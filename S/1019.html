@@ -1,0 +1,238 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>ext/soap/php_encoding.h</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<a id='TOP' name='TOP'></a><h2 class='header'><a href='../mains.html'>root</a>/<a href='../files/1753.html'>ext</a>/<a href='../files/1850.html'>soap</a>/php_encoding.h</h2>
+<em class='comment'>/* [&lt;][&gt;][^][v][top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+<hr />
+<h2 class='header'><a href='1028.html#L70' title='Included from 70 in ext/soap/php_soap.h.'>INCLUDED FROM</a></h2>
+<hr />
+<pre>
+<a id='L1' name='L1'></a>   1 <em class='comment'>/*</em>
+<a id='L2' name='L2'></a>   2 <em class='comment'>  +----------------------------------------------------------------------+</em>
+<a id='L3' name='L3'></a>   3 <em class='comment'>  | PHP Version 5                                                        |</em>
+<a id='L4' name='L4'></a>   4 <em class='comment'>  +----------------------------------------------------------------------+</em>
+<a id='L5' name='L5'></a>   5 <em class='comment'>  | Copyright (c) 1997-2016 The PHP Group                                |</em>
+<a id='L6' name='L6'></a>   6 <em class='comment'>  +----------------------------------------------------------------------+</em>
+<a id='L7' name='L7'></a>   7 <em class='comment'>  | This source file is subject to version 3.01 of the PHP license,      |</em>
+<a id='L8' name='L8'></a>   8 <em class='comment'>  | that is bundled with this package in the file LICENSE, and is        |</em>
+<a id='L9' name='L9'></a>   9 <em class='comment'>  | available through the world-wide-web at the following url:           |</em>
+<a id='L10' name='L10'></a>  10 <em class='comment'>  | http://www.php.net/license/3_01.txt                                  |</em>
+<a id='L11' name='L11'></a>  11 <em class='comment'>  | If you did not receive a copy of the PHP license and are unable to   |</em>
+<a id='L12' name='L12'></a>  12 <em class='comment'>  | obtain it through the world-wide-web, please send a note to          |</em>
+<a id='L13' name='L13'></a>  13 <em class='comment'>  | license@php.net so we can mail you a copy immediately.               |</em>
+<a id='L14' name='L14'></a>  14 <em class='comment'>  +----------------------------------------------------------------------+</em>
+<a id='L15' name='L15'></a>  15 <em class='comment'>  | Authors: Brad Lafountain &lt;rodif_bl@yahoo.com&gt;                        |</em>
+<a id='L16' name='L16'></a>  16 <em class='comment'>  |          Shane Caraveo &lt;shane@caraveo.com&gt;                           |</em>
+<a id='L17' name='L17'></a>  17 <em class='comment'>  |          Dmitry Stogov &lt;dmitry@zend.com&gt;                             |</em>
+<a id='L18' name='L18'></a>  18 <em class='comment'>  +----------------------------------------------------------------------+</em>
+<a id='L19' name='L19'></a>  19 <em class='comment'>*/</em>
+<a id='L20' name='L20'></a>  20 <em class='comment'>/* $Id$ */</em>
+<a id='L21' name='L21'></a>  21 
+<a id='L22' name='L22'></a>  22 <em class='sharp'>#ifndef</em> <a href='../S/1019.html#L23' title='Defined at 23 in ext/soap/php_encoding.h.'>PHP_ENCODING_H</a>
+<a id='L23' name='L23'></a>  23 <em class='sharp'>#define</em> <a href='../S/1019.html#L22' title='Referred from 22 in ext/soap/php_encoding.h.'>PHP_ENCODING_H</a>
+<a id='L24' name='L24'></a>  24 
+<a id='L25' name='L25'></a>  25 <em class='sharp'>#define</em> <a href='../R/13202.html' title='Multiple referred from 12 places.'>XSD_1999_NAMESPACE</a> "http://www.w3.org/1999/XMLSchema"
+<a id='L26' name='L26'></a>  26 <em class='sharp'>#define</em> <a href='../R/13203.html' title='Multiple referred from 2 places.'>XSD_1999_TIMEINSTANT</a> 401
+<a id='L27' name='L27'></a>  27 <em class='sharp'>#define</em> <a href='../S/1018.html#L230' title='Referred from 230 in ext/soap/php_encoding.c.'>XSD_1999_TIMEINSTANT_STRING</a> "timeInstant"
+<a id='L28' name='L28'></a>  28 
+<a id='L29' name='L29'></a>  29 <em class='sharp'>#define</em> <a href='../R/9592.html' title='Multiple referred from 10 places.'>SOAP_1_1_ENV_NAMESPACE</a> "http://schemas.xmlsoap.org/soap/envelope/"
+<a id='L30' name='L30'></a>  30 <em class='sharp'>#define</em> <a href='../R/9593.html' title='Multiple referred from 5 places.'>SOAP_1_1_ENV_NS_PREFIX</a> "SOAP-ENV"
+<a id='L31' name='L31'></a>  31 
+<a id='L32' name='L32'></a>  32 <em class='sharp'>#define</em> <a href='../R/9600.html' title='Multiple referred from 18 places.'>SOAP_1_2_ENV_NAMESPACE</a> "http://www.w3.org/2003/05/soap-envelope"
+<a id='L33' name='L33'></a>  33 <em class='sharp'>#define</em> <a href='../R/9601.html' title='Multiple referred from 8 places.'>SOAP_1_2_ENV_NS_PREFIX</a> "env"
+<a id='L34' name='L34'></a>  34 
+<a id='L35' name='L35'></a>  35 <em class='sharp'>#define</em> <a href='../R/9590.html' title='Multiple referred from 35 places.'>SOAP_1_1_ENC_NAMESPACE</a> "http://schemas.xmlsoap.org/soap/encoding/"
+<a id='L36' name='L36'></a>  36 <em class='sharp'>#define</em> <a href='../R/9591.html' title='Multiple referred from 3 places.'>SOAP_1_1_ENC_NS_PREFIX</a> "SOAP-ENC"
+<a id='L37' name='L37'></a>  37 
+<a id='L38' name='L38'></a>  38 <em class='sharp'>#define</em> <a href='../R/9598.html' title='Multiple referred from 46 places.'>SOAP_1_2_ENC_NAMESPACE</a> "http://www.w3.org/2003/05/soap-encoding"
+<a id='L39' name='L39'></a>  39 <em class='sharp'>#define</em> <a href='../R/9599.html' title='Multiple referred from 3 places.'>SOAP_1_2_ENC_NS_PREFIX</a> "enc"
+<a id='L40' name='L40'></a>  40 
+<a id='L41' name='L41'></a>  41 <em class='sharp'>#define</em> <a href='../R/9060.html' title='Multiple referred from 12 places.'>SCHEMA_NAMESPACE</a> "http://www.w3.org/2001/XMLSchema"
+<a id='L42' name='L42'></a>  42 <em class='sharp'>#define</em> <a href='../R/13269.html' title='Multiple referred from 61 places.'>XSD_NAMESPACE</a> "http://www.w3.org/2001/XMLSchema"
+<a id='L43' name='L43'></a>  43 <em class='sharp'>#define</em> <a href='../R/13287.html' title='Multiple referred from 4 places.'>XSD_NS_PREFIX</a> "xsd"
+<a id='L44' name='L44'></a>  44 <em class='sharp'>#define</em> <a href='../R/13320.html' title='Multiple referred from 8 places.'>XSI_NAMESPACE</a> "http://www.w3.org/2001/XMLSchema-instance"
+<a id='L45' name='L45'></a>  45 <em class='sharp'>#define</em> <a href='../S/1031.html#L568' title='Referred from 568 in ext/soap/soap.c.'>XSI_NS_PREFIX</a> "xsi"
+<a id='L46' name='L46'></a>  46 <em class='sharp'>#define</em> <a href='../R/13162.html' title='Multiple referred from 2 places.'>XML_NAMESPACE</a> "http://www.w3.org/XML/1998/namespace"
+<a id='L47' name='L47'></a>  47 <em class='sharp'>#define</em> <a href='../S/1031.html#L569' title='Referred from 569 in ext/soap/soap.c.'>XML_NS_PREFIX</a> "xml"
+<a id='L48' name='L48'></a>  48 
+<a id='L49' name='L49'></a>  49 <em class='sharp'>#define</em> <a href='../R/13294.html' title='Multiple referred from 4 places.'>XSD_STRING</a> 101
+<a id='L50' name='L50'></a>  50 <em class='sharp'>#define</em> <a href='../R/13295.html' title='Multiple referred from 4 places.'>XSD_STRING_STRING</a> "string"
+<a id='L51' name='L51'></a>  51 <em class='sharp'>#define</em> <a href='../R/13212.html' title='Multiple referred from 3 places.'>XSD_BOOLEAN</a> 102
+<a id='L52' name='L52'></a>  52 <em class='sharp'>#define</em> <a href='../R/13213.html' title='Multiple referred from 3 places.'>XSD_BOOLEAN_STRING</a> "boolean"
+<a id='L53' name='L53'></a>  53 <em class='sharp'>#define</em> <a href='../R/13227.html' title='Multiple referred from 3 places.'>XSD_DECIMAL</a> 103
+<a id='L54' name='L54'></a>  54 <em class='sharp'>#define</em> <a href='../R/13228.html' title='Multiple referred from 2 places.'>XSD_DECIMAL_STRING</a> "decimal"
+<a id='L55' name='L55'></a>  55 <em class='sharp'>#define</em> <a href='../R/13237.html' title='Multiple referred from 3 places.'>XSD_FLOAT</a> 104
+<a id='L56' name='L56'></a>  56 <em class='sharp'>#define</em> <a href='../R/13238.html' title='Multiple referred from 3 places.'>XSD_FLOAT_STRING</a> "float"
+<a id='L57' name='L57'></a>  57 <em class='sharp'>#define</em> <a href='../R/13229.html' title='Multiple referred from 3 places.'>XSD_DOUBLE</a> 105
+<a id='L58' name='L58'></a>  58 <em class='sharp'>#define</em> <a href='../R/13230.html' title='Multiple referred from 2 places.'>XSD_DOUBLE_STRING</a> "double"
+<a id='L59' name='L59'></a>  59 <em class='sharp'>#define</em> <a href='../R/13231.html' title='Multiple referred from 2 places.'>XSD_DURATION</a> 106
+<a id='L60' name='L60'></a>  60 <em class='sharp'>#define</em> <a href='../S/1018.html#L175' title='Referred from 175 in ext/soap/php_encoding.c.'>XSD_DURATION_STRING</a> "duration"
+<a id='L61' name='L61'></a>  61 <em class='sharp'>#define</em> <a href='../R/13224.html' title='Multiple referred from 2 places.'>XSD_DATETIME</a> 107
+<a id='L62' name='L62'></a>  62 <em class='sharp'>#define</em> <a href='../S/1018.html#L167' title='Referred from 167 in ext/soap/php_encoding.c.'>XSD_DATETIME_STRING</a> "dateTime"
+<a id='L63' name='L63'></a>  63 <em class='sharp'>#define</em> <a href='../R/13296.html' title='Multiple referred from 2 places.'>XSD_TIME</a> 108
+<a id='L64' name='L64'></a>  64 <em class='sharp'>#define</em> <a href='../S/1018.html#L168' title='Referred from 168 in ext/soap/php_encoding.c.'>XSD_TIME_STRING</a> "time"
+<a id='L65' name='L65'></a>  65 <em class='sharp'>#define</em> <a href='../R/13223.html' title='Multiple referred from 2 places.'>XSD_DATE</a> 109
+<a id='L66' name='L66'></a>  66 <em class='sharp'>#define</em> <a href='../S/1018.html#L169' title='Referred from 169 in ext/soap/php_encoding.c.'>XSD_DATE_STRING</a> "date"
+<a id='L67' name='L67'></a>  67 <em class='sharp'>#define</em> <a href='../R/13249.html' title='Multiple referred from 2 places.'>XSD_GYEARMONTH</a> 110
+<a id='L68' name='L68'></a>  68 <em class='sharp'>#define</em> <a href='../S/1018.html#L170' title='Referred from 170 in ext/soap/php_encoding.c.'>XSD_GYEARMONTH_STRING</a> "gYearMonth"
+<a id='L69' name='L69'></a>  69 <em class='sharp'>#define</em> <a href='../R/13248.html' title='Multiple referred from 2 places.'>XSD_GYEAR</a> 111
+<a id='L70' name='L70'></a>  70 <em class='sharp'>#define</em> <a href='../S/1018.html#L171' title='Referred from 171 in ext/soap/php_encoding.c.'>XSD_GYEAR_STRING</a> "gYear"
+<a id='L71' name='L71'></a>  71 <em class='sharp'>#define</em> <a href='../R/13245.html' title='Multiple referred from 2 places.'>XSD_GMONTHDAY</a> 112
+<a id='L72' name='L72'></a>  72 <em class='sharp'>#define</em> <a href='../S/1018.html#L172' title='Referred from 172 in ext/soap/php_encoding.c.'>XSD_GMONTHDAY_STRING</a> "gMonthDay"
+<a id='L73' name='L73'></a>  73 <em class='sharp'>#define</em> <a href='../R/13242.html' title='Multiple referred from 2 places.'>XSD_GDAY</a> 113
+<a id='L74' name='L74'></a>  74 <em class='sharp'>#define</em> <a href='../S/1018.html#L173' title='Referred from 173 in ext/soap/php_encoding.c.'>XSD_GDAY_STRING</a> "gDay"
+<a id='L75' name='L75'></a>  75 <em class='sharp'>#define</em> <a href='../R/13244.html' title='Multiple referred from 2 places.'>XSD_GMONTH</a> 114
+<a id='L76' name='L76'></a>  76 <em class='sharp'>#define</em> <a href='../S/1018.html#L174' title='Referred from 174 in ext/soap/php_encoding.c.'>XSD_GMONTH_STRING</a> "gMonth"
+<a id='L77' name='L77'></a>  77 <em class='sharp'>#define</em> <a href='../R/13252.html' title='Multiple referred from 2 places.'>XSD_HEXBINARY</a> 115
+<a id='L78' name='L78'></a>  78 <em class='sharp'>#define</em> <a href='../S/1018.html#L177' title='Referred from 177 in ext/soap/php_encoding.c.'>XSD_HEXBINARY_STRING</a> "hexBinary"
+<a id='L79' name='L79'></a>  79 <em class='sharp'>#define</em> <a href='../R/13210.html' title='Multiple referred from 2 places.'>XSD_BASE64BINARY</a> 116
+<a id='L80' name='L80'></a>  80 <em class='sharp'>#define</em> <a href='../S/1018.html#L178' title='Referred from 178 in ext/soap/php_encoding.c.'>XSD_BASE64BINARY_STRING</a> "base64Binary"
+<a id='L81' name='L81'></a>  81 <em class='sharp'>#define</em> <a href='../R/13207.html' title='Multiple referred from 2 places.'>XSD_ANYURI</a> 117
+<a id='L82' name='L82'></a>  82 <em class='sharp'>#define</em> <a href='../S/1018.html#L196' title='Referred from 196 in ext/soap/php_encoding.c.'>XSD_ANYURI_STRING</a> "anyURI"
+<a id='L83' name='L83'></a>  83 <em class='sharp'>#define</em> <a href='../R/13290.html' title='Multiple referred from 2 places.'>XSD_QNAME</a> 118
+<a id='L84' name='L84'></a>  84 <em class='sharp'>#define</em> <a href='../S/1018.html#L197' title='Referred from 197 in ext/soap/php_encoding.c.'>XSD_QNAME_STRING</a> "QName"
+<a id='L85' name='L85'></a>  85 <em class='sharp'>#define</em> <a href='../R/13285.html' title='Multiple referred from 2 places.'>XSD_NOTATION</a> 119
+<a id='L86' name='L86'></a>  86 <em class='sharp'>#define</em> <a href='../S/1018.html#L198' title='Referred from 198 in ext/soap/php_encoding.c.'>XSD_NOTATION_STRING</a> "NOTATION"
+<a id='L87' name='L87'></a>  87 <em class='sharp'>#define</em> <a href='../R/13283.html' title='Multiple referred from 2 places.'>XSD_NORMALIZEDSTRING</a> 120
+<a id='L88' name='L88'></a>  88 <em class='sharp'>#define</em> <a href='../S/1018.html#L199' title='Referred from 199 in ext/soap/php_encoding.c.'>XSD_NORMALIZEDSTRING_STRING</a> "normalizedString"
+<a id='L89' name='L89'></a>  89 <em class='sharp'>#define</em> <a href='../R/13298.html' title='Multiple referred from 2 places.'>XSD_TOKEN</a> 121
+<a id='L90' name='L90'></a>  90 <em class='sharp'>#define</em> <a href='../S/1018.html#L200' title='Referred from 200 in ext/soap/php_encoding.c.'>XSD_TOKEN_STRING</a> "token"
+<a id='L91' name='L91'></a>  91 <em class='sharp'>#define</em> <a href='../R/13264.html' title='Multiple referred from 2 places.'>XSD_LANGUAGE</a> 122
+<a id='L92' name='L92'></a>  92 <em class='sharp'>#define</em> <a href='../S/1018.html#L201' title='Referred from 201 in ext/soap/php_encoding.c.'>XSD_LANGUAGE_STRING</a> "language"
+<a id='L93' name='L93'></a>  93 <em class='sharp'>#define</em> <a href='../R/13275.html' title='Multiple referred from 2 places.'>XSD_NMTOKEN</a> 123
+<a id='L94' name='L94'></a>  94 <em class='sharp'>#define</em> <a href='../S/1018.html#L202' title='Referred from 202 in ext/soap/php_encoding.c.'>XSD_NMTOKEN_STRING</a> "NMTOKEN"
+<a id='L95' name='L95'></a>  95 <em class='sharp'>#define</em> <a href='../R/13268.html' title='Multiple referred from 2 places.'>XSD_NAME</a> 124
+<a id='L96' name='L96'></a>  96 <em class='sharp'>#define</em> <a href='../S/1018.html#L204' title='Referred from 204 in ext/soap/php_encoding.c.'>XSD_NAME_STRING</a> "Name"
+<a id='L97' name='L97'></a>  97 <em class='sharp'>#define</em> <a href='../R/13271.html' title='Multiple referred from 2 places.'>XSD_NCNAME</a> 125
+<a id='L98' name='L98'></a>  98 <em class='sharp'>#define</em> <a href='../S/1018.html#L205' title='Referred from 205 in ext/soap/php_encoding.c.'>XSD_NCNAME_STRING</a> "NCName"
+<a id='L99' name='L99'></a>  99 <em class='sharp'>#define</em> <a href='../R/13254.html' title='Multiple referred from 2 places.'>XSD_ID</a> 126
+<a id='L100' name='L100'></a> 100 <em class='sharp'>#define</em> <a href='../S/1018.html#L206' title='Referred from 206 in ext/soap/php_encoding.c.'>XSD_ID_STRING</a> "ID"
+<a id='L101' name='L101'></a> 101 <em class='sharp'>#define</em> <a href='../R/13255.html' title='Multiple referred from 2 places.'>XSD_IDREF</a> 127
+<a id='L102' name='L102'></a> 102 <em class='sharp'>#define</em> <a href='../S/1018.html#L207' title='Referred from 207 in ext/soap/php_encoding.c.'>XSD_IDREF_STRING</a> "IDREF"
+<a id='L103' name='L103'></a> 103 <em class='sharp'>#define</em> <a href='../R/13256.html' title='Multiple referred from 2 places.'>XSD_IDREFS</a> 128
+<a id='L104' name='L104'></a> 104 <em class='sharp'>#define</em> <a href='../S/1018.html#L208' title='Referred from 208 in ext/soap/php_encoding.c.'>XSD_IDREFS_STRING</a> "IDREFS"
+<a id='L105' name='L105'></a> 105 <em class='sharp'>#define</em> <a href='../R/13235.html' title='Multiple referred from 2 places.'>XSD_ENTITY</a> 129
+<a id='L106' name='L106'></a> 106 <em class='sharp'>#define</em> <a href='../S/1018.html#L209' title='Referred from 209 in ext/soap/php_encoding.c.'>XSD_ENTITY_STRING</a> "ENTITY"
+<a id='L107' name='L107'></a> 107 <em class='sharp'>#define</em> <a href='../R/13233.html' title='Multiple referred from 2 places.'>XSD_ENTITIES</a> 130
+<a id='L108' name='L108'></a> 108 <em class='sharp'>#define</em> <a href='../S/1018.html#L210' title='Referred from 210 in ext/soap/php_encoding.c.'>XSD_ENTITIES_STRING</a> "ENTITIES"
+<a id='L109' name='L109'></a> 109 <em class='sharp'>#define</em> <a href='../R/13261.html' title='Multiple referred from 2 places.'>XSD_INTEGER</a> 131
+<a id='L110' name='L110'></a> 110 <em class='sharp'>#define</em> <a href='../S/1018.html#L192' title='Referred from 192 in ext/soap/php_encoding.c.'>XSD_INTEGER_STRING</a> "integer"
+<a id='L111' name='L111'></a> 111 <em class='sharp'>#define</em> <a href='../R/13281.html' title='Multiple referred from 2 places.'>XSD_NONPOSITIVEINTEGER</a> 132
+<a id='L112' name='L112'></a> 112 <em class='sharp'>#define</em> <a href='../S/1018.html#L184' title='Referred from 184 in ext/soap/php_encoding.c.'>XSD_NONPOSITIVEINTEGER_STRING</a> "nonPositiveInteger"
+<a id='L113' name='L113'></a> 113 <em class='sharp'>#define</em> <a href='../R/13273.html' title='Multiple referred from 2 places.'>XSD_NEGATIVEINTEGER</a> 133
+<a id='L114' name='L114'></a> 114 <em class='sharp'>#define</em> <a href='../S/1018.html#L187' title='Referred from 187 in ext/soap/php_encoding.c.'>XSD_NEGATIVEINTEGER_STRING</a> "negativeInteger"
+<a id='L115' name='L115'></a> 115 <em class='sharp'>#define</em> <a href='../R/13266.html' title='Multiple referred from 3 places.'>XSD_LONG</a> 134
+<a id='L116' name='L116'></a> 116 <em class='sharp'>#define</em> <a href='../R/13267.html' title='Multiple referred from 2 places.'>XSD_LONG_STRING</a> "long"
+<a id='L117' name='L117'></a> 117 <em class='sharp'>#define</em> <a href='../R/13260.html' title='Multiple referred from 3 places.'>XSD_INT</a> 135
+<a id='L118' name='L118'></a> 118 <em class='sharp'>#define</em> <a href='../R/13263.html' title='Multiple referred from 3 places.'>XSD_INT_STRING</a> "int"
+<a id='L119' name='L119'></a> 119 <em class='sharp'>#define</em> <a href='../R/13292.html' title='Multiple referred from 3 places.'>XSD_SHORT</a> 136
+<a id='L120' name='L120'></a> 120 <em class='sharp'>#define</em> <a href='../R/13293.html' title='Multiple referred from 2 places.'>XSD_SHORT_STRING</a> "short"
+<a id='L121' name='L121'></a> 121 <em class='sharp'>#define</em> <a href='../R/13214.html' title='Multiple referred from 3 places.'>XSD_BYTE</a> 137
+<a id='L122' name='L122'></a> 122 <em class='sharp'>#define</em> <a href='../R/13215.html' title='Multiple referred from 2 places.'>XSD_BYTE_STRING</a> "byte"
+<a id='L123' name='L123'></a> 123 <em class='sharp'>#define</em> <a href='../R/13279.html' title='Multiple referred from 2 places.'>XSD_NONNEGATIVEINTEGER</a> 138
+<a id='L124' name='L124'></a> 124 <em class='sharp'>#define</em> <a href='../S/1018.html#L186' title='Referred from 186 in ext/soap/php_encoding.c.'>XSD_NONNEGATIVEINTEGER_STRING</a> "nonNegativeInteger"
+<a id='L125' name='L125'></a> 125 <em class='sharp'>#define</em> <a href='../R/13310.html' title='Multiple referred from 2 places.'>XSD_UNSIGNEDLONG</a> 139
+<a id='L126' name='L126'></a> 126 <em class='sharp'>#define</em> <a href='../S/1018.html#L191' title='Referred from 191 in ext/soap/php_encoding.c.'>XSD_UNSIGNEDLONG_STRING</a> "unsignedLong"
+<a id='L127' name='L127'></a> 127 <em class='sharp'>#define</em> <a href='../R/13308.html' title='Multiple referred from 2 places.'>XSD_UNSIGNEDINT</a> 140
+<a id='L128' name='L128'></a> 128 <em class='sharp'>#define</em> <a href='../S/1018.html#L190' title='Referred from 190 in ext/soap/php_encoding.c.'>XSD_UNSIGNEDINT_STRING</a> "unsignedInt"
+<a id='L129' name='L129'></a> 129 <em class='sharp'>#define</em> <a href='../R/13312.html' title='Multiple referred from 2 places.'>XSD_UNSIGNEDSHORT</a> 141
+<a id='L130' name='L130'></a> 130 <em class='sharp'>#define</em> <a href='../S/1018.html#L189' title='Referred from 189 in ext/soap/php_encoding.c.'>XSD_UNSIGNEDSHORT_STRING</a> "unsignedShort"
+<a id='L131' name='L131'></a> 131 <em class='sharp'>#define</em> <a href='../R/13306.html' title='Multiple referred from 2 places.'>XSD_UNSIGNEDBYTE</a> 142
+<a id='L132' name='L132'></a> 132 <em class='sharp'>#define</em> <a href='../S/1018.html#L188' title='Referred from 188 in ext/soap/php_encoding.c.'>XSD_UNSIGNEDBYTE_STRING</a> "unsignedByte"
+<a id='L133' name='L133'></a> 133 <em class='sharp'>#define</em> <a href='../R/13288.html' title='Multiple referred from 2 places.'>XSD_POSITIVEINTEGER</a> 143
+<a id='L134' name='L134'></a> 134 <em class='sharp'>#define</em> <a href='../S/1018.html#L185' title='Referred from 185 in ext/soap/php_encoding.c.'>XSD_POSITIVEINTEGER_STRING</a> "positiveInteger"
+<a id='L135' name='L135'></a> 135 <em class='sharp'>#define</em> <a href='../R/13276.html' title='Multiple referred from 2 places.'>XSD_NMTOKENS</a> 144
+<a id='L136' name='L136'></a> 136 <em class='sharp'>#define</em> <a href='../S/1018.html#L203' title='Referred from 203 in ext/soap/php_encoding.c.'>XSD_NMTOKENS_STRING</a> "NMTOKENS"
+<a id='L137' name='L137'></a> 137 <em class='sharp'>#define</em> <a href='../R/13205.html' title='Multiple referred from 4 places.'>XSD_ANYTYPE</a> 145
+<a id='L138' name='L138'></a> 138 <em class='sharp'>#define</em> <a href='../S/1018.html#L194' title='Referred from 194 in ext/soap/php_encoding.c.'>XSD_ANYTYPE_STRING</a> "anyType"
+<a id='L139' name='L139'></a> 139 <em class='sharp'>#define</em> <a href='../S/1018.html#L195' title='Referred from 195 in ext/soap/php_encoding.c.'>XSD_UR_TYPE</a> 146
+<a id='L140' name='L140'></a> 140 <em class='sharp'>#define</em> <a href='../S/1018.html#L195' title='Referred from 195 in ext/soap/php_encoding.c.'>XSD_UR_TYPE_STRING</a> "ur-type"
+<a id='L141' name='L141'></a> 141 
+<a id='L142' name='L142'></a> 142 <em class='sharp'>#define</em> <a href='../R/13209.html' title='Multiple referred from 7 places.'>XSD_ANYXML</a> 147
+<a id='L143' name='L143'></a> 143 
+<a id='L144' name='L144'></a> 144 <em class='sharp'>#define</em> <a href='../S/1018.html#L212' title='Referred from 212 in ext/soap/php_encoding.c.'>APACHE_NAMESPACE</a> "http://xml.apache.org/xml-soap"
+<a id='L145' name='L145'></a> 145 <em class='sharp'>#define</em> <a href='../R/183.html' title='Multiple referred from 4 places.'>APACHE_MAP</a> 200
+<a id='L146' name='L146'></a> 146 <em class='sharp'>#define</em> <a href='../S/1018.html#L212' title='Referred from 212 in ext/soap/php_encoding.c.'>APACHE_MAP_STRING</a> "Map"
+<a id='L147' name='L147'></a> 147 
+<a id='L148' name='L148'></a> 148 <em class='sharp'>#define</em> <a href='../R/9619.html' title='Multiple referred from 9 places.'>SOAP_ENC_ARRAY</a> 300
+<a id='L149' name='L149'></a> 149 <em class='sharp'>#define</em> <a href='../R/9620.html' title='Multiple referred from 4 places.'>SOAP_ENC_ARRAY_STRING</a> "Array"
+<a id='L150' name='L150'></a> 150 <em class='sharp'>#define</em> <a href='../R/9621.html' title='Multiple referred from 4 places.'>SOAP_ENC_OBJECT</a> 301
+<a id='L151' name='L151'></a> 151 <em class='sharp'>#define</em> <a href='../R/9622.html' title='Multiple referred from 4 places.'>SOAP_ENC_OBJECT_STRING</a> "Struct"
+<a id='L152' name='L152'></a> 152 
+<a id='L153' name='L153'></a> 153 <em class='sharp'>#define</em> <a href='../R/12949.html' title='Multiple referred from 23 places.'>WSDL_NAMESPACE</a> "http://schemas.xmlsoap.org/wsdl/"
+<a id='L154' name='L154'></a> 154 <em class='sharp'>#define</em> WSDL_NS_PREFIX "wsdl"
+<a id='L155' name='L155'></a> 155 
+<a id='L156' name='L156'></a> 156 <em class='sharp'>#define</em> <a href='../R/12950.html' title='Multiple referred from 2 places.'>WSDL_SOAP11_NAMESPACE</a> "http://schemas.xmlsoap.org/wsdl/soap/"
+<a id='L157' name='L157'></a> 157 <em class='sharp'>#define</em> <a href='../R/12951.html' title='Multiple referred from 2 places.'>WSDL_SOAP12_NAMESPACE</a> "http://schemas.xmlsoap.org/wsdl/soap12/"
+<a id='L158' name='L158'></a> 158 <em class='sharp'>#define</em> <a href='../R/8876.html' title='Multiple referred from 4 places.'>RPC_SOAP12_NAMESPACE</a>  "http://www.w3.org/2003/05/soap-rpc"
+<a id='L159' name='L159'></a> 159 <em class='sharp'>#define</em> <a href='../S/1031.html#L3801' title='Referred from 3801 in ext/soap/soap.c.'>RPC_SOAP12_NS_PREFIX</a>  "rpc"
+<a id='L160' name='L160'></a> 160 
+<a id='L161' name='L161'></a> 161 <em class='sharp'>#define</em> <a href='../S/1026.html#L806' title='Referred from 806 in ext/soap/php_sdl.c.'>WSDL_HTTP11_NAMESPACE</a> "http://schemas.xmlsoap.org/wsdl/http/"
+<a id='L162' name='L162'></a> 162 <em class='sharp'>#define</em> <a href='../S/1026.html#L809' title='Referred from 809 in ext/soap/php_sdl.c.'>WSDL_HTTP12_NAMESPACE</a>   "http://www.w3.org/2003/05/soap/bindings/HTTP/"
+<a id='L163' name='L163'></a> 163 <em class='sharp'>#define</em> WSDL_HTTP_NS_PREFIX "http"
+<a id='L164' name='L164'></a> 164 
+<a id='L165' name='L165'></a> 165 <em class='sharp'>#define</em> <a href='../S/1026.html#L866' title='Referred from 866 in ext/soap/php_sdl.c.'>WSDL_HTTP_TRANSPORT</a> "http://schemas.xmlsoap.org/soap/http"
+<a id='L166' name='L166'></a> 166 
+<a id='L167' name='L167'></a> 167 <em class='sharp'>#define</em> WSDL_MIME_NAMESPACE "http://schemas.xmlsoap.org/wsdl/mime/"
+<a id='L168' name='L168'></a> 168 
+<a id='L169' name='L169'></a> 169 <em class='sharp'>#define</em> WSDL_DIME_NAMESPACE "http://schemas.xmlsoap.org/ws/2002/04/dime/wsdl/"
+<a id='L170' name='L170'></a> 170 <em class='sharp'>#define</em> WSDL_DIME_OPEN      "http://schemas.xmlsoap.org/ws/2002/04/dime/open-layout"
+<a id='L171' name='L171'></a> 171 <em class='sharp'>#define</em> WSDL_DIME_CLOSED    "http://schemas.xmlsoap.org/ws/2002/04/dime/closed-layout"
+<a id='L172' name='L172'></a> 172 
+<a id='L173' name='L173'></a> 173 <em class='sharp'>#define</em> <a href='../R/12522.html' title='Multiple referred from 6 places.'>UNKNOWN_TYPE</a> 999998
+<a id='L174' name='L174'></a> 174 <em class='sharp'>#define</em> <a href='../R/1755.html' title='Multiple referred from 5 places.'>END_KNOWN_TYPES</a> 999999
+<a id='L175' name='L175'></a> 175 
+<a id='L176' name='L176'></a> 176 <strong class='reserved'>struct</strong> <a href='../S/1028.html#L50' title='Referred from 50 in ext/soap/php_soap.h.'>_encodeType</a> <em class='brace'>{</em>
+<a id='L177' name='L177'></a> 177         <strong class='reserved'>int</strong> <a href='../D/32025.html' title='Multiple defined in 3 places.'>type</a>;
+<a id='L178' name='L178'></a> 178         <strong class='reserved'>char</strong> *<a href='../Y/39596.html' title='Multiple used in 52 places.'>type_str</a>;
+<a id='L179' name='L179'></a> 179         <strong class='reserved'>char</strong> *<a href='../Y/29013.html' title='Multiple used in 617 places.'>ns</a>;
+<a id='L180' name='L180'></a> 180         <a href='../S/1028.html#L57' title='Defined at 57 in ext/soap/php_soap.h.'>sdlTypePtr</a> <a href='../Y/35881.html' title='Multiple used in 109 places.'>sdl_type</a>;
+<a id='L181' name='L181'></a> 181         <a href='../S/1028.html#L66' title='Defined at 66 in ext/soap/php_soap.h.'>soapMappingPtr</a> <a href='../Y/25908.html' title='Multiple used in 332 places.'>map</a>;
+<a id='L182' name='L182'></a> 182 <em class='brace'>}</em>;
+<a id='L183' name='L183'></a> 183 
+<a id='L184' name='L184'></a> 184 <strong class='reserved'>struct</strong> <a href='../S/1028.html#L51' title='Referred from 51 in ext/soap/php_soap.h.'>_encode</a> <em class='brace'>{</em>
+<a id='L185' name='L185'></a> 185         <a href='../Y/16714.html' title='Multiple used in 2 places.'>encodeType</a> <a href='../Y/15635.html' title='Multiple used in 212 places.'>details</a>;
+<a id='L186' name='L186'></a> 186         <a href='../S/1741.html#L55' title='Defined at 55 in Zend/zend_types.h.'>zval</a> *(*<a href='../Y/39263.html' title='Multiple used in 35 places.'>to_zval</a>)(<a href='../S/1028.html#L50' title='Defined at 50 in ext/soap/php_soap.h.'>encodeTypePtr</a> <a href='../D/32025.html' title='Multiple defined in 3 places.'>type</a>, <a href='../Y/41735.html' title='Multiple used in 650 places.'>xmlNodePtr</a> <a href='../D/20513.html' title='Multiple defined in 7 places.'>data</a> <a href='../D/14076.html' title='Multiple defined in 136 places.'>TSRMLS_DC</a>);
+<a id='L187' name='L187'></a> 187         <a href='../Y/41735.html' title='Multiple used in 650 places.'>xmlNodePtr</a> (*<a href='../Y/39262.html' title='Multiple used in 23 places.'>to_xml</a>)(<a href='../S/1028.html#L50' title='Defined at 50 in ext/soap/php_soap.h.'>encodeTypePtr</a> <a href='../D/32025.html' title='Multiple defined in 3 places.'>type</a>, <a href='../S/1741.html#L55' title='Defined at 55 in Zend/zend_types.h.'>zval</a> *<a href='../D/20513.html' title='Multiple defined in 7 places.'>data</a>, <strong class='reserved'>int</strong> <a href='../Y/38179.html' title='Multiple used in 249 places.'>style</a>, <a href='../Y/41735.html' title='Multiple used in 650 places.'>xmlNodePtr</a> <a href='../Y/31439.html' title='Multiple used in 535 places.'>parent</a> <a href='../D/14076.html' title='Multiple defined in 136 places.'>TSRMLS_DC</a>);
+<a id='L188' name='L188'></a> 188 <em class='brace'>}</em>;
+<a id='L189' name='L189'></a> 189 
+<a id='L190' name='L190'></a> 190 <em class='comment'>/* Master functions all encode/decode should be called thur these functions */</em>
+<a id='L191' name='L191'></a> 191 <a href='../Y/41735.html' title='Multiple used in 650 places.'>xmlNodePtr</a> <a href='../S/1018.html#L535' title='Defined at 535 in ext/soap/php_encoding.c.'>master_to_xml</a>(<a href='../S/1028.html#L51' title='Defined at 51 in ext/soap/php_soap.h.'>encodePtr</a> <a href='../Y/16713.html' title='Multiple used in 292 places.'>encode</a>, <a href='../S/1741.html#L55' title='Defined at 55 in Zend/zend_types.h.'>zval</a> *<a href='../D/20513.html' title='Multiple defined in 7 places.'>data</a>, <strong class='reserved'>int</strong> <a href='../Y/38179.html' title='Multiple used in 249 places.'>style</a>, <a href='../Y/41735.html' title='Multiple used in 650 places.'>xmlNodePtr</a> <a href='../Y/31439.html' title='Multiple used in 535 places.'>parent</a> <a href='../D/14076.html' title='Multiple defined in 136 places.'>TSRMLS_DC</a>);
+<a id='L192' name='L192'></a> 192 <a href='../S/1741.html#L55' title='Defined at 55 in Zend/zend_types.h.'>zval</a> *<a href='../S/1018.html#L591' title='Defined at 591 in ext/soap/php_encoding.c.'>master_to_zval</a>(<a href='../S/1028.html#L51' title='Defined at 51 in ext/soap/php_soap.h.'>encodePtr</a> <a href='../Y/16713.html' title='Multiple used in 292 places.'>encode</a>, <a href='../Y/41735.html' title='Multiple used in 650 places.'>xmlNodePtr</a> <a href='../D/20513.html' title='Multiple defined in 7 places.'>data</a> <a href='../D/14076.html' title='Multiple defined in 136 places.'>TSRMLS_DC</a>);
+<a id='L193' name='L193'></a> 193 
+<a id='L194' name='L194'></a> 194 <em class='comment'>/* user defined mapping */</em>
+<a id='L195' name='L195'></a> 195 <a href='../Y/41735.html' title='Multiple used in 650 places.'>xmlNodePtr</a> <a href='../S/1018.html#L625' title='Defined at 625 in ext/soap/php_encoding.c.'>to_xml_user</a>(<a href='../S/1028.html#L50' title='Defined at 50 in ext/soap/php_soap.h.'>encodeTypePtr</a> <a href='../D/32025.html' title='Multiple defined in 3 places.'>type</a>, <a href='../S/1741.html#L55' title='Defined at 55 in Zend/zend_types.h.'>zval</a> *<a href='../D/20513.html' title='Multiple defined in 7 places.'>data</a>, <strong class='reserved'>int</strong> <a href='../Y/38179.html' title='Multiple used in 249 places.'>style</a>, <a href='../Y/41735.html' title='Multiple used in 650 places.'>xmlNodePtr</a> <a href='../Y/31439.html' title='Multiple used in 535 places.'>parent</a> <a href='../D/14076.html' title='Multiple defined in 136 places.'>TSRMLS_DC</a>);
+<a id='L196' name='L196'></a> 196 <a href='../S/1741.html#L55' title='Defined at 55 in Zend/zend_types.h.'>zval</a> *<a href='../S/1018.html#L656' title='Defined at 656 in ext/soap/php_encoding.c.'>to_zval_user</a>(<a href='../S/1028.html#L50' title='Defined at 50 in ext/soap/php_soap.h.'>encodeTypePtr</a> <a href='../D/32025.html' title='Multiple defined in 3 places.'>type</a>, <a href='../Y/41735.html' title='Multiple used in 650 places.'>xmlNodePtr</a> <a href='../S/1232.html#L32' title='Defined at 32 in ext/xmlrpc/libxmlrpc/queue.h.'>node</a> <a href='../D/14076.html' title='Multiple defined in 136 places.'>TSRMLS_DC</a>);
+<a id='L197' name='L197'></a> 197 
+<a id='L198' name='L198'></a> 198 <strong class='reserved'>void</strong> <a href='../S/1018.html#L240' title='Defined at 240 in ext/soap/php_encoding.c.'>whiteSpace_replace</a>(<a href='../Y/41626.html' title='Multiple used in 317 places.'>xmlChar</a>* <a href='../Y/37895.html' title='Multiple used in 2900 places.'>str</a>);
+<a id='L199' name='L199'></a> 199 <strong class='reserved'>void</strong> <a href='../S/1018.html#L250' title='Defined at 250 in ext/soap/php_encoding.c.'>whiteSpace_collapse</a>(<a href='../Y/41626.html' title='Multiple used in 317 places.'>xmlChar</a>* <a href='../Y/37895.html' title='Multiple used in 2900 places.'>str</a>);
+<a id='L200' name='L200'></a> 200 
+<a id='L201' name='L201'></a> 201 <a href='../Y/41735.html' title='Multiple used in 650 places.'>xmlNodePtr</a> <a href='../S/1018.html#L3341' title='Defined at 3341 in ext/soap/php_encoding.c.'>sdl_guess_convert_xml</a>(<a href='../S/1028.html#L50' title='Defined at 50 in ext/soap/php_soap.h.'>encodeTypePtr</a> <a href='../Y/16622.html' title='Multiple used in 1254 places.'>enc</a>, <a href='../S/1741.html#L55' title='Defined at 55 in Zend/zend_types.h.'>zval</a>* <a href='../D/20513.html' title='Multiple defined in 7 places.'>data</a>, <strong class='reserved'>int</strong> <a href='../Y/38179.html' title='Multiple used in 249 places.'>style</a>, <a href='../Y/41735.html' title='Multiple used in 650 places.'>xmlNodePtr</a> <a href='../Y/31439.html' title='Multiple used in 535 places.'>parent</a> <a href='../D/14076.html' title='Multiple defined in 136 places.'>TSRMLS_DC</a>);
+<a id='L202' name='L202'></a> 202 <a href='../S/1741.html#L55' title='Defined at 55 in Zend/zend_types.h.'>zval</a> *<a href='../S/1018.html#L3277' title='Defined at 3277 in ext/soap/php_encoding.c.'>sdl_guess_convert_zval</a>(<a href='../S/1028.html#L50' title='Defined at 50 in ext/soap/php_soap.h.'>encodeTypePtr</a> <a href='../Y/16622.html' title='Multiple used in 1254 places.'>enc</a>, <a href='../Y/41735.html' title='Multiple used in 650 places.'>xmlNodePtr</a> <a href='../D/20513.html' title='Multiple defined in 7 places.'>data</a> <a href='../D/14076.html' title='Multiple defined in 136 places.'>TSRMLS_DC</a>);
+<a id='L203' name='L203'></a> 203 
+<a id='L204' name='L204'></a> 204 <strong class='reserved'>void</strong> <a href='../S/1018.html#L3580' title='Defined at 3580 in ext/soap/php_encoding.c.'>encode_finish</a>();
+<a id='L205' name='L205'></a> 205 <strong class='reserved'>void</strong> <a href='../S/1018.html#L3567' title='Defined at 3567 in ext/soap/php_encoding.c.'>encode_reset_ns</a>();
+<a id='L206' name='L206'></a> 206 <a href='../Y/41743.html' title='Multiple used in 91 places.'>xmlNsPtr</a> <a href='../S/1018.html#L3510' title='Defined at 3510 in ext/soap/php_encoding.c.'>encode_add_ns</a>(<a href='../Y/41735.html' title='Multiple used in 650 places.'>xmlNodePtr</a> <a href='../S/1232.html#L32' title='Defined at 32 in ext/xmlrpc/libxmlrpc/queue.h.'>node</a>, <strong class='reserved'>const</strong> <strong class='reserved'>char</strong>* <a href='../Y/29013.html' title='Multiple used in 617 places.'>ns</a>);
+<a id='L207' name='L207'></a> 207 
+<a id='L208' name='L208'></a> 208 <a href='../S/1028.html#L51' title='Defined at 51 in ext/soap/php_soap.h.'>encodePtr</a> <a href='../S/1018.html#L3592' title='Defined at 3592 in ext/soap/php_encoding.c.'>get_conversion</a>(<strong class='reserved'>int</strong> <a href='../Y/16713.html' title='Multiple used in 292 places.'>encode</a>);
+<a id='L209' name='L209'></a> 209 
+<a id='L210' name='L210'></a> 210 <strong class='reserved'>void</strong> <a href='../S/1018.html#L3762' title='Defined at 3762 in ext/soap/php_encoding.c.'>delete_encoder</a>(<strong class='reserved'>void</strong> *<a href='../Y/19711.html' title='Multiple used in 698 places.'>handle</a>);
+<a id='L211' name='L211'></a> 211 <strong class='reserved'>void</strong> <a href='../S/1018.html#L3777' title='Defined at 3777 in ext/soap/php_encoding.c.'>delete_encoder_persistent</a>(<strong class='reserved'>void</strong> *<a href='../Y/19711.html' title='Multiple used in 698 places.'>handle</a>);
+<a id='L212' name='L212'></a> 212 
+<a id='L213' name='L213'></a> 213 <strong class='reserved'>extern</strong> <a href='../Y/16713.html' title='Multiple used in 292 places.'>encode</a> <a href='../Y/15403.html' title='Multiple used in 15 places.'>defaultEncoding</a>[];
+<a id='L214' name='L214'></a> 214 <strong class='reserved'>extern</strong> <strong class='reserved'>int</strong> <a href='../Y/29119.html' title='Multiple used in 3 places.'>numDefaultEncodings</a>;
+<a id='L215' name='L215'></a> 215 
+<a id='L216' name='L216'></a> 216 <em class='sharp'>#endif</em>
+</pre>
+<hr />
+<a id='BOTTOM' name='BOTTOM'></a>
+<em class='comment'>/* [&lt;][&gt;][^][v]<a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+</body>
+</html>

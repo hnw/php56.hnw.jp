@@ -1,0 +1,358 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>main/php_network.h</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<a id='TOP' name='TOP'></a><h2 class='header'><a href='../mains.html'>root</a>/<a href='../files/1872.html'>main</a>/php_network.h</h2>
+<em class='comment'>/* [&lt;][&gt;]<a href='#L144'>[^]</a><a href='#L273'>[v]</a>[top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+<hr />
+<h2 class='header'><a href='../J/1500.html' title='Multiple included from 31 places.'>INCLUDED FROM</a></h2>
+<hr />
+<h2 class='header'>DEFINITIONS</h2>
+This source file includes following definitions.
+<ol>
+<li><a href='#L144' title='Defined at 144.'>php_tvtoto</a></li>
+<li><a href='#L156' title='Defined at 156.'>php_pollfd_for</a></li>
+<li><a href='#L174' title='Defined at 174.'>php_pollfd_for_ms</a></li>
+<li><a href='#L273' title='Defined at 273.'>END_EXTERN_C</a></li>
+</ol>
+<hr />
+<pre>
+<a id='L1' name='L1'></a>   1 <em class='comment'>/*</em>
+<a id='L2' name='L2'></a>   2 <em class='comment'>   +----------------------------------------------------------------------+</em>
+<a id='L3' name='L3'></a>   3 <em class='comment'>   | PHP Version 5                                                        |</em>
+<a id='L4' name='L4'></a>   4 <em class='comment'>   +----------------------------------------------------------------------+</em>
+<a id='L5' name='L5'></a>   5 <em class='comment'>   | Copyright (c) 1997-2016 The PHP Group                                |</em>
+<a id='L6' name='L6'></a>   6 <em class='comment'>   +----------------------------------------------------------------------+</em>
+<a id='L7' name='L7'></a>   7 <em class='comment'>   | This source file is subject to version 3.01 of the PHP license,      |</em>
+<a id='L8' name='L8'></a>   8 <em class='comment'>   | that is bundled with this package in the file LICENSE, and is        |</em>
+<a id='L9' name='L9'></a>   9 <em class='comment'>   | available through the world-wide-web at the following url:           |</em>
+<a id='L10' name='L10'></a>  10 <em class='comment'>   | http://www.php.net/license/3_01.txt                                  |</em>
+<a id='L11' name='L11'></a>  11 <em class='comment'>   | If you did not receive a copy of the PHP license and are unable to   |</em>
+<a id='L12' name='L12'></a>  12 <em class='comment'>   | obtain it through the world-wide-web, please send a note to          |</em>
+<a id='L13' name='L13'></a>  13 <em class='comment'>   | license@php.net so we can mail you a copy immediately.               |</em>
+<a id='L14' name='L14'></a>  14 <em class='comment'>   +----------------------------------------------------------------------+</em>
+<a id='L15' name='L15'></a>  15 <em class='comment'>   | Author: Stig Venaas &lt;venaas@uninett.no&gt;                              |</em>
+<a id='L16' name='L16'></a>  16 <em class='comment'>   +----------------------------------------------------------------------+</em>
+<a id='L17' name='L17'></a>  17 <em class='comment'> */</em>
+<a id='L18' name='L18'></a>  18 
+<a id='L19' name='L19'></a>  19 <em class='comment'>/* $Id$ */</em>
+<a id='L20' name='L20'></a>  20 
+<a id='L21' name='L21'></a>  21 <em class='sharp'>#ifndef</em> <a href='../S/1378.html#L22' title='Defined at 22 in main/php_network.h.'>_PHP_NETWORK_H</a>
+<a id='L22' name='L22'></a>  22 <em class='sharp'>#define</em> <a href='../S/1378.html#L21' title='Referred from 21 in main/php_network.h.'>_PHP_NETWORK_H</a>
+<a id='L23' name='L23'></a>  23 
+<a id='L24' name='L24'></a>  24 <em class='sharp'>#include</em> &lt;<a href='1368.html'>php.h</a>&gt;
+<a id='L25' name='L25'></a>  25 
+<a id='L26' name='L26'></a>  26 <em class='sharp'>#ifdef</em> <a href='../Y/4758.html' title='Multiple used in 689 places.'>PHP_WIN32</a>
+<a id='L27' name='L27'></a>  27 <em class='sharp'># include</em> "<a href='1615.html'>win32/inet.h</a>"
+<a id='L28' name='L28'></a>  28 <em class='sharp'>#else</em>
+<a id='L29' name='L29'></a>  29 <em class='sharp'># undef</em> <a href='../R/17343.html' title='Multiple referred from 32 places.'>closesocket</a>
+<a id='L30' name='L30'></a>  30 <em class='sharp'># define</em> <a href='../R/17343.html' title='Multiple referred from 32 places.'>closesocket</a> <a href='../D/20053.html' title='Multiple defined in 3 places.'>close</a>
+<a id='L31' name='L31'></a>  31 <em class='sharp'>#endif</em>
+<a id='L32' name='L32'></a>  32 
+<a id='L33' name='L33'></a>  33 <em class='sharp'>#ifndef</em> <a href='../Y/2905.html' title='Multiple used in 9 places.'>HAVE_SHUTDOWN</a>
+<a id='L34' name='L34'></a>  34 <em class='sharp'>#undef</em> <a href='../R/26423.html' title='Multiple referred from 41 places.'>shutdown</a>
+<a id='L35' name='L35'></a>  35 <em class='sharp'>#define</em> <a href='../R/26423.html' title='Multiple referred from 41 places.'>shutdown</a>(<a href='../D/29024.html' title='Multiple defined in 2 places.'>s</a>,<a href='../D/24846.html' title='Multiple defined in 3 places.'>n</a>)   <em class='comment'>/* nothing */</em>
+<a id='L36' name='L36'></a>  36 <em class='sharp'>#endif</em>
+<a id='L37' name='L37'></a>  37 
+<a id='L38' name='L38'></a>  38 <em class='sharp'>#ifdef</em> <a href='../Y/4758.html' title='Multiple used in 689 places.'>PHP_WIN32</a>
+<a id='L39' name='L39'></a>  39 <em class='sharp'># ifdef</em> <a href='../D/2295.html' title='Multiple defined in 9 places.'>EWOULDBLOCK</a>
+<a id='L40' name='L40'></a>  40 <em class='sharp'>#  undef</em> <a href='../R/1999.html' title='Multiple referred from 20 places.'>EWOULDBLOCK</a>
+<a id='L41' name='L41'></a>  41 <em class='sharp'># endif</em>
+<a id='L42' name='L42'></a>  42 <em class='sharp'># ifdef</em> <a href='../D/1925.html' title='Multiple defined in 4 places.'>EINPROGRESS</a>
+<a id='L43' name='L43'></a>  43 <em class='sharp'>#  undef</em> <a href='../R/1642.html' title='Multiple referred from 8 places.'>EINPROGRESS</a>
+<a id='L44' name='L44'></a>  44 <em class='sharp'># endif</em>
+<a id='L45' name='L45'></a>  45 <em class='sharp'># define</em> <a href='../R/1999.html' title='Multiple referred from 20 places.'>EWOULDBLOCK</a> <a href='../Y/7010.html' title='Multiple used in 8 places.'>WSAEWOULDBLOCK</a>
+<a id='L46' name='L46'></a>  46 <em class='sharp'># define</em> <a href='../R/1642.html' title='Multiple referred from 8 places.'>EINPROGRESS</a>    <a href='../Y/7010.html' title='Multiple used in 8 places.'>WSAEWOULDBLOCK</a>
+<a id='L47' name='L47'></a>  47 <em class='sharp'># define</em> <a href='../R/19211.html' title='Multiple referred from 8 places.'>fsync</a> <a href='../Y/7789.html' title='Multiple used in 3 places.'>_commit</a>
+<a id='L48' name='L48'></a>  48 <em class='sharp'># define</em> <a href='../R/19251.html' title='Multiple referred from 7 places.'>ftruncate</a>(<a href='../Y/8054.html' title='Multiple used in 2294 places.'>a</a>, <a href='../Y/12066.html' title='Multiple used in 1763 places.'>b</a>) <a href='../Y/13545.html' title='Multiple used in 7 places.'>chsize</a>(<a href='../Y/8054.html' title='Multiple used in 2294 places.'>a</a>, <a href='../Y/12066.html' title='Multiple used in 1763 places.'>b</a>)
+<a id='L49' name='L49'></a>  49 <em class='sharp'>#endif</em> <em class='comment'>/* defined(PHP_WIN32) */</em>
+<a id='L50' name='L50'></a>  50 
+<a id='L51' name='L51'></a>  51 <em class='sharp'>#ifndef</em> <a href='../D/2295.html' title='Multiple defined in 9 places.'>EWOULDBLOCK</a>
+<a id='L52' name='L52'></a>  52 <em class='sharp'># define</em> <a href='../R/1999.html' title='Multiple referred from 20 places.'>EWOULDBLOCK</a> <a href='../D/1900.html' title='Multiple defined in 2 places.'>EAGAIN</a>
+<a id='L53' name='L53'></a>  53 <em class='sharp'>#endif</em>
+<a id='L54' name='L54'></a>  54 
+<a id='L55' name='L55'></a>  55 <em class='sharp'>#ifdef</em> <a href='../Y/4758.html' title='Multiple used in 689 places.'>PHP_WIN32</a>
+<a id='L56' name='L56'></a>  56 <em class='sharp'>#define</em> <a href='../R/24577.html' title='Multiple referred from 25 places.'>php_socket_errno</a>() <a href='../Y/7011.html' title='Multiple used in 12 places.'>WSAGetLastError</a>()
+<a id='L57' name='L57'></a>  57 <em class='sharp'>#else</em>
+<a id='L58' name='L58'></a>  58 <em class='sharp'>#define</em> <a href='../R/24577.html' title='Multiple referred from 25 places.'>php_socket_errno</a>() <a href='../D/21169.html' title='Multiple defined in 2 places.'>errno</a>
+<a id='L59' name='L59'></a>  59 <em class='sharp'>#endif</em>
+<a id='L60' name='L60'></a>  60 
+<a id='L61' name='L61'></a>  61 <em class='comment'>/* like strerror, but caller must efree the returned string,</em>
+<a id='L62' name='L62'></a>  62 <em class='comment'> * unless buf is not NULL.</em>
+<a id='L63' name='L63'></a>  63 <em class='comment'> * Also works sensibly for win32 */</em>
+<a id='L64' name='L64'></a>  64 <a href='../D/388.html' title='Multiple defined in 16 places.'>BEGIN_EXTERN_C</a>()
+<a id='L65' name='L65'></a>  65 <a href='../D/7744.html' title='Multiple defined in 14 places.'>PHPAPI</a> <strong class='reserved'>char</strong> *<a href='../S/1366.html#L990' title='Defined at 990 in main/network.c.'>php_socket_strerror</a>(<strong class='reserved'>long</strong> <a href='../Y/17000.html' title='Multiple used in 1398 places.'>err</a>, <strong class='reserved'>char</strong> *<a href='../Y/12847.html' title='Multiple used in 3901 places.'>buf</a>, <a href='../Y/36596.html' title='Multiple used in 2694 places.'>size_t</a> <a href='../Y/12906.html' title='Multiple used in 33 places.'>bufsize</a>);
+<a id='L66' name='L66'></a>  66 <a href='../D/2043.html' title='Multiple defined in 9 places.'>END_EXTERN_C</a>()
+<a id='L67' name='L67'></a>  67 
+<a id='L68' name='L68'></a>  68 <em class='sharp'>#ifdef</em> <a href='../Y/2805.html' title='Multiple used in 5 places.'>HAVE_NETINET_IN_H</a>
+<a id='L69' name='L69'></a>  69 <em class='sharp'># include</em> &lt;netinet/in.h&gt;
+<a id='L70' name='L70'></a>  70 <em class='sharp'>#endif</em>
+<a id='L71' name='L71'></a>  71 
+<a id='L72' name='L72'></a>  72 <em class='sharp'>#ifdef</em> <a href='../Y/2983.html' title='Multiple used in 8 places.'>HAVE_SYS_SOCKET_H</a>
+<a id='L73' name='L73'></a>  73 <em class='sharp'>#include</em> &lt;sys/socket.h&gt;
+<a id='L74' name='L74'></a>  74 <em class='sharp'>#endif</em>
+<a id='L75' name='L75'></a>  75 
+<a id='L76' name='L76'></a>  76 <em class='comment'>/* These are here, rather than with the win32 counterparts above,</em>
+<a id='L77' name='L77'></a>  77 <em class='comment'> * since &lt;sys/socket.h&gt; defines them. */</em>
+<a id='L78' name='L78'></a>  78 <em class='sharp'>#ifndef</em> <a href='../D/10692.html' title='Multiple defined in 2 places.'>SHUT_RD</a>
+<a id='L79' name='L79'></a>  79 <em class='sharp'># define</em> <a href='../R/9244.html' title='Multiple referred from 5 places.'>SHUT_RD</a> 0
+<a id='L80' name='L80'></a>  80 <em class='sharp'># define</em> <a href='../R/9246.html' title='Multiple referred from 2 places.'>SHUT_WR</a> 1
+<a id='L81' name='L81'></a>  81 <em class='sharp'># define</em> <a href='../R/9245.html' title='Multiple referred from 5 places.'>SHUT_RDWR</a> 2
+<a id='L82' name='L82'></a>  82 <em class='sharp'>#endif</em>
+<a id='L83' name='L83'></a>  83 
+<a id='L84' name='L84'></a>  84 <em class='sharp'>#ifdef</em> <a href='../Y/2990.html' title='Multiple used in 21 places.'>HAVE_SYS_TIME_H</a>
+<a id='L85' name='L85'></a>  85 <em class='sharp'>#include</em> &lt;<a href='1637.html'>sys/time.h</a>&gt;
+<a id='L86' name='L86'></a>  86 <em class='sharp'>#endif</em>
+<a id='L87' name='L87'></a>  87 
+<a id='L88' name='L88'></a>  88 <em class='sharp'>#ifdef</em> <a href='../Y/2938.html' title='Multiple used in 24 places.'>HAVE_STDDEF_H</a>
+<a id='L89' name='L89'></a>  89 <em class='sharp'>#include</em> &lt;stddef.h&gt;
+<a id='L90' name='L90'></a>  90 <em class='sharp'>#endif</em>
+<a id='L91' name='L91'></a>  91 
+<a id='L92' name='L92'></a>  92 <em class='sharp'>#ifdef</em> <a href='../Y/4758.html' title='Multiple used in 689 places.'>PHP_WIN32</a>
+<a id='L93' name='L93'></a>  93 <strong class='reserved'>typedef</strong> <a href='../S/1425.html#L14' title='Defined at 14 in netware/sendmail_nw.h.'>SOCKET</a> <a href='../R/24581.html' title='Multiple referred from 63 places.'>php_socket_t</a>;
+<a id='L94' name='L94'></a>  94 <em class='sharp'>#else</em>
+<a id='L95' name='L95'></a>  95 <strong class='reserved'>typedef</strong> <strong class='reserved'>int</strong> <a href='../R/24581.html' title='Multiple referred from 63 places.'>php_socket_t</a>;
+<a id='L96' name='L96'></a>  96 <em class='sharp'>#endif</em>
+<a id='L97' name='L97'></a>  97 
+<a id='L98' name='L98'></a>  98 <em class='sharp'>#ifdef</em> <a href='../Y/4758.html' title='Multiple used in 689 places.'>PHP_WIN32</a>
+<a id='L99' name='L99'></a>  99 <em class='sharp'># define</em> <a href='../R/9652.html' title='Multiple referred from 27 places.'>SOCK_ERR</a> <a href='../S/1425.html#L19' title='Defined at 19 in netware/sendmail_nw.h.'>INVALID_SOCKET</a>
+<a id='L100' name='L100'></a> 100 <em class='sharp'># define</em> <a href='../R/9647.html' title='Multiple referred from 6 places.'>SOCK_CONN_ERR</a> <a href='../Y/5411.html' title='Multiple used in 4 places.'>SOCKET_ERROR</a>
+<a id='L101' name='L101'></a> 101 <em class='sharp'># define</em> SOCK_RECV_ERR <a href='../Y/5411.html' title='Multiple used in 4 places.'>SOCKET_ERROR</a>
+<a id='L102' name='L102'></a> 102 <em class='sharp'>#else</em>
+<a id='L103' name='L103'></a> 103 <em class='sharp'># define</em> <a href='../R/9652.html' title='Multiple referred from 27 places.'>SOCK_ERR</a> -1
+<a id='L104' name='L104'></a> 104 <em class='sharp'># define</em> <a href='../R/9647.html' title='Multiple referred from 6 places.'>SOCK_CONN_ERR</a> -1
+<a id='L105' name='L105'></a> 105 <em class='sharp'># define</em> SOCK_RECV_ERR -1
+<a id='L106' name='L106'></a> 106 <em class='sharp'>#endif</em>
+<a id='L107' name='L107'></a> 107 
+<a id='L108' name='L108'></a> 108 <em class='comment'>/* uncomment this to debug poll(2) emulation on systems that have poll(2) */</em>
+<a id='L109' name='L109'></a> 109 <em class='comment'>/* #define PHP_USE_POLL_2_EMULATION 1 */</em>
+<a id='L110' name='L110'></a> 110 
+<a id='L111' name='L111'></a> 111 <em class='sharp'>#if</em> <strong class='reserved'>defined</strong>(<a href='../Y/2980.html' title='Multiple used in 6 places.'>HAVE_SYS_POLL_H</a>) &amp;&amp; <strong class='reserved'>defined</strong>(<a href='../Y/2839.html' title='Multiple used in 8 places.'>HAVE_POLL</a>)
+<a id='L112' name='L112'></a> 112 <em class='sharp'># include</em> &lt;<a href='1473.html'>sys/poll.h</a>&gt;
+<a id='L113' name='L113'></a> 113 <strong class='reserved'>typedef</strong> <strong class='reserved'>struct</strong> <a href='../Y/33284.html' title='Multiple used in 26 places.'>pollfd</a> <a href='../R/24374.html' title='Multiple referred from 5 places.'>php_pollfd</a>;
+<a id='L114' name='L114'></a> 114 <em class='sharp'>#else</em>
+<a id='L115' name='L115'></a> 115 <strong class='reserved'>typedef</strong> <strong class='reserved'>struct</strong> _php_pollfd <em class='brace'>{</em>
+<a id='L116' name='L116'></a> 116         <a href='../D/27574.html' title='Multiple defined in 2 places.'>php_socket_t</a> <a href='../Y/17724.html' title='Multiple used in 1039 places.'>fd</a>;
+<a id='L117' name='L117'></a> 117         <strong class='reserved'>short</strong> <a href='../Y/17226.html' title='Multiple used in 53 places.'>events</a>;
+<a id='L118' name='L118'></a> 118         <strong class='reserved'>short</strong> <a href='../Y/35224.html' title='Multiple used in 16 places.'>revents</a>;
+<a id='L119' name='L119'></a> 119 <em class='brace'>}</em> <a href='../R/24374.html' title='Multiple referred from 5 places.'>php_pollfd</a>;
+<a id='L120' name='L120'></a> 120 
+<a id='L121' name='L121'></a> 121 <a href='../D/7744.html' title='Multiple defined in 14 places.'>PHPAPI</a> <strong class='reserved'>int</strong> <a href='../D/27360.html' title='Multiple defined in 2 places.'>php_poll2</a>(<a href='../D/27361.html' title='Multiple defined in 2 places.'>php_pollfd</a> *<a href='../Y/39915.html' title='Multiple used in 18 places.'>ufds</a>, <strong class='reserved'>unsigned</strong> <strong class='reserved'>int</strong> <a href='../Y/28773.html' title='Multiple used in 10 places.'>nfds</a>, <strong class='reserved'>int</strong> <a href='../Y/38977.html' title='Multiple used in 261 places.'>timeout</a>);
+<a id='L122' name='L122'></a> 122 
+<a id='L123' name='L123'></a> 123 <em class='sharp'>#ifndef</em> <a href='../S/1378.html#L124' title='Defined at 124 in main/php_network.h.'>POLLIN</a>
+<a id='L124' name='L124'></a> 124 <em class='sharp'># define</em> <a href='../R/8041.html' title='Multiple referred from 27 places.'>POLLIN</a>      0x0001    <em class='comment'>/* There is data to read */</em>
+<a id='L125' name='L125'></a> 125 <em class='sharp'># define</em> <a href='../R/8043.html' title='Multiple referred from 10 places.'>POLLPRI</a>     0x0002    <em class='comment'>/* There is urgent data to read */</em>
+<a id='L126' name='L126'></a> 126 <em class='sharp'># define</em> <a href='../R/8042.html' title='Multiple referred from 24 places.'>POLLOUT</a>     0x0004    <em class='comment'>/* Writing now will not block */</em>
+<a id='L127' name='L127'></a> 127 <em class='sharp'># define</em> <a href='../S/1378.html#L137' title='Referred from 137 in main/php_network.h.'>POLLERR</a>     0x0008    <em class='comment'>/* Error condition */</em>
+<a id='L128' name='L128'></a> 128 <em class='sharp'># define</em> <a href='../S/1378.html#L137' title='Referred from 137 in main/php_network.h.'>POLLHUP</a>     0x0010    <em class='comment'>/* Hung up */</em>
+<a id='L129' name='L129'></a> 129 <em class='sharp'># define</em> POLLNVAL    0x0020    <em class='comment'>/* Invalid request: fd not open */</em>
+<a id='L130' name='L130'></a> 130 <em class='sharp'>#endif</em>
+<a id='L131' name='L131'></a> 131 
+<a id='L132' name='L132'></a> 132 <em class='sharp'># ifndef</em> <a href='../S/1378.html#L133' title='Defined at 133 in main/php_network.h.'>PHP_USE_POLL_2_EMULATION</a>
+<a id='L133' name='L133'></a> 133 <em class='sharp'>#  define</em> <a href='../R/7956.html' title='Multiple referred from 3 places.'>PHP_USE_POLL_2_EMULATION</a> 1
+<a id='L134' name='L134'></a> 134 <em class='sharp'># endif</em>
+<a id='L135' name='L135'></a> 135 <em class='sharp'>#endif</em>
+<a id='L136' name='L136'></a> 136 
+<a id='L137' name='L137'></a> 137 <em class='sharp'>#define</em> <a href='../R/7648.html' title='Multiple referred from 10 places.'>PHP_POLLREADABLE</a>        (<a href='../S/1378.html#L124' title='Defined at 124 in main/php_network.h.'>POLLIN</a>|<a href='../S/1378.html#L127' title='Defined at 127 in main/php_network.h.'>POLLERR</a>|<a href='../S/1378.html#L128' title='Defined at 128 in main/php_network.h.'>POLLHUP</a>)
+<a id='L138' name='L138'></a> 138 
+<a id='L139' name='L139'></a> 139 <em class='sharp'>#ifndef</em> <a href='../S/1378.html#L133' title='Defined at 133 in main/php_network.h.'>PHP_USE_POLL_2_EMULATION</a>
+<a id='L140' name='L140'></a> 140 <em class='sharp'># define</em> <a href='../R/24373.html' title='Multiple referred from 3 places.'>php_poll2</a>(<a href='../Y/39915.html' title='Multiple used in 18 places.'>ufds</a>, <a href='../Y/28773.html' title='Multiple used in 10 places.'>nfds</a>, <a href='../Y/38977.html' title='Multiple used in 261 places.'>timeout</a>)         <a href='../Y/33281.html' title='Multiple used in 5 places.'>poll</a>(<a href='../Y/39915.html' title='Multiple used in 18 places.'>ufds</a>, <a href='../Y/28773.html' title='Multiple used in 10 places.'>nfds</a>, <a href='../Y/38977.html' title='Multiple used in 261 places.'>timeout</a>)
+<a id='L141' name='L141'></a> 141 <em class='sharp'>#endif</em>
+<a id='L142' name='L142'></a> 142 
+<a id='L143' name='L143'></a> 143 <em class='comment'>/* timeval-to-timeout (for poll(2)) */</em>
+<a id='L144' name='L144'></a> 144 <strong class='reserved'>static</strong> <strong class='reserved'>inline</strong> <strong class='reserved'>int</strong> <a href='../S/1378.html#L165' title='Referred from 165 in main/php_network.h.'>php_tvtoto</a>(<strong class='reserved'>struct</strong> <a href='../Y/38997.html' title='Multiple used in 173 places.'>timeval</a> *<a href='../Y/38986.html' title='Multiple used in 5 places.'>timeouttv</a>)
+<a id='L145' name='L145'></a> 145 <em class='brace'>{</em>
+<a id='L146' name='L146'></a> 146         <strong class='reserved'>if</strong> (<a href='../Y/38986.html' title='Multiple used in 5 places.'>timeouttv</a>) <em class='brace'>{</em>
+<a id='L147' name='L147'></a> 147                 <strong class='reserved'>return</strong> (<a href='../Y/38986.html' title='Multiple used in 5 places.'>timeouttv</a>-&gt;<a href='../Y/39553.html' title='Multiple used in 205 places.'>tv_sec</a> * 1000) + (<a href='../Y/38986.html' title='Multiple used in 5 places.'>timeouttv</a>-&gt;<a href='../Y/39554.html' title='Multiple used in 120 places.'>tv_usec</a> / 1000);
+<a id='L148' name='L148'></a> 148         <em class='brace'>}</em>
+<a id='L149' name='L149'></a> 149         <strong class='reserved'>return</strong> -1;
+<a id='L150' name='L150'></a> 150 <em class='brace'>}</em>
+<a id='L151' name='L151'></a> 151 
+<a id='L152' name='L152'></a> 152 <em class='comment'>/* hybrid select(2)/poll(2) for a single descriptor.</em>
+<a id='L153' name='L153'></a> 153 <em class='comment'> * timeouttv follows same rules as select(2), but is reduced to millisecond accuracy.</em>
+<a id='L154' name='L154'></a> 154 <em class='comment'> * Returns 0 on timeout, -1 on error, or the event mask (ala poll(2)).</em>
+<a id='L155' name='L155'></a> 155 <em class='comment'> */</em>
+<a id='L156' name='L156'></a> 156 <strong class='reserved'>static</strong> <strong class='reserved'>inline</strong> <strong class='reserved'>int</strong> <a href='../R/24375.html' title='Multiple referred from 13 places.'>php_pollfd_for</a>(<a href='../D/27574.html' title='Multiple defined in 2 places.'>php_socket_t</a> <a href='../Y/17724.html' title='Multiple used in 1039 places.'>fd</a>, <strong class='reserved'>int</strong> <a href='../Y/17226.html' title='Multiple used in 53 places.'>events</a>, <strong class='reserved'>struct</strong> <a href='../Y/38997.html' title='Multiple used in 173 places.'>timeval</a> *<a href='../Y/38986.html' title='Multiple used in 5 places.'>timeouttv</a>)
+<a id='L157' name='L157'></a> 157 <em class='brace'>{</em>
+<a id='L158' name='L158'></a> 158         <a href='../D/27361.html' title='Multiple defined in 2 places.'>php_pollfd</a> <a href='../Y/30495.html' title='Multiple used in 13216 places.'>p</a>;
+<a id='L159' name='L159'></a> 159         <strong class='reserved'>int</strong> <a href='../D/24846.html' title='Multiple defined in 3 places.'>n</a>;
+<a id='L160' name='L160'></a> 160 
+<a id='L161' name='L161'></a> 161         <a href='../Y/30495.html' title='Multiple used in 13216 places.'>p</a>.<a href='../Y/17724.html' title='Multiple used in 1039 places.'>fd</a> = <a href='../Y/17724.html' title='Multiple used in 1039 places.'>fd</a>;
+<a id='L162' name='L162'></a> 162         <a href='../Y/30495.html' title='Multiple used in 13216 places.'>p</a>.<a href='../Y/17226.html' title='Multiple used in 53 places.'>events</a> = <a href='../Y/17226.html' title='Multiple used in 53 places.'>events</a>;
+<a id='L163' name='L163'></a> 163         <a href='../Y/30495.html' title='Multiple used in 13216 places.'>p</a>.<a href='../Y/35224.html' title='Multiple used in 16 places.'>revents</a> = 0;
+<a id='L164' name='L164'></a> 164 
+<a id='L165' name='L165'></a> 165         <a href='../D/24846.html' title='Multiple defined in 3 places.'>n</a> = <a href='../D/27360.html' title='Multiple defined in 2 places.'>php_poll2</a>(&amp;<a href='../Y/30495.html' title='Multiple used in 13216 places.'>p</a>, 1, <a href='../S/1378.html#L144' title='Defined at 144 in main/php_network.h.'>php_tvtoto</a>(<a href='../Y/38986.html' title='Multiple used in 5 places.'>timeouttv</a>));
+<a id='L166' name='L166'></a> 166 
+<a id='L167' name='L167'></a> 167         <strong class='reserved'>if</strong> (<a href='../D/24846.html' title='Multiple defined in 3 places.'>n</a> &gt; 0) <em class='brace'>{</em>
+<a id='L168' name='L168'></a> 168                 <strong class='reserved'>return</strong> <a href='../Y/30495.html' title='Multiple used in 13216 places.'>p</a>.<a href='../Y/35224.html' title='Multiple used in 16 places.'>revents</a>;
+<a id='L169' name='L169'></a> 169         <em class='brace'>}</em>
+<a id='L170' name='L170'></a> 170 
+<a id='L171' name='L171'></a> 171         <strong class='reserved'>return</strong> <a href='../D/24846.html' title='Multiple defined in 3 places.'>n</a>;
+<a id='L172' name='L172'></a> 172 <em class='brace'>}</em>
+<a id='L173' name='L173'></a> 173 
+<a id='L174' name='L174'></a> 174 <strong class='reserved'>static</strong> <strong class='reserved'>inline</strong> <strong class='reserved'>int</strong> <a href='../R/24376.html' title='Multiple referred from 8 places.'>php_pollfd_for_ms</a>(<a href='../D/27574.html' title='Multiple defined in 2 places.'>php_socket_t</a> <a href='../Y/17724.html' title='Multiple used in 1039 places.'>fd</a>, <strong class='reserved'>int</strong> <a href='../Y/17226.html' title='Multiple used in 53 places.'>events</a>, <strong class='reserved'>int</strong> <a href='../Y/38977.html' title='Multiple used in 261 places.'>timeout</a>)
+<a id='L175' name='L175'></a> 175 <em class='brace'>{</em>
+<a id='L176' name='L176'></a> 176         <a href='../D/27361.html' title='Multiple defined in 2 places.'>php_pollfd</a> <a href='../Y/30495.html' title='Multiple used in 13216 places.'>p</a>;
+<a id='L177' name='L177'></a> 177         <strong class='reserved'>int</strong> <a href='../D/24846.html' title='Multiple defined in 3 places.'>n</a>;
+<a id='L178' name='L178'></a> 178 
+<a id='L179' name='L179'></a> 179         <a href='../Y/30495.html' title='Multiple used in 13216 places.'>p</a>.<a href='../Y/17724.html' title='Multiple used in 1039 places.'>fd</a> = <a href='../Y/17724.html' title='Multiple used in 1039 places.'>fd</a>;
+<a id='L180' name='L180'></a> 180         <a href='../Y/30495.html' title='Multiple used in 13216 places.'>p</a>.<a href='../Y/17226.html' title='Multiple used in 53 places.'>events</a> = <a href='../Y/17226.html' title='Multiple used in 53 places.'>events</a>;
+<a id='L181' name='L181'></a> 181         <a href='../Y/30495.html' title='Multiple used in 13216 places.'>p</a>.<a href='../Y/35224.html' title='Multiple used in 16 places.'>revents</a> = 0;
+<a id='L182' name='L182'></a> 182 
+<a id='L183' name='L183'></a> 183         <a href='../D/24846.html' title='Multiple defined in 3 places.'>n</a> = <a href='../D/27360.html' title='Multiple defined in 2 places.'>php_poll2</a>(&amp;<a href='../Y/30495.html' title='Multiple used in 13216 places.'>p</a>, 1, <a href='../Y/38977.html' title='Multiple used in 261 places.'>timeout</a>);
+<a id='L184' name='L184'></a> 184 
+<a id='L185' name='L185'></a> 185         <strong class='reserved'>if</strong> (<a href='../D/24846.html' title='Multiple defined in 3 places.'>n</a> &gt; 0) <em class='brace'>{</em>
+<a id='L186' name='L186'></a> 186                 <strong class='reserved'>return</strong> <a href='../Y/30495.html' title='Multiple used in 13216 places.'>p</a>.<a href='../Y/35224.html' title='Multiple used in 16 places.'>revents</a>;
+<a id='L187' name='L187'></a> 187         <em class='brace'>}</em>
+<a id='L188' name='L188'></a> 188 
+<a id='L189' name='L189'></a> 189         <strong class='reserved'>return</strong> <a href='../D/24846.html' title='Multiple defined in 3 places.'>n</a>;
+<a id='L190' name='L190'></a> 190 <em class='brace'>}</em>
+<a id='L191' name='L191'></a> 191 
+<a id='L192' name='L192'></a> 192 <em class='comment'>/* emit warning and suggestion for unsafe select(2) usage */</em>
+<a id='L193' name='L193'></a> 193 <a href='../D/7744.html' title='Multiple defined in 14 places.'>PHPAPI</a> <strong class='reserved'>void</strong> <a href='../S/1366.html#L1110' title='Defined at 1110 in main/network.c.'>_php_emit_fd_setsize_warning</a>(<strong class='reserved'>int</strong> <a href='../Y/26013.html' title='Multiple used in 51 places.'>max_fd</a>);
+<a id='L194' name='L194'></a> 194 
+<a id='L195' name='L195'></a> 195 <em class='sharp'>#ifdef</em> <a href='../Y/4758.html' title='Multiple used in 689 places.'>PHP_WIN32</a>
+<a id='L196' name='L196'></a> 196 <em class='comment'>/* it is safe to FD_SET too many fd's under win32; the macro will simply ignore</em>
+<a id='L197' name='L197'></a> 197 <em class='comment'> * descriptors that go beyond the default FD_SETSIZE */</em>
+<a id='L198' name='L198'></a> 198 <em class='sharp'># define</em> <a href='../R/7705.html' title='Multiple referred from 9 places.'>PHP_SAFE_FD_SET</a>(<a href='../Y/17724.html' title='Multiple used in 1039 places.'>fd</a>, <a href='../Y/36164.html' title='Multiple used in 253 places.'>set</a>)       <a href='../Y/2239.html' title='Multiple used in 15 places.'>FD_SET</a>(<a href='../Y/17724.html' title='Multiple used in 1039 places.'>fd</a>, <a href='../Y/36164.html' title='Multiple used in 253 places.'>set</a>)
+<a id='L199' name='L199'></a> 199 <em class='sharp'># define</em> <a href='../R/7703.html' title='Multiple referred from 2 places.'>PHP_SAFE_FD_CLR</a>(<a href='../Y/17724.html' title='Multiple used in 1039 places.'>fd</a>, <a href='../Y/36164.html' title='Multiple used in 253 places.'>set</a>)       <a href='../Y/2237.html' title='Multiple used in 3 places.'>FD_CLR</a>(<a href='../Y/17724.html' title='Multiple used in 1039 places.'>fd</a>, <a href='../Y/36164.html' title='Multiple used in 253 places.'>set</a>)
+<a id='L200' name='L200'></a> 200 <em class='sharp'># define</em> <a href='../R/7704.html' title='Multiple referred from 9 places.'>PHP_SAFE_FD_ISSET</a>(<a href='../Y/17724.html' title='Multiple used in 1039 places.'>fd</a>, <a href='../Y/36164.html' title='Multiple used in 253 places.'>set</a>)     <a href='../Y/2238.html' title='Multiple used in 8 places.'>FD_ISSET</a>(<a href='../Y/17724.html' title='Multiple used in 1039 places.'>fd</a>, <a href='../Y/36164.html' title='Multiple used in 253 places.'>set</a>)
+<a id='L201' name='L201'></a> 201 <em class='sharp'># define</em> <a href='../R/7706.html' title='Multiple referred from 4 places.'>PHP_SAFE_MAX_FD</a>(<a href='../D/23627.html' title='Multiple defined in 10 places.'>m</a>, <a href='../D/24846.html' title='Multiple defined in 3 places.'>n</a>)          <strong class='reserved'>do</strong> <em class='brace'>{</em> <strong class='reserved'>if</strong> (<a href='../D/24846.html' title='Multiple defined in 3 places.'>n</a> + 1 &gt;= <a href='../Y/2240.html' title='Multiple used in 14 places.'>FD_SETSIZE</a>) <em class='brace'>{</em> <a href='../S/1366.html#L1110' title='Defined at 1110 in main/network.c.'>_php_emit_fd_setsize_warning</a>(<a href='../D/24846.html' title='Multiple defined in 3 places.'>n</a>); <em class='brace'>}</em><em class='brace'>}</em> <strong class='reserved'>while</strong>(0)
+<a id='L202' name='L202'></a> 202 <em class='sharp'>#else</em>
+<a id='L203' name='L203'></a> 203 <em class='sharp'># define</em> <a href='../R/7705.html' title='Multiple referred from 9 places.'>PHP_SAFE_FD_SET</a>(<a href='../Y/17724.html' title='Multiple used in 1039 places.'>fd</a>, <a href='../Y/36164.html' title='Multiple used in 253 places.'>set</a>)       <strong class='reserved'>do</strong> <em class='brace'>{</em> <strong class='reserved'>if</strong> (<a href='../Y/17724.html' title='Multiple used in 1039 places.'>fd</a> &lt; <a href='../Y/2240.html' title='Multiple used in 14 places.'>FD_SETSIZE</a>) <a href='../Y/2239.html' title='Multiple used in 15 places.'>FD_SET</a>(<a href='../Y/17724.html' title='Multiple used in 1039 places.'>fd</a>, <a href='../Y/36164.html' title='Multiple used in 253 places.'>set</a>); <em class='brace'>}</em> <strong class='reserved'>while</strong>(0)
+<a id='L204' name='L204'></a> 204 <em class='sharp'># define</em> <a href='../R/7703.html' title='Multiple referred from 2 places.'>PHP_SAFE_FD_CLR</a>(<a href='../Y/17724.html' title='Multiple used in 1039 places.'>fd</a>, <a href='../Y/36164.html' title='Multiple used in 253 places.'>set</a>)       <strong class='reserved'>do</strong> <em class='brace'>{</em> <strong class='reserved'>if</strong> (<a href='../Y/17724.html' title='Multiple used in 1039 places.'>fd</a> &lt; <a href='../Y/2240.html' title='Multiple used in 14 places.'>FD_SETSIZE</a>) <a href='../Y/2237.html' title='Multiple used in 3 places.'>FD_CLR</a>(<a href='../Y/17724.html' title='Multiple used in 1039 places.'>fd</a>, <a href='../Y/36164.html' title='Multiple used in 253 places.'>set</a>); <em class='brace'>}</em> <strong class='reserved'>while</strong>(0)
+<a id='L205' name='L205'></a> 205 <em class='sharp'># define</em> <a href='../R/7704.html' title='Multiple referred from 9 places.'>PHP_SAFE_FD_ISSET</a>(<a href='../Y/17724.html' title='Multiple used in 1039 places.'>fd</a>, <a href='../Y/36164.html' title='Multiple used in 253 places.'>set</a>)     ((<a href='../Y/17724.html' title='Multiple used in 1039 places.'>fd</a> &lt; <a href='../Y/2240.html' title='Multiple used in 14 places.'>FD_SETSIZE</a>) &amp;&amp; <a href='../Y/2238.html' title='Multiple used in 8 places.'>FD_ISSET</a>(<a href='../Y/17724.html' title='Multiple used in 1039 places.'>fd</a>, <a href='../Y/36164.html' title='Multiple used in 253 places.'>set</a>))
+<a id='L206' name='L206'></a> 206 <em class='sharp'># define</em> <a href='../R/7706.html' title='Multiple referred from 4 places.'>PHP_SAFE_MAX_FD</a>(<a href='../D/23627.html' title='Multiple defined in 10 places.'>m</a>, <a href='../D/24846.html' title='Multiple defined in 3 places.'>n</a>)          <strong class='reserved'>do</strong> <em class='brace'>{</em> <strong class='reserved'>if</strong> (<a href='../D/23627.html' title='Multiple defined in 10 places.'>m</a> &gt;= <a href='../Y/2240.html' title='Multiple used in 14 places.'>FD_SETSIZE</a>) <em class='brace'>{</em> <a href='../S/1366.html#L1110' title='Defined at 1110 in main/network.c.'>_php_emit_fd_setsize_warning</a>(<a href='../D/23627.html' title='Multiple defined in 10 places.'>m</a>); <a href='../D/23627.html' title='Multiple defined in 10 places.'>m</a> = <a href='../Y/2240.html' title='Multiple used in 14 places.'>FD_SETSIZE</a> - 1; <em class='brace'>}</em><em class='brace'>}</em> <strong class='reserved'>while</strong>(0)
+<a id='L207' name='L207'></a> 207 <em class='sharp'>#endif</em>
+<a id='L208' name='L208'></a> 208 
+<a id='L209' name='L209'></a> 209 
+<a id='L210' name='L210'></a> 210 <em class='sharp'>#define</em> <a href='../R/7780.html' title='Multiple referred from 2 places.'>PHP_SOCK_CHUNK_SIZE</a>     8192
+<a id='L211' name='L211'></a> 211 
+<a id='L212' name='L212'></a> 212 <em class='sharp'>#ifdef</em> HAVE_SOCKADDR_STORAGE
+<a id='L213' name='L213'></a> 213 <strong class='reserved'>typedef</strong> <strong class='reserved'>struct</strong> <a href='../Y/36856.html' title='Multiple used in 4 places.'>sockaddr_storage</a> <a href='../R/24575.html' title='Multiple referred from 27 places.'>php_sockaddr_storage</a>;
+<a id='L214' name='L214'></a> 214 <em class='sharp'>#else</em>
+<a id='L215' name='L215'></a> 215 <strong class='reserved'>typedef</strong> <strong class='reserved'>struct</strong> <em class='brace'>{</em>
+<a id='L216' name='L216'></a> 216 <em class='sharp'>#ifdef</em> <a href='../Y/2914.html' title='Multiple used in 2 places.'>HAVE_SOCKADDR_SA_LEN</a>
+<a id='L217' name='L217'></a> 217                 <strong class='reserved'>unsigned</strong> <strong class='reserved'>char</strong> <a href='../Y/37397.html' title='Multiple used in 7 places.'>ss_len</a>;
+<a id='L218' name='L218'></a> 218                 <strong class='reserved'>unsigned</strong> <strong class='reserved'>char</strong> <a href='../S/1036.html#L113' title='Defined at 113 in ext/sockets/php_sockets.h.'>ss_family</a>;
+<a id='L219' name='L219'></a> 219 <em class='sharp'>#else</em>
+<a id='L220' name='L220'></a> 220         <strong class='reserved'>unsigned</strong> <strong class='reserved'>short</strong> <a href='../S/1036.html#L113' title='Defined at 113 in ext/sockets/php_sockets.h.'>ss_family</a>;
+<a id='L221' name='L221'></a> 221 <em class='sharp'>#endif</em>
+<a id='L222' name='L222'></a> 222         <strong class='reserved'>char</strong> <a href='../Y/23235.html' title='Multiple used in 868 places.'>info</a>[126];
+<a id='L223' name='L223'></a> 223 <em class='brace'>}</em> <a href='../R/24575.html' title='Multiple referred from 27 places.'>php_sockaddr_storage</a>;
+<a id='L224' name='L224'></a> 224 <em class='sharp'>#endif</em>
+<a id='L225' name='L225'></a> 225 
+<a id='L226' name='L226'></a> 226 <a href='../D/388.html' title='Multiple defined in 16 places.'>BEGIN_EXTERN_C</a>()
+<a id='L227' name='L227'></a> 227 <a href='../D/7744.html' title='Multiple defined in 14 places.'>PHPAPI</a> <strong class='reserved'>int</strong> <a href='../S/1366.html#L169' title='Defined at 169 in main/network.c.'>php_network_getaddresses</a>(<strong class='reserved'>const</strong> <strong class='reserved'>char</strong> *<a href='../D/23103.html' title='Multiple defined in 3 places.'>host</a>, <strong class='reserved'>int</strong> <a href='../Y/36908.html' title='Multiple used in 18 places.'>socktype</a>, <strong class='reserved'>struct</strong> <a href='../Y/36848.html' title='Multiple used in 155 places.'>sockaddr</a> ***<a href='../Y/35631.html' title='Multiple used in 22 places.'>sal</a>, <strong class='reserved'>char</strong> **<a href='../Y/17108.html' title='Multiple used in 42 places.'>error_string</a> <a href='../D/14076.html' title='Multiple defined in 136 places.'>TSRMLS_DC</a>);
+<a id='L228' name='L228'></a> 228 <a href='../D/7744.html' title='Multiple defined in 14 places.'>PHPAPI</a> <strong class='reserved'>void</strong> <a href='../S/1366.html#L154' title='Defined at 154 in main/network.c.'>php_network_freeaddresses</a>(<strong class='reserved'>struct</strong> <a href='../Y/36848.html' title='Multiple used in 155 places.'>sockaddr</a> **<a href='../Y/35631.html' title='Multiple used in 22 places.'>sal</a>);
+<a id='L229' name='L229'></a> 229 
+<a id='L230' name='L230'></a> 230 <a href='../D/7744.html' title='Multiple defined in 14 places.'>PHPAPI</a> <a href='../D/27574.html' title='Multiple defined in 2 places.'>php_socket_t</a> <a href='../S/1366.html#L768' title='Defined at 768 in main/network.c.'>php_network_connect_socket_to_host</a>(<strong class='reserved'>const</strong> <strong class='reserved'>char</strong> *<a href='../D/23103.html' title='Multiple defined in 3 places.'>host</a>, <strong class='reserved'>unsigned</strong> <strong class='reserved'>short</strong> <a href='../D/28536.html' title='Multiple defined in 2 places.'>port</a>,
+<a id='L231' name='L231'></a> 231                 <strong class='reserved'>int</strong> <a href='../Y/36908.html' title='Multiple used in 18 places.'>socktype</a>, <strong class='reserved'>int</strong> <a href='../Y/11906.html' title='Multiple used in 11 places.'>asynchronous</a>, <strong class='reserved'>struct</strong> <a href='../Y/38997.html' title='Multiple used in 173 places.'>timeval</a> *<a href='../Y/38977.html' title='Multiple used in 261 places.'>timeout</a>, <strong class='reserved'>char</strong> **<a href='../Y/17108.html' title='Multiple used in 42 places.'>error_string</a>,
+<a id='L232' name='L232'></a> 232                 <strong class='reserved'>int</strong> *<a href='../Y/17059.html' title='Multiple used in 179 places.'>error_code</a>, <strong class='reserved'>char</strong> *<a href='../Y/12531.html' title='Multiple used in 14 places.'>bindto</a>, <strong class='reserved'>unsigned</strong> <strong class='reserved'>short</strong> <a href='../Y/12527.html' title='Multiple used in 8 places.'>bindport</a> 
+<a id='L233' name='L233'></a> 233                 <a href='../D/14076.html' title='Multiple defined in 136 places.'>TSRMLS_DC</a>);
+<a id='L234' name='L234'></a> 234 
+<a id='L235' name='L235'></a> 235 <a href='../D/7744.html' title='Multiple defined in 14 places.'>PHPAPI</a> <strong class='reserved'>int</strong> <a href='../S/1366.html#L308' title='Defined at 308 in main/network.c.'>php_network_connect_socket</a>(<a href='../D/27574.html' title='Multiple defined in 2 places.'>php_socket_t</a> <a href='../Y/36906.html' title='Multiple used in 14 places.'>sockfd</a>,
+<a id='L236' name='L236'></a> 236                 <strong class='reserved'>const</strong> <strong class='reserved'>struct</strong> <a href='../Y/36848.html' title='Multiple used in 155 places.'>sockaddr</a> *<a href='../Y/8481.html' title='Multiple used in 834 places.'>addr</a>,
+<a id='L237' name='L237'></a> 237                 <a href='../D/29787.html' title='Multiple defined in 2 places.'>socklen_t</a> <a href='../Y/8556.html' title='Multiple used in 49 places.'>addrlen</a>,
+<a id='L238' name='L238'></a> 238                 <strong class='reserved'>int</strong> <a href='../Y/11906.html' title='Multiple used in 11 places.'>asynchronous</a>,
+<a id='L239' name='L239'></a> 239                 <strong class='reserved'>struct</strong> <a href='../Y/38997.html' title='Multiple used in 173 places.'>timeval</a> *<a href='../Y/38977.html' title='Multiple used in 261 places.'>timeout</a>,
+<a id='L240' name='L240'></a> 240                 <strong class='reserved'>char</strong> **<a href='../Y/17108.html' title='Multiple used in 42 places.'>error_string</a>,
+<a id='L241' name='L241'></a> 241                 <strong class='reserved'>int</strong> *<a href='../Y/17059.html' title='Multiple used in 179 places.'>error_code</a>);
+<a id='L242' name='L242'></a> 242 
+<a id='L243' name='L243'></a> 243 <em class='sharp'>#define</em> <a href='../S/206.html#L1408' title='Referred from 1408 in ext/ftp/ftp.c.'>php_connect_nonb</a>(<a href='../Y/36838.html' title='Multiple used in 294 places.'>sock</a>, <a href='../Y/8481.html' title='Multiple used in 834 places.'>addr</a>, <a href='../Y/8556.html' title='Multiple used in 49 places.'>addrlen</a>, <a href='../Y/38977.html' title='Multiple used in 261 places.'>timeout</a>) \
+<a id='L244' name='L244'></a> 244         <a href='../S/1366.html#L308' title='Defined at 308 in main/network.c.'>php_network_connect_socket</a>((<a href='../Y/36838.html' title='Multiple used in 294 places.'>sock</a>), (<a href='../Y/8481.html' title='Multiple used in 834 places.'>addr</a>), (<a href='../Y/8556.html' title='Multiple used in 49 places.'>addrlen</a>), 0, (<a href='../Y/38977.html' title='Multiple used in 261 places.'>timeout</a>), <a href='../D/6086.html' title='Multiple defined in 8 places.'>NULL</a>, <a href='../D/6086.html' title='Multiple defined in 8 places.'>NULL</a>)
+<a id='L245' name='L245'></a> 245 
+<a id='L246' name='L246'></a> 246 <a href='../D/7744.html' title='Multiple defined in 14 places.'>PHPAPI</a> <a href='../D/27574.html' title='Multiple defined in 2 places.'>php_socket_t</a> <a href='../S/1366.html#L423' title='Defined at 423 in main/network.c.'>php_network_bind_socket_to_local_addr</a>(<strong class='reserved'>const</strong> <strong class='reserved'>char</strong> *<a href='../D/23103.html' title='Multiple defined in 3 places.'>host</a>, <strong class='reserved'>unsigned</strong> <a href='../D/28536.html' title='Multiple defined in 2 places.'>port</a>,
+<a id='L247' name='L247'></a> 247                 <strong class='reserved'>int</strong> <a href='../Y/36908.html' title='Multiple used in 18 places.'>socktype</a>, <strong class='reserved'>char</strong> **<a href='../Y/17108.html' title='Multiple used in 42 places.'>error_string</a>, <strong class='reserved'>int</strong> *<a href='../Y/17059.html' title='Multiple used in 179 places.'>error_code</a>
+<a id='L248' name='L248'></a> 248                 <a href='../D/14076.html' title='Multiple defined in 136 places.'>TSRMLS_DC</a>);
+<a id='L249' name='L249'></a> 249 
+<a id='L250' name='L250'></a> 250 <a href='../D/7744.html' title='Multiple defined in 14 places.'>PHPAPI</a> <a href='../D/27574.html' title='Multiple defined in 2 places.'>php_socket_t</a> <a href='../S/1366.html#L713' title='Defined at 713 in main/network.c.'>php_network_accept_incoming</a>(<a href='../D/27574.html' title='Multiple defined in 2 places.'>php_socket_t</a> <a href='../Y/37392.html' title='Multiple used in 4 places.'>srvsock</a>,
+<a id='L251' name='L251'></a> 251                 <strong class='reserved'>char</strong> **<a href='../Y/38738.html' title='Multiple used in 42 places.'>textaddr</a>, <strong class='reserved'>long</strong> *<a href='../Y/38739.html' title='Multiple used in 33 places.'>textaddrlen</a>,
+<a id='L252' name='L252'></a> 252                 <strong class='reserved'>struct</strong> <a href='../Y/36848.html' title='Multiple used in 155 places.'>sockaddr</a> **<a href='../Y/8481.html' title='Multiple used in 834 places.'>addr</a>,
+<a id='L253' name='L253'></a> 253                 <a href='../D/29787.html' title='Multiple defined in 2 places.'>socklen_t</a> *<a href='../Y/8556.html' title='Multiple used in 49 places.'>addrlen</a>,
+<a id='L254' name='L254'></a> 254                 <strong class='reserved'>struct</strong> <a href='../Y/38997.html' title='Multiple used in 173 places.'>timeval</a> *<a href='../Y/38977.html' title='Multiple used in 261 places.'>timeout</a>,
+<a id='L255' name='L255'></a> 255                 <strong class='reserved'>char</strong> **<a href='../Y/17108.html' title='Multiple used in 42 places.'>error_string</a>,
+<a id='L256' name='L256'></a> 256                 <strong class='reserved'>int</strong> *<a href='../Y/17059.html' title='Multiple used in 179 places.'>error_code</a>
+<a id='L257' name='L257'></a> 257                 <a href='../D/14076.html' title='Multiple defined in 136 places.'>TSRMLS_DC</a>);
+<a id='L258' name='L258'></a> 258 
+<a id='L259' name='L259'></a> 259 <a href='../D/7744.html' title='Multiple defined in 14 places.'>PHPAPI</a> <strong class='reserved'>int</strong> <a href='../S/1366.html#L682' title='Defined at 682 in main/network.c.'>php_network_get_sock_name</a>(<a href='../D/27574.html' title='Multiple defined in 2 places.'>php_socket_t</a> <a href='../Y/36838.html' title='Multiple used in 294 places.'>sock</a>, 
+<a id='L260' name='L260'></a> 260                 <strong class='reserved'>char</strong> **<a href='../Y/38738.html' title='Multiple used in 42 places.'>textaddr</a>, <strong class='reserved'>long</strong> *<a href='../Y/38739.html' title='Multiple used in 33 places.'>textaddrlen</a>,
+<a id='L261' name='L261'></a> 261                 <strong class='reserved'>struct</strong> <a href='../Y/36848.html' title='Multiple used in 155 places.'>sockaddr</a> **<a href='../Y/8481.html' title='Multiple used in 834 places.'>addr</a>,
+<a id='L262' name='L262'></a> 262                 <a href='../D/29787.html' title='Multiple defined in 2 places.'>socklen_t</a> *<a href='../Y/8556.html' title='Multiple used in 49 places.'>addrlen</a>
+<a id='L263' name='L263'></a> 263                 <a href='../D/14076.html' title='Multiple defined in 136 places.'>TSRMLS_DC</a>);
+<a id='L264' name='L264'></a> 264         
+<a id='L265' name='L265'></a> 265 <a href='../D/7744.html' title='Multiple defined in 14 places.'>PHPAPI</a> <strong class='reserved'>int</strong> <a href='../S/1366.html#L662' title='Defined at 662 in main/network.c.'>php_network_get_peer_name</a>(<a href='../D/27574.html' title='Multiple defined in 2 places.'>php_socket_t</a> <a href='../Y/36838.html' title='Multiple used in 294 places.'>sock</a>, 
+<a id='L266' name='L266'></a> 266                 <strong class='reserved'>char</strong> **<a href='../Y/38738.html' title='Multiple used in 42 places.'>textaddr</a>, <strong class='reserved'>long</strong> *<a href='../Y/38739.html' title='Multiple used in 33 places.'>textaddrlen</a>,
+<a id='L267' name='L267'></a> 267                 <strong class='reserved'>struct</strong> <a href='../Y/36848.html' title='Multiple used in 155 places.'>sockaddr</a> **<a href='../Y/8481.html' title='Multiple used in 834 places.'>addr</a>,
+<a id='L268' name='L268'></a> 268                 <a href='../D/29787.html' title='Multiple defined in 2 places.'>socklen_t</a> *<a href='../Y/8556.html' title='Multiple used in 49 places.'>addrlen</a>
+<a id='L269' name='L269'></a> 269                 <a href='../D/14076.html' title='Multiple defined in 136 places.'>TSRMLS_DC</a>);
+<a id='L270' name='L270'></a> 270 
+<a id='L271' name='L271'></a> 271 <a href='../D/7744.html' title='Multiple defined in 14 places.'>PHPAPI</a> <strong class='reserved'>void</strong> <a href='../S/1366.html#L938' title='Defined at 938 in main/network.c.'>php_any_addr</a>(<strong class='reserved'>int</strong> <a href='../Y/17600.html' title='Multiple used in 8 places.'>family</a>, <a href='../D/27568.html' title='Multiple defined in 2 places.'>php_sockaddr_storage</a> *<a href='../Y/8481.html' title='Multiple used in 834 places.'>addr</a>, <strong class='reserved'>unsigned</strong> <strong class='reserved'>short</strong> <a href='../D/28536.html' title='Multiple defined in 2 places.'>port</a>);
+<a id='L272' name='L272'></a> 272 <a href='../D/7744.html' title='Multiple defined in 14 places.'>PHPAPI</a> <strong class='reserved'>int</strong> <a href='../S/1366.html#L965' title='Defined at 965 in main/network.c.'>php_sockaddr_size</a>(<a href='../D/27568.html' title='Multiple defined in 2 places.'>php_sockaddr_storage</a> *<a href='../Y/8481.html' title='Multiple used in 834 places.'>addr</a>);
+<a id='L273' name='L273'></a> 273 <a href='../R/1754.html' title='Multiple referred from 103 places.'>END_EXTERN_C</a>()
+<a id='L274' name='L274'></a> 274 
+<a id='L275' name='L275'></a> 275 <strong class='reserved'>struct</strong> <a href='../Y/7931.html' title='Multiple used in 2 places.'>_php_netstream_data_t</a>    <em class='brace'>{</em>
+<a id='L276' name='L276'></a> 276         <a href='../D/27574.html' title='Multiple defined in 2 places.'>php_socket_t</a> <a href='../Y/36858.html' title='Multiple used in 173 places.'>socket</a>;
+<a id='L277' name='L277'></a> 277         <strong class='reserved'>char</strong> <a href='../Y/23858.html' title='Multiple used in 24 places.'>is_blocked</a>;
+<a id='L278' name='L278'></a> 278         <strong class='reserved'>struct</strong> <a href='../Y/38997.html' title='Multiple used in 173 places.'>timeval</a> <a href='../Y/38977.html' title='Multiple used in 261 places.'>timeout</a>;
+<a id='L279' name='L279'></a> 279         <strong class='reserved'>char</strong> <a href='../Y/38979.html' title='Multiple used in 9 places.'>timeout_event</a>;
+<a id='L280' name='L280'></a> 280         <a href='../Y/36596.html' title='Multiple used in 2694 places.'>size_t</a> ownsize;
+<a id='L281' name='L281'></a> 281 <em class='brace'>}</em>;
+<a id='L282' name='L282'></a> 282 <strong class='reserved'>typedef</strong> <strong class='reserved'>struct</strong> <a href='../Y/7931.html' title='Multiple used in 2 places.'>_php_netstream_data_t</a> <a href='../S/1378.html#L282' title='Defined at 282 in main/php_network.h.'>php_netstream_data_t</a>;
+<a id='L283' name='L283'></a> 283 <a href='../D/7744.html' title='Multiple defined in 14 places.'>PHPAPI</a> <strong class='reserved'>extern</strong> <a href='../S/1387.html#L130' title='Defined at 130 in main/php_streams.h.'>php_stream_ops</a> <a href='../Y/32908.html' title='Multiple used in 12 places.'>php_stream_socket_ops</a>;
+<a id='L284' name='L284'></a> 284 <strong class='reserved'>extern</strong> <a href='../S/1387.html#L130' title='Defined at 130 in main/php_streams.h.'>php_stream_ops</a> <a href='../Y/32894.html' title='Multiple used in 4 places.'>php_stream_generic_socket_ops</a>;
+<a id='L285' name='L285'></a> 285 <em class='sharp'>#define</em> <a href='../S/1041.html#L2287' title='Referred from 2287 in ext/sockets/sockets.c.'>PHP_STREAM_IS_SOCKET</a>    (&amp;<a href='../Y/32908.html' title='Multiple used in 12 places.'>php_stream_socket_ops</a>)
+<a id='L286' name='L286'></a> 286 
+<a id='L287' name='L287'></a> 287 <a href='../D/388.html' title='Multiple defined in 16 places.'>BEGIN_EXTERN_C</a>()
+<a id='L288' name='L288'></a> 288 <a href='../D/7744.html' title='Multiple defined in 14 places.'>PHPAPI</a> <a href='../S/1387.html#L98' title='Defined at 98 in main/php_streams.h.'>php_stream</a> *<a href='../S/1366.html#L1038' title='Defined at 1038 in main/network.c.'>_php_stream_sock_open_from_socket</a>(<a href='../D/27574.html' title='Multiple defined in 2 places.'>php_socket_t</a> <a href='../Y/36858.html' title='Multiple used in 173 places.'>socket</a>, <strong class='reserved'>const</strong> <strong class='reserved'>char</strong> *<a href='../Y/31934.html' title='Multiple used in 65 places.'>persistent_id</a> <a href='../D/12338.html' title='Multiple defined in 2 places.'>STREAMS_DC</a> <a href='../D/14076.html' title='Multiple defined in 136 places.'>TSRMLS_DC</a> );
+<a id='L289' name='L289'></a> 289 <em class='comment'>/* open a connection to a host using php_hostconnect and return a stream */</em>
+<a id='L290' name='L290'></a> 290 <a href='../D/7744.html' title='Multiple defined in 14 places.'>PHPAPI</a> <a href='../S/1387.html#L98' title='Defined at 98 in main/php_streams.h.'>php_stream</a> *<a href='../S/1366.html#L1062' title='Defined at 1062 in main/network.c.'>_php_stream_sock_open_host</a>(<strong class='reserved'>const</strong> <strong class='reserved'>char</strong> *<a href='../D/23103.html' title='Multiple defined in 3 places.'>host</a>, <strong class='reserved'>unsigned</strong> <strong class='reserved'>short</strong> <a href='../D/28536.html' title='Multiple defined in 2 places.'>port</a>,
+<a id='L291' name='L291'></a> 291                 <strong class='reserved'>int</strong> <a href='../Y/36908.html' title='Multiple used in 18 places.'>socktype</a>, <strong class='reserved'>struct</strong> <a href='../Y/38997.html' title='Multiple used in 173 places.'>timeval</a> *<a href='../Y/38977.html' title='Multiple used in 261 places.'>timeout</a>, <strong class='reserved'>const</strong> <strong class='reserved'>char</strong> *<a href='../Y/31934.html' title='Multiple used in 65 places.'>persistent_id</a> <a href='../D/12338.html' title='Multiple defined in 2 places.'>STREAMS_DC</a> <a href='../D/14076.html' title='Multiple defined in 136 places.'>TSRMLS_DC</a>);
+<a id='L292' name='L292'></a> 292 <a href='../D/7744.html' title='Multiple defined in 14 places.'>PHPAPI</a> <strong class='reserved'>void</strong> <a href='../S/1366.html#L594' title='Defined at 594 in main/network.c.'>php_network_populate_name_from_sockaddr</a>(
+<a id='L293' name='L293'></a> 293                 <em class='comment'>/* input address */</em>
+<a id='L294' name='L294'></a> 294                 <strong class='reserved'>struct</strong> <a href='../Y/36848.html' title='Multiple used in 155 places.'>sockaddr</a> *<a href='../Y/35602.html' title='Multiple used in 296 places.'>sa</a>, <a href='../D/29787.html' title='Multiple defined in 2 places.'>socklen_t</a> <a href='../Y/36664.html' title='Multiple used in 45 places.'>sl</a>,
+<a id='L295' name='L295'></a> 295                 <em class='comment'>/* output readable address */</em>
+<a id='L296' name='L296'></a> 296                 <strong class='reserved'>char</strong> **<a href='../Y/38738.html' title='Multiple used in 42 places.'>textaddr</a>, <strong class='reserved'>long</strong> *<a href='../Y/38739.html' title='Multiple used in 33 places.'>textaddrlen</a>,
+<a id='L297' name='L297'></a> 297                 <em class='comment'>/* output address */</em>
+<a id='L298' name='L298'></a> 298                 <strong class='reserved'>struct</strong> <a href='../Y/36848.html' title='Multiple used in 155 places.'>sockaddr</a> **<a href='../Y/8481.html' title='Multiple used in 834 places.'>addr</a>,
+<a id='L299' name='L299'></a> 299                 <a href='../D/29787.html' title='Multiple defined in 2 places.'>socklen_t</a> *<a href='../Y/8556.html' title='Multiple used in 49 places.'>addrlen</a>
+<a id='L300' name='L300'></a> 300                 <a href='../D/14076.html' title='Multiple defined in 136 places.'>TSRMLS_DC</a>);
+<a id='L301' name='L301'></a> 301 
+<a id='L302' name='L302'></a> 302 <a href='../D/7744.html' title='Multiple defined in 14 places.'>PHPAPI</a> <strong class='reserved'>int</strong> <a href='../S/1366.html#L507' title='Defined at 507 in main/network.c.'>php_network_parse_network_address_with_port</a>(<strong class='reserved'>const</strong> <strong class='reserved'>char</strong> *<a href='../Y/8481.html' title='Multiple used in 834 places.'>addr</a>,
+<a id='L303' name='L303'></a> 303                 <strong class='reserved'>long</strong> <a href='../Y/8556.html' title='Multiple used in 49 places.'>addrlen</a>, <strong class='reserved'>struct</strong> <a href='../Y/36848.html' title='Multiple used in 155 places.'>sockaddr</a> *<a href='../Y/35602.html' title='Multiple used in 296 places.'>sa</a>, <a href='../D/29787.html' title='Multiple defined in 2 places.'>socklen_t</a> *<a href='../Y/36664.html' title='Multiple used in 45 places.'>sl</a> <a href='../D/14076.html' title='Multiple defined in 136 places.'>TSRMLS_DC</a>);
+<a id='L304' name='L304'></a> 304 <a href='../D/2043.html' title='Multiple defined in 9 places.'>END_EXTERN_C</a>()
+<a id='L305' name='L305'></a> 305 
+<a id='L306' name='L306'></a> 306 <em class='sharp'>#define</em> <a href='../R/24821.html' title='Multiple referred from 3 places.'>php_stream_sock_open_from_socket</a>(<a href='../Y/36858.html' title='Multiple used in 173 places.'>socket</a>, <a href='../D/25782.html' title='Multiple defined in 11 places.'>persistent</a>)    <a href='../S/1366.html#L1038' title='Defined at 1038 in main/network.c.'>_php_stream_sock_open_from_socket</a>((<a href='../Y/36858.html' title='Multiple used in 173 places.'>socket</a>), (<a href='../D/25782.html' title='Multiple defined in 11 places.'>persistent</a>) <a href='../D/12336.html' title='Multiple defined in 2 places.'>STREAMS_CC</a> <a href='../D/14074.html' title='Multiple defined in 2 places.'>TSRMLS_CC</a>)
+<a id='L307' name='L307'></a> 307 <em class='sharp'>#define</em> <a href='../S/1116.html#L732' title='Referred from 732 in ext/standard/ftp_fopen_wrapper.c.'>php_stream_sock_open_host</a>(<a href='../D/23103.html' title='Multiple defined in 3 places.'>host</a>, <a href='../D/28536.html' title='Multiple defined in 2 places.'>port</a>, <a href='../Y/36908.html' title='Multiple used in 18 places.'>socktype</a>, <a href='../Y/38977.html' title='Multiple used in 261 places.'>timeout</a>, <a href='../D/25782.html' title='Multiple defined in 11 places.'>persistent</a>)    <a href='../S/1366.html#L1062' title='Defined at 1062 in main/network.c.'>_php_stream_sock_open_host</a>((<a href='../D/23103.html' title='Multiple defined in 3 places.'>host</a>), (<a href='../D/28536.html' title='Multiple defined in 2 places.'>port</a>), (<a href='../Y/36908.html' title='Multiple used in 18 places.'>socktype</a>), (<a href='../Y/38977.html' title='Multiple used in 261 places.'>timeout</a>), (<a href='../D/25782.html' title='Multiple defined in 11 places.'>persistent</a>) <a href='../D/12336.html' title='Multiple defined in 2 places.'>STREAMS_CC</a> <a href='../D/14074.html' title='Multiple defined in 2 places.'>TSRMLS_CC</a>)
+<a id='L308' name='L308'></a> 308 
+<a id='L309' name='L309'></a> 309 <em class='comment'>/* {{{ memory debug */</em>
+<a id='L310' name='L310'></a> 310 <em class='sharp'>#define</em> php_stream_sock_open_from_socket_rel(<a href='../Y/36858.html' title='Multiple used in 173 places.'>socket</a>, <a href='../D/25782.html' title='Multiple defined in 11 places.'>persistent</a>)        <a href='../S/1366.html#L1038' title='Defined at 1038 in main/network.c.'>_php_stream_sock_open_from_socket</a>((<a href='../Y/36858.html' title='Multiple used in 173 places.'>socket</a>), (<a href='../D/25782.html' title='Multiple defined in 11 places.'>persistent</a>) <a href='../D/12340.html' title='Multiple defined in 2 places.'>STREAMS_REL_CC</a> <a href='../D/14074.html' title='Multiple defined in 2 places.'>TSRMLS_CC</a>)
+<a id='L311' name='L311'></a> 311 <em class='sharp'>#define</em> php_stream_sock_open_host_rel(<a href='../D/23103.html' title='Multiple defined in 3 places.'>host</a>, <a href='../D/28536.html' title='Multiple defined in 2 places.'>port</a>, <a href='../Y/36908.html' title='Multiple used in 18 places.'>socktype</a>, <a href='../Y/38977.html' title='Multiple used in 261 places.'>timeout</a>, <a href='../D/25782.html' title='Multiple defined in 11 places.'>persistent</a>)        <a href='../S/1366.html#L1062' title='Defined at 1062 in main/network.c.'>_php_stream_sock_open_host</a>((<a href='../D/23103.html' title='Multiple defined in 3 places.'>host</a>), (<a href='../D/28536.html' title='Multiple defined in 2 places.'>port</a>), (<a href='../Y/36908.html' title='Multiple used in 18 places.'>socktype</a>), (<a href='../Y/38977.html' title='Multiple used in 261 places.'>timeout</a>), (<a href='../D/25782.html' title='Multiple defined in 11 places.'>persistent</a>) <a href='../D/12340.html' title='Multiple defined in 2 places.'>STREAMS_REL_CC</a> <a href='../D/14074.html' title='Multiple defined in 2 places.'>TSRMLS_CC</a>)
+<a id='L312' name='L312'></a> 312 <em class='sharp'>#define</em> php_stream_sock_open_unix_rel(<a href='../Y/31544.html' title='Multiple used in 1178 places.'>path</a>, pathlen, <a href='../D/25782.html' title='Multiple defined in 11 places.'>persistent</a>, <a href='../Y/38997.html' title='Multiple used in 173 places.'>timeval</a>)       _php_stream_sock_open_unix((<a href='../Y/31544.html' title='Multiple used in 1178 places.'>path</a>), (pathlen), (<a href='../D/25782.html' title='Multiple defined in 11 places.'>persistent</a>), (<a href='../Y/38997.html' title='Multiple used in 173 places.'>timeval</a>) <a href='../D/12340.html' title='Multiple defined in 2 places.'>STREAMS_REL_CC</a> <a href='../D/14074.html' title='Multiple defined in 2 places.'>TSRMLS_CC</a>)
+<a id='L313' name='L313'></a> 313 
+<a id='L314' name='L314'></a> 314 <em class='comment'>/* }}} */</em>
+<a id='L315' name='L315'></a> 315 
+<a id='L316' name='L316'></a> 316 <em class='sharp'>#ifndef</em> <a href='../D/4857.html' title='Multiple defined in 2 places.'>MAXFQDNLEN</a>
+<a id='L317' name='L317'></a> 317 <em class='sharp'>#define</em> <a href='../R/4212.html' title='Multiple referred from 9 places.'>MAXFQDNLEN</a> 255
+<a id='L318' name='L318'></a> 318 <em class='sharp'>#endif</em>
+<a id='L319' name='L319'></a> 319 
+<a id='L320' name='L320'></a> 320 <em class='sharp'>#endif</em> <em class='comment'>/* _PHP_NETWORK_H */</em>
+<a id='L321' name='L321'></a> 321 
+<a id='L322' name='L322'></a> 322 <em class='comment'>/*</em>
+<a id='L323' name='L323'></a> 323 <em class='comment'> * Local variables:</em>
+<a id='L324' name='L324'></a> 324 <em class='comment'> * tab-width: 8</em>
+<a id='L325' name='L325'></a> 325 <em class='comment'> * c-basic-offset: 8</em>
+<a id='L326' name='L326'></a> 326 <em class='comment'> * End:</em>
+<a id='L327' name='L327'></a> 327 <em class='comment'> */</em>
+</pre>
+<hr />
+<a id='BOTTOM' name='BOTTOM'></a>
+<em class='comment'>/* [&lt;][&gt;]<a href='#L144'>[^]</a><a href='#L273'>[v]</a><a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+</body>
+</html>

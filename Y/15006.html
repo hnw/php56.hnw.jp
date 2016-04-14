@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>datafmt</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/1205.html#L299'>datafmt</a>           299 ext/sybase_ct/php_sybase_ct.c 	efree_if(result-&gt;datafmt);</span>
+<span class='curline'><a href='../S/1205.html#L1096'>datafmt</a>          1096 ext/sybase_ct/php_sybase_ct.c 	efree_n(result-&gt;datafmt);</span>
+<span class='curline'><a href='../S/1205.html#L1324'>datafmt</a>          1324 ext/sybase_ct/php_sybase_ct.c 	result-&gt;datafmt = (CS_DATAFMT *) safe_emalloc(sizeof(CS_DATAFMT), num_fields, 0);</span>
+<span class='curline'><a href='../S/1205.html#L1329'>datafmt</a>          1329 ext/sybase_ct/php_sybase_ct.c 		ct_describe(sybase_ptr-&gt;cmd, i+1, &amp;result-&gt;datafmt[i]);</span>
+<span class='curline'><a href='../S/1205.html#L1330'>datafmt</a>          1330 ext/sybase_ct/php_sybase_ct.c 		result-&gt;types[i] = result-&gt;datafmt[i].datatype;</span>
+<span class='curline'><a href='../S/1205.html#L1331'>datafmt</a>          1331 ext/sybase_ct/php_sybase_ct.c 		switch (result-&gt;datafmt[i].datatype) {</span>
+<span class='curline'><a href='../S/1205.html#L1336'>datafmt</a>          1336 ext/sybase_ct/php_sybase_ct.c 				result-&gt;datafmt[i].maxlength++;</span>
+<span class='curline'><a href='../S/1205.html#L1341'>datafmt</a>          1341 ext/sybase_ct/php_sybase_ct.c 				result-&gt;datafmt[i].maxlength *= 2;</span>
+<span class='curline'><a href='../S/1205.html#L1342'>datafmt</a>          1342 ext/sybase_ct/php_sybase_ct.c 				result-&gt;datafmt[i].maxlength++;</span>
+<span class='curline'><a href='../S/1205.html#L1347'>datafmt</a>          1347 ext/sybase_ct/php_sybase_ct.c 				result-&gt;datafmt[i].maxlength = 4;</span>
+<span class='curline'><a href='../S/1205.html#L1351'>datafmt</a>          1351 ext/sybase_ct/php_sybase_ct.c 				result-&gt;datafmt[i].maxlength = 7;</span>
+<span class='curline'><a href='../S/1205.html#L1355'>datafmt</a>          1355 ext/sybase_ct/php_sybase_ct.c 				result-&gt;datafmt[i].maxlength = 12;</span>
+<span class='curline'><a href='../S/1205.html#L1360'>datafmt</a>          1360 ext/sybase_ct/php_sybase_ct.c 				result-&gt;datafmt[i].maxlength = 24;</span>
+<span class='curline'><a href='../S/1205.html#L1365'>datafmt</a>          1365 ext/sybase_ct/php_sybase_ct.c 				result-&gt;datafmt[i].maxlength = 24;</span>
+<span class='curline'><a href='../S/1205.html#L1370'>datafmt</a>          1370 ext/sybase_ct/php_sybase_ct.c 				result-&gt;datafmt[i].maxlength = 30;</span>
+<span class='curline'><a href='../S/1205.html#L1375'>datafmt</a>          1375 ext/sybase_ct/php_sybase_ct.c 				result-&gt;datafmt[i].maxlength = result-&gt;datafmt[i].precision + 3;</span>
+<span class='curline'><a href='../S/1205.html#L1377'>datafmt</a>          1377 ext/sybase_ct/php_sybase_ct.c 				result-&gt;numerics[i] = (result-&gt;datafmt[i].scale == 0) ? 3 : 2;</span>
+<span class='curline'><a href='../S/1205.html#L1380'>datafmt</a>          1380 ext/sybase_ct/php_sybase_ct.c 				result-&gt;datafmt[i].maxlength++;</span>
+<span class='curline'><a href='../S/1205.html#L1384'>datafmt</a>          1384 ext/sybase_ct/php_sybase_ct.c 		result-&gt;tmp_buffer[i] = (char *)emalloc(result-&gt;datafmt[i].maxlength);</span>
+<span class='curline'><a href='../S/1205.html#L1385'>datafmt</a>          1385 ext/sybase_ct/php_sybase_ct.c 		result-&gt;datafmt[i].datatype = CS_CHAR_TYPE;</span>
+<span class='curline'><a href='../S/1205.html#L1386'>datafmt</a>          1386 ext/sybase_ct/php_sybase_ct.c 		result-&gt;datafmt[i].format = CS_FMT_NULLTERM;</span>
+<span class='curline'><a href='../S/1205.html#L1387'>datafmt</a>          1387 ext/sybase_ct/php_sybase_ct.c 		ct_bind(sybase_ptr-&gt;cmd, i+1, &amp;result-&gt;datafmt[i], result-&gt;tmp_buffer[i], &amp;result-&gt;lengths[i], &amp;result-&gt;indicators[i]);</span>
+<span class='curline'><a href='../S/1205.html#L1395'>datafmt</a>          1395 ext/sybase_ct/php_sybase_ct.c 		if (result-&gt;datafmt[i].namelen&gt;0) {</span>
+<span class='curline'><a href='../S/1205.html#L1396'>datafmt</a>          1396 ext/sybase_ct/php_sybase_ct.c 			result-&gt;fields[i].name = estrndup(result-&gt;datafmt[i].name, result-&gt;datafmt[i].namelen);</span>
+<span class='curline'><a href='../S/1205.html#L1407'>datafmt</a>          1407 ext/sybase_ct/php_sybase_ct.c 		result-&gt;fields[i].max_length = result-&gt;datafmt[i].maxlength-1;</span>
+<span class='curline'><a href='../S/1206.html#L111'>datafmt</a>           111 ext/sybase_ct/php_sybase_ct.h 	CS_DATAFMT *datafmt;</span>
+</pre>
+</body>
+</html>

@@ -1,0 +1,756 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>zend_free_op</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/1669.html#L70'>zend_free_op</a>       70 Zend/zend_execute.c static zend_always_inline void zend_pzval_unlock_func(zval *z, zend_free_op *should_free, int unref TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1669.html#L175'>zend_free_op</a>      175 Zend/zend_execute.c static zend_always_inline zval *_get_zval_ptr_tmp(zend_uint var, const zend_execute_data *execute_data, zend_free_op *should_free TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1669.html#L180'>zend_free_op</a>      180 Zend/zend_execute.c static zend_always_inline zval *_get_zval_ptr_var(zend_uint var, const zend_execute_data *execute_data, zend_free_op *should_free TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1669.html#L345'>zend_free_op</a>      345 Zend/zend_execute.c static inline zval *_get_zval_ptr(int op_type, const znode_op *node, const zend_execute_data *execute_data, zend_free_op *should_free, int type TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1669.html#L373'>zend_free_op</a>      373 Zend/zend_execute.c static zend_always_inline zval **_get_zval_ptr_ptr_var(zend_uint var, const zend_execute_data *execute_data, zend_free_op *should_free TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1669.html#L386'>zend_free_op</a>      386 Zend/zend_execute.c static zend_always_inline zval **_get_zval_ptr_ptr_var_fast(zend_uint var, const zend_execute_data *execute_data, zend_free_op *should_free TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1669.html#L459'>zend_free_op</a>      459 Zend/zend_execute.c static inline zval **_get_zval_ptr_ptr(int op_type, const znode_op *node, const zend_execute_data *execute_data, zend_free_op *should_free, int type TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1669.html#L482'>zend_free_op</a>      482 Zend/zend_execute.c static inline zval **_get_obj_zval_ptr_ptr(int op_type, const znode_op *op, const zend_execute_data *execute_data, zend_free_op *should_free, int type TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1669.html#L507'>zend_free_op</a>      507 Zend/zend_execute.c static inline zval *_get_obj_zval_ptr(int op_type, znode_op *op, const zend_execute_data *execute_data, zend_free_op *should_free, int type TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1669.html#L691'>zend_free_op</a>      691 Zend/zend_execute.c 	zend_free_op free_value;</span>
+<span class='curline'><a href='../S/1669.html#L1820'>zend_free_op</a>     1820 Zend/zend_execute.c ZEND_API zval *zend_get_zval_ptr(int op_type, const znode_op *node, const zend_execute_data *execute_data, zend_free_op *should_free, int type TSRMLS_DC) {</span>
+<span class='curline'><a href='../S/1669.html#L1824'>zend_free_op</a>     1824 Zend/zend_execute.c ZEND_API zval **zend_get_zval_ptr_ptr(int op_type, const znode_op *node, const zend_execute_data *execute_data, zend_free_op *should_free, int type TSRMLS_DC) {</span>
+<span class='curline'><a href='../S/1670.html#L396'>zend_free_op</a>      396 Zend/zend_execute.h ZEND_API zval *zend_get_zval_ptr(int op_type, const znode_op *node, const zend_execute_data *execute_data, zend_free_op *should_free, int type TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1670.html#L397'>zend_free_op</a>      397 Zend/zend_execute.h ZEND_API zval **zend_get_zval_ptr_ptr(int op_type, const znode_op *node, const zend_execute_data *execute_data, zend_free_op *should_free, int type TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1747.html#L31'>zend_free_op</a>       31 Zend/zend_vm_def.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1747.html#L46'>zend_free_op</a>       46 Zend/zend_vm_def.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1747.html#L61'>zend_free_op</a>       61 Zend/zend_vm_def.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1747.html#L76'>zend_free_op</a>       76 Zend/zend_vm_def.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1747.html#L91'>zend_free_op</a>       91 Zend/zend_vm_def.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1747.html#L106'>zend_free_op</a>      106 Zend/zend_vm_def.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1747.html#L121'>zend_free_op</a>      121 Zend/zend_vm_def.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1747.html#L136'>zend_free_op</a>      136 Zend/zend_vm_def.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1747.html#L151'>zend_free_op</a>      151 Zend/zend_vm_def.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1747.html#L166'>zend_free_op</a>      166 Zend/zend_vm_def.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1747.html#L183'>zend_free_op</a>      183 Zend/zend_vm_def.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1747.html#L199'>zend_free_op</a>      199 Zend/zend_vm_def.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1747.html#L215'>zend_free_op</a>      215 Zend/zend_vm_def.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1747.html#L231'>zend_free_op</a>      231 Zend/zend_vm_def.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1747.html#L247'>zend_free_op</a>      247 Zend/zend_vm_def.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1747.html#L262'>zend_free_op</a>      262 Zend/zend_vm_def.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1747.html#L277'>zend_free_op</a>      277 Zend/zend_vm_def.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1747.html#L292'>zend_free_op</a>      292 Zend/zend_vm_def.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1747.html#L307'>zend_free_op</a>      307 Zend/zend_vm_def.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1747.html#L320'>zend_free_op</a>      320 Zend/zend_vm_def.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1747.html#L333'>zend_free_op</a>      333 Zend/zend_vm_def.h 	zend_free_op free_op1, free_op2, free_op_data1;</span>
+<span class='curline'><a href='../S/1747.html#L443'>zend_free_op</a>      443 Zend/zend_vm_def.h 	zend_free_op free_op1, free_op2, free_op_data2, free_op_data1;</span>
+<span class='curline'><a href='../S/1747.html#L588'>zend_free_op</a>      588 Zend/zend_vm_def.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1747.html#L696'>zend_free_op</a>      696 Zend/zend_vm_def.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1747.html#L800'>zend_free_op</a>      800 Zend/zend_vm_def.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1747.html#L847'>zend_free_op</a>      847 Zend/zend_vm_def.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1747.html#L894'>zend_free_op</a>      894 Zend/zend_vm_def.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1747.html#L937'>zend_free_op</a>      937 Zend/zend_vm_def.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1747.html#L980'>zend_free_op</a>      980 Zend/zend_vm_def.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1747.html#L1007'>zend_free_op</a>     1007 Zend/zend_vm_def.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1747.html#L1116'>zend_free_op</a>     1116 Zend/zend_vm_def.h 			zend_free_op free_res;</span>
+<span class='curline'><a href='../S/1747.html#L1170'>zend_free_op</a>     1170 Zend/zend_vm_def.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1747.html#L1187'>zend_free_op</a>     1187 Zend/zend_vm_def.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1747.html#L1221'>zend_free_op</a>     1221 Zend/zend_vm_def.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1747.html#L1243'>zend_free_op</a>     1243 Zend/zend_vm_def.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1747.html#L1258'>zend_free_op</a>     1258 Zend/zend_vm_def.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1747.html#L1291'>zend_free_op</a>     1291 Zend/zend_vm_def.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1747.html#L1315'>zend_free_op</a>     1315 Zend/zend_vm_def.h 		zend_free_op free_res;</span>
+<span class='curline'><a href='../S/1747.html#L1332'>zend_free_op</a>     1332 Zend/zend_vm_def.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1747.html#L1334'>zend_free_op</a>     1334 Zend/zend_vm_def.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1747.html#L1380'>zend_free_op</a>     1380 Zend/zend_vm_def.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1747.html#L1424'>zend_free_op</a>     1424 Zend/zend_vm_def.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1747.html#L1455'>zend_free_op</a>     1455 Zend/zend_vm_def.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1747.html#L1457'>zend_free_op</a>     1457 Zend/zend_vm_def.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1747.html#L1500'>zend_free_op</a>     1500 Zend/zend_vm_def.h 		zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1747.html#L1534'>zend_free_op</a>     1534 Zend/zend_vm_def.h 	zend_free_op free_op1, free_op2, free_res;</span>
+<span class='curline'><a href='../S/1747.html#L1577'>zend_free_op</a>     1577 Zend/zend_vm_def.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1747.html#L1587'>zend_free_op</a>     1587 Zend/zend_vm_def.h 		zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1747.html#L1601'>zend_free_op</a>     1601 Zend/zend_vm_def.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1747.html#L1631'>zend_free_op</a>     1631 Zend/zend_vm_def.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1747.html#L1641'>zend_free_op</a>     1641 Zend/zend_vm_def.h 		zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1747.html#L1654'>zend_free_op</a>     1654 Zend/zend_vm_def.h 		zend_free_op free_op2, free_op_data1, free_op_data2;</span>
+<span class='curline'><a href='../S/1747.html#L1712'>zend_free_op</a>     1712 Zend/zend_vm_def.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1747.html#L1770'>zend_free_op</a>     1770 Zend/zend_vm_def.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1747.html#L2108'>zend_free_op</a>     2108 Zend/zend_vm_def.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1747.html#L2138'>zend_free_op</a>     2138 Zend/zend_vm_def.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1747.html#L2168'>zend_free_op</a>     2168 Zend/zend_vm_def.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1747.html#L2202'>zend_free_op</a>     2202 Zend/zend_vm_def.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1747.html#L2233'>zend_free_op</a>     2233 Zend/zend_vm_def.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1747.html#L2340'>zend_free_op</a>     2340 Zend/zend_vm_def.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1747.html#L2395'>zend_free_op</a>     2395 Zend/zend_vm_def.h 		zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1747.html#L2428'>zend_free_op</a>     2428 Zend/zend_vm_def.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1747.html#L2550'>zend_free_op</a>     2550 Zend/zend_vm_def.h 		zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1747.html#L2658'>zend_free_op</a>     2658 Zend/zend_vm_def.h 		zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1747.html#L2828'>zend_free_op</a>     2828 Zend/zend_vm_def.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1747.html#L2857'>zend_free_op</a>     2857 Zend/zend_vm_def.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1747.html#L2901'>zend_free_op</a>     2901 Zend/zend_vm_def.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1747.html#L2985'>zend_free_op</a>     2985 Zend/zend_vm_def.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1747.html#L3085'>zend_free_op</a>     3085 Zend/zend_vm_def.h 		zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1747.html#L3105'>zend_free_op</a>     3105 Zend/zend_vm_def.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1747.html#L3137'>zend_free_op</a>     3137 Zend/zend_vm_def.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1747.html#L3184'>zend_free_op</a>     3184 Zend/zend_vm_def.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1747.html#L3235'>zend_free_op</a>     3235 Zend/zend_vm_def.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1747.html#L3495'>zend_free_op</a>     3495 Zend/zend_vm_def.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1747.html#L3559'>zend_free_op</a>     3559 Zend/zend_vm_def.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1747.html#L3635'>zend_free_op</a>     3635 Zend/zend_vm_def.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1747.html#L3793'>zend_free_op</a>     3793 Zend/zend_vm_def.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1747.html#L3828'>zend_free_op</a>     3828 Zend/zend_vm_def.h 		zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1747.html#L3888'>zend_free_op</a>     3888 Zend/zend_vm_def.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1747.html#L3948'>zend_free_op</a>     3948 Zend/zend_vm_def.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1747.html#L4082'>zend_free_op</a>     4082 Zend/zend_vm_def.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1747.html#L4158'>zend_free_op</a>     4158 Zend/zend_vm_def.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1747.html#L4254'>zend_free_op</a>     4254 Zend/zend_vm_def.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1747.html#L4295'>zend_free_op</a>     4295 Zend/zend_vm_def.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1747.html#L4457'>zend_free_op</a>     4457 Zend/zend_vm_def.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1747.html#L4608'>zend_free_op</a>     4608 Zend/zend_vm_def.h 		zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1747.html#L4673'>zend_free_op</a>     4673 Zend/zend_vm_def.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1747.html#L4824'>zend_free_op</a>     4824 Zend/zend_vm_def.h 		zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1747.html#L4919'>zend_free_op</a>     4919 Zend/zend_vm_def.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1747.html#L4945'>zend_free_op</a>     4945 Zend/zend_vm_def.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1747.html#L4980'>zend_free_op</a>     4980 Zend/zend_vm_def.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1747.html#L4998'>zend_free_op</a>     4998 Zend/zend_vm_def.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1747.html#L5116'>zend_free_op</a>     5116 Zend/zend_vm_def.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1747.html#L5383'>zend_free_op</a>     5383 Zend/zend_vm_def.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1747.html#L5495'>zend_free_op</a>     5495 Zend/zend_vm_def.h 		zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1747.html#L5574'>zend_free_op</a>     5574 Zend/zend_vm_def.h 		zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1747.html#L5696'>zend_free_op</a>     5696 Zend/zend_vm_def.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L711'>zend_free_op</a>      711 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L1751'>zend_free_op</a>     1751 Zend/zend_vm_execute.h 		zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L1806'>zend_free_op</a>     1806 Zend/zend_vm_execute.h 		zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L1950'>zend_free_op</a>     1950 Zend/zend_vm_execute.h 		zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L2005'>zend_free_op</a>     2005 Zend/zend_vm_execute.h 		zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L3619'>zend_free_op</a>     3619 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L3728'>zend_free_op</a>     3728 Zend/zend_vm_execute.h 			zend_free_op free_res;</span>
+<span class='curline'><a href='../S/1748.html#L4531'>zend_free_op</a>     4531 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L4546'>zend_free_op</a>     4546 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L4561'>zend_free_op</a>     4561 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L4576'>zend_free_op</a>     4576 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L4591'>zend_free_op</a>     4591 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L4606'>zend_free_op</a>     4606 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L4621'>zend_free_op</a>     4621 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L4636'>zend_free_op</a>     4636 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L4651'>zend_free_op</a>     4651 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L4666'>zend_free_op</a>     4666 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L4683'>zend_free_op</a>     4683 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L4699'>zend_free_op</a>     4699 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L4715'>zend_free_op</a>     4715 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L4731'>zend_free_op</a>     4731 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L4747'>zend_free_op</a>     4747 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L4762'>zend_free_op</a>     4762 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L4777'>zend_free_op</a>     4777 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L4792'>zend_free_op</a>     4792 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L4807'>zend_free_op</a>     4807 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L4866'>zend_free_op</a>     4866 Zend/zend_vm_execute.h 		zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L4949'>zend_free_op</a>     4949 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L4999'>zend_free_op</a>     4999 Zend/zend_vm_execute.h 		zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L5157'>zend_free_op</a>     5157 Zend/zend_vm_execute.h 		zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L5218'>zend_free_op</a>     5218 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L5233'>zend_free_op</a>     5233 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L5248'>zend_free_op</a>     5248 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L5263'>zend_free_op</a>     5263 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L5278'>zend_free_op</a>     5278 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L5293'>zend_free_op</a>     5293 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L5308'>zend_free_op</a>     5308 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L5323'>zend_free_op</a>     5323 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L5338'>zend_free_op</a>     5338 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L5353'>zend_free_op</a>     5353 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L5368'>zend_free_op</a>     5368 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L5385'>zend_free_op</a>     5385 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L5401'>zend_free_op</a>     5401 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L5417'>zend_free_op</a>     5417 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L5433'>zend_free_op</a>     5433 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L5449'>zend_free_op</a>     5449 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L5464'>zend_free_op</a>     5464 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L5479'>zend_free_op</a>     5479 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L5494'>zend_free_op</a>     5494 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L5509'>zend_free_op</a>     5509 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L5618'>zend_free_op</a>     5618 Zend/zend_vm_execute.h 			zend_free_op free_res;</span>
+<span class='curline'><a href='../S/1748.html#L5671'>zend_free_op</a>     5671 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L5730'>zend_free_op</a>     5730 Zend/zend_vm_execute.h 		zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L5813'>zend_free_op</a>     5813 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L5863'>zend_free_op</a>     5863 Zend/zend_vm_execute.h 		zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L6184'>zend_free_op</a>     6184 Zend/zend_vm_execute.h 		zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L6246'>zend_free_op</a>     6246 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L6261'>zend_free_op</a>     6261 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L6370'>zend_free_op</a>     6370 Zend/zend_vm_execute.h 			zend_free_op free_res;</span>
+<span class='curline'><a href='../S/1748.html#L7750'>zend_free_op</a>     7750 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L7763'>zend_free_op</a>     7763 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L7776'>zend_free_op</a>     7776 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L7803'>zend_free_op</a>     7803 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L7833'>zend_free_op</a>     7833 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L7863'>zend_free_op</a>     7863 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L7897'>zend_free_op</a>     7897 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L7928'>zend_free_op</a>     7928 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L7974'>zend_free_op</a>     7974 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L8018'>zend_free_op</a>     8018 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L8089'>zend_free_op</a>     8089 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L8129'>zend_free_op</a>     8129 Zend/zend_vm_execute.h 		zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L8148'>zend_free_op</a>     8148 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L8163'>zend_free_op</a>     8163 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L8229'>zend_free_op</a>     8229 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L8289'>zend_free_op</a>     8289 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L8421'>zend_free_op</a>     8421 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L8587'>zend_free_op</a>     8587 Zend/zend_vm_execute.h 		zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L8634'>zend_free_op</a>     8634 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L8660'>zend_free_op</a>     8660 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L8695'>zend_free_op</a>     8695 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L8713'>zend_free_op</a>     8713 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L8740'>zend_free_op</a>     8740 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L8761'>zend_free_op</a>     8761 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L8776'>zend_free_op</a>     8776 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L8791'>zend_free_op</a>     8791 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L8806'>zend_free_op</a>     8806 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L8821'>zend_free_op</a>     8821 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L8836'>zend_free_op</a>     8836 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L8851'>zend_free_op</a>     8851 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L8866'>zend_free_op</a>     8866 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L8881'>zend_free_op</a>     8881 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L8896'>zend_free_op</a>     8896 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L8913'>zend_free_op</a>     8913 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L8929'>zend_free_op</a>     8929 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L8945'>zend_free_op</a>     8945 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L8961'>zend_free_op</a>     8961 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L8977'>zend_free_op</a>     8977 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L8992'>zend_free_op</a>     8992 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L9007'>zend_free_op</a>     9007 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L9022'>zend_free_op</a>     9022 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L9037'>zend_free_op</a>     9037 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L9146'>zend_free_op</a>     9146 Zend/zend_vm_execute.h 			zend_free_op free_res;</span>
+<span class='curline'><a href='../S/1748.html#L9199'>zend_free_op</a>     9199 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L9216'>zend_free_op</a>     9216 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L9289'>zend_free_op</a>     9289 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L9367'>zend_free_op</a>     9367 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L9381'>zend_free_op</a>     9381 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L9478'>zend_free_op</a>     9478 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L9574'>zend_free_op</a>     9574 Zend/zend_vm_execute.h 		zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L9659'>zend_free_op</a>     9659 Zend/zend_vm_execute.h 		zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L9798'>zend_free_op</a>     9798 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L9813'>zend_free_op</a>     9813 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L9828'>zend_free_op</a>     9828 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L9843'>zend_free_op</a>     9843 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L9858'>zend_free_op</a>     9858 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L9873'>zend_free_op</a>     9873 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L9888'>zend_free_op</a>     9888 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L9903'>zend_free_op</a>     9903 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L9918'>zend_free_op</a>     9918 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L9933'>zend_free_op</a>     9933 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L9948'>zend_free_op</a>     9948 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L9965'>zend_free_op</a>     9965 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L9981'>zend_free_op</a>     9981 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L9997'>zend_free_op</a>     9997 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L10013'>zend_free_op</a>     10013 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L10029'>zend_free_op</a>     10029 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L10044'>zend_free_op</a>     10044 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L10059'>zend_free_op</a>     10059 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L10074'>zend_free_op</a>     10074 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L10089'>zend_free_op</a>     10089 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L10106'>zend_free_op</a>     10106 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L10154'>zend_free_op</a>     10154 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L10233'>zend_free_op</a>     10233 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L10248'>zend_free_op</a>     10248 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L10283'>zend_free_op</a>     10283 Zend/zend_vm_execute.h 		zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L10363'>zend_free_op</a>     10363 Zend/zend_vm_execute.h 		zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L10441'>zend_free_op</a>     10441 Zend/zend_vm_execute.h 		zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L10502'>zend_free_op</a>     10502 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L10517'>zend_free_op</a>     10517 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L10532'>zend_free_op</a>     10532 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L10547'>zend_free_op</a>     10547 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L10562'>zend_free_op</a>     10562 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L10577'>zend_free_op</a>     10577 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L10592'>zend_free_op</a>     10592 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L10607'>zend_free_op</a>     10607 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L10622'>zend_free_op</a>     10622 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L10637'>zend_free_op</a>     10637 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L10652'>zend_free_op</a>     10652 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L10669'>zend_free_op</a>     10669 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L10685'>zend_free_op</a>     10685 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L10701'>zend_free_op</a>     10701 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L10717'>zend_free_op</a>     10717 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L10733'>zend_free_op</a>     10733 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L10748'>zend_free_op</a>     10748 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L10763'>zend_free_op</a>     10763 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L10778'>zend_free_op</a>     10778 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L10793'>zend_free_op</a>     10793 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L10902'>zend_free_op</a>     10902 Zend/zend_vm_execute.h 			zend_free_op free_res;</span>
+<span class='curline'><a href='../S/1748.html#L10955'>zend_free_op</a>     10955 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L10972'>zend_free_op</a>     10972 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L11020'>zend_free_op</a>     11020 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L11099'>zend_free_op</a>     11099 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L11114'>zend_free_op</a>     11114 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L11149'>zend_free_op</a>     11149 Zend/zend_vm_execute.h 		zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L11211'>zend_free_op</a>     11211 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L11307'>zend_free_op</a>     11307 Zend/zend_vm_execute.h 		zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L11392'>zend_free_op</a>     11392 Zend/zend_vm_execute.h 		zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L11470'>zend_free_op</a>     11470 Zend/zend_vm_execute.h 		zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L11532'>zend_free_op</a>     11532 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L11547'>zend_free_op</a>     11547 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L11656'>zend_free_op</a>     11656 Zend/zend_vm_execute.h 			zend_free_op free_res;</span>
+<span class='curline'><a href='../S/1748.html#L11709'>zend_free_op</a>     11709 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L11806'>zend_free_op</a>     11806 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L11902'>zend_free_op</a>     11902 Zend/zend_vm_execute.h 		zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L11987'>zend_free_op</a>     11987 Zend/zend_vm_execute.h 		zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L12126'>zend_free_op</a>     12126 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L12141'>zend_free_op</a>     12141 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L12156'>zend_free_op</a>     12156 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L12171'>zend_free_op</a>     12171 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L12186'>zend_free_op</a>     12186 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L12201'>zend_free_op</a>     12201 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L12216'>zend_free_op</a>     12216 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L12231'>zend_free_op</a>     12231 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L12246'>zend_free_op</a>     12246 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L12261'>zend_free_op</a>     12261 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L12278'>zend_free_op</a>     12278 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L12294'>zend_free_op</a>     12294 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L12310'>zend_free_op</a>     12310 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L12326'>zend_free_op</a>     12326 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L12342'>zend_free_op</a>     12342 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L12357'>zend_free_op</a>     12357 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L12372'>zend_free_op</a>     12372 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L12387'>zend_free_op</a>     12387 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L12402'>zend_free_op</a>     12402 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L12466'>zend_free_op</a>     12466 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L12544'>zend_free_op</a>     12544 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L12558'>zend_free_op</a>     12558 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L12673'>zend_free_op</a>     12673 Zend/zend_vm_execute.h 		zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L12812'>zend_free_op</a>     12812 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L12827'>zend_free_op</a>     12827 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L12840'>zend_free_op</a>     12840 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L12853'>zend_free_op</a>     12853 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L12900'>zend_free_op</a>     12900 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L12947'>zend_free_op</a>     12947 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L12990'>zend_free_op</a>     12990 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L13033'>zend_free_op</a>     13033 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L13060'>zend_free_op</a>     13060 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L13090'>zend_free_op</a>     13090 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L13120'>zend_free_op</a>     13120 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L13154'>zend_free_op</a>     13154 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L13185'>zend_free_op</a>     13185 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L13231'>zend_free_op</a>     13231 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L13275'>zend_free_op</a>     13275 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L13347'>zend_free_op</a>     13347 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L13377'>zend_free_op</a>     13377 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L13409'>zend_free_op</a>     13409 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L13456'>zend_free_op</a>     13456 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L13507'>zend_free_op</a>     13507 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L13532'>zend_free_op</a>     13532 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L13598'>zend_free_op</a>     13598 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L13658'>zend_free_op</a>     13658 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L13790'>zend_free_op</a>     13790 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L14087'>zend_free_op</a>     14087 Zend/zend_vm_execute.h 		zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L14105'>zend_free_op</a>     14105 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L14131'>zend_free_op</a>     14131 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L14166'>zend_free_op</a>     14166 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L14184'>zend_free_op</a>     14184 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L14212'>zend_free_op</a>     14212 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L14233'>zend_free_op</a>     14233 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L14248'>zend_free_op</a>     14248 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L14263'>zend_free_op</a>     14263 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L14278'>zend_free_op</a>     14278 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L14293'>zend_free_op</a>     14293 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L14308'>zend_free_op</a>     14308 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L14323'>zend_free_op</a>     14323 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L14338'>zend_free_op</a>     14338 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L14353'>zend_free_op</a>     14353 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L14368'>zend_free_op</a>     14368 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L14385'>zend_free_op</a>     14385 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L14401'>zend_free_op</a>     14401 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L14417'>zend_free_op</a>     14417 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L14433'>zend_free_op</a>     14433 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L14449'>zend_free_op</a>     14449 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L14464'>zend_free_op</a>     14464 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L14479'>zend_free_op</a>     14479 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L14494'>zend_free_op</a>     14494 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L14509'>zend_free_op</a>     14509 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op_data1;</span>
+<span class='curline'><a href='../S/1748.html#L14619'>zend_free_op</a>     14619 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op_data2, free_op_data1;</span>
+<span class='curline'><a href='../S/1748.html#L14763'>zend_free_op</a>     14763 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L14871'>zend_free_op</a>     14871 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L14975'>zend_free_op</a>     14975 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L15084'>zend_free_op</a>     15084 Zend/zend_vm_execute.h 			zend_free_op free_res;</span>
+<span class='curline'><a href='../S/1748.html#L15137'>zend_free_op</a>     15137 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L15154'>zend_free_op</a>     15154 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L15188'>zend_free_op</a>     15188 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L15210'>zend_free_op</a>     15210 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L15225'>zend_free_op</a>     15225 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L15258'>zend_free_op</a>     15258 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L15282'>zend_free_op</a>     15282 Zend/zend_vm_execute.h 		zend_free_op free_res;</span>
+<span class='curline'><a href='../S/1748.html#L15299'>zend_free_op</a>     15299 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L15347'>zend_free_op</a>     15347 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L15391'>zend_free_op</a>     15391 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L15422'>zend_free_op</a>     15422 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L15467'>zend_free_op</a>     15467 Zend/zend_vm_execute.h 		zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L15501'>zend_free_op</a>     15501 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_res;</span>
+<span class='curline'><a href='../S/1748.html#L15544'>zend_free_op</a>     15544 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L15574'>zend_free_op</a>     15574 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L15597'>zend_free_op</a>     15597 Zend/zend_vm_execute.h 		zend_free_op free_op_data1, free_op_data2;</span>
+<span class='curline'><a href='../S/1748.html#L15654'>zend_free_op</a>     15654 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L15714'>zend_free_op</a>     15714 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L15918'>zend_free_op</a>     15918 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L16024'>zend_free_op</a>     16024 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L16121'>zend_free_op</a>     16121 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L16197'>zend_free_op</a>     16197 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L16293'>zend_free_op</a>     16293 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L16354'>zend_free_op</a>     16354 Zend/zend_vm_execute.h 		zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L16419'>zend_free_op</a>     16419 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L16586'>zend_free_op</a>     16586 Zend/zend_vm_execute.h 		zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L16726'>zend_free_op</a>     16726 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L16746'>zend_free_op</a>     16746 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L16761'>zend_free_op</a>     16761 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L16776'>zend_free_op</a>     16776 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L16791'>zend_free_op</a>     16791 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L16806'>zend_free_op</a>     16806 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L16821'>zend_free_op</a>     16821 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L16836'>zend_free_op</a>     16836 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L16851'>zend_free_op</a>     16851 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L16866'>zend_free_op</a>     16866 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L16881'>zend_free_op</a>     16881 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L16898'>zend_free_op</a>     16898 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L16914'>zend_free_op</a>     16914 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L16930'>zend_free_op</a>     16930 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L16946'>zend_free_op</a>     16946 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L16962'>zend_free_op</a>     16962 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L16977'>zend_free_op</a>     16977 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L16992'>zend_free_op</a>     16992 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L17007'>zend_free_op</a>     17007 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L17022'>zend_free_op</a>     17022 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2, free_op_data1;</span>
+<span class='curline'><a href='../S/1748.html#L17132'>zend_free_op</a>     17132 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2, free_op_data2, free_op_data1;</span>
+<span class='curline'><a href='../S/1748.html#L17277'>zend_free_op</a>     17277 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L17385'>zend_free_op</a>     17385 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L17489'>zend_free_op</a>     17489 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L17506'>zend_free_op</a>     17506 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L17540'>zend_free_op</a>     17540 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L17562'>zend_free_op</a>     17562 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L17577'>zend_free_op</a>     17577 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L17610'>zend_free_op</a>     17610 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L17634'>zend_free_op</a>     17634 Zend/zend_vm_execute.h 		zend_free_op free_res;</span>
+<span class='curline'><a href='../S/1748.html#L17651'>zend_free_op</a>     17651 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L17653'>zend_free_op</a>     17653 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L17699'>zend_free_op</a>     17699 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L17743'>zend_free_op</a>     17743 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L17774'>zend_free_op</a>     17774 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L17776'>zend_free_op</a>     17776 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L17819'>zend_free_op</a>     17819 Zend/zend_vm_execute.h 		zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L17853'>zend_free_op</a>     17853 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2, free_res;</span>
+<span class='curline'><a href='../S/1748.html#L17896'>zend_free_op</a>     17896 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L17926'>zend_free_op</a>     17926 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L17936'>zend_free_op</a>     17936 Zend/zend_vm_execute.h 		zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L17949'>zend_free_op</a>     17949 Zend/zend_vm_execute.h 		zend_free_op free_op2, free_op_data1, free_op_data2;</span>
+<span class='curline'><a href='../S/1748.html#L18007'>zend_free_op</a>     18007 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L18067'>zend_free_op</a>     18067 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L18189'>zend_free_op</a>     18189 Zend/zend_vm_execute.h 		zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L18272'>zend_free_op</a>     18272 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L18287'>zend_free_op</a>     18287 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L18322'>zend_free_op</a>     18322 Zend/zend_vm_execute.h 		zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L18382'>zend_free_op</a>     18382 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L18478'>zend_free_op</a>     18478 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L18519'>zend_free_op</a>     18519 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L18686'>zend_free_op</a>     18686 Zend/zend_vm_execute.h 		zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L18765'>zend_free_op</a>     18765 Zend/zend_vm_execute.h 		zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L18826'>zend_free_op</a>     18826 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L18846'>zend_free_op</a>     18846 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L18861'>zend_free_op</a>     18861 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L18876'>zend_free_op</a>     18876 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L18891'>zend_free_op</a>     18891 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L18906'>zend_free_op</a>     18906 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L18921'>zend_free_op</a>     18921 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L18936'>zend_free_op</a>     18936 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L18951'>zend_free_op</a>     18951 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L18966'>zend_free_op</a>     18966 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L18981'>zend_free_op</a>     18981 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L18998'>zend_free_op</a>     18998 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L19014'>zend_free_op</a>     19014 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L19030'>zend_free_op</a>     19030 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L19046'>zend_free_op</a>     19046 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L19062'>zend_free_op</a>     19062 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L19077'>zend_free_op</a>     19077 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L19092'>zend_free_op</a>     19092 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L19107'>zend_free_op</a>     19107 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L19122'>zend_free_op</a>     19122 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2, free_op_data1;</span>
+<span class='curline'><a href='../S/1748.html#L19232'>zend_free_op</a>     19232 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2, free_op_data2, free_op_data1;</span>
+<span class='curline'><a href='../S/1748.html#L19377'>zend_free_op</a>     19377 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L19485'>zend_free_op</a>     19485 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L19589'>zend_free_op</a>     19589 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L19698'>zend_free_op</a>     19698 Zend/zend_vm_execute.h 			zend_free_op free_res;</span>
+<span class='curline'><a href='../S/1748.html#L19751'>zend_free_op</a>     19751 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L19768'>zend_free_op</a>     19768 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L19802'>zend_free_op</a>     19802 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L19824'>zend_free_op</a>     19824 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L19839'>zend_free_op</a>     19839 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L19872'>zend_free_op</a>     19872 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L19896'>zend_free_op</a>     19896 Zend/zend_vm_execute.h 		zend_free_op free_res;</span>
+<span class='curline'><a href='../S/1748.html#L19913'>zend_free_op</a>     19913 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L19915'>zend_free_op</a>     19915 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L19961'>zend_free_op</a>     19961 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L20005'>zend_free_op</a>     20005 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L20036'>zend_free_op</a>     20036 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L20038'>zend_free_op</a>     20038 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L20081'>zend_free_op</a>     20081 Zend/zend_vm_execute.h 		zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L20115'>zend_free_op</a>     20115 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2, free_res;</span>
+<span class='curline'><a href='../S/1748.html#L20158'>zend_free_op</a>     20158 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L20188'>zend_free_op</a>     20188 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L20198'>zend_free_op</a>     20198 Zend/zend_vm_execute.h 		zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L20211'>zend_free_op</a>     20211 Zend/zend_vm_execute.h 		zend_free_op free_op2, free_op_data1, free_op_data2;</span>
+<span class='curline'><a href='../S/1748.html#L20269'>zend_free_op</a>     20269 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L20327'>zend_free_op</a>     20327 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L20385'>zend_free_op</a>     20385 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L20507'>zend_free_op</a>     20507 Zend/zend_vm_execute.h 		zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L20590'>zend_free_op</a>     20590 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L20605'>zend_free_op</a>     20605 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L20640'>zend_free_op</a>     20640 Zend/zend_vm_execute.h 		zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L20702'>zend_free_op</a>     20702 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L20778'>zend_free_op</a>     20778 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L20874'>zend_free_op</a>     20874 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L20935'>zend_free_op</a>     20935 Zend/zend_vm_execute.h 		zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L21000'>zend_free_op</a>     21000 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L21167'>zend_free_op</a>     21167 Zend/zend_vm_execute.h 		zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L21246'>zend_free_op</a>     21246 Zend/zend_vm_execute.h 		zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L21308'>zend_free_op</a>     21308 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L21328'>zend_free_op</a>     21328 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op_data1;</span>
+<span class='curline'><a href='../S/1748.html#L21438'>zend_free_op</a>     21438 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op_data2, free_op_data1;</span>
+<span class='curline'><a href='../S/1748.html#L21582'>zend_free_op</a>     21582 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L21691'>zend_free_op</a>     21691 Zend/zend_vm_execute.h 			zend_free_op free_res;</span>
+<span class='curline'><a href='../S/1748.html#L21744'>zend_free_op</a>     21744 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L21778'>zend_free_op</a>     21778 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L21800'>zend_free_op</a>     21800 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L21833'>zend_free_op</a>     21833 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L21856'>zend_free_op</a>     21856 Zend/zend_vm_execute.h 		zend_free_op free_op_data1, free_op_data2;</span>
+<span class='curline'><a href='../S/1748.html#L22038'>zend_free_op</a>     22038 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L22135'>zend_free_op</a>     22135 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L22231'>zend_free_op</a>     22231 Zend/zend_vm_execute.h 		zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L22337'>zend_free_op</a>     22337 Zend/zend_vm_execute.h 		zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L22482'>zend_free_op</a>     22482 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L22497'>zend_free_op</a>     22497 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L22512'>zend_free_op</a>     22512 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L22527'>zend_free_op</a>     22527 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L22542'>zend_free_op</a>     22542 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L22557'>zend_free_op</a>     22557 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L22572'>zend_free_op</a>     22572 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L22587'>zend_free_op</a>     22587 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L22602'>zend_free_op</a>     22602 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L22617'>zend_free_op</a>     22617 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L22634'>zend_free_op</a>     22634 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L22650'>zend_free_op</a>     22650 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L22666'>zend_free_op</a>     22666 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L22682'>zend_free_op</a>     22682 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L22698'>zend_free_op</a>     22698 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L22713'>zend_free_op</a>     22713 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L22728'>zend_free_op</a>     22728 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L22743'>zend_free_op</a>     22743 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L22758'>zend_free_op</a>     22758 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op_data1;</span>
+<span class='curline'><a href='../S/1748.html#L22868'>zend_free_op</a>     22868 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op_data2, free_op_data1;</span>
+<span class='curline'><a href='../S/1748.html#L23012'>zend_free_op</a>     23012 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L23120'>zend_free_op</a>     23120 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L23224'>zend_free_op</a>     23224 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L23241'>zend_free_op</a>     23241 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L23275'>zend_free_op</a>     23275 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L23297'>zend_free_op</a>     23297 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L23312'>zend_free_op</a>     23312 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L23345'>zend_free_op</a>     23345 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L23369'>zend_free_op</a>     23369 Zend/zend_vm_execute.h 		zend_free_op free_res;</span>
+<span class='curline'><a href='../S/1748.html#L23386'>zend_free_op</a>     23386 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L23434'>zend_free_op</a>     23434 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L23478'>zend_free_op</a>     23478 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L23509'>zend_free_op</a>     23509 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L23554'>zend_free_op</a>     23554 Zend/zend_vm_execute.h 		zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L23588'>zend_free_op</a>     23588 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_res;</span>
+<span class='curline'><a href='../S/1748.html#L23631'>zend_free_op</a>     23631 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L23661'>zend_free_op</a>     23661 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L23684'>zend_free_op</a>     23684 Zend/zend_vm_execute.h 		zend_free_op free_op_data1, free_op_data2;</span>
+<span class='curline'><a href='../S/1748.html#L23741'>zend_free_op</a>     23741 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L23798'>zend_free_op</a>     23798 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L23855'>zend_free_op</a>     23855 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L24059'>zend_free_op</a>     24059 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L24073'>zend_free_op</a>     24073 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L24168'>zend_free_op</a>     24168 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L24264'>zend_free_op</a>     24264 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L24305'>zend_free_op</a>     24305 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L24472'>zend_free_op</a>     24472 Zend/zend_vm_execute.h 		zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L24612'>zend_free_op</a>     24612 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L24720'>zend_free_op</a>     24720 Zend/zend_vm_execute.h 	zend_free_op free_op_data1;</span>
+<span class='curline'><a href='../S/1748.html#L24829'>zend_free_op</a>     24829 Zend/zend_vm_execute.h 	zend_free_op free_op_data2, free_op_data1;</span>
+<span class='curline'><a href='../S/1748.html#L25232'>zend_free_op</a>     25232 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L25275'>zend_free_op</a>     25275 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L25350'>zend_free_op</a>     25350 Zend/zend_vm_execute.h 		zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L25384'>zend_free_op</a>     25384 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_res;</span>
+<span class='curline'><a href='../S/1748.html#L26133'>zend_free_op</a>     26133 Zend/zend_vm_execute.h 	zend_free_op free_op2, free_op_data1;</span>
+<span class='curline'><a href='../S/1748.html#L26242'>zend_free_op</a>     26242 Zend/zend_vm_execute.h 	zend_free_op free_op2, free_op_data2, free_op_data1;</span>
+<span class='curline'><a href='../S/1748.html#L26387'>zend_free_op</a>     26387 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L26495'>zend_free_op</a>     26495 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L26601'>zend_free_op</a>     26601 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L26646'>zend_free_op</a>     26646 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L26689'>zend_free_op</a>     26689 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L26722'>zend_free_op</a>     26722 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L26764'>zend_free_op</a>     26764 Zend/zend_vm_execute.h 		zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L26798'>zend_free_op</a>     26798 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2, free_res;</span>
+<span class='curline'><a href='../S/1748.html#L26840'>zend_free_op</a>     26840 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L26870'>zend_free_op</a>     26870 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L26918'>zend_free_op</a>     26918 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L27011'>zend_free_op</a>     27011 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L27106'>zend_free_op</a>     27106 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L27146'>zend_free_op</a>     27146 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L27389'>zend_free_op</a>     27389 Zend/zend_vm_execute.h 		zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L27455'>zend_free_op</a>     27455 Zend/zend_vm_execute.h 	zend_free_op free_op2, free_op_data1;</span>
+<span class='curline'><a href='../S/1748.html#L27564'>zend_free_op</a>     27564 Zend/zend_vm_execute.h 	zend_free_op free_op2, free_op_data2, free_op_data1;</span>
+<span class='curline'><a href='../S/1748.html#L27709'>zend_free_op</a>     27709 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L27817'>zend_free_op</a>     27817 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L27923'>zend_free_op</a>     27923 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L27968'>zend_free_op</a>     27968 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L28011'>zend_free_op</a>     28011 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L28044'>zend_free_op</a>     28044 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L28086'>zend_free_op</a>     28086 Zend/zend_vm_execute.h 		zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L28120'>zend_free_op</a>     28120 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2, free_res;</span>
+<span class='curline'><a href='../S/1748.html#L28162'>zend_free_op</a>     28162 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L28192'>zend_free_op</a>     28192 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L28240'>zend_free_op</a>     28240 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L28333'>zend_free_op</a>     28333 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L28428'>zend_free_op</a>     28428 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L28468'>zend_free_op</a>     28468 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L28711'>zend_free_op</a>     28711 Zend/zend_vm_execute.h 		zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L28778'>zend_free_op</a>     28778 Zend/zend_vm_execute.h 	zend_free_op free_op_data1;</span>
+<span class='curline'><a href='../S/1748.html#L28887'>zend_free_op</a>     28887 Zend/zend_vm_execute.h 	zend_free_op free_op_data2, free_op_data1;</span>
+<span class='curline'><a href='../S/1748.html#L29209'>zend_free_op</a>     29209 Zend/zend_vm_execute.h 	zend_free_op free_op_data1;</span>
+<span class='curline'><a href='../S/1748.html#L29318'>zend_free_op</a>     29318 Zend/zend_vm_execute.h 	zend_free_op free_op_data2, free_op_data1;</span>
+<span class='curline'><a href='../S/1748.html#L29721'>zend_free_op</a>     29721 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L29764'>zend_free_op</a>     29764 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L29839'>zend_free_op</a>     29839 Zend/zend_vm_execute.h 		zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L29873'>zend_free_op</a>     29873 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_res;</span>
+<span class='curline'><a href='../S/1748.html#L32044'>zend_free_op</a>     32044 Zend/zend_vm_execute.h 	zend_free_op free_op_data1;</span>
+<span class='curline'><a href='../S/1748.html#L32153'>zend_free_op</a>     32153 Zend/zend_vm_execute.h 	zend_free_op free_op_data2, free_op_data1;</span>
+<span class='curline'><a href='../S/1748.html#L32509'>zend_free_op</a>     32509 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L32618'>zend_free_op</a>     32618 Zend/zend_vm_execute.h 			zend_free_op free_res;</span>
+<span class='curline'><a href='../S/1748.html#L32688'>zend_free_op</a>     32688 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L32721'>zend_free_op</a>     32721 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L32758'>zend_free_op</a>     32758 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L32791'>zend_free_op</a>     32791 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L32815'>zend_free_op</a>     32815 Zend/zend_vm_execute.h 		zend_free_op free_res;</span>
+<span class='curline'><a href='../S/1748.html#L32879'>zend_free_op</a>     32879 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L32922'>zend_free_op</a>     32922 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L32997'>zend_free_op</a>     32997 Zend/zend_vm_execute.h 		zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L33031'>zend_free_op</a>     33031 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_res;</span>
+<span class='curline'><a href='../S/1748.html#L33126'>zend_free_op</a>     33126 Zend/zend_vm_execute.h 		zend_free_op free_op_data1, free_op_data2;</span>
+<span class='curline'><a href='../S/1748.html#L34052'>zend_free_op</a>     34052 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L34067'>zend_free_op</a>     34067 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L34082'>zend_free_op</a>     34082 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L34097'>zend_free_op</a>     34097 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L34112'>zend_free_op</a>     34112 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L34127'>zend_free_op</a>     34127 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L34142'>zend_free_op</a>     34142 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L34157'>zend_free_op</a>     34157 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L34172'>zend_free_op</a>     34172 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L34187'>zend_free_op</a>     34187 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L34204'>zend_free_op</a>     34204 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L34220'>zend_free_op</a>     34220 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L34236'>zend_free_op</a>     34236 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L34252'>zend_free_op</a>     34252 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L34268'>zend_free_op</a>     34268 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L34283'>zend_free_op</a>     34283 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L34298'>zend_free_op</a>     34298 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L34313'>zend_free_op</a>     34313 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L34328'>zend_free_op</a>     34328 Zend/zend_vm_execute.h 	zend_free_op free_op2, free_op_data1;</span>
+<span class='curline'><a href='../S/1748.html#L34437'>zend_free_op</a>     34437 Zend/zend_vm_execute.h 	zend_free_op free_op2, free_op_data2, free_op_data1;</span>
+<span class='curline'><a href='../S/1748.html#L34582'>zend_free_op</a>     34582 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L34690'>zend_free_op</a>     34690 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L34794'>zend_free_op</a>     34794 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L34811'>zend_free_op</a>     34811 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L34844'>zend_free_op</a>     34844 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L34866'>zend_free_op</a>     34866 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L34881'>zend_free_op</a>     34881 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L34914'>zend_free_op</a>     34914 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L34938'>zend_free_op</a>     34938 Zend/zend_vm_execute.h 		zend_free_op free_res;</span>
+<span class='curline'><a href='../S/1748.html#L34957'>zend_free_op</a>     34957 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L35002'>zend_free_op</a>     35002 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L35045'>zend_free_op</a>     35045 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L35078'>zend_free_op</a>     35078 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L35120'>zend_free_op</a>     35120 Zend/zend_vm_execute.h 		zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L35154'>zend_free_op</a>     35154 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2, free_res;</span>
+<span class='curline'><a href='../S/1748.html#L35196'>zend_free_op</a>     35196 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L35236'>zend_free_op</a>     35236 Zend/zend_vm_execute.h 		zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L35249'>zend_free_op</a>     35249 Zend/zend_vm_execute.h 		zend_free_op free_op2, free_op_data1, free_op_data2;</span>
+<span class='curline'><a href='../S/1748.html#L35307'>zend_free_op</a>     35307 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L35367'>zend_free_op</a>     35367 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L35446'>zend_free_op</a>     35446 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L35496'>zend_free_op</a>     35496 Zend/zend_vm_execute.h 		zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L35556'>zend_free_op</a>     35556 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L35651'>zend_free_op</a>     35651 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L35691'>zend_free_op</a>     35691 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L35934'>zend_free_op</a>     35934 Zend/zend_vm_execute.h 		zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L35995'>zend_free_op</a>     35995 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L36015'>zend_free_op</a>     36015 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L36030'>zend_free_op</a>     36030 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L36045'>zend_free_op</a>     36045 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L36060'>zend_free_op</a>     36060 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L36075'>zend_free_op</a>     36075 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L36090'>zend_free_op</a>     36090 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L36105'>zend_free_op</a>     36105 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L36120'>zend_free_op</a>     36120 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L36135'>zend_free_op</a>     36135 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L36150'>zend_free_op</a>     36150 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L36167'>zend_free_op</a>     36167 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L36183'>zend_free_op</a>     36183 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L36199'>zend_free_op</a>     36199 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L36215'>zend_free_op</a>     36215 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L36231'>zend_free_op</a>     36231 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L36246'>zend_free_op</a>     36246 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L36261'>zend_free_op</a>     36261 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L36276'>zend_free_op</a>     36276 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L36291'>zend_free_op</a>     36291 Zend/zend_vm_execute.h 	zend_free_op free_op2, free_op_data1;</span>
+<span class='curline'><a href='../S/1748.html#L36400'>zend_free_op</a>     36400 Zend/zend_vm_execute.h 	zend_free_op free_op2, free_op_data2, free_op_data1;</span>
+<span class='curline'><a href='../S/1748.html#L36545'>zend_free_op</a>     36545 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L36653'>zend_free_op</a>     36653 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L36757'>zend_free_op</a>     36757 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L36866'>zend_free_op</a>     36866 Zend/zend_vm_execute.h 			zend_free_op free_res;</span>
+<span class='curline'><a href='../S/1748.html#L36919'>zend_free_op</a>     36919 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L36936'>zend_free_op</a>     36936 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L36969'>zend_free_op</a>     36969 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L36991'>zend_free_op</a>     36991 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L37006'>zend_free_op</a>     37006 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L37039'>zend_free_op</a>     37039 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L37063'>zend_free_op</a>     37063 Zend/zend_vm_execute.h 		zend_free_op free_res;</span>
+<span class='curline'><a href='../S/1748.html#L37082'>zend_free_op</a>     37082 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L37127'>zend_free_op</a>     37127 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L37170'>zend_free_op</a>     37170 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L37203'>zend_free_op</a>     37203 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L37245'>zend_free_op</a>     37245 Zend/zend_vm_execute.h 		zend_free_op free_op1, free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L37279'>zend_free_op</a>     37279 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_op2, free_res;</span>
+<span class='curline'><a href='../S/1748.html#L37321'>zend_free_op</a>     37321 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L37361'>zend_free_op</a>     37361 Zend/zend_vm_execute.h 		zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L37374'>zend_free_op</a>     37374 Zend/zend_vm_execute.h 		zend_free_op free_op2, free_op_data1, free_op_data2;</span>
+<span class='curline'><a href='../S/1748.html#L37432'>zend_free_op</a>     37432 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L37490'>zend_free_op</a>     37490 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L37547'>zend_free_op</a>     37547 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L37626'>zend_free_op</a>     37626 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L37676'>zend_free_op</a>     37676 Zend/zend_vm_execute.h 		zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L37814'>zend_free_op</a>     37814 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L37909'>zend_free_op</a>     37909 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L38034'>zend_free_op</a>     38034 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L38277'>zend_free_op</a>     38277 Zend/zend_vm_execute.h 		zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L38339'>zend_free_op</a>     38339 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+<span class='curline'><a href='../S/1748.html#L38359'>zend_free_op</a>     38359 Zend/zend_vm_execute.h 	zend_free_op free_op_data1;</span>
+<span class='curline'><a href='../S/1748.html#L38468'>zend_free_op</a>     38468 Zend/zend_vm_execute.h 	zend_free_op free_op_data2, free_op_data1;</span>
+<span class='curline'><a href='../S/1748.html#L38612'>zend_free_op</a>     38612 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L38721'>zend_free_op</a>     38721 Zend/zend_vm_execute.h 			zend_free_op free_res;</span>
+<span class='curline'><a href='../S/1748.html#L38774'>zend_free_op</a>     38774 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L38807'>zend_free_op</a>     38807 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L38829'>zend_free_op</a>     38829 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L38885'>zend_free_op</a>     38885 Zend/zend_vm_execute.h 		zend_free_op free_op_data1, free_op_data2;</span>
+<span class='curline'><a href='../S/1748.html#L39640'>zend_free_op</a>     39640 Zend/zend_vm_execute.h 	zend_free_op free_op_data1;</span>
+<span class='curline'><a href='../S/1748.html#L39749'>zend_free_op</a>     39749 Zend/zend_vm_execute.h 	zend_free_op free_op_data2, free_op_data1;</span>
+<span class='curline'><a href='../S/1748.html#L40122'>zend_free_op</a>     40122 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L40155'>zend_free_op</a>     40155 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L40192'>zend_free_op</a>     40192 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L40225'>zend_free_op</a>     40225 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L40249'>zend_free_op</a>     40249 Zend/zend_vm_execute.h 		zend_free_op free_res;</span>
+<span class='curline'><a href='../S/1748.html#L40313'>zend_free_op</a>     40313 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L40356'>zend_free_op</a>     40356 Zend/zend_vm_execute.h 	zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L40431'>zend_free_op</a>     40431 Zend/zend_vm_execute.h 		zend_free_op free_op1;</span>
+<span class='curline'><a href='../S/1748.html#L40465'>zend_free_op</a>     40465 Zend/zend_vm_execute.h 	zend_free_op free_op1, free_res;</span>
+<span class='curline'><a href='../S/1748.html#L40560'>zend_free_op</a>     40560 Zend/zend_vm_execute.h 		zend_free_op free_op_data1, free_op_data2;</span>
+<span class='curline'><a href='../S/1748.html#L40674'>zend_free_op</a>     40674 Zend/zend_vm_execute.h 	zend_free_op free_op2;</span>
+</pre>
+</body>
+</html>

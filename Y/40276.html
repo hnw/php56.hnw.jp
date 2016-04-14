@@ -1,0 +1,135 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>use_heap</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/1598.html#L58'>use_heap</a>           58 TSRM/tsrm_config_common.h # define tsrm_do_alloca_ex(size, limit, use_heap) \</span>
+<span class='curline'><a href='../S/1598.html#L59'>use_heap</a>           59 TSRM/tsrm_config_common.h 	((use_heap = ((size) &gt; (limit))) ? malloc(size) : alloca(size))</span>
+<span class='curline'><a href='../S/1598.html#L60'>use_heap</a>           60 TSRM/tsrm_config_common.h # define tsrm_do_alloca(size, use_heap) \</span>
+<span class='curline'><a href='../S/1598.html#L61'>use_heap</a>           61 TSRM/tsrm_config_common.h 	tsrm_do_alloca_ex(size, TSRM_ALLOCA_MAX_SIZE, use_heap)</span>
+<span class='curline'><a href='../S/1598.html#L62'>use_heap</a>           62 TSRM/tsrm_config_common.h # define tsrm_free_alloca(p, use_heap) \</span>
+<span class='curline'><a href='../S/1598.html#L63'>use_heap</a>           63 TSRM/tsrm_config_common.h 	do { if (use_heap) free(p); } while (0)</span>
+<span class='curline'><a href='../S/1598.html#L66'>use_heap</a>           66 TSRM/tsrm_config_common.h # define tsrm_do_alloca(p, use_heap)	malloc(p)</span>
+<span class='curline'><a href='../S/1598.html#L67'>use_heap</a>           67 TSRM/tsrm_config_common.h # define tsrm_free_alloca(p, use_heap)	free(p)</span>
+<span class='curline'><a href='../S/1643.html#L202'>use_heap</a>          202 Zend/zend.h    # define do_alloca_ex(size, limit, use_heap) \</span>
+<span class='curline'><a href='../S/1643.html#L203'>use_heap</a>          203 Zend/zend.h    	((use_heap = (UNEXPECTED((size) &gt; (limit)))) ? emalloc(size) : alloca(size))</span>
+<span class='curline'><a href='../S/1643.html#L204'>use_heap</a>          204 Zend/zend.h    # define do_alloca(size, use_heap) \</span>
+<span class='curline'><a href='../S/1643.html#L205'>use_heap</a>          205 Zend/zend.h    	do_alloca_ex(size, ZEND_ALLOCA_MAX_SIZE, use_heap)</span>
+<span class='curline'><a href='../S/1643.html#L206'>use_heap</a>          206 Zend/zend.h    # define free_alloca(p, use_heap) \</span>
+<span class='curline'><a href='../S/1643.html#L207'>use_heap</a>          207 Zend/zend.h    	do { if (UNEXPECTED(use_heap)) efree(p); } while (0)</span>
+<span class='curline'><a href='../S/1643.html#L211'>use_heap</a>          211 Zend/zend.h    # define do_alloca(p, use_heap)		emalloc(p)</span>
+<span class='curline'><a href='../S/1643.html#L212'>use_heap</a>          212 Zend/zend.h    # define free_alloca(p, use_heap)	efree(p)</span>
+<span class='curline'><a href='../S/1651.html#L1236'>use_heap</a>         1236 Zend/zend_builtin_functions.c 	ALLOCA_FLAG(use_heap)</span>
+<span class='curline'><a href='../S/1651.html#L1246'>use_heap</a>         1246 Zend/zend_builtin_functions.c 		lc_name = do_alloca(class_name_len + 1, use_heap);</span>
+<span class='curline'><a href='../S/1651.html#L1258'>use_heap</a>         1258 Zend/zend_builtin_functions.c 		free_alloca(lc_name, use_heap);</span>
+<span class='curline'><a href='../S/1651.html#L1279'>use_heap</a>         1279 Zend/zend_builtin_functions.c 	ALLOCA_FLAG(use_heap)</span>
+<span class='curline'><a href='../S/1651.html#L1289'>use_heap</a>         1289 Zend/zend_builtin_functions.c 		lc_name = do_alloca(iface_name_len + 1, use_heap);</span>
+<span class='curline'><a href='../S/1651.html#L1301'>use_heap</a>         1301 Zend/zend_builtin_functions.c 		free_alloca(lc_name, use_heap);</span>
+<span class='curline'><a href='../S/1651.html#L1322'>use_heap</a>         1322 Zend/zend_builtin_functions.c 	ALLOCA_FLAG(use_heap)</span>
+<span class='curline'><a href='../S/1651.html#L1332'>use_heap</a>         1332 Zend/zend_builtin_functions.c 		lc_name = do_alloca(trait_name_len + 1, use_heap);</span>
+<span class='curline'><a href='../S/1651.html#L1344'>use_heap</a>         1344 Zend/zend_builtin_functions.c 		free_alloca(lc_name, use_heap);</span>
+<span class='curline'><a href='../S/1653.html#L201'>use_heap</a>          201 Zend/zend_closures.c 	ALLOCA_FLAG(use_heap)</span>
+<span class='curline'><a href='../S/1653.html#L203'>use_heap</a>          203 Zend/zend_closures.c 	lc_name = do_alloca(method_len + 1, use_heap);</span>
+<span class='curline'><a href='../S/1653.html#L208'>use_heap</a>          208 Zend/zend_closures.c 		free_alloca(lc_name, use_heap);</span>
+<span class='curline'><a href='../S/1653.html#L211'>use_heap</a>          211 Zend/zend_closures.c 	free_alloca(lc_name, use_heap);</span>
+<span class='curline'><a href='../S/1655.html#L1544'>use_heap</a>         1544 Zend/zend_compile.c 	ALLOCA_FLAG(use_heap)</span>
+<span class='curline'><a href='../S/1655.html#L1641'>use_heap</a>         1641 Zend/zend_compile.c 			class_lcname = do_alloca(CG(active_class_entry)-&gt;name_length + 1, use_heap);</span>
+<span class='curline'><a href='../S/1655.html#L1705'>use_heap</a>         1705 Zend/zend_compile.c 			free_alloca(class_lcname, use_heap);</span>
+<span class='curline'><a href='../S/1659.html#L229'>use_heap</a>          229 Zend/zend_constants.c 			ALLOCA_FLAG(use_heap)</span>
+<span class='curline'><a href='../S/1659.html#L232'>use_heap</a>          232 Zend/zend_constants.c 			const_name = do_alloca(const_name_len, use_heap);</span>
+<span class='curline'><a href='../S/1659.html#L242'>use_heap</a>          242 Zend/zend_constants.c 			free_alloca(const_name, use_heap);</span>
+<span class='curline'><a href='../S/1671.html#L916'>use_heap</a>          916 Zend/zend_execute_API.c 	ALLOCA_FLAG(use_heap)</span>
+<span class='curline'><a href='../S/1671.html#L927'>use_heap</a>          927 Zend/zend_execute_API.c 		lc_free = lc_name = do_alloca(name_length + 1, use_heap);</span>
+<span class='curline'><a href='../S/1671.html#L941'>use_heap</a>          941 Zend/zend_execute_API.c 			free_alloca(lc_free, use_heap);</span>
+<span class='curline'><a href='../S/1671.html#L951'>use_heap</a>          951 Zend/zend_execute_API.c 			free_alloca(lc_free, use_heap);</span>
+<span class='curline'><a href='../S/1671.html#L959'>use_heap</a>          959 Zend/zend_execute_API.c 			free_alloca(lc_free, use_heap);</span>
+<span class='curline'><a href='../S/1671.html#L971'>use_heap</a>          971 Zend/zend_execute_API.c 			free_alloca(lc_free, use_heap);</span>
+<span class='curline'><a href='../S/1671.html#L1022'>use_heap</a>         1022 Zend/zend_execute_API.c 		free_alloca(lc_free, use_heap);</span>
+<span class='curline'><a href='../S/1713.html#L1044'>use_heap</a>         1044 Zend/zend_object_handlers.c 	ALLOCA_FLAG(use_heap)</span>
+<span class='curline'><a href='../S/1713.html#L1050'>use_heap</a>         1050 Zend/zend_object_handlers.c 		lc_method_name = do_alloca(method_len+1, use_heap);</span>
+<span class='curline'><a href='../S/1713.html#L1058'>use_heap</a>         1058 Zend/zend_object_handlers.c 			free_alloca(lc_method_name, use_heap);</span>
+<span class='curline'><a href='../S/1713.html#L1114'>use_heap</a>         1114 Zend/zend_object_handlers.c 		free_alloca(lc_method_name, use_heap);</span>
+<span class='curline'><a href='../S/1713.html#L1184'>use_heap</a>         1184 Zend/zend_object_handlers.c 	ALLOCA_FLAG(use_heap)</span>
+<span class='curline'><a href='../S/1713.html#L1190'>use_heap</a>         1190 Zend/zend_object_handlers.c 		lc_function_name = do_alloca(function_name_strlen+1, use_heap);</span>
+<span class='curline'><a href='../S/1713.html#L1209'>use_heap</a>         1209 Zend/zend_object_handlers.c 			free_alloca(lc_function_name, use_heap);</span>
+<span class='curline'><a href='../S/1713.html#L1261'>use_heap</a>         1261 Zend/zend_object_handlers.c 		free_alloca(lc_function_name, use_heap);</span>
+<span class='curline'><a href='../S/1744.html#L793'>use_heap</a>          793 Zend/zend_virtual_cwd.c 	ALLOCA_FLAG(use_heap)</span>
+<span class='curline'><a href='../S/1744.html#L893'>use_heap</a>          893 Zend/zend_virtual_cwd.c 		tmp = do_alloca(len+1, use_heap);</span>
+<span class='curline'><a href='../S/1744.html#L1039'>use_heap</a>         1039 Zend/zend_virtual_cwd.c 						free_alloca(tmp, use_heap);</span>
+<span class='curline'><a href='../S/1744.html#L1046'>use_heap</a>         1046 Zend/zend_virtual_cwd.c 					free_alloca(tmp, use_heap);</span>
+<span class='curline'><a href='../S/1744.html#L1055'>use_heap</a>         1055 Zend/zend_virtual_cwd.c 					free_alloca(tmp, use_heap);</span>
+<span class='curline'><a href='../S/1744.html#L1076'>use_heap</a>         1076 Zend/zend_virtual_cwd.c 		tmp = do_alloca(len+1, use_heap);</span>
+<span class='curline'><a href='../S/1744.html#L1088'>use_heap</a>         1088 Zend/zend_virtual_cwd.c 		tmp = do_alloca(len+1, use_heap);</span>
+<span class='curline'><a href='../S/1744.html#L1094'>use_heap</a>         1094 Zend/zend_virtual_cwd.c 				free_alloca(tmp, use_heap);</span>
+<span class='curline'><a href='../S/1744.html#L1101'>use_heap</a>         1101 Zend/zend_virtual_cwd.c 					free_alloca(tmp, use_heap);</span>
+<span class='curline'><a href='../S/1744.html#L1106'>use_heap</a>         1106 Zend/zend_virtual_cwd.c 					free_alloca(tmp, use_heap);</span>
+<span class='curline'><a href='../S/1744.html#L1114'>use_heap</a>         1114 Zend/zend_virtual_cwd.c 					free_alloca(tmp, use_heap);</span>
+<span class='curline'><a href='../S/1744.html#L1129'>use_heap</a>         1129 Zend/zend_virtual_cwd.c 					free_alloca(tmp, use_heap);</span>
+<span class='curline'><a href='../S/1744.html#L1145'>use_heap</a>         1145 Zend/zend_virtual_cwd.c 				free_alloca(tmp, use_heap);</span>
+<span class='curline'><a href='../S/1744.html#L1160'>use_heap</a>         1160 Zend/zend_virtual_cwd.c 				free_alloca(tmp, use_heap);</span>
+<span class='curline'><a href='../S/1744.html#L1173'>use_heap</a>         1173 Zend/zend_virtual_cwd.c 		free_alloca(tmp, use_heap);</span>
+<span class='curline'><a href='../S/1744.html#L1400'>use_heap</a>         1400 Zend/zend_virtual_cwd.c 	ALLOCA_FLAG(use_heap)</span>
+<span class='curline'><a href='../S/1744.html#L1417'>use_heap</a>         1417 Zend/zend_virtual_cwd.c 	temp = (char *) do_alloca(length+1, use_heap);</span>
+<span class='curline'><a href='../S/1744.html#L1424'>use_heap</a>         1424 Zend/zend_virtual_cwd.c 	free_alloca(temp, use_heap);</span>
+<span class='curline'><a href='../S/324.html#L1786'>use_heap</a>         1786 ext/interbase/ibase_query.c 	ALLOCA_FLAG(use_heap)</span>
+<span class='curline'><a href='../S/324.html#L1812'>use_heap</a>         1812 ext/interbase/ibase_query.c 		args = (zval ***) do_alloca((expected_n + 1) * sizeof(zval **), use_heap);</span>
+<span class='curline'><a href='../S/324.html#L1852'>use_heap</a>         1852 ext/interbase/ibase_query.c 		free_alloca(args, use_heap);</span>
+<span class='curline'><a href='../S/353.html#L23'>use_heap</a>           23 ext/intl/collator/collator_is_numeric.c #define ALLOCA_FLAG(use_heap)</span>
+<span class='curline'><a href='../S/353.html#L39'>use_heap</a>           39 ext/intl/collator/collator_is_numeric.c 	ALLOCA_FLAG(use_heap);</span>
+<span class='curline'><a href='../S/353.html#L90'>use_heap</a>           90 ext/intl/collator/collator_is_numeric.c 			numbuf = (char *) _do_alloca(length + 1, use_heap);</span>
+<span class='curline'><a href='../S/353.html#L103'>use_heap</a>          103 ext/intl/collator/collator_is_numeric.c 			_free_alloca(numbuf, use_heap);</span>
+<span class='curline'><a href='../S/830.html#L9'>use_heap</a>            9 ext/opcache/Optimizer/block_pass.c 	ALLOCA_FLAG(use_heap);</span>
+<span class='curline'><a href='../S/832.html#L11'>use_heap</a>           11 ext/opcache/Optimizer/nop_removal.c 	ALLOCA_FLAG(use_heap);</span>
+<span class='curline'><a href='../S/838.html#L34'>use_heap</a>           34 ext/opcache/Optimizer/pass3.c 	ALLOCA_FLAG(use_heap);</span>
+<span class='curline'><a href='../S/864.html#L160'>use_heap</a>          160 ext/opcache/ZendAccelerator.h 	#define DO_ALLOCA(x)	do_alloca_with_limit(x, use_heap)</span>
+<span class='curline'><a href='../S/864.html#L161'>use_heap</a>          161 ext/opcache/ZendAccelerator.h 	#define FREE_ALLOCA(x)	free_alloca_with_limit(x, use_heap)</span>
+<span class='curline'><a href='../S/864.html#L168'>use_heap</a>          168 ext/opcache/ZendAccelerator.h 	#define DO_ALLOCA(x)	do_alloca(x, use_heap)</span>
+<span class='curline'><a href='../S/864.html#L169'>use_heap</a>          169 ext/opcache/ZendAccelerator.h 	#define FREE_ALLOCA(x)	free_alloca(x, use_heap)</span>
+<span class='curline'><a href='../S/996.html#L1248'>use_heap</a>         1248 ext/reflection/php_reflection.c 	ALLOCA_FLAG(use_heap)</span>
+<span class='curline'><a href='../S/996.html#L1250'>use_heap</a>         1250 ext/reflection/php_reflection.c 	lcname = do_alloca(name_len + 1, use_heap);</span>
+<span class='curline'><a href='../S/996.html#L1253'>use_heap</a>         1253 ext/reflection/php_reflection.c 		free_alloca(lcname, use_heap);</span>
+<span class='curline'><a href='../S/996.html#L1256'>use_heap</a>         1256 ext/reflection/php_reflection.c 	free_alloca(lcname, use_heap);</span>
+<span class='curline'><a href='../S/996.html#L5251'>use_heap</a>         5251 ext/reflection/php_reflection.c 	ALLOCA_FLAG(use_heap)</span>
+<span class='curline'><a href='../S/996.html#L5262'>use_heap</a>         5262 ext/reflection/php_reflection.c 	lcname = do_alloca(name_len + 1, use_heap);</span>
+<span class='curline'><a href='../S/996.html#L5265'>use_heap</a>         5265 ext/reflection/php_reflection.c 		free_alloca(lcname, use_heap);</span>
+<span class='curline'><a href='../S/996.html#L5270'>use_heap</a>         5270 ext/reflection/php_reflection.c 	free_alloca(lcname, use_heap);</span>
+<span class='curline'><a href='../S/1045.html#L72'>use_heap</a>           72 ext/spl/php_spl.c 		ALLOCA_FLAG(use_heap)</span>
+<span class='curline'><a href='../S/1045.html#L74'>use_heap</a>           74 ext/spl/php_spl.c 		lc_name = do_alloca(len + 1, use_heap);</span>
+<span class='curline'><a href='../S/1045.html#L78'>use_heap</a>           78 ext/spl/php_spl.c 		free_alloca(lc_name, use_heap);</span>
+<span class='curline'><a href='../S/1364.html#L2523'>use_heap</a>         2523 main/main.c    	ALLOCA_FLAG(use_heap)</span>
+<span class='curline'><a href='../S/1364.html#L2530'>use_heap</a>         2530 main/main.c    	old_cwd = do_alloca(OLD_CWD_SIZE, use_heap);</span>
+<span class='curline'><a href='../S/1364.html#L2626'>use_heap</a>         2626 main/main.c    	free_alloca(old_cwd, use_heap);</span>
+<span class='curline'><a href='../S/1364.html#L2637'>use_heap</a>         2637 main/main.c    	ALLOCA_FLAG(use_heap)</span>
+<span class='curline'><a href='../S/1364.html#L2641'>use_heap</a>         2641 main/main.c    	old_cwd = do_alloca(OLD_CWD_SIZE, use_heap);</span>
+<span class='curline'><a href='../S/1364.html#L2664'>use_heap</a>         2664 main/main.c    	free_alloca(old_cwd, use_heap);</span>
+<span class='curline'><a href='../S/1391.html#L69'>use_heap</a>           69 main/php_variables.c 	ALLOCA_FLAG(use_heap)</span>
+<span class='curline'><a href='../S/1391.html#L93'>use_heap</a>           93 main/php_variables.c 	var = var_orig = do_alloca(var_len + 1, use_heap);</span>
+<span class='curline'><a href='../S/1391.html#L111'>use_heap</a>          111 main/php_variables.c 		free_alloca(var_orig, use_heap);</span>
+<span class='curline'><a href='../S/1391.html#L120'>use_heap</a>          120 main/php_variables.c 		free_alloca(var_orig, use_heap);</span>
+<span class='curline'><a href='../S/1391.html#L149'>use_heap</a>          149 main/php_variables.c 				free_alloca(var_orig, use_heap);</span>
+<span class='curline'><a href='../S/1391.html#L183'>use_heap</a>          183 main/php_variables.c 					free_alloca(var_orig, use_heap);</span>
+<span class='curline'><a href='../S/1391.html#L232'>use_heap</a>          232 main/php_variables.c 	free_alloca(var_orig, use_heap);</span>
+<span class='curline'><a href='../S/1449.html#L678'>use_heap</a>          678 sapi/cgi/cgi_main.c 		ALLOCA_FLAG(use_heap)</span>
+<span class='curline'><a href='../S/1449.html#L695'>use_heap</a>          695 sapi/cgi/cgi_main.c 				php_self = do_alloca(php_self_len + 1, use_heap);</span>
+<span class='curline'><a href='../S/1449.html#L719'>use_heap</a>          719 sapi/cgi/cgi_main.c 			free_alloca(php_self, use_heap);</span>
+<span class='curline'><a href='../S/1449.html#L1537'>use_heap</a>         1537 sapi/cgi/cgi_main.c 	ALLOCA_FLAG(use_heap)</span>
+<span class='curline'><a href='../S/1449.html#L1548'>use_heap</a>         1548 sapi/cgi/cgi_main.c 		var = str = do_alloca(var_len + 1, use_heap);</span>
+<span class='curline'><a href='../S/1449.html#L1575'>use_heap</a>         1575 sapi/cgi/cgi_main.c 		free_alloca(var, use_heap);</span>
+<span class='curline'><a href='../S/1449.html#L1667'>use_heap</a>         1667 sapi/cgi/cgi_main.c 	ALLOCA_FLAG(use_heap)</span>
+<span class='curline'><a href='../S/1449.html#L1679'>use_heap</a>         1679 sapi/cgi/cgi_main.c 				s = do_alloca(len + 1, use_heap);</span>
+<span class='curline'><a href='../S/1449.html#L1686'>use_heap</a>         1686 sapi/cgi/cgi_main.c 				free_alloca(s, use_heap);</span>
+<span class='curline'><a href='../S/1457.html#L512'>use_heap</a>          512 sapi/cli/php_cli_server.c 	ALLOCA_FLAG(use_heap)</span>
+<span class='curline'><a href='../S/1457.html#L522'>use_heap</a>          522 sapi/cli/php_cli_server.c 				s = do_alloca(len + 1, use_heap);</span>
+<span class='curline'><a href='../S/1457.html#L529'>use_heap</a>          529 sapi/cli/php_cli_server.c 				free_alloca(s, use_heap);</span>
+<span class='curline'><a href='../S/1457.html#L2156'>use_heap</a>         2156 sapi/cli/php_cli_server.c 	ALLOCA_FLAG(use_heap)</span>
+<span class='curline'><a href='../S/1457.html#L2157'>use_heap</a>         2157 sapi/cli/php_cli_server.c 	old_cwd = do_alloca(MAXPATHLEN, use_heap);</span>
+<span class='curline'><a href='../S/1457.html#L2183'>use_heap</a>         2183 sapi/cli/php_cli_server.c 	free_alloca(old_cwd, use_heap);</span>
+</pre>
+</body>
+</html>

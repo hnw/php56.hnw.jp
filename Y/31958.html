@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>pfunc</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/1026.html#L2899'>pfunc</a>            2899 ext/soap/php_sdl.c 	sdlFunctionPtr pfunc = NULL;</span>
+<span class='curline'><a href='../S/1026.html#L2901'>pfunc</a>            2901 ext/soap/php_sdl.c 	pfunc = malloc(sizeof(sdlFunction));</span>
+<span class='curline'><a href='../S/1026.html#L2902'>pfunc</a>            2902 ext/soap/php_sdl.c 	memset(pfunc, 0, sizeof(sdlFunction));</span>
+<span class='curline'><a href='../S/1026.html#L2904'>pfunc</a>            2904 ext/soap/php_sdl.c 	*pfunc = *func;</span>
+<span class='curline'><a href='../S/1026.html#L2906'>pfunc</a>            2906 ext/soap/php_sdl.c 	if (pfunc-&gt;functionName) {</span>
+<span class='curline'><a href='../S/1026.html#L2907'>pfunc</a>            2907 ext/soap/php_sdl.c 		pfunc-&gt;functionName = strdup(pfunc-&gt;functionName);</span>
+<span class='curline'><a href='../S/1026.html#L2909'>pfunc</a>            2909 ext/soap/php_sdl.c 	if (pfunc-&gt;requestName) {</span>
+<span class='curline'><a href='../S/1026.html#L2910'>pfunc</a>            2910 ext/soap/php_sdl.c 		pfunc-&gt;requestName = strdup(pfunc-&gt;requestName);</span>
+<span class='curline'><a href='../S/1026.html#L2912'>pfunc</a>            2912 ext/soap/php_sdl.c 	if (pfunc-&gt;responseName) {</span>
+<span class='curline'><a href='../S/1026.html#L2913'>pfunc</a>            2913 ext/soap/php_sdl.c 		pfunc-&gt;responseName = strdup(pfunc-&gt;responseName);</span>
+<span class='curline'><a href='../S/1026.html#L2916'>pfunc</a>            2916 ext/soap/php_sdl.c 	if (pfunc-&gt;binding) {</span>
+<span class='curline'><a href='../S/1026.html#L2919'>pfunc</a>            2919 ext/soap/php_sdl.c 		if (zend_hash_find(ptr_map, (char*)&amp;pfunc-&gt;binding, sizeof(pfunc-&gt;binding), (void**)&amp;tmp) == FAILURE) {</span>
+<span class='curline'><a href='../S/1026.html#L2922'>pfunc</a>            2922 ext/soap/php_sdl.c 		pfunc-&gt;binding = *tmp;</span>
+<span class='curline'><a href='../S/1026.html#L2924'>pfunc</a>            2924 ext/soap/php_sdl.c 		if (pfunc-&gt;binding-&gt;bindingType == BINDING_SOAP &amp;&amp; pfunc-&gt;bindingAttributes) {</span>
+<span class='curline'><a href='../S/1026.html#L2929'>pfunc</a>            2929 ext/soap/php_sdl.c 			*soap_binding = *(sdlSoapBindingFunctionPtr)pfunc-&gt;bindingAttributes;</span>
+<span class='curline'><a href='../S/1026.html#L2935'>pfunc</a>            2935 ext/soap/php_sdl.c 			pfunc-&gt;bindingAttributes = soap_binding;</span>
+<span class='curline'><a href='../S/1026.html#L2938'>pfunc</a>            2938 ext/soap/php_sdl.c 		if (pfunc-&gt;requestParameters) {</span>
+<span class='curline'><a href='../S/1026.html#L2939'>pfunc</a>            2939 ext/soap/php_sdl.c 			pfunc-&gt;requestParameters = make_persistent_sdl_parameters(pfunc-&gt;requestParameters, ptr_map);</span>
+<span class='curline'><a href='../S/1026.html#L2941'>pfunc</a>            2941 ext/soap/php_sdl.c 		if (pfunc-&gt;responseParameters) {</span>
+<span class='curline'><a href='../S/1026.html#L2942'>pfunc</a>            2942 ext/soap/php_sdl.c 			pfunc-&gt;responseParameters = make_persistent_sdl_parameters(pfunc-&gt;responseParameters, ptr_map);</span>
+<span class='curline'><a href='../S/1026.html#L2944'>pfunc</a>            2944 ext/soap/php_sdl.c 		if (pfunc-&gt;faults) {</span>
+<span class='curline'><a href='../S/1026.html#L2945'>pfunc</a>            2945 ext/soap/php_sdl.c 			pfunc-&gt;faults = make_persistent_sdl_function_faults(pfunc, pfunc-&gt;faults, ptr_map);</span>
+<span class='curline'><a href='../S/1026.html#L2949'>pfunc</a>            2949 ext/soap/php_sdl.c 	return pfunc;</span>
+<span class='curline'><a href='../S/1026.html#L3105'>pfunc</a>            3105 ext/soap/php_sdl.c 		sdlFunctionPtr pfunc;</span>
+<span class='curline'><a href='../S/1026.html#L3109'>pfunc</a>            3109 ext/soap/php_sdl.c 			pfunc = make_persistent_sdl_function(*tmp, &amp;ptr_map);</span>
+<span class='curline'><a href='../S/1026.html#L3111'>pfunc</a>            3111 ext/soap/php_sdl.c 				zend_hash_add(&amp;psdl-&gt;functions, key, key_len, (void*)&amp;pfunc, sizeof(sdlFunctionPtr), NULL);</span>
+<span class='curline'><a href='../S/1026.html#L3113'>pfunc</a>            3113 ext/soap/php_sdl.c 				zend_hash_next_index_insert(&amp;psdl-&gt;functions, (void*)&amp;pfunc, sizeof(sdlFunctionPtr), NULL);</span>
+<span class='curline'><a href='../S/1026.html#L3115'>pfunc</a>            3115 ext/soap/php_sdl.c 			zend_hash_add(&amp;ptr_map, (char*)tmp, sizeof(*tmp), (void*)&amp;pfunc, sizeof(sdlFunctionPtr), NULL);</span>
+</pre>
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>signo</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/1671.html#L1290'>signo</a>            1290 Zend/zend_execute_API.c 		int signo;</span>
+<span class='curline'><a href='../S/1671.html#L1299'>signo</a>            1299 Zend/zend_execute_API.c 		signo = SIGALRM;</span>
+<span class='curline'><a href='../S/1671.html#L1303'>signo</a>            1303 Zend/zend_execute_API.c 		signo = SIGPROF;</span>
+<span class='curline'><a href='../S/1671.html#L1308'>signo</a>            1308 Zend/zend_execute_API.c 			zend_signal(signo, zend_timeout TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1671.html#L1312'>signo</a>            1312 Zend/zend_execute_API.c 			signal(signo, zend_timeout);</span>
+<span class='curline'><a href='../S/1671.html#L1314'>signo</a>            1314 Zend/zend_execute_API.c 			sigaddset(&amp;sigset, signo);</span>
+<span class='curline'><a href='../S/1726.html#L54'>signo</a>              54 Zend/zend_signal.c static void zend_signal_handler(int signo, siginfo_t *siginfo, void *context TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1726.html#L55'>signo</a>              55 Zend/zend_signal.c static int zend_signal_register(int signo, void (*handler)(int, siginfo_t*, void*) TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1726.html#L73'>signo</a>              73 Zend/zend_signal.c void zend_signal_handler_defer(int signo, siginfo_t *siginfo, void *context)</span>
+<span class='curline'><a href='../S/1726.html#L86'>signo</a>              86 Zend/zend_signal.c 				zend_signal_handler(signo, siginfo, context TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1726.html#L92'>signo</a>              92 Zend/zend_signal.c 					zend_signal_handler(queue-&gt;zend_signal.signo, queue-&gt;zend_signal.siginfo, queue-&gt;zend_signal.context TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1726.html#L95'>signo</a>              95 Zend/zend_signal.c 					queue-&gt;zend_signal.signo = 0;</span>
+<span class='curline'><a href='../S/1726.html#L106'>signo</a>             106 Zend/zend_signal.c 				queue-&gt;zend_signal.signo = signo;</span>
+<span class='curline'><a href='../S/1726.html#L120'>signo</a>             120 Zend/zend_signal.c 				zend_output_debug_string(0, "zend_signal: not enough queue storage, lost signal (%d)", signo);</span>
+<span class='curline'><a href='../S/1726.html#L126'>signo</a>             126 Zend/zend_signal.c 		zend_signal_handler(signo, siginfo, context TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1726.html#L145'>signo</a>             145 Zend/zend_signal.c 		queue-&gt;zend_signal.signo = 0;</span>
+<span class='curline'><a href='../S/1726.html#L148'>signo</a>             148 Zend/zend_signal.c 		zend_signal_handler_defer(zend_signal.signo, zend_signal.siginfo, zend_signal.context);</span>
+<span class='curline'><a href='../S/1726.html#L157'>signo</a>             157 Zend/zend_signal.c static void zend_signal_handler(int signo, siginfo_t *siginfo, void *context TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1726.html#L162'>signo</a>             162 Zend/zend_signal.c 	zend_signal_entry_t p_sig = SIGG(handlers)[signo-1];</span>
+<span class='curline'><a href='../S/1726.html#L165'>signo</a>             165 Zend/zend_signal.c 		if (sigaction(signo, NULL, &amp;sa) == 0) {</span>
+<span class='curline'><a href='../S/1726.html#L170'>signo</a>             170 Zend/zend_signal.c 			sigaddset(&amp;sigset, signo);</span>
+<span class='curline'><a href='../S/1726.html#L172'>signo</a>             172 Zend/zend_signal.c 			if (sigaction(signo, &amp;sa, NULL) == 0) {</span>
+<span class='curline'><a href='../S/1726.html#L175'>signo</a>             175 Zend/zend_signal.c 				raise(signo);</span>
+<span class='curline'><a href='../S/1726.html#L181'>signo</a>             181 Zend/zend_signal.c 				SIGG(handlers)[signo-1].flags   = 0;</span>
+<span class='curline'><a href='../S/1726.html#L182'>signo</a>             182 Zend/zend_signal.c 				SIGG(handlers)[signo-1].handler = SIG_DFL;</span>
+<span class='curline'><a href='../S/1726.html#L184'>signo</a>             184 Zend/zend_signal.c 			(*(void (*)(int, siginfo_t*, void*))p_sig.handler)(signo, siginfo, context);</span>
+<span class='curline'><a href='../S/1726.html#L186'>signo</a>             186 Zend/zend_signal.c 			(*(void (*)(int))p_sig.handler)(signo);</span>
+<span class='curline'><a href='../S/1726.html#L195'>signo</a>             195 Zend/zend_signal.c ZEND_API int zend_sigaction(int signo, const struct sigaction *act, struct sigaction *oldact TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1726.html#L201'>signo</a>             201 Zend/zend_signal.c 		oldact-&gt;sa_flags   = SIGG(handlers)[signo-1].flags;</span>
+<span class='curline'><a href='../S/1726.html#L202'>signo</a>             202 Zend/zend_signal.c 		oldact-&gt;sa_handler = (void *) SIGG(handlers)[signo-1].handler;</span>
+<span class='curline'><a href='../S/1726.html#L206'>signo</a>             206 Zend/zend_signal.c 		SIGG(handlers)[signo-1].flags = act-&gt;sa_flags;</span>
+<span class='curline'><a href='../S/1726.html#L208'>signo</a>             208 Zend/zend_signal.c 			SIGG(handlers)[signo-1].handler = (void *) act-&gt;sa_sigaction;</span>
+<span class='curline'><a href='../S/1726.html#L210'>signo</a>             210 Zend/zend_signal.c 			SIGG(handlers)[signo-1].handler = (void *) act-&gt;sa_handler;</span>
+<span class='curline'><a href='../S/1726.html#L217'>signo</a>             217 Zend/zend_signal.c 		if (sigaction(signo, &amp;sa, NULL) &lt; 0) {</span>
+<span class='curline'><a href='../S/1726.html#L218'>signo</a>             218 Zend/zend_signal.c 			zend_error(E_ERROR, "Error installing signal handler for %d", signo);</span>
+<span class='curline'><a href='../S/1726.html#L223'>signo</a>             223 Zend/zend_signal.c 		sigaddset(&amp;sigset, signo);</span>
+<span class='curline'><a href='../S/1726.html#L233'>signo</a>             233 Zend/zend_signal.c ZEND_API int zend_signal(int signo, void (*handler)(int) TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1726.html#L241'>signo</a>             241 Zend/zend_signal.c 	return zend_sigaction(signo, &amp;sa, NULL TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1726.html#L249'>signo</a>             249 Zend/zend_signal.c static int zend_signal_register(int signo, void (*handler)(int, siginfo_t*, void*) TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1726.html#L253'>signo</a>             253 Zend/zend_signal.c 	if (sigaction(signo, NULL, &amp;sa) == 0) {</span>
+<span class='curline'><a href='../S/1726.html#L258'>signo</a>             258 Zend/zend_signal.c 		SIGG(handlers)[signo-1].flags = sa.sa_flags;</span>
+<span class='curline'><a href='../S/1726.html#L260'>signo</a>             260 Zend/zend_signal.c 			SIGG(handlers)[signo-1].handler = (void *)sa.sa_sigaction;</span>
+<span class='curline'><a href='../S/1726.html#L262'>signo</a>             262 Zend/zend_signal.c 			SIGG(handlers)[signo-1].handler = (void *)sa.sa_handler;</span>
+<span class='curline'><a href='../S/1726.html#L269'>signo</a>             269 Zend/zend_signal.c 		if (sigaction(signo, &amp;sa, NULL) &lt; 0) {</span>
+<span class='curline'><a href='../S/1726.html#L270'>signo</a>             270 Zend/zend_signal.c 			zend_error(E_ERROR, "Error installing signal handler for %d", signo);</span>
+<span class='curline'><a href='../S/1726.html#L332'>signo</a>             332 Zend/zend_signal.c 		queue-&gt;zend_signal.signo = 0;</span>
+<span class='curline'><a href='../S/1726.html#L347'>signo</a>             347 Zend/zend_signal.c 	int signo;</span>
+<span class='curline'><a href='../S/1726.html#L380'>signo</a>             380 Zend/zend_signal.c 	for (signo = 1; signo &lt; NSIG; ++signo) {</span>
+<span class='curline'><a href='../S/1726.html#L381'>signo</a>             381 Zend/zend_signal.c 		if (sigaction(signo, NULL, &amp;sa) == 0) {</span>
+<span class='curline'><a href='../S/1726.html#L382'>signo</a>             382 Zend/zend_signal.c 			global_orig_handlers[signo-1].flags = sa.sa_flags;</span>
+<span class='curline'><a href='../S/1726.html#L384'>signo</a>             384 Zend/zend_signal.c 				global_orig_handlers[signo-1].handler = (void *) sa.sa_sigaction;</span>
+<span class='curline'><a href='../S/1726.html#L386'>signo</a>             386 Zend/zend_signal.c 				global_orig_handlers[signo-1].handler = (void *) sa.sa_handler;</span>
+<span class='curline'><a href='../S/1727.html#L45'>signo</a>              45 Zend/zend_signal.h 	int signo;</span>
+<span class='curline'><a href='../S/1727.html#L85'>signo</a>              85 Zend/zend_signal.h void zend_signal_handler_defer(int signo, siginfo_t *siginfo, void *context);</span>
+<span class='curline'><a href='../S/1727.html#L91'>signo</a>              91 Zend/zend_signal.h ZEND_API int zend_signal(int signo, void (*handler)(int) TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1727.html#L92'>signo</a>              92 Zend/zend_signal.h ZEND_API int zend_sigaction(int signo, const struct sigaction *act, struct sigaction *oldact TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1727.html#L95'>signo</a>              95 Zend/zend_signal.h #define zend_sigprocmask(signo, set, oldset) tsrm_sigmask((signo), (set), (oldset))</span>
+<span class='curline'><a href='../S/1727.html#L97'>signo</a>              97 Zend/zend_signal.h #define zend_sigprocmask(signo, set, oldset) sigprocmask((signo), (set), (oldset))</span>
+<span class='curline'><a href='../S/868.html#L68'>signo</a>              68 ext/pcntl/pcntl.c 	ZEND_ARG_INFO(0, signo)</span>
+<span class='curline'><a href='../S/868.html#L845'>signo</a>             845 ext/pcntl/pcntl.c 	long signo;</span>
+<span class='curline'><a href='../S/868.html#L848'>signo</a>             848 ext/pcntl/pcntl.c 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "lz|b", &amp;signo, &amp;handle, &amp;restart_syscalls) == FAILURE) {</span>
+<span class='curline'><a href='../S/868.html#L852'>signo</a>             852 ext/pcntl/pcntl.c 	if (signo &lt; 1 || signo &gt; 32) {</span>
+<span class='curline'><a href='../S/868.html#L876'>signo</a>             876 ext/pcntl/pcntl.c 		if (php_signal(signo, (Sigfunc *) Z_LVAL_P(handle), (int) restart_syscalls) == SIG_ERR) {</span>
+<span class='curline'><a href='../S/868.html#L881'>signo</a>             881 ext/pcntl/pcntl.c 		zend_hash_index_del(&amp;PCNTL_G(php_signal_table), signo);</span>
+<span class='curline'><a href='../S/868.html#L894'>signo</a>             894 ext/pcntl/pcntl.c 	zend_hash_index_update(&amp;PCNTL_G(php_signal_table), signo, (void **) &amp;handle, sizeof(zval *), (void **) &amp;dest_handle);</span>
+<span class='curline'><a href='../S/868.html#L897'>signo</a>             897 ext/pcntl/pcntl.c 	if (php_signal4(signo, pcntl_signal_handler, (int) restart_syscalls, 1) == SIG_ERR) {</span>
+<span class='curline'><a href='../S/868.html#L920'>signo</a>             920 ext/pcntl/pcntl.c 	long          how, signo;</span>
+<span class='curline'><a href='../S/868.html#L942'>signo</a>             942 ext/pcntl/pcntl.c 		signo = Z_LVAL_PP(user_signo);</span>
+<span class='curline'><a href='../S/868.html#L943'>signo</a>             943 ext/pcntl/pcntl.c 		if (sigaddset(&amp;set, signo) != 0) {</span>
+<span class='curline'><a href='../S/868.html#L964'>signo</a>             964 ext/pcntl/pcntl.c 		for (signo = 1; signo &lt; MAX(NSIG-1, SIGRTMAX); ++signo) {</span>
+<span class='curline'><a href='../S/868.html#L965'>signo</a>             965 ext/pcntl/pcntl.c 			if (sigismember(&amp;oldset, signo) != 1) {</span>
+<span class='curline'><a href='../S/868.html#L968'>signo</a>             968 ext/pcntl/pcntl.c 			add_next_index_long(user_oldset, signo);</span>
+<span class='curline'><a href='../S/868.html#L984'>signo</a>             984 ext/pcntl/pcntl.c 	int              signo;</span>
+<span class='curline'><a href='../S/868.html#L1011'>signo</a>            1011 ext/pcntl/pcntl.c 		signo = Z_LVAL_PP(user_signo);</span>
+<span class='curline'><a href='../S/868.html#L1012'>signo</a>            1012 ext/pcntl/pcntl.c 		if (sigaddset(&amp;set, signo) != 0) {</span>
+<span class='curline'><a href='../S/868.html#L1023'>signo</a>            1023 ext/pcntl/pcntl.c 		signo = sigtimedwait(&amp;set, &amp;siginfo, &amp;timeout);</span>
+<span class='curline'><a href='../S/868.html#L1025'>signo</a>            1025 ext/pcntl/pcntl.c 		signo = sigwaitinfo(&amp;set, &amp;siginfo);</span>
+<span class='curline'><a href='../S/868.html#L1027'>signo</a>            1027 ext/pcntl/pcntl.c 	if (signo == -1 &amp;&amp; errno != EAGAIN) {</span>
+<span class='curline'><a href='../S/868.html#L1036'>signo</a>            1036 ext/pcntl/pcntl.c 	if (!signo &amp;&amp; siginfo.si_signo) {</span>
+<span class='curline'><a href='../S/868.html#L1037'>signo</a>            1037 ext/pcntl/pcntl.c 		signo = siginfo.si_signo;</span>
+<span class='curline'><a href='../S/868.html#L1040'>signo</a>            1040 ext/pcntl/pcntl.c 	if (signo &gt; 0 &amp;&amp; user_siginfo) {</span>
+<span class='curline'><a href='../S/868.html#L1050'>signo</a>            1050 ext/pcntl/pcntl.c 		switch(signo) {</span>
+<span class='curline'><a href='../S/868.html#L1082'>signo</a>            1082 ext/pcntl/pcntl.c 	RETURN_LONG(signo);</span>
+<span class='curline'><a href='../S/868.html#L1205'>signo</a>            1205 ext/pcntl/pcntl.c static void pcntl_signal_handler(int signo)</span>
+<span class='curline'><a href='../S/868.html#L1217'>signo</a>            1217 ext/pcntl/pcntl.c 	psig-&gt;signo = signo;</span>
+<span class='curline'><a href='../S/868.html#L1262'>signo</a>            1262 ext/pcntl/pcntl.c 		if (zend_hash_index_find(&amp;PCNTL_G(php_signal_table), queue-&gt;signo, (void **) &amp;handle)==SUCCESS) {</span>
+<span class='curline'><a href='../S/868.html#L1266'>signo</a>            1266 ext/pcntl/pcntl.c 			ZVAL_LONG(param, queue-&gt;signo);</span>
+<span class='curline'><a href='../S/869.html#L64'>signo</a>              64 ext/pcntl/php_pcntl.h 	long signo;</span>
+<span class='curline'><a href='../S/870.html#L28'>signo</a>              28 ext/pcntl/php_signal.c Sigfunc *php_signal4(int signo, Sigfunc *func, int restart, int mask_all)</span>
+<span class='curline'><a href='../S/870.html#L41'>signo</a>              41 ext/pcntl/php_signal.c 	if (signo == SIGALRM || (! restart)) {</span>
+<span class='curline'><a href='../S/870.html#L51'>signo</a>              51 ext/pcntl/php_signal.c 	if (zend_sigaction(signo, &amp;act, &amp;oact TSRMLS_CC) &lt; 0)</span>
+<span class='curline'><a href='../S/870.html#L53'>signo</a>              53 ext/pcntl/php_signal.c 	if (sigaction(signo, &amp;act, &amp;oact) &lt; 0)</span>
+<span class='curline'><a href='../S/870.html#L62'>signo</a>              62 ext/pcntl/php_signal.c Sigfunc *php_signal(int signo, Sigfunc *func, int restart)</span>
+<span class='curline'><a href='../S/870.html#L64'>signo</a>              64 ext/pcntl/php_signal.c 	return php_signal4(signo, func, restart, 0);</span>
+<span class='curline'><a href='../S/871.html#L33'>signo</a>              33 ext/pcntl/php_signal.h Sigfunc *php_signal(int signo, Sigfunc *func, int restart);</span>
+<span class='curline'><a href='../S/871.html#L34'>signo</a>              34 ext/pcntl/php_signal.h Sigfunc *php_signal4(int signo, Sigfunc *func, int restart, int mask_all);</span>
+<span class='curline'><a href='../S/1450.html#L378'>signo</a>             378 sapi/cgi/fastcgi.c static void fcgi_signal_handler(int signo)</span>
+<span class='curline'><a href='../S/1450.html#L380'>signo</a>             380 sapi/cgi/fastcgi.c 	if (signo == SIGUSR1 || signo == SIGTERM) {</span>
+<span class='curline'><a href='../S/1478.html#L161'>signo</a>             161 sapi/fpm/fpm/fastcgi.c static void fcgi_signal_handler(int signo)</span>
+<span class='curline'><a href='../S/1478.html#L163'>signo</a>             163 sapi/fpm/fpm/fastcgi.c 	if (signo == SIGUSR1 || signo == SIGTERM) {</span>
+<span class='curline'><a href='../S/1504.html#L146'>signo</a>             146 sapi/fpm/fpm/fpm_process_ctl.c void fpm_pctl_kill_all(int signo) /* {{{ */</span>
+<span class='curline'><a href='../S/1504.html#L155'>signo</a>             155 sapi/fpm/fpm/fpm_process_ctl.c 			int res = kill(child-&gt;pid, signo);</span>
+<span class='curline'><a href='../S/1504.html#L158'>signo</a>             158 sapi/fpm/fpm/fpm_process_ctl.c 				child-&gt;wp-&gt;config-&gt;name, signo,</span>
+<span class='curline'><a href='../S/1504.html#L159'>signo</a>             159 sapi/fpm/fpm/fpm_process_ctl.c 				fpm_signal_names[signo] ? fpm_signal_names[signo] : "", (int) child-&gt;pid);</span>
+<span class='curline'><a href='../S/1505.html#L23'>signo</a>              23 sapi/fpm/fpm/fpm_process_ctl.h void fpm_pctl_kill_all(int signo);</span>
+<span class='curline'><a href='../S/1512.html#L142'>signo</a>             142 sapi/fpm/fpm/fpm_signals.c static void sig_soft_quit(int signo) /* {{{ */</span>
+<span class='curline'><a href='../S/1512.html#L156'>signo</a>             156 sapi/fpm/fpm/fpm_signals.c static void sig_handler(int signo) /* {{{ */</span>
+<span class='curline'><a href='../S/1512.html#L176'>signo</a>             176 sapi/fpm/fpm/fpm_signals.c 	s = sig_chars[signo];</span>
+<span class='curline'><a href='../S/1539.html#L200'>signo</a>             200 sapi/litespeed/lsapilib.c static void lsapi_signal(int signo, sighandler_t handler)</span>
+<span class='curline'><a href='../S/1539.html#L204'>signo</a>             204 sapi/litespeed/lsapilib.c     sigaction(signo, NULL, &amp;sa);</span>
+<span class='curline'><a href='../S/1539.html#L211'>signo</a>             211 sapi/litespeed/lsapilib.c         sigaction(signo, &amp;sa, NULL);</span>
+<span class='curline'><a href='../S/1546.html#L742'>signo</a>             742 sapi/phpdbg/phpdbg.c static inline void phpdbg_sigint_handler(int signo) /* {{{ */</span>
+</pre>
+</body>
+</html>

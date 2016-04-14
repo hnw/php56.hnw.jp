@@ -1,0 +1,111 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>tzobj</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/79.html#L2329'>tzobj</a>            2329 ext/date/php_date.c 	php_timezone_obj     *tzobj;</span>
+<span class='curline'><a href='../S/79.html#L2332'>tzobj</a>            2332 ext/date/php_date.c 	tzobj = (php_timezone_obj *) zend_object_store_get_object(object TSRMLS_CC);</span>
+<span class='curline'><a href='../S/79.html#L2336'>tzobj</a>            2336 ext/date/php_date.c 	if (!tzobj-&gt;initialized) {</span>
+<span class='curline'><a href='../S/79.html#L2341'>tzobj</a>            2341 ext/date/php_date.c 	ZVAL_LONG(zv, tzobj-&gt;type);</span>
+<span class='curline'><a href='../S/79.html#L2345'>tzobj</a>            2345 ext/date/php_date.c 	switch (tzobj-&gt;type) {</span>
+<span class='curline'><a href='../S/79.html#L2347'>tzobj</a>            2347 ext/date/php_date.c 			ZVAL_STRING(zv, tzobj-&gt;tzi.tz-&gt;name, 1);</span>
+<span class='curline'><a href='../S/79.html#L2353'>tzobj</a>            2353 ext/date/php_date.c 			tzobj-&gt;tzi.utc_offset &gt; 0 ? '-' : '+',</span>
+<span class='curline'><a href='../S/79.html#L2354'>tzobj</a>            2354 ext/date/php_date.c 			abs(tzobj-&gt;tzi.utc_offset / 60),</span>
+<span class='curline'><a href='../S/79.html#L2355'>tzobj</a>            2355 ext/date/php_date.c 			abs((tzobj-&gt;tzi.utc_offset % 60)));</span>
+<span class='curline'><a href='../S/79.html#L2361'>tzobj</a>            2361 ext/date/php_date.c 			ZVAL_STRING(zv, tzobj-&gt;tzi.z.abbr, 1);</span>
+<span class='curline'><a href='../S/79.html#L2600'>tzobj</a>            2600 ext/date/php_date.c 		php_timezone_obj *tzobj;</span>
+<span class='curline'><a href='../S/79.html#L2602'>tzobj</a>            2602 ext/date/php_date.c 		tzobj = (php_timezone_obj *) zend_object_store_get_object(timezone_object TSRMLS_CC);</span>
+<span class='curline'><a href='../S/79.html#L2603'>tzobj</a>            2603 ext/date/php_date.c 		switch (tzobj-&gt;type) {</span>
+<span class='curline'><a href='../S/79.html#L2605'>tzobj</a>            2605 ext/date/php_date.c 				tzi = tzobj-&gt;tzi.tz;</span>
+<span class='curline'><a href='../S/79.html#L2608'>tzobj</a>            2608 ext/date/php_date.c 				new_offset = tzobj-&gt;tzi.utc_offset;</span>
+<span class='curline'><a href='../S/79.html#L2611'>tzobj</a>            2611 ext/date/php_date.c 				new_offset = tzobj-&gt;tzi.z.utc_offset;</span>
+<span class='curline'><a href='../S/79.html#L2612'>tzobj</a>            2612 ext/date/php_date.c 				new_dst    = tzobj-&gt;tzi.z.dst;</span>
+<span class='curline'><a href='../S/79.html#L2613'>tzobj</a>            2613 ext/date/php_date.c 				new_abbr   = strdup(tzobj-&gt;tzi.z.abbr);</span>
+<span class='curline'><a href='../S/79.html#L2616'>tzobj</a>            2616 ext/date/php_date.c 		type = tzobj-&gt;type;</span>
+<span class='curline'><a href='../S/79.html#L2814'>tzobj</a>            2814 ext/date/php_date.c 	php_timezone_obj *tzobj;</span>
+<span class='curline'><a href='../S/79.html#L2841'>tzobj</a>            2841 ext/date/php_date.c 						tzobj = zend_object_store_get_object(php_date_instantiate(date_ce_timezone, tmp_obj TSRMLS_CC) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/79.html#L2842'>tzobj</a>            2842 ext/date/php_date.c 						tzobj-&gt;type = TIMELIB_ZONETYPE_ID;</span>
+<span class='curline'><a href='../S/79.html#L2843'>tzobj</a>            2843 ext/date/php_date.c 						tzobj-&gt;tzi.tz = tzi;</span>
+<span class='curline'><a href='../S/79.html#L2844'>tzobj</a>            2844 ext/date/php_date.c 						tzobj-&gt;initialized = 1;</span>
+<span class='curline'><a href='../S/79.html#L3298'>tzobj</a>            3298 ext/date/php_date.c static void set_timezone_from_timelib_time(php_timezone_obj *tzobj, timelib_time *t)</span>
+<span class='curline'><a href='../S/79.html#L3300'>tzobj</a>            3300 ext/date/php_date.c        tzobj-&gt;initialized = 1;</span>
+<span class='curline'><a href='../S/79.html#L3301'>tzobj</a>            3301 ext/date/php_date.c        tzobj-&gt;type = t-&gt;zone_type;</span>
+<span class='curline'><a href='../S/79.html#L3304'>tzobj</a>            3304 ext/date/php_date.c                        tzobj-&gt;tzi.tz = t-&gt;tz_info;</span>
+<span class='curline'><a href='../S/79.html#L3307'>tzobj</a>            3307 ext/date/php_date.c                        tzobj-&gt;tzi.utc_offset = t-&gt;z;</span>
+<span class='curline'><a href='../S/79.html#L3310'>tzobj</a>            3310 ext/date/php_date.c                        tzobj-&gt;tzi.z.utc_offset = t-&gt;z;</span>
+<span class='curline'><a href='../S/79.html#L3311'>tzobj</a>            3311 ext/date/php_date.c                        tzobj-&gt;tzi.z.dst = t-&gt;dst;</span>
+<span class='curline'><a href='../S/79.html#L3312'>tzobj</a>            3312 ext/date/php_date.c                        tzobj-&gt;tzi.z.abbr = strdup(t-&gt;tz_abbr);</span>
+<span class='curline'><a href='../S/79.html#L3325'>tzobj</a>            3325 ext/date/php_date.c 	php_timezone_obj *tzobj;</span>
+<span class='curline'><a href='../S/79.html#L3334'>tzobj</a>            3334 ext/date/php_date.c 		tzobj = (php_timezone_obj *) zend_object_store_get_object(return_value TSRMLS_CC);</span>
+<span class='curline'><a href='../S/79.html#L3335'>tzobj</a>            3335 ext/date/php_date.c 		set_timezone_from_timelib_time(tzobj, dateobj-&gt;time);</span>
+<span class='curline'><a href='../S/79.html#L3345'>tzobj</a>            3345 ext/date/php_date.c 	php_timezone_obj *tzobj;</span>
+<span class='curline'><a href='../S/79.html#L3349'>tzobj</a>            3349 ext/date/php_date.c 	tzobj = (php_timezone_obj *) zend_object_store_get_object(timezone_object TSRMLS_CC);</span>
+<span class='curline'><a href='../S/79.html#L3351'>tzobj</a>            3351 ext/date/php_date.c 	switch (tzobj-&gt;type) {</span>
+<span class='curline'><a href='../S/79.html#L3353'>tzobj</a>            3353 ext/date/php_date.c 			timelib_set_timezone_from_offset(dateobj-&gt;time, tzobj-&gt;tzi.utc_offset);</span>
+<span class='curline'><a href='../S/79.html#L3356'>tzobj</a>            3356 ext/date/php_date.c 			timelib_set_timezone_from_abbr(dateobj-&gt;time, tzobj-&gt;tzi.z);</span>
+<span class='curline'><a href='../S/79.html#L3359'>tzobj</a>            3359 ext/date/php_date.c 			timelib_set_timezone(dateobj-&gt;time, tzobj-&gt;tzi.tz);</span>
+<span class='curline'><a href='../S/79.html#L3686'>tzobj</a>            3686 ext/date/php_date.c static int timezone_initialize(php_timezone_obj *tzobj, /*const*/ char *tz, size_t tz_len TSRMLS_DC)</span>
+<span class='curline'><a href='../S/79.html#L3703'>tzobj</a>            3703 ext/date/php_date.c 		set_timezone_from_timelib_time(tzobj, dummy_t);</span>
+<span class='curline'><a href='../S/79.html#L3717'>tzobj</a>            3717 ext/date/php_date.c 	php_timezone_obj *tzobj;</span>
+<span class='curline'><a href='../S/79.html#L3722'>tzobj</a>            3722 ext/date/php_date.c 	tzobj = zend_object_store_get_object(php_date_instantiate(date_ce_timezone, return_value TSRMLS_CC) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/79.html#L3723'>tzobj</a>            3723 ext/date/php_date.c 	if (SUCCESS != timezone_initialize(tzobj, tz, tz_len TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/79.html#L3736'>tzobj</a>            3736 ext/date/php_date.c 	php_timezone_obj *tzobj;</span>
+<span class='curline'><a href='../S/79.html#L3741'>tzobj</a>            3741 ext/date/php_date.c 		tzobj = zend_object_store_get_object(getThis() TSRMLS_CC);</span>
+<span class='curline'><a href='../S/79.html#L3742'>tzobj</a>            3742 ext/date/php_date.c 		if (FAILURE == timezone_initialize(tzobj, tz, tz_len TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/79.html#L3750'>tzobj</a>            3750 ext/date/php_date.c static int php_date_timezone_initialize_from_hash(zval **return_value, php_timezone_obj **tzobj, HashTable *myht TSRMLS_DC)</span>
+<span class='curline'><a href='../S/79.html#L3757'>tzobj</a>            3757 ext/date/php_date.c 			if (SUCCESS == timezone_initialize(*tzobj, Z_STRVAL_PP(z_timezone), Z_STRLEN_PP(z_timezone) TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/79.html#L3769'>tzobj</a>            3769 ext/date/php_date.c 	php_timezone_obj *tzobj;</span>
+<span class='curline'><a href='../S/79.html#L3780'>tzobj</a>            3780 ext/date/php_date.c 	tzobj = (php_timezone_obj *) zend_object_store_get_object(return_value TSRMLS_CC);</span>
+<span class='curline'><a href='../S/79.html#L3781'>tzobj</a>            3781 ext/date/php_date.c 	if(php_date_timezone_initialize_from_hash(&amp;return_value, &amp;tzobj, myht TSRMLS_CC) != SUCCESS) {</span>
+<span class='curline'><a href='../S/79.html#L3792'>tzobj</a>            3792 ext/date/php_date.c 	php_timezone_obj *tzobj;</span>
+<span class='curline'><a href='../S/79.html#L3795'>tzobj</a>            3795 ext/date/php_date.c 	tzobj = (php_timezone_obj *) zend_object_store_get_object(object TSRMLS_CC);</span>
+<span class='curline'><a href='../S/79.html#L3799'>tzobj</a>            3799 ext/date/php_date.c 	if(php_date_timezone_initialize_from_hash(&amp;return_value, &amp;tzobj, myht TSRMLS_CC) != SUCCESS) {</span>
+<span class='curline'><a href='../S/79.html#L3811'>tzobj</a>            3811 ext/date/php_date.c 	php_timezone_obj *tzobj;</span>
+<span class='curline'><a href='../S/79.html#L3816'>tzobj</a>            3816 ext/date/php_date.c 	tzobj = (php_timezone_obj *) zend_object_store_get_object(object TSRMLS_CC);</span>
+<span class='curline'><a href='../S/79.html#L3817'>tzobj</a>            3817 ext/date/php_date.c 	DATE_CHECK_INITIALIZED(tzobj-&gt;initialized, DateTimeZone);</span>
+<span class='curline'><a href='../S/79.html#L3819'>tzobj</a>            3819 ext/date/php_date.c 	switch (tzobj-&gt;type) {</span>
+<span class='curline'><a href='../S/79.html#L3821'>tzobj</a>            3821 ext/date/php_date.c 			RETURN_STRING(tzobj-&gt;tzi.tz-&gt;name, 1);</span>
+<span class='curline'><a href='../S/79.html#L3825'>tzobj</a>            3825 ext/date/php_date.c 			timelib_sll utc_offset = tzobj-&gt;tzi.utc_offset;</span>
+<span class='curline'><a href='../S/79.html#L3836'>tzobj</a>            3836 ext/date/php_date.c 			RETURN_STRING(tzobj-&gt;tzi.z.abbr, 1);</span>
+<span class='curline'><a href='../S/79.html#L3872'>tzobj</a>            3872 ext/date/php_date.c 	php_timezone_obj    *tzobj;</span>
+<span class='curline'><a href='../S/79.html#L3879'>tzobj</a>            3879 ext/date/php_date.c 	tzobj = (php_timezone_obj *) zend_object_store_get_object(object TSRMLS_CC);</span>
+<span class='curline'><a href='../S/79.html#L3880'>tzobj</a>            3880 ext/date/php_date.c 	DATE_CHECK_INITIALIZED(tzobj-&gt;initialized, DateTimeZone);</span>
+<span class='curline'><a href='../S/79.html#L3884'>tzobj</a>            3884 ext/date/php_date.c 	switch (tzobj-&gt;type) {</span>
+<span class='curline'><a href='../S/79.html#L3886'>tzobj</a>            3886 ext/date/php_date.c 			offset = timelib_get_time_zone_info(dateobj-&gt;time-&gt;sse, tzobj-&gt;tzi.tz);</span>
+<span class='curline'><a href='../S/79.html#L3891'>tzobj</a>            3891 ext/date/php_date.c 			RETURN_LONG(tzobj-&gt;tzi.utc_offset * -60);</span>
+<span class='curline'><a href='../S/79.html#L3894'>tzobj</a>            3894 ext/date/php_date.c 			RETURN_LONG((tzobj-&gt;tzi.z.utc_offset - (tzobj-&gt;tzi.z.dst*60)) * -60);</span>
+<span class='curline'><a href='../S/79.html#L3906'>tzobj</a>            3906 ext/date/php_date.c 	php_timezone_obj    *tzobj;</span>
+<span class='curline'><a href='../S/79.html#L3913'>tzobj</a>            3913 ext/date/php_date.c 	tzobj = (php_timezone_obj *) zend_object_store_get_object(object TSRMLS_CC);</span>
+<span class='curline'><a href='../S/79.html#L3914'>tzobj</a>            3914 ext/date/php_date.c 	DATE_CHECK_INITIALIZED(tzobj-&gt;initialized, DateTimeZone);</span>
+<span class='curline'><a href='../S/79.html#L3915'>tzobj</a>            3915 ext/date/php_date.c 	if (tzobj-&gt;type != TIMELIB_ZONETYPE_ID) {</span>
+<span class='curline'><a href='../S/79.html#L3924'>tzobj</a>            3924 ext/date/php_date.c 		add_assoc_long(element, "offset", tzobj-&gt;tzi.tz-&gt;type[0].offset); \</span>
+<span class='curline'><a href='../S/79.html#L3925'>tzobj</a>            3925 ext/date/php_date.c 		add_assoc_bool(element, "isdst",  tzobj-&gt;tzi.tz-&gt;type[0].isdst); \</span>
+<span class='curline'><a href='../S/79.html#L3926'>tzobj</a>            3926 ext/date/php_date.c 		add_assoc_string(element, "abbr", &amp;tzobj-&gt;tzi.tz-&gt;timezone_abbr[tzobj-&gt;tzi.tz-&gt;type[0].abbr_idx], 1); \</span>
+<span class='curline'><a href='../S/79.html#L3934'>tzobj</a>            3934 ext/date/php_date.c 		add_assoc_long(element, "offset", tzobj-&gt;tzi.tz-&gt;type[tzobj-&gt;tzi.tz-&gt;trans_idx[i]].offset); \</span>
+<span class='curline'><a href='../S/79.html#L3935'>tzobj</a>            3935 ext/date/php_date.c 		add_assoc_bool(element, "isdst",  tzobj-&gt;tzi.tz-&gt;type[tzobj-&gt;tzi.tz-&gt;trans_idx[i]].isdst); \</span>
+<span class='curline'><a href='../S/79.html#L3936'>tzobj</a>            3936 ext/date/php_date.c 		add_assoc_string(element, "abbr", &amp;tzobj-&gt;tzi.tz-&gt;timezone_abbr[tzobj-&gt;tzi.tz-&gt;type[tzobj-&gt;tzi.tz-&gt;trans_idx[i]].abbr_idx], 1); \</span>
+<span class='curline'><a href='../S/79.html#L3939'>tzobj</a>            3939 ext/date/php_date.c #define add_last() add(tzobj-&gt;tzi.tz-&gt;bit32.timecnt - 1, timestamp_begin)</span>
+<span class='curline'><a href='../S/79.html#L3950'>tzobj</a>            3950 ext/date/php_date.c 		if (tzobj-&gt;tzi.tz-&gt;bit32.timecnt &gt; 0) {</span>
+<span class='curline'><a href='../S/79.html#L3952'>tzobj</a>            3952 ext/date/php_date.c 				if (tzobj-&gt;tzi.tz-&gt;trans[begin] &gt; timestamp_begin) {</span>
+<span class='curline'><a href='../S/79.html#L3962'>tzobj</a>            3962 ext/date/php_date.c 			} while (begin &lt; tzobj-&gt;tzi.tz-&gt;bit32.timecnt);</span>
+<span class='curline'><a href='../S/79.html#L3967'>tzobj</a>            3967 ext/date/php_date.c 		if (tzobj-&gt;tzi.tz-&gt;bit32.timecnt &gt; 0) {</span>
+<span class='curline'><a href='../S/79.html#L3973'>tzobj</a>            3973 ext/date/php_date.c 		for (i = begin; i &lt; tzobj-&gt;tzi.tz-&gt;bit32.timecnt; ++i) {</span>
+<span class='curline'><a href='../S/79.html#L3974'>tzobj</a>            3974 ext/date/php_date.c 			if (tzobj-&gt;tzi.tz-&gt;trans[i] &lt; timestamp_end) {</span>
+<span class='curline'><a href='../S/79.html#L3975'>tzobj</a>            3975 ext/date/php_date.c 				add(i, tzobj-&gt;tzi.tz-&gt;trans[i]);</span>
+<span class='curline'><a href='../S/79.html#L3988'>tzobj</a>            3988 ext/date/php_date.c 	php_timezone_obj    *tzobj;</span>
+<span class='curline'><a href='../S/79.html#L3993'>tzobj</a>            3993 ext/date/php_date.c 	tzobj = (php_timezone_obj *) zend_object_store_get_object(object TSRMLS_CC);</span>
+<span class='curline'><a href='../S/79.html#L3994'>tzobj</a>            3994 ext/date/php_date.c 	DATE_CHECK_INITIALIZED(tzobj-&gt;initialized, DateTimeZone);</span>
+<span class='curline'><a href='../S/79.html#L3995'>tzobj</a>            3995 ext/date/php_date.c 	if (tzobj-&gt;type != TIMELIB_ZONETYPE_ID) {</span>
+<span class='curline'><a href='../S/79.html#L4000'>tzobj</a>            4000 ext/date/php_date.c 	add_assoc_string(return_value, "country_code", tzobj-&gt;tzi.tz-&gt;location.country_code, 1);</span>
+<span class='curline'><a href='../S/79.html#L4001'>tzobj</a>            4001 ext/date/php_date.c 	add_assoc_double(return_value, "latitude", tzobj-&gt;tzi.tz-&gt;location.latitude);</span>
+<span class='curline'><a href='../S/79.html#L4002'>tzobj</a>            4002 ext/date/php_date.c 	add_assoc_double(return_value, "longitude", tzobj-&gt;tzi.tz-&gt;location.longitude);</span>
+<span class='curline'><a href='../S/79.html#L4003'>tzobj</a>            4003 ext/date/php_date.c 	add_assoc_string(return_value, "comments", tzobj-&gt;tzi.tz-&gt;location.comments, 1);</span>
+</pre>
+</body>
+</html>

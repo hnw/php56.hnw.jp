@@ -1,0 +1,250 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>ext/intl/dateformat/dateformat_class.c</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<a id='TOP' name='TOP'></a><h2 class='header'><a href='../mains.html'>root</a>/<a href='../files/1753.html'>ext</a>/<a href='../files/1785.html'>intl</a>/<a href='../files/1791.html'>dateformat</a>/dateformat_class.c</h2>
+<em class='comment'>/* [&lt;][&gt;]<a href='#L38'>[^]</a><a href='#L200'>[v]</a>[top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+<hr />
+<h2 class='header'>DEFINITIONS</h2>
+This source file includes following definitions.
+<ol>
+<li><a href='#L38' title='Defined at 38.'>IntlDateFormatter_object_dtor</a></li>
+<li><a href='#L45' title='Defined at 45.'>IntlDateFormatter_object_free</a></li>
+<li><a href='#L62' title='Defined at 62.'>IntlDateFormatter_object_create</a></li>
+<li><a href='#L89' title='Defined at 89.'>IntlDateFormatter_object_clone</a></li>
+<li><a href='#L200' title='Defined at 200.'>dateformat_register_IntlDateFormatter_class</a></li>
+</ol>
+<hr />
+<pre>
+<a id='L1' name='L1'></a>   1 <em class='comment'>/*</em>
+<a id='L2' name='L2'></a>   2 <em class='comment'>   +----------------------------------------------------------------------+</em>
+<a id='L3' name='L3'></a>   3 <em class='comment'>   | PHP Version 5                                                        |</em>
+<a id='L4' name='L4'></a>   4 <em class='comment'>   +----------------------------------------------------------------------+</em>
+<a id='L5' name='L5'></a>   5 <em class='comment'>   | This source file is subject to version 3.01 of the PHP license,      |</em>
+<a id='L6' name='L6'></a>   6 <em class='comment'>   | that is bundled with this package in the file LICENSE, and is        |</em>
+<a id='L7' name='L7'></a>   7 <em class='comment'>   | available through the world-wide-web at the following url:           |</em>
+<a id='L8' name='L8'></a>   8 <em class='comment'>   | http://www.php.net/license/3_01.txt                                  |</em>
+<a id='L9' name='L9'></a>   9 <em class='comment'>   | If you did not receive a copy of the PHP license and are unable to   |</em>
+<a id='L10' name='L10'></a>  10 <em class='comment'>   | obtain it through the world-wide-web, please send a note to          |</em>
+<a id='L11' name='L11'></a>  11 <em class='comment'>   | license@php.net so we can mail you a copy immediately.               |</em>
+<a id='L12' name='L12'></a>  12 <em class='comment'>   +----------------------------------------------------------------------+</em>
+<a id='L13' name='L13'></a>  13 <em class='comment'>   | Authors: Kirti Velankar &lt;kirtig@yahoo-inc.com&gt;                       |</em>
+<a id='L14' name='L14'></a>  14 <em class='comment'>   +----------------------------------------------------------------------+</em>
+<a id='L15' name='L15'></a>  15 <em class='comment'>*/</em>
+<a id='L16' name='L16'></a>  16 <em class='sharp'>#include</em> &lt;unicode/unum.h&gt;
+<a id='L17' name='L17'></a>  17 
+<a id='L18' name='L18'></a>  18 <em class='sharp'>#include</em> "<a href='371.html'>dateformat_class.h</a>"
+<a id='L19' name='L19'></a>  19 <em class='sharp'>#include</em> "<a href='435.html'>php_intl.h</a>"
+<a id='L20' name='L20'></a>  20 <em class='sharp'>#include</em> "<a href='374.html'>dateformat_data.h</a>"
+<a id='L21' name='L21'></a>  21 <em class='sharp'>#include</em> "<a href='376.html'>dateformat_format.h</a>"
+<a id='L22' name='L22'></a>  22 <em class='sharp'>#include</em> "<a href='377.html'>dateformat_format_object.h</a>"
+<a id='L23' name='L23'></a>  23 <em class='sharp'>#include</em> "<a href='380.html'>dateformat_parse.h</a>"
+<a id='L24' name='L24'></a>  24 <em class='sharp'>#include</em> "<a href='366.html'>dateformat.h</a>"
+<a id='L25' name='L25'></a>  25 <em class='sharp'>#include</em> "<a href='368.html'>dateformat_attr.h</a>"
+<a id='L26' name='L26'></a>  26 <em class='sharp'>#include</em> "<a href='369.html'>dateformat_attrcpp.h</a>"
+<a id='L27' name='L27'></a>  27 
+<a id='L28' name='L28'></a>  28 <em class='sharp'>#include</em> &lt;<a href='1668.html'>zend_exceptions.h</a>&gt;
+<a id='L29' name='L29'></a>  29 
+<a id='L30' name='L30'></a>  30 <a href='../S/1643.html#L302' title='Defined at 302 in Zend/zend.h.'>zend_class_entry</a> *<a href='../Y/3409.html' title='Multiple used in 21 places.'>IntlDateFormatter_ce_ptr</a> = <a href='../D/6086.html' title='Multiple defined in 8 places.'>NULL</a>;
+<a id='L31' name='L31'></a>  31 <strong class='reserved'>static</strong> <a href='../S/1741.html#L54' title='Defined at 54 in Zend/zend_types.h.'>zend_object_handlers</a> <a href='../Y/3411.html' title='Multiple used in 5 places.'>IntlDateFormatter_handlers</a>;
+<a id='L32' name='L32'></a>  32 
+<a id='L33' name='L33'></a>  33 <em class='comment'>/*</em>
+<a id='L34' name='L34'></a>  34 <em class='comment'> * Auxiliary functions needed by objects of 'IntlDateFormatter' class</em>
+<a id='L35' name='L35'></a>  35 <em class='comment'> */</em>
+<a id='L36' name='L36'></a>  36 
+<a id='L37' name='L37'></a>  37 <em class='comment'>/* {{{ IntlDateFormatter_objects_dtor */</em>
+<a id='L38' name='L38'></a>  38 <strong class='reserved'>static</strong> <strong class='reserved'>void</strong> <a href='../S/370.html#L78' title='Referred from 78 in ext/intl/dateformat/dateformat_class.c.'>IntlDateFormatter_object_dtor</a>(<strong class='reserved'>void</strong> *<a href='../Y/29333.html' title='Multiple used in 3115 places.'>object</a>, <a href='../S/1741.html#L53' title='Defined at 53 in Zend/zend_types.h.'>zend_object_handle</a> <a href='../Y/19711.html' title='Multiple used in 698 places.'>handle</a> <a href='../D/14076.html' title='Multiple defined in 136 places.'>TSRMLS_DC</a> )
+<a id='L39' name='L39'></a>  39 <em class='brace'>{</em>
+<a id='L40' name='L40'></a>  40         <a href='../S/1715.html#L61' title='Defined at 61 in Zend/zend_objects.c.'>zend_objects_destroy_object</a>( <a href='../Y/29333.html' title='Multiple used in 3115 places.'>object</a>, <a href='../Y/19711.html' title='Multiple used in 698 places.'>handle</a> <a href='../D/14074.html' title='Multiple defined in 2 places.'>TSRMLS_CC</a> );
+<a id='L41' name='L41'></a>  41 <em class='brace'>}</em>
+<a id='L42' name='L42'></a>  42 <em class='comment'>/* }}} */</em>
+<a id='L43' name='L43'></a>  43 
+<a id='L44' name='L44'></a>  44 <em class='comment'>/* {{{ IntlDateFormatter_objects_free */</em>
+<a id='L45' name='L45'></a>  45 <strong class='reserved'>void</strong> <a href='../S/370.html#L79' title='Referred from 79 in ext/intl/dateformat/dateformat_class.c.'>IntlDateFormatter_object_free</a>( <a href='../S/1643.html#L317' title='Defined at 317 in Zend/zend.h.'>zend_object</a> *<a href='../Y/29333.html' title='Multiple used in 3115 places.'>object</a> <a href='../D/14076.html' title='Multiple defined in 136 places.'>TSRMLS_DC</a> )
+<a id='L46' name='L46'></a>  46 <em class='brace'>{</em>
+<a id='L47' name='L47'></a>  47         <a href='../S/371.html#L33' title='Defined at 33 in ext/intl/dateformat/dateformat_class.h.'>IntlDateFormatter_object</a>* <a href='../Y/15659.html' title='Multiple used in 89 places.'>dfo</a> = (<a href='../S/371.html#L33' title='Defined at 33 in ext/intl/dateformat/dateformat_class.h.'>IntlDateFormatter_object</a>*)<a href='../Y/29333.html' title='Multiple used in 3115 places.'>object</a>;
+<a id='L48' name='L48'></a>  48 
+<a id='L49' name='L49'></a>  49         <a href='../S/1715.html#L37' title='Defined at 37 in Zend/zend_objects.c.'>zend_object_std_dtor</a>( &amp;<a href='../Y/15659.html' title='Multiple used in 89 places.'>dfo</a>-&gt;<a href='../Y/44563.html' title='Multiple used in 133 places.'>zo</a> <a href='../D/14074.html' title='Multiple defined in 2 places.'>TSRMLS_CC</a> );
+<a id='L50' name='L50'></a>  50 
+<a id='L51' name='L51'></a>  51         <strong class='reserved'>if</strong> (<a href='../Y/15659.html' title='Multiple used in 89 places.'>dfo</a>-&gt;<a href='../Y/34931.html' title='Multiple used in 4 places.'>requested_locale</a>) <em class='brace'>{</em>
+<a id='L52' name='L52'></a>  52                 <a href='../D/21052.html' title='Multiple defined in 3 places.'>efree</a>( <a href='../Y/15659.html' title='Multiple used in 89 places.'>dfo</a>-&gt;<a href='../Y/34931.html' title='Multiple used in 4 places.'>requested_locale</a> );
+<a id='L53' name='L53'></a>  53         <em class='brace'>}</em>
+<a id='L54' name='L54'></a>  54 
+<a id='L55' name='L55'></a>  55         <a href='../S/373.html#L38' title='Defined at 38 in ext/intl/dateformat/dateformat_data.c.'>dateformat_data_free</a>( &amp;<a href='../Y/15659.html' title='Multiple used in 89 places.'>dfo</a>-&gt;<a href='../Y/15074.html' title='Multiple used in 23 places.'>datef_data</a> <a href='../D/14074.html' title='Multiple defined in 2 places.'>TSRMLS_CC</a> );
+<a id='L56' name='L56'></a>  56 
+<a id='L57' name='L57'></a>  57         <a href='../D/21052.html' title='Multiple defined in 3 places.'>efree</a>( <a href='../Y/15659.html' title='Multiple used in 89 places.'>dfo</a> );
+<a id='L58' name='L58'></a>  58 <em class='brace'>}</em>
+<a id='L59' name='L59'></a>  59 <em class='comment'>/* }}} */</em>
+<a id='L60' name='L60'></a>  60 
+<a id='L61' name='L61'></a>  61 <em class='comment'>/* {{{ IntlDateFormatter_object_create */</em>
+<a id='L62' name='L62'></a>  62 <a href='../S/1741.html#L60' title='Defined at 60 in Zend/zend_types.h.'>zend_object_value</a> <a href='../S/370.html#L206' title='Referred from 206 in ext/intl/dateformat/dateformat_class.c.'>IntlDateFormatter_object_create</a>(<a href='../S/1643.html#L302' title='Defined at 302 in Zend/zend.h.'>zend_class_entry</a> *<a href='../Y/13321.html' title='Multiple used in 3134 places.'>ce</a> <a href='../D/14076.html' title='Multiple defined in 136 places.'>TSRMLS_DC</a>)
+<a id='L63' name='L63'></a>  63 <em class='brace'>{</em>
+<a id='L64' name='L64'></a>  64         <a href='../S/1741.html#L60' title='Defined at 60 in Zend/zend_types.h.'>zend_object_value</a>    <a href='../Y/35202.html' title='Multiple used in 3455 places.'>retval</a>;
+<a id='L65' name='L65'></a>  65         <a href='../S/371.html#L33' title='Defined at 33 in ext/intl/dateformat/dateformat_class.h.'>IntlDateFormatter_object</a>*     <a href='../Y/23464.html' title='Multiple used in 3534 places.'>intern</a>;
+<a id='L66' name='L66'></a>  66 
+<a id='L67' name='L67'></a>  67         <a href='../Y/23464.html' title='Multiple used in 3534 places.'>intern</a> = <a href='../S/1645.html#L73' title='Defined at 73 in Zend/zend_alloc.h.'>ecalloc</a>( 1, <strong class='reserved'>sizeof</strong>(<a href='../S/371.html#L33' title='Defined at 33 in ext/intl/dateformat/dateformat_class.h.'>IntlDateFormatter_object</a>) );
+<a id='L68' name='L68'></a>  68         <a href='../S/373.html#L25' title='Defined at 25 in ext/intl/dateformat/dateformat_data.c.'>dateformat_data_init</a>( &amp;<a href='../Y/23464.html' title='Multiple used in 3534 places.'>intern</a>-&gt;<a href='../Y/15074.html' title='Multiple used in 23 places.'>datef_data</a> <a href='../D/14074.html' title='Multiple defined in 2 places.'>TSRMLS_CC</a> );
+<a id='L69' name='L69'></a>  69         <a href='../S/1715.html#L29' title='Defined at 29 in Zend/zend_objects.c.'>zend_object_std_init</a>( &amp;<a href='../Y/23464.html' title='Multiple used in 3534 places.'>intern</a>-&gt;<a href='../Y/44563.html' title='Multiple used in 133 places.'>zo</a>, <a href='../Y/13321.html' title='Multiple used in 3134 places.'>ce</a> <a href='../D/14074.html' title='Multiple defined in 2 places.'>TSRMLS_CC</a> );
+<a id='L70' name='L70'></a>  70         <a href='../S/1646.html#L1150' title='Defined at 1150 in Zend/zend_API.c.'>object_properties_init</a>(&amp;<a href='../Y/23464.html' title='Multiple used in 3534 places.'>intern</a>-&gt;<a href='../Y/44563.html' title='Multiple used in 133 places.'>zo</a>, <a href='../Y/13321.html' title='Multiple used in 3134 places.'>ce</a>);
+<a id='L71' name='L71'></a>  71         <a href='../Y/23464.html' title='Multiple used in 3534 places.'>intern</a>-&gt;<a href='../Y/15072.html' title='Multiple used in 4 places.'>date_type</a>                       = 0;
+<a id='L72' name='L72'></a>  72         <a href='../Y/23464.html' title='Multiple used in 3534 places.'>intern</a>-&gt;<a href='../Y/38958.html' title='Multiple used in 11 places.'>time_type</a>                       = 0;
+<a id='L73' name='L73'></a>  73         <a href='../Y/23464.html' title='Multiple used in 3534 places.'>intern</a>-&gt;<a href='../Y/13105.html' title='Multiple used in 56 places.'>calendar</a>                        = -1;
+<a id='L74' name='L74'></a>  74         <a href='../Y/23464.html' title='Multiple used in 3534 places.'>intern</a>-&gt;<a href='../Y/34931.html' title='Multiple used in 4 places.'>requested_locale</a>        = <a href='../D/6086.html' title='Multiple defined in 8 places.'>NULL</a>;
+<a id='L75' name='L75'></a>  75 
+<a id='L76' name='L76'></a>  76         <a href='../Y/35202.html' title='Multiple used in 3455 places.'>retval</a>.<a href='../Y/19711.html' title='Multiple used in 698 places.'>handle</a> = <a href='../S/1717.html#L107' title='Defined at 107 in Zend/zend_objects_API.c.'>zend_objects_store_put</a>(
+<a id='L77' name='L77'></a>  77                 <a href='../Y/23464.html' title='Multiple used in 3534 places.'>intern</a>,
+<a id='L78' name='L78'></a>  78                 <a href='../S/370.html#L38' title='Defined at 38 in ext/intl/dateformat/dateformat_class.c.'>IntlDateFormatter_object_dtor</a>,
+<a id='L79' name='L79'></a>  79                 (<a href='../Y/44345.html' title='Multiple used in 44 places.'>zend_objects_free_object_storage_t</a>)<a href='../S/370.html#L45' title='Defined at 45 in ext/intl/dateformat/dateformat_class.c.'>IntlDateFormatter_object_free</a>,
+<a id='L80' name='L80'></a>  80                 <a href='../D/6086.html' title='Multiple defined in 8 places.'>NULL</a> <a href='../D/14074.html' title='Multiple defined in 2 places.'>TSRMLS_CC</a> );
+<a id='L81' name='L81'></a>  81 
+<a id='L82' name='L82'></a>  82         <a href='../Y/35202.html' title='Multiple used in 3455 places.'>retval</a>.<a href='../Y/19740.html' title='Multiple used in 369 places.'>handlers</a> = &amp;<a href='../Y/3411.html' title='Multiple used in 5 places.'>IntlDateFormatter_handlers</a>;
+<a id='L83' name='L83'></a>  83 
+<a id='L84' name='L84'></a>  84         <strong class='reserved'>return</strong> <a href='../Y/35202.html' title='Multiple used in 3455 places.'>retval</a>;
+<a id='L85' name='L85'></a>  85 <em class='brace'>}</em>
+<a id='L86' name='L86'></a>  86 <em class='comment'>/* }}} */</em>
+<a id='L87' name='L87'></a>  87 
+<a id='L88' name='L88'></a>  88 <em class='comment'>/* {{{ IntlDateFormatter_object_clone */</em>
+<a id='L89' name='L89'></a>  89 <a href='../S/1741.html#L60' title='Defined at 60 in Zend/zend_types.h.'>zend_object_value</a> <a href='../S/370.html#L211' title='Referred from 211 in ext/intl/dateformat/dateformat_class.c.'>IntlDateFormatter_object_clone</a>(<a href='../S/1741.html#L55' title='Defined at 55 in Zend/zend_types.h.'>zval</a> *<a href='../Y/29333.html' title='Multiple used in 3115 places.'>object</a> <a href='../D/14076.html' title='Multiple defined in 136 places.'>TSRMLS_DC</a>)
+<a id='L90' name='L90'></a>  90 <em class='brace'>{</em>
+<a id='L91' name='L91'></a>  91         <a href='../S/1741.html#L60' title='Defined at 60 in Zend/zend_types.h.'>zend_object_value</a> <a href='../Y/28535.html' title='Multiple used in 52 places.'>new_obj_val</a>;
+<a id='L92' name='L92'></a>  92         <a href='../S/1741.html#L53' title='Defined at 53 in Zend/zend_types.h.'>zend_object_handle</a> <a href='../Y/19711.html' title='Multiple used in 698 places.'>handle</a> = <a href='../S/1721.html#L468' title='Defined at 468 in Zend/zend_operators.h.'>Z_OBJ_HANDLE_P</a>(<a href='../Y/29333.html' title='Multiple used in 3115 places.'>object</a>);
+<a id='L93' name='L93'></a>  93         <a href='../S/371.html#L33' title='Defined at 33 in ext/intl/dateformat/dateformat_class.h.'>IntlDateFormatter_object</a> *<a href='../Y/15659.html' title='Multiple used in 89 places.'>dfo</a>, *<a href='../Y/28466.html' title='Multiple used in 4 places.'>new_dfo</a>;
+<a id='L94' name='L94'></a>  94 
+<a id='L95' name='L95'></a>  95         <a href='../S/371.html#L41' title='Defined at 41 in ext/intl/dateformat/dateformat_class.h.'>DATE_FORMAT_METHOD_FETCH_OBJECT_NO_CHECK</a>;
+<a id='L96' name='L96'></a>  96 
+<a id='L97' name='L97'></a>  97         <a href='../Y/28535.html' title='Multiple used in 52 places.'>new_obj_val</a> = <a href='../Y/3409.html' title='Multiple used in 21 places.'>IntlDateFormatter_ce_ptr</a>-&gt;<a href='../Y/14527.html' title='Multiple used in 71 places.'>create_object</a>(<a href='../S/1721.html#L465' title='Defined at 465 in Zend/zend_operators.h.'>Z_OBJCE_P</a>(<a href='../Y/29333.html' title='Multiple used in 3115 places.'>object</a>) <a href='../D/14074.html' title='Multiple defined in 2 places.'>TSRMLS_CC</a>);
+<a id='L98' name='L98'></a>  98         <a href='../Y/28466.html' title='Multiple used in 4 places.'>new_dfo</a> = (<a href='../S/371.html#L33' title='Defined at 33 in ext/intl/dateformat/dateformat_class.h.'>IntlDateFormatter_object</a> *)<a href='../S/1717.html#L284' title='Defined at 284 in Zend/zend_objects_API.c.'>zend_object_store_get_object_by_handle</a>(<a href='../Y/28535.html' title='Multiple used in 52 places.'>new_obj_val</a>.<a href='../Y/19711.html' title='Multiple used in 698 places.'>handle</a> <a href='../D/14074.html' title='Multiple defined in 2 places.'>TSRMLS_CC</a>);
+<a id='L99' name='L99'></a>  99         <em class='comment'>/* clone standard parts */</em>      
+<a id='L100' name='L100'></a> 100         <a href='../S/1715.html#L160' title='Defined at 160 in Zend/zend_objects.c.'>zend_objects_clone_members</a>(&amp;<a href='../Y/28466.html' title='Multiple used in 4 places.'>new_dfo</a>-&gt;<a href='../Y/44563.html' title='Multiple used in 133 places.'>zo</a>, <a href='../Y/28535.html' title='Multiple used in 52 places.'>new_obj_val</a>, &amp;<a href='../Y/15659.html' title='Multiple used in 89 places.'>dfo</a>-&gt;<a href='../Y/44563.html' title='Multiple used in 133 places.'>zo</a>, <a href='../Y/19711.html' title='Multiple used in 698 places.'>handle</a> <a href='../D/14074.html' title='Multiple defined in 2 places.'>TSRMLS_CC</a>);
+<a id='L101' name='L101'></a> 101         <em class='comment'>/* clone formatter object */</em>
+<a id='L102' name='L102'></a> 102         <strong class='reserved'>if</strong> (<a href='../Y/15659.html' title='Multiple used in 89 places.'>dfo</a>-&gt;<a href='../Y/15074.html' title='Multiple used in 23 places.'>datef_data</a>.<a href='../Y/39907.html' title='Multiple used in 8 places.'>udatf</a> != <a href='../D/6086.html' title='Multiple defined in 8 places.'>NULL</a>) <em class='brace'>{</em>
+<a id='L103' name='L103'></a> 103                 <a href='../S/371.html#L50' title='Defined at 50 in ext/intl/dateformat/dateformat_class.h.'>DATE_FORMAT_OBJECT</a>(<a href='../Y/28466.html' title='Multiple used in 4 places.'>new_dfo</a>) = udat_clone(<a href='../S/371.html#L50' title='Defined at 50 in ext/intl/dateformat/dateformat_class.h.'>DATE_FORMAT_OBJECT</a>(<a href='../Y/15659.html' title='Multiple used in 89 places.'>dfo</a>),  &amp;<a href='../S/406.html#L42' title='Defined at 42 in ext/intl/intl_data.h.'>INTL_DATA_ERROR_CODE</a>(<a href='../Y/15659.html' title='Multiple used in 89 places.'>dfo</a>));
+<a id='L104' name='L104'></a> 104                 <strong class='reserved'>if</strong> (<a href='../Y/6638.html' title='Multiple used in 98 places.'>U_FAILURE</a>(<a href='../S/406.html#L42' title='Defined at 42 in ext/intl/intl_data.h.'>INTL_DATA_ERROR_CODE</a>(<a href='../Y/15659.html' title='Multiple used in 89 places.'>dfo</a>))) <em class='brace'>{</em>
+<a id='L105' name='L105'></a> 105                         <em class='comment'>/* set up error in case error handler is interested */</em>
+<a id='L106' name='L106'></a> 106                         <a href='../S/407.html#L193' title='Defined at 193 in ext/intl/intl_error.c.'>intl_errors_set</a>(<a href='../S/406.html#L41' title='Defined at 41 in ext/intl/intl_data.h.'>INTL_DATA_ERROR_P</a>(<a href='../Y/15659.html' title='Multiple used in 89 places.'>dfo</a>), <a href='../S/406.html#L42' title='Defined at 42 in ext/intl/intl_data.h.'>INTL_DATA_ERROR_CODE</a>(<a href='../Y/15659.html' title='Multiple used in 89 places.'>dfo</a>),
+<a id='L107' name='L107'></a> 107                                         "Failed to clone IntlDateFormatter object", 0 <a href='../D/14074.html' title='Multiple defined in 2 places.'>TSRMLS_CC</a> );
+<a id='L108' name='L108'></a> 108                         <a href='../S/1667.html#L831' title='Defined at 831 in Zend/zend_exceptions.c.'>zend_throw_exception</a>(<a href='../D/6086.html' title='Multiple defined in 8 places.'>NULL</a>, "Failed to clone IntlDateFormatter object", 0 <a href='../D/14074.html' title='Multiple defined in 2 places.'>TSRMLS_CC</a>);
+<a id='L109' name='L109'></a> 109                 <em class='brace'>}</em>
+<a id='L110' name='L110'></a> 110         <em class='brace'>}</em> <strong class='reserved'>else</strong> <em class='brace'>{</em>
+<a id='L111' name='L111'></a> 111                 <a href='../S/1667.html#L831' title='Defined at 831 in Zend/zend_exceptions.c.'>zend_throw_exception</a>(<a href='../D/6086.html' title='Multiple defined in 8 places.'>NULL</a>, "Cannot clone unconstructed IntlDateFormatter", 0 <a href='../D/14074.html' title='Multiple defined in 2 places.'>TSRMLS_CC</a>);
+<a id='L112' name='L112'></a> 112         <em class='brace'>}</em>
+<a id='L113' name='L113'></a> 113         <strong class='reserved'>return</strong> <a href='../Y/28535.html' title='Multiple used in 52 places.'>new_obj_val</a>;
+<a id='L114' name='L114'></a> 114 <em class='brace'>}</em>
+<a id='L115' name='L115'></a> 115 <em class='comment'>/* }}} */</em>
+<a id='L116' name='L116'></a> 116 
+<a id='L117' name='L117'></a> 117 <em class='comment'>/* </em>
+<a id='L118' name='L118'></a> 118 <em class='comment'> * 'IntlDateFormatter' class registration structures &amp; functions</em>
+<a id='L119' name='L119'></a> 119 <em class='comment'> */</em>
+<a id='L120' name='L120'></a> 120 
+<a id='L121' name='L121'></a> 121 <em class='comment'>/* {{{ arginfo */</em>
+<a id='L122' name='L122'></a> 122 <a href='../D/15992.html' title='Multiple defined in 24 places.'>ZEND_BEGIN_ARG_INFO_EX</a>(<a href='../Y/15091.html' title='Multiple used in 6 places.'>datefmt_parse_args</a>, 0, 0, 1)
+<a id='L123' name='L123'></a> 123                 <a href='../S/1647.html#L101' title='Defined at 101 in Zend/zend_API.h.'>ZEND_ARG_INFO</a>(0, <a href='../S/996.html#L119' title='Defined at 119 in ext/reflection/php_reflection.c.'>string</a>)
+<a id='L124' name='L124'></a> 124                 <a href='../S/1647.html#L101' title='Defined at 101 in Zend/zend_API.h.'>ZEND_ARG_INFO</a>(1, <a href='../Y/33342.html' title='Multiple used in 277 places.'>position</a>)
+<a id='L125' name='L125'></a> 125 <a href='../S/1647.html#L113' title='Defined at 113 in Zend/zend_API.h.'>ZEND_END_ARG_INFO</a>()
+<a id='L126' name='L126'></a> 126 
+<a id='L127' name='L127'></a> 127 <a href='../D/15992.html' title='Multiple defined in 24 places.'>ZEND_BEGIN_ARG_INFO_EX</a>(<a href='../Y/10254.html' title='Multiple used in 2 places.'>arginfo_intldateformatter_format</a>, 0, 0, 0)
+<a id='L128' name='L128'></a> 128         <a href='../S/1647.html#L101' title='Defined at 101 in Zend/zend_API.h.'>ZEND_ARG_INFO</a>(0, <a href='../Y/11737.html' title='Multiple used in 1257 places.'>args</a>)
+<a id='L129' name='L129'></a> 129         <a href='../S/1647.html#L101' title='Defined at 101 in Zend/zend_API.h.'>ZEND_ARG_INFO</a>(0, <a href='../Y/11774.html' title='Multiple used in 576 places.'>array</a>)
+<a id='L130' name='L130'></a> 130 <a href='../S/1647.html#L113' title='Defined at 113 in Zend/zend_API.h.'>ZEND_END_ARG_INFO</a>()
+<a id='L131' name='L131'></a> 131 
+<a id='L132' name='L132'></a> 132 <a href='../D/15992.html' title='Multiple defined in 24 places.'>ZEND_BEGIN_ARG_INFO_EX</a>(<a href='../Y/10255.html' title='Multiple used in 2 places.'>arginfo_intldateformatter_format_object</a>, 0, 0, 1)
+<a id='L133' name='L133'></a> 133         <a href='../S/1647.html#L101' title='Defined at 101 in Zend/zend_API.h.'>ZEND_ARG_INFO</a>(0, <a href='../Y/29333.html' title='Multiple used in 3115 places.'>object</a>)
+<a id='L134' name='L134'></a> 134         <a href='../S/1647.html#L101' title='Defined at 101 in Zend/zend_API.h.'>ZEND_ARG_INFO</a>(0, <a href='../Y/18256.html' title='Multiple used in 555 places.'>format</a>)
+<a id='L135' name='L135'></a> 135         <a href='../S/1647.html#L101' title='Defined at 101 in Zend/zend_API.h.'>ZEND_ARG_INFO</a>(0, <a href='../Y/25388.html' title='Multiple used in 48 places.'>locale</a>)
+<a id='L136' name='L136'></a> 136 <a href='../S/1647.html#L113' title='Defined at 113 in Zend/zend_API.h.'>ZEND_END_ARG_INFO</a>()
+<a id='L137' name='L137'></a> 137 
+<a id='L138' name='L138'></a> 138 <a href='../S/1647.html#L111' title='Defined at 111 in Zend/zend_API.h.'>ZEND_BEGIN_ARG_INFO</a>(<a href='../Y/10256.html' title='Multiple used in 12 places.'>arginfo_intldateformatter_getdatetype</a>, 0)
+<a id='L139' name='L139'></a> 139 <a href='../S/1647.html#L113' title='Defined at 113 in Zend/zend_API.h.'>ZEND_END_ARG_INFO</a>()
+<a id='L140' name='L140'></a> 140 
+<a id='L141' name='L141'></a> 141 <a href='../D/15992.html' title='Multiple defined in 24 places.'>ZEND_BEGIN_ARG_INFO_EX</a>(<a href='../Y/10260.html' title='Multiple used in 3 places.'>arginfo_intldateformatter_settimezoneid</a>, 0, 0, 1)
+<a id='L142' name='L142'></a> 142         <a href='../S/1647.html#L101' title='Defined at 101 in Zend/zend_API.h.'>ZEND_ARG_INFO</a>(0, <a href='../Y/44584.html' title='Multiple used in 9 places.'>zone</a>)
+<a id='L143' name='L143'></a> 143 <a href='../S/1647.html#L113' title='Defined at 113 in Zend/zend_API.h.'>ZEND_END_ARG_INFO</a>()
+<a id='L144' name='L144'></a> 144 
+<a id='L145' name='L145'></a> 145 <a href='../D/15992.html' title='Multiple defined in 24 places.'>ZEND_BEGIN_ARG_INFO_EX</a>(<a href='../Y/10259.html' title='Multiple used in 2 places.'>arginfo_intldateformatter_setpattern</a>, 0, 0, 1)
+<a id='L146' name='L146'></a> 146         <a href='../S/1647.html#L101' title='Defined at 101 in Zend/zend_API.h.'>ZEND_ARG_INFO</a>(0, <a href='../Y/31587.html' title='Multiple used in 345 places.'>pattern</a>)
+<a id='L147' name='L147'></a> 147 <a href='../S/1647.html#L113' title='Defined at 113 in Zend/zend_API.h.'>ZEND_END_ARG_INFO</a>()
+<a id='L148' name='L148'></a> 148 
+<a id='L149' name='L149'></a> 149 <a href='../D/15992.html' title='Multiple defined in 24 places.'>ZEND_BEGIN_ARG_INFO_EX</a>(<a href='../Y/10258.html' title='Multiple used in 2 places.'>arginfo_intldateformatter_setlenient</a>, 0, 0, 1)
+<a id='L150' name='L150'></a> 150         <a href='../S/1647.html#L101' title='Defined at 101 in Zend/zend_API.h.'>ZEND_ARG_INFO</a>(0, lenient)
+<a id='L151' name='L151'></a> 151 <a href='../S/1647.html#L113' title='Defined at 113 in Zend/zend_API.h.'>ZEND_END_ARG_INFO</a>()
+<a id='L152' name='L152'></a> 152 
+<a id='L153' name='L153'></a> 153 <a href='../D/15992.html' title='Multiple defined in 24 places.'>ZEND_BEGIN_ARG_INFO_EX</a>(<a href='../Y/10257.html' title='Multiple used in 2 places.'>arginfo_intldateformatter_setcalendar</a>, 0, 0, 1)
+<a id='L154' name='L154'></a> 154         <a href='../S/1647.html#L101' title='Defined at 101 in Zend/zend_API.h.'>ZEND_ARG_INFO</a>(0, <a href='../Y/41211.html' title='Multiple used in 43 places.'>which</a>)
+<a id='L155' name='L155'></a> 155 <a href='../S/1647.html#L113' title='Defined at 113 in Zend/zend_API.h.'>ZEND_END_ARG_INFO</a>()
+<a id='L156' name='L156'></a> 156 
+<a id='L157' name='L157'></a> 157 <a href='../D/15992.html' title='Multiple defined in 24 places.'>ZEND_BEGIN_ARG_INFO_EX</a>(<a href='../Y/10253.html' title='Multiple used in 3 places.'>arginfo_intldateformatter___construct</a>, 0, 0, 3)
+<a id='L158' name='L158'></a> 158         <a href='../S/1647.html#L101' title='Defined at 101 in Zend/zend_API.h.'>ZEND_ARG_INFO</a>(0, <a href='../Y/25388.html' title='Multiple used in 48 places.'>locale</a>)
+<a id='L159' name='L159'></a> 159         <a href='../S/1647.html#L101' title='Defined at 101 in Zend/zend_API.h.'>ZEND_ARG_INFO</a>(0, datetype)
+<a id='L160' name='L160'></a> 160         <a href='../S/1647.html#L101' title='Defined at 101 in Zend/zend_API.h.'>ZEND_ARG_INFO</a>(0, timetype)
+<a id='L161' name='L161'></a> 161         <a href='../S/1647.html#L101' title='Defined at 101 in Zend/zend_API.h.'>ZEND_ARG_INFO</a>(0, <a href='../D/31849.html' title='Multiple defined in 2 places.'>timezone</a>)
+<a id='L162' name='L162'></a> 162         <a href='../S/1647.html#L101' title='Defined at 101 in Zend/zend_API.h.'>ZEND_ARG_INFO</a>(0, <a href='../Y/13105.html' title='Multiple used in 56 places.'>calendar</a>)
+<a id='L163' name='L163'></a> 163         <a href='../S/1647.html#L101' title='Defined at 101 in Zend/zend_API.h.'>ZEND_ARG_INFO</a>(0, <a href='../Y/31587.html' title='Multiple used in 345 places.'>pattern</a>)
+<a id='L164' name='L164'></a> 164 <a href='../S/1647.html#L113' title='Defined at 113 in Zend/zend_API.h.'>ZEND_END_ARG_INFO</a>()
+<a id='L165' name='L165'></a> 165 <em class='comment'>/* }}} */</em>
+<a id='L166' name='L166'></a> 166 
+<a id='L167' name='L167'></a> 167 <em class='comment'>/* {{{ IntlDateFormatter_class_functions</em>
+<a id='L168' name='L168'></a> 168 <em class='comment'> * Every 'IntlDateFormatter' class method has an entry in this table</em>
+<a id='L169' name='L169'></a> 169 <em class='comment'> */</em>
+<a id='L170' name='L170'></a> 170 <strong class='reserved'>static</strong> <a href='../Y/44266.html' title='Multiple used in 309 places.'>zend_function_entry</a> <a href='../Y/3410.html' title='Multiple used in 2 places.'>IntlDateFormatter_class_functions</a>[] = <em class='brace'>{</em>
+<a id='L171' name='L171'></a> 171         <a href='../S/1368.html#L356' title='Defined at 356 in main/php.h.'>PHP_ME</a>( <a href='../Y/3408.html' title='Multiple used in 5 places.'>IntlDateFormatter</a>, <a href='../Y/7607.html' title='Multiple used in 177 places.'>__construct</a>, <a href='../Y/10253.html' title='Multiple used in 3 places.'>arginfo_intldateformatter___construct</a>, <a href='../S/1656.html#L170' title='Defined at 170 in Zend/zend_compile.h.'>ZEND_ACC_PUBLIC</a>|<a href='../S/1656.html#L179' title='Defined at 179 in Zend/zend_compile.h.'>ZEND_ACC_CTOR</a> )
+<a id='L172' name='L172'></a> 172         <a href='../S/1647.html#L71' title='Defined at 71 in Zend/zend_API.h.'>ZEND_FENTRY</a>(  <a href='../Y/14492.html' title='Multiple used in 13 places.'>create</a>, <a href='../S/1647.html#L65' title='Defined at 65 in Zend/zend_API.h.'>ZEND_FN</a>( <a href='../Y/15075.html' title='Multiple used in 4 places.'>datefmt_create</a> ), <a href='../Y/10253.html' title='Multiple used in 3 places.'>arginfo_intldateformatter___construct</a>, <a href='../S/1656.html#L170' title='Defined at 170 in Zend/zend_compile.h.'>ZEND_ACC_PUBLIC</a>|<a href='../S/1656.html#L151' title='Defined at 151 in Zend/zend_compile.h.'>ZEND_ACC_STATIC</a> )
+<a id='L173' name='L173'></a> 173         <a href='../S/1368.html#L351' title='Defined at 351 in main/php.h.'>PHP_NAMED_FE</a>( getDateType, <a href='../S/1647.html#L65' title='Defined at 65 in Zend/zend_API.h.'>ZEND_FN</a>( <a href='../Y/15080.html' title='Multiple used in 4 places.'>datefmt_get_datetype</a> ), <a href='../Y/10256.html' title='Multiple used in 12 places.'>arginfo_intldateformatter_getdatetype</a> )
+<a id='L174' name='L174'></a> 174         <a href='../S/1368.html#L351' title='Defined at 351 in main/php.h.'>PHP_NAMED_FE</a>( getTimeType, <a href='../S/1647.html#L65' title='Defined at 65 in Zend/zend_API.h.'>ZEND_FN</a>( <a href='../Y/15085.html' title='Multiple used in 4 places.'>datefmt_get_timetype</a> ), <a href='../Y/10256.html' title='Multiple used in 12 places.'>arginfo_intldateformatter_getdatetype</a> )
+<a id='L175' name='L175'></a> 175         <a href='../S/1368.html#L351' title='Defined at 351 in main/php.h.'>PHP_NAMED_FE</a>( getCalendar, <a href='../S/1647.html#L65' title='Defined at 65 in Zend/zend_API.h.'>ZEND_FN</a>( <a href='../Y/15078.html' title='Multiple used in 3 places.'>datefmt_get_calendar</a> ), <a href='../Y/10256.html' title='Multiple used in 12 places.'>arginfo_intldateformatter_getdatetype</a> )
+<a id='L176' name='L176'></a> 176         <a href='../S/1368.html#L351' title='Defined at 351 in main/php.h.'>PHP_NAMED_FE</a>( getCalendarObject, <a href='../S/1647.html#L65' title='Defined at 65 in Zend/zend_API.h.'>ZEND_FN</a>( <a href='../Y/15079.html' title='Multiple used in 3 places.'>datefmt_get_calendar_object</a> ), <a href='../Y/10256.html' title='Multiple used in 12 places.'>arginfo_intldateformatter_getdatetype</a> )
+<a id='L177' name='L177'></a> 177         <a href='../S/1368.html#L351' title='Defined at 351 in main/php.h.'>PHP_NAMED_FE</a>( setCalendar, <a href='../S/1647.html#L65' title='Defined at 65 in Zend/zend_API.h.'>ZEND_FN</a>( <a href='../Y/15093.html' title='Multiple used in 3 places.'>datefmt_set_calendar</a> ), <a href='../Y/10257.html' title='Multiple used in 2 places.'>arginfo_intldateformatter_setcalendar</a> )
+<a id='L178' name='L178'></a> 178         <a href='../S/1368.html#L351' title='Defined at 351 in main/php.h.'>PHP_NAMED_FE</a>( getTimeZoneId, <a href='../S/1647.html#L65' title='Defined at 65 in Zend/zend_API.h.'>ZEND_FN</a>( <a href='../Y/15087.html' title='Multiple used in 3 places.'>datefmt_get_timezone_id</a> ), <a href='../Y/10256.html' title='Multiple used in 12 places.'>arginfo_intldateformatter_getdatetype</a> )
+<a id='L179' name='L179'></a> 179         <a href='../S/1368.html#L351' title='Defined at 351 in main/php.h.'>PHP_NAMED_FE</a>( setTimeZoneId, <a href='../S/1647.html#L65' title='Defined at 65 in Zend/zend_API.h.'>ZEND_FN</a>( <a href='../Y/15097.html' title='Multiple used in 3 places.'>datefmt_set_timezone_id</a> ), <a href='../Y/10260.html' title='Multiple used in 3 places.'>arginfo_intldateformatter_settimezoneid</a> )
+<a id='L180' name='L180'></a> 180         <a href='../S/1368.html#L351' title='Defined at 351 in main/php.h.'>PHP_NAMED_FE</a>( getTimeZone, <a href='../S/1647.html#L65' title='Defined at 65 in Zend/zend_API.h.'>ZEND_FN</a>( <a href='../Y/15086.html' title='Multiple used in 3 places.'>datefmt_get_timezone</a> ), <a href='../Y/10256.html' title='Multiple used in 12 places.'>arginfo_intldateformatter_getdatetype</a> )
+<a id='L181' name='L181'></a> 181         <a href='../S/1368.html#L351' title='Defined at 351 in main/php.h.'>PHP_NAMED_FE</a>( setTimeZone, <a href='../S/1647.html#L65' title='Defined at 65 in Zend/zend_API.h.'>ZEND_FN</a>( <a href='../Y/15096.html' title='Multiple used in 3 places.'>datefmt_set_timezone</a> ), <a href='../Y/10260.html' title='Multiple used in 3 places.'>arginfo_intldateformatter_settimezoneid</a> )
+<a id='L182' name='L182'></a> 182         <a href='../S/1368.html#L351' title='Defined at 351 in main/php.h.'>PHP_NAMED_FE</a>( <a href='../Y/36217.html' title='Multiple used in 3 places.'>setPattern</a>, <a href='../S/1647.html#L65' title='Defined at 65 in Zend/zend_API.h.'>ZEND_FN</a>( <a href='../Y/15095.html' title='Multiple used in 4 places.'>datefmt_set_pattern</a> ), <a href='../Y/10259.html' title='Multiple used in 2 places.'>arginfo_intldateformatter_setpattern</a> )
+<a id='L183' name='L183'></a> 183         <a href='../S/1368.html#L351' title='Defined at 351 in main/php.h.'>PHP_NAMED_FE</a>( <a href='../Y/19113.html' title='Multiple used in 3 places.'>getPattern</a>, <a href='../S/1647.html#L65' title='Defined at 65 in Zend/zend_API.h.'>ZEND_FN</a>( <a href='../Y/15084.html' title='Multiple used in 4 places.'>datefmt_get_pattern</a> ), <a href='../Y/10256.html' title='Multiple used in 12 places.'>arginfo_intldateformatter_getdatetype</a> )
+<a id='L184' name='L184'></a> 184         <a href='../S/1368.html#L351' title='Defined at 351 in main/php.h.'>PHP_NAMED_FE</a>( <a href='../Y/19076.html' title='Multiple used in 4 places.'>getLocale</a>, <a href='../S/1647.html#L65' title='Defined at 65 in Zend/zend_API.h.'>ZEND_FN</a>( <a href='../Y/15083.html' title='Multiple used in 4 places.'>datefmt_get_locale</a> ), <a href='../Y/10256.html' title='Multiple used in 12 places.'>arginfo_intldateformatter_getdatetype</a> )
+<a id='L185' name='L185'></a> 185         <a href='../S/1368.html#L351' title='Defined at 351 in main/php.h.'>PHP_NAMED_FE</a>( setLenient, <a href='../S/1647.html#L65' title='Defined at 65 in Zend/zend_API.h.'>ZEND_FN</a>( <a href='../Y/15094.html' title='Multiple used in 4 places.'>datefmt_set_lenient</a> ), <a href='../Y/10258.html' title='Multiple used in 2 places.'>arginfo_intldateformatter_setlenient</a> )
+<a id='L186' name='L186'></a> 186         <a href='../S/1368.html#L351' title='Defined at 351 in main/php.h.'>PHP_NAMED_FE</a>( <a href='../Y/23763.html' title='Multiple used in 5 places.'>isLenient</a>, <a href='../S/1647.html#L65' title='Defined at 65 in Zend/zend_API.h.'>ZEND_FN</a>( <a href='../Y/15088.html' title='Multiple used in 4 places.'>datefmt_is_lenient</a> ), <a href='../Y/10256.html' title='Multiple used in 12 places.'>arginfo_intldateformatter_getdatetype</a> )
+<a id='L187' name='L187'></a> 187         <a href='../S/1368.html#L351' title='Defined at 351 in main/php.h.'>PHP_NAMED_FE</a>( <a href='../Y/18256.html' title='Multiple used in 555 places.'>format</a>, <a href='../S/1647.html#L65' title='Defined at 65 in Zend/zend_API.h.'>ZEND_FN</a>( <a href='../Y/15076.html' title='Multiple used in 4 places.'>datefmt_format</a> ), <a href='../Y/10254.html' title='Multiple used in 2 places.'>arginfo_intldateformatter_format</a> )
+<a id='L188' name='L188'></a> 188         <a href='../S/1368.html#L359' title='Defined at 359 in main/php.h.'>PHP_ME_MAPPING</a>( formatObject, <a href='../Y/15077.html' title='Multiple used in 3 places.'>datefmt_format_object</a>, <a href='../Y/10255.html' title='Multiple used in 2 places.'>arginfo_intldateformatter_format_object</a>, <a href='../S/1656.html#L170' title='Defined at 170 in Zend/zend_compile.h.'>ZEND_ACC_PUBLIC</a>|<a href='../S/1656.html#L151' title='Defined at 151 in Zend/zend_compile.h.'>ZEND_ACC_STATIC</a>)
+<a id='L189' name='L189'></a> 189         <a href='../S/1368.html#L351' title='Defined at 351 in main/php.h.'>PHP_NAMED_FE</a>( <a href='../D/25444.html' title='Multiple defined in 2 places.'>parse</a>, <a href='../S/1647.html#L65' title='Defined at 65 in Zend/zend_API.h.'>ZEND_FN</a>( <a href='../Y/15090.html' title='Multiple used in 4 places.'>datefmt_parse</a>), <a href='../Y/15091.html' title='Multiple used in 6 places.'>datefmt_parse_args</a> )
+<a id='L190' name='L190'></a> 190         <a href='../S/1368.html#L351' title='Defined at 351 in main/php.h.'>PHP_NAMED_FE</a>( <a href='../S/1067.html#L35207' title='Defined at 35207 in ext/sqlite3/libsqlite/sqlite3.c.'>localtime</a>, <a href='../S/1647.html#L65' title='Defined at 65 in Zend/zend_API.h.'>ZEND_FN</a>( <a href='../Y/15089.html' title='Multiple used in 4 places.'>datefmt_localtime</a> ), <a href='../Y/15091.html' title='Multiple used in 6 places.'>datefmt_parse_args</a> )
+<a id='L191' name='L191'></a> 191         <a href='../S/1368.html#L351' title='Defined at 351 in main/php.h.'>PHP_NAMED_FE</a>( <a href='../Y/19041.html' title='Multiple used in 8 places.'>getErrorCode</a>, <a href='../S/1647.html#L65' title='Defined at 65 in Zend/zend_API.h.'>ZEND_FN</a>( <a href='../Y/15081.html' title='Multiple used in 4 places.'>datefmt_get_error_code</a> ), <a href='../Y/10256.html' title='Multiple used in 12 places.'>arginfo_intldateformatter_getdatetype</a> )
+<a id='L192' name='L192'></a> 192         <a href='../S/1368.html#L351' title='Defined at 351 in main/php.h.'>PHP_NAMED_FE</a>( <a href='../Y/19042.html' title='Multiple used in 8 places.'>getErrorMessage</a>, <a href='../S/1647.html#L65' title='Defined at 65 in Zend/zend_API.h.'>ZEND_FN</a>( <a href='../Y/15082.html' title='Multiple used in 4 places.'>datefmt_get_error_message</a> ), <a href='../Y/10256.html' title='Multiple used in 12 places.'>arginfo_intldateformatter_getdatetype</a> )
+<a id='L193' name='L193'></a> 193         <a href='../S/1368.html#L360' title='Defined at 360 in main/php.h.'>PHP_FE_END</a>
+<a id='L194' name='L194'></a> 194 <em class='brace'>}</em>;
+<a id='L195' name='L195'></a> 195 <em class='comment'>/* }}} */</em>
+<a id='L196' name='L196'></a> 196 
+<a id='L197' name='L197'></a> 197 <em class='comment'>/* {{{ dateformat_register_class</em>
+<a id='L198' name='L198'></a> 198 <em class='comment'> * Initialize 'IntlDateFormatter' class</em>
+<a id='L199' name='L199'></a> 199 <em class='comment'> */</em>
+<a id='L200' name='L200'></a> 200 <strong class='reserved'>void</strong> <a href='../R/17834.html' title='Multiple referred from 2 places.'>dateformat_register_IntlDateFormatter_class</a>( <a href='../D/14075.html' title='Multiple defined in 2 places.'>TSRMLS_D</a> )
+<a id='L201' name='L201'></a> 201 <em class='brace'>{</em>
+<a id='L202' name='L202'></a> 202         <a href='../S/1643.html#L302' title='Defined at 302 in Zend/zend.h.'>zend_class_entry</a> <a href='../Y/13321.html' title='Multiple used in 3134 places.'>ce</a>;
+<a id='L203' name='L203'></a> 203 
+<a id='L204' name='L204'></a> 204         <em class='comment'>/* Create and register 'IntlDateFormatter' class. */</em>
+<a id='L205' name='L205'></a> 205         <a href='../S/1647.html#L165' title='Defined at 165 in Zend/zend_API.h.'>INIT_CLASS_ENTRY</a>( <a href='../Y/13321.html' title='Multiple used in 3134 places.'>ce</a>, "IntlDateFormatter", <a href='../Y/3410.html' title='Multiple used in 2 places.'>IntlDateFormatter_class_functions</a> );
+<a id='L206' name='L206'></a> 206         <a href='../Y/13321.html' title='Multiple used in 3134 places.'>ce</a>.<a href='../Y/14527.html' title='Multiple used in 71 places.'>create_object</a> = <a href='../S/370.html#L62' title='Defined at 62 in ext/intl/dateformat/dateformat_class.c.'>IntlDateFormatter_object_create</a>;
+<a id='L207' name='L207'></a> 207         <a href='../Y/3409.html' title='Multiple used in 21 places.'>IntlDateFormatter_ce_ptr</a> = <a href='../S/1646.html#L2577' title='Defined at 2577 in Zend/zend_API.c.'>zend_register_internal_class</a>( &amp;<a href='../Y/13321.html' title='Multiple used in 3134 places.'>ce</a> <a href='../D/14074.html' title='Multiple defined in 2 places.'>TSRMLS_CC</a> );
+<a id='L208' name='L208'></a> 208 
+<a id='L209' name='L209'></a> 209         <a href='../D/24204.html' title='Multiple defined in 2 places.'>memcpy</a>(&amp;<a href='../Y/3411.html' title='Multiple used in 5 places.'>IntlDateFormatter_handlers</a>, <a href='../S/1717.html#L386' title='Defined at 386 in Zend/zend_objects_API.c.'>zend_get_std_object_handlers</a>(),
+<a id='L210' name='L210'></a> 210                 <strong class='reserved'>sizeof</strong> <a href='../Y/3411.html' title='Multiple used in 5 places.'>IntlDateFormatter_handlers</a>);
+<a id='L211' name='L211'></a> 211         <a href='../Y/3411.html' title='Multiple used in 5 places.'>IntlDateFormatter_handlers</a>.<a href='../Y/13746.html' title='Multiple used in 51 places.'>clone_obj</a> = <a href='../S/370.html#L89' title='Defined at 89 in ext/intl/dateformat/dateformat_class.c.'>IntlDateFormatter_object_clone</a>;
+<a id='L212' name='L212'></a> 212 
+<a id='L213' name='L213'></a> 213         <em class='comment'>/* Declare 'IntlDateFormatter' class properties. */</em>
+<a id='L214' name='L214'></a> 214         <strong class='reserved'>if</strong>( !<a href='../Y/3409.html' title='Multiple used in 21 places.'>IntlDateFormatter_ce_ptr</a> )
+<a id='L215' name='L215'></a> 215         <em class='brace'>{</em>
+<a id='L216' name='L216'></a> 216                 <a href='../S/1642.html#L1031' title='Defined at 1031 in Zend/zend.c.'>zend_error</a>(<a href='../S/1666.html#L25' title='Defined at 25 in Zend/zend_errors.h.'>E_ERROR</a>, "Failed to register IntlDateFormatter class");
+<a id='L217' name='L217'></a> 217                 <strong class='reserved'>return</strong>;
+<a id='L218' name='L218'></a> 218         <em class='brace'>}</em>
+<a id='L219' name='L219'></a> 219 <em class='brace'>}</em>
+<a id='L220' name='L220'></a> 220 <em class='comment'>/* }}} */</em>
+</pre>
+<hr />
+<a id='BOTTOM' name='BOTTOM'></a>
+<em class='comment'>/* [&lt;][&gt;]<a href='#L38'>[^]</a><a href='#L200'>[v]</a><a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+</body>
+</html>

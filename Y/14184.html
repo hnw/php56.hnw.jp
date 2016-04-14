@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>connect_attr</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/780.html#L99'>connect_attr</a>       99 ext/mysqlnd/mysqlnd.c 	if (conn-&gt;options-&gt;connect_attr) {</span>
+<span class='curline'><a href='../S/780.html#L100'>connect_attr</a>      100 ext/mysqlnd/mysqlnd.c 		zend_hash_destroy(conn-&gt;options-&gt;connect_attr);</span>
+<span class='curline'><a href='../S/780.html#L101'>connect_attr</a>      101 ext/mysqlnd/mysqlnd.c 		mnd_pefree(conn-&gt;options-&gt;connect_attr, pers);</span>
+<span class='curline'><a href='../S/780.html#L102'>connect_attr</a>      102 ext/mysqlnd/mysqlnd.c 		conn-&gt;options-&gt;connect_attr = NULL;</span>
+<span class='curline'><a href='../S/780.html#L2457'>connect_attr</a>     2457 ext/mysqlnd/mysqlnd.c 			if (conn-&gt;options-&gt;connect_attr) {</span>
+<span class='curline'><a href='../S/780.html#L2458'>connect_attr</a>     2458 ext/mysqlnd/mysqlnd.c 				DBG_INF_FMT("Before reset %d attribute(s)", zend_hash_num_elements(conn-&gt;options-&gt;connect_attr));</span>
+<span class='curline'><a href='../S/780.html#L2459'>connect_attr</a>     2459 ext/mysqlnd/mysqlnd.c 				zend_hash_clean(conn-&gt;options-&gt;connect_attr);</span>
+<span class='curline'><a href='../S/780.html#L2463'>connect_attr</a>     2463 ext/mysqlnd/mysqlnd.c 			if (conn-&gt;options-&gt;connect_attr &amp;&amp; value) {</span>
+<span class='curline'><a href='../S/780.html#L2464'>connect_attr</a>     2464 ext/mysqlnd/mysqlnd.c 				DBG_INF_FMT("Before delete %d attribute(s)", zend_hash_num_elements(conn-&gt;options-&gt;connect_attr));</span>
+<span class='curline'><a href='../S/780.html#L2465'>connect_attr</a>     2465 ext/mysqlnd/mysqlnd.c 				zend_hash_del(conn-&gt;options-&gt;connect_attr, value, strlen(value));</span>
+<span class='curline'><a href='../S/780.html#L2466'>connect_attr</a>     2466 ext/mysqlnd/mysqlnd.c 				DBG_INF_FMT("%d left", zend_hash_num_elements(conn-&gt;options-&gt;connect_attr));</span>
+<span class='curline'><a href='../S/780.html#L2535'>connect_attr</a>     2535 ext/mysqlnd/mysqlnd.c 			if (!conn-&gt;options-&gt;connect_attr) {</span>
+<span class='curline'><a href='../S/780.html#L2537'>connect_attr</a>     2537 ext/mysqlnd/mysqlnd.c 				conn-&gt;options-&gt;connect_attr = mnd_pemalloc(sizeof(HashTable), conn-&gt;persistent);</span>
+<span class='curline'><a href='../S/780.html#L2538'>connect_attr</a>     2538 ext/mysqlnd/mysqlnd.c 				if (!conn-&gt;options-&gt;connect_attr) {</span>
+<span class='curline'><a href='../S/780.html#L2541'>connect_attr</a>     2541 ext/mysqlnd/mysqlnd.c 				zend_hash_init(conn-&gt;options-&gt;connect_attr, 0, NULL, conn-&gt;persistent? connect_attr_item_pdtor:connect_attr_item_edtor, conn-&gt;persistent);</span>
+<span class='curline'><a href='../S/780.html#L2549'>connect_attr</a>     2549 ext/mysqlnd/mysqlnd.c 				zend_hash_update(conn-&gt;options-&gt;connect_attr, key, strlen(key), &amp;copyv, sizeof(char *), NULL);</span>
+<span class='curline'><a href='../S/784.html#L103'>connect_attr</a>      103 ext/mysqlnd/mysqlnd_auth.c 			auth_packet-&gt;connect_attr = conn-&gt;options-&gt;connect_attr;</span>
+<span class='curline'><a href='../S/813.html#L178'>connect_attr</a>      178 ext/mysqlnd/mysqlnd_structs.h 	HashTable	* connect_attr;</span>
+<span class='curline'><a href='../S/814.html#L563'>connect_attr</a>      563 ext/mysqlnd/mysqlnd_wireprotocol.c 		if (packet-&gt;connect_attr &amp;&amp; zend_hash_num_elements(packet-&gt;connect_attr)) {</span>
+<span class='curline'><a href='../S/814.html#L567'>connect_attr</a>      567 ext/mysqlnd/mysqlnd_wireprotocol.c 			zend_hash_internal_pointer_reset_ex(packet-&gt;connect_attr, &amp;pos_value);</span>
+<span class='curline'><a href='../S/814.html#L568'>connect_attr</a>      568 ext/mysqlnd/mysqlnd_wireprotocol.c 			while (SUCCESS == zend_hash_get_current_data_ex(packet-&gt;connect_attr, (void **)&amp;entry_value, &amp;pos_value)) {</span>
+<span class='curline'><a href='../S/814.html#L574'>connect_attr</a>      574 ext/mysqlnd/mysqlnd_wireprotocol.c 				if (HASH_KEY_IS_STRING == zend_hash_get_current_key_ex(packet-&gt;connect_attr, &amp;s_key, &amp;s_len, &amp;num_key, 0, &amp;pos_value)) {</span>
+<span class='curline'><a href='../S/814.html#L580'>connect_attr</a>      580 ext/mysqlnd/mysqlnd_wireprotocol.c 				zend_hash_move_forward_ex(conn-&gt;options-&gt;connect_attr, &amp;pos_value);</span>
+<span class='curline'><a href='../S/814.html#L586'>connect_attr</a>      586 ext/mysqlnd/mysqlnd_wireprotocol.c 				zend_hash_internal_pointer_reset_ex(packet-&gt;connect_attr, &amp;pos_value);</span>
+<span class='curline'><a href='../S/814.html#L587'>connect_attr</a>      587 ext/mysqlnd/mysqlnd_wireprotocol.c 				while (SUCCESS == zend_hash_get_current_data_ex(packet-&gt;connect_attr, (void **)&amp;entry_value, &amp;pos_value)) {</span>
+<span class='curline'><a href='../S/814.html#L592'>connect_attr</a>      592 ext/mysqlnd/mysqlnd_wireprotocol.c 					if (HASH_KEY_IS_STRING == zend_hash_get_current_key_ex(packet-&gt;connect_attr, &amp;s_key, &amp;s_len, &amp;num_key, 0, &amp;pos_value)) {</span>
+<span class='curline'><a href='../S/814.html#L602'>connect_attr</a>      602 ext/mysqlnd/mysqlnd_wireprotocol.c 					zend_hash_move_forward_ex(conn-&gt;options-&gt;connect_attr, &amp;pos_value);</span>
+<span class='curline'><a href='../S/815.html#L106'>connect_attr</a>      106 ext/mysqlnd/mysqlnd_wireprotocol.h 	HashTable	*connect_attr;</span>
+</pre>
+</body>
+</html>

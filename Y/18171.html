@@ -1,0 +1,278 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>fn</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/1655.html#L3967'>fn</a>               3967 Zend/zend_compile.c static zend_bool zend_traits_method_compatibility_check(zend_function *fn, zend_function *other_fn TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1655.html#L3969'>fn</a>               3969 Zend/zend_compile.c 	zend_uint    fn_flags = fn-&gt;common.scope-&gt;ce_flags;</span>
+<span class='curline'><a href='../S/1655.html#L3972'>fn</a>               3972 Zend/zend_compile.c 	return zend_do_perform_implementation_check(fn, other_fn TSRMLS_CC)</span>
+<span class='curline'><a href='../S/1655.html#L3973'>fn</a>               3973 Zend/zend_compile.c 		&amp;&amp; ((other_fn-&gt;common.scope-&gt;ce_flags &amp; ZEND_ACC_INTERFACE) || zend_do_perform_implementation_check(other_fn, fn TSRMLS_CC))</span>
+<span class='curline'><a href='../S/1655.html#L4022'>fn</a>               4022 Zend/zend_compile.c static void zend_add_trait_method(zend_class_entry *ce, const char *name, const char *arKey, uint nKeyLength, zend_function *fn, HashTable **overriden TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1655.html#L4035'>fn</a>               4035 Zend/zend_compile.c 						if (!zend_traits_method_compatibility_check(fn, existing_fn TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/1655.html#L4037'>fn</a>               4037 Zend/zend_compile.c 								zend_get_function_declaration(fn TSRMLS_CC),</span>
+<span class='curline'><a href='../S/1655.html#L4040'>fn</a>               4040 Zend/zend_compile.c 					} else if (fn-&gt;common.fn_flags &amp; ZEND_ACC_ABSTRACT) {</span>
+<span class='curline'><a href='../S/1655.html#L4042'>fn</a>               4042 Zend/zend_compile.c 						if (!zend_traits_method_compatibility_check(existing_fn, fn TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/1655.html#L4044'>fn</a>               4044 Zend/zend_compile.c 								zend_get_function_declaration(fn TSRMLS_CC),</span>
+<span class='curline'><a href='../S/1655.html#L4054'>fn</a>               4054 Zend/zend_compile.c 			zend_hash_quick_update(*overriden, arKey, nKeyLength, h, fn, sizeof(zend_function), (void**)&amp;fn);</span>
+<span class='curline'><a href='../S/1655.html#L4059'>fn</a>               4059 Zend/zend_compile.c 			if (!zend_traits_method_compatibility_check(fn, existing_fn TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/1655.html#L4061'>fn</a>               4061 Zend/zend_compile.c 					zend_get_function_declaration(fn TSRMLS_CC),</span>
+<span class='curline'><a href='../S/1655.html#L4064'>fn</a>               4064 Zend/zend_compile.c 		} else if (fn-&gt;common.fn_flags &amp; ZEND_ACC_ABSTRACT) {</span>
+<span class='curline'><a href='../S/1655.html#L4066'>fn</a>               4066 Zend/zend_compile.c 			if (!zend_traits_method_compatibility_check(existing_fn, fn TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/1655.html#L4068'>fn</a>               4068 Zend/zend_compile.c 					zend_get_function_declaration(fn TSRMLS_CC),</span>
+<span class='curline'><a href='../S/1655.html#L4079'>fn</a>               4079 Zend/zend_compile.c 				fn-&gt;common.scope-&gt;name, fn-&gt;common.function_name,</span>
+<span class='curline'><a href='../S/1655.html#L4086'>fn</a>               4086 Zend/zend_compile.c 			do_inheritance_check_on_method(fn, existing_fn TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1655.html#L4087'>fn</a>               4087 Zend/zend_compile.c 			fn-&gt;common.prototype = NULL;</span>
+<span class='curline'><a href='../S/1655.html#L4091'>fn</a>               4091 Zend/zend_compile.c 	function_add_ref(fn);</span>
+<span class='curline'><a href='../S/1655.html#L4092'>fn</a>               4092 Zend/zend_compile.c 	zend_hash_quick_update(&amp;ce-&gt;function_table, arKey, nKeyLength, h, fn, sizeof(zend_function), (void**)&amp;fn);</span>
+<span class='curline'><a href='../S/1655.html#L4093'>fn</a>               4093 Zend/zend_compile.c 	zend_add_magic_methods(ce, arKey, nKeyLength, fn TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1655.html#L4097'>fn</a>               4097 Zend/zend_compile.c static int zend_fixup_trait_method(zend_function *fn, zend_class_entry *ce TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1655.html#L4099'>fn</a>               4099 Zend/zend_compile.c 	if ((fn-&gt;common.scope-&gt;ce_flags &amp; ZEND_ACC_TRAIT) == ZEND_ACC_TRAIT) {</span>
+<span class='curline'><a href='../S/1655.html#L4101'>fn</a>               4101 Zend/zend_compile.c 		fn-&gt;common.scope = ce;</span>
+<span class='curline'><a href='../S/1655.html#L4103'>fn</a>               4103 Zend/zend_compile.c 		if (fn-&gt;common.fn_flags &amp; ZEND_ACC_ABSTRACT) {</span>
+<span class='curline'><a href='../S/1655.html#L4106'>fn</a>               4106 Zend/zend_compile.c 		if (fn-&gt;type == ZEND_USER_FUNCTION &amp;&amp; fn-&gt;op_array.static_variables) {</span>
+<span class='curline'><a href='../S/1655.html#L4114'>fn</a>               4114 Zend/zend_compile.c static int zend_traits_copy_functions(zend_function *fn TSRMLS_DC, int num_args, va_list args, zend_hash_key *hash_key) /* {{{ */</span>
+<span class='curline'><a href='../S/1655.html#L4138'>fn</a>               4138 Zend/zend_compile.c 				&amp;&amp; (!alias-&gt;trait_method-&gt;ce || fn-&gt;common.scope == alias-&gt;trait_method-&gt;ce)</span>
+<span class='curline'><a href='../S/1655.html#L4141'>fn</a>               4141 Zend/zend_compile.c 				fn_copy = *fn;</span>
+<span class='curline'><a href='../S/1655.html#L4145'>fn</a>               4145 Zend/zend_compile.c 					fn_copy.common.fn_flags = alias-&gt;modifiers | (fn-&gt;common.fn_flags ^ (fn-&gt;common.fn_flags &amp; ZEND_ACC_PPP_MASK));</span>
+<span class='curline'><a href='../S/1655.html#L4154'>fn</a>               4154 Zend/zend_compile.c 					alias-&gt;trait_method-&gt;ce = fn-&gt;common.scope;</span>
+<span class='curline'><a href='../S/1655.html#L4166'>fn</a>               4166 Zend/zend_compile.c 		fn_copy = *fn;</span>
+<span class='curline'><a href='../S/1655.html#L4175'>fn</a>               4175 Zend/zend_compile.c 					&amp;&amp; (!alias-&gt;trait_method-&gt;ce || fn-&gt;common.scope == alias-&gt;trait_method-&gt;ce)</span>
+<span class='curline'><a href='../S/1655.html#L4179'>fn</a>               4179 Zend/zend_compile.c 					fn_copy.common.fn_flags = alias-&gt;modifiers | (fn-&gt;common.fn_flags ^ (fn-&gt;common.fn_flags &amp; ZEND_ACC_PPP_MASK));</span>
+<span class='curline'><a href='../S/1655.html#L4183'>fn</a>               4183 Zend/zend_compile.c 						alias-&gt;trait_method-&gt;ce = fn-&gt;common.scope;</span>
+<span class='curline'><a href='../S/1655.html#L4191'>fn</a>               4191 Zend/zend_compile.c 		zend_add_trait_method(ce, fn-&gt;common.function_name, lcname, fnname_len+1, &amp;fn_copy, overriden TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1671.html#L1447'>fn</a>               1447 Zend/zend_execute_API.c static int zend_verify_abstract_class_function(zend_function *fn, zend_abstract_info *ai TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1671.html#L1449'>fn</a>               1449 Zend/zend_execute_API.c 	if (fn-&gt;common.fn_flags &amp; ZEND_ACC_ABSTRACT) {</span>
+<span class='curline'><a href='../S/1671.html#L1451'>fn</a>               1451 Zend/zend_execute_API.c 			ai-&gt;afn[ai-&gt;cnt] = fn;</span>
+<span class='curline'><a href='../S/1671.html#L1453'>fn</a>               1453 Zend/zend_execute_API.c 		if (fn-&gt;common.fn_flags &amp; ZEND_ACC_CTOR) {</span>
+<span class='curline'><a href='../S/46.html#L410'>fn</a>                410 ext/com_dotnet/com_handlers.c #define POPULATE_CTOR(f, fn)	\</span>
+<span class='curline'><a href='../S/46.html#L417'>fn</a>                417 ext/com_dotnet/com_handlers.c 	f.handler = ZEND_FN(fn); \</span>
+<span class='curline'><a href='../S/170.html#L19'>fn</a>                 19 ext/ereg/regex/split.c 	register int fn;</span>
+<span class='curline'><a href='../S/170.html#L42'>fn</a>                 42 ext/ereg/regex/split.c 		fn = nfields;</span>
+<span class='curline'><a href='../S/170.html#L45'>fn</a>                 45 ext/ereg/regex/split.c 			fn--;</span>
+<span class='curline'><a href='../S/170.html#L46'>fn</a>                 46 ext/ereg/regex/split.c 			if (fn == 0)</span>
+<span class='curline'><a href='../S/170.html#L50'>fn</a>                 50 ext/ereg/regex/split.c 					return(nfields - fn);</span>
+<span class='curline'><a href='../S/170.html#L54'>fn</a>                 54 ext/ereg/regex/split.c 		fn = nfields;</span>
+<span class='curline'><a href='../S/170.html#L58'>fn</a>                 58 ext/ereg/regex/split.c 					return(fn);</span>
+<span class='curline'><a href='../S/170.html#L59'>fn</a>                 59 ext/ereg/regex/split.c 			fn++;</span>
+<span class='curline'><a href='../S/170.html#L66'>fn</a>                 66 ext/ereg/regex/split.c 		fn = nfields;</span>
+<span class='curline'><a href='../S/170.html#L69'>fn</a>                 69 ext/ereg/regex/split.c 			fn--;</span>
+<span class='curline'><a href='../S/170.html#L73'>fn</a>                 73 ext/ereg/regex/split.c 						fn++;</span>
+<span class='curline'><a href='../S/170.html#L74'>fn</a>                 74 ext/ereg/regex/split.c 					return(nfields - fn);</span>
+<span class='curline'><a href='../S/170.html#L76'>fn</a>                 76 ext/ereg/regex/split.c 			if (fn == 0)</span>
+<span class='curline'><a href='../S/170.html#L84'>fn</a>                 84 ext/ereg/regex/split.c 		fn = nfields;</span>
+<span class='curline'><a href='../S/170.html#L89'>fn</a>                 89 ext/ereg/regex/split.c 			fn++;</span>
+<span class='curline'><a href='../S/170.html#L100'>fn</a>                100 ext/ereg/regex/split.c 				if (fn == nfields+1)</span>
+<span class='curline'><a href='../S/170.html#L102'>fn</a>                102 ext/ereg/regex/split.c 				fn--;</span>
+<span class='curline'><a href='../S/170.html#L105'>fn</a>                105 ext/ereg/regex/split.c 		return(fn);</span>
+<span class='curline'><a href='../S/170.html#L109'>fn</a>                109 ext/ereg/regex/split.c 	fn = 0;</span>
+<span class='curline'><a href='../S/170.html#L111'>fn</a>                111 ext/ereg/regex/split.c 		if (fn &lt; nfields)</span>
+<span class='curline'><a href='../S/170.html#L113'>fn</a>                113 ext/ereg/regex/split.c 		fn++;</span>
+<span class='curline'><a href='../S/170.html#L117'>fn</a>                117 ext/ereg/regex/split.c 				return(fn);</span>
+<span class='curline'><a href='../S/170.html#L124'>fn</a>                124 ext/ereg/regex/split.c 		if (fn &lt; nfields)</span>
+<span class='curline'><a href='../S/170.html#L199'>fn</a>                199 ext/ereg/regex/split.c 	register int fn;</span>
+<span class='curline'><a href='../S/170.html#L204'>fn</a>                204 ext/ereg/regex/split.c 	for (fn = 0; fn &lt; bound; fn++)</span>
+<span class='curline'><a href='../S/170.html#L205'>fn</a>                205 ext/ereg/regex/split.c 		printf("\"%s\"%s", fields[fn], (fn+1 &lt; nf) ? ", " : "\n");</span>
+<span class='curline'><a href='../S/176.html#L392'>fn</a>                392 ext/fileinfo/libmagic/apprentice.c apprentice_1(struct magic_set *ms, const char *fn, int action)</span>
+<span class='curline'><a href='../S/176.html#L406'>fn</a>                406 ext/fileinfo/libmagic/apprentice.c 		map = apprentice_load(ms, fn, action);</span>
+<span class='curline'><a href='../S/176.html#L409'>fn</a>                409 ext/fileinfo/libmagic/apprentice.c 		return apprentice_compile(ms, map, fn);</span>
+<span class='curline'><a href='../S/176.html#L412'>fn</a>                412 ext/fileinfo/libmagic/apprentice.c 	map = apprentice_map(ms, fn);</span>
+<span class='curline'><a href='../S/176.html#L414'>fn</a>                414 ext/fileinfo/libmagic/apprentice.c 		if (fn) {</span>
+<span class='curline'><a href='../S/176.html#L416'>fn</a>                416 ext/fileinfo/libmagic/apprentice.c 				file_magwarn(ms, "using regular magic file `%s'", fn);</span>
+<span class='curline'><a href='../S/176.html#L417'>fn</a>                417 ext/fileinfo/libmagic/apprentice.c 			map = apprentice_load(ms, fn, action);</span>
+<span class='curline'><a href='../S/176.html#L547'>fn</a>                547 ext/fileinfo/libmagic/apprentice.c file_apprentice(struct magic_set *ms, const char *fn, int action)</span>
+<span class='curline'><a href='../S/176.html#L557'>fn</a>                557 ext/fileinfo/libmagic/apprentice.c 	if ((fn = magic_getpath(fn, action)) == NULL)</span>
+<span class='curline'><a href='../S/176.html#L563'>fn</a>                563 ext/fileinfo/libmagic/apprentice.c 	if (fn == NULL)</span>
+<span class='curline'><a href='../S/176.html#L564'>fn</a>                564 ext/fileinfo/libmagic/apprentice.c 		fn = getenv("MAGIC");</span>
+<span class='curline'><a href='../S/176.html#L565'>fn</a>                565 ext/fileinfo/libmagic/apprentice.c 	if (fn == NULL) {</span>
+<span class='curline'><a href='../S/176.html#L573'>fn</a>                573 ext/fileinfo/libmagic/apprentice.c 		return apprentice_1(ms, fn, action);</span>
+<span class='curline'><a href='../S/176.html#L576'>fn</a>                576 ext/fileinfo/libmagic/apprentice.c 	if ((mfn = estrdup(fn)) == NULL) {</span>
+<span class='curline'><a href='../S/176.html#L577'>fn</a>                577 ext/fileinfo/libmagic/apprentice.c 		file_oomem(ms, strlen(fn));</span>
+<span class='curline'><a href='../S/176.html#L595'>fn</a>                595 ext/fileinfo/libmagic/apprentice.c 	fn = mfn;</span>
+<span class='curline'><a href='../S/176.html#L597'>fn</a>                597 ext/fileinfo/libmagic/apprentice.c 	while (fn) {</span>
+<span class='curline'><a href='../S/176.html#L598'>fn</a>                598 ext/fileinfo/libmagic/apprentice.c 		p = strchr(fn, PATHSEP);</span>
+<span class='curline'><a href='../S/176.html#L601'>fn</a>                601 ext/fileinfo/libmagic/apprentice.c 		if (*fn == '\0')</span>
+<span class='curline'><a href='../S/176.html#L603'>fn</a>                603 ext/fileinfo/libmagic/apprentice.c 		file_err = apprentice_1(ms, fn, action);</span>
+<span class='curline'><a href='../S/176.html#L605'>fn</a>                605 ext/fileinfo/libmagic/apprentice.c 		fn = p;</span>
+<span class='curline'><a href='../S/176.html#L952'>fn</a>                952 ext/fileinfo/libmagic/apprentice.c load_1(struct magic_set *ms, int action, const char *fn, int *errs,</span>
+<span class='curline'><a href='../S/176.html#L965'>fn</a>                965 ext/fileinfo/libmagic/apprentice.c 	ms-&gt;file = fn;</span>
+<span class='curline'><a href='../S/176.html#L966'>fn</a>                966 ext/fileinfo/libmagic/apprentice.c 	stream = php_stream_open_wrapper((char *)fn, "rb", REPORT_ERRORS, NULL);</span>
+<span class='curline'><a href='../S/176.html#L971'>fn</a>                971 ext/fileinfo/libmagic/apprentice.c 				   fn);</span>
+<span class='curline'><a href='../S/176.html#L1142'>fn</a>               1142 ext/fileinfo/libmagic/apprentice.c apprentice_load(struct magic_set *ms, const char *fn, int action)</span>
+<span class='curline'><a href='../S/176.html#L1173'>fn</a>               1173 ext/fileinfo/libmagic/apprentice.c 	if (php_sys_stat(fn, &amp;st) == 0 &amp;&amp; S_ISDIR(st.st_mode)) {</span>
+<span class='curline'><a href='../S/176.html#L1177'>fn</a>               1177 ext/fileinfo/libmagic/apprentice.c 		dir = php_stream_opendir((char *)fn, REPORT_ERRORS, NULL);</span>
+<span class='curline'><a href='../S/176.html#L1183'>fn</a>               1183 ext/fileinfo/libmagic/apprentice.c 			if ((mflen = snprintf(mfn, sizeof(mfn), "%s/%s", fn, d.d_name)) &lt; 0) {</span>
+<span class='curline'><a href='../S/176.html#L1185'>fn</a>               1185 ext/fileinfo/libmagic/apprentice.c 				strlen(fn) + strlen(d.d_name) + 2);</span>
+<span class='curline'><a href='../S/176.html#L1215'>fn</a>               1215 ext/fileinfo/libmagic/apprentice.c 		load_1(ms, action, fn, &amp;errs, mset);</span>
+<span class='curline'><a href='../S/176.html#L2598'>fn</a>               2598 ext/fileinfo/libmagic/apprentice.c apprentice_map(struct magic_set *ms, const char *fn)</span>
+<span class='curline'><a href='../S/176.html#L2617'>fn</a>               2617 ext/fileinfo/libmagic/apprentice.c 	if (fn == NULL) {</span>
+<span class='curline'><a href='../S/176.html#L2625'>fn</a>               2625 ext/fileinfo/libmagic/apprentice.c 	if (php_stream_stat_path_ex((char *)fn, 0, &amp;st, NULL) == SUCCESS) {</span>
+<span class='curline'><a href='../S/176.html#L2632'>fn</a>               2632 ext/fileinfo/libmagic/apprentice.c 	dbname = mkdbname(ms, fn, 0);</span>
+<span class='curline'><a href='../S/176.html#L2636'>fn</a>               2636 ext/fileinfo/libmagic/apprentice.c 		stream = php_stream_open_wrapper((char *)fn, "rb", REPORT_ERRORS, NULL);</span>
+<span class='curline'><a href='../S/176.html#L2691'>fn</a>               2691 ext/fileinfo/libmagic/apprentice.c 	if (needsbyteswap &amp;&amp; fn == NULL) {</span>
+<span class='curline'><a href='../S/176.html#L2696'>fn</a>               2696 ext/fileinfo/libmagic/apprentice.c 	if (NULL != fn) {</span>
+<span class='curline'><a href='../S/176.html#L2717'>fn</a>               2717 ext/fileinfo/libmagic/apprentice.c 	if (NULL != fn &amp;&amp; entries != nentries + 1) {</span>
+<span class='curline'><a href='../S/176.html#L2751'>fn</a>               2751 ext/fileinfo/libmagic/apprentice.c apprentice_compile(struct magic_set *ms, struct magic_map *map, const char *fn)</span>
+<span class='curline'><a href='../S/176.html#L2764'>fn</a>               2764 ext/fileinfo/libmagic/apprentice.c 	dbname = mkdbname(ms, fn, 0);</span>
+<span class='curline'><a href='../S/176.html#L2770'>fn</a>               2770 ext/fileinfo/libmagic/apprentice.c 	stream = php_stream_open_wrapper((char *)fn, "wb+", REPORT_ERRORS, NULL);</span>
+<span class='curline'><a href='../S/176.html#L2817'>fn</a>               2817 ext/fileinfo/libmagic/apprentice.c mkdbname(struct magic_set *ms, const char *fn, int strip)</span>
+<span class='curline'><a href='../S/176.html#L2824'>fn</a>               2824 ext/fileinfo/libmagic/apprentice.c 		if ((p = strrchr(fn, '/')) != NULL)</span>
+<span class='curline'><a href='../S/176.html#L2825'>fn</a>               2825 ext/fileinfo/libmagic/apprentice.c 			fn = ++p;</span>
+<span class='curline'><a href='../S/176.html#L2828'>fn</a>               2828 ext/fileinfo/libmagic/apprentice.c 	for (q = fn; *q; q++)</span>
+<span class='curline'><a href='../S/176.html#L2831'>fn</a>               2831 ext/fileinfo/libmagic/apprentice.c 	for (p = ext + sizeof(ext) - 1; p &gt;= ext &amp;&amp; q &gt;= fn; p--, q--)</span>
+<span class='curline'><a href='../S/176.html#L2843'>fn</a>               2843 ext/fileinfo/libmagic/apprentice.c 		spprintf(&amp;buf, MAXPATHLEN, "%.*s.mime%s", (int)(q - fn), fn, ext);</span>
+<span class='curline'><a href='../S/176.html#L2854'>fn</a>               2854 ext/fileinfo/libmagic/apprentice.c 	spprintf(&amp;buf, MAXPATHLEN, "%.*s%s", (int)(q - fn), fn, ext);</span>
+<span class='curline'><a href='../S/177.html#L45'>fn</a>                 45 ext/fileinfo/libmagic/apptype.c file_os2_apptype(struct magic_set *ms, const char *fn, const void *buf,</span>
+<span class='curline'><a href='../S/177.html#L54'>fn</a>                 54 ext/fileinfo/libmagic/apptype.c 	if (fn)</span>
+<span class='curline'><a href='../S/177.html#L55'>fn</a>                 55 ext/fileinfo/libmagic/apptype.c 		filename = strdup(fn);</span>
+<span class='curline'><a href='../S/177.html#L67'>fn</a>                 67 ext/fileinfo/libmagic/apptype.c 	if (fn == NULL) {</span>
+<span class='curline'><a href='../S/177.html#L82'>fn</a>                 82 ext/fileinfo/libmagic/apptype.c 	if (fn == NULL) {</span>
+<span class='curline'><a href='../S/187.html#L93'>fn</a>                 93 ext/fileinfo/libmagic/fsmagic.c file_fsmagic(struct magic_set *ms, const char *fn, struct stat *sb, php_stream *stream)</span>
+<span class='curline'><a href='../S/187.html#L102'>fn</a>                102 ext/fileinfo/libmagic/fsmagic.c 	if (fn == NULL &amp;&amp; !stream) {</span>
+<span class='curline'><a href='../S/187.html#L112'>fn</a>                112 ext/fileinfo/libmagic/fsmagic.c 				file_error(ms, errno, "cannot stat `%s'", fn);</span>
+<span class='curline'><a href='../S/187.html#L119'>fn</a>                119 ext/fileinfo/libmagic/fsmagic.c 		if (php_sys_stat(fn, sb) != 0) {</span>
+<span class='curline'><a href='../S/187.html#L121'>fn</a>                121 ext/fileinfo/libmagic/fsmagic.c 				file_error(ms, errno, "cannot stat `%s'", fn);</span>
+<span class='curline'><a href='../S/187.html#L209'>fn</a>                209 ext/fileinfo/libmagic/fsmagic.c 			    file_error(ms, errno, "unreadable symlink `%s'", fn);</span>
+<span class='curline'><a href='../S/210.html#L2574'>fn</a>               2574 ext/gd/gd.c    	char *fn = NULL;</span>
+<span class='curline'><a href='../S/210.html#L2590'>fn</a>               2590 ext/gd/gd.c    		fn = file;</span>
+<span class='curline'><a href='../S/210.html#L2600'>fn</a>               2600 ext/gd/gd.c    		PHP_GD_CHECK_OPEN_BASEDIR(fn, "Invalid filename");</span>
+<span class='curline'><a href='../S/210.html#L2602'>fn</a>               2602 ext/gd/gd.c    		fp = VCWD_FOPEN(fn, "wb");</span>
+<span class='curline'><a href='../S/210.html#L2604'>fn</a>               2604 ext/gd/gd.c    			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Unable to open '%s' for writing", fn);</span>
+<span class='curline'><a href='../S/714.html#L11224'>fn</a>               11224 ext/mbstring/oniguruma/enc/unicode.c       int fn, ncs[3];</span>
+<span class='curline'><a href='../S/714.html#L11226'>fn</a>               11226 ext/mbstring/oniguruma/enc/unicode.c       for (fn = 0; fn &lt; to-&gt;n; fn++) {</span>
+<span class='curline'><a href='../S/714.html#L11227'>fn</a>               11227 ext/mbstring/oniguruma/enc/unicode.c 	cs[fn][0] = to-&gt;code[fn];</span>
+<span class='curline'><a href='../S/714.html#L11228'>fn</a>               11228 ext/mbstring/oniguruma/enc/unicode.c 	if (onig_st_lookup(Unfold1Table, (st_data_t )cs[fn][0],</span>
+<span class='curline'><a href='../S/714.html#L11231'>fn</a>               11231 ext/mbstring/oniguruma/enc/unicode.c 	    cs[fn][i+1] = z3-&gt;code[i];</span>
+<span class='curline'><a href='../S/714.html#L11233'>fn</a>               11233 ext/mbstring/oniguruma/enc/unicode.c 	  ncs[fn] = z3-&gt;n + 1;</span>
+<span class='curline'><a href='../S/714.html#L11236'>fn</a>               11236 ext/mbstring/oniguruma/enc/unicode.c 	  ncs[fn] = 1;</span>
+<span class='curline'><a href='../S/714.html#L11239'>fn</a>               11239 ext/mbstring/oniguruma/enc/unicode.c       if (fn == 2) {</span>
+<span class='curline'><a href='../S/782.html#L88'>fn</a>                 88 ext/mysqlnd/mysqlnd_alloc.c 		char * fn = strrchr(__zend_orig_filename, PHP_DIR_SEPARATOR); </span>
+<span class='curline'><a href='../S/782.html#L89'>fn</a>                 89 ext/mysqlnd/mysqlnd_alloc.c 		TRACE_ALLOC_INF_FMT("file=%-15s line=%4d", fn? fn + 1:__zend_orig_filename, __zend_orig_lineno);</span>
+<span class='curline'><a href='../S/782.html#L128'>fn</a>                128 ext/mysqlnd/mysqlnd_alloc.c 		char * fn = strrchr(__zend_orig_filename, PHP_DIR_SEPARATOR); </span>
+<span class='curline'><a href='../S/782.html#L129'>fn</a>                129 ext/mysqlnd/mysqlnd_alloc.c 		TRACE_ALLOC_INF_FMT("file=%-15s line=%4d", fn? fn + 1:__zend_orig_filename, __zend_orig_lineno);</span>
+<span class='curline'><a href='../S/782.html#L171'>fn</a>                171 ext/mysqlnd/mysqlnd_alloc.c 		char * fn = strrchr(__zend_orig_filename, PHP_DIR_SEPARATOR); </span>
+<span class='curline'><a href='../S/782.html#L172'>fn</a>                172 ext/mysqlnd/mysqlnd_alloc.c 		TRACE_ALLOC_INF_FMT("file=%-15s line=%4d", fn? fn + 1:__zend_orig_filename, __zend_orig_lineno);</span>
+<span class='curline'><a href='../S/782.html#L211'>fn</a>                211 ext/mysqlnd/mysqlnd_alloc.c 		char * fn = strrchr(__zend_orig_filename, PHP_DIR_SEPARATOR); </span>
+<span class='curline'><a href='../S/782.html#L212'>fn</a>                212 ext/mysqlnd/mysqlnd_alloc.c 		TRACE_ALLOC_INF_FMT("file=%-15s line=%4d", fn? fn + 1:__zend_orig_filename, __zend_orig_lineno);</span>
+<span class='curline'><a href='../S/782.html#L255'>fn</a>                255 ext/mysqlnd/mysqlnd_alloc.c 		char * fn = strrchr(__zend_orig_filename, PHP_DIR_SEPARATOR); </span>
+<span class='curline'><a href='../S/782.html#L256'>fn</a>                256 ext/mysqlnd/mysqlnd_alloc.c 		TRACE_ALLOC_INF_FMT("file=%-15s line=%4d", fn? fn + 1:__zend_orig_filename, __zend_orig_lineno);</span>
+<span class='curline'><a href='../S/782.html#L296'>fn</a>                296 ext/mysqlnd/mysqlnd_alloc.c 		char * fn = strrchr(__zend_orig_filename, PHP_DIR_SEPARATOR); </span>
+<span class='curline'><a href='../S/782.html#L297'>fn</a>                297 ext/mysqlnd/mysqlnd_alloc.c 		TRACE_ALLOC_INF_FMT("file=%-15s line=%4d", fn? fn + 1:__zend_orig_filename, __zend_orig_lineno);</span>
+<span class='curline'><a href='../S/782.html#L336'>fn</a>                336 ext/mysqlnd/mysqlnd_alloc.c 		char * fn = strrchr(__zend_orig_filename, PHP_DIR_SEPARATOR); </span>
+<span class='curline'><a href='../S/782.html#L337'>fn</a>                337 ext/mysqlnd/mysqlnd_alloc.c 		TRACE_ALLOC_INF_FMT("file=%-15s line=%4d", fn? fn + 1:__zend_orig_filename, __zend_orig_lineno);</span>
+<span class='curline'><a href='../S/782.html#L367'>fn</a>                367 ext/mysqlnd/mysqlnd_alloc.c 		char * fn = strrchr(__zend_orig_filename, PHP_DIR_SEPARATOR); </span>
+<span class='curline'><a href='../S/782.html#L368'>fn</a>                368 ext/mysqlnd/mysqlnd_alloc.c 		TRACE_ALLOC_INF_FMT("file=%-15s line=%4d", fn? fn + 1:__zend_orig_filename, __zend_orig_lineno);</span>
+<span class='curline'><a href='../S/782.html#L402'>fn</a>                402 ext/mysqlnd/mysqlnd_alloc.c 		char * fn = strrchr(__zend_orig_filename, PHP_DIR_SEPARATOR); </span>
+<span class='curline'><a href='../S/782.html#L403'>fn</a>                403 ext/mysqlnd/mysqlnd_alloc.c 		TRACE_ALLOC_INF_FMT("file=%-15s line=%4d", fn? fn + 1:__zend_orig_filename, __zend_orig_lineno);</span>
+<span class='curline'><a href='../S/782.html#L441'>fn</a>                441 ext/mysqlnd/mysqlnd_alloc.c 		char * fn = strrchr(__zend_orig_filename, PHP_DIR_SEPARATOR); </span>
+<span class='curline'><a href='../S/782.html#L442'>fn</a>                442 ext/mysqlnd/mysqlnd_alloc.c 		TRACE_ALLOC_INF_FMT("file=%-15s line=%4d", fn? fn + 1:__zend_orig_filename, __zend_orig_lineno);</span>
+<span class='curline'><a href='../S/782.html#L480'>fn</a>                480 ext/mysqlnd/mysqlnd_alloc.c 		char * fn = strrchr(__zend_orig_filename, PHP_DIR_SEPARATOR); </span>
+<span class='curline'><a href='../S/782.html#L481'>fn</a>                481 ext/mysqlnd/mysqlnd_alloc.c 		TRACE_ALLOC_INF_FMT("file=%-15s line=%4d", fn? fn + 1:__zend_orig_filename, __zend_orig_lineno);</span>
+<span class='curline'><a href='../S/782.html#L519'>fn</a>                519 ext/mysqlnd/mysqlnd_alloc.c 		char * fn = strrchr(__zend_orig_filename, PHP_DIR_SEPARATOR); </span>
+<span class='curline'><a href='../S/782.html#L520'>fn</a>                520 ext/mysqlnd/mysqlnd_alloc.c 		TRACE_ALLOC_INF_FMT("file=%-15s line=%4d", fn? fn + 1:__zend_orig_filename, __zend_orig_lineno);</span>
+<span class='curline'><a href='../S/782.html#L554'>fn</a>                554 ext/mysqlnd/mysqlnd_alloc.c 		char * fn = strrchr(__zend_orig_filename, PHP_DIR_SEPARATOR); </span>
+<span class='curline'><a href='../S/782.html#L555'>fn</a>                555 ext/mysqlnd/mysqlnd_alloc.c 		TRACE_ALLOC_INF_FMT("file=%-15s line=%4d", fn? fn + 1:__zend_orig_filename, __zend_orig_lineno);</span>
+<span class='curline'><a href='../S/782.html#L591'>fn</a>                591 ext/mysqlnd/mysqlnd_alloc.c 		char * fn = strrchr(__zend_orig_filename, PHP_DIR_SEPARATOR); </span>
+<span class='curline'><a href='../S/782.html#L592'>fn</a>                592 ext/mysqlnd/mysqlnd_alloc.c 		TRACE_ALLOC_INF_FMT("file=%-15s line=%4d", fn? fn + 1:__zend_orig_filename, __zend_orig_lineno);</span>
+<span class='curline'><a href='../S/1022.html#L25'>fn</a>                 25 ext/soap/php_packet_soap.c int parse_packet_soap(zval *this_ptr, char *buffer, int buffer_size, sdlFunctionPtr fn, char *fn_name, zval *return_value, zval *soap_headers TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1022.html#L256'>fn</a>                256 ext/soap/php_packet_soap.c 		if (fn != NULL &amp;&amp; fn-&gt;binding &amp;&amp; fn-&gt;binding-&gt;bindingType == BINDING_SOAP) {</span>
+<span class='curline'><a href='../S/1022.html#L262'>fn</a>                262 ext/soap/php_packet_soap.c 			sdlSoapBindingFunctionPtr fnb = (sdlSoapBindingFunctionPtr)fn-&gt;bindingAttributes;</span>
+<span class='curline'><a href='../S/1022.html#L267'>fn</a>                267 ext/soap/php_packet_soap.c 			if (fn-&gt;responseParameters) {</span>
+<span class='curline'><a href='../S/1022.html#L268'>fn</a>                268 ext/soap/php_packet_soap.c 			  res_count = zend_hash_num_elements(fn-&gt;responseParameters);</span>
+<span class='curline'><a href='../S/1022.html#L269'>fn</a>                269 ext/soap/php_packet_soap.c 				zend_hash_internal_pointer_reset(fn-&gt;responseParameters);</span>
+<span class='curline'><a href='../S/1022.html#L270'>fn</a>                270 ext/soap/php_packet_soap.c 				while (zend_hash_get_current_data(fn-&gt;responseParameters, (void **)&amp;h_param) == SUCCESS) {</span>
+<span class='curline'><a href='../S/1022.html#L284'>fn</a>                284 ext/soap/php_packet_soap.c 						name = fn-&gt;responseName;</span>
+<span class='curline'><a href='../S/1022.html#L337'>fn</a>                337 ext/soap/php_packet_soap.c 					zend_hash_move_forward(fn-&gt;responseParameters);</span>
+<span class='curline'><a href='../S/1023.html#L25'>fn</a>                 25 ext/soap/php_packet_soap.h int parse_packet_soap(zval *this_ptr, char *buffer, int buffer_size, sdlFunctionPtr fn, char *fn_name, zval *return_value, zval *soap_headers TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1026.html#L1535'>fn</a>               1535 ext/soap/php_sdl.c static sdlPtr get_sdl_from_cache(const char *fn, const char *uri, time_t t, time_t *cached TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1026.html#L1550'>fn</a>               1550 ext/soap/php_sdl.c 	f = open(fn, O_RDONLY|O_BINARY);</span>
+<span class='curline'><a href='../S/1026.html#L1567'>fn</a>               1567 ext/soap/php_sdl.c 		unlink(fn);</span>
+<span class='curline'><a href='../S/1026.html#L1575'>fn</a>               1575 ext/soap/php_sdl.c 		unlink(fn);</span>
+<span class='curline'><a href='../S/1026.html#L1583'>fn</a>               1583 ext/soap/php_sdl.c 		unlink(fn);</span>
+<span class='curline'><a href='../S/1026.html#L2112'>fn</a>               2112 ext/soap/php_sdl.c static void add_sdl_to_cache(const char *fn, const char *uri, time_t t, sdlPtr sdl TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1026.html#L2127'>fn</a>               2127 ext/soap/php_sdl.c 	f = open(fn,O_CREAT|O_WRONLY|O_EXCL|O_BINARY,S_IREAD|S_IWRITE);</span>
+<span class='curline'><a href='../S/1026.html#L2129'>fn</a>               2129 ext/soap/php_sdl.c 	f = open(fn,O_CREAT|O_WRONLY|O_EXCL|O_BINARY,S_IREAD|S_IWRITE);</span>
+<span class='curline'><a href='../S/1026.html#L3193'>fn</a>               3193 ext/soap/php_sdl.c 	char  fn[MAXPATHLEN];</span>
+<span class='curline'><a href='../S/1026.html#L3207'>fn</a>               3207 ext/soap/php_sdl.c 	} else if (VCWD_REALPATH(uri, fn) == NULL) {</span>
+<span class='curline'><a href='../S/1026.html#L3210'>fn</a>               3210 ext/soap/php_sdl.c 		uri = fn;</span>
+<span class='curline'><a href='../S/1031.html#L2639'>fn</a>               2639 ext/soap/soap.c  	sdlFunctionPtr fn;</span>
+<span class='curline'><a href='../S/1031.html#L2708'>fn</a>               2708 ext/soap/soap.c  			fn = get_function(sdl, function);</span>
+<span class='curline'><a href='../S/1031.html#L2709'>fn</a>               2709 ext/soap/soap.c  			if (fn != NULL) {</span>
+<span class='curline'><a href='../S/1031.html#L2710'>fn</a>               2710 ext/soap/soap.c 				sdlBindingPtr binding = fn-&gt;binding;</span>
+<span class='curline'><a href='../S/1031.html#L2713'>fn</a>               2713 ext/soap/soap.c 				if (fn-&gt;responseName == NULL &amp;&amp;</span>
+<span class='curline'><a href='../S/1031.html#L2714'>fn</a>               2714 ext/soap/soap.c 				    fn-&gt;responseParameters == NULL &amp;&amp;</span>
+<span class='curline'><a href='../S/1031.html#L2723'>fn</a>               2723 ext/soap/soap.c 					sdlSoapBindingFunctionPtr fnb = (sdlSoapBindingFunctionPtr)fn-&gt;bindingAttributes;</span>
+<span class='curline'><a href='../S/1031.html#L2724'>fn</a>               2724 ext/soap/soap.c  					request = serialize_function_call(this_ptr, fn, NULL, fnb-&gt;input.ns, real_args, arg_count, soap_version, soap_headers TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1031.html#L2727'>fn</a>               2727 ext/soap/soap.c 	 				request = serialize_function_call(this_ptr, fn, NULL, sdl-&gt;target_ns, real_args, arg_count, soap_version, soap_headers TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1031.html#L2735'>fn</a>               2735 ext/soap/soap.c 					ret = parse_packet_soap(this_ptr, Z_STRVAL(response), Z_STRLEN(response), fn, NULL, return_value, output_headers TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1182.html#L593'>fn</a>                593 ext/standard/scanf.c 	long (*fn)() = NULL;</span>
+<span class='curline'><a href='../S/1182.html#L765'>fn</a>                765 ext/standard/scanf.c 				fn = (long (*)())strtol;</span>
+<span class='curline'><a href='../S/1182.html#L770'>fn</a>                770 ext/standard/scanf.c 				fn = (long (*)())strtol;</span>
+<span class='curline'><a href='../S/1182.html#L775'>fn</a>                775 ext/standard/scanf.c 				fn = (long (*)())strtol;</span>
+<span class='curline'><a href='../S/1182.html#L781'>fn</a>                781 ext/standard/scanf.c 				fn = (long (*)())strtol;</span>
+<span class='curline'><a href='../S/1182.html#L787'>fn</a>                787 ext/standard/scanf.c 				fn = (long (*)())strtoul;</span>
+<span class='curline'><a href='../S/1182.html#L1063'>fn</a>               1063 ext/standard/scanf.c 					value = (long) (*fn)(buf, NULL, base);</span>
+<span class='curline'><a href='../S/1310.html#L57'>fn</a>                 57 ext/zip/lib/zip_name_locate.c     const char *fn, *p;</span>
+<span class='curline'><a href='../S/1310.html#L71'>fn</a>                 71 ext/zip/lib/zip_name_locate.c 	fn = _zip_get_name(za, i, flags, error);</span>
+<span class='curline'><a href='../S/1310.html#L74'>fn</a>                 74 ext/zip/lib/zip_name_locate.c 	if (fn == NULL)</span>
+<span class='curline'><a href='../S/1310.html#L78'>fn</a>                 78 ext/zip/lib/zip_name_locate.c 	    p = strrchr(fn, '/');</span>
+<span class='curline'><a href='../S/1310.html#L80'>fn</a>                 80 ext/zip/lib/zip_name_locate.c 		fn = p+1;</span>
+<span class='curline'><a href='../S/1310.html#L83'>fn</a>                 83 ext/zip/lib/zip_name_locate.c 	if (cmp(fname, fn) == 0) {</span>
+<span class='curline'><a href='../S/1312.html#L64'>fn</a>                 64 ext/zip/lib/zip_open.c zip_open(const char *fn, int _flags, int *zep)</span>
+<span class='curline'><a href='../S/1312.html#L76'>fn</a>                 76 ext/zip/lib/zip_open.c     switch (_zip_file_exists(fn, flags, zep)) {</span>
+<span class='curline'><a href='../S/1312.html#L80'>fn</a>                 80 ext/zip/lib/zip_open.c 	return _zip_allocate_new(fn, flags, zep);</span>
+<span class='curline'><a href='../S/1312.html#L85'>fn</a>                 85 ext/zip/lib/zip_open.c 	    if ((f = fopen(fn, "rb")) == NULL) {</span>
+<span class='curline'><a href='../S/1312.html#L90'>fn</a>                 90 ext/zip/lib/zip_open.c 	    return _zip_allocate_new(fn, flags, zep);</span>
+<span class='curline'><a href='../S/1312.html#L95'>fn</a>                 95 ext/zip/lib/zip_open.c     if ((fp=fopen(fn, "rb")) == NULL) {</span>
+<span class='curline'><a href='../S/1312.html#L100'>fn</a>                100 ext/zip/lib/zip_open.c     return _zip_open(fn, fp, flags, zep);</span>
+<span class='curline'><a href='../S/1312.html#L126'>fn</a>                126 ext/zip/lib/zip_open.c _zip_open(const char *fn, FILE *fp, unsigned int flags, int *zep)</span>
+<span class='curline'><a href='../S/1312.html#L140'>fn</a>                140 ext/zip/lib/zip_open.c 	if ((za=_zip_allocate_new(fn, flags, zep)) == NULL)</span>
+<span class='curline'><a href='../S/1312.html#L153'>fn</a>                153 ext/zip/lib/zip_open.c     if ((za=_zip_allocate_new(fn, flags, zep)) == NULL) {</span>
+<span class='curline'><a href='../S/1312.html#L434'>fn</a>                434 ext/zip/lib/zip_open.c _zip_allocate_new(const char *fn, unsigned int flags, int *zep)</span>
+<span class='curline'><a href='../S/1312.html#L444'>fn</a>                444 ext/zip/lib/zip_open.c     if (fn == NULL)</span>
+<span class='curline'><a href='../S/1312.html#L447'>fn</a>                447 ext/zip/lib/zip_open.c 	za-&gt;zn = strdup(fn);</span>
+<span class='curline'><a href='../S/1312.html#L461'>fn</a>                461 ext/zip/lib/zip_open.c _zip_file_exists(const char *fn, unsigned int flags, int *zep)</span>
+<span class='curline'><a href='../S/1312.html#L465'>fn</a>                465 ext/zip/lib/zip_open.c     if (fn == NULL) {</span>
+<span class='curline'><a href='../S/1312.html#L470'>fn</a>                470 ext/zip/lib/zip_open.c     if (stat(fn, &amp;st) != 0) {</span>
+<span class='curline'><a href='../S/1539.html#L1981'>fn</a>               1981 sapi/litespeed/lsapilib.c             LSAPI_CB_EnvHandler fn, void * arg )</span>
+<span class='curline'><a href='../S/1539.html#L1990'>fn</a>               1990 sapi/litespeed/lsapilib.c     if ( !pReq || !fn )</span>
+<span class='curline'><a href='../S/1539.html#L2047'>fn</a>               2047 sapi/litespeed/lsapilib.c         ret = (*fn)( headers[i]._name, headers[i]._nameLen, </span>
+<span class='curline'><a href='../S/1539.html#L2058'>fn</a>               2058 sapi/litespeed/lsapilib.c             LSAPI_CB_EnvHandler fn, void * arg )</span>
+<span class='curline'><a href='../S/1539.html#L2065'>fn</a>               2065 sapi/litespeed/lsapilib.c     if ( !pReq || !fn )</span>
+<span class='curline'><a href='../S/1539.html#L2074'>fn</a>               2074 sapi/litespeed/lsapilib.c             ret = (*fn)( CGI_HEADERS[i], CGI_HEADER_LEN[i],</span>
+<span class='curline'><a href='../S/1539.html#L2114'>fn</a>               2114 sapi/litespeed/lsapilib.c             ret = (*fn)( achHeaderName, keyLen, </span>
+<span class='curline'><a href='../S/1539.html#L2126'>fn</a>               2126 sapi/litespeed/lsapilib.c             int n, LSAPI_CB_EnvHandler fn, void * arg )</span>
+<span class='curline'><a href='../S/1539.html#L2130'>fn</a>               2130 sapi/litespeed/lsapilib.c     if ( !pEnv || !fn )</span>
+<span class='curline'><a href='../S/1539.html#L2134'>fn</a>               2134 sapi/litespeed/lsapilib.c         ret = (*fn)( pEnv-&gt;pKey, pEnv-&gt;keyLen,</span>
+<span class='curline'><a href='../S/1539.html#L2146'>fn</a>               2146 sapi/litespeed/lsapilib.c             LSAPI_CB_EnvHandler fn, void * arg )</span>
+<span class='curline'><a href='../S/1539.html#L2148'>fn</a>               2148 sapi/litespeed/lsapilib.c     if ( !pReq || !fn )</span>
+<span class='curline'><a href='../S/1539.html#L2153'>fn</a>               2153 sapi/litespeed/lsapilib.c                     fn, arg );</span>
+<span class='curline'><a href='../S/1539.html#L2161'>fn</a>               2161 sapi/litespeed/lsapilib.c             LSAPI_CB_EnvHandler fn, void * arg )</span>
+<span class='curline'><a href='../S/1539.html#L2163'>fn</a>               2163 sapi/litespeed/lsapilib.c     if ( !pReq || !fn )</span>
+<span class='curline'><a href='../S/1539.html#L2169'>fn</a>               2169 sapi/litespeed/lsapilib.c                     fn, arg );</span>
+<span class='curline'><a href='../S/1540.html#L159'>fn</a>                159 sapi/litespeed/lsapilib.h             LSAPI_CB_EnvHandler fn, void * arg );</span>
+<span class='curline'><a href='../S/1540.html#L162'>fn</a>                162 sapi/litespeed/lsapilib.h             LSAPI_CB_EnvHandler fn, void * arg );</span>
+<span class='curline'><a href='../S/1540.html#L165'>fn</a>                165 sapi/litespeed/lsapilib.h             LSAPI_CB_EnvHandler fn, void * arg );</span>
+<span class='curline'><a href='../S/1540.html#L168'>fn</a>                168 sapi/litespeed/lsapilib.h             LSAPI_CB_EnvHandler fn, void * arg );</span>
+<span class='curline'><a href='../S/1540.html#L281'>fn</a>                281 sapi/litespeed/lsapilib.h static inline int LSAPI_ForeachHeader( LSAPI_CB_EnvHandler fn, void * arg )</span>
+<span class='curline'><a href='../S/1540.html#L282'>fn</a>                282 sapi/litespeed/lsapilib.h {   return LSAPI_ForeachHeader_r( &amp;g_req, fn, arg );        }</span>
+<span class='curline'><a href='../S/1540.html#L285'>fn</a>                285 sapi/litespeed/lsapilib.h             LSAPI_CB_EnvHandler fn, void * arg )</span>
+<span class='curline'><a href='../S/1540.html#L286'>fn</a>                286 sapi/litespeed/lsapilib.h {   return LSAPI_ForeachOrgHeader_r( &amp;g_req, fn, arg );     }</span>
+<span class='curline'><a href='../S/1540.html#L288'>fn</a>                288 sapi/litespeed/lsapilib.h static inline int LSAPI_ForeachEnv( LSAPI_CB_EnvHandler fn, void * arg )</span>
+<span class='curline'><a href='../S/1540.html#L289'>fn</a>                289 sapi/litespeed/lsapilib.h {   return LSAPI_ForeachEnv_r( &amp;g_req, fn, arg );           }</span>
+<span class='curline'><a href='../S/1540.html#L291'>fn</a>                291 sapi/litespeed/lsapilib.h static inline int LSAPI_ForeachSpecialEnv( LSAPI_CB_EnvHandler fn, void * arg )</span>
+<span class='curline'><a href='../S/1540.html#L292'>fn</a>                292 sapi/litespeed/lsapilib.h {   return LSAPI_ForeachSpecialEnv_r( &amp;g_req, fn, arg );    }</span>
+<span class='curline'><a href='../S/1610.html#L859'>fn</a>                859 win32/glob.c   g_lstat(fn, sb, pglob)</span>
+<span class='curline'><a href='../S/1610.html#L860'>fn</a>                860 win32/glob.c   	register Char *fn;</span>
+<span class='curline'><a href='../S/1610.html#L866'>fn</a>                866 win32/glob.c   	if (g_Ctoc(fn, buf, sizeof(buf)))</span>
+<span class='curline'><a href='../S/1610.html#L874'>fn</a>                874 win32/glob.c   g_stat(fn, sb, pglob)</span>
+<span class='curline'><a href='../S/1610.html#L875'>fn</a>                875 win32/glob.c   	register Char *fn;</span>
+<span class='curline'><a href='../S/1610.html#L881'>fn</a>                881 win32/glob.c   	if (g_Ctoc(fn, buf, sizeof(buf)))</span>
+</pre>
+</body>
+</html>

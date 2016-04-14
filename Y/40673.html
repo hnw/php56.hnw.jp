@@ -1,0 +1,588 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>varname</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/1655.html#L661'>varname</a>           661 Zend/zend_compile.c void fetch_simple_variable_ex(znode *result, znode *varname, int bp, zend_uchar op TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1655.html#L667'>varname</a>           667 Zend/zend_compile.c 	if (varname-&gt;op_type == IS_CONST) {</span>
+<span class='curline'><a href='../S/1655.html#L670'>varname</a>           670 Zend/zend_compile.c 		if (Z_TYPE(varname-&gt;u.constant) != IS_STRING) {</span>
+<span class='curline'><a href='../S/1655.html#L671'>varname</a>           671 Zend/zend_compile.c 			convert_to_string(&amp;varname-&gt;u.constant);</span>
+<span class='curline'><a href='../S/1655.html#L674'>varname</a>           674 Zend/zend_compile.c 		hash = str_hash(Z_STRVAL(varname-&gt;u.constant), Z_STRLEN(varname-&gt;u.constant));</span>
+<span class='curline'><a href='../S/1655.html#L675'>varname</a>           675 Zend/zend_compile.c 		if (!zend_is_auto_global_quick(Z_STRVAL(varname-&gt;u.constant), Z_STRLEN(varname-&gt;u.constant), hash TSRMLS_CC) &amp;&amp;</span>
+<span class='curline'><a href='../S/1655.html#L676'>varname</a>           676 Zend/zend_compile.c 		    !(Z_STRLEN(varname-&gt;u.constant) == (sizeof("this")-1) &amp;&amp;</span>
+<span class='curline'><a href='../S/1655.html#L677'>varname</a>           677 Zend/zend_compile.c 		      !memcmp(Z_STRVAL(varname-&gt;u.constant), "this", sizeof("this") - 1)) &amp;&amp;</span>
+<span class='curline'><a href='../S/1655.html#L681'>varname</a>           681 Zend/zend_compile.c 			result-&gt;u.op.var = lookup_cv(CG(active_op_array), Z_STRVAL(varname-&gt;u.constant), Z_STRLEN(varname-&gt;u.constant), hash TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1655.html#L682'>varname</a>           682 Zend/zend_compile.c 			Z_STRVAL(varname-&gt;u.constant) = (char*)CG(active_op_array)-&gt;vars[result-&gt;u.op.var].name;</span>
+<span class='curline'><a href='../S/1655.html#L698'>varname</a>           698 Zend/zend_compile.c 	SET_NODE(opline_ptr-&gt;op1, varname);</span>
+<span class='curline'><a href='../S/1655.html#L703'>varname</a>           703 Zend/zend_compile.c 	if (varname-&gt;op_type == IS_CONST) {</span>
+<span class='curline'><a href='../S/1655.html#L705'>varname</a>           705 Zend/zend_compile.c 		if (zend_is_auto_global_quick(Z_STRVAL(varname-&gt;u.constant), Z_STRLEN(varname-&gt;u.constant), Z_HASH_P(&amp;CONSTANT(opline_ptr-&gt;op1.constant)) TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/1655.html#L717'>varname</a>           717 Zend/zend_compile.c void fetch_simple_variable(znode *result, znode *varname, int bp TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1655.html#L720'>varname</a>           720 Zend/zend_compile.c 	fetch_simple_variable_ex(result, varname, bp, ZEND_FETCH_W TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1655.html#L803'>varname</a>           803 Zend/zend_compile.c void fetch_array_begin(znode *result, znode *varname, znode *first_dim TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1655.html#L805'>varname</a>           805 Zend/zend_compile.c 	fetch_simple_variable(result, varname, 1 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1655.html#L1865'>varname</a>          1865 Zend/zend_compile.c void zend_do_receive_param(zend_uchar op, znode *varname, const znode *initialization, znode *class_type, zend_uchar pass_by_reference, zend_bool is_variadic TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1655.html#L1871'>varname</a>          1871 Zend/zend_compile.c 	if (zend_is_auto_global(Z_STRVAL(varname-&gt;u.constant), Z_STRLEN(varname-&gt;u.constant) TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/1655.html#L1872'>varname</a>          1872 Zend/zend_compile.c 		zend_error_noreturn(E_COMPILE_ERROR, "Cannot re-assign auto-global variable %s", Z_STRVAL(varname-&gt;u.constant));</span>
+<span class='curline'><a href='../S/1655.html#L1875'>varname</a>          1875 Zend/zend_compile.c 		var.u.op.var = lookup_cv(CG(active_op_array), Z_STRVAL(varname-&gt;u.constant), Z_STRLEN(varname-&gt;u.constant), 0 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1655.html#L1876'>varname</a>          1876 Zend/zend_compile.c 		Z_STRVAL(varname-&gt;u.constant) = (char*)CG(active_op_array)-&gt;vars[var.u.op.var].name;</span>
+<span class='curline'><a href='../S/1655.html#L1879'>varname</a>          1879 Zend/zend_compile.c 			Z_STRLEN(varname-&gt;u.constant) == sizeof("this")-1 &amp;&amp;</span>
+<span class='curline'><a href='../S/1655.html#L1880'>varname</a>          1880 Zend/zend_compile.c 		    !memcmp(Z_STRVAL(varname-&gt;u.constant), "this", sizeof("this")-1)) {</span>
+<span class='curline'><a href='../S/1655.html#L1918'>varname</a>          1918 Zend/zend_compile.c 	cur_arg_info-&gt;name = zend_new_interned_string(estrndup(Z_STRVAL(varname-&gt;u.constant), Z_STRLEN(varname-&gt;u.constant)), Z_STRLEN(varname-&gt;u.constant) + 1, 1 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1655.html#L1919'>varname</a>          1919 Zend/zend_compile.c 	cur_arg_info-&gt;name_len = Z_STRLEN(varname-&gt;u.constant);</span>
+<span class='curline'><a href='../S/1655.html#L6091'>varname</a>          6091 Zend/zend_compile.c void zend_do_fetch_static_variable(znode *varname, const znode *static_assignment, int fetch_type TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1655.html#L6112'>varname</a>          6112 Zend/zend_compile.c 	zend_hash_update(CG(active_op_array)-&gt;static_variables, Z_STRVAL(varname-&gt;u.constant), Z_STRLEN(varname-&gt;u.constant)+1, &amp;tmp, sizeof(zval *), NULL);</span>
+<span class='curline'><a href='../S/1655.html#L6114'>varname</a>          6114 Zend/zend_compile.c 	if (varname-&gt;op_type == IS_CONST) {</span>
+<span class='curline'><a href='../S/1655.html#L6115'>varname</a>          6115 Zend/zend_compile.c 		if (Z_TYPE(varname-&gt;u.constant) != IS_STRING) {</span>
+<span class='curline'><a href='../S/1655.html#L6116'>varname</a>          6116 Zend/zend_compile.c 			convert_to_string(&amp;varname-&gt;u.constant);</span>
+<span class='curline'><a href='../S/1655.html#L6124'>varname</a>          6124 Zend/zend_compile.c 	SET_NODE(opline-&gt;op1, varname);</span>
+<span class='curline'><a href='../S/1655.html#L6132'>varname</a>          6132 Zend/zend_compile.c 	if (varname-&gt;op_type == IS_CONST) {</span>
+<span class='curline'><a href='../S/1655.html#L6133'>varname</a>          6133 Zend/zend_compile.c 		zval_copy_ctor(&amp;varname-&gt;u.constant);</span>
+<span class='curline'><a href='../S/1655.html#L6135'>varname</a>          6135 Zend/zend_compile.c 	fetch_simple_variable(&amp;lval, varname, 0 TSRMLS_CC); /* Relies on the fact that the default fetch is BP_VAR_W */</span>
+<span class='curline'><a href='../S/1655.html#L6150'>varname</a>          6150 Zend/zend_compile.c void zend_do_fetch_lexical_variable(znode *varname, zend_bool is_ref TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1655.html#L6154'>varname</a>          6154 Zend/zend_compile.c 	if (Z_STRLEN(varname-&gt;u.constant) == sizeof("this") - 1 &amp;&amp;</span>
+<span class='curline'><a href='../S/1655.html#L6155'>varname</a>          6155 Zend/zend_compile.c 	    memcmp(Z_STRVAL(varname-&gt;u.constant), "this", sizeof("this") - 1) == 0) {</span>
+<span class='curline'><a href='../S/1655.html#L6166'>varname</a>          6166 Zend/zend_compile.c 	zend_do_fetch_static_variable(varname, &amp;value, is_ref ? ZEND_FETCH_STATIC : ZEND_FETCH_LEXICAL TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1655.html#L6170'>varname</a>          6170 Zend/zend_compile.c void zend_do_fetch_global_variable(znode *varname, const znode *static_assignment, int fetch_type TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1655.html#L6176'>varname</a>          6176 Zend/zend_compile.c 	if (varname-&gt;op_type == IS_CONST) {</span>
+<span class='curline'><a href='../S/1655.html#L6177'>varname</a>          6177 Zend/zend_compile.c 		if (Z_TYPE(varname-&gt;u.constant) != IS_STRING) {</span>
+<span class='curline'><a href='../S/1655.html#L6178'>varname</a>          6178 Zend/zend_compile.c 			convert_to_string(&amp;varname-&gt;u.constant);</span>
+<span class='curline'><a href='../S/1655.html#L6186'>varname</a>          6186 Zend/zend_compile.c 	SET_NODE(opline-&gt;op1, varname);</span>
+<span class='curline'><a href='../S/1655.html#L6194'>varname</a>          6194 Zend/zend_compile.c 	if (varname-&gt;op_type == IS_CONST) {</span>
+<span class='curline'><a href='../S/1655.html#L6195'>varname</a>          6195 Zend/zend_compile.c 		zval_copy_ctor(&amp;varname-&gt;u.constant);</span>
+<span class='curline'><a href='../S/1655.html#L6197'>varname</a>          6197 Zend/zend_compile.c 	fetch_simple_variable(&amp;lval, varname, 0 TSRMLS_CC); /* Relies on the fact that the default fetch is BP_VAR_W */</span>
+<span class='curline'><a href='../S/1656.html#L471'>varname</a>           471 Zend/zend_compile.h void fetch_simple_variable(znode *result, znode *varname, int bp TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1656.html#L472'>varname</a>           472 Zend/zend_compile.h void fetch_simple_variable_ex(znode *result, znode *varname, int bp, zend_uchar op TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1656.html#L474'>varname</a>           474 Zend/zend_compile.h void zend_do_fetch_static_variable(znode *varname, const znode *static_assignment, int fetch_type TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1656.html#L475'>varname</a>           475 Zend/zend_compile.h void zend_do_fetch_global_variable(znode *varname, const znode *static_assignment, int fetch_type TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1656.html#L477'>varname</a>           477 Zend/zend_compile.h void fetch_array_begin(znode *result, znode *varname, znode *first_dim TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1656.html#L518'>varname</a>           518 Zend/zend_compile.h void zend_do_receive_param(zend_uchar op, znode *varname, const znode *initialization, znode *class_type, zend_bool pass_by_reference, zend_bool is_variadic TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1656.html#L532'>varname</a>           532 Zend/zend_compile.h void zend_do_fetch_lexical_variable(znode *varname, zend_bool is_ref TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1747.html#L1008'>varname</a>          1008 Zend/zend_vm_def.h 	zval *varname;</span>
+<span class='curline'><a href='../S/1747.html#L1015'>varname</a>          1015 Zend/zend_vm_def.h 	varname = GET_OP1_ZVAL_PTR(BP_VAR_R);</span>
+<span class='curline'><a href='../S/1747.html#L1017'>varname</a>          1017 Zend/zend_vm_def.h  	if (OP1_TYPE != IS_CONST &amp;&amp; UNEXPECTED(Z_TYPE_P(varname) != IS_STRING)) {</span>
+<span class='curline'><a href='../S/1747.html#L1018'>varname</a>          1018 Zend/zend_vm_def.h 		ZVAL_COPY_VALUE(&amp;tmp_varname, varname);</span>
+<span class='curline'><a href='../S/1747.html#L1023'>varname</a>          1023 Zend/zend_vm_def.h 		varname = &amp;tmp_varname;</span>
+<span class='curline'><a href='../S/1747.html#L1035'>varname</a>          1035 Zend/zend_vm_def.h 					if (OP1_TYPE != IS_CONST &amp;&amp; varname == &amp;tmp_varname) {</span>
+<span class='curline'><a href='../S/1747.html#L1047'>varname</a>          1047 Zend/zend_vm_def.h 		retval = zend_std_get_static_property(ce, Z_STRVAL_P(varname), Z_STRLEN_P(varname), 0, ((OP1_TYPE == IS_CONST) ? opline-&gt;op1.literal : NULL) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1747.html#L1058'>varname</a>          1058 Zend/zend_vm_def.h 			hash_value = Z_HASH_P(varname);</span>
+<span class='curline'><a href='../S/1747.html#L1060'>varname</a>          1060 Zend/zend_vm_def.h 			hash_value = str_hash(Z_STRVAL_P(varname), Z_STRLEN_P(varname));	</span>
+<span class='curline'><a href='../S/1747.html#L1063'>varname</a>          1063 Zend/zend_vm_def.h 		if (zend_hash_quick_find(target_symbol_table, Z_STRVAL_P(varname), Z_STRLEN_P(varname)+1, hash_value, (void **) &amp;retval) == FAILURE) {</span>
+<span class='curline'><a href='../S/1747.html#L1067'>varname</a>          1067 Zend/zend_vm_def.h 					zend_error(E_NOTICE,"Undefined variable: %s", Z_STRVAL_P(varname));</span>
+<span class='curline'><a href='../S/1747.html#L1073'>varname</a>          1073 Zend/zend_vm_def.h 					zend_error(E_NOTICE,"Undefined variable: %s", Z_STRVAL_P(varname));</span>
+<span class='curline'><a href='../S/1747.html#L1077'>varname</a>          1077 Zend/zend_vm_def.h 					zend_hash_quick_update(target_symbol_table, Z_STRVAL_P(varname), Z_STRLEN_P(varname)+1, hash_value, &amp;EG(uninitialized_zval_ptr), sizeof(zval *), (void **) &amp;retval);</span>
+<span class='curline'><a href='../S/1747.html#L1103'>varname</a>          1103 Zend/zend_vm_def.h 	if (OP1_TYPE != IS_CONST &amp;&amp; varname == &amp;tmp_varname) {</span>
+<span class='curline'><a href='../S/1747.html#L4080'>varname</a>          4080 Zend/zend_vm_def.h 	zval tmp, *varname;</span>
+<span class='curline'><a href='../S/1747.html#L4101'>varname</a>          4101 Zend/zend_vm_def.h 	varname = GET_OP1_ZVAL_PTR(BP_VAR_R);</span>
+<span class='curline'><a href='../S/1747.html#L4103'>varname</a>          4103 Zend/zend_vm_def.h 	if (OP1_TYPE != IS_CONST &amp;&amp; Z_TYPE_P(varname) != IS_STRING) {</span>
+<span class='curline'><a href='../S/1747.html#L4104'>varname</a>          4104 Zend/zend_vm_def.h 		ZVAL_COPY_VALUE(&amp;tmp, varname);</span>
+<span class='curline'><a href='../S/1747.html#L4107'>varname</a>          4107 Zend/zend_vm_def.h 		varname = &amp;tmp;</span>
+<span class='curline'><a href='../S/1747.html#L4109'>varname</a>          4109 Zend/zend_vm_def.h 		Z_ADDREF_P(varname);</span>
+<span class='curline'><a href='../S/1747.html#L4121'>varname</a>          4121 Zend/zend_vm_def.h 					if (OP1_TYPE != IS_CONST &amp;&amp; varname == &amp;tmp) {</span>
+<span class='curline'><a href='../S/1747.html#L4124'>varname</a>          4124 Zend/zend_vm_def.h 						zval_ptr_dtor(&amp;varname);</span>
+<span class='curline'><a href='../S/1747.html#L4137'>varname</a>          4137 Zend/zend_vm_def.h 		zend_std_unset_static_property(ce, Z_STRVAL_P(varname), Z_STRLEN_P(varname), ((OP1_TYPE == IS_CONST) ? opline-&gt;op1.literal : NULL) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1747.html#L4139'>varname</a>          4139 Zend/zend_vm_def.h 		ulong hash_value = zend_inline_hash_func(varname-&gt;value.str.val, varname-&gt;value.str.len+1);</span>
+<span class='curline'><a href='../S/1747.html#L4142'>varname</a>          4142 Zend/zend_vm_def.h 		zend_delete_variable(execute_data, target_symbol_table, varname-&gt;value.str.val, varname-&gt;value.str.len+1, hash_value TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1747.html#L4145'>varname</a>          4145 Zend/zend_vm_def.h 	if (OP1_TYPE != IS_CONST &amp;&amp; varname == &amp;tmp) {</span>
+<span class='curline'><a href='../S/1747.html#L4148'>varname</a>          4148 Zend/zend_vm_def.h 		zval_ptr_dtor(&amp;varname);</span>
+<span class='curline'><a href='../S/1747.html#L4609'>varname</a>          4609 Zend/zend_vm_def.h 		zval tmp, *varname = GET_OP1_ZVAL_PTR(BP_VAR_IS);</span>
+<span class='curline'><a href='../S/1747.html#L4611'>varname</a>          4611 Zend/zend_vm_def.h 		if (OP1_TYPE != IS_CONST &amp;&amp; Z_TYPE_P(varname) != IS_STRING) {</span>
+<span class='curline'><a href='../S/1747.html#L4612'>varname</a>          4612 Zend/zend_vm_def.h 			ZVAL_COPY_VALUE(&amp;tmp, varname);</span>
+<span class='curline'><a href='../S/1747.html#L4615'>varname</a>          4615 Zend/zend_vm_def.h 			varname = &amp;tmp;</span>
+<span class='curline'><a href='../S/1747.html#L4635'>varname</a>          4635 Zend/zend_vm_def.h 			value = zend_std_get_static_property(ce, Z_STRVAL_P(varname), Z_STRLEN_P(varname), 1, ((OP1_TYPE == IS_CONST) ? opline-&gt;op1.literal : NULL) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1747.html#L4641'>varname</a>          4641 Zend/zend_vm_def.h 			if (zend_hash_find(target_symbol_table, varname-&gt;value.str.val, varname-&gt;value.str.len+1, (void **) &amp;value) == FAILURE) {</span>
+<span class='curline'><a href='../S/1747.html#L4646'>varname</a>          4646 Zend/zend_vm_def.h 		if (OP1_TYPE != IS_CONST &amp;&amp; varname == &amp;tmp) {</span>
+<span class='curline'><a href='../S/1748.html#L3620'>varname</a>          3620 Zend/zend_vm_execute.h 	zval *varname;</span>
+<span class='curline'><a href='../S/1748.html#L3627'>varname</a>          3627 Zend/zend_vm_execute.h 	varname = opline-&gt;op1.zv;</span>
+<span class='curline'><a href='../S/1748.html#L3629'>varname</a>          3629 Zend/zend_vm_execute.h  	if (IS_CONST != IS_CONST &amp;&amp; UNEXPECTED(Z_TYPE_P(varname) != IS_STRING)) {</span>
+<span class='curline'><a href='../S/1748.html#L3630'>varname</a>          3630 Zend/zend_vm_execute.h 		ZVAL_COPY_VALUE(&amp;tmp_varname, varname);</span>
+<span class='curline'><a href='../S/1748.html#L3635'>varname</a>          3635 Zend/zend_vm_execute.h 		varname = &amp;tmp_varname;</span>
+<span class='curline'><a href='../S/1748.html#L3647'>varname</a>          3647 Zend/zend_vm_execute.h 					if (IS_CONST != IS_CONST &amp;&amp; varname == &amp;tmp_varname) {</span>
+<span class='curline'><a href='../S/1748.html#L3659'>varname</a>          3659 Zend/zend_vm_execute.h 		retval = zend_std_get_static_property(ce, Z_STRVAL_P(varname), Z_STRLEN_P(varname), 0, ((IS_CONST == IS_CONST) ? opline-&gt;op1.literal : NULL) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L3670'>varname</a>          3670 Zend/zend_vm_execute.h 			hash_value = Z_HASH_P(varname);</span>
+<span class='curline'><a href='../S/1748.html#L3672'>varname</a>          3672 Zend/zend_vm_execute.h 			hash_value = str_hash(Z_STRVAL_P(varname), Z_STRLEN_P(varname));</span>
+<span class='curline'><a href='../S/1748.html#L3675'>varname</a>          3675 Zend/zend_vm_execute.h 		if (zend_hash_quick_find(target_symbol_table, Z_STRVAL_P(varname), Z_STRLEN_P(varname)+1, hash_value, (void **) &amp;retval) == FAILURE) {</span>
+<span class='curline'><a href='../S/1748.html#L3679'>varname</a>          3679 Zend/zend_vm_execute.h 					zend_error(E_NOTICE,"Undefined variable: %s", Z_STRVAL_P(varname));</span>
+<span class='curline'><a href='../S/1748.html#L3685'>varname</a>          3685 Zend/zend_vm_execute.h 					zend_error(E_NOTICE,"Undefined variable: %s", Z_STRVAL_P(varname));</span>
+<span class='curline'><a href='../S/1748.html#L3689'>varname</a>          3689 Zend/zend_vm_execute.h 					zend_hash_quick_update(target_symbol_table, Z_STRVAL_P(varname), Z_STRLEN_P(varname)+1, hash_value, &amp;EG(uninitialized_zval_ptr), sizeof(zval *), (void **) &amp;retval);</span>
+<span class='curline'><a href='../S/1748.html#L3715'>varname</a>          3715 Zend/zend_vm_execute.h 	if (IS_CONST != IS_CONST &amp;&amp; varname == &amp;tmp_varname) {</span>
+<span class='curline'><a href='../S/1748.html#L4148'>varname</a>          4148 Zend/zend_vm_execute.h 	zval tmp, *varname;</span>
+<span class='curline'><a href='../S/1748.html#L4169'>varname</a>          4169 Zend/zend_vm_execute.h 	varname = opline-&gt;op1.zv;</span>
+<span class='curline'><a href='../S/1748.html#L4171'>varname</a>          4171 Zend/zend_vm_execute.h 	if (IS_CONST != IS_CONST &amp;&amp; Z_TYPE_P(varname) != IS_STRING) {</span>
+<span class='curline'><a href='../S/1748.html#L4172'>varname</a>          4172 Zend/zend_vm_execute.h 		ZVAL_COPY_VALUE(&amp;tmp, varname);</span>
+<span class='curline'><a href='../S/1748.html#L4175'>varname</a>          4175 Zend/zend_vm_execute.h 		varname = &amp;tmp;</span>
+<span class='curline'><a href='../S/1748.html#L4177'>varname</a>          4177 Zend/zend_vm_execute.h 		Z_ADDREF_P(varname);</span>
+<span class='curline'><a href='../S/1748.html#L4189'>varname</a>          4189 Zend/zend_vm_execute.h 					if (IS_CONST != IS_CONST &amp;&amp; varname == &amp;tmp) {</span>
+<span class='curline'><a href='../S/1748.html#L4192'>varname</a>          4192 Zend/zend_vm_execute.h 						zval_ptr_dtor(&amp;varname);</span>
+<span class='curline'><a href='../S/1748.html#L4205'>varname</a>          4205 Zend/zend_vm_execute.h 		zend_std_unset_static_property(ce, Z_STRVAL_P(varname), Z_STRLEN_P(varname), ((IS_CONST == IS_CONST) ? opline-&gt;op1.literal : NULL) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L4207'>varname</a>          4207 Zend/zend_vm_execute.h 		ulong hash_value = zend_inline_hash_func(varname-&gt;value.str.val, varname-&gt;value.str.len+1);</span>
+<span class='curline'><a href='../S/1748.html#L4210'>varname</a>          4210 Zend/zend_vm_execute.h 		zend_delete_variable(execute_data, target_symbol_table, varname-&gt;value.str.val, varname-&gt;value.str.len+1, hash_value TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L4213'>varname</a>          4213 Zend/zend_vm_execute.h 	if (IS_CONST != IS_CONST &amp;&amp; varname == &amp;tmp) {</span>
+<span class='curline'><a href='../S/1748.html#L4216'>varname</a>          4216 Zend/zend_vm_execute.h 		zval_ptr_dtor(&amp;varname);</span>
+<span class='curline'><a href='../S/1748.html#L4247'>varname</a>          4247 Zend/zend_vm_execute.h 		zval tmp, *varname = opline-&gt;op1.zv;</span>
+<span class='curline'><a href='../S/1748.html#L4249'>varname</a>          4249 Zend/zend_vm_execute.h 		if (IS_CONST != IS_CONST &amp;&amp; Z_TYPE_P(varname) != IS_STRING) {</span>
+<span class='curline'><a href='../S/1748.html#L4250'>varname</a>          4250 Zend/zend_vm_execute.h 			ZVAL_COPY_VALUE(&amp;tmp, varname);</span>
+<span class='curline'><a href='../S/1748.html#L4253'>varname</a>          4253 Zend/zend_vm_execute.h 			varname = &amp;tmp;</span>
+<span class='curline'><a href='../S/1748.html#L4273'>varname</a>          4273 Zend/zend_vm_execute.h 			value = zend_std_get_static_property(ce, Z_STRVAL_P(varname), Z_STRLEN_P(varname), 1, ((IS_CONST == IS_CONST) ? opline-&gt;op1.literal : NULL) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L4279'>varname</a>          4279 Zend/zend_vm_execute.h 			if (zend_hash_find(target_symbol_table, varname-&gt;value.str.val, varname-&gt;value.str.len+1, (void **) &amp;value) == FAILURE) {</span>
+<span class='curline'><a href='../S/1748.html#L4284'>varname</a>          4284 Zend/zend_vm_execute.h 		if (IS_CONST != IS_CONST &amp;&amp; varname == &amp;tmp) {</span>
+<span class='curline'><a href='../S/1748.html#L5510'>varname</a>          5510 Zend/zend_vm_execute.h 	zval *varname;</span>
+<span class='curline'><a href='../S/1748.html#L5517'>varname</a>          5517 Zend/zend_vm_execute.h 	varname = opline-&gt;op1.zv;</span>
+<span class='curline'><a href='../S/1748.html#L5519'>varname</a>          5519 Zend/zend_vm_execute.h  	if (IS_CONST != IS_CONST &amp;&amp; UNEXPECTED(Z_TYPE_P(varname) != IS_STRING)) {</span>
+<span class='curline'><a href='../S/1748.html#L5520'>varname</a>          5520 Zend/zend_vm_execute.h 		ZVAL_COPY_VALUE(&amp;tmp_varname, varname);</span>
+<span class='curline'><a href='../S/1748.html#L5525'>varname</a>          5525 Zend/zend_vm_execute.h 		varname = &amp;tmp_varname;</span>
+<span class='curline'><a href='../S/1748.html#L5537'>varname</a>          5537 Zend/zend_vm_execute.h 					if (IS_CONST != IS_CONST &amp;&amp; varname == &amp;tmp_varname) {</span>
+<span class='curline'><a href='../S/1748.html#L5549'>varname</a>          5549 Zend/zend_vm_execute.h 		retval = zend_std_get_static_property(ce, Z_STRVAL_P(varname), Z_STRLEN_P(varname), 0, ((IS_CONST == IS_CONST) ? opline-&gt;op1.literal : NULL) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L5560'>varname</a>          5560 Zend/zend_vm_execute.h 			hash_value = Z_HASH_P(varname);</span>
+<span class='curline'><a href='../S/1748.html#L5562'>varname</a>          5562 Zend/zend_vm_execute.h 			hash_value = str_hash(Z_STRVAL_P(varname), Z_STRLEN_P(varname));</span>
+<span class='curline'><a href='../S/1748.html#L5565'>varname</a>          5565 Zend/zend_vm_execute.h 		if (zend_hash_quick_find(target_symbol_table, Z_STRVAL_P(varname), Z_STRLEN_P(varname)+1, hash_value, (void **) &amp;retval) == FAILURE) {</span>
+<span class='curline'><a href='../S/1748.html#L5569'>varname</a>          5569 Zend/zend_vm_execute.h 					zend_error(E_NOTICE,"Undefined variable: %s", Z_STRVAL_P(varname));</span>
+<span class='curline'><a href='../S/1748.html#L5575'>varname</a>          5575 Zend/zend_vm_execute.h 					zend_error(E_NOTICE,"Undefined variable: %s", Z_STRVAL_P(varname));</span>
+<span class='curline'><a href='../S/1748.html#L5579'>varname</a>          5579 Zend/zend_vm_execute.h 					zend_hash_quick_update(target_symbol_table, Z_STRVAL_P(varname), Z_STRLEN_P(varname)+1, hash_value, &amp;EG(uninitialized_zval_ptr), sizeof(zval *), (void **) &amp;retval);</span>
+<span class='curline'><a href='../S/1748.html#L5605'>varname</a>          5605 Zend/zend_vm_execute.h 	if (IS_CONST != IS_CONST &amp;&amp; varname == &amp;tmp_varname) {</span>
+<span class='curline'><a href='../S/1748.html#L5923'>varname</a>          5923 Zend/zend_vm_execute.h 	zval tmp, *varname;</span>
+<span class='curline'><a href='../S/1748.html#L5944'>varname</a>          5944 Zend/zend_vm_execute.h 	varname = opline-&gt;op1.zv;</span>
+<span class='curline'><a href='../S/1748.html#L5946'>varname</a>          5946 Zend/zend_vm_execute.h 	if (IS_CONST != IS_CONST &amp;&amp; Z_TYPE_P(varname) != IS_STRING) {</span>
+<span class='curline'><a href='../S/1748.html#L5947'>varname</a>          5947 Zend/zend_vm_execute.h 		ZVAL_COPY_VALUE(&amp;tmp, varname);</span>
+<span class='curline'><a href='../S/1748.html#L5950'>varname</a>          5950 Zend/zend_vm_execute.h 		varname = &amp;tmp;</span>
+<span class='curline'><a href='../S/1748.html#L5952'>varname</a>          5952 Zend/zend_vm_execute.h 		Z_ADDREF_P(varname);</span>
+<span class='curline'><a href='../S/1748.html#L5964'>varname</a>          5964 Zend/zend_vm_execute.h 					if (IS_CONST != IS_CONST &amp;&amp; varname == &amp;tmp) {</span>
+<span class='curline'><a href='../S/1748.html#L5967'>varname</a>          5967 Zend/zend_vm_execute.h 						zval_ptr_dtor(&amp;varname);</span>
+<span class='curline'><a href='../S/1748.html#L5980'>varname</a>          5980 Zend/zend_vm_execute.h 		zend_std_unset_static_property(ce, Z_STRVAL_P(varname), Z_STRLEN_P(varname), ((IS_CONST == IS_CONST) ? opline-&gt;op1.literal : NULL) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L5982'>varname</a>          5982 Zend/zend_vm_execute.h 		ulong hash_value = zend_inline_hash_func(varname-&gt;value.str.val, varname-&gt;value.str.len+1);</span>
+<span class='curline'><a href='../S/1748.html#L5985'>varname</a>          5985 Zend/zend_vm_execute.h 		zend_delete_variable(execute_data, target_symbol_table, varname-&gt;value.str.val, varname-&gt;value.str.len+1, hash_value TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L5988'>varname</a>          5988 Zend/zend_vm_execute.h 	if (IS_CONST != IS_CONST &amp;&amp; varname == &amp;tmp) {</span>
+<span class='curline'><a href='../S/1748.html#L5991'>varname</a>          5991 Zend/zend_vm_execute.h 		zval_ptr_dtor(&amp;varname);</span>
+<span class='curline'><a href='../S/1748.html#L6022'>varname</a>          6022 Zend/zend_vm_execute.h 		zval tmp, *varname = opline-&gt;op1.zv;</span>
+<span class='curline'><a href='../S/1748.html#L6024'>varname</a>          6024 Zend/zend_vm_execute.h 		if (IS_CONST != IS_CONST &amp;&amp; Z_TYPE_P(varname) != IS_STRING) {</span>
+<span class='curline'><a href='../S/1748.html#L6025'>varname</a>          6025 Zend/zend_vm_execute.h 			ZVAL_COPY_VALUE(&amp;tmp, varname);</span>
+<span class='curline'><a href='../S/1748.html#L6028'>varname</a>          6028 Zend/zend_vm_execute.h 			varname = &amp;tmp;</span>
+<span class='curline'><a href='../S/1748.html#L6048'>varname</a>          6048 Zend/zend_vm_execute.h 			value = zend_std_get_static_property(ce, Z_STRVAL_P(varname), Z_STRLEN_P(varname), 1, ((IS_CONST == IS_CONST) ? opline-&gt;op1.literal : NULL) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L6054'>varname</a>          6054 Zend/zend_vm_execute.h 			if (zend_hash_find(target_symbol_table, varname-&gt;value.str.val, varname-&gt;value.str.len+1, (void **) &amp;value) == FAILURE) {</span>
+<span class='curline'><a href='../S/1748.html#L6059'>varname</a>          6059 Zend/zend_vm_execute.h 		if (IS_CONST != IS_CONST &amp;&amp; varname == &amp;tmp) {</span>
+<span class='curline'><a href='../S/1748.html#L6262'>varname</a>          6262 Zend/zend_vm_execute.h 	zval *varname;</span>
+<span class='curline'><a href='../S/1748.html#L6269'>varname</a>          6269 Zend/zend_vm_execute.h 	varname = opline-&gt;op1.zv;</span>
+<span class='curline'><a href='../S/1748.html#L6271'>varname</a>          6271 Zend/zend_vm_execute.h  	if (IS_CONST != IS_CONST &amp;&amp; UNEXPECTED(Z_TYPE_P(varname) != IS_STRING)) {</span>
+<span class='curline'><a href='../S/1748.html#L6272'>varname</a>          6272 Zend/zend_vm_execute.h 		ZVAL_COPY_VALUE(&amp;tmp_varname, varname);</span>
+<span class='curline'><a href='../S/1748.html#L6277'>varname</a>          6277 Zend/zend_vm_execute.h 		varname = &amp;tmp_varname;</span>
+<span class='curline'><a href='../S/1748.html#L6289'>varname</a>          6289 Zend/zend_vm_execute.h 					if (IS_CONST != IS_CONST &amp;&amp; varname == &amp;tmp_varname) {</span>
+<span class='curline'><a href='../S/1748.html#L6301'>varname</a>          6301 Zend/zend_vm_execute.h 		retval = zend_std_get_static_property(ce, Z_STRVAL_P(varname), Z_STRLEN_P(varname), 0, ((IS_CONST == IS_CONST) ? opline-&gt;op1.literal : NULL) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L6312'>varname</a>          6312 Zend/zend_vm_execute.h 			hash_value = Z_HASH_P(varname);</span>
+<span class='curline'><a href='../S/1748.html#L6314'>varname</a>          6314 Zend/zend_vm_execute.h 			hash_value = str_hash(Z_STRVAL_P(varname), Z_STRLEN_P(varname));</span>
+<span class='curline'><a href='../S/1748.html#L6317'>varname</a>          6317 Zend/zend_vm_execute.h 		if (zend_hash_quick_find(target_symbol_table, Z_STRVAL_P(varname), Z_STRLEN_P(varname)+1, hash_value, (void **) &amp;retval) == FAILURE) {</span>
+<span class='curline'><a href='../S/1748.html#L6321'>varname</a>          6321 Zend/zend_vm_execute.h 					zend_error(E_NOTICE,"Undefined variable: %s", Z_STRVAL_P(varname));</span>
+<span class='curline'><a href='../S/1748.html#L6327'>varname</a>          6327 Zend/zend_vm_execute.h 					zend_error(E_NOTICE,"Undefined variable: %s", Z_STRVAL_P(varname));</span>
+<span class='curline'><a href='../S/1748.html#L6331'>varname</a>          6331 Zend/zend_vm_execute.h 					zend_hash_quick_update(target_symbol_table, Z_STRVAL_P(varname), Z_STRLEN_P(varname)+1, hash_value, &amp;EG(uninitialized_zval_ptr), sizeof(zval *), (void **) &amp;retval);</span>
+<span class='curline'><a href='../S/1748.html#L6357'>varname</a>          6357 Zend/zend_vm_execute.h 	if (IS_CONST != IS_CONST &amp;&amp; varname == &amp;tmp_varname) {</span>
+<span class='curline'><a href='../S/1748.html#L6643'>varname</a>          6643 Zend/zend_vm_execute.h 	zval tmp, *varname;</span>
+<span class='curline'><a href='../S/1748.html#L6664'>varname</a>          6664 Zend/zend_vm_execute.h 	varname = opline-&gt;op1.zv;</span>
+<span class='curline'><a href='../S/1748.html#L6666'>varname</a>          6666 Zend/zend_vm_execute.h 	if (IS_CONST != IS_CONST &amp;&amp; Z_TYPE_P(varname) != IS_STRING) {</span>
+<span class='curline'><a href='../S/1748.html#L6667'>varname</a>          6667 Zend/zend_vm_execute.h 		ZVAL_COPY_VALUE(&amp;tmp, varname);</span>
+<span class='curline'><a href='../S/1748.html#L6670'>varname</a>          6670 Zend/zend_vm_execute.h 		varname = &amp;tmp;</span>
+<span class='curline'><a href='../S/1748.html#L6672'>varname</a>          6672 Zend/zend_vm_execute.h 		Z_ADDREF_P(varname);</span>
+<span class='curline'><a href='../S/1748.html#L6684'>varname</a>          6684 Zend/zend_vm_execute.h 					if (IS_CONST != IS_CONST &amp;&amp; varname == &amp;tmp) {</span>
+<span class='curline'><a href='../S/1748.html#L6687'>varname</a>          6687 Zend/zend_vm_execute.h 						zval_ptr_dtor(&amp;varname);</span>
+<span class='curline'><a href='../S/1748.html#L6700'>varname</a>          6700 Zend/zend_vm_execute.h 		zend_std_unset_static_property(ce, Z_STRVAL_P(varname), Z_STRLEN_P(varname), ((IS_CONST == IS_CONST) ? opline-&gt;op1.literal : NULL) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L6702'>varname</a>          6702 Zend/zend_vm_execute.h 		ulong hash_value = zend_inline_hash_func(varname-&gt;value.str.val, varname-&gt;value.str.len+1);</span>
+<span class='curline'><a href='../S/1748.html#L6705'>varname</a>          6705 Zend/zend_vm_execute.h 		zend_delete_variable(execute_data, target_symbol_table, varname-&gt;value.str.val, varname-&gt;value.str.len+1, hash_value TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L6708'>varname</a>          6708 Zend/zend_vm_execute.h 	if (IS_CONST != IS_CONST &amp;&amp; varname == &amp;tmp) {</span>
+<span class='curline'><a href='../S/1748.html#L6711'>varname</a>          6711 Zend/zend_vm_execute.h 		zval_ptr_dtor(&amp;varname);</span>
+<span class='curline'><a href='../S/1748.html#L6742'>varname</a>          6742 Zend/zend_vm_execute.h 		zval tmp, *varname = opline-&gt;op1.zv;</span>
+<span class='curline'><a href='../S/1748.html#L6744'>varname</a>          6744 Zend/zend_vm_execute.h 		if (IS_CONST != IS_CONST &amp;&amp; Z_TYPE_P(varname) != IS_STRING) {</span>
+<span class='curline'><a href='../S/1748.html#L6745'>varname</a>          6745 Zend/zend_vm_execute.h 			ZVAL_COPY_VALUE(&amp;tmp, varname);</span>
+<span class='curline'><a href='../S/1748.html#L6748'>varname</a>          6748 Zend/zend_vm_execute.h 			varname = &amp;tmp;</span>
+<span class='curline'><a href='../S/1748.html#L6768'>varname</a>          6768 Zend/zend_vm_execute.h 			value = zend_std_get_static_property(ce, Z_STRVAL_P(varname), Z_STRLEN_P(varname), 1, ((IS_CONST == IS_CONST) ? opline-&gt;op1.literal : NULL) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L6774'>varname</a>          6774 Zend/zend_vm_execute.h 			if (zend_hash_find(target_symbol_table, varname-&gt;value.str.val, varname-&gt;value.str.len+1, (void **) &amp;value) == FAILURE) {</span>
+<span class='curline'><a href='../S/1748.html#L6779'>varname</a>          6779 Zend/zend_vm_execute.h 		if (IS_CONST != IS_CONST &amp;&amp; varname == &amp;tmp) {</span>
+<span class='curline'><a href='../S/1748.html#L9038'>varname</a>          9038 Zend/zend_vm_execute.h 	zval *varname;</span>
+<span class='curline'><a href='../S/1748.html#L9045'>varname</a>          9045 Zend/zend_vm_execute.h 	varname = _get_zval_ptr_tmp(opline-&gt;op1.var, execute_data, &amp;free_op1 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L9047'>varname</a>          9047 Zend/zend_vm_execute.h  	if (IS_TMP_VAR != IS_CONST &amp;&amp; UNEXPECTED(Z_TYPE_P(varname) != IS_STRING)) {</span>
+<span class='curline'><a href='../S/1748.html#L9048'>varname</a>          9048 Zend/zend_vm_execute.h 		ZVAL_COPY_VALUE(&amp;tmp_varname, varname);</span>
+<span class='curline'><a href='../S/1748.html#L9053'>varname</a>          9053 Zend/zend_vm_execute.h 		varname = &amp;tmp_varname;</span>
+<span class='curline'><a href='../S/1748.html#L9065'>varname</a>          9065 Zend/zend_vm_execute.h 					if (IS_TMP_VAR != IS_CONST &amp;&amp; varname == &amp;tmp_varname) {</span>
+<span class='curline'><a href='../S/1748.html#L9077'>varname</a>          9077 Zend/zend_vm_execute.h 		retval = zend_std_get_static_property(ce, Z_STRVAL_P(varname), Z_STRLEN_P(varname), 0, ((IS_TMP_VAR == IS_CONST) ? opline-&gt;op1.literal : NULL) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L9088'>varname</a>          9088 Zend/zend_vm_execute.h 			hash_value = Z_HASH_P(varname);</span>
+<span class='curline'><a href='../S/1748.html#L9090'>varname</a>          9090 Zend/zend_vm_execute.h 			hash_value = str_hash(Z_STRVAL_P(varname), Z_STRLEN_P(varname));</span>
+<span class='curline'><a href='../S/1748.html#L9093'>varname</a>          9093 Zend/zend_vm_execute.h 		if (zend_hash_quick_find(target_symbol_table, Z_STRVAL_P(varname), Z_STRLEN_P(varname)+1, hash_value, (void **) &amp;retval) == FAILURE) {</span>
+<span class='curline'><a href='../S/1748.html#L9097'>varname</a>          9097 Zend/zend_vm_execute.h 					zend_error(E_NOTICE,"Undefined variable: %s", Z_STRVAL_P(varname));</span>
+<span class='curline'><a href='../S/1748.html#L9103'>varname</a>          9103 Zend/zend_vm_execute.h 					zend_error(E_NOTICE,"Undefined variable: %s", Z_STRVAL_P(varname));</span>
+<span class='curline'><a href='../S/1748.html#L9107'>varname</a>          9107 Zend/zend_vm_execute.h 					zend_hash_quick_update(target_symbol_table, Z_STRVAL_P(varname), Z_STRLEN_P(varname)+1, hash_value, &amp;EG(uninitialized_zval_ptr), sizeof(zval *), (void **) &amp;retval);</span>
+<span class='curline'><a href='../S/1748.html#L9133'>varname</a>          9133 Zend/zend_vm_execute.h 	if (IS_TMP_VAR != IS_CONST &amp;&amp; varname == &amp;tmp_varname) {</span>
+<span class='curline'><a href='../S/1748.html#L9476'>varname</a>          9476 Zend/zend_vm_execute.h 	zval tmp, *varname;</span>
+<span class='curline'><a href='../S/1748.html#L9497'>varname</a>          9497 Zend/zend_vm_execute.h 	varname = _get_zval_ptr_tmp(opline-&gt;op1.var, execute_data, &amp;free_op1 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L9499'>varname</a>          9499 Zend/zend_vm_execute.h 	if (IS_TMP_VAR != IS_CONST &amp;&amp; Z_TYPE_P(varname) != IS_STRING) {</span>
+<span class='curline'><a href='../S/1748.html#L9500'>varname</a>          9500 Zend/zend_vm_execute.h 		ZVAL_COPY_VALUE(&amp;tmp, varname);</span>
+<span class='curline'><a href='../S/1748.html#L9503'>varname</a>          9503 Zend/zend_vm_execute.h 		varname = &amp;tmp;</span>
+<span class='curline'><a href='../S/1748.html#L9505'>varname</a>          9505 Zend/zend_vm_execute.h 		Z_ADDREF_P(varname);</span>
+<span class='curline'><a href='../S/1748.html#L9517'>varname</a>          9517 Zend/zend_vm_execute.h 					if (IS_TMP_VAR != IS_CONST &amp;&amp; varname == &amp;tmp) {</span>
+<span class='curline'><a href='../S/1748.html#L9520'>varname</a>          9520 Zend/zend_vm_execute.h 						zval_ptr_dtor(&amp;varname);</span>
+<span class='curline'><a href='../S/1748.html#L9533'>varname</a>          9533 Zend/zend_vm_execute.h 		zend_std_unset_static_property(ce, Z_STRVAL_P(varname), Z_STRLEN_P(varname), ((IS_TMP_VAR == IS_CONST) ? opline-&gt;op1.literal : NULL) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L9535'>varname</a>          9535 Zend/zend_vm_execute.h 		ulong hash_value = zend_inline_hash_func(varname-&gt;value.str.val, varname-&gt;value.str.len+1);</span>
+<span class='curline'><a href='../S/1748.html#L9538'>varname</a>          9538 Zend/zend_vm_execute.h 		zend_delete_variable(execute_data, target_symbol_table, varname-&gt;value.str.val, varname-&gt;value.str.len+1, hash_value TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L9541'>varname</a>          9541 Zend/zend_vm_execute.h 	if (IS_TMP_VAR != IS_CONST &amp;&amp; varname == &amp;tmp) {</span>
+<span class='curline'><a href='../S/1748.html#L9544'>varname</a>          9544 Zend/zend_vm_execute.h 		zval_ptr_dtor(&amp;varname);</span>
+<span class='curline'><a href='../S/1748.html#L9575'>varname</a>          9575 Zend/zend_vm_execute.h 		zval tmp, *varname = _get_zval_ptr_tmp(opline-&gt;op1.var, execute_data, &amp;free_op1 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L9577'>varname</a>          9577 Zend/zend_vm_execute.h 		if (IS_TMP_VAR != IS_CONST &amp;&amp; Z_TYPE_P(varname) != IS_STRING) {</span>
+<span class='curline'><a href='../S/1748.html#L9578'>varname</a>          9578 Zend/zend_vm_execute.h 			ZVAL_COPY_VALUE(&amp;tmp, varname);</span>
+<span class='curline'><a href='../S/1748.html#L9581'>varname</a>          9581 Zend/zend_vm_execute.h 			varname = &amp;tmp;</span>
+<span class='curline'><a href='../S/1748.html#L9601'>varname</a>          9601 Zend/zend_vm_execute.h 			value = zend_std_get_static_property(ce, Z_STRVAL_P(varname), Z_STRLEN_P(varname), 1, ((IS_TMP_VAR == IS_CONST) ? opline-&gt;op1.literal : NULL) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L9607'>varname</a>          9607 Zend/zend_vm_execute.h 			if (zend_hash_find(target_symbol_table, varname-&gt;value.str.val, varname-&gt;value.str.len+1, (void **) &amp;value) == FAILURE) {</span>
+<span class='curline'><a href='../S/1748.html#L9612'>varname</a>          9612 Zend/zend_vm_execute.h 		if (IS_TMP_VAR != IS_CONST &amp;&amp; varname == &amp;tmp) {</span>
+<span class='curline'><a href='../S/1748.html#L10794'>varname</a>          10794 Zend/zend_vm_execute.h 	zval *varname;</span>
+<span class='curline'><a href='../S/1748.html#L10801'>varname</a>          10801 Zend/zend_vm_execute.h 	varname = _get_zval_ptr_tmp(opline-&gt;op1.var, execute_data, &amp;free_op1 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L10803'>varname</a>          10803 Zend/zend_vm_execute.h  	if (IS_TMP_VAR != IS_CONST &amp;&amp; UNEXPECTED(Z_TYPE_P(varname) != IS_STRING)) {</span>
+<span class='curline'><a href='../S/1748.html#L10804'>varname</a>          10804 Zend/zend_vm_execute.h 		ZVAL_COPY_VALUE(&amp;tmp_varname, varname);</span>
+<span class='curline'><a href='../S/1748.html#L10809'>varname</a>          10809 Zend/zend_vm_execute.h 		varname = &amp;tmp_varname;</span>
+<span class='curline'><a href='../S/1748.html#L10821'>varname</a>          10821 Zend/zend_vm_execute.h 					if (IS_TMP_VAR != IS_CONST &amp;&amp; varname == &amp;tmp_varname) {</span>
+<span class='curline'><a href='../S/1748.html#L10833'>varname</a>          10833 Zend/zend_vm_execute.h 		retval = zend_std_get_static_property(ce, Z_STRVAL_P(varname), Z_STRLEN_P(varname), 0, ((IS_TMP_VAR == IS_CONST) ? opline-&gt;op1.literal : NULL) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L10844'>varname</a>          10844 Zend/zend_vm_execute.h 			hash_value = Z_HASH_P(varname);</span>
+<span class='curline'><a href='../S/1748.html#L10846'>varname</a>          10846 Zend/zend_vm_execute.h 			hash_value = str_hash(Z_STRVAL_P(varname), Z_STRLEN_P(varname));</span>
+<span class='curline'><a href='../S/1748.html#L10849'>varname</a>          10849 Zend/zend_vm_execute.h 		if (zend_hash_quick_find(target_symbol_table, Z_STRVAL_P(varname), Z_STRLEN_P(varname)+1, hash_value, (void **) &amp;retval) == FAILURE) {</span>
+<span class='curline'><a href='../S/1748.html#L10853'>varname</a>          10853 Zend/zend_vm_execute.h 					zend_error(E_NOTICE,"Undefined variable: %s", Z_STRVAL_P(varname));</span>
+<span class='curline'><a href='../S/1748.html#L10859'>varname</a>          10859 Zend/zend_vm_execute.h 					zend_error(E_NOTICE,"Undefined variable: %s", Z_STRVAL_P(varname));</span>
+<span class='curline'><a href='../S/1748.html#L10863'>varname</a>          10863 Zend/zend_vm_execute.h 					zend_hash_quick_update(target_symbol_table, Z_STRVAL_P(varname), Z_STRLEN_P(varname)+1, hash_value, &amp;EG(uninitialized_zval_ptr), sizeof(zval *), (void **) &amp;retval);</span>
+<span class='curline'><a href='../S/1748.html#L10889'>varname</a>          10889 Zend/zend_vm_execute.h 	if (IS_TMP_VAR != IS_CONST &amp;&amp; varname == &amp;tmp_varname) {</span>
+<span class='curline'><a href='../S/1748.html#L11209'>varname</a>          11209 Zend/zend_vm_execute.h 	zval tmp, *varname;</span>
+<span class='curline'><a href='../S/1748.html#L11230'>varname</a>          11230 Zend/zend_vm_execute.h 	varname = _get_zval_ptr_tmp(opline-&gt;op1.var, execute_data, &amp;free_op1 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L11232'>varname</a>          11232 Zend/zend_vm_execute.h 	if (IS_TMP_VAR != IS_CONST &amp;&amp; Z_TYPE_P(varname) != IS_STRING) {</span>
+<span class='curline'><a href='../S/1748.html#L11233'>varname</a>          11233 Zend/zend_vm_execute.h 		ZVAL_COPY_VALUE(&amp;tmp, varname);</span>
+<span class='curline'><a href='../S/1748.html#L11236'>varname</a>          11236 Zend/zend_vm_execute.h 		varname = &amp;tmp;</span>
+<span class='curline'><a href='../S/1748.html#L11238'>varname</a>          11238 Zend/zend_vm_execute.h 		Z_ADDREF_P(varname);</span>
+<span class='curline'><a href='../S/1748.html#L11250'>varname</a>          11250 Zend/zend_vm_execute.h 					if (IS_TMP_VAR != IS_CONST &amp;&amp; varname == &amp;tmp) {</span>
+<span class='curline'><a href='../S/1748.html#L11253'>varname</a>          11253 Zend/zend_vm_execute.h 						zval_ptr_dtor(&amp;varname);</span>
+<span class='curline'><a href='../S/1748.html#L11266'>varname</a>          11266 Zend/zend_vm_execute.h 		zend_std_unset_static_property(ce, Z_STRVAL_P(varname), Z_STRLEN_P(varname), ((IS_TMP_VAR == IS_CONST) ? opline-&gt;op1.literal : NULL) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L11268'>varname</a>          11268 Zend/zend_vm_execute.h 		ulong hash_value = zend_inline_hash_func(varname-&gt;value.str.val, varname-&gt;value.str.len+1);</span>
+<span class='curline'><a href='../S/1748.html#L11271'>varname</a>          11271 Zend/zend_vm_execute.h 		zend_delete_variable(execute_data, target_symbol_table, varname-&gt;value.str.val, varname-&gt;value.str.len+1, hash_value TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L11274'>varname</a>          11274 Zend/zend_vm_execute.h 	if (IS_TMP_VAR != IS_CONST &amp;&amp; varname == &amp;tmp) {</span>
+<span class='curline'><a href='../S/1748.html#L11277'>varname</a>          11277 Zend/zend_vm_execute.h 		zval_ptr_dtor(&amp;varname);</span>
+<span class='curline'><a href='../S/1748.html#L11308'>varname</a>          11308 Zend/zend_vm_execute.h 		zval tmp, *varname = _get_zval_ptr_tmp(opline-&gt;op1.var, execute_data, &amp;free_op1 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L11310'>varname</a>          11310 Zend/zend_vm_execute.h 		if (IS_TMP_VAR != IS_CONST &amp;&amp; Z_TYPE_P(varname) != IS_STRING) {</span>
+<span class='curline'><a href='../S/1748.html#L11311'>varname</a>          11311 Zend/zend_vm_execute.h 			ZVAL_COPY_VALUE(&amp;tmp, varname);</span>
+<span class='curline'><a href='../S/1748.html#L11314'>varname</a>          11314 Zend/zend_vm_execute.h 			varname = &amp;tmp;</span>
+<span class='curline'><a href='../S/1748.html#L11334'>varname</a>          11334 Zend/zend_vm_execute.h 			value = zend_std_get_static_property(ce, Z_STRVAL_P(varname), Z_STRLEN_P(varname), 1, ((IS_TMP_VAR == IS_CONST) ? opline-&gt;op1.literal : NULL) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L11340'>varname</a>          11340 Zend/zend_vm_execute.h 			if (zend_hash_find(target_symbol_table, varname-&gt;value.str.val, varname-&gt;value.str.len+1, (void **) &amp;value) == FAILURE) {</span>
+<span class='curline'><a href='../S/1748.html#L11345'>varname</a>          11345 Zend/zend_vm_execute.h 		if (IS_TMP_VAR != IS_CONST &amp;&amp; varname == &amp;tmp) {</span>
+<span class='curline'><a href='../S/1748.html#L11548'>varname</a>          11548 Zend/zend_vm_execute.h 	zval *varname;</span>
+<span class='curline'><a href='../S/1748.html#L11555'>varname</a>          11555 Zend/zend_vm_execute.h 	varname = _get_zval_ptr_tmp(opline-&gt;op1.var, execute_data, &amp;free_op1 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L11557'>varname</a>          11557 Zend/zend_vm_execute.h  	if (IS_TMP_VAR != IS_CONST &amp;&amp; UNEXPECTED(Z_TYPE_P(varname) != IS_STRING)) {</span>
+<span class='curline'><a href='../S/1748.html#L11558'>varname</a>          11558 Zend/zend_vm_execute.h 		ZVAL_COPY_VALUE(&amp;tmp_varname, varname);</span>
+<span class='curline'><a href='../S/1748.html#L11563'>varname</a>          11563 Zend/zend_vm_execute.h 		varname = &amp;tmp_varname;</span>
+<span class='curline'><a href='../S/1748.html#L11575'>varname</a>          11575 Zend/zend_vm_execute.h 					if (IS_TMP_VAR != IS_CONST &amp;&amp; varname == &amp;tmp_varname) {</span>
+<span class='curline'><a href='../S/1748.html#L11587'>varname</a>          11587 Zend/zend_vm_execute.h 		retval = zend_std_get_static_property(ce, Z_STRVAL_P(varname), Z_STRLEN_P(varname), 0, ((IS_TMP_VAR == IS_CONST) ? opline-&gt;op1.literal : NULL) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L11598'>varname</a>          11598 Zend/zend_vm_execute.h 			hash_value = Z_HASH_P(varname);</span>
+<span class='curline'><a href='../S/1748.html#L11600'>varname</a>          11600 Zend/zend_vm_execute.h 			hash_value = str_hash(Z_STRVAL_P(varname), Z_STRLEN_P(varname));</span>
+<span class='curline'><a href='../S/1748.html#L11603'>varname</a>          11603 Zend/zend_vm_execute.h 		if (zend_hash_quick_find(target_symbol_table, Z_STRVAL_P(varname), Z_STRLEN_P(varname)+1, hash_value, (void **) &amp;retval) == FAILURE) {</span>
+<span class='curline'><a href='../S/1748.html#L11607'>varname</a>          11607 Zend/zend_vm_execute.h 					zend_error(E_NOTICE,"Undefined variable: %s", Z_STRVAL_P(varname));</span>
+<span class='curline'><a href='../S/1748.html#L11613'>varname</a>          11613 Zend/zend_vm_execute.h 					zend_error(E_NOTICE,"Undefined variable: %s", Z_STRVAL_P(varname));</span>
+<span class='curline'><a href='../S/1748.html#L11617'>varname</a>          11617 Zend/zend_vm_execute.h 					zend_hash_quick_update(target_symbol_table, Z_STRVAL_P(varname), Z_STRLEN_P(varname)+1, hash_value, &amp;EG(uninitialized_zval_ptr), sizeof(zval *), (void **) &amp;retval);</span>
+<span class='curline'><a href='../S/1748.html#L11643'>varname</a>          11643 Zend/zend_vm_execute.h 	if (IS_TMP_VAR != IS_CONST &amp;&amp; varname == &amp;tmp_varname) {</span>
+<span class='curline'><a href='../S/1748.html#L11804'>varname</a>          11804 Zend/zend_vm_execute.h 	zval tmp, *varname;</span>
+<span class='curline'><a href='../S/1748.html#L11825'>varname</a>          11825 Zend/zend_vm_execute.h 	varname = _get_zval_ptr_tmp(opline-&gt;op1.var, execute_data, &amp;free_op1 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L11827'>varname</a>          11827 Zend/zend_vm_execute.h 	if (IS_TMP_VAR != IS_CONST &amp;&amp; Z_TYPE_P(varname) != IS_STRING) {</span>
+<span class='curline'><a href='../S/1748.html#L11828'>varname</a>          11828 Zend/zend_vm_execute.h 		ZVAL_COPY_VALUE(&amp;tmp, varname);</span>
+<span class='curline'><a href='../S/1748.html#L11831'>varname</a>          11831 Zend/zend_vm_execute.h 		varname = &amp;tmp;</span>
+<span class='curline'><a href='../S/1748.html#L11833'>varname</a>          11833 Zend/zend_vm_execute.h 		Z_ADDREF_P(varname);</span>
+<span class='curline'><a href='../S/1748.html#L11845'>varname</a>          11845 Zend/zend_vm_execute.h 					if (IS_TMP_VAR != IS_CONST &amp;&amp; varname == &amp;tmp) {</span>
+<span class='curline'><a href='../S/1748.html#L11848'>varname</a>          11848 Zend/zend_vm_execute.h 						zval_ptr_dtor(&amp;varname);</span>
+<span class='curline'><a href='../S/1748.html#L11861'>varname</a>          11861 Zend/zend_vm_execute.h 		zend_std_unset_static_property(ce, Z_STRVAL_P(varname), Z_STRLEN_P(varname), ((IS_TMP_VAR == IS_CONST) ? opline-&gt;op1.literal : NULL) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L11863'>varname</a>          11863 Zend/zend_vm_execute.h 		ulong hash_value = zend_inline_hash_func(varname-&gt;value.str.val, varname-&gt;value.str.len+1);</span>
+<span class='curline'><a href='../S/1748.html#L11866'>varname</a>          11866 Zend/zend_vm_execute.h 		zend_delete_variable(execute_data, target_symbol_table, varname-&gt;value.str.val, varname-&gt;value.str.len+1, hash_value TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L11869'>varname</a>          11869 Zend/zend_vm_execute.h 	if (IS_TMP_VAR != IS_CONST &amp;&amp; varname == &amp;tmp) {</span>
+<span class='curline'><a href='../S/1748.html#L11872'>varname</a>          11872 Zend/zend_vm_execute.h 		zval_ptr_dtor(&amp;varname);</span>
+<span class='curline'><a href='../S/1748.html#L11903'>varname</a>          11903 Zend/zend_vm_execute.h 		zval tmp, *varname = _get_zval_ptr_tmp(opline-&gt;op1.var, execute_data, &amp;free_op1 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L11905'>varname</a>          11905 Zend/zend_vm_execute.h 		if (IS_TMP_VAR != IS_CONST &amp;&amp; Z_TYPE_P(varname) != IS_STRING) {</span>
+<span class='curline'><a href='../S/1748.html#L11906'>varname</a>          11906 Zend/zend_vm_execute.h 			ZVAL_COPY_VALUE(&amp;tmp, varname);</span>
+<span class='curline'><a href='../S/1748.html#L11909'>varname</a>          11909 Zend/zend_vm_execute.h 			varname = &amp;tmp;</span>
+<span class='curline'><a href='../S/1748.html#L11929'>varname</a>          11929 Zend/zend_vm_execute.h 			value = zend_std_get_static_property(ce, Z_STRVAL_P(varname), Z_STRLEN_P(varname), 1, ((IS_TMP_VAR == IS_CONST) ? opline-&gt;op1.literal : NULL) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L11935'>varname</a>          11935 Zend/zend_vm_execute.h 			if (zend_hash_find(target_symbol_table, varname-&gt;value.str.val, varname-&gt;value.str.len+1, (void **) &amp;value) == FAILURE) {</span>
+<span class='curline'><a href='../S/1748.html#L11940'>varname</a>          11940 Zend/zend_vm_execute.h 		if (IS_TMP_VAR != IS_CONST &amp;&amp; varname == &amp;tmp) {</span>
+<span class='curline'><a href='../S/1748.html#L14976'>varname</a>          14976 Zend/zend_vm_execute.h 	zval *varname;</span>
+<span class='curline'><a href='../S/1748.html#L14983'>varname</a>          14983 Zend/zend_vm_execute.h 	varname = _get_zval_ptr_var(opline-&gt;op1.var, execute_data, &amp;free_op1 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L14985'>varname</a>          14985 Zend/zend_vm_execute.h  	if (IS_VAR != IS_CONST &amp;&amp; UNEXPECTED(Z_TYPE_P(varname) != IS_STRING)) {</span>
+<span class='curline'><a href='../S/1748.html#L14986'>varname</a>          14986 Zend/zend_vm_execute.h 		ZVAL_COPY_VALUE(&amp;tmp_varname, varname);</span>
+<span class='curline'><a href='../S/1748.html#L14991'>varname</a>          14991 Zend/zend_vm_execute.h 		varname = &amp;tmp_varname;</span>
+<span class='curline'><a href='../S/1748.html#L15003'>varname</a>          15003 Zend/zend_vm_execute.h 					if (IS_VAR != IS_CONST &amp;&amp; varname == &amp;tmp_varname) {</span>
+<span class='curline'><a href='../S/1748.html#L15015'>varname</a>          15015 Zend/zend_vm_execute.h 		retval = zend_std_get_static_property(ce, Z_STRVAL_P(varname), Z_STRLEN_P(varname), 0, ((IS_VAR == IS_CONST) ? opline-&gt;op1.literal : NULL) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L15026'>varname</a>          15026 Zend/zend_vm_execute.h 			hash_value = Z_HASH_P(varname);</span>
+<span class='curline'><a href='../S/1748.html#L15028'>varname</a>          15028 Zend/zend_vm_execute.h 			hash_value = str_hash(Z_STRVAL_P(varname), Z_STRLEN_P(varname));</span>
+<span class='curline'><a href='../S/1748.html#L15031'>varname</a>          15031 Zend/zend_vm_execute.h 		if (zend_hash_quick_find(target_symbol_table, Z_STRVAL_P(varname), Z_STRLEN_P(varname)+1, hash_value, (void **) &amp;retval) == FAILURE) {</span>
+<span class='curline'><a href='../S/1748.html#L15035'>varname</a>          15035 Zend/zend_vm_execute.h 					zend_error(E_NOTICE,"Undefined variable: %s", Z_STRVAL_P(varname));</span>
+<span class='curline'><a href='../S/1748.html#L15041'>varname</a>          15041 Zend/zend_vm_execute.h 					zend_error(E_NOTICE,"Undefined variable: %s", Z_STRVAL_P(varname));</span>
+<span class='curline'><a href='../S/1748.html#L15045'>varname</a>          15045 Zend/zend_vm_execute.h 					zend_hash_quick_update(target_symbol_table, Z_STRVAL_P(varname), Z_STRLEN_P(varname)+1, hash_value, &amp;EG(uninitialized_zval_ptr), sizeof(zval *), (void **) &amp;retval);</span>
+<span class='curline'><a href='../S/1748.html#L15071'>varname</a>          15071 Zend/zend_vm_execute.h 	if (IS_VAR != IS_CONST &amp;&amp; varname == &amp;tmp_varname) {</span>
+<span class='curline'><a href='../S/1748.html#L16119'>varname</a>          16119 Zend/zend_vm_execute.h 	zval tmp, *varname;</span>
+<span class='curline'><a href='../S/1748.html#L16140'>varname</a>          16140 Zend/zend_vm_execute.h 	varname = _get_zval_ptr_var(opline-&gt;op1.var, execute_data, &amp;free_op1 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L16142'>varname</a>          16142 Zend/zend_vm_execute.h 	if (IS_VAR != IS_CONST &amp;&amp; Z_TYPE_P(varname) != IS_STRING) {</span>
+<span class='curline'><a href='../S/1748.html#L16143'>varname</a>          16143 Zend/zend_vm_execute.h 		ZVAL_COPY_VALUE(&amp;tmp, varname);</span>
+<span class='curline'><a href='../S/1748.html#L16146'>varname</a>          16146 Zend/zend_vm_execute.h 		varname = &amp;tmp;</span>
+<span class='curline'><a href='../S/1748.html#L16148'>varname</a>          16148 Zend/zend_vm_execute.h 		Z_ADDREF_P(varname);</span>
+<span class='curline'><a href='../S/1748.html#L16160'>varname</a>          16160 Zend/zend_vm_execute.h 					if (IS_VAR != IS_CONST &amp;&amp; varname == &amp;tmp) {</span>
+<span class='curline'><a href='../S/1748.html#L16163'>varname</a>          16163 Zend/zend_vm_execute.h 						zval_ptr_dtor(&amp;varname);</span>
+<span class='curline'><a href='../S/1748.html#L16176'>varname</a>          16176 Zend/zend_vm_execute.h 		zend_std_unset_static_property(ce, Z_STRVAL_P(varname), Z_STRLEN_P(varname), ((IS_VAR == IS_CONST) ? opline-&gt;op1.literal : NULL) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L16178'>varname</a>          16178 Zend/zend_vm_execute.h 		ulong hash_value = zend_inline_hash_func(varname-&gt;value.str.val, varname-&gt;value.str.len+1);</span>
+<span class='curline'><a href='../S/1748.html#L16181'>varname</a>          16181 Zend/zend_vm_execute.h 		zend_delete_variable(execute_data, target_symbol_table, varname-&gt;value.str.val, varname-&gt;value.str.len+1, hash_value TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L16184'>varname</a>          16184 Zend/zend_vm_execute.h 	if (IS_VAR != IS_CONST &amp;&amp; varname == &amp;tmp) {</span>
+<span class='curline'><a href='../S/1748.html#L16187'>varname</a>          16187 Zend/zend_vm_execute.h 		zval_ptr_dtor(&amp;varname);</span>
+<span class='curline'><a href='../S/1748.html#L16355'>varname</a>          16355 Zend/zend_vm_execute.h 		zval tmp, *varname = _get_zval_ptr_var(opline-&gt;op1.var, execute_data, &amp;free_op1 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L16357'>varname</a>          16357 Zend/zend_vm_execute.h 		if (IS_VAR != IS_CONST &amp;&amp; Z_TYPE_P(varname) != IS_STRING) {</span>
+<span class='curline'><a href='../S/1748.html#L16358'>varname</a>          16358 Zend/zend_vm_execute.h 			ZVAL_COPY_VALUE(&amp;tmp, varname);</span>
+<span class='curline'><a href='../S/1748.html#L16361'>varname</a>          16361 Zend/zend_vm_execute.h 			varname = &amp;tmp;</span>
+<span class='curline'><a href='../S/1748.html#L16381'>varname</a>          16381 Zend/zend_vm_execute.h 			value = zend_std_get_static_property(ce, Z_STRVAL_P(varname), Z_STRLEN_P(varname), 1, ((IS_VAR == IS_CONST) ? opline-&gt;op1.literal : NULL) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L16387'>varname</a>          16387 Zend/zend_vm_execute.h 			if (zend_hash_find(target_symbol_table, varname-&gt;value.str.val, varname-&gt;value.str.len+1, (void **) &amp;value) == FAILURE) {</span>
+<span class='curline'><a href='../S/1748.html#L16392'>varname</a>          16392 Zend/zend_vm_execute.h 		if (IS_VAR != IS_CONST &amp;&amp; varname == &amp;tmp) {</span>
+<span class='curline'><a href='../S/1748.html#L19590'>varname</a>          19590 Zend/zend_vm_execute.h 	zval *varname;</span>
+<span class='curline'><a href='../S/1748.html#L19597'>varname</a>          19597 Zend/zend_vm_execute.h 	varname = _get_zval_ptr_var(opline-&gt;op1.var, execute_data, &amp;free_op1 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L19599'>varname</a>          19599 Zend/zend_vm_execute.h  	if (IS_VAR != IS_CONST &amp;&amp; UNEXPECTED(Z_TYPE_P(varname) != IS_STRING)) {</span>
+<span class='curline'><a href='../S/1748.html#L19600'>varname</a>          19600 Zend/zend_vm_execute.h 		ZVAL_COPY_VALUE(&amp;tmp_varname, varname);</span>
+<span class='curline'><a href='../S/1748.html#L19605'>varname</a>          19605 Zend/zend_vm_execute.h 		varname = &amp;tmp_varname;</span>
+<span class='curline'><a href='../S/1748.html#L19617'>varname</a>          19617 Zend/zend_vm_execute.h 					if (IS_VAR != IS_CONST &amp;&amp; varname == &amp;tmp_varname) {</span>
+<span class='curline'><a href='../S/1748.html#L19629'>varname</a>          19629 Zend/zend_vm_execute.h 		retval = zend_std_get_static_property(ce, Z_STRVAL_P(varname), Z_STRLEN_P(varname), 0, ((IS_VAR == IS_CONST) ? opline-&gt;op1.literal : NULL) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L19640'>varname</a>          19640 Zend/zend_vm_execute.h 			hash_value = Z_HASH_P(varname);</span>
+<span class='curline'><a href='../S/1748.html#L19642'>varname</a>          19642 Zend/zend_vm_execute.h 			hash_value = str_hash(Z_STRVAL_P(varname), Z_STRLEN_P(varname));</span>
+<span class='curline'><a href='../S/1748.html#L19645'>varname</a>          19645 Zend/zend_vm_execute.h 		if (zend_hash_quick_find(target_symbol_table, Z_STRVAL_P(varname), Z_STRLEN_P(varname)+1, hash_value, (void **) &amp;retval) == FAILURE) {</span>
+<span class='curline'><a href='../S/1748.html#L19649'>varname</a>          19649 Zend/zend_vm_execute.h 					zend_error(E_NOTICE,"Undefined variable: %s", Z_STRVAL_P(varname));</span>
+<span class='curline'><a href='../S/1748.html#L19655'>varname</a>          19655 Zend/zend_vm_execute.h 					zend_error(E_NOTICE,"Undefined variable: %s", Z_STRVAL_P(varname));</span>
+<span class='curline'><a href='../S/1748.html#L19659'>varname</a>          19659 Zend/zend_vm_execute.h 					zend_hash_quick_update(target_symbol_table, Z_STRVAL_P(varname), Z_STRLEN_P(varname)+1, hash_value, &amp;EG(uninitialized_zval_ptr), sizeof(zval *), (void **) &amp;retval);</span>
+<span class='curline'><a href='../S/1748.html#L19685'>varname</a>          19685 Zend/zend_vm_execute.h 	if (IS_VAR != IS_CONST &amp;&amp; varname == &amp;tmp_varname) {</span>
+<span class='curline'><a href='../S/1748.html#L20700'>varname</a>          20700 Zend/zend_vm_execute.h 	zval tmp, *varname;</span>
+<span class='curline'><a href='../S/1748.html#L20721'>varname</a>          20721 Zend/zend_vm_execute.h 	varname = _get_zval_ptr_var(opline-&gt;op1.var, execute_data, &amp;free_op1 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L20723'>varname</a>          20723 Zend/zend_vm_execute.h 	if (IS_VAR != IS_CONST &amp;&amp; Z_TYPE_P(varname) != IS_STRING) {</span>
+<span class='curline'><a href='../S/1748.html#L20724'>varname</a>          20724 Zend/zend_vm_execute.h 		ZVAL_COPY_VALUE(&amp;tmp, varname);</span>
+<span class='curline'><a href='../S/1748.html#L20727'>varname</a>          20727 Zend/zend_vm_execute.h 		varname = &amp;tmp;</span>
+<span class='curline'><a href='../S/1748.html#L20729'>varname</a>          20729 Zend/zend_vm_execute.h 		Z_ADDREF_P(varname);</span>
+<span class='curline'><a href='../S/1748.html#L20741'>varname</a>          20741 Zend/zend_vm_execute.h 					if (IS_VAR != IS_CONST &amp;&amp; varname == &amp;tmp) {</span>
+<span class='curline'><a href='../S/1748.html#L20744'>varname</a>          20744 Zend/zend_vm_execute.h 						zval_ptr_dtor(&amp;varname);</span>
+<span class='curline'><a href='../S/1748.html#L20757'>varname</a>          20757 Zend/zend_vm_execute.h 		zend_std_unset_static_property(ce, Z_STRVAL_P(varname), Z_STRLEN_P(varname), ((IS_VAR == IS_CONST) ? opline-&gt;op1.literal : NULL) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L20759'>varname</a>          20759 Zend/zend_vm_execute.h 		ulong hash_value = zend_inline_hash_func(varname-&gt;value.str.val, varname-&gt;value.str.len+1);</span>
+<span class='curline'><a href='../S/1748.html#L20762'>varname</a>          20762 Zend/zend_vm_execute.h 		zend_delete_variable(execute_data, target_symbol_table, varname-&gt;value.str.val, varname-&gt;value.str.len+1, hash_value TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L20765'>varname</a>          20765 Zend/zend_vm_execute.h 	if (IS_VAR != IS_CONST &amp;&amp; varname == &amp;tmp) {</span>
+<span class='curline'><a href='../S/1748.html#L20768'>varname</a>          20768 Zend/zend_vm_execute.h 		zval_ptr_dtor(&amp;varname);</span>
+<span class='curline'><a href='../S/1748.html#L20936'>varname</a>          20936 Zend/zend_vm_execute.h 		zval tmp, *varname = _get_zval_ptr_var(opline-&gt;op1.var, execute_data, &amp;free_op1 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L20938'>varname</a>          20938 Zend/zend_vm_execute.h 		if (IS_VAR != IS_CONST &amp;&amp; Z_TYPE_P(varname) != IS_STRING) {</span>
+<span class='curline'><a href='../S/1748.html#L20939'>varname</a>          20939 Zend/zend_vm_execute.h 			ZVAL_COPY_VALUE(&amp;tmp, varname);</span>
+<span class='curline'><a href='../S/1748.html#L20942'>varname</a>          20942 Zend/zend_vm_execute.h 			varname = &amp;tmp;</span>
+<span class='curline'><a href='../S/1748.html#L20962'>varname</a>          20962 Zend/zend_vm_execute.h 			value = zend_std_get_static_property(ce, Z_STRVAL_P(varname), Z_STRLEN_P(varname), 1, ((IS_VAR == IS_CONST) ? opline-&gt;op1.literal : NULL) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L20968'>varname</a>          20968 Zend/zend_vm_execute.h 			if (zend_hash_find(target_symbol_table, varname-&gt;value.str.val, varname-&gt;value.str.len+1, (void **) &amp;value) == FAILURE) {</span>
+<span class='curline'><a href='../S/1748.html#L20973'>varname</a>          20973 Zend/zend_vm_execute.h 		if (IS_VAR != IS_CONST &amp;&amp; varname == &amp;tmp) {</span>
+<span class='curline'><a href='../S/1748.html#L21583'>varname</a>          21583 Zend/zend_vm_execute.h 	zval *varname;</span>
+<span class='curline'><a href='../S/1748.html#L21590'>varname</a>          21590 Zend/zend_vm_execute.h 	varname = _get_zval_ptr_var(opline-&gt;op1.var, execute_data, &amp;free_op1 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L21592'>varname</a>          21592 Zend/zend_vm_execute.h  	if (IS_VAR != IS_CONST &amp;&amp; UNEXPECTED(Z_TYPE_P(varname) != IS_STRING)) {</span>
+<span class='curline'><a href='../S/1748.html#L21593'>varname</a>          21593 Zend/zend_vm_execute.h 		ZVAL_COPY_VALUE(&amp;tmp_varname, varname);</span>
+<span class='curline'><a href='../S/1748.html#L21598'>varname</a>          21598 Zend/zend_vm_execute.h 		varname = &amp;tmp_varname;</span>
+<span class='curline'><a href='../S/1748.html#L21610'>varname</a>          21610 Zend/zend_vm_execute.h 					if (IS_VAR != IS_CONST &amp;&amp; varname == &amp;tmp_varname) {</span>
+<span class='curline'><a href='../S/1748.html#L21622'>varname</a>          21622 Zend/zend_vm_execute.h 		retval = zend_std_get_static_property(ce, Z_STRVAL_P(varname), Z_STRLEN_P(varname), 0, ((IS_VAR == IS_CONST) ? opline-&gt;op1.literal : NULL) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L21633'>varname</a>          21633 Zend/zend_vm_execute.h 			hash_value = Z_HASH_P(varname);</span>
+<span class='curline'><a href='../S/1748.html#L21635'>varname</a>          21635 Zend/zend_vm_execute.h 			hash_value = str_hash(Z_STRVAL_P(varname), Z_STRLEN_P(varname));</span>
+<span class='curline'><a href='../S/1748.html#L21638'>varname</a>          21638 Zend/zend_vm_execute.h 		if (zend_hash_quick_find(target_symbol_table, Z_STRVAL_P(varname), Z_STRLEN_P(varname)+1, hash_value, (void **) &amp;retval) == FAILURE) {</span>
+<span class='curline'><a href='../S/1748.html#L21642'>varname</a>          21642 Zend/zend_vm_execute.h 					zend_error(E_NOTICE,"Undefined variable: %s", Z_STRVAL_P(varname));</span>
+<span class='curline'><a href='../S/1748.html#L21648'>varname</a>          21648 Zend/zend_vm_execute.h 					zend_error(E_NOTICE,"Undefined variable: %s", Z_STRVAL_P(varname));</span>
+<span class='curline'><a href='../S/1748.html#L21652'>varname</a>          21652 Zend/zend_vm_execute.h 					zend_hash_quick_update(target_symbol_table, Z_STRVAL_P(varname), Z_STRLEN_P(varname)+1, hash_value, &amp;EG(uninitialized_zval_ptr), sizeof(zval *), (void **) &amp;retval);</span>
+<span class='curline'><a href='../S/1748.html#L21678'>varname</a>          21678 Zend/zend_vm_execute.h 	if (IS_VAR != IS_CONST &amp;&amp; varname == &amp;tmp_varname) {</span>
+<span class='curline'><a href='../S/1748.html#L22133'>varname</a>          22133 Zend/zend_vm_execute.h 	zval tmp, *varname;</span>
+<span class='curline'><a href='../S/1748.html#L22154'>varname</a>          22154 Zend/zend_vm_execute.h 	varname = _get_zval_ptr_var(opline-&gt;op1.var, execute_data, &amp;free_op1 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L22156'>varname</a>          22156 Zend/zend_vm_execute.h 	if (IS_VAR != IS_CONST &amp;&amp; Z_TYPE_P(varname) != IS_STRING) {</span>
+<span class='curline'><a href='../S/1748.html#L22157'>varname</a>          22157 Zend/zend_vm_execute.h 		ZVAL_COPY_VALUE(&amp;tmp, varname);</span>
+<span class='curline'><a href='../S/1748.html#L22160'>varname</a>          22160 Zend/zend_vm_execute.h 		varname = &amp;tmp;</span>
+<span class='curline'><a href='../S/1748.html#L22162'>varname</a>          22162 Zend/zend_vm_execute.h 		Z_ADDREF_P(varname);</span>
+<span class='curline'><a href='../S/1748.html#L22174'>varname</a>          22174 Zend/zend_vm_execute.h 					if (IS_VAR != IS_CONST &amp;&amp; varname == &amp;tmp) {</span>
+<span class='curline'><a href='../S/1748.html#L22177'>varname</a>          22177 Zend/zend_vm_execute.h 						zval_ptr_dtor(&amp;varname);</span>
+<span class='curline'><a href='../S/1748.html#L22190'>varname</a>          22190 Zend/zend_vm_execute.h 		zend_std_unset_static_property(ce, Z_STRVAL_P(varname), Z_STRLEN_P(varname), ((IS_VAR == IS_CONST) ? opline-&gt;op1.literal : NULL) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L22192'>varname</a>          22192 Zend/zend_vm_execute.h 		ulong hash_value = zend_inline_hash_func(varname-&gt;value.str.val, varname-&gt;value.str.len+1);</span>
+<span class='curline'><a href='../S/1748.html#L22195'>varname</a>          22195 Zend/zend_vm_execute.h 		zend_delete_variable(execute_data, target_symbol_table, varname-&gt;value.str.val, varname-&gt;value.str.len+1, hash_value TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L22198'>varname</a>          22198 Zend/zend_vm_execute.h 	if (IS_VAR != IS_CONST &amp;&amp; varname == &amp;tmp) {</span>
+<span class='curline'><a href='../S/1748.html#L22201'>varname</a>          22201 Zend/zend_vm_execute.h 		zval_ptr_dtor(&amp;varname);</span>
+<span class='curline'><a href='../S/1748.html#L22232'>varname</a>          22232 Zend/zend_vm_execute.h 		zval tmp, *varname = _get_zval_ptr_var(opline-&gt;op1.var, execute_data, &amp;free_op1 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L22234'>varname</a>          22234 Zend/zend_vm_execute.h 		if (IS_VAR != IS_CONST &amp;&amp; Z_TYPE_P(varname) != IS_STRING) {</span>
+<span class='curline'><a href='../S/1748.html#L22235'>varname</a>          22235 Zend/zend_vm_execute.h 			ZVAL_COPY_VALUE(&amp;tmp, varname);</span>
+<span class='curline'><a href='../S/1748.html#L22238'>varname</a>          22238 Zend/zend_vm_execute.h 			varname = &amp;tmp;</span>
+<span class='curline'><a href='../S/1748.html#L22258'>varname</a>          22258 Zend/zend_vm_execute.h 			value = zend_std_get_static_property(ce, Z_STRVAL_P(varname), Z_STRLEN_P(varname), 1, ((IS_VAR == IS_CONST) ? opline-&gt;op1.literal : NULL) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L22264'>varname</a>          22264 Zend/zend_vm_execute.h 			if (zend_hash_find(target_symbol_table, varname-&gt;value.str.val, varname-&gt;value.str.len+1, (void **) &amp;value) == FAILURE) {</span>
+<span class='curline'><a href='../S/1748.html#L22269'>varname</a>          22269 Zend/zend_vm_execute.h 		if (IS_VAR != IS_CONST &amp;&amp; varname == &amp;tmp) {</span>
+<span class='curline'><a href='../S/1748.html#L32510'>varname</a>          32510 Zend/zend_vm_execute.h 	zval *varname;</span>
+<span class='curline'><a href='../S/1748.html#L32517'>varname</a>          32517 Zend/zend_vm_execute.h 	varname = _get_zval_ptr_cv_BP_VAR_R(execute_data, opline-&gt;op1.var TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L32519'>varname</a>          32519 Zend/zend_vm_execute.h  	if (IS_CV != IS_CONST &amp;&amp; UNEXPECTED(Z_TYPE_P(varname) != IS_STRING)) {</span>
+<span class='curline'><a href='../S/1748.html#L32520'>varname</a>          32520 Zend/zend_vm_execute.h 		ZVAL_COPY_VALUE(&amp;tmp_varname, varname);</span>
+<span class='curline'><a href='../S/1748.html#L32525'>varname</a>          32525 Zend/zend_vm_execute.h 		varname = &amp;tmp_varname;</span>
+<span class='curline'><a href='../S/1748.html#L32537'>varname</a>          32537 Zend/zend_vm_execute.h 					if (IS_CV != IS_CONST &amp;&amp; varname == &amp;tmp_varname) {</span>
+<span class='curline'><a href='../S/1748.html#L32549'>varname</a>          32549 Zend/zend_vm_execute.h 		retval = zend_std_get_static_property(ce, Z_STRVAL_P(varname), Z_STRLEN_P(varname), 0, ((IS_CV == IS_CONST) ? opline-&gt;op1.literal : NULL) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L32560'>varname</a>          32560 Zend/zend_vm_execute.h 			hash_value = Z_HASH_P(varname);</span>
+<span class='curline'><a href='../S/1748.html#L32562'>varname</a>          32562 Zend/zend_vm_execute.h 			hash_value = str_hash(Z_STRVAL_P(varname), Z_STRLEN_P(varname));</span>
+<span class='curline'><a href='../S/1748.html#L32565'>varname</a>          32565 Zend/zend_vm_execute.h 		if (zend_hash_quick_find(target_symbol_table, Z_STRVAL_P(varname), Z_STRLEN_P(varname)+1, hash_value, (void **) &amp;retval) == FAILURE) {</span>
+<span class='curline'><a href='../S/1748.html#L32569'>varname</a>          32569 Zend/zend_vm_execute.h 					zend_error(E_NOTICE,"Undefined variable: %s", Z_STRVAL_P(varname));</span>
+<span class='curline'><a href='../S/1748.html#L32575'>varname</a>          32575 Zend/zend_vm_execute.h 					zend_error(E_NOTICE,"Undefined variable: %s", Z_STRVAL_P(varname));</span>
+<span class='curline'><a href='../S/1748.html#L32579'>varname</a>          32579 Zend/zend_vm_execute.h 					zend_hash_quick_update(target_symbol_table, Z_STRVAL_P(varname), Z_STRLEN_P(varname)+1, hash_value, &amp;EG(uninitialized_zval_ptr), sizeof(zval *), (void **) &amp;retval);</span>
+<span class='curline'><a href='../S/1748.html#L32605'>varname</a>          32605 Zend/zend_vm_execute.h 	if (IS_CV != IS_CONST &amp;&amp; varname == &amp;tmp_varname) {</span>
+<span class='curline'><a href='../S/1748.html#L33430'>varname</a>          33430 Zend/zend_vm_execute.h 	zval tmp, *varname;</span>
+<span class='curline'><a href='../S/1748.html#L33451'>varname</a>          33451 Zend/zend_vm_execute.h 	varname = _get_zval_ptr_cv_BP_VAR_R(execute_data, opline-&gt;op1.var TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L33453'>varname</a>          33453 Zend/zend_vm_execute.h 	if (IS_CV != IS_CONST &amp;&amp; Z_TYPE_P(varname) != IS_STRING) {</span>
+<span class='curline'><a href='../S/1748.html#L33454'>varname</a>          33454 Zend/zend_vm_execute.h 		ZVAL_COPY_VALUE(&amp;tmp, varname);</span>
+<span class='curline'><a href='../S/1748.html#L33457'>varname</a>          33457 Zend/zend_vm_execute.h 		varname = &amp;tmp;</span>
+<span class='curline'><a href='../S/1748.html#L33459'>varname</a>          33459 Zend/zend_vm_execute.h 		Z_ADDREF_P(varname);</span>
+<span class='curline'><a href='../S/1748.html#L33471'>varname</a>          33471 Zend/zend_vm_execute.h 					if (IS_CV != IS_CONST &amp;&amp; varname == &amp;tmp) {</span>
+<span class='curline'><a href='../S/1748.html#L33474'>varname</a>          33474 Zend/zend_vm_execute.h 						zval_ptr_dtor(&amp;varname);</span>
+<span class='curline'><a href='../S/1748.html#L33487'>varname</a>          33487 Zend/zend_vm_execute.h 		zend_std_unset_static_property(ce, Z_STRVAL_P(varname), Z_STRLEN_P(varname), ((IS_CV == IS_CONST) ? opline-&gt;op1.literal : NULL) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L33489'>varname</a>          33489 Zend/zend_vm_execute.h 		ulong hash_value = zend_inline_hash_func(varname-&gt;value.str.val, varname-&gt;value.str.len+1);</span>
+<span class='curline'><a href='../S/1748.html#L33492'>varname</a>          33492 Zend/zend_vm_execute.h 		zend_delete_variable(execute_data, target_symbol_table, varname-&gt;value.str.val, varname-&gt;value.str.len+1, hash_value TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L33495'>varname</a>          33495 Zend/zend_vm_execute.h 	if (IS_CV != IS_CONST &amp;&amp; varname == &amp;tmp) {</span>
+<span class='curline'><a href='../S/1748.html#L33498'>varname</a>          33498 Zend/zend_vm_execute.h 		zval_ptr_dtor(&amp;varname);</span>
+<span class='curline'><a href='../S/1748.html#L33664'>varname</a>          33664 Zend/zend_vm_execute.h 		zval tmp, *varname = _get_zval_ptr_cv_BP_VAR_IS(execute_data, opline-&gt;op1.var TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L33666'>varname</a>          33666 Zend/zend_vm_execute.h 		if (IS_CV != IS_CONST &amp;&amp; Z_TYPE_P(varname) != IS_STRING) {</span>
+<span class='curline'><a href='../S/1748.html#L33667'>varname</a>          33667 Zend/zend_vm_execute.h 			ZVAL_COPY_VALUE(&amp;tmp, varname);</span>
+<span class='curline'><a href='../S/1748.html#L33670'>varname</a>          33670 Zend/zend_vm_execute.h 			varname = &amp;tmp;</span>
+<span class='curline'><a href='../S/1748.html#L33690'>varname</a>          33690 Zend/zend_vm_execute.h 			value = zend_std_get_static_property(ce, Z_STRVAL_P(varname), Z_STRLEN_P(varname), 1, ((IS_CV == IS_CONST) ? opline-&gt;op1.literal : NULL) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L33696'>varname</a>          33696 Zend/zend_vm_execute.h 			if (zend_hash_find(target_symbol_table, varname-&gt;value.str.val, varname-&gt;value.str.len+1, (void **) &amp;value) == FAILURE) {</span>
+<span class='curline'><a href='../S/1748.html#L33701'>varname</a>          33701 Zend/zend_vm_execute.h 		if (IS_CV != IS_CONST &amp;&amp; varname == &amp;tmp) {</span>
+<span class='curline'><a href='../S/1748.html#L36758'>varname</a>          36758 Zend/zend_vm_execute.h 	zval *varname;</span>
+<span class='curline'><a href='../S/1748.html#L36765'>varname</a>          36765 Zend/zend_vm_execute.h 	varname = _get_zval_ptr_cv_BP_VAR_R(execute_data, opline-&gt;op1.var TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L36767'>varname</a>          36767 Zend/zend_vm_execute.h  	if (IS_CV != IS_CONST &amp;&amp; UNEXPECTED(Z_TYPE_P(varname) != IS_STRING)) {</span>
+<span class='curline'><a href='../S/1748.html#L36768'>varname</a>          36768 Zend/zend_vm_execute.h 		ZVAL_COPY_VALUE(&amp;tmp_varname, varname);</span>
+<span class='curline'><a href='../S/1748.html#L36773'>varname</a>          36773 Zend/zend_vm_execute.h 		varname = &amp;tmp_varname;</span>
+<span class='curline'><a href='../S/1748.html#L36785'>varname</a>          36785 Zend/zend_vm_execute.h 					if (IS_CV != IS_CONST &amp;&amp; varname == &amp;tmp_varname) {</span>
+<span class='curline'><a href='../S/1748.html#L36797'>varname</a>          36797 Zend/zend_vm_execute.h 		retval = zend_std_get_static_property(ce, Z_STRVAL_P(varname), Z_STRLEN_P(varname), 0, ((IS_CV == IS_CONST) ? opline-&gt;op1.literal : NULL) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L36808'>varname</a>          36808 Zend/zend_vm_execute.h 			hash_value = Z_HASH_P(varname);</span>
+<span class='curline'><a href='../S/1748.html#L36810'>varname</a>          36810 Zend/zend_vm_execute.h 			hash_value = str_hash(Z_STRVAL_P(varname), Z_STRLEN_P(varname));</span>
+<span class='curline'><a href='../S/1748.html#L36813'>varname</a>          36813 Zend/zend_vm_execute.h 		if (zend_hash_quick_find(target_symbol_table, Z_STRVAL_P(varname), Z_STRLEN_P(varname)+1, hash_value, (void **) &amp;retval) == FAILURE) {</span>
+<span class='curline'><a href='../S/1748.html#L36817'>varname</a>          36817 Zend/zend_vm_execute.h 					zend_error(E_NOTICE,"Undefined variable: %s", Z_STRVAL_P(varname));</span>
+<span class='curline'><a href='../S/1748.html#L36823'>varname</a>          36823 Zend/zend_vm_execute.h 					zend_error(E_NOTICE,"Undefined variable: %s", Z_STRVAL_P(varname));</span>
+<span class='curline'><a href='../S/1748.html#L36827'>varname</a>          36827 Zend/zend_vm_execute.h 					zend_hash_quick_update(target_symbol_table, Z_STRVAL_P(varname), Z_STRLEN_P(varname)+1, hash_value, &amp;EG(uninitialized_zval_ptr), sizeof(zval *), (void **) &amp;retval);</span>
+<span class='curline'><a href='../S/1748.html#L36853'>varname</a>          36853 Zend/zend_vm_execute.h 	if (IS_CV != IS_CONST &amp;&amp; varname == &amp;tmp_varname) {</span>
+<span class='curline'><a href='../S/1748.html#L37736'>varname</a>          37736 Zend/zend_vm_execute.h 	zval tmp, *varname;</span>
+<span class='curline'><a href='../S/1748.html#L37757'>varname</a>          37757 Zend/zend_vm_execute.h 	varname = _get_zval_ptr_cv_BP_VAR_R(execute_data, opline-&gt;op1.var TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L37759'>varname</a>          37759 Zend/zend_vm_execute.h 	if (IS_CV != IS_CONST &amp;&amp; Z_TYPE_P(varname) != IS_STRING) {</span>
+<span class='curline'><a href='../S/1748.html#L37760'>varname</a>          37760 Zend/zend_vm_execute.h 		ZVAL_COPY_VALUE(&amp;tmp, varname);</span>
+<span class='curline'><a href='../S/1748.html#L37763'>varname</a>          37763 Zend/zend_vm_execute.h 		varname = &amp;tmp;</span>
+<span class='curline'><a href='../S/1748.html#L37765'>varname</a>          37765 Zend/zend_vm_execute.h 		Z_ADDREF_P(varname);</span>
+<span class='curline'><a href='../S/1748.html#L37777'>varname</a>          37777 Zend/zend_vm_execute.h 					if (IS_CV != IS_CONST &amp;&amp; varname == &amp;tmp) {</span>
+<span class='curline'><a href='../S/1748.html#L37780'>varname</a>          37780 Zend/zend_vm_execute.h 						zval_ptr_dtor(&amp;varname);</span>
+<span class='curline'><a href='../S/1748.html#L37793'>varname</a>          37793 Zend/zend_vm_execute.h 		zend_std_unset_static_property(ce, Z_STRVAL_P(varname), Z_STRLEN_P(varname), ((IS_CV == IS_CONST) ? opline-&gt;op1.literal : NULL) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L37795'>varname</a>          37795 Zend/zend_vm_execute.h 		ulong hash_value = zend_inline_hash_func(varname-&gt;value.str.val, varname-&gt;value.str.len+1);</span>
+<span class='curline'><a href='../S/1748.html#L37798'>varname</a>          37798 Zend/zend_vm_execute.h 		zend_delete_variable(execute_data, target_symbol_table, varname-&gt;value.str.val, varname-&gt;value.str.len+1, hash_value TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L37801'>varname</a>          37801 Zend/zend_vm_execute.h 	if (IS_CV != IS_CONST &amp;&amp; varname == &amp;tmp) {</span>
+<span class='curline'><a href='../S/1748.html#L37804'>varname</a>          37804 Zend/zend_vm_execute.h 		zval_ptr_dtor(&amp;varname);</span>
+<span class='curline'><a href='../S/1748.html#L37970'>varname</a>          37970 Zend/zend_vm_execute.h 		zval tmp, *varname = _get_zval_ptr_cv_BP_VAR_IS(execute_data, opline-&gt;op1.var TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L37972'>varname</a>          37972 Zend/zend_vm_execute.h 		if (IS_CV != IS_CONST &amp;&amp; Z_TYPE_P(varname) != IS_STRING) {</span>
+<span class='curline'><a href='../S/1748.html#L37973'>varname</a>          37973 Zend/zend_vm_execute.h 			ZVAL_COPY_VALUE(&amp;tmp, varname);</span>
+<span class='curline'><a href='../S/1748.html#L37976'>varname</a>          37976 Zend/zend_vm_execute.h 			varname = &amp;tmp;</span>
+<span class='curline'><a href='../S/1748.html#L37996'>varname</a>          37996 Zend/zend_vm_execute.h 			value = zend_std_get_static_property(ce, Z_STRVAL_P(varname), Z_STRLEN_P(varname), 1, ((IS_CV == IS_CONST) ? opline-&gt;op1.literal : NULL) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L38002'>varname</a>          38002 Zend/zend_vm_execute.h 			if (zend_hash_find(target_symbol_table, varname-&gt;value.str.val, varname-&gt;value.str.len+1, (void **) &amp;value) == FAILURE) {</span>
+<span class='curline'><a href='../S/1748.html#L38007'>varname</a>          38007 Zend/zend_vm_execute.h 		if (IS_CV != IS_CONST &amp;&amp; varname == &amp;tmp) {</span>
+<span class='curline'><a href='../S/1748.html#L38613'>varname</a>          38613 Zend/zend_vm_execute.h 	zval *varname;</span>
+<span class='curline'><a href='../S/1748.html#L38620'>varname</a>          38620 Zend/zend_vm_execute.h 	varname = _get_zval_ptr_cv_BP_VAR_R(execute_data, opline-&gt;op1.var TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L38622'>varname</a>          38622 Zend/zend_vm_execute.h  	if (IS_CV != IS_CONST &amp;&amp; UNEXPECTED(Z_TYPE_P(varname) != IS_STRING)) {</span>
+<span class='curline'><a href='../S/1748.html#L38623'>varname</a>          38623 Zend/zend_vm_execute.h 		ZVAL_COPY_VALUE(&amp;tmp_varname, varname);</span>
+<span class='curline'><a href='../S/1748.html#L38628'>varname</a>          38628 Zend/zend_vm_execute.h 		varname = &amp;tmp_varname;</span>
+<span class='curline'><a href='../S/1748.html#L38640'>varname</a>          38640 Zend/zend_vm_execute.h 					if (IS_CV != IS_CONST &amp;&amp; varname == &amp;tmp_varname) {</span>
+<span class='curline'><a href='../S/1748.html#L38652'>varname</a>          38652 Zend/zend_vm_execute.h 		retval = zend_std_get_static_property(ce, Z_STRVAL_P(varname), Z_STRLEN_P(varname), 0, ((IS_CV == IS_CONST) ? opline-&gt;op1.literal : NULL) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L38663'>varname</a>          38663 Zend/zend_vm_execute.h 			hash_value = Z_HASH_P(varname);</span>
+<span class='curline'><a href='../S/1748.html#L38665'>varname</a>          38665 Zend/zend_vm_execute.h 			hash_value = str_hash(Z_STRVAL_P(varname), Z_STRLEN_P(varname));</span>
+<span class='curline'><a href='../S/1748.html#L38668'>varname</a>          38668 Zend/zend_vm_execute.h 		if (zend_hash_quick_find(target_symbol_table, Z_STRVAL_P(varname), Z_STRLEN_P(varname)+1, hash_value, (void **) &amp;retval) == FAILURE) {</span>
+<span class='curline'><a href='../S/1748.html#L38672'>varname</a>          38672 Zend/zend_vm_execute.h 					zend_error(E_NOTICE,"Undefined variable: %s", Z_STRVAL_P(varname));</span>
+<span class='curline'><a href='../S/1748.html#L38678'>varname</a>          38678 Zend/zend_vm_execute.h 					zend_error(E_NOTICE,"Undefined variable: %s", Z_STRVAL_P(varname));</span>
+<span class='curline'><a href='../S/1748.html#L38682'>varname</a>          38682 Zend/zend_vm_execute.h 					zend_hash_quick_update(target_symbol_table, Z_STRVAL_P(varname), Z_STRLEN_P(varname)+1, hash_value, &amp;EG(uninitialized_zval_ptr), sizeof(zval *), (void **) &amp;retval);</span>
+<span class='curline'><a href='../S/1748.html#L38708'>varname</a>          38708 Zend/zend_vm_execute.h 	if (IS_CV != IS_CONST &amp;&amp; varname == &amp;tmp_varname) {</span>
+<span class='curline'><a href='../S/1748.html#L39037'>varname</a>          39037 Zend/zend_vm_execute.h 	zval tmp, *varname;</span>
+<span class='curline'><a href='../S/1748.html#L39058'>varname</a>          39058 Zend/zend_vm_execute.h 	varname = _get_zval_ptr_cv_BP_VAR_R(execute_data, opline-&gt;op1.var TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L39060'>varname</a>          39060 Zend/zend_vm_execute.h 	if (IS_CV != IS_CONST &amp;&amp; Z_TYPE_P(varname) != IS_STRING) {</span>
+<span class='curline'><a href='../S/1748.html#L39061'>varname</a>          39061 Zend/zend_vm_execute.h 		ZVAL_COPY_VALUE(&amp;tmp, varname);</span>
+<span class='curline'><a href='../S/1748.html#L39064'>varname</a>          39064 Zend/zend_vm_execute.h 		varname = &amp;tmp;</span>
+<span class='curline'><a href='../S/1748.html#L39066'>varname</a>          39066 Zend/zend_vm_execute.h 		Z_ADDREF_P(varname);</span>
+<span class='curline'><a href='../S/1748.html#L39078'>varname</a>          39078 Zend/zend_vm_execute.h 					if (IS_CV != IS_CONST &amp;&amp; varname == &amp;tmp) {</span>
+<span class='curline'><a href='../S/1748.html#L39081'>varname</a>          39081 Zend/zend_vm_execute.h 						zval_ptr_dtor(&amp;varname);</span>
+<span class='curline'><a href='../S/1748.html#L39094'>varname</a>          39094 Zend/zend_vm_execute.h 		zend_std_unset_static_property(ce, Z_STRVAL_P(varname), Z_STRLEN_P(varname), ((IS_CV == IS_CONST) ? opline-&gt;op1.literal : NULL) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L39096'>varname</a>          39096 Zend/zend_vm_execute.h 		ulong hash_value = zend_inline_hash_func(varname-&gt;value.str.val, varname-&gt;value.str.len+1);</span>
+<span class='curline'><a href='../S/1748.html#L39099'>varname</a>          39099 Zend/zend_vm_execute.h 		zend_delete_variable(execute_data, target_symbol_table, varname-&gt;value.str.val, varname-&gt;value.str.len+1, hash_value TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L39102'>varname</a>          39102 Zend/zend_vm_execute.h 	if (IS_CV != IS_CONST &amp;&amp; varname == &amp;tmp) {</span>
+<span class='curline'><a href='../S/1748.html#L39105'>varname</a>          39105 Zend/zend_vm_execute.h 		zval_ptr_dtor(&amp;varname);</span>
+<span class='curline'><a href='../S/1748.html#L39136'>varname</a>          39136 Zend/zend_vm_execute.h 		zval tmp, *varname = _get_zval_ptr_cv_BP_VAR_IS(execute_data, opline-&gt;op1.var TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L39138'>varname</a>          39138 Zend/zend_vm_execute.h 		if (IS_CV != IS_CONST &amp;&amp; Z_TYPE_P(varname) != IS_STRING) {</span>
+<span class='curline'><a href='../S/1748.html#L39139'>varname</a>          39139 Zend/zend_vm_execute.h 			ZVAL_COPY_VALUE(&amp;tmp, varname);</span>
+<span class='curline'><a href='../S/1748.html#L39142'>varname</a>          39142 Zend/zend_vm_execute.h 			varname = &amp;tmp;</span>
+<span class='curline'><a href='../S/1748.html#L39162'>varname</a>          39162 Zend/zend_vm_execute.h 			value = zend_std_get_static_property(ce, Z_STRVAL_P(varname), Z_STRLEN_P(varname), 1, ((IS_CV == IS_CONST) ? opline-&gt;op1.literal : NULL) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L39168'>varname</a>          39168 Zend/zend_vm_execute.h 			if (zend_hash_find(target_symbol_table, varname-&gt;value.str.val, varname-&gt;value.str.len+1, (void **) &amp;value) == FAILURE) {</span>
+<span class='curline'><a href='../S/1748.html#L39173'>varname</a>          39173 Zend/zend_vm_execute.h 		if (IS_CV != IS_CONST &amp;&amp; varname == &amp;tmp) {</span>
+<span class='curline'><a href='../S/865.html#L844'>varname</a>           844 ext/openssl/openssl.c #define SET_OPTIONAL_STRING_ARG(key, varname, defval)	\</span>
+<span class='curline'><a href='../S/865.html#L846'>varname</a>           846 ext/openssl/openssl.c 		varname = Z_STRVAL_PP(item); \</span>
+<span class='curline'><a href='../S/865.html#L848'>varname</a>           848 ext/openssl/openssl.c 		varname = defval</span>
+<span class='curline'><a href='../S/865.html#L850'>varname</a>           850 ext/openssl/openssl.c #define SET_OPTIONAL_LONG_ARG(key, varname, defval)	\</span>
+<span class='curline'><a href='../S/865.html#L852'>varname</a>           852 ext/openssl/openssl.c 		varname = Z_LVAL_PP(item); \</span>
+<span class='curline'><a href='../S/865.html#L854'>varname</a>           854 ext/openssl/openssl.c 		varname = defval</span>
+<span class='curline'><a href='../S/991.html#L82'>varname</a>            82 ext/readline/readline.c 	ZEND_ARG_INFO(0, varname)</span>
+<span class='curline'><a href='../S/1077.html#L640'>varname</a>           640 ext/standard/basic_functions.c 	ZEND_ARG_INFO(0, varname)</span>
+<span class='curline'><a href='../S/1077.html#L745'>varname</a>           745 ext/standard/basic_functions.c 	ZEND_ARG_INFO(0, varname)</span>
+<span class='curline'><a href='../S/1077.html#L753'>varname</a>           753 ext/standard/basic_functions.c 	ZEND_ARG_INFO(0, varname)</span>
+<span class='curline'><a href='../S/1077.html#L758'>varname</a>           758 ext/standard/basic_functions.c 	ZEND_ARG_INFO(0, varname)</span>
+<span class='curline'><a href='../S/1077.html#L4578'>varname</a>          4578 ext/standard/basic_functions.c 	char *varname;</span>
+<span class='curline'><a href='../S/1077.html#L4582'>varname</a>          4582 ext/standard/basic_functions.c 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &amp;varname, &amp;varname_len) == FAILURE) {</span>
+<span class='curline'><a href='../S/1077.html#L4586'>varname</a>          4586 ext/standard/basic_functions.c 	retval = cfg_get_entry(varname, varname_len + 1);</span>
+<span class='curline'><a href='../S/1077.html#L5303'>varname</a>          5303 ext/standard/basic_functions.c 	char *varname, *str;</span>
+<span class='curline'><a href='../S/1077.html#L5306'>varname</a>          5306 ext/standard/basic_functions.c 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &amp;varname, &amp;varname_len) == FAILURE) {</span>
+<span class='curline'><a href='../S/1077.html#L5310'>varname</a>          5310 ext/standard/basic_functions.c 	str = zend_ini_string(varname, varname_len + 1, 0);</span>
+<span class='curline'><a href='../S/1077.html#L5409'>varname</a>          5409 ext/standard/basic_functions.c 	char *varname, *new_value;</span>
+<span class='curline'><a href='../S/1077.html#L5413'>varname</a>          5413 ext/standard/basic_functions.c 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ss", &amp;varname, &amp;varname_len, &amp;new_value, &amp;new_value_len) == FAILURE) {</span>
+<span class='curline'><a href='../S/1077.html#L5417'>varname</a>          5417 ext/standard/basic_functions.c 	old_value = zend_ini_string(varname, varname_len + 1, 0);</span>
+<span class='curline'><a href='../S/1077.html#L5429'>varname</a>          5429 ext/standard/basic_functions.c 		if (_CHECK_PATH(varname, varname_len, "error_log") ||</span>
+<span class='curline'><a href='../S/1077.html#L5430'>varname</a>          5430 ext/standard/basic_functions.c 			_CHECK_PATH(varname, varname_len, "java.class.path") ||</span>
+<span class='curline'><a href='../S/1077.html#L5431'>varname</a>          5431 ext/standard/basic_functions.c 			_CHECK_PATH(varname, varname_len, "java.home") ||</span>
+<span class='curline'><a href='../S/1077.html#L5432'>varname</a>          5432 ext/standard/basic_functions.c 			_CHECK_PATH(varname, varname_len, "mail.log") ||</span>
+<span class='curline'><a href='../S/1077.html#L5433'>varname</a>          5433 ext/standard/basic_functions.c 			_CHECK_PATH(varname, varname_len, "java.library.path") ||</span>
+<span class='curline'><a href='../S/1077.html#L5434'>varname</a>          5434 ext/standard/basic_functions.c 			_CHECK_PATH(varname, varname_len, "vpopmail.directory")) {</span>
+<span class='curline'><a href='../S/1077.html#L5442'>varname</a>          5442 ext/standard/basic_functions.c 	if (zend_alter_ini_entry_ex(varname, varname_len + 1, new_value, new_value_len, PHP_INI_USER, PHP_INI_STAGE_RUNTIME, 0 TSRMLS_CC) == FAILURE) {</span>
+<span class='curline'><a href='../S/1077.html#L5453'>varname</a>          5453 ext/standard/basic_functions.c 	char *varname;</span>
+<span class='curline'><a href='../S/1077.html#L5456'>varname</a>          5456 ext/standard/basic_functions.c 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &amp;varname, &amp;varname_len) == FAILURE) {</span>
+<span class='curline'><a href='../S/1077.html#L5460'>varname</a>          5460 ext/standard/basic_functions.c 	zend_restore_ini_entry(varname, varname_len+1, PHP_INI_STAGE_RUNTIME);</span>
+<span class='curline'><a href='../S/1220.html#L69'>varname</a>            69 ext/wddx/wddx.c 		if (stack-&gt;varname) {						\</span>
+<span class='curline'><a href='../S/1220.html#L70'>varname</a>            70 ext/wddx/wddx.c 			ent.varname = estrdup(stack-&gt;varname);	\</span>
+<span class='curline'><a href='../S/1220.html#L71'>varname</a>            71 ext/wddx/wddx.c 			efree(stack-&gt;varname);					\</span>
+<span class='curline'><a href='../S/1220.html#L72'>varname</a>            72 ext/wddx/wddx.c 			stack-&gt;varname = NULL;					\</span>
+<span class='curline'><a href='../S/1220.html#L74'>varname</a>            74 ext/wddx/wddx.c 			ent.varname = NULL;						\</span>
+<span class='curline'><a href='../S/1220.html#L92'>varname</a>            92 ext/wddx/wddx.c 	char *varname;</span>
+<span class='curline'><a href='../S/1220.html#L97'>varname</a>            97 ext/wddx/wddx.c 	char *varname;</span>
+<span class='curline'><a href='../S/1220.html#L178'>varname</a>           178 ext/wddx/wddx.c 	stack-&gt;varname = NULL;</span>
+<span class='curline'><a href='../S/1220.html#L236'>varname</a>           236 ext/wddx/wddx.c 			if (((st_entry *)stack-&gt;elements[i])-&gt;varname) {</span>
+<span class='curline'><a href='../S/1220.html#L237'>varname</a>           237 ext/wddx/wddx.c 				efree(((st_entry *)stack-&gt;elements[i])-&gt;varname);</span>
+<span class='curline'><a href='../S/1220.html#L459'>varname</a>           459 ext/wddx/wddx.c 	zval **ent, *fname, **varname;</span>
+<span class='curline'><a href='../S/1220.html#L493'>varname</a>           493 ext/wddx/wddx.c 				 zend_hash_get_current_data(sleephash, (void **)&amp;varname) == SUCCESS;</span>
+<span class='curline'><a href='../S/1220.html#L495'>varname</a>           495 ext/wddx/wddx.c 				if (Z_TYPE_PP(varname) != IS_STRING) {</span>
+<span class='curline'><a href='../S/1220.html#L500'>varname</a>           500 ext/wddx/wddx.c 				if (zend_hash_find(objhash, Z_STRVAL_PP(varname), Z_STRLEN_PP(varname)+1, (void **)&amp;ent) == SUCCESS) {</span>
+<span class='curline'><a href='../S/1220.html#L501'>varname</a>           501 ext/wddx/wddx.c 					php_wddx_serialize_var(packet, *ent, Z_STRVAL_PP(varname), Z_STRLEN_PP(varname) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1220.html#L837'>varname</a>           837 ext/wddx/wddx.c 				stack-&gt;varname = estrdup(atts[i]);</span>
+<span class='curline'><a href='../S/1220.html#L882'>varname</a>           882 ext/wddx/wddx.c 		ent.varname = NULL;</span>
+<span class='curline'><a href='../S/1220.html#L987'>varname</a>           987 ext/wddx/wddx.c 				if (ent1-&gt;varname) {</span>
+<span class='curline'><a href='../S/1220.html#L988'>varname</a>           988 ext/wddx/wddx.c 					if (!strcmp(ent1-&gt;varname, PHP_CLASS_NAME_VAR) &amp;&amp;</span>
+<span class='curline'><a href='../S/1220.html#L1027'>varname</a>          1027 ext/wddx/wddx.c 						add_property_zval(ent2-&gt;data, ent1-&gt;varname, ent1-&gt;data);</span>
+<span class='curline'><a href='../S/1220.html#L1030'>varname</a>          1030 ext/wddx/wddx.c 						zend_symtable_update(target_hash, ent1-&gt;varname, strlen(ent1-&gt;varname)+1, &amp;ent1-&gt;data, sizeof(zval *), NULL);</span>
+<span class='curline'><a href='../S/1220.html#L1032'>varname</a>          1032 ext/wddx/wddx.c 					efree(ent1-&gt;varname);</span>
+<span class='curline'><a href='../S/1220.html#L1041'>varname</a>          1041 ext/wddx/wddx.c 	} else if (!strcmp(name, EL_VAR) &amp;&amp; stack-&gt;varname) {</span>
+<span class='curline'><a href='../S/1220.html#L1042'>varname</a>          1042 ext/wddx/wddx.c 		efree(stack-&gt;varname);</span>
+<span class='curline'><a href='../S/1220.html#L1043'>varname</a>          1043 ext/wddx/wddx.c 		stack-&gt;varname = NULL;</span>
+<span class='curline'><a href='../S/1220.html#L1103'>varname</a>          1103 ext/wddx/wddx.c 					if (ent-&gt;varname) {</span>
+<span class='curline'><a href='../S/1220.html#L1104'>varname</a>          1104 ext/wddx/wddx.c 						efree(ent-&gt;varname);</span>
+<span class='curline'><a href='../S/1374.html#L894'>varname</a>           894 main/php_ini.c PHPAPI int cfg_get_long(const char *varname, long *result)</span>
+<span class='curline'><a href='../S/1374.html#L898'>varname</a>           898 main/php_ini.c 	if (zend_hash_find(&amp;configuration_hash, varname, strlen(varname) + 1, (void **) &amp;tmp) == FAILURE) {</span>
+<span class='curline'><a href='../S/1374.html#L912'>varname</a>           912 main/php_ini.c PHPAPI int cfg_get_double(const char *varname, double *result)</span>
+<span class='curline'><a href='../S/1374.html#L916'>varname</a>           916 main/php_ini.c 	if (zend_hash_find(&amp;configuration_hash, varname, strlen(varname) + 1, (void **) &amp;tmp) == FAILURE) {</span>
+<span class='curline'><a href='../S/1374.html#L930'>varname</a>           930 main/php_ini.c PHPAPI int cfg_get_string(const char *varname, char **result)</span>
+<span class='curline'><a href='../S/1374.html#L934'>varname</a>           934 main/php_ini.c 	if (zend_hash_find(&amp;configuration_hash, varname, strlen(varname)+1, (void **) &amp;tmp) == FAILURE) {</span>
+<span class='curline'><a href='../S/1375.html#L32'>varname</a>            32 main/php_ini.h PHPAPI int cfg_get_long(const char *varname, long *result);</span>
+<span class='curline'><a href='../S/1375.html#L33'>varname</a>            33 main/php_ini.h PHPAPI int cfg_get_double(const char *varname, double *result);</span>
+<span class='curline'><a href='../S/1375.html#L34'>varname</a>            34 main/php_ini.h PHPAPI int cfg_get_string(const char *varname, char **result);</span>
+<span class='curline'><a href='../S/1395.html#L93'>varname</a>            93 main/rfc1867.c static void normalize_protected_variable(char *varname TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1395.html#L95'>varname</a>            95 main/rfc1867.c 	char *s = varname, *index = NULL, *indexend = NULL, *p;</span>
+<span class='curline'><a href='../S/1395.html#L103'>varname</a>           103 main/rfc1867.c 	if (s != varname) {</span>
+<span class='curline'><a href='../S/1395.html#L104'>varname</a>           104 main/rfc1867.c 		memmove(varname, s, strlen(s)+1);</span>
+<span class='curline'><a href='../S/1395.html#L107'>varname</a>           107 main/rfc1867.c 	for (p = varname; *p &amp;&amp; *p != '['; p++) {</span>
+<span class='curline'><a href='../S/1395.html#L117'>varname</a>           117 main/rfc1867.c 	index = strchr(varname, '[');</span>
+<span class='curline'><a href='../S/1395.html#L151'>varname</a>           151 main/rfc1867.c static void add_protected_variable(char *varname TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1395.html#L155'>varname</a>           155 main/rfc1867.c 	normalize_protected_variable(varname TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1395.html#L156'>varname</a>           156 main/rfc1867.c 	zend_hash_add(&amp;PG(rfc1867_protected_variables), varname, strlen(varname)+1, &amp;dummy, sizeof(int), NULL);</span>
+<span class='curline'><a href='../S/1395.html#L160'>varname</a>           160 main/rfc1867.c static zend_bool is_protected_variable(char *varname TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1395.html#L162'>varname</a>           162 main/rfc1867.c 	normalize_protected_variable(varname TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1395.html#L163'>varname</a>           163 main/rfc1867.c 	return zend_hash_exists(&amp;PG(rfc1867_protected_variables), varname, strlen(varname)+1);</span>
+</pre>
+</body>
+</html>

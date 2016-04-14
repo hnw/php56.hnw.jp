@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>pCopyConstructor</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/1682.html#L745'>pCopyConstructor</a>  745 Zend/zend_hash.c ZEND_API void zend_hash_copy(HashTable *target, HashTable *source, copy_ctor_func_t pCopyConstructor, void *tmp, uint size)</span>
+<span class='curline'><a href='../S/1682.html#L765'>pCopyConstructor</a>  765 Zend/zend_hash.c 		if (pCopyConstructor) {</span>
+<span class='curline'><a href='../S/1682.html#L766'>pCopyConstructor</a>  766 Zend/zend_hash.c 			pCopyConstructor(new_entry);</span>
+<span class='curline'><a href='../S/1682.html#L776'>pCopyConstructor</a>  776 Zend/zend_hash.c ZEND_API void _zend_hash_merge(HashTable *target, HashTable *source, copy_ctor_func_t pCopyConstructor, void *tmp, uint size, int overwrite ZEND_FILE_LINE_DC)</span>
+<span class='curline'><a href='../S/1682.html#L788'>pCopyConstructor</a>  788 Zend/zend_hash.c 			if (_zend_hash_quick_add_or_update(target, p-&gt;arKey, p-&gt;nKeyLength, p-&gt;h, p-&gt;pData, size, &amp;t, mode ZEND_FILE_LINE_RELAY_CC)==SUCCESS &amp;&amp; pCopyConstructor) {</span>
+<span class='curline'><a href='../S/1682.html#L789'>pCopyConstructor</a>  789 Zend/zend_hash.c 				pCopyConstructor(t);</span>
+<span class='curline'><a href='../S/1682.html#L792'>pCopyConstructor</a>  792 Zend/zend_hash.c 			if ((mode==HASH_UPDATE || !zend_hash_index_exists(target, p-&gt;h)) &amp;&amp; zend_hash_index_update(target, p-&gt;h, p-&gt;pData, size, &amp;t)==SUCCESS &amp;&amp; pCopyConstructor) {</span>
+<span class='curline'><a href='../S/1682.html#L793'>pCopyConstructor</a>  793 Zend/zend_hash.c 				pCopyConstructor(t);</span>
+<span class='curline'><a href='../S/1682.html#L813'>pCopyConstructor</a>  813 Zend/zend_hash.c ZEND_API void zend_hash_merge_ex(HashTable *target, HashTable *source, copy_ctor_func_t pCopyConstructor, uint size, merge_checker_func_t pMergeSource, void *pParam)</span>
+<span class='curline'><a href='../S/1682.html#L824'>pCopyConstructor</a>  824 Zend/zend_hash.c 			if (zend_hash_quick_update(target, p-&gt;arKey, p-&gt;nKeyLength, p-&gt;h, p-&gt;pData, size, &amp;t)==SUCCESS &amp;&amp; pCopyConstructor) {</span>
+<span class='curline'><a href='../S/1682.html#L825'>pCopyConstructor</a>  825 Zend/zend_hash.c 				pCopyConstructor(t);</span>
+<span class='curline'><a href='../S/1682.html#L1301'>pCopyConstructor</a> 1301 Zend/zend_hash.c ZEND_API void _zend_hash_splice(HashTable *ht, uint nDataSize, copy_ctor_func_t pCopyConstructor, uint offset, uint length, void **list, uint list_count, HashTable *removed ZEND_FILE_LINE_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1682.html#L1323'>pCopyConstructor</a> 1323 Zend/zend_hash.c 			if (pCopyConstructor) {</span>
+<span class='curline'><a href='../S/1682.html#L1324'>pCopyConstructor</a> 1324 Zend/zend_hash.c 				pCopyConstructor(new_entry);</span>
+<span class='curline'><a href='../S/1682.html#L1353'>pCopyConstructor</a> 1353 Zend/zend_hash.c 			if (pCopyConstructor) {</span>
+<span class='curline'><a href='../S/1682.html#L1354'>pCopyConstructor</a> 1354 Zend/zend_hash.c 				pCopyConstructor(q-&gt;pData);</span>
+<span class='curline'><a href='../S/1683.html#L217'>pCopyConstructor</a>  217 Zend/zend_hash.h ZEND_API void zend_hash_copy(HashTable *target, HashTable *source, copy_ctor_func_t pCopyConstructor, void *tmp, uint size);</span>
+<span class='curline'><a href='../S/1683.html#L218'>pCopyConstructor</a>  218 Zend/zend_hash.h ZEND_API void _zend_hash_merge(HashTable *target, HashTable *source, copy_ctor_func_t pCopyConstructor, void *tmp, uint size, int overwrite ZEND_FILE_LINE_DC);</span>
+<span class='curline'><a href='../S/1683.html#L219'>pCopyConstructor</a>  219 Zend/zend_hash.h ZEND_API void zend_hash_merge_ex(HashTable *target, HashTable *source, copy_ctor_func_t pCopyConstructor, uint size, merge_checker_func_t pMergeSource, void *pParam);</span>
+<span class='curline'><a href='../S/1683.html#L224'>pCopyConstructor</a>  224 Zend/zend_hash.h #define zend_hash_merge(target, source, pCopyConstructor, tmp, size, overwrite)					\</span>
+<span class='curline'><a href='../S/1683.html#L225'>pCopyConstructor</a>  225 Zend/zend_hash.h 	_zend_hash_merge(target, source, pCopyConstructor, tmp, size, overwrite ZEND_FILE_LINE_CC)</span>
+<span class='curline'><a href='../S/1683.html#L232'>pCopyConstructor</a>  232 Zend/zend_hash.h ZEND_API void _zend_hash_splice(HashTable *ht, uint nDataSize, copy_ctor_func_t pCopyConstructor, uint offset, uint length, void **list, uint list_count, HashTable *removed ZEND_FILE_LINE_DC);</span>
+<span class='curline'><a href='../S/1683.html#L233'>pCopyConstructor</a>  233 Zend/zend_hash.h #define zend_hash_splice(ht, nDataSize, pCopyConstructor, offset, length, list, list_count, removed) \</span>
+<span class='curline'><a href='../S/1683.html#L234'>pCopyConstructor</a>  234 Zend/zend_hash.h 	_zend_hash_splice(ht, nDataSize, pCopyConstructor, offset, length, list, list_count, removed ZEND_FILE_LINE_CC)</span>
+<span class='curline'><a href='../S/1739.html#L267'>pCopyConstructor</a>  267 Zend/zend_ts_hash.c ZEND_API void zend_ts_hash_copy(TsHashTable *target, TsHashTable *source, copy_ctor_func_t pCopyConstructor, void *tmp, uint size)</span>
+<span class='curline'><a href='../S/1739.html#L271'>pCopyConstructor</a>  271 Zend/zend_ts_hash.c 	zend_hash_copy(TS_HASH(target), TS_HASH(source), pCopyConstructor, tmp, size);</span>
+<span class='curline'><a href='../S/1739.html#L276'>pCopyConstructor</a>  276 Zend/zend_ts_hash.c ZEND_API void zend_ts_hash_copy_to_hash(HashTable *target, TsHashTable *source, copy_ctor_func_t pCopyConstructor, void *tmp, uint size)</span>
+<span class='curline'><a href='../S/1739.html#L279'>pCopyConstructor</a>  279 Zend/zend_ts_hash.c 	zend_hash_copy(target, TS_HASH(source), pCopyConstructor, tmp, size);</span>
+<span class='curline'><a href='../S/1739.html#L283'>pCopyConstructor</a>  283 Zend/zend_ts_hash.c ZEND_API void zend_ts_hash_merge(TsHashTable *target, TsHashTable *source, copy_ctor_func_t pCopyConstructor, void *tmp, uint size, int overwrite)</span>
+<span class='curline'><a href='../S/1739.html#L287'>pCopyConstructor</a>  287 Zend/zend_ts_hash.c 	zend_hash_merge(TS_HASH(target), TS_HASH(source), pCopyConstructor, tmp, size, overwrite);</span>
+<span class='curline'><a href='../S/1739.html#L292'>pCopyConstructor</a>  292 Zend/zend_ts_hash.c ZEND_API void zend_ts_hash_merge_ex(TsHashTable *target, TsHashTable *source, copy_ctor_func_t pCopyConstructor, uint size, merge_checker_func_t pMergeSource, void *pParam)</span>
+<span class='curline'><a href='../S/1739.html#L296'>pCopyConstructor</a>  296 Zend/zend_ts_hash.c 	zend_hash_merge_ex(TS_HASH(target), TS_HASH(source), pCopyConstructor, size, pMergeSource, pParam);</span>
+<span class='curline'><a href='../S/1740.html#L99'>pCopyConstructor</a>   99 Zend/zend_ts_hash.h ZEND_API void zend_ts_hash_copy(TsHashTable *target, TsHashTable *source, copy_ctor_func_t pCopyConstructor, void *tmp, uint size);</span>
+<span class='curline'><a href='../S/1740.html#L100'>pCopyConstructor</a>  100 Zend/zend_ts_hash.h ZEND_API void zend_ts_hash_copy_to_hash(HashTable *target, TsHashTable *source, copy_ctor_func_t pCopyConstructor, void *tmp, uint size);</span>
+<span class='curline'><a href='../S/1740.html#L101'>pCopyConstructor</a>  101 Zend/zend_ts_hash.h ZEND_API void zend_ts_hash_merge(TsHashTable *target, TsHashTable *source, copy_ctor_func_t pCopyConstructor, void *tmp, uint size, int overwrite);</span>
+<span class='curline'><a href='../S/1740.html#L102'>pCopyConstructor</a>  102 Zend/zend_ts_hash.h ZEND_API void zend_ts_hash_merge_ex(TsHashTable *target, TsHashTable *source, copy_ctor_func_t pCopyConstructor, uint size, merge_checker_func_t pMergeSource, void *pParam);</span>
+<span class='curline'><a href='../S/856.html#L891'>pCopyConstructor</a>  891 ext/opcache/zend_accelerator_util_funcs.c static int zend_hash_unique_copy(HashTable *target, HashTable *source, unique_copy_ctor_func_t pCopyConstructor, uint size, int ignore_dups, void **fail_data, void **conflict_data)</span>
+<span class='curline'><a href='../S/856.html#L900'>pCopyConstructor</a>  900 ext/opcache/zend_accelerator_util_funcs.c 				if (pCopyConstructor) {</span>
+<span class='curline'><a href='../S/856.html#L901'>pCopyConstructor</a>  901 ext/opcache/zend_accelerator_util_funcs.c 					pCopyConstructor(t);</span>
+<span class='curline'><a href='../S/856.html#L908'>pCopyConstructor</a>  908 ext/opcache/zend_accelerator_util_funcs.c 						if (pCopyConstructor) {</span>
+<span class='curline'><a href='../S/856.html#L909'>pCopyConstructor</a>  909 ext/opcache/zend_accelerator_util_funcs.c 							pCopyConstructor(t);</span>
+<span class='curline'><a href='../S/856.html#L921'>pCopyConstructor</a>  921 ext/opcache/zend_accelerator_util_funcs.c 				if (pCopyConstructor) {</span>
+<span class='curline'><a href='../S/856.html#L922'>pCopyConstructor</a>  922 ext/opcache/zend_accelerator_util_funcs.c 					pCopyConstructor(t);</span>
+<span class='curline'><a href='../S/856.html#L937'>pCopyConstructor</a>  937 ext/opcache/zend_accelerator_util_funcs.c static void zend_accel_function_hash_copy(HashTable *target, HashTable *source, unique_copy_ctor_func_t pCopyConstructor)</span>
+<span class='curline'><a href='../S/856.html#L942'>pCopyConstructor</a>  942 ext/opcache/zend_accelerator_util_funcs.c 	if (zend_hash_unique_copy(target, source, pCopyConstructor, sizeof(zend_function), 0, (void**)&amp;function1, (void**)&amp;function2) != SUCCESS) {</span>
+<span class='curline'><a href='../S/856.html#L958'>pCopyConstructor</a>  958 ext/opcache/zend_accelerator_util_funcs.c static void zend_accel_class_hash_copy(HashTable *target, HashTable *source, unique_copy_ctor_func_t pCopyConstructor TSRMLS_DC)</span>
+<span class='curline'><a href='../S/856.html#L962'>pCopyConstructor</a>  962 ext/opcache/zend_accelerator_util_funcs.c 	if (zend_hash_unique_copy(target, source, pCopyConstructor, sizeof(zend_class_entry*), ZCG(accel_directives).ignore_dups, (void**)&amp;pce1, (void**)&amp;pce2) != SUCCESS) {</span>
+</pre>
+</body>
+</html>

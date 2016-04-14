@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>zipentry</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/985.html#L352'>zipentry</a>          352 ext/phar/zip.c 		phar_zip_central_dir_file zipentry;</span>
+<span class='curline'><a href='../S/985.html#L355'>zipentry</a>          355 ext/phar/zip.c 		if (sizeof(zipentry) != php_stream_read(fp, (char *) &amp;zipentry, sizeof(zipentry))) {</span>
+<span class='curline'><a href='../S/985.html#L360'>zipentry</a>          360 ext/phar/zip.c 		if (memcmp("PK\1\2", zipentry.signature, 4)) {</span>
+<span class='curline'><a href='../S/985.html#L369'>zipentry</a>          369 ext/phar/zip.c 		entry.compressed_filesize = PHAR_GET_32(zipentry.compsize);</span>
+<span class='curline'><a href='../S/985.html#L370'>zipentry</a>          370 ext/phar/zip.c 		entry.uncompressed_filesize = PHAR_GET_32(zipentry.uncompsize);</span>
+<span class='curline'><a href='../S/985.html#L371'>zipentry</a>          371 ext/phar/zip.c 		entry.crc32 = PHAR_GET_32(zipentry.crc32);</span>
+<span class='curline'><a href='../S/985.html#L373'>zipentry</a>          373 ext/phar/zip.c 		entry.timestamp = phar_zip_d2u_time(zipentry.timestamp, zipentry.datestamp);</span>
+<span class='curline'><a href='../S/985.html#L375'>zipentry</a>          375 ext/phar/zip.c 		entry.header_offset = PHAR_GET_32(zipentry.offset);</span>
+<span class='curline'><a href='../S/985.html#L376'>zipentry</a>          376 ext/phar/zip.c 		entry.offset = entry.offset_abs = PHAR_GET_32(zipentry.offset) + sizeof(phar_zip_file_header) + PHAR_GET_16(zipentry.filename_len) +</span>
+<span class='curline'><a href='../S/985.html#L377'>zipentry</a>          377 ext/phar/zip.c 			PHAR_GET_16(zipentry.extra_len);</span>
+<span class='curline'><a href='../S/985.html#L379'>zipentry</a>          379 ext/phar/zip.c 		if (PHAR_GET_16(zipentry.flags) &amp; PHAR_ZIP_FLAG_ENCRYPTED) {</span>
+<span class='curline'><a href='../S/985.html#L383'>zipentry</a>          383 ext/phar/zip.c 		if (!PHAR_GET_16(zipentry.filename_len)) {</span>
+<span class='curline'><a href='../S/985.html#L387'>zipentry</a>          387 ext/phar/zip.c 		entry.filename_len = PHAR_GET_16(zipentry.filename_len);</span>
+<span class='curline'><a href='../S/985.html#L430'>zipentry</a>          430 ext/phar/zip.c 			php_stream_seek(fp, sizeof(phar_zip_file_header) + entry.header_offset + entry.filename_len + PHAR_GET_16(zipentry.extra_len), SEEK_SET);</span>
+<span class='curline'><a href='../S/985.html#L464'>zipentry</a>          464 ext/phar/zip.c 		if (PHAR_GET_16(zipentry.extra_len)) {</span>
+<span class='curline'><a href='../S/985.html#L466'>zipentry</a>          466 ext/phar/zip.c 			if (FAILURE == phar_zip_process_extra(fp, &amp;entry, PHAR_GET_16(zipentry.extra_len) TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/985.html#L470'>zipentry</a>          470 ext/phar/zip.c 			php_stream_seek(fp, loc + PHAR_GET_16(zipentry.extra_len), SEEK_SET);</span>
+<span class='curline'><a href='../S/985.html#L473'>zipentry</a>          473 ext/phar/zip.c 		switch (PHAR_GET_16(zipentry.compressed)) {</span>
+<span class='curline'><a href='../S/985.html#L533'>zipentry</a>          533 ext/phar/zip.c 		if (PHAR_GET_16(zipentry.comment_len)) {</span>
+<span class='curline'><a href='../S/985.html#L534'>zipentry</a>          534 ext/phar/zip.c 			if (PHAR_GET_16(zipentry.comment_len) != php_stream_read(fp, buf, PHAR_GET_16(zipentry.comment_len))) {</span>
+<span class='curline'><a href='../S/985.html#L540'>zipentry</a>          540 ext/phar/zip.c 			entry.metadata_len = PHAR_GET_16(zipentry.comment_len);</span>
+<span class='curline'><a href='../S/985.html#L542'>zipentry</a>          542 ext/phar/zip.c 			if (phar_parse_metadata(&amp;p, &amp;(entry.metadata), PHAR_GET_16(zipentry.comment_len) TSRMLS_CC) == FAILURE) {</span>
+<span class='curline'><a href='../S/985.html#L553'>zipentry</a>          553 ext/phar/zip.c 				ZVAL_STRINGL(entry.metadata, pestrndup(buf, PHAR_GET_16(zipentry.comment_len), entry.is_persistent), PHAR_GET_16(zipentry.comment_len), 0);</span>
+<span class='curline'><a href='../S/985.html#L567'>zipentry</a>          567 ext/phar/zip.c 			php_stream_seek(fp, PHAR_GET_32(zipentry.offset), SEEK_SET);</span>
+</pre>
+</body>
+</html>

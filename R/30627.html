@@ -1,0 +1,302 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>zend_module_entry</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/1646.html#L38'>zend_module_entry</a>   38 Zend/zend_API.c static zend_module_entry **module_request_startup_handlers;</span>
+<span class='curline'><a href='../S/1646.html#L39'>zend_module_entry</a>   39 Zend/zend_API.c static zend_module_entry **module_request_shutdown_handlers;</span>
+<span class='curline'><a href='../S/1646.html#L40'>zend_module_entry</a>   40 Zend/zend_API.c static zend_module_entry **module_post_deactivate_handlers;</span>
+<span class='curline'><a href='../S/1646.html#L1712'>zend_module_entry</a> 1712 Zend/zend_API.c ZEND_API int zend_startup_module_ex(zend_module_entry *module TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1646.html#L1728'>zend_module_entry</a> 1728 Zend/zend_API.c 				zend_module_entry *req_mod;</span>
+<span class='curline'><a href='../S/1646.html#L1775'>zend_module_entry</a> 1775 Zend/zend_API.c 	zend_module_entry *m, *r;</span>
+<span class='curline'><a href='../S/1646.html#L1779'>zend_module_entry</a> 1779 Zend/zend_API.c 		m = (zend_module_entry*)(*b1)-&gt;pData;</span>
+<span class='curline'><a href='../S/1646.html#L1786'>zend_module_entry</a> 1786 Zend/zend_API.c 						r = (zend_module_entry*)(*b2)-&gt;pData;</span>
+<span class='curline'><a href='../S/1646.html#L1807'>zend_module_entry</a> 1807 Zend/zend_API.c 	zend_module_entry *module;</span>
+<span class='curline'><a href='../S/1646.html#L1828'>zend_module_entry</a> 1828 Zend/zend_API.c 	module_request_startup_handlers = (zend_module_entry**)malloc(</span>
+<span class='curline'><a href='../S/1646.html#L1829'>zend_module_entry</a> 1829 Zend/zend_API.c 	    sizeof(zend_module_entry*) *</span>
+<span class='curline'><a href='../S/1646.html#L1898'>zend_module_entry</a> 1898 Zend/zend_API.c ZEND_API zend_module_entry* zend_register_module_ex(zend_module_entry *module TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1646.html#L1902'>zend_module_entry</a> 1902 Zend/zend_API.c 	zend_module_entry *module_ptr;</span>
+<span class='curline'><a href='../S/1646.html#L1936'>zend_module_entry</a> 1936 Zend/zend_API.c 	if (zend_hash_add(&amp;module_registry, lcname, name_len+1, (void *)module, sizeof(zend_module_entry), (void**)&amp;module_ptr)==FAILURE) {</span>
+<span class='curline'><a href='../S/1646.html#L1956'>zend_module_entry</a> 1956 Zend/zend_API.c ZEND_API zend_module_entry* zend_register_internal_module(zend_module_entry *module TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1646.html#L2327'>zend_module_entry</a> 2327 Zend/zend_API.c ZEND_API int zend_startup_module(zend_module_entry *module) /* {{{ */</span>
+<span class='curline'><a href='../S/1646.html#L2340'>zend_module_entry</a> 2340 Zend/zend_API.c 	zend_module_entry *module;</span>
+<span class='curline'><a href='../S/1646.html#L2362'>zend_module_entry</a> 2362 Zend/zend_API.c void module_destructor(zend_module_entry *module) /* {{{ */</span>
+<span class='curline'><a href='../S/1646.html#L2409'>zend_module_entry</a> 2409 Zend/zend_API.c 	zend_module_entry **p = module_request_startup_handlers;</span>
+<span class='curline'><a href='../S/1646.html#L2412'>zend_module_entry</a> 2412 Zend/zend_API.c 		zend_module_entry *module = *p;</span>
+<span class='curline'><a href='../S/1646.html#L2424'>zend_module_entry</a> 2424 Zend/zend_API.c int module_registry_cleanup(zend_module_entry *module TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1646.html#L2444'>zend_module_entry</a> 2444 Zend/zend_API.c 			zend_module_entry **p = module_request_shutdown_handlers;</span>
+<span class='curline'><a href='../S/1646.html#L2447'>zend_module_entry</a> 2447 Zend/zend_API.c 				zend_module_entry *module = *p;</span>
+<span class='curline'><a href='../S/1646.html#L2468'>zend_module_entry</a> 2468 Zend/zend_API.c int module_registry_unload_temp(const zend_module_entry *module TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1646.html#L2474'>zend_module_entry</a> 2474 Zend/zend_API.c static int exec_done_cb(zend_module_entry *module TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1646.html#L2489'>zend_module_entry</a> 2489 Zend/zend_API.c 		zend_module_entry **p = module_post_deactivate_handlers;</span>
+<span class='curline'><a href='../S/1646.html#L2492'>zend_module_entry</a> 2492 Zend/zend_API.c 			zend_module_entry *module = *p;</span>
+<span class='curline'><a href='../S/1646.html#L3413'>zend_module_entry</a> 3413 Zend/zend_API.c 	zend_module_entry *module;</span>
+<span class='curline'><a href='../S/1647.html#L137'>zend_module_entry</a>  137 Zend/zend_API.h 	ZEND_DLEXPORT zend_module_entry *get_module(void) { return &amp;name##_module_entry; }\</span>
+<span class='curline'><a href='../S/1647.html#L270'>zend_module_entry</a>  270 Zend/zend_API.h ZEND_API int zend_startup_module(zend_module_entry *module_entry);</span>
+<span class='curline'><a href='../S/1647.html#L271'>zend_module_entry</a>  271 Zend/zend_API.h ZEND_API zend_module_entry* zend_register_internal_module(zend_module_entry *module_entry TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1647.html#L272'>zend_module_entry</a>  272 Zend/zend_API.h ZEND_API zend_module_entry* zend_register_module_ex(zend_module_entry *module TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1647.html#L273'>zend_module_entry</a>  273 Zend/zend_API.h ZEND_API int zend_startup_module_ex(zend_module_entry *module TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1651.html#L326'>zend_module_entry</a>  326 Zend/zend_builtin_functions.c zend_module_entry zend_builtin_module = { /* {{{ */</span>
+<span class='curline'><a href='../S/1651.html#L1898'>zend_module_entry</a> 1898 Zend/zend_builtin_functions.c static int add_extension_info(zend_module_entry *module, void *arg TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1651.html#L1970'>zend_module_entry</a> 1970 Zend/zend_builtin_functions.c 		zend_module_entry *module;</span>
+<span class='curline'><a href='../S/1651.html#L2452'>zend_module_entry</a> 2452 Zend/zend_builtin_functions.c 	zend_module_entry *module;</span>
+<span class='curline'><a href='../S/1689.html#L100'>zend_module_entry</a>  100 Zend/zend_ini.h ZEND_API void display_ini_entries(zend_module_entry *module);</span>
+<span class='curline'><a href='../S/1709.html#L33'>zend_module_entry</a>   33 Zend/zend_modules.h #define ZEND_MODULE_INFO_FUNC_ARGS zend_module_entry *zend_module TSRMLS_DC</span>
+<span class='curline'><a href='../S/1709.html#L43'>zend_module_entry</a>   43 Zend/zend_modules.h #define STANDARD_MODULE_HEADER_EX sizeof(zend_module_entry), ZEND_MODULE_API_NO, ZEND_DEBUG, USING_ZTS</span>
+<span class='curline'><a href='../S/1709.html#L70'>zend_module_entry</a>   70 Zend/zend_modules.h typedef struct _zend_module_entry zend_module_entry;</span>
+<span class='curline'><a href='../S/1709.html#L127'>zend_module_entry</a>  127 Zend/zend_modules.h void module_destructor(zend_module_entry *module);</span>
+<span class='curline'><a href='../S/1709.html#L128'>zend_module_entry</a>  128 Zend/zend_modules.h int module_registry_cleanup(zend_module_entry *module TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1709.html#L129'>zend_module_entry</a>  129 Zend/zend_modules.h int module_registry_request_startup(zend_module_entry *module TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1709.html#L130'>zend_module_entry</a>  130 Zend/zend_modules.h int module_registry_unload_temp(const zend_module_entry *module TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1.html#L112'>zend_module_entry</a>  112 ext/bcmath/bcmath.c zend_module_entry bcmath_module_entry = {</span>
+<span class='curline'><a href='../S/29.html#L26'>zend_module_entry</a>   26 ext/bcmath/php_bcmath.h extern zend_module_entry bcmath_module_entry;</span>
+<span class='curline'><a href='../S/30.html#L114'>zend_module_entry</a>  114 ext/bz2/bz2.c  zend_module_entry bz2_module_entry = {</span>
+<span class='curline'><a href='../S/32.html#L26'>zend_module_entry</a>   26 ext/bz2/php_bz2.h extern zend_module_entry bz2_module_entry;</span>
+<span class='curline'><a href='../S/34.html#L155'>zend_module_entry</a>  155 ext/calendar/calendar.c zend_module_entry calendar_module_entry = {</span>
+<span class='curline'><a href='../S/41.html#L4'>zend_module_entry</a>    4 ext/calendar/php_calendar.h extern zend_module_entry calendar_module_entry;</span>
+<span class='curline'><a href='../S/45.html#L236'>zend_module_entry</a>  236 ext/com_dotnet/com_extension.c zend_module_entry com_dotnet_module_entry = {</span>
+<span class='curline'><a href='../S/55.html#L24'>zend_module_entry</a>   24 ext/com_dotnet/php_com_dotnet.h extern zend_module_entry com_dotnet_module_entry;</span>
+<span class='curline'><a href='../S/57.html#L115'>zend_module_entry</a>  115 ext/ctype/ctype.c zend_module_entry ctype_module_entry = {</span>
+<span class='curline'><a href='../S/58.html#L24'>zend_module_entry</a>   24 ext/ctype/php_ctype.h extern zend_module_entry ctype_module_entry;</span>
+<span class='curline'><a href='../S/60.html#L479'>zend_module_entry</a>  479 ext/curl/interface.c zend_module_entry curl_module_entry = {</span>
+<span class='curline'><a href='../S/62.html#L48'>zend_module_entry</a>   48 ext/curl/php_curl.h extern zend_module_entry curl_module_entry;</span>
+<span class='curline'><a href='../S/79.html#L656'>zend_module_entry</a>  656 ext/date/php_date.c zend_module_entry date_module_entry = {</span>
+<span class='curline'><a href='../S/80.html#L27'>zend_module_entry</a>   27 ext/date/php_date.h extern zend_module_entry date_module_entry;</span>
+<span class='curline'><a href='../S/81.html#L172'>zend_module_entry</a>  172 ext/dba/dba.c  zend_module_entry dba_module_entry = {</span>
+<span class='curline'><a href='../S/109.html#L71'>zend_module_entry</a>   71 ext/dba/php_dba.h extern zend_module_entry dba_module_entry;</span>
+<span class='curline'><a href='../S/145.html#L640'>zend_module_entry</a>  640 ext/dom/php_dom.c zend_module_entry dom_module_entry = { /* {{{ */</span>
+<span class='curline'><a href='../S/146.html#L26'>zend_module_entry</a>   26 ext/dom/php_dom.h extern zend_module_entry dom_module_entry;</span>
+<span class='curline'><a href='../S/154.html#L155'>zend_module_entry</a>  155 ext/enchant/enchant.c zend_module_entry enchant_module_entry = {</span>
+<span class='curline'><a href='../S/155.html#L24'>zend_module_entry</a>   24 ext/enchant/php_enchant.h extern zend_module_entry enchant_module_entry;</span>
+<span class='curline'><a href='../S/156.html#L81'>zend_module_entry</a>   81 ext/ereg/ereg.c zend_module_entry ereg_module_entry = {</span>
+<span class='curline'><a href='../S/157.html#L27'>zend_module_entry</a>   27 ext/ereg/php_ereg.h extern zend_module_entry ereg_module_entry;</span>
+<span class='curline'><a href='../S/172.html#L253'>zend_module_entry</a>  253 ext/exif/exif.c zend_module_entry exif_module_entry = {</span>
+<span class='curline'><a href='../S/173.html#L23'>zend_module_entry</a>   23 ext/exif/php_exif.h extern zend_module_entry exif_module_entry;</span>
+<span class='curline'><a href='../S/175.html#L250'>zend_module_entry</a>  250 ext/fileinfo/fileinfo.c zend_module_entry fileinfo_module_entry = {</span>
+<span class='curline'><a href='../S/199.html#L24'>zend_module_entry</a>   24 ext/fileinfo/php_fileinfo.h extern zend_module_entry fileinfo_module_entry;</span>
+<span class='curline'><a href='../S/201.html#L138'>zend_module_entry</a>  138 ext/filter/filter.c zend_module_entry filter_module_entry = {</span>
+<span class='curline'><a href='../S/204.html#L34'>zend_module_entry</a>   34 ext/filter/php_filter.h extern zend_module_entry filter_module_entry;</span>
+<span class='curline'><a href='../S/208.html#L284'>zend_module_entry</a>  284 ext/ftp/php_ftp.c zend_module_entry php_ftp_module_entry = {</span>
+<span class='curline'><a href='../S/209.html#L27'>zend_module_entry</a>   27 ext/ftp/php_ftp.h extern zend_module_entry php_ftp_module_entry;</span>
+<span class='curline'><a href='../S/210.html#L1042'>zend_module_entry</a> 1042 ext/gd/gd.c    zend_module_entry gd_module_entry = {</span>
+<span class='curline'><a href='../S/282.html#L64'>zend_module_entry</a>   64 ext/gd/php_gd.h extern zend_module_entry gd_module_entry;</span>
+<span class='curline'><a href='../S/283.html#L121'>zend_module_entry</a>  121 ext/gettext/gettext.c zend_module_entry php_gettext_module_entry = {</span>
+<span class='curline'><a href='../S/284.html#L26'>zend_module_entry</a>   26 ext/gettext/php_gettext.h extern zend_module_entry php_gettext_module_entry;</span>
+<span class='curline'><a href='../S/285.html#L193'>zend_module_entry</a>  193 ext/gmp/gmp.c  zend_module_entry gmp_module_entry = {</span>
+<span class='curline'><a href='../S/286.html#L26'>zend_module_entry</a>   26 ext/gmp/php_gmp.h extern zend_module_entry gmp_module_entry;</span>
+<span class='curline'><a href='../S/287.html#L810'>zend_module_entry</a>  810 ext/hash/hash.c zend_module_entry mhash_module_entry = {</span>
+<span class='curline'><a href='../S/287.html#L1279'>zend_module_entry</a> 1279 ext/hash/hash.c zend_module_entry hash_module_entry = {</span>
+<span class='curline'><a href='../S/300.html#L113'>zend_module_entry</a>  113 ext/hash/php_hash.h extern zend_module_entry hash_module_entry;</span>
+<span class='curline'><a href='../S/318.html#L148'>zend_module_entry</a>  148 ext/iconv/iconv.c zend_module_entry iconv_module_entry = {</span>
+<span class='curline'><a href='../S/319.html#L50'>zend_module_entry</a>   50 ext/iconv/php_iconv.h extern zend_module_entry iconv_module_entry;</span>
+<span class='curline'><a href='../S/320.html#L567'>zend_module_entry</a>  567 ext/imap/php_imap.c zend_module_entry imap_module_entry = {</span>
+<span class='curline'><a href='../S/321.html#L46'>zend_module_entry</a>   46 ext/imap/php_imap.h extern zend_module_entry imap_module_entry;</span>
+<span class='curline'><a href='../S/326.html#L445'>zend_module_entry</a>  445 ext/interbase/interbase.c zend_module_entry ibase_module_entry = {</span>
+<span class='curline'><a href='../S/326.html#L783'>zend_module_entry</a>  783 ext/interbase/interbase.c 	zend_module_entry *ibase_entry;</span>
+<span class='curline'><a href='../S/329.html#L24'>zend_module_entry</a>   24 ext/interbase/php_interbase.h extern zend_module_entry ibase_module_entry;</span>
+<span class='curline'><a href='../S/434.html#L875'>zend_module_entry</a>  875 ext/intl/php_intl.c zend_module_entry intl_module_entry = {</span>
+<span class='curline'><a href='../S/435.html#L34'>zend_module_entry</a>   34 ext/intl/php_intl.h extern zend_module_entry intl_module_entry;</span>
+<span class='curline'><a href='../S/458.html#L146'>zend_module_entry</a>  146 ext/json/json.c zend_module_entry json_module_entry = {</span>
+<span class='curline'><a href='../S/461.html#L27'>zend_module_entry</a>   27 ext/json/php_json.h extern zend_module_entry json_module_entry;</span>
+<span class='curline'><a href='../S/462.html#L3311'>zend_module_entry</a> 3311 ext/ldap/ldap.c zend_module_entry ldap_module_entry = { /* {{{ */</span>
+<span class='curline'><a href='../S/463.html#L32'>zend_module_entry</a>   32 ext/ldap/php_ldap.h extern zend_module_entry ldap_module_entry;</span>
+<span class='curline'><a href='../S/464.html#L134'>zend_module_entry</a>  134 ext/libxml/libxml.c zend_module_entry libxml_module_entry = {</span>
+<span class='curline'><a href='../S/465.html#L26'>zend_module_entry</a>   26 ext/libxml/php_libxml.h extern zend_module_entry libxml_module_entry;</span>
+<span class='curline'><a href='../S/686.html#L574'>zend_module_entry</a>  574 ext/mbstring/mbstring.c zend_module_entry mbstring_module_entry = {</span>
+<span class='curline'><a href='../S/687.html#L79'>zend_module_entry</a>   79 ext/mbstring/mbstring.h extern zend_module_entry mbstring_module_entry;</span>
+<span class='curline'><a href='../S/751.html#L296'>zend_module_entry</a>  296 ext/mcrypt/mcrypt.c zend_module_entry mcrypt_module_entry = {</span>
+<span class='curline'><a href='../S/753.html#L30'>zend_module_entry</a>   30 ext/mcrypt/php_mcrypt.h extern zend_module_entry mcrypt_module_entry;</span>
+<span class='curline'><a href='../S/755.html#L190'>zend_module_entry</a>  190 ext/mssql/php_mssql.c zend_module_entry mssql_module_entry = </span>
+<span class='curline'><a href='../S/756.html#L97'>zend_module_entry</a>   97 ext/mssql/php_mssql.h extern zend_module_entry mssql_module_entry;</span>
+<span class='curline'><a href='../S/758.html#L337'>zend_module_entry</a>  337 ext/mysql/php_mysql.c zend_module_entry mysql_module_entry = {</span>
+<span class='curline'><a href='../S/759.html#L27'>zend_module_entry</a>   27 ext/mysql/php_mysql.h extern zend_module_entry mysql_module_entry;</span>
+<span class='curline'><a href='../S/761.html#L1011'>zend_module_entry</a> 1011 ext/mysqli/mysqli.c zend_module_entry mysqli_module_entry = {</span>
+<span class='curline'><a href='../S/776.html#L27'>zend_module_entry</a>   27 ext/mysqli/php_mysqli.h extern zend_module_entry mysqli_module_entry;</span>
+<span class='curline'><a href='../S/810.html#L26'>zend_module_entry</a>   26 ext/mysqlnd/mysqlnd_reverse_api.h 	zend_module_entry * module;</span>
+<span class='curline'><a href='../S/816.html#L337'>zend_module_entry</a>  337 ext/mysqlnd/php_mysqlnd.c zend_module_entry mysqlnd_module_entry = {</span>
+<span class='curline'><a href='../S/817.html#L27'>zend_module_entry</a>   27 ext/mysqlnd/php_mysqlnd.h extern zend_module_entry mysqlnd_module_entry;</span>
+<span class='curline'><a href='../S/818.html#L1042'>zend_module_entry</a> 1042 ext/oci8/oci8.c zend_module_entry oci8_module_entry = {</span>
+<span class='curline'><a href='../S/823.html#L50'>zend_module_entry</a>   50 ext/oci8/php_oci8.h extern zend_module_entry oci8_module_entry;</span>
+<span class='curline'><a href='../S/825.html#L142'>zend_module_entry</a>  142 ext/odbc/birdstep.c zend_module_entry birdstep_module_entry = {</span>
+<span class='curline'><a href='../S/826.html#L56'>zend_module_entry</a>   56 ext/odbc/php_birdstep.h extern zend_module_entry birdstep_module_entry;</span>
+<span class='curline'><a href='../S/827.html#L395'>zend_module_entry</a>  395 ext/odbc/php_odbc.c zend_module_entry odbc_module_entry = {</span>
+<span class='curline'><a href='../S/828.html#L32'>zend_module_entry</a>   32 ext/odbc/php_odbc.h extern zend_module_entry odbc_module_entry;</span>
+<span class='curline'><a href='../S/836.html#L408'>zend_module_entry</a>  408 ext/opcache/Optimizer/pass1_5.c 					zend_module_entry *m;</span>
+<span class='curline'><a href='../S/854.html#L480'>zend_module_entry</a>  480 ext/opcache/zend_accelerator_module.c static zend_module_entry accel_module_entry = {</span>
+<span class='curline'><a href='../S/865.html#L516'>zend_module_entry</a>  516 ext/openssl/openssl.c zend_module_entry openssl_module_entry = {</span>
+<span class='curline'><a href='../S/866.html#L26'>zend_module_entry</a>   26 ext/openssl/php_openssl.h extern zend_module_entry openssl_module_entry;</span>
+<span class='curline'><a href='../S/868.html#L178'>zend_module_entry</a>  178 ext/pcntl/pcntl.c zend_module_entry pcntl_module_entry = {</span>
+<span class='curline'><a href='../S/869.html#L24'>zend_module_entry</a>   24 ext/pcntl/php_pcntl.h extern zend_module_entry pcntl_module_entry;</span>
+<span class='curline'><a href='../S/920.html#L2021'>zend_module_entry</a> 2021 ext/pcre/php_pcre.c zend_module_entry pcre_module_entry = {</span>
+<span class='curline'><a href='../S/921.html#L40'>zend_module_entry</a>   40 ext/pcre/php_pcre.h extern zend_module_entry pcre_module_entry;</span>
+<span class='curline'><a href='../S/922.html#L144'>zend_module_entry</a>  144 ext/pdo/pdo.c  zend_module_entry pdo_module_entry = {</span>
+<span class='curline'><a href='../S/927.html#L30'>zend_module_entry</a>   30 ext/pdo/php_pdo.h extern zend_module_entry pdo_module_entry;</span>
+<span class='curline'><a href='../S/933.html#L50'>zend_module_entry</a>   50 ext/pdo_dblib/pdo_dblib.c zend_module_entry pdo_mssql_module_entry = {</span>
+<span class='curline'><a href='../S/933.html#L52'>zend_module_entry</a>   52 ext/pdo_dblib/pdo_dblib.c zend_module_entry pdo_dblib_module_entry = {</span>
+<span class='curline'><a href='../S/934.html#L26'>zend_module_entry</a>   26 ext/pdo_dblib/php_pdo_dblib.h extern zend_module_entry pdo_mssql_module_entry;</span>
+<span class='curline'><a href='../S/934.html#L29'>zend_module_entry</a>   29 ext/pdo_dblib/php_pdo_dblib.h extern zend_module_entry pdo_dblib_module_entry;</span>
+<span class='curline'><a href='../S/938.html#L44'>zend_module_entry</a>   44 ext/pdo_firebird/pdo_firebird.c zend_module_entry pdo_firebird_module_entry = { /* {{{ */</span>
+<span class='curline'><a href='../S/939.html#L22'>zend_module_entry</a>   22 ext/pdo_firebird/php_pdo_firebird.h extern zend_module_entry pdo_firebird_module_entry;</span>
+<span class='curline'><a href='../S/943.html#L238'>zend_module_entry</a>  238 ext/pdo_mysql/pdo_mysql.c zend_module_entry pdo_mysql_module_entry = {</span>
+<span class='curline'><a href='../S/944.html#L24'>zend_module_entry</a>   24 ext/pdo_mysql/php_pdo_mysql.h extern zend_module_entry pdo_mysql_module_entry;</span>
+<span class='curline'><a href='../S/949.html#L48'>zend_module_entry</a>   48 ext/pdo_oci/pdo_oci.c zend_module_entry pdo_oci_module_entry = {</span>
+<span class='curline'><a href='../S/950.html#L24'>zend_module_entry</a>   24 ext/pdo_oci/php_pdo_oci.h extern zend_module_entry pdo_oci_module_entry;</span>
+<span class='curline'><a href='../S/954.html#L49'>zend_module_entry</a>   49 ext/pdo_odbc/pdo_odbc.c zend_module_entry pdo_odbc_module_entry = {</span>
+<span class='curline'><a href='../S/955.html#L24'>zend_module_entry</a>   24 ext/pdo_odbc/php_pdo_odbc.h extern zend_module_entry pdo_odbc_module_entry;</span>
+<span class='curline'><a href='../S/957.html#L59'>zend_module_entry</a>   59 ext/pdo_pgsql/pdo_pgsql.c zend_module_entry pdo_pgsql_module_entry = {</span>
+<span class='curline'><a href='../S/960.html#L26'>zend_module_entry</a>   26 ext/pdo_pgsql/php_pdo_pgsql.h extern zend_module_entry pdo_pgsql_module_entry;</span>
+<span class='curline'><a href='../S/962.html#L54'>zend_module_entry</a>   54 ext/pdo_sqlite/pdo_sqlite.c zend_module_entry pdo_sqlite_module_entry = {</span>
+<span class='curline'><a href='../S/963.html#L25'>zend_module_entry</a>   25 ext/pdo_sqlite/php_pdo_sqlite.h extern zend_module_entry pdo_sqlite_module_entry;</span>
+<span class='curline'><a href='../S/967.html#L755'>zend_module_entry</a>  755 ext/pgsql/pgsql.c zend_module_entry pgsql_module_entry = {</span>
+<span class='curline'><a href='../S/968.html#L29'>zend_module_entry</a>   29 ext/pgsql/php_pgsql.h extern zend_module_entry pgsql_module_entry;</span>
+<span class='curline'><a href='../S/973.html#L3642'>zend_module_entry</a> 3642 ext/phar/phar.c zend_module_entry phar_module_entry = {</span>
+<span class='curline'><a href='../S/978.html#L28'>zend_module_entry</a>   28 ext/phar/php_phar.h extern zend_module_entry phar_module_entry;</span>
+<span class='curline'><a href='../S/986.html#L34'>zend_module_entry</a>   34 ext/posix/php_posix.h extern zend_module_entry posix_module_entry;</span>
+<span class='curline'><a href='../S/987.html#L354'>zend_module_entry</a>  354 ext/posix/posix.c zend_module_entry posix_module_entry = {</span>
+<span class='curline'><a href='../S/988.html#L24'>zend_module_entry</a>   24 ext/pspell/php_pspell.h extern zend_module_entry pspell_module_entry;</span>
+<span class='curline'><a href='../S/989.html#L207'>zend_module_entry</a>  207 ext/pspell/pspell.c zend_module_entry pspell_module_entry = {</span>
+<span class='curline'><a href='../S/990.html#L29'>zend_module_entry</a>   29 ext/readline/php_readline.h extern zend_module_entry readline_module_entry;</span>
+<span class='curline'><a href='../S/991.html#L154'>zend_module_entry</a>  154 ext/readline/readline.c zend_module_entry readline_module_entry = { </span>
+<span class='curline'><a href='../S/994.html#L26'>zend_module_entry</a>   26 ext/recode/php_recode.h extern zend_module_entry recode_module_entry;</span>
+<span class='curline'><a href='../S/995.html#L90'>zend_module_entry</a>   90 ext/recode/recode.c zend_module_entry recode_module_entry = {</span>
+<span class='curline'><a href='../S/996.html#L372'>zend_module_entry</a>  372 ext/reflection/php_reflection.c static void _extension_string(string *str, zend_module_entry *module, char *indent TSRMLS_DC);</span>
+<span class='curline'><a href='../S/996.html#L1070'>zend_module_entry</a> 1070 ext/reflection/php_reflection.c static void _extension_string(string *str, zend_module_entry *module, char *indent TSRMLS_DC)</span>
+<span class='curline'><a href='../S/996.html#L5248'>zend_module_entry</a> 5248 ext/reflection/php_reflection.c 	zend_module_entry *module;</span>
+<span class='curline'><a href='../S/996.html#L5285'>zend_module_entry</a> 5285 ext/reflection/php_reflection.c 	zend_module_entry *module;</span>
+<span class='curline'><a href='../S/996.html#L5314'>zend_module_entry</a> 5314 ext/reflection/php_reflection.c 	zend_module_entry *module;</span>
+<span class='curline'><a href='../S/996.html#L5335'>zend_module_entry</a> 5335 ext/reflection/php_reflection.c 	zend_module_entry *module;</span>
+<span class='curline'><a href='../S/996.html#L5381'>zend_module_entry</a> 5381 ext/reflection/php_reflection.c 	zend_module_entry *module;</span>
+<span class='curline'><a href='../S/996.html#L5415'>zend_module_entry</a> 5415 ext/reflection/php_reflection.c 	zend_module_entry *module;</span>
+<span class='curline'><a href='../S/996.html#L5464'>zend_module_entry</a> 5464 ext/reflection/php_reflection.c 	zend_module_entry *module;</span>
+<span class='curline'><a href='../S/996.html#L5481'>zend_module_entry</a> 5481 ext/reflection/php_reflection.c 	zend_module_entry *module;</span>
+<span class='curline'><a href='../S/996.html#L5498'>zend_module_entry</a> 5498 ext/reflection/php_reflection.c 	zend_module_entry *module;</span>
+<span class='curline'><a href='../S/996.html#L5552'>zend_module_entry</a> 5552 ext/reflection/php_reflection.c 	zend_module_entry *module;</span>
+<span class='curline'><a href='../S/996.html#L5568'>zend_module_entry</a> 5568 ext/reflection/php_reflection.c     zend_module_entry *module;</span>
+<span class='curline'><a href='../S/996.html#L5584'>zend_module_entry</a> 5584 ext/reflection/php_reflection.c 	zend_module_entry *module;</span>
+<span class='curline'><a href='../S/996.html#L6271'>zend_module_entry</a> 6271 ext/reflection/php_reflection.c zend_module_entry reflection_module_entry = { /* {{{ */</span>
+<span class='curline'><a href='../S/997.html#L26'>zend_module_entry</a>   26 ext/reflection/php_reflection.h extern zend_module_entry reflection_module_entry;</span>
+<span class='curline'><a href='../S/1005.html#L188'>zend_module_entry</a>  188 ext/session/php_session.h extern zend_module_entry session_module_entry;</span>
+<span class='curline'><a href='../S/1006.html#L2837'>zend_module_entry</a> 2837 ext/session/session.c zend_module_entry session_module_entry = {</span>
+<span class='curline'><a href='../S/1007.html#L24'>zend_module_entry</a>   24 ext/shmop/php_shmop.h extern zend_module_entry shmop_module_entry;</span>
+<span class='curline'><a href='../S/1008.html#L96'>zend_module_entry</a>   96 ext/shmop/shmop.c zend_module_entry shmop_module_entry = {</span>
+<span class='curline'><a href='../S/1009.html#L24'>zend_module_entry</a>   24 ext/simplexml/php_simplexml.h extern zend_module_entry simplexml_module_entry;</span>
+<span class='curline'><a href='../S/1011.html#L2579'>zend_module_entry</a> 2579 ext/simplexml/simplexml.c zend_module_entry simplexml_module_entry = { /* {{{ */</span>
+<span class='curline'><a href='../S/1014.html#L6'>zend_module_entry</a>    6 ext/skeleton/php_skeleton.h extern zend_module_entry extname_module_entry;</span>
+<span class='curline'><a href='../S/1015.html#L136'>zend_module_entry</a>  136 ext/skeleton/skeleton.c zend_module_entry extname_module_entry = {</span>
+<span class='curline'><a href='../S/1016.html#L37'>zend_module_entry</a>   37 ext/snmp/php_snmp.h extern zend_module_entry snmp_module_entry;</span>
+<span class='curline'><a href='../S/1017.html#L2501'>zend_module_entry</a> 2501 ext/snmp/snmp.c zend_module_entry snmp_module_entry = {</span>
+<span class='curline'><a href='../S/1028.html#L189'>zend_module_entry</a>  189 ext/soap/php_soap.h extern zend_module_entry soap_module_entry;</span>
+<span class='curline'><a href='../S/1031.html#L452'>zend_module_entry</a>  452 ext/soap/soap.c zend_module_entry soap_module_entry = {</span>
+<span class='curline'><a href='../S/1036.html#L38'>zend_module_entry</a>   38 ext/sockets/php_sockets.h extern zend_module_entry sockets_module_entry;</span>
+<span class='curline'><a href='../S/1041.html#L354'>zend_module_entry</a>  354 ext/sockets/sockets.c zend_module_entry sockets_module_entry = {</span>
+<span class='curline'><a href='../S/1045.html#L991'>zend_module_entry</a>  991 ext/spl/php_spl.c zend_module_entry spl_module_entry = {</span>
+<span class='curline'><a href='../S/1046.html#L31'>zend_module_entry</a>   31 ext/spl/php_spl.h extern zend_module_entry spl_module_entry;</span>
+<span class='curline'><a href='../S/1070.html#L26'>zend_module_entry</a>   26 ext/sqlite3/php_sqlite3.h extern zend_module_entry sqlite3_module_entry;</span>
+<span class='curline'><a href='../S/1072.html#L2358'>zend_module_entry</a> 2358 ext/sqlite3/sqlite3.c zend_module_entry sqlite3_module_entry = {</span>
+<span class='curline'><a href='../S/1077.html#L3376'>zend_module_entry</a> 3376 ext/standard/basic_functions.c zend_module_entry basic_functions_module = { /* {{{ */</span>
+<span class='curline'><a href='../S/1077.html#L5373'>zend_module_entry</a> 5373 ext/standard/basic_functions.c 	zend_module_entry *module;</span>
+<span class='curline'><a href='../S/1078.html#L37'>zend_module_entry</a>   37 ext/standard/basic_functions.h extern zend_module_entry basic_functions_module;</span>
+<span class='curline'><a href='../S/1100.html#L106'>zend_module_entry</a>  106 ext/standard/dl.c 	zend_module_entry *module_entry;</span>
+<span class='curline'><a href='../S/1100.html#L107'>zend_module_entry</a>  107 ext/standard/dl.c 	zend_module_entry *(*get_module)(void);</span>
+<span class='curline'><a href='../S/1100.html#L163'>zend_module_entry</a>  163 ext/standard/dl.c 	get_module = (zend_module_entry *(*)(void)) DL_FETCH_SYMBOL(handle, "get_module");</span>
+<span class='curline'><a href='../S/1100.html#L170'>zend_module_entry</a>  170 ext/standard/dl.c 		get_module = (zend_module_entry *(*)(void)) DL_FETCH_SYMBOL(handle, "_get_module");</span>
+<span class='curline'><a href='../S/1126.html#L147'>zend_module_entry</a>  147 ext/standard/info.c PHPAPI void php_info_print_module(zend_module_entry *zend_module TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1126.html#L175'>zend_module_entry</a>  175 ext/standard/info.c static int _display_module_info_func(zend_module_entry *module TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1126.html#L184'>zend_module_entry</a>  184 ext/standard/info.c static int _display_module_info_def(zend_module_entry *module TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1126.html#L894'>zend_module_entry</a>  894 ext/standard/info.c 	return strcasecmp(((zend_module_entry *)f-&gt;pData)-&gt;name,</span>
+<span class='curline'><a href='../S/1126.html#L895'>zend_module_entry</a>  895 ext/standard/info.c 				  ((zend_module_entry *)s-&gt;pData)-&gt;name);</span>
+<span class='curline'><a href='../S/1126.html#L1067'>zend_module_entry</a> 1067 ext/standard/info.c 		zend_module_entry tmp;</span>
+<span class='curline'><a href='../S/1126.html#L1070'>zend_module_entry</a> 1070 ext/standard/info.c 		zend_hash_copy(&amp;sorted_registry, &amp;module_registry, NULL, &amp;tmp, sizeof(zend_module_entry));</span>
+<span class='curline'><a href='../S/1127.html#L81'>zend_module_entry</a>   81 ext/standard/info.h PHPAPI void php_info_print_module(zend_module_entry *module TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1205.html#L210'>zend_module_entry</a>  210 ext/sybase_ct/php_sybase_ct.c zend_module_entry sybase_module_entry = {</span>
+<span class='curline'><a href='../S/1206.html#L29'>zend_module_entry</a>   29 ext/sybase_ct/php_sybase_ct.h extern zend_module_entry sybase_module_entry;</span>
+<span class='curline'><a href='../S/1207.html#L26'>zend_module_entry</a>   26 ext/sysvmsg/php_sysvmsg.h extern zend_module_entry sysvmsg_module_entry;</span>
+<span class='curline'><a href='../S/1208.html#L104'>zend_module_entry</a>  104 ext/sysvmsg/sysvmsg.c zend_module_entry sysvmsg_module_entry = {</span>
+<span class='curline'><a href='../S/1209.html#L26'>zend_module_entry</a>   26 ext/sysvsem/php_sysvsem.h extern zend_module_entry sysvsem_module_entry;</span>
+<span class='curline'><a href='../S/1210.html#L94'>zend_module_entry</a>   94 ext/sysvsem/sysvsem.c zend_module_entry sysvsem_module_entry = {</span>
+<span class='curline'><a href='../S/1211.html#L26'>zend_module_entry</a>   26 ext/sysvshm/php_sysvshm.h extern zend_module_entry sysvshm_module_entry;</span>
+<span class='curline'><a href='../S/1212.html#L95'>zend_module_entry</a>   95 ext/sysvshm/sysvshm.c zend_module_entry sysvshm_module_entry = {</span>
+<span class='curline'><a href='../S/1213.html#L24'>zend_module_entry</a>   24 ext/tidy/php_tidy.h extern zend_module_entry tidy_module_entry;</span>
+<span class='curline'><a href='../S/1214.html#L451'>zend_module_entry</a>  451 ext/tidy/tidy.c zend_module_entry tidy_module_entry = {</span>
+<span class='curline'><a href='../S/1215.html#L24'>zend_module_entry</a>   24 ext/tokenizer/php_tokenizer.h extern zend_module_entry tokenizer_module_entry;</span>
+<span class='curline'><a href='../S/1216.html#L63'>zend_module_entry</a>   63 ext/tokenizer/tokenizer.c zend_module_entry tokenizer_module_entry = {</span>
+<span class='curline'><a href='../S/1218.html#L26'>zend_module_entry</a>   26 ext/wddx/php_wddx.h extern zend_module_entry wddx_module_entry;</span>
+<span class='curline'><a href='../S/1220.html#L157'>zend_module_entry</a>  157 ext/wddx/wddx.c zend_module_entry wddx_module_entry = {</span>
+<span class='curline'><a href='../S/1223.html#L27'>zend_module_entry</a>   27 ext/xml/php_xml.h extern zend_module_entry xml_module_entry;</span>
+<span class='curline'><a href='../S/1224.html#L251'>zend_module_entry</a>  251 ext/xml/xml.c  zend_module_entry xml_module_entry = {</span>
+<span class='curline'><a href='../S/1225.html#L329'>zend_module_entry</a>  329 ext/xmlreader/php_xmlreader.c zend_module_entry xmlreader_module_entry = {</span>
+<span class='curline'><a href='../S/1226.html#L24'>zend_module_entry</a>   24 ext/xmlreader/php_xmlreader.h extern zend_module_entry xmlreader_module_entry;</span>
+<span class='curline'><a href='../S/1252.html#L61'>zend_module_entry</a>   61 ext/xmlrpc/php_xmlrpc.h extern zend_module_entry xmlrpc_module_entry;</span>
+<span class='curline'><a href='../S/1253.html#L164'>zend_module_entry</a>  164 ext/xmlrpc/xmlrpc-epi-php.c zend_module_entry xmlrpc_module_entry = {</span>
+<span class='curline'><a href='../S/1254.html#L706'>zend_module_entry</a>  706 ext/xmlwriter/php_xmlwriter.c zend_module_entry xmlwriter_module_entry = {</span>
+<span class='curline'><a href='../S/1255.html#L25'>zend_module_entry</a>   25 ext/xmlwriter/php_xmlwriter.h extern zend_module_entry xmlwriter_module_entry;</span>
+<span class='curline'><a href='../S/1256.html#L49'>zend_module_entry</a>   49 ext/xsl/php_xsl.c zend_module_entry xsl_module_entry = {</span>
+<span class='curline'><a href='../S/1257.html#L24'>zend_module_entry</a>   24 ext/xsl/php_xsl.h extern zend_module_entry xsl_module_entry;</span>
+<span class='curline'><a href='../S/1351.html#L1219'>zend_module_entry</a> 1219 ext/zip/php_zip.c zend_module_entry zip_module_entry = {</span>
+<span class='curline'><a href='../S/1352.html#L23'>zend_module_entry</a>   23 ext/zip/php_zip.h extern zend_module_entry zip_module_entry;</span>
+<span class='curline'><a href='../S/1354.html#L65'>zend_module_entry</a>   65 ext/zlib/php_zlib.h extern zend_module_entry php_zlib_module_entry;</span>
+<span class='curline'><a href='../S/1355.html#L1024'>zend_module_entry</a> 1024 ext/zlib/zlib.c zend_module_entry php_zlib_module_entry = {</span>
+<span class='curline'><a href='../S/1362.html#L65'>zend_module_entry</a>   65 main/internal_functions_nw.c static zend_module_entry *php_builtin_extensions[] = {</span>
+<span class='curline'><a href='../S/1362.html#L85'>zend_module_entry</a>   85 main/internal_functions_nw.c #define EXTCOUNT (sizeof(php_builtin_extensions)/sizeof(zend_module_entry *))</span>
+<span class='curline'><a href='../S/1363.html#L118'>zend_module_entry</a>  118 main/internal_functions_win32.c static zend_module_entry *php_builtin_extensions[] = {</span>
+<span class='curline'><a href='../S/1363.html#L188'>zend_module_entry</a>  188 main/internal_functions_win32.c #define EXTCOUNT (sizeof(php_builtin_extensions)/sizeof(zend_module_entry *))</span>
+<span class='curline'><a href='../S/1364.html#L2012'>zend_module_entry</a> 2012 main/main.c    int php_register_extensions(zend_module_entry **ptr, int count TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1364.html#L2014'>zend_module_entry</a> 2014 main/main.c    	zend_module_entry **end = ptr + count;</span>
+<span class='curline'><a href='../S/1364.html#L2034'>zend_module_entry</a> 2034 main/main.c    static int php_register_extensions_bc(zend_module_entry *ptr, int count TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1364.html#L2081'>zend_module_entry</a> 2081 main/main.c    int php_module_startup(sapi_module_struct *sf, zend_module_entry *additional_modules, uint num_additional_modules)</span>
+<span class='curline'><a href='../S/1364.html#L2087'>zend_module_entry</a> 2087 main/main.c    	zend_module_entry *module;</span>
+<span class='curline'><a href='../S/1374.html#L165'>zend_module_entry</a>  165 main/php_ini.c PHPAPI void display_ini_entries(zend_module_entry *module)</span>
+<span class='curline'><a href='../S/1376.html#L33'>zend_module_entry</a>   33 main/php_main.h PHPAPI int php_module_startup(sapi_module_struct *sf, zend_module_entry *additional_modules, uint num_additional_modules);</span>
+<span class='curline'><a href='../S/1376.html#L40'>zend_module_entry</a>   40 main/php_main.h PHPAPI int php_register_extensions(zend_module_entry **ptr, int count TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1427.html#L253'>zend_module_entry</a>  253 sapi/aolserver/aolserver.c static zend_module_entry php_aolserver_module = {</span>
+<span class='curline'><a href='../S/1430.html#L37'>zend_module_entry</a>   37 sapi/apache/mod_php5.h extern zend_module_entry apache_module_entry;</span>
+<span class='curline'><a href='../S/1431.html#L147'>zend_module_entry</a>  147 sapi/apache/php_apache.c zend_module_entry apache_module_entry = {</span>
+<span class='curline'><a href='../S/1436.html#L405'>zend_module_entry</a>  405 sapi/apache2filter/php_functions.c zend_module_entry php_apache_module = {</span>
+<span class='curline'><a href='../S/1437.html#L320'>zend_module_entry</a>  320 sapi/apache2filter/sapi_apache2.c extern zend_module_entry php_apache_module;</span>
+<span class='curline'><a href='../S/1440.html#L75'>zend_module_entry</a>   75 sapi/apache2handler/php_apache.h extern zend_module_entry apache2_module_entry;</span>
+<span class='curline'><a href='../S/1441.html#L551'>zend_module_entry</a>  551 sapi/apache2handler/php_functions.c zend_module_entry php_apache_module = {</span>
+<span class='curline'><a href='../S/1442.html#L344'>zend_module_entry</a>  344 sapi/apache2handler/sapi_apache2.c extern zend_module_entry php_apache_module;</span>
+<span class='curline'><a href='../S/1444.html#L50'>zend_module_entry</a>   50 sapi/apache_hooks/mod_php5.h extern zend_module_entry apache_module_entry;</span>
+<span class='curline'><a href='../S/1445.html#L1516'>zend_module_entry</a> 1516 sapi/apache_hooks/php_apache.c zend_module_entry apache_module_entry = {</span>
+<span class='curline'><a href='../S/1448.html#L467'>zend_module_entry</a>  467 sapi/caudium/caudium.c static zend_module_entry php_caudium_module = {</span>
+<span class='curline'><a href='../S/1449.html#L135'>zend_module_entry</a>  135 sapi/cgi/cgi_main.c static zend_module_entry cgi_module_entry;</span>
+<span class='curline'><a href='../S/1449.html#L218'>zend_module_entry</a>  218 sapi/cgi/cgi_main.c static int print_module_info(zend_module_entry *module, void *arg TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1449.html#L229'>zend_module_entry</a>  229 sapi/cgi/cgi_main.c 	return strcasecmp(	((zend_module_entry *)f-&gt;pData)-&gt;name,</span>
+<span class='curline'><a href='../S/1449.html#L230'>zend_module_entry</a>  230 sapi/cgi/cgi_main.c 						((zend_module_entry *)s-&gt;pData)-&gt;name);</span>
+<span class='curline'><a href='../S/1449.html#L236'>zend_module_entry</a>  236 sapi/cgi/cgi_main.c 	zend_module_entry tmp;</span>
+<span class='curline'><a href='../S/1449.html#L239'>zend_module_entry</a>  239 sapi/cgi/cgi_main.c 	zend_hash_copy(&amp;sorted_registry, &amp;module_registry, NULL, &amp;tmp, sizeof(zend_module_entry));</span>
+<span class='curline'><a href='../S/1449.html#L1718'>zend_module_entry</a> 1718 sapi/cgi/cgi_main.c static zend_module_entry cgi_module_entry = {</span>
+<span class='curline'><a href='../S/1454.html#L176'>zend_module_entry</a>  176 sapi/cli/php_cli.c static int print_module_info(zend_module_entry *module TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1454.html#L188'>zend_module_entry</a>  188 sapi/cli/php_cli.c 	return strcasecmp(((zend_module_entry *)f-&gt;pData)-&gt;name,</span>
+<span class='curline'><a href='../S/1454.html#L189'>zend_module_entry</a>  189 sapi/cli/php_cli.c 				  ((zend_module_entry *)s-&gt;pData)-&gt;name);</span>
+<span class='curline'><a href='../S/1454.html#L196'>zend_module_entry</a>  196 sapi/cli/php_cli.c 	zend_module_entry tmp;</span>
+<span class='curline'><a href='../S/1454.html#L199'>zend_module_entry</a>  199 sapi/cli/php_cli.c 	zend_hash_copy(&amp;sorted_registry, &amp;module_registry, NULL, &amp;tmp, sizeof(zend_module_entry));</span>
+<span class='curline'><a href='../S/1454.html#L1148'>zend_module_entry</a> 1148 sapi/cli/php_cli.c 					zend_module_entry *module;</span>
+<span class='curline'><a href='../S/1457.html#L580'>zend_module_entry</a>  580 sapi/cli/php_cli_server.c zend_module_entry cli_server_module_entry = {</span>
+<span class='curline'><a href='../S/1463.html#L87'>zend_module_entry</a>   87 sapi/continuity/capi.c zend_module_entry continuity_module_entry = {</span>
+<span class='curline'><a href='../S/1499.html#L141'>zend_module_entry</a>  141 sapi/fpm/fpm/fpm_main.c static zend_module_entry cgi_module_entry;</span>
+<span class='curline'><a href='../S/1499.html#L219'>zend_module_entry</a>  219 sapi/fpm/fpm/fpm_main.c static int print_module_info(zend_module_entry *module, void *arg TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1499.html#L230'>zend_module_entry</a>  230 sapi/fpm/fpm/fpm_main.c 	return strcasecmp(	((zend_module_entry *)f-&gt;pData)-&gt;name,</span>
+<span class='curline'><a href='../S/1499.html#L231'>zend_module_entry</a>  231 sapi/fpm/fpm/fpm_main.c 						((zend_module_entry *)s-&gt;pData)-&gt;name);</span>
+<span class='curline'><a href='../S/1499.html#L237'>zend_module_entry</a>  237 sapi/fpm/fpm/fpm_main.c 	zend_module_entry tmp;</span>
+<span class='curline'><a href='../S/1499.html#L240'>zend_module_entry</a>  240 sapi/fpm/fpm/fpm_main.c 	zend_hash_copy(&amp;sorted_registry, &amp;module_registry, NULL, &amp;tmp, sizeof(zend_module_entry));</span>
+<span class='curline'><a href='../S/1499.html#L1583'>zend_module_entry</a> 1583 sapi/fpm/fpm/fpm_main.c static zend_module_entry cgi_module_entry = {</span>
+<span class='curline'><a href='../S/1534.html#L191'>zend_module_entry</a>  191 sapi/isapi/php5isapi.c static zend_module_entry php_isapi_module = {</span>
+<span class='curline'><a href='../S/1537.html#L87'>zend_module_entry</a>   87 sapi/litespeed/lsapi_main.c zend_module_entry litespeed_module_entry;</span>
+<span class='curline'><a href='../S/1537.html#L1185'>zend_module_entry</a> 1185 sapi/litespeed/lsapi_main.c zend_module_entry litespeed_module_entry = {</span>
+<span class='curline'><a href='../S/1543.html#L846'>zend_module_entry</a>  846 sapi/milter/php_milter.c static zend_module_entry php_milter_module = {</span>
+<span class='curline'><a href='../S/1545.html#L201'>zend_module_entry</a>  201 sapi/nsapi/nsapi.c zend_module_entry nsapi_module_entry = {</span>
+<span class='curline'><a href='../S/1546.html#L420'>zend_module_entry</a>  420 sapi/phpdbg/phpdbg.c static zend_module_entry sapi_phpdbg_module_entry = {</span>
+<span class='curline'><a href='../S/1584.html#L109'>zend_module_entry</a>  109 sapi/pi3web/pi3web_sapi.c static zend_module_entry php_pi3web_module = {</span>
+<span class='curline'><a href='../S/1586.html#L461'>zend_module_entry</a>  461 sapi/roxen/roxen.c static zend_module_entry php_roxen_module = {</span>
+<span class='curline'><a href='../S/1589.html#L339'>zend_module_entry</a>  339 sapi/thttpd/thttpd.c static zend_module_entry php_thttpd_module = {</span>
+<span class='curline'><a href='../S/1592.html#L251'>zend_module_entry</a>  251 sapi/webjames/webjames.c static zend_module_entry php_webjames_module = {</span>
+</pre>
+</body>
+</html>

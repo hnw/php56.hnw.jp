@@ -1,0 +1,230 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>pz</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/1643.html#L351'>pz</a>                351 Zend/zend.h    #define Z_REFCOUNT_P(pz)		zval_refcount_p(pz)</span>
+<span class='curline'><a href='../S/1643.html#L352'>pz</a>                352 Zend/zend.h    #define Z_SET_REFCOUNT_P(pz, rc)	zval_set_refcount_p(pz, rc)</span>
+<span class='curline'><a href='../S/1643.html#L353'>pz</a>                353 Zend/zend.h    #define Z_ADDREF_P(pz)			zval_addref_p(pz)</span>
+<span class='curline'><a href='../S/1643.html#L354'>pz</a>                354 Zend/zend.h    #define Z_DELREF_P(pz)			zval_delref_p(pz)</span>
+<span class='curline'><a href='../S/1643.html#L355'>pz</a>                355 Zend/zend.h    #define Z_ISREF_P(pz)			zval_isref_p(pz)</span>
+<span class='curline'><a href='../S/1643.html#L356'>pz</a>                356 Zend/zend.h    #define Z_SET_ISREF_P(pz)		zval_set_isref_p(pz)</span>
+<span class='curline'><a href='../S/1643.html#L357'>pz</a>                357 Zend/zend.h    #define Z_UNSET_ISREF_P(pz)		zval_unset_isref_p(pz)</span>
+<span class='curline'><a href='../S/1643.html#L358'>pz</a>                358 Zend/zend.h    #define Z_SET_ISREF_TO_P(pz, isref)	zval_set_isref_to_p(pz, isref)</span>
+<span class='curline'><a href='../S/1643.html#L398'>pz</a>                398 Zend/zend.h    static zend_always_inline zend_uint zval_refcount_p(zval* pz) {</span>
+<span class='curline'><a href='../S/1643.html#L399'>pz</a>                399 Zend/zend.h    	return pz-&gt;refcount__gc;</span>
+<span class='curline'><a href='../S/1643.html#L402'>pz</a>                402 Zend/zend.h    static zend_always_inline zend_uint zval_set_refcount_p(zval* pz, zend_uint rc) {</span>
+<span class='curline'><a href='../S/1643.html#L403'>pz</a>                403 Zend/zend.h    	return pz-&gt;refcount__gc = rc;</span>
+<span class='curline'><a href='../S/1643.html#L406'>pz</a>                406 Zend/zend.h    static zend_always_inline zend_uint zval_addref_p(zval* pz) {</span>
+<span class='curline'><a href='../S/1643.html#L407'>pz</a>                407 Zend/zend.h    	return ++pz-&gt;refcount__gc;</span>
+<span class='curline'><a href='../S/1643.html#L410'>pz</a>                410 Zend/zend.h    static zend_always_inline zend_uint zval_delref_p(zval* pz) {</span>
+<span class='curline'><a href='../S/1643.html#L411'>pz</a>                411 Zend/zend.h    	return --pz-&gt;refcount__gc;</span>
+<span class='curline'><a href='../S/1643.html#L414'>pz</a>                414 Zend/zend.h    static zend_always_inline zend_bool zval_isref_p(zval* pz) {</span>
+<span class='curline'><a href='../S/1643.html#L415'>pz</a>                415 Zend/zend.h    	return pz-&gt;is_ref__gc;</span>
+<span class='curline'><a href='../S/1643.html#L418'>pz</a>                418 Zend/zend.h    static zend_always_inline zend_bool zval_set_isref_p(zval* pz) {</span>
+<span class='curline'><a href='../S/1643.html#L419'>pz</a>                419 Zend/zend.h    	return pz-&gt;is_ref__gc = 1;</span>
+<span class='curline'><a href='../S/1643.html#L422'>pz</a>                422 Zend/zend.h    static zend_always_inline zend_bool zval_unset_isref_p(zval* pz) {</span>
+<span class='curline'><a href='../S/1643.html#L423'>pz</a>                423 Zend/zend.h    	return pz-&gt;is_ref__gc = 0;</span>
+<span class='curline'><a href='../S/1643.html#L426'>pz</a>                426 Zend/zend.h    static zend_always_inline zend_bool zval_set_isref_to_p(zval* pz, zend_bool isref) {</span>
+<span class='curline'><a href='../S/1643.html#L427'>pz</a>                427 Zend/zend.h    	return pz-&gt;is_ref__gc = isref;</span>
+<span class='curline'><a href='../S/1669.html#L1492'>pz</a>               1492 Zend/zend_execute.c static int zend_check_symbol(zval **pz TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1669.html#L1494'>pz</a>               1494 Zend/zend_execute.c 	if (Z_TYPE_PP(pz) &gt; 9) {</span>
+<span class='curline'><a href='../S/1669.html#L1495'>pz</a>               1495 Zend/zend_execute.c 		fprintf(stderr, "Warning!  %x has invalid type!\n", *pz);</span>
+<span class='curline'><a href='../S/1669.html#L1500'>pz</a>               1500 Zend/zend_execute.c 	} else if (Z_TYPE_PP(pz) == IS_ARRAY) {</span>
+<span class='curline'><a href='../S/1669.html#L1501'>pz</a>               1501 Zend/zend_execute.c 		zend_hash_apply(Z_ARRVAL_PP(pz), (apply_func_t) zend_check_symbol TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1669.html#L1502'>pz</a>               1502 Zend/zend_execute.c 	} else if (Z_TYPE_PP(pz) == IS_OBJECT) {</span>
+<span class='curline'><a href='../S/1669.html#L1505'>pz</a>               1505 Zend/zend_execute.c 		zend_hash_apply(Z_OBJPROP_PP(pz), (apply_func_t) zend_check_symbol TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1676.html#L181'>pz</a>                181 Zend/zend_gc.c 			newRoot-&gt;u.pz = zv;</span>
+<span class='curline'><a href='../S/1676.html#L264'>pz</a>                264 Zend/zend_gc.c static void zval_scan_black(zval *pz TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1676.html#L270'>pz</a>                270 Zend/zend_gc.c 	GC_ZVAL_SET_BLACK(pz);</span>
+<span class='curline'><a href='../S/1676.html#L272'>pz</a>                272 Zend/zend_gc.c 	if (Z_TYPE_P(pz) == IS_OBJECT &amp;&amp; EG(objects_store).object_buckets) {</span>
+<span class='curline'><a href='../S/1676.html#L274'>pz</a>                274 Zend/zend_gc.c 		struct _store_object *obj = &amp;EG(objects_store).object_buckets[Z_OBJ_HANDLE_P(pz)].bucket.obj;</span>
+<span class='curline'><a href='../S/1676.html#L279'>pz</a>                279 Zend/zend_gc.c 			if (EXPECTED(EG(objects_store).object_buckets[Z_OBJ_HANDLE_P(pz)].valid &amp;&amp;</span>
+<span class='curline'><a href='../S/1676.html#L280'>pz</a>                280 Zend/zend_gc.c 			             (get_gc = Z_OBJ_HANDLER_P(pz, get_gc)) != NULL)) {</span>
+<span class='curline'><a href='../S/1676.html#L283'>pz</a>                283 Zend/zend_gc.c 				HashTable *props = get_gc(pz, &amp;table, &amp;n TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1676.html#L288'>pz</a>                288 Zend/zend_gc.c 						pz = table[i];</span>
+<span class='curline'><a href='../S/1676.html#L289'>pz</a>                289 Zend/zend_gc.c 						if (Z_TYPE_P(pz) != IS_ARRAY || Z_ARRVAL_P(pz) != &amp;EG(symbol_table)) {</span>
+<span class='curline'><a href='../S/1676.html#L290'>pz</a>                290 Zend/zend_gc.c 							pz-&gt;refcount__gc++;</span>
+<span class='curline'><a href='../S/1676.html#L292'>pz</a>                292 Zend/zend_gc.c 						if (GC_ZVAL_GET_COLOR(pz) != GC_BLACK) {</span>
+<span class='curline'><a href='../S/1676.html#L296'>pz</a>                296 Zend/zend_gc.c 								zval_scan_black(pz TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1676.html#L307'>pz</a>                307 Zend/zend_gc.c 	} else if (Z_TYPE_P(pz) == IS_ARRAY) {</span>
+<span class='curline'><a href='../S/1676.html#L308'>pz</a>                308 Zend/zend_gc.c 		if (Z_ARRVAL_P(pz) != &amp;EG(symbol_table)) {</span>
+<span class='curline'><a href='../S/1676.html#L309'>pz</a>                309 Zend/zend_gc.c 			p = Z_ARRVAL_P(pz)-&gt;pListHead;</span>
+<span class='curline'><a href='../S/1676.html#L313'>pz</a>                313 Zend/zend_gc.c 		pz = *(zval**)p-&gt;pData;</span>
+<span class='curline'><a href='../S/1676.html#L314'>pz</a>                314 Zend/zend_gc.c 		if (Z_TYPE_P(pz) != IS_ARRAY || Z_ARRVAL_P(pz) != &amp;EG(symbol_table)) {</span>
+<span class='curline'><a href='../S/1676.html#L315'>pz</a>                315 Zend/zend_gc.c 			pz-&gt;refcount__gc++;</span>
+<span class='curline'><a href='../S/1676.html#L317'>pz</a>                317 Zend/zend_gc.c 		if (GC_ZVAL_GET_COLOR(pz) != GC_BLACK) {</span>
+<span class='curline'><a href='../S/1676.html#L321'>pz</a>                321 Zend/zend_gc.c 				zval_scan_black(pz TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1676.html#L328'>pz</a>                328 Zend/zend_gc.c static void zobj_scan_black(struct _store_object *obj, zval *pz TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1676.html#L334'>pz</a>                334 Zend/zend_gc.c 	if (EXPECTED(EG(objects_store).object_buckets[Z_OBJ_HANDLE_P(pz)].valid &amp;&amp;</span>
+<span class='curline'><a href='../S/1676.html#L335'>pz</a>                335 Zend/zend_gc.c 	             (get_gc = Z_OBJ_HANDLER_P(pz, get_gc)) != NULL)) {</span>
+<span class='curline'><a href='../S/1676.html#L338'>pz</a>                338 Zend/zend_gc.c 		HashTable *props = get_gc(pz, &amp;table, &amp;n TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1676.html#L342'>pz</a>                342 Zend/zend_gc.c 				pz = table[i];</span>
+<span class='curline'><a href='../S/1676.html#L343'>pz</a>                343 Zend/zend_gc.c 				if (Z_TYPE_P(pz) != IS_ARRAY || Z_ARRVAL_P(pz) != &amp;EG(symbol_table)) {</span>
+<span class='curline'><a href='../S/1676.html#L344'>pz</a>                344 Zend/zend_gc.c 					pz-&gt;refcount__gc++;</span>
+<span class='curline'><a href='../S/1676.html#L346'>pz</a>                346 Zend/zend_gc.c 				if (GC_ZVAL_GET_COLOR(pz) != GC_BLACK) {</span>
+<span class='curline'><a href='../S/1676.html#L347'>pz</a>                347 Zend/zend_gc.c 					zval_scan_black(pz TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1676.html#L356'>pz</a>                356 Zend/zend_gc.c 			pz = *(zval**)p-&gt;pData;</span>
+<span class='curline'><a href='../S/1676.html#L357'>pz</a>                357 Zend/zend_gc.c 			if (Z_TYPE_P(pz) != IS_ARRAY || Z_ARRVAL_P(pz) != &amp;EG(symbol_table)) {</span>
+<span class='curline'><a href='../S/1676.html#L358'>pz</a>                358 Zend/zend_gc.c 				pz-&gt;refcount__gc++;</span>
+<span class='curline'><a href='../S/1676.html#L360'>pz</a>                360 Zend/zend_gc.c 			if (GC_ZVAL_GET_COLOR(pz) != GC_BLACK) {</span>
+<span class='curline'><a href='../S/1676.html#L361'>pz</a>                361 Zend/zend_gc.c 				zval_scan_black(pz TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1676.html#L368'>pz</a>                368 Zend/zend_gc.c static void zval_mark_grey(zval *pz TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1676.html#L373'>pz</a>                373 Zend/zend_gc.c 	if (GC_ZVAL_GET_COLOR(pz) != GC_GREY) {</span>
+<span class='curline'><a href='../S/1676.html#L376'>pz</a>                376 Zend/zend_gc.c 		GC_ZVAL_SET_COLOR(pz, GC_GREY);</span>
+<span class='curline'><a href='../S/1676.html#L378'>pz</a>                378 Zend/zend_gc.c 		if (Z_TYPE_P(pz) == IS_OBJECT &amp;&amp; EG(objects_store).object_buckets) {</span>
+<span class='curline'><a href='../S/1676.html#L380'>pz</a>                380 Zend/zend_gc.c 			struct _store_object *obj = &amp;EG(objects_store).object_buckets[Z_OBJ_HANDLE_P(pz)].bucket.obj;</span>
+<span class='curline'><a href='../S/1676.html#L386'>pz</a>                386 Zend/zend_gc.c 				if (EXPECTED(EG(objects_store).object_buckets[Z_OBJ_HANDLE_P(pz)].valid &amp;&amp;</span>
+<span class='curline'><a href='../S/1676.html#L387'>pz</a>                387 Zend/zend_gc.c 				             (get_gc = Z_OBJ_HANDLER_P(pz, get_gc)) != NULL)) {</span>
+<span class='curline'><a href='../S/1676.html#L390'>pz</a>                390 Zend/zend_gc.c 					HashTable *props = get_gc(pz, &amp;table, &amp;n TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1676.html#L395'>pz</a>                395 Zend/zend_gc.c 							pz = table[i];</span>
+<span class='curline'><a href='../S/1676.html#L396'>pz</a>                396 Zend/zend_gc.c 							if (Z_TYPE_P(pz) != IS_ARRAY || Z_ARRVAL_P(pz) != &amp;EG(symbol_table)) {</span>
+<span class='curline'><a href='../S/1676.html#L397'>pz</a>                397 Zend/zend_gc.c 								pz-&gt;refcount__gc--;</span>
+<span class='curline'><a href='../S/1676.html#L402'>pz</a>                402 Zend/zend_gc.c 								zval_mark_grey(pz TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1676.html#L412'>pz</a>                412 Zend/zend_gc.c 		} else if (Z_TYPE_P(pz) == IS_ARRAY) {</span>
+<span class='curline'><a href='../S/1676.html#L413'>pz</a>                413 Zend/zend_gc.c 			if (Z_ARRVAL_P(pz) == &amp;EG(symbol_table)) {</span>
+<span class='curline'><a href='../S/1676.html#L414'>pz</a>                414 Zend/zend_gc.c 				GC_ZVAL_SET_BLACK(pz);</span>
+<span class='curline'><a href='../S/1676.html#L416'>pz</a>                416 Zend/zend_gc.c 				p = Z_ARRVAL_P(pz)-&gt;pListHead;</span>
+<span class='curline'><a href='../S/1676.html#L420'>pz</a>                420 Zend/zend_gc.c 			pz = *(zval**)p-&gt;pData;</span>
+<span class='curline'><a href='../S/1676.html#L421'>pz</a>                421 Zend/zend_gc.c 			if (Z_TYPE_P(pz) != IS_ARRAY || Z_ARRVAL_P(pz) != &amp;EG(symbol_table)) {</span>
+<span class='curline'><a href='../S/1676.html#L422'>pz</a>                422 Zend/zend_gc.c 				pz-&gt;refcount__gc--;</span>
+<span class='curline'><a href='../S/1676.html#L427'>pz</a>                427 Zend/zend_gc.c 				zval_mark_grey(pz TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1676.html#L434'>pz</a>                434 Zend/zend_gc.c static void zobj_mark_grey(struct _store_object *obj, zval *pz TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1676.html#L442'>pz</a>                442 Zend/zend_gc.c 		if (EXPECTED(EG(objects_store).object_buckets[Z_OBJ_HANDLE_P(pz)].valid &amp;&amp;</span>
+<span class='curline'><a href='../S/1676.html#L443'>pz</a>                443 Zend/zend_gc.c 		             (get_gc = Z_OBJ_HANDLER_P(pz, get_gc)) != NULL)) {</span>
+<span class='curline'><a href='../S/1676.html#L446'>pz</a>                446 Zend/zend_gc.c 			HashTable *props = get_gc(pz, &amp;table, &amp;n TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1676.html#L450'>pz</a>                450 Zend/zend_gc.c 					pz = table[i];</span>
+<span class='curline'><a href='../S/1676.html#L451'>pz</a>                451 Zend/zend_gc.c 					if (Z_TYPE_P(pz) != IS_ARRAY || Z_ARRVAL_P(pz) != &amp;EG(symbol_table)) {</span>
+<span class='curline'><a href='../S/1676.html#L452'>pz</a>                452 Zend/zend_gc.c 						pz-&gt;refcount__gc--;</span>
+<span class='curline'><a href='../S/1676.html#L454'>pz</a>                454 Zend/zend_gc.c 					zval_mark_grey(pz TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1676.html#L462'>pz</a>                462 Zend/zend_gc.c 				pz = *(zval**)p-&gt;pData;</span>
+<span class='curline'><a href='../S/1676.html#L463'>pz</a>                463 Zend/zend_gc.c 				if (Z_TYPE_P(pz) != IS_ARRAY || Z_ARRVAL_P(pz) != &amp;EG(symbol_table)) {</span>
+<span class='curline'><a href='../S/1676.html#L464'>pz</a>                464 Zend/zend_gc.c 					pz-&gt;refcount__gc--;</span>
+<span class='curline'><a href='../S/1676.html#L466'>pz</a>                466 Zend/zend_gc.c 				zval_mark_grey(pz TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1676.html#L495'>pz</a>                495 Zend/zend_gc.c 			if (GC_ZVAL_GET_COLOR(current-&gt;u.pz) == GC_PURPLE) {</span>
+<span class='curline'><a href='../S/1676.html#L496'>pz</a>                496 Zend/zend_gc.c 				zval_mark_grey(current-&gt;u.pz TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1676.html#L498'>pz</a>                498 Zend/zend_gc.c 				GC_ZVAL_SET_ADDRESS(current-&gt;u.pz, NULL);</span>
+<span class='curline'><a href='../S/1676.html#L506'>pz</a>                506 Zend/zend_gc.c static void zval_scan(zval *pz TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1676.html#L511'>pz</a>                511 Zend/zend_gc.c 	if (GC_ZVAL_GET_COLOR(pz) == GC_GREY) {</span>
+<span class='curline'><a href='../S/1676.html#L513'>pz</a>                513 Zend/zend_gc.c 		if (pz-&gt;refcount__gc &gt; 0) {</span>
+<span class='curline'><a href='../S/1676.html#L514'>pz</a>                514 Zend/zend_gc.c 			zval_scan_black(pz TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1676.html#L516'>pz</a>                516 Zend/zend_gc.c 			GC_ZVAL_SET_COLOR(pz, GC_WHITE);</span>
+<span class='curline'><a href='../S/1676.html#L517'>pz</a>                517 Zend/zend_gc.c 			if (Z_TYPE_P(pz) == IS_OBJECT &amp;&amp; EG(objects_store).object_buckets) {</span>
+<span class='curline'><a href='../S/1676.html#L519'>pz</a>                519 Zend/zend_gc.c 				struct _store_object *obj = &amp;EG(objects_store).object_buckets[Z_OBJ_HANDLE_P(pz)].bucket.obj;</span>
+<span class='curline'><a href='../S/1676.html#L523'>pz</a>                523 Zend/zend_gc.c 						zobj_scan_black(obj, pz TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1676.html#L526'>pz</a>                526 Zend/zend_gc.c 						if (EXPECTED(EG(objects_store).object_buckets[Z_OBJ_HANDLE_P(pz)].valid &amp;&amp;</span>
+<span class='curline'><a href='../S/1676.html#L527'>pz</a>                527 Zend/zend_gc.c 						             (get_gc = Z_OBJ_HANDLER_P(pz, get_gc)) != NULL)) {</span>
+<span class='curline'><a href='../S/1676.html#L530'>pz</a>                530 Zend/zend_gc.c 							HashTable *props = get_gc(pz, &amp;table, &amp;n TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1676.html#L535'>pz</a>                535 Zend/zend_gc.c 									pz = table[i];</span>
+<span class='curline'><a href='../S/1676.html#L539'>pz</a>                539 Zend/zend_gc.c 										zval_scan(pz TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1676.html#L550'>pz</a>                550 Zend/zend_gc.c 			} else if (Z_TYPE_P(pz) == IS_ARRAY) {</span>
+<span class='curline'><a href='../S/1676.html#L551'>pz</a>                551 Zend/zend_gc.c 				if (Z_ARRVAL_P(pz) == &amp;EG(symbol_table)) {</span>
+<span class='curline'><a href='../S/1676.html#L552'>pz</a>                552 Zend/zend_gc.c 					GC_ZVAL_SET_BLACK(pz);</span>
+<span class='curline'><a href='../S/1676.html#L554'>pz</a>                554 Zend/zend_gc.c 					p = Z_ARRVAL_P(pz)-&gt;pListHead;</span>
+<span class='curline'><a href='../S/1676.html#L560'>pz</a>                560 Zend/zend_gc.c 				pz = *(zval**)p-&gt;pData;</span>
+<span class='curline'><a href='../S/1676.html#L570'>pz</a>                570 Zend/zend_gc.c static void zobj_scan(zval *pz TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1676.html#L576'>pz</a>                576 Zend/zend_gc.c 		struct _store_object *obj = &amp;EG(objects_store).object_buckets[Z_OBJ_HANDLE_P(pz)].bucket.obj;</span>
+<span class='curline'><a href='../S/1676.html#L580'>pz</a>                580 Zend/zend_gc.c 				zobj_scan_black(obj, pz TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1676.html#L583'>pz</a>                583 Zend/zend_gc.c 				if (EXPECTED(EG(objects_store).object_buckets[Z_OBJ_HANDLE_P(pz)].valid &amp;&amp;</span>
+<span class='curline'><a href='../S/1676.html#L584'>pz</a>                584 Zend/zend_gc.c 				             (get_gc = Z_OBJ_HANDLER_P(pz, get_gc)) != NULL)) {</span>
+<span class='curline'><a href='../S/1676.html#L587'>pz</a>                587 Zend/zend_gc.c 					HashTable *props = get_gc(pz, &amp;table, &amp;n TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1676.html#L591'>pz</a>                591 Zend/zend_gc.c 							pz = table[i];</span>
+<span class='curline'><a href='../S/1676.html#L592'>pz</a>                592 Zend/zend_gc.c 							zval_scan(pz TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1676.html#L622'>pz</a>                622 Zend/zend_gc.c 			zval_scan(current-&gt;u.pz TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1676.html#L628'>pz</a>                628 Zend/zend_gc.c static void zval_collect_white(zval *pz TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1676.html#L633'>pz</a>                633 Zend/zend_gc.c 	if (((zval_gc_info*)(pz))-&gt;u.buffered == (gc_root_buffer*)GC_WHITE) {</span>
+<span class='curline'><a href='../S/1676.html#L635'>pz</a>                635 Zend/zend_gc.c 		GC_ZVAL_SET_BLACK(pz);</span>
+<span class='curline'><a href='../S/1676.html#L637'>pz</a>                637 Zend/zend_gc.c 		if (Z_TYPE_P(pz) == IS_OBJECT &amp;&amp; EG(objects_store).object_buckets) {</span>
+<span class='curline'><a href='../S/1676.html#L639'>pz</a>                639 Zend/zend_gc.c 			struct _store_object *obj = &amp;EG(objects_store).object_buckets[Z_OBJ_HANDLE_P(pz)].bucket.obj;</span>
+<span class='curline'><a href='../S/1676.html#L645'>pz</a>                645 Zend/zend_gc.c 				if (EXPECTED(EG(objects_store).object_buckets[Z_OBJ_HANDLE_P(pz)].valid &amp;&amp;</span>
+<span class='curline'><a href='../S/1676.html#L646'>pz</a>                646 Zend/zend_gc.c 				             (get_gc = Z_OBJ_HANDLER_P(pz, get_gc)) != NULL)) {</span>
+<span class='curline'><a href='../S/1676.html#L649'>pz</a>                649 Zend/zend_gc.c 					HashTable *props = get_gc(pz, &amp;table, &amp;n TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1676.html#L653'>pz</a>                653 Zend/zend_gc.c 						pz-&gt;refcount__gc++;</span>
+<span class='curline'><a href='../S/1676.html#L654'>pz</a>                654 Zend/zend_gc.c 						((zval_gc_info*)pz)-&gt;u.next = GC_G(zval_to_free);</span>
+<span class='curline'><a href='../S/1676.html#L655'>pz</a>                655 Zend/zend_gc.c 						GC_G(zval_to_free) = (zval_gc_info*)pz;</span>
+<span class='curline'><a href='../S/1676.html#L666'>pz</a>                666 Zend/zend_gc.c 								pz = zv;</span>
+<span class='curline'><a href='../S/1676.html#L680'>pz</a>                680 Zend/zend_gc.c 			if (Z_TYPE_P(pz) == IS_ARRAY) {</span>
+<span class='curline'><a href='../S/1676.html#L681'>pz</a>                681 Zend/zend_gc.c 				p = Z_ARRVAL_P(pz)-&gt;pListHead;</span>
+<span class='curline'><a href='../S/1676.html#L686'>pz</a>                686 Zend/zend_gc.c 		pz-&gt;refcount__gc++;</span>
+<span class='curline'><a href='../S/1676.html#L687'>pz</a>                687 Zend/zend_gc.c 		((zval_gc_info*)pz)-&gt;u.next = GC_G(zval_to_free);</span>
+<span class='curline'><a href='../S/1676.html#L688'>pz</a>                688 Zend/zend_gc.c 		GC_G(zval_to_free) = (zval_gc_info*)pz;</span>
+<span class='curline'><a href='../S/1676.html#L691'>pz</a>                691 Zend/zend_gc.c 			pz = *(zval**)p-&gt;pData;</span>
+<span class='curline'><a href='../S/1676.html#L692'>pz</a>                692 Zend/zend_gc.c 			if (Z_TYPE_P(pz) != IS_ARRAY || Z_ARRVAL_P(pz) != &amp;EG(symbol_table)) {</span>
+<span class='curline'><a href='../S/1676.html#L693'>pz</a>                693 Zend/zend_gc.c 				pz-&gt;refcount__gc++;</span>
+<span class='curline'><a href='../S/1676.html#L698'>pz</a>                698 Zend/zend_gc.c 				zval_collect_white(pz TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1676.html#L705'>pz</a>                705 Zend/zend_gc.c static void zobj_collect_white(zval *pz TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1676.html#L711'>pz</a>                711 Zend/zend_gc.c 		struct _store_object *obj = &amp;EG(objects_store).object_buckets[Z_OBJ_HANDLE_P(pz)].bucket.obj;</span>
+<span class='curline'><a href='../S/1676.html#L717'>pz</a>                717 Zend/zend_gc.c 			if (EXPECTED(EG(objects_store).object_buckets[Z_OBJ_HANDLE_P(pz)].valid &amp;&amp;</span>
+<span class='curline'><a href='../S/1676.html#L718'>pz</a>                718 Zend/zend_gc.c 			             (get_gc = Z_OBJ_HANDLER_P(pz, get_gc)) != NULL)) {</span>
+<span class='curline'><a href='../S/1676.html#L721'>pz</a>                721 Zend/zend_gc.c 				HashTable *props = get_gc(pz, &amp;table, &amp;n TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1676.html#L725'>pz</a>                725 Zend/zend_gc.c 						pz = table[i];</span>
+<span class='curline'><a href='../S/1676.html#L726'>pz</a>                726 Zend/zend_gc.c 						if (Z_TYPE_P(pz) != IS_ARRAY || Z_ARRVAL_P(pz) != &amp;EG(symbol_table)) {</span>
+<span class='curline'><a href='../S/1676.html#L727'>pz</a>                727 Zend/zend_gc.c 							pz-&gt;refcount__gc++;</span>
+<span class='curline'><a href='../S/1676.html#L729'>pz</a>                729 Zend/zend_gc.c 						zval_collect_white(pz TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1676.html#L737'>pz</a>                737 Zend/zend_gc.c 					pz = *(zval**)p-&gt;pData;</span>
+<span class='curline'><a href='../S/1676.html#L738'>pz</a>                738 Zend/zend_gc.c 					if (Z_TYPE_P(pz) != IS_ARRAY || Z_ARRVAL_P(pz) != &amp;EG(symbol_table)) {</span>
+<span class='curline'><a href='../S/1676.html#L739'>pz</a>                739 Zend/zend_gc.c 						pz-&gt;refcount__gc++;</span>
+<span class='curline'><a href='../S/1676.html#L741'>pz</a>                741 Zend/zend_gc.c 					zval_collect_white(pz TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1676.html#L766'>pz</a>                766 Zend/zend_gc.c 			GC_ZVAL_SET_ADDRESS(current-&gt;u.pz, NULL);</span>
+<span class='curline'><a href='../S/1676.html#L767'>pz</a>                767 Zend/zend_gc.c 			zval_collect_white(current-&gt;u.pz TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1677.html#L86'>pz</a>                 86 Zend/zend_gc.h 		zval                 *pz;</span>
+<span class='curline'><a href='../S/761.html#L314'>pz</a>                314 ext/mysqli/mysqli.c #define Z_ADDREF_P(pz)				(++(pz)-&gt;refcount)</span>
+<span class='curline'><a href='../S/761.html#L315'>pz</a>                315 ext/mysqli/mysqli.c #define Z_REFCOUNT_P(pz)			((pz)-&gt;refcount)</span>
+<span class='curline'><a href='../S/761.html#L316'>pz</a>                316 ext/mysqli/mysqli.c #define Z_SET_REFCOUNT_P(pz, rc)	((pz)-&gt;refcount = rc)</span>
+<span class='curline'><a href='../S/802.html#L28'>pz</a>                 28 ext/mysqlnd/mysqlnd_priv.h #define Z_ADDREF_P(pz)				(++(pz)-&gt;refcount)</span>
+<span class='curline'><a href='../S/802.html#L29'>pz</a>                 29 ext/mysqlnd/mysqlnd_priv.h #define Z_DELREF_P(pz)				(--(pz)-&gt;refcount)</span>
+<span class='curline'><a href='../S/802.html#L30'>pz</a>                 30 ext/mysqlnd/mysqlnd_priv.h #define Z_REFCOUNT_P(pz)			((pz)-&gt;refcount)</span>
+<span class='curline'><a href='../S/802.html#L31'>pz</a>                 31 ext/mysqlnd/mysqlnd_priv.h #define Z_SET_REFCOUNT_P(pz, rc)	((pz)-&gt;refcount = rc)</span>
+<span class='curline'><a href='../S/864.html#L131'>pz</a>                131 ext/opcache/ZendAccelerator.h 	#define Z_REFCOUNT_P(pz)				(pz)-&gt;refcount</span>
+<span class='curline'><a href='../S/864.html#L132'>pz</a>                132 ext/opcache/ZendAccelerator.h 	#define Z_SET_REFCOUNT_P(pz, v)			(pz)-&gt;refcount = (v)</span>
+<span class='curline'><a href='../S/864.html#L133'>pz</a>                133 ext/opcache/ZendAccelerator.h 	#define Z_ADDREF_P(pz)					++((pz)-&gt;refcount)</span>
+<span class='curline'><a href='../S/864.html#L134'>pz</a>                134 ext/opcache/ZendAccelerator.h 	#define Z_DELREF_P(pz)					--((pz)-&gt;refcount)</span>
+<span class='curline'><a href='../S/864.html#L135'>pz</a>                135 ext/opcache/ZendAccelerator.h 	#define Z_ISREF_P(pz)					(pz)-&gt;is_ref</span>
+<span class='curline'><a href='../S/864.html#L136'>pz</a>                136 ext/opcache/ZendAccelerator.h 	#define Z_SET_ISREF_P(pz)				Z_SET_ISREF_TO_P(pz, 1)</span>
+<span class='curline'><a href='../S/864.html#L137'>pz</a>                137 ext/opcache/ZendAccelerator.h 	#define Z_UNSET_ISREF_P(pz)				Z_SET_ISREF_TO_P(pz, 0)</span>
+<span class='curline'><a href='../S/864.html#L138'>pz</a>                138 ext/opcache/ZendAccelerator.h 	#define Z_SET_ISREF_TO_P(pz, isref)		(pz)-&gt;is_ref = (isref)</span>
+<span class='curline'><a href='../S/864.html#L139'>pz</a>                139 ext/opcache/ZendAccelerator.h 	#define PZ_REFCOUNT_P(pz)				(pz)-&gt;refcount</span>
+<span class='curline'><a href='../S/864.html#L140'>pz</a>                140 ext/opcache/ZendAccelerator.h 	#define PZ_SET_REFCOUNT_P(pz, v)		(pz)-&gt;refcount = (v)</span>
+<span class='curline'><a href='../S/864.html#L141'>pz</a>                141 ext/opcache/ZendAccelerator.h 	#define PZ_ADDREF_P(pz)					++((pz)-&gt;refcount)</span>
+<span class='curline'><a href='../S/864.html#L142'>pz</a>                142 ext/opcache/ZendAccelerator.h 	#define PZ_DELREF_P(pz)					--((pz)-&gt;refcount)</span>
+<span class='curline'><a href='../S/864.html#L143'>pz</a>                143 ext/opcache/ZendAccelerator.h 	#define PZ_ISREF_P(pz)					(pz)-&gt;is_ref</span>
+<span class='curline'><a href='../S/864.html#L144'>pz</a>                144 ext/opcache/ZendAccelerator.h 	#define PZ_SET_ISREF_P(pz)				Z_SET_ISREF_TO_P(pz, 1)</span>
+<span class='curline'><a href='../S/864.html#L145'>pz</a>                145 ext/opcache/ZendAccelerator.h 	#define PZ_UNSET_ISREF_P(pz)			Z_SET_ISREF_TO_P(pz, 0)</span>
+<span class='curline'><a href='../S/864.html#L146'>pz</a>                146 ext/opcache/ZendAccelerator.h 	#define PZ_SET_ISREF_TO_P(pz, isref)	(pz)-&gt;is_ref = (isref)</span>
+<span class='curline'><a href='../S/864.html#L148'>pz</a>                148 ext/opcache/ZendAccelerator.h 	#define PZ_REFCOUNT_P(pz)				(pz)-&gt;refcount__gc</span>
+<span class='curline'><a href='../S/864.html#L149'>pz</a>                149 ext/opcache/ZendAccelerator.h 	#define PZ_SET_REFCOUNT_P(pz, v)		(pz)-&gt;refcount__gc = (v)</span>
+<span class='curline'><a href='../S/864.html#L150'>pz</a>                150 ext/opcache/ZendAccelerator.h 	#define PZ_ADDREF_P(pz)					++((pz)-&gt;refcount__gc)</span>
+<span class='curline'><a href='../S/864.html#L151'>pz</a>                151 ext/opcache/ZendAccelerator.h 	#define PZ_DELREF_P(pz)					--((pz)-&gt;refcount__gc)</span>
+<span class='curline'><a href='../S/864.html#L152'>pz</a>                152 ext/opcache/ZendAccelerator.h 	#define PZ_ISREF_P(pz)					(pz)-&gt;is_ref__gc</span>
+<span class='curline'><a href='../S/864.html#L153'>pz</a>                153 ext/opcache/ZendAccelerator.h 	#define PZ_SET_ISREF_P(pz)				Z_SET_ISREF_TO_P(pz, 1)</span>
+<span class='curline'><a href='../S/864.html#L154'>pz</a>                154 ext/opcache/ZendAccelerator.h 	#define PZ_UNSET_ISREF_P(pz)			Z_SET_ISREF_TO_P(pz, 0)</span>
+<span class='curline'><a href='../S/864.html#L155'>pz</a>                155 ext/opcache/ZendAccelerator.h 	#define PZ_SET_ISREF_TO_P(pz, isref)	(pz)-&gt;is_ref__gc = (isref)</span>
+<span class='curline'><a href='../S/1067.html#L21296'>pz</a>               21296 ext/sqlite3/libsqlite/sqlite3.c SQLITE_PRIVATE void sqlite3SetString(char **pz, sqlite3 *db, const char *zFormat, ...){</span>
+<span class='curline'><a href='../S/1067.html#L21303'>pz</a>               21303 ext/sqlite3/libsqlite/sqlite3.c   sqlite3DbFree(db, *pz);</span>
+<span class='curline'><a href='../S/1067.html#L21304'>pz</a>               21304 ext/sqlite3/libsqlite/sqlite3.c   *pz = z;</span>
+<span class='curline'><a href='../S/1067.html#L23061'>pz</a>               23061 ext/sqlite3/libsqlite/sqlite3.c   const unsigned char **pz    /* Pointer to string from which to read char */</span>
+<span class='curline'><a href='../S/1067.html#L23068'>pz</a>               23068 ext/sqlite3/libsqlite/sqlite3.c   c = *((*pz)++);</span>
+<span class='curline'><a href='../S/1067.html#L23071'>pz</a>               23071 ext/sqlite3/libsqlite/sqlite3.c     while( (*(*pz) &amp; 0xc0)==0x80 ){</span>
+<span class='curline'><a href='../S/1067.html#L23072'>pz</a>               23072 ext/sqlite3/libsqlite/sqlite3.c       c = (c&lt;&lt;6) + (0x3f &amp; *((*pz)++));</span>
+<span class='curline'><a href='../S/1067.html#L133758'>pz</a>               133758 ext/sqlite3/libsqlite/sqlite3.c   char **pz,                      /* IN/OUT: Pointer to string buffer */</span>
+<span class='curline'><a href='../S/1067.html#L133768'>pz</a>               133768 ext/sqlite3/libsqlite/sqlite3.c     if( z &amp;&amp; *pz ){</span>
+<span class='curline'><a href='../S/1067.html#L133769'>pz</a>               133769 ext/sqlite3/libsqlite/sqlite3.c       char *z2 = sqlite3_mprintf("%s%s", *pz, z);</span>
+<span class='curline'><a href='../S/1067.html#L133774'>pz</a>               133774 ext/sqlite3/libsqlite/sqlite3.c     sqlite3_free(*pz);</span>
+<span class='curline'><a href='../S/1067.html#L133775'>pz</a>               133775 ext/sqlite3/libsqlite/sqlite3.c     *pz = z;</span>
+<span class='curline'><a href='../S/1067.html#L141378'>pz</a>               141378 ext/sqlite3/libsqlite/sqlite3.c   char **pz,             /* The word being stemmed (Reversed) */</span>
+<span class='curline'><a href='../S/1067.html#L141383'>pz</a>               141383 ext/sqlite3/libsqlite/sqlite3.c   char *z = *pz;</span>
+<span class='curline'><a href='../S/1067.html#L141390'>pz</a>               141390 ext/sqlite3/libsqlite/sqlite3.c   *pz = z;</span>
+<span class='curline'><a href='../S/1067.html#L147905'>pz</a>               147905 ext/sqlite3/libsqlite/sqlite3.c static int fts3Getint(const char **pz){</span>
+<span class='curline'><a href='../S/1067.html#L147906'>pz</a>               147906 ext/sqlite3/libsqlite/sqlite3.c   const char *z = *pz;</span>
+<span class='curline'><a href='../S/1067.html#L147909'>pz</a>               147909 ext/sqlite3/libsqlite/sqlite3.c   *pz = z;</span>
+<span class='curline'><a href='../S/1352.html#L48'>pz</a>                 48 ext/zip/php_zip.h #  define Z_SET_REFCOUNT_P(pz, rc)  pz-&gt;refcount = rc </span>
+<span class='curline'><a href='../S/1352.html#L49'>pz</a>                 49 ext/zip/php_zip.h #  define Z_UNSET_ISREF_P(pz) pz-&gt;is_ref = 0 </span>
+</pre>
+</body>
+</html>

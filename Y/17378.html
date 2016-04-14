@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>expr_copy</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/1642.html#L226'>expr_copy</a>         226 Zend/zend.c    ZEND_API void zend_make_printable_zval(zval *expr, zval *expr_copy, int *use_copy) /* {{{ */</span>
+<span class='curline'><a href='../S/1642.html#L234'>expr_copy</a>         234 Zend/zend.c    			Z_STRLEN_P(expr_copy) = 0;</span>
+<span class='curline'><a href='../S/1642.html#L235'>expr_copy</a>         235 Zend/zend.c    			Z_STRVAL_P(expr_copy) = STR_EMPTY_ALLOC();</span>
+<span class='curline'><a href='../S/1642.html#L239'>expr_copy</a>         239 Zend/zend.c    				Z_STRLEN_P(expr_copy) = 1;</span>
+<span class='curline'><a href='../S/1642.html#L240'>expr_copy</a>         240 Zend/zend.c    				Z_STRVAL_P(expr_copy) = estrndup("1", 1);</span>
+<span class='curline'><a href='../S/1642.html#L242'>expr_copy</a>         242 Zend/zend.c    				Z_STRLEN_P(expr_copy) = 0;</span>
+<span class='curline'><a href='../S/1642.html#L243'>expr_copy</a>         243 Zend/zend.c    				Z_STRVAL_P(expr_copy) = STR_EMPTY_ALLOC();</span>
+<span class='curline'><a href='../S/1642.html#L247'>expr_copy</a>         247 Zend/zend.c    			Z_STRVAL_P(expr_copy) = (char *) emalloc(sizeof("Resource id #") - 1 + MAX_LENGTH_OF_LONG);</span>
+<span class='curline'><a href='../S/1642.html#L248'>expr_copy</a>         248 Zend/zend.c    			Z_STRLEN_P(expr_copy) = snprintf(Z_STRVAL_P(expr_copy), sizeof("Resource id #") - 1 + MAX_LENGTH_OF_LONG, "Resource id #%ld", Z_LVAL_P(expr));</span>
+<span class='curline'><a href='../S/1642.html#L252'>expr_copy</a>         252 Zend/zend.c    			Z_STRLEN_P(expr_copy) = sizeof("Array") - 1;</span>
+<span class='curline'><a href='../S/1642.html#L253'>expr_copy</a>         253 Zend/zend.c    			Z_STRVAL_P(expr_copy) = estrndup("Array", Z_STRLEN_P(expr_copy));</span>
+<span class='curline'><a href='../S/1642.html#L259'>expr_copy</a>         259 Zend/zend.c    				if (zend_std_cast_object_tostring(expr, expr_copy, IS_STRING TSRMLS_CC) == SUCCESS) {</span>
+<span class='curline'><a href='../S/1642.html#L268'>expr_copy</a>         268 Zend/zend.c    					if (Z_OBJ_HANDLER_P(expr, cast_object)(val, expr_copy, IS_STRING TSRMLS_CC) == SUCCESS) {</span>
+<span class='curline'><a href='../S/1642.html#L279'>expr_copy</a>         279 Zend/zend.c    						zend_make_printable_zval(z, expr_copy, use_copy);</span>
+<span class='curline'><a href='../S/1642.html#L283'>expr_copy</a>         283 Zend/zend.c    							ZVAL_ZVAL(expr_copy, z, 0, 1);</span>
+<span class='curline'><a href='../S/1642.html#L291'>expr_copy</a>         291 Zend/zend.c    				Z_STRLEN_P(expr_copy) = 0;</span>
+<span class='curline'><a href='../S/1642.html#L292'>expr_copy</a>         292 Zend/zend.c    				Z_STRVAL_P(expr_copy) = STR_EMPTY_ALLOC();</span>
+<span class='curline'><a href='../S/1642.html#L296'>expr_copy</a>         296 Zend/zend.c    			*expr_copy = *expr;</span>
+<span class='curline'><a href='../S/1642.html#L297'>expr_copy</a>         297 Zend/zend.c    			zval_copy_ctor(expr_copy);</span>
+<span class='curline'><a href='../S/1642.html#L298'>expr_copy</a>         298 Zend/zend.c    			zend_locale_sprintf_double(expr_copy ZEND_FILE_LINE_CC);</span>
+<span class='curline'><a href='../S/1642.html#L301'>expr_copy</a>         301 Zend/zend.c    			*expr_copy = *expr;</span>
+<span class='curline'><a href='../S/1642.html#L302'>expr_copy</a>         302 Zend/zend.c    			zval_copy_ctor(expr_copy);</span>
+<span class='curline'><a href='../S/1642.html#L303'>expr_copy</a>         303 Zend/zend.c    			convert_to_string(expr_copy);</span>
+<span class='curline'><a href='../S/1642.html#L306'>expr_copy</a>         306 Zend/zend.c    	Z_TYPE_P(expr_copy) = IS_STRING;</span>
+<span class='curline'><a href='../S/1642.html#L319'>expr_copy</a>         319 Zend/zend.c    	zval expr_copy;</span>
+<span class='curline'><a href='../S/1642.html#L322'>expr_copy</a>         322 Zend/zend.c    	zend_make_printable_zval(expr, &amp;expr_copy, &amp;use_copy);</span>
+<span class='curline'><a href='../S/1642.html#L324'>expr_copy</a>         324 Zend/zend.c    		expr = &amp;expr_copy;</span>
+<span class='curline'><a href='../S/1643.html#L648'>expr_copy</a>         648 Zend/zend.h    ZEND_API void zend_make_printable_zval(zval *expr, zval *expr_copy, int *use_copy);</span>
+<span class='curline'><a href='../S/1646.html#L3202'>expr_copy</a>        3202 Zend/zend_API.c 				zval expr_copy;</span>
+<span class='curline'><a href='../S/1646.html#L3205'>expr_copy</a>        3205 Zend/zend_API.c 				zend_make_printable_zval(callable, &amp;expr_copy, &amp;use_copy);</span>
+<span class='curline'><a href='../S/1646.html#L3206'>expr_copy</a>        3206 Zend/zend_API.c 				*callable_name = estrndup(Z_STRVAL(expr_copy), Z_STRLEN(expr_copy));</span>
+<span class='curline'><a href='../S/1646.html#L3207'>expr_copy</a>        3207 Zend/zend_API.c 				*callable_name_len = Z_STRLEN(expr_copy);</span>
+<span class='curline'><a href='../S/1646.html#L3208'>expr_copy</a>        3208 Zend/zend_API.c 				zval_dtor(&amp;expr_copy);</span>
+<span class='curline'><a href='../S/1063.html#L2749'>expr_copy</a>        2749 ext/spl/spl_iterators.c 			zval expr_copy;</span>
+<span class='curline'><a href='../S/1063.html#L2756'>expr_copy</a>        2756 ext/spl/spl_iterators.c 			zend_make_printable_zval(intern-&gt;u.caching.zstr, &amp;expr_copy, &amp;use_copy);</span>
+<span class='curline'><a href='../S/1063.html#L2758'>expr_copy</a>        2758 ext/spl/spl_iterators.c 				*intern-&gt;u.caching.zstr = expr_copy;</span>
+<span class='curline'><a href='../S/1063.html#L2761'>expr_copy</a>        2761 ext/spl/spl_iterators.c 				zval_dtor(&amp;expr_copy);</span>
+<span class='curline'><a href='../S/1192.html#L198'>expr_copy</a>         198 ext/standard/type.c 	zval expr_copy;</span>
+<span class='curline'><a href='../S/1192.html#L205'>expr_copy</a>         205 ext/standard/type.c 	zend_make_printable_zval(*num, &amp;expr_copy, &amp;use_copy);</span>
+<span class='curline'><a href='../S/1192.html#L207'>expr_copy</a>         207 ext/standard/type.c 		tmp = &amp;expr_copy;</span>
+<span class='curline'><a href='../S/1205.html#L442'>expr_copy</a>         442 ext/sybase_ct/php_sybase_ct.c 		zval expr_copy;</span>
+<span class='curline'><a href='../S/1205.html#L445'>expr_copy</a>         445 ext/sybase_ct/php_sybase_ct.c 		zend_make_printable_zval(callback_name, &amp;expr_copy, &amp;use_copy);</span>
+<span class='curline'><a href='../S/1205.html#L446'>expr_copy</a>         446 ext/sybase_ct/php_sybase_ct.c 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Sybase:  Cannot call the messagehandler %s", Z_STRVAL(expr_copy));</span>
+<span class='curline'><a href='../S/1205.html#L447'>expr_copy</a>         447 ext/sybase_ct/php_sybase_ct.c 		zval_dtor(&amp;expr_copy);</span>
+</pre>
+</body>
+</html>

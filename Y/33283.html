@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>poller</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/1457.html#L186'>poller</a>            186 sapi/cli/php_cli_server.c 	php_cli_server_poller poller;</span>
+<span class='curline'><a href='../S/1457.html#L865'>poller</a>            865 sapi/cli/php_cli_server.c static int php_cli_server_poller_ctor(php_cli_server_poller *poller) /* {{{ */</span>
+<span class='curline'><a href='../S/1457.html#L867'>poller</a>            867 sapi/cli/php_cli_server.c 	FD_ZERO(&amp;poller-&gt;rfds);</span>
+<span class='curline'><a href='../S/1457.html#L868'>poller</a>            868 sapi/cli/php_cli_server.c 	FD_ZERO(&amp;poller-&gt;wfds);</span>
+<span class='curline'><a href='../S/1457.html#L869'>poller</a>            869 sapi/cli/php_cli_server.c 	poller-&gt;max_fd = -1;</span>
+<span class='curline'><a href='../S/1457.html#L873'>poller</a>            873 sapi/cli/php_cli_server.c static void php_cli_server_poller_add(php_cli_server_poller *poller, int mode, int fd) /* {{{ */</span>
+<span class='curline'><a href='../S/1457.html#L876'>poller</a>            876 sapi/cli/php_cli_server.c 		PHP_SAFE_FD_SET(fd, &amp;poller-&gt;rfds);</span>
+<span class='curline'><a href='../S/1457.html#L879'>poller</a>            879 sapi/cli/php_cli_server.c 		PHP_SAFE_FD_SET(fd, &amp;poller-&gt;wfds);</span>
+<span class='curline'><a href='../S/1457.html#L881'>poller</a>            881 sapi/cli/php_cli_server.c 	if (fd &gt; poller-&gt;max_fd) {</span>
+<span class='curline'><a href='../S/1457.html#L882'>poller</a>            882 sapi/cli/php_cli_server.c 		poller-&gt;max_fd = fd;</span>
+<span class='curline'><a href='../S/1457.html#L886'>poller</a>            886 sapi/cli/php_cli_server.c static void php_cli_server_poller_remove(php_cli_server_poller *poller, int mode, int fd) /* {{{ */</span>
+<span class='curline'><a href='../S/1457.html#L889'>poller</a>            889 sapi/cli/php_cli_server.c 		PHP_SAFE_FD_CLR(fd, &amp;poller-&gt;rfds);</span>
+<span class='curline'><a href='../S/1457.html#L892'>poller</a>            892 sapi/cli/php_cli_server.c 		PHP_SAFE_FD_CLR(fd, &amp;poller-&gt;wfds);</span>
+<span class='curline'><a href='../S/1457.html#L895'>poller</a>            895 sapi/cli/php_cli_server.c 	if (fd == poller-&gt;max_fd) {</span>
+<span class='curline'><a href='../S/1457.html#L898'>poller</a>            898 sapi/cli/php_cli_server.c 			if (PHP_SAFE_FD_ISSET(fd, &amp;poller-&gt;rfds) || PHP_SAFE_FD_ISSET(fd, &amp;poller-&gt;wfds)) {</span>
+<span class='curline'><a href='../S/1457.html#L902'>poller</a>            902 sapi/cli/php_cli_server.c 		poller-&gt;max_fd = fd;</span>
+<span class='curline'><a href='../S/1457.html#L907'>poller</a>            907 sapi/cli/php_cli_server.c static int php_cli_server_poller_poll(php_cli_server_poller *poller, struct timeval *tv) /* {{{ */</span>
+<span class='curline'><a href='../S/1457.html#L909'>poller</a>            909 sapi/cli/php_cli_server.c 	memmove(&amp;poller-&gt;active.rfds, &amp;poller-&gt;rfds, sizeof(poller-&gt;rfds));</span>
+<span class='curline'><a href='../S/1457.html#L910'>poller</a>            910 sapi/cli/php_cli_server.c 	memmove(&amp;poller-&gt;active.wfds, &amp;poller-&gt;wfds, sizeof(poller-&gt;wfds));</span>
+<span class='curline'><a href='../S/1457.html#L911'>poller</a>            911 sapi/cli/php_cli_server.c 	return php_select(poller-&gt;max_fd + 1, &amp;poller-&gt;active.rfds, &amp;poller-&gt;active.wfds, NULL, tv);</span>
+<span class='curline'><a href='../S/1457.html#L914'>poller</a>            914 sapi/cli/php_cli_server.c static int php_cli_server_poller_iter_on_active(php_cli_server_poller *poller, void *opaque, int(*callback)(void *, int fd, int events)) /* {{{ */</span>
+<span class='curline'><a href='../S/1457.html#L926'>poller</a>            926 sapi/cli/php_cli_server.c 	for (i = 0; i &lt; poller-&gt;active.rfds.fd_count; i++) {</span>
+<span class='curline'><a href='../S/1457.html#L928'>poller</a>            928 sapi/cli/php_cli_server.c 		n-&gt;fd = poller-&gt;active.rfds.fd_array[i];</span>
+<span class='curline'><a href='../S/1457.html#L933'>poller</a>            933 sapi/cli/php_cli_server.c 	for (i = 0; i &lt; poller-&gt;active.wfds.fd_count; i++) {</span>
+<span class='curline'><a href='../S/1457.html#L935'>poller</a>            935 sapi/cli/php_cli_server.c 		SOCKET fd = poller-&gt;active.wfds.fd_array[i];</span>
+<span class='curline'><a href='../S/1457.html#L960'>poller</a>            960 sapi/cli/php_cli_server.c 	const php_socket_t max_fd = poller-&gt;max_fd;</span>
+<span class='curline'><a href='../S/1457.html#L963'>poller</a>            963 sapi/cli/php_cli_server.c 		if (PHP_SAFE_FD_ISSET(fd, &amp;poller-&gt;active.rfds)) {</span>
+<span class='curline'><a href='../S/1457.html#L968'>poller</a>            968 sapi/cli/php_cli_server.c 		if (PHP_SAFE_FD_ISSET(fd, &amp;poller-&gt;active.wfds)) {</span>
+<span class='curline'><a href='../S/1457.html#L2014'>poller</a>           2014 sapi/cli/php_cli_server.c 	php_cli_server_poller_add(&amp;server-&gt;poller, POLLOUT, client-&gt;sock);</span>
+<span class='curline'><a href='../S/1457.html#L2117'>poller</a>           2117 sapi/cli/php_cli_server.c 	php_cli_server_poller_add(&amp;server-&gt;poller, POLLOUT, client-&gt;sock);</span>
+<span class='curline'><a href='../S/1457.html#L2269'>poller</a>           2269 sapi/cli/php_cli_server.c 	php_cli_server_poller_remove(&amp;(*p)-&gt;server-&gt;poller, POLLIN | POLLOUT, (*p)-&gt;sock);</span>
+<span class='curline'><a href='../S/1457.html#L2332'>poller</a>           2332 sapi/cli/php_cli_server.c 	err = php_cli_server_poller_ctor(&amp;server-&gt;poller);</span>
+<span class='curline'><a href='../S/1457.html#L2337'>poller</a>           2337 sapi/cli/php_cli_server.c 	php_cli_server_poller_add(&amp;server-&gt;poller, POLLIN, server_sock);</span>
+<span class='curline'><a href='../S/1457.html#L2400'>poller</a>           2400 sapi/cli/php_cli_server.c 		php_cli_server_poller_remove(&amp;server-&gt;poller, POLLIN, client-&gt;sock);</span>
+<span class='curline'><a href='../S/1457.html#L2403'>poller</a>           2403 sapi/cli/php_cli_server.c 		php_cli_server_poller_add(&amp;server-&gt;poller, POLLIN, client-&gt;sock);</span>
+<span class='curline'><a href='../S/1457.html#L2513'>poller</a>           2513 sapi/cli/php_cli_server.c 	php_cli_server_poller_iter_on_active(&amp;server-&gt;poller, &amp;params, php_cli_server_do_event_for_each_fd_callback);</span>
+<span class='curline'><a href='../S/1457.html#L2521'>poller</a>           2521 sapi/cli/php_cli_server.c 		int n = php_cli_server_poller_poll(&amp;server-&gt;poller, &amp;tv);</span>
+</pre>
+</body>
+</html>

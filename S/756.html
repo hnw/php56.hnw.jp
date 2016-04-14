@@ -1,0 +1,236 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>ext/mssql/php_mssql.h</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<a id='TOP' name='TOP'></a><h2 class='header'><a href='../mains.html'>root</a>/<a href='../files/1753.html'>ext</a>/<a href='../files/1817.html'>mssql</a>/php_mssql.h</h2>
+<em class='comment'>/* [&lt;][&gt;][^][v][top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+<hr />
+<h2 class='header'><a href='755.html#L33' title='Included from 33 in ext/mssql/php_mssql.c.'>INCLUDED FROM</a></h2>
+<hr />
+<pre>
+<a id='L1' name='L1'></a>   1 <em class='comment'>/* </em>
+<a id='L2' name='L2'></a>   2 <em class='comment'>   +----------------------------------------------------------------------+</em>
+<a id='L3' name='L3'></a>   3 <em class='comment'>   | PHP Version 5                                                        |</em>
+<a id='L4' name='L4'></a>   4 <em class='comment'>   +----------------------------------------------------------------------+</em>
+<a id='L5' name='L5'></a>   5 <em class='comment'>   | Copyright (c) 1997-2016 The PHP Group                                |</em>
+<a id='L6' name='L6'></a>   6 <em class='comment'>   +----------------------------------------------------------------------+</em>
+<a id='L7' name='L7'></a>   7 <em class='comment'>   | This source file is subject to version 3.01 of the PHP license,      |</em>
+<a id='L8' name='L8'></a>   8 <em class='comment'>   | that is bundled with this package in the file LICENSE, and is        |</em>
+<a id='L9' name='L9'></a>   9 <em class='comment'>   | available through the world-wide-web at the following url:           |</em>
+<a id='L10' name='L10'></a>  10 <em class='comment'>   | http://www.php.net/license/3_01.txt                                  |</em>
+<a id='L11' name='L11'></a>  11 <em class='comment'>   | If you did not receive a copy of the PHP license and are unable to   |</em>
+<a id='L12' name='L12'></a>  12 <em class='comment'>   | obtain it through the world-wide-web, please send a note to          |</em>
+<a id='L13' name='L13'></a>  13 <em class='comment'>   | license@php.net so we can mail you a copy immediately.               |</em>
+<a id='L14' name='L14'></a>  14 <em class='comment'>   +----------------------------------------------------------------------+</em>
+<a id='L15' name='L15'></a>  15 <em class='comment'>   | Author: Frank M. Kromann &lt;frank@kromann.info&gt;                        |</em>
+<a id='L16' name='L16'></a>  16 <em class='comment'>   +----------------------------------------------------------------------+</em>
+<a id='L17' name='L17'></a>  17 <em class='comment'> */</em>
+<a id='L18' name='L18'></a>  18 
+<a id='L19' name='L19'></a>  19 
+<a id='L20' name='L20'></a>  20 <em class='comment'>/* $Id$ */</em>
+<a id='L21' name='L21'></a>  21 
+<a id='L22' name='L22'></a>  22 <em class='sharp'>#ifndef</em> <a href='../S/756.html#L23' title='Defined at 23 in ext/mssql/php_mssql.h.'>PHP_MSSQL_H</a>
+<a id='L23' name='L23'></a>  23 <em class='sharp'>#define</em> <a href='../S/756.html#L22' title='Referred from 22 in ext/mssql/php_mssql.h.'>PHP_MSSQL_H</a>
+<a id='L24' name='L24'></a>  24 
+<a id='L25' name='L25'></a>  25 
+<a id='L26' name='L26'></a>  26 <em class='sharp'>#if</em> <a href='../S/755.html#L22' title='Defined at 22 in ext/mssql/php_mssql.c.'>HAVE_MSSQL</a>
+<a id='L27' name='L27'></a>  27 <em class='sharp'>#define</em> <a href='../S/932.html#L277' title='Referred from 277 in ext/pdo_dblib/dblib_stmt.c.'>MSDBLIB</a>
+<a id='L28' name='L28'></a>  28 
+<a id='L29' name='L29'></a>  29 <em class='comment'>/* FreeTDS checks for PHP_MSSQL_API for avoid type redefinition */</em>
+<a id='L30' name='L30'></a>  30 <em class='sharp'>#ifdef</em> <a href='../Y/2665.html' title='Multiple used in 11 places.'>HAVE_FREETDS</a>
+<a id='L31' name='L31'></a>  31 <em class='sharp'>#define</em> PHP_MSSQL_API
+<a id='L32' name='L32'></a>  32 <em class='sharp'>#endif</em>
+<a id='L33' name='L33'></a>  33 
+<a id='L34' name='L34'></a>  34 <em class='sharp'>#include</em> &lt;sqlfront.h&gt;
+<a id='L35' name='L35'></a>  35 <em class='sharp'>#include</em> &lt;sqldb.h&gt;
+<a id='L36' name='L36'></a>  36 
+<a id='L37' name='L37'></a>  37 <strong class='reserved'>typedef</strong> <strong class='reserved'>short</strong> <a href='../S/755.html#L499' title='Referred from 499 in ext/mssql/php_mssql.c.'>TDS_SHORT</a>;
+<a id='L38' name='L38'></a>  38 <em class='sharp'>#ifdef</em> <a href='../Y/2665.html' title='Multiple used in 11 places.'>HAVE_FREETDS</a>
+<a id='L39' name='L39'></a>  39 <em class='sharp'>#define</em> <a href='../S/755.html#L534' title='Referred from 534 in ext/mssql/php_mssql.c.'>MSSQL_VERSION</a> "FreeTDS"
+<a id='L40' name='L40'></a>  40 <em class='sharp'>#define</em> <a href='../R/10324.html' title='Multiple referred from 7 places.'>SQLTEXT</a> <a href='../Y/6049.html' title='Multiple used in 2 places.'>SYBTEXT</a>
+<a id='L41' name='L41'></a>  41 <em class='sharp'>#define</em> <a href='../R/9762.html' title='Multiple referred from 19 places.'>SQLCHAR</a> <a href='../Y/6032.html' title='Multiple used in 2 places.'>SYBCHAR</a>
+<a id='L42' name='L42'></a>  42 <em class='sharp'>#define</em> <a href='../R/10330.html' title='Multiple referred from 7 places.'>SQLVARCHAR</a> <a href='../Y/6052.html' title='Multiple used in 2 places.'>SYBVARCHAR</a>
+<a id='L43' name='L43'></a>  43 <em class='sharp'>#define</em> <a href='../R/9772.html' title='Multiple referred from 6 places.'>SQLINT1</a> <a href='../Y/6040.html' title='Multiple used in 2 places.'>SYBINT1</a>
+<a id='L44' name='L44'></a>  44 <em class='sharp'>#define</em> <a href='../R/9773.html' title='Multiple referred from 7 places.'>SQLINT2</a> <a href='../Y/6041.html' title='Multiple used in 2 places.'>SYBINT2</a>
+<a id='L45' name='L45'></a>  45 <em class='sharp'>#define</em> <a href='../R/9774.html' title='Multiple referred from 7 places.'>SQLINT4</a> <a href='../Y/6042.html' title='Multiple used in 2 places.'>SYBINT4</a>
+<a id='L46' name='L46'></a>  46 <em class='sharp'>#define</em> <a href='../R/9776.html' title='Multiple referred from 3 places.'>SQLINTN</a> <a href='../Y/6043.html' title='Multiple used in 2 places.'>SYBINTN</a>
+<a id='L47' name='L47'></a>  47 <em class='sharp'>#define</em> <a href='../R/9761.html' title='Multiple referred from 5 places.'>SQLBIT</a> <a href='../Y/6031.html' title='Multiple used in 2 places.'>SYBBIT</a>
+<a id='L48' name='L48'></a>  48 <em class='sharp'>#define</em> <a href='../R/9768.html' title='Multiple referred from 6 places.'>SQLFLT4</a> <a href='../Y/6048.html' title='Multiple used in 2 places.'>SYBREAL</a>
+<a id='L49' name='L49'></a>  49 <em class='sharp'>#define</em> <a href='../R/9769.html' title='Multiple referred from 8 places.'>SQLFLT8</a> <a href='../Y/6037.html' title='Multiple used in 2 places.'>SYBFLT8</a>
+<a id='L50' name='L50'></a>  50 <em class='sharp'>#define</em> <a href='../R/9770.html' title='Multiple referred from 4 places.'>SQLFLTN</a> <a href='../Y/6038.html' title='Multiple used in 2 places.'>SYBFLTN</a>
+<a id='L51' name='L51'></a>  51 <em class='sharp'>#define</em> <a href='../R/9767.html' title='Multiple referred from 4 places.'>SQLDECIMAL</a> <a href='../Y/6036.html' title='Multiple used in 2 places.'>SYBDECIMAL</a>
+<a id='L52' name='L52'></a>  52 <em class='sharp'>#define</em> <a href='../R/10321.html' title='Multiple referred from 5 places.'>SQLNUMERIC</a> <a href='../Y/6047.html' title='Multiple used in 2 places.'>SYBNUMERIC</a>
+<a id='L53' name='L53'></a>  53 <em class='sharp'>#define</em> <a href='../R/9764.html' title='Multiple referred from 9 places.'>SQLDATETIME</a> <a href='../Y/6033.html' title='Multiple used in 2 places.'>SYBDATETIME</a>
+<a id='L54' name='L54'></a>  54 <em class='sharp'>#define</em> <a href='../R/9763.html' title='Multiple referred from 10 places.'>SQLDATETIM4</a> <a href='../Y/6034.html' title='Multiple used in 2 places.'>SYBDATETIME4</a>
+<a id='L55' name='L55'></a>  55 <em class='sharp'>#define</em> <a href='../S/755.html#L1652' title='Referred from 1652 in ext/mssql/php_mssql.c.'>SQLDATETIMN</a> <a href='../Y/6035.html' title='Multiple used in 2 places.'>SYBDATETIMN</a>
+<a id='L56' name='L56'></a>  56 <em class='sharp'>#define</em> <a href='../R/10318.html' title='Multiple referred from 6 places.'>SQLMONEY</a> <a href='../Y/6044.html' title='Multiple used in 2 places.'>SYBMONEY</a>
+<a id='L57' name='L57'></a>  57 <em class='sharp'>#define</em> <a href='../R/10319.html' title='Multiple referred from 6 places.'>SQLMONEY4</a> <a href='../Y/6045.html' title='Multiple used in 2 places.'>SYBMONEY4</a>
+<a id='L58' name='L58'></a>  58 <em class='sharp'>#define</em> <a href='../R/10320.html' title='Multiple referred from 6 places.'>SQLMONEYN</a> <a href='../Y/6046.html' title='Multiple used in 2 places.'>SYBMONEYN</a>
+<a id='L59' name='L59'></a>  59 <em class='sharp'>#define</em> <a href='../R/9771.html' title='Multiple referred from 4 places.'>SQLIMAGE</a> <a href='../Y/6039.html' title='Multiple used in 2 places.'>SYBIMAGE</a>
+<a id='L60' name='L60'></a>  60 <em class='sharp'>#define</em> <a href='../R/9760.html' title='Multiple referred from 5 places.'>SQLBINARY</a> <a href='../Y/6030.html' title='Multiple used in 2 places.'>SYBBINARY</a>
+<a id='L61' name='L61'></a>  61 <em class='sharp'>#define</em> <a href='../R/10329.html' title='Multiple referred from 4 places.'>SQLVARBINARY</a> <a href='../Y/6051.html' title='Multiple used in 2 places.'>SYBVARBINARY</a>
+<a id='L62' name='L62'></a>  62 <em class='sharp'>#ifdef</em> <a href='../D/11920.html' title='Multiple defined in 3 places.'>SQLUNIQUE</a> <em class='comment'>/* FreeTSD 0.61+ */</em>
+<a id='L63' name='L63'></a>  63 <em class='sharp'>#define</em> <a href='../R/10327.html' title='Multiple referred from 7 places.'>SQLUNIQUE</a> <a href='../Y/6050.html' title='Multiple used in 3 places.'>SYBUNIQUE</a>
+<a id='L64' name='L64'></a>  64 <em class='sharp'>#endif</em>
+<a id='L65' name='L65'></a>  65 <em class='sharp'>#define</em> <a href='../R/1374.html' title='Multiple referred from 2 places.'>DBERRHANDLE</a>(<a href='../Y/8054.html' title='Multiple used in 2294 places.'>a</a>, <a href='../Y/12066.html' title='Multiple used in 1763 places.'>b</a>) <a href='../Y/15218.html' title='Multiple used in 3 places.'>dberrhandle</a>(<a href='../Y/12066.html' title='Multiple used in 1763 places.'>b</a>)
+<a id='L66' name='L66'></a>  66 <em class='sharp'>#define</em> <a href='../R/1407.html' title='Multiple referred from 2 places.'>DBMSGHANDLE</a>(<a href='../Y/8054.html' title='Multiple used in 2294 places.'>a</a>, <a href='../Y/12066.html' title='Multiple used in 1763 places.'>b</a>) <a href='../Y/15252.html' title='Multiple used in 3 places.'>dbmsghandle</a>(<a href='../Y/12066.html' title='Multiple used in 1763 places.'>b</a>)
+<a id='L67' name='L67'></a>  67 <em class='sharp'>#define</em> <a href='../R/1410.html' title='Multiple referred from 8 places.'>DBSETOPT</a>(<a href='../Y/8054.html' title='Multiple used in 2294 places.'>a</a>, <a href='../Y/12066.html' title='Multiple used in 1763 places.'>b</a>, <a href='../Y/12995.html' title='Multiple used in 8103 places.'>c</a>) <a href='../Y/15278.html' title='Multiple used in 4 places.'>dbsetopt</a>(<a href='../Y/8054.html' title='Multiple used in 2294 places.'>a</a>, <a href='../Y/12066.html' title='Multiple used in 1763 places.'>b</a>, <a href='../Y/12995.html' title='Multiple used in 8103 places.'>c</a>, -1)
+<a id='L68' name='L68'></a>  68 <em class='sharp'>#define</em> <a href='../R/5223.html' title='Multiple referred from 3 places.'>NO_MORE_RPC_RESULTS</a> 3
+<a id='L69' name='L69'></a>  69 <em class='sharp'>#ifndef</em> <a href='../D/20604.html' title='Multiple defined in 2 places.'>dbfreelogin</a>
+<a id='L70' name='L70'></a>  70 <em class='sharp'>#define</em> <a href='../R/17858.html' title='Multiple referred from 19 places.'>dbfreelogin</a> <a href='../Y/15241.html' title='Multiple used in 2 places.'>dbloginfree</a>
+<a id='L71' name='L71'></a>  71 <em class='sharp'>#endif</em>
+<a id='L72' name='L72'></a>  72 <em class='sharp'>#define</em> <a href='../S/755.html#L2137' title='Referred from 2137 in ext/mssql/php_mssql.c.'>dbrpcexec</a> <a href='../Y/15274.html' title='Multiple used in 2 places.'>dbrpcsend</a>
+<a id='L73' name='L73'></a>  73 <strong class='reserved'>typedef</strong> <strong class='reserved'>unsigned</strong> <strong class='reserved'>char</strong>   *<a href='../R/3964.html' title='Multiple referred from 17 places.'>LPBYTE</a>;
+<a id='L74' name='L74'></a>  74 <strong class='reserved'>typedef</strong> <strong class='reserved'>float</strong>           <a href='../S/756.html#L90' title='Referred from 90 in ext/mssql/php_mssql.h.'>DBFLT4</a>;
+<a id='L75' name='L75'></a>  75 <em class='sharp'>#else</em>
+<a id='L76' name='L76'></a>  76 <em class='sharp'>#define</em> <a href='../S/755.html#L534' title='Referred from 534 in ext/mssql/php_mssql.c.'>MSSQL_VERSION</a> "7.0"
+<a id='L77' name='L77'></a>  77 <em class='sharp'>#define</em> <a href='../R/1374.html' title='Multiple referred from 2 places.'>DBERRHANDLE</a>(<a href='../Y/8054.html' title='Multiple used in 2294 places.'>a</a>, <a href='../Y/12066.html' title='Multiple used in 1763 places.'>b</a>) <a href='../Y/15264.html' title='Multiple used in 2 places.'>dbprocerrhandle</a>(<a href='../Y/8054.html' title='Multiple used in 2294 places.'>a</a>, <a href='../Y/12066.html' title='Multiple used in 1763 places.'>b</a>)
+<a id='L78' name='L78'></a>  78 <em class='sharp'>#define</em> <a href='../R/1407.html' title='Multiple referred from 2 places.'>DBMSGHANDLE</a>(<a href='../Y/8054.html' title='Multiple used in 2294 places.'>a</a>, <a href='../Y/12066.html' title='Multiple used in 1763 places.'>b</a>) <a href='../Y/15265.html' title='Multiple used in 2 places.'>dbprocmsghandle</a>(<a href='../Y/8054.html' title='Multiple used in 2294 places.'>a</a>, <a href='../Y/12066.html' title='Multiple used in 1763 places.'>b</a>)
+<a id='L79' name='L79'></a>  79 <em class='sharp'>#define</em> <a href='../R/1636.html' title='Multiple referred from 2 places.'>EHANDLEFUNC</a> <a href='../Y/1360.html' title='Multiple used in 2 places.'>DBERRHANDLE_PROC</a>
+<a id='L80' name='L80'></a>  80 <em class='sharp'>#define</em> <a href='../R/4539.html' title='Multiple referred from 2 places.'>MHANDLEFUNC</a> <a href='../Y/1367.html' title='Multiple used in 2 places.'>DBMSGHANDLE_PROC</a>
+<a id='L81' name='L81'></a>  81 <em class='sharp'>#define</em> <a href='../R/1410.html' title='Multiple referred from 8 places.'>DBSETOPT</a>(<a href='../Y/8054.html' title='Multiple used in 2294 places.'>a</a>, <a href='../Y/12066.html' title='Multiple used in 1763 places.'>b</a>, <a href='../Y/12995.html' title='Multiple used in 8103 places.'>c</a>) <a href='../Y/15278.html' title='Multiple used in 4 places.'>dbsetopt</a>(<a href='../Y/8054.html' title='Multiple used in 2294 places.'>a</a>, <a href='../Y/12066.html' title='Multiple used in 1763 places.'>b</a>, <a href='../Y/12995.html' title='Multiple used in 8103 places.'>c</a>)
+<a id='L82' name='L82'></a>  82 <em class='sharp'>#endif</em>
+<a id='L83' name='L83'></a>  83 
+<a id='L84' name='L84'></a>  84 <em class='sharp'>#define</em> <a href='../R/17417.html' title='Multiple referred from 33 places.'>coltype</a>(<a href='../Y/24310.html' title='Multiple used in 1782 places.'>j</a>) <a href='../Y/15208.html' title='Multiple used in 5 places.'>dbcoltype</a>(<a href='../Y/27162.html' title='Multiple used in 137 places.'>mssql_ptr</a>-&gt;<a href='../Y/25198.html' title='Multiple used in 551 places.'>link</a>,<a href='../Y/24310.html' title='Multiple used in 1782 places.'>j</a>)
+<a id='L85' name='L85'></a>  85 <em class='sharp'>#define</em> <a href='../S/756.html#L88' title='Referred from 88 in ext/mssql/php_mssql.h.'>intcol</a>(<a href='../Y/22121.html' title='Multiple used in 12184 places.'>i</a>) ((<strong class='reserved'>int</strong>) *(<a href='../Y/1362.html' title='Multiple used in 5 places.'>DBINT</a> *) <a href='../Y/15212.html' title='Multiple used in 18 places.'>dbdata</a>(<a href='../Y/27162.html' title='Multiple used in 137 places.'>mssql_ptr</a>-&gt;<a href='../Y/25198.html' title='Multiple used in 551 places.'>link</a>,<a href='../Y/22121.html' title='Multiple used in 12184 places.'>i</a>))
+<a id='L86' name='L86'></a>  86 <em class='sharp'>#define</em> <a href='../S/756.html#L88' title='Referred from 88 in ext/mssql/php_mssql.h.'>smallintcol</a>(<a href='../Y/22121.html' title='Multiple used in 12184 places.'>i</a>) ((<strong class='reserved'>int</strong>) *(DBSMALLINT *) <a href='../Y/15212.html' title='Multiple used in 18 places.'>dbdata</a>(<a href='../Y/27162.html' title='Multiple used in 137 places.'>mssql_ptr</a>-&gt;<a href='../Y/25198.html' title='Multiple used in 551 places.'>link</a>,<a href='../Y/22121.html' title='Multiple used in 12184 places.'>i</a>))
+<a id='L87' name='L87'></a>  87 <em class='sharp'>#define</em> <a href='../S/756.html#L88' title='Referred from 88 in ext/mssql/php_mssql.h.'>tinyintcol</a>(<a href='../Y/22121.html' title='Multiple used in 12184 places.'>i</a>) ((<strong class='reserved'>int</strong>) *(DBTINYINT *) <a href='../Y/15212.html' title='Multiple used in 18 places.'>dbdata</a>(<a href='../Y/27162.html' title='Multiple used in 137 places.'>mssql_ptr</a>-&gt;<a href='../Y/25198.html' title='Multiple used in 551 places.'>link</a>,<a href='../Y/22121.html' title='Multiple used in 12184 places.'>i</a>))
+<a id='L88' name='L88'></a>  88 <em class='sharp'>#define</em> <a href='../S/755.html#L947' title='Referred from 947 in ext/mssql/php_mssql.c.'>anyintcol</a>(<a href='../Y/24310.html' title='Multiple used in 1782 places.'>j</a>) (<a href='../S/756.html#L84' title='Defined at 84 in ext/mssql/php_mssql.h.'>coltype</a>(<a href='../Y/24310.html' title='Multiple used in 1782 places.'>j</a>)==<a href='../D/11345.html' title='Multiple defined in 2 places.'>SQLINT4</a>?<a href='../S/756.html#L85' title='Defined at 85 in ext/mssql/php_mssql.h.'>intcol</a>(<a href='../Y/24310.html' title='Multiple used in 1782 places.'>j</a>):(<a href='../S/756.html#L84' title='Defined at 84 in ext/mssql/php_mssql.h.'>coltype</a>(<a href='../Y/24310.html' title='Multiple used in 1782 places.'>j</a>)==<a href='../D/11344.html' title='Multiple defined in 2 places.'>SQLINT2</a>?<a href='../S/756.html#L86' title='Defined at 86 in ext/mssql/php_mssql.h.'>smallintcol</a>(<a href='../Y/24310.html' title='Multiple used in 1782 places.'>j</a>):<a href='../S/756.html#L87' title='Defined at 87 in ext/mssql/php_mssql.h.'>tinyintcol</a>(<a href='../Y/24310.html' title='Multiple used in 1782 places.'>j</a>)))
+<a id='L89' name='L89'></a>  89 <em class='sharp'>#define</em> <a href='../R/17190.html' title='Multiple referred from 2 places.'>charcol</a>(<a href='../Y/22121.html' title='Multiple used in 12184 places.'>i</a>) ((DBCHAR *) <a href='../Y/15212.html' title='Multiple used in 18 places.'>dbdata</a>(<a href='../Y/27162.html' title='Multiple used in 137 places.'>mssql_ptr</a>-&gt;<a href='../Y/25198.html' title='Multiple used in 551 places.'>link</a>,<a href='../Y/22121.html' title='Multiple used in 12184 places.'>i</a>))
+<a id='L90' name='L90'></a>  90 <em class='sharp'>#define</em> <a href='../S/755.html#L966' title='Referred from 966 in ext/mssql/php_mssql.c.'>floatcol4</a>(<a href='../Y/22121.html' title='Multiple used in 12184 places.'>i</a>) (*(<a href='../D/1617.html' title='Multiple defined in 2 places.'>DBFLT4</a> *) <a href='../Y/15212.html' title='Multiple used in 18 places.'>dbdata</a>(<a href='../Y/27162.html' title='Multiple used in 137 places.'>mssql_ptr</a>-&gt;<a href='../Y/25198.html' title='Multiple used in 551 places.'>link</a>,<a href='../Y/22121.html' title='Multiple used in 12184 places.'>i</a>))
+<a id='L91' name='L91'></a>  91 <em class='sharp'>#define</em> <a href='../S/755.html#L977' title='Referred from 977 in ext/mssql/php_mssql.c.'>floatcol8</a>(<a href='../Y/22121.html' title='Multiple used in 12184 places.'>i</a>) (*(<a href='../Y/1361.html' title='Multiple used in 3 places.'>DBFLT8</a> *) <a href='../Y/15212.html' title='Multiple used in 18 places.'>dbdata</a>(<a href='../Y/27162.html' title='Multiple used in 137 places.'>mssql_ptr</a>-&gt;<a href='../Y/25198.html' title='Multiple used in 551 places.'>link</a>,<a href='../Y/22121.html' title='Multiple used in 12184 places.'>i</a>))
+<a id='L92' name='L92'></a>  92 
+<a id='L93' name='L93'></a>  93 <em class='sharp'>#ifdef</em> <a href='../Y/7361.html' title='Multiple used in 473 places.'>ZTS</a>
+<a id='L94' name='L94'></a>  94 <em class='sharp'>#include</em> "<a href='1596.html'>TSRM.h</a>"
+<a id='L95' name='L95'></a>  95 <em class='sharp'>#endif</em>
+<a id='L96' name='L96'></a>  96 
+<a id='L97' name='L97'></a>  97 <strong class='reserved'>extern</strong> <a href='../S/1709.html#L70' title='Defined at 70 in Zend/zend_modules.h.'>zend_module_entry</a> <a href='../Y/27157.html' title='Multiple used in 4 places.'>mssql_module_entry</a>;
+<a id='L98' name='L98'></a>  98 <em class='sharp'>#define</em> <a href='../S/756.html#L212' title='Referred from 212 in ext/mssql/php_mssql.h.'>mssql_module_ptr</a> &amp;<a href='../Y/27157.html' title='Multiple used in 4 places.'>mssql_module_entry</a>
+<a id='L99' name='L99'></a>  99 
+<a id='L100' name='L100'></a> 100 <a href='../D/8401.html' title='Multiple defined in 101 places.'>PHP_MINIT_FUNCTION</a>(<a href='../Y/27127.html' title='Multiple used in 68 places.'>mssql</a>);
+<a id='L101' name='L101'></a> 101 <a href='../D/8432.html' title='Multiple defined in 78 places.'>PHP_MSHUTDOWN_FUNCTION</a>(<a href='../Y/27127.html' title='Multiple used in 68 places.'>mssql</a>);
+<a id='L102' name='L102'></a> 102 <a href='../D/8657.html' title='Multiple defined in 32 places.'>PHP_RINIT_FUNCTION</a>(<a href='../Y/27127.html' title='Multiple used in 68 places.'>mssql</a>);
+<a id='L103' name='L103'></a> 103 <a href='../D/8679.html' title='Multiple defined in 39 places.'>PHP_RSHUTDOWN_FUNCTION</a>(<a href='../Y/27127.html' title='Multiple used in 68 places.'>mssql</a>);
+<a id='L104' name='L104'></a> 104 <a href='../D/8399.html' title='Multiple defined in 88 places.'>PHP_MINFO_FUNCTION</a>(<a href='../Y/27127.html' title='Multiple used in 68 places.'>mssql</a>);
+<a id='L105' name='L105'></a> 105 
+<a id='L106' name='L106'></a> 106 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/27130.html' title='Multiple used in 4 places.'>mssql_connect</a>);
+<a id='L107' name='L107'></a> 107 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/27161.html' title='Multiple used in 4 places.'>mssql_pconnect</a>);
+<a id='L108' name='L108'></a> 108 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/27129.html' title='Multiple used in 4 places.'>mssql_close</a>);
+<a id='L109' name='L109'></a> 109 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/27166.html' title='Multiple used in 4 places.'>mssql_select_db</a>);
+<a id='L110' name='L110'></a> 110 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/27163.html' title='Multiple used in 4 places.'>mssql_query</a>);
+<a id='L111' name='L111'></a> 111 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/27136.html' title='Multiple used in 3 places.'>mssql_fetch_batch</a>);
+<a id='L112' name='L112'></a> 112 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/27165.html' title='Multiple used in 3 places.'>mssql_rows_affected</a>);
+<a id='L113' name='L113'></a> 113 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/27144.html' title='Multiple used in 4 places.'>mssql_free_result</a>);
+<a id='L114' name='L114'></a> 114 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/27147.html' title='Multiple used in 4 places.'>mssql_get_last_message</a>);
+<a id='L115' name='L115'></a> 115 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/27160.html' title='Multiple used in 4 places.'>mssql_num_rows</a>);
+<a id='L116' name='L116'></a> 116 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/27159.html' title='Multiple used in 4 places.'>mssql_num_fields</a>);
+<a id='L117' name='L117'></a> 117 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/27137.html' title='Multiple used in 4 places.'>mssql_fetch_field</a>);
+<a id='L118' name='L118'></a> 118 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/27139.html' title='Multiple used in 4 places.'>mssql_fetch_row</a>);
+<a id='L119' name='L119'></a> 119 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/27134.html' title='Multiple used in 4 places.'>mssql_fetch_array</a>);
+<a id='L120' name='L120'></a> 120 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/27135.html' title='Multiple used in 4 places.'>mssql_fetch_assoc</a>);
+<a id='L121' name='L121'></a> 121 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/27138.html' title='Multiple used in 4 places.'>mssql_fetch_object</a>);
+<a id='L122' name='L122'></a> 122 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/27140.html' title='Multiple used in 3 places.'>mssql_field_length</a>);
+<a id='L123' name='L123'></a> 123 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/27141.html' title='Multiple used in 3 places.'>mssql_field_name</a>);
+<a id='L124' name='L124'></a> 124 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/27143.html' title='Multiple used in 3 places.'>mssql_field_type</a>);
+<a id='L125' name='L125'></a> 125 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/27131.html' title='Multiple used in 4 places.'>mssql_data_seek</a>);
+<a id='L126' name='L126'></a> 126 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/27142.html' title='Multiple used in 4 places.'>mssql_field_seek</a>);
+<a id='L127' name='L127'></a> 127 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../D/24374.html' title='Multiple defined in 2 places.'>mssql_result</a>);
+<a id='L128' name='L128'></a> 128 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/27158.html' title='Multiple used in 3 places.'>mssql_next_result</a>);
+<a id='L129' name='L129'></a> 129 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/27154.html' title='Multiple used in 3 places.'>mssql_min_error_severity</a>);
+<a id='L130' name='L130'></a> 130 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/27155.html' title='Multiple used in 3 places.'>mssql_min_message_severity</a>);
+<a id='L131' name='L131'></a> 131 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/27151.html' title='Multiple used in 3 places.'>mssql_init</a>);
+<a id='L132' name='L132'></a> 132 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../S/756.html#L154' title='Defined at 154 in ext/mssql/php_mssql.h.'>mssql_bind</a>);
+<a id='L133' name='L133'></a> 133 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/27133.html' title='Multiple used in 3 places.'>mssql_execute</a>);
+<a id='L134' name='L134'></a> 134 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/27145.html' title='Multiple used in 3 places.'>mssql_free_statement</a>);
+<a id='L135' name='L135'></a> 135 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/27150.html' title='Multiple used in 3 places.'>mssql_guid_string</a>);
+<a id='L136' name='L136'></a> 136 
+<a id='L137' name='L137'></a> 137 <strong class='reserved'>typedef</strong> <strong class='reserved'>struct</strong> <a href='../R/21470.html' title='Multiple referred from 32 places.'>mssql_link</a> <em class='brace'>{</em>
+<a id='L138' name='L138'></a> 138         <a href='../Y/3611.html' title='Multiple used in 2 places.'>LOGINREC</a> *<a href='../Y/25482.html' title='Multiple used in 62 places.'>login</a>;
+<a id='L139' name='L139'></a> 139         <a href='../Y/1372.html' title='Multiple used in 8 places.'>DBPROCESS</a> *<a href='../Y/25198.html' title='Multiple used in 551 places.'>link</a>;
+<a id='L140' name='L140'></a> 140         <strong class='reserved'>int</strong> <a href='../Y/40532.html' title='Multiple used in 130 places.'>valid</a>;
+<a id='L141' name='L141'></a> 141 <em class='brace'>}</em> <a href='../R/21470.html' title='Multiple referred from 32 places.'>mssql_link</a>;
+<a id='L142' name='L142'></a> 142 
+<a id='L143' name='L143'></a> 143 <strong class='reserved'>typedef</strong> <strong class='reserved'>struct</strong> <a href='../R/21473.html' title='Multiple referred from 11 places.'>mssql_statement</a> <em class='brace'>{</em>
+<a id='L144' name='L144'></a> 144         <strong class='reserved'>int</strong> <a href='../Y/22644.html' title='Multiple used in 1673 places.'>id</a>;
+<a id='L145' name='L145'></a> 145         <a href='../D/24372.html' title='Multiple defined in 2 places.'>mssql_link</a> *<a href='../Y/25198.html' title='Multiple used in 551 places.'>link</a>;
+<a id='L146' name='L146'></a> 146         <a href='../S/1683.html#L83' title='Defined at 83 in Zend/zend_hash.h.'>HashTable</a> *<a href='../Y/12529.html' title='Multiple used in 31 places.'>binds</a>;
+<a id='L147' name='L147'></a> 147         <strong class='reserved'>int</strong> <a href='../Y/17284.html' title='Multiple used in 25 places.'>executed</a>;
+<a id='L148' name='L148'></a> 148 <em class='brace'>}</em> <a href='../R/21473.html' title='Multiple referred from 11 places.'>mssql_statement</a>;
+<a id='L149' name='L149'></a> 149 
+<a id='L150' name='L150'></a> 150 <strong class='reserved'>typedef</strong> <strong class='reserved'>struct</strong> <em class='brace'>{</em>
+<a id='L151' name='L151'></a> 151         
+<a id='L152' name='L152'></a> 152         <a href='../S/1741.html#L55' title='Defined at 55 in Zend/zend_types.h.'>zval</a> *<a href='../S/1741.html#L55' title='Defined at 55 in Zend/zend_types.h.'>zval</a>;
+<a id='L153' name='L153'></a> 153         <em class='comment'>/* TODO: more data for special types (BLOBS, NUMERIC...) */</em>
+<a id='L154' name='L154'></a> 154 <em class='brace'>}</em> <a href='../R/21468.html' title='Multiple referred from 8 places.'>mssql_bind</a>;
+<a id='L155' name='L155'></a> 155 
+<a id='L156' name='L156'></a> 156 <a href='../D/15993.html' title='Multiple defined in 7 places.'>ZEND_BEGIN_MODULE_GLOBALS</a>(<a href='../Y/27127.html' title='Multiple used in 68 places.'>mssql</a>)
+<a id='L157' name='L157'></a> 157         <strong class='reserved'>long</strong> <a href='../Y/15435.html' title='Multiple used in 88 places.'>default_link</a>;
+<a id='L158' name='L158'></a> 158         <strong class='reserved'>long</strong> <a href='../Y/29178.html' title='Multiple used in 96 places.'>num_links</a>,<a href='../Y/29196.html' title='Multiple used in 55 places.'>num_persistent</a>;
+<a id='L159' name='L159'></a> 159         <strong class='reserved'>long</strong> <a href='../Y/26033.html' title='Multiple used in 33 places.'>max_links</a>,<a href='../Y/26046.html' title='Multiple used in 24 places.'>max_persistent</a>;
+<a id='L160' name='L160'></a> 160         <a href='../S/1741.html#L25' title='Defined at 25 in Zend/zend_types.h.'>zend_bool</a> <a href='../Y/8761.html' title='Multiple used in 19 places.'>allow_persistent</a>;
+<a id='L161' name='L161'></a> 161         <strong class='reserved'>char</strong> *<a href='../Y/9095.html' title='Multiple used in 24 places.'>appname</a>;
+<a id='L162' name='L162'></a> 162         <strong class='reserved'>char</strong> *<a href='../Y/36102.html' title='Multiple used in 23 places.'>server_message</a>;
+<a id='L163' name='L163'></a> 163 <em class='sharp'>#ifdef</em> <a href='../Y/2665.html' title='Multiple used in 11 places.'>HAVE_FREETDS</a>
+<a id='L164' name='L164'></a> 164         <strong class='reserved'>char</strong> *<a href='../S/813.html#L928' title='Defined at 928 in ext/mysqlnd/mysqlnd_structs.h.'>charset</a>;
+<a id='L165' name='L165'></a> 165 <em class='sharp'>#endif</em>
+<a id='L166' name='L166'></a> 166         <strong class='reserved'>long</strong> <a href='../Y/26755.html' title='Multiple used in 4 places.'>min_error_severity</a>, <a href='../Y/26758.html' title='Multiple used in 4 places.'>min_message_severity</a>;
+<a id='L167' name='L167'></a> 167         <strong class='reserved'>long</strong> <a href='../Y/13384.html' title='Multiple used in 3 places.'>cfg_min_error_severity</a>, <a href='../Y/13385.html' title='Multiple used in 3 places.'>cfg_min_message_severity</a>;
+<a id='L168' name='L168'></a> 168         <strong class='reserved'>long</strong> <a href='../Y/14190.html' title='Multiple used in 26 places.'>connect_timeout</a>, <a href='../Y/38977.html' title='Multiple used in 261 places.'>timeout</a>;
+<a id='L169' name='L169'></a> 169         <a href='../S/1741.html#L25' title='Defined at 25 in Zend/zend_types.h.'>zend_bool</a> <a href='../Y/14090.html' title='Multiple used in 6 places.'>compatibility_mode</a>;
+<a id='L170' name='L170'></a> 170         <strong class='reserved'>void</strong> (*<a href='../Y/19202.html' title='Multiple used in 4 places.'>get_column_content</a>)(<a href='../D/24372.html' title='Multiple defined in 2 places.'>mssql_link</a> *<a href='../Y/27162.html' title='Multiple used in 137 places.'>mssql_ptr</a>,<strong class='reserved'>int</strong> <a href='../D/25061.html' title='Multiple defined in 3 places.'>offset</a>,<a href='../S/1741.html#L55' title='Defined at 55 in Zend/zend_types.h.'>zval</a> *<a href='../D/28927.html' title='Multiple defined in 16 places.'>result</a>,<strong class='reserved'>int</strong> <a href='../Y/13991.html' title='Multiple used in 21 places.'>column_type</a>  <a href='../D/14076.html' title='Multiple defined in 136 places.'>TSRMLS_DC</a>);
+<a id='L171' name='L171'></a> 171         <strong class='reserved'>long</strong> <a href='../Y/38743.html' title='Multiple used in 6 places.'>textsize</a>, <a href='../Y/38742.html' title='Multiple used in 6 places.'>textlimit</a>, <a href='../Y/12349.html' title='Multiple used in 11 places.'>batchsize</a>;
+<a id='L172' name='L172'></a> 172         <a href='../S/1741.html#L25' title='Defined at 25 in Zend/zend_types.h.'>zend_bool</a> <a href='../Y/15111.html' title='Multiple used in 4 places.'>datetimeconvert</a>;
+<a id='L173' name='L173'></a> 173         <a href='../S/1683.html#L83' title='Defined at 83 in Zend/zend_hash.h.'>HashTable</a> *<a href='../Y/35002.html' title='Multiple used in 2 places.'>resource_list</a>, *<a href='../Y/35004.html' title='Multiple used in 2 places.'>resource_plist</a>;
+<a id='L174' name='L174'></a> 174         <a href='../S/1741.html#L25' title='Defined at 25 in Zend/zend_types.h.'>zend_bool</a> <a href='../Y/35942.html' title='Multiple used in 3 places.'>secure_connection</a>;
+<a id='L175' name='L175'></a> 175         <strong class='reserved'>long</strong> <a href='../Y/26049.html' title='Multiple used in 4 places.'>max_procs</a>;
+<a id='L176' name='L176'></a> 176 <a href='../S/465.html#L51' title='Defined at 51 in ext/libxml/php_libxml.h.'>ZEND_END_MODULE_GLOBALS</a>(<a href='../Y/27127.html' title='Multiple used in 68 places.'>mssql</a>)
+<a id='L177' name='L177'></a> 177 
+<a id='L178' name='L178'></a> 178 <em class='sharp'>#define</em> <a href='../R/4654.html' title='Multiple referred from 4 places.'>MSSQL_ROWS_BLOCK</a> 128
+<a id='L179' name='L179'></a> 179 
+<a id='L180' name='L180'></a> 180 <strong class='reserved'>typedef</strong> <strong class='reserved'>struct</strong> <a href='../R/21469.html' title='Multiple referred from 4 places.'>mssql_field</a> <em class='brace'>{</em>
+<a id='L181' name='L181'></a> 181         <strong class='reserved'>char</strong> *<a href='../Y/28160.html' title='Multiple used in 4617 places.'>name</a>,*<a href='../Y/13986.html' title='Multiple used in 9 places.'>column_source</a>;
+<a id='L182' name='L182'></a> 182         <strong class='reserved'>long</strong> <a href='../Y/26029.html' title='Multiple used in 65 places.'>max_length</a>; 
+<a id='L183' name='L183'></a> 183         <strong class='reserved'>int</strong> <a href='../Y/29247.html' title='Multiple used in 19 places.'>numeric</a>;
+<a id='L184' name='L184'></a> 184         <strong class='reserved'>int</strong> <a href='../D/32025.html' title='Multiple defined in 3 places.'>type</a>;
+<a id='L185' name='L185'></a> 185 <em class='brace'>}</em> <a href='../R/21469.html' title='Multiple referred from 4 places.'>mssql_field</a>;
+<a id='L186' name='L186'></a> 186 
+<a id='L187' name='L187'></a> 187 <strong class='reserved'>typedef</strong> <strong class='reserved'>struct</strong> <a href='../R/21472.html' title='Multiple referred from 38 places.'>mssql_result</a> <em class='brace'>{</em>
+<a id='L188' name='L188'></a> 188         <a href='../S/1741.html#L55' title='Defined at 55 in Zend/zend_types.h.'>zval</a> **<a href='../D/20513.html' title='Multiple defined in 7 places.'>data</a>;
+<a id='L189' name='L189'></a> 189         <a href='../D/24371.html' title='Multiple defined in 2 places.'>mssql_field</a> *<a href='../D/21444.html' title='Multiple defined in 2 places.'>fields</a>;
+<a id='L190' name='L190'></a> 190         <a href='../D/24372.html' title='Multiple defined in 2 places.'>mssql_link</a> *<a href='../Y/27162.html' title='Multiple used in 137 places.'>mssql_ptr</a>;
+<a id='L191' name='L191'></a> 191         <a href='../D/24375.html' title='Multiple defined in 2 places.'>mssql_statement</a> * <a href='../Y/37766.html' title='Multiple used in 483 places.'>statement</a>;
+<a id='L192' name='L192'></a> 192         <strong class='reserved'>int</strong> <a href='../Y/12349.html' title='Multiple used in 11 places.'>batchsize</a>;
+<a id='L193' name='L193'></a> 193         <strong class='reserved'>int</strong> <a href='../Y/24769.html' title='Multiple used in 3 places.'>lastresult</a>;
+<a id='L194' name='L194'></a> 194         <strong class='reserved'>int</strong> <a href='../Y/12639.html' title='Multiple used in 12 places.'>blocks_initialized</a>;
+<a id='L195' name='L195'></a> 195         <strong class='reserved'>int</strong> <a href='../Y/14688.html' title='Multiple used in 27 places.'>cur_row</a>,<a href='../Y/14667.html' title='Multiple used in 17 places.'>cur_field</a>;
+<a id='L196' name='L196'></a> 196         <strong class='reserved'>int</strong> <a href='../D/24981.html' title='Multiple defined in 3 places.'>num_rows</a>,<a href='../S/813.html#L674' title='Defined at 674 in ext/mysqlnd/mysqlnd_structs.h.'>num_fields</a>,<a href='../Y/19906.html' title='Multiple used in 6 places.'>have_fields</a>;
+<a id='L197' name='L197'></a> 197 <em class='brace'>}</em> <a href='../R/21472.html' title='Multiple referred from 38 places.'>mssql_result</a>;
+<a id='L198' name='L198'></a> 198 
+<a id='L199' name='L199'></a> 199 
+<a id='L200' name='L200'></a> 200 <em class='sharp'>#ifdef</em> <a href='../Y/7361.html' title='Multiple used in 473 places.'>ZTS</a>
+<a id='L201' name='L201'></a> 201 <em class='sharp'># define</em> <a href='../R/4656.html' title='Multiple referred from 68 places.'>MS_SQL_G</a>(<a href='../Y/40497.html' title='Multiple used in 3064 places.'>v</a>) <a href='../S/1596.html#L164' title='Defined at 164 in TSRM/TSRM.h.'>TSRMG</a>(mssql_globals_id, <a href='../Y/44303.html' title='Multiple used in 17 places.'>zend_mssql_globals</a> *, <a href='../Y/40497.html' title='Multiple used in 3064 places.'>v</a>)
+<a id='L202' name='L202'></a> 202 <em class='sharp'>#else</em>
+<a id='L203' name='L203'></a> 203 <em class='sharp'># define</em> <a href='../R/4656.html' title='Multiple referred from 68 places.'>MS_SQL_G</a>(<a href='../Y/40497.html' title='Multiple used in 3064 places.'>v</a>)    (<a href='../Y/27148.html' title='Multiple used in 20 places.'>mssql_globals</a>.<a href='../Y/40497.html' title='Multiple used in 3064 places.'>v</a>)
+<a id='L204' name='L204'></a> 204 <em class='sharp'>#endif</em>
+<a id='L205' name='L205'></a> 205 
+<a id='L206' name='L206'></a> 206 <em class='sharp'>#else</em>
+<a id='L207' name='L207'></a> 207 
+<a id='L208' name='L208'></a> 208 <em class='sharp'>#define</em> <a href='../S/756.html#L212' title='Referred from 212 in ext/mssql/php_mssql.h.'>mssql_module_ptr</a> <a href='../D/6086.html' title='Multiple defined in 8 places.'>NULL</a>
+<a id='L209' name='L209'></a> 209 
+<a id='L210' name='L210'></a> 210 <em class='sharp'>#endif</em> <em class='comment'>/* HAVE_MSSQL */</em>
+<a id='L211' name='L211'></a> 211 
+<a id='L212' name='L212'></a> 212 <em class='sharp'>#define</em> phpext_mssql_ptr <a href='../D/24373.html' title='Multiple defined in 2 places.'>mssql_module_ptr</a>
+<a id='L213' name='L213'></a> 213 
+<a id='L214' name='L214'></a> 214 <em class='sharp'>#endif</em> <em class='comment'>/* PHP_MSSQL_H */</em>
+</pre>
+<hr />
+<a id='BOTTOM' name='BOTTOM'></a>
+<em class='comment'>/* [&lt;][&gt;][^][v]<a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+</body>
+</html>

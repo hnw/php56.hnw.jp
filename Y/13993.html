@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>columns</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/820.html#L1391'>columns</a>          1391 ext/oci8/oci8_interface.c 	php_oci_out_column **columns;</span>
+<span class='curline'><a href='../S/820.html#L1413'>columns</a>          1413 ext/oci8/oci8_interface.c 		columns = safe_emalloc(statement-&gt;ncolumns, sizeof(php_oci_out_column *), 0);</span>
+<span class='curline'><a href='../S/820.html#L1416'>columns</a>          1416 ext/oci8/oci8_interface.c 			columns[ i ] = php_oci_statement_get_column(statement, i + 1, NULL, 0 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/820.html#L1427'>columns</a>          1427 ext/oci8/oci8_interface.c 				php_oci_column_to_zval(columns[ i ], element, PHP_OCI_RETURN_LOBS TSRMLS_CC);</span>
+<span class='curline'><a href='../S/820.html#L1432'>columns</a>          1432 ext/oci8/oci8_interface.c 					zend_symtable_update(Z_ARRVAL_P(row), columns[ i ]-&gt;name, columns[ i ]-&gt;name_len+1, &amp;element, sizeof(zval*), NULL);</span>
+<span class='curline'><a href='../S/820.html#L1444'>columns</a>          1444 ext/oci8/oci8_interface.c 		efree(columns);</span>
+<span class='curline'><a href='../S/820.html#L1447'>columns</a>          1447 ext/oci8/oci8_interface.c 		columns = safe_emalloc(statement-&gt;ncolumns, sizeof(php_oci_out_column *), 0);</span>
+<span class='curline'><a href='../S/820.html#L1452'>columns</a>          1452 ext/oci8/oci8_interface.c 				columns[ i ] = php_oci_statement_get_column(statement, i + 1, NULL, 0 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/820.html#L1460'>columns</a>          1460 ext/oci8/oci8_interface.c 				columns[ i ] = php_oci_statement_get_column(statement, i + 1, NULL, 0 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/820.html#L1464'>columns</a>          1464 ext/oci8/oci8_interface.c 				zend_symtable_update(Z_ARRVAL_P(array), columns[ i ]-&gt;name, columns[ i ]-&gt;name_len+1, (void *) &amp;tmp, sizeof(zval*), (void **) &amp;(outarrs[ i ]));</span>
+<span class='curline'><a href='../S/820.html#L1471'>columns</a>          1471 ext/oci8/oci8_interface.c 				php_oci_column_to_zval(columns[ i ], element, PHP_OCI_RETURN_LOBS TSRMLS_CC);</span>
+<span class='curline'><a href='../S/820.html#L1483'>columns</a>          1483 ext/oci8/oci8_interface.c 		efree(columns);</span>
+<span class='curline'><a href='../S/822.html#L160'>columns</a>           160 ext/oci8/oci8_statement.c 		statement2-&gt;columns = NULL;</span>
+<span class='curline'><a href='../S/822.html#L256'>columns</a>           256 ext/oci8/oci8_statement.c 	if (statement-&gt;has_descr &amp;&amp; statement-&gt;columns) {</span>
+<span class='curline'><a href='../S/822.html#L257'>columns</a>           257 ext/oci8/oci8_statement.c 		zend_hash_apply(statement-&gt;columns, (apply_func_t) php_oci_cleanup_pre_fetch TSRMLS_CC);</span>
+<span class='curline'><a href='../S/822.html#L265'>columns</a>           265 ext/oci8/oci8_statement.c 			if (statement-&gt;columns) {</span>
+<span class='curline'><a href='../S/822.html#L266'>columns</a>           266 ext/oci8/oci8_statement.c 				zend_hash_destroy(statement-&gt;columns);</span>
+<span class='curline'><a href='../S/822.html#L267'>columns</a>           267 ext/oci8/oci8_statement.c 				efree(statement-&gt;columns);</span>
+<span class='curline'><a href='../S/822.html#L268'>columns</a>           268 ext/oci8/oci8_statement.c 				statement-&gt;columns = NULL;</span>
+<span class='curline'><a href='../S/822.html#L385'>columns</a>           385 ext/oci8/oci8_statement.c 	if (statement-&gt;columns == NULL) { /* we release the columns at the end of a fetch */</span>
+<span class='curline'><a href='../S/822.html#L399'>columns</a>           399 ext/oci8/oci8_statement.c 		if (zend_hash_index_find(statement-&gt;columns, column_index, (void **)&amp;column) == FAILURE) {</span>
+<span class='curline'><a href='../S/822.html#L574'>columns</a>           574 ext/oci8/oci8_statement.c 		ALLOC_HASHTABLE(statement-&gt;columns);</span>
+<span class='curline'><a href='../S/822.html#L575'>columns</a>           575 ext/oci8/oci8_statement.c 		zend_hash_init(statement-&gt;columns, 13, NULL, php_oci_column_hash_dtor, 0);</span>
+<span class='curline'><a href='../S/822.html#L593'>columns</a>           593 ext/oci8/oci8_statement.c 			if (zend_hash_index_update(statement-&gt;columns, counter, &amp;column, sizeof(php_oci_out_column), (void**) &amp;outcol) == FAILURE) {</span>
+<span class='curline'><a href='../S/822.html#L594'>columns</a>           594 ext/oci8/oci8_statement.c 				efree(statement-&gt;columns);</span>
+<span class='curline'><a href='../S/822.html#L878'>columns</a>           878 ext/oci8/oci8_statement.c 	if (statement-&gt;columns) {</span>
+<span class='curline'><a href='../S/822.html#L879'>columns</a>           879 ext/oci8/oci8_statement.c 		zend_hash_destroy(statement-&gt;columns);</span>
+<span class='curline'><a href='../S/822.html#L880'>columns</a>           880 ext/oci8/oci8_statement.c 		efree(statement-&gt;columns);</span>
+<span class='curline'><a href='../S/824.html#L225'>columns</a>           225 ext/oci8/php_oci8_int.h 	HashTable			*columns;				/* hash containing all the result columns */</span>
+<span class='curline'><a href='../S/926.html#L209'>columns</a>           209 ext/pdo/pdo_stmt.c 	stmt-&gt;columns = ecalloc(stmt-&gt;column_count, sizeof(struct pdo_column_data));</span>
+<span class='curline'><a href='../S/926.html#L218'>columns</a>           218 ext/pdo/pdo_stmt.c 			char *s = stmt-&gt;columns[col].name;</span>
+<span class='curline'><a href='../S/926.html#L243'>columns</a>           243 ext/pdo/pdo_stmt.c 			if (SUCCESS == zend_hash_find(stmt-&gt;bound_params, stmt-&gt;columns[col].name,</span>
+<span class='curline'><a href='../S/926.html#L244'>columns</a>           244 ext/pdo/pdo_stmt.c 						stmt-&gt;columns[col].namelen, (void**)&amp;param)) {</span>
+<span class='curline'><a href='../S/926.html#L252'>columns</a>           252 ext/pdo/pdo_stmt.c 			if (SUCCESS == zend_hash_find(stmt-&gt;bound_columns, stmt-&gt;columns[col].name,</span>
+<span class='curline'><a href='../S/926.html#L253'>columns</a>           253 ext/pdo/pdo_stmt.c 						stmt-&gt;columns[col].namelen, (void**)&amp;param)) {</span>
+<span class='curline'><a href='../S/926.html#L341'>columns</a>           341 ext/pdo/pdo_stmt.c 	if (!is_param &amp;&amp; param-&gt;name &amp;&amp; stmt-&gt;columns) {</span>
+<span class='curline'><a href='../S/926.html#L346'>columns</a>           346 ext/pdo/pdo_stmt.c 			if (strcmp(stmt-&gt;columns[i].name, param-&gt;name) == 0) {</span>
+<span class='curline'><a href='../S/926.html#L522'>columns</a>           522 ext/pdo/pdo_stmt.c 			if (stmt-&gt;dbh-&gt;alloc_own_columns &amp;&amp; !stmt-&gt;columns) {</span>
+<span class='curline'><a href='../S/926.html#L554'>columns</a>           554 ext/pdo/pdo_stmt.c 	col = &amp;stmt-&gt;columns[colno];</span>
+<span class='curline'><a href='../S/926.html#L705'>columns</a>           705 ext/pdo/pdo_stmt.c 	if (!stmt-&gt;columns &amp;&amp; !pdo_stmt_describe_columns(stmt TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/926.html#L1038'>columns</a>          1038 ext/pdo/pdo_stmt.c 					add_assoc_zval(return_value, stmt-&gt;columns[i].name, val);</span>
+<span class='curline'><a href='../S/926.html#L1060'>columns</a>          1060 ext/pdo/pdo_stmt.c 					add_assoc_zval(return_value, stmt-&gt;columns[i].name, val);</span>
+<span class='curline'><a href='../S/926.html#L1069'>columns</a>          1069 ext/pdo/pdo_stmt.c 						if (zend_hash_find(Z_ARRVAL_P(return_value), stmt-&gt;columns[i].name,</span>
+<span class='curline'><a href='../S/926.html#L1070'>columns</a>          1070 ext/pdo/pdo_stmt.c 									strlen(stmt-&gt;columns[i].name)+1,</span>
+<span class='curline'><a href='../S/926.html#L1097'>columns</a>          1097 ext/pdo/pdo_stmt.c 							add_assoc_zval(return_value, stmt-&gt;columns[i].name, val);</span>
+<span class='curline'><a href='../S/926.html#L1109'>columns</a>          1109 ext/pdo/pdo_stmt.c 						stmt-&gt;columns[i].name, stmt-&gt;columns[i].namelen,</span>
+<span class='curline'><a href='../S/926.html#L1117'>columns</a>          1117 ext/pdo/pdo_stmt.c 							stmt-&gt;columns[i].name, stmt-&gt;columns[i].namelen,</span>
+<span class='curline'><a href='../S/926.html#L1841'>columns</a>          1841 ext/pdo/pdo_stmt.c 	col = &amp;stmt-&gt;columns[colno];</span>
+<span class='curline'><a href='../S/926.html#L2048'>columns</a>          2048 ext/pdo/pdo_stmt.c 	if (stmt-&gt;columns) {</span>
+<span class='curline'><a href='../S/926.html#L2050'>columns</a>          2050 ext/pdo/pdo_stmt.c 		struct pdo_column_data *cols = stmt-&gt;columns;</span>
+<span class='curline'><a href='../S/926.html#L2055'>columns</a>          2055 ext/pdo/pdo_stmt.c 		efree(stmt-&gt;columns);</span>
+<span class='curline'><a href='../S/926.html#L2056'>columns</a>          2056 ext/pdo/pdo_stmt.c 		stmt-&gt;columns = NULL;</span>
+<span class='curline'><a href='../S/926.html#L2373'>columns</a>          2373 ext/pdo/pdo_stmt.c 	if (stmt-&gt;columns) {</span>
+<span class='curline'><a href='../S/926.html#L2375'>columns</a>          2375 ext/pdo/pdo_stmt.c 		struct pdo_column_data *cols = stmt-&gt;columns;</span>
+<span class='curline'><a href='../S/926.html#L2383'>columns</a>          2383 ext/pdo/pdo_stmt.c 		efree(stmt-&gt;columns);</span>
+<span class='curline'><a href='../S/926.html#L2384'>columns</a>          2384 ext/pdo/pdo_stmt.c 		stmt-&gt;columns = NULL;</span>
+<span class='curline'><a href='../S/926.html#L2581'>columns</a>          2581 ext/pdo/pdo_stmt.c 				if (strcmp(stmt-&gt;columns[colno].name, Z_STRVAL_P(member)) == 0) {</span>
+<span class='curline'><a href='../S/926.html#L2630'>columns</a>          2630 ext/pdo/pdo_stmt.c 				if (strcmp(stmt-&gt;columns[colno].name, Z_STRVAL_P(member)) == 0) {</span>
+<span class='curline'><a href='../S/926.html#L2672'>columns</a>          2672 ext/pdo/pdo_stmt.c 		zend_hash_update(stmt-&gt;std.properties, stmt-&gt;columns[i].name, stmt-&gt;columns[i].namelen + 1, (void *)&amp;val, sizeof(zval *), NULL);</span>
+<span class='curline'><a href='../S/928.html#L580'>columns</a>           580 ext/pdo/php_pdo_driver.h 	struct pdo_column_data *columns;</span>
+<span class='curline'><a href='../S/932.html#L201'>columns</a>           201 ext/pdo_dblib/dblib_stmt.c 	col = &amp;stmt-&gt;columns[colno];</span>
+<span class='curline'><a href='../S/937.html#L186'>columns</a>           186 ext/pdo_firebird/firebird_statement.c 	struct pdo_column_data *col = &amp;stmt-&gt;columns[colno];</span>
+<span class='curline'><a href='../S/942.html#L657'>columns</a>           657 ext/pdo_mysql/mysql_statement.c 	struct pdo_column_data *cols = stmt-&gt;columns;</span>
+<span class='curline'><a href='../S/948.html#L511'>columns</a>           511 ext/pdo_oci/oci_statement.c 	struct pdo_column_data *col = &amp;stmt-&gt;columns[colno];</span>
+<span class='curline'><a href='../S/953.html#L551'>columns</a>           551 ext/pdo_odbc/odbc_stmt.c 	struct pdo_column_data *col = &amp;stmt-&gt;columns[colno];</span>
+<span class='curline'><a href='../S/959.html#L432'>columns</a>           432 ext/pdo_pgsql/pgsql_statement.c 	struct pdo_column_data *cols = stmt-&gt;columns;</span>
+<span class='curline'><a href='../S/959.html#L494'>columns</a>           494 ext/pdo_pgsql/pgsql_statement.c 	struct pdo_column_data *cols = stmt-&gt;columns;</span>
+<span class='curline'><a href='../S/966.html#L230'>columns</a>           230 ext/pdo_sqlite/sqlite_statement.c 	stmt-&gt;columns[colno].name = estrdup(sqlite3_column_name(S-&gt;stmt, colno));</span>
+<span class='curline'><a href='../S/966.html#L231'>columns</a>           231 ext/pdo_sqlite/sqlite_statement.c 	stmt-&gt;columns[colno].namelen = strlen(stmt-&gt;columns[colno].name);</span>
+<span class='curline'><a href='../S/966.html#L232'>columns</a>           232 ext/pdo_sqlite/sqlite_statement.c 	stmt-&gt;columns[colno].maxlen = 0xffffffff;</span>
+<span class='curline'><a href='../S/966.html#L233'>columns</a>           233 ext/pdo_sqlite/sqlite_statement.c 	stmt-&gt;columns[colno].precision = 0;</span>
+<span class='curline'><a href='../S/966.html#L242'>columns</a>           242 ext/pdo_sqlite/sqlite_statement.c 			stmt-&gt;columns[colno].param_type = PDO_PARAM_STR;</span>
+<span class='curline'><a href='../S/1576.html#L441'>columns</a>           441 sapi/phpdbg/phpdbg_utils.c 	int columns;	</span>
+<span class='curline'><a href='../S/1576.html#L446'>columns</a>           446 sapi/phpdbg/phpdbg_utils.c 	columns = csbi.srWindow.Right - csbi.srWindow.Left + 1;</span>
+<span class='curline'><a href='../S/1576.html#L450'>columns</a>           450 sapi/phpdbg/phpdbg_utils.c 	columns = ioctl(fileno(stdout), TIOCGWINSZ, &amp;w) == 0 ? w.ws_col : 80;</span>
+<span class='curline'><a href='../S/1576.html#L452'>columns</a>           452 sapi/phpdbg/phpdbg_utils.c 	columns = 80;</span>
+<span class='curline'><a href='../S/1576.html#L454'>columns</a>           454 sapi/phpdbg/phpdbg_utils.c 	return columns;</span>
+</pre>
+</body>
+</html>

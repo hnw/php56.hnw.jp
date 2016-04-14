@@ -1,0 +1,169 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>service</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/1026.html#L755'>service</a>           755 ext/soap/php_sdl.c 			xmlNodePtr *tmp, service;</span>
+<span class='curline'><a href='../S/1026.html#L760'>service</a>           760 ext/soap/php_sdl.c 			service = *tmp;</span>
+<span class='curline'><a href='../S/1026.html#L762'>service</a>           762 ext/soap/php_sdl.c 			trav = service-&gt;children;</span>
+<span class='curline'><a href='../S/1031.html#L67'>service</a>            67 ext/soap/soap.c static void delete_service(void *service);</span>
+<span class='curline'><a href='../S/1031.html#L1115'>service</a>          1115 ext/soap/soap.c 	soapServicePtr service;</span>
+<span class='curline'><a href='../S/1031.html#L1132'>service</a>          1132 ext/soap/soap.c 	service = emalloc(sizeof(soapService));</span>
+<span class='curline'><a href='../S/1031.html#L1133'>service</a>          1133 ext/soap/soap.c 	memset(service, 0, sizeof(soapService));</span>
+<span class='curline'><a href='../S/1031.html#L1134'>service</a>          1134 ext/soap/soap.c 	service-&gt;send_errors = 1;</span>
+<span class='curline'><a href='../S/1031.html#L1153'>service</a>          1153 ext/soap/soap.c 			service-&gt;uri = estrndup(Z_STRVAL_PP(tmp), Z_STRLEN_PP(tmp));</span>
+<span class='curline'><a href='../S/1031.html#L1160'>service</a>          1160 ext/soap/soap.c 			service-&gt;actor = estrndup(Z_STRVAL_PP(tmp), Z_STRLEN_PP(tmp));</span>
+<span class='curline'><a href='../S/1031.html#L1171'>service</a>          1171 ext/soap/soap.c 			  service-&gt;encoding = encoding;</span>
+<span class='curline'><a href='../S/1031.html#L1179'>service</a>          1179 ext/soap/soap.c 			ALLOC_HASHTABLE(service-&gt;class_map);</span>
+<span class='curline'><a href='../S/1031.html#L1180'>service</a>          1180 ext/soap/soap.c 			zend_hash_init(service-&gt;class_map, zend_hash_num_elements((*tmp)-&gt;value.ht), NULL, ZVAL_PTR_DTOR, 0);</span>
+<span class='curline'><a href='../S/1031.html#L1181'>service</a>          1181 ext/soap/soap.c 			zend_hash_copy(service-&gt;class_map, (*tmp)-&gt;value.ht, (copy_ctor_func_t) zval_add_ref, (void *) &amp;ztmp, sizeof(zval *));</span>
+<span class='curline'><a href='../S/1031.html#L1192'>service</a>          1192 ext/soap/soap.c 			service-&gt;features = Z_LVAL_PP(tmp);</span>
+<span class='curline'><a href='../S/1031.html#L1202'>service</a>          1202 ext/soap/soap.c 			service-&gt;send_errors = Z_LVAL_PP(tmp);</span>
+<span class='curline'><a href='../S/1031.html#L1209'>service</a>          1209 ext/soap/soap.c 	service-&gt;version = version;</span>
+<span class='curline'><a href='../S/1031.html#L1210'>service</a>          1210 ext/soap/soap.c 	service-&gt;type = SOAP_FUNCTIONS;</span>
+<span class='curline'><a href='../S/1031.html#L1211'>service</a>          1211 ext/soap/soap.c 	service-&gt;soap_functions.functions_all = FALSE;</span>
+<span class='curline'><a href='../S/1031.html#L1212'>service</a>          1212 ext/soap/soap.c 	service-&gt;soap_functions.ft = emalloc(sizeof(HashTable));</span>
+<span class='curline'><a href='../S/1031.html#L1213'>service</a>          1213 ext/soap/soap.c 	zend_hash_init(service-&gt;soap_functions.ft, 0, NULL, ZVAL_PTR_DTOR, 0);</span>
+<span class='curline'><a href='../S/1031.html#L1216'>service</a>          1216 ext/soap/soap.c 		service-&gt;sdl = get_sdl(this_ptr, Z_STRVAL_P(wsdl), cache_wsdl TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1031.html#L1217'>service</a>          1217 ext/soap/soap.c 		if (service-&gt;uri == NULL) {</span>
+<span class='curline'><a href='../S/1031.html#L1218'>service</a>          1218 ext/soap/soap.c 			if (service-&gt;sdl-&gt;target_ns) {</span>
+<span class='curline'><a href='../S/1031.html#L1219'>service</a>          1219 ext/soap/soap.c 				service-&gt;uri = estrdup(service-&gt;sdl-&gt;target_ns);</span>
+<span class='curline'><a href='../S/1031.html#L1222'>service</a>          1222 ext/soap/soap.c 				service-&gt;uri = estrdup("http://unknown-uri/");</span>
+<span class='curline'><a href='../S/1031.html#L1228'>service</a>          1228 ext/soap/soap.c 		service-&gt;typemap = soap_create_typemap(service-&gt;sdl, typemap_ht TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1031.html#L1231'>service</a>          1231 ext/soap/soap.c 	ret = zend_list_insert(service, le_service TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1031.html#L1243'>service</a>          1243 ext/soap/soap.c 	soapServicePtr service;</span>
+<span class='curline'><a href='../S/1031.html#L1248'>service</a>          1248 ext/soap/soap.c 	FETCH_THIS_SERVICE(service);</span>
+<span class='curline'><a href='../S/1031.html#L1251'>service</a>          1251 ext/soap/soap.c 		if (service-&gt;type == SOAP_CLASS) {</span>
+<span class='curline'><a href='../S/1031.html#L1254'>service</a>          1254 ext/soap/soap.c 				service-&gt;soap_class.persistance = value;</span>
+<span class='curline'><a href='../S/1031.html#L1274'>service</a>          1274 ext/soap/soap.c 	soapServicePtr service;</span>
+<span class='curline'><a href='../S/1031.html#L1283'>service</a>          1283 ext/soap/soap.c 	FETCH_THIS_SERVICE(service);</span>
+<span class='curline'><a href='../S/1031.html#L1292'>service</a>          1292 ext/soap/soap.c 		service-&gt;type = SOAP_CLASS;</span>
+<span class='curline'><a href='../S/1031.html#L1293'>service</a>          1293 ext/soap/soap.c 		service-&gt;soap_class.ce = *ce;</span>
+<span class='curline'><a href='../S/1031.html#L1295'>service</a>          1295 ext/soap/soap.c 		service-&gt;soap_class.persistance = SOAP_PERSISTENCE_REQUEST;</span>
+<span class='curline'><a href='../S/1031.html#L1296'>service</a>          1296 ext/soap/soap.c 		service-&gt;soap_class.argc = num_args;</span>
+<span class='curline'><a href='../S/1031.html#L1297'>service</a>          1297 ext/soap/soap.c 		if (service-&gt;soap_class.argc &gt; 0) {</span>
+<span class='curline'><a href='../S/1031.html#L1299'>service</a>          1299 ext/soap/soap.c 			service-&gt;soap_class.argv = safe_emalloc(sizeof(zval), service-&gt;soap_class.argc, 0);</span>
+<span class='curline'><a href='../S/1031.html#L1300'>service</a>          1300 ext/soap/soap.c 			for (i = 0;i &lt; service-&gt;soap_class.argc;i++) {</span>
+<span class='curline'><a href='../S/1031.html#L1301'>service</a>          1301 ext/soap/soap.c 				service-&gt;soap_class.argv[i] = *(argv[i]);</span>
+<span class='curline'><a href='../S/1031.html#L1302'>service</a>          1302 ext/soap/soap.c 				zval_add_ref(&amp;service-&gt;soap_class.argv[i]);</span>
+<span class='curline'><a href='../S/1031.html#L1323'>service</a>          1323 ext/soap/soap.c 	soapServicePtr service;</span>
+<span class='curline'><a href='../S/1031.html#L1328'>service</a>          1328 ext/soap/soap.c 	FETCH_THIS_SERVICE(service);</span>
+<span class='curline'><a href='../S/1031.html#L1334'>service</a>          1334 ext/soap/soap.c 	service-&gt;type = SOAP_OBJECT;</span>
+<span class='curline'><a href='../S/1031.html#L1336'>service</a>          1336 ext/soap/soap.c 	MAKE_STD_ZVAL(service-&gt;soap_object);</span>
+<span class='curline'><a href='../S/1031.html#L1337'>service</a>          1337 ext/soap/soap.c 	MAKE_COPY_ZVAL(&amp;obj, service-&gt;soap_object);</span>
+<span class='curline'><a href='../S/1031.html#L1348'>service</a>          1348 ext/soap/soap.c 	soapServicePtr  service;</span>
+<span class='curline'><a href='../S/1031.html#L1357'>service</a>          1357 ext/soap/soap.c 	FETCH_THIS_SERVICE(service);</span>
+<span class='curline'><a href='../S/1031.html#L1360'>service</a>          1360 ext/soap/soap.c 	if (service-&gt;type == SOAP_OBJECT) {</span>
+<span class='curline'><a href='../S/1031.html#L1361'>service</a>          1361 ext/soap/soap.c 		ft = &amp;(Z_OBJCE_P(service-&gt;soap_object)-&gt;function_table);</span>
+<span class='curline'><a href='../S/1031.html#L1362'>service</a>          1362 ext/soap/soap.c 	} else if (service-&gt;type == SOAP_CLASS) {</span>
+<span class='curline'><a href='../S/1031.html#L1363'>service</a>          1363 ext/soap/soap.c 		ft = &amp;service-&gt;soap_class.ce-&gt;function_table;</span>
+<span class='curline'><a href='../S/1031.html#L1364'>service</a>          1364 ext/soap/soap.c 	} else if (service-&gt;soap_functions.functions_all == TRUE) {</span>
+<span class='curline'><a href='../S/1031.html#L1366'>service</a>          1366 ext/soap/soap.c 	} else if (service-&gt;soap_functions.ft != NULL) {</span>
+<span class='curline'><a href='../S/1031.html#L1370'>service</a>          1370 ext/soap/soap.c 		zend_hash_internal_pointer_reset_ex(service-&gt;soap_functions.ft, &amp;pos);</span>
+<span class='curline'><a href='../S/1031.html#L1371'>service</a>          1371 ext/soap/soap.c 		while (zend_hash_get_current_data_ex(service-&gt;soap_functions.ft, (void **)&amp;name, &amp;pos) != FAILURE) {</span>
+<span class='curline'><a href='../S/1031.html#L1373'>service</a>          1373 ext/soap/soap.c 			zend_hash_move_forward_ex(service-&gt;soap_functions.ft, &amp;pos);</span>
+<span class='curline'><a href='../S/1031.html#L1381'>service</a>          1381 ext/soap/soap.c 			if ((service-&gt;type != SOAP_OBJECT &amp;&amp; service-&gt;type != SOAP_CLASS) || (f-&gt;common.fn_flags &amp; ZEND_ACC_PUBLIC)) {</span>
+<span class='curline'><a href='../S/1031.html#L1397'>service</a>          1397 ext/soap/soap.c 	soapServicePtr service;</span>
+<span class='curline'><a href='../S/1031.html#L1403'>service</a>          1403 ext/soap/soap.c 	FETCH_THIS_SERVICE(service);</span>
+<span class='curline'><a href='../S/1031.html#L1412'>service</a>          1412 ext/soap/soap.c 		if (service-&gt;type == SOAP_FUNCTIONS) {</span>
+<span class='curline'><a href='../S/1031.html#L1415'>service</a>          1415 ext/soap/soap.c 			if (service-&gt;soap_functions.ft == NULL) {</span>
+<span class='curline'><a href='../S/1031.html#L1416'>service</a>          1416 ext/soap/soap.c 				service-&gt;soap_functions.functions_all = FALSE;</span>
+<span class='curline'><a href='../S/1031.html#L1417'>service</a>          1417 ext/soap/soap.c 				service-&gt;soap_functions.ft = emalloc(sizeof(HashTable));</span>
+<span class='curline'><a href='../S/1031.html#L1418'>service</a>          1418 ext/soap/soap.c 				zend_hash_init(service-&gt;soap_functions.ft, zend_hash_num_elements(Z_ARRVAL_P(function_name)), NULL, ZVAL_PTR_DTOR, 0);</span>
+<span class='curline'><a href='../S/1031.html#L1443'>service</a>          1443 ext/soap/soap.c 				zend_hash_update(service-&gt;soap_functions.ft, key, key_len+1, &amp;function_copy, sizeof(zval *), NULL);</span>
+<span class='curline'><a href='../S/1031.html#L1462'>service</a>          1462 ext/soap/soap.c 		if (service-&gt;soap_functions.ft == NULL) {</span>
+<span class='curline'><a href='../S/1031.html#L1463'>service</a>          1463 ext/soap/soap.c 			service-&gt;soap_functions.functions_all = FALSE;</span>
+<span class='curline'><a href='../S/1031.html#L1464'>service</a>          1464 ext/soap/soap.c 			service-&gt;soap_functions.ft = emalloc(sizeof(HashTable));</span>
+<span class='curline'><a href='../S/1031.html#L1465'>service</a>          1465 ext/soap/soap.c 			zend_hash_init(service-&gt;soap_functions.ft, 0, NULL, ZVAL_PTR_DTOR, 0);</span>
+<span class='curline'><a href='../S/1031.html#L1470'>service</a>          1470 ext/soap/soap.c 		zend_hash_update(service-&gt;soap_functions.ft, key, key_len+1, &amp;function_copy, sizeof(zval *), NULL);</span>
+<span class='curline'><a href='../S/1031.html#L1474'>service</a>          1474 ext/soap/soap.c 			if (service-&gt;soap_functions.ft != NULL) {</span>
+<span class='curline'><a href='../S/1031.html#L1475'>service</a>          1475 ext/soap/soap.c 				zend_hash_destroy(service-&gt;soap_functions.ft);</span>
+<span class='curline'><a href='../S/1031.html#L1476'>service</a>          1476 ext/soap/soap.c 				efree(service-&gt;soap_functions.ft);</span>
+<span class='curline'><a href='../S/1031.html#L1477'>service</a>          1477 ext/soap/soap.c 				service-&gt;soap_functions.ft = NULL;</span>
+<span class='curline'><a href='../S/1031.html#L1479'>service</a>          1479 ext/soap/soap.c 			service-&gt;soap_functions.functions_all = TRUE;</span>
+<span class='curline'><a href='../S/1031.html#L1497'>service</a>          1497 ext/soap/soap.c 	soapServicePtr service;</span>
+<span class='curline'><a href='../S/1031.html#L1514'>service</a>          1514 ext/soap/soap.c 	FETCH_THIS_SERVICE(service);</span>
+<span class='curline'><a href='../S/1031.html#L1515'>service</a>          1515 ext/soap/soap.c 	SOAP_GLOBAL(soap_version) = service-&gt;version;</span>
+<span class='curline'><a href='../S/1031.html#L1526'>service</a>          1526 ext/soap/soap.c 		if (service-&gt;sdl) {</span>
+<span class='curline'><a href='../S/1031.html#L1541'>service</a>          1541 ext/soap/soap.c 			ZVAL_STRING(param, service-&gt;sdl-&gt;source, 1);</span>
+<span class='curline'><a href='../S/1031.html#L1641'>service</a>          1641 ext/soap/soap.c 	SOAP_GLOBAL(sdl) = service-&gt;sdl;</span>
+<span class='curline'><a href='../S/1031.html#L1643'>service</a>          1643 ext/soap/soap.c 	SOAP_GLOBAL(encoding) = service-&gt;encoding;</span>
+<span class='curline'><a href='../S/1031.html#L1645'>service</a>          1645 ext/soap/soap.c 	SOAP_GLOBAL(class_map) = service-&gt;class_map;</span>
+<span class='curline'><a href='../S/1031.html#L1647'>service</a>          1647 ext/soap/soap.c 	SOAP_GLOBAL(typemap) = service-&gt;typemap;</span>
+<span class='curline'><a href='../S/1031.html#L1649'>service</a>          1649 ext/soap/soap.c 	SOAP_GLOBAL(features) = service-&gt;features;</span>
+<span class='curline'><a href='../S/1031.html#L1651'>service</a>          1651 ext/soap/soap.c 	function = deserialize_function_call(service-&gt;sdl, doc_request, service-&gt;actor, &amp;function_name, &amp;num_params, &amp;params, &amp;soap_version, &amp;soap_headers TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1031.html#L1663'>service</a>          1663 ext/soap/soap.c 	service-&gt;soap_headers_ptr = &amp;soap_headers;</span>
+<span class='curline'><a href='../S/1031.html#L1666'>service</a>          1666 ext/soap/soap.c 	if (service-&gt;type == SOAP_OBJECT) {</span>
+<span class='curline'><a href='../S/1031.html#L1667'>service</a>          1667 ext/soap/soap.c 		soap_obj = service-&gt;soap_object;</span>
+<span class='curline'><a href='../S/1031.html#L1669'>service</a>          1669 ext/soap/soap.c 	} else if (service-&gt;type == SOAP_CLASS) {</span>
+<span class='curline'><a href='../S/1031.html#L1672'>service</a>          1672 ext/soap/soap.c 		if (service-&gt;soap_class.persistance == SOAP_PERSISTENCE_SESSION) {</span>
+<span class='curline'><a href='../S/1031.html#L1683'>service</a>          1683 ext/soap/soap.c 			    Z_OBJCE_PP(tmp_soap) == service-&gt;soap_class.ce) {</span>
+<span class='curline'><a href='../S/1031.html#L1693'>service</a>          1693 ext/soap/soap.c 			object_init_ex(tmp_soap, service-&gt;soap_class.ce);</span>
+<span class='curline'><a href='../S/1031.html#L1703'>service</a>          1703 ext/soap/soap.c 				if (call_user_function(NULL, &amp;tmp_soap, &amp;constructor, &amp;c_ret, service-&gt;soap_class.argc, service-&gt;soap_class.argv TSRMLS_CC) == FAILURE) {</span>
+<span class='curline'><a href='../S/1031.html#L1720'>service</a>          1720 ext/soap/soap.c 				int class_name_len = strlen(service-&gt;soap_class.ce-&gt;name);</span>
+<span class='curline'><a href='../S/1031.html#L1723'>service</a>          1723 ext/soap/soap.c 				memcpy(class_name, service-&gt;soap_class.ce-&gt;name,class_name_len+1);</span>
+<span class='curline'><a href='../S/1031.html#L1730'>service</a>          1730 ext/soap/soap.c 					ZVAL_STRING(&amp;constructor, service-&gt;soap_class.ce-&gt;name, 1);</span>
+<span class='curline'><a href='../S/1031.html#L1731'>service</a>          1731 ext/soap/soap.c 					if (call_user_function(NULL, &amp;tmp_soap, &amp;constructor, &amp;c_ret, service-&gt;soap_class.argc, service-&gt;soap_class.argv TSRMLS_CC) == FAILURE) {</span>
+<span class='curline'><a href='../S/1031.html#L1755'>service</a>          1755 ext/soap/soap.c 			if (service-&gt;soap_class.persistance == SOAP_PERSISTENCE_SESSION) {</span>
+<span class='curline'><a href='../S/1031.html#L1770'>service</a>          1770 ext/soap/soap.c 		if (service-&gt;soap_functions.functions_all == TRUE) {</span>
+<span class='curline'><a href='../S/1031.html#L1773'>service</a>          1773 ext/soap/soap.c 			function_table = service-&gt;soap_functions.ft;</span>
+<span class='curline'><a href='../S/1031.html#L1787'>service</a>          1787 ext/soap/soap.c 			if (service-&gt;sdl &amp;&amp; !h-&gt;function &amp;&amp; !h-&gt;hdr) {</span>
+<span class='curline'><a href='../S/1031.html#L1797'>service</a>          1797 ext/soap/soap.c 			    ((service-&gt;type == SOAP_CLASS || service-&gt;type == SOAP_OBJECT) &amp;&amp;</span>
+<span class='curline'><a href='../S/1031.html#L1799'>service</a>          1799 ext/soap/soap.c 				if (service-&gt;type == SOAP_CLASS || service-&gt;type == SOAP_OBJECT) {</span>
+<span class='curline'><a href='../S/1031.html#L1819'>service</a>          1819 ext/soap/soap.c 					if (service-&gt;type == SOAP_CLASS &amp;&amp; soap_obj) {zval_ptr_dtor(&amp;soap_obj);}</span>
+<span class='curline'><a href='../S/1031.html#L1834'>service</a>          1834 ext/soap/soap.c 					if (service-&gt;type == SOAP_CLASS &amp;&amp; soap_obj) {zval_ptr_dtor(&amp;soap_obj);}</span>
+<span class='curline'><a href='../S/1031.html#L1846'>service</a>          1846 ext/soap/soap.c 	    ((service-&gt;type == SOAP_CLASS || service-&gt;type == SOAP_OBJECT) &amp;&amp;</span>
+<span class='curline'><a href='../S/1031.html#L1848'>service</a>          1848 ext/soap/soap.c 		if (service-&gt;type == SOAP_CLASS || service-&gt;type == SOAP_OBJECT) {</span>
+<span class='curline'><a href='../S/1031.html#L1850'>service</a>          1850 ext/soap/soap.c 			if (service-&gt;type == SOAP_CLASS) {</span>
+<span class='curline'><a href='../S/1031.html#L1852'>service</a>          1852 ext/soap/soap.c 				if (service-&gt;soap_class.persistance != SOAP_PERSISTENCE_SESSION) {</span>
+<span class='curline'><a href='../S/1031.html#L1875'>service</a>          1875 ext/soap/soap.c 		if (service-&gt;type == SOAP_CLASS) {</span>
+<span class='curline'><a href='../S/1031.html#L1877'>service</a>          1877 ext/soap/soap.c 			if (soap_obj &amp;&amp; service-&gt;soap_class.persistance != SOAP_PERSISTENCE_SESSION) {</span>
+<span class='curline'><a href='../S/1031.html#L1904'>service</a>          1904 ext/soap/soap.c 		doc_return = serialize_response_call(function, response_name, service-&gt;uri, retval, soap_headers, soap_version TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1031.html#L1917'>service</a>          1917 ext/soap/soap.c 		if (service-&gt;type == SOAP_CLASS) {</span>
+<span class='curline'><a href='../S/1031.html#L1919'>service</a>          1919 ext/soap/soap.c 			if (soap_obj &amp;&amp; service-&gt;soap_class.persistance != SOAP_PERSISTENCE_SESSION) {</span>
+<span class='curline'><a href='../S/1031.html#L1987'>service</a>          1987 ext/soap/soap.c 	service-&gt;soap_headers_ptr = NULL;</span>
+<span class='curline'><a href='../S/1031.html#L2010'>service</a>          2010 ext/soap/soap.c 	soapServicePtr service;</span>
+<span class='curline'><a href='../S/1031.html#L2014'>service</a>          2014 ext/soap/soap.c 	FETCH_THIS_SERVICE(service);</span>
+<span class='curline'><a href='../S/1031.html#L2016'>service</a>          2016 ext/soap/soap.c 	SOAP_GLOBAL(encoding) = service-&gt;encoding;</span>
+<span class='curline'><a href='../S/1031.html#L2033'>service</a>          2033 ext/soap/soap.c 	soapServicePtr service;</span>
+<span class='curline'><a href='../S/1031.html#L2039'>service</a>          2039 ext/soap/soap.c 	FETCH_THIS_SERVICE(service);</span>
+<span class='curline'><a href='../S/1031.html#L2041'>service</a>          2041 ext/soap/soap.c 	if (!service || !service-&gt;soap_headers_ptr) {</span>
+<span class='curline'><a href='../S/1031.html#L2050'>service</a>          2050 ext/soap/soap.c 	p = service-&gt;soap_headers_ptr;</span>
+<span class='curline'><a href='../S/1031.html#L2236'>service</a>          2236 ext/soap/soap.c 			soapServicePtr service;</span>
+<span class='curline'><a href='../S/1031.html#L2245'>service</a>          2245 ext/soap/soap.c 				(service = (soapServicePtr)zend_fetch_resource(tmp TSRMLS_CC, -1, "service", NULL, 1, le_service)) &amp;&amp;</span>
+<span class='curline'><a href='../S/1031.html#L2246'>service</a>          2246 ext/soap/soap.c 				!service-&gt;send_errors) {</span>
+<span class='curline'><a href='../S/1031.html#L4887'>service</a>          4887 ext/soap/soap.c 	soapServicePtr service = (soapServicePtr)data;</span>
+<span class='curline'><a href='../S/1031.html#L4889'>service</a>          4889 ext/soap/soap.c 	if (service-&gt;soap_functions.ft) {</span>
+<span class='curline'><a href='../S/1031.html#L4890'>service</a>          4890 ext/soap/soap.c 		zend_hash_destroy(service-&gt;soap_functions.ft);</span>
+<span class='curline'><a href='../S/1031.html#L4891'>service</a>          4891 ext/soap/soap.c 		efree(service-&gt;soap_functions.ft);</span>
+<span class='curline'><a href='../S/1031.html#L4894'>service</a>          4894 ext/soap/soap.c 	if (service-&gt;typemap) {</span>
+<span class='curline'><a href='../S/1031.html#L4895'>service</a>          4895 ext/soap/soap.c 		zend_hash_destroy(service-&gt;typemap);</span>
+<span class='curline'><a href='../S/1031.html#L4896'>service</a>          4896 ext/soap/soap.c 		efree(service-&gt;typemap);</span>
+<span class='curline'><a href='../S/1031.html#L4899'>service</a>          4899 ext/soap/soap.c 	if (service-&gt;soap_class.argc) {</span>
+<span class='curline'><a href='../S/1031.html#L4901'>service</a>          4901 ext/soap/soap.c 		for (i = 0; i &lt; service-&gt;soap_class.argc;i++) {</span>
+<span class='curline'><a href='../S/1031.html#L4902'>service</a>          4902 ext/soap/soap.c 			zval_ptr_dtor(&amp;service-&gt;soap_class.argv[i]);</span>
+<span class='curline'><a href='../S/1031.html#L4904'>service</a>          4904 ext/soap/soap.c 		efree(service-&gt;soap_class.argv);</span>
+<span class='curline'><a href='../S/1031.html#L4907'>service</a>          4907 ext/soap/soap.c 	if (service-&gt;actor) {</span>
+<span class='curline'><a href='../S/1031.html#L4908'>service</a>          4908 ext/soap/soap.c 		efree(service-&gt;actor);</span>
+<span class='curline'><a href='../S/1031.html#L4910'>service</a>          4910 ext/soap/soap.c 	if (service-&gt;uri) {</span>
+<span class='curline'><a href='../S/1031.html#L4911'>service</a>          4911 ext/soap/soap.c 		efree(service-&gt;uri);</span>
+<span class='curline'><a href='../S/1031.html#L4913'>service</a>          4913 ext/soap/soap.c 	if (service-&gt;sdl) {</span>
+<span class='curline'><a href='../S/1031.html#L4914'>service</a>          4914 ext/soap/soap.c 		delete_sdl(service-&gt;sdl);</span>
+<span class='curline'><a href='../S/1031.html#L4916'>service</a>          4916 ext/soap/soap.c 	if (service-&gt;encoding) {</span>
+<span class='curline'><a href='../S/1031.html#L4917'>service</a>          4917 ext/soap/soap.c 		xmlCharEncCloseFunc(service-&gt;encoding);</span>
+<span class='curline'><a href='../S/1031.html#L4919'>service</a>          4919 ext/soap/soap.c 	if (service-&gt;class_map) {</span>
+<span class='curline'><a href='../S/1031.html#L4920'>service</a>          4920 ext/soap/soap.c 		zend_hash_destroy(service-&gt;class_map);</span>
+<span class='curline'><a href='../S/1031.html#L4921'>service</a>          4921 ext/soap/soap.c 		FREE_HASHTABLE(service-&gt;class_map);</span>
+<span class='curline'><a href='../S/1031.html#L4923'>service</a>          4923 ext/soap/soap.c 	if (service-&gt;soap_object) {</span>
+<span class='curline'><a href='../S/1031.html#L4924'>service</a>          4924 ext/soap/soap.c 		zval_ptr_dtor(&amp;service-&gt;soap_object);</span>
+<span class='curline'><a href='../S/1031.html#L4926'>service</a>          4926 ext/soap/soap.c 	efree(service);</span>
+<span class='curline'><a href='../S/1077.html#L788'>service</a>           788 ext/standard/basic_functions.c 	ZEND_ARG_INFO(0, service)</span>
+</pre>
+</body>
+</html>

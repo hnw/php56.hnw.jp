@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>OG</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/1367.html#L110'>OG</a>                110 main/output.c  		if (!OG(output_start_filename)) {</span>
+<span class='curline'><a href='../S/1367.html#L112'>OG</a>                112 main/output.c  				OG(output_start_filename) = zend_get_compiled_filename(TSRMLS_C);</span>
+<span class='curline'><a href='../S/1367.html#L113'>OG</a>                113 main/output.c  				OG(output_start_lineno) = zend_get_compiled_lineno(TSRMLS_C);</span>
+<span class='curline'><a href='../S/1367.html#L115'>OG</a>                115 main/output.c  				OG(output_start_filename) = zend_get_executed_filename(TSRMLS_C);</span>
+<span class='curline'><a href='../S/1367.html#L116'>OG</a>                116 main/output.c  				OG(output_start_lineno) = zend_get_executed_lineno(TSRMLS_C);</span>
+<span class='curline'><a href='../S/1367.html#L119'>OG</a>                119 main/output.c  			fprintf(stderr, "!!! output started at: %s (%d)\n", OG(output_start_filename), OG(output_start_lineno));</span>
+<span class='curline'><a href='../S/1367.html#L123'>OG</a>                123 main/output.c  			OG(flags) |= PHP_OUTPUT_DISABLED;</span>
+<span class='curline'><a href='../S/1367.html#L162'>OG</a>                162 main/output.c  	zend_stack_init(&amp;OG(handlers));</span>
+<span class='curline'><a href='../S/1367.html#L163'>OG</a>                163 main/output.c  	OG(flags) |= PHP_OUTPUT_ACTIVATED;</span>
+<span class='curline'><a href='../S/1367.html#L175'>OG</a>                175 main/output.c  	if ((OG(flags) &amp; PHP_OUTPUT_ACTIVATED)) {</span>
+<span class='curline'><a href='../S/1367.html#L178'>OG</a>                178 main/output.c  		OG(flags) ^= PHP_OUTPUT_ACTIVATED;</span>
+<span class='curline'><a href='../S/1367.html#L179'>OG</a>                179 main/output.c  		OG(active) = NULL;</span>
+<span class='curline'><a href='../S/1367.html#L180'>OG</a>                180 main/output.c  		OG(running) = NULL;</span>
+<span class='curline'><a href='../S/1367.html#L183'>OG</a>                183 main/output.c  		if (OG(handlers).elements) {</span>
+<span class='curline'><a href='../S/1367.html#L184'>OG</a>                184 main/output.c  			while (SUCCESS == zend_stack_top(&amp;OG(handlers), (void *) &amp;handler)) {</span>
+<span class='curline'><a href='../S/1367.html#L186'>OG</a>                186 main/output.c  				zend_stack_del_top(&amp;OG(handlers));</span>
+<span class='curline'><a href='../S/1367.html#L188'>OG</a>                188 main/output.c  			zend_stack_destroy(&amp;OG(handlers));</span>
+<span class='curline'><a href='../S/1367.html#L218'>OG</a>                218 main/output.c  	OG(flags) = (OG(flags) &amp; ~0xf) | (status &amp; 0xf);</span>
+<span class='curline'><a href='../S/1367.html#L227'>OG</a>                227 main/output.c  		OG(flags)</span>
+<span class='curline'><a href='../S/1367.html#L228'>OG</a>                228 main/output.c  		|	(OG(active) ? PHP_OUTPUT_ACTIVE : 0)</span>
+<span class='curline'><a href='../S/1367.html#L229'>OG</a>                229 main/output.c  		|	(OG(running)? PHP_OUTPUT_LOCKED : 0)</span>
+<span class='curline'><a href='../S/1367.html#L245'>OG</a>                245 main/output.c  	if (OG(flags) &amp; PHP_OUTPUT_DISABLED) {</span>
+<span class='curline'><a href='../S/1367.html#L248'>OG</a>                248 main/output.c  	if (OG(flags) &amp; PHP_OUTPUT_ACTIVATED) {</span>
+<span class='curline'><a href='../S/1367.html#L266'>OG</a>                266 main/output.c  	if (OG(flags) &amp; PHP_OUTPUT_DISABLED) {</span>
+<span class='curline'><a href='../S/1367.html#L269'>OG</a>                269 main/output.c  	if (OG(flags) &amp; PHP_OUTPUT_ACTIVATED) {</span>
+<span class='curline'><a href='../S/1367.html#L283'>OG</a>                283 main/output.c  	if (OG(active) &amp;&amp; (OG(active)-&gt;flags &amp; PHP_OUTPUT_HANDLER_FLUSHABLE)) {</span>
+<span class='curline'><a href='../S/1367.html#L285'>OG</a>                285 main/output.c  		php_output_handler_op(OG(active), &amp;context);</span>
+<span class='curline'><a href='../S/1367.html#L287'>OG</a>                287 main/output.c  			zend_stack_del_top(&amp;OG(handlers));</span>
+<span class='curline'><a href='../S/1367.html#L289'>OG</a>                289 main/output.c  			zend_stack_push(&amp;OG(handlers), &amp;OG(active), sizeof(php_output_handler *));</span>
+<span class='curline'><a href='../S/1367.html#L302'>OG</a>                302 main/output.c  	if (OG(active)) {</span>
+<span class='curline'><a href='../S/1367.html#L314'>OG</a>                314 main/output.c  	if (OG(active) &amp;&amp; (OG(active)-&gt;flags &amp; PHP_OUTPUT_HANDLER_CLEANABLE)) {</span>
+<span class='curline'><a href='../S/1367.html#L316'>OG</a>                316 main/output.c  		php_output_handler_op(OG(active), &amp;context);</span>
+<span class='curline'><a href='../S/1367.html#L330'>OG</a>                330 main/output.c  	if (OG(active)) {</span>
+<span class='curline'><a href='../S/1367.html#L332'>OG</a>                332 main/output.c  		zend_stack_apply_with_argument(&amp;OG(handlers), ZEND_STACK_APPLY_TOPDOWN, php_output_stack_apply_clean, &amp;context);</span>
+<span class='curline'><a href='../S/1367.html#L351'>OG</a>                351 main/output.c  	while (OG(active) &amp;&amp; php_output_stack_pop(PHP_OUTPUT_POP_FORCE TSRMLS_CC));</span>
+<span class='curline'><a href='../S/1367.html#L370'>OG</a>                370 main/output.c  	while (OG(active)) {</span>
+<span class='curline'><a href='../S/1367.html#L380'>OG</a>                380 main/output.c  	return OG(active) ? zend_stack_count(&amp;OG(handlers)) : 0;</span>
+<span class='curline'><a href='../S/1367.html#L388'>OG</a>                388 main/output.c  	if (OG(active)) {</span>
+<span class='curline'><a href='../S/1367.html#L389'>OG</a>                389 main/output.c  		ZVAL_STRINGL(p, OG(active)-&gt;buffer.data, OG(active)-&gt;buffer.used, 1);</span>
+<span class='curline'><a href='../S/1367.html#L401'>OG</a>                401 main/output.c  	if (OG(active)) {</span>
+<span class='curline'><a href='../S/1367.html#L402'>OG</a>                402 main/output.c  		ZVAL_LONG(p, OG(active)-&gt;buffer.used);</span>
+<span class='curline'><a href='../S/1367.html#L415'>OG</a>                415 main/output.c  	return OG(active);</span>
+<span class='curline'><a href='../S/1367.html#L577'>OG</a>                577 main/output.c  	if (FAILURE == (handler-&gt;level = zend_stack_push(&amp;OG(handlers), &amp;handler, sizeof(php_output_handler *)))) {</span>
+<span class='curline'><a href='../S/1367.html#L580'>OG</a>                580 main/output.c  	OG(active) = handler;</span>
+<span class='curline'><a href='../S/1367.html#L593'>OG</a>                593 main/output.c  		handlers = (php_output_handler ***) zend_stack_base(&amp;OG(handlers));</span>
+<span class='curline'><a href='../S/1367.html#L689'>OG</a>                689 main/output.c  	if (OG(running)) {</span>
+<span class='curline'><a href='../S/1367.html#L692'>OG</a>                692 main/output.c  				*(void ***) arg = &amp;OG(running)-&gt;opaq;</span>
+<span class='curline'><a href='../S/1367.html#L695'>OG</a>                695 main/output.c  				*(int *) arg = OG(running)-&gt;flags;</span>
+<span class='curline'><a href='../S/1367.html#L698'>OG</a>                698 main/output.c  				*(int *) arg = OG(running)-&gt;level;</span>
+<span class='curline'><a href='../S/1367.html#L701'>OG</a>                701 main/output.c  				OG(running)-&gt;flags &amp;= ~(PHP_OUTPUT_HANDLER_REMOVABLE|PHP_OUTPUT_HANDLER_CLEANABLE);</span>
+<span class='curline'><a href='../S/1367.html#L704'>OG</a>                704 main/output.c  				OG(running)-&gt;flags |= PHP_OUTPUT_HANDLER_DISABLED;</span>
+<span class='curline'><a href='../S/1367.html#L748'>OG</a>                748 main/output.c  		OG(flags) |= PHP_OUTPUT_IMPLICITFLUSH;</span>
+<span class='curline'><a href='../S/1367.html#L750'>OG</a>                750 main/output.c  		OG(flags) &amp;= ~PHP_OUTPUT_IMPLICITFLUSH;</span>
+<span class='curline'><a href='../S/1367.html#L759'>OG</a>                759 main/output.c  	return OG(output_start_filename);</span>
+<span class='curline'><a href='../S/1367.html#L767'>OG</a>                767 main/output.c  	return OG(output_start_lineno);</span>
+<span class='curline'><a href='../S/1367.html#L776'>OG</a>                776 main/output.c  	if (op &amp;&amp; OG(active) &amp;&amp; OG(running)) {</span>
+<span class='curline'><a href='../S/1367.html#L898'>OG</a>                898 main/output.c  		OG(flags) |= PHP_OUTPUT_WRITTEN;</span>
+<span class='curline'><a href='../S/1367.html#L914'>OG</a>                914 main/output.c  			return OG(running) ? 1 : 0;</span>
+<span class='curline'><a href='../S/1367.html#L966'>OG</a>                966 main/output.c  		OG(running) = handler;</span>
+<span class='curline'><a href='../S/1367.html#L1016'>OG</a>               1016 main/output.c  		OG(running) = NULL;</span>
+<span class='curline'><a href='../S/1367.html#L1071'>OG</a>               1071 main/output.c  	if (OG(active) &amp;&amp; (obh_cnt = zend_stack_count(&amp;OG(handlers)))) {</span>
+<span class='curline'><a href='../S/1367.html#L1076'>OG</a>               1076 main/output.c  			zend_stack_apply_with_argument(&amp;OG(handlers), ZEND_STACK_APPLY_TOPDOWN, php_output_stack_apply_op, &amp;context);</span>
+<span class='curline'><a href='../S/1367.html#L1077'>OG</a>               1077 main/output.c  		} else if ((SUCCESS == zend_stack_top(&amp;OG(handlers), (void *) &amp;active)) &amp;&amp; (!((*active)-&gt;flags &amp; PHP_OUTPUT_HANDLER_DISABLED))) {</span>
+<span class='curline'><a href='../S/1367.html#L1090'>OG</a>               1090 main/output.c  		if (!(OG(flags) &amp; PHP_OUTPUT_DISABLED)) {</span>
+<span class='curline'><a href='../S/1367.html#L1096'>OG</a>               1096 main/output.c  			if (OG(flags) &amp; PHP_OUTPUT_IMPLICITFLUSH) {</span>
+<span class='curline'><a href='../S/1367.html#L1100'>OG</a>               1100 main/output.c  			OG(flags) |= PHP_OUTPUT_SENT;</span>
+<span class='curline'><a href='../S/1367.html#L1219'>OG</a>               1219 main/output.c  	php_output_handler **current, *orphan = OG(active);</span>
+<span class='curline'><a href='../S/1367.html#L1248'>OG</a>               1248 main/output.c  		zend_stack_del_top(&amp;OG(handlers));</span>
+<span class='curline'><a href='../S/1367.html#L1249'>OG</a>               1249 main/output.c  		if (SUCCESS == zend_stack_top(&amp;OG(handlers), (void *) &amp;current)) {</span>
+<span class='curline'><a href='../S/1367.html#L1250'>OG</a>               1250 main/output.c  			OG(active) = *current;</span>
+<span class='curline'><a href='../S/1367.html#L1252'>OG</a>               1252 main/output.c  			OG(active) = NULL;</span>
+<span class='curline'><a href='../S/1367.html#L1349'>OG</a>               1349 main/output.c  	if (!OG(active)) {</span>
+<span class='curline'><a href='../S/1367.html#L1355'>OG</a>               1355 main/output.c  		php_error_docref("ref.outcontrol" TSRMLS_CC, E_NOTICE, "failed to flush buffer of %s (%d)", OG(active)-&gt;name, OG(active)-&gt;level);</span>
+<span class='curline'><a href='../S/1367.html#L1370'>OG</a>               1370 main/output.c  	if (!OG(active)) {</span>
+<span class='curline'><a href='../S/1367.html#L1376'>OG</a>               1376 main/output.c  		php_error_docref("ref.outcontrol" TSRMLS_CC, E_NOTICE, "failed to delete buffer of %s (%d)", OG(active)-&gt;name, OG(active)-&gt;level);</span>
+<span class='curline'><a href='../S/1367.html#L1391'>OG</a>               1391 main/output.c  	if (!OG(active)) {</span>
+<span class='curline'><a href='../S/1367.html#L1408'>OG</a>               1408 main/output.c  	if (!OG(active)) {</span>
+<span class='curline'><a href='../S/1367.html#L1431'>OG</a>               1431 main/output.c  		php_error_docref("ref.outcontrol" TSRMLS_CC, E_NOTICE, "failed to delete buffer of %s (%d)", OG(active)-&gt;name, OG(active)-&gt;level);</span>
+<span class='curline'><a href='../S/1367.html#L1444'>OG</a>               1444 main/output.c  	if(!OG(active)) {</span>
+<span class='curline'><a href='../S/1367.html#L1454'>OG</a>               1454 main/output.c  		php_error_docref("ref.outcontrol" TSRMLS_CC, E_NOTICE, "failed to delete buffer of %s (%d)", OG(active)-&gt;name, OG(active)-&gt;level);</span>
+<span class='curline'><a href='../S/1367.html#L1509'>OG</a>               1509 main/output.c  	if (!OG(active)) {</span>
+<span class='curline'><a href='../S/1367.html#L1513'>OG</a>               1513 main/output.c  	zend_stack_apply_with_argument(&amp;OG(handlers), ZEND_STACK_APPLY_BOTTOMUP, php_output_stack_apply_list, return_value);</span>
+<span class='curline'><a href='../S/1367.html#L1529'>OG</a>               1529 main/output.c  	if (!OG(active)) {</span>
+<span class='curline'><a href='../S/1367.html#L1534'>OG</a>               1534 main/output.c  		zend_stack_apply_with_argument(&amp;OG(handlers), ZEND_STACK_APPLY_BOTTOMUP, php_output_stack_apply_status, return_value);</span>
+<span class='curline'><a href='../S/1367.html#L1536'>OG</a>               1536 main/output.c  		php_output_handler_status(OG(active), return_value);</span>
+</pre>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>interned_strings</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/1680.html#L153'>interned_strings</a>  153 Zend/zend_globals.h 	HashTable interned_strings;</span>
+<span class='curline'><a href='../S/1735.html#L55'>interned_strings</a>   55 Zend/zend_string.c 	zend_hash_init(&amp;CG(interned_strings), 0, NULL, NULL, 1);</span>
+<span class='curline'><a href='../S/1735.html#L57'>interned_strings</a>   57 Zend/zend_string.c 	CG(interned_strings).nTableMask = CG(interned_strings).nTableSize - 1;</span>
+<span class='curline'><a href='../S/1735.html#L58'>interned_strings</a>   58 Zend/zend_string.c 	CG(interned_strings).arBuckets = (Bucket **) pecalloc(CG(interned_strings).nTableSize, sizeof(Bucket *), CG(interned_strings).persistent);</span>
+<span class='curline'><a href='../S/1735.html#L79'>interned_strings</a>   79 Zend/zend_string.c 	free(CG(interned_strings).arBuckets);</span>
+<span class='curline'><a href='../S/1735.html#L96'>interned_strings</a>   96 Zend/zend_string.c 	nIndex = h &amp; CG(interned_strings).nTableMask;</span>
+<span class='curline'><a href='../S/1735.html#L97'>interned_strings</a>   97 Zend/zend_string.c 	p = CG(interned_strings).arBuckets[nIndex];</span>
+<span class='curline'><a href='../S/1735.html#L133'>interned_strings</a>  133 Zend/zend_string.c 	p-&gt;pNext = CG(interned_strings).arBuckets[nIndex];</span>
+<span class='curline'><a href='../S/1735.html#L141'>interned_strings</a>  141 Zend/zend_string.c 	p-&gt;pListLast = CG(interned_strings).pListTail;</span>
+<span class='curline'><a href='../S/1735.html#L142'>interned_strings</a>  142 Zend/zend_string.c 	CG(interned_strings).pListTail = p;</span>
+<span class='curline'><a href='../S/1735.html#L147'>interned_strings</a>  147 Zend/zend_string.c 	if (!CG(interned_strings).pListHead) {</span>
+<span class='curline'><a href='../S/1735.html#L148'>interned_strings</a>  148 Zend/zend_string.c 		CG(interned_strings).pListHead = p;</span>
+<span class='curline'><a href='../S/1735.html#L151'>interned_strings</a>  151 Zend/zend_string.c 	CG(interned_strings).arBuckets[nIndex] = p;</span>
+<span class='curline'><a href='../S/1735.html#L155'>interned_strings</a>  155 Zend/zend_string.c 	CG(interned_strings).nNumOfElements++;</span>
+<span class='curline'><a href='../S/1735.html#L157'>interned_strings</a>  157 Zend/zend_string.c 	if (CG(interned_strings).nNumOfElements &gt; CG(interned_strings).nTableSize) {</span>
+<span class='curline'><a href='../S/1735.html#L158'>interned_strings</a>  158 Zend/zend_string.c 		if ((CG(interned_strings).nTableSize &lt;&lt; 1) &gt; 0) {	/* Let's double the table size */</span>
+<span class='curline'><a href='../S/1735.html#L159'>interned_strings</a>  159 Zend/zend_string.c 			Bucket **t = (Bucket **) perealloc_recoverable(CG(interned_strings).arBuckets, (CG(interned_strings).nTableSize &lt;&lt; 1) * sizeof(Bucket *), CG(interned_strings).persistent);</span>
+<span class='curline'><a href='../S/1735.html#L163'>interned_strings</a>  163 Zend/zend_string.c 				CG(interned_strings).arBuckets = t;</span>
+<span class='curline'><a href='../S/1735.html#L164'>interned_strings</a>  164 Zend/zend_string.c 				CG(interned_strings).nTableSize = (CG(interned_strings).nTableSize &lt;&lt; 1);</span>
+<span class='curline'><a href='../S/1735.html#L165'>interned_strings</a>  165 Zend/zend_string.c 				CG(interned_strings).nTableMask = CG(interned_strings).nTableSize - 1;</span>
+<span class='curline'><a href='../S/1735.html#L166'>interned_strings</a>  166 Zend/zend_string.c 				zend_hash_rehash(&amp;CG(interned_strings));</span>
+<span class='curline'><a href='../S/1735.html#L201'>interned_strings</a>  201 Zend/zend_string.c 	for (i = 0; i &lt; CG(interned_strings).nTableSize; i++) {</span>
+<span class='curline'><a href='../S/1735.html#L202'>interned_strings</a>  202 Zend/zend_string.c 		p = CG(interned_strings).arBuckets[i];</span>
+<span class='curline'><a href='../S/1735.html#L204'>interned_strings</a>  204 Zend/zend_string.c 			CG(interned_strings).nNumOfElements--;</span>
+<span class='curline'><a href='../S/1735.html#L208'>interned_strings</a>  208 Zend/zend_string.c 				CG(interned_strings).pListHead = p-&gt;pListNext;</span>
+<span class='curline'><a href='../S/1735.html#L213'>interned_strings</a>  213 Zend/zend_string.c 				CG(interned_strings).pListTail = p-&gt;pListLast;</span>
+<span class='curline'><a href='../S/1735.html#L220'>interned_strings</a>  220 Zend/zend_string.c 		CG(interned_strings).arBuckets[i] = p;</span>
+<span class='curline'><a href='../S/863.html#L282'>interned_strings</a>  282 ext/opcache/ZendAccelerator.c 	for (i = 0; i &lt; ZCSG(interned_strings).nTableSize; i++) {</span>
+<span class='curline'><a href='../S/863.html#L283'>interned_strings</a>  283 ext/opcache/ZendAccelerator.c 		ZCSG(interned_strings).arBuckets[i] = ZCSG(interned_strings_saved_state).arBuckets[i];</span>
+<span class='curline'><a href='../S/863.html#L284'>interned_strings</a>  284 ext/opcache/ZendAccelerator.c 		if (ZCSG(interned_strings).arBuckets[i]) {</span>
+<span class='curline'><a href='../S/863.html#L285'>interned_strings</a>  285 ext/opcache/ZendAccelerator.c 			ZCSG(interned_strings).arBuckets[i]-&gt;pLast = NULL;</span>
+<span class='curline'><a href='../S/863.html#L288'>interned_strings</a>  288 ext/opcache/ZendAccelerator.c 	ZCSG(interned_strings).pListHead = ZCSG(interned_strings_saved_state).pListHead;</span>
+<span class='curline'><a href='../S/863.html#L289'>interned_strings</a>  289 ext/opcache/ZendAccelerator.c 	ZCSG(interned_strings).pListTail = ZCSG(interned_strings_saved_state).pListTail;</span>
+<span class='curline'><a href='../S/863.html#L290'>interned_strings</a>  290 ext/opcache/ZendAccelerator.c 	if (ZCSG(interned_strings).pListHead) {</span>
+<span class='curline'><a href='../S/863.html#L291'>interned_strings</a>  291 ext/opcache/ZendAccelerator.c 		ZCSG(interned_strings).pListHead-&gt;pListLast = NULL;</span>
+<span class='curline'><a href='../S/863.html#L293'>interned_strings</a>  293 ext/opcache/ZendAccelerator.c 	if (ZCSG(interned_strings).pListTail) {</span>
+<span class='curline'><a href='../S/863.html#L294'>interned_strings</a>  294 ext/opcache/ZendAccelerator.c 		ZCSG(interned_strings).pListTail-&gt;pListNext = NULL;</span>
+<span class='curline'><a href='../S/863.html#L301'>interned_strings</a>  301 ext/opcache/ZendAccelerator.c 	ZCSG(interned_strings_saved_state).arBuckets = (Bucket**)zend_shared_alloc(ZCSG(interned_strings).nTableSize * sizeof(Bucket *));</span>
+<span class='curline'><a href='../S/863.html#L305'>interned_strings</a>  305 ext/opcache/ZendAccelerator.c 	memcpy(ZCSG(interned_strings_saved_state).arBuckets, ZCSG(interned_strings).arBuckets, ZCSG(interned_strings).nTableSize * sizeof(Bucket *));</span>
+<span class='curline'><a href='../S/863.html#L306'>interned_strings</a>  306 ext/opcache/ZendAccelerator.c 	ZCSG(interned_strings_saved_state).pListHead = ZCSG(interned_strings).pListHead;</span>
+<span class='curline'><a href='../S/863.html#L307'>interned_strings</a>  307 ext/opcache/ZendAccelerator.c 	ZCSG(interned_strings_saved_state).pListTail = ZCSG(interned_strings).pListTail;</span>
+<span class='curline'><a href='../S/863.html#L326'>interned_strings</a>  326 ext/opcache/ZendAccelerator.c 	nIndex = h &amp; ZCSG(interned_strings).nTableMask;</span>
+<span class='curline'><a href='../S/863.html#L329'>interned_strings</a>  329 ext/opcache/ZendAccelerator.c 	p = ZCSG(interned_strings).arBuckets[nIndex];</span>
+<span class='curline'><a href='../S/863.html#L360'>interned_strings</a>  360 ext/opcache/ZendAccelerator.c 	p-&gt;pNext = ZCSG(interned_strings).arBuckets[nIndex];</span>
+<span class='curline'><a href='../S/863.html#L365'>interned_strings</a>  365 ext/opcache/ZendAccelerator.c 	ZCSG(interned_strings).arBuckets[nIndex] = p;</span>
+<span class='curline'><a href='../S/863.html#L367'>interned_strings</a>  367 ext/opcache/ZendAccelerator.c 	p-&gt;pListLast = ZCSG(interned_strings).pListTail;</span>
+<span class='curline'><a href='../S/863.html#L368'>interned_strings</a>  368 ext/opcache/ZendAccelerator.c 	ZCSG(interned_strings).pListTail = p;</span>
+<span class='curline'><a href='../S/863.html#L373'>interned_strings</a>  373 ext/opcache/ZendAccelerator.c 	if (!ZCSG(interned_strings).pListHead) {</span>
+<span class='curline'><a href='../S/863.html#L374'>interned_strings</a>  374 ext/opcache/ZendAccelerator.c 		ZCSG(interned_strings).pListHead = p;</span>
+<span class='curline'><a href='../S/863.html#L377'>interned_strings</a>  377 ext/opcache/ZendAccelerator.c 	ZCSG(interned_strings).nNumOfElements++;</span>
+<span class='curline'><a href='../S/863.html#L2474'>interned_strings</a> 2474 ext/opcache/ZendAccelerator.c 	zend_hash_init(&amp;ZCSG(interned_strings), (ZCG(accel_directives).interned_strings_buffer * 1024 * 1024) / (sizeof(Bucket) + sizeof(Bucket*) + 8 /* average string length */), NULL, NULL, 1);</span>
+<span class='curline'><a href='../S/863.html#L2476'>interned_strings</a> 2476 ext/opcache/ZendAccelerator.c 		ZCSG(interned_strings).nTableMask = ZCSG(interned_strings).nTableSize - 1;</span>
+<span class='curline'><a href='../S/863.html#L2477'>interned_strings</a> 2477 ext/opcache/ZendAccelerator.c 		ZCSG(interned_strings).arBuckets = zend_shared_alloc(ZCSG(interned_strings).nTableSize * sizeof(Bucket *));</span>
+<span class='curline'><a href='../S/863.html#L2479'>interned_strings</a> 2479 ext/opcache/ZendAccelerator.c 		if (!ZCSG(interned_strings).arBuckets || !ZCSG(interned_strings_start)) {</span>
+<span class='curline'><a href='../S/864.html#L306'>interned_strings</a>  306 ext/opcache/ZendAccelerator.h 	HashTable       interned_strings;</span>
+<span class='curline'><a href='../S/854.html#L599'>interned_strings</a>  599 ext/opcache/zend_accelerator_module.c 		add_assoc_long(interned_strings_usage, "number_of_strings", ZCSG(interned_strings).nNumOfElements);</span>
+</pre>
+</body>
+</html>

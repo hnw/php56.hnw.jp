@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>decpt</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/1737.html#L1442'>decpt</a>            1442 Zend/zend_strtod.c ZEND_API char * zend_dtoa(double _d, int mode, int ndigits, int *decpt, int *sign, char **rve)</span>
+<span class='curline'><a href='../S/1737.html#L1509'>decpt</a>            1509 Zend/zend_strtod.c 			*decpt = 9999;</span>
+<span class='curline'><a href='../S/1737.html#L1521'>decpt</a>            1521 Zend/zend_strtod.c 		*decpt = 1;</span>
+<span class='curline'><a href='../S/1737.html#L2033'>decpt</a>            2033 Zend/zend_strtod.c 	*decpt = k + 1;</span>
+<span class='curline'><a href='../S/1738.html#L29'>decpt</a>              29 Zend/zend_strtod.h ZEND_API char * zend_dtoa(double _d, int mode, int ndigits, int *decpt, int *sign, char **rve);</span>
+<span class='curline'><a href='../S/1399.html#L71'>decpt</a>              71 main/snprintf.c static char * __cvt(double value, int ndigit, int *decpt, int *sign, int fmode, int pad) /* {{{ */</span>
+<span class='curline'><a href='../S/1399.html#L85'>decpt</a>              85 main/snprintf.c 		*decpt = 1 - fmode; /* 1 for 'e', 0 for 'f' */</span>
+<span class='curline'><a href='../S/1399.html#L96'>decpt</a>              96 main/snprintf.c 		p = zend_dtoa(value, fmode + 2, ndigit, decpt, sign, &amp;rve);</span>
+<span class='curline'><a href='../S/1399.html#L97'>decpt</a>              97 main/snprintf.c 		if (*decpt == 9999) {</span>
+<span class='curline'><a href='../S/1399.html#L99'>decpt</a>              99 main/snprintf.c 			*decpt = 0;</span>
+<span class='curline'><a href='../S/1399.html#L106'>decpt</a>             106 main/snprintf.c 			siz += *decpt;</span>
+<span class='curline'><a href='../S/1399.html#L130'>decpt</a>             130 main/snprintf.c static inline char *php_ecvt(double value, int ndigit, int *decpt, int *sign) /* {{{ */</span>
+<span class='curline'><a href='../S/1399.html#L132'>decpt</a>             132 main/snprintf.c 	return(__cvt(value, ndigit, decpt, sign, 0, 1));</span>
+<span class='curline'><a href='../S/1399.html#L136'>decpt</a>             136 main/snprintf.c static inline char *php_fcvt(double value, int ndigit, int *decpt, int *sign) /* {{{ */</span>
+<span class='curline'><a href='../S/1399.html#L138'>decpt</a>             138 main/snprintf.c     return(__cvt(value, ndigit, decpt, sign, 1, 1));</span>
+<span class='curline'><a href='../S/1399.html#L145'>decpt</a>             145 main/snprintf.c 	int i, decpt, sign;</span>
+<span class='curline'><a href='../S/1399.html#L147'>decpt</a>             147 main/snprintf.c 	digits = zend_dtoa(value, 2, ndigit, &amp;decpt, &amp;sign, NULL);</span>
+<span class='curline'><a href='../S/1399.html#L148'>decpt</a>             148 main/snprintf.c 	if (decpt == 9999) {</span>
+<span class='curline'><a href='../S/1399.html#L163'>decpt</a>             163 main/snprintf.c 	if ((decpt &gt;= 0 &amp;&amp; decpt &gt; ndigit) || decpt &lt; -3) { /* use E-style */</span>
+<span class='curline'><a href='../S/1399.html#L165'>decpt</a>             165 main/snprintf.c 		if (--decpt &lt; 0) {</span>
+<span class='curline'><a href='../S/1399.html#L167'>decpt</a>             167 main/snprintf.c 			decpt = -decpt;</span>
+<span class='curline'><a href='../S/1399.html#L187'>decpt</a>             187 main/snprintf.c 		if (decpt &lt; 10) {</span>
+<span class='curline'><a href='../S/1399.html#L188'>decpt</a>             188 main/snprintf.c 			*dst++ = '0' + decpt;</span>
+<span class='curline'><a href='../S/1399.html#L192'>decpt</a>             192 main/snprintf.c 			for (sign = decpt, i = 0; (sign /= 10) != 0; i++)</span>
+<span class='curline'><a href='../S/1399.html#L195'>decpt</a>             195 main/snprintf.c 			while (decpt != 0) {</span>
+<span class='curline'><a href='../S/1399.html#L196'>decpt</a>             196 main/snprintf.c 				dst[i--] = '0' + decpt % 10;</span>
+<span class='curline'><a href='../S/1399.html#L197'>decpt</a>             197 main/snprintf.c 				decpt /= 10;</span>
+<span class='curline'><a href='../S/1399.html#L200'>decpt</a>             200 main/snprintf.c 	} else if (decpt &lt; 0) {</span>
+<span class='curline'><a href='../S/1399.html#L206'>decpt</a>             206 main/snprintf.c 		} while (++decpt &lt; 0);</span>
+<span class='curline'><a href='../S/1399.html#L214'>decpt</a>             214 main/snprintf.c 		for (i = 0, src = digits; i &lt; decpt; i++) {</span>
+<span class='curline'><a href='../S/1399.html#L226'>decpt</a>             226 main/snprintf.c 			for (i = decpt; digits[i] != '\0'; i++) {</span>
+</pre>
+</body>
+</html>

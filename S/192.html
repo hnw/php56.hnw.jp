@@ -1,0 +1,193 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>ext/fileinfo/libmagic/names.h</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<a id='TOP' name='TOP'></a><h2 class='header'><a href='../mains.html'>root</a>/<a href='../files/1753.html'>ext</a>/<a href='../files/1773.html'>fileinfo</a>/<a href='../files/1774.html'>libmagic</a>/names.h</h2>
+<em class='comment'>/* [&lt;][&gt;][^][v][top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+<hr />
+<pre>
+<a id='L1' name='L1'></a>   1 <em class='comment'>/*</em>
+<a id='L2' name='L2'></a>   2 <em class='comment'> * Copyright (c) Ian F. Darwin 1986-1995.</em>
+<a id='L3' name='L3'></a>   3 <em class='comment'> * Software written by Ian F. Darwin and others;</em>
+<a id='L4' name='L4'></a>   4 <em class='comment'> * maintained 1995-present by Christos Zoulas and others.</em>
+<a id='L5' name='L5'></a>   5 <em class='comment'> * </em>
+<a id='L6' name='L6'></a>   6 <em class='comment'> * Redistribution and use in source and binary forms, with or without</em>
+<a id='L7' name='L7'></a>   7 <em class='comment'> * modification, are permitted provided that the following conditions</em>
+<a id='L8' name='L8'></a>   8 <em class='comment'> * are met:</em>
+<a id='L9' name='L9'></a>   9 <em class='comment'> * 1. Redistributions of source code must retain the above copyright</em>
+<a id='L10' name='L10'></a>  10 <em class='comment'> *    notice immediately at the beginning of the file, without modification,</em>
+<a id='L11' name='L11'></a>  11 <em class='comment'> *    this list of conditions, and the following disclaimer.</em>
+<a id='L12' name='L12'></a>  12 <em class='comment'> * 2. Redistributions in binary form must reproduce the above copyright</em>
+<a id='L13' name='L13'></a>  13 <em class='comment'> *    notice, this list of conditions and the following disclaimer in the</em>
+<a id='L14' name='L14'></a>  14 <em class='comment'> *    documentation and/or other materials provided with the distribution.</em>
+<a id='L15' name='L15'></a>  15 <em class='comment'> *  </em>
+<a id='L16' name='L16'></a>  16 <em class='comment'> * THIS SOFTWARE IS PROVIDED BY THE AUTHOR AND CONTRIBUTORS ``AS IS'' AND</em>
+<a id='L17' name='L17'></a>  17 <em class='comment'> * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE</em>
+<a id='L18' name='L18'></a>  18 <em class='comment'> * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE</em>
+<a id='L19' name='L19'></a>  19 <em class='comment'> * ARE DISCLAIMED. IN NO EVENT SHALL THE AUTHOR OR CONTRIBUTORS BE LIABLE FOR</em>
+<a id='L20' name='L20'></a>  20 <em class='comment'> * ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL</em>
+<a id='L21' name='L21'></a>  21 <em class='comment'> * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS</em>
+<a id='L22' name='L22'></a>  22 <em class='comment'> * OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)</em>
+<a id='L23' name='L23'></a>  23 <em class='comment'> * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT</em>
+<a id='L24' name='L24'></a>  24 <em class='comment'> * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY</em>
+<a id='L25' name='L25'></a>  25 <em class='comment'> * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF</em>
+<a id='L26' name='L26'></a>  26 <em class='comment'> * SUCH DAMAGE.</em>
+<a id='L27' name='L27'></a>  27 <em class='comment'> */</em>
+<a id='L28' name='L28'></a>  28 <em class='comment'>/*</em>
+<a id='L29' name='L29'></a>  29 <em class='comment'> * Names.h - names and types used by ascmagic in file(1).</em>
+<a id='L30' name='L30'></a>  30 <em class='comment'> * These tokens are here because they can appear anywhere in</em>
+<a id='L31' name='L31'></a>  31 <em class='comment'> * the first HOWMANY bytes, while tokens in MAGIC must</em>
+<a id='L32' name='L32'></a>  32 <em class='comment'> * appear at fixed offsets into the file. Don't make HOWMANY</em>
+<a id='L33' name='L33'></a>  33 <em class='comment'> * too high unless you have a very fast CPU.</em>
+<a id='L34' name='L34'></a>  34 <em class='comment'> *</em>
+<a id='L35' name='L35'></a>  35 <em class='comment'> * $File: names.h,v 1.32 2008/02/11 00:19:29 rrt Exp $</em>
+<a id='L36' name='L36'></a>  36 <em class='comment'> */</em>
+<a id='L37' name='L37'></a>  37 
+<a id='L38' name='L38'></a>  38 <em class='comment'>/*</em>
+<a id='L39' name='L39'></a>  39 <em class='comment'>        modified by Chris Lowth - 9 April 2000</em>
+<a id='L40' name='L40'></a>  40 <em class='comment'>        to add mime type strings to the types table.</em>
+<a id='L41' name='L41'></a>  41 <em class='comment'>*/</em>
+<a id='L42' name='L42'></a>  42 
+<a id='L43' name='L43'></a>  43 <em class='comment'>/* these types are used to index the table 'types': keep em in sync! */</em>
+<a id='L44' name='L44'></a>  44 <em class='sharp'>#define</em> <a href='../R/4095.html' title='Multiple referred from 8 places.'>L_C</a>     0               <em class='comment'>/* first and foremost on UNIX */</em>
+<a id='L45' name='L45'></a>  45 <em class='sharp'>#define</em> <a href='../R/4096.html' title='Multiple referred from 6 places.'>L_CC</a>    1               <em class='comment'>/* Bjarne's postincrement */</em>
+<a id='L46' name='L46'></a>  46 <em class='sharp'>#define</em> <a href='../R/4103.html' title='Multiple referred from 4 places.'>L_MAKE</a>  2               <em class='comment'>/* Makefiles */</em>
+<a id='L47' name='L47'></a>  47 <em class='sharp'>#define</em> <a href='../S/192.html#L157' title='Referred from 157 in ext/fileinfo/libmagic/names.h.'>L_PLI</a>   3               <em class='comment'>/* PL/1 */</em>
+<a id='L48' name='L48'></a>  48 <em class='sharp'>#define</em> <a href='../R/4101.html' title='Multiple referred from 7 places.'>L_MACH</a>  4               <em class='comment'>/* some kinda assembler */</em>
+<a id='L49' name='L49'></a>  49 <em class='sharp'>#define</em> <a href='../R/4097.html' title='Multiple referred from 2 places.'>L_ENG</a>   5               <em class='comment'>/* English */</em>
+<a id='L50' name='L50'></a>  50 <em class='sharp'>#define</em> <a href='../R/4105.html' title='Multiple referred from 3 places.'>L_PAS</a>   6               <em class='comment'>/* Pascal */</em>
+<a id='L51' name='L51'></a>  51 <em class='sharp'>#define</em> <a href='../R/4102.html' title='Multiple referred from 4 places.'>L_MAIL</a>  7               <em class='comment'>/* Electronic mail */</em>
+<a id='L52' name='L52'></a>  52 <em class='sharp'>#define</em> <a href='../R/4104.html' title='Multiple referred from 3 places.'>L_NEWS</a>  8               <em class='comment'>/* Usenet Netnews */</em>
+<a id='L53' name='L53'></a>  53 <em class='sharp'>#define</em> <a href='../S/192.html#L124' title='Referred from 124 in ext/fileinfo/libmagic/names.h.'>L_JAVA</a>  9               <em class='comment'>/* Java code */</em>
+<a id='L54' name='L54'></a>  54 <em class='sharp'>#define</em> <a href='../R/4098.html' title='Multiple referred from 7 places.'>L_HTML</a>  10              <em class='comment'>/* HTML */</em>
+<a id='L55' name='L55'></a>  55 <em class='sharp'>#define</em> <a href='../R/4094.html' title='Multiple referred from 2 places.'>L_BCPL</a>  11              <em class='comment'>/* BCPL */</em>
+<a id='L56' name='L56'></a>  56 <em class='sharp'>#define</em> <a href='../S/192.html#L123' title='Referred from 123 in ext/fileinfo/libmagic/names.h.'>L_M4</a>    12              <em class='comment'>/* M4 */</em>
+<a id='L57' name='L57'></a>  57 <em class='sharp'>#define</em> <a href='../S/192.html#L122' title='Referred from 122 in ext/fileinfo/libmagic/names.h.'>L_PO</a>    13              <em class='comment'>/* PO */</em>
+<a id='L58' name='L58'></a>  58 
+<a id='L59' name='L59'></a>  59 <strong class='reserved'>static</strong> <strong class='reserved'>const</strong> <strong class='reserved'>struct</strong> <em class='brace'>{</em>
+<a id='L60' name='L60'></a>  60         <strong class='reserved'>char</strong> human[48];
+<a id='L61' name='L61'></a>  61         <strong class='reserved'>char</strong> <a href='../Y/26727.html' title='Multiple used in 49 places.'>mime</a>[16];
+<a id='L62' name='L62'></a>  62 <em class='brace'>}</em> <a href='../Y/39619.html' title='Multiple used in 99 places.'>types</a>[] = <em class='brace'>{</em>
+<a id='L63' name='L63'></a>  63         <em class='brace'>{</em> "C program",                                  "text/x-c", <em class='brace'>}</em>,
+<a id='L64' name='L64'></a>  64         <em class='brace'>{</em> "C++ program",                                "text/x-c++" <em class='brace'>}</em>,
+<a id='L65' name='L65'></a>  65         <em class='brace'>{</em> "make commands",                              "text/x-makefile" <em class='brace'>}</em>,
+<a id='L66' name='L66'></a>  66         <em class='brace'>{</em> "PL/1 program",                               "text/x-pl1" <em class='brace'>}</em>,
+<a id='L67' name='L67'></a>  67         <em class='brace'>{</em> "assembler program",                          "text/x-asm" <em class='brace'>}</em>,
+<a id='L68' name='L68'></a>  68         <em class='brace'>{</em> "English",                                    "text/plain" <em class='brace'>}</em>,
+<a id='L69' name='L69'></a>  69         <em class='brace'>{</em> "Pascal program",                             "text/x-pascal" <em class='brace'>}</em>,
+<a id='L70' name='L70'></a>  70         <em class='brace'>{</em> "mail",                                       "text/x-mail" <em class='brace'>}</em>,
+<a id='L71' name='L71'></a>  71         <em class='brace'>{</em> "news",                                       "text/x-news" <em class='brace'>}</em>,
+<a id='L72' name='L72'></a>  72         <em class='brace'>{</em> "Java program",                               "text/x-java" <em class='brace'>}</em>,
+<a id='L73' name='L73'></a>  73         <em class='brace'>{</em> "HTML document",                              "text/html", <em class='brace'>}</em>,
+<a id='L74' name='L74'></a>  74         <em class='brace'>{</em> "BCPL program",                               "text/x-bcpl" <em class='brace'>}</em>,
+<a id='L75' name='L75'></a>  75         <em class='brace'>{</em> "M4 macro language pre-processor",            "text/x-m4" <em class='brace'>}</em>,
+<a id='L76' name='L76'></a>  76         <em class='brace'>{</em> "PO (gettext message catalogue)",             "text/x-po" <em class='brace'>}</em>,
+<a id='L77' name='L77'></a>  77         <em class='brace'>{</em> "cannot happen error on names.h/types",       "error/x-error" <em class='brace'>}</em>
+<a id='L78' name='L78'></a>  78 <em class='brace'>}</em>;
+<a id='L79' name='L79'></a>  79 
+<a id='L80' name='L80'></a>  80 <em class='comment'>/*</em>
+<a id='L81' name='L81'></a>  81 <em class='comment'> * XXX - how should we distinguish Java from C++?</em>
+<a id='L82' name='L82'></a>  82 <em class='comment'> * The trick used in a Debian snapshot, of having "extends" or "implements"</em>
+<a id='L83' name='L83'></a>  83 <em class='comment'> * as tags for Java, doesn't work very well, given that those keywords</em>
+<a id='L84' name='L84'></a>  84 <em class='comment'> * are often preceded by "class", which flags it as C++.</em>
+<a id='L85' name='L85'></a>  85 <em class='comment'> *</em>
+<a id='L86' name='L86'></a>  86 <em class='comment'> * Perhaps we need to be able to say</em>
+<a id='L87' name='L87'></a>  87 <em class='comment'> *</em>
+<a id='L88' name='L88'></a>  88 <em class='comment'> *      If "class" then</em>
+<a id='L89' name='L89'></a>  89 <em class='comment'> *</em>
+<a id='L90' name='L90'></a>  90 <em class='comment'> *              if "extends" or "implements" then</em>
+<a id='L91' name='L91'></a>  91 <em class='comment'> *                      Java</em>
+<a id='L92' name='L92'></a>  92 <em class='comment'> *              else</em>
+<a id='L93' name='L93'></a>  93 <em class='comment'> *                      C++</em>
+<a id='L94' name='L94'></a>  94 <em class='comment'> *      endif</em>
+<a id='L95' name='L95'></a>  95 <em class='comment'> *</em>
+<a id='L96' name='L96'></a>  96 <em class='comment'> * Or should we use other keywords, such as "package" or "import"?</em>
+<a id='L97' name='L97'></a>  97 <em class='comment'> * Unfortunately, Ada95 uses "package", and Modula-3 uses "import",</em>
+<a id='L98' name='L98'></a>  98 <em class='comment'> * although I infer from the language spec at</em>
+<a id='L99' name='L99'></a>  99 <em class='comment'> *</em>
+<a id='L100' name='L100'></a> 100 <em class='comment'> *      http://www.research.digital.com/SRC/m3defn/html/m3.html</em>
+<a id='L101' name='L101'></a> 101 <em class='comment'> *</em>
+<a id='L102' name='L102'></a> 102 <em class='comment'> * that Modula-3 uses "IMPORT" rather than "import", i.e. it must be</em>
+<a id='L103' name='L103'></a> 103 <em class='comment'> * in all caps.</em>
+<a id='L104' name='L104'></a> 104 <em class='comment'> *</em>
+<a id='L105' name='L105'></a> 105 <em class='comment'> * So, for now, we go with "import".  We must put it before the C++</em>
+<a id='L106' name='L106'></a> 106 <em class='comment'> * stuff, so that we don't misidentify Java as C++.  Not using "package"</em>
+<a id='L107' name='L107'></a> 107 <em class='comment'> * means we won't identify stuff that defines a package but imports</em>
+<a id='L108' name='L108'></a> 108 <em class='comment'> * nothing; hopefully, very little Java code imports nothing (one of the</em>
+<a id='L109' name='L109'></a> 109 <em class='comment'> * reasons for doing OO programming is to import as much as possible</em>
+<a id='L110' name='L110'></a> 110 <em class='comment'> * and write only what you need to, right?).</em>
+<a id='L111' name='L111'></a> 111 <em class='comment'> *</em>
+<a id='L112' name='L112'></a> 112 <em class='comment'> * Unfortunately, "import" may cause us to misidentify English text</em>
+<a id='L113' name='L113'></a> 113 <em class='comment'> * as Java, as it comes after "the" and "The".  Perhaps we need a fancier</em>
+<a id='L114' name='L114'></a> 114 <em class='comment'> * heuristic to identify Java?</em>
+<a id='L115' name='L115'></a> 115 <em class='comment'> */</em>
+<a id='L116' name='L116'></a> 116 <strong class='reserved'>static</strong> <strong class='reserved'>const</strong> <strong class='reserved'>struct</strong> <a href='../R/21922.html' title='Multiple referred from 41 places.'>names</a> <em class='brace'>{</em>
+<a id='L117' name='L117'></a> 117         <strong class='reserved'>char</strong> <a href='../Y/28160.html' title='Multiple used in 4617 places.'>name</a>[14];
+<a id='L118' name='L118'></a> 118         <strong class='reserved'>short</strong> <a href='../D/32025.html' title='Multiple defined in 3 places.'>type</a>;
+<a id='L119' name='L119'></a> 119 <em class='brace'>}</em> <a href='../D/24853.html' title='Multiple defined in 2 places.'>names</a>[] = <em class='brace'>{</em>
+<a id='L120' name='L120'></a> 120         <em class='comment'>/* These must be sorted by eye for optimal hit rate */</em>
+<a id='L121' name='L121'></a> 121         <em class='comment'>/* Add to this list only after substantial meditation */</em>
+<a id='L122' name='L122'></a> 122         <em class='brace'>{</em>"msgid",       <a href='../S/192.html#L57' title='Defined at 57 in ext/fileinfo/libmagic/names.h.'>L_PO</a><em class='brace'>}</em>,
+<a id='L123' name='L123'></a> 123         <em class='brace'>{</em>"dnl",         <a href='../S/192.html#L56' title='Defined at 56 in ext/fileinfo/libmagic/names.h.'>L_M4</a><em class='brace'>}</em>,
+<a id='L124' name='L124'></a> 124         <em class='brace'>{</em>"import",      <a href='../S/192.html#L53' title='Defined at 53 in ext/fileinfo/libmagic/names.h.'>L_JAVA</a><em class='brace'>}</em>,
+<a id='L125' name='L125'></a> 125         <em class='brace'>{</em>"\"libhdr\"",  <a href='../S/192.html#L55' title='Defined at 55 in ext/fileinfo/libmagic/names.h.'>L_BCPL</a><em class='brace'>}</em>,
+<a id='L126' name='L126'></a> 126         <em class='brace'>{</em>"\"LIBHDR\"",  <a href='../S/192.html#L55' title='Defined at 55 in ext/fileinfo/libmagic/names.h.'>L_BCPL</a><em class='brace'>}</em>,
+<a id='L127' name='L127'></a> 127         <em class='brace'>{</em>"//",          <a href='../S/192.html#L45' title='Defined at 45 in ext/fileinfo/libmagic/names.h.'>L_CC</a><em class='brace'>}</em>,
+<a id='L128' name='L128'></a> 128         <em class='brace'>{</em>"template",    <a href='../S/192.html#L45' title='Defined at 45 in ext/fileinfo/libmagic/names.h.'>L_CC</a><em class='brace'>}</em>,
+<a id='L129' name='L129'></a> 129         <em class='brace'>{</em>"virtual",     <a href='../S/192.html#L45' title='Defined at 45 in ext/fileinfo/libmagic/names.h.'>L_CC</a><em class='brace'>}</em>,
+<a id='L130' name='L130'></a> 130         <em class='brace'>{</em>"class",       <a href='../S/192.html#L45' title='Defined at 45 in ext/fileinfo/libmagic/names.h.'>L_CC</a><em class='brace'>}</em>,
+<a id='L131' name='L131'></a> 131         <em class='brace'>{</em>"public:",     <a href='../S/192.html#L45' title='Defined at 45 in ext/fileinfo/libmagic/names.h.'>L_CC</a><em class='brace'>}</em>,
+<a id='L132' name='L132'></a> 132         <em class='brace'>{</em>"private:",    <a href='../S/192.html#L45' title='Defined at 45 in ext/fileinfo/libmagic/names.h.'>L_CC</a><em class='brace'>}</em>,
+<a id='L133' name='L133'></a> 133         <em class='brace'>{</em>"/*",          <a href='../S/192.html#L44' title='Defined at 44 in ext/fileinfo/libmagic/names.h.'>L_C</a><em class='brace'>}</em>,   <em class='comment'>/* must precede "The", "the", etc. */</em>
+<a id='L134' name='L134'></a> 134         <em class='brace'>{</em>"#include",    <a href='../S/192.html#L44' title='Defined at 44 in ext/fileinfo/libmagic/names.h.'>L_C</a><em class='brace'>}</em>,
+<a id='L135' name='L135'></a> 135         <em class='brace'>{</em>"char",        <a href='../S/192.html#L44' title='Defined at 44 in ext/fileinfo/libmagic/names.h.'>L_C</a><em class='brace'>}</em>,
+<a id='L136' name='L136'></a> 136         <em class='brace'>{</em>"The",         <a href='../S/192.html#L49' title='Defined at 49 in ext/fileinfo/libmagic/names.h.'>L_ENG</a><em class='brace'>}</em>,
+<a id='L137' name='L137'></a> 137         <em class='brace'>{</em>"the",         <a href='../S/192.html#L49' title='Defined at 49 in ext/fileinfo/libmagic/names.h.'>L_ENG</a><em class='brace'>}</em>,
+<a id='L138' name='L138'></a> 138         <em class='brace'>{</em>"double",      <a href='../S/192.html#L44' title='Defined at 44 in ext/fileinfo/libmagic/names.h.'>L_C</a><em class='brace'>}</em>,
+<a id='L139' name='L139'></a> 139         <em class='brace'>{</em>"extern",      <a href='../S/192.html#L44' title='Defined at 44 in ext/fileinfo/libmagic/names.h.'>L_C</a><em class='brace'>}</em>,
+<a id='L140' name='L140'></a> 140         <em class='brace'>{</em>"float",       <a href='../S/192.html#L44' title='Defined at 44 in ext/fileinfo/libmagic/names.h.'>L_C</a><em class='brace'>}</em>,
+<a id='L141' name='L141'></a> 141         <em class='brace'>{</em>"struct",      <a href='../S/192.html#L44' title='Defined at 44 in ext/fileinfo/libmagic/names.h.'>L_C</a><em class='brace'>}</em>,
+<a id='L142' name='L142'></a> 142         <em class='brace'>{</em>"union",       <a href='../S/192.html#L44' title='Defined at 44 in ext/fileinfo/libmagic/names.h.'>L_C</a><em class='brace'>}</em>,
+<a id='L143' name='L143'></a> 143         <em class='brace'>{</em>"CFLAGS",      <a href='../S/192.html#L46' title='Defined at 46 in ext/fileinfo/libmagic/names.h.'>L_MAKE</a><em class='brace'>}</em>,
+<a id='L144' name='L144'></a> 144         <em class='brace'>{</em>"LDFLAGS",     <a href='../S/192.html#L46' title='Defined at 46 in ext/fileinfo/libmagic/names.h.'>L_MAKE</a><em class='brace'>}</em>,
+<a id='L145' name='L145'></a> 145         <em class='brace'>{</em>"all:",        <a href='../S/192.html#L46' title='Defined at 46 in ext/fileinfo/libmagic/names.h.'>L_MAKE</a><em class='brace'>}</em>,
+<a id='L146' name='L146'></a> 146         <em class='brace'>{</em>".PRECIOUS",   <a href='../S/192.html#L46' title='Defined at 46 in ext/fileinfo/libmagic/names.h.'>L_MAKE</a><em class='brace'>}</em>,
+<a id='L147' name='L147'></a> 147         <em class='brace'>{</em>".ascii",      <a href='../S/192.html#L48' title='Defined at 48 in ext/fileinfo/libmagic/names.h.'>L_MACH</a><em class='brace'>}</em>,
+<a id='L148' name='L148'></a> 148         <em class='brace'>{</em>".asciiz",     <a href='../S/192.html#L48' title='Defined at 48 in ext/fileinfo/libmagic/names.h.'>L_MACH</a><em class='brace'>}</em>,
+<a id='L149' name='L149'></a> 149         <em class='brace'>{</em>".byte",       <a href='../S/192.html#L48' title='Defined at 48 in ext/fileinfo/libmagic/names.h.'>L_MACH</a><em class='brace'>}</em>,
+<a id='L150' name='L150'></a> 150         <em class='brace'>{</em>".even",       <a href='../S/192.html#L48' title='Defined at 48 in ext/fileinfo/libmagic/names.h.'>L_MACH</a><em class='brace'>}</em>,
+<a id='L151' name='L151'></a> 151         <em class='brace'>{</em>".globl",      <a href='../S/192.html#L48' title='Defined at 48 in ext/fileinfo/libmagic/names.h.'>L_MACH</a><em class='brace'>}</em>,
+<a id='L152' name='L152'></a> 152         <em class='brace'>{</em>".text",       <a href='../S/192.html#L48' title='Defined at 48 in ext/fileinfo/libmagic/names.h.'>L_MACH</a><em class='brace'>}</em>,
+<a id='L153' name='L153'></a> 153         <em class='brace'>{</em>"clr",         <a href='../S/192.html#L48' title='Defined at 48 in ext/fileinfo/libmagic/names.h.'>L_MACH</a><em class='brace'>}</em>,
+<a id='L154' name='L154'></a> 154         <em class='brace'>{</em>"(input,",     <a href='../S/192.html#L50' title='Defined at 50 in ext/fileinfo/libmagic/names.h.'>L_PAS</a><em class='brace'>}</em>,
+<a id='L155' name='L155'></a> 155         <em class='brace'>{</em>"program",     <a href='../S/192.html#L50' title='Defined at 50 in ext/fileinfo/libmagic/names.h.'>L_PAS</a><em class='brace'>}</em>,
+<a id='L156' name='L156'></a> 156         <em class='brace'>{</em>"record",      <a href='../S/192.html#L50' title='Defined at 50 in ext/fileinfo/libmagic/names.h.'>L_PAS</a><em class='brace'>}</em>,
+<a id='L157' name='L157'></a> 157         <em class='brace'>{</em>"dcl",         <a href='../S/192.html#L47' title='Defined at 47 in ext/fileinfo/libmagic/names.h.'>L_PLI</a><em class='brace'>}</em>,
+<a id='L158' name='L158'></a> 158         <em class='brace'>{</em>"Received:",   <a href='../S/192.html#L51' title='Defined at 51 in ext/fileinfo/libmagic/names.h.'>L_MAIL</a><em class='brace'>}</em>,
+<a id='L159' name='L159'></a> 159         <em class='brace'>{</em>"&gt;From",       <a href='../S/192.html#L51' title='Defined at 51 in ext/fileinfo/libmagic/names.h.'>L_MAIL</a><em class='brace'>}</em>,
+<a id='L160' name='L160'></a> 160         <em class='brace'>{</em>"Return-Path:",<a href='../S/192.html#L51' title='Defined at 51 in ext/fileinfo/libmagic/names.h.'>L_MAIL</a><em class='brace'>}</em>,
+<a id='L161' name='L161'></a> 161         <em class='brace'>{</em>"Cc:",         <a href='../S/192.html#L51' title='Defined at 51 in ext/fileinfo/libmagic/names.h.'>L_MAIL</a><em class='brace'>}</em>,
+<a id='L162' name='L162'></a> 162         <em class='brace'>{</em>"Newsgroups:", <a href='../S/192.html#L52' title='Defined at 52 in ext/fileinfo/libmagic/names.h.'>L_NEWS</a><em class='brace'>}</em>,
+<a id='L163' name='L163'></a> 163         <em class='brace'>{</em>"Path:",       <a href='../S/192.html#L52' title='Defined at 52 in ext/fileinfo/libmagic/names.h.'>L_NEWS</a><em class='brace'>}</em>,
+<a id='L164' name='L164'></a> 164         <em class='brace'>{</em>"Organization:",<a href='../S/192.html#L52' title='Defined at 52 in ext/fileinfo/libmagic/names.h.'>L_NEWS</a><em class='brace'>}</em>,
+<a id='L165' name='L165'></a> 165         <em class='brace'>{</em>"href=",       <a href='../S/192.html#L54' title='Defined at 54 in ext/fileinfo/libmagic/names.h.'>L_HTML</a><em class='brace'>}</em>,
+<a id='L166' name='L166'></a> 166         <em class='brace'>{</em>"HREF=",       <a href='../S/192.html#L54' title='Defined at 54 in ext/fileinfo/libmagic/names.h.'>L_HTML</a><em class='brace'>}</em>,
+<a id='L167' name='L167'></a> 167         <em class='brace'>{</em>"&lt;body",       <a href='../S/192.html#L54' title='Defined at 54 in ext/fileinfo/libmagic/names.h.'>L_HTML</a><em class='brace'>}</em>,
+<a id='L168' name='L168'></a> 168         <em class='brace'>{</em>"&lt;BODY",       <a href='../S/192.html#L54' title='Defined at 54 in ext/fileinfo/libmagic/names.h.'>L_HTML</a><em class='brace'>}</em>,
+<a id='L169' name='L169'></a> 169         <em class='brace'>{</em>"&lt;html",       <a href='../S/192.html#L54' title='Defined at 54 in ext/fileinfo/libmagic/names.h.'>L_HTML</a><em class='brace'>}</em>,
+<a id='L170' name='L170'></a> 170         <em class='brace'>{</em>"&lt;HTML",       <a href='../S/192.html#L54' title='Defined at 54 in ext/fileinfo/libmagic/names.h.'>L_HTML</a><em class='brace'>}</em>,
+<a id='L171' name='L171'></a> 171         <em class='brace'>{</em>"&lt;!--",        <a href='../S/192.html#L54' title='Defined at 54 in ext/fileinfo/libmagic/names.h.'>L_HTML</a><em class='brace'>}</em>,
+<a id='L172' name='L172'></a> 172 <em class='brace'>}</em>;
+<a id='L173' name='L173'></a> 173 <em class='sharp'>#define</em> NNAMES (<strong class='reserved'>sizeof</strong>(<a href='../D/24853.html' title='Multiple defined in 2 places.'>names</a>)/<strong class='reserved'>sizeof</strong>(<strong class='reserved'>struct</strong> <a href='../D/24853.html' title='Multiple defined in 2 places.'>names</a>))
+</pre>
+<hr />
+<a id='BOTTOM' name='BOTTOM'></a>
+<em class='comment'>/* [&lt;][&gt;][^][v]<a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+</body>
+</html>

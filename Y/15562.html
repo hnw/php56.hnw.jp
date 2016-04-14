@@ -1,0 +1,291 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>descriptor</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/1603.html#L74'>descriptor</a>         74 TSRM/tsrm_win32.c 			UnmapViewOfFile(ptr-&gt;descriptor);</span>
+<span class='curline'><a href='../S/1603.html#L417'>descriptor</a>        417 TSRM/tsrm_win32.c 		if (!ptr-&gt;descriptor) {</span>
+<span class='curline'><a href='../S/1603.html#L420'>descriptor</a>        420 TSRM/tsrm_win32.c 		if (!addr &amp;&amp; ptr-&gt;descriptor-&gt;shm_perm.key == key) {</span>
+<span class='curline'><a href='../S/1603.html#L611'>descriptor</a>        611 TSRM/tsrm_win32.c 			info_handle	= CreateFileMapping(INVALID_HANDLE_VALUE, NULL, PAGE_READWRITE, 0, sizeof(shm-&gt;descriptor), shm_info);</span>
+<span class='curline'><a href='../S/1603.html#L626'>descriptor</a>        626 TSRM/tsrm_win32.c 	shm-&gt;descriptor = MapViewOfFileEx(shm-&gt;info, FILE_MAP_ALL_ACCESS, 0, 0, 0, NULL);</span>
+<span class='curline'><a href='../S/1603.html#L628'>descriptor</a>        628 TSRM/tsrm_win32.c 	if (NULL != shm-&gt;descriptor &amp;&amp; created) {</span>
+<span class='curline'><a href='../S/1603.html#L629'>descriptor</a>        629 TSRM/tsrm_win32.c 		shm-&gt;descriptor-&gt;shm_perm.key	= key;</span>
+<span class='curline'><a href='../S/1603.html#L630'>descriptor</a>        630 TSRM/tsrm_win32.c 		shm-&gt;descriptor-&gt;shm_segsz		= size;</span>
+<span class='curline'><a href='../S/1603.html#L631'>descriptor</a>        631 TSRM/tsrm_win32.c 		shm-&gt;descriptor-&gt;shm_ctime		= time(NULL);</span>
+<span class='curline'><a href='../S/1603.html#L632'>descriptor</a>        632 TSRM/tsrm_win32.c 		shm-&gt;descriptor-&gt;shm_cpid		= getpid();</span>
+<span class='curline'><a href='../S/1603.html#L633'>descriptor</a>        633 TSRM/tsrm_win32.c 		shm-&gt;descriptor-&gt;shm_perm.mode	= flags;</span>
+<span class='curline'><a href='../S/1603.html#L635'>descriptor</a>        635 TSRM/tsrm_win32.c 		shm-&gt;descriptor-&gt;shm_perm.cuid	= shm-&gt;descriptor-&gt;shm_perm.cgid= 0;</span>
+<span class='curline'><a href='../S/1603.html#L636'>descriptor</a>        636 TSRM/tsrm_win32.c 		shm-&gt;descriptor-&gt;shm_perm.gid	= shm-&gt;descriptor-&gt;shm_perm.uid = 0;</span>
+<span class='curline'><a href='../S/1603.html#L637'>descriptor</a>        637 TSRM/tsrm_win32.c 		shm-&gt;descriptor-&gt;shm_atime		= shm-&gt;descriptor-&gt;shm_dtime	= 0;</span>
+<span class='curline'><a href='../S/1603.html#L638'>descriptor</a>        638 TSRM/tsrm_win32.c 		shm-&gt;descriptor-&gt;shm_lpid		= shm-&gt;descriptor-&gt;shm_nattch	= 0;</span>
+<span class='curline'><a href='../S/1603.html#L639'>descriptor</a>        639 TSRM/tsrm_win32.c 		shm-&gt;descriptor-&gt;shm_perm.mode	= shm-&gt;descriptor-&gt;shm_perm.seq	= 0;</span>
+<span class='curline'><a href='../S/1603.html#L642'>descriptor</a>        642 TSRM/tsrm_win32.c 	if (NULL != shm-&gt;descriptor &amp;&amp; (shm-&gt;descriptor-&gt;shm_perm.key != key || size &gt; shm-&gt;descriptor-&gt;shm_segsz)) {</span>
+<span class='curline'><a href='../S/1603.html#L646'>descriptor</a>        646 TSRM/tsrm_win32.c 		UnmapViewOfFile(shm-&gt;descriptor);</span>
+<span class='curline'><a href='../S/1603.html#L662'>descriptor</a>        662 TSRM/tsrm_win32.c 	shm-&gt;descriptor-&gt;shm_atime = time(NULL);</span>
+<span class='curline'><a href='../S/1603.html#L663'>descriptor</a>        663 TSRM/tsrm_win32.c 	shm-&gt;descriptor-&gt;shm_lpid  = getpid();</span>
+<span class='curline'><a href='../S/1603.html#L664'>descriptor</a>        664 TSRM/tsrm_win32.c 	shm-&gt;descriptor-&gt;shm_nattch++;</span>
+<span class='curline'><a href='../S/1603.html#L679'>descriptor</a>        679 TSRM/tsrm_win32.c 	shm-&gt;descriptor-&gt;shm_dtime = time(NULL);</span>
+<span class='curline'><a href='../S/1603.html#L680'>descriptor</a>        680 TSRM/tsrm_win32.c 	shm-&gt;descriptor-&gt;shm_lpid  = getpid();</span>
+<span class='curline'><a href='../S/1603.html#L681'>descriptor</a>        681 TSRM/tsrm_win32.c 	shm-&gt;descriptor-&gt;shm_nattch--;</span>
+<span class='curline'><a href='../S/1603.html#L695'>descriptor</a>        695 TSRM/tsrm_win32.c 			memcpy(buf, shm-&gt;descriptor, sizeof(struct shmid_ds));</span>
+<span class='curline'><a href='../S/1603.html#L699'>descriptor</a>        699 TSRM/tsrm_win32.c 			shm-&gt;descriptor-&gt;shm_ctime		= time(NULL);</span>
+<span class='curline'><a href='../S/1603.html#L700'>descriptor</a>        700 TSRM/tsrm_win32.c 			shm-&gt;descriptor-&gt;shm_perm.uid	= buf-&gt;shm_perm.uid;</span>
+<span class='curline'><a href='../S/1603.html#L701'>descriptor</a>        701 TSRM/tsrm_win32.c 			shm-&gt;descriptor-&gt;shm_perm.gid	= buf-&gt;shm_perm.gid;</span>
+<span class='curline'><a href='../S/1603.html#L702'>descriptor</a>        702 TSRM/tsrm_win32.c 			shm-&gt;descriptor-&gt;shm_perm.mode	= buf-&gt;shm_perm.mode;</span>
+<span class='curline'><a href='../S/1603.html#L706'>descriptor</a>        706 TSRM/tsrm_win32.c 			if (shm-&gt;descriptor-&gt;shm_nattch &lt; 1) {</span>
+<span class='curline'><a href='../S/1603.html#L707'>descriptor</a>        707 TSRM/tsrm_win32.c 				shm-&gt;descriptor-&gt;shm_perm.key = -1;</span>
+<span class='curline'><a href='../S/1604.html#L57'>descriptor</a>         57 TSRM/tsrm_win32.h 	struct	shmid_ds	*descriptor;</span>
+<span class='curline'><a href='../S/818.html#L1508'>descriptor</a>       1508 ext/oci8/oci8.c 	php_oci_descriptor *descriptor = (php_oci_descriptor *)entry-&gt;ptr;</span>
+<span class='curline'><a href='../S/818.html#L1509'>descriptor</a>       1509 ext/oci8/oci8.c 	php_oci_lob_free(descriptor TSRMLS_CC);</span>
+<span class='curline'><a href='../S/818.html#L1602'>descriptor</a>       1602 ext/oci8/oci8.c 	php_oci_descriptor *descriptor = *(php_oci_descriptor **)data;</span>
+<span class='curline'><a href='../S/818.html#L1605'>descriptor</a>       1605 ext/oci8/oci8.c 	if (descriptor &amp;&amp; descriptor-&gt;buffering == PHP_OCI_LOB_BUFFER_USED &amp;&amp; (descriptor-&gt;type == OCI_DTYPE_LOB || descriptor-&gt;type == OCI_DTYPE_FILE)) {</span>
+<span class='curline'><a href='../S/818.html#L1606'>descriptor</a>       1606 ext/oci8/oci8.c 		php_oci_lob_flush(descriptor, OCI_LOB_BUFFER_FREE TSRMLS_CC);</span>
+<span class='curline'><a href='../S/818.html#L1607'>descriptor</a>       1607 ext/oci8/oci8.c 		descriptor-&gt;buffering = PHP_OCI_LOB_BUFFER_ENABLED;</span>
+<span class='curline'><a href='../S/818.html#L2548'>descriptor</a>       2548 ext/oci8/oci8.c 	php_oci_descriptor *descriptor;</span>
+<span class='curline'><a href='../S/818.html#L2568'>descriptor</a>       2568 ext/oci8/oci8.c 			descriptor = (php_oci_descriptor *) zend_list_find(column-&gt;descid, &amp;rsrc_type);</span>
+<span class='curline'><a href='../S/818.html#L2570'>descriptor</a>       2570 ext/oci8/oci8.c 			if (!descriptor || rsrc_type != le_descriptor) {</span>
+<span class='curline'><a href='../S/818.html#L2575'>descriptor</a>       2575 ext/oci8/oci8.c 			descriptor-&gt;lob_size = -1;</span>
+<span class='curline'><a href='../S/818.html#L2576'>descriptor</a>       2576 ext/oci8/oci8.c 			descriptor-&gt;lob_current_position = 0;</span>
+<span class='curline'><a href='../S/818.html#L2577'>descriptor</a>       2577 ext/oci8/oci8.c 			descriptor-&gt;buffering = 0;</span>
+<span class='curline'><a href='../S/818.html#L2584'>descriptor</a>       2584 ext/oci8/oci8.c 				descriptor-&gt;chunk_size = column-&gt;chunk_size;			</span>
+<span class='curline'><a href='../S/818.html#L2585'>descriptor</a>       2585 ext/oci8/oci8.c 			lob_fetch_status = php_oci_lob_read(descriptor, -1, 0, &amp;lob_buffer, &amp;lob_length TSRMLS_CC);</span>
+<span class='curline'><a href='../S/818.html#L2586'>descriptor</a>       2586 ext/oci8/oci8.c 			if (descriptor-&gt;chunk_size)  /* Cache the chunk_size to avoid recalling OCILobGetChunkSize */</span>
+<span class='curline'><a href='../S/818.html#L2587'>descriptor</a>       2587 ext/oci8/oci8.c 				column-&gt;chunk_size = descriptor-&gt;chunk_size;</span>
+<span class='curline'><a href='../S/818.html#L2588'>descriptor</a>       2588 ext/oci8/oci8.c 			php_oci_temp_lob_close(descriptor TSRMLS_CC);</span>
+<span class='curline'><a href='../S/820.html#L165'>descriptor</a>        165 ext/oci8/oci8_interface.c 	php_oci_descriptor *descriptor;</span>
+<span class='curline'><a href='../S/820.html#L178'>descriptor</a>        178 ext/oci8/oci8_interface.c 	PHP_OCI_ZVAL_TO_DESCRIPTOR(*tmp, descriptor);</span>
+<span class='curline'><a href='../S/820.html#L180'>descriptor</a>        180 ext/oci8/oci8_interface.c 	zend_list_delete(descriptor-&gt;id);</span>
+<span class='curline'><a href='../S/820.html#L190'>descriptor</a>        190 ext/oci8/oci8_interface.c 	php_oci_descriptor *descriptor;</span>
+<span class='curline'><a href='../S/820.html#L212'>descriptor</a>        212 ext/oci8/oci8_interface.c 	PHP_OCI_ZVAL_TO_DESCRIPTOR(*tmp, descriptor);</span>
+<span class='curline'><a href='../S/820.html#L219'>descriptor</a>        219 ext/oci8/oci8_interface.c 	if (php_oci_lob_write(descriptor, offset, data, data_len, &amp;bytes_written TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/820.html#L231'>descriptor</a>        231 ext/oci8/oci8_interface.c 	php_oci_descriptor *descriptor;</span>
+<span class='curline'><a href='../S/820.html#L267'>descriptor</a>        267 ext/oci8/oci8_interface.c 	PHP_OCI_ZVAL_TO_DESCRIPTOR(*tmp, descriptor);</span>
+<span class='curline'><a href='../S/820.html#L269'>descriptor</a>        269 ext/oci8/oci8_interface.c 	if (php_oci_lob_import(descriptor, filename TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/820.html#L281'>descriptor</a>        281 ext/oci8/oci8_interface.c 	php_oci_descriptor *descriptor;</span>
+<span class='curline'><a href='../S/820.html#L296'>descriptor</a>        296 ext/oci8/oci8_interface.c 	PHP_OCI_ZVAL_TO_DESCRIPTOR(*tmp, descriptor);</span>
+<span class='curline'><a href='../S/820.html#L298'>descriptor</a>        298 ext/oci8/oci8_interface.c 	if (php_oci_lob_read(descriptor, -1, 0, &amp;buffer, &amp;buffer_len TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/820.html#L315'>descriptor</a>        315 ext/oci8/oci8_interface.c 	php_oci_descriptor *descriptor;</span>
+<span class='curline'><a href='../S/820.html#L336'>descriptor</a>        336 ext/oci8/oci8_interface.c 	PHP_OCI_ZVAL_TO_DESCRIPTOR(*tmp, descriptor);</span>
+<span class='curline'><a href='../S/820.html#L343'>descriptor</a>        343 ext/oci8/oci8_interface.c 	if (php_oci_lob_read(descriptor, length, descriptor-&gt;lob_current_position, &amp;buffer, &amp;buffer_len TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/820.html#L360'>descriptor</a>        360 ext/oci8/oci8_interface.c 	php_oci_descriptor *descriptor;</span>
+<span class='curline'><a href='../S/820.html#L374'>descriptor</a>        374 ext/oci8/oci8_interface.c 	PHP_OCI_ZVAL_TO_DESCRIPTOR(*tmp, descriptor);</span>
+<span class='curline'><a href='../S/820.html#L376'>descriptor</a>        376 ext/oci8/oci8_interface.c 	if (!php_oci_lob_get_length(descriptor, &amp;lob_length TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/820.html#L377'>descriptor</a>        377 ext/oci8/oci8_interface.c 		if (lob_length == descriptor-&gt;lob_current_position) {</span>
+<span class='curline'><a href='../S/820.html#L390'>descriptor</a>        390 ext/oci8/oci8_interface.c 	php_oci_descriptor *descriptor;</span>
+<span class='curline'><a href='../S/820.html#L403'>descriptor</a>        403 ext/oci8/oci8_interface.c 	PHP_OCI_ZVAL_TO_DESCRIPTOR(*tmp, descriptor);</span>
+<span class='curline'><a href='../S/820.html#L405'>descriptor</a>        405 ext/oci8/oci8_interface.c 	RETURN_LONG(descriptor-&gt;lob_current_position);	</span>
+<span class='curline'><a href='../S/820.html#L414'>descriptor</a>        414 ext/oci8/oci8_interface.c 	php_oci_descriptor *descriptor;</span>
+<span class='curline'><a href='../S/820.html#L427'>descriptor</a>        427 ext/oci8/oci8_interface.c 	PHP_OCI_ZVAL_TO_DESCRIPTOR(*tmp, descriptor);</span>
+<span class='curline'><a href='../S/820.html#L429'>descriptor</a>        429 ext/oci8/oci8_interface.c 	descriptor-&gt;lob_current_position = 0;</span>
+<span class='curline'><a href='../S/820.html#L440'>descriptor</a>        440 ext/oci8/oci8_interface.c 	php_oci_descriptor *descriptor;</span>
+<span class='curline'><a href='../S/820.html#L460'>descriptor</a>        460 ext/oci8/oci8_interface.c 	PHP_OCI_ZVAL_TO_DESCRIPTOR(*tmp, descriptor);</span>
+<span class='curline'><a href='../S/820.html#L462'>descriptor</a>        462 ext/oci8/oci8_interface.c 	if (php_oci_lob_get_length(descriptor, &amp;lob_length TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/820.html#L468'>descriptor</a>        468 ext/oci8/oci8_interface.c 			descriptor-&gt;lob_current_position += offset;</span>
+<span class='curline'><a href='../S/820.html#L471'>descriptor</a>        471 ext/oci8/oci8_interface.c 			if ((descriptor-&gt;lob_size + offset) &gt;= 0) {</span>
+<span class='curline'><a href='../S/820.html#L472'>descriptor</a>        472 ext/oci8/oci8_interface.c 				descriptor-&gt;lob_current_position = descriptor-&gt;lob_size + offset;</span>
+<span class='curline'><a href='../S/820.html#L475'>descriptor</a>        475 ext/oci8/oci8_interface.c 				descriptor-&gt;lob_current_position = 0;</span>
+<span class='curline'><a href='../S/820.html#L480'>descriptor</a>        480 ext/oci8/oci8_interface.c 				descriptor-&gt;lob_current_position = (offset &gt; 0) ? offset : 0;</span>
+<span class='curline'><a href='../S/820.html#L492'>descriptor</a>        492 ext/oci8/oci8_interface.c 	php_oci_descriptor *descriptor;</span>
+<span class='curline'><a href='../S/820.html#L506'>descriptor</a>        506 ext/oci8/oci8_interface.c 	PHP_OCI_ZVAL_TO_DESCRIPTOR(*tmp, descriptor);</span>
+<span class='curline'><a href='../S/820.html#L508'>descriptor</a>        508 ext/oci8/oci8_interface.c 	if (php_oci_lob_get_length(descriptor, &amp;lob_length TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/820.html#L520'>descriptor</a>        520 ext/oci8/oci8_interface.c 	php_oci_descriptor *descriptor;</span>
+<span class='curline'><a href='../S/820.html#L550'>descriptor</a>        550 ext/oci8/oci8_interface.c 	PHP_OCI_ZVAL_TO_DESCRIPTOR(*tmp, descriptor);</span>
+<span class='curline'><a href='../S/820.html#L556'>descriptor</a>        556 ext/oci8/oci8_interface.c 	if (php_oci_lob_write(descriptor, descriptor-&gt;lob_current_position, data, data_len, &amp;bytes_written TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/820.html#L607'>descriptor</a>        607 ext/oci8/oci8_interface.c 	php_oci_descriptor *descriptor;</span>
+<span class='curline'><a href='../S/820.html#L633'>descriptor</a>        633 ext/oci8/oci8_interface.c 	PHP_OCI_ZVAL_TO_DESCRIPTOR(*tmp, descriptor);</span>
+<span class='curline'><a href='../S/820.html#L635'>descriptor</a>        635 ext/oci8/oci8_interface.c 	if (php_oci_lob_truncate(descriptor, ub_trim_length TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/820.html#L647'>descriptor</a>        647 ext/oci8/oci8_interface.c 	php_oci_descriptor *descriptor;</span>
+<span class='curline'><a href='../S/820.html#L687'>descriptor</a>        687 ext/oci8/oci8_interface.c 	PHP_OCI_ZVAL_TO_DESCRIPTOR(*tmp, descriptor);</span>
+<span class='curline'><a href='../S/820.html#L689'>descriptor</a>        689 ext/oci8/oci8_interface.c 	if (php_oci_lob_erase(descriptor, offset, length, &amp;bytes_erased TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/820.html#L701'>descriptor</a>        701 ext/oci8/oci8_interface.c 	php_oci_descriptor *descriptor;</span>
+<span class='curline'><a href='../S/820.html#L720'>descriptor</a>        720 ext/oci8/oci8_interface.c 	PHP_OCI_ZVAL_TO_DESCRIPTOR(*tmp, descriptor);</span>
+<span class='curline'><a href='../S/820.html#L722'>descriptor</a>        722 ext/oci8/oci8_interface.c 	if (descriptor-&gt;buffering == PHP_OCI_LOB_BUFFER_DISABLED) {</span>
+<span class='curline'><a href='../S/820.html#L727'>descriptor</a>        727 ext/oci8/oci8_interface.c 	if (php_oci_lob_flush(descriptor, flush_flag TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/820.html#L739'>descriptor</a>        739 ext/oci8/oci8_interface.c 	php_oci_descriptor *descriptor;</span>
+<span class='curline'><a href='../S/820.html#L758'>descriptor</a>        758 ext/oci8/oci8_interface.c 	PHP_OCI_ZVAL_TO_DESCRIPTOR(*tmp, descriptor);</span>
+<span class='curline'><a href='../S/820.html#L760'>descriptor</a>        760 ext/oci8/oci8_interface.c 	if (php_oci_lob_set_buffering(descriptor, flag TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/820.html#L772'>descriptor</a>        772 ext/oci8/oci8_interface.c 	php_oci_descriptor *descriptor;</span>
+<span class='curline'><a href='../S/820.html#L785'>descriptor</a>        785 ext/oci8/oci8_interface.c 	PHP_OCI_ZVAL_TO_DESCRIPTOR(*tmp, descriptor);</span>
+<span class='curline'><a href='../S/820.html#L787'>descriptor</a>        787 ext/oci8/oci8_interface.c 	if (descriptor-&gt;buffering != PHP_OCI_LOB_BUFFER_DISABLED) {</span>
+<span class='curline'><a href='../S/820.html#L877'>descriptor</a>        877 ext/oci8/oci8_interface.c 	php_oci_descriptor *descriptor;</span>
+<span class='curline'><a href='../S/820.html#L935'>descriptor</a>        935 ext/oci8/oci8_interface.c 	PHP_OCI_ZVAL_TO_DESCRIPTOR(*tmp, descriptor);</span>
+<span class='curline'><a href='../S/820.html#L937'>descriptor</a>        937 ext/oci8/oci8_interface.c 	if (php_oci_lob_get_length(descriptor, &amp;lob_length TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/820.html#L946'>descriptor</a>        946 ext/oci8/oci8_interface.c 		length = lob_length - descriptor-&gt;lob_current_position;</span>
+<span class='curline'><a href='../S/820.html#L978'>descriptor</a>        978 ext/oci8/oci8_interface.c 		if (php_oci_lob_read(descriptor, block_length, start, &amp;buffer, &amp;tmp_bytes_read TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/820.html#L992'>descriptor</a>        992 ext/oci8/oci8_interface.c 		descriptor-&gt;lob_current_position += tmp_bytes_read;</span>
+<span class='curline'><a href='../S/820.html#L1010'>descriptor</a>       1010 ext/oci8/oci8_interface.c 	php_oci_descriptor *descriptor;</span>
+<span class='curline'><a href='../S/820.html#L1031'>descriptor</a>       1031 ext/oci8/oci8_interface.c 	PHP_OCI_ZVAL_TO_DESCRIPTOR(*tmp, descriptor);</span>
+<span class='curline'><a href='../S/820.html#L1033'>descriptor</a>       1033 ext/oci8/oci8_interface.c 	if (php_oci_lob_write_tmp(descriptor, type, data, data_len TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/820.html#L1045'>descriptor</a>       1045 ext/oci8/oci8_interface.c 	php_oci_descriptor *descriptor;</span>
+<span class='curline'><a href='../S/820.html#L1058'>descriptor</a>       1058 ext/oci8/oci8_interface.c 	PHP_OCI_ZVAL_TO_DESCRIPTOR(*tmp, descriptor);</span>
+<span class='curline'><a href='../S/820.html#L1060'>descriptor</a>       1060 ext/oci8/oci8_interface.c 	if (php_oci_lob_close(descriptor TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/820.html#L1073'>descriptor</a>       1073 ext/oci8/oci8_interface.c 	php_oci_descriptor *descriptor;</span>
+<span class='curline'><a href='../S/820.html#L1083'>descriptor</a>       1083 ext/oci8/oci8_interface.c 	descriptor = php_oci_lob_create(connection, type TSRMLS_CC);	</span>
+<span class='curline'><a href='../S/820.html#L1085'>descriptor</a>       1085 ext/oci8/oci8_interface.c 	if (!descriptor) {</span>
+<span class='curline'><a href='../S/820.html#L1090'>descriptor</a>       1090 ext/oci8/oci8_interface.c 	add_property_resource(return_value, "descriptor", descriptor-&gt;id);</span>
+<span class='curline'><a href='../S/821.html#L56'>descriptor</a>         56 ext/oci8/oci8_lob.c 	php_oci_descriptor *descriptor;</span>
+<span class='curline'><a href='../S/821.html#L71'>descriptor</a>         71 ext/oci8/oci8_lob.c 	descriptor = ecalloc(1, sizeof(php_oci_descriptor));</span>
+<span class='curline'><a href='../S/821.html#L72'>descriptor</a>         72 ext/oci8/oci8_lob.c 	descriptor-&gt;type = type;</span>
+<span class='curline'><a href='../S/821.html#L73'>descriptor</a>         73 ext/oci8/oci8_lob.c 	descriptor-&gt;connection = connection;</span>
+<span class='curline'><a href='../S/821.html#L74'>descriptor</a>         74 ext/oci8/oci8_lob.c 	zend_list_addref(descriptor-&gt;connection-&gt;id);</span>
+<span class='curline'><a href='../S/821.html#L76'>descriptor</a>         76 ext/oci8/oci8_lob.c 	PHP_OCI_CALL_RETURN(errstatus, OCIDescriptorAlloc, (connection-&gt;env, (dvoid*)&amp;(descriptor-&gt;descriptor), descriptor-&gt;type, (size_t) 0, (dvoid **) 0));</span>
+<span class='curline'><a href='../S/821.html#L81'>descriptor</a>         81 ext/oci8/oci8_lob.c 		efree(descriptor);</span>
+<span class='curline'><a href='../S/821.html#L87'>descriptor</a>         87 ext/oci8/oci8_lob.c 	PHP_OCI_REGISTER_RESOURCE(descriptor, le_descriptor);</span>
+<span class='curline'><a href='../S/821.html#L89'>descriptor</a>         89 ext/oci8/oci8_lob.c 	descriptor-&gt;lob_current_position = 0;</span>
+<span class='curline'><a href='../S/821.html#L90'>descriptor</a>         90 ext/oci8/oci8_lob.c 	descriptor-&gt;lob_size = -1;				/* we should set it to -1 to know, that it's just not initialized */</span>
+<span class='curline'><a href='../S/821.html#L91'>descriptor</a>         91 ext/oci8/oci8_lob.c 	descriptor-&gt;buffering = PHP_OCI_LOB_BUFFER_DISABLED;				/* buffering is off by default */</span>
+<span class='curline'><a href='../S/821.html#L92'>descriptor</a>         92 ext/oci8/oci8_lob.c 	descriptor-&gt;charset_form = SQLCS_IMPLICIT;	/* default value */</span>
+<span class='curline'><a href='../S/821.html#L93'>descriptor</a>         93 ext/oci8/oci8_lob.c 	descriptor-&gt;charset_id = connection-&gt;charset;</span>
+<span class='curline'><a href='../S/821.html#L94'>descriptor</a>         94 ext/oci8/oci8_lob.c 	descriptor-&gt;is_open = 0;</span>
+<span class='curline'><a href='../S/821.html#L95'>descriptor</a>         95 ext/oci8/oci8_lob.c 	descriptor-&gt;chunk_size = 0;</span>
+<span class='curline'><a href='../S/821.html#L97'>descriptor</a>         97 ext/oci8/oci8_lob.c 	if (descriptor-&gt;type == OCI_DTYPE_LOB || descriptor-&gt;type == OCI_DTYPE_FILE) {</span>
+<span class='curline'><a href='../S/821.html#L105'>descriptor</a>        105 ext/oci8/oci8_lob.c 		descriptor-&gt;index = (connection-&gt;descriptor_count)++;</span>
+<span class='curline'><a href='../S/821.html#L112'>descriptor</a>        112 ext/oci8/oci8_lob.c 		zend_hash_index_update(connection-&gt;descriptors,descriptor-&gt;index,&amp;descriptor,sizeof(php_oci_descriptor *),NULL);</span>
+<span class='curline'><a href='../S/821.html#L114'>descriptor</a>        114 ext/oci8/oci8_lob.c 	return descriptor;</span>
+<span class='curline'><a href='../S/821.html#L121'>descriptor</a>        121 ext/oci8/oci8_lob.c int php_oci_lob_get_length (php_oci_descriptor *descriptor, ub4 *length TSRMLS_DC)</span>
+<span class='curline'><a href='../S/821.html#L123'>descriptor</a>        123 ext/oci8/oci8_lob.c 	php_oci_connection *connection = descriptor-&gt;connection;</span>
+<span class='curline'><a href='../S/821.html#L128'>descriptor</a>        128 ext/oci8/oci8_lob.c 	if (descriptor-&gt;lob_size &gt;= 0) {</span>
+<span class='curline'><a href='../S/821.html#L129'>descriptor</a>        129 ext/oci8/oci8_lob.c 		*length = descriptor-&gt;lob_size;</span>
+<span class='curline'><a href='../S/821.html#L132'>descriptor</a>        132 ext/oci8/oci8_lob.c 		if (descriptor-&gt;type == OCI_DTYPE_FILE) {</span>
+<span class='curline'><a href='../S/821.html#L133'>descriptor</a>        133 ext/oci8/oci8_lob.c 			PHP_OCI_CALL_RETURN(errstatus, OCILobFileOpen, (connection-&gt;svc, connection-&gt;err, descriptor-&gt;descriptor, OCI_FILE_READONLY));</span>
+<span class='curline'><a href='../S/821.html#L141'>descriptor</a>        141 ext/oci8/oci8_lob.c 		PHP_OCI_CALL_RETURN(errstatus, OCILobGetLength, (connection-&gt;svc, connection-&gt;err, descriptor-&gt;descriptor, (ub4 *)length));</span>
+<span class='curline'><a href='../S/821.html#L149'>descriptor</a>        149 ext/oci8/oci8_lob.c 		descriptor-&gt;lob_size = *length;</span>
+<span class='curline'><a href='../S/821.html#L151'>descriptor</a>        151 ext/oci8/oci8_lob.c 		if (descriptor-&gt;type == OCI_DTYPE_FILE) {</span>
+<span class='curline'><a href='../S/821.html#L152'>descriptor</a>        152 ext/oci8/oci8_lob.c 			PHP_OCI_CALL_RETURN(errstatus, OCILobFileClose, (connection-&gt;svc, connection-&gt;err, descriptor-&gt;descriptor));</span>
+<span class='curline'><a href='../S/821.html#L213'>descriptor</a>        213 ext/oci8/oci8_lob.c static inline int php_oci_lob_calculate_buffer(php_oci_descriptor *descriptor, long read_length TSRMLS_DC)</span>
+<span class='curline'><a href='../S/821.html#L215'>descriptor</a>        215 ext/oci8/oci8_lob.c 	php_oci_connection *connection = descriptor-&gt;connection;</span>
+<span class='curline'><a href='../S/821.html#L219'>descriptor</a>        219 ext/oci8/oci8_lob.c 	if (descriptor-&gt;type == OCI_DTYPE_FILE) {</span>
+<span class='curline'><a href='../S/821.html#L223'>descriptor</a>        223 ext/oci8/oci8_lob.c 	if (!descriptor-&gt;chunk_size) {</span>
+<span class='curline'><a href='../S/821.html#L224'>descriptor</a>        224 ext/oci8/oci8_lob.c 		PHP_OCI_CALL_RETURN(errstatus, OCILobGetChunkSize, (connection-&gt;svc, connection-&gt;err, descriptor-&gt;descriptor, &amp;chunk_size));</span>
+<span class='curline'><a href='../S/821.html#L231'>descriptor</a>        231 ext/oci8/oci8_lob.c 		descriptor-&gt;chunk_size = chunk_size;</span>
+<span class='curline'><a href='../S/821.html#L235'>descriptor</a>        235 ext/oci8/oci8_lob.c 	if ((read_length % descriptor-&gt;chunk_size) != 0) {</span>
+<span class='curline'><a href='../S/821.html#L236'>descriptor</a>        236 ext/oci8/oci8_lob.c 		return descriptor-&gt;chunk_size * ((read_length / descriptor-&gt;chunk_size) + 1);</span>
+<span class='curline'><a href='../S/821.html#L244'>descriptor</a>        244 ext/oci8/oci8_lob.c int php_oci_lob_read (php_oci_descriptor *descriptor, long read_length, long initial_offset, char **data, ub4 *data_len TSRMLS_DC)</span>
+<span class='curline'><a href='../S/821.html#L246'>descriptor</a>        246 ext/oci8/oci8_lob.c 	php_oci_connection *connection = descriptor-&gt;connection;</span>
+<span class='curline'><a href='../S/821.html#L265'>descriptor</a>        265 ext/oci8/oci8_lob.c 	if (php_oci_lob_get_length(descriptor, &amp;length TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/821.html#L292'>descriptor</a>        292 ext/oci8/oci8_lob.c 	if (descriptor-&gt;type == OCI_DTYPE_FILE) {</span>
+<span class='curline'><a href='../S/821.html#L293'>descriptor</a>        293 ext/oci8/oci8_lob.c 		PHP_OCI_CALL_RETURN(errstatus, OCILobFileOpen, (connection-&gt;svc, connection-&gt;err, descriptor-&gt;descriptor, OCI_FILE_READONLY));</span>
+<span class='curline'><a href='../S/821.html#L303'>descriptor</a>        303 ext/oci8/oci8_lob.c 		PHP_OCI_CALL_RETURN(errstatus, OCILobCharSetId, (connection-&gt;env, connection-&gt;err, descriptor-&gt;descriptor, &amp;charset_id));</span>
+<span class='curline'><a href='../S/821.html#L340'>descriptor</a>        340 ext/oci8/oci8_lob.c 	buffer_size = php_oci_lob_calculate_buffer(descriptor, buffer_size TSRMLS_CC);	/* use chunk size */</span>
+<span class='curline'><a href='../S/821.html#L347'>descriptor</a>        347 ext/oci8/oci8_lob.c 			descriptor-&gt;descriptor,</span>
+<span class='curline'><a href='../S/821.html#L356'>descriptor</a>        356 ext/oci8/oci8_lob.c 			(ub2) descriptor-&gt;charset_id,			   /* The character set ID of the buffer data. */</span>
+<span class='curline'><a href='../S/821.html#L357'>descriptor</a>        357 ext/oci8/oci8_lob.c 			(ub1) descriptor-&gt;charset_form					  /* The character set form of the buffer data. */</span>
+<span class='curline'><a href='../S/821.html#L364'>descriptor</a>        364 ext/oci8/oci8_lob.c 		offset = descriptor-&gt;lob_current_position + chars_read;</span>
+<span class='curline'><a href='../S/821.html#L366'>descriptor</a>        366 ext/oci8/oci8_lob.c 		offset = descriptor-&gt;lob_current_position + bytes_read;</span>
+<span class='curline'><a href='../S/821.html#L380'>descriptor</a>        380 ext/oci8/oci8_lob.c 	descriptor-&gt;lob_current_position = (int)offset;</span>
+<span class='curline'><a href='../S/821.html#L382'>descriptor</a>        382 ext/oci8/oci8_lob.c 	if (descriptor-&gt;type == OCI_DTYPE_FILE) {</span>
+<span class='curline'><a href='../S/821.html#L383'>descriptor</a>        383 ext/oci8/oci8_lob.c 		PHP_OCI_CALL_RETURN(errstatus, OCILobFileClose, (connection-&gt;svc, connection-&gt;err, descriptor-&gt;descriptor));</span>
+<span class='curline'><a href='../S/821.html#L404'>descriptor</a>        404 ext/oci8/oci8_lob.c int php_oci_lob_write (php_oci_descriptor *descriptor, ub4 offset, char *data, int data_len, ub4 *bytes_written TSRMLS_DC)</span>
+<span class='curline'><a href='../S/821.html#L406'>descriptor</a>        406 ext/oci8/oci8_lob.c 	OCILobLocator *lob		   = (OCILobLocator *) descriptor-&gt;descriptor;</span>
+<span class='curline'><a href='../S/821.html#L407'>descriptor</a>        407 ext/oci8/oci8_lob.c 	php_oci_connection *connection = (php_oci_connection *) descriptor-&gt;connection;</span>
+<span class='curline'><a href='../S/821.html#L412'>descriptor</a>        412 ext/oci8/oci8_lob.c 	if (php_oci_lob_get_length(descriptor, &amp;lob_length TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/821.html#L420'>descriptor</a>        420 ext/oci8/oci8_lob.c 	if (offset &gt; descriptor-&gt;lob_current_position) {</span>
+<span class='curline'><a href='../S/821.html#L421'>descriptor</a>        421 ext/oci8/oci8_lob.c 		offset = descriptor-&gt;lob_current_position;</span>
+<span class='curline'><a href='../S/821.html#L436'>descriptor</a>        436 ext/oci8/oci8_lob.c 				(ub2) descriptor-&gt;charset_id,</span>
+<span class='curline'><a href='../S/821.html#L437'>descriptor</a>        437 ext/oci8/oci8_lob.c 				(ub1) descriptor-&gt;charset_form</span>
+<span class='curline'><a href='../S/821.html#L448'>descriptor</a>        448 ext/oci8/oci8_lob.c 	descriptor-&gt;lob_current_position += data_len;</span>
+<span class='curline'><a href='../S/821.html#L450'>descriptor</a>        450 ext/oci8/oci8_lob.c 	if (descriptor-&gt;lob_current_position &gt; descriptor-&gt;lob_size) {</span>
+<span class='curline'><a href='../S/821.html#L451'>descriptor</a>        451 ext/oci8/oci8_lob.c 		descriptor-&gt;lob_size = descriptor-&gt;lob_current_position;</span>
+<span class='curline'><a href='../S/821.html#L455'>descriptor</a>        455 ext/oci8/oci8_lob.c 	if (descriptor-&gt;buffering == PHP_OCI_LOB_BUFFER_ENABLED) {</span>
+<span class='curline'><a href='../S/821.html#L456'>descriptor</a>        456 ext/oci8/oci8_lob.c 		descriptor-&gt;buffering = PHP_OCI_LOB_BUFFER_USED;</span>
+<span class='curline'><a href='../S/821.html#L466'>descriptor</a>        466 ext/oci8/oci8_lob.c int php_oci_lob_set_buffering (php_oci_descriptor *descriptor, int on_off TSRMLS_DC)</span>
+<span class='curline'><a href='../S/821.html#L468'>descriptor</a>        468 ext/oci8/oci8_lob.c 	php_oci_connection *connection = descriptor-&gt;connection;</span>
+<span class='curline'><a href='../S/821.html#L471'>descriptor</a>        471 ext/oci8/oci8_lob.c 	if (!on_off &amp;&amp; descriptor-&gt;buffering == PHP_OCI_LOB_BUFFER_DISABLED) {</span>
+<span class='curline'><a href='../S/821.html#L476'>descriptor</a>        476 ext/oci8/oci8_lob.c 	if (on_off &amp;&amp; descriptor-&gt;buffering != PHP_OCI_LOB_BUFFER_DISABLED) {</span>
+<span class='curline'><a href='../S/821.html#L482'>descriptor</a>        482 ext/oci8/oci8_lob.c 		PHP_OCI_CALL_RETURN(errstatus, OCILobEnableBuffering, (connection-&gt;svc, connection-&gt;err, descriptor-&gt;descriptor));</span>
+<span class='curline'><a href='../S/821.html#L484'>descriptor</a>        484 ext/oci8/oci8_lob.c 		PHP_OCI_CALL_RETURN(errstatus, OCILobDisableBuffering, (connection-&gt;svc, connection-&gt;err, descriptor-&gt;descriptor));</span>
+<span class='curline'><a href='../S/821.html#L492'>descriptor</a>        492 ext/oci8/oci8_lob.c 	descriptor-&gt;buffering = on_off ? PHP_OCI_LOB_BUFFER_ENABLED : PHP_OCI_LOB_BUFFER_DISABLED;</span>
+<span class='curline'><a href='../S/821.html#L500'>descriptor</a>        500 ext/oci8/oci8_lob.c int php_oci_lob_get_buffering (php_oci_descriptor *descriptor)</span>
+<span class='curline'><a href='../S/821.html#L502'>descriptor</a>        502 ext/oci8/oci8_lob.c 	if (descriptor-&gt;buffering != PHP_OCI_LOB_BUFFER_DISABLED) {</span>
+<span class='curline'><a href='../S/821.html#L541'>descriptor</a>        541 ext/oci8/oci8_lob.c 			 descriptor_dest-&gt;descriptor,</span>
+<span class='curline'><a href='../S/821.html#L542'>descriptor</a>        542 ext/oci8/oci8_lob.c 			 descriptor_from-&gt;descriptor,</span>
+<span class='curline'><a href='../S/821.html#L562'>descriptor</a>        562 ext/oci8/oci8_lob.c int php_oci_lob_close (php_oci_descriptor *descriptor TSRMLS_DC)</span>
+<span class='curline'><a href='../S/821.html#L564'>descriptor</a>        564 ext/oci8/oci8_lob.c 	php_oci_connection *connection = descriptor-&gt;connection;</span>
+<span class='curline'><a href='../S/821.html#L567'>descriptor</a>        567 ext/oci8/oci8_lob.c 	if (descriptor-&gt;is_open) {</span>
+<span class='curline'><a href='../S/821.html#L568'>descriptor</a>        568 ext/oci8/oci8_lob.c 		PHP_OCI_CALL_RETURN(errstatus, OCILobClose, (connection-&gt;svc, connection-&gt;err, descriptor-&gt;descriptor));</span>
+<span class='curline'><a href='../S/821.html#L578'>descriptor</a>        578 ext/oci8/oci8_lob.c 	if (php_oci_temp_lob_close(descriptor TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/821.html#L588'>descriptor</a>        588 ext/oci8/oci8_lob.c int php_oci_temp_lob_close (php_oci_descriptor *descriptor TSRMLS_DC)</span>
+<span class='curline'><a href='../S/821.html#L590'>descriptor</a>        590 ext/oci8/oci8_lob.c 	php_oci_connection *connection = descriptor-&gt;connection;</span>
+<span class='curline'><a href='../S/821.html#L594'>descriptor</a>        594 ext/oci8/oci8_lob.c 	PHP_OCI_CALL_RETURN(errstatus, OCILobIsTemporary, (connection-&gt;env,connection-&gt;err, descriptor-&gt;descriptor, &amp;is_temporary));</span>
+<span class='curline'><a href='../S/821.html#L603'>descriptor</a>        603 ext/oci8/oci8_lob.c 		PHP_OCI_CALL_RETURN(errstatus, OCILobFreeTemporary, (connection-&gt;svc, connection-&gt;err, descriptor-&gt;descriptor));</span>
+<span class='curline'><a href='../S/821.html#L618'>descriptor</a>        618 ext/oci8/oci8_lob.c int php_oci_lob_flush(php_oci_descriptor *descriptor, long flush_flag TSRMLS_DC)</span>
+<span class='curline'><a href='../S/821.html#L620'>descriptor</a>        620 ext/oci8/oci8_lob.c 	OCILobLocator *lob = descriptor-&gt;descriptor;</span>
+<span class='curline'><a href='../S/821.html#L621'>descriptor</a>        621 ext/oci8/oci8_lob.c 	php_oci_connection *connection = descriptor-&gt;connection;</span>
+<span class='curline'><a href='../S/821.html#L642'>descriptor</a>        642 ext/oci8/oci8_lob.c 	if (descriptor-&gt;buffering != PHP_OCI_LOB_BUFFER_USED) {</span>
+<span class='curline'><a href='../S/821.html#L655'>descriptor</a>        655 ext/oci8/oci8_lob.c 	descriptor-&gt;buffering = PHP_OCI_LOB_BUFFER_ENABLED;</span>
+<span class='curline'><a href='../S/821.html#L663'>descriptor</a>        663 ext/oci8/oci8_lob.c void php_oci_lob_free (php_oci_descriptor *descriptor TSRMLS_DC)</span>
+<span class='curline'><a href='../S/821.html#L665'>descriptor</a>        665 ext/oci8/oci8_lob.c 	if (!descriptor || !descriptor-&gt;connection) {</span>
+<span class='curline'><a href='../S/821.html#L669'>descriptor</a>        669 ext/oci8/oci8_lob.c 	if (descriptor-&gt;connection-&gt;descriptors) {</span>
+<span class='curline'><a href='../S/821.html#L671'>descriptor</a>        671 ext/oci8/oci8_lob.c 		zend_hash_index_del(descriptor-&gt;connection-&gt;descriptors, descriptor-&gt;index);</span>
+<span class='curline'><a href='../S/821.html#L672'>descriptor</a>        672 ext/oci8/oci8_lob.c 		if (zend_hash_num_elements(descriptor-&gt;connection-&gt;descriptors) == 0) {</span>
+<span class='curline'><a href='../S/821.html#L673'>descriptor</a>        673 ext/oci8/oci8_lob.c 			descriptor-&gt;connection-&gt;descriptor_count = 0;</span>
+<span class='curline'><a href='../S/821.html#L675'>descriptor</a>        675 ext/oci8/oci8_lob.c 			if (descriptor-&gt;index + 1 == descriptor-&gt;connection-&gt;descriptor_count) {</span>
+<span class='curline'><a href='../S/821.html#L687'>descriptor</a>        687 ext/oci8/oci8_lob.c 				descriptor-&gt;connection-&gt;descriptor_count--;</span>
+<span class='curline'><a href='../S/821.html#L693'>descriptor</a>        693 ext/oci8/oci8_lob.c 	if ((descriptor-&gt;type == OCI_DTYPE_FILE || descriptor-&gt;type == OCI_DTYPE_LOB) &amp;&amp; descriptor-&gt;buffering == PHP_OCI_LOB_BUFFER_USED) {</span>
+<span class='curline'><a href='../S/821.html#L694'>descriptor</a>        694 ext/oci8/oci8_lob.c 		php_oci_lob_flush(descriptor, OCI_LOB_BUFFER_FREE TSRMLS_CC);</span>
+<span class='curline'><a href='../S/821.html#L697'>descriptor</a>        697 ext/oci8/oci8_lob.c 	if (descriptor-&gt;type == OCI_DTYPE_LOB) {</span>
+<span class='curline'><a href='../S/821.html#L698'>descriptor</a>        698 ext/oci8/oci8_lob.c 		php_oci_temp_lob_close(descriptor TSRMLS_CC);</span>
+<span class='curline'><a href='../S/821.html#L701'>descriptor</a>        701 ext/oci8/oci8_lob.c 	PHP_OCI_CALL(OCIDescriptorFree, (descriptor-&gt;descriptor, descriptor-&gt;type));</span>
+<span class='curline'><a href='../S/821.html#L703'>descriptor</a>        703 ext/oci8/oci8_lob.c 	zend_list_delete(descriptor-&gt;connection-&gt;id);</span>
+<span class='curline'><a href='../S/821.html#L704'>descriptor</a>        704 ext/oci8/oci8_lob.c 	efree(descriptor);</span>
+<span class='curline'><a href='../S/821.html#L710'>descriptor</a>        710 ext/oci8/oci8_lob.c int php_oci_lob_import (php_oci_descriptor *descriptor, char *filename TSRMLS_DC)</span>
+<span class='curline'><a href='../S/821.html#L714'>descriptor</a>        714 ext/oci8/oci8_lob.c 	OCILobLocator *lob = (OCILobLocator *)descriptor-&gt;descriptor;</span>
+<span class='curline'><a href='../S/821.html#L715'>descriptor</a>        715 ext/oci8/oci8_lob.c 	php_oci_connection *connection = descriptor-&gt;connection;</span>
+<span class='curline'><a href='../S/821.html#L748'>descriptor</a>        748 ext/oci8/oci8_lob.c 					(ub2) descriptor-&gt;charset_id,</span>
+<span class='curline'><a href='../S/821.html#L749'>descriptor</a>        749 ext/oci8/oci8_lob.c 					(ub1) descriptor-&gt;charset_form</span>
+<span class='curline'><a href='../S/821.html#L774'>descriptor</a>        774 ext/oci8/oci8_lob.c 	OCILobLocator *lob_dest = descriptor_dest-&gt;descriptor;</span>
+<span class='curline'><a href='../S/821.html#L775'>descriptor</a>        775 ext/oci8/oci8_lob.c 	OCILobLocator *lob_from = descriptor_from-&gt;descriptor;</span>
+<span class='curline'><a href='../S/821.html#L805'>descriptor</a>        805 ext/oci8/oci8_lob.c int php_oci_lob_truncate (php_oci_descriptor *descriptor, long new_lob_length TSRMLS_DC)</span>
+<span class='curline'><a href='../S/821.html#L807'>descriptor</a>        807 ext/oci8/oci8_lob.c 	php_oci_connection *connection = descriptor-&gt;connection;</span>
+<span class='curline'><a href='../S/821.html#L808'>descriptor</a>        808 ext/oci8/oci8_lob.c 	OCILobLocator *lob = descriptor-&gt;descriptor;</span>
+<span class='curline'><a href='../S/821.html#L812'>descriptor</a>        812 ext/oci8/oci8_lob.c 	if (php_oci_lob_get_length(descriptor, &amp;lob_length TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/821.html#L838'>descriptor</a>        838 ext/oci8/oci8_lob.c 	descriptor-&gt;lob_size = new_lob_length;</span>
+<span class='curline'><a href='../S/821.html#L847'>descriptor</a>        847 ext/oci8/oci8_lob.c int php_oci_lob_erase (php_oci_descriptor *descriptor, long offset, ub4 length, ub4 *bytes_erased TSRMLS_DC)</span>
+<span class='curline'><a href='../S/821.html#L849'>descriptor</a>        849 ext/oci8/oci8_lob.c 	php_oci_connection *connection = descriptor-&gt;connection;</span>
+<span class='curline'><a href='../S/821.html#L850'>descriptor</a>        850 ext/oci8/oci8_lob.c 	OCILobLocator *lob = descriptor-&gt;descriptor;</span>
+<span class='curline'><a href='../S/821.html#L856'>descriptor</a>        856 ext/oci8/oci8_lob.c 	if (php_oci_lob_get_length(descriptor, &amp;lob_length TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/821.html#L861'>descriptor</a>        861 ext/oci8/oci8_lob.c 		offset = descriptor-&gt;lob_current_position;</span>
+<span class='curline'><a href='../S/821.html#L887'>descriptor</a>        887 ext/oci8/oci8_lob.c 	OCILobLocator *first_lob   = descriptor_first-&gt;descriptor;</span>
+<span class='curline'><a href='../S/821.html#L888'>descriptor</a>        888 ext/oci8/oci8_lob.c 	OCILobLocator *second_lob  = descriptor_second-&gt;descriptor;</span>
+<span class='curline'><a href='../S/821.html#L905'>descriptor</a>        905 ext/oci8/oci8_lob.c int php_oci_lob_write_tmp (php_oci_descriptor *descriptor, long type, char *data, int data_len TSRMLS_DC)</span>
+<span class='curline'><a href='../S/821.html#L907'>descriptor</a>        907 ext/oci8/oci8_lob.c 	php_oci_connection *connection = descriptor-&gt;connection;</span>
+<span class='curline'><a href='../S/821.html#L908'>descriptor</a>        908 ext/oci8/oci8_lob.c 	OCILobLocator *lob		   = descriptor-&gt;descriptor;</span>
+<span class='curline'><a href='../S/821.html#L954'>descriptor</a>        954 ext/oci8/oci8_lob.c 	descriptor-&gt;is_open = 1;</span>
+<span class='curline'><a href='../S/821.html#L957'>descriptor</a>        957 ext/oci8/oci8_lob.c 	return php_oci_lob_write(descriptor, 0, data, data_len, &amp;bytes_written TSRMLS_CC);</span>
+<span class='curline'><a href='../S/822.html#L464'>descriptor</a>        464 ext/oci8/oci8_statement.c 				*bufpp = descr-&gt;descriptor;</span>
+<span class='curline'><a href='../S/822.html#L1132'>descriptor</a>       1132 ext/oci8/oci8_statement.c 			oci_desc = bind_descriptor-&gt;descriptor;</span>
+<span class='curline'><a href='../S/822.html#L1232'>descriptor</a>       1232 ext/oci8/oci8_statement.c 	bindp-&gt;descriptor = oci_desc;</span>
+<span class='curline'><a href='../S/822.html#L1337'>descriptor</a>       1337 ext/oci8/oci8_statement.c 	} else	if ((phpbind-&gt;descriptor == 0) &amp;&amp; (phpbind-&gt;statement == 0)) {</span>
+<span class='curline'><a href='../S/822.html#L1351'>descriptor</a>       1351 ext/oci8/oci8_statement.c 		*bufpp = phpbind-&gt;descriptor;</span>
+<span class='curline'><a href='../S/822.html#L1399'>descriptor</a>       1399 ext/oci8/oci8_statement.c 		if (!phpbind-&gt;descriptor) {</span>
+<span class='curline'><a href='../S/822.html#L1415'>descriptor</a>       1415 ext/oci8/oci8_statement.c 		*bufpp = phpbind-&gt;descriptor;</span>
+<span class='curline'><a href='../S/822.html#L1590'>descriptor</a>       1590 ext/oci8/oci8_statement.c 	bindp-&gt;descriptor = NULL;</span>
+<span class='curline'><a href='../S/824.html#L170'>descriptor</a>        170 ext/oci8/php_oci8_int.h 	dvoid				*descriptor;			/* OCI descriptor handle */</span>
+<span class='curline'><a href='../S/824.html#L241'>descriptor</a>        241 ext/oci8/php_oci8_int.h 	dvoid				*descriptor;			/* used for binding of LOBS etc */</span>
+<span class='curline'><a href='../S/824.html#L369'>descriptor</a>        369 ext/oci8/php_oci8_int.h #define PHP_OCI_ZVAL_TO_DESCRIPTOR(zval, descriptor) \</span>
+<span class='curline'><a href='../S/824.html#L370'>descriptor</a>        370 ext/oci8/php_oci8_int.h 	ZEND_FETCH_RESOURCE(descriptor, php_oci_descriptor *, &amp;zval, -1, "oci8 descriptor", le_descriptor)</span>
+<span class='curline'><a href='../S/824.html#L389'>descriptor</a>        389 ext/oci8/php_oci8_int.h #define PHP_OCI_ZVAL_TO_DESCRIPTOR_EX(zval, descriptor) \</span>
+<span class='curline'><a href='../S/824.html#L390'>descriptor</a>        390 ext/oci8/php_oci8_int.h 	PHP_OCI_FETCH_RESOURCE_EX(zval, descriptor, php_oci_descriptor *, "oci8 descriptor", le_descriptor)</span>
+<span class='curline'><a href='../S/824.html#L426'>descriptor</a>        426 ext/oci8/php_oci8_int.h int php_oci_lob_get_length(php_oci_descriptor *descriptor, ub4 *length TSRMLS_DC);</span>
+<span class='curline'><a href='../S/824.html#L427'>descriptor</a>        427 ext/oci8/php_oci8_int.h int php_oci_lob_read(php_oci_descriptor *descriptor, long read_length, long inital_offset, char **data, ub4 *data_len TSRMLS_DC);</span>
+<span class='curline'><a href='../S/824.html#L428'>descriptor</a>        428 ext/oci8/php_oci8_int.h int php_oci_lob_write(php_oci_descriptor *descriptor, ub4 offset, char *data, int data_len, ub4 *bytes_written TSRMLS_DC);</span>
+<span class='curline'><a href='../S/824.html#L429'>descriptor</a>        429 ext/oci8/php_oci8_int.h int php_oci_lob_flush(php_oci_descriptor *descriptor, long flush_flag TSRMLS_DC);</span>
+<span class='curline'><a href='../S/824.html#L430'>descriptor</a>        430 ext/oci8/php_oci8_int.h int php_oci_lob_set_buffering(php_oci_descriptor *descriptor, int on_off TSRMLS_DC);</span>
+<span class='curline'><a href='../S/824.html#L431'>descriptor</a>        431 ext/oci8/php_oci8_int.h int php_oci_lob_get_buffering(php_oci_descriptor *descriptor);</span>
+<span class='curline'><a href='../S/824.html#L432'>descriptor</a>        432 ext/oci8/php_oci8_int.h int php_oci_lob_copy(php_oci_descriptor *descriptor, php_oci_descriptor *descriptor_from, long length TSRMLS_DC);</span>
+<span class='curline'><a href='../S/824.html#L433'>descriptor</a>        433 ext/oci8/php_oci8_int.h int php_oci_lob_close(php_oci_descriptor *descriptor TSRMLS_DC);</span>
+<span class='curline'><a href='../S/824.html#L434'>descriptor</a>        434 ext/oci8/php_oci8_int.h int php_oci_temp_lob_close(php_oci_descriptor *descriptor TSRMLS_DC);</span>
+<span class='curline'><a href='../S/824.html#L435'>descriptor</a>        435 ext/oci8/php_oci8_int.h int php_oci_lob_write_tmp(php_oci_descriptor *descriptor, long type, char *data, int data_len TSRMLS_DC);</span>
+<span class='curline'><a href='../S/824.html#L436'>descriptor</a>        436 ext/oci8/php_oci8_int.h void php_oci_lob_free(php_oci_descriptor *descriptor TSRMLS_DC);</span>
+<span class='curline'><a href='../S/824.html#L437'>descriptor</a>        437 ext/oci8/php_oci8_int.h int php_oci_lob_import(php_oci_descriptor *descriptor, char *filename TSRMLS_DC);</span>
+<span class='curline'><a href='../S/824.html#L439'>descriptor</a>        439 ext/oci8/php_oci8_int.h int php_oci_lob_truncate(php_oci_descriptor *descriptor, long new_lob_length TSRMLS_DC);</span>
+<span class='curline'><a href='../S/824.html#L440'>descriptor</a>        440 ext/oci8/php_oci8_int.h int php_oci_lob_erase(php_oci_descriptor *descriptor, long offset, ub4 length, ub4 *bytes_erased TSRMLS_DC);</span>
+</pre>
+</body>
+</html>

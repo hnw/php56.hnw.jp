@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>dbg</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/781.html#L272'>dbg</a>               272 ext/mysqlnd/mysqlnd.h 	MYSQLND_DEBUG *	dbg;	/* The DBG object for standard tracing */</span>
+<span class='curline'><a href='../S/790.html#L750'>dbg</a>               750 ext/mysqlnd/mysqlnd_debug.c 	MYSQLND_DEBUG * dbg = MYSQLND_G(dbg);</span>
+<span class='curline'><a href='../S/790.html#L751'>dbg</a>               751 ext/mysqlnd/mysqlnd_debug.c 	if (!dbg) {</span>
+<span class='curline'><a href='../S/790.html#L754'>dbg</a>               754 ext/mysqlnd/mysqlnd_debug.c 			dbg = trace_log_plugin-&gt;methods.trace_instance_init(mysqlnd_debug_std_no_trace_funcs TSRMLS_CC);</span>
+<span class='curline'><a href='../S/790.html#L755'>dbg</a>               755 ext/mysqlnd/mysqlnd_debug.c 			if (!dbg) {</span>
+<span class='curline'><a href='../S/790.html#L758'>dbg</a>               758 ext/mysqlnd/mysqlnd_debug.c 			MYSQLND_G(dbg) = dbg;</span>
+<span class='curline'><a href='../S/790.html#L761'>dbg</a>               761 ext/mysqlnd/mysqlnd_debug.c 	if (dbg) {</span>
+<span class='curline'><a href='../S/790.html#L762'>dbg</a>               762 ext/mysqlnd/mysqlnd_debug.c 		dbg-&gt;m-&gt;close(dbg);</span>
+<span class='curline'><a href='../S/790.html#L763'>dbg</a>               763 ext/mysqlnd/mysqlnd_debug.c 		dbg-&gt;m-&gt;set_mode(dbg, mode);</span>
+<span class='curline'><a href='../S/790.html#L764'>dbg</a>               764 ext/mysqlnd/mysqlnd_debug.c 		while (zend_stack_count(&amp;dbg-&gt;call_stack)) {</span>
+<span class='curline'><a href='../S/790.html#L765'>dbg</a>               765 ext/mysqlnd/mysqlnd_debug.c 			zend_stack_del_top(&amp;dbg-&gt;call_stack);</span>
+<span class='curline'><a href='../S/790.html#L767'>dbg</a>               767 ext/mysqlnd/mysqlnd_debug.c 		while (zend_stack_count(&amp;dbg-&gt;call_time_stack)) {</span>
+<span class='curline'><a href='../S/790.html#L768'>dbg</a>               768 ext/mysqlnd/mysqlnd_debug.c 			zend_stack_del_top(&amp;dbg-&gt;call_time_stack);</span>
+<span class='curline'><a href='../S/791.html#L179'>dbg</a>               179 ext/mysqlnd/mysqlnd_debug.h #define DBG_INF(msg)		DBG_INF_EX(MYSQLND_G(dbg), (msg))</span>
+<span class='curline'><a href='../S/791.html#L180'>dbg</a>               180 ext/mysqlnd/mysqlnd_debug.h #define DBG_ERR(msg)		DBG_ERR_EX(MYSQLND_G(dbg), (msg))</span>
+<span class='curline'><a href='../S/791.html#L181'>dbg</a>               181 ext/mysqlnd/mysqlnd_debug.h #define DBG_INF_FMT(...)	DBG_INF_FMT_EX(MYSQLND_G(dbg), __VA_ARGS__)</span>
+<span class='curline'><a href='../S/791.html#L182'>dbg</a>               182 ext/mysqlnd/mysqlnd_debug.h #define DBG_ERR_FMT(...)	DBG_ERR_FMT_EX(MYSQLND_G(dbg), __VA_ARGS__)</span>
+<span class='curline'><a href='../S/791.html#L184'>dbg</a>               184 ext/mysqlnd/mysqlnd_debug.h #define DBG_ENTER(func_name)	DBG_ENTER_EX(MYSQLND_G(dbg), (func_name))</span>
+<span class='curline'><a href='../S/791.html#L185'>dbg</a>               185 ext/mysqlnd/mysqlnd_debug.h #define DBG_BLOCK_ENTER(bname)	DBG_BLOCK_ENTER_EX(MYSQLND_G(dbg), (bname))</span>
+<span class='curline'><a href='../S/791.html#L186'>dbg</a>               186 ext/mysqlnd/mysqlnd_debug.h #define DBG_RETURN(value)		DBG_RETURN_EX(MYSQLND_G(dbg), (value))</span>
+<span class='curline'><a href='../S/791.html#L187'>dbg</a>               187 ext/mysqlnd/mysqlnd_debug.h #define DBG_VOID_RETURN			DBG_VOID_RETURN_EX(MYSQLND_G(dbg))</span>
+<span class='curline'><a href='../S/791.html#L188'>dbg</a>               188 ext/mysqlnd/mysqlnd_debug.h #define DBG_BLOCK_LEAVE			DBG_BLOCK_LEAVE_EX(MYSQLND_G(dbg))</span>
+<span class='curline'><a href='../S/791.html#L196'>dbg</a>               196 ext/mysqlnd/mysqlnd_debug.h #define TRACE_ALLOC_ENTER(func_name)	DBG_ENTER_EX2(MYSQLND_G(dbg), MYSQLND_G(trace_alloc), (func_name))</span>
+<span class='curline'><a href='../S/791.html#L197'>dbg</a>               197 ext/mysqlnd/mysqlnd_debug.h #define TRACE_ALLOC_BLOCK_ENTER(bname)	DBG_BLOCK_ENTER_EX2(MYSQLND_G(dbg), MYSQLND_G(trace_alloc), (bname))</span>
+<span class='curline'><a href='../S/791.html#L198'>dbg</a>               198 ext/mysqlnd/mysqlnd_debug.h #define TRACE_ALLOC_RETURN(value)		DBG_RETURN_EX2(MYSQLND_G(dbg), MYSQLND_G(trace_alloc), (value))</span>
+<span class='curline'><a href='../S/791.html#L199'>dbg</a>               199 ext/mysqlnd/mysqlnd_debug.h #define TRACE_ALLOC_VOID_RETURN			DBG_VOID_RETURN_EX2(MYSQLND_G(dbg), MYSQLND_G(trace_alloc))</span>
+<span class='curline'><a href='../S/791.html#L200'>dbg</a>               200 ext/mysqlnd/mysqlnd_debug.h #define TRACE_ALLOC_BLOCK_LEAVE			DBG_BLOCK_LEAVE_EX2(MYSQLND_G(dbg), MYSQLND_G(trace_alloc))</span>
+<span class='curline'><a href='../S/816.html#L197'>dbg</a>               197 ext/mysqlnd/php_mysqlnd.c 	mysqlnd_globals-&gt;dbg = NULL;	/* The DBG object*/</span>
+<span class='curline'><a href='../S/816.html#L286'>dbg</a>               286 ext/mysqlnd/php_mysqlnd.c 		MYSQLND_G(dbg) = NULL;</span>
+<span class='curline'><a href='../S/816.html#L288'>dbg</a>               288 ext/mysqlnd/php_mysqlnd.c 			MYSQLND_DEBUG * dbg = trace_log_plugin-&gt;methods.trace_instance_init(mysqlnd_debug_std_no_trace_funcs TSRMLS_CC);</span>
+<span class='curline'><a href='../S/816.html#L290'>dbg</a>               290 ext/mysqlnd/php_mysqlnd.c 			if (!dbg || !trace_alloc) {</span>
+<span class='curline'><a href='../S/816.html#L293'>dbg</a>               293 ext/mysqlnd/php_mysqlnd.c 			dbg-&gt;m-&gt;set_mode(dbg, MYSQLND_G(debug));</span>
+<span class='curline'><a href='../S/816.html#L295'>dbg</a>               295 ext/mysqlnd/php_mysqlnd.c 			MYSQLND_G(dbg) = dbg;</span>
+<span class='curline'><a href='../S/816.html#L310'>dbg</a>               310 ext/mysqlnd/php_mysqlnd.c 	MYSQLND_DEBUG * dbg = MYSQLND_G(dbg);</span>
+<span class='curline'><a href='../S/816.html#L313'>dbg</a>               313 ext/mysqlnd/php_mysqlnd.c 	if (dbg) {</span>
+<span class='curline'><a href='../S/816.html#L314'>dbg</a>               314 ext/mysqlnd/php_mysqlnd.c 		dbg-&gt;m-&gt;close(dbg);</span>
+<span class='curline'><a href='../S/816.html#L315'>dbg</a>               315 ext/mysqlnd/php_mysqlnd.c 		dbg-&gt;m-&gt;free_handle(dbg);</span>
+<span class='curline'><a href='../S/816.html#L316'>dbg</a>               316 ext/mysqlnd/php_mysqlnd.c 		MYSQLND_G(dbg) = NULL;</span>
+<span class='curline'><a href='../S/943.html#L176'>dbg</a>               176 ext/pdo_mysql/pdo_mysql.c 		MYSQLND_DEBUG *dbg = mysqlnd_debug_init(mysqlnd_debug_std_no_trace_funcs TSRMLS_CC);</span>
+<span class='curline'><a href='../S/943.html#L177'>dbg</a>               177 ext/pdo_mysql/pdo_mysql.c 		if (!dbg) {</span>
+<span class='curline'><a href='../S/943.html#L180'>dbg</a>               180 ext/pdo_mysql/pdo_mysql.c 		dbg-&gt;m-&gt;set_mode(dbg, PDO_MYSQL_G(debug));</span>
+<span class='curline'><a href='../S/943.html#L181'>dbg</a>               181 ext/pdo_mysql/pdo_mysql.c 		PDO_MYSQL_G(dbg) = dbg;</span>
+<span class='curline'><a href='../S/943.html#L192'>dbg</a>               192 ext/pdo_mysql/pdo_mysql.c 	MYSQLND_DEBUG *dbg = PDO_MYSQL_G(dbg);</span>
+<span class='curline'><a href='../S/943.html#L194'>dbg</a>               194 ext/pdo_mysql/pdo_mysql.c 	if (dbg) {</span>
+<span class='curline'><a href='../S/943.html#L195'>dbg</a>               195 ext/pdo_mysql/pdo_mysql.c 		dbg-&gt;m-&gt;close(dbg);</span>
+<span class='curline'><a href='../S/943.html#L196'>dbg</a>               196 ext/pdo_mysql/pdo_mysql.c 		dbg-&gt;m-&gt;free_handle(dbg);</span>
+<span class='curline'><a href='../S/943.html#L197'>dbg</a>               197 ext/pdo_mysql/pdo_mysql.c 		PDO_MYSQL_G(dbg) = NULL;</span>
+<span class='curline'><a href='../S/943.html#L214'>dbg</a>               214 ext/pdo_mysql/pdo_mysql.c 	pdo_mysql_globals-&gt;dbg = NULL;	/* The DBG object*/</span>
+<span class='curline'><a href='../S/945.html#L42'>dbg</a>                42 ext/pdo_mysql/php_pdo_mysql_int.h #define PDO_DBG_INF(msg) do { if (dbg_skip_trace == FALSE) PDO_MYSQL_G(dbg)-&gt;m-&gt;log(PDO_MYSQL_G(dbg), __LINE__, __FILE__, -1, "info : ", (msg)); } while (0)</span>
+<span class='curline'><a href='../S/945.html#L43'>dbg</a>                43 ext/pdo_mysql/php_pdo_mysql_int.h #define PDO_DBG_ERR(msg) do { if (dbg_skip_trace == FALSE) PDO_MYSQL_G(dbg)-&gt;m-&gt;log(PDO_MYSQL_G(dbg), __LINE__, __FILE__, -1, "error: ", (msg)); } while (0)</span>
+<span class='curline'><a href='../S/945.html#L44'>dbg</a>                44 ext/pdo_mysql/php_pdo_mysql_int.h #define PDO_DBG_INF_FMT(...) do { if (dbg_skip_trace == FALSE) PDO_MYSQL_G(dbg)-&gt;m-&gt;log_va(PDO_MYSQL_G(dbg), __LINE__, __FILE__, -1, "info : ", __VA_ARGS__); } while (0)</span>
+<span class='curline'><a href='../S/945.html#L45'>dbg</a>                45 ext/pdo_mysql/php_pdo_mysql_int.h #define PDO_DBG_ERR_FMT(...) do { if (dbg_skip_trace == FALSE) PDO_MYSQL_G(dbg)-&gt;m-&gt;log_va(PDO_MYSQL_G(dbg), __LINE__, __FILE__, -1, "error: ", __VA_ARGS__); } while (0)</span>
+<span class='curline'><a href='../S/945.html#L46'>dbg</a>                46 ext/pdo_mysql/php_pdo_mysql_int.h #define PDO_DBG_ENTER(func_name) zend_bool dbg_skip_trace = TRUE; if (PDO_MYSQL_G(dbg)) dbg_skip_trace = !PDO_MYSQL_G(dbg)-&gt;m-&gt;func_enter(PDO_MYSQL_G(dbg), __LINE__, __FILE__, func_name, strlen(func_name));</span>
+<span class='curline'><a href='../S/945.html#L47'>dbg</a>                47 ext/pdo_mysql/php_pdo_mysql_int.h #define PDO_DBG_RETURN(value)	do { if (PDO_MYSQL_G(dbg)) PDO_MYSQL_G(dbg)-&gt;m-&gt;func_leave(PDO_MYSQL_G(dbg), __LINE__, __FILE__, 0); return (value); } while (0)</span>
+<span class='curline'><a href='../S/945.html#L48'>dbg</a>                48 ext/pdo_mysql/php_pdo_mysql_int.h #define PDO_DBG_VOID_RETURN		do { if (PDO_MYSQL_G(dbg)) PDO_MYSQL_G(dbg)-&gt;m-&gt;func_leave(PDO_MYSQL_G(dbg), __LINE__, __FILE__, 0); return; } while (0)</span>
+<span class='curline'><a href='../S/945.html#L73'>dbg</a>                73 ext/pdo_mysql/php_pdo_mysql_int.h 	MYSQLND_DEBUG *dbg;	/* The DBG object */</span>
+</pre>
+</body>
+</html>

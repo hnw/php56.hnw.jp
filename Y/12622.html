@@ -1,0 +1,396 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>block</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/1644.html#L471'>block</a>             471 Zend/zend_alloc.c # define ZEND_MM_COOKIE(block) \</span>
+<span class='curline'><a href='../S/1644.html#L472'>block</a>             472 Zend/zend_alloc.c 	(((size_t)(block)) ^ _zend_mm_cookie)</span>
+<span class='curline'><a href='../S/1644.html#L473'>block</a>             473 Zend/zend_alloc.c # define ZEND_MM_SET_COOKIE(block) \</span>
+<span class='curline'><a href='../S/1644.html#L474'>block</a>             474 Zend/zend_alloc.c 	(block)-&gt;info._cookie = ZEND_MM_COOKIE(block)</span>
+<span class='curline'><a href='../S/1644.html#L475'>block</a>             475 Zend/zend_alloc.c # define ZEND_MM_CHECK_COOKIE(block) \</span>
+<span class='curline'><a href='../S/1644.html#L476'>block</a>             476 Zend/zend_alloc.c 	if (UNEXPECTED((block)-&gt;info._cookie != ZEND_MM_COOKIE(block))) { \</span>
+<span class='curline'><a href='../S/1644.html#L480'>block</a>             480 Zend/zend_alloc.c # define ZEND_MM_SET_COOKIE(block)</span>
+<span class='curline'><a href='../S/1644.html#L481'>block</a>             481 Zend/zend_alloc.c # define ZEND_MM_CHECK_COOKIE(block)</span>
+<span class='curline'><a href='../S/1644.html#L554'>block</a>             554 Zend/zend_alloc.c #  define ZEND_MM_SET_THREAD_ID(block) \</span>
+<span class='curline'><a href='../S/1644.html#L555'>block</a>             555 Zend/zend_alloc.c 	((zend_mm_block*)(block))-&gt;thread_id = tsrm_thread_id()</span>
+<span class='curline'><a href='../S/1644.html#L556'>block</a>             556 Zend/zend_alloc.c #  define ZEND_MM_BAD_THREAD_ID(block) ((block)-&gt;thread_id != tsrm_thread_id())</span>
+<span class='curline'><a href='../S/1644.html#L558'>block</a>             558 Zend/zend_alloc.c #  define ZEND_MM_SET_THREAD_ID(block)</span>
+<span class='curline'><a href='../S/1644.html#L559'>block</a>             559 Zend/zend_alloc.c #  define ZEND_MM_BAD_THREAD_ID(block) 0</span>
+<span class='curline'><a href='../S/1644.html#L562'>block</a>             562 Zend/zend_alloc.c # define ZEND_MM_VALID_PTR(block) \</span>
+<span class='curline'><a href='../S/1644.html#L563'>block</a>             563 Zend/zend_alloc.c 	zend_mm_check_ptr(heap, block, 1 ZEND_FILE_LINE_RELAY_CC ZEND_FILE_LINE_ORIG_RELAY_CC)</span>
+<span class='curline'><a href='../S/1644.html#L565'>block</a>             565 Zend/zend_alloc.c # define ZEND_MM_SET_MAGIC(block, val) do { \</span>
+<span class='curline'><a href='../S/1644.html#L566'>block</a>             566 Zend/zend_alloc.c 		(block)-&gt;magic = (val); \</span>
+<span class='curline'><a href='../S/1644.html#L569'>block</a>             569 Zend/zend_alloc.c # define ZEND_MM_CHECK_MAGIC(block, val) do { \</span>
+<span class='curline'><a href='../S/1644.html#L570'>block</a>             570 Zend/zend_alloc.c 		if ((block)-&gt;magic != (val)) { \</span>
+<span class='curline'><a href='../S/1644.html#L575'>block</a>             575 Zend/zend_alloc.c # define ZEND_MM_SET_DEBUG_INFO(block, __size, set_valid, set_thread) do { \</span>
+<span class='curline'><a href='../S/1644.html#L576'>block</a>             576 Zend/zend_alloc.c 		((zend_mm_block*)(block))-&gt;debug.filename = __zend_filename; \</span>
+<span class='curline'><a href='../S/1644.html#L577'>block</a>             577 Zend/zend_alloc.c 		((zend_mm_block*)(block))-&gt;debug.lineno = __zend_lineno; \</span>
+<span class='curline'><a href='../S/1644.html#L578'>block</a>             578 Zend/zend_alloc.c 		((zend_mm_block*)(block))-&gt;debug.orig_filename = __zend_orig_filename; \</span>
+<span class='curline'><a href='../S/1644.html#L579'>block</a>             579 Zend/zend_alloc.c 		((zend_mm_block*)(block))-&gt;debug.orig_lineno = __zend_orig_lineno; \</span>
+<span class='curline'><a href='../S/1644.html#L580'>block</a>             580 Zend/zend_alloc.c 		ZEND_MM_SET_BLOCK_SIZE(block, __size); \</span>
+<span class='curline'><a href='../S/1644.html#L582'>block</a>             582 Zend/zend_alloc.c 			ZEND_MM_SET_MAGIC(block, MEM_BLOCK_VALID); \</span>
+<span class='curline'><a href='../S/1644.html#L585'>block</a>             585 Zend/zend_alloc.c 			ZEND_MM_SET_THREAD_ID(block); \</span>
+<span class='curline'><a href='../S/1644.html#L593'>block</a>             593 Zend/zend_alloc.c # define ZEND_MM_SET_MAGIC(block, val)</span>
+<span class='curline'><a href='../S/1644.html#L595'>block</a>             595 Zend/zend_alloc.c # define ZEND_MM_CHECK_MAGIC(block, val)</span>
+<span class='curline'><a href='../S/1644.html#L597'>block</a>             597 Zend/zend_alloc.c # define ZEND_MM_SET_DEBUG_INFO(block, __size, set_valid, set_thread) ZEND_MM_SET_BLOCK_SIZE(block, __size)</span>
+<span class='curline'><a href='../S/1644.html#L604'>block</a>             604 Zend/zend_alloc.c # define ZEND_MM_CHECK_PROTECTION(block) \</span>
+<span class='curline'><a href='../S/1644.html#L606'>block</a>             606 Zend/zend_alloc.c 		if ((block)-&gt;debug.start_magic != _mem_block_start_magic || \</span>
+<span class='curline'><a href='../S/1644.html#L607'>block</a>             607 Zend/zend_alloc.c 		    memcmp(ZEND_MM_END_MAGIC_PTR(block), &amp;_mem_block_end_magic, END_MAGIC_SIZE) != 0) { \</span>
+<span class='curline'><a href='../S/1644.html#L612'>block</a>             612 Zend/zend_alloc.c # define ZEND_MM_END_MAGIC_PTR(block) \</span>
+<span class='curline'><a href='../S/1644.html#L613'>block</a>             613 Zend/zend_alloc.c 	(((char*)(ZEND_MM_DATA_OF(block))) + ((zend_mm_block*)(block))-&gt;debug.size)</span>
+<span class='curline'><a href='../S/1644.html#L617'>block</a>             617 Zend/zend_alloc.c # define ZEND_MM_SET_BLOCK_SIZE(block, __size) do { \</span>
+<span class='curline'><a href='../S/1644.html#L619'>block</a>             619 Zend/zend_alloc.c 		((zend_mm_block*)(block))-&gt;debug.size = (__size); \</span>
+<span class='curline'><a href='../S/1644.html#L620'>block</a>             620 Zend/zend_alloc.c 		p = ZEND_MM_END_MAGIC_PTR(block); \</span>
+<span class='curline'><a href='../S/1644.html#L621'>block</a>             621 Zend/zend_alloc.c 		((zend_mm_block*)(block))-&gt;debug.start_magic = _mem_block_start_magic; \</span>
+<span class='curline'><a href='../S/1644.html#L631'>block</a>             631 Zend/zend_alloc.c #  define ZEND_MM_SET_BLOCK_SIZE(block, _size) \</span>
+<span class='curline'><a href='../S/1644.html#L632'>block</a>             632 Zend/zend_alloc.c 	((zend_mm_block*)(block))-&gt;debug.size = (_size)</span>
+<span class='curline'><a href='../S/1644.html#L634'>block</a>             634 Zend/zend_alloc.c #  define ZEND_MM_SET_BLOCK_SIZE(block, _size)</span>
+<span class='curline'><a href='../S/1644.html#L637'>block</a>             637 Zend/zend_alloc.c # define ZEND_MM_CHECK_PROTECTION(block)</span>
+<span class='curline'><a href='../S/1644.html#L644'>block</a>             644 Zend/zend_alloc.c # define ZEND_MM_CHECK_BLOCK_LINKAGE(block) \</span>
+<span class='curline'><a href='../S/1644.html#L645'>block</a>             645 Zend/zend_alloc.c 	if (UNEXPECTED((block)-&gt;info._size != ZEND_MM_BLOCK_AT(block, ZEND_MM_FREE_BLOCK_SIZE(block))-&gt;info._prev) || \</span>
+<span class='curline'><a href='../S/1644.html#L646'>block</a>             646 Zend/zend_alloc.c 		UNEXPECTED(!UNEXPECTED(ZEND_MM_IS_FIRST_BLOCK(block)) &amp;&amp; \</span>
+<span class='curline'><a href='../S/1644.html#L647'>block</a>             647 Zend/zend_alloc.c 	    UNEXPECTED(ZEND_MM_PREV_BLOCK(block)-&gt;info._size != (block)-&gt;info._prev))) { \</span>
+<span class='curline'><a href='../S/1644.html#L650'>block</a>             650 Zend/zend_alloc.c #define ZEND_MM_CHECK_TREE(block) \</span>
+<span class='curline'><a href='../S/1644.html#L651'>block</a>             651 Zend/zend_alloc.c 	if (UNEXPECTED(*((block)-&gt;parent) != (block))) { \</span>
+<span class='curline'><a href='../S/1644.html#L655'>block</a>             655 Zend/zend_alloc.c # define ZEND_MM_CHECK_BLOCK_LINKAGE(block)</span>
+<span class='curline'><a href='../S/1644.html#L656'>block</a>             656 Zend/zend_alloc.c # define ZEND_MM_CHECK_TREE(block)</span>
+<span class='curline'><a href='../S/1731.html#L25'>block</a>              25 Zend/zend_static_allocator.c inline static void block_init(Block *block, zend_uint block_size)</span>
+<span class='curline'><a href='../S/1731.html#L27'>block</a>              27 Zend/zend_static_allocator.c 	block-&gt;pos = block-&gt;bp = (char *) emalloc(block_size);</span>
+<span class='curline'><a href='../S/1731.html#L28'>block</a>              28 Zend/zend_static_allocator.c 	block-&gt;end = block-&gt;bp + block_size;</span>
+<span class='curline'><a href='../S/1731.html#L31'>block</a>              31 Zend/zend_static_allocator.c inline static char *block_allocate(Block *block, zend_uint size)</span>
+<span class='curline'><a href='../S/1731.html#L33'>block</a>              33 Zend/zend_static_allocator.c 	char *retval = block-&gt;pos;</span>
+<span class='curline'><a href='../S/1731.html#L34'>block</a>              34 Zend/zend_static_allocator.c 	if ((block-&gt;pos += size) &gt;= block-&gt;end) {</span>
+<span class='curline'><a href='../S/1731.html#L40'>block</a>              40 Zend/zend_static_allocator.c inline static void block_destroy(Block *block)</span>
+<span class='curline'><a href='../S/1731.html#L42'>block</a>              42 Zend/zend_static_allocator.c 	efree(block-&gt;bp);</span>
+<span class='curline'><a href='../S/292.html#L144'>block</a>             144 ext/hash/hash_haval.c static void PHP_3HAVALTransform(php_hash_uint32 state[8], const unsigned char block[128])</span>
+<span class='curline'><a href='../S/292.html#L150'>block</a>             150 ext/hash/hash_haval.c 	Decode(x, block, 128);</span>
+<span class='curline'><a href='../S/292.html#L178'>block</a>             178 ext/hash/hash_haval.c static void PHP_4HAVALTransform(php_hash_uint32 state[8], const unsigned char block[128])</span>
+<span class='curline'><a href='../S/292.html#L184'>block</a>             184 ext/hash/hash_haval.c 	Decode(x, block, 128);</span>
+<span class='curline'><a href='../S/292.html#L215'>block</a>             215 ext/hash/hash_haval.c static void PHP_5HAVALTransform(php_hash_uint32 state[8], const unsigned char block[128])</span>
+<span class='curline'><a href='../S/292.html#L221'>block</a>             221 ext/hash/hash_haval.c 	Decode(x, block, 128);</span>
+<span class='curline'><a href='../S/294.html#L354'>block</a>             354 ext/hash/hash_md.c static void MD5Transform(state, block)</span>
+<span class='curline'><a href='../S/294.html#L356'>block</a>             356 ext/hash/hash_md.c const unsigned char block[64];</span>
+<span class='curline'><a href='../S/294.html#L360'>block</a>             360 ext/hash/hash_md.c 	Decode(x, block, 64);</span>
+<span class='curline'><a href='../S/294.html#L458'>block</a>             458 ext/hash/hash_md.c static void MD4Transform(php_hash_uint32 state[4], const unsigned char block[64])</span>
+<span class='curline'><a href='../S/294.html#L462'>block</a>             462 ext/hash/hash_md.c 	Decode(x, block, 64);</span>
+<span class='curline'><a href='../S/294.html#L634'>block</a>             634 ext/hash/hash_md.c static void MD2_Transform(PHP_MD2_CTX *context, const unsigned char *block)</span>
+<span class='curline'><a href='../S/294.html#L639'>block</a>             639 ext/hash/hash_md.c 		context-&gt;state[16+i] = block[i];</span>
+<span class='curline'><a href='../S/294.html#L653'>block</a>             653 ext/hash/hash_md.c 		t = context-&gt;checksum[i] ^= MD2_S[block[i] ^ t];</span>
+<span class='curline'><a href='../S/295.html#L203'>block</a>             203 ext/hash/hash_ripemd.c static void RIPEMD128Transform(php_hash_uint32 state[4], const unsigned char block[64])</span>
+<span class='curline'><a href='../S/295.html#L210'>block</a>             210 ext/hash/hash_ripemd.c 	RIPEMDDecode(x, block, 64);</span>
+<span class='curline'><a href='../S/295.html#L294'>block</a>             294 ext/hash/hash_ripemd.c static void RIPEMD256Transform(php_hash_uint32 state[8], const unsigned char block[64])</span>
+<span class='curline'><a href='../S/295.html#L301'>block</a>             301 ext/hash/hash_ripemd.c 	RIPEMDDecode(x, block, 64);</span>
+<span class='curline'><a href='../S/295.html#L392'>block</a>             392 ext/hash/hash_ripemd.c static void RIPEMD160Transform(php_hash_uint32 state[5], const unsigned char block[64])</span>
+<span class='curline'><a href='../S/295.html#L399'>block</a>             399 ext/hash/hash_ripemd.c 	RIPEMDDecode(x, block, 64);</span>
+<span class='curline'><a href='../S/295.html#L491'>block</a>             491 ext/hash/hash_ripemd.c static void RIPEMD320Transform(php_hash_uint32 state[10], const unsigned char block[64])</span>
+<span class='curline'><a href='../S/295.html#L498'>block</a>             498 ext/hash/hash_ripemd.c 	RIPEMDDecode(x, block, 64);</span>
+<span class='curline'><a href='../S/296.html#L222'>block</a>             222 ext/hash/hash_sha.c static void SHA1Transform(php_hash_uint32 state[5], const unsigned char block[64])</span>
+<span class='curline'><a href='../S/296.html#L227'>block</a>             227 ext/hash/hash_sha.c 	SHADecode32(x, block, 64);</span>
+<span class='curline'><a href='../S/296.html#L480'>block</a>             480 ext/hash/hash_sha.c static void SHA256Transform(php_hash_uint32 state[8], const unsigned char block[64])</span>
+<span class='curline'><a href='../S/296.html#L487'>block</a>             487 ext/hash/hash_sha.c 	SHADecode32(x, block, 64);</span>
+<span class='curline'><a href='../S/296.html#L790'>block</a>             790 ext/hash/hash_sha.c static void SHA512Transform(php_hash_uint64 state[8], const unsigned char block[128])</span>
+<span class='curline'><a href='../S/296.html#L797'>block</a>             797 ext/hash/hash_sha.c 	SHADecode64(x, block, 128);</span>
+<span class='curline'><a href='../S/299.html#L45'>block</a>              45 ext/hash/hash_whirlpool.c     php_hash_uint64 block[8];    /* mu(buffer) */</span>
+<span class='curline'><a href='../S/299.html#L54'>block</a>              54 ext/hash/hash_whirlpool.c         block[i] =</span>
+<span class='curline'><a href='../S/299.html#L67'>block</a>              67 ext/hash/hash_whirlpool.c     state[0] = block[0] ^ (K[0] = context-&gt;state[0]);</span>
+<span class='curline'><a href='../S/299.html#L68'>block</a>              68 ext/hash/hash_whirlpool.c     state[1] = block[1] ^ (K[1] = context-&gt;state[1]);</span>
+<span class='curline'><a href='../S/299.html#L69'>block</a>              69 ext/hash/hash_whirlpool.c     state[2] = block[2] ^ (K[2] = context-&gt;state[2]);</span>
+<span class='curline'><a href='../S/299.html#L70'>block</a>              70 ext/hash/hash_whirlpool.c     state[3] = block[3] ^ (K[3] = context-&gt;state[3]);</span>
+<span class='curline'><a href='../S/299.html#L71'>block</a>              71 ext/hash/hash_whirlpool.c     state[4] = block[4] ^ (K[4] = context-&gt;state[4]);</span>
+<span class='curline'><a href='../S/299.html#L72'>block</a>              72 ext/hash/hash_whirlpool.c     state[5] = block[5] ^ (K[5] = context-&gt;state[5]);</span>
+<span class='curline'><a href='../S/299.html#L73'>block</a>              73 ext/hash/hash_whirlpool.c     state[6] = block[6] ^ (K[6] = context-&gt;state[6]);</span>
+<span class='curline'><a href='../S/299.html#L74'>block</a>              74 ext/hash/hash_whirlpool.c     state[7] = block[7] ^ (K[7] = context-&gt;state[7]);</span>
+<span class='curline'><a href='../S/299.html#L258'>block</a>             258 ext/hash/hash_whirlpool.c     context-&gt;state[0] ^= state[0] ^ block[0];</span>
+<span class='curline'><a href='../S/299.html#L259'>block</a>             259 ext/hash/hash_whirlpool.c     context-&gt;state[1] ^= state[1] ^ block[1];</span>
+<span class='curline'><a href='../S/299.html#L260'>block</a>             260 ext/hash/hash_whirlpool.c     context-&gt;state[2] ^= state[2] ^ block[2];</span>
+<span class='curline'><a href='../S/299.html#L261'>block</a>             261 ext/hash/hash_whirlpool.c     context-&gt;state[3] ^= state[3] ^ block[3];</span>
+<span class='curline'><a href='../S/299.html#L262'>block</a>             262 ext/hash/hash_whirlpool.c     context-&gt;state[4] ^= state[4] ^ block[4];</span>
+<span class='curline'><a href='../S/299.html#L263'>block</a>             263 ext/hash/hash_whirlpool.c     context-&gt;state[5] ^= state[5] ^ block[5];</span>
+<span class='curline'><a href='../S/299.html#L264'>block</a>             264 ext/hash/hash_whirlpool.c     context-&gt;state[6] ^= state[6] ^ block[6];</span>
+<span class='curline'><a href='../S/299.html#L265'>block</a>             265 ext/hash/hash_whirlpool.c     context-&gt;state[7] ^= state[7] ^ block[7];</span>
+<span class='curline'><a href='../S/307.html#L33'>block</a>              33 ext/hash/php_hash_haval.h 	void (*Transform)(php_hash_uint32 state[8], const unsigned char block[128]);</span>
+<span class='curline'><a href='../S/320.html#L95'>block</a>              95 ext/imap/php_imap.c void fs_give(void **block);</span>
+<span class='curline'><a href='../S/830.html#L43'>block</a>              43 ext/opcache/Optimizer/block_pass.c static inline void print_block(zend_code_block *block, zend_op *opcodes, char *txt)</span>
+<span class='curline'><a href='../S/830.html#L45'>block</a>              45 ext/opcache/Optimizer/block_pass.c 	fprintf(stderr, "%sBlock: %d-%d (%d)", txt, block-&gt;start_opline - opcodes, block-&gt;start_opline - opcodes + block-&gt;len - 1, block-&gt;len);</span>
+<span class='curline'><a href='../S/830.html#L46'>block</a>              46 ext/opcache/Optimizer/block_pass.c 	if (!block-&gt;access) {</span>
+<span class='curline'><a href='../S/830.html#L49'>block</a>              49 ext/opcache/Optimizer/block_pass.c 	if (block-&gt;op1_to) {</span>
+<span class='curline'><a href='../S/830.html#L50'>block</a>              50 ext/opcache/Optimizer/block_pass.c 		fprintf(stderr, " 1: %d", block-&gt;op1_to-&gt;start_opline - opcodes);</span>
+<span class='curline'><a href='../S/830.html#L52'>block</a>              52 ext/opcache/Optimizer/block_pass.c 	if (block-&gt;op2_to) {</span>
+<span class='curline'><a href='../S/830.html#L53'>block</a>              53 ext/opcache/Optimizer/block_pass.c 		fprintf(stderr, " 2: %d", block-&gt;op2_to-&gt;start_opline - opcodes);</span>
+<span class='curline'><a href='../S/830.html#L55'>block</a>              55 ext/opcache/Optimizer/block_pass.c 	if (block-&gt;ext_to) {</span>
+<span class='curline'><a href='../S/830.html#L56'>block</a>              56 ext/opcache/Optimizer/block_pass.c 		fprintf(stderr, " e: %d", block-&gt;ext_to-&gt;start_opline - opcodes);</span>
+<span class='curline'><a href='../S/830.html#L58'>block</a>              58 ext/opcache/Optimizer/block_pass.c 	if (block-&gt;follow_to) {</span>
+<span class='curline'><a href='../S/830.html#L59'>block</a>              59 ext/opcache/Optimizer/block_pass.c 		fprintf(stderr, " f: %d", block-&gt;follow_to-&gt;start_opline - opcodes);</span>
+<span class='curline'><a href='../S/830.html#L62'>block</a>              62 ext/opcache/Optimizer/block_pass.c 	if (block-&gt;sources) {</span>
+<span class='curline'><a href='../S/830.html#L63'>block</a>              63 ext/opcache/Optimizer/block_pass.c 		zend_block_source *bs = block-&gt;sources;</span>
+<span class='curline'><a href='../S/830.html#L430'>block</a>             430 ext/opcache/Optimizer/block_pass.c static void delete_code_block(zend_code_block *block)</span>
+<span class='curline'><a href='../S/830.html#L432'>block</a>             432 ext/opcache/Optimizer/block_pass.c 	if (block-&gt;protected) {</span>
+<span class='curline'><a href='../S/830.html#L435'>block</a>             435 ext/opcache/Optimizer/block_pass.c 	if (block-&gt;follow_to) {</span>
+<span class='curline'><a href='../S/830.html#L436'>block</a>             436 ext/opcache/Optimizer/block_pass.c 		zend_block_source *bs = block-&gt;sources;</span>
+<span class='curline'><a href='../S/830.html#L439'>block</a>             439 ext/opcache/Optimizer/block_pass.c 			zend_code_block *to = block-&gt;follow_to;</span>
+<span class='curline'><a href='../S/830.html#L440'>block</a>             440 ext/opcache/Optimizer/block_pass.c 			if (from_block-&gt;op1_to == block) {</span>
+<span class='curline'><a href='../S/830.html#L444'>block</a>             444 ext/opcache/Optimizer/block_pass.c 			if (from_block-&gt;op2_to == block) {</span>
+<span class='curline'><a href='../S/830.html#L448'>block</a>             448 ext/opcache/Optimizer/block_pass.c 			if (from_block-&gt;ext_to == block) {</span>
+<span class='curline'><a href='../S/830.html#L452'>block</a>             452 ext/opcache/Optimizer/block_pass.c 			if (from_block-&gt;follow_to == block) {</span>
+<span class='curline'><a href='../S/830.html#L459'>block</a>             459 ext/opcache/Optimizer/block_pass.c 	block-&gt;access = 0;</span>
+<span class='curline'><a href='../S/830.html#L462'>block</a>             462 ext/opcache/Optimizer/block_pass.c static void zend_access_path(zend_code_block *block)</span>
+<span class='curline'><a href='../S/830.html#L464'>block</a>             464 ext/opcache/Optimizer/block_pass.c 	if (block-&gt;access) {</span>
+<span class='curline'><a href='../S/830.html#L468'>block</a>             468 ext/opcache/Optimizer/block_pass.c 	block-&gt;access = 1;</span>
+<span class='curline'><a href='../S/830.html#L469'>block</a>             469 ext/opcache/Optimizer/block_pass.c 	if (block-&gt;op1_to) {</span>
+<span class='curline'><a href='../S/830.html#L470'>block</a>             470 ext/opcache/Optimizer/block_pass.c 		zend_access_path(block-&gt;op1_to);</span>
+<span class='curline'><a href='../S/830.html#L471'>block</a>             471 ext/opcache/Optimizer/block_pass.c 		ADD_SOURCE(block, block-&gt;op1_to);</span>
+<span class='curline'><a href='../S/830.html#L473'>block</a>             473 ext/opcache/Optimizer/block_pass.c 	if (block-&gt;op2_to) {</span>
+<span class='curline'><a href='../S/830.html#L474'>block</a>             474 ext/opcache/Optimizer/block_pass.c 		zend_access_path(block-&gt;op2_to);</span>
+<span class='curline'><a href='../S/830.html#L475'>block</a>             475 ext/opcache/Optimizer/block_pass.c 		ADD_SOURCE(block, block-&gt;op2_to);</span>
+<span class='curline'><a href='../S/830.html#L477'>block</a>             477 ext/opcache/Optimizer/block_pass.c 	if (block-&gt;ext_to) {</span>
+<span class='curline'><a href='../S/830.html#L478'>block</a>             478 ext/opcache/Optimizer/block_pass.c 		zend_access_path(block-&gt;ext_to);</span>
+<span class='curline'><a href='../S/830.html#L479'>block</a>             479 ext/opcache/Optimizer/block_pass.c 		ADD_SOURCE(block, block-&gt;ext_to);</span>
+<span class='curline'><a href='../S/830.html#L481'>block</a>             481 ext/opcache/Optimizer/block_pass.c 	if (block-&gt;follow_to) {</span>
+<span class='curline'><a href='../S/830.html#L482'>block</a>             482 ext/opcache/Optimizer/block_pass.c 		zend_access_path(block-&gt;follow_to);</span>
+<span class='curline'><a href='../S/830.html#L483'>block</a>             483 ext/opcache/Optimizer/block_pass.c 		ADD_SOURCE(block, block-&gt;follow_to);</span>
+<span class='curline'><a href='../S/830.html#L565'>block</a>             565 ext/opcache/Optimizer/block_pass.c static void strip_nop(zend_code_block *block)</span>
+<span class='curline'><a href='../S/830.html#L567'>block</a>             567 ext/opcache/Optimizer/block_pass.c 	zend_op *opline = block-&gt;start_opline;</span>
+<span class='curline'><a href='../S/830.html#L571'>block</a>             571 ext/opcache/Optimizer/block_pass.c 	while (block-&gt;len &gt; 0 &amp;&amp; block-&gt;start_opline-&gt;opcode == ZEND_NOP) {</span>
+<span class='curline'><a href='../S/830.html#L572'>block</a>             572 ext/opcache/Optimizer/block_pass.c 		if (block-&gt;len == 1) {</span>
+<span class='curline'><a href='../S/830.html#L574'>block</a>             574 ext/opcache/Optimizer/block_pass.c 			if (block-&gt;follow_to) {</span>
+<span class='curline'><a href='../S/830.html#L575'>block</a>             575 ext/opcache/Optimizer/block_pass.c 				delete_code_block(block);</span>
+<span class='curline'><a href='../S/830.html#L579'>block</a>             579 ext/opcache/Optimizer/block_pass.c 		block-&gt;start_opline++;</span>
+<span class='curline'><a href='../S/830.html#L580'>block</a>             580 ext/opcache/Optimizer/block_pass.c 		block-&gt;start_opline_no++;</span>
+<span class='curline'><a href='../S/830.html#L581'>block</a>             581 ext/opcache/Optimizer/block_pass.c 		block-&gt;len--;</span>
+<span class='curline'><a href='../S/830.html#L585'>block</a>             585 ext/opcache/Optimizer/block_pass.c 	opline = new_end = block-&gt;start_opline;</span>
+<span class='curline'><a href='../S/830.html#L586'>block</a>             586 ext/opcache/Optimizer/block_pass.c 	end = opline + block-&gt;len;</span>
+<span class='curline'><a href='../S/830.html#L607'>block</a>             607 ext/opcache/Optimizer/block_pass.c 	block-&gt;len = new_end - block-&gt;start_opline;</span>
+<span class='curline'><a href='../S/830.html#L610'>block</a>             610 ext/opcache/Optimizer/block_pass.c static void zend_optimize_block(zend_code_block *block, zend_op_array *op_array, char *used_ext TSRMLS_DC)</span>
+<span class='curline'><a href='../S/830.html#L612'>block</a>             612 ext/opcache/Optimizer/block_pass.c 	zend_op *opline = block-&gt;start_opline;</span>
+<span class='curline'><a href='../S/830.html#L616'>block</a>             616 ext/opcache/Optimizer/block_pass.c 	print_block(block, op_array-&gt;opcodes, "Opt ");</span>
+<span class='curline'><a href='../S/830.html#L619'>block</a>             619 ext/opcache/Optimizer/block_pass.c 	while (block-&gt;len &gt; 0 &amp;&amp; block-&gt;start_opline-&gt;opcode == ZEND_NOP) {</span>
+<span class='curline'><a href='../S/830.html#L620'>block</a>             620 ext/opcache/Optimizer/block_pass.c 		if (block-&gt;len == 1) {</span>
+<span class='curline'><a href='../S/830.html#L622'>block</a>             622 ext/opcache/Optimizer/block_pass.c 			if (block-&gt;follow_to) {</span>
+<span class='curline'><a href='../S/830.html#L623'>block</a>             623 ext/opcache/Optimizer/block_pass.c 				delete_code_block(block);</span>
+<span class='curline'><a href='../S/830.html#L627'>block</a>             627 ext/opcache/Optimizer/block_pass.c 		block-&gt;start_opline++;</span>
+<span class='curline'><a href='../S/830.html#L628'>block</a>             628 ext/opcache/Optimizer/block_pass.c 		block-&gt;start_opline_no++;</span>
+<span class='curline'><a href='../S/830.html#L629'>block</a>             629 ext/opcache/Optimizer/block_pass.c 		block-&gt;len--;</span>
+<span class='curline'><a href='../S/830.html#L636'>block</a>             636 ext/opcache/Optimizer/block_pass.c 	opline = block-&gt;start_opline;</span>
+<span class='curline'><a href='../S/830.html#L637'>block</a>             637 ext/opcache/Optimizer/block_pass.c 	end = opline + block-&gt;len;</span>
+<span class='curline'><a href='../S/830.html#L738'>block</a>             738 ext/opcache/Optimizer/block_pass.c 			if(sv &gt;= block-&gt;start_opline &amp;&amp; sv-&gt;opcode == ZEND_SEND_VAL &amp;&amp;</span>
+<span class='curline'><a href='../S/830.html#L852'>block</a>             852 ext/opcache/Optimizer/block_pass.c 					op_b = block-&gt;ext_to;</span>
+<span class='curline'><a href='../S/830.html#L853'>block</a>             853 ext/opcache/Optimizer/block_pass.c 					block-&gt;ext_to = block-&gt;op2_to;</span>
+<span class='curline'><a href='../S/830.html#L854'>block</a>             854 ext/opcache/Optimizer/block_pass.c 					block-&gt;op2_to = op_b;</span>
+<span class='curline'><a href='../S/830.html#L1184'>block</a>            1184 ext/opcache/Optimizer/block_pass.c 	strip_nop(block);</span>
+<span class='curline'><a href='../S/830.html#L1323'>block</a>            1323 ext/opcache/Optimizer/block_pass.c static void zend_jmp_optimization(zend_code_block *block, zend_op_array *op_array, zend_code_block *blocks TSRMLS_DC)</span>
+<span class='curline'><a href='../S/830.html#L1326'>block</a>            1326 ext/opcache/Optimizer/block_pass.c 	zend_op *last_op = (block-&gt;start_opline + block-&gt;len - 1);</span>
+<span class='curline'><a href='../S/830.html#L1328'>block</a>            1328 ext/opcache/Optimizer/block_pass.c 	if (!block-&gt;len) {</span>
+<span class='curline'><a href='../S/830.html#L1334'>block</a>            1334 ext/opcache/Optimizer/block_pass.c 				zend_op *target = block-&gt;op1_to-&gt;start_opline;</span>
+<span class='curline'><a href='../S/830.html#L1335'>block</a>            1335 ext/opcache/Optimizer/block_pass.c 				zend_code_block *next = block-&gt;next;</span>
+<span class='curline'><a href='../S/830.html#L1343'>block</a>            1343 ext/opcache/Optimizer/block_pass.c 				if (block-&gt;op1_to == next) {</span>
+<span class='curline'><a href='../S/830.html#L1344'>block</a>            1344 ext/opcache/Optimizer/block_pass.c 					block-&gt;follow_to = block-&gt;op1_to;</span>
+<span class='curline'><a href='../S/830.html#L1345'>block</a>            1345 ext/opcache/Optimizer/block_pass.c 					block-&gt;op1_to = NULL;</span>
+<span class='curline'><a href='../S/830.html#L1347'>block</a>            1347 ext/opcache/Optimizer/block_pass.c 					block-&gt;len--;</span>
+<span class='curline'><a href='../S/830.html#L1348'>block</a>            1348 ext/opcache/Optimizer/block_pass.c 					if (block-&gt;len == 0) {</span>
+<span class='curline'><a href='../S/830.html#L1350'>block</a>            1350 ext/opcache/Optimizer/block_pass.c 						delete_code_block(block);</span>
+<span class='curline'><a href='../S/830.html#L1356'>block</a>            1356 ext/opcache/Optimizer/block_pass.c 					block-&gt;op1_to != block-&gt;op1_to-&gt;op1_to) ||</span>
+<span class='curline'><a href='../S/830.html#L1358'>block</a>            1358 ext/opcache/Optimizer/block_pass.c 					!block-&gt;op1_to-&gt;protected) {</span>
+<span class='curline'><a href='../S/830.html#L1373'>block</a>            1373 ext/opcache/Optimizer/block_pass.c 					del_source(block, block-&gt;op1_to);</span>
+<span class='curline'><a href='../S/830.html#L1374'>block</a>            1374 ext/opcache/Optimizer/block_pass.c 					if (block-&gt;op1_to-&gt;op2_to) {</span>
+<span class='curline'><a href='../S/830.html#L1375'>block</a>            1375 ext/opcache/Optimizer/block_pass.c 						block-&gt;op2_to = block-&gt;op1_to-&gt;op2_to;</span>
+<span class='curline'><a href='../S/830.html#L1376'>block</a>            1376 ext/opcache/Optimizer/block_pass.c 						ADD_SOURCE(block, block-&gt;op2_to);</span>
+<span class='curline'><a href='../S/830.html#L1378'>block</a>            1378 ext/opcache/Optimizer/block_pass.c 					if (block-&gt;op1_to-&gt;ext_to) {</span>
+<span class='curline'><a href='../S/830.html#L1379'>block</a>            1379 ext/opcache/Optimizer/block_pass.c 						block-&gt;ext_to = block-&gt;op1_to-&gt;ext_to;</span>
+<span class='curline'><a href='../S/830.html#L1380'>block</a>            1380 ext/opcache/Optimizer/block_pass.c 						ADD_SOURCE(block, block-&gt;ext_to);</span>
+<span class='curline'><a href='../S/830.html#L1382'>block</a>            1382 ext/opcache/Optimizer/block_pass.c 					if (block-&gt;op1_to-&gt;op1_to) {</span>
+<span class='curline'><a href='../S/830.html#L1383'>block</a>            1383 ext/opcache/Optimizer/block_pass.c 						block-&gt;op1_to = block-&gt;op1_to-&gt;op1_to;</span>
+<span class='curline'><a href='../S/830.html#L1384'>block</a>            1384 ext/opcache/Optimizer/block_pass.c 						ADD_SOURCE(block, block-&gt;op1_to);</span>
+<span class='curline'><a href='../S/830.html#L1386'>block</a>            1386 ext/opcache/Optimizer/block_pass.c 						block-&gt;op1_to = NULL;</span>
+<span class='curline'><a href='../S/830.html#L1409'>block</a>            1409 ext/opcache/Optimizer/block_pass.c 					del_source(block, block-&gt;op1_to);</span>
+<span class='curline'><a href='../S/830.html#L1410'>block</a>            1410 ext/opcache/Optimizer/block_pass.c 					block-&gt;op1_to = NULL;</span>
+<span class='curline'><a href='../S/830.html#L1413'>block</a>            1413 ext/opcache/Optimizer/block_pass.c 				} else if (0&amp;&amp; block-&gt;op1_to != block &amp;&amp;</span>
+<span class='curline'><a href='../S/830.html#L1414'>block</a>            1414 ext/opcache/Optimizer/block_pass.c 			           block-&gt;op1_to != blocks &amp;&amp;</span>
+<span class='curline'><a href='../S/830.html#L1423'>block</a>            1423 ext/opcache/Optimizer/block_pass.c 					zend_block_source *cs = block-&gt;op1_to-&gt;sources;</span>
+<span class='curline'><a href='../S/830.html#L1427'>block</a>            1427 ext/opcache/Optimizer/block_pass.c 						if (cs-&gt;from-&gt;follow_to == block-&gt;op1_to) {</span>
+<span class='curline'><a href='../S/830.html#L1434'>block</a>            1434 ext/opcache/Optimizer/block_pass.c 						next = block-&gt;op1_to;</span>
+<span class='curline'><a href='../S/830.html#L1437'>block</a>            1437 ext/opcache/Optimizer/block_pass.c 							if (next-&gt;follow_to == block) {</span>
+<span class='curline'><a href='../S/830.html#L1446'>block</a>            1446 ext/opcache/Optimizer/block_pass.c 							while (prev-&gt;next != block-&gt;op1_to) {</span>
+<span class='curline'><a href='../S/830.html#L1450'>block</a>            1450 ext/opcache/Optimizer/block_pass.c 							next-&gt;next = block-&gt;next;</span>
+<span class='curline'><a href='../S/830.html#L1451'>block</a>            1451 ext/opcache/Optimizer/block_pass.c 							block-&gt;next = block-&gt;op1_to;</span>
+<span class='curline'><a href='../S/830.html#L1453'>block</a>            1453 ext/opcache/Optimizer/block_pass.c 							block-&gt;follow_to = block-&gt;op1_to;</span>
+<span class='curline'><a href='../S/830.html#L1454'>block</a>            1454 ext/opcache/Optimizer/block_pass.c 							block-&gt;op1_to = NULL;</span>
+<span class='curline'><a href='../S/830.html#L1456'>block</a>            1456 ext/opcache/Optimizer/block_pass.c 							block-&gt;len--;</span>
+<span class='curline'><a href='../S/830.html#L1457'>block</a>            1457 ext/opcache/Optimizer/block_pass.c 							if(block-&gt;len == 0) {</span>
+<span class='curline'><a href='../S/830.html#L1459'>block</a>            1459 ext/opcache/Optimizer/block_pass.c 								delete_code_block(block);</span>
+<span class='curline'><a href='../S/830.html#L1483'>block</a>            1483 ext/opcache/Optimizer/block_pass.c 					block-&gt;op1_to = block-&gt;op2_to;</span>
+<span class='curline'><a href='../S/830.html#L1484'>block</a>            1484 ext/opcache/Optimizer/block_pass.c 					del_source(block, block-&gt;follow_to);</span>
+<span class='curline'><a href='../S/830.html#L1485'>block</a>            1485 ext/opcache/Optimizer/block_pass.c 					block-&gt;op2_to = NULL;</span>
+<span class='curline'><a href='../S/830.html#L1486'>block</a>            1486 ext/opcache/Optimizer/block_pass.c 					block-&gt;follow_to = NULL;</span>
+<span class='curline'><a href='../S/830.html#L1490'>block</a>            1490 ext/opcache/Optimizer/block_pass.c 					del_source(block, block-&gt;op2_to);</span>
+<span class='curline'><a href='../S/830.html#L1491'>block</a>            1491 ext/opcache/Optimizer/block_pass.c 					block-&gt;op2_to = NULL;</span>
+<span class='curline'><a href='../S/830.html#L1496'>block</a>            1496 ext/opcache/Optimizer/block_pass.c 			if (block-&gt;op2_to) {</span>
+<span class='curline'><a href='../S/830.html#L1501'>block</a>            1501 ext/opcache/Optimizer/block_pass.c 				zend_code_block *target_block = block-&gt;op2_to;;</span>
+<span class='curline'><a href='../S/830.html#L1522'>block</a>            1522 ext/opcache/Optimizer/block_pass.c 					del_source(block, block-&gt;op2_to);</span>
+<span class='curline'><a href='../S/830.html#L1523'>block</a>            1523 ext/opcache/Optimizer/block_pass.c 					block-&gt;op2_to = target_block-&gt;follow_to;</span>
+<span class='curline'><a href='../S/830.html#L1524'>block</a>            1524 ext/opcache/Optimizer/block_pass.c 					ADD_SOURCE(block, block-&gt;op2_to);</span>
+<span class='curline'><a href='../S/830.html#L1534'>block</a>            1534 ext/opcache/Optimizer/block_pass.c 					del_source(block, block-&gt;op2_to);</span>
+<span class='curline'><a href='../S/830.html#L1535'>block</a>            1535 ext/opcache/Optimizer/block_pass.c 					block-&gt;op2_to = target_block-&gt;follow_to;</span>
+<span class='curline'><a href='../S/830.html#L1536'>block</a>            1536 ext/opcache/Optimizer/block_pass.c 					ADD_SOURCE(block, block-&gt;op2_to);</span>
+<span class='curline'><a href='../S/830.html#L1544'>block</a>            1544 ext/opcache/Optimizer/block_pass.c 					del_source(block, block-&gt;op2_to);</span>
+<span class='curline'><a href='../S/830.html#L1545'>block</a>            1545 ext/opcache/Optimizer/block_pass.c 					block-&gt;op2_to = target_block-&gt;op2_to;</span>
+<span class='curline'><a href='../S/830.html#L1546'>block</a>            1546 ext/opcache/Optimizer/block_pass.c 					ADD_SOURCE(block, block-&gt;op2_to);</span>
+<span class='curline'><a href='../S/830.html#L1551'>block</a>            1551 ext/opcache/Optimizer/block_pass.c 					del_source(block, block-&gt;op2_to);</span>
+<span class='curline'><a href='../S/830.html#L1552'>block</a>            1552 ext/opcache/Optimizer/block_pass.c 					block-&gt;op2_to = target_block-&gt;op1_to;</span>
+<span class='curline'><a href='../S/830.html#L1553'>block</a>            1553 ext/opcache/Optimizer/block_pass.c 					ADD_SOURCE(block, block-&gt;op2_to);</span>
+<span class='curline'><a href='../S/830.html#L1562'>block</a>            1562 ext/opcache/Optimizer/block_pass.c 					del_source(block, block-&gt;op2_to);</span>
+<span class='curline'><a href='../S/830.html#L1564'>block</a>            1564 ext/opcache/Optimizer/block_pass.c 						block-&gt;op2_to = target_block-&gt;op2_to;</span>
+<span class='curline'><a href='../S/830.html#L1566'>block</a>            1566 ext/opcache/Optimizer/block_pass.c 						block-&gt;op2_to = target_block-&gt;ext_to;</span>
+<span class='curline'><a href='../S/830.html#L1568'>block</a>            1568 ext/opcache/Optimizer/block_pass.c 					ADD_SOURCE(block, block-&gt;op2_to);</span>
+<span class='curline'><a href='../S/830.html#L1572'>block</a>            1572 ext/opcache/Optimizer/block_pass.c 			if (block-&gt;follow_to &amp;&amp;</span>
+<span class='curline'><a href='../S/830.html#L1578'>block</a>            1578 ext/opcache/Optimizer/block_pass.c 					target = block-&gt;follow_to-&gt;start_opline;</span>
+<span class='curline'><a href='../S/830.html#L1579'>block</a>            1579 ext/opcache/Optimizer/block_pass.c 					target_end = block-&gt;follow_to-&gt;start_opline + block-&gt;follow_to-&gt;len;</span>
+<span class='curline'><a href='../S/830.html#L1585'>block</a>            1585 ext/opcache/Optimizer/block_pass.c 					if (target == target_end &amp;&amp; ! block-&gt;follow_to-&gt;protected) {</span>
+<span class='curline'><a href='../S/830.html#L1586'>block</a>            1586 ext/opcache/Optimizer/block_pass.c 						del_source(block, block-&gt;follow_to);</span>
+<span class='curline'><a href='../S/830.html#L1587'>block</a>            1587 ext/opcache/Optimizer/block_pass.c 						block-&gt;follow_to = block-&gt;follow_to-&gt;follow_to;</span>
+<span class='curline'><a href='../S/830.html#L1588'>block</a>            1588 ext/opcache/Optimizer/block_pass.c 						ADD_SOURCE(block, block-&gt;follow_to);</span>
+<span class='curline'><a href='../S/830.html#L1595'>block</a>            1595 ext/opcache/Optimizer/block_pass.c 					block-&gt;follow_to-&gt;op1_to &amp;&amp;</span>
+<span class='curline'><a href='../S/830.html#L1596'>block</a>            1596 ext/opcache/Optimizer/block_pass.c 					!block-&gt;follow_to-&gt;protected) {</span>
+<span class='curline'><a href='../S/830.html#L1597'>block</a>            1597 ext/opcache/Optimizer/block_pass.c 					del_source(block, block-&gt;follow_to);</span>
+<span class='curline'><a href='../S/830.html#L1599'>block</a>            1599 ext/opcache/Optimizer/block_pass.c 						block-&gt;ext_to = block-&gt;follow_to-&gt;op1_to;</span>
+<span class='curline'><a href='../S/830.html#L1600'>block</a>            1600 ext/opcache/Optimizer/block_pass.c 						ADD_SOURCE(block, block-&gt;ext_to);</span>
+<span class='curline'><a href='../S/830.html#L1602'>block</a>            1602 ext/opcache/Optimizer/block_pass.c 						block-&gt;ext_to = block-&gt;op2_to;</span>
+<span class='curline'><a href='../S/830.html#L1603'>block</a>            1603 ext/opcache/Optimizer/block_pass.c 						block-&gt;op2_to = block-&gt;follow_to-&gt;op1_to;</span>
+<span class='curline'><a href='../S/830.html#L1604'>block</a>            1604 ext/opcache/Optimizer/block_pass.c 						ADD_SOURCE(block, block-&gt;op2_to);</span>
+<span class='curline'><a href='../S/830.html#L1606'>block</a>            1606 ext/opcache/Optimizer/block_pass.c 					block-&gt;follow_to = NULL;</span>
+<span class='curline'><a href='../S/830.html#L1626'>block</a>            1626 ext/opcache/Optimizer/block_pass.c 					del_source(block, block-&gt;op2_to);</span>
+<span class='curline'><a href='../S/830.html#L1627'>block</a>            1627 ext/opcache/Optimizer/block_pass.c 					block-&gt;op2_to = NULL;</span>
+<span class='curline'><a href='../S/830.html#L1632'>block</a>            1632 ext/opcache/Optimizer/block_pass.c 			if (block-&gt;op2_to) {</span>
+<span class='curline'><a href='../S/830.html#L1651'>block</a>            1651 ext/opcache/Optimizer/block_pass.c 				target_block = block-&gt;op2_to;</span>
+<span class='curline'><a href='../S/830.html#L1668'>block</a>            1668 ext/opcache/Optimizer/block_pass.c 					del_source(block, block-&gt;op2_to);</span>
+<span class='curline'><a href='../S/830.html#L1669'>block</a>            1669 ext/opcache/Optimizer/block_pass.c 					block-&gt;op2_to = target_block-&gt;op2_to;</span>
+<span class='curline'><a href='../S/830.html#L1670'>block</a>            1670 ext/opcache/Optimizer/block_pass.c 					ADD_SOURCE(block, block-&gt;op2_to);</span>
+<span class='curline'><a href='../S/830.html#L1677'>block</a>            1677 ext/opcache/Optimizer/block_pass.c 					del_source(block, block-&gt;op2_to);</span>
+<span class='curline'><a href='../S/830.html#L1678'>block</a>            1678 ext/opcache/Optimizer/block_pass.c 					block-&gt;op2_to = target_block-&gt;follow_to;</span>
+<span class='curline'><a href='../S/830.html#L1679'>block</a>            1679 ext/opcache/Optimizer/block_pass.c 					ADD_SOURCE(block, block-&gt;op2_to);</span>
+<span class='curline'><a href='../S/830.html#L1687'>block</a>            1687 ext/opcache/Optimizer/block_pass.c 					del_source(block, block-&gt;op2_to);</span>
+<span class='curline'><a href='../S/830.html#L1688'>block</a>            1688 ext/opcache/Optimizer/block_pass.c 					block-&gt;op2_to = target_block-&gt;follow_to;</span>
+<span class='curline'><a href='../S/830.html#L1689'>block</a>            1689 ext/opcache/Optimizer/block_pass.c 					ADD_SOURCE(block, block-&gt;op2_to);</span>
+<span class='curline'><a href='../S/830.html#L1697'>block</a>            1697 ext/opcache/Optimizer/block_pass.c 					del_source(block, block-&gt;op2_to);</span>
+<span class='curline'><a href='../S/830.html#L1698'>block</a>            1698 ext/opcache/Optimizer/block_pass.c 					block-&gt;op2_to = target_block-&gt;op2_to;</span>
+<span class='curline'><a href='../S/830.html#L1699'>block</a>            1699 ext/opcache/Optimizer/block_pass.c 					ADD_SOURCE(block, block-&gt;op2_to);</span>
+<span class='curline'><a href='../S/830.html#L1704'>block</a>            1704 ext/opcache/Optimizer/block_pass.c 					del_source(block, block-&gt;op2_to);</span>
+<span class='curline'><a href='../S/830.html#L1705'>block</a>            1705 ext/opcache/Optimizer/block_pass.c 					block-&gt;op2_to = target_block-&gt;op1_to;</span>
+<span class='curline'><a href='../S/830.html#L1706'>block</a>            1706 ext/opcache/Optimizer/block_pass.c 					ADD_SOURCE(block, block-&gt;op2_to);</span>
+<span class='curline'><a href='../S/830.html#L1714'>block</a>            1714 ext/opcache/Optimizer/block_pass.c 					del_source(block, block-&gt;op2_to);</span>
+<span class='curline'><a href='../S/830.html#L1716'>block</a>            1716 ext/opcache/Optimizer/block_pass.c 						block-&gt;op2_to = target_block-&gt;op2_to;</span>
+<span class='curline'><a href='../S/830.html#L1718'>block</a>            1718 ext/opcache/Optimizer/block_pass.c 						block-&gt;op2_to = target_block-&gt;ext_to;</span>
+<span class='curline'><a href='../S/830.html#L1720'>block</a>            1720 ext/opcache/Optimizer/block_pass.c 					ADD_SOURCE(block, block-&gt;op2_to);</span>
+<span class='curline'><a href='../S/830.html#L1729'>block</a>            1729 ext/opcache/Optimizer/block_pass.c 			zend_code_block *next = block-&gt;next;</span>
+<span class='curline'><a href='../S/830.html#L1745'>block</a>            1745 ext/opcache/Optimizer/block_pass.c 					block-&gt;op1_to = block-&gt;op2_to;</span>
+<span class='curline'><a href='../S/830.html#L1746'>block</a>            1746 ext/opcache/Optimizer/block_pass.c 					todel = block-&gt;ext_to;</span>
+<span class='curline'><a href='../S/830.html#L1747'>block</a>            1747 ext/opcache/Optimizer/block_pass.c 					block-&gt;op2_to = NULL;</span>
+<span class='curline'><a href='../S/830.html#L1748'>block</a>            1748 ext/opcache/Optimizer/block_pass.c 					block-&gt;ext_to = NULL;</span>
+<span class='curline'><a href='../S/830.html#L1749'>block</a>            1749 ext/opcache/Optimizer/block_pass.c 					del_source(block, todel);</span>
+<span class='curline'><a href='../S/830.html#L1758'>block</a>            1758 ext/opcache/Optimizer/block_pass.c 					block-&gt;op1_to = block-&gt;ext_to;</span>
+<span class='curline'><a href='../S/830.html#L1759'>block</a>            1759 ext/opcache/Optimizer/block_pass.c 					todel =  block-&gt;op2_to;</span>
+<span class='curline'><a href='../S/830.html#L1760'>block</a>            1760 ext/opcache/Optimizer/block_pass.c 					block-&gt;op2_to = NULL;</span>
+<span class='curline'><a href='../S/830.html#L1761'>block</a>            1761 ext/opcache/Optimizer/block_pass.c 					block-&gt;ext_to = NULL;</span>
+<span class='curline'><a href='../S/830.html#L1762'>block</a>            1762 ext/opcache/Optimizer/block_pass.c 					del_source(block, todel);</span>
+<span class='curline'><a href='../S/830.html#L1764'>block</a>            1764 ext/opcache/Optimizer/block_pass.c 			} else if (block-&gt;op2_to == block-&gt;ext_to) {</span>
+<span class='curline'><a href='../S/830.html#L1771'>block</a>            1771 ext/opcache/Optimizer/block_pass.c 					block-&gt;op1_to = block-&gt;op2_to;</span>
+<span class='curline'><a href='../S/830.html#L1772'>block</a>            1772 ext/opcache/Optimizer/block_pass.c 					block-&gt;op2_to = NULL;</span>
+<span class='curline'><a href='../S/830.html#L1773'>block</a>            1773 ext/opcache/Optimizer/block_pass.c 					block-&gt;ext_to = NULL;</span>
+<span class='curline'><a href='../S/830.html#L1775'>block</a>            1775 ext/opcache/Optimizer/block_pass.c 			} else if (block-&gt;op2_to == next) {</span>
+<span class='curline'><a href='../S/830.html#L1779'>block</a>            1779 ext/opcache/Optimizer/block_pass.c 				block-&gt;op2_to = block-&gt;ext_to;</span>
+<span class='curline'><a href='../S/830.html#L1780'>block</a>            1780 ext/opcache/Optimizer/block_pass.c 				block-&gt;follow_to = next;</span>
+<span class='curline'><a href='../S/830.html#L1781'>block</a>            1781 ext/opcache/Optimizer/block_pass.c 				block-&gt;ext_to = NULL;</span>
+<span class='curline'><a href='../S/830.html#L1783'>block</a>            1783 ext/opcache/Optimizer/block_pass.c 			} else if (block-&gt;ext_to == next) {</span>
+<span class='curline'><a href='../S/830.html#L1787'>block</a>            1787 ext/opcache/Optimizer/block_pass.c 				block-&gt;follow_to = next;</span>
+<span class='curline'><a href='../S/830.html#L1788'>block</a>            1788 ext/opcache/Optimizer/block_pass.c 				block-&gt;ext_to = NULL;</span>
+<span class='curline'><a href='../S/830.html#L1792'>block</a>            1792 ext/opcache/Optimizer/block_pass.c 			if (last_op-&gt;opcode == ZEND_JMPZNZ &amp;&amp; block-&gt;op2_to) {</span>
+<span class='curline'><a href='../S/830.html#L1797'>block</a>            1797 ext/opcache/Optimizer/block_pass.c 				zend_code_block *target_block = block-&gt;op2_to;</span>
+<span class='curline'><a href='../S/830.html#L1816'>block</a>            1816 ext/opcache/Optimizer/block_pass.c 					del_source(block, block-&gt;op2_to);</span>
+<span class='curline'><a href='../S/830.html#L1817'>block</a>            1817 ext/opcache/Optimizer/block_pass.c 					block-&gt;op2_to = target_block-&gt;op2_to;</span>
+<span class='curline'><a href='../S/830.html#L1818'>block</a>            1818 ext/opcache/Optimizer/block_pass.c 					ADD_SOURCE(block, block-&gt;op2_to);</span>
+<span class='curline'><a href='../S/830.html#L1826'>block</a>            1826 ext/opcache/Optimizer/block_pass.c 					del_source(block, block-&gt;op2_to);</span>
+<span class='curline'><a href='../S/830.html#L1827'>block</a>            1827 ext/opcache/Optimizer/block_pass.c 					block-&gt;op2_to = target_block-&gt;follow_to;</span>
+<span class='curline'><a href='../S/830.html#L1828'>block</a>            1828 ext/opcache/Optimizer/block_pass.c 					ADD_SOURCE(block, block-&gt;op2_to);</span>
+<span class='curline'><a href='../S/830.html#L1833'>block</a>            1833 ext/opcache/Optimizer/block_pass.c 					del_source(block, block-&gt;op2_to);</span>
+<span class='curline'><a href='../S/830.html#L1834'>block</a>            1834 ext/opcache/Optimizer/block_pass.c 					block-&gt;op2_to = target_block-&gt;op1_to;</span>
+<span class='curline'><a href='../S/830.html#L1835'>block</a>            1835 ext/opcache/Optimizer/block_pass.c 					ADD_SOURCE(block, block-&gt;op2_to);</span>
+<span class='curline'><a href='../S/830.html#L1873'>block</a>            1873 ext/opcache/Optimizer/block_pass.c static void zend_t_usage(zend_code_block *block, zend_op_array *op_array, char *used_ext)</span>
+<span class='curline'><a href='../S/830.html#L1875'>block</a>            1875 ext/opcache/Optimizer/block_pass.c 	zend_code_block *next_block = block-&gt;next;</span>
+<span class='curline'><a href='../S/830.html#L1928'>block</a>            1928 ext/opcache/Optimizer/block_pass.c 	while (block) {</span>
+<span class='curline'><a href='../S/830.html#L1929'>block</a>            1929 ext/opcache/Optimizer/block_pass.c 		zend_op *opline = block-&gt;start_opline + block-&gt;len - 1;</span>
+<span class='curline'><a href='../S/830.html#L1931'>block</a>            1931 ext/opcache/Optimizer/block_pass.c 		if (!block-&gt;access) {</span>
+<span class='curline'><a href='../S/830.html#L1932'>block</a>            1932 ext/opcache/Optimizer/block_pass.c 			block = block-&gt;next;</span>
+<span class='curline'><a href='../S/830.html#L1938'>block</a>            1938 ext/opcache/Optimizer/block_pass.c 		while (opline &gt;= block-&gt;start_opline) {</span>
+<span class='curline'><a href='../S/830.html#L2028'>block</a>            2028 ext/opcache/Optimizer/block_pass.c 		block = block-&gt;next;</span>
+<span class='curline'><a href='../S/992.html#L141'>block</a>             141 ext/readline/readline_cli.c static char *cli_get_prompt(char *block, char prompt TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/992.html#L172'>block</a>             172 ext/readline/readline_cli.c 				smart_str_appends(&amp;retval, block);</span>
+<span class='curline'><a href='../S/1067.html#L146587'>block</a>            146587 ext/sqlite3/libsqlite/sqlite3.c   Blob block;                     /* Current block image */</span>
+<span class='curline'><a href='../S/1067.html#L146760'>block</a>            146760 ext/sqlite3/libsqlite/sqlite3.c     if( pNode-&gt;key.n==0 || (pNode-&gt;block.n + nSpace)&lt;=p-&gt;nNodeSize ){ </span>
+<span class='curline'><a href='../S/1067.html#L146765'>block</a>            146765 ext/sqlite3/libsqlite/sqlite3.c       Blob *pBlk = &amp;pNode-&gt;block;</span>
+<span class='curline'><a href='../S/1067.html#L146791'>block</a>            146791 ext/sqlite3/libsqlite/sqlite3.c       rc = fts3WriteSegment(p, pNode-&gt;iBlock, pNode-&gt;block.a, pNode-&gt;block.n);</span>
+<span class='curline'><a href='../S/1067.html#L146793'>block</a>            146793 ext/sqlite3/libsqlite/sqlite3.c       assert( pNode-&gt;block.nAlloc&gt;=p-&gt;nNodeSize );</span>
+<span class='curline'><a href='../S/1067.html#L146794'>block</a>            146794 ext/sqlite3/libsqlite/sqlite3.c       pNode-&gt;block.a[0] = (char)iLayer;</span>
+<span class='curline'><a href='../S/1067.html#L146795'>block</a>            146795 ext/sqlite3/libsqlite/sqlite3.c       pNode-&gt;block.n = 1 + sqlite3Fts3PutVarint(&amp;pNode-&gt;block.a[1], iPtr+1);</span>
+<span class='curline'><a href='../S/1067.html#L146910'>block</a>            146910 ext/sqlite3/libsqlite/sqlite3.c   if( pLeaf-&gt;block.n&gt;0 &amp;&amp; (pLeaf-&gt;block.n + nSpace)&gt;p-&gt;nNodeSize ){</span>
+<span class='curline'><a href='../S/1067.html#L146911'>block</a>            146911 ext/sqlite3/libsqlite/sqlite3.c     rc = fts3WriteSegment(p, pLeaf-&gt;iBlock, pLeaf-&gt;block.a, pLeaf-&gt;block.n);</span>
+<span class='curline'><a href='../S/1067.html#L146933'>block</a>            146933 ext/sqlite3/libsqlite/sqlite3.c     pLeaf-&gt;block.n = 0;</span>
+<span class='curline'><a href='../S/1067.html#L146942'>block</a>            146942 ext/sqlite3/libsqlite/sqlite3.c   blobGrowBuffer(&amp;pLeaf-&gt;block, pLeaf-&gt;block.n + nSpace, &amp;rc);</span>
+<span class='curline'><a href='../S/1067.html#L146944'>block</a>            146944 ext/sqlite3/libsqlite/sqlite3.c     if( pLeaf-&gt;block.n==0 ){</span>
+<span class='curline'><a href='../S/1067.html#L146945'>block</a>            146945 ext/sqlite3/libsqlite/sqlite3.c       pLeaf-&gt;block.n = 1;</span>
+<span class='curline'><a href='../S/1067.html#L146946'>block</a>            146946 ext/sqlite3/libsqlite/sqlite3.c       pLeaf-&gt;block.a[0] = '\0';</span>
+<span class='curline'><a href='../S/1067.html#L146949'>block</a>            146949 ext/sqlite3/libsqlite/sqlite3.c         &amp;pLeaf-&gt;block, &amp;pLeaf-&gt;key, zTerm, nTerm, aDoclist, nDoclist</span>
+<span class='curline'><a href='../S/1067.html#L146985'>block</a>            146985 ext/sqlite3/libsqlite/sqlite3.c     if( pNode-&gt;block.n&gt;0 ) break;</span>
+<span class='curline'><a href='../S/1067.html#L146986'>block</a>            146986 ext/sqlite3/libsqlite/sqlite3.c     assert( *pRc || pNode-&gt;block.nAlloc==0 );</span>
+<span class='curline'><a href='../S/1067.html#L146988'>block</a>            146988 ext/sqlite3/libsqlite/sqlite3.c     sqlite3_free(pNode-&gt;block.a);</span>
+<span class='curline'><a href='../S/1067.html#L147011'>block</a>            147011 ext/sqlite3/libsqlite/sqlite3.c     Blob *pBlock = &amp;pWriter-&gt;aNodeWriter[1].block;</span>
+<span class='curline'><a href='../S/1067.html#L147026'>block</a>            147026 ext/sqlite3/libsqlite/sqlite3.c     if( pNode-&gt;block.n&gt;0 &amp;&amp; rc==SQLITE_OK ){</span>
+<span class='curline'><a href='../S/1067.html#L147027'>block</a>            147027 ext/sqlite3/libsqlite/sqlite3.c       rc = fts3WriteSegment(p, pNode-&gt;iBlock, pNode-&gt;block.a, pNode-&gt;block.n);</span>
+<span class='curline'><a href='../S/1067.html#L147029'>block</a>            147029 ext/sqlite3/libsqlite/sqlite3.c     sqlite3_free(pNode-&gt;block.a);</span>
+<span class='curline'><a href='../S/1067.html#L147042'>block</a>            147042 ext/sqlite3/libsqlite/sqlite3.c         pRoot-&gt;block.a, pRoot-&gt;block.n      /* root */</span>
+<span class='curline'><a href='../S/1067.html#L147045'>block</a>            147045 ext/sqlite3/libsqlite/sqlite3.c   sqlite3_free(pRoot-&gt;block.a);</span>
+<span class='curline'><a href='../S/1067.html#L147198'>block</a>            147198 ext/sqlite3/libsqlite/sqlite3.c       blobGrowBuffer(&amp;pNode-&gt;block, MAX(nRoot, p-&gt;nNodeSize), &amp;rc);</span>
+<span class='curline'><a href='../S/1067.html#L147200'>block</a>            147200 ext/sqlite3/libsqlite/sqlite3.c         memcpy(pNode-&gt;block.a, aRoot, nRoot);</span>
+<span class='curline'><a href='../S/1067.html#L147201'>block</a>            147201 ext/sqlite3/libsqlite/sqlite3.c         pNode-&gt;block.n = nRoot;</span>
+<span class='curline'><a href='../S/1067.html#L147208'>block</a>            147208 ext/sqlite3/libsqlite/sqlite3.c         rc = nodeReaderInit(&amp;reader, pNode-&gt;block.a, pNode-&gt;block.n);</span>
+<span class='curline'><a href='../S/1067.html#L147220'>block</a>            147220 ext/sqlite3/libsqlite/sqlite3.c             blobGrowBuffer(&amp;pNode-&gt;block, MAX(nBlock, p-&gt;nNodeSize), &amp;rc);</span>
+<span class='curline'><a href='../S/1067.html#L147222'>block</a>            147222 ext/sqlite3/libsqlite/sqlite3.c               memcpy(pNode-&gt;block.a, aBlock, nBlock);</span>
+<span class='curline'><a href='../S/1067.html#L147223'>block</a>            147223 ext/sqlite3/libsqlite/sqlite3.c               pNode-&gt;block.n = nBlock;</span>
+<span class='curline'><a href='../S/1067.html#L147521'>block</a>            147521 ext/sqlite3/libsqlite/sqlite3.c   Blob block = {0,0,0};           /* Buffer used for any other block */</span>
+<span class='curline'><a href='../S/1067.html#L147549'>block</a>            147549 ext/sqlite3/libsqlite/sqlite3.c       rc = fts3TruncateNode(aBlock, nBlock, &amp;block, zTerm, nTerm, &amp;iBlock);</span>
+<span class='curline'><a href='../S/1067.html#L147552'>block</a>            147552 ext/sqlite3/libsqlite/sqlite3.c       rc = fts3WriteSegment(p, iNewStart, block.a, block.n);</span>
+<span class='curline'><a href='../S/1067.html#L147583'>block</a>            147583 ext/sqlite3/libsqlite/sqlite3.c   sqlite3_free(block.a);</span>
+<span class='curline'><a href='../S/1107.html#L76'>block</a>              76 ext/standard/file.h PHPAPI int php_set_sock_blocking(int socketd, int block TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1135.html#L174'>block</a>             174 ext/standard/md5.c 	(ctx-&gt;block[(n)] = \</span>
+<span class='curline'><a href='../S/1135.html#L180'>block</a>             180 ext/standard/md5.c 	(ctx-&gt;block[(n)])</span>
+<span class='curline'><a href='../S/1136.html#L48'>block</a>              48 ext/standard/md5.h 	php_uint32 block[16];</span>
+<span class='curline'><a href='../S/1184.html#L260'>block</a>             260 ext/standard/sha1.c static void SHA1Transform(state, block)</span>
+<span class='curline'><a href='../S/1184.html#L262'>block</a>             262 ext/standard/sha1.c const unsigned char block[64];</span>
+<span class='curline'><a href='../S/1184.html#L267'>block</a>             267 ext/standard/sha1.c 	SHA1Decode(x, block, 64);</span>
+<span class='curline'><a href='../S/1187.html#L1345'>block</a>            1345 ext/standard/streamsfuncs.c 	int block;</span>
+<span class='curline'><a href='../S/1187.html#L1355'>block</a>            1355 ext/standard/streamsfuncs.c 	block = arg2;</span>
+<span class='curline'><a href='../S/1187.html#L1357'>block</a>            1357 ext/standard/streamsfuncs.c 	if (php_stream_set_option(stream, PHP_STREAM_OPTION_BLOCKING, block == 0 ? 0 : 1, NULL) == -1) {</span>
+<span class='curline'><a href='../S/1358.html#L347'>block</a>             347 main/alloca.c    long *block, size;</span>
+<span class='curline'><a href='../S/1358.html#L373'>block</a>             373 main/alloca.c        block = (long *) trailer-&gt;this_address;</span>
+<span class='curline'><a href='../S/1358.html#L375'>block</a>             375 main/alloca.c        if (block == 0 || size == 0)</span>
+<span class='curline'><a href='../S/1358.html#L378'>block</a>             378 main/alloca.c        if ((block &lt;= address) &amp;&amp; (address &lt; (block + size)))</span>
+<span class='curline'><a href='../S/1358.html#L385'>block</a>             385 main/alloca.c    result = address - block;</span>
+<span class='curline'><a href='../S/1366.html#L1079'>block</a>            1079 main/network.c PHPAPI int php_set_sock_blocking(int socketd, int block TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1366.html#L1087'>block</a>            1087 main/network.c 	flags = !block;</span>
+<span class='curline'><a href='../S/1366.html#L1098'>block</a>            1098 main/network.c 	if (!block) {</span>
+<span class='curline'><a href='../S/1437.html#L363'>block</a>             363 sapi/apache2filter/sapi_apache2.c 		ap_input_mode_t mode, apr_read_type_e block, apr_off_t readbytes)</span>
+<span class='curline'><a href='../S/1437.html#L370'>block</a>             370 sapi/apache2filter/sapi_apache2.c 		return ap_get_brigade(f-&gt;next, bb, mode, block, readbytes);</span>
+<span class='curline'><a href='../S/1437.html#L380'>block</a>             380 sapi/apache2filter/sapi_apache2.c 	if ((rv = ap_get_brigade(f-&gt;next, bb, mode, block, readbytes)) != APR_SUCCESS) {</span>
+<span class='curline'><a href='../S/1457.html#L151'>block</a>             151 sapi/cli/php_cli_server.c 		struct { void *block; char *p; size_t len; } heap;</span>
+<span class='curline'><a href='../S/1457.html#L993'>block</a>             993 sapi/cli/php_cli_server.c 		if (chunk-&gt;data.heap.block != chunk) {</span>
+<span class='curline'><a href='../S/1457.html#L994'>block</a>             994 sapi/cli/php_cli_server.c 			pefree(chunk-&gt;data.heap.block, 1);</span>
+<span class='curline'><a href='../S/1457.html#L1065'>block</a>            1065 sapi/cli/php_cli_server.c static php_cli_server_chunk *php_cli_server_chunk_heap_new(char *block, char *buf, size_t len) /* {{{ */</span>
+<span class='curline'><a href='../S/1457.html#L1074'>block</a>            1074 sapi/cli/php_cli_server.c 	chunk-&gt;data.heap.block = block;</span>
+<span class='curline'><a href='../S/1457.html#L1089'>block</a>            1089 sapi/cli/php_cli_server.c 	chunk-&gt;data.heap.block = chunk;</span>
+</pre>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>zend_ast</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/1643.html#L331'>zend_ast</a>          331 Zend/zend.h    	zend_ast *ast;</span>
+<span class='curline'><a href='../S/1648.html#L26'>zend_ast</a>           26 Zend/zend_ast.c ZEND_API zend_ast *zend_ast_create_constant(zval *zv)</span>
+<span class='curline'><a href='../S/1648.html#L28'>zend_ast</a>           28 Zend/zend_ast.c 	zend_ast *ast = emalloc(sizeof(zend_ast) + sizeof(zval));</span>
+<span class='curline'><a href='../S/1648.html#L36'>zend_ast</a>           36 Zend/zend_ast.c ZEND_API zend_ast* zend_ast_create_unary(uint kind, zend_ast *op0)</span>
+<span class='curline'><a href='../S/1648.html#L38'>zend_ast</a>           38 Zend/zend_ast.c 	zend_ast *ast = emalloc(sizeof(zend_ast));</span>
+<span class='curline'><a href='../S/1648.html#L45'>zend_ast</a>           45 Zend/zend_ast.c ZEND_API zend_ast* zend_ast_create_binary(uint kind, zend_ast *op0, zend_ast *op1)</span>
+<span class='curline'><a href='../S/1648.html#L47'>zend_ast</a>           47 Zend/zend_ast.c 	zend_ast *ast = emalloc(sizeof(zend_ast) + sizeof(zend_ast*));</span>
+<span class='curline'><a href='../S/1648.html#L55'>zend_ast</a>           55 Zend/zend_ast.c ZEND_API zend_ast* zend_ast_create_ternary(uint kind, zend_ast *op0, zend_ast *op1, zend_ast *op2)</span>
+<span class='curline'><a href='../S/1648.html#L57'>zend_ast</a>           57 Zend/zend_ast.c 	zend_ast *ast = emalloc(sizeof(zend_ast) + sizeof(zend_ast*) * 2);</span>
+<span class='curline'><a href='../S/1648.html#L66'>zend_ast</a>           66 Zend/zend_ast.c ZEND_API zend_ast* zend_ast_create_dynamic(uint kind)</span>
+<span class='curline'><a href='../S/1648.html#L68'>zend_ast</a>           68 Zend/zend_ast.c 	zend_ast *ast = emalloc(sizeof(zend_ast) + sizeof(zend_ast*) * 3); /* use 4 children as deafult */</span>
+<span class='curline'><a href='../S/1648.html#L74'>zend_ast</a>           74 Zend/zend_ast.c ZEND_API void zend_ast_dynamic_add(zend_ast **ast, zend_ast *op)</span>
+<span class='curline'><a href='../S/1648.html#L77'>zend_ast</a>           77 Zend/zend_ast.c 		*ast = erealloc(*ast, sizeof(zend_ast) + sizeof(zend_ast*) * ((*ast)-&gt;children * 2 + 1));</span>
+<span class='curline'><a href='../S/1648.html#L82'>zend_ast</a>           82 Zend/zend_ast.c ZEND_API void zend_ast_dynamic_shrink(zend_ast **ast)</span>
+<span class='curline'><a href='../S/1648.html#L84'>zend_ast</a>           84 Zend/zend_ast.c 	*ast = erealloc(*ast, sizeof(zend_ast) + sizeof(zend_ast*) * ((*ast)-&gt;children - 1));</span>
+<span class='curline'><a href='../S/1648.html#L87'>zend_ast</a>           87 Zend/zend_ast.c ZEND_API int zend_ast_is_ct_constant(zend_ast *ast)</span>
+<span class='curline'><a href='../S/1648.html#L105'>zend_ast</a>          105 Zend/zend_ast.c ZEND_API void zend_ast_evaluate(zval *result, zend_ast *ast, zend_class_entry *scope TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1648.html#L350'>zend_ast</a>          350 Zend/zend_ast.c ZEND_API zend_ast *zend_ast_copy(zend_ast *ast)</span>
+<span class='curline'><a href='../S/1648.html#L355'>zend_ast</a>          355 Zend/zend_ast.c 		zend_ast *copy = zend_ast_create_constant(ast-&gt;u.val);</span>
+<span class='curline'><a href='../S/1648.html#L359'>zend_ast</a>          359 Zend/zend_ast.c 		zend_ast *new = emalloc(sizeof(zend_ast) + sizeof(zend_ast*) * (ast-&gt;children - 1));</span>
+<span class='curline'><a href='../S/1648.html#L371'>zend_ast</a>          371 Zend/zend_ast.c ZEND_API void zend_ast_destroy(zend_ast *ast)</span>
+<span class='curline'><a href='../S/1649.html#L25'>zend_ast</a>           25 Zend/zend_ast.h typedef struct _zend_ast zend_ast;</span>
+<span class='curline'><a href='../S/1649.html#L44'>zend_ast</a>           44 Zend/zend_ast.h 		zend_ast *child;</span>
+<span class='curline'><a href='../S/1649.html#L48'>zend_ast</a>           48 Zend/zend_ast.h ZEND_API zend_ast *zend_ast_create_constant(zval *zv);</span>
+<span class='curline'><a href='../S/1649.html#L50'>zend_ast</a>           50 Zend/zend_ast.h ZEND_API zend_ast *zend_ast_create_unary(uint kind, zend_ast *op0);</span>
+<span class='curline'><a href='../S/1649.html#L51'>zend_ast</a>           51 Zend/zend_ast.h ZEND_API zend_ast *zend_ast_create_binary(uint kind, zend_ast *op0, zend_ast *op1);</span>
+<span class='curline'><a href='../S/1649.html#L52'>zend_ast</a>           52 Zend/zend_ast.h ZEND_API zend_ast *zend_ast_create_ternary(uint kind, zend_ast *op0, zend_ast *op1, zend_ast *op2);</span>
+<span class='curline'><a href='../S/1649.html#L53'>zend_ast</a>           53 Zend/zend_ast.h ZEND_API zend_ast* zend_ast_create_dynamic(uint kind);</span>
+<span class='curline'><a href='../S/1649.html#L54'>zend_ast</a>           54 Zend/zend_ast.h ZEND_API void zend_ast_dynamic_add(zend_ast **ast, zend_ast *op);</span>
+<span class='curline'><a href='../S/1649.html#L55'>zend_ast</a>           55 Zend/zend_ast.h ZEND_API void zend_ast_dynamic_shrink(zend_ast **ast);</span>
+<span class='curline'><a href='../S/1649.html#L57'>zend_ast</a>           57 Zend/zend_ast.h ZEND_API int zend_ast_is_ct_constant(zend_ast *ast);</span>
+<span class='curline'><a href='../S/1649.html#L59'>zend_ast</a>           59 Zend/zend_ast.h ZEND_API void zend_ast_evaluate(zval *result, zend_ast *ast, zend_class_entry *scope TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1649.html#L61'>zend_ast</a>           61 Zend/zend_ast.h ZEND_API zend_ast *zend_ast_copy(zend_ast *ast);</span>
+<span class='curline'><a href='../S/1649.html#L62'>zend_ast</a>           62 Zend/zend_ast.h ZEND_API void zend_ast_destroy(zend_ast *ast);</span>
+<span class='curline'><a href='../S/1655.html#L7429'>zend_ast</a>         7429 Zend/zend_compile.c void zend_do_constant_expression(znode *result, zend_ast *ast TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1656.html#L96'>zend_ast</a>           96 Zend/zend_compile.h 		zend_ast *ast;</span>
+<span class='curline'><a href='../S/1656.html#L659'>zend_ast</a>          659 Zend/zend_compile.h void zend_do_constant_expression(znode *result, zend_ast *ast TSRMLS_DC);</span>
+<span class='curline'><a href='../S/856.html#L226'>zend_ast</a>          226 ext/opcache/zend_accelerator_util_funcs.c static zend_ast *zend_ast_clone(zend_ast *ast TSRMLS_DC)</span>
+<span class='curline'><a href='../S/856.html#L229'>zend_ast</a>          229 ext/opcache/zend_accelerator_util_funcs.c 	zend_ast *node;</span>
+<span class='curline'><a href='../S/856.html#L232'>zend_ast</a>          232 ext/opcache/zend_accelerator_util_funcs.c 		node = emalloc(sizeof(zend_ast) + sizeof(zval));</span>
+<span class='curline'><a href='../S/856.html#L258'>zend_ast</a>          258 ext/opcache/zend_accelerator_util_funcs.c 		node = emalloc(sizeof(zend_ast) + sizeof(zend_ast*) * (ast-&gt;children - 1));</span>
+<span class='curline'><a href='../S/858.html#L143'>zend_ast</a>          143 ext/opcache/zend_persist.c static zend_ast *zend_persist_ast(zend_ast *ast TSRMLS_DC)</span>
+<span class='curline'><a href='../S/858.html#L146'>zend_ast</a>          146 ext/opcache/zend_persist.c 	zend_ast *node;</span>
+<span class='curline'><a href='../S/858.html#L149'>zend_ast</a>          149 ext/opcache/zend_persist.c 		node = zend_accel_memdup(ast, sizeof(zend_ast) + sizeof(zval));</span>
+<span class='curline'><a href='../S/858.html#L153'>zend_ast</a>          153 ext/opcache/zend_persist.c 		node = zend_accel_memdup(ast, sizeof(zend_ast) + sizeof(zend_ast*) * (ast-&gt;children - 1));</span>
+<span class='curline'><a href='../S/860.html#L98'>zend_ast</a>           98 ext/opcache/zend_persist_calc.c static uint zend_persist_ast_calc(zend_ast *ast TSRMLS_DC)</span>
+<span class='curline'><a href='../S/860.html#L104'>zend_ast</a>          104 ext/opcache/zend_persist_calc.c 		ADD_SIZE(sizeof(zend_ast) + sizeof(zval));</span>
+<span class='curline'><a href='../S/860.html#L107'>zend_ast</a>          107 ext/opcache/zend_persist_calc.c 		ADD_SIZE(sizeof(zend_ast) + sizeof(zend_ast*) * (ast-&gt;children - 1));</span>
+</pre>
+</body>
+</html>

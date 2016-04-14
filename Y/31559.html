@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>path_length</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/1744.html#L1183'>path_length</a>      1183 Zend/zend_virtual_cwd.c 	int path_length = strlen(path);</span>
+<span class='curline'><a href='../S/1744.html#L1192'>path_length</a>      1192 Zend/zend_virtual_cwd.c 	if (path_length == 0 || path_length &gt;= MAXPATHLEN-1) {</span>
+<span class='curline'><a href='../S/1744.html#L1212'>path_length</a>      1212 Zend/zend_virtual_cwd.c 	if (!IS_ABSOLUTE_PATH(path, path_length)) {</span>
+<span class='curline'><a href='../S/1744.html#L1216'>path_length</a>      1216 Zend/zend_virtual_cwd.c 			memcpy(resolved_path , path, path_length + 1);</span>
+<span class='curline'><a href='../S/1744.html#L1245'>path_length</a>      1245 Zend/zend_virtual_cwd.c 			if (path_length + state_cwd_length + 1 &gt;= MAXPATHLEN-1) {</span>
+<span class='curline'><a href='../S/1744.html#L1250'>path_length</a>      1250 Zend/zend_virtual_cwd.c 				memcpy(resolved_path + state_cwd_length, path, path_length + 1);</span>
+<span class='curline'><a href='../S/1744.html#L1251'>path_length</a>      1251 Zend/zend_virtual_cwd.c 				path_length += state_cwd_length;</span>
+<span class='curline'><a href='../S/1744.html#L1254'>path_length</a>      1254 Zend/zend_virtual_cwd.c 				memcpy(resolved_path + state_cwd_length + 1, path, path_length + 1);</span>
+<span class='curline'><a href='../S/1744.html#L1255'>path_length</a>      1255 Zend/zend_virtual_cwd.c 				path_length += state_cwd_length + 1;</span>
+<span class='curline'><a href='../S/1744.html#L1260'>path_length</a>      1260 Zend/zend_virtual_cwd.c 		if (path_length &gt; 2 &amp;&amp; path[1] == ':' &amp;&amp; !IS_SLASH(path[2])) {</span>
+<span class='curline'><a href='../S/1744.html#L1264'>path_length</a>      1264 Zend/zend_virtual_cwd.c 			memcpy(resolved_path + 3, path + 2, path_length - 1);</span>
+<span class='curline'><a href='../S/1744.html#L1265'>path_length</a>      1265 Zend/zend_virtual_cwd.c 			path_length++;</span>
+<span class='curline'><a href='../S/1744.html#L1268'>path_length</a>      1268 Zend/zend_virtual_cwd.c 		memcpy(resolved_path, path, path_length + 1);</span>
+<span class='curline'><a href='../S/1744.html#L1272'>path_length</a>      1272 Zend/zend_virtual_cwd.c 	if (memchr(resolved_path, '*', path_length) ||</span>
+<span class='curline'><a href='../S/1744.html#L1273'>path_length</a>      1273 Zend/zend_virtual_cwd.c 		memchr(resolved_path, '?', path_length)) {</span>
+<span class='curline'><a href='../S/1744.html#L1279'>path_length</a>      1279 Zend/zend_virtual_cwd.c 	if (IS_UNC_PATH(resolved_path, path_length)) {</span>
+<span class='curline'><a href='../S/1744.html#L1300'>path_length</a>      1300 Zend/zend_virtual_cwd.c 	} else if (IS_ABSOLUTE_PATH(resolved_path, path_length)) {</span>
+<span class='curline'><a href='../S/1744.html#L1307'>path_length</a>      1307 Zend/zend_virtual_cwd.c 	if (IS_ABSOLUTE_PATH(resolved_path, path_length)) {</span>
+<span class='curline'><a href='../S/1744.html#L1320'>path_length</a>      1320 Zend/zend_virtual_cwd.c 	add_slash = (use_realpath != CWD_REALPATH) &amp;&amp; path_length &gt; 0 &amp;&amp; IS_SLASH(resolved_path[path_length-1]);</span>
+<span class='curline'><a href='../S/1744.html#L1322'>path_length</a>      1322 Zend/zend_virtual_cwd.c 	path_length = tsrm_realpath_r(resolved_path, start, path_length, &amp;ll, &amp;t, use_realpath, 0, NULL TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1744.html#L1324'>path_length</a>      1324 Zend/zend_virtual_cwd.c 	if (path_length &lt; 0) {</span>
+<span class='curline'><a href='../S/1744.html#L1329'>path_length</a>      1329 Zend/zend_virtual_cwd.c 	if (!start &amp;&amp; !path_length) {</span>
+<span class='curline'><a href='../S/1744.html#L1330'>path_length</a>      1330 Zend/zend_virtual_cwd.c 		resolved_path[path_length++] = '.';</span>
+<span class='curline'><a href='../S/1744.html#L1332'>path_length</a>      1332 Zend/zend_virtual_cwd.c 	if (add_slash &amp;&amp; path_length &amp;&amp; !IS_SLASH(resolved_path[path_length-1])) {</span>
+<span class='curline'><a href='../S/1744.html#L1333'>path_length</a>      1333 Zend/zend_virtual_cwd.c 		if (path_length &gt;= MAXPATHLEN-1) {</span>
+<span class='curline'><a href='../S/1744.html#L1336'>path_length</a>      1336 Zend/zend_virtual_cwd.c 		resolved_path[path_length++] = DEFAULT_SLASH;</span>
+<span class='curline'><a href='../S/1744.html#L1338'>path_length</a>      1338 Zend/zend_virtual_cwd.c 	resolved_path[path_length] = 0;</span>
+<span class='curline'><a href='../S/1744.html#L1347'>path_length</a>      1347 Zend/zend_virtual_cwd.c 		state-&gt;cwd_length = path_length;</span>
+<span class='curline'><a href='../S/1744.html#L1368'>path_length</a>      1368 Zend/zend_virtual_cwd.c 		state-&gt;cwd_length = path_length;</span>
+<span class='curline'><a href='../S/863.html#L929'>path_length</a>       929 ext/opcache/ZendAccelerator.c char *accel_make_persistent_key_ex(zend_file_handle *file_handle, int path_length, int *key_len TSRMLS_DC)</span>
+<span class='curline'><a href='../S/863.html#L935'>path_length</a>       935 ext/opcache/ZendAccelerator.c         !IS_ABSOLUTE_PATH(file_handle-&gt;filename, path_length) &amp;&amp;</span>
+<span class='curline'><a href='../S/863.html#L1010'>path_length</a>      1010 ext/opcache/ZendAccelerator.c         key_length = cwd_len + path_length + include_path_len + 2;</span>
+<span class='curline'><a href='../S/863.html#L1027'>path_length</a>      1027 ext/opcache/ZendAccelerator.c 		memcpy(ZCG(key) + cwd_len + 1, file_handle-&gt;filename, path_length);</span>
+<span class='curline'><a href='../S/863.html#L1029'>path_length</a>      1029 ext/opcache/ZendAccelerator.c 		ZCG(key)[cwd_len + 1 + path_length] = ':';</span>
+<span class='curline'><a href='../S/863.html#L1031'>path_length</a>      1031 ext/opcache/ZendAccelerator.c         cur_len = cwd_len + 1 + path_length + 1;</span>
+<span class='curline'><a href='../S/863.html#L1043'>path_length</a>      1043 ext/opcache/ZendAccelerator.c         key_length = path_length;</span>
+<span class='curline'><a href='../S/864.html#L340'>path_length</a>       340 ext/opcache/ZendAccelerator.h char *accel_make_persistent_key_ex(zend_file_handle *file_handle, int path_length, int *key_len TSRMLS_DC);</span>
+<span class='curline'><a href='../S/848.html#L111'>path_length</a>       111 ext/opcache/zend_accelerator_blacklist.c 		if (p + blacklist-&gt;entries[i].path_length &lt; end) {</span>
+<span class='curline'><a href='../S/848.html#L248'>path_length</a>       248 ext/opcache/zend_accelerator_blacklist.c 	int path_length, blacklist_path_length;</span>
+<span class='curline'><a href='../S/848.html#L272'>path_length</a>       272 ext/opcache/zend_accelerator_blacklist.c 		path_length = strlen(buf);</span>
+<span class='curline'><a href='../S/848.html#L273'>path_length</a>       273 ext/opcache/zend_accelerator_blacklist.c 		if (path_length &gt; 0 &amp;&amp; buf[path_length - 1] == '\n') {</span>
+<span class='curline'><a href='../S/848.html#L274'>path_length</a>       274 ext/opcache/zend_accelerator_blacklist.c 			buf[--path_length] = 0;</span>
+<span class='curline'><a href='../S/848.html#L275'>path_length</a>       275 ext/opcache/zend_accelerator_blacklist.c 			if (path_length &gt; 0 &amp;&amp; buf[path_length - 1] == '\r') {</span>
+<span class='curline'><a href='../S/848.html#L276'>path_length</a>       276 ext/opcache/zend_accelerator_blacklist.c 				buf[--path_length] = 0;</span>
+<span class='curline'><a href='../S/848.html#L284'>path_length</a>       284 ext/opcache/zend_accelerator_blacklist.c 			path_length--;</span>
+<span class='curline'><a href='../S/848.html#L288'>path_length</a>       288 ext/opcache/zend_accelerator_blacklist.c 		if (pbuf[0] == '\"' &amp;&amp; pbuf[path_length - 1]== '\"') {</span>
+<span class='curline'><a href='../S/848.html#L290'>path_length</a>       290 ext/opcache/zend_accelerator_blacklist.c 			path_length -= 2;</span>
+<span class='curline'><a href='../S/848.html#L293'>path_length</a>       293 ext/opcache/zend_accelerator_blacklist.c 		if (path_length == 0) {</span>
+<span class='curline'><a href='../S/848.html#L302'>path_length</a>       302 ext/opcache/zend_accelerator_blacklist.c 		path_dup = zend_strndup(pbuf, path_length);</span>
+<span class='curline'><a href='../S/848.html#L308'>path_length</a>       308 ext/opcache/zend_accelerator_blacklist.c 		path_length = strlen(real_path);</span>
+<span class='curline'><a href='../S/848.html#L313'>path_length</a>       313 ext/opcache/zend_accelerator_blacklist.c 		blacklist-&gt;entries[blacklist-&gt;pos].path_length = path_length;</span>
+<span class='curline'><a href='../S/848.html#L314'>path_length</a>       314 ext/opcache/zend_accelerator_blacklist.c 		blacklist-&gt;entries[blacklist-&gt;pos].path = (char *)malloc(path_length + 1);</span>
+<span class='curline'><a href='../S/848.html#L321'>path_length</a>       321 ext/opcache/zend_accelerator_blacklist.c 		memcpy(blacklist-&gt;entries[blacklist-&gt;pos].path, real_path, path_length + 1);</span>
+<span class='curline'><a href='../S/849.html#L29'>path_length</a>        29 ext/opcache/zend_accelerator_blacklist.h     int   path_length;</span>
+<span class='curline'><a href='../S/854.html#L634'>path_length</a>       634 ext/opcache/zend_accelerator_module.c 	add_next_index_stringl(return_value, p-&gt;path, p-&gt;path_length, 1);</span>
+<span class='curline'><a href='../S/973.html#L2129'>path_length</a>      2129 ext/phar/phar.c 	int ptr_length, path_length = *new_len;</span>
+<span class='curline'><a href='../S/973.html#L2131'>path_length</a>      2131 ext/phar/phar.c 	if (PHAR_G(cwd_len) &amp;&amp; use_cwd &amp;&amp; path_length &gt; 2 &amp;&amp; path[0] == '.' &amp;&amp; path[1] == '/') {</span>
+<span class='curline'><a href='../S/973.html#L2150'>path_length</a>      2150 ext/phar/phar.c 		ptr = memchr(ptr, '/', path_length - (ptr - path));</span>
+<span class='curline'><a href='../S/973.html#L2153'>path_length</a>      2153 ext/phar/phar.c 	if (!ptr &amp;&amp; (path_length - (tok - path))) {</span>
+<span class='curline'><a href='../S/973.html#L2154'>path_length</a>      2154 ext/phar/phar.c 		switch (path_length - (tok - path)) {</span>
+<span class='curline'><a href='../S/973.html#L2201'>path_length</a>      2201 ext/phar/phar.c 		if (ptr == path + path_length) {</span>
+<span class='curline'><a href='../S/973.html#L2208'>path_length</a>      2208 ext/phar/phar.c 			ptr = memchr(ptr, '/', path_length - (ptr - path));</span>
+<span class='curline'><a href='../S/973.html#L2211'>path_length</a>      2211 ext/phar/phar.c 		if (!ptr &amp;&amp; (path_length - (tok - path))) {</span>
+<span class='curline'><a href='../S/973.html#L2212'>path_length</a>      2212 ext/phar/phar.c 			ptr_length = path_length - (tok - path);</span>
+<span class='curline'><a href='../S/973.html#L2213'>path_length</a>      2213 ext/phar/phar.c 			ptr = path + path_length;</span>
+<span class='curline'><a href='../S/1359.html#L617'>path_length</a>       617 main/fopen_wrappers.c 	int path_length;</span>
+<span class='curline'><a href='../S/1359.html#L647'>path_length</a>       647 main/fopen_wrappers.c 		path_length = strlen(path);</span>
+<span class='curline'><a href='../S/1359.html#L654'>path_length</a>       654 main/fopen_wrappers.c 			pathbuf = (char *) emalloc(exec_fname_length + path_length + 1 + 1);</span>
+<span class='curline'><a href='../S/1359.html#L655'>path_length</a>       655 main/fopen_wrappers.c 			memcpy(pathbuf, path, path_length);</span>
+<span class='curline'><a href='../S/1359.html#L656'>path_length</a>       656 main/fopen_wrappers.c 			pathbuf[path_length] = DEFAULT_DIR_SEPARATOR;</span>
+<span class='curline'><a href='../S/1359.html#L657'>path_length</a>       657 main/fopen_wrappers.c 			memcpy(pathbuf + path_length + 1, exec_fname, exec_fname_length);</span>
+<span class='curline'><a href='../S/1359.html#L658'>path_length</a>       658 main/fopen_wrappers.c 			pathbuf[path_length + exec_fname_length + 1] = '\0';</span>
+<span class='curline'><a href='../S/1416.html#L1391'>path_length</a>      1391 main/streams/plain_wrapper.c 	int path_length;</span>
+<span class='curline'><a href='../S/1416.html#L1469'>path_length</a>      1469 main/streams/plain_wrapper.c 		path_length = strlen(path);</span>
+<span class='curline'><a href='../S/1416.html#L1477'>path_length</a>      1477 main/streams/plain_wrapper.c 			pathbuf = (char *) emalloc(exec_fname_length + path_length +1 +1);</span>
+<span class='curline'><a href='../S/1416.html#L1478'>path_length</a>      1478 main/streams/plain_wrapper.c 			memcpy(pathbuf, path, path_length);</span>
+<span class='curline'><a href='../S/1416.html#L1479'>path_length</a>      1479 main/streams/plain_wrapper.c 			pathbuf[path_length] = DEFAULT_DIR_SEPARATOR;</span>
+<span class='curline'><a href='../S/1416.html#L1480'>path_length</a>      1480 main/streams/plain_wrapper.c 			memcpy(pathbuf+path_length+1, exec_fname, exec_fname_length);</span>
+<span class='curline'><a href='../S/1416.html#L1481'>path_length</a>      1481 main/streams/plain_wrapper.c 			pathbuf[path_length + exec_fname_length +1] = '\0';</span>
+</pre>
+</body>
+</html>

@@ -1,0 +1,235 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>win32/time.c</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<a id='TOP' name='TOP'></a><h2 class='header'><a href='../mains.html'>root</a>/<a href='../files/1901.html'>win32</a>/time.c</h2>
+<em class='comment'>/* [&lt;][&gt;]<a href='#L30'>[^]</a><a href='#L148'>[v]</a>[top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+<hr />
+<h2 class='header'>DEFINITIONS</h2>
+This source file includes following definitions.
+<ol>
+<li><a href='#L30' title='Defined at 30.'>get_time_func</a></li>
+<li><a href='#L48' title='Defined at 48.'>getfilesystemtime</a></li>
+<li><a href='#L80' title='Defined at 80.'>gettimeofday</a></li>
+<li><a href='#L96' title='Defined at 96.'>usleep</a></li>
+<li><a href='#L110' title='Defined at 110.'>nanosleep</a></li>
+<li><a href='#L135' title='Defined at 135.'>setitimer_timeout</a></li>
+<li><a href='#L148' title='Defined at 148.'>setitimer</a></li>
+</ol>
+<hr />
+<pre>
+<a id='L1' name='L1'></a>   1 <em class='comment'>/*****************************************************************************</em>
+<a id='L2' name='L2'></a>   2 <em class='comment'> *                                                                           *</em>
+<a id='L3' name='L3'></a>   3 <em class='comment'> * DH_TIME.C                                                                 *</em>
+<a id='L4' name='L4'></a>   4 <em class='comment'> *                                                                           *</em>
+<a id='L5' name='L5'></a>   5 <em class='comment'> * Freely redistributable and modifiable.  Use at your own risk.             *</em>
+<a id='L6' name='L6'></a>   6 <em class='comment'> *                                                                           *</em>
+<a id='L7' name='L7'></a>   7 <em class='comment'> * Copyright 1994 The Downhill Project                                       *</em>
+<a id='L8' name='L8'></a>   8 <em class='comment'> * </em>
+<a id='L9' name='L9'></a>   9 <em class='comment'> * Modified by Shane Caraveo for use with PHP</em>
+<a id='L10' name='L10'></a>  10 <em class='comment'> *</em>
+<a id='L11' name='L11'></a>  11 <em class='comment'> *****************************************************************************/</em>
+<a id='L12' name='L12'></a>  12 
+<a id='L13' name='L13'></a>  13 <em class='comment'>/* $Id$ */</em>
+<a id='L14' name='L14'></a>  14 
+<a id='L15' name='L15'></a>  15 <em class='comment'>/* Include stuff ************************************************************ */</em>
+<a id='L16' name='L16'></a>  16 
+<a id='L17' name='L17'></a>  17 <em class='sharp'>#include</em> &lt;config.w32.h&gt;
+<a id='L18' name='L18'></a>  18 
+<a id='L19' name='L19'></a>  19 <em class='sharp'>#include</em> "<a href='1637.html'>time.h</a>"
+<a id='L20' name='L20'></a>  20 <em class='sharp'>#include</em> "<a href='1638.html'>unistd.h</a>"
+<a id='L21' name='L21'></a>  21 <em class='sharp'>#include</em> "<a href='1631.html'>signal.h</a>"
+<a id='L22' name='L22'></a>  22 <em class='sharp'>#include</em> &lt;windows.h&gt;
+<a id='L23' name='L23'></a>  23 <em class='sharp'>#include</em> &lt;winbase.h&gt;
+<a id='L24' name='L24'></a>  24 <em class='sharp'>#include</em> &lt;mmsystem.h&gt;
+<a id='L25' name='L25'></a>  25 <em class='sharp'>#include</em> &lt;errno.h&gt;
+<a id='L26' name='L26'></a>  26 <em class='sharp'>#include</em> "<a href='1622.html'>php_win32_globals.h</a>"
+<a id='L27' name='L27'></a>  27 
+<a id='L28' name='L28'></a>  28 <strong class='reserved'>typedef</strong> <a href='../Y/6813.html' title='Multiple used in 16 places.'>VOID</a> (<a href='../Y/6958.html' title='Multiple used in 103 places.'>WINAPI</a> *<a href='../Y/3895.html' title='Multiple used in 6 places.'>MyGetSystemTimeAsFileTime</a>)(<a href='../Y/3638.html' title='Multiple used in 5 places.'>LPFILETIME</a> lpSystemTimeAsFileTime);
+<a id='L29' name='L29'></a>  29 
+<a id='L30' name='L30'></a>  30 <strong class='reserved'>static</strong> <a href='../Y/3895.html' title='Multiple used in 6 places.'>MyGetSystemTimeAsFileTime</a> <a href='../S/1636.html#L55' title='Referred from 55 in win32/time.c.'>get_time_func</a>(<strong class='reserved'>void</strong>)
+<a id='L31' name='L31'></a>  31 <em class='brace'>{</em>
+<a id='L32' name='L32'></a>  32         <a href='../Y/3895.html' title='Multiple used in 6 places.'>MyGetSystemTimeAsFileTime</a> <a href='../Y/38965.html' title='Multiple used in 9 places.'>timefunc</a> = <a href='../D/6086.html' title='Multiple defined in 8 places.'>NULL</a>;
+<a id='L33' name='L33'></a>  33         <a href='../Y/3063.html' title='Multiple used in 9 places.'>HMODULE</a> <a href='../Y/19642.html' title='Multiple used in 4 places.'>hMod</a> = <a href='../Y/3668.html' title='Multiple used in 7 places.'>LoadLibrary</a>("kernel32.dll");
+<a id='L34' name='L34'></a>  34 
+<a id='L35' name='L35'></a>  35         <strong class='reserved'>if</strong> (<a href='../Y/19642.html' title='Multiple used in 4 places.'>hMod</a>) <em class='brace'>{</em>
+<a id='L36' name='L36'></a>  36                 <em class='comment'>/* Max possible resolution &lt;1us, win8/server2012 */</em>
+<a id='L37' name='L37'></a>  37                 <a href='../Y/38965.html' title='Multiple used in 9 places.'>timefunc</a> = (<a href='../Y/3895.html' title='Multiple used in 6 places.'>MyGetSystemTimeAsFileTime</a>)<a href='../Y/2524.html' title='Multiple used in 13 places.'>GetProcAddress</a>(<a href='../Y/19642.html' title='Multiple used in 4 places.'>hMod</a>, "GetSystemTimePreciseAsFileTime");
+<a id='L38' name='L38'></a>  38 
+<a id='L39' name='L39'></a>  39                 <strong class='reserved'>if</strong>(!<a href='../Y/38965.html' title='Multiple used in 9 places.'>timefunc</a>) <em class='brace'>{</em>
+<a id='L40' name='L40'></a>  40                         <em class='comment'>/* 100ns blocks since 01-Jan-1641 */</em>
+<a id='L41' name='L41'></a>  41                         <a href='../Y/38965.html' title='Multiple used in 9 places.'>timefunc</a> = (<a href='../Y/3895.html' title='Multiple used in 6 places.'>MyGetSystemTimeAsFileTime</a>)<a href='../Y/2524.html' title='Multiple used in 13 places.'>GetProcAddress</a>(<a href='../Y/19642.html' title='Multiple used in 4 places.'>hMod</a>, "GetSystemTimeAsFileTime");
+<a id='L42' name='L42'></a>  42                 <em class='brace'>}</em>
+<a id='L43' name='L43'></a>  43         <em class='brace'>}</em>
+<a id='L44' name='L44'></a>  44 
+<a id='L45' name='L45'></a>  45         <strong class='reserved'>return</strong> <a href='../Y/38965.html' title='Multiple used in 9 places.'>timefunc</a>;
+<a id='L46' name='L46'></a>  46 <em class='brace'>}</em>
+<a id='L47' name='L47'></a>  47 
+<a id='L48' name='L48'></a>  48 <strong class='reserved'>int</strong> <a href='../S/1636.html#L84' title='Referred from 84 in win32/time.c.'>getfilesystemtime</a>(<strong class='reserved'>struct</strong> <a href='../Y/38997.html' title='Multiple used in 173 places.'>timeval</a> *<a href='../Y/39547.html' title='Multiple used in 204 places.'>tv</a>)
+<a id='L49' name='L49'></a>  49 <em class='brace'>{</em>
+<a id='L50' name='L50'></a>  50         <a href='../Y/2246.html' title='Multiple used in 10 places.'>FILETIME</a> <a href='../Y/18532.html' title='Multiple used in 55 places.'>ft</a>;
+<a id='L51' name='L51'></a>  51         <strong class='reserved'>unsigned</strong> <a href='../Y/7649.html' title='Multiple used in 42 places.'>__int64</a> <a href='../Y/17798.html' title='Multiple used in 6 places.'>ff</a> = 0;
+<a id='L52' name='L52'></a>  52         <a href='../Y/3895.html' title='Multiple used in 6 places.'>MyGetSystemTimeAsFileTime</a> <a href='../Y/38965.html' title='Multiple used in 9 places.'>timefunc</a>;
+<a id='L53' name='L53'></a>  53         <a href='../Y/6476.html' title='Multiple used in 14 places.'>ULARGE_INTEGER</a> <a href='../Y/17802.html' title='Multiple used in 4 places.'>fft</a>;
+<a id='L54' name='L54'></a>  54 
+<a id='L55' name='L55'></a>  55         <a href='../Y/38965.html' title='Multiple used in 9 places.'>timefunc</a> = <a href='../S/1636.html#L30' title='Defined at 30 in win32/time.c.'>get_time_func</a>();
+<a id='L56' name='L56'></a>  56         <strong class='reserved'>if</strong> (<a href='../Y/38965.html' title='Multiple used in 9 places.'>timefunc</a>) <em class='brace'>{</em>
+<a id='L57' name='L57'></a>  57                 <a href='../Y/38965.html' title='Multiple used in 9 places.'>timefunc</a>(&amp;<a href='../Y/18532.html' title='Multiple used in 55 places.'>ft</a>);
+<a id='L58' name='L58'></a>  58         <em class='brace'>}</em> <strong class='reserved'>else</strong> <em class='brace'>{</em>
+<a id='L59' name='L59'></a>  59                 <a href='../Y/2535.html' title='Multiple used in 3 places.'>GetSystemTimeAsFileTime</a>(&amp;<a href='../Y/18532.html' title='Multiple used in 55 places.'>ft</a>);
+<a id='L60' name='L60'></a>  60         <em class='brace'>}</em>
+<a id='L61' name='L61'></a>  61 
+<a id='L62' name='L62'></a>  62         <em class='comment'>/*</em>
+<a id='L63' name='L63'></a>  63 <em class='comment'>         * Do not cast a pointer to a FILETIME structure to either a </em>
+<a id='L64' name='L64'></a>  64 <em class='comment'>         * ULARGE_INTEGER* or __int64* value because it can cause alignment faults on 64-bit Windows.</em>
+<a id='L65' name='L65'></a>  65 <em class='comment'>         * via  http://technet.microsoft.com/en-us/library/ms724284(v=vs.85).aspx</em>
+<a id='L66' name='L66'></a>  66 <em class='comment'>         */</em>
+<a id='L67' name='L67'></a>  67         <a href='../Y/17802.html' title='Multiple used in 4 places.'>fft</a>.<a href='../Y/3164.html' title='Multiple used in 5 places.'>HighPart</a> = <a href='../Y/18532.html' title='Multiple used in 55 places.'>ft</a>.<a href='../Y/16350.html' title='Multiple used in 8 places.'>dwHighDateTime</a>;
+<a id='L68' name='L68'></a>  68         <a href='../Y/17802.html' title='Multiple used in 4 places.'>fft</a>.<a href='../Y/3682.html' title='Multiple used in 3 places.'>LowPart</a> = <a href='../Y/18532.html' title='Multiple used in 55 places.'>ft</a>.<a href='../Y/16357.html' title='Multiple used in 8 places.'>dwLowDateTime</a>;
+<a id='L69' name='L69'></a>  69         <a href='../Y/17798.html' title='Multiple used in 6 places.'>ff</a> = <a href='../Y/17802.html' title='Multiple used in 4 places.'>fft</a>.<a href='../Y/5025.html' title='Multiple used in 8 places.'>QuadPart</a>;
+<a id='L70' name='L70'></a>  70 
+<a id='L71' name='L71'></a>  71         <a href='../Y/17798.html' title='Multiple used in 6 places.'>ff</a> /= 10Ui64; <em class='comment'>/* convert to microseconds */</em>
+<a id='L72' name='L72'></a>  72         <a href='../Y/17798.html' title='Multiple used in 6 places.'>ff</a> -= 11644473600000000Ui64; <em class='comment'>/* convert to unix epoch */</em>
+<a id='L73' name='L73'></a>  73 
+<a id='L74' name='L74'></a>  74         <a href='../Y/39547.html' title='Multiple used in 204 places.'>tv</a>-&gt;<a href='../Y/39553.html' title='Multiple used in 205 places.'>tv_sec</a> = (<strong class='reserved'>long</strong>)(<a href='../Y/17798.html' title='Multiple used in 6 places.'>ff</a> / 1000000Ui64);
+<a id='L75' name='L75'></a>  75         <a href='../Y/39547.html' title='Multiple used in 204 places.'>tv</a>-&gt;<a href='../Y/39554.html' title='Multiple used in 120 places.'>tv_usec</a> = (<strong class='reserved'>long</strong>)(<a href='../Y/17798.html' title='Multiple used in 6 places.'>ff</a> % 1000000Ui64);
+<a id='L76' name='L76'></a>  76 
+<a id='L77' name='L77'></a>  77         <strong class='reserved'>return</strong> 0;
+<a id='L78' name='L78'></a>  78 <em class='brace'>}</em>
+<a id='L79' name='L79'></a>  79 
+<a id='L80' name='L80'></a>  80 <a href='../D/7744.html' title='Multiple defined in 14 places.'>PHPAPI</a> <strong class='reserved'>int</strong> <a href='../R/20125.html' title='Multiple referred from 39 places.'>gettimeofday</a>(<strong class='reserved'>struct</strong> <a href='../Y/38997.html' title='Multiple used in 173 places.'>timeval</a> *<a href='../Y/38946.html' title='Multiple used in 4 places.'>time_Info</a>, <strong class='reserved'>struct</strong> <a href='../D/31849.html' title='Multiple defined in 2 places.'>timezone</a> *<a href='../Y/38998.html' title='Multiple used in 5 places.'>timezone_Info</a>)
+<a id='L81' name='L81'></a>  81 <em class='brace'>{</em>
+<a id='L82' name='L82'></a>  82         <em class='comment'>/* Get the time, if they want it */</em>
+<a id='L83' name='L83'></a>  83         <strong class='reserved'>if</strong> (<a href='../Y/38946.html' title='Multiple used in 4 places.'>time_Info</a> != <a href='../D/6086.html' title='Multiple defined in 8 places.'>NULL</a>) <em class='brace'>{</em>
+<a id='L84' name='L84'></a>  84                 <a href='../S/1636.html#L48' title='Defined at 48 in win32/time.c.'>getfilesystemtime</a>(<a href='../Y/38946.html' title='Multiple used in 4 places.'>time_Info</a>);
+<a id='L85' name='L85'></a>  85         <em class='brace'>}</em>
+<a id='L86' name='L86'></a>  86         <em class='comment'>/* Get the timezone, if they want it */</em>
+<a id='L87' name='L87'></a>  87         <strong class='reserved'>if</strong> (<a href='../Y/38998.html' title='Multiple used in 5 places.'>timezone_Info</a> != <a href='../D/6086.html' title='Multiple defined in 8 places.'>NULL</a>) <em class='brace'>{</em>
+<a id='L88' name='L88'></a>  88                 _tzset();
+<a id='L89' name='L89'></a>  89                 <a href='../Y/38998.html' title='Multiple used in 5 places.'>timezone_Info</a>-&gt;<a href='../Y/39629.html' title='Multiple used in 2 places.'>tz_minuteswest</a> = <a href='../Y/8000.html' title='Multiple used in 3 places.'>_timezone</a>;
+<a id='L90' name='L90'></a>  90                 <a href='../Y/38998.html' title='Multiple used in 5 places.'>timezone_Info</a>-&gt;<a href='../Y/39625.html' title='Multiple used in 2 places.'>tz_dsttime</a> = _daylight;
+<a id='L91' name='L91'></a>  91         <em class='brace'>}</em>
+<a id='L92' name='L92'></a>  92         <em class='comment'>/* And return */</em>
+<a id='L93' name='L93'></a>  93         <strong class='reserved'>return</strong> 0;
+<a id='L94' name='L94'></a>  94 <em class='brace'>}</em>
+<a id='L95' name='L95'></a>  95 
+<a id='L96' name='L96'></a>  96 <a href='../D/7744.html' title='Multiple defined in 14 places.'>PHPAPI</a> <strong class='reserved'>int</strong> <a href='../R/29151.html' title='Multiple referred from 20 places.'>usleep</a>(<strong class='reserved'>unsigned</strong> <strong class='reserved'>int</strong> <a href='../Y/40316.html' title='Multiple used in 4 places.'>useconds</a>)
+<a id='L97' name='L97'></a>  97 <em class='brace'>{</em>
+<a id='L98' name='L98'></a>  98         <a href='../Y/2568.html' title='Multiple used in 137 places.'>HANDLE</a> <a href='../Y/38988.html' title='Multiple used in 5 places.'>timer</a>;
+<a id='L99' name='L99'></a>  99         <a href='../Y/3484.html' title='Multiple used in 7 places.'>LARGE_INTEGER</a> <a href='../Y/16283.html' title='Multiple used in 3 places.'>due</a>;
+<a id='L100' name='L100'></a> 100 
+<a id='L101' name='L101'></a> 101         <a href='../Y/16283.html' title='Multiple used in 3 places.'>due</a>.<a href='../Y/5025.html' title='Multiple used in 8 places.'>QuadPart</a> = -(10 * (<a href='../Y/7649.html' title='Multiple used in 42 places.'>__int64</a>)<a href='../Y/40316.html' title='Multiple used in 4 places.'>useconds</a>);
+<a id='L102' name='L102'></a> 102 
+<a id='L103' name='L103'></a> 103         <a href='../Y/38988.html' title='Multiple used in 5 places.'>timer</a> = CreateWaitableTimer(<a href='../D/6086.html' title='Multiple defined in 8 places.'>NULL</a>, <a href='../D/14068.html' title='Multiple defined in 24 places.'>TRUE</a>, <a href='../D/6086.html' title='Multiple defined in 8 places.'>NULL</a>);
+<a id='L104' name='L104'></a> 104         SetWaitableTimer(<a href='../Y/38988.html' title='Multiple used in 5 places.'>timer</a>, &amp;<a href='../Y/16283.html' title='Multiple used in 3 places.'>due</a>, 0, <a href='../D/6086.html' title='Multiple defined in 8 places.'>NULL</a>, <a href='../D/6086.html' title='Multiple defined in 8 places.'>NULL</a>, 0);
+<a id='L105' name='L105'></a> 105         <a href='../Y/7032.html' title='Multiple used in 15 places.'>WaitForSingleObject</a>(<a href='../Y/38988.html' title='Multiple used in 5 places.'>timer</a>, <a href='../Y/3253.html' title='Multiple used in 12 places.'>INFINITE</a>);
+<a id='L106' name='L106'></a> 106         <a href='../Y/1247.html' title='Multiple used in 37 places.'>CloseHandle</a>(<a href='../Y/38988.html' title='Multiple used in 5 places.'>timer</a>);
+<a id='L107' name='L107'></a> 107         <strong class='reserved'>return</strong> 0;
+<a id='L108' name='L108'></a> 108 <em class='brace'>}</em>
+<a id='L109' name='L109'></a> 109 
+<a id='L110' name='L110'></a> 110 <a href='../D/7744.html' title='Multiple defined in 14 places.'>PHPAPI</a> <strong class='reserved'>int</strong> <a href='../R/21924.html' title='Multiple referred from 4 places.'>nanosleep</a>( <strong class='reserved'>const</strong> <strong class='reserved'>struct</strong> <a href='../D/31848.html' title='Multiple defined in 3 places.'>timespec</a> * <a href='../Y/35413.html' title='Multiple used in 4 places.'>rqtp</a>, <strong class='reserved'>struct</strong> <a href='../D/31848.html' title='Multiple defined in 3 places.'>timespec</a> * <a href='../Y/35340.html' title='Multiple used in 2 places.'>rmtp</a> )
+<a id='L111' name='L111'></a> 111 <em class='brace'>{</em>
+<a id='L112' name='L112'></a> 112         <strong class='reserved'>if</strong> (<a href='../Y/35413.html' title='Multiple used in 4 places.'>rqtp</a>-&gt;<a href='../D/32011.html' title='Multiple defined in 2 places.'>tv_nsec</a> &gt; 999999999) <em class='brace'>{</em>
+<a id='L113' name='L113'></a> 113                 <em class='comment'>/* The time interval specified 1,000,000 or more microseconds. */</em>
+<a id='L114' name='L114'></a> 114                 <a href='../D/21169.html' title='Multiple defined in 2 places.'>errno</a> = <a href='../Y/1691.html' title='Multiple used in 59 places.'>EINVAL</a>;
+<a id='L115' name='L115'></a> 115                 <strong class='reserved'>return</strong> -1;
+<a id='L116' name='L116'></a> 116         <em class='brace'>}</em>
+<a id='L117' name='L117'></a> 117         <strong class='reserved'>return</strong> <a href='../S/1636.html#L96' title='Defined at 96 in win32/time.c.'>usleep</a>( <a href='../Y/35413.html' title='Multiple used in 4 places.'>rqtp</a>-&gt;<a href='../Y/39553.html' title='Multiple used in 205 places.'>tv_sec</a> * 1000000 + <a href='../Y/35413.html' title='Multiple used in 4 places.'>rqtp</a>-&gt;<a href='../D/32011.html' title='Multiple defined in 2 places.'>tv_nsec</a> / 1000  );
+<a id='L118' name='L118'></a> 118 <em class='brace'>}</em>
+<a id='L119' name='L119'></a> 119 
+<a id='L120' name='L120'></a> 120 <em class='sharp'>#if</em> 0 <em class='comment'>/* looks pretty ropey in here */</em>
+<a id='L121' name='L121'></a> 121 <em class='sharp'>#ifdef</em> <a href='../Y/2896.html' title='Multiple used in 3 places.'>HAVE_SETITIMER</a>
+<a id='L122' name='L122'></a> 122 
+<a id='L123' name='L123'></a> 123 
+<a id='L124' name='L124'></a> 124 <em class='sharp'>#ifndef</em> <a href='../Y/6233.html' title='Multiple used in 2 places.'>THREAD_SAFE</a>
+<a id='L125' name='L125'></a> 125 <strong class='reserved'>unsigned</strong> <strong class='reserved'>int</strong> <a href='../Y/33742.html' title='Multiple used in 3 places.'>proftimer</a>, <a href='../Y/40742.html' title='Multiple used in 3 places.'>virttimer</a>, <a href='../Y/34485.html' title='Multiple used in 3 places.'>realtimer</a>;
+<a id='L126' name='L126'></a> 126 <strong class='reserved'>extern</strong> LPMSG <a href='../Y/32996.html' title='Multiple used in 2 places.'>phpmsg</a>;
+<a id='L127' name='L127'></a> 127 <em class='sharp'>#endif</em>
+<a id='L128' name='L128'></a> 128 
+<a id='L129' name='L129'></a> 129 <strong class='reserved'>struct</strong> <a href='../R/28615.html' title='Multiple referred from 2 places.'>timer_msg</a> <em class='brace'>{</em>
+<a id='L130' name='L130'></a> 130         <strong class='reserved'>int</strong> <a href='../D/29601.html' title='Multiple defined in 2 places.'>signal</a>;
+<a id='L131' name='L131'></a> 131         <strong class='reserved'>unsigned</strong> <strong class='reserved'>int</strong> <a href='../D/31697.html' title='Multiple defined in 2 places.'>threadid</a>;
+<a id='L132' name='L132'></a> 132 <em class='brace'>}</em>;
+<a id='L133' name='L133'></a> 133 
+<a id='L134' name='L134'></a> 134 
+<a id='L135' name='L135'></a> 135 <a href='../Y/3649.html' title='Multiple used in 4 places.'>LPTIMECALLBACK</a> <a href='../R/26390.html' title='Multiple referred from 3 places.'>setitimer_timeout</a>(<a href='../Y/6473.html' title='Multiple used in 26 places.'>UINT</a> uTimerID, <a href='../Y/6473.html' title='Multiple used in 26 places.'>UINT</a> <a href='../Y/23235.html' title='Multiple used in 868 places.'>info</a>, <a href='../D/1870.html' title='Multiple defined in 2 places.'>DWORD</a> dwUser, <a href='../D/1870.html' title='Multiple defined in 2 places.'>DWORD</a> dw1, <a href='../D/1870.html' title='Multiple defined in 2 places.'>DWORD</a> dw2)
+<a id='L136' name='L136'></a> 136 <em class='brace'>{</em>
+<a id='L137' name='L137'></a> 137         <strong class='reserved'>struct</strong> <a href='../S/1636.html#L129' title='Defined at 129 in win32/time.c.'>timer_msg</a> *<a href='../Y/27072.html' title='Multiple used in 320 places.'>msg</a> = (<strong class='reserved'>struct</strong> <a href='../S/1636.html#L129' title='Defined at 129 in win32/time.c.'>timer_msg</a> *) <a href='../Y/23235.html' title='Multiple used in 868 places.'>info</a>;
+<a id='L138' name='L138'></a> 138 
+<a id='L139' name='L139'></a> 139         <strong class='reserved'>if</strong> (<a href='../Y/27072.html' title='Multiple used in 320 places.'>msg</a>) <em class='brace'>{</em>
+<a id='L140' name='L140'></a> 140                 <a href='../Y/34280.html' title='Multiple used in 2 places.'>raise</a>((<strong class='reserved'>int</strong>) <a href='../Y/27072.html' title='Multiple used in 320 places.'>msg</a>-&gt;<a href='../D/29601.html' title='Multiple defined in 2 places.'>signal</a>);
+<a id='L141' name='L141'></a> 141                 PostThreadMessage(<a href='../Y/27072.html' title='Multiple used in 320 places.'>msg</a>-&gt;<a href='../D/31697.html' title='Multiple defined in 2 places.'>threadid</a>,
+<a id='L142' name='L142'></a> 142                                                   WM_NOTIFY, <a href='../Y/27072.html' title='Multiple used in 320 places.'>msg</a>-&gt;<a href='../D/29601.html' title='Multiple defined in 2 places.'>signal</a>, 0);
+<a id='L143' name='L143'></a> 143                 <a href='../S/1228.html#L36' title='Defined at 36 in ext/xmlrpc/libxmlrpc/base64.h.'>free</a>(<a href='../Y/27072.html' title='Multiple used in 320 places.'>msg</a>);
+<a id='L144' name='L144'></a> 144         <em class='brace'>}</em>
+<a id='L145' name='L145'></a> 145         <strong class='reserved'>return</strong> 0;
+<a id='L146' name='L146'></a> 146 <em class='brace'>}</em>
+<a id='L147' name='L147'></a> 147 
+<a id='L148' name='L148'></a> 148 <a href='../D/7744.html' title='Multiple defined in 14 places.'>PHPAPI</a> <strong class='reserved'>int</strong> <a href='../R/26389.html' title='Multiple referred from 5 places.'>setitimer</a>(<strong class='reserved'>int</strong> <a href='../Y/41211.html' title='Multiple used in 43 places.'>which</a>, <strong class='reserved'>const</strong> <strong class='reserved'>struct</strong> <a href='../S/1637.html#L26' title='Defined at 26 in win32/time.h.'>itimerval</a> *<a href='../S/1737.html#L277' title='Defined at 277 in Zend/zend_strtod.c.'>value</a>, <strong class='reserved'>struct</strong> <a href='../S/1637.html#L26' title='Defined at 26 in win32/time.h.'>itimerval</a> *<a href='../Y/30458.html' title='Multiple used in 3 places.'>ovalue</a>)
+<a id='L149' name='L149'></a> 149 <em class='brace'>{</em>
+<a id='L150' name='L150'></a> 150         <strong class='reserved'>int</strong> <a href='../Y/38977.html' title='Multiple used in 261 places.'>timeout</a> = <a href='../S/1737.html#L277' title='Defined at 277 in Zend/zend_strtod.c.'>value</a>-&gt;<a href='../Y/24260.html' title='Multiple used in 5 places.'>it_value</a>.<a href='../Y/39553.html' title='Multiple used in 205 places.'>tv_sec</a> * 1000 + <a href='../S/1737.html#L277' title='Defined at 277 in Zend/zend_strtod.c.'>value</a>-&gt;<a href='../Y/24260.html' title='Multiple used in 5 places.'>it_value</a>.<a href='../Y/39554.html' title='Multiple used in 120 places.'>tv_usec</a>;
+<a id='L151' name='L151'></a> 151         <strong class='reserved'>int</strong> <a href='../S/164.html#L920' title='Defined at 920 in ext/ereg/regex/regcomp.c.'>repeat</a> = TIME_ONESHOT;
+<a id='L152' name='L152'></a> 152 
+<a id='L153' name='L153'></a> 153         <em class='comment'>/*make sure the message queue is initialized */</em>
+<a id='L154' name='L154'></a> 154         <a href='../Y/4989.html' title='Multiple used in 2 places.'>PeekMessage</a>(<a href='../Y/32996.html' title='Multiple used in 2 places.'>phpmsg</a>, <a href='../D/6086.html' title='Multiple defined in 8 places.'>NULL</a>, WM_USER, WM_USER, PM_NOREMOVE);
+<a id='L155' name='L155'></a> 155         <strong class='reserved'>if</strong> (<a href='../Y/38977.html' title='Multiple used in 261 places.'>timeout</a> &gt; 0) <em class='brace'>{</em>
+<a id='L156' name='L156'></a> 156                 <strong class='reserved'>struct</strong> <a href='../S/1636.html#L129' title='Defined at 129 in win32/time.c.'>timer_msg</a> *<a href='../Y/27072.html' title='Multiple used in 320 places.'>msg</a> = <a href='../S/1228.html#L35' title='Defined at 35 in ext/xmlrpc/libxmlrpc/base64.h.'>malloc</a>(<strong class='reserved'>sizeof</strong>(<strong class='reserved'>struct</strong> <a href='../S/1636.html#L129' title='Defined at 129 in win32/time.c.'>timer_msg</a>));
+<a id='L157' name='L157'></a> 157                 <a href='../Y/27072.html' title='Multiple used in 320 places.'>msg</a>-&gt;<a href='../D/31697.html' title='Multiple defined in 2 places.'>threadid</a> = <a href='../Y/2488.html' title='Multiple used in 17 places.'>GetCurrentThreadId</a>();
+<a id='L158' name='L158'></a> 158                 <strong class='reserved'>if</strong> (!<a href='../Y/30458.html' title='Multiple used in 3 places.'>ovalue</a>) <em class='brace'>{</em>
+<a id='L159' name='L159'></a> 159                         <a href='../S/164.html#L920' title='Defined at 920 in ext/ereg/regex/regcomp.c.'>repeat</a> = TIME_PERIODIC;
+<a id='L160' name='L160'></a> 160                 <em class='brace'>}</em>
+<a id='L161' name='L161'></a> 161                 <strong class='reserved'>switch</strong> (<a href='../Y/41211.html' title='Multiple used in 43 places.'>which</a>) <em class='brace'>{</em>
+<a id='L162' name='L162'></a> 162                         <strong class='reserved'>case</strong> <a href='../S/1637.html#L39' title='Defined at 39 in win32/time.h.'>ITIMER_REAL</a>:
+<a id='L163' name='L163'></a> 163                                 <a href='../Y/27072.html' title='Multiple used in 320 places.'>msg</a>-&gt;<a href='../D/29601.html' title='Multiple defined in 2 places.'>signal</a> = <a href='../S/1631.html#L14' title='Defined at 14 in win32/signal.h.'>SIGALRM</a>;
+<a id='L164' name='L164'></a> 164                                 <a href='../Y/34485.html' title='Multiple used in 3 places.'>realtimer</a> = <a href='../Y/38943.html' title='Multiple used in 3 places.'>timeSetEvent</a>(<a href='../Y/38977.html' title='Multiple used in 261 places.'>timeout</a>, 100, (<a href='../Y/3649.html' title='Multiple used in 4 places.'>LPTIMECALLBACK</a>) <a href='../S/1636.html#L135' title='Defined at 135 in win32/time.c.'>setitimer_timeout</a>, (<a href='../Y/6473.html' title='Multiple used in 26 places.'>UINT</a>) <a href='../Y/27072.html' title='Multiple used in 320 places.'>msg</a>, <a href='../S/164.html#L920' title='Defined at 920 in ext/ereg/regex/regcomp.c.'>repeat</a>);
+<a id='L165' name='L165'></a> 165                                 <strong class='reserved'>break</strong>;
+<a id='L166' name='L166'></a> 166                         <strong class='reserved'>case</strong> <a href='../S/1637.html#L41' title='Defined at 41 in win32/time.h.'>ITIMER_VIRT</a>:
+<a id='L167' name='L167'></a> 167                                 <a href='../Y/27072.html' title='Multiple used in 320 places.'>msg</a>-&gt;<a href='../D/29601.html' title='Multiple defined in 2 places.'>signal</a> = <a href='../S/1631.html#L15' title='Defined at 15 in win32/signal.h.'>SIGVTALRM</a>;
+<a id='L168' name='L168'></a> 168                                 <a href='../Y/40742.html' title='Multiple used in 3 places.'>virttimer</a> = <a href='../Y/38943.html' title='Multiple used in 3 places.'>timeSetEvent</a>(<a href='../Y/38977.html' title='Multiple used in 261 places.'>timeout</a>, 100, (<a href='../Y/3649.html' title='Multiple used in 4 places.'>LPTIMECALLBACK</a>) <a href='../S/1636.html#L135' title='Defined at 135 in win32/time.c.'>setitimer_timeout</a>, (<a href='../Y/6473.html' title='Multiple used in 26 places.'>UINT</a>) <a href='../Y/27072.html' title='Multiple used in 320 places.'>msg</a>, <a href='../S/164.html#L920' title='Defined at 920 in ext/ereg/regex/regcomp.c.'>repeat</a>);
+<a id='L169' name='L169'></a> 169                                 <strong class='reserved'>break</strong>;
+<a id='L170' name='L170'></a> 170                         <strong class='reserved'>case</strong> <a href='../S/1637.html#L42' title='Defined at 42 in win32/time.h.'>ITIMER_PROF</a>:
+<a id='L171' name='L171'></a> 171                                 <a href='../Y/27072.html' title='Multiple used in 320 places.'>msg</a>-&gt;<a href='../D/29601.html' title='Multiple defined in 2 places.'>signal</a> = <a href='../D/10703.html' title='Multiple defined in 2 places.'>SIGPROF</a>;
+<a id='L172' name='L172'></a> 172                                 <a href='../Y/33742.html' title='Multiple used in 3 places.'>proftimer</a> = <a href='../Y/38943.html' title='Multiple used in 3 places.'>timeSetEvent</a>(<a href='../Y/38977.html' title='Multiple used in 261 places.'>timeout</a>, 100, (<a href='../Y/3649.html' title='Multiple used in 4 places.'>LPTIMECALLBACK</a>) <a href='../S/1636.html#L135' title='Defined at 135 in win32/time.c.'>setitimer_timeout</a>, (<a href='../Y/6473.html' title='Multiple used in 26 places.'>UINT</a>) <a href='../Y/27072.html' title='Multiple used in 320 places.'>msg</a>, <a href='../S/164.html#L920' title='Defined at 920 in ext/ereg/regex/regcomp.c.'>repeat</a>);
+<a id='L173' name='L173'></a> 173                                 <strong class='reserved'>break</strong>;
+<a id='L174' name='L174'></a> 174                         <strong class='reserved'>default</strong>:
+<a id='L175' name='L175'></a> 175                                 <a href='../D/21169.html' title='Multiple defined in 2 places.'>errno</a> = <a href='../Y/1691.html' title='Multiple used in 59 places.'>EINVAL</a>;
+<a id='L176' name='L176'></a> 176                                 <strong class='reserved'>return</strong> -1;
+<a id='L177' name='L177'></a> 177                                 <strong class='reserved'>break</strong>;
+<a id='L178' name='L178'></a> 178                 <em class='brace'>}</em>
+<a id='L179' name='L179'></a> 179         <em class='brace'>}</em> <strong class='reserved'>else</strong> <em class='brace'>{</em>
+<a id='L180' name='L180'></a> 180                 <strong class='reserved'>switch</strong> (<a href='../Y/41211.html' title='Multiple used in 43 places.'>which</a>) <em class='brace'>{</em>
+<a id='L181' name='L181'></a> 181                         <strong class='reserved'>case</strong> <a href='../S/1637.html#L39' title='Defined at 39 in win32/time.h.'>ITIMER_REAL</a>:
+<a id='L182' name='L182'></a> 182                                 <a href='../Y/38942.html' title='Multiple used in 3 places.'>timeKillEvent</a>(<a href='../Y/34485.html' title='Multiple used in 3 places.'>realtimer</a>);
+<a id='L183' name='L183'></a> 183                                 <strong class='reserved'>break</strong>;
+<a id='L184' name='L184'></a> 184                         <strong class='reserved'>case</strong> <a href='../S/1637.html#L41' title='Defined at 41 in win32/time.h.'>ITIMER_VIRT</a>:
+<a id='L185' name='L185'></a> 185                                 <a href='../Y/38942.html' title='Multiple used in 3 places.'>timeKillEvent</a>(<a href='../Y/40742.html' title='Multiple used in 3 places.'>virttimer</a>);
+<a id='L186' name='L186'></a> 186                                 <strong class='reserved'>break</strong>;
+<a id='L187' name='L187'></a> 187                         <strong class='reserved'>case</strong> <a href='../S/1637.html#L42' title='Defined at 42 in win32/time.h.'>ITIMER_PROF</a>:
+<a id='L188' name='L188'></a> 188                                 <a href='../Y/38942.html' title='Multiple used in 3 places.'>timeKillEvent</a>(<a href='../Y/33742.html' title='Multiple used in 3 places.'>proftimer</a>);
+<a id='L189' name='L189'></a> 189                                 <strong class='reserved'>break</strong>;
+<a id='L190' name='L190'></a> 190                         <strong class='reserved'>default</strong>:
+<a id='L191' name='L191'></a> 191                                 <a href='../D/21169.html' title='Multiple defined in 2 places.'>errno</a> = <a href='../Y/1691.html' title='Multiple used in 59 places.'>EINVAL</a>;
+<a id='L192' name='L192'></a> 192                                 <strong class='reserved'>return</strong> -1;
+<a id='L193' name='L193'></a> 193                                 <strong class='reserved'>break</strong>;
+<a id='L194' name='L194'></a> 194                 <em class='brace'>}</em>
+<a id='L195' name='L195'></a> 195         <em class='brace'>}</em>
+<a id='L196' name='L196'></a> 196 
+<a id='L197' name='L197'></a> 197 
+<a id='L198' name='L198'></a> 198         <strong class='reserved'>return</strong> 0;
+<a id='L199' name='L199'></a> 199 <em class='brace'>}</em>
+<a id='L200' name='L200'></a> 200 
+<a id='L201' name='L201'></a> 201 <em class='sharp'>#endif</em>
+<a id='L202' name='L202'></a> 202 <em class='sharp'>#endif</em>
+<a id='L203' name='L203'></a> 203 
+</pre>
+<hr />
+<a id='BOTTOM' name='BOTTOM'></a>
+<em class='comment'>/* [&lt;][&gt;]<a href='#L30'>[^]</a><a href='#L148'>[v]</a><a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+</body>
+</html>

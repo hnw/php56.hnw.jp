@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>jp</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/459.html#L202'>jp</a>                202 ext/json/JSON_parser.c push(JSON_parser jp, int mode)</span>
+<span class='curline'><a href='../S/459.html#L204'>jp</a>                204 ext/json/JSON_parser.c     jp-&gt;top += 1;</span>
+<span class='curline'><a href='../S/459.html#L205'>jp</a>                205 ext/json/JSON_parser.c     if (jp-&gt;top &gt;= jp-&gt;depth) {</span>
+<span class='curline'><a href='../S/459.html#L206'>jp</a>                206 ext/json/JSON_parser.c 		jp-&gt;error_code = PHP_JSON_ERROR_DEPTH;</span>
+<span class='curline'><a href='../S/459.html#L209'>jp</a>                209 ext/json/JSON_parser.c     jp-&gt;stack[jp-&gt;top] = mode;</span>
+<span class='curline'><a href='../S/459.html#L219'>jp</a>                219 ext/json/JSON_parser.c pop(JSON_parser jp, int mode)</span>
+<span class='curline'><a href='../S/459.html#L221'>jp</a>                221 ext/json/JSON_parser.c     if (jp-&gt;top &lt; 0 || jp-&gt;stack[jp-&gt;top] != mode) {</span>
+<span class='curline'><a href='../S/459.html#L222'>jp</a>                222 ext/json/JSON_parser.c 		jp-&gt;error_code = PHP_JSON_ERROR_STATE_MISMATCH;</span>
+<span class='curline'><a href='../S/459.html#L225'>jp</a>                225 ext/json/JSON_parser.c     jp-&gt;top -= 1;</span>
+<span class='curline'><a href='../S/459.html#L244'>jp</a>                244 ext/json/JSON_parser.c     JSON_parser jp = (JSON_parser)emalloc(sizeof(struct JSON_parser_struct));</span>
+<span class='curline'><a href='../S/459.html#L245'>jp</a>                245 ext/json/JSON_parser.c     jp-&gt;state = GO;</span>
+<span class='curline'><a href='../S/459.html#L246'>jp</a>                246 ext/json/JSON_parser.c     jp-&gt;depth = depth;</span>
+<span class='curline'><a href='../S/459.html#L247'>jp</a>                247 ext/json/JSON_parser.c     jp-&gt;top = -1;</span>
+<span class='curline'><a href='../S/459.html#L248'>jp</a>                248 ext/json/JSON_parser.c 	jp-&gt;error_code = PHP_JSON_ERROR_NONE;</span>
+<span class='curline'><a href='../S/459.html#L249'>jp</a>                249 ext/json/JSON_parser.c     jp-&gt;stack = (int*)ecalloc(depth, sizeof(int));</span>
+<span class='curline'><a href='../S/459.html#L251'>jp</a>                251 ext/json/JSON_parser.c         jp-&gt;the_zstack = (zval **)safe_emalloc(depth, sizeof(zval), 0);</span>
+<span class='curline'><a href='../S/459.html#L253'>jp</a>                253 ext/json/JSON_parser.c         jp-&gt;the_zstack = &amp;jp-&gt;the_static_zstack[0];</span>
+<span class='curline'><a href='../S/459.html#L255'>jp</a>                255 ext/json/JSON_parser.c     push(jp, MODE_DONE);</span>
+<span class='curline'><a href='../S/459.html#L256'>jp</a>                256 ext/json/JSON_parser.c     return jp;</span>
+<span class='curline'><a href='../S/459.html#L263'>jp</a>                263 ext/json/JSON_parser.c free_JSON_parser(JSON_parser jp)</span>
+<span class='curline'><a href='../S/459.html#L265'>jp</a>                265 ext/json/JSON_parser.c     efree((void*)jp-&gt;stack);</span>
+<span class='curline'><a href='../S/459.html#L266'>jp</a>                266 ext/json/JSON_parser.c     if (jp-&gt;the_zstack != &amp;jp-&gt;the_static_zstack[0]) {</span>
+<span class='curline'><a href='../S/459.html#L267'>jp</a>                267 ext/json/JSON_parser.c         efree(jp-&gt;the_zstack);</span>
+<span class='curline'><a href='../S/459.html#L269'>jp</a>                269 ext/json/JSON_parser.c     efree((void*)jp);</span>
+<span class='curline'><a href='../S/459.html#L392'>jp</a>                392 ext/json/JSON_parser.c static void attach_zval(JSON_parser jp, int up, int cur, smart_str *key, int assoc TSRMLS_DC)</span>
+<span class='curline'><a href='../S/459.html#L394'>jp</a>                394 ext/json/JSON_parser.c     zval *root = jp-&gt;the_zstack[up];</span>
+<span class='curline'><a href='../S/459.html#L395'>jp</a>                395 ext/json/JSON_parser.c     zval *child =  jp-&gt;the_zstack[cur];</span>
+<span class='curline'><a href='../S/459.html#L396'>jp</a>                396 ext/json/JSON_parser.c     int up_mode = jp-&gt;stack[up];</span>
+<span class='curline'><a href='../S/459.html#L439'>jp</a>                439 ext/json/JSON_parser.c parse_JSON_ex(JSON_parser jp, zval *z, unsigned short utf16_json[], int length, int options TSRMLS_DC)</span>
+<span class='curline'><a href='../S/459.html#L462'>jp</a>                462 ext/json/JSON_parser.c 				jp-&gt;error_code = PHP_JSON_ERROR_CTRL_CHAR;</span>
+<span class='curline'><a href='../S/459.html#L470'>jp</a>                470 ext/json/JSON_parser.c         next_state = state_transition_table[jp-&gt;state][next_class];</span>
+<span class='curline'><a href='../S/459.html#L476'>jp</a>                476 ext/json/JSON_parser.c 	            if (next_state == ST &amp;&amp; jp-&gt;state != U4) {</span>
+<span class='curline'><a href='../S/459.html#L477'>jp</a>                477 ext/json/JSON_parser.c 	                if (jp-&gt;state != ES) {</span>
+<span class='curline'><a href='../S/459.html#L507'>jp</a>                507 ext/json/JSON_parser.c 	            } else if (next_state == ST &amp;&amp; jp-&gt;state == U4) {</span>
+<span class='curline'><a href='../S/459.html#L522'>jp</a>                522 ext/json/JSON_parser.c 	        } else if (type &lt; IS_BOOL &amp;&amp; ((jp-&gt;state == T3 &amp;&amp; next_state == OK) || (jp-&gt;state == F4 &amp;&amp; next_state == OK))) {</span>
+<span class='curline'><a href='../S/459.html#L524'>jp</a>                524 ext/json/JSON_parser.c 	        } else if (type &lt; IS_NULL &amp;&amp; jp-&gt;state == N3 &amp;&amp; next_state == OK) {</span>
+<span class='curline'><a href='../S/459.html#L529'>jp</a>                529 ext/json/JSON_parser.c         	jp-&gt;state = next_state;</span>
+<span class='curline'><a href='../S/459.html#L537'>jp</a>                537 ext/json/JSON_parser.c                 if (!pop(jp, MODE_KEY)) {</span>
+<span class='curline'><a href='../S/459.html#L541'>jp</a>                541 ext/json/JSON_parser.c                 jp-&gt;state = OK;</span>
+<span class='curline'><a href='../S/459.html#L545'>jp</a>                545 ext/json/JSON_parser.c                 if (type != -1 &amp;&amp; jp-&gt;stack[jp-&gt;top] == MODE_OBJECT)</span>
+<span class='curline'><a href='../S/459.html#L553'>jp</a>                553 ext/json/JSON_parser.c                         add_property_zval_ex(jp-&gt;the_zstack[jp-&gt;top], (key.len ? key.c : "_empty_"), (key.len ? (key.len + 1) : sizeof("_empty_")), mval TSRMLS_CC);</span>
+<span class='curline'><a href='../S/459.html#L556'>jp</a>                556 ext/json/JSON_parser.c                         add_assoc_zval_ex(jp-&gt;the_zstack[jp-&gt;top], (key.len ? key.c : ""), (key.len ? (key.len + 1) : sizeof("")), mval);</span>
+<span class='curline'><a href='../S/459.html#L564'>jp</a>                564 ext/json/JSON_parser.c                 if (!pop(jp, MODE_OBJECT)) {</span>
+<span class='curline'><a href='../S/459.html#L568'>jp</a>                568 ext/json/JSON_parser.c                 jp-&gt;state = OK;</span>
+<span class='curline'><a href='../S/459.html#L573'>jp</a>                573 ext/json/JSON_parser.c                 if (type != -1 &amp;&amp; jp-&gt;stack[jp-&gt;top] == MODE_ARRAY)</span>
+<span class='curline'><a href='../S/459.html#L579'>jp</a>                579 ext/json/JSON_parser.c                     add_next_index_zval(jp-&gt;the_zstack[jp-&gt;top], mval);</span>
+<span class='curline'><a href='../S/459.html#L584'>jp</a>                584 ext/json/JSON_parser.c                 if (!pop(jp, MODE_ARRAY)) {</span>
+<span class='curline'><a href='../S/459.html#L588'>jp</a>                588 ext/json/JSON_parser.c                 jp-&gt;state = OK;</span>
+<span class='curline'><a href='../S/459.html#L593'>jp</a>                593 ext/json/JSON_parser.c                 if (!push(jp, MODE_KEY)) {</span>
+<span class='curline'><a href='../S/459.html#L598'>jp</a>                598 ext/json/JSON_parser.c                 jp-&gt;state = OB;</span>
+<span class='curline'><a href='../S/459.html#L599'>jp</a>                599 ext/json/JSON_parser.c                 if (jp-&gt;top &gt; 0) {</span>
+<span class='curline'><a href='../S/459.html#L602'>jp</a>                602 ext/json/JSON_parser.c                     if (jp-&gt;top == 1) {</span>
+<span class='curline'><a href='../S/459.html#L614'>jp</a>                614 ext/json/JSON_parser.c                     jp-&gt;the_zstack[jp-&gt;top] = obj;</span>
+<span class='curline'><a href='../S/459.html#L616'>jp</a>                616 ext/json/JSON_parser.c                     if (jp-&gt;top &gt; 1) {</span>
+<span class='curline'><a href='../S/459.html#L617'>jp</a>                617 ext/json/JSON_parser.c                         attach_zval(jp, jp-&gt;top - 1, jp-&gt;top, &amp;key, assoc TSRMLS_CC);</span>
+<span class='curline'><a href='../S/459.html#L626'>jp</a>                626 ext/json/JSON_parser.c                 if (!push(jp, MODE_ARRAY)) {</span>
+<span class='curline'><a href='../S/459.html#L630'>jp</a>                630 ext/json/JSON_parser.c                 jp-&gt;state = AR;</span>
+<span class='curline'><a href='../S/459.html#L632'>jp</a>                632 ext/json/JSON_parser.c                 if (jp-&gt;top &gt; 0) {</span>
+<span class='curline'><a href='../S/459.html#L635'>jp</a>                635 ext/json/JSON_parser.c                     if (jp-&gt;top == 1) {</span>
+<span class='curline'><a href='../S/459.html#L642'>jp</a>                642 ext/json/JSON_parser.c                     jp-&gt;the_zstack[jp-&gt;top] = arr;</span>
+<span class='curline'><a href='../S/459.html#L644'>jp</a>                644 ext/json/JSON_parser.c                     if (jp-&gt;top &gt; 1) {</span>
+<span class='curline'><a href='../S/459.html#L645'>jp</a>                645 ext/json/JSON_parser.c                         attach_zval(jp, jp-&gt;top - 1, jp-&gt;top, &amp;key, assoc TSRMLS_CC);</span>
+<span class='curline'><a href='../S/459.html#L655'>jp</a>                655 ext/json/JSON_parser.c                 switch (jp-&gt;stack[jp-&gt;top]) {</span>
+<span class='curline'><a href='../S/459.html#L657'>jp</a>                657 ext/json/JSON_parser.c                     jp-&gt;state = CO;</span>
+<span class='curline'><a href='../S/459.html#L664'>jp</a>                664 ext/json/JSON_parser.c                     jp-&gt;state = OK;</span>
+<span class='curline'><a href='../S/459.html#L670'>jp</a>                670 ext/json/JSON_parser.c 						jp-&gt;state = OK;</span>
+<span class='curline'><a href='../S/459.html#L676'>jp</a>                676 ext/json/JSON_parser.c                     jp-&gt;error_code = PHP_JSON_ERROR_SYNTAX;</span>
+<span class='curline'><a href='../S/459.html#L686'>jp</a>                686 ext/json/JSON_parser.c                     (jp-&gt;stack[jp-&gt;top] == MODE_OBJECT ||</span>
+<span class='curline'><a href='../S/459.html#L687'>jp</a>                687 ext/json/JSON_parser.c                      jp-&gt;stack[jp-&gt;top] == MODE_ARRAY))</span>
+<span class='curline'><a href='../S/459.html#L693'>jp</a>                693 ext/json/JSON_parser.c                 switch (jp-&gt;stack[jp-&gt;top]) {</span>
+<span class='curline'><a href='../S/459.html#L695'>jp</a>                695 ext/json/JSON_parser.c                         if (pop(jp, MODE_OBJECT) &amp;&amp; push(jp, MODE_KEY)) {</span>
+<span class='curline'><a href='../S/459.html#L698'>jp</a>                698 ext/json/JSON_parser.c                                     add_property_zval_ex(jp-&gt;the_zstack[jp-&gt;top], (key.len ? key.c : "_empty_"), (key.len ? (key.len + 1) : sizeof("_empty_")), mval TSRMLS_CC);</span>
+<span class='curline'><a href='../S/459.html#L701'>jp</a>                701 ext/json/JSON_parser.c                                     add_assoc_zval_ex(jp-&gt;the_zstack[jp-&gt;top], (key.len ? key.c : ""), (key.len ? (key.len + 1) : sizeof("")), mval);</span>
+<span class='curline'><a href='../S/459.html#L705'>jp</a>                705 ext/json/JSON_parser.c                             jp-&gt;state = KE;</span>
+<span class='curline'><a href='../S/459.html#L710'>jp</a>                710 ext/json/JSON_parser.c                             add_next_index_zval(jp-&gt;the_zstack[jp-&gt;top], mval);</span>
+<span class='curline'><a href='../S/459.html#L712'>jp</a>                712 ext/json/JSON_parser.c                         jp-&gt;state = VA;</span>
+<span class='curline'><a href='../S/459.html#L716'>jp</a>                716 ext/json/JSON_parser.c                         jp-&gt;error_code = PHP_JSON_ERROR_SYNTAX;</span>
+<span class='curline'><a href='../S/459.html#L725'>jp</a>                725 ext/json/JSON_parser.c                 if (pop(jp, MODE_KEY) &amp;&amp; push(jp, MODE_OBJECT)) {</span>
+<span class='curline'><a href='../S/459.html#L726'>jp</a>                726 ext/json/JSON_parser.c                     jp-&gt;state = VA;</span>
+<span class='curline'><a href='../S/459.html#L734'>jp</a>                734 ext/json/JSON_parser.c 					jp-&gt;error_code = PHP_JSON_ERROR_SYNTAX;</span>
+<span class='curline'><a href='../S/459.html#L743'>jp</a>                743 ext/json/JSON_parser.c 	if (jp-&gt;state == OK &amp;&amp; pop(jp, MODE_DONE)) {</span>
+<span class='curline'><a href='../S/459.html#L747'>jp</a>                747 ext/json/JSON_parser.c 	jp-&gt;error_code = PHP_JSON_ERROR_SYNTAX;</span>
+<span class='curline'><a href='../S/460.html#L35'>jp</a>                 35 ext/json/JSON_parser.h extern int parse_JSON_ex(JSON_parser jp, zval *z, unsigned short utf16_json[], int length, int options TSRMLS_DC);</span>
+<span class='curline'><a href='../S/460.html#L36'>jp</a>                 36 ext/json/JSON_parser.h extern int free_JSON_parser(JSON_parser jp);</span>
+<span class='curline'><a href='../S/460.html#L38'>jp</a>                 38 ext/json/JSON_parser.h static inline int parse_JSON(JSON_parser jp, zval *z, unsigned short utf16_json[], int length, int assoc TSRMLS_DC)</span>
+<span class='curline'><a href='../S/460.html#L40'>jp</a>                 40 ext/json/JSON_parser.h 	return parse_JSON_ex(jp, z, utf16_json, length, assoc ? PHP_JSON_OBJECT_AS_ARRAY : 0 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/458.html#L688'>jp</a>                688 ext/json/json.c 	JSON_parser jp;</span>
+<span class='curline'><a href='../S/458.html#L708'>jp</a>                708 ext/json/json.c 	jp = new_JSON_parser(depth);</span>
+<span class='curline'><a href='../S/458.html#L709'>jp</a>                709 ext/json/json.c 	if (parse_JSON_ex(jp, z, utf16, utf16_len, options TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/458.html#L736'>jp</a>                736 ext/json/json.c 				jp-&gt;error_code = PHP_JSON_ERROR_NONE;</span>
+<span class='curline'><a href='../S/458.html#L779'>jp</a>                779 ext/json/json.c 			jp-&gt;error_code = PHP_JSON_ERROR_NONE;</span>
+<span class='curline'><a href='../S/458.html#L786'>jp</a>                786 ext/json/json.c 	JSON_G(error_code) = jp-&gt;error_code;</span>
+<span class='curline'><a href='../S/458.html#L787'>jp</a>                787 ext/json/json.c 	free_JSON_parser(jp);</span>
+</pre>
+</body>
+</html>

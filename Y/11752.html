@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>argument_stack</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/1669.html#L1651'>argument_stack</a>   1651 Zend/zend_execute.c 		EG(argument_stack) = zend_vm_stack_new_page((total_size + (sizeof(void*) - 1)) / sizeof(void*));</span>
+<span class='curline'><a href='../S/1669.html#L1652'>argument_stack</a>   1652 Zend/zend_execute.c 		EG(argument_stack)-&gt;prev = NULL;</span>
+<span class='curline'><a href='../S/1669.html#L1653'>argument_stack</a>   1653 Zend/zend_execute.c 		execute_data = (zend_execute_data*)((char*)ZEND_VM_STACK_ELEMETS(EG(argument_stack)) + args_size + execute_data_size + Ts_size);</span>
+<span class='curline'><a href='../S/1669.html#L1656'>argument_stack</a>   1656 Zend/zend_execute.c 		EX(prev_execute_data) = (zend_execute_data*)((char*)ZEND_VM_STACK_ELEMETS(EG(argument_stack)) + args_size);</span>
+<span class='curline'><a href='../S/1669.html#L1659'>argument_stack</a>   1659 Zend/zend_execute.c 		EX(prev_execute_data)-&gt;function_state.arguments = (void**)((char*)ZEND_VM_STACK_ELEMETS(EG(argument_stack)) + ZEND_MM_ALIGNED_SIZE(sizeof(zval*)) * args_count);</span>
+<span class='curline'><a href='../S/1669.html#L1686'>argument_stack</a>   1686 Zend/zend_execute.c 	EG(argument_stack)-&gt;top = zend_vm_stack_frame_base(execute_data);</span>
+<span class='curline'><a href='../S/1669.html#L1738'>argument_stack</a>   1738 Zend/zend_execute.c 	zend_vm_stack p = EG(argument_stack);</span>
+<span class='curline'><a href='../S/1669.html#L1742'>argument_stack</a>   1742 Zend/zend_execute.c 	EG(argument_stack)-&gt;top += count;</span>
+<span class='curline'><a href='../S/1669.html#L1743'>argument_stack</a>   1743 Zend/zend_execute.c 	*(EG(argument_stack)-&gt;top) = (void*)(zend_uintptr_t)count;</span>
+<span class='curline'><a href='../S/1669.html#L1750'>argument_stack</a>   1750 Zend/zend_execute.c 			EG(argument_stack)-&gt;prev = p-&gt;prev;</span>
+<span class='curline'><a href='../S/1669.html#L1754'>argument_stack</a>   1754 Zend/zend_execute.c 		*(ZEND_VM_STACK_ELEMETS(EG(argument_stack)) + count) = data;</span>
+<span class='curline'><a href='../S/1669.html#L1756'>argument_stack</a>   1756 Zend/zend_execute.c 	return EG(argument_stack)-&gt;top++;</span>
+<span class='curline'><a href='../S/1669.html#L1762'>argument_stack</a>   1762 Zend/zend_execute.c 	if (UNEXPECTED(EG(argument_stack)-&gt;top - ZEND_VM_STACK_ELEMETS(EG(argument_stack)) &lt; count)</span>
+<span class='curline'><a href='../S/1669.html#L1763'>argument_stack</a>   1763 Zend/zend_execute.c 		|| UNEXPECTED(EG(argument_stack)-&gt;top == EG(argument_stack)-&gt;end)) {</span>
+<span class='curline'><a href='../S/1669.html#L1766'>argument_stack</a>   1766 Zend/zend_execute.c 	*(EG(argument_stack)-&gt;top) = (void*)(zend_uintptr_t)count;</span>
+<span class='curline'><a href='../S/1669.html#L1767'>argument_stack</a>   1767 Zend/zend_execute.c 	return EG(argument_stack)-&gt;top++;</span>
+<span class='curline'><a href='../S/1670.html#L181'>argument_stack</a>    181 Zend/zend_execute.h 		    EG(argument_stack)-&gt;end - EG(argument_stack)-&gt;top)) {	\</span>
+<span class='curline'><a href='../S/1670.html#L197'>argument_stack</a>    197 Zend/zend_execute.h 	EG(argument_stack) = zend_vm_stack_new_page(ZEND_VM_STACK_PAGE_SIZE);</span>
+<span class='curline'><a href='../S/1670.html#L202'>argument_stack</a>    202 Zend/zend_execute.h 	zend_vm_stack stack = EG(argument_stack);</span>
+<span class='curline'><a href='../S/1670.html#L214'>argument_stack</a>    214 Zend/zend_execute.h 	p-&gt;prev = EG(argument_stack);</span>
+<span class='curline'><a href='../S/1670.html#L215'>argument_stack</a>    215 Zend/zend_execute.h 	EG(argument_stack) = p;</span>
+<span class='curline'><a href='../S/1670.html#L220'>argument_stack</a>    220 Zend/zend_execute.h 	return EG(argument_stack)-&gt;top;</span>
+<span class='curline'><a href='../S/1670.html#L225'>argument_stack</a>    225 Zend/zend_execute.h 	*(EG(argument_stack)-&gt;top++) = ptr;</span>
+<span class='curline'><a href='../S/1670.html#L230'>argument_stack</a>    230 Zend/zend_execute.h 	void *el = *(--EG(argument_stack)-&gt;top);</span>
+<span class='curline'><a href='../S/1670.html#L243'>argument_stack</a>    243 Zend/zend_execute.h 		int extra = (ZEND_MM_ALIGNMENT - ((zend_uintptr_t)EG(argument_stack)-&gt;top &amp; (ZEND_MM_ALIGNMENT - 1))) / sizeof(void*);</span>
+<span class='curline'><a href='../S/1670.html#L246'>argument_stack</a>    246 Zend/zend_execute.h 		    (zend_uintptr_t)(EG(argument_stack)-&gt;end - EG(argument_stack)-&gt;top))) {</span>
+<span class='curline'><a href='../S/1670.html#L249'>argument_stack</a>    249 Zend/zend_execute.h 			void **old_top = EG(argument_stack)-&gt;top;</span>
+<span class='curline'><a href='../S/1670.html#L251'>argument_stack</a>    251 Zend/zend_execute.h 			EG(argument_stack)-&gt;top += extra;</span>
+<span class='curline'><a href='../S/1670.html#L253'>argument_stack</a>    253 Zend/zend_execute.h 			*EG(argument_stack)-&gt;top = (void*)old_top;</span>
+<span class='curline'><a href='../S/1670.html#L254'>argument_stack</a>    254 Zend/zend_execute.h 			EG(argument_stack)-&gt;top += ZEND_MM_ALIGNED_SIZE(sizeof(void*)) / sizeof(void*);</span>
+<span class='curline'><a href='../S/1670.html#L259'>argument_stack</a>    259 Zend/zend_execute.h 	ret = (void*)EG(argument_stack)-&gt;top;</span>
+<span class='curline'><a href='../S/1670.html#L260'>argument_stack</a>    260 Zend/zend_execute.h 	EG(argument_stack)-&gt;top += size;</span>
+<span class='curline'><a href='../S/1670.html#L272'>argument_stack</a>    272 Zend/zend_execute.h 	if (UNEXPECTED(ZEND_VM_STACK_ELEMETS(EG(argument_stack)) == (void**)ptr)) {</span>
+<span class='curline'><a href='../S/1670.html#L273'>argument_stack</a>    273 Zend/zend_execute.h 		zend_vm_stack p = EG(argument_stack);</span>
+<span class='curline'><a href='../S/1670.html#L275'>argument_stack</a>    275 Zend/zend_execute.h 		EG(argument_stack) = p-&gt;prev;</span>
+<span class='curline'><a href='../S/1670.html#L278'>argument_stack</a>    278 Zend/zend_execute.h 		EG(argument_stack)-&gt;top = (void**)ptr;</span>
+<span class='curline'><a href='../S/1670.html#L284'>argument_stack</a>    284 Zend/zend_execute.h 	if (UNEXPECTED(ZEND_VM_STACK_ELEMETS(EG(argument_stack)) == (void**)ptr)) {</span>
+<span class='curline'><a href='../S/1670.html#L285'>argument_stack</a>    285 Zend/zend_execute.h 		zend_vm_stack p = EG(argument_stack);</span>
+<span class='curline'><a href='../S/1670.html#L287'>argument_stack</a>    287 Zend/zend_execute.h 		EG(argument_stack) = p-&gt;prev;</span>
+<span class='curline'><a href='../S/1670.html#L293'>argument_stack</a>    293 Zend/zend_execute.h 			EG(argument_stack)-&gt;top = *(void***)ptr;</span>
+<span class='curline'><a href='../S/1670.html#L295'>argument_stack</a>    295 Zend/zend_execute.h 			EG(argument_stack)-&gt;top = (void**)ptr;</span>
+<span class='curline'><a href='../S/1670.html#L302'>argument_stack</a>    302 Zend/zend_execute.h 	void **p = EG(argument_stack)-&gt;top - 1;</span>
+<span class='curline'><a href='../S/1670.html#L311'>argument_stack</a>    311 Zend/zend_execute.h 		EG(argument_stack)-&gt;top = p;</span>
+<span class='curline'><a href='../S/1671.html#L729'>argument_stack</a>    729 Zend/zend_execute_API.c 					if (i || UNEXPECTED(ZEND_VM_STACK_ELEMETS(EG(argument_stack)) == (EG(argument_stack)-&gt;top))) {</span>
+<span class='curline'><a href='../S/1678.html#L263'>argument_stack</a>    263 Zend/zend_generators.c 	zend_vm_stack current_stack = EG(argument_stack);</span>
+<span class='curline'><a href='../S/1678.html#L317'>argument_stack</a>    317 Zend/zend_generators.c 	generator-&gt;stack = EG(argument_stack);</span>
+<span class='curline'><a href='../S/1678.html#L318'>argument_stack</a>    318 Zend/zend_generators.c 	EG(argument_stack) = current_stack;</span>
+<span class='curline'><a href='../S/1678.html#L356'>argument_stack</a>    356 Zend/zend_generators.c 		zend_vm_stack original_stack = EG(argument_stack);</span>
+<span class='curline'><a href='../S/1678.html#L370'>argument_stack</a>    370 Zend/zend_generators.c 		EG(argument_stack) = generator-&gt;stack;</span>
+<span class='curline'><a href='../S/1678.html#L394'>argument_stack</a>    394 Zend/zend_generators.c 		EG(argument_stack) = original_stack;</span>
+<span class='curline'><a href='../S/1680.html#L226'>argument_stack</a>    226 Zend/zend_globals.h 	zend_vm_stack argument_stack;</span>
+<span class='curline'><a href='../S/1031.html#L96'>argument_stack</a>     96 ext/soap/soap.c 	void **_old_stack_top = EG(argument_stack)-&gt;top; \</span>
+<span class='curline'><a href='../S/1031.html#L113'>argument_stack</a>    113 ext/soap/soap.c 		if (_old_stack_top != EG(argument_stack)-&gt;top) { \</span>
+<span class='curline'><a href='../S/1031.html#L114'>argument_stack</a>    114 ext/soap/soap.c 			while (EG(argument_stack)-&gt;prev != NULL &amp;&amp; \</span>
+<span class='curline'><a href='../S/1031.html#L115'>argument_stack</a>    115 ext/soap/soap.c 			       ((char*)_old_stack_top &lt; (char*)EG(argument_stack) || \</span>
+<span class='curline'><a href='../S/1031.html#L116'>argument_stack</a>    116 ext/soap/soap.c 			        (char*) _old_stack_top &gt; (char*)EG(argument_stack)-&gt;end)) { \</span>
+<span class='curline'><a href='../S/1031.html#L117'>argument_stack</a>    117 ext/soap/soap.c 				zend_vm_stack tmp = EG(argument_stack)-&gt;prev; \</span>
+<span class='curline'><a href='../S/1031.html#L118'>argument_stack</a>    118 ext/soap/soap.c 				efree(EG(argument_stack)); \</span>
+<span class='curline'><a href='../S/1031.html#L119'>argument_stack</a>    119 ext/soap/soap.c 				EG(argument_stack) = tmp; \</span>
+<span class='curline'><a href='../S/1031.html#L121'>argument_stack</a>    121 ext/soap/soap.c 			EG(argument_stack)-&gt;top = _old_stack_top; \</span>
+<span class='curline'><a href='../S/1063.html#L1390'>argument_stack</a>   1390 ext/spl/spl_iterators.c 	p = EG(argument_stack).top_element-2;</span>
+</pre>
+</body>
+</html>

@@ -1,0 +1,686 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>fci</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/1646.html#L622'>fci</a>               622 Zend/zend_API.c 				zend_fcall_info *fci = va_arg(*va, zend_fcall_info *);</span>
+<span class='curline'><a href='../S/1646.html#L627'>fci</a>               627 Zend/zend_API.c 					fci-&gt;size = 0;</span>
+<span class='curline'><a href='../S/1646.html#L632'>fci</a>               632 Zend/zend_API.c 				if (zend_fcall_info_init(*arg, 0, fci, fcc, NULL, &amp;is_callable_error TSRMLS_CC) == SUCCESS) {</span>
+<span class='curline'><a href='../S/1646.html#L3249'>fci</a>              3249 Zend/zend_API.c ZEND_API int zend_fcall_info_init(zval *callable, uint check_flags, zend_fcall_info *fci, zend_fcall_info_cache *fcc, char **callable_name, char **error TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1646.html#L3255'>fci</a>              3255 Zend/zend_API.c 	fci-&gt;size = sizeof(*fci);</span>
+<span class='curline'><a href='../S/1646.html#L3256'>fci</a>              3256 Zend/zend_API.c 	fci-&gt;function_table = fcc-&gt;calling_scope ? &amp;fcc-&gt;calling_scope-&gt;function_table : EG(function_table);</span>
+<span class='curline'><a href='../S/1646.html#L3257'>fci</a>              3257 Zend/zend_API.c 	fci-&gt;object_ptr = fcc-&gt;object_ptr;</span>
+<span class='curline'><a href='../S/1646.html#L3258'>fci</a>              3258 Zend/zend_API.c 	fci-&gt;function_name = callable;</span>
+<span class='curline'><a href='../S/1646.html#L3259'>fci</a>              3259 Zend/zend_API.c 	fci-&gt;retval_ptr_ptr = NULL;</span>
+<span class='curline'><a href='../S/1646.html#L3260'>fci</a>              3260 Zend/zend_API.c 	fci-&gt;param_count = 0;</span>
+<span class='curline'><a href='../S/1646.html#L3261'>fci</a>              3261 Zend/zend_API.c 	fci-&gt;params = NULL;</span>
+<span class='curline'><a href='../S/1646.html#L3262'>fci</a>              3262 Zend/zend_API.c 	fci-&gt;no_separation = 1;</span>
+<span class='curline'><a href='../S/1646.html#L3263'>fci</a>              3263 Zend/zend_API.c 	fci-&gt;symbol_table = NULL;</span>
+<span class='curline'><a href='../S/1646.html#L3269'>fci</a>              3269 Zend/zend_API.c ZEND_API void zend_fcall_info_args_clear(zend_fcall_info *fci, int free_mem) /* {{{ */</span>
+<span class='curline'><a href='../S/1646.html#L3271'>fci</a>              3271 Zend/zend_API.c 	if (fci-&gt;params) {</span>
+<span class='curline'><a href='../S/1646.html#L3273'>fci</a>              3273 Zend/zend_API.c 			efree(fci-&gt;params);</span>
+<span class='curline'><a href='../S/1646.html#L3274'>fci</a>              3274 Zend/zend_API.c 			fci-&gt;params = NULL;</span>
+<span class='curline'><a href='../S/1646.html#L3277'>fci</a>              3277 Zend/zend_API.c 	fci-&gt;param_count = 0;</span>
+<span class='curline'><a href='../S/1646.html#L3281'>fci</a>              3281 Zend/zend_API.c ZEND_API void zend_fcall_info_args_save(zend_fcall_info *fci, int *param_count, zval ****params) /* {{{ */</span>
+<span class='curline'><a href='../S/1646.html#L3283'>fci</a>              3283 Zend/zend_API.c 	*param_count = fci-&gt;param_count;</span>
+<span class='curline'><a href='../S/1646.html#L3284'>fci</a>              3284 Zend/zend_API.c 	*params = fci-&gt;params;</span>
+<span class='curline'><a href='../S/1646.html#L3285'>fci</a>              3285 Zend/zend_API.c 	fci-&gt;param_count = 0;</span>
+<span class='curline'><a href='../S/1646.html#L3286'>fci</a>              3286 Zend/zend_API.c 	fci-&gt;params = NULL;</span>
+<span class='curline'><a href='../S/1646.html#L3290'>fci</a>              3290 Zend/zend_API.c ZEND_API void zend_fcall_info_args_restore(zend_fcall_info *fci, int param_count, zval ***params) /* {{{ */</span>
+<span class='curline'><a href='../S/1646.html#L3292'>fci</a>              3292 Zend/zend_API.c 	zend_fcall_info_args_clear(fci, 1);</span>
+<span class='curline'><a href='../S/1646.html#L3293'>fci</a>              3293 Zend/zend_API.c 	fci-&gt;param_count = param_count;</span>
+<span class='curline'><a href='../S/1646.html#L3294'>fci</a>              3294 Zend/zend_API.c 	fci-&gt;params = params;</span>
+<span class='curline'><a href='../S/1646.html#L3298'>fci</a>              3298 Zend/zend_API.c ZEND_API int zend_fcall_info_args(zend_fcall_info *fci, zval *args TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1646.html#L3303'>fci</a>              3303 Zend/zend_API.c 	zend_fcall_info_args_clear(fci, !args);</span>
+<span class='curline'><a href='../S/1646.html#L3313'>fci</a>              3313 Zend/zend_API.c 	fci-&gt;param_count = zend_hash_num_elements(Z_ARRVAL_P(args));</span>
+<span class='curline'><a href='../S/1646.html#L3314'>fci</a>              3314 Zend/zend_API.c 	fci-&gt;params = params = (zval ***) erealloc(fci-&gt;params, fci-&gt;param_count * sizeof(zval **));</span>
+<span class='curline'><a href='../S/1646.html#L3326'>fci</a>              3326 Zend/zend_API.c ZEND_API int zend_fcall_info_argp(zend_fcall_info *fci TSRMLS_DC, int argc, zval ***argv) /* {{{ */</span>
+<span class='curline'><a href='../S/1646.html#L3334'>fci</a>              3334 Zend/zend_API.c 	zend_fcall_info_args_clear(fci, !argc);</span>
+<span class='curline'><a href='../S/1646.html#L3337'>fci</a>              3337 Zend/zend_API.c 		fci-&gt;param_count = argc;</span>
+<span class='curline'><a href='../S/1646.html#L3338'>fci</a>              3338 Zend/zend_API.c 		fci-&gt;params = (zval ***) erealloc(fci-&gt;params, fci-&gt;param_count * sizeof(zval **));</span>
+<span class='curline'><a href='../S/1646.html#L3341'>fci</a>              3341 Zend/zend_API.c 			fci-&gt;params[i] = argv[i];</span>
+<span class='curline'><a href='../S/1646.html#L3349'>fci</a>              3349 Zend/zend_API.c ZEND_API int zend_fcall_info_argv(zend_fcall_info *fci TSRMLS_DC, int argc, va_list *argv) /* {{{ */</span>
+<span class='curline'><a href='../S/1646.html#L3358'>fci</a>              3358 Zend/zend_API.c 	zend_fcall_info_args_clear(fci, !argc);</span>
+<span class='curline'><a href='../S/1646.html#L3361'>fci</a>              3361 Zend/zend_API.c 		fci-&gt;param_count = argc;</span>
+<span class='curline'><a href='../S/1646.html#L3362'>fci</a>              3362 Zend/zend_API.c 		fci-&gt;params = (zval ***) erealloc(fci-&gt;params, fci-&gt;param_count * sizeof(zval **));</span>
+<span class='curline'><a href='../S/1646.html#L3366'>fci</a>              3366 Zend/zend_API.c 			fci-&gt;params[i] = arg;</span>
+<span class='curline'><a href='../S/1646.html#L3374'>fci</a>              3374 Zend/zend_API.c ZEND_API int zend_fcall_info_argn(zend_fcall_info *fci TSRMLS_DC, int argc, ...) /* {{{ */</span>
+<span class='curline'><a href='../S/1646.html#L3380'>fci</a>              3380 Zend/zend_API.c 	ret = zend_fcall_info_argv(fci TSRMLS_CC, argc, &amp;argv);</span>
+<span class='curline'><a href='../S/1646.html#L3387'>fci</a>              3387 Zend/zend_API.c ZEND_API int zend_fcall_info_call(zend_fcall_info *fci, zend_fcall_info_cache *fcc, zval **retval_ptr_ptr, zval *args TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1646.html#L3392'>fci</a>              3392 Zend/zend_API.c 	fci-&gt;retval_ptr_ptr = retval_ptr_ptr ? retval_ptr_ptr : &amp;retval;</span>
+<span class='curline'><a href='../S/1646.html#L3394'>fci</a>              3394 Zend/zend_API.c 		zend_fcall_info_args_save(fci, &amp;org_count, &amp;org_params);</span>
+<span class='curline'><a href='../S/1646.html#L3395'>fci</a>              3395 Zend/zend_API.c 		zend_fcall_info_args(fci, args TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1646.html#L3397'>fci</a>              3397 Zend/zend_API.c 	result = zend_call_function(fci, fcc TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1646.html#L3403'>fci</a>              3403 Zend/zend_API.c 		zend_fcall_info_args_restore(fci, org_count, org_params);</span>
+<span class='curline'><a href='../S/1647.html#L234'>fci</a>               234 Zend/zend_API.h #define ZEND_FCI_INITIALIZED(fci) ((fci).size != 0)</span>
+<span class='curline'><a href='../S/1647.html#L469'>fci</a>               469 Zend/zend_API.h ZEND_API int zend_fcall_info_init(zval *callable, uint check_flags, zend_fcall_info *fci, zend_fcall_info_cache *fcc, char **callable_name, char **error TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1647.html#L474'>fci</a>               474 Zend/zend_API.h ZEND_API void zend_fcall_info_args_clear(zend_fcall_info *fci, int free_mem);</span>
+<span class='curline'><a href='../S/1647.html#L479'>fci</a>               479 Zend/zend_API.h ZEND_API void zend_fcall_info_args_save(zend_fcall_info *fci, int *param_count, zval ****params);</span>
+<span class='curline'><a href='../S/1647.html#L483'>fci</a>               483 Zend/zend_API.h ZEND_API void zend_fcall_info_args_restore(zend_fcall_info *fci, int param_count, zval ***params);</span>
+<span class='curline'><a href='../S/1647.html#L488'>fci</a>               488 Zend/zend_API.h ZEND_API int zend_fcall_info_args(zend_fcall_info *fci, zval *args TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1647.html#L494'>fci</a>               494 Zend/zend_API.h ZEND_API int zend_fcall_info_argp(zend_fcall_info *fci TSRMLS_DC, int argc, zval ***argv);</span>
+<span class='curline'><a href='../S/1647.html#L500'>fci</a>               500 Zend/zend_API.h ZEND_API int zend_fcall_info_argv(zend_fcall_info *fci TSRMLS_DC, int argc, va_list *argv);</span>
+<span class='curline'><a href='../S/1647.html#L506'>fci</a>               506 Zend/zend_API.h ZEND_API int zend_fcall_info_argn(zend_fcall_info *fci TSRMLS_DC, int argc, ...);</span>
+<span class='curline'><a href='../S/1647.html#L511'>fci</a>               511 Zend/zend_API.h ZEND_API int zend_fcall_info_call(zend_fcall_info *fci, zend_fcall_info_cache *fcc, zval **retval, zval *args TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1647.html#L513'>fci</a>               513 Zend/zend_API.h ZEND_API int zend_call_function(zend_fcall_info *fci, zend_fcall_info_cache *fci_cache TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1662.html#L84'>fci</a>                84 Zend/zend_dtrace.c ZEND_API void dtrace_execute_internal(zend_execute_data *execute_data_ptr, zend_fcall_info *fci, int return_value_used TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1662.html#L97'>fci</a>                97 Zend/zend_dtrace.c 	execute_internal(execute_data_ptr, fci, return_value_used TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1663.html#L35'>fci</a>                35 Zend/zend_dtrace.h ZEND_API void (*zend_dtrace_execute_internal)(zend_execute_data *execute_data_ptr, zend_fcall_info *fci, int return_value_used TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1663.html#L39'>fci</a>                39 Zend/zend_dtrace.h ZEND_API void dtrace_execute_internal(zend_execute_data *execute_data_ptr, zend_fcall_info *fci, int return_value_used TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1667.html#L676'>fci</a>               676 Zend/zend_exceptions.c 	zend_fcall_info fci;</span>
+<span class='curline'><a href='../S/1667.html#L697'>fci</a>               697 Zend/zend_exceptions.c 		fci.size = sizeof(fci);</span>
+<span class='curline'><a href='../S/1667.html#L698'>fci</a>               698 Zend/zend_exceptions.c 		fci.function_table = &amp;Z_OBJCE_P(exception)-&gt;function_table;</span>
+<span class='curline'><a href='../S/1667.html#L699'>fci</a>               699 Zend/zend_exceptions.c 		fci.function_name = &amp;fname;</span>
+<span class='curline'><a href='../S/1667.html#L700'>fci</a>               700 Zend/zend_exceptions.c 		fci.symbol_table = NULL;</span>
+<span class='curline'><a href='../S/1667.html#L701'>fci</a>               701 Zend/zend_exceptions.c 		fci.object_ptr = exception;</span>
+<span class='curline'><a href='../S/1667.html#L702'>fci</a>               702 Zend/zend_exceptions.c 		fci.retval_ptr_ptr = &amp;trace;</span>
+<span class='curline'><a href='../S/1667.html#L703'>fci</a>               703 Zend/zend_exceptions.c 		fci.param_count = 0;</span>
+<span class='curline'><a href='../S/1667.html#L704'>fci</a>               704 Zend/zend_exceptions.c 		fci.params = NULL;</span>
+<span class='curline'><a href='../S/1667.html#L705'>fci</a>               705 Zend/zend_exceptions.c 		fci.no_separation = 1;</span>
+<span class='curline'><a href='../S/1667.html#L707'>fci</a>               707 Zend/zend_exceptions.c 		zend_call_function(&amp;fci, NULL TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1669.html#L1518'>fci</a>              1518 Zend/zend_execute.c ZEND_API void execute_internal(zend_execute_data *execute_data_ptr, zend_fcall_info *fci, int return_value_used TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1669.html#L1520'>fci</a>              1520 Zend/zend_execute.c 	if (fci != NULL) {</span>
+<span class='curline'><a href='../S/1669.html#L1522'>fci</a>              1522 Zend/zend_execute.c 			fci-&gt;param_count, *fci-&gt;retval_ptr_ptr, fci-&gt;retval_ptr_ptr,</span>
+<span class='curline'><a href='../S/1669.html#L1523'>fci</a>              1523 Zend/zend_execute.c 			fci-&gt;object_ptr, 1 TSRMLS_CC</span>
+<span class='curline'><a href='../S/1670.html#L54'>fci</a>                54 Zend/zend_execute.h ZEND_API extern void (*zend_execute_internal)(zend_execute_data *execute_data_ptr, struct _zend_fcall_info *fci, int return_value_used TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1670.html#L62'>fci</a>                62 Zend/zend_execute.h ZEND_API void execute_internal(zend_execute_data *execute_data_ptr, struct _zend_fcall_info *fci, int return_value_used TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1671.html#L42'>fci</a>                42 Zend/zend_execute_API.c ZEND_API void (*zend_execute_internal)(zend_execute_data *execute_data_ptr, zend_fcall_info *fci, int return_value_used TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1671.html#L605'>fci</a>               605 Zend/zend_execute_API.c 	zend_fcall_info fci;</span>
+<span class='curline'><a href='../S/1671.html#L607'>fci</a>               607 Zend/zend_execute_API.c 	fci.size = sizeof(fci);</span>
+<span class='curline'><a href='../S/1671.html#L608'>fci</a>               608 Zend/zend_execute_API.c 	fci.function_table = function_table;</span>
+<span class='curline'><a href='../S/1671.html#L609'>fci</a>               609 Zend/zend_execute_API.c 	fci.object_ptr = object_pp ? *object_pp : NULL;</span>
+<span class='curline'><a href='../S/1671.html#L610'>fci</a>               610 Zend/zend_execute_API.c 	fci.function_name = function_name;</span>
+<span class='curline'><a href='../S/1671.html#L611'>fci</a>               611 Zend/zend_execute_API.c 	fci.retval_ptr_ptr = retval_ptr_ptr;</span>
+<span class='curline'><a href='../S/1671.html#L612'>fci</a>               612 Zend/zend_execute_API.c 	fci.param_count = param_count;</span>
+<span class='curline'><a href='../S/1671.html#L613'>fci</a>               613 Zend/zend_execute_API.c 	fci.params = params;</span>
+<span class='curline'><a href='../S/1671.html#L614'>fci</a>               614 Zend/zend_execute_API.c 	fci.no_separation = (zend_bool) no_separation;</span>
+<span class='curline'><a href='../S/1671.html#L615'>fci</a>               615 Zend/zend_execute_API.c 	fci.symbol_table = symbol_table;</span>
+<span class='curline'><a href='../S/1671.html#L617'>fci</a>               617 Zend/zend_execute_API.c 	return zend_call_function(&amp;fci, NULL TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1671.html#L621'>fci</a>               621 Zend/zend_execute_API.c int zend_call_function(zend_fcall_info *fci, zend_fcall_info_cache *fci_cache TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1671.html#L636'>fci</a>               636 Zend/zend_execute_API.c 	*fci-&gt;retval_ptr_ptr = NULL;</span>
+<span class='curline'><a href='../S/1671.html#L646'>fci</a>               646 Zend/zend_execute_API.c 	switch (fci-&gt;size) {</span>
+<span class='curline'><a href='../S/1671.html#L676'>fci</a>               676 Zend/zend_execute_API.c 		if (!zend_is_callable_ex(fci-&gt;function_name, fci-&gt;object_ptr, IS_CALLABLE_CHECK_SILENT, &amp;callable_name, NULL, fci_cache, &amp;error TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/1671.html#L699'>fci</a>               699 Zend/zend_execute_API.c 	fci-&gt;object_ptr = fci_cache-&gt;object_ptr;</span>
+<span class='curline'><a href='../S/1671.html#L700'>fci</a>               700 Zend/zend_execute_API.c 	EX(object) = fci-&gt;object_ptr;</span>
+<span class='curline'><a href='../S/1671.html#L701'>fci</a>               701 Zend/zend_execute_API.c 	if (fci-&gt;object_ptr &amp;&amp; Z_TYPE_P(fci-&gt;object_ptr) == IS_OBJECT &amp;&amp;</span>
+<span class='curline'><a href='../S/1671.html#L702'>fci</a>               702 Zend/zend_execute_API.c 	    (!EG(objects_store).object_buckets || !EG(objects_store).object_buckets[Z_OBJ_HANDLE_P(fci-&gt;object_ptr)].valid)) {</span>
+<span class='curline'><a href='../S/1671.html#L718'>fci</a>               718 Zend/zend_execute_API.c 	ZEND_VM_STACK_GROW_IF_NEEDED(fci-&gt;param_count + 1);</span>
+<span class='curline'><a href='../S/1671.html#L720'>fci</a>               720 Zend/zend_execute_API.c 	for (i=0; i&lt;fci-&gt;param_count; i++) {</span>
+<span class='curline'><a href='../S/1671.html#L724'>fci</a>               724 Zend/zend_execute_API.c 			if (!PZVAL_IS_REF(*fci-&gt;params[i]) &amp;&amp; Z_REFCOUNT_PP(fci-&gt;params[i]) &gt; 1) {</span>
+<span class='curline'><a href='../S/1671.html#L727'>fci</a>               727 Zend/zend_execute_API.c 				if (fci-&gt;no_separation &amp;&amp;</span>
+<span class='curline'><a href='../S/1671.html#L744'>fci</a>               744 Zend/zend_execute_API.c 				*new_zval = **fci-&gt;params[i];</span>
+<span class='curline'><a href='../S/1671.html#L747'>fci</a>               747 Zend/zend_execute_API.c 				Z_DELREF_PP(fci-&gt;params[i]);</span>
+<span class='curline'><a href='../S/1671.html#L748'>fci</a>               748 Zend/zend_execute_API.c 				*fci-&gt;params[i] = new_zval;</span>
+<span class='curline'><a href='../S/1671.html#L750'>fci</a>               750 Zend/zend_execute_API.c 			Z_ADDREF_PP(fci-&gt;params[i]);</span>
+<span class='curline'><a href='../S/1671.html#L751'>fci</a>               751 Zend/zend_execute_API.c 			Z_SET_ISREF_PP(fci-&gt;params[i]);</span>
+<span class='curline'><a href='../S/1671.html#L752'>fci</a>               752 Zend/zend_execute_API.c 			param = *fci-&gt;params[i];</span>
+<span class='curline'><a href='../S/1671.html#L753'>fci</a>               753 Zend/zend_execute_API.c 		} else if (PZVAL_IS_REF(*fci-&gt;params[i]) &amp;&amp;</span>
+<span class='curline'><a href='../S/1671.html#L757'>fci</a>               757 Zend/zend_execute_API.c 			*param = **(fci-&gt;params[i]);</span>
+<span class='curline'><a href='../S/1671.html#L760'>fci</a>               760 Zend/zend_execute_API.c 		} else if (*fci-&gt;params[i] != &amp;EG(uninitialized_zval)) {</span>
+<span class='curline'><a href='../S/1671.html#L761'>fci</a>               761 Zend/zend_execute_API.c 			Z_ADDREF_PP(fci-&gt;params[i]);</span>
+<span class='curline'><a href='../S/1671.html#L762'>fci</a>               762 Zend/zend_execute_API.c 			param = *fci-&gt;params[i];</span>
+<span class='curline'><a href='../S/1671.html#L765'>fci</a>               765 Zend/zend_execute_API.c 			*param = **(fci-&gt;params[i]);</span>
+<span class='curline'><a href='../S/1671.html#L772'>fci</a>               772 Zend/zend_execute_API.c 	zend_vm_stack_push((void*)(zend_uintptr_t)fci-&gt;param_count TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1671.html#L786'>fci</a>               786 Zend/zend_execute_API.c 	if (fci-&gt;object_ptr) {</span>
+<span class='curline'><a href='../S/1671.html#L790'>fci</a>               790 Zend/zend_execute_API.c 			EG(This) = fci-&gt;object_ptr;</span>
+<span class='curline'><a href='../S/1671.html#L814'>fci</a>               814 Zend/zend_execute_API.c 		if (fci-&gt;symbol_table) {</span>
+<span class='curline'><a href='../S/1671.html#L815'>fci</a>               815 Zend/zend_execute_API.c 			EG(active_symbol_table) = fci-&gt;symbol_table;</span>
+<span class='curline'><a href='../S/1671.html#L822'>fci</a>               822 Zend/zend_execute_API.c 		EG(return_value_ptr_ptr) = fci-&gt;retval_ptr_ptr;</span>
+<span class='curline'><a href='../S/1671.html#L827'>fci</a>               827 Zend/zend_execute_API.c 			*fci-&gt;retval_ptr_ptr = zend_generator_create_zval(EG(active_op_array) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1671.html#L832'>fci</a>               832 Zend/zend_execute_API.c 		if (!fci-&gt;symbol_table &amp;&amp; EG(active_symbol_table)) {</span>
+<span class='curline'><a href='../S/1671.html#L841'>fci</a>               841 Zend/zend_execute_API.c 		ALLOC_INIT_ZVAL(*fci-&gt;retval_ptr_ptr);</span>
+<span class='curline'><a href='../S/1671.html#L847'>fci</a>               847 Zend/zend_execute_API.c 			EX(function_state).function-&gt;internal_function.handler(fci-&gt;param_count, *fci-&gt;retval_ptr_ptr, fci-&gt;retval_ptr_ptr, fci-&gt;object_ptr, 1 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1671.html#L849'>fci</a>               849 Zend/zend_execute_API.c 			zend_execute_internal(&amp;execute_data, fci, 1 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1671.html#L857'>fci</a>               857 Zend/zend_execute_API.c 		if (EG(exception) &amp;&amp; fci-&gt;retval_ptr_ptr) {</span>
+<span class='curline'><a href='../S/1671.html#L858'>fci</a>               858 Zend/zend_execute_API.c 			zval_ptr_dtor(fci-&gt;retval_ptr_ptr);</span>
+<span class='curline'><a href='../S/1671.html#L859'>fci</a>               859 Zend/zend_execute_API.c 			*fci-&gt;retval_ptr_ptr = NULL;</span>
+<span class='curline'><a href='../S/1671.html#L867'>fci</a>               867 Zend/zend_execute_API.c 		ALLOC_INIT_ZVAL(*fci-&gt;retval_ptr_ptr);</span>
+<span class='curline'><a href='../S/1671.html#L870'>fci</a>               870 Zend/zend_execute_API.c 		if (fci-&gt;object_ptr) {</span>
+<span class='curline'><a href='../S/1671.html#L871'>fci</a>               871 Zend/zend_execute_API.c 			Z_OBJ_HT_P(fci-&gt;object_ptr)-&gt;call_method(EX(function_state).function-&gt;common.function_name, fci-&gt;param_count, *fci-&gt;retval_ptr_ptr, fci-&gt;retval_ptr_ptr, fci-&gt;object_ptr, 1 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1671.html#L881'>fci</a>               881 Zend/zend_execute_API.c 		if (EG(exception) &amp;&amp; fci-&gt;retval_ptr_ptr) {</span>
+<span class='curline'><a href='../S/1671.html#L882'>fci</a>               882 Zend/zend_execute_API.c 			zval_ptr_dtor(fci-&gt;retval_ptr_ptr);</span>
+<span class='curline'><a href='../S/1671.html#L883'>fci</a>               883 Zend/zend_execute_API.c 			*fci-&gt;retval_ptr_ptr = NULL;</span>
+<span class='curline'><a href='../S/1695.html#L37'>fci</a>                37 Zend/zend_interfaces.c 	zend_fcall_info fci;</span>
+<span class='curline'><a href='../S/1695.html#L47'>fci</a>                47 Zend/zend_interfaces.c 	fci.size = sizeof(fci);</span>
+<span class='curline'><a href='../S/1695.html#L49'>fci</a>                49 Zend/zend_interfaces.c 	fci.object_ptr = object_pp ? *object_pp : NULL;</span>
+<span class='curline'><a href='../S/1695.html#L50'>fci</a>                50 Zend/zend_interfaces.c 	fci.function_name = &amp;z_fname;</span>
+<span class='curline'><a href='../S/1695.html#L51'>fci</a>                51 Zend/zend_interfaces.c 	fci.retval_ptr_ptr = retval_ptr_ptr ? retval_ptr_ptr : &amp;retval;</span>
+<span class='curline'><a href='../S/1695.html#L52'>fci</a>                52 Zend/zend_interfaces.c 	fci.param_count = param_count;</span>
+<span class='curline'><a href='../S/1695.html#L53'>fci</a>                53 Zend/zend_interfaces.c 	fci.params = params;</span>
+<span class='curline'><a href='../S/1695.html#L54'>fci</a>                54 Zend/zend_interfaces.c 	fci.no_separation = 1;</span>
+<span class='curline'><a href='../S/1695.html#L55'>fci</a>                55 Zend/zend_interfaces.c 	fci.symbol_table = NULL;</span>
+<span class='curline'><a href='../S/1695.html#L61'>fci</a>                61 Zend/zend_interfaces.c 		fci.function_table = !object_pp ? EG(function_table) : NULL;</span>
+<span class='curline'><a href='../S/1695.html#L62'>fci</a>                62 Zend/zend_interfaces.c 		result = zend_call_function(&amp;fci, NULL TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1695.html#L97'>fci</a>                97 Zend/zend_interfaces.c 		result = zend_call_function(&amp;fci, &amp;fcic TSRMLS_CC);</span>
+<span class='curline'><a href='../S/60.html#L1324'>fci</a>              1324 ext/curl/interface.c 			zend_fcall_info fci;</span>
+<span class='curline'><a href='../S/60.html#L1335'>fci</a>              1335 ext/curl/interface.c 			fci.size = sizeof(fci);</span>
+<span class='curline'><a href='../S/60.html#L1336'>fci</a>              1336 ext/curl/interface.c 			fci.function_table = EG(function_table);</span>
+<span class='curline'><a href='../S/60.html#L1337'>fci</a>              1337 ext/curl/interface.c 			fci.object_ptr = NULL;</span>
+<span class='curline'><a href='../S/60.html#L1338'>fci</a>              1338 ext/curl/interface.c 			fci.function_name = t-&gt;func_name;</span>
+<span class='curline'><a href='../S/60.html#L1339'>fci</a>              1339 ext/curl/interface.c 			fci.retval_ptr_ptr = &amp;retval_ptr;</span>
+<span class='curline'><a href='../S/60.html#L1340'>fci</a>              1340 ext/curl/interface.c 			fci.param_count = 2;</span>
+<span class='curline'><a href='../S/60.html#L1341'>fci</a>              1341 ext/curl/interface.c 			fci.params = argv;</span>
+<span class='curline'><a href='../S/60.html#L1342'>fci</a>              1342 ext/curl/interface.c 			fci.no_separation = 0;</span>
+<span class='curline'><a href='../S/60.html#L1343'>fci</a>              1343 ext/curl/interface.c 			fci.symbol_table = NULL;</span>
+<span class='curline'><a href='../S/60.html#L1346'>fci</a>              1346 ext/curl/interface.c 			error = zend_call_function(&amp;fci, &amp;t-&gt;fci_cache TSRMLS_CC);</span>
+<span class='curline'><a href='../S/60.html#L1386'>fci</a>              1386 ext/curl/interface.c 			zend_fcall_info fci;</span>
+<span class='curline'><a href='../S/60.html#L1402'>fci</a>              1402 ext/curl/interface.c 			fci.size = sizeof(fci);</span>
+<span class='curline'><a href='../S/60.html#L1403'>fci</a>              1403 ext/curl/interface.c 			fci.function_table = EG(function_table);</span>
+<span class='curline'><a href='../S/60.html#L1404'>fci</a>              1404 ext/curl/interface.c 			fci.function_name = t-&gt;func_name;</span>
+<span class='curline'><a href='../S/60.html#L1405'>fci</a>              1405 ext/curl/interface.c 			fci.object_ptr = NULL;</span>
+<span class='curline'><a href='../S/60.html#L1406'>fci</a>              1406 ext/curl/interface.c 			fci.retval_ptr_ptr = &amp;retval_ptr;</span>
+<span class='curline'><a href='../S/60.html#L1407'>fci</a>              1407 ext/curl/interface.c 			fci.param_count = 3;</span>
+<span class='curline'><a href='../S/60.html#L1408'>fci</a>              1408 ext/curl/interface.c 			fci.params = argv;</span>
+<span class='curline'><a href='../S/60.html#L1409'>fci</a>              1409 ext/curl/interface.c 			fci.no_separation = 0;</span>
+<span class='curline'><a href='../S/60.html#L1410'>fci</a>              1410 ext/curl/interface.c 			fci.symbol_table = NULL;</span>
+<span class='curline'><a href='../S/60.html#L1413'>fci</a>              1413 ext/curl/interface.c 			error = zend_call_function(&amp;fci, &amp;t-&gt;fci_cache TSRMLS_CC);</span>
+<span class='curline'><a href='../S/60.html#L1459'>fci</a>              1459 ext/curl/interface.c 			zend_fcall_info fci;</span>
+<span class='curline'><a href='../S/60.html#L1481'>fci</a>              1481 ext/curl/interface.c 			fci.size = sizeof(fci);</span>
+<span class='curline'><a href='../S/60.html#L1482'>fci</a>              1482 ext/curl/interface.c 			fci.function_table = EG(function_table);</span>
+<span class='curline'><a href='../S/60.html#L1483'>fci</a>              1483 ext/curl/interface.c 			fci.function_name = t-&gt;func_name;</span>
+<span class='curline'><a href='../S/60.html#L1484'>fci</a>              1484 ext/curl/interface.c 			fci.object_ptr = NULL;</span>
+<span class='curline'><a href='../S/60.html#L1485'>fci</a>              1485 ext/curl/interface.c 			fci.retval_ptr_ptr = &amp;retval_ptr;</span>
+<span class='curline'><a href='../S/60.html#L1486'>fci</a>              1486 ext/curl/interface.c 			fci.param_count = 5;</span>
+<span class='curline'><a href='../S/60.html#L1487'>fci</a>              1487 ext/curl/interface.c 			fci.params = argv;</span>
+<span class='curline'><a href='../S/60.html#L1488'>fci</a>              1488 ext/curl/interface.c 			fci.no_separation = 0;</span>
+<span class='curline'><a href='../S/60.html#L1489'>fci</a>              1489 ext/curl/interface.c 			fci.symbol_table = NULL;</span>
+<span class='curline'><a href='../S/60.html#L1492'>fci</a>              1492 ext/curl/interface.c 			error = zend_call_function(&amp;fci, &amp;t-&gt;fci_cache TSRMLS_CC);</span>
+<span class='curline'><a href='../S/60.html#L1539'>fci</a>              1539 ext/curl/interface.c 			zend_fcall_info fci;</span>
+<span class='curline'><a href='../S/60.html#L1556'>fci</a>              1556 ext/curl/interface.c 			fci.size = sizeof(fci);</span>
+<span class='curline'><a href='../S/60.html#L1557'>fci</a>              1557 ext/curl/interface.c 			fci.function_table = EG(function_table);</span>
+<span class='curline'><a href='../S/60.html#L1558'>fci</a>              1558 ext/curl/interface.c 			fci.function_name = t-&gt;func_name;</span>
+<span class='curline'><a href='../S/60.html#L1559'>fci</a>              1559 ext/curl/interface.c 			fci.object_ptr = NULL;</span>
+<span class='curline'><a href='../S/60.html#L1560'>fci</a>              1560 ext/curl/interface.c 			fci.retval_ptr_ptr = &amp;retval_ptr;</span>
+<span class='curline'><a href='../S/60.html#L1561'>fci</a>              1561 ext/curl/interface.c 			fci.param_count = 3;</span>
+<span class='curline'><a href='../S/60.html#L1562'>fci</a>              1562 ext/curl/interface.c 			fci.params = argv;</span>
+<span class='curline'><a href='../S/60.html#L1563'>fci</a>              1563 ext/curl/interface.c 			fci.no_separation = 0;</span>
+<span class='curline'><a href='../S/60.html#L1564'>fci</a>              1564 ext/curl/interface.c 			fci.symbol_table = NULL;</span>
+<span class='curline'><a href='../S/60.html#L1567'>fci</a>              1567 ext/curl/interface.c 			error = zend_call_function(&amp;fci, &amp;t-&gt;fci_cache TSRMLS_CC);</span>
+<span class='curline'><a href='../S/60.html#L1621'>fci</a>              1621 ext/curl/interface.c 			zend_fcall_info fci;</span>
+<span class='curline'><a href='../S/60.html#L1633'>fci</a>              1633 ext/curl/interface.c 			fci.size = sizeof(fci);</span>
+<span class='curline'><a href='../S/60.html#L1634'>fci</a>              1634 ext/curl/interface.c 			fci.function_table = EG(function_table);</span>
+<span class='curline'><a href='../S/60.html#L1635'>fci</a>              1635 ext/curl/interface.c 			fci.function_name = t-&gt;func_name;</span>
+<span class='curline'><a href='../S/60.html#L1636'>fci</a>              1636 ext/curl/interface.c 			fci.symbol_table = NULL;</span>
+<span class='curline'><a href='../S/60.html#L1637'>fci</a>              1637 ext/curl/interface.c 			fci.object_ptr = NULL;</span>
+<span class='curline'><a href='../S/60.html#L1638'>fci</a>              1638 ext/curl/interface.c 			fci.retval_ptr_ptr = &amp;retval_ptr;</span>
+<span class='curline'><a href='../S/60.html#L1639'>fci</a>              1639 ext/curl/interface.c 			fci.param_count = 2;</span>
+<span class='curline'><a href='../S/60.html#L1640'>fci</a>              1640 ext/curl/interface.c 			fci.params = argv;</span>
+<span class='curline'><a href='../S/60.html#L1641'>fci</a>              1641 ext/curl/interface.c 			fci.no_separation = 0;</span>
+<span class='curline'><a href='../S/60.html#L1644'>fci</a>              1644 ext/curl/interface.c 			error = zend_call_function(&amp;fci, &amp;t-&gt;fci_cache TSRMLS_CC);</span>
+<span class='curline'><a href='../S/153.html#L81'>fci</a>                81 ext/dom/xpath.c 	zend_fcall_info fci;</span>
+<span class='curline'><a href='../S/153.html#L116'>fci</a>               116 ext/dom/xpath.c 	fci.param_count = nargs - 1;</span>
+<span class='curline'><a href='../S/153.html#L117'>fci</a>               117 ext/dom/xpath.c 	if (fci.param_count &gt; 0) {</span>
+<span class='curline'><a href='../S/153.html#L118'>fci</a>               118 ext/dom/xpath.c 		fci.params = safe_emalloc(fci.param_count, sizeof(zval**), 0);</span>
+<span class='curline'><a href='../S/153.html#L119'>fci</a>               119 ext/dom/xpath.c 		args = safe_emalloc(fci.param_count, sizeof(zval *), 0);</span>
+<span class='curline'><a href='../S/153.html#L177'>fci</a>               177 ext/dom/xpath.c 		fci.params[i] = &amp;args[i];</span>
+<span class='curline'><a href='../S/153.html#L180'>fci</a>               180 ext/dom/xpath.c 	fci.size = sizeof(fci);</span>
+<span class='curline'><a href='../S/153.html#L181'>fci</a>               181 ext/dom/xpath.c 	fci.function_table = EG(function_table);</span>
+<span class='curline'><a href='../S/153.html#L187'>fci</a>               187 ext/dom/xpath.c 		if (fci.param_count &gt; 0) {</span>
+<span class='curline'><a href='../S/153.html#L192'>fci</a>               192 ext/dom/xpath.c 			efree(fci.params);</span>
+<span class='curline'><a href='../S/153.html#L200'>fci</a>               200 ext/dom/xpath.c 	fci.function_name = &amp;handler;</span>
+<span class='curline'><a href='../S/153.html#L201'>fci</a>               201 ext/dom/xpath.c 	fci.symbol_table = NULL;</span>
+<span class='curline'><a href='../S/153.html#L202'>fci</a>               202 ext/dom/xpath.c 	fci.object_ptr = NULL;</span>
+<span class='curline'><a href='../S/153.html#L203'>fci</a>               203 ext/dom/xpath.c 	fci.retval_ptr_ptr = &amp;retval;</span>
+<span class='curline'><a href='../S/153.html#L204'>fci</a>               204 ext/dom/xpath.c 	fci.no_separation = 0;</span>
+<span class='curline'><a href='../S/153.html#L214'>fci</a>               214 ext/dom/xpath.c 		result = zend_call_function(&amp;fci, NULL TSRMLS_CC);</span>
+<span class='curline'><a href='../S/153.html#L248'>fci</a>               248 ext/dom/xpath.c 	if (fci.param_count &gt; 0) {</span>
+<span class='curline'><a href='../S/153.html#L253'>fci</a>               253 ext/dom/xpath.c 		efree(fci.params);</span>
+<span class='curline'><a href='../S/464.html#L273'>fci</a>               273 ext/libxml/libxml.c 	libxml_globals-&gt;entity_loader.fci.size = 0;</span>
+<span class='curline'><a href='../S/464.html#L277'>fci</a>               277 ext/libxml/libxml.c static void _php_libxml_destroy_fci(zend_fcall_info *fci)</span>
+<span class='curline'><a href='../S/464.html#L279'>fci</a>               279 ext/libxml/libxml.c 	if (fci-&gt;size &gt; 0) {</span>
+<span class='curline'><a href='../S/464.html#L280'>fci</a>               280 ext/libxml/libxml.c 		zval_ptr_dtor(&amp;fci-&gt;function_name);</span>
+<span class='curline'><a href='../S/464.html#L281'>fci</a>               281 ext/libxml/libxml.c 		if (fci-&gt;object_ptr != NULL) {</span>
+<span class='curline'><a href='../S/464.html#L282'>fci</a>               282 ext/libxml/libxml.c 			zval_ptr_dtor(&amp;fci-&gt;object_ptr);</span>
+<span class='curline'><a href='../S/464.html#L284'>fci</a>               284 ext/libxml/libxml.c 		fci-&gt;size = 0;</span>
+<span class='curline'><a href='../S/464.html#L580'>fci</a>               580 ext/libxml/libxml.c 	zend_fcall_info		*fci;</span>
+<span class='curline'><a href='../S/464.html#L583'>fci</a>               583 ext/libxml/libxml.c 	fci = &amp;LIBXML(entity_loader).fci;</span>
+<span class='curline'><a href='../S/464.html#L585'>fci</a>               585 ext/libxml/libxml.c 	if (fci-&gt;size == 0) {</span>
+<span class='curline'><a href='../S/464.html#L616'>fci</a>               616 ext/libxml/libxml.c 	fci-&gt;retval_ptr_ptr	= &amp;retval_ptr;</span>
+<span class='curline'><a href='../S/464.html#L617'>fci</a>               617 ext/libxml/libxml.c 	fci-&gt;params			= params;</span>
+<span class='curline'><a href='../S/464.html#L618'>fci</a>               618 ext/libxml/libxml.c 	fci-&gt;param_count	= sizeof(params)/sizeof(*params);</span>
+<span class='curline'><a href='../S/464.html#L619'>fci</a>               619 ext/libxml/libxml.c 	fci-&gt;no_separation	= 1;</span>
+<span class='curline'><a href='../S/464.html#L621'>fci</a>               621 ext/libxml/libxml.c 	retval = zend_call_function(fci, &amp;LIBXML(entity_loader).fcc TSRMLS_CC);</span>
+<span class='curline'><a href='../S/464.html#L622'>fci</a>               622 ext/libxml/libxml.c 	if (retval != SUCCESS || fci-&gt;retval_ptr_ptr == NULL) {</span>
+<span class='curline'><a href='../S/464.html#L625'>fci</a>               625 ext/libxml/libxml.c 				fci-&gt;function_name);</span>
+<span class='curline'><a href='../S/464.html#L627'>fci</a>               627 ext/libxml/libxml.c 		retval_ptr = *fci-&gt;retval_ptr_ptr;</span>
+<span class='curline'><a href='../S/464.html#L632'>fci</a>               632 ext/libxml/libxml.c 					fci-&gt;function_name);</span>
+<span class='curline'><a href='../S/464.html#L643'>fci</a>               643 ext/libxml/libxml.c 						fci-&gt;function_name);</span>
+<span class='curline'><a href='../S/464.html#L925'>fci</a>               925 ext/libxml/libxml.c 	_php_libxml_destroy_fci(&amp;LIBXML(entity_loader).fci);</span>
+<span class='curline'><a href='../S/464.html#L1109'>fci</a>              1109 ext/libxml/libxml.c 	zend_fcall_info			fci;</span>
+<span class='curline'><a href='../S/464.html#L1111'>fci</a>              1111 ext/libxml/libxml.c 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "f!", &amp;fci, &amp;fcc)</span>
+<span class='curline'><a href='../S/464.html#L1116'>fci</a>              1116 ext/libxml/libxml.c 	_php_libxml_destroy_fci(&amp;LIBXML(entity_loader).fci);</span>
+<span class='curline'><a href='../S/464.html#L1118'>fci</a>              1118 ext/libxml/libxml.c 	if (fci.size &gt; 0) { /* argument not null */</span>
+<span class='curline'><a href='../S/464.html#L1119'>fci</a>              1119 ext/libxml/libxml.c 		LIBXML(entity_loader).fci = fci;</span>
+<span class='curline'><a href='../S/464.html#L1120'>fci</a>              1120 ext/libxml/libxml.c 		Z_ADDREF_P(fci.function_name);</span>
+<span class='curline'><a href='../S/464.html#L1121'>fci</a>              1121 ext/libxml/libxml.c 		if (fci.object_ptr != NULL) {</span>
+<span class='curline'><a href='../S/464.html#L1122'>fci</a>              1122 ext/libxml/libxml.c 			Z_ADDREF_P(fci.object_ptr);</span>
+<span class='curline'><a href='../S/465.html#L47'>fci</a>                47 ext/libxml/php_libxml.h 		zend_fcall_info			fci;</span>
+<span class='curline'><a href='../S/758.html#L2164'>fci</a>              2164 ext/mysql/php_mysql.c 		zend_fcall_info fci;</span>
+<span class='curline'><a href='../S/758.html#L2172'>fci</a>              2172 ext/mysql/php_mysql.c 			fci.size = sizeof(fci);</span>
+<span class='curline'><a href='../S/758.html#L2173'>fci</a>              2173 ext/mysql/php_mysql.c 			fci.function_table = &amp;ce-&gt;function_table;</span>
+<span class='curline'><a href='../S/758.html#L2174'>fci</a>              2174 ext/mysql/php_mysql.c 			fci.function_name = NULL;</span>
+<span class='curline'><a href='../S/758.html#L2175'>fci</a>              2175 ext/mysql/php_mysql.c 			fci.symbol_table = NULL;</span>
+<span class='curline'><a href='../S/758.html#L2176'>fci</a>              2176 ext/mysql/php_mysql.c 			fci.object_ptr = return_value;</span>
+<span class='curline'><a href='../S/758.html#L2177'>fci</a>              2177 ext/mysql/php_mysql.c 			fci.retval_ptr_ptr = &amp;retval_ptr;</span>
+<span class='curline'><a href='../S/758.html#L2178'>fci</a>              2178 ext/mysql/php_mysql.c 			fci.params = NULL;</span>
+<span class='curline'><a href='../S/758.html#L2179'>fci</a>              2179 ext/mysql/php_mysql.c 			fci.param_count = 0;</span>
+<span class='curline'><a href='../S/758.html#L2180'>fci</a>              2180 ext/mysql/php_mysql.c 			fci.no_separation = 1;</span>
+<span class='curline'><a href='../S/758.html#L2183'>fci</a>              2183 ext/mysql/php_mysql.c 				if (zend_fcall_info_args(&amp;fci, ctor_params TSRMLS_CC) == FAILURE) {</span>
+<span class='curline'><a href='../S/758.html#L2201'>fci</a>              2201 ext/mysql/php_mysql.c 			if (zend_call_function(&amp;fci, &amp;fcc TSRMLS_CC) == FAILURE) {</span>
+<span class='curline'><a href='../S/758.html#L2208'>fci</a>              2208 ext/mysql/php_mysql.c 			if (fci.params) {</span>
+<span class='curline'><a href='../S/758.html#L2209'>fci</a>              2209 ext/mysql/php_mysql.c 				efree(fci.params);</span>
+<span class='curline'><a href='../S/761.html#L1295'>fci</a>              1295 ext/mysqli/mysqli.c 		zend_fcall_info fci;</span>
+<span class='curline'><a href='../S/761.html#L1303'>fci</a>              1303 ext/mysqli/mysqli.c 			fci.size = sizeof(fci);</span>
+<span class='curline'><a href='../S/761.html#L1304'>fci</a>              1304 ext/mysqli/mysqli.c 			fci.function_table = &amp;ce-&gt;function_table;</span>
+<span class='curline'><a href='../S/761.html#L1305'>fci</a>              1305 ext/mysqli/mysqli.c 			fci.function_name = NULL;</span>
+<span class='curline'><a href='../S/761.html#L1306'>fci</a>              1306 ext/mysqli/mysqli.c 			fci.symbol_table = NULL;</span>
+<span class='curline'><a href='../S/761.html#L1307'>fci</a>              1307 ext/mysqli/mysqli.c 			fci.object_ptr = return_value;</span>
+<span class='curline'><a href='../S/761.html#L1308'>fci</a>              1308 ext/mysqli/mysqli.c 			fci.retval_ptr_ptr = &amp;retval_ptr;</span>
+<span class='curline'><a href='../S/761.html#L1309'>fci</a>              1309 ext/mysqli/mysqli.c 			fci.params = NULL;</span>
+<span class='curline'><a href='../S/761.html#L1310'>fci</a>              1310 ext/mysqli/mysqli.c 			fci.param_count = 0;</span>
+<span class='curline'><a href='../S/761.html#L1311'>fci</a>              1311 ext/mysqli/mysqli.c 			fci.no_separation = 1;</span>
+<span class='curline'><a href='../S/761.html#L1314'>fci</a>              1314 ext/mysqli/mysqli.c 				if (zend_fcall_info_args(&amp;fci, ctor_params TSRMLS_CC) == FAILURE) {</span>
+<span class='curline'><a href='../S/761.html#L1332'>fci</a>              1332 ext/mysqli/mysqli.c 			if (zend_call_function(&amp;fci, &amp;fcc TSRMLS_CC) == FAILURE) {</span>
+<span class='curline'><a href='../S/761.html#L1339'>fci</a>              1339 ext/mysqli/mysqli.c 			if (fci.params) {</span>
+<span class='curline'><a href='../S/761.html#L1340'>fci</a>              1340 ext/mysqli/mysqli.c 				efree(fci.params);</span>
+<span class='curline'><a href='../S/923.html#L467'>fci</a>               467 ext/pdo/pdo_dbh.c 		zend_fcall_info fci;</span>
+<span class='curline'><a href='../S/923.html#L471'>fci</a>               471 ext/pdo/pdo_dbh.c 		fci.size = sizeof(zend_fcall_info);</span>
+<span class='curline'><a href='../S/923.html#L472'>fci</a>               472 ext/pdo/pdo_dbh.c 		fci.function_table = &amp;dbstmt_ce-&gt;function_table;</span>
+<span class='curline'><a href='../S/923.html#L473'>fci</a>               473 ext/pdo/pdo_dbh.c 		fci.function_name = NULL;</span>
+<span class='curline'><a href='../S/923.html#L474'>fci</a>               474 ext/pdo/pdo_dbh.c 		fci.object_ptr = object;</span>
+<span class='curline'><a href='../S/923.html#L475'>fci</a>               475 ext/pdo/pdo_dbh.c 		fci.symbol_table = NULL;</span>
+<span class='curline'><a href='../S/923.html#L476'>fci</a>               476 ext/pdo/pdo_dbh.c 		fci.retval_ptr_ptr = &amp;retval;</span>
+<span class='curline'><a href='../S/923.html#L477'>fci</a>               477 ext/pdo/pdo_dbh.c 		fci.params = NULL;</span>
+<span class='curline'><a href='../S/923.html#L478'>fci</a>               478 ext/pdo/pdo_dbh.c 		fci.no_separation = 1;</span>
+<span class='curline'><a href='../S/923.html#L480'>fci</a>               480 ext/pdo/pdo_dbh.c 		zend_fcall_info_args(&amp;fci, ctor_args TSRMLS_CC);</span>
+<span class='curline'><a href='../S/923.html#L488'>fci</a>               488 ext/pdo/pdo_dbh.c 		if (zend_call_function(&amp;fci, &amp;fcc TSRMLS_CC) == FAILURE) {</span>
+<span class='curline'><a href='../S/923.html#L496'>fci</a>               496 ext/pdo/pdo_dbh.c 		if (fci.params) {</span>
+<span class='curline'><a href='../S/923.html#L497'>fci</a>               497 ext/pdo/pdo_dbh.c 			efree(fci.params);</span>
+<span class='curline'><a href='../S/926.html#L745'>fci</a>               745 ext/pdo/pdo_stmt.c 	zend_fcall_info * fci = &amp;stmt-&gt;fetch.cls.fci;</span>
+<span class='curline'><a href='../S/926.html#L748'>fci</a>               748 ext/pdo/pdo_stmt.c 	fci-&gt;size = sizeof(zend_fcall_info);</span>
+<span class='curline'><a href='../S/926.html#L756'>fci</a>               756 ext/pdo/pdo_stmt.c 		fci-&gt;function_table = &amp;ce-&gt;function_table;</span>
+<span class='curline'><a href='../S/926.html#L757'>fci</a>               757 ext/pdo/pdo_stmt.c 		fci-&gt;function_name = NULL;</span>
+<span class='curline'><a href='../S/926.html#L758'>fci</a>               758 ext/pdo/pdo_stmt.c 		fci-&gt;symbol_table = NULL;</span>
+<span class='curline'><a href='../S/926.html#L759'>fci</a>               759 ext/pdo/pdo_stmt.c 		fci-&gt;retval_ptr_ptr = &amp;stmt-&gt;fetch.cls.retval_ptr;</span>
+<span class='curline'><a href='../S/926.html#L760'>fci</a>               760 ext/pdo/pdo_stmt.c 		fci-&gt;params = NULL;</span>
+<span class='curline'><a href='../S/926.html#L761'>fci</a>               761 ext/pdo/pdo_stmt.c 		fci-&gt;no_separation = 1;</span>
+<span class='curline'><a href='../S/926.html#L763'>fci</a>               763 ext/pdo/pdo_stmt.c 		zend_fcall_info_args(fci, stmt-&gt;fetch.cls.ctor_args TSRMLS_CC);</span>
+<span class='curline'><a href='../S/926.html#L779'>fci</a>               779 ext/pdo/pdo_stmt.c static int make_callable_ex(pdo_stmt_t *stmt, zval *callable, zend_fcall_info * fci, zend_fcall_info_cache * fcc, int num_args TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/926.html#L783'>fci</a>               783 ext/pdo/pdo_stmt.c 	if (zend_fcall_info_init(callable, 0, fci, fcc, NULL, &amp;is_callable_error TSRMLS_CC) == FAILURE) { </span>
+<span class='curline'><a href='../S/926.html#L797'>fci</a>               797 ext/pdo/pdo_stmt.c 	fci-&gt;param_count = num_args; /* probably less */</span>
+<span class='curline'><a href='../S/926.html#L798'>fci</a>               798 ext/pdo/pdo_stmt.c 	fci-&gt;params = safe_emalloc(sizeof(zval**), num_args, 0);</span>
+<span class='curline'><a href='../S/926.html#L806'>fci</a>               806 ext/pdo/pdo_stmt.c 	zend_fcall_info * fci = &amp;stmt-&gt;fetch.cls.fci;</span>
+<span class='curline'><a href='../S/926.html#L809'>fci</a>               809 ext/pdo/pdo_stmt.c 	if (!make_callable_ex(stmt, stmt-&gt;fetch.func.function, fci, fcc, stmt-&gt;column_count TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/926.html#L821'>fci</a>               821 ext/pdo/pdo_stmt.c 	if (stmt-&gt;fetch.cls.fci.size &amp;&amp; stmt-&gt;fetch.cls.fci.params) {</span>
+<span class='curline'><a href='../S/926.html#L822'>fci</a>               822 ext/pdo/pdo_stmt.c 		efree(stmt-&gt;fetch.cls.fci.params);</span>
+<span class='curline'><a href='../S/926.html#L823'>fci</a>               823 ext/pdo/pdo_stmt.c 		stmt-&gt;fetch.cls.fci.params = NULL;</span>
+<span class='curline'><a href='../S/926.html#L825'>fci</a>               825 ext/pdo/pdo_stmt.c 	stmt-&gt;fetch.cls.fci.size = 0;</span>
+<span class='curline'><a href='../S/926.html#L829'>fci</a>               829 ext/pdo/pdo_stmt.c 		stmt-&gt;fetch.cls.fci.param_count = 0;</span>
+<span class='curline'><a href='../S/926.html#L935'>fci</a>               935 ext/pdo/pdo_stmt.c 					old_arg_count = stmt-&gt;fetch.cls.fci.param_count;</span>
+<span class='curline'><a href='../S/926.html#L959'>fci</a>               959 ext/pdo/pdo_stmt.c 					if (!stmt-&gt;fetch.cls.fci.size) {</span>
+<span class='curline'><a href='../S/926.html#L966'>fci</a>               966 ext/pdo/pdo_stmt.c 						stmt-&gt;fetch.cls.fci.object_ptr = return_value;</span>
+<span class='curline'><a href='../S/926.html#L968'>fci</a>               968 ext/pdo/pdo_stmt.c 						if (zend_call_function(&amp;stmt-&gt;fetch.cls.fci, &amp;stmt-&gt;fetch.cls.fcc TSRMLS_CC) == FAILURE) {</span>
+<span class='curline'><a href='../S/926.html#L1002'>fci</a>              1002 ext/pdo/pdo_stmt.c 				if (!stmt-&gt;fetch.func.fci.size) {</span>
+<span class='curline'><a href='../S/926.html#L1150'>fci</a>              1150 ext/pdo/pdo_stmt.c 					stmt-&gt;fetch.cls.fci.params[idx] = &amp;stmt-&gt;fetch.func.values[idx];</span>
+<span class='curline'><a href='../S/926.html#L1164'>fci</a>              1164 ext/pdo/pdo_stmt.c 					stmt-&gt;fetch.cls.fci.object_ptr = return_value;</span>
+<span class='curline'><a href='../S/926.html#L1166'>fci</a>              1166 ext/pdo/pdo_stmt.c 					if (zend_call_function(&amp;stmt-&gt;fetch.cls.fci, &amp;stmt-&gt;fetch.cls.fcc TSRMLS_CC) == FAILURE) {</span>
+<span class='curline'><a href='../S/926.html#L1179'>fci</a>              1179 ext/pdo/pdo_stmt.c 					stmt-&gt;fetch.cls.fci.param_count = old_arg_count;</span>
+<span class='curline'><a href='../S/926.html#L1184'>fci</a>              1184 ext/pdo/pdo_stmt.c 				stmt-&gt;fetch.func.fci.param_count = idx;</span>
+<span class='curline'><a href='../S/926.html#L1185'>fci</a>              1185 ext/pdo/pdo_stmt.c 				stmt-&gt;fetch.func.fci.retval_ptr_ptr = &amp;retval;</span>
+<span class='curline'><a href='../S/926.html#L1186'>fci</a>              1186 ext/pdo/pdo_stmt.c 				if (zend_call_function(&amp;stmt-&gt;fetch.func.fci, &amp;stmt-&gt;fetch.func.fcc TSRMLS_CC) == FAILURE) {</span>
+<span class='curline'><a href='../S/926.html#L1335'>fci</a>              1335 ext/pdo/pdo_stmt.c 	old_arg_count = stmt-&gt;fetch.cls.fci.param_count;</span>
+<span class='curline'><a href='../S/926.html#L1369'>fci</a>              1369 ext/pdo/pdo_stmt.c 	stmt-&gt;fetch.cls.fci.param_count = old_arg_count;</span>
+<span class='curline'><a href='../S/926.html#L1420'>fci</a>              1420 ext/pdo/pdo_stmt.c 	old_arg_count = stmt-&gt;fetch.cls.fci.param_count;</span>
+<span class='curline'><a href='../S/926.html#L1545'>fci</a>              1545 ext/pdo/pdo_stmt.c 	stmt-&gt;fetch.cls.fci.param_count = old_arg_count;</span>
+<span class='curline'><a href='../S/928.html#L622'>fci</a>               622 ext/pdo/php_pdo_driver.h 			zend_fcall_info fci;</span>
+<span class='curline'><a href='../S/928.html#L629'>fci</a>               629 ext/pdo/php_pdo_driver.h 			zend_fcall_info fci;</span>
+<span class='curline'><a href='../S/964.html#L34'>fci</a>                34 ext/pdo_sqlite/php_pdo_sqlite_int.h 	zend_fcall_info fci;</span>
+<span class='curline'><a href='../S/965.html#L328'>fci</a>               328 ext/pdo_sqlite/sqlite_driver.c 	fc-&gt;fci.size = sizeof(fc-&gt;fci);</span>
+<span class='curline'><a href='../S/965.html#L329'>fci</a>               329 ext/pdo_sqlite/sqlite_driver.c 	fc-&gt;fci.function_table = EG(function_table);</span>
+<span class='curline'><a href='../S/965.html#L330'>fci</a>               330 ext/pdo_sqlite/sqlite_driver.c 	fc-&gt;fci.function_name = cb;</span>
+<span class='curline'><a href='../S/965.html#L331'>fci</a>               331 ext/pdo_sqlite/sqlite_driver.c 	fc-&gt;fci.symbol_table = NULL;</span>
+<span class='curline'><a href='../S/965.html#L332'>fci</a>               332 ext/pdo_sqlite/sqlite_driver.c 	fc-&gt;fci.object_ptr = NULL;</span>
+<span class='curline'><a href='../S/965.html#L333'>fci</a>               333 ext/pdo_sqlite/sqlite_driver.c 	fc-&gt;fci.retval_ptr_ptr = &amp;retval;</span>
+<span class='curline'><a href='../S/965.html#L334'>fci</a>               334 ext/pdo_sqlite/sqlite_driver.c 	fc-&gt;fci.param_count = fake_argc;</span>
+<span class='curline'><a href='../S/965.html#L384'>fci</a>               384 ext/pdo_sqlite/sqlite_driver.c 	fc-&gt;fci.params = zargs;</span>
+<span class='curline'><a href='../S/965.html#L387'>fci</a>               387 ext/pdo_sqlite/sqlite_driver.c 	if ((ret = zend_call_function(&amp;fc-&gt;fci, &amp;fc-&gt;fcc TSRMLS_CC)) == FAILURE) {</span>
+<span class='curline'><a href='../S/965.html#L492'>fci</a>               492 ext/pdo_sqlite/sqlite_driver.c 	collation-&gt;fc.fci.size = sizeof(collation-&gt;fc.fci);</span>
+<span class='curline'><a href='../S/965.html#L493'>fci</a>               493 ext/pdo_sqlite/sqlite_driver.c 	collation-&gt;fc.fci.function_table = EG(function_table);</span>
+<span class='curline'><a href='../S/965.html#L494'>fci</a>               494 ext/pdo_sqlite/sqlite_driver.c 	collation-&gt;fc.fci.function_name = collation-&gt;callback;</span>
+<span class='curline'><a href='../S/965.html#L495'>fci</a>               495 ext/pdo_sqlite/sqlite_driver.c 	collation-&gt;fc.fci.symbol_table = NULL;</span>
+<span class='curline'><a href='../S/965.html#L496'>fci</a>               496 ext/pdo_sqlite/sqlite_driver.c 	collation-&gt;fc.fci.object_ptr = NULL;</span>
+<span class='curline'><a href='../S/965.html#L497'>fci</a>               497 ext/pdo_sqlite/sqlite_driver.c 	collation-&gt;fc.fci.retval_ptr_ptr = &amp;retval;</span>
+<span class='curline'><a href='../S/965.html#L506'>fci</a>               506 ext/pdo_sqlite/sqlite_driver.c 	collation-&gt;fc.fci.param_count = 2;</span>
+<span class='curline'><a href='../S/965.html#L507'>fci</a>               507 ext/pdo_sqlite/sqlite_driver.c 	collation-&gt;fc.fci.params = zargs;</span>
+<span class='curline'><a href='../S/965.html#L509'>fci</a>               509 ext/pdo_sqlite/sqlite_driver.c 	if ((ret = zend_call_function(&amp;collation-&gt;fc.fci, &amp;collation-&gt;fc.fcc TSRMLS_CC)) == FAILURE) {</span>
+<span class='curline'><a href='../S/967.html#L2784'>fci</a>              2784 ext/pgsql/pgsql.c 		zend_fcall_info fci;</span>
+<span class='curline'><a href='../S/967.html#L2792'>fci</a>              2792 ext/pgsql/pgsql.c 			fci.size = sizeof(fci);</span>
+<span class='curline'><a href='../S/967.html#L2793'>fci</a>              2793 ext/pgsql/pgsql.c 			fci.function_table = &amp;ce-&gt;function_table;</span>
+<span class='curline'><a href='../S/967.html#L2794'>fci</a>              2794 ext/pgsql/pgsql.c 			fci.function_name = NULL;</span>
+<span class='curline'><a href='../S/967.html#L2795'>fci</a>              2795 ext/pgsql/pgsql.c 			fci.symbol_table = NULL;</span>
+<span class='curline'><a href='../S/967.html#L2796'>fci</a>              2796 ext/pgsql/pgsql.c 			fci.object_ptr = return_value;</span>
+<span class='curline'><a href='../S/967.html#L2797'>fci</a>              2797 ext/pgsql/pgsql.c 			fci.retval_ptr_ptr = &amp;retval_ptr;</span>
+<span class='curline'><a href='../S/967.html#L2798'>fci</a>              2798 ext/pgsql/pgsql.c 			fci.params = NULL;</span>
+<span class='curline'><a href='../S/967.html#L2799'>fci</a>              2799 ext/pgsql/pgsql.c 			fci.param_count = 0;</span>
+<span class='curline'><a href='../S/967.html#L2800'>fci</a>              2800 ext/pgsql/pgsql.c 			fci.no_separation = 1;</span>
+<span class='curline'><a href='../S/967.html#L2803'>fci</a>              2803 ext/pgsql/pgsql.c 				if (zend_fcall_info_args(&amp;fci, ctor_params TSRMLS_CC) == FAILURE) {</span>
+<span class='curline'><a href='../S/967.html#L2821'>fci</a>              2821 ext/pgsql/pgsql.c 			if (zend_call_function(&amp;fci, &amp;fcc TSRMLS_CC) == FAILURE) {</span>
+<span class='curline'><a href='../S/967.html#L2828'>fci</a>              2828 ext/pgsql/pgsql.c 			if (fci.params) {</span>
+<span class='curline'><a href='../S/967.html#L2829'>fci</a>              2829 ext/pgsql/pgsql.c 				efree(fci.params);</span>
+<span class='curline'><a href='../S/975.html#L681'>fci</a>               681 ext/phar/phar_object.c 		zend_fcall_info fci;</span>
+<span class='curline'><a href='../S/975.html#L689'>fci</a>               689 ext/phar/phar_object.c 		if (FAILURE == zend_fcall_info_init(rewrite, 0, &amp;fci, &amp;fcc, NULL, NULL TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/975.html#L699'>fci</a>               699 ext/phar/phar_object.c 		fci.param_count = 1;</span>
+<span class='curline'><a href='../S/975.html#L700'>fci</a>               700 ext/phar/phar_object.c 		fci.params = zp;</span>
+<span class='curline'><a href='../S/975.html#L702'>fci</a>               702 ext/phar/phar_object.c 		fci.retval_ptr_ptr = &amp;retval_ptr;</span>
+<span class='curline'><a href='../S/975.html#L704'>fci</a>               704 ext/phar/phar_object.c 		if (FAILURE == zend_call_function(&amp;fci, &amp;fcc TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/975.html#L716'>fci</a>               716 ext/phar/phar_object.c 		if (!fci.retval_ptr_ptr || !retval_ptr) {</span>
+<span class='curline'><a href='../S/975.html#L728'>fci</a>               728 ext/phar/phar_object.c 				if (fci.retval_ptr_ptr != &amp;retval_ptr) {</span>
+<span class='curline'><a href='../S/975.html#L729'>fci</a>               729 ext/phar/phar_object.c 					entry = estrndup(Z_STRVAL_PP(fci.retval_ptr_ptr), Z_STRLEN_PP(fci.retval_ptr_ptr));</span>
+<span class='curline'><a href='../S/975.html#L730'>fci</a>               730 ext/phar/phar_object.c 					entry_len = Z_STRLEN_PP(fci.retval_ptr_ptr);</span>
+<span class='curline'><a href='../S/984.html#L1409'>fci</a>              1409 ext/phar/util.c 	zend_fcall_info fci;</span>
+<span class='curline'><a href='../S/984.html#L1440'>fci</a>              1440 ext/phar/util.c 	if (FAILURE == zend_fcall_info_init(openssl, 0, &amp;fci, &amp;fcc, NULL, NULL TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/984.html#L1452'>fci</a>              1452 ext/phar/util.c 	fci.param_count = 3;</span>
+<span class='curline'><a href='../S/984.html#L1453'>fci</a>              1453 ext/phar/util.c 	fci.params = zp;</span>
+<span class='curline'><a href='../S/984.html#L1462'>fci</a>              1462 ext/phar/util.c 	fci.retval_ptr_ptr = &amp;retval_ptr;</span>
+<span class='curline'><a href='../S/984.html#L1464'>fci</a>              1464 ext/phar/util.c 	if (FAILURE == zend_call_function(&amp;fci, &amp;fcc TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/996.html#L1404'>fci</a>              1404 ext/reflection/php_reflection.c 	zend_fcall_info fci;</span>
+<span class='curline'><a href='../S/996.html#L1430'>fci</a>              1430 ext/reflection/php_reflection.c 	fci.size = sizeof(fci);</span>
+<span class='curline'><a href='../S/996.html#L1431'>fci</a>              1431 ext/reflection/php_reflection.c 	fci.function_table = NULL;</span>
+<span class='curline'><a href='../S/996.html#L1432'>fci</a>              1432 ext/reflection/php_reflection.c 	fci.function_name = NULL;</span>
+<span class='curline'><a href='../S/996.html#L1433'>fci</a>              1433 ext/reflection/php_reflection.c 	fci.symbol_table = NULL;</span>
+<span class='curline'><a href='../S/996.html#L1434'>fci</a>              1434 ext/reflection/php_reflection.c 	fci.object_ptr = reflector_ptr;</span>
+<span class='curline'><a href='../S/996.html#L1435'>fci</a>              1435 ext/reflection/php_reflection.c 	fci.retval_ptr_ptr = &amp;retval_ptr;</span>
+<span class='curline'><a href='../S/996.html#L1436'>fci</a>              1436 ext/reflection/php_reflection.c 	fci.param_count = ctor_argc;</span>
+<span class='curline'><a href='../S/996.html#L1437'>fci</a>              1437 ext/reflection/php_reflection.c 	fci.params = params;</span>
+<span class='curline'><a href='../S/996.html#L1438'>fci</a>              1438 ext/reflection/php_reflection.c 	fci.no_separation = 1;</span>
+<span class='curline'><a href='../S/996.html#L1446'>fci</a>              1446 ext/reflection/php_reflection.c 	result = zend_call_function(&amp;fci, &amp;fcc TSRMLS_CC);</span>
+<span class='curline'><a href='../S/996.html#L1467'>fci</a>              1467 ext/reflection/php_reflection.c 	fci.function_table = &amp;reflection_ptr-&gt;function_table;</span>
+<span class='curline'><a href='../S/996.html#L1468'>fci</a>              1468 ext/reflection/php_reflection.c 	fci.function_name = &amp;fname;</span>
+<span class='curline'><a href='../S/996.html#L1469'>fci</a>              1469 ext/reflection/php_reflection.c 	fci.object_ptr = NULL;</span>
+<span class='curline'><a href='../S/996.html#L1470'>fci</a>              1470 ext/reflection/php_reflection.c 	fci.retval_ptr_ptr = &amp;retval_ptr;</span>
+<span class='curline'><a href='../S/996.html#L1471'>fci</a>              1471 ext/reflection/php_reflection.c 	fci.param_count = 2;</span>
+<span class='curline'><a href='../S/996.html#L1472'>fci</a>              1472 ext/reflection/php_reflection.c 	fci.params = params;</span>
+<span class='curline'><a href='../S/996.html#L1473'>fci</a>              1473 ext/reflection/php_reflection.c 	fci.no_separation = 1;</span>
+<span class='curline'><a href='../S/996.html#L1475'>fci</a>              1475 ext/reflection/php_reflection.c 	result = zend_call_function(&amp;fci, NULL TSRMLS_CC);</span>
+<span class='curline'><a href='../S/996.html#L1934'>fci</a>              1934 ext/reflection/php_reflection.c 	zend_fcall_info fci;</span>
+<span class='curline'><a href='../S/996.html#L1946'>fci</a>              1946 ext/reflection/php_reflection.c 	fci.size = sizeof(fci);</span>
+<span class='curline'><a href='../S/996.html#L1947'>fci</a>              1947 ext/reflection/php_reflection.c 	fci.function_table = NULL;</span>
+<span class='curline'><a href='../S/996.html#L1948'>fci</a>              1948 ext/reflection/php_reflection.c 	fci.function_name = NULL;</span>
+<span class='curline'><a href='../S/996.html#L1949'>fci</a>              1949 ext/reflection/php_reflection.c 	fci.symbol_table = NULL;</span>
+<span class='curline'><a href='../S/996.html#L1950'>fci</a>              1950 ext/reflection/php_reflection.c 	fci.object_ptr = NULL;</span>
+<span class='curline'><a href='../S/996.html#L1951'>fci</a>              1951 ext/reflection/php_reflection.c 	fci.retval_ptr_ptr = &amp;retval_ptr;</span>
+<span class='curline'><a href='../S/996.html#L1952'>fci</a>              1952 ext/reflection/php_reflection.c 	fci.param_count = num_args;</span>
+<span class='curline'><a href='../S/996.html#L1953'>fci</a>              1953 ext/reflection/php_reflection.c 	fci.params = params;</span>
+<span class='curline'><a href='../S/996.html#L1954'>fci</a>              1954 ext/reflection/php_reflection.c 	fci.no_separation = 1;</span>
+<span class='curline'><a href='../S/996.html#L1962'>fci</a>              1962 ext/reflection/php_reflection.c 	result = zend_call_function(&amp;fci, &amp;fcc TSRMLS_CC);</span>
+<span class='curline'><a href='../S/996.html#L1994'>fci</a>              1994 ext/reflection/php_reflection.c 	zend_fcall_info fci;</span>
+<span class='curline'><a href='../S/996.html#L2013'>fci</a>              2013 ext/reflection/php_reflection.c 	fci.size = sizeof(fci);</span>
+<span class='curline'><a href='../S/996.html#L2014'>fci</a>              2014 ext/reflection/php_reflection.c 	fci.function_table = NULL;</span>
+<span class='curline'><a href='../S/996.html#L2015'>fci</a>              2015 ext/reflection/php_reflection.c 	fci.function_name = NULL;</span>
+<span class='curline'><a href='../S/996.html#L2016'>fci</a>              2016 ext/reflection/php_reflection.c 	fci.symbol_table = NULL;</span>
+<span class='curline'><a href='../S/996.html#L2017'>fci</a>              2017 ext/reflection/php_reflection.c 	fci.object_ptr = NULL;</span>
+<span class='curline'><a href='../S/996.html#L2018'>fci</a>              2018 ext/reflection/php_reflection.c 	fci.retval_ptr_ptr = &amp;retval_ptr;</span>
+<span class='curline'><a href='../S/996.html#L2019'>fci</a>              2019 ext/reflection/php_reflection.c 	fci.param_count = argc;</span>
+<span class='curline'><a href='../S/996.html#L2020'>fci</a>              2020 ext/reflection/php_reflection.c 	fci.params = params;</span>
+<span class='curline'><a href='../S/996.html#L2021'>fci</a>              2021 ext/reflection/php_reflection.c 	fci.no_separation = 1;</span>
+<span class='curline'><a href='../S/996.html#L2029'>fci</a>              2029 ext/reflection/php_reflection.c 	result = zend_call_function(&amp;fci, &amp;fcc TSRMLS_CC);</span>
+<span class='curline'><a href='../S/996.html#L2887'>fci</a>              2887 ext/reflection/php_reflection.c 	zend_fcall_info fci;</span>
+<span class='curline'><a href='../S/996.html#L2946'>fci</a>              2946 ext/reflection/php_reflection.c 	fci.size = sizeof(fci);</span>
+<span class='curline'><a href='../S/996.html#L2947'>fci</a>              2947 ext/reflection/php_reflection.c 	fci.function_table = NULL;</span>
+<span class='curline'><a href='../S/996.html#L2948'>fci</a>              2948 ext/reflection/php_reflection.c 	fci.function_name = NULL;</span>
+<span class='curline'><a href='../S/996.html#L2949'>fci</a>              2949 ext/reflection/php_reflection.c 	fci.symbol_table = NULL;</span>
+<span class='curline'><a href='../S/996.html#L2950'>fci</a>              2950 ext/reflection/php_reflection.c 	fci.object_ptr = object_ptr;</span>
+<span class='curline'><a href='../S/996.html#L2951'>fci</a>              2951 ext/reflection/php_reflection.c 	fci.retval_ptr_ptr = &amp;retval_ptr;</span>
+<span class='curline'><a href='../S/996.html#L2952'>fci</a>              2952 ext/reflection/php_reflection.c 	fci.param_count = num_args - 1;</span>
+<span class='curline'><a href='../S/996.html#L2953'>fci</a>              2953 ext/reflection/php_reflection.c 	fci.params = params + 1;</span>
+<span class='curline'><a href='../S/996.html#L2954'>fci</a>              2954 ext/reflection/php_reflection.c 	fci.no_separation = 1;</span>
+<span class='curline'><a href='../S/996.html#L2962'>fci</a>              2962 ext/reflection/php_reflection.c 	result = zend_call_function(&amp;fci, &amp;fcc TSRMLS_CC);</span>
+<span class='curline'><a href='../S/996.html#L2991'>fci</a>              2991 ext/reflection/php_reflection.c 	zend_fcall_info fci;</span>
+<span class='curline'><a href='../S/996.html#L3055'>fci</a>              3055 ext/reflection/php_reflection.c 	fci.size = sizeof(fci);</span>
+<span class='curline'><a href='../S/996.html#L3056'>fci</a>              3056 ext/reflection/php_reflection.c 	fci.function_table = NULL;</span>
+<span class='curline'><a href='../S/996.html#L3057'>fci</a>              3057 ext/reflection/php_reflection.c 	fci.function_name = NULL;</span>
+<span class='curline'><a href='../S/996.html#L3058'>fci</a>              3058 ext/reflection/php_reflection.c 	fci.symbol_table = NULL;</span>
+<span class='curline'><a href='../S/996.html#L3059'>fci</a>              3059 ext/reflection/php_reflection.c 	fci.object_ptr = object;</span>
+<span class='curline'><a href='../S/996.html#L3060'>fci</a>              3060 ext/reflection/php_reflection.c 	fci.retval_ptr_ptr = &amp;retval_ptr;</span>
+<span class='curline'><a href='../S/996.html#L3061'>fci</a>              3061 ext/reflection/php_reflection.c 	fci.param_count = argc;</span>
+<span class='curline'><a href='../S/996.html#L3062'>fci</a>              3062 ext/reflection/php_reflection.c 	fci.params = params;</span>
+<span class='curline'><a href='../S/996.html#L3063'>fci</a>              3063 ext/reflection/php_reflection.c 	fci.no_separation = 1;</span>
+<span class='curline'><a href='../S/996.html#L3079'>fci</a>              3079 ext/reflection/php_reflection.c 	result = zend_call_function(&amp;fci, &amp;fcc TSRMLS_CC);</span>
+<span class='curline'><a href='../S/996.html#L4282'>fci</a>              4282 ext/reflection/php_reflection.c 		zend_fcall_info fci;</span>
+<span class='curline'><a href='../S/996.html#L4299'>fci</a>              4299 ext/reflection/php_reflection.c 		fci.size = sizeof(fci);</span>
+<span class='curline'><a href='../S/996.html#L4300'>fci</a>              4300 ext/reflection/php_reflection.c 		fci.function_table = EG(function_table);</span>
+<span class='curline'><a href='../S/996.html#L4301'>fci</a>              4301 ext/reflection/php_reflection.c 		fci.function_name = NULL;</span>
+<span class='curline'><a href='../S/996.html#L4302'>fci</a>              4302 ext/reflection/php_reflection.c 		fci.symbol_table = NULL;</span>
+<span class='curline'><a href='../S/996.html#L4303'>fci</a>              4303 ext/reflection/php_reflection.c 		fci.object_ptr = return_value;</span>
+<span class='curline'><a href='../S/996.html#L4304'>fci</a>              4304 ext/reflection/php_reflection.c 		fci.retval_ptr_ptr = &amp;retval_ptr;</span>
+<span class='curline'><a href='../S/996.html#L4305'>fci</a>              4305 ext/reflection/php_reflection.c 		fci.param_count = num_args;</span>
+<span class='curline'><a href='../S/996.html#L4306'>fci</a>              4306 ext/reflection/php_reflection.c 		fci.params = params;</span>
+<span class='curline'><a href='../S/996.html#L4307'>fci</a>              4307 ext/reflection/php_reflection.c 		fci.no_separation = 1;</span>
+<span class='curline'><a href='../S/996.html#L4315'>fci</a>              4315 ext/reflection/php_reflection.c 		if (zend_call_function(&amp;fci, &amp;fcc TSRMLS_CC) == FAILURE) {</span>
+<span class='curline'><a href='../S/996.html#L4389'>fci</a>              4389 ext/reflection/php_reflection.c 		zend_fcall_info fci;</span>
+<span class='curline'><a href='../S/996.html#L4404'>fci</a>              4404 ext/reflection/php_reflection.c 		fci.size = sizeof(fci);</span>
+<span class='curline'><a href='../S/996.html#L4405'>fci</a>              4405 ext/reflection/php_reflection.c 		fci.function_table = EG(function_table);</span>
+<span class='curline'><a href='../S/996.html#L4406'>fci</a>              4406 ext/reflection/php_reflection.c 		fci.function_name = NULL;</span>
+<span class='curline'><a href='../S/996.html#L4407'>fci</a>              4407 ext/reflection/php_reflection.c 		fci.symbol_table = NULL;</span>
+<span class='curline'><a href='../S/996.html#L4408'>fci</a>              4408 ext/reflection/php_reflection.c 		fci.object_ptr = return_value;</span>
+<span class='curline'><a href='../S/996.html#L4409'>fci</a>              4409 ext/reflection/php_reflection.c 		fci.retval_ptr_ptr = &amp;retval_ptr;</span>
+<span class='curline'><a href='../S/996.html#L4410'>fci</a>              4410 ext/reflection/php_reflection.c 		fci.param_count = argc;</span>
+<span class='curline'><a href='../S/996.html#L4411'>fci</a>              4411 ext/reflection/php_reflection.c 		fci.params = params;</span>
+<span class='curline'><a href='../S/996.html#L4412'>fci</a>              4412 ext/reflection/php_reflection.c 		fci.no_separation = 1;</span>
+<span class='curline'><a href='../S/996.html#L4420'>fci</a>              4420 ext/reflection/php_reflection.c 		if (zend_call_function(&amp;fci, &amp;fcc TSRMLS_CC) == FAILURE) {</span>
+<span class='curline'><a href='../S/1031.html#L909'>fci</a>               909 ext/soap/soap.c 	zend_fcall_info fci;</span>
+<span class='curline'><a href='../S/1031.html#L923'>fci</a>               923 ext/soap/soap.c 	fci.size = sizeof(fci);</span>
+<span class='curline'><a href='../S/1031.html#L924'>fci</a>               924 ext/soap/soap.c 	fci.function_table = &amp;Z_OBJCE_P(getThis())-&gt;function_table;</span>
+<span class='curline'><a href='../S/1031.html#L925'>fci</a>               925 ext/soap/soap.c 	fci.function_name = &amp;fname;</span>
+<span class='curline'><a href='../S/1031.html#L926'>fci</a>               926 ext/soap/soap.c 	fci.symbol_table = NULL;</span>
+<span class='curline'><a href='../S/1031.html#L927'>fci</a>               927 ext/soap/soap.c 	fci.object_ptr = getThis();</span>
+<span class='curline'><a href='../S/1031.html#L928'>fci</a>               928 ext/soap/soap.c 	fci.retval_ptr_ptr = &amp;trace;</span>
+<span class='curline'><a href='../S/1031.html#L929'>fci</a>               929 ext/soap/soap.c 	fci.param_count = 0;</span>
+<span class='curline'><a href='../S/1031.html#L930'>fci</a>               930 ext/soap/soap.c 	fci.params = NULL;</span>
+<span class='curline'><a href='../S/1031.html#L931'>fci</a>               931 ext/soap/soap.c 	fci.no_separation = 1;</span>
+<span class='curline'><a href='../S/1031.html#L933'>fci</a>               933 ext/soap/soap.c 	zend_call_function(&amp;fci, NULL TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1049.html#L2101'>fci</a>              2101 ext/spl/spl_directory.c 	zend_fcall_info fci;</span>
+<span class='curline'><a href='../S/1049.html#L2120'>fci</a>              2120 ext/spl/spl_directory.c 	fci.size = sizeof(fci);</span>
+<span class='curline'><a href='../S/1049.html#L2121'>fci</a>              2121 ext/spl/spl_directory.c 	fci.function_table = EG(function_table);</span>
+<span class='curline'><a href='../S/1049.html#L2122'>fci</a>              2122 ext/spl/spl_directory.c 	fci.object_ptr = NULL;</span>
+<span class='curline'><a href='../S/1049.html#L2123'>fci</a>              2123 ext/spl/spl_directory.c 	fci.function_name = &amp;z_fname;</span>
+<span class='curline'><a href='../S/1049.html#L2124'>fci</a>              2124 ext/spl/spl_directory.c 	fci.retval_ptr_ptr = &amp;retval;</span>
+<span class='curline'><a href='../S/1049.html#L2125'>fci</a>              2125 ext/spl/spl_directory.c 	fci.param_count = num_args;</span>
+<span class='curline'><a href='../S/1049.html#L2126'>fci</a>              2126 ext/spl/spl_directory.c 	fci.params = params;</span>
+<span class='curline'><a href='../S/1049.html#L2127'>fci</a>              2127 ext/spl/spl_directory.c 	fci.no_separation = 1;</span>
+<span class='curline'><a href='../S/1049.html#L2128'>fci</a>              2128 ext/spl/spl_directory.c 	fci.symbol_table = NULL;</span>
+<span class='curline'><a href='../S/1049.html#L2136'>fci</a>              2136 ext/spl/spl_directory.c 	result = zend_call_function(&amp;fci, &amp;fcic TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1054.html#L56'>fci</a>                56 ext/spl/spl_engine.h 	zend_fcall_info fci;</span>
+<span class='curline'><a href='../S/1054.html#L65'>fci</a>                65 ext/spl/spl_engine.h 	fci.size = sizeof(zend_fcall_info);</span>
+<span class='curline'><a href='../S/1054.html#L66'>fci</a>                66 ext/spl/spl_engine.h 	fci.function_table = &amp;pce-&gt;function_table;</span>
+<span class='curline'><a href='../S/1054.html#L67'>fci</a>                67 ext/spl/spl_engine.h 	fci.function_name = &amp;z_name;</span>
+<span class='curline'><a href='../S/1054.html#L68'>fci</a>                68 ext/spl/spl_engine.h 	fci.object_ptr = *retval;</span>
+<span class='curline'><a href='../S/1054.html#L69'>fci</a>                69 ext/spl/spl_engine.h 	fci.symbol_table = NULL;</span>
+<span class='curline'><a href='../S/1054.html#L70'>fci</a>                70 ext/spl/spl_engine.h 	fci.retval_ptr_ptr = &amp;dummy;</span>
+<span class='curline'><a href='../S/1054.html#L71'>fci</a>                71 ext/spl/spl_engine.h 	fci.param_count = argc;</span>
+<span class='curline'><a href='../S/1054.html#L72'>fci</a>                72 ext/spl/spl_engine.h 	fci.params = argv;</span>
+<span class='curline'><a href='../S/1054.html#L73'>fci</a>                73 ext/spl/spl_engine.h 	fci.no_separation = 1;</span>
+<span class='curline'><a href='../S/1054.html#L81'>fci</a>                81 ext/spl/spl_engine.h 	zend_call_function(&amp;fci, &amp;fcc TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1063.html#L1578'>fci</a>              1578 ext/spl/spl_iterators.c 			if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "Of", &amp;zobject, ce_inner, &amp;cfi-&gt;fci, &amp;cfi-&gt;fcc) == FAILURE) {</span>
+<span class='curline'><a href='../S/1063.html#L1583'>fci</a>              1583 ext/spl/spl_iterators.c 			if (cfi-&gt;fci.function_name) {</span>
+<span class='curline'><a href='../S/1063.html#L1584'>fci</a>              1584 ext/spl/spl_iterators.c 				Z_ADDREF_P(cfi-&gt;fci.function_name);</span>
+<span class='curline'><a href='../S/1063.html#L1586'>fci</a>              1586 ext/spl/spl_iterators.c 			if (cfi-&gt;fci.object_ptr) {</span>
+<span class='curline'><a href='../S/1063.html#L1587'>fci</a>              1587 ext/spl/spl_iterators.c 				Z_ADDREF_P(cfi-&gt;fci.object_ptr);</span>
+<span class='curline'><a href='../S/1063.html#L1974'>fci</a>              1974 ext/spl/spl_iterators.c 		spl_instantiate_arg_ex2(Z_OBJCE_P(getThis()), &amp;return_value, 0, retval, intern-&gt;u.cbfilter-&gt;fci.function_name TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1063.html#L2000'>fci</a>              2000 ext/spl/spl_iterators.c 	zend_fcall_info        *fci = &amp;intern-&gt;u.cbfilter-&gt;fci;</span>
+<span class='curline'><a href='../S/1063.html#L2017'>fci</a>              2017 ext/spl/spl_iterators.c 	fci-&gt;retval_ptr_ptr = &amp;result;</span>
+<span class='curline'><a href='../S/1063.html#L2018'>fci</a>              2018 ext/spl/spl_iterators.c 	fci-&gt;param_count = 3;</span>
+<span class='curline'><a href='../S/1063.html#L2019'>fci</a>              2019 ext/spl/spl_iterators.c 	fci-&gt;params = params;</span>
+<span class='curline'><a href='../S/1063.html#L2020'>fci</a>              2020 ext/spl/spl_iterators.c 	fci-&gt;no_separation = 0;</span>
+<span class='curline'><a href='../S/1063.html#L2022'>fci</a>              2022 ext/spl/spl_iterators.c 	if (zend_call_function(fci, fcc TSRMLS_CC) != SUCCESS || !result) {</span>
+<span class='curline'><a href='../S/1063.html#L2385'>fci</a>              2385 ext/spl/spl_iterators.c 			if (object-&gt;u.cbfilter-&gt;fci.function_name) {</span>
+<span class='curline'><a href='../S/1063.html#L2386'>fci</a>              2386 ext/spl/spl_iterators.c 				zval_ptr_dtor(&amp;object-&gt;u.cbfilter-&gt;fci.function_name);</span>
+<span class='curline'><a href='../S/1063.html#L2388'>fci</a>              2388 ext/spl/spl_iterators.c 			if (object-&gt;u.cbfilter-&gt;fci.object_ptr) {</span>
+<span class='curline'><a href='../S/1063.html#L2389'>fci</a>              2389 ext/spl/spl_iterators.c 				zval_ptr_dtor(&amp;object-&gt;u.cbfilter-&gt;fci.object_ptr);</span>
+<span class='curline'><a href='../S/1063.html#L3680'>fci</a>              3680 ext/spl/spl_iterators.c 	zend_fcall_info        fci;</span>
+<span class='curline'><a href='../S/1063.html#L3691'>fci</a>              3691 ext/spl/spl_iterators.c 	zend_fcall_info_call(&amp;apply_info-&gt;fci, &amp;apply_info-&gt;fcc, &amp;retval, NULL TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1063.html#L3709'>fci</a>              3709 ext/spl/spl_iterators.c 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "Of|a!", &amp;apply_info.obj, zend_ce_traversable, &amp;apply_info.fci, &amp;apply_info.fcc, &amp;apply_info.args) == FAILURE) {</span>
+<span class='curline'><a href='../S/1063.html#L3714'>fci</a>              3714 ext/spl/spl_iterators.c 	zend_fcall_info_args(&amp;apply_info.fci, apply_info.args TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1063.html#L3720'>fci</a>              3720 ext/spl/spl_iterators.c 	zend_fcall_info_args(&amp;apply_info.fci, NULL TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1064.html#L122'>fci</a>               122 ext/spl/spl_iterators.h 	zend_fcall_info       fci;</span>
+<span class='curline'><a href='../S/1071.html#L50'>fci</a>                50 ext/sqlite3/php_sqlite3_structs.h 	zend_fcall_info fci;</span>
+<span class='curline'><a href='../S/1071.html#L71'>fci</a>                71 ext/sqlite3/php_sqlite3_structs.h 	struct php_sqlite3_fci fci;</span>
+<span class='curline'><a href='../S/1072.html#L715'>fci</a>               715 ext/sqlite3/sqlite3.c 	fc-&gt;fci.size = sizeof(fc-&gt;fci);</span>
+<span class='curline'><a href='../S/1072.html#L716'>fci</a>               716 ext/sqlite3/sqlite3.c 	fc-&gt;fci.function_table = EG(function_table);</span>
+<span class='curline'><a href='../S/1072.html#L717'>fci</a>               717 ext/sqlite3/sqlite3.c 	fc-&gt;fci.function_name = cb;</span>
+<span class='curline'><a href='../S/1072.html#L718'>fci</a>               718 ext/sqlite3/sqlite3.c 	fc-&gt;fci.symbol_table = NULL;</span>
+<span class='curline'><a href='../S/1072.html#L719'>fci</a>               719 ext/sqlite3/sqlite3.c 	fc-&gt;fci.object_ptr = NULL;</span>
+<span class='curline'><a href='../S/1072.html#L720'>fci</a>               720 ext/sqlite3/sqlite3.c 	fc-&gt;fci.retval_ptr_ptr = &amp;retval;</span>
+<span class='curline'><a href='../S/1072.html#L721'>fci</a>               721 ext/sqlite3/sqlite3.c 	fc-&gt;fci.param_count = fake_argc;</span>
+<span class='curline'><a href='../S/1072.html#L773'>fci</a>               773 ext/sqlite3/sqlite3.c 	fc-&gt;fci.params = zargs;</span>
+<span class='curline'><a href='../S/1072.html#L775'>fci</a>               775 ext/sqlite3/sqlite3.c 	if ((ret = zend_call_function(&amp;fc-&gt;fci, &amp;fc-&gt;fcc TSRMLS_CC)) == FAILURE) {</span>
+<span class='curline'><a href='../S/1072.html#L888'>fci</a>               888 ext/sqlite3/sqlite3.c 	collation-&gt;fci.fci.size = (sizeof(collation-&gt;fci.fci));</span>
+<span class='curline'><a href='../S/1072.html#L889'>fci</a>               889 ext/sqlite3/sqlite3.c 	collation-&gt;fci.fci.function_table = EG(function_table);</span>
+<span class='curline'><a href='../S/1072.html#L890'>fci</a>               890 ext/sqlite3/sqlite3.c 	collation-&gt;fci.fci.function_name = collation-&gt;cmp_func;</span>
+<span class='curline'><a href='../S/1072.html#L891'>fci</a>               891 ext/sqlite3/sqlite3.c 	collation-&gt;fci.fci.symbol_table = NULL;</span>
+<span class='curline'><a href='../S/1072.html#L892'>fci</a>               892 ext/sqlite3/sqlite3.c 	collation-&gt;fci.fci.object_ptr = NULL;</span>
+<span class='curline'><a href='../S/1072.html#L893'>fci</a>               893 ext/sqlite3/sqlite3.c 	collation-&gt;fci.fci.retval_ptr_ptr = &amp;retval;</span>
+<span class='curline'><a href='../S/1072.html#L894'>fci</a>               894 ext/sqlite3/sqlite3.c 	collation-&gt;fci.fci.param_count = 2;</span>
+<span class='curline'><a href='../S/1072.html#L906'>fci</a>               906 ext/sqlite3/sqlite3.c 	collation-&gt;fci.fci.params = zargs;</span>
+<span class='curline'><a href='../S/1072.html#L908'>fci</a>               908 ext/sqlite3/sqlite3.c 	if ((ret = zend_call_function(&amp;collation-&gt;fci.fci, &amp;collation-&gt;fci.fcc TSRMLS_CC)) == FAILURE) {</span>
+<span class='curline'><a href='../S/1073.html#L4003'>fci</a>              4003 ext/standard/array.c 	zend_fcall_info fci;</span>
+<span class='curline'><a href='../S/1073.html#L4009'>fci</a>              4009 ext/standard/array.c 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "af|z", &amp;input, &amp;fci, &amp;fci_cache, &amp;initial) == FAILURE) {</span>
+<span class='curline'><a href='../S/1073.html#L4033'>fci</a>              4033 ext/standard/array.c 	fci.retval_ptr_ptr = &amp;retval;</span>
+<span class='curline'><a href='../S/1073.html#L4034'>fci</a>              4034 ext/standard/array.c 	fci.param_count = 2;</span>
+<span class='curline'><a href='../S/1073.html#L4035'>fci</a>              4035 ext/standard/array.c 	fci.no_separation = 0;</span>
+<span class='curline'><a href='../S/1073.html#L4043'>fci</a>              4043 ext/standard/array.c 			fci.params = args;</span>
+<span class='curline'><a href='../S/1073.html#L4045'>fci</a>              4045 ext/standard/array.c 			if (zend_call_function(&amp;fci, &amp;fci_cache TSRMLS_CC) == SUCCESS &amp;&amp; retval) {</span>
+<span class='curline'><a href='../S/1073.html#L4074'>fci</a>              4074 ext/standard/array.c 	zend_fcall_info fci = empty_fcall_info;</span>
+<span class='curline'><a href='../S/1073.html#L4080'>fci</a>              4080 ext/standard/array.c 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "a|fl", &amp;array, &amp;fci, &amp;fci_cache, &amp;use_type) == FAILURE) {</span>
+<span class='curline'><a href='../S/1073.html#L4091'>fci</a>              4091 ext/standard/array.c 		fci.no_separation = 0;</span>
+<span class='curline'><a href='../S/1073.html#L4092'>fci</a>              4092 ext/standard/array.c 		fci.retval_ptr_ptr = &amp;retval;</span>
+<span class='curline'><a href='../S/1073.html#L4095'>fci</a>              4095 ext/standard/array.c 			fci.param_count = 2;</span>
+<span class='curline'><a href='../S/1073.html#L4098'>fci</a>              4098 ext/standard/array.c 			fci.param_count = 1;</span>
+<span class='curline'><a href='../S/1073.html#L4130'>fci</a>              4130 ext/standard/array.c 			fci.params = args;</span>
+<span class='curline'><a href='../S/1073.html#L4132'>fci</a>              4132 ext/standard/array.c 			if (zend_call_function(&amp;fci, &amp;fci_cache TSRMLS_CC) == SUCCESS &amp;&amp; retval) {</span>
+<span class='curline'><a href='../S/1073.html#L4174'>fci</a>              4174 ext/standard/array.c 	zend_fcall_info fci = empty_fcall_info;</span>
+<span class='curline'><a href='../S/1073.html#L4179'>fci</a>              4179 ext/standard/array.c 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "f!+", &amp;fci, &amp;fci_cache, &amp;arrays, &amp;n_arrays) == FAILURE) {</span>
+<span class='curline'><a href='../S/1073.html#L4210'>fci</a>              4210 ext/standard/array.c 	if (!ZEND_FCI_INITIALIZED(fci) &amp;&amp; n_arrays == 1) {</span>
+<span class='curline'><a href='../S/1073.html#L4232'>fci</a>              4232 ext/standard/array.c 		if (!ZEND_FCI_INITIALIZED(fci)) {</span>
+<span class='curline'><a href='../S/1073.html#L4253'>fci</a>              4253 ext/standard/array.c 			if (!ZEND_FCI_INITIALIZED(fci)) {</span>
+<span class='curline'><a href='../S/1073.html#L4259'>fci</a>              4259 ext/standard/array.c 		if (ZEND_FCI_INITIALIZED(fci)) {</span>
+<span class='curline'><a href='../S/1073.html#L4260'>fci</a>              4260 ext/standard/array.c 			fci.retval_ptr_ptr = &amp;result;</span>
+<span class='curline'><a href='../S/1073.html#L4261'>fci</a>              4261 ext/standard/array.c 			fci.param_count = n_arrays;</span>
+<span class='curline'><a href='../S/1073.html#L4262'>fci</a>              4262 ext/standard/array.c 			fci.params = params;</span>
+<span class='curline'><a href='../S/1073.html#L4263'>fci</a>              4263 ext/standard/array.c 			fci.no_separation = 0;</span>
+<span class='curline'><a href='../S/1073.html#L4265'>fci</a>              4265 ext/standard/array.c 			if (zend_call_function(&amp;fci, &amp;fci_cache TSRMLS_CC) != SUCCESS || !result) {</span>
+<span class='curline'><a href='../S/1077.html#L4752'>fci</a>              4752 ext/standard/basic_functions.c 	zend_fcall_info fci;</span>
+<span class='curline'><a href='../S/1077.html#L4755'>fci</a>              4755 ext/standard/basic_functions.c 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "f*", &amp;fci, &amp;fci_cache, &amp;fci.params, &amp;fci.param_count) == FAILURE) {</span>
+<span class='curline'><a href='../S/1077.html#L4759'>fci</a>              4759 ext/standard/basic_functions.c 	fci.retval_ptr_ptr = &amp;retval_ptr;</span>
+<span class='curline'><a href='../S/1077.html#L4761'>fci</a>              4761 ext/standard/basic_functions.c 	if (zend_call_function(&amp;fci, &amp;fci_cache TSRMLS_CC) == SUCCESS &amp;&amp; fci.retval_ptr_ptr &amp;&amp; *fci.retval_ptr_ptr) {</span>
+<span class='curline'><a href='../S/1077.html#L4762'>fci</a>              4762 ext/standard/basic_functions.c 		COPY_PZVAL_TO_ZVAL(*return_value, *fci.retval_ptr_ptr);</span>
+<span class='curline'><a href='../S/1077.html#L4765'>fci</a>              4765 ext/standard/basic_functions.c 	if (fci.params) {</span>
+<span class='curline'><a href='../S/1077.html#L4766'>fci</a>              4766 ext/standard/basic_functions.c 		efree(fci.params);</span>
+<span class='curline'><a href='../S/1077.html#L4776'>fci</a>              4776 ext/standard/basic_functions.c 	zend_fcall_info fci;</span>
+<span class='curline'><a href='../S/1077.html#L4779'>fci</a>              4779 ext/standard/basic_functions.c 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "fa/", &amp;fci, &amp;fci_cache, &amp;params) == FAILURE) {</span>
+<span class='curline'><a href='../S/1077.html#L4783'>fci</a>              4783 ext/standard/basic_functions.c 	zend_fcall_info_args(&amp;fci, params TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1077.html#L4784'>fci</a>              4784 ext/standard/basic_functions.c 	fci.retval_ptr_ptr = &amp;retval_ptr;</span>
+<span class='curline'><a href='../S/1077.html#L4786'>fci</a>              4786 ext/standard/basic_functions.c 	if (zend_call_function(&amp;fci, &amp;fci_cache TSRMLS_CC) == SUCCESS &amp;&amp; fci.retval_ptr_ptr &amp;&amp; *fci.retval_ptr_ptr) {</span>
+<span class='curline'><a href='../S/1077.html#L4787'>fci</a>              4787 ext/standard/basic_functions.c 		COPY_PZVAL_TO_ZVAL(*return_value, *fci.retval_ptr_ptr);</span>
+<span class='curline'><a href='../S/1077.html#L4790'>fci</a>              4790 ext/standard/basic_functions.c 	zend_fcall_info_args_clear(&amp;fci, 1);</span>
+<span class='curline'><a href='../S/1077.html#L4882'>fci</a>              4882 ext/standard/basic_functions.c 	zend_fcall_info fci;</span>
+<span class='curline'><a href='../S/1077.html#L4885'>fci</a>              4885 ext/standard/basic_functions.c 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "f*", &amp;fci, &amp;fci_cache, &amp;fci.params, &amp;fci.param_count) == FAILURE) {</span>
+<span class='curline'><a href='../S/1077.html#L4893'>fci</a>              4893 ext/standard/basic_functions.c 	fci.retval_ptr_ptr = &amp;retval_ptr;</span>
+<span class='curline'><a href='../S/1077.html#L4900'>fci</a>              4900 ext/standard/basic_functions.c 	if (zend_call_function(&amp;fci, &amp;fci_cache TSRMLS_CC) == SUCCESS &amp;&amp; fci.retval_ptr_ptr &amp;&amp; *fci.retval_ptr_ptr) {</span>
+<span class='curline'><a href='../S/1077.html#L4901'>fci</a>              4901 ext/standard/basic_functions.c 		COPY_PZVAL_TO_ZVAL(*return_value, *fci.retval_ptr_ptr);</span>
+<span class='curline'><a href='../S/1077.html#L4904'>fci</a>              4904 ext/standard/basic_functions.c 	if (fci.params) {</span>
+<span class='curline'><a href='../S/1077.html#L4905'>fci</a>              4905 ext/standard/basic_functions.c 		efree(fci.params);</span>
+<span class='curline'><a href='../S/1077.html#L4915'>fci</a>              4915 ext/standard/basic_functions.c 	zend_fcall_info fci;</span>
+<span class='curline'><a href='../S/1077.html#L4918'>fci</a>              4918 ext/standard/basic_functions.c 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "fa/", &amp;fci, &amp;fci_cache, &amp;params) == FAILURE) {</span>
+<span class='curline'><a href='../S/1077.html#L4922'>fci</a>              4922 ext/standard/basic_functions.c 	zend_fcall_info_args(&amp;fci, params TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1077.html#L4923'>fci</a>              4923 ext/standard/basic_functions.c 	fci.retval_ptr_ptr = &amp;retval_ptr;</span>
+<span class='curline'><a href='../S/1077.html#L4930'>fci</a>              4930 ext/standard/basic_functions.c 	if (zend_call_function(&amp;fci, &amp;fci_cache TSRMLS_CC) == SUCCESS &amp;&amp; fci.retval_ptr_ptr &amp;&amp; *fci.retval_ptr_ptr) {</span>
+<span class='curline'><a href='../S/1077.html#L4931'>fci</a>              4931 ext/standard/basic_functions.c 		COPY_PZVAL_TO_ZVAL(*return_value, *fci.retval_ptr_ptr);</span>
+<span class='curline'><a href='../S/1077.html#L4934'>fci</a>              4934 ext/standard/basic_functions.c 	zend_fcall_info_args_clear(&amp;fci, 1);</span>
+<span class='curline'><a href='../S/1205.html#L2191'>fci</a>              2191 ext/sybase_ct/php_sybase_ct.c 	zend_fcall_info fci = empty_fcall_info;</span>
+<span class='curline'><a href='../S/1205.html#L2198'>fci</a>              2198 ext/sybase_ct/php_sybase_ct.c 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "f!|r", &amp;fci, &amp;cache, &amp;sybase_link_index) == FAILURE) {</span>
+<span class='curline'><a href='../S/1205.html#L2223'>fci</a>              2223 ext/sybase_ct/php_sybase_ct.c 	if (ZEND_FCI_INITIALIZED(fci)) {</span>
+<span class='curline'><a href='../S/1205.html#L2225'>fci</a>              2225 ext/sybase_ct/php_sybase_ct.c 		**callback = *fci.function_name;</span>
+<span class='curline'><a href='../S/1224.html#L513'>fci</a>               513 ext/xml/xml.c  		zend_fcall_info fci;</span>
+<span class='curline'><a href='../S/1224.html#L520'>fci</a>               520 ext/xml/xml.c  		fci.size = sizeof(fci);</span>
+<span class='curline'><a href='../S/1224.html#L521'>fci</a>               521 ext/xml/xml.c  		fci.function_table = EG(function_table);</span>
+<span class='curline'><a href='../S/1224.html#L522'>fci</a>               522 ext/xml/xml.c  		fci.function_name = handler;</span>
+<span class='curline'><a href='../S/1224.html#L523'>fci</a>               523 ext/xml/xml.c  		fci.symbol_table = NULL;</span>
+<span class='curline'><a href='../S/1224.html#L524'>fci</a>               524 ext/xml/xml.c  		fci.object_ptr = parser-&gt;object;</span>
+<span class='curline'><a href='../S/1224.html#L525'>fci</a>               525 ext/xml/xml.c  		fci.retval_ptr_ptr = &amp;retval;</span>
+<span class='curline'><a href='../S/1224.html#L526'>fci</a>               526 ext/xml/xml.c  		fci.param_count = argc;</span>
+<span class='curline'><a href='../S/1224.html#L527'>fci</a>               527 ext/xml/xml.c  		fci.params = args;</span>
+<span class='curline'><a href='../S/1224.html#L528'>fci</a>               528 ext/xml/xml.c  		fci.no_separation = 0;</span>
+<span class='curline'><a href='../S/1224.html#L531'>fci</a>               531 ext/xml/xml.c  		result = zend_call_function(&amp;fci, NULL TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1259.html#L189'>fci</a>               189 ext/xsl/xsltprocessor.c 	zend_fcall_info fci;</span>
+<span class='curline'><a href='../S/1259.html#L233'>fci</a>               233 ext/xsl/xsltprocessor.c 	fci.param_count = nargs - 1;</span>
+<span class='curline'><a href='../S/1259.html#L234'>fci</a>               234 ext/xsl/xsltprocessor.c 	if (fci.param_count &gt; 0) {</span>
+<span class='curline'><a href='../S/1259.html#L235'>fci</a>               235 ext/xsl/xsltprocessor.c 		fci.params = safe_emalloc(fci.param_count, sizeof(zval**), 0);</span>
+<span class='curline'><a href='../S/1259.html#L236'>fci</a>               236 ext/xsl/xsltprocessor.c 		args = safe_emalloc(fci.param_count, sizeof(zval *), 0);</span>
+<span class='curline'><a href='../S/1259.html#L304'>fci</a>               304 ext/xsl/xsltprocessor.c 		fci.params[i] = &amp;args[i];</span>
+<span class='curline'><a href='../S/1259.html#L307'>fci</a>               307 ext/xsl/xsltprocessor.c 	fci.size = sizeof(fci);</span>
+<span class='curline'><a href='../S/1259.html#L308'>fci</a>               308 ext/xsl/xsltprocessor.c 	fci.function_table = EG(function_table);</span>
+<span class='curline'><a href='../S/1259.html#L317'>fci</a>               317 ext/xsl/xsltprocessor.c 		if (fci.param_count &gt; 0) {</span>
+<span class='curline'><a href='../S/1259.html#L322'>fci</a>               322 ext/xsl/xsltprocessor.c 			efree(fci.params);</span>
+<span class='curline'><a href='../S/1259.html#L330'>fci</a>               330 ext/xsl/xsltprocessor.c 	fci.function_name = &amp;handler;</span>
+<span class='curline'><a href='../S/1259.html#L331'>fci</a>               331 ext/xsl/xsltprocessor.c 	fci.symbol_table = NULL;</span>
+<span class='curline'><a href='../S/1259.html#L332'>fci</a>               332 ext/xsl/xsltprocessor.c 	fci.object_ptr = NULL;</span>
+<span class='curline'><a href='../S/1259.html#L333'>fci</a>               333 ext/xsl/xsltprocessor.c 	fci.retval_ptr_ptr = &amp;retval;</span>
+<span class='curline'><a href='../S/1259.html#L334'>fci</a>               334 ext/xsl/xsltprocessor.c 	fci.no_separation = 0;</span>
+<span class='curline'><a href='../S/1259.html#L344'>fci</a>               344 ext/xsl/xsltprocessor.c 		result = zend_call_function(&amp;fci, NULL TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1259.html#L379'>fci</a>               379 ext/xsl/xsltprocessor.c 	if (fci.param_count &gt; 0) {</span>
+<span class='curline'><a href='../S/1259.html#L384'>fci</a>               384 ext/xsl/xsltprocessor.c 		efree(fci.params);</span>
+<span class='curline'><a href='../S/1397.html#L155'>fci</a>               155 main/SAPI.c    	zend_fcall_info fci;</span>
+<span class='curline'><a href='../S/1397.html#L160'>fci</a>               160 main/SAPI.c    	if (zend_fcall_info_init(SG(callback_func), 0, &amp;fci, &amp;SG(fci_cache), &amp;callback_name, &amp;callback_error TSRMLS_CC) == SUCCESS) {</span>
+<span class='curline'><a href='../S/1397.html#L161'>fci</a>               161 main/SAPI.c    		fci.retval_ptr_ptr = &amp;retval_ptr;</span>
+<span class='curline'><a href='../S/1397.html#L163'>fci</a>               163 main/SAPI.c    		error = zend_call_function(&amp;fci, &amp;SG(fci_cache) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1367.html#L504'>fci</a>               504 main/output.c  			if (SUCCESS == zend_fcall_info_init(output_handler, 0, &amp;user-&gt;fci, &amp;user-&gt;fcc, &amp;handler_name, &amp;error TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/1367.html#L974'>fci</a>               974 main/output.c  			zend_fcall_info_argn(&amp;handler-&gt;func.user-&gt;fci TSRMLS_CC, 2, &amp;ob_data, &amp;ob_mode);</span>
+<span class='curline'><a href='../S/1367.html#L977'>fci</a>               977 main/output.c  			if (SUCCESS == zend_fcall_info_call(&amp;handler-&gt;func.user-&gt;fci, &amp;handler-&gt;func.user-&gt;fcc, &amp;retval, NULL TSRMLS_CC) &amp;&amp; PHP_OUTPUT_USER_SUCCESS(retval)) {</span>
+<span class='curline'><a href='../S/1367.html#L994'>fci</a>               994 main/output.c  			zend_fcall_info_argn(&amp;handler-&gt;func.user-&gt;fci TSRMLS_CC, 0);</span>
+<span class='curline'><a href='../S/1381.html#L124'>fci</a>               124 main/php_output.h 	zend_fcall_info fci;</span>
+<span class='curline'><a href='../S/1419.html#L301'>fci</a>               301 main/streams/userspace.c 		zend_fcall_info fci;</span>
+<span class='curline'><a href='../S/1419.html#L305'>fci</a>               305 main/streams/userspace.c 		fci.size = sizeof(fci);</span>
+<span class='curline'><a href='../S/1419.html#L306'>fci</a>               306 main/streams/userspace.c 		fci.function_table = &amp;uwrap-&gt;ce-&gt;function_table;</span>
+<span class='curline'><a href='../S/1419.html#L307'>fci</a>               307 main/streams/userspace.c 		fci.function_name = NULL;</span>
+<span class='curline'><a href='../S/1419.html#L308'>fci</a>               308 main/streams/userspace.c 		fci.symbol_table = NULL;</span>
+<span class='curline'><a href='../S/1419.html#L309'>fci</a>               309 main/streams/userspace.c 		fci.object_ptr = object;</span>
+<span class='curline'><a href='../S/1419.html#L310'>fci</a>               310 main/streams/userspace.c 		fci.retval_ptr_ptr = &amp;retval_ptr;</span>
+<span class='curline'><a href='../S/1419.html#L311'>fci</a>               311 main/streams/userspace.c 		fci.param_count = 0;</span>
+<span class='curline'><a href='../S/1419.html#L312'>fci</a>               312 main/streams/userspace.c 		fci.params = NULL;</span>
+<span class='curline'><a href='../S/1419.html#L313'>fci</a>               313 main/streams/userspace.c 		fci.no_separation = 1;</span>
+<span class='curline'><a href='../S/1419.html#L321'>fci</a>               321 main/streams/userspace.c 		if (zend_call_function(&amp;fci, &amp;fcc TSRMLS_CC) == FAILURE) {</span>
+<span class='curline'><a href='../S/1572.html#L87'>fci</a>                87 sapi/phpdbg/phpdbg_prompt.c 			zend_fcall_info fci;</span>
+<span class='curline'><a href='../S/1572.html#L91'>fci</a>                91 sapi/phpdbg/phpdbg_prompt.c 			memset(&amp;fci, 0, sizeof(zend_fcall_info));</span>
+<span class='curline'><a href='../S/1572.html#L93'>fci</a>                93 sapi/phpdbg/phpdbg_prompt.c 			fci.size = sizeof(zend_fcall_info);</span>
+<span class='curline'><a href='../S/1572.html#L94'>fci</a>                94 sapi/phpdbg/phpdbg_prompt.c 			fci.function_table = &amp;PHPDBG_G(registered);</span>
+<span class='curline'><a href='../S/1572.html#L95'>fci</a>                95 sapi/phpdbg/phpdbg_prompt.c 			fci.function_name = &amp;fname;</span>
+<span class='curline'><a href='../S/1572.html#L96'>fci</a>                96 sapi/phpdbg/phpdbg_prompt.c 			fci.symbol_table = EG(active_symbol_table);</span>
+<span class='curline'><a href='../S/1572.html#L97'>fci</a>                97 sapi/phpdbg/phpdbg_prompt.c 			fci.object_ptr = NULL;</span>
+<span class='curline'><a href='../S/1572.html#L98'>fci</a>                98 sapi/phpdbg/phpdbg_prompt.c 			fci.retval_ptr_ptr = &amp;fretval;</span>
+<span class='curline'><a href='../S/1572.html#L99'>fci</a>                99 sapi/phpdbg/phpdbg_prompt.c 			fci.no_separation = 1;</span>
+<span class='curline'><a href='../S/1572.html#L162'>fci</a>               162 sapi/phpdbg/phpdbg_prompt.c 				zend_fcall_info_args(&amp;fci, &amp;params TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1572.html#L164'>fci</a>               164 sapi/phpdbg/phpdbg_prompt.c 				fci.params = NULL;</span>
+<span class='curline'><a href='../S/1572.html#L165'>fci</a>               165 sapi/phpdbg/phpdbg_prompt.c 				fci.param_count = 0;</span>
+<span class='curline'><a href='../S/1572.html#L170'>fci</a>               170 sapi/phpdbg/phpdbg_prompt.c 				fci.param_count);</span>
+<span class='curline'><a href='../S/1572.html#L172'>fci</a>               172 sapi/phpdbg/phpdbg_prompt.c 			zend_call_function(&amp;fci, NULL TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1572.html#L529'>fci</a>               529 sapi/phpdbg/phpdbg_prompt.c 	zend_fcall_info fci;</span>
+<span class='curline'><a href='../S/1572.html#L550'>fci</a>               550 sapi/phpdbg/phpdbg_prompt.c 	fci.size = sizeof(fci);</span>
+<span class='curline'><a href='../S/1572.html#L551'>fci</a>               551 sapi/phpdbg/phpdbg_prompt.c 	fci.function_table = &amp;Z_OBJCE(exception)-&gt;function_table;</span>
+<span class='curline'><a href='../S/1572.html#L552'>fci</a>               552 sapi/phpdbg/phpdbg_prompt.c 	fci.function_name = &amp;fname;</span>
+<span class='curline'><a href='../S/1572.html#L553'>fci</a>               553 sapi/phpdbg/phpdbg_prompt.c 	fci.symbol_table = NULL;</span>
+<span class='curline'><a href='../S/1572.html#L554'>fci</a>               554 sapi/phpdbg/phpdbg_prompt.c 	fci.object_ptr = &amp;exception;</span>
+<span class='curline'><a href='../S/1572.html#L555'>fci</a>               555 sapi/phpdbg/phpdbg_prompt.c 	fci.retval_ptr_ptr = &amp;trace;</span>
+<span class='curline'><a href='../S/1572.html#L556'>fci</a>               556 sapi/phpdbg/phpdbg_prompt.c 	fci.param_count = 0;</span>
+<span class='curline'><a href='../S/1572.html#L557'>fci</a>               557 sapi/phpdbg/phpdbg_prompt.c 	fci.params = NULL;</span>
+<span class='curline'><a href='../S/1572.html#L558'>fci</a>               558 sapi/phpdbg/phpdbg_prompt.c 	fci.no_separation = 1;</span>
+<span class='curline'><a href='../S/1572.html#L559'>fci</a>               559 sapi/phpdbg/phpdbg_prompt.c 	zend_call_function(&amp;fci, NULL TSRMLS_CC);</span>
+</pre>
+</body>
+</html>

@@ -1,0 +1,616 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>EX</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/1669.html#L1552'>EX</a>               1552 Zend/zend_execute.c 	zval ***end = cv + EX(op_array)-&gt;last_var;</span>
+<span class='curline'><a href='../S/1669.html#L1656'>EX</a>               1656 Zend/zend_execute.c 		EX(prev_execute_data) = (zend_execute_data*)((char*)ZEND_VM_STACK_ELEMETS(EG(argument_stack)) + args_size);</span>
+<span class='curline'><a href='../S/1669.html#L1657'>EX</a>               1657 Zend/zend_execute.c 		memset(EX(prev_execute_data), 0, sizeof(zend_execute_data));</span>
+<span class='curline'><a href='../S/1669.html#L1658'>EX</a>               1658 Zend/zend_execute.c 		EX(prev_execute_data)-&gt;function_state.function = (zend_function*)op_array;</span>
+<span class='curline'><a href='../S/1669.html#L1659'>EX</a>               1659 Zend/zend_execute.c 		EX(prev_execute_data)-&gt;function_state.arguments = (void**)((char*)ZEND_VM_STACK_ELEMETS(EG(argument_stack)) + ZEND_MM_ALIGNED_SIZE(sizeof(zval*)) * args_count);</span>
+<span class='curline'><a href='../S/1669.html#L1662'>EX</a>               1662 Zend/zend_execute.c 		*EX(prev_execute_data)-&gt;function_state.arguments = (void*)(zend_uintptr_t)args_count;</span>
+<span class='curline'><a href='../S/1669.html#L1665'>EX</a>               1665 Zend/zend_execute.c 			zval **arg_dst = (zval**)zend_vm_stack_get_arg_ex(EX(prev_execute_data), 1);</span>
+<span class='curline'><a href='../S/1669.html#L1676'>EX</a>               1676 Zend/zend_execute.c 		EX(prev_execute_data) = EG(current_execute_data);</span>
+<span class='curline'><a href='../S/1669.html#L1681'>EX</a>               1681 Zend/zend_execute.c 	EX(call_slots) = (call_slot*)((char *)execute_data + execute_data_size + CVs_size);</span>
+<span class='curline'><a href='../S/1669.html#L1684'>EX</a>               1684 Zend/zend_execute.c 	EX(op_array) = op_array;</span>
+<span class='curline'><a href='../S/1669.html#L1688'>EX</a>               1688 Zend/zend_execute.c 	EX(object) = NULL;</span>
+<span class='curline'><a href='../S/1669.html#L1689'>EX</a>               1689 Zend/zend_execute.c 	EX(current_this) = NULL;</span>
+<span class='curline'><a href='../S/1669.html#L1690'>EX</a>               1690 Zend/zend_execute.c 	EX(old_error_reporting) = NULL;</span>
+<span class='curline'><a href='../S/1669.html#L1691'>EX</a>               1691 Zend/zend_execute.c 	EX(symbol_table) = EG(active_symbol_table);</span>
+<span class='curline'><a href='../S/1669.html#L1692'>EX</a>               1692 Zend/zend_execute.c 	EX(call) = NULL;</span>
+<span class='curline'><a href='../S/1669.html#L1694'>EX</a>               1694 Zend/zend_execute.c 	EX(nested) = nested;</span>
+<span class='curline'><a href='../S/1669.html#L1695'>EX</a>               1695 Zend/zend_execute.c 	EX(delayed_exception) = NULL;</span>
+<span class='curline'><a href='../S/1669.html#L1713'>EX</a>               1713 Zend/zend_execute.c 	EX(opline) = UNEXPECTED((op_array-&gt;fn_flags &amp; ZEND_ACC_INTERACTIVE) != 0) &amp;&amp; EG(start_op) ? EG(start_op) : op_array-&gt;opcodes;</span>
+<span class='curline'><a href='../S/1669.html#L1714'>EX</a>               1714 Zend/zend_execute.c 	EG(opline_ptr) = &amp;EX(opline);</span>
+<span class='curline'><a href='../S/1669.html#L1716'>EX</a>               1716 Zend/zend_execute.c 	EX(function_state).function = (zend_function *) op_array;</span>
+<span class='curline'><a href='../S/1669.html#L1717'>EX</a>               1717 Zend/zend_execute.c 	EX(function_state).arguments = NULL;</span>
+<span class='curline'><a href='../S/1671.html#L657'>EX</a>                657 Zend/zend_execute_API.c 		EX(op_array) = NULL;</span>
+<span class='curline'><a href='../S/1671.html#L658'>EX</a>                658 Zend/zend_execute_API.c 		EX(opline) = NULL;</span>
+<span class='curline'><a href='../S/1671.html#L659'>EX</a>                659 Zend/zend_execute_API.c 		EX(object) = NULL;</span>
+<span class='curline'><a href='../S/1671.html#L696'>EX</a>                696 Zend/zend_execute_API.c 	EX(function_state).function = fci_cache-&gt;function_handler;</span>
+<span class='curline'><a href='../S/1671.html#L700'>EX</a>                700 Zend/zend_execute_API.c 	EX(object) = fci-&gt;object_ptr;</span>
+<span class='curline'><a href='../S/1671.html#L706'>EX</a>                706 Zend/zend_execute_API.c 	if (EX(function_state).function-&gt;common.fn_flags &amp; (ZEND_ACC_ABSTRACT|ZEND_ACC_DEPRECATED)) {</span>
+<span class='curline'><a href='../S/1671.html#L707'>EX</a>                707 Zend/zend_execute_API.c 		if (EX(function_state).function-&gt;common.fn_flags &amp; ZEND_ACC_ABSTRACT) {</span>
+<span class='curline'><a href='../S/1671.html#L708'>EX</a>                708 Zend/zend_execute_API.c 			zend_error_noreturn(E_ERROR, "Cannot call abstract method %s::%s()", EX(function_state).function-&gt;common.scope-&gt;name, EX(function_state).function-&gt;common.function_name);</span>
+<span class='curline'><a href='../S/1671.html#L710'>EX</a>                710 Zend/zend_execute_API.c 		if (EX(function_state).function-&gt;common.fn_flags &amp; ZEND_ACC_DEPRECATED) {</span>
+<span class='curline'><a href='../S/1671.html#L712'>EX</a>                712 Zend/zend_execute_API.c 				EX(function_state).function-&gt;common.scope ? EX(function_state).function-&gt;common.scope-&gt;name : "",</span>
+<span class='curline'><a href='../S/1671.html#L713'>EX</a>                713 Zend/zend_execute_API.c 				EX(function_state).function-&gt;common.scope ? "::" : "",</span>
+<span class='curline'><a href='../S/1671.html#L714'>EX</a>                714 Zend/zend_execute_API.c 				EX(function_state).function-&gt;common.function_name);</span>
+<span class='curline'><a href='../S/1671.html#L723'>EX</a>                723 Zend/zend_execute_API.c 		if (ARG_SHOULD_BE_SENT_BY_REF(EX(function_state).function, i + 1)) {</span>
+<span class='curline'><a href='../S/1671.html#L728'>EX</a>                728 Zend/zend_execute_API.c 				    !ARG_MAY_BE_SENT_BY_REF(EX(function_state).function, i + 1)) {</span>
+<span class='curline'><a href='../S/1671.html#L737'>EX</a>                737 Zend/zend_execute_API.c 						EX(function_state).function-&gt;common.scope ? EX(function_state).function-&gt;common.scope-&gt;name : "",</span>
+<span class='curline'><a href='../S/1671.html#L738'>EX</a>                738 Zend/zend_execute_API.c 						EX(function_state).function-&gt;common.scope ? "::" : "",</span>
+<span class='curline'><a href='../S/1671.html#L739'>EX</a>                739 Zend/zend_execute_API.c 						EX(function_state).function-&gt;common.function_name);</span>
+<span class='curline'><a href='../S/1671.html#L755'>EX</a>                755 Zend/zend_execute_API.c 		           (EX(function_state).function-&gt;common.fn_flags &amp; ZEND_ACC_CALL_VIA_HANDLER) == 0 ) {</span>
+<span class='curline'><a href='../S/1671.html#L771'>EX</a>                771 Zend/zend_execute_API.c 	EX(function_state).arguments = zend_vm_stack_top(TSRMLS_C);</span>
+<span class='curline'><a href='../S/1671.html#L782'>EX</a>                782 Zend/zend_execute_API.c 	} else if (EX(function_state).function-&gt;type != ZEND_INTERNAL_FUNCTION) {</span>
+<span class='curline'><a href='../S/1671.html#L787'>EX</a>                787 Zend/zend_execute_API.c 		if ((EX(function_state).function-&gt;common.fn_flags &amp; ZEND_ACC_STATIC)) {</span>
+<span class='curline'><a href='../S/1671.html#L808'>EX</a>                808 Zend/zend_execute_API.c 	EX(prev_execute_data) = EG(current_execute_data);</span>
+<span class='curline'><a href='../S/1671.html#L811'>EX</a>                811 Zend/zend_execute_API.c 	if (EX(function_state).function-&gt;type == ZEND_USER_FUNCTION) {</span>
+<span class='curline'><a href='../S/1671.html#L813'>EX</a>                813 Zend/zend_execute_API.c 		EG(scope) = EX(function_state).function-&gt;common.scope;</span>
+<span class='curline'><a href='../S/1671.html#L823'>EX</a>                823 Zend/zend_execute_API.c 		EG(active_op_array) = (zend_op_array *) EX(function_state).function;</span>
+<span class='curline'><a href='../S/1671.html#L839'>EX</a>                839 Zend/zend_execute_API.c 	} else if (EX(function_state).function-&gt;type == ZEND_INTERNAL_FUNCTION) {</span>
+<span class='curline'><a href='../S/1671.html#L840'>EX</a>                840 Zend/zend_execute_API.c 		int call_via_handler = (EX(function_state).function-&gt;common.fn_flags &amp; ZEND_ACC_CALL_VIA_HANDLER) != 0;</span>
+<span class='curline'><a href='../S/1671.html#L842'>EX</a>                842 Zend/zend_execute_API.c 		if (EX(function_state).function-&gt;common.scope) {</span>
+<span class='curline'><a href='../S/1671.html#L843'>EX</a>                843 Zend/zend_execute_API.c 			EG(scope) = EX(function_state).function-&gt;common.scope;</span>
+<span class='curline'><a href='../S/1671.html#L847'>EX</a>                847 Zend/zend_execute_API.c 			EX(function_state).function-&gt;internal_function.handler(fci-&gt;param_count, *fci-&gt;retval_ptr_ptr, fci-&gt;retval_ptr_ptr, fci-&gt;object_ptr, 1 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1671.html#L871'>EX</a>                871 Zend/zend_execute_API.c 			Z_OBJ_HT_P(fci-&gt;object_ptr)-&gt;call_method(EX(function_state).function-&gt;common.function_name, fci-&gt;param_count, *fci-&gt;retval_ptr_ptr, fci-&gt;retval_ptr_ptr, fci-&gt;object_ptr, 1 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1671.html#L876'>EX</a>                876 Zend/zend_execute_API.c 		if (EX(function_state).function-&gt;type == ZEND_OVERLOADED_FUNCTION_TEMPORARY) {</span>
+<span class='curline'><a href='../S/1671.html#L877'>EX</a>                877 Zend/zend_execute_API.c 			efree((char*)EX(function_state).function-&gt;common.function_name);</span>
+<span class='curline'><a href='../S/1671.html#L879'>EX</a>                879 Zend/zend_execute_API.c 		efree(EX(function_state).function);</span>
+<span class='curline'><a href='../S/1671.html#L894'>EX</a>                894 Zend/zend_execute_API.c 	EG(current_execute_data) = EX(prev_execute_data);</span>
+<span class='curline'><a href='../S/1747.html#L1154'>EX</a>               1154 Zend/zend_vm_def.h 		zend_is_by_ref_func_arg_fetch(opline, EX(call) TSRMLS_CC) ? BP_VAR_W : BP_VAR_R);</span>
+<span class='curline'><a href='../S/1747.html#L1262'>EX</a>               1262 Zend/zend_vm_def.h 	if (zend_is_by_ref_func_arg_fetch(opline, EX(call) TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/1747.html#L1498'>EX</a>               1498 Zend/zend_vm_def.h 	if (zend_is_by_ref_func_arg_fetch(opline, EX(call) TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/1747.html#L1824'>EX</a>               1824 Zend/zend_vm_def.h 	zend_bool nested = EX(nested);</span>
+<span class='curline'><a href='../S/1747.html#L1825'>EX</a>               1825 Zend/zend_vm_def.h 	zend_op_array *op_array = EX(op_array);</span>
+<span class='curline'><a href='../S/1747.html#L1827'>EX</a>               1827 Zend/zend_vm_def.h 	EG(current_execute_data) = EX(prev_execute_data);</span>
+<span class='curline'><a href='../S/1747.html#L1849'>EX</a>               1849 Zend/zend_vm_def.h 			EX(function_state).function = (zend_function *) EX(op_array);</span>
+<span class='curline'><a href='../S/1747.html#L1850'>EX</a>               1850 Zend/zend_vm_def.h 			EX(function_state).arguments = NULL;</span>
+<span class='curline'><a href='../S/1747.html#L1852'>EX</a>               1852 Zend/zend_vm_def.h 			EG(opline_ptr) = &amp;EX(opline);</span>
+<span class='curline'><a href='../S/1747.html#L1853'>EX</a>               1853 Zend/zend_vm_def.h 			EG(active_op_array) = EX(op_array);</span>
+<span class='curline'><a href='../S/1747.html#L1854'>EX</a>               1854 Zend/zend_vm_def.h 			EG(return_value_ptr_ptr) = EX(original_return_value);</span>
+<span class='curline'><a href='../S/1747.html#L1865'>EX</a>               1865 Zend/zend_vm_def.h 			EG(opline_ptr) = &amp;EX(opline);</span>
+<span class='curline'><a href='../S/1747.html#L1866'>EX</a>               1866 Zend/zend_vm_def.h 			EG(active_op_array) = EX(op_array);</span>
+<span class='curline'><a href='../S/1747.html#L1867'>EX</a>               1867 Zend/zend_vm_def.h 			EG(return_value_ptr_ptr) = EX(original_return_value);</span>
+<span class='curline'><a href='../S/1747.html#L1871'>EX</a>               1871 Zend/zend_vm_def.h 			EG(active_symbol_table) = EX(symbol_table);</span>
+<span class='curline'><a href='../S/1747.html#L1873'>EX</a>               1873 Zend/zend_vm_def.h 			EX(function_state).function = (zend_function *) EX(op_array);</span>
+<span class='curline'><a href='../S/1747.html#L1874'>EX</a>               1874 Zend/zend_vm_def.h 			EX(function_state).arguments = NULL;</span>
+<span class='curline'><a href='../S/1747.html#L1877'>EX</a>               1877 Zend/zend_vm_def.h 				if (UNEXPECTED(EG(exception) != NULL) &amp;&amp; EX(call)-&gt;is_ctor_call) {</span>
+<span class='curline'><a href='../S/1747.html#L1878'>EX</a>               1878 Zend/zend_vm_def.h 					if (EX(call)-&gt;is_ctor_result_used) {</span>
+<span class='curline'><a href='../S/1747.html#L1887'>EX</a>               1887 Zend/zend_vm_def.h 			EG(This) = EX(current_this);</span>
+<span class='curline'><a href='../S/1747.html#L1888'>EX</a>               1888 Zend/zend_vm_def.h 			EG(scope) = EX(current_scope);</span>
+<span class='curline'><a href='../S/1747.html#L1889'>EX</a>               1889 Zend/zend_vm_def.h 			EG(called_scope) = EX(current_called_scope);</span>
+<span class='curline'><a href='../S/1747.html#L1891'>EX</a>               1891 Zend/zend_vm_def.h 			EX(call)--;</span>
+<span class='curline'><a href='../S/1747.html#L1914'>EX</a>               1914 Zend/zend_vm_def.h 	zend_function *fbc = EX(function_state).function;</span>
+<span class='curline'><a href='../S/1747.html#L1918'>EX</a>               1918 Zend/zend_vm_def.h 	EX(object) = EX(call)-&gt;object;</span>
+<span class='curline'><a href='../S/1747.html#L1935'>EX</a>               1935 Zend/zend_vm_def.h 		!EX(object)) {</span>
+<span class='curline'><a href='../S/1747.html#L1952'>EX</a>               1952 Zend/zend_vm_def.h 		EX(current_this) = EG(This);</span>
+<span class='curline'><a href='../S/1747.html#L1953'>EX</a>               1953 Zend/zend_vm_def.h 		EX(current_scope) = EG(scope);</span>
+<span class='curline'><a href='../S/1747.html#L1954'>EX</a>               1954 Zend/zend_vm_def.h 		EX(current_called_scope) = EG(called_scope);</span>
+<span class='curline'><a href='../S/1747.html#L1955'>EX</a>               1955 Zend/zend_vm_def.h 		EG(This) = EX(object);</span>
+<span class='curline'><a href='../S/1747.html#L1956'>EX</a>               1956 Zend/zend_vm_def.h 		EG(scope) = (fbc-&gt;type == ZEND_USER_FUNCTION || !EX(object)) ? fbc-&gt;common.scope : NULL;</span>
+<span class='curline'><a href='../S/1747.html#L1957'>EX</a>               1957 Zend/zend_vm_def.h 		EG(called_scope) = EX(call)-&gt;called_scope;</span>
+<span class='curline'><a href='../S/1747.html#L1960'>EX</a>               1960 Zend/zend_vm_def.h 	num_args = opline-&gt;extended_value + EX(call)-&gt;num_additional_args;</span>
+<span class='curline'><a href='../S/1747.html#L1961'>EX</a>               1961 Zend/zend_vm_def.h 	if (EX(call)-&gt;num_additional_args) {</span>
+<span class='curline'><a href='../S/1747.html#L1962'>EX</a>               1962 Zend/zend_vm_def.h 		EX(function_state).arguments = zend_vm_stack_push_args(num_args TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1747.html#L1964'>EX</a>               1964 Zend/zend_vm_def.h 		EX(function_state).arguments = zend_vm_stack_top(TSRMLS_C);</span>
+<span class='curline'><a href='../S/1747.html#L1972'>EX</a>               1972 Zend/zend_vm_def.h 			void **p = EX(function_state).arguments - num_args;</span>
+<span class='curline'><a href='../S/1747.html#L1989'>EX</a>               1989 Zend/zend_vm_def.h 				fbc-&gt;internal_function.handler(num_args, ret-&gt;var.ptr, &amp;ret-&gt;var.ptr, EX(object), RETURN_VALUE_USED(opline) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1747.html#L2002'>EX</a>               2002 Zend/zend_vm_def.h 		EX(original_return_value) = EG(return_value_ptr_ptr);</span>
+<span class='curline'><a href='../S/1747.html#L2026'>EX</a>               2026 Zend/zend_vm_def.h 		EG(opline_ptr) = &amp;EX(opline);</span>
+<span class='curline'><a href='../S/1747.html#L2027'>EX</a>               2027 Zend/zend_vm_def.h 		EG(active_op_array) = EX(op_array);</span>
+<span class='curline'><a href='../S/1747.html#L2028'>EX</a>               2028 Zend/zend_vm_def.h 		EG(return_value_ptr_ptr) = EX(original_return_value);</span>
+<span class='curline'><a href='../S/1747.html#L2032'>EX</a>               2032 Zend/zend_vm_def.h 		EG(active_symbol_table) = EX(symbol_table);</span>
+<span class='curline'><a href='../S/1747.html#L2038'>EX</a>               2038 Zend/zend_vm_def.h 		if (EXPECTED(EX(object) != NULL)) {</span>
+<span class='curline'><a href='../S/1747.html#L2039'>EX</a>               2039 Zend/zend_vm_def.h 			Z_OBJ_HT_P(EX(object))-&gt;call_method(fbc-&gt;common.function_name, num_args, EX_T(opline-&gt;result.var).var.ptr, &amp;EX_T(opline-&gt;result.var).var.ptr, EX(object), RETURN_VALUE_USED(opline) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1747.html#L2059'>EX</a>               2059 Zend/zend_vm_def.h 	EX(function_state).function = (zend_function *) EX(op_array);</span>
+<span class='curline'><a href='../S/1747.html#L2060'>EX</a>               2060 Zend/zend_vm_def.h 	EX(function_state).arguments = NULL;</span>
+<span class='curline'><a href='../S/1747.html#L2064'>EX</a>               2064 Zend/zend_vm_def.h 			if (UNEXPECTED(EG(exception) != NULL) &amp;&amp; EX(call)-&gt;is_ctor_call) {</span>
+<span class='curline'><a href='../S/1747.html#L2065'>EX</a>               2065 Zend/zend_vm_def.h 				if (EX(call)-&gt;is_ctor_result_used) {</span>
+<span class='curline'><a href='../S/1747.html#L2074'>EX</a>               2074 Zend/zend_vm_def.h 		EG(This) = EX(current_this);</span>
+<span class='curline'><a href='../S/1747.html#L2075'>EX</a>               2075 Zend/zend_vm_def.h 		EG(scope) = EX(current_scope);</span>
+<span class='curline'><a href='../S/1747.html#L2076'>EX</a>               2076 Zend/zend_vm_def.h 		EG(called_scope) = EX(current_called_scope);</span>
+<span class='curline'><a href='../S/1747.html#L2079'>EX</a>               2079 Zend/zend_vm_def.h 	EX(call)--;</span>
+<span class='curline'><a href='../S/1747.html#L2188'>EX</a>               2188 Zend/zend_vm_def.h 		ZEND_VM_SET_OPCODE(&amp;EX(op_array)-&gt;opcodes[opline-&gt;extended_value]);</span>
+<span class='curline'><a href='../S/1747.html#L2194'>EX</a>               2194 Zend/zend_vm_def.h 		ZEND_VM_SET_OPCODE(&amp;EX(op_array)-&gt;opcodes[opline-&gt;op2.opline_num]);</span>
+<span class='curline'><a href='../S/1747.html#L2429'>EX</a>               2429 Zend/zend_vm_def.h 	call_slot *call = EX(call_slots) + opline-&gt;result.num;</span>
+<span class='curline'><a href='../S/1747.html#L2496'>EX</a>               2496 Zend/zend_vm_def.h 	EX(call) = call;</span>
+<span class='curline'><a href='../S/1747.html#L2510'>EX</a>               2510 Zend/zend_vm_def.h 	call_slot *call = EX(call_slots) + opline-&gt;result.num;</span>
+<span class='curline'><a href='../S/1747.html#L2624'>EX</a>               2624 Zend/zend_vm_def.h 	EX(call) = call;</span>
+<span class='curline'><a href='../S/1747.html#L2634'>EX</a>               2634 Zend/zend_vm_def.h 	call_slot *call = EX(call_slots) + opline-&gt;result.num;</span>
+<span class='curline'><a href='../S/1747.html#L2651'>EX</a>               2651 Zend/zend_vm_def.h 		EX(call) = call;</span>
+<span class='curline'><a href='../S/1747.html#L2682'>EX</a>               2682 Zend/zend_vm_def.h 			EX(call) = call;</span>
+<span class='curline'><a href='../S/1747.html#L2703'>EX</a>               2703 Zend/zend_vm_def.h 			EX(call) = call;</span>
+<span class='curline'><a href='../S/1747.html#L2773'>EX</a>               2773 Zend/zend_vm_def.h 			EX(call) = call;</span>
+<span class='curline'><a href='../S/1747.html#L2793'>EX</a>               2793 Zend/zend_vm_def.h 	call_slot *call = EX(call_slots) + opline-&gt;result.num;</span>
+<span class='curline'><a href='../S/1747.html#L2815'>EX</a>               2815 Zend/zend_vm_def.h 	EX(call) = call;</span>
+<span class='curline'><a href='../S/1747.html#L2821'>EX</a>               2821 Zend/zend_vm_def.h 	EX(function_state).function = EX(call)-&gt;fbc;</span>
+<span class='curline'><a href='../S/1747.html#L2830'>EX</a>               2830 Zend/zend_vm_def.h 	call_slot *call = EX(call_slots) + opline-&gt;op2.num;</span>
+<span class='curline'><a href='../S/1747.html#L2833'>EX</a>               2833 Zend/zend_vm_def.h 		EX(function_state).function = CACHED_PTR(opline-&gt;op1.literal-&gt;cache_slot);</span>
+<span class='curline'><a href='../S/1747.html#L2834'>EX</a>               2834 Zend/zend_vm_def.h 	} else if (UNEXPECTED(zend_hash_quick_find(EG(function_table), Z_STRVAL_P(fname), Z_STRLEN_P(fname)+1, Z_HASH_P(fname), (void **) &amp;EX(function_state).function)==FAILURE)) {</span>
+<span class='curline'><a href='../S/1747.html#L2838'>EX</a>               2838 Zend/zend_vm_def.h 		CACHE_PTR(opline-&gt;op1.literal-&gt;cache_slot, EX(function_state).function);</span>
+<span class='curline'><a href='../S/1747.html#L2841'>EX</a>               2841 Zend/zend_vm_def.h 	call-&gt;fbc = EX(function_state).function;</span>
+<span class='curline'><a href='../S/1747.html#L2846'>EX</a>               2846 Zend/zend_vm_def.h 	EX(call) = call;</span>
+<span class='curline'><a href='../S/1747.html#L3021'>EX</a>               3021 Zend/zend_vm_def.h 		ZEND_VM_SET_OPCODE(&amp;EX(op_array)-&gt;opcodes[opline-&gt;extended_value]);</span>
+<span class='curline'><a href='../S/1747.html#L3045'>EX</a>               3045 Zend/zend_vm_def.h 			ZEND_VM_SET_OPCODE(&amp;EX(op_array)-&gt;opcodes[opline-&gt;extended_value]);</span>
+<span class='curline'><a href='../S/1747.html#L3055'>EX</a>               3055 Zend/zend_vm_def.h 		EX_CV(opline-&gt;op2.var) = (zval**)EX_CV_NUM(execute_data, EX(op_array)-&gt;last_var + opline-&gt;op2.var);</span>
+<span class='curline'><a href='../S/1747.html#L3077'>EX</a>               3077 Zend/zend_vm_def.h 		if (ARG_MUST_BE_SENT_BY_REF(EX(call)-&gt;fbc, opline-&gt;op2.num)) {</span>
+<span class='curline'><a href='../S/1747.html#L3146'>EX</a>               3146 Zend/zend_vm_def.h 		if (!ARG_SHOULD_BE_SENT_BY_REF(EX(call)-&gt;fbc, opline-&gt;op2.num)) {</span>
+<span class='curline'><a href='../S/1747.html#L3166'>EX</a>               3166 Zend/zend_vm_def.h 			!ARG_MAY_BE_SENT_BY_REF(EX(call)-&gt;fbc, opline-&gt;op2.num)) {</span>
+<span class='curline'><a href='../S/1747.html#L3203'>EX</a>               3203 Zend/zend_vm_def.h 	    EX(function_state).function-&gt;type == ZEND_INTERNAL_FUNCTION) { </span>
+<span class='curline'><a href='../S/1747.html#L3204'>EX</a>               3204 Zend/zend_vm_def.h 		if (!ARG_SHOULD_BE_SENT_BY_REF(EX(call)-&gt;fbc, opline-&gt;op2.num)) {</span>
+<span class='curline'><a href='../S/1747.html#L3224'>EX</a>               3224 Zend/zend_vm_def.h 		if (ARG_SHOULD_BE_SENT_BY_REF(EX(call)-&gt;fbc, opline-&gt;op2.num)) {</span>
+<span class='curline'><a href='../S/1747.html#L3241'>EX</a>               3241 Zend/zend_vm_def.h 	arg_num = opline-&gt;op2.num + EX(call)-&gt;num_additional_args + 1;</span>
+<span class='curline'><a href='../S/1747.html#L3266'>EX</a>               3266 Zend/zend_vm_def.h 				if (ARG_SHOULD_BE_SENT_BY_REF(EX(call)-&gt;fbc, arg_num)) {</span>
+<span class='curline'><a href='../S/1747.html#L3279'>EX</a>               3279 Zend/zend_vm_def.h 				EX(call)-&gt;num_additional_args++;</span>
+<span class='curline'><a href='../S/1747.html#L3339'>EX</a>               3339 Zend/zend_vm_def.h 				if (ARG_MUST_BE_SENT_BY_REF(EX(call)-&gt;fbc, arg_num)) {</span>
+<span class='curline'><a href='../S/1747.html#L3343'>EX</a>               3343 Zend/zend_vm_def.h 						EX(call)-&gt;fbc-&gt;common.scope ? EX(call)-&gt;fbc-&gt;common.scope-&gt;name : "",</span>
+<span class='curline'><a href='../S/1747.html#L3344'>EX</a>               3344 Zend/zend_vm_def.h 						EX(call)-&gt;fbc-&gt;common.scope ? "::" : "",</span>
+<span class='curline'><a href='../S/1747.html#L3345'>EX</a>               3345 Zend/zend_vm_def.h 						EX(call)-&gt;fbc-&gt;common.function_name</span>
+<span class='curline'><a href='../S/1747.html#L3359'>EX</a>               3359 Zend/zend_vm_def.h 				EX(call)-&gt;num_additional_args++;</span>
+<span class='curline'><a href='../S/1747.html#L3399'>EX</a>               3399 Zend/zend_vm_def.h 			ptr = EX(prev_execute_data);</span>
+<span class='curline'><a href='../S/1747.html#L3514'>EX</a>               3514 Zend/zend_vm_def.h 	                   EX(op_array), execute_data TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1747.html#L3515'>EX</a>               3515 Zend/zend_vm_def.h 	ZEND_VM_JMP(EX(op_array)-&gt;opcodes + el-&gt;brk);</span>
+<span class='curline'><a href='../S/1747.html#L3525'>EX</a>               3525 Zend/zend_vm_def.h 	                   EX(op_array), execute_data TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1747.html#L3526'>EX</a>               3526 Zend/zend_vm_def.h 	ZEND_VM_JMP(EX(op_array)-&gt;opcodes + el-&gt;cont);</span>
+<span class='curline'><a href='../S/1747.html#L3537'>EX</a>               3537 Zend/zend_vm_def.h  	                   EX(op_array), execute_data TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1747.html#L3539'>EX</a>               3539 Zend/zend_vm_def.h 	brk_opline = EX(op_array)-&gt;opcodes + el-&gt;brk;</span>
+<span class='curline'><a href='../S/1747.html#L3609'>EX</a>               3609 Zend/zend_vm_def.h 		ZEND_VM_JMP(EX(op_array)-&gt;opcodes + opline-&gt;op2.opline_num);</span>
+<span class='curline'><a href='../S/1747.html#L3611'>EX</a>               3611 Zend/zend_vm_def.h 		call_slot *call = EX(call_slots) + opline-&gt;extended_value;</span>
+<span class='curline'><a href='../S/1747.html#L3625'>EX</a>               3625 Zend/zend_vm_def.h 		EX(call) = call;</span>
+<span class='curline'><a href='../S/1747.html#L4032'>EX</a>               4032 Zend/zend_vm_def.h 		EX(original_return_value) = EG(return_value_ptr_ptr);</span>
+<span class='curline'><a href='../S/1747.html#L4041'>EX</a>               4041 Zend/zend_vm_def.h 		EX(function_state).function = (zend_function *) new_op_array;</span>
+<span class='curline'><a href='../S/1747.html#L4042'>EX</a>               4042 Zend/zend_vm_def.h 		EX(object) = NULL;</span>
+<span class='curline'><a href='../S/1747.html#L4054'>EX</a>               4054 Zend/zend_vm_def.h 		EX(function_state).function = (zend_function *) EX(op_array);</span>
+<span class='curline'><a href='../S/1747.html#L4056'>EX</a>               4056 Zend/zend_vm_def.h 		EG(opline_ptr) = &amp;EX(opline);</span>
+<span class='curline'><a href='../S/1747.html#L4057'>EX</a>               4057 Zend/zend_vm_def.h 		EG(active_op_array) = EX(op_array);</span>
+<span class='curline'><a href='../S/1747.html#L4058'>EX</a>               4058 Zend/zend_vm_def.h 		EG(return_value_ptr_ptr) = EX(original_return_value);</span>
+<span class='curline'><a href='../S/1747.html#L4091'>EX</a>               4091 Zend/zend_vm_def.h 			zend_delete_variable(EX(prev_execute_data), EG(active_symbol_table),  cv-&gt;name, cv-&gt;name_len+1, cv-&gt;hash_value TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1747.html#L4313'>EX</a>               4313 Zend/zend_vm_def.h 				ZEND_VM_JMP(EX(op_array)-&gt;opcodes+opline-&gt;op2.opline_num);</span>
+<span class='curline'><a href='../S/1747.html#L4447'>EX</a>               4447 Zend/zend_vm_def.h 		ZEND_VM_JMP(EX(op_array)-&gt;opcodes+opline-&gt;op2.opline_num);</span>
+<span class='curline'><a href='../S/1747.html#L4474'>EX</a>               4474 Zend/zend_vm_def.h 			ZEND_VM_JMP(EX(op_array)-&gt;opcodes+opline-&gt;op2.opline_num);</span>
+<span class='curline'><a href='../S/1747.html#L4488'>EX</a>               4488 Zend/zend_vm_def.h 					ZEND_VM_JMP(EX(op_array)-&gt;opcodes+opline-&gt;op2.opline_num);</span>
+<span class='curline'><a href='../S/1747.html#L4518'>EX</a>               4518 Zend/zend_vm_def.h 				ZEND_VM_JMP(EX(op_array)-&gt;opcodes+opline-&gt;op2.opline_num);</span>
+<span class='curline'><a href='../S/1747.html#L4545'>EX</a>               4545 Zend/zend_vm_def.h 				ZEND_VM_JMP(EX(op_array)-&gt;opcodes+opline-&gt;op2.opline_num);</span>
+<span class='curline'><a href='../S/1747.html#L4554'>EX</a>               4554 Zend/zend_vm_def.h 				ZEND_VM_JMP(EX(op_array)-&gt;opcodes+opline-&gt;op2.opline_num);</span>
+<span class='curline'><a href='../S/1747.html#L4846'>EX</a>               4846 Zend/zend_vm_def.h 	if (EX(old_error_reporting) == NULL) {</span>
+<span class='curline'><a href='../S/1747.html#L4847'>EX</a>               4847 Zend/zend_vm_def.h 		EX(old_error_reporting) = &amp;EX_T(opline-&gt;result.var).tmp_var;</span>
+<span class='curline'><a href='../S/1747.html#L4883'>EX</a>               4883 Zend/zend_vm_def.h 	zend_error_noreturn(E_ERROR, "Cannot call abstract method %s::%s()", EG(scope)-&gt;name, EX(op_array)-&gt;function_name);</span>
+<span class='curline'><a href='../S/1747.html#L4909'>EX</a>               4909 Zend/zend_vm_def.h 	if (EX(old_error_reporting) == &amp;EX_T(opline-&gt;op1.var).tmp_var) {</span>
+<span class='curline'><a href='../S/1747.html#L4910'>EX</a>               4910 Zend/zend_vm_def.h 		EX(old_error_reporting) = NULL;</span>
+<span class='curline'><a href='../S/1747.html#L5027'>EX</a>               5027 Zend/zend_vm_def.h 		zend_llist_apply_with_argument(&amp;zend_extensions, (llist_apply_with_arg_func_t) zend_extension_statement_handler, EX(op_array) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1747.html#L5037'>EX</a>               5037 Zend/zend_vm_def.h 		zend_llist_apply_with_argument(&amp;zend_extensions, (llist_apply_with_arg_func_t) zend_extension_fcall_begin_handler, EX(op_array) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1747.html#L5047'>EX</a>               5047 Zend/zend_vm_def.h 		zend_llist_apply_with_argument(&amp;zend_extensions, (llist_apply_with_arg_func_t) zend_extension_fcall_end_handler, EX(op_array) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1747.html#L5058'>EX</a>               5058 Zend/zend_vm_def.h 	EX_T(opline-&gt;result.var).class_entry = do_bind_class(EX(op_array), opline, EG(class_table), 0 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1747.html#L5068'>EX</a>               5068 Zend/zend_vm_def.h 	EX_T(opline-&gt;result.var).class_entry = do_bind_inherited_class(EX(op_array), opline, EG(class_table), EX_T(opline-&gt;extended_value).class_entry, 0 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1747.html#L5082'>EX</a>               5082 Zend/zend_vm_def.h 		do_bind_inherited_class(EX(op_array), opline, EG(class_table), EX_T(opline-&gt;extended_value).class_entry, 0 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1747.html#L5093'>EX</a>               5093 Zend/zend_vm_def.h 	do_bind_function(EX(op_array), opline, EG(function_table), 0);</span>
+<span class='curline'><a href='../S/1747.html#L5236'>EX</a>               5236 Zend/zend_vm_def.h 			catch_op_num = EX(op_array)-&gt;try_catch_array[i].catch_op;</span>
+<span class='curline'><a href='../S/1747.html#L5239'>EX</a>               5239 Zend/zend_vm_def.h 			finally_op_num = EX(op_array)-&gt;try_catch_array[i].finally_op;</span>
+<span class='curline'><a href='../S/1747.html#L5247'>EX</a>               5247 Zend/zend_vm_def.h 	if (EX(call) &gt;= EX(call_slots)) {</span>
+<span class='curline'><a href='../S/1747.html#L5248'>EX</a>               5248 Zend/zend_vm_def.h 		call_slot *call = EX(call);</span>
+<span class='curline'><a href='../S/1747.html#L5266'>EX</a>               5266 Zend/zend_vm_def.h 		} while (call &gt;= EX(call_slots));</span>
+<span class='curline'><a href='../S/1747.html#L5267'>EX</a>               5267 Zend/zend_vm_def.h 		EX(call) = NULL;</span>
+<span class='curline'><a href='../S/1747.html#L5270'>EX</a>               5270 Zend/zend_vm_def.h 	for (i=0; i&lt;EX(op_array)-&gt;last_brk_cont; i++) {</span>
+<span class='curline'><a href='../S/1747.html#L5271'>EX</a>               5271 Zend/zend_vm_def.h 		if (EX(op_array)-&gt;brk_cont_array[i].start &lt; 0) {</span>
+<span class='curline'><a href='../S/1747.html#L5273'>EX</a>               5273 Zend/zend_vm_def.h 		} else if (EX(op_array)-&gt;brk_cont_array[i].start &gt; op_num) {</span>
+<span class='curline'><a href='../S/1747.html#L5276'>EX</a>               5276 Zend/zend_vm_def.h 		} else if (op_num &lt; EX(op_array)-&gt;brk_cont_array[i].brk) {</span>
+<span class='curline'><a href='../S/1747.html#L5278'>EX</a>               5278 Zend/zend_vm_def.h 			    catch_op_num &gt;= EX(op_array)-&gt;brk_cont_array[i].brk) {</span>
+<span class='curline'><a href='../S/1747.html#L5279'>EX</a>               5279 Zend/zend_vm_def.h 				zend_op *brk_opline = &amp;EX(op_array)-&gt;opcodes[EX(op_array)-&gt;brk_cont_array[i].brk];</span>
+<span class='curline'><a href='../S/1747.html#L5298'>EX</a>               5298 Zend/zend_vm_def.h 	if (!EG(error_reporting) &amp;&amp; EX(old_error_reporting) != NULL &amp;&amp; Z_LVAL_P(EX(old_error_reporting)) != 0) {</span>
+<span class='curline'><a href='../S/1747.html#L5302'>EX</a>               5302 Zend/zend_vm_def.h 		Z_LVAL(restored_error_reporting) = Z_LVAL_P(EX(old_error_reporting));</span>
+<span class='curline'><a href='../S/1747.html#L5307'>EX</a>               5307 Zend/zend_vm_def.h 	EX(old_error_reporting) = NULL;</span>
+<span class='curline'><a href='../S/1747.html#L5310'>EX</a>               5310 Zend/zend_vm_def.h 		if (EX(delayed_exception)) {</span>
+<span class='curline'><a href='../S/1747.html#L5311'>EX</a>               5311 Zend/zend_vm_def.h 			zend_exception_set_previous(EG(exception), EX(delayed_exception) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1747.html#L5313'>EX</a>               5313 Zend/zend_vm_def.h 		EX(delayed_exception) = EG(exception);</span>
+<span class='curline'><a href='../S/1747.html#L5315'>EX</a>               5315 Zend/zend_vm_def.h 		EX(fast_ret) = NULL;</span>
+<span class='curline'><a href='../S/1747.html#L5316'>EX</a>               5316 Zend/zend_vm_def.h 		ZEND_VM_SET_OPCODE(&amp;EX(op_array)-&gt;opcodes[finally_op_num]);</span>
+<span class='curline'><a href='../S/1747.html#L5321'>EX</a>               5321 Zend/zend_vm_def.h 			if (EX(delayed_exception)) {</span>
+<span class='curline'><a href='../S/1747.html#L5322'>EX</a>               5322 Zend/zend_vm_def.h 				zend_exception_set_previous(EG(exception), EX(delayed_exception) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1747.html#L5323'>EX</a>               5323 Zend/zend_vm_def.h 				EX(delayed_exception) = NULL;</span>
+<span class='curline'><a href='../S/1747.html#L5326'>EX</a>               5326 Zend/zend_vm_def.h 		ZEND_VM_SET_OPCODE(&amp;EX(op_array)-&gt;opcodes[catch_op_num]);</span>
+<span class='curline'><a href='../S/1747.html#L5329'>EX</a>               5329 Zend/zend_vm_def.h 		if (EX(delayed_exception)) {</span>
+<span class='curline'><a href='../S/1747.html#L5330'>EX</a>               5330 Zend/zend_vm_def.h 			zend_exception_set_previous(EG(exception), EX(delayed_exception) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1747.html#L5331'>EX</a>               5331 Zend/zend_vm_def.h 			EX(delayed_exception) = NULL;</span>
+<span class='curline'><a href='../S/1747.html#L5333'>EX</a>               5333 Zend/zend_vm_def.h 		if (UNEXPECTED((EX(op_array)-&gt;fn_flags &amp; ZEND_ACC_GENERATOR) != 0)) {</span>
+<span class='curline'><a href='../S/1747.html#L5364'>EX</a>               5364 Zend/zend_vm_def.h 			if (UNEXPECTED((EX(op_array)-&gt;fn_flags &amp; ZEND_ACC_GENERATOR) != 0)) {</span>
+<span class='curline'><a href='../S/1747.html#L5440'>EX</a>               5440 Zend/zend_vm_def.h 			(EX(prev_execute_data) &amp;&amp;</span>
+<span class='curline'><a href='../S/1747.html#L5441'>EX</a>               5441 Zend/zend_vm_def.h 			 EX(prev_execute_data)-&gt;function_state.function-&gt;common.fn_flags &amp; ZEND_ACC_STATIC))) {</span>
+<span class='curline'><a href='../S/1747.html#L5497'>EX</a>               5497 Zend/zend_vm_def.h 		if (EX(op_array)-&gt;fn_flags &amp; ZEND_ACC_RETURN_REFERENCE) {</span>
+<span class='curline'><a href='../S/1747.html#L5635'>EX</a>               5635 Zend/zend_vm_def.h 	if (EX(delayed_exception) != NULL) {</span>
+<span class='curline'><a href='../S/1747.html#L5637'>EX</a>               5637 Zend/zend_vm_def.h 		zval_ptr_dtor(&amp;EX(delayed_exception));</span>
+<span class='curline'><a href='../S/1747.html#L5638'>EX</a>               5638 Zend/zend_vm_def.h 		EX(delayed_exception) = NULL;</span>
+<span class='curline'><a href='../S/1747.html#L5651'>EX</a>               5651 Zend/zend_vm_def.h 		ZEND_VM_SET_OPCODE(&amp;EX(op_array)-&gt;opcodes[opline-&gt;op2.opline_num]);</span>
+<span class='curline'><a href='../S/1747.html#L5654'>EX</a>               5654 Zend/zend_vm_def.h 	if (UNEXPECTED(EX(delayed_exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1747.html#L5655'>EX</a>               5655 Zend/zend_vm_def.h 		EX(fast_ret) = NULL;</span>
+<span class='curline'><a href='../S/1747.html#L5657'>EX</a>               5657 Zend/zend_vm_def.h 		EX(fast_ret) = opline;</span>
+<span class='curline'><a href='../S/1747.html#L5665'>EX</a>               5665 Zend/zend_vm_def.h 	if (EX(fast_ret)) {</span>
+<span class='curline'><a href='../S/1747.html#L5666'>EX</a>               5666 Zend/zend_vm_def.h 		ZEND_VM_SET_OPCODE(EX(fast_ret) + 1);</span>
+<span class='curline'><a href='../S/1747.html#L5667'>EX</a>               5667 Zend/zend_vm_def.h 		if ((EX(fast_ret)-&gt;extended_value &amp; ZEND_FAST_CALL_FROM_FINALLY)) {</span>
+<span class='curline'><a href='../S/1747.html#L5668'>EX</a>               5668 Zend/zend_vm_def.h 			EX(fast_ret) = &amp;EX(op_array)-&gt;opcodes[EX(fast_ret)-&gt;op2.opline_num];</span>
+<span class='curline'><a href='../S/1747.html#L5676'>EX</a>               5676 Zend/zend_vm_def.h 			ZEND_VM_SET_OPCODE(&amp;EX(op_array)-&gt;opcodes[opline-&gt;op2.opline_num]);</span>
+<span class='curline'><a href='../S/1747.html#L5679'>EX</a>               5679 Zend/zend_vm_def.h 			EG(exception) = EX(delayed_exception);</span>
+<span class='curline'><a href='../S/1747.html#L5680'>EX</a>               5680 Zend/zend_vm_def.h 			EX(delayed_exception) = NULL;</span>
+<span class='curline'><a href='../S/1747.html#L5682'>EX</a>               5682 Zend/zend_vm_def.h 				ZEND_VM_SET_OPCODE(&amp;EX(op_array)-&gt;opcodes[opline-&gt;op2.opline_num]);</span>
+<span class='curline'><a href='../S/1747.html#L5684'>EX</a>               5684 Zend/zend_vm_def.h 			} else if (UNEXPECTED((EX(op_array)-&gt;fn_flags &amp; ZEND_ACC_GENERATOR) != 0)) {</span>
+<span class='curline'><a href='../S/1748.html#L317'>EX</a>                317 Zend/zend_vm_execute.h #define OPLINE EX(opline)</span>
+<span class='curline'><a href='../S/1748.html#L319'>EX</a>                319 Zend/zend_vm_execute.h #define USE_OPLINE zend_op *opline = EX(opline);</span>
+<span class='curline'><a href='../S/1748.html#L393'>EX</a>                393 Zend/zend_vm_execute.h 	zend_bool nested = EX(nested);</span>
+<span class='curline'><a href='../S/1748.html#L394'>EX</a>                394 Zend/zend_vm_execute.h 	zend_op_array *op_array = EX(op_array);</span>
+<span class='curline'><a href='../S/1748.html#L396'>EX</a>                396 Zend/zend_vm_execute.h 	EG(current_execute_data) = EX(prev_execute_data);</span>
+<span class='curline'><a href='../S/1748.html#L418'>EX</a>                418 Zend/zend_vm_execute.h 			EX(function_state).function = (zend_function *) EX(op_array);</span>
+<span class='curline'><a href='../S/1748.html#L419'>EX</a>                419 Zend/zend_vm_execute.h 			EX(function_state).arguments = NULL;</span>
+<span class='curline'><a href='../S/1748.html#L421'>EX</a>                421 Zend/zend_vm_execute.h 			EG(opline_ptr) = &amp;EX(opline);</span>
+<span class='curline'><a href='../S/1748.html#L422'>EX</a>                422 Zend/zend_vm_execute.h 			EG(active_op_array) = EX(op_array);</span>
+<span class='curline'><a href='../S/1748.html#L423'>EX</a>                423 Zend/zend_vm_execute.h 			EG(return_value_ptr_ptr) = EX(original_return_value);</span>
+<span class='curline'><a href='../S/1748.html#L434'>EX</a>                434 Zend/zend_vm_execute.h 			EG(opline_ptr) = &amp;EX(opline);</span>
+<span class='curline'><a href='../S/1748.html#L435'>EX</a>                435 Zend/zend_vm_execute.h 			EG(active_op_array) = EX(op_array);</span>
+<span class='curline'><a href='../S/1748.html#L436'>EX</a>                436 Zend/zend_vm_execute.h 			EG(return_value_ptr_ptr) = EX(original_return_value);</span>
+<span class='curline'><a href='../S/1748.html#L440'>EX</a>                440 Zend/zend_vm_execute.h 			EG(active_symbol_table) = EX(symbol_table);</span>
+<span class='curline'><a href='../S/1748.html#L442'>EX</a>                442 Zend/zend_vm_execute.h 			EX(function_state).function = (zend_function *) EX(op_array);</span>
+<span class='curline'><a href='../S/1748.html#L443'>EX</a>                443 Zend/zend_vm_execute.h 			EX(function_state).arguments = NULL;</span>
+<span class='curline'><a href='../S/1748.html#L446'>EX</a>                446 Zend/zend_vm_execute.h 				if (UNEXPECTED(EG(exception) != NULL) &amp;&amp; EX(call)-&gt;is_ctor_call) {</span>
+<span class='curline'><a href='../S/1748.html#L447'>EX</a>                447 Zend/zend_vm_execute.h 					if (EX(call)-&gt;is_ctor_result_used) {</span>
+<span class='curline'><a href='../S/1748.html#L456'>EX</a>                456 Zend/zend_vm_execute.h 			EG(This) = EX(current_this);</span>
+<span class='curline'><a href='../S/1748.html#L457'>EX</a>                457 Zend/zend_vm_execute.h 			EG(scope) = EX(current_scope);</span>
+<span class='curline'><a href='../S/1748.html#L458'>EX</a>                458 Zend/zend_vm_execute.h 			EG(called_scope) = EX(current_called_scope);</span>
+<span class='curline'><a href='../S/1748.html#L460'>EX</a>                460 Zend/zend_vm_execute.h 			EX(call)--;</span>
+<span class='curline'><a href='../S/1748.html#L483'>EX</a>                483 Zend/zend_vm_execute.h 	zend_function *fbc = EX(function_state).function;</span>
+<span class='curline'><a href='../S/1748.html#L487'>EX</a>                487 Zend/zend_vm_execute.h 	EX(object) = EX(call)-&gt;object;</span>
+<span class='curline'><a href='../S/1748.html#L504'>EX</a>                504 Zend/zend_vm_execute.h 		!EX(object)) {</span>
+<span class='curline'><a href='../S/1748.html#L521'>EX</a>                521 Zend/zend_vm_execute.h 		EX(current_this) = EG(This);</span>
+<span class='curline'><a href='../S/1748.html#L522'>EX</a>                522 Zend/zend_vm_execute.h 		EX(current_scope) = EG(scope);</span>
+<span class='curline'><a href='../S/1748.html#L523'>EX</a>                523 Zend/zend_vm_execute.h 		EX(current_called_scope) = EG(called_scope);</span>
+<span class='curline'><a href='../S/1748.html#L524'>EX</a>                524 Zend/zend_vm_execute.h 		EG(This) = EX(object);</span>
+<span class='curline'><a href='../S/1748.html#L525'>EX</a>                525 Zend/zend_vm_execute.h 		EG(scope) = (fbc-&gt;type == ZEND_USER_FUNCTION || !EX(object)) ? fbc-&gt;common.scope : NULL;</span>
+<span class='curline'><a href='../S/1748.html#L526'>EX</a>                526 Zend/zend_vm_execute.h 		EG(called_scope) = EX(call)-&gt;called_scope;</span>
+<span class='curline'><a href='../S/1748.html#L529'>EX</a>                529 Zend/zend_vm_execute.h 	num_args = opline-&gt;extended_value + EX(call)-&gt;num_additional_args;</span>
+<span class='curline'><a href='../S/1748.html#L530'>EX</a>                530 Zend/zend_vm_execute.h 	if (EX(call)-&gt;num_additional_args) {</span>
+<span class='curline'><a href='../S/1748.html#L531'>EX</a>                531 Zend/zend_vm_execute.h 		EX(function_state).arguments = zend_vm_stack_push_args(num_args TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L533'>EX</a>                533 Zend/zend_vm_execute.h 		EX(function_state).arguments = zend_vm_stack_top(TSRMLS_C);</span>
+<span class='curline'><a href='../S/1748.html#L541'>EX</a>                541 Zend/zend_vm_execute.h 			void **p = EX(function_state).arguments - num_args;</span>
+<span class='curline'><a href='../S/1748.html#L558'>EX</a>                558 Zend/zend_vm_execute.h 				fbc-&gt;internal_function.handler(num_args, ret-&gt;var.ptr, &amp;ret-&gt;var.ptr, EX(object), RETURN_VALUE_USED(opline) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L571'>EX</a>                571 Zend/zend_vm_execute.h 		EX(original_return_value) = EG(return_value_ptr_ptr);</span>
+<span class='curline'><a href='../S/1748.html#L595'>EX</a>                595 Zend/zend_vm_execute.h 		EG(opline_ptr) = &amp;EX(opline);</span>
+<span class='curline'><a href='../S/1748.html#L596'>EX</a>                596 Zend/zend_vm_execute.h 		EG(active_op_array) = EX(op_array);</span>
+<span class='curline'><a href='../S/1748.html#L597'>EX</a>                597 Zend/zend_vm_execute.h 		EG(return_value_ptr_ptr) = EX(original_return_value);</span>
+<span class='curline'><a href='../S/1748.html#L601'>EX</a>                601 Zend/zend_vm_execute.h 		EG(active_symbol_table) = EX(symbol_table);</span>
+<span class='curline'><a href='../S/1748.html#L607'>EX</a>                607 Zend/zend_vm_execute.h 		if (EXPECTED(EX(object) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L608'>EX</a>                608 Zend/zend_vm_execute.h 			Z_OBJ_HT_P(EX(object))-&gt;call_method(fbc-&gt;common.function_name, num_args, EX_T(opline-&gt;result.var).var.ptr, &amp;EX_T(opline-&gt;result.var).var.ptr, EX(object), RETURN_VALUE_USED(opline) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L628'>EX</a>                628 Zend/zend_vm_execute.h 	EX(function_state).function = (zend_function *) EX(op_array);</span>
+<span class='curline'><a href='../S/1748.html#L629'>EX</a>                629 Zend/zend_vm_execute.h 	EX(function_state).arguments = NULL;</span>
+<span class='curline'><a href='../S/1748.html#L633'>EX</a>                633 Zend/zend_vm_execute.h 			if (UNEXPECTED(EG(exception) != NULL) &amp;&amp; EX(call)-&gt;is_ctor_call) {</span>
+<span class='curline'><a href='../S/1748.html#L634'>EX</a>                634 Zend/zend_vm_execute.h 				if (EX(call)-&gt;is_ctor_result_used) {</span>
+<span class='curline'><a href='../S/1748.html#L643'>EX</a>                643 Zend/zend_vm_execute.h 		EG(This) = EX(current_this);</span>
+<span class='curline'><a href='../S/1748.html#L644'>EX</a>                644 Zend/zend_vm_execute.h 		EG(scope) = EX(current_scope);</span>
+<span class='curline'><a href='../S/1748.html#L645'>EX</a>                645 Zend/zend_vm_execute.h 		EG(called_scope) = EX(current_called_scope);</span>
+<span class='curline'><a href='../S/1748.html#L648'>EX</a>                648 Zend/zend_vm_execute.h 	EX(call)--;</span>
+<span class='curline'><a href='../S/1748.html#L692'>EX</a>                692 Zend/zend_vm_execute.h 	EX(function_state).function = EX(call)-&gt;fbc;</span>
+<span class='curline'><a href='../S/1748.html#L717'>EX</a>                717 Zend/zend_vm_execute.h 	arg_num = opline-&gt;op2.num + EX(call)-&gt;num_additional_args + 1;</span>
+<span class='curline'><a href='../S/1748.html#L742'>EX</a>                742 Zend/zend_vm_execute.h 				if (ARG_SHOULD_BE_SENT_BY_REF(EX(call)-&gt;fbc, arg_num)) {</span>
+<span class='curline'><a href='../S/1748.html#L755'>EX</a>                755 Zend/zend_vm_execute.h 				EX(call)-&gt;num_additional_args++;</span>
+<span class='curline'><a href='../S/1748.html#L815'>EX</a>                815 Zend/zend_vm_execute.h 				if (ARG_MUST_BE_SENT_BY_REF(EX(call)-&gt;fbc, arg_num)) {</span>
+<span class='curline'><a href='../S/1748.html#L819'>EX</a>                819 Zend/zend_vm_execute.h 						EX(call)-&gt;fbc-&gt;common.scope ? EX(call)-&gt;fbc-&gt;common.scope-&gt;name : "",</span>
+<span class='curline'><a href='../S/1748.html#L820'>EX</a>                820 Zend/zend_vm_execute.h 						EX(call)-&gt;fbc-&gt;common.scope ? "::" : "",</span>
+<span class='curline'><a href='../S/1748.html#L821'>EX</a>                821 Zend/zend_vm_execute.h 						EX(call)-&gt;fbc-&gt;common.function_name</span>
+<span class='curline'><a href='../S/1748.html#L835'>EX</a>                835 Zend/zend_vm_execute.h 				EX(call)-&gt;num_additional_args++;</span>
+<span class='curline'><a href='../S/1748.html#L875'>EX</a>                875 Zend/zend_vm_execute.h 			ptr = EX(prev_execute_data);</span>
+<span class='curline'><a href='../S/1748.html#L956'>EX</a>                956 Zend/zend_vm_execute.h 		ZEND_VM_JMP(EX(op_array)-&gt;opcodes + opline-&gt;op2.opline_num);</span>
+<span class='curline'><a href='../S/1748.html#L958'>EX</a>                958 Zend/zend_vm_execute.h 		call_slot *call = EX(call_slots) + opline-&gt;extended_value;</span>
+<span class='curline'><a href='../S/1748.html#L972'>EX</a>                972 Zend/zend_vm_execute.h 		EX(call) = call;</span>
+<span class='curline'><a href='../S/1748.html#L986'>EX</a>                986 Zend/zend_vm_execute.h 	if (EX(old_error_reporting) == NULL) {</span>
+<span class='curline'><a href='../S/1748.html#L987'>EX</a>                987 Zend/zend_vm_execute.h 		EX(old_error_reporting) = &amp;EX_T(opline-&gt;result.var).tmp_var;</span>
+<span class='curline'><a href='../S/1748.html#L1023'>EX</a>               1023 Zend/zend_vm_execute.h 	zend_error_noreturn(E_ERROR, "Cannot call abstract method %s::%s()", EG(scope)-&gt;name, EX(op_array)-&gt;function_name);</span>
+<span class='curline'><a href='../S/1748.html#L1031'>EX</a>               1031 Zend/zend_vm_execute.h 		zend_llist_apply_with_argument(&amp;zend_extensions, (llist_apply_with_arg_func_t) zend_extension_statement_handler, EX(op_array) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L1041'>EX</a>               1041 Zend/zend_vm_execute.h 		zend_llist_apply_with_argument(&amp;zend_extensions, (llist_apply_with_arg_func_t) zend_extension_fcall_begin_handler, EX(op_array) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L1051'>EX</a>               1051 Zend/zend_vm_execute.h 		zend_llist_apply_with_argument(&amp;zend_extensions, (llist_apply_with_arg_func_t) zend_extension_fcall_end_handler, EX(op_array) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L1062'>EX</a>               1062 Zend/zend_vm_execute.h 	EX_T(opline-&gt;result.var).class_entry = do_bind_class(EX(op_array), opline, EG(class_table), 0 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L1072'>EX</a>               1072 Zend/zend_vm_execute.h 	EX_T(opline-&gt;result.var).class_entry = do_bind_inherited_class(EX(op_array), opline, EG(class_table), EX_T(opline-&gt;extended_value).class_entry, 0 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L1086'>EX</a>               1086 Zend/zend_vm_execute.h 		do_bind_inherited_class(EX(op_array), opline, EG(class_table), EX_T(opline-&gt;extended_value).class_entry, 0 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L1097'>EX</a>               1097 Zend/zend_vm_execute.h 	do_bind_function(EX(op_array), opline, EG(function_table), 0);</span>
+<span class='curline'><a href='../S/1748.html#L1192'>EX</a>               1192 Zend/zend_vm_execute.h 			catch_op_num = EX(op_array)-&gt;try_catch_array[i].catch_op;</span>
+<span class='curline'><a href='../S/1748.html#L1195'>EX</a>               1195 Zend/zend_vm_execute.h 			finally_op_num = EX(op_array)-&gt;try_catch_array[i].finally_op;</span>
+<span class='curline'><a href='../S/1748.html#L1203'>EX</a>               1203 Zend/zend_vm_execute.h 	if (EX(call) &gt;= EX(call_slots)) {</span>
+<span class='curline'><a href='../S/1748.html#L1204'>EX</a>               1204 Zend/zend_vm_execute.h 		call_slot *call = EX(call);</span>
+<span class='curline'><a href='../S/1748.html#L1222'>EX</a>               1222 Zend/zend_vm_execute.h 		} while (call &gt;= EX(call_slots));</span>
+<span class='curline'><a href='../S/1748.html#L1223'>EX</a>               1223 Zend/zend_vm_execute.h 		EX(call) = NULL;</span>
+<span class='curline'><a href='../S/1748.html#L1226'>EX</a>               1226 Zend/zend_vm_execute.h 	for (i=0; i&lt;EX(op_array)-&gt;last_brk_cont; i++) {</span>
+<span class='curline'><a href='../S/1748.html#L1227'>EX</a>               1227 Zend/zend_vm_execute.h 		if (EX(op_array)-&gt;brk_cont_array[i].start &lt; 0) {</span>
+<span class='curline'><a href='../S/1748.html#L1229'>EX</a>               1229 Zend/zend_vm_execute.h 		} else if (EX(op_array)-&gt;brk_cont_array[i].start &gt; op_num) {</span>
+<span class='curline'><a href='../S/1748.html#L1232'>EX</a>               1232 Zend/zend_vm_execute.h 		} else if (op_num &lt; EX(op_array)-&gt;brk_cont_array[i].brk) {</span>
+<span class='curline'><a href='../S/1748.html#L1234'>EX</a>               1234 Zend/zend_vm_execute.h 			    catch_op_num &gt;= EX(op_array)-&gt;brk_cont_array[i].brk) {</span>
+<span class='curline'><a href='../S/1748.html#L1235'>EX</a>               1235 Zend/zend_vm_execute.h 				zend_op *brk_opline = &amp;EX(op_array)-&gt;opcodes[EX(op_array)-&gt;brk_cont_array[i].brk];</span>
+<span class='curline'><a href='../S/1748.html#L1254'>EX</a>               1254 Zend/zend_vm_execute.h 	if (!EG(error_reporting) &amp;&amp; EX(old_error_reporting) != NULL &amp;&amp; Z_LVAL_P(EX(old_error_reporting)) != 0) {</span>
+<span class='curline'><a href='../S/1748.html#L1258'>EX</a>               1258 Zend/zend_vm_execute.h 		Z_LVAL(restored_error_reporting) = Z_LVAL_P(EX(old_error_reporting));</span>
+<span class='curline'><a href='../S/1748.html#L1263'>EX</a>               1263 Zend/zend_vm_execute.h 	EX(old_error_reporting) = NULL;</span>
+<span class='curline'><a href='../S/1748.html#L1266'>EX</a>               1266 Zend/zend_vm_execute.h 		if (EX(delayed_exception)) {</span>
+<span class='curline'><a href='../S/1748.html#L1267'>EX</a>               1267 Zend/zend_vm_execute.h 			zend_exception_set_previous(EG(exception), EX(delayed_exception) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L1269'>EX</a>               1269 Zend/zend_vm_execute.h 		EX(delayed_exception) = EG(exception);</span>
+<span class='curline'><a href='../S/1748.html#L1271'>EX</a>               1271 Zend/zend_vm_execute.h 		EX(fast_ret) = NULL;</span>
+<span class='curline'><a href='../S/1748.html#L1272'>EX</a>               1272 Zend/zend_vm_execute.h 		ZEND_VM_SET_OPCODE(&amp;EX(op_array)-&gt;opcodes[finally_op_num]);</span>
+<span class='curline'><a href='../S/1748.html#L1277'>EX</a>               1277 Zend/zend_vm_execute.h 			if (EX(delayed_exception)) {</span>
+<span class='curline'><a href='../S/1748.html#L1278'>EX</a>               1278 Zend/zend_vm_execute.h 				zend_exception_set_previous(EG(exception), EX(delayed_exception) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L1279'>EX</a>               1279 Zend/zend_vm_execute.h 				EX(delayed_exception) = NULL;</span>
+<span class='curline'><a href='../S/1748.html#L1282'>EX</a>               1282 Zend/zend_vm_execute.h 		ZEND_VM_SET_OPCODE(&amp;EX(op_array)-&gt;opcodes[catch_op_num]);</span>
+<span class='curline'><a href='../S/1748.html#L1285'>EX</a>               1285 Zend/zend_vm_execute.h 		if (EX(delayed_exception)) {</span>
+<span class='curline'><a href='../S/1748.html#L1286'>EX</a>               1286 Zend/zend_vm_execute.h 			zend_exception_set_previous(EG(exception), EX(delayed_exception) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L1287'>EX</a>               1287 Zend/zend_vm_execute.h 			EX(delayed_exception) = NULL;</span>
+<span class='curline'><a href='../S/1748.html#L1289'>EX</a>               1289 Zend/zend_vm_execute.h 		if (UNEXPECTED((EX(op_array)-&gt;fn_flags &amp; ZEND_ACC_GENERATOR) != 0)) {</span>
+<span class='curline'><a href='../S/1748.html#L1320'>EX</a>               1320 Zend/zend_vm_execute.h 			if (UNEXPECTED((EX(op_array)-&gt;fn_flags &amp; ZEND_ACC_GENERATOR) != 0)) {</span>
+<span class='curline'><a href='../S/1748.html#L1338'>EX</a>               1338 Zend/zend_vm_execute.h 	if (EX(delayed_exception) != NULL) {</span>
+<span class='curline'><a href='../S/1748.html#L1340'>EX</a>               1340 Zend/zend_vm_execute.h 		zval_ptr_dtor(&amp;EX(delayed_exception));</span>
+<span class='curline'><a href='../S/1748.html#L1341'>EX</a>               1341 Zend/zend_vm_execute.h 		EX(delayed_exception) = NULL;</span>
+<span class='curline'><a href='../S/1748.html#L1354'>EX</a>               1354 Zend/zend_vm_execute.h 		ZEND_VM_SET_OPCODE(&amp;EX(op_array)-&gt;opcodes[opline-&gt;op2.opline_num]);</span>
+<span class='curline'><a href='../S/1748.html#L1357'>EX</a>               1357 Zend/zend_vm_execute.h 	if (UNEXPECTED(EX(delayed_exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L1358'>EX</a>               1358 Zend/zend_vm_execute.h 		EX(fast_ret) = NULL;</span>
+<span class='curline'><a href='../S/1748.html#L1360'>EX</a>               1360 Zend/zend_vm_execute.h 		EX(fast_ret) = opline;</span>
+<span class='curline'><a href='../S/1748.html#L1368'>EX</a>               1368 Zend/zend_vm_execute.h 	if (EX(fast_ret)) {</span>
+<span class='curline'><a href='../S/1748.html#L1369'>EX</a>               1369 Zend/zend_vm_execute.h 		ZEND_VM_SET_OPCODE(EX(fast_ret) + 1);</span>
+<span class='curline'><a href='../S/1748.html#L1370'>EX</a>               1370 Zend/zend_vm_execute.h 		if ((EX(fast_ret)-&gt;extended_value &amp; ZEND_FAST_CALL_FROM_FINALLY)) {</span>
+<span class='curline'><a href='../S/1748.html#L1371'>EX</a>               1371 Zend/zend_vm_execute.h 			EX(fast_ret) = &amp;EX(op_array)-&gt;opcodes[EX(fast_ret)-&gt;op2.opline_num];</span>
+<span class='curline'><a href='../S/1748.html#L1379'>EX</a>               1379 Zend/zend_vm_execute.h 			ZEND_VM_SET_OPCODE(&amp;EX(op_array)-&gt;opcodes[opline-&gt;op2.opline_num]);</span>
+<span class='curline'><a href='../S/1748.html#L1382'>EX</a>               1382 Zend/zend_vm_execute.h 			EG(exception) = EX(delayed_exception);</span>
+<span class='curline'><a href='../S/1748.html#L1383'>EX</a>               1383 Zend/zend_vm_execute.h 			EX(delayed_exception) = NULL;</span>
+<span class='curline'><a href='../S/1748.html#L1385'>EX</a>               1385 Zend/zend_vm_execute.h 				ZEND_VM_SET_OPCODE(&amp;EX(op_array)-&gt;opcodes[opline-&gt;op2.opline_num]);</span>
+<span class='curline'><a href='../S/1748.html#L1387'>EX</a>               1387 Zend/zend_vm_execute.h 			} else if (UNEXPECTED((EX(op_array)-&gt;fn_flags &amp; ZEND_ACC_GENERATOR) != 0)) {</span>
+<span class='curline'><a href='../S/1748.html#L1439'>EX</a>               1439 Zend/zend_vm_execute.h 	call_slot *call = EX(call_slots) + opline-&gt;result.num;</span>
+<span class='curline'><a href='../S/1748.html#L1456'>EX</a>               1456 Zend/zend_vm_execute.h 		EX(call) = call;</span>
+<span class='curline'><a href='../S/1748.html#L1486'>EX</a>               1486 Zend/zend_vm_execute.h 			EX(call) = call;</span>
+<span class='curline'><a href='../S/1748.html#L1507'>EX</a>               1507 Zend/zend_vm_execute.h 			EX(call) = call;</span>
+<span class='curline'><a href='../S/1748.html#L1577'>EX</a>               1577 Zend/zend_vm_execute.h 			EX(call) = call;</span>
+<span class='curline'><a href='../S/1748.html#L1596'>EX</a>               1596 Zend/zend_vm_execute.h 	call_slot *call = EX(call_slots) + opline-&gt;result.num;</span>
+<span class='curline'><a href='../S/1748.html#L1618'>EX</a>               1618 Zend/zend_vm_execute.h 	EX(call) = call;</span>
+<span class='curline'><a href='../S/1748.html#L1669'>EX</a>               1669 Zend/zend_vm_execute.h 	                   EX(op_array), execute_data TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L1670'>EX</a>               1670 Zend/zend_vm_execute.h 	ZEND_VM_JMP(EX(op_array)-&gt;opcodes + el-&gt;brk);</span>
+<span class='curline'><a href='../S/1748.html#L1680'>EX</a>               1680 Zend/zend_vm_execute.h 	                   EX(op_array), execute_data TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L1681'>EX</a>               1681 Zend/zend_vm_execute.h 	ZEND_VM_JMP(EX(op_array)-&gt;opcodes + el-&gt;cont);</span>
+<span class='curline'><a href='../S/1748.html#L1692'>EX</a>               1692 Zend/zend_vm_execute.h  	                   EX(op_array), execute_data TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L1694'>EX</a>               1694 Zend/zend_vm_execute.h 	brk_opline = EX(op_array)-&gt;opcodes + el-&gt;brk;</span>
+<span class='curline'><a href='../S/1748.html#L1782'>EX</a>               1782 Zend/zend_vm_execute.h 	call_slot *call = EX(call_slots) + opline-&gt;result.num;</span>
+<span class='curline'><a href='../S/1748.html#L1799'>EX</a>               1799 Zend/zend_vm_execute.h 		EX(call) = call;</span>
+<span class='curline'><a href='../S/1748.html#L1830'>EX</a>               1830 Zend/zend_vm_execute.h 			EX(call) = call;</span>
+<span class='curline'><a href='../S/1748.html#L1851'>EX</a>               1851 Zend/zend_vm_execute.h 			EX(call) = call;</span>
+<span class='curline'><a href='../S/1748.html#L1921'>EX</a>               1921 Zend/zend_vm_execute.h 			EX(call) = call;</span>
+<span class='curline'><a href='../S/1748.html#L1981'>EX</a>               1981 Zend/zend_vm_execute.h 	call_slot *call = EX(call_slots) + opline-&gt;result.num;</span>
+<span class='curline'><a href='../S/1748.html#L1998'>EX</a>               1998 Zend/zend_vm_execute.h 		EX(call) = call;</span>
+<span class='curline'><a href='../S/1748.html#L2029'>EX</a>               2029 Zend/zend_vm_execute.h 			EX(call) = call;</span>
+<span class='curline'><a href='../S/1748.html#L2050'>EX</a>               2050 Zend/zend_vm_execute.h 			EX(call) = call;</span>
+<span class='curline'><a href='../S/1748.html#L2120'>EX</a>               2120 Zend/zend_vm_execute.h 			EX(call) = call;</span>
+<span class='curline'><a href='../S/1748.html#L2218'>EX</a>               2218 Zend/zend_vm_execute.h 	call_slot *call = EX(call_slots) + opline-&gt;result.num;</span>
+<span class='curline'><a href='../S/1748.html#L2235'>EX</a>               2235 Zend/zend_vm_execute.h 		EX(call) = call;</span>
+<span class='curline'><a href='../S/1748.html#L2265'>EX</a>               2265 Zend/zend_vm_execute.h 			EX(call) = call;</span>
+<span class='curline'><a href='../S/1748.html#L2286'>EX</a>               2286 Zend/zend_vm_execute.h 			EX(call) = call;</span>
+<span class='curline'><a href='../S/1748.html#L2356'>EX</a>               2356 Zend/zend_vm_execute.h 			EX(call) = call;</span>
+<span class='curline'><a href='../S/1748.html#L2506'>EX</a>               2506 Zend/zend_vm_execute.h 		ZEND_VM_SET_OPCODE(&amp;EX(op_array)-&gt;opcodes[opline-&gt;extended_value]);</span>
+<span class='curline'><a href='../S/1748.html#L2512'>EX</a>               2512 Zend/zend_vm_execute.h 		ZEND_VM_SET_OPCODE(&amp;EX(op_array)-&gt;opcodes[opline-&gt;op2.opline_num]);</span>
+<span class='curline'><a href='../S/1748.html#L2584'>EX</a>               2584 Zend/zend_vm_execute.h 	call_slot *call = EX(call_slots) + opline-&gt;op2.num;</span>
+<span class='curline'><a href='../S/1748.html#L2587'>EX</a>               2587 Zend/zend_vm_execute.h 		EX(function_state).function = CACHED_PTR(opline-&gt;op1.literal-&gt;cache_slot);</span>
+<span class='curline'><a href='../S/1748.html#L2588'>EX</a>               2588 Zend/zend_vm_execute.h 	} else if (UNEXPECTED(zend_hash_quick_find(EG(function_table), Z_STRVAL_P(fname), Z_STRLEN_P(fname)+1, Z_HASH_P(fname), (void **) &amp;EX(function_state).function)==FAILURE)) {</span>
+<span class='curline'><a href='../S/1748.html#L2592'>EX</a>               2592 Zend/zend_vm_execute.h 		CACHE_PTR(opline-&gt;op1.literal-&gt;cache_slot, EX(function_state).function);</span>
+<span class='curline'><a href='../S/1748.html#L2595'>EX</a>               2595 Zend/zend_vm_execute.h 	call-&gt;fbc = EX(function_state).function;</span>
+<span class='curline'><a href='../S/1748.html#L2600'>EX</a>               2600 Zend/zend_vm_execute.h 	EX(call) = call;</span>
+<span class='curline'><a href='../S/1748.html#L2756'>EX</a>               2756 Zend/zend_vm_execute.h 		if (ARG_MUST_BE_SENT_BY_REF(EX(call)-&gt;fbc, opline-&gt;op2.num)) {</span>
+<span class='curline'><a href='../S/1748.html#L3007'>EX</a>               3007 Zend/zend_vm_execute.h 		EX(original_return_value) = EG(return_value_ptr_ptr);</span>
+<span class='curline'><a href='../S/1748.html#L3016'>EX</a>               3016 Zend/zend_vm_execute.h 		EX(function_state).function = (zend_function *) new_op_array;</span>
+<span class='curline'><a href='../S/1748.html#L3017'>EX</a>               3017 Zend/zend_vm_execute.h 		EX(object) = NULL;</span>
+<span class='curline'><a href='../S/1748.html#L3029'>EX</a>               3029 Zend/zend_vm_execute.h 		EX(function_state).function = (zend_function *) EX(op_array);</span>
+<span class='curline'><a href='../S/1748.html#L3031'>EX</a>               3031 Zend/zend_vm_execute.h 		EG(opline_ptr) = &amp;EX(opline);</span>
+<span class='curline'><a href='../S/1748.html#L3032'>EX</a>               3032 Zend/zend_vm_execute.h 		EG(active_op_array) = EX(op_array);</span>
+<span class='curline'><a href='../S/1748.html#L3033'>EX</a>               3033 Zend/zend_vm_execute.h 		EG(return_value_ptr_ptr) = EX(original_return_value);</span>
+<span class='curline'><a href='../S/1748.html#L3073'>EX</a>               3073 Zend/zend_vm_execute.h 				ZEND_VM_JMP(EX(op_array)-&gt;opcodes+opline-&gt;op2.opline_num);</span>
+<span class='curline'><a href='../S/1748.html#L3207'>EX</a>               3207 Zend/zend_vm_execute.h 		ZEND_VM_JMP(EX(op_array)-&gt;opcodes+opline-&gt;op2.opline_num);</span>
+<span class='curline'><a href='../S/1748.html#L3765'>EX</a>               3765 Zend/zend_vm_execute.h 	return zend_fetch_var_address_helper_SPEC_CONST_CONST(zend_is_by_ref_func_arg_fetch(opline, EX(call) TSRMLS_CC) ? BP_VAR_W : BP_VAR_R, ZEND_OPCODE_HANDLER_ARGS_PASSTHRU);</span>
+<span class='curline'><a href='../S/1748.html#L3824'>EX</a>               3824 Zend/zend_vm_execute.h 	call_slot *call = EX(call_slots) + opline-&gt;result.num;</span>
+<span class='curline'><a href='../S/1748.html#L3938'>EX</a>               3938 Zend/zend_vm_execute.h 	EX(call) = call;</span>
+<span class='curline'><a href='../S/1748.html#L4159'>EX</a>               4159 Zend/zend_vm_execute.h 			zend_delete_variable(EX(prev_execute_data), EG(active_symbol_table),  cv-&gt;name, cv-&gt;name_len+1, cv-&gt;hash_value TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L4379'>EX</a>               4379 Zend/zend_vm_execute.h 		if (EX(op_array)-&gt;fn_flags &amp; ZEND_ACC_RETURN_REFERENCE) {</span>
+<span class='curline'><a href='../S/1748.html#L4826'>EX</a>               4826 Zend/zend_vm_execute.h 	call_slot *call = EX(call_slots) + opline-&gt;result.num;</span>
+<span class='curline'><a href='../S/1748.html#L4940'>EX</a>               4940 Zend/zend_vm_execute.h 	EX(call) = call;</span>
+<span class='curline'><a href='../S/1748.html#L5081'>EX</a>               5081 Zend/zend_vm_execute.h 		if (EX(op_array)-&gt;fn_flags &amp; ZEND_ACC_RETURN_REFERENCE) {</span>
+<span class='curline'><a href='../S/1748.html#L5655'>EX</a>               5655 Zend/zend_vm_execute.h 	return zend_fetch_var_address_helper_SPEC_CONST_VAR(zend_is_by_ref_func_arg_fetch(opline, EX(call) TSRMLS_CC) ? BP_VAR_W : BP_VAR_R, ZEND_OPCODE_HANDLER_ARGS_PASSTHRU);</span>
+<span class='curline'><a href='../S/1748.html#L5690'>EX</a>               5690 Zend/zend_vm_execute.h 	call_slot *call = EX(call_slots) + opline-&gt;result.num;</span>
+<span class='curline'><a href='../S/1748.html#L5804'>EX</a>               5804 Zend/zend_vm_execute.h 	EX(call) = call;</span>
+<span class='curline'><a href='../S/1748.html#L5934'>EX</a>               5934 Zend/zend_vm_execute.h 			zend_delete_variable(EX(prev_execute_data), EG(active_symbol_table),  cv-&gt;name, cv-&gt;name_len+1, cv-&gt;hash_value TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L6108'>EX</a>               6108 Zend/zend_vm_execute.h 		if (EX(op_array)-&gt;fn_flags &amp; ZEND_ACC_RETURN_REFERENCE) {</span>
+<span class='curline'><a href='../S/1748.html#L6407'>EX</a>               6407 Zend/zend_vm_execute.h 	return zend_fetch_var_address_helper_SPEC_CONST_UNUSED(zend_is_by_ref_func_arg_fetch(opline, EX(call) TSRMLS_CC) ? BP_VAR_W : BP_VAR_R, ZEND_OPCODE_HANDLER_ARGS_PASSTHRU);</span>
+<span class='curline'><a href='../S/1748.html#L6425'>EX</a>               6425 Zend/zend_vm_execute.h 	call_slot *call = EX(call_slots) + opline-&gt;result.num;</span>
+<span class='curline'><a href='../S/1748.html#L6539'>EX</a>               6539 Zend/zend_vm_execute.h 	EX(call) = call;</span>
+<span class='curline'><a href='../S/1748.html#L6654'>EX</a>               6654 Zend/zend_vm_execute.h 			zend_delete_variable(EX(prev_execute_data), EG(active_symbol_table),  cv-&gt;name, cv-&gt;name_len+1, cv-&gt;hash_value TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L6816'>EX</a>               6816 Zend/zend_vm_execute.h 			(EX(prev_execute_data) &amp;&amp;</span>
+<span class='curline'><a href='../S/1748.html#L6817'>EX</a>               6817 Zend/zend_vm_execute.h 			 EX(prev_execute_data)-&gt;function_state.function-&gt;common.fn_flags &amp; ZEND_ACC_STATIC))) {</span>
+<span class='curline'><a href='../S/1748.html#L6852'>EX</a>               6852 Zend/zend_vm_execute.h 		if (EX(op_array)-&gt;fn_flags &amp; ZEND_ACC_RETURN_REFERENCE) {</span>
+<span class='curline'><a href='../S/1748.html#L7284'>EX</a>               7284 Zend/zend_vm_execute.h 	call_slot *call = EX(call_slots) + opline-&gt;result.num;</span>
+<span class='curline'><a href='../S/1748.html#L7398'>EX</a>               7398 Zend/zend_vm_execute.h 	EX(call) = call;</span>
+<span class='curline'><a href='../S/1748.html#L7414'>EX</a>               7414 Zend/zend_vm_execute.h 		ZEND_VM_SET_OPCODE(&amp;EX(op_array)-&gt;opcodes[opline-&gt;extended_value]);</span>
+<span class='curline'><a href='../S/1748.html#L7438'>EX</a>               7438 Zend/zend_vm_execute.h 			ZEND_VM_SET_OPCODE(&amp;EX(op_array)-&gt;opcodes[opline-&gt;extended_value]);</span>
+<span class='curline'><a href='../S/1748.html#L7448'>EX</a>               7448 Zend/zend_vm_execute.h 		EX_CV(opline-&gt;op2.var) = (zval**)EX_CV_NUM(execute_data, EX(op_array)-&gt;last_var + opline-&gt;op2.var);</span>
+<span class='curline'><a href='../S/1748.html#L7598'>EX</a>               7598 Zend/zend_vm_execute.h 		if (EX(op_array)-&gt;fn_flags &amp; ZEND_ACC_RETURN_REFERENCE) {</span>
+<span class='curline'><a href='../S/1748.html#L7883'>EX</a>               7883 Zend/zend_vm_execute.h 		ZEND_VM_SET_OPCODE(&amp;EX(op_array)-&gt;opcodes[opline-&gt;extended_value]);</span>
+<span class='curline'><a href='../S/1748.html#L7889'>EX</a>               7889 Zend/zend_vm_execute.h 		ZEND_VM_SET_OPCODE(&amp;EX(op_array)-&gt;opcodes[opline-&gt;op2.opline_num]);</span>
+<span class='curline'><a href='../S/1748.html#L8121'>EX</a>               8121 Zend/zend_vm_execute.h 		if (ARG_MUST_BE_SENT_BY_REF(EX(call)-&gt;fbc, opline-&gt;op2.num)) {</span>
+<span class='curline'><a href='../S/1748.html#L8373'>EX</a>               8373 Zend/zend_vm_execute.h 		EX(original_return_value) = EG(return_value_ptr_ptr);</span>
+<span class='curline'><a href='../S/1748.html#L8382'>EX</a>               8382 Zend/zend_vm_execute.h 		EX(function_state).function = (zend_function *) new_op_array;</span>
+<span class='curline'><a href='../S/1748.html#L8383'>EX</a>               8383 Zend/zend_vm_execute.h 		EX(object) = NULL;</span>
+<span class='curline'><a href='../S/1748.html#L8395'>EX</a>               8395 Zend/zend_vm_execute.h 		EX(function_state).function = (zend_function *) EX(op_array);</span>
+<span class='curline'><a href='../S/1748.html#L8397'>EX</a>               8397 Zend/zend_vm_execute.h 		EG(opline_ptr) = &amp;EX(opline);</span>
+<span class='curline'><a href='../S/1748.html#L8398'>EX</a>               8398 Zend/zend_vm_execute.h 		EG(active_op_array) = EX(op_array);</span>
+<span class='curline'><a href='../S/1748.html#L8399'>EX</a>               8399 Zend/zend_vm_execute.h 		EG(return_value_ptr_ptr) = EX(original_return_value);</span>
+<span class='curline'><a href='../S/1748.html#L8439'>EX</a>               8439 Zend/zend_vm_execute.h 				ZEND_VM_JMP(EX(op_array)-&gt;opcodes+opline-&gt;op2.opline_num);</span>
+<span class='curline'><a href='../S/1748.html#L8573'>EX</a>               8573 Zend/zend_vm_execute.h 		ZEND_VM_JMP(EX(op_array)-&gt;opcodes+opline-&gt;op2.opline_num);</span>
+<span class='curline'><a href='../S/1748.html#L8624'>EX</a>               8624 Zend/zend_vm_execute.h 	if (EX(old_error_reporting) == &amp;EX_T(opline-&gt;op1.var).tmp_var) {</span>
+<span class='curline'><a href='../S/1748.html#L8625'>EX</a>               8625 Zend/zend_vm_execute.h 		EX(old_error_reporting) = NULL;</span>
+<span class='curline'><a href='../S/1748.html#L9183'>EX</a>               9183 Zend/zend_vm_execute.h 	return zend_fetch_var_address_helper_SPEC_TMP_CONST(zend_is_by_ref_func_arg_fetch(opline, EX(call) TSRMLS_CC) ? BP_VAR_W : BP_VAR_R, ZEND_OPCODE_HANDLER_ARGS_PASSTHRU);</span>
+<span class='curline'><a href='../S/1748.html#L9290'>EX</a>               9290 Zend/zend_vm_execute.h 	call_slot *call = EX(call_slots) + opline-&gt;result.num;</span>
+<span class='curline'><a href='../S/1748.html#L9357'>EX</a>               9357 Zend/zend_vm_execute.h 	EX(call) = call;</span>
+<span class='curline'><a href='../S/1748.html#L9487'>EX</a>               9487 Zend/zend_vm_execute.h 			zend_delete_variable(EX(prev_execute_data), EG(active_symbol_table),  cv-&gt;name, cv-&gt;name_len+1, cv-&gt;hash_value TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L9661'>EX</a>               9661 Zend/zend_vm_execute.h 		if (EX(op_array)-&gt;fn_flags &amp; ZEND_ACC_RETURN_REFERENCE) {</span>
+<span class='curline'><a href='../S/1748.html#L10155'>EX</a>               10155 Zend/zend_vm_execute.h 	call_slot *call = EX(call_slots) + opline-&gt;result.num;</span>
+<span class='curline'><a href='../S/1748.html#L10222'>EX</a>               10222 Zend/zend_vm_execute.h 	EX(call) = call;</span>
+<span class='curline'><a href='../S/1748.html#L10365'>EX</a>               10365 Zend/zend_vm_execute.h 		if (EX(op_array)-&gt;fn_flags &amp; ZEND_ACC_RETURN_REFERENCE) {</span>
+<span class='curline'><a href='../S/1748.html#L10939'>EX</a>               10939 Zend/zend_vm_execute.h 	return zend_fetch_var_address_helper_SPEC_TMP_VAR(zend_is_by_ref_func_arg_fetch(opline, EX(call) TSRMLS_CC) ? BP_VAR_W : BP_VAR_R, ZEND_OPCODE_HANDLER_ARGS_PASSTHRU);</span>
+<span class='curline'><a href='../S/1748.html#L11021'>EX</a>               11021 Zend/zend_vm_execute.h 	call_slot *call = EX(call_slots) + opline-&gt;result.num;</span>
+<span class='curline'><a href='../S/1748.html#L11088'>EX</a>               11088 Zend/zend_vm_execute.h 	EX(call) = call;</span>
+<span class='curline'><a href='../S/1748.html#L11220'>EX</a>               11220 Zend/zend_vm_execute.h 			zend_delete_variable(EX(prev_execute_data), EG(active_symbol_table),  cv-&gt;name, cv-&gt;name_len+1, cv-&gt;hash_value TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L11394'>EX</a>               11394 Zend/zend_vm_execute.h 		if (EX(op_array)-&gt;fn_flags &amp; ZEND_ACC_RETURN_REFERENCE) {</span>
+<span class='curline'><a href='../S/1748.html#L11693'>EX</a>               11693 Zend/zend_vm_execute.h 	return zend_fetch_var_address_helper_SPEC_TMP_UNUSED(zend_is_by_ref_func_arg_fetch(opline, EX(call) TSRMLS_CC) ? BP_VAR_W : BP_VAR_R, ZEND_OPCODE_HANDLER_ARGS_PASSTHRU);</span>
+<span class='curline'><a href='../S/1748.html#L11815'>EX</a>               11815 Zend/zend_vm_execute.h 			zend_delete_variable(EX(prev_execute_data), EG(active_symbol_table),  cv-&gt;name, cv-&gt;name_len+1, cv-&gt;hash_value TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L11989'>EX</a>               11989 Zend/zend_vm_execute.h 		if (EX(op_array)-&gt;fn_flags &amp; ZEND_ACC_RETURN_REFERENCE) {</span>
+<span class='curline'><a href='../S/1748.html#L12467'>EX</a>               12467 Zend/zend_vm_execute.h 	call_slot *call = EX(call_slots) + opline-&gt;result.num;</span>
+<span class='curline'><a href='../S/1748.html#L12534'>EX</a>               12534 Zend/zend_vm_execute.h 	EX(call) = call;</span>
+<span class='curline'><a href='../S/1748.html#L12675'>EX</a>               12675 Zend/zend_vm_execute.h 		if (EX(op_array)-&gt;fn_flags &amp; ZEND_ACC_RETURN_REFERENCE) {</span>
+<span class='curline'><a href='../S/1748.html#L13140'>EX</a>               13140 Zend/zend_vm_execute.h 		ZEND_VM_SET_OPCODE(&amp;EX(op_array)-&gt;opcodes[opline-&gt;extended_value]);</span>
+<span class='curline'><a href='../S/1748.html#L13146'>EX</a>               13146 Zend/zend_vm_execute.h 		ZEND_VM_SET_OPCODE(&amp;EX(op_array)-&gt;opcodes[opline-&gt;op2.opline_num]);</span>
+<span class='curline'><a href='../S/1748.html#L13418'>EX</a>               13418 Zend/zend_vm_execute.h 		if (!ARG_SHOULD_BE_SENT_BY_REF(EX(call)-&gt;fbc, opline-&gt;op2.num)) {</span>
+<span class='curline'><a href='../S/1748.html#L13438'>EX</a>               13438 Zend/zend_vm_execute.h 			!ARG_MAY_BE_SENT_BY_REF(EX(call)-&gt;fbc, opline-&gt;op2.num)) {</span>
+<span class='curline'><a href='../S/1748.html#L13475'>EX</a>               13475 Zend/zend_vm_execute.h 	    EX(function_state).function-&gt;type == ZEND_INTERNAL_FUNCTION) {</span>
+<span class='curline'><a href='../S/1748.html#L13476'>EX</a>               13476 Zend/zend_vm_execute.h 		if (!ARG_SHOULD_BE_SENT_BY_REF(EX(call)-&gt;fbc, opline-&gt;op2.num)) {</span>
+<span class='curline'><a href='../S/1748.html#L13496'>EX</a>               13496 Zend/zend_vm_execute.h 		if (ARG_SHOULD_BE_SENT_BY_REF(EX(call)-&gt;fbc, opline-&gt;op2.num)) {</span>
+<span class='curline'><a href='../S/1748.html#L13742'>EX</a>               13742 Zend/zend_vm_execute.h 		EX(original_return_value) = EG(return_value_ptr_ptr);</span>
+<span class='curline'><a href='../S/1748.html#L13751'>EX</a>               13751 Zend/zend_vm_execute.h 		EX(function_state).function = (zend_function *) new_op_array;</span>
+<span class='curline'><a href='../S/1748.html#L13752'>EX</a>               13752 Zend/zend_vm_execute.h 		EX(object) = NULL;</span>
+<span class='curline'><a href='../S/1748.html#L13764'>EX</a>               13764 Zend/zend_vm_execute.h 		EX(function_state).function = (zend_function *) EX(op_array);</span>
+<span class='curline'><a href='../S/1748.html#L13766'>EX</a>               13766 Zend/zend_vm_execute.h 		EG(opline_ptr) = &amp;EX(opline);</span>
+<span class='curline'><a href='../S/1748.html#L13767'>EX</a>               13767 Zend/zend_vm_execute.h 		EG(active_op_array) = EX(op_array);</span>
+<span class='curline'><a href='../S/1748.html#L13768'>EX</a>               13768 Zend/zend_vm_execute.h 		EG(return_value_ptr_ptr) = EX(original_return_value);</span>
+<span class='curline'><a href='../S/1748.html#L13808'>EX</a>               13808 Zend/zend_vm_execute.h 				ZEND_VM_JMP(EX(op_array)-&gt;opcodes+opline-&gt;op2.opline_num);</span>
+<span class='curline'><a href='../S/1748.html#L13942'>EX</a>               13942 Zend/zend_vm_execute.h 		ZEND_VM_JMP(EX(op_array)-&gt;opcodes+opline-&gt;op2.opline_num);</span>
+<span class='curline'><a href='../S/1748.html#L13969'>EX</a>               13969 Zend/zend_vm_execute.h 			ZEND_VM_JMP(EX(op_array)-&gt;opcodes+opline-&gt;op2.opline_num);</span>
+<span class='curline'><a href='../S/1748.html#L13983'>EX</a>               13983 Zend/zend_vm_execute.h 					ZEND_VM_JMP(EX(op_array)-&gt;opcodes+opline-&gt;op2.opline_num);</span>
+<span class='curline'><a href='../S/1748.html#L14013'>EX</a>               14013 Zend/zend_vm_execute.h 				ZEND_VM_JMP(EX(op_array)-&gt;opcodes+opline-&gt;op2.opline_num);</span>
+<span class='curline'><a href='../S/1748.html#L14040'>EX</a>               14040 Zend/zend_vm_execute.h 				ZEND_VM_JMP(EX(op_array)-&gt;opcodes+opline-&gt;op2.opline_num);</span>
+<span class='curline'><a href='../S/1748.html#L14049'>EX</a>               14049 Zend/zend_vm_execute.h 				ZEND_VM_JMP(EX(op_array)-&gt;opcodes+opline-&gt;op2.opline_num);</span>
+<span class='curline'><a href='../S/1748.html#L15121'>EX</a>               15121 Zend/zend_vm_execute.h 	return zend_fetch_var_address_helper_SPEC_VAR_CONST(zend_is_by_ref_func_arg_fetch(opline, EX(call) TSRMLS_CC) ? BP_VAR_W : BP_VAR_R, ZEND_OPCODE_HANDLER_ARGS_PASSTHRU);</span>
+<span class='curline'><a href='../S/1748.html#L15229'>EX</a>               15229 Zend/zend_vm_execute.h 	if (zend_is_by_ref_func_arg_fetch(opline, EX(call) TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/1748.html#L15465'>EX</a>               15465 Zend/zend_vm_execute.h 	if (zend_is_by_ref_func_arg_fetch(opline, EX(call) TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/1748.html#L15715'>EX</a>               15715 Zend/zend_vm_execute.h 	call_slot *call = EX(call_slots) + opline-&gt;result.num;</span>
+<span class='curline'><a href='../S/1748.html#L15782'>EX</a>               15782 Zend/zend_vm_execute.h 	EX(call) = call;</span>
+<span class='curline'><a href='../S/1748.html#L15795'>EX</a>               15795 Zend/zend_vm_execute.h 	call_slot *call = EX(call_slots) + opline-&gt;result.num;</span>
+<span class='curline'><a href='../S/1748.html#L15909'>EX</a>               15909 Zend/zend_vm_execute.h 	EX(call) = call;</span>
+<span class='curline'><a href='../S/1748.html#L16130'>EX</a>               16130 Zend/zend_vm_execute.h 			zend_delete_variable(EX(prev_execute_data), EG(active_symbol_table),  cv-&gt;name, cv-&gt;name_len+1, cv-&gt;hash_value TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L16588'>EX</a>               16588 Zend/zend_vm_execute.h 		if (EX(op_array)-&gt;fn_flags &amp; ZEND_ACC_RETURN_REFERENCE) {</span>
+<span class='curline'><a href='../S/1748.html#L17581'>EX</a>               17581 Zend/zend_vm_execute.h 	if (zend_is_by_ref_func_arg_fetch(opline, EX(call) TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/1748.html#L17817'>EX</a>               17817 Zend/zend_vm_execute.h 	if (zend_is_by_ref_func_arg_fetch(opline, EX(call) TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/1748.html#L18068'>EX</a>               18068 Zend/zend_vm_execute.h 	call_slot *call = EX(call_slots) + opline-&gt;result.num;</span>
+<span class='curline'><a href='../S/1748.html#L18135'>EX</a>               18135 Zend/zend_vm_execute.h 	EX(call) = call;</span>
+<span class='curline'><a href='../S/1748.html#L18149'>EX</a>               18149 Zend/zend_vm_execute.h 	call_slot *call = EX(call_slots) + opline-&gt;result.num;</span>
+<span class='curline'><a href='../S/1748.html#L18263'>EX</a>               18263 Zend/zend_vm_execute.h 	EX(call) = call;</span>
+<span class='curline'><a href='../S/1748.html#L18688'>EX</a>               18688 Zend/zend_vm_execute.h 		if (EX(op_array)-&gt;fn_flags &amp; ZEND_ACC_RETURN_REFERENCE) {</span>
+<span class='curline'><a href='../S/1748.html#L19735'>EX</a>               19735 Zend/zend_vm_execute.h 	return zend_fetch_var_address_helper_SPEC_VAR_VAR(zend_is_by_ref_func_arg_fetch(opline, EX(call) TSRMLS_CC) ? BP_VAR_W : BP_VAR_R, ZEND_OPCODE_HANDLER_ARGS_PASSTHRU);</span>
+<span class='curline'><a href='../S/1748.html#L19843'>EX</a>               19843 Zend/zend_vm_execute.h 	if (zend_is_by_ref_func_arg_fetch(opline, EX(call) TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/1748.html#L20079'>EX</a>               20079 Zend/zend_vm_execute.h 	if (zend_is_by_ref_func_arg_fetch(opline, EX(call) TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/1748.html#L20386'>EX</a>               20386 Zend/zend_vm_execute.h 	call_slot *call = EX(call_slots) + opline-&gt;result.num;</span>
+<span class='curline'><a href='../S/1748.html#L20453'>EX</a>               20453 Zend/zend_vm_execute.h 	EX(call) = call;</span>
+<span class='curline'><a href='../S/1748.html#L20467'>EX</a>               20467 Zend/zend_vm_execute.h 	call_slot *call = EX(call_slots) + opline-&gt;result.num;</span>
+<span class='curline'><a href='../S/1748.html#L20581'>EX</a>               20581 Zend/zend_vm_execute.h 	EX(call) = call;</span>
+<span class='curline'><a href='../S/1748.html#L20711'>EX</a>               20711 Zend/zend_vm_execute.h 			zend_delete_variable(EX(prev_execute_data), EG(active_symbol_table),  cv-&gt;name, cv-&gt;name_len+1, cv-&gt;hash_value TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L21169'>EX</a>               21169 Zend/zend_vm_execute.h 		if (EX(op_array)-&gt;fn_flags &amp; ZEND_ACC_RETURN_REFERENCE) {</span>
+<span class='curline'><a href='../S/1748.html#L21728'>EX</a>               21728 Zend/zend_vm_execute.h 	return zend_fetch_var_address_helper_SPEC_VAR_UNUSED(zend_is_by_ref_func_arg_fetch(opline, EX(call) TSRMLS_CC) ? BP_VAR_W : BP_VAR_R, ZEND_OPCODE_HANDLER_ARGS_PASSTHRU);</span>
+<span class='curline'><a href='../S/1748.html#L21804'>EX</a>               21804 Zend/zend_vm_execute.h 	if (zend_is_by_ref_func_arg_fetch(opline, EX(call) TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/1748.html#L21915'>EX</a>               21915 Zend/zend_vm_execute.h 	call_slot *call = EX(call_slots) + opline-&gt;result.num;</span>
+<span class='curline'><a href='../S/1748.html#L22029'>EX</a>               22029 Zend/zend_vm_execute.h 	EX(call) = call;</span>
+<span class='curline'><a href='../S/1748.html#L22144'>EX</a>               22144 Zend/zend_vm_execute.h 			zend_delete_variable(EX(prev_execute_data), EG(active_symbol_table),  cv-&gt;name, cv-&gt;name_len+1, cv-&gt;hash_value TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L22339'>EX</a>               22339 Zend/zend_vm_execute.h 		if (EX(op_array)-&gt;fn_flags &amp; ZEND_ACC_RETURN_REFERENCE) {</span>
+<span class='curline'><a href='../S/1748.html#L23316'>EX</a>               23316 Zend/zend_vm_execute.h 	if (zend_is_by_ref_func_arg_fetch(opline, EX(call) TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/1748.html#L23552'>EX</a>               23552 Zend/zend_vm_execute.h 	if (zend_is_by_ref_func_arg_fetch(opline, EX(call) TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/1748.html#L23856'>EX</a>               23856 Zend/zend_vm_execute.h 	call_slot *call = EX(call_slots) + opline-&gt;result.num;</span>
+<span class='curline'><a href='../S/1748.html#L23923'>EX</a>               23923 Zend/zend_vm_execute.h 	EX(call) = call;</span>
+<span class='curline'><a href='../S/1748.html#L23936'>EX</a>               23936 Zend/zend_vm_execute.h 	call_slot *call = EX(call_slots) + opline-&gt;result.num;</span>
+<span class='curline'><a href='../S/1748.html#L24050'>EX</a>               24050 Zend/zend_vm_execute.h 	EX(call) = call;</span>
+<span class='curline'><a href='../S/1748.html#L24474'>EX</a>               24474 Zend/zend_vm_execute.h 		if (EX(op_array)-&gt;fn_flags &amp; ZEND_ACC_RETURN_REFERENCE) {</span>
+<span class='curline'><a href='../S/1748.html#L25348'>EX</a>               25348 Zend/zend_vm_execute.h 	if (zend_is_by_ref_func_arg_fetch(opline, EX(call) TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/1748.html#L25506'>EX</a>               25506 Zend/zend_vm_execute.h 	call_slot *call = EX(call_slots) + opline-&gt;result.num;</span>
+<span class='curline'><a href='../S/1748.html#L25573'>EX</a>               25573 Zend/zend_vm_execute.h 	EX(call) = call;</span>
+<span class='curline'><a href='../S/1748.html#L25991'>EX</a>               25991 Zend/zend_vm_execute.h 		if (EX(op_array)-&gt;fn_flags &amp; ZEND_ACC_RETURN_REFERENCE) {</span>
+<span class='curline'><a href='../S/1748.html#L26762'>EX</a>               26762 Zend/zend_vm_execute.h 	if (zend_is_by_ref_func_arg_fetch(opline, EX(call) TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/1748.html#L26919'>EX</a>               26919 Zend/zend_vm_execute.h 	call_slot *call = EX(call_slots) + opline-&gt;result.num;</span>
+<span class='curline'><a href='../S/1748.html#L26986'>EX</a>               26986 Zend/zend_vm_execute.h 	EX(call) = call;</span>
+<span class='curline'><a href='../S/1748.html#L27313'>EX</a>               27313 Zend/zend_vm_execute.h 		if (EX(op_array)-&gt;fn_flags &amp; ZEND_ACC_RETURN_REFERENCE) {</span>
+<span class='curline'><a href='../S/1748.html#L28084'>EX</a>               28084 Zend/zend_vm_execute.h 	if (zend_is_by_ref_func_arg_fetch(opline, EX(call) TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/1748.html#L28241'>EX</a>               28241 Zend/zend_vm_execute.h 	call_slot *call = EX(call_slots) + opline-&gt;result.num;</span>
+<span class='curline'><a href='../S/1748.html#L28308'>EX</a>               28308 Zend/zend_vm_execute.h 	EX(call) = call;</span>
+<span class='curline'><a href='../S/1748.html#L28635'>EX</a>               28635 Zend/zend_vm_execute.h 		if (EX(op_array)-&gt;fn_flags &amp; ZEND_ACC_RETURN_REFERENCE) {</span>
+<span class='curline'><a href='../S/1748.html#L29067'>EX</a>               29067 Zend/zend_vm_execute.h 		if (EX(op_array)-&gt;fn_flags &amp; ZEND_ACC_RETURN_REFERENCE) {</span>
+<span class='curline'><a href='../S/1748.html#L29837'>EX</a>               29837 Zend/zend_vm_execute.h 	if (zend_is_by_ref_func_arg_fetch(opline, EX(call) TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/1748.html#L29993'>EX</a>               29993 Zend/zend_vm_execute.h 	call_slot *call = EX(call_slots) + opline-&gt;result.num;</span>
+<span class='curline'><a href='../S/1748.html#L30060'>EX</a>               30060 Zend/zend_vm_execute.h 	EX(call) = call;</span>
+<span class='curline'><a href='../S/1748.html#L30386'>EX</a>               30386 Zend/zend_vm_execute.h 		if (EX(op_array)-&gt;fn_flags &amp; ZEND_ACC_RETURN_REFERENCE) {</span>
+<span class='curline'><a href='../S/1748.html#L30836'>EX</a>               30836 Zend/zend_vm_execute.h 		ZEND_VM_SET_OPCODE(&amp;EX(op_array)-&gt;opcodes[opline-&gt;extended_value]);</span>
+<span class='curline'><a href='../S/1748.html#L30842'>EX</a>               30842 Zend/zend_vm_execute.h 		ZEND_VM_SET_OPCODE(&amp;EX(op_array)-&gt;opcodes[opline-&gt;op2.opline_num]);</span>
+<span class='curline'><a href='../S/1748.html#L31099'>EX</a>               31099 Zend/zend_vm_execute.h 		if (!ARG_SHOULD_BE_SENT_BY_REF(EX(call)-&gt;fbc, opline-&gt;op2.num)) {</span>
+<span class='curline'><a href='../S/1748.html#L31119'>EX</a>               31119 Zend/zend_vm_execute.h 			!ARG_MAY_BE_SENT_BY_REF(EX(call)-&gt;fbc, opline-&gt;op2.num)) {</span>
+<span class='curline'><a href='../S/1748.html#L31156'>EX</a>               31156 Zend/zend_vm_execute.h 	    EX(function_state).function-&gt;type == ZEND_INTERNAL_FUNCTION) {</span>
+<span class='curline'><a href='../S/1748.html#L31157'>EX</a>               31157 Zend/zend_vm_execute.h 		if (!ARG_SHOULD_BE_SENT_BY_REF(EX(call)-&gt;fbc, opline-&gt;op2.num)) {</span>
+<span class='curline'><a href='../S/1748.html#L31176'>EX</a>               31176 Zend/zend_vm_execute.h 		if (ARG_SHOULD_BE_SENT_BY_REF(EX(call)-&gt;fbc, opline-&gt;op2.num)) {</span>
+<span class='curline'><a href='../S/1748.html#L31411'>EX</a>               31411 Zend/zend_vm_execute.h 		EX(original_return_value) = EG(return_value_ptr_ptr);</span>
+<span class='curline'><a href='../S/1748.html#L31420'>EX</a>               31420 Zend/zend_vm_execute.h 		EX(function_state).function = (zend_function *) new_op_array;</span>
+<span class='curline'><a href='../S/1748.html#L31421'>EX</a>               31421 Zend/zend_vm_execute.h 		EX(object) = NULL;</span>
+<span class='curline'><a href='../S/1748.html#L31433'>EX</a>               31433 Zend/zend_vm_execute.h 		EX(function_state).function = (zend_function *) EX(op_array);</span>
+<span class='curline'><a href='../S/1748.html#L31435'>EX</a>               31435 Zend/zend_vm_execute.h 		EG(opline_ptr) = &amp;EX(opline);</span>
+<span class='curline'><a href='../S/1748.html#L31436'>EX</a>               31436 Zend/zend_vm_execute.h 		EG(active_op_array) = EX(op_array);</span>
+<span class='curline'><a href='../S/1748.html#L31437'>EX</a>               31437 Zend/zend_vm_execute.h 		EG(return_value_ptr_ptr) = EX(original_return_value);</span>
+<span class='curline'><a href='../S/1748.html#L31477'>EX</a>               31477 Zend/zend_vm_execute.h 				ZEND_VM_JMP(EX(op_array)-&gt;opcodes+opline-&gt;op2.opline_num);</span>
+<span class='curline'><a href='../S/1748.html#L31611'>EX</a>               31611 Zend/zend_vm_execute.h 		ZEND_VM_JMP(EX(op_array)-&gt;opcodes+opline-&gt;op2.opline_num);</span>
+<span class='curline'><a href='../S/1748.html#L32655'>EX</a>               32655 Zend/zend_vm_execute.h 	return zend_fetch_var_address_helper_SPEC_CV_CONST(zend_is_by_ref_func_arg_fetch(opline, EX(call) TSRMLS_CC) ? BP_VAR_W : BP_VAR_R, ZEND_OPCODE_HANDLER_ARGS_PASSTHRU);</span>
+<span class='curline'><a href='../S/1748.html#L32762'>EX</a>               32762 Zend/zend_vm_execute.h 	if (zend_is_by_ref_func_arg_fetch(opline, EX(call) TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/1748.html#L32995'>EX</a>               32995 Zend/zend_vm_execute.h 	if (zend_is_by_ref_func_arg_fetch(opline, EX(call) TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/1748.html#L33244'>EX</a>               33244 Zend/zend_vm_execute.h 	call_slot *call = EX(call_slots) + opline-&gt;result.num;</span>
+<span class='curline'><a href='../S/1748.html#L33311'>EX</a>               33311 Zend/zend_vm_execute.h 	EX(call) = call;</span>
+<span class='curline'><a href='../S/1748.html#L33441'>EX</a>               33441 Zend/zend_vm_execute.h 			zend_delete_variable(EX(prev_execute_data), EG(active_symbol_table),  cv-&gt;name, cv-&gt;name_len+1, cv-&gt;hash_value TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L33895'>EX</a>               33895 Zend/zend_vm_execute.h 		if (EX(op_array)-&gt;fn_flags &amp; ZEND_ACC_RETURN_REFERENCE) {</span>
+<span class='curline'><a href='../S/1748.html#L34885'>EX</a>               34885 Zend/zend_vm_execute.h 	if (zend_is_by_ref_func_arg_fetch(opline, EX(call) TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/1748.html#L35118'>EX</a>               35118 Zend/zend_vm_execute.h 	if (zend_is_by_ref_func_arg_fetch(opline, EX(call) TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/1748.html#L35368'>EX</a>               35368 Zend/zend_vm_execute.h 	call_slot *call = EX(call_slots) + opline-&gt;result.num;</span>
+<span class='curline'><a href='../S/1748.html#L35435'>EX</a>               35435 Zend/zend_vm_execute.h 	EX(call) = call;</span>
+<span class='curline'><a href='../S/1748.html#L35858'>EX</a>               35858 Zend/zend_vm_execute.h 		if (EX(op_array)-&gt;fn_flags &amp; ZEND_ACC_RETURN_REFERENCE) {</span>
+<span class='curline'><a href='../S/1748.html#L36903'>EX</a>               36903 Zend/zend_vm_execute.h 	return zend_fetch_var_address_helper_SPEC_CV_VAR(zend_is_by_ref_func_arg_fetch(opline, EX(call) TSRMLS_CC) ? BP_VAR_W : BP_VAR_R, ZEND_OPCODE_HANDLER_ARGS_PASSTHRU);</span>
+<span class='curline'><a href='../S/1748.html#L37010'>EX</a>               37010 Zend/zend_vm_execute.h 	if (zend_is_by_ref_func_arg_fetch(opline, EX(call) TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/1748.html#L37243'>EX</a>               37243 Zend/zend_vm_execute.h 	if (zend_is_by_ref_func_arg_fetch(opline, EX(call) TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/1748.html#L37548'>EX</a>               37548 Zend/zend_vm_execute.h 	call_slot *call = EX(call_slots) + opline-&gt;result.num;</span>
+<span class='curline'><a href='../S/1748.html#L37615'>EX</a>               37615 Zend/zend_vm_execute.h 	EX(call) = call;</span>
+<span class='curline'><a href='../S/1748.html#L37747'>EX</a>               37747 Zend/zend_vm_execute.h 			zend_delete_variable(EX(prev_execute_data), EG(active_symbol_table),  cv-&gt;name, cv-&gt;name_len+1, cv-&gt;hash_value TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L38201'>EX</a>               38201 Zend/zend_vm_execute.h 		if (EX(op_array)-&gt;fn_flags &amp; ZEND_ACC_RETURN_REFERENCE) {</span>
+<span class='curline'><a href='../S/1748.html#L38758'>EX</a>               38758 Zend/zend_vm_execute.h 	return zend_fetch_var_address_helper_SPEC_CV_UNUSED(zend_is_by_ref_func_arg_fetch(opline, EX(call) TSRMLS_CC) ? BP_VAR_W : BP_VAR_R, ZEND_OPCODE_HANDLER_ARGS_PASSTHRU);</span>
+<span class='curline'><a href='../S/1748.html#L38833'>EX</a>               38833 Zend/zend_vm_execute.h 	if (zend_is_by_ref_func_arg_fetch(opline, EX(call) TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/1748.html#L39048'>EX</a>               39048 Zend/zend_vm_execute.h 			zend_delete_variable(EX(prev_execute_data), EG(active_symbol_table),  cv-&gt;name, cv-&gt;name_len+1, cv-&gt;hash_value TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L39222'>EX</a>               39222 Zend/zend_vm_execute.h 		if (EX(op_array)-&gt;fn_flags &amp; ZEND_ACC_RETURN_REFERENCE) {</span>
+<span class='curline'><a href='../S/1748.html#L40196'>EX</a>               40196 Zend/zend_vm_execute.h 	if (zend_is_by_ref_func_arg_fetch(opline, EX(call) TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/1748.html#L40429'>EX</a>               40429 Zend/zend_vm_execute.h 	if (zend_is_by_ref_func_arg_fetch(opline, EX(call) TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/1748.html#L40731'>EX</a>               40731 Zend/zend_vm_execute.h 	call_slot *call = EX(call_slots) + opline-&gt;result.num;</span>
+<span class='curline'><a href='../S/1748.html#L40798'>EX</a>               40798 Zend/zend_vm_execute.h 	EX(call) = call;</span>
+<span class='curline'><a href='../S/1748.html#L41219'>EX</a>               41219 Zend/zend_vm_execute.h 		if (EX(op_array)-&gt;fn_flags &amp; ZEND_ACC_RETURN_REFERENCE) {</span>
+<span class='curline'><a href='../S/854.html#L295'>EX</a>                295 ext/opcache/zend_accelerator_module.c #undef  EX</span>
+<span class='curline'><a href='../S/854.html#L297'>EX</a>                297 ext/opcache/zend_accelerator_module.c #define EX_T(offset) (*(temp_variable *)((char *) EX(Ts) + offset))</span>
+<span class='curline'><a href='../S/854.html#L303'>EX</a>                303 ext/opcache/zend_accelerator_module.c 	if (zend_hash_find(EG(class_table), Z_STRVAL(EX(opline)-&gt;op2.u.constant), Z_STRLEN(EX(opline)-&gt;op2.u.constant) + 1, (void **)&amp;pce) == FAILURE ||</span>
+<span class='curline'><a href='../S/854.html#L304'>EX</a>                304 ext/opcache/zend_accelerator_module.c 	    (zend_hash_find(EG(class_table), Z_STRVAL(EX(opline)-&gt;op1.u.constant), Z_STRLEN(EX(opline)-&gt;op1.u.constant), (void**)&amp;pce_orig) == SUCCESS &amp;&amp;</span>
+<span class='curline'><a href='../S/854.html#L306'>EX</a>                306 ext/opcache/zend_accelerator_module.c 		do_bind_inherited_class(EX(opline), EG(class_table), EX_T(EX(opline)-&gt;extended_value).class_entry, 0 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/854.html#L308'>EX</a>                308 ext/opcache/zend_accelerator_module.c 	EX(opline)++;</span>
+<span class='curline'><a href='../S/1454.html#L1128'>EX</a>               1128 sapi/cli/php_cli.c 					EX(function_state).function = pce-&gt;constructor;</span>
+<span class='curline'><a href='../S/1572.html#L1095'>EX</a>               1095 sapi/phpdbg/phpdbg_prompt.c #define EX_CV(var) EX(CVs)[var]</span>
+<span class='curline'><a href='../S/1572.html#L1097'>EX</a>               1097 sapi/phpdbg/phpdbg_prompt.c #define EX_CVs() EX(CVs)</span>
+<span class='curline'><a href='../S/1572.html#L1099'>EX</a>               1099 sapi/phpdbg/phpdbg_prompt.c #define EX_T(offset) (*(temp_variable *)((char *) EX(Ts) + offset))</span>
+<span class='curline'><a href='../S/1572.html#L1101'>EX</a>               1101 sapi/phpdbg/phpdbg_prompt.c #define EX_Ts() EX(Ts)</span>
+<span class='curline'><a href='../S/1572.html#L1108'>EX</a>               1108 sapi/phpdbg/phpdbg_prompt.c 	EX(CVs) = (zval***)((char*)execute_data + ZEND_MM_ALIGNED_SIZE(sizeof(zend_execute_data)));</span>
+<span class='curline'><a href='../S/1572.html#L1109'>EX</a>               1109 sapi/phpdbg/phpdbg_prompt.c 	memset(EX(CVs), 0, sizeof(zval**) * op_array-&gt;last_var);</span>
+<span class='curline'><a href='../S/1572.html#L1110'>EX</a>               1110 sapi/phpdbg/phpdbg_prompt.c 	EX(Ts) = (temp_variable *)(((char*)EX(CVs)) + ZEND_MM_ALIGNED_SIZE(sizeof(zval**) * op_array-&gt;last_var * (EG(active_symbol_table) ? 1 : 2)));</span>
+<span class='curline'><a href='../S/1572.html#L1111'>EX</a>               1111 sapi/phpdbg/phpdbg_prompt.c 	EX(fbc) = NULL;</span>
+<span class='curline'><a href='../S/1572.html#L1112'>EX</a>               1112 sapi/phpdbg/phpdbg_prompt.c 	EX(called_scope) = NULL;</span>
+<span class='curline'><a href='../S/1572.html#L1113'>EX</a>               1113 sapi/phpdbg/phpdbg_prompt.c 	EX(object) = NULL;</span>
+<span class='curline'><a href='../S/1572.html#L1114'>EX</a>               1114 sapi/phpdbg/phpdbg_prompt.c 	EX(old_error_reporting) = NULL;</span>
+<span class='curline'><a href='../S/1572.html#L1115'>EX</a>               1115 sapi/phpdbg/phpdbg_prompt.c 	EX(op_array) = op_array;</span>
+<span class='curline'><a href='../S/1572.html#L1116'>EX</a>               1116 sapi/phpdbg/phpdbg_prompt.c 	EX(symbol_table) = EG(active_symbol_table);</span>
+<span class='curline'><a href='../S/1572.html#L1117'>EX</a>               1117 sapi/phpdbg/phpdbg_prompt.c 	EX(prev_execute_data) = EG(current_execute_data);</span>
+<span class='curline'><a href='../S/1572.html#L1119'>EX</a>               1119 sapi/phpdbg/phpdbg_prompt.c 	EX(nested) = nested;</span>
+<span class='curline'><a href='../S/1572.html#L1137'>EX</a>               1137 sapi/phpdbg/phpdbg_prompt.c 	EX(opline) = UNEXPECTED((op_array-&gt;fn_flags &amp; ZEND_ACC_INTERACTIVE) != 0) &amp;&amp; EG(start_op) ? EG(start_op) : op_array-&gt;opcodes;</span>
+<span class='curline'><a href='../S/1572.html#L1138'>EX</a>               1138 sapi/phpdbg/phpdbg_prompt.c 	EG(opline_ptr) = &amp;EX(opline);</span>
+<span class='curline'><a href='../S/1572.html#L1140'>EX</a>               1140 sapi/phpdbg/phpdbg_prompt.c 	EX(function_state).function = (zend_function *) op_array;</span>
+<span class='curline'><a href='../S/1572.html#L1141'>EX</a>               1141 sapi/phpdbg/phpdbg_prompt.c 	EX(function_state).arguments = NULL;</span>
+</pre>
+</body>
+</html>

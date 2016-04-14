@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>best_fit</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/1644.html#L1809'>best_fit</a>         1809 Zend/zend_alloc.c 	zend_mm_free_block *best_fit;</span>
+<span class='curline'><a href='../S/1644.html#L1824'>best_fit</a>         1824 Zend/zend_alloc.c 		best_fit = NULL;</span>
+<span class='curline'><a href='../S/1644.html#L1832'>best_fit</a>         1832 Zend/zend_alloc.c 				best_fit = p;</span>
+<span class='curline'><a href='../S/1644.html#L1856'>best_fit</a>         1856 Zend/zend_alloc.c 				best_fit = p;</span>
+<span class='curline'><a href='../S/1644.html#L1860'>best_fit</a>         1860 Zend/zend_alloc.c 		if (best_fit) {</span>
+<span class='curline'><a href='../S/1644.html#L1861'>best_fit</a>         1861 Zend/zend_alloc.c 			return best_fit-&gt;next_free_block;</span>
+<span class='curline'><a href='../S/1644.html#L1871'>best_fit</a>         1871 Zend/zend_alloc.c 	best_fit = p = heap-&gt;large_free_buckets[index + zend_mm_low_bit(bitmap)];</span>
+<span class='curline'><a href='../S/1644.html#L1873'>best_fit</a>         1873 Zend/zend_alloc.c 		if (ZEND_MM_FREE_BLOCK_SIZE(p) &lt; ZEND_MM_FREE_BLOCK_SIZE(best_fit)) {</span>
+<span class='curline'><a href='../S/1644.html#L1874'>best_fit</a>         1874 Zend/zend_alloc.c 			best_fit = p;</span>
+<span class='curline'><a href='../S/1644.html#L1877'>best_fit</a>         1877 Zend/zend_alloc.c 	return best_fit-&gt;next_free_block;</span>
+<span class='curline'><a href='../S/1644.html#L1882'>best_fit</a>         1882 Zend/zend_alloc.c 	zend_mm_free_block *best_fit;</span>
+<span class='curline'><a href='../S/1644.html#L1909'>best_fit</a>         1909 Zend/zend_alloc.c 			best_fit = heap-&gt;cache[index];</span>
+<span class='curline'><a href='../S/1644.html#L1910'>best_fit</a>         1910 Zend/zend_alloc.c 			heap-&gt;cache[index] = best_fit-&gt;prev_free_block;</span>
+<span class='curline'><a href='../S/1644.html#L1912'>best_fit</a>         1912 Zend/zend_alloc.c 			ZEND_MM_CHECK_MAGIC(best_fit, MEM_BLOCK_CACHED);</span>
+<span class='curline'><a href='../S/1644.html#L1913'>best_fit</a>         1913 Zend/zend_alloc.c 			ZEND_MM_SET_DEBUG_INFO(best_fit, size, 1, 0);</span>
+<span class='curline'><a href='../S/1644.html#L1915'>best_fit</a>         1915 Zend/zend_alloc.c 			return ZEND_MM_DATA_OF(best_fit);</span>
+<span class='curline'><a href='../S/1644.html#L1926'>best_fit</a>         1926 Zend/zend_alloc.c 			best_fit = heap-&gt;free_buckets[index*2];</span>
+<span class='curline'><a href='../S/1644.html#L1938'>best_fit</a>         1938 Zend/zend_alloc.c 	best_fit = zend_mm_search_large_block(heap, true_size);</span>
+<span class='curline'><a href='../S/1644.html#L1940'>best_fit</a>         1940 Zend/zend_alloc.c 	if (!best_fit &amp;&amp; heap-&gt;real_size &gt;= heap-&gt;limit - heap-&gt;block_size) {</span>
+<span class='curline'><a href='../S/1644.html#L1946'>best_fit</a>         1946 Zend/zend_alloc.c 				best_fit = p;</span>
+<span class='curline'><a href='../S/1644.html#L1951'>best_fit</a>         1951 Zend/zend_alloc.c 				best_fit = p;</span>
+<span class='curline'><a href='../S/1644.html#L1957'>best_fit</a>         1957 Zend/zend_alloc.c 	if (!best_fit) {</span>
+<span class='curline'><a href='../S/1644.html#L2008'>best_fit</a>         2008 Zend/zend_alloc.c 		best_fit = (zend_mm_free_block *) ((char *) segment + ZEND_MM_ALIGNED_SEGMENT_SIZE);</span>
+<span class='curline'><a href='../S/1644.html#L2009'>best_fit</a>         2009 Zend/zend_alloc.c 		ZEND_MM_MARK_FIRST_BLOCK(best_fit);</span>
+<span class='curline'><a href='../S/1644.html#L2013'>best_fit</a>         2013 Zend/zend_alloc.c 		ZEND_MM_LAST_BLOCK(ZEND_MM_BLOCK_AT(best_fit, block_size));</span>
+<span class='curline'><a href='../S/1644.html#L2018'>best_fit</a>         2018 Zend/zend_alloc.c 		ZEND_MM_CHECK_MAGIC(best_fit, MEM_BLOCK_FREED);</span>
+<span class='curline'><a href='../S/1644.html#L2019'>best_fit</a>         2019 Zend/zend_alloc.c 		ZEND_MM_CHECK_COOKIE(best_fit);</span>
+<span class='curline'><a href='../S/1644.html#L2020'>best_fit</a>         2020 Zend/zend_alloc.c 		ZEND_MM_CHECK_BLOCK_LINKAGE(best_fit);</span>
+<span class='curline'><a href='../S/1644.html#L2021'>best_fit</a>         2021 Zend/zend_alloc.c 		zend_mm_remove_from_free_list(heap, best_fit);</span>
+<span class='curline'><a href='../S/1644.html#L2023'>best_fit</a>         2023 Zend/zend_alloc.c 		block_size = ZEND_MM_FREE_BLOCK_SIZE(best_fit);</span>
+<span class='curline'><a href='../S/1644.html#L2030'>best_fit</a>         2030 Zend/zend_alloc.c 		ZEND_MM_BLOCK(best_fit, ZEND_MM_USED_BLOCK, true_size);</span>
+<span class='curline'><a href='../S/1644.html#L2035'>best_fit</a>         2035 Zend/zend_alloc.c 		ZEND_MM_BLOCK(best_fit, ZEND_MM_USED_BLOCK, true_size);</span>
+<span class='curline'><a href='../S/1644.html#L2036'>best_fit</a>         2036 Zend/zend_alloc.c 		new_free_block = (zend_mm_free_block *) ZEND_MM_BLOCK_AT(best_fit, true_size);</span>
+<span class='curline'><a href='../S/1644.html#L2047'>best_fit</a>         2047 Zend/zend_alloc.c 	ZEND_MM_SET_DEBUG_INFO(best_fit, size, 1, 1);</span>
+<span class='curline'><a href='../S/1644.html#L2056'>best_fit</a>         2056 Zend/zend_alloc.c 	return ZEND_MM_DATA_OF(best_fit);</span>
+<span class='curline'><a href='../S/1644.html#L2180'>best_fit</a>         2180 Zend/zend_alloc.c 			zend_mm_free_block *best_fit;</span>
+<span class='curline'><a href='../S/1644.html#L2187'>best_fit</a>         2187 Zend/zend_alloc.c 			best_fit = heap-&gt;cache[index];</span>
+<span class='curline'><a href='../S/1644.html#L2188'>best_fit</a>         2188 Zend/zend_alloc.c 			heap-&gt;cache[index] = best_fit-&gt;prev_free_block;</span>
+<span class='curline'><a href='../S/1644.html#L2189'>best_fit</a>         2189 Zend/zend_alloc.c 			ZEND_MM_CHECK_MAGIC(best_fit, MEM_BLOCK_CACHED);</span>
+<span class='curline'><a href='../S/1644.html#L2190'>best_fit</a>         2190 Zend/zend_alloc.c 			ZEND_MM_SET_DEBUG_INFO(best_fit, size, 1, 0);</span>
+<span class='curline'><a href='../S/1644.html#L2192'>best_fit</a>         2192 Zend/zend_alloc.c 			ptr = ZEND_MM_DATA_OF(best_fit);</span>
+</pre>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>zend_signal_globals</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/1642.html#L109'>zend_signal_globals</a>  109 Zend/zend.c    	STD_ZEND_INI_BOOLEAN("zend.signal_check", "0", ZEND_INI_SYSTEM, OnUpdateBool, check, zend_signal_globals_t, zend_signal_globals)</span>
+<span class='curline'><a href='../S/1726.html#L51'>zend_signal_globals</a>   51 Zend/zend_signal.c zend_signal_globals_t zend_signal_globals;</span>
+<span class='curline'><a href='../S/1726.html#L323'>zend_signal_globals</a>  323 Zend/zend_signal.c static void zend_signal_globals_ctor(zend_signal_globals_t *zend_signal_globals TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1726.html#L327'>zend_signal_globals</a>  327 Zend/zend_signal.c 	memset(zend_signal_globals, 0, sizeof(*zend_signal_globals));</span>
+<span class='curline'><a href='../S/1726.html#L328'>zend_signal_globals</a>  328 Zend/zend_signal.c 	zend_signal_globals-&gt;blocked = -1;</span>
+<span class='curline'><a href='../S/1726.html#L330'>zend_signal_globals</a>  330 Zend/zend_signal.c 	for (x = 0; x &lt; sizeof(zend_signal_globals-&gt;pstorage) / sizeof(*zend_signal_globals-&gt;pstorage); ++x) {</span>
+<span class='curline'><a href='../S/1726.html#L331'>zend_signal_globals</a>  331 Zend/zend_signal.c 		zend_signal_queue_t *queue = &amp;zend_signal_globals-&gt;pstorage[x];</span>
+<span class='curline'><a href='../S/1726.html#L333'>zend_signal_globals</a>  333 Zend/zend_signal.c 		queue-&gt;next = zend_signal_globals-&gt;pavail;</span>
+<span class='curline'><a href='../S/1726.html#L334'>zend_signal_globals</a>  334 Zend/zend_signal.c 		zend_signal_globals-&gt;pavail = queue;</span>
+<span class='curline'><a href='../S/1726.html#L338'>zend_signal_globals</a>  338 Zend/zend_signal.c static void zend_signal_globals_dtor(zend_signal_globals_t *zend_signal_globals TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1726.html#L340'>zend_signal_globals</a>  340 Zend/zend_signal.c 	zend_signal_globals-&gt;blocked = -1;</span>
+<span class='curline'><a href='../S/1726.html#L353'>zend_signal_globals</a>  353 Zend/zend_signal.c 	zend_signal_globals_ctor(&amp;zend_signal_globals);</span>
+<span class='curline'><a href='../S/1726.html#L398'>zend_signal_globals</a>  398 Zend/zend_signal.c 	zend_signal_globals_dtor(&amp;zend_signal_globals);</span>
+<span class='curline'><a href='../S/1727.html#L75'>zend_signal_globals</a>   75 Zend/zend_signal.h # define SIGG(v) (zend_signal_globals.v)</span>
+<span class='curline'><a href='../S/1727.html#L76'>zend_signal_globals</a>   76 Zend/zend_signal.h extern ZEND_API zend_signal_globals_t zend_signal_globals;</span>
+</pre>
+</body>
+</html>

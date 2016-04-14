@@ -1,0 +1,175 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>queue</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/1726.html#L76'>queue</a>              76 Zend/zend_signal.c 	zend_signal_queue_t *queue, *qtmp;</span>
+<span class='curline'><a href='../S/1726.html#L88'>queue</a>              88 Zend/zend_signal.c 				queue = SIGG(phead);</span>
+<span class='curline'><a href='../S/1726.html#L91'>queue</a>              91 Zend/zend_signal.c 				while (queue) {</span>
+<span class='curline'><a href='../S/1726.html#L92'>queue</a>              92 Zend/zend_signal.c 					zend_signal_handler(queue-&gt;zend_signal.signo, queue-&gt;zend_signal.siginfo, queue-&gt;zend_signal.context TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1726.html#L93'>queue</a>              93 Zend/zend_signal.c 					qtmp = queue-&gt;next;</span>
+<span class='curline'><a href='../S/1726.html#L94'>queue</a>              94 Zend/zend_signal.c 					queue-&gt;next = SIGG(pavail);</span>
+<span class='curline'><a href='../S/1726.html#L95'>queue</a>              95 Zend/zend_signal.c 					queue-&gt;zend_signal.signo = 0;</span>
+<span class='curline'><a href='../S/1726.html#L96'>queue</a>              96 Zend/zend_signal.c 					SIGG(pavail) = queue;</span>
+<span class='curline'><a href='../S/1726.html#L97'>queue</a>              97 Zend/zend_signal.c 					queue = qtmp;</span>
+<span class='curline'><a href='../S/1726.html#L104'>queue</a>             104 Zend/zend_signal.c 			if ((queue = SIGG(pavail))) { /* if none available it's simply forgotton */</span>
+<span class='curline'><a href='../S/1726.html#L105'>queue</a>             105 Zend/zend_signal.c 				SIGG(pavail) = queue-&gt;next;</span>
+<span class='curline'><a href='../S/1726.html#L106'>queue</a>             106 Zend/zend_signal.c 				queue-&gt;zend_signal.signo = signo;</span>
+<span class='curline'><a href='../S/1726.html#L107'>queue</a>             107 Zend/zend_signal.c 				queue-&gt;zend_signal.siginfo = siginfo;</span>
+<span class='curline'><a href='../S/1726.html#L108'>queue</a>             108 Zend/zend_signal.c 				queue-&gt;zend_signal.context = context;</span>
+<span class='curline'><a href='../S/1726.html#L109'>queue</a>             109 Zend/zend_signal.c 				queue-&gt;next = NULL;</span>
+<span class='curline'><a href='../S/1726.html#L112'>queue</a>             112 Zend/zend_signal.c 					SIGG(ptail)-&gt;next = queue;</span>
+<span class='curline'><a href='../S/1726.html#L114'>queue</a>             114 Zend/zend_signal.c 					SIGG(phead) = queue;</span>
+<span class='curline'><a href='../S/1726.html#L116'>queue</a>             116 Zend/zend_signal.c 				SIGG(ptail) = queue;</span>
+<span class='curline'><a href='../S/1726.html#L136'>queue</a>             136 Zend/zend_signal.c 	zend_signal_queue_t *queue;</span>
+<span class='curline'><a href='../S/1726.html#L141'>queue</a>             141 Zend/zend_signal.c 		queue = SIGG(phead);</span>
+<span class='curline'><a href='../S/1726.html#L142'>queue</a>             142 Zend/zend_signal.c 		SIGG(phead) = queue-&gt;next;</span>
+<span class='curline'><a href='../S/1726.html#L143'>queue</a>             143 Zend/zend_signal.c 		zend_signal = queue-&gt;zend_signal;</span>
+<span class='curline'><a href='../S/1726.html#L144'>queue</a>             144 Zend/zend_signal.c 		queue-&gt;next = SIGG(pavail);</span>
+<span class='curline'><a href='../S/1726.html#L145'>queue</a>             145 Zend/zend_signal.c 		queue-&gt;zend_signal.signo = 0;</span>
+<span class='curline'><a href='../S/1726.html#L146'>queue</a>             146 Zend/zend_signal.c 		SIGG(pavail) = queue;</span>
+<span class='curline'><a href='../S/1726.html#L331'>queue</a>             331 Zend/zend_signal.c 		zend_signal_queue_t *queue = &amp;zend_signal_globals-&gt;pstorage[x];</span>
+<span class='curline'><a href='../S/1726.html#L332'>queue</a>             332 Zend/zend_signal.c 		queue-&gt;zend_signal.signo = 0;</span>
+<span class='curline'><a href='../S/1726.html#L333'>queue</a>             333 Zend/zend_signal.c 		queue-&gt;next = zend_signal_globals-&gt;pavail;</span>
+<span class='curline'><a href='../S/1726.html#L334'>queue</a>             334 Zend/zend_signal.c 		zend_signal_globals-&gt;pavail = queue;</span>
+<span class='curline'><a href='../S/868.html#L1234'>queue</a>            1234 ext/pcntl/pcntl.c 	struct php_pcntl_pending_signal *queue, *next;</span>
+<span class='curline'><a href='../S/868.html#L1256'>queue</a>            1256 ext/pcntl/pcntl.c 	queue = PCNTL_G(head);</span>
+<span class='curline'><a href='../S/868.html#L1261'>queue</a>            1261 ext/pcntl/pcntl.c 	while (queue) {</span>
+<span class='curline'><a href='../S/868.html#L1262'>queue</a>            1262 ext/pcntl/pcntl.c 		if (zend_hash_index_find(&amp;PCNTL_G(php_signal_table), queue-&gt;signo, (void **) &amp;handle)==SUCCESS) {</span>
+<span class='curline'><a href='../S/868.html#L1266'>queue</a>            1266 ext/pcntl/pcntl.c 			ZVAL_LONG(param, queue-&gt;signo);</span>
+<span class='curline'><a href='../S/868.html#L1275'>queue</a>            1275 ext/pcntl/pcntl.c 		next = queue-&gt;next;</span>
+<span class='curline'><a href='../S/868.html#L1276'>queue</a>            1276 ext/pcntl/pcntl.c 		queue-&gt;next = PCNTL_G(spares);</span>
+<span class='curline'><a href='../S/868.html#L1277'>queue</a>            1277 ext/pcntl/pcntl.c 		PCNTL_G(spares) = queue;</span>
+<span class='curline'><a href='../S/868.html#L1278'>queue</a>            1278 ext/pcntl/pcntl.c 		queue = next;</span>
+<span class='curline'><a href='../S/1208.html#L49'>queue</a>              49 ext/sysvmsg/sysvmsg.c 	ZEND_ARG_INFO(0, queue)</span>
+<span class='curline'><a href='../S/1208.html#L58'>queue</a>              58 ext/sysvmsg/sysvmsg.c 	ZEND_ARG_INFO(0, queue)</span>
+<span class='curline'><a href='../S/1208.html#L69'>queue</a>              69 ext/sysvmsg/sysvmsg.c 	ZEND_ARG_INFO(0, queue)</span>
+<span class='curline'><a href='../S/1208.html#L73'>queue</a>              73 ext/sysvmsg/sysvmsg.c 	ZEND_ARG_INFO(0, queue)</span>
+<span class='curline'><a href='../S/1208.html#L77'>queue</a>              77 ext/sysvmsg/sysvmsg.c 	ZEND_ARG_INFO(0, queue)</span>
+<span class='curline'><a href='../S/1208.html#L157'>queue</a>             157 ext/sysvmsg/sysvmsg.c 	zval *queue, *data;</span>
+<span class='curline'><a href='../S/1208.html#L163'>queue</a>             163 ext/sysvmsg/sysvmsg.c 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ra", &amp;queue, &amp;data) == FAILURE) {</span>
+<span class='curline'><a href='../S/1208.html#L167'>queue</a>             167 ext/sysvmsg/sysvmsg.c 	ZEND_FETCH_RESOURCE(mq, sysvmsg_queue_t *, &amp;queue, -1, "sysvmsg queue", le_sysvmsg);</span>
+<span class='curline'><a href='../S/1208.html#L200'>queue</a>             200 ext/sysvmsg/sysvmsg.c 	zval *queue;</span>
+<span class='curline'><a href='../S/1208.html#L206'>queue</a>             206 ext/sysvmsg/sysvmsg.c 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "r", &amp;queue) == FAILURE) {</span>
+<span class='curline'><a href='../S/1208.html#L210'>queue</a>             210 ext/sysvmsg/sysvmsg.c 	ZEND_FETCH_RESOURCE(mq, sysvmsg_queue_t *, &amp;queue, -1, "sysvmsg queue", le_sysvmsg);</span>
+<span class='curline'><a href='../S/1208.html#L282'>queue</a>             282 ext/sysvmsg/sysvmsg.c 	zval *queue;</span>
+<span class='curline'><a href='../S/1208.html#L285'>queue</a>             285 ext/sysvmsg/sysvmsg.c 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "r", &amp;queue) == FAILURE) {</span>
+<span class='curline'><a href='../S/1208.html#L289'>queue</a>             289 ext/sysvmsg/sysvmsg.c 	ZEND_FETCH_RESOURCE(mq, sysvmsg_queue_t *, &amp;queue, -1, "sysvmsg queue", le_sysvmsg);</span>
+<span class='curline'><a href='../S/1208.html#L303'>queue</a>             303 ext/sysvmsg/sysvmsg.c 	zval *out_message, *queue, *out_msgtype, *zerrcode = NULL;</span>
+<span class='curline'><a href='../S/1208.html#L314'>queue</a>             314 ext/sysvmsg/sysvmsg.c 				&amp;queue, &amp;desiredmsgtype, &amp;out_msgtype, &amp;maxsize,</span>
+<span class='curline'><a href='../S/1208.html#L341'>queue</a>             341 ext/sysvmsg/sysvmsg.c 	ZEND_FETCH_RESOURCE(mq, sysvmsg_queue_t *, &amp;queue, -1, "sysvmsg queue", le_sysvmsg);</span>
+<span class='curline'><a href='../S/1208.html#L391'>queue</a>             391 ext/sysvmsg/sysvmsg.c 	zval *message, *queue, *zerror=NULL;</span>
+<span class='curline'><a href='../S/1208.html#L402'>queue</a>             402 ext/sysvmsg/sysvmsg.c 				&amp;queue, &amp;msgtype, &amp;message, &amp;do_serialize, &amp;blocking, &amp;zerror) == FAILURE) {</span>
+<span class='curline'><a href='../S/1208.html#L406'>queue</a>             406 ext/sysvmsg/sysvmsg.c 	ZEND_FETCH_RESOURCE(mq, sysvmsg_queue_t*, &amp;queue, -1, "sysvmsg queue", le_sysvmsg);</span>
+<span class='curline'><a href='../S/1231.html#L109'>queue</a>             109 ext/xmlrpc/libxmlrpc/queue.c static int  Q_BSearch(queue *q, void *key,</span>
+<span class='curline'><a href='../S/1231.html#L131'>queue</a>             131 ext/xmlrpc/libxmlrpc/queue.c int Q_Init(queue  *q)</span>
+<span class='curline'><a href='../S/1231.html#L157'>queue</a>             157 ext/xmlrpc/libxmlrpc/queue.c int Q_AtHead(queue *q)</span>
+<span class='curline'><a href='../S/1231.html#L177'>queue</a>             177 ext/xmlrpc/libxmlrpc/queue.c int Q_AtTail(queue *q)</span>
+<span class='curline'><a href='../S/1231.html#L197'>queue</a>             197 ext/xmlrpc/libxmlrpc/queue.c inline int Q_IsEmpty(queue *q)</span>
+<span class='curline'><a href='../S/1231.html#L216'>queue</a>             216 ext/xmlrpc/libxmlrpc/queue.c int Q_Size(queue *q)</span>
+<span class='curline'><a href='../S/1231.html#L236'>queue</a>             236 ext/xmlrpc/libxmlrpc/queue.c void *Q_Head(queue *q)</span>
+<span class='curline'><a href='../S/1231.html#L261'>queue</a>             261 ext/xmlrpc/libxmlrpc/queue.c void *Q_Tail(queue *q)</span>
+<span class='curline'><a href='../S/1231.html#L286'>queue</a>             286 ext/xmlrpc/libxmlrpc/queue.c int Q_PushHead(queue *q, void *d)</span>
+<span class='curline'><a href='../S/1231.html#L338'>queue</a>             338 ext/xmlrpc/libxmlrpc/queue.c int Q_PushTail(queue *q, void *d)</span>
+<span class='curline'><a href='../S/1231.html#L390'>queue</a>             390 ext/xmlrpc/libxmlrpc/queue.c void *Q_PopHead(queue *q)</span>
+<span class='curline'><a href='../S/1231.html#L433'>queue</a>             433 ext/xmlrpc/libxmlrpc/queue.c void *Q_PopTail(queue *q)</span>
+<span class='curline'><a href='../S/1231.html#L477'>queue</a>             477 ext/xmlrpc/libxmlrpc/queue.c void *Q_Next(queue *q)</span>
+<span class='curline'><a href='../S/1231.html#L507'>queue</a>             507 ext/xmlrpc/libxmlrpc/queue.c void *Q_Previous(queue *q)</span>
+<span class='curline'><a href='../S/1231.html#L521'>queue</a>             521 ext/xmlrpc/libxmlrpc/queue.c void *Q_Iter_Del(queue *q, q_iter iter)</span>
+<span class='curline'><a href='../S/1231.html#L586'>queue</a>             586 ext/xmlrpc/libxmlrpc/queue.c void *Q_DelCur(queue* q) {</span>
+<span class='curline'><a href='../S/1231.html#L610'>queue</a>             610 ext/xmlrpc/libxmlrpc/queue.c void Q_Destroy(queue *q)</span>
+<span class='curline'><a href='../S/1231.html#L632'>queue</a>             632 ext/xmlrpc/libxmlrpc/queue.c void *Q_Get(queue *q)</span>
+<span class='curline'><a href='../S/1231.html#L658'>queue</a>             658 ext/xmlrpc/libxmlrpc/queue.c int Q_Put(queue *q, void *data)</span>
+<span class='curline'><a href='../S/1231.html#L690'>queue</a>             690 ext/xmlrpc/libxmlrpc/queue.c int Q_Find(queue *q, void *data,</span>
+<span class='curline'><a href='../S/1231.html#L777'>queue</a>             777 ext/xmlrpc/libxmlrpc/queue.c int Q_Sort(queue *q, int (*Comp)(const void *, const void *))</span>
+<span class='curline'><a href='../S/1231.html#L853'>queue</a>             853 ext/xmlrpc/libxmlrpc/queue.c static int Q_BSearch( queue *q, void *key,</span>
+<span class='curline'><a href='../S/1231.html#L897'>queue</a>             897 ext/xmlrpc/libxmlrpc/queue.c void *Q_Seek(queue *q, void *data, int (*Comp)(const void *, const void *))</span>
+<span class='curline'><a href='../S/1231.html#L941'>queue</a>             941 ext/xmlrpc/libxmlrpc/queue.c int Q_Insert(queue *q, void *data, int (*Comp)(const void *, const void *))</span>
+<span class='curline'><a href='../S/1231.html#L956'>queue</a>             956 ext/xmlrpc/libxmlrpc/queue.c q_iter Q_Iter_Head(queue *q) {</span>
+<span class='curline'><a href='../S/1231.html#L960'>queue</a>             960 ext/xmlrpc/libxmlrpc/queue.c q_iter Q_Iter_Tail(queue *q) {</span>
+<span class='curline'><a href='../S/1232.html#L48'>queue</a>              48 ext/xmlrpc/libxmlrpc/queue.h int    Q_Init(queue  *q);</span>
+<span class='curline'><a href='../S/1232.html#L49'>queue</a>              49 ext/xmlrpc/libxmlrpc/queue.h void   Q_Destroy(queue *q);</span>
+<span class='curline'><a href='../S/1232.html#L50'>queue</a>              50 ext/xmlrpc/libxmlrpc/queue.h int    Q_IsEmpty(queue *q);</span>
+<span class='curline'><a href='../S/1232.html#L51'>queue</a>              51 ext/xmlrpc/libxmlrpc/queue.h int    Q_Size(queue *q);</span>
+<span class='curline'><a href='../S/1232.html#L52'>queue</a>              52 ext/xmlrpc/libxmlrpc/queue.h int    Q_AtHead(queue *q);</span>
+<span class='curline'><a href='../S/1232.html#L53'>queue</a>              53 ext/xmlrpc/libxmlrpc/queue.h int    Q_AtTail(queue *q);</span>
+<span class='curline'><a href='../S/1232.html#L54'>queue</a>              54 ext/xmlrpc/libxmlrpc/queue.h int    Q_PushHead(queue *q, void *d);</span>
+<span class='curline'><a href='../S/1232.html#L55'>queue</a>              55 ext/xmlrpc/libxmlrpc/queue.h int    Q_PushTail(queue *q, void *d);</span>
+<span class='curline'><a href='../S/1232.html#L56'>queue</a>              56 ext/xmlrpc/libxmlrpc/queue.h void  *Q_Head(queue *q);</span>
+<span class='curline'><a href='../S/1232.html#L57'>queue</a>              57 ext/xmlrpc/libxmlrpc/queue.h void  *Q_Tail(queue *q);</span>
+<span class='curline'><a href='../S/1232.html#L58'>queue</a>              58 ext/xmlrpc/libxmlrpc/queue.h void  *Q_PopHead(queue *q);</span>
+<span class='curline'><a href='../S/1232.html#L59'>queue</a>              59 ext/xmlrpc/libxmlrpc/queue.h void  *Q_PopTail(queue *q);</span>
+<span class='curline'><a href='../S/1232.html#L60'>queue</a>              60 ext/xmlrpc/libxmlrpc/queue.h void  *Q_Next(queue *q);</span>
+<span class='curline'><a href='../S/1232.html#L61'>queue</a>              61 ext/xmlrpc/libxmlrpc/queue.h void  *Q_Previous(queue *q);</span>
+<span class='curline'><a href='../S/1232.html#L62'>queue</a>              62 ext/xmlrpc/libxmlrpc/queue.h void  *Q_DelCur(queue *q);</span>
+<span class='curline'><a href='../S/1232.html#L63'>queue</a>              63 ext/xmlrpc/libxmlrpc/queue.h void  *Q_Get(queue *q);</span>
+<span class='curline'><a href='../S/1232.html#L64'>queue</a>              64 ext/xmlrpc/libxmlrpc/queue.h int    Q_Put(queue *q, void *data);</span>
+<span class='curline'><a href='../S/1232.html#L65'>queue</a>              65 ext/xmlrpc/libxmlrpc/queue.h int    Q_Sort(queue *q, int (*Comp)(const void *, const void *));</span>
+<span class='curline'><a href='../S/1232.html#L66'>queue</a>              66 ext/xmlrpc/libxmlrpc/queue.h int    Q_Find(queue *q, void *data,</span>
+<span class='curline'><a href='../S/1232.html#L68'>queue</a>              68 ext/xmlrpc/libxmlrpc/queue.h void  *Q_Seek(queue *q, void *data,</span>
+<span class='curline'><a href='../S/1232.html#L70'>queue</a>              70 ext/xmlrpc/libxmlrpc/queue.h int    Q_Insert(queue *q, void *data,</span>
+<span class='curline'><a href='../S/1232.html#L74'>queue</a>              74 ext/xmlrpc/libxmlrpc/queue.h q_iter Q_Iter_Head(queue *q);</span>
+<span class='curline'><a href='../S/1232.html#L75'>queue</a>              75 ext/xmlrpc/libxmlrpc/queue.h q_iter Q_Iter_Tail(queue *q);</span>
+<span class='curline'><a href='../S/1232.html#L80'>queue</a>              80 ext/xmlrpc/libxmlrpc/queue.h void*  Q_Iter_Del(queue *q, q_iter iter); /* not read only! here for completeness. */</span>
+<span class='curline'><a href='../S/1232.html#L83'>queue</a>              83 ext/xmlrpc/libxmlrpc/queue.h #define Q_Iter_Head_F(q) (q ? (q_iter)((queue*)q)-&gt;head : NULL)</span>
+<span class='curline'><a href='../S/1232.html#L84'>queue</a>              84 ext/xmlrpc/libxmlrpc/queue.h #define Q_Iter_Tail_F(q) (q ? (q_iter)((queue*)q)-&gt;tail : NULL)</span>
+<span class='curline'><a href='../S/1238.html#L154'>queue</a>             154 ext/xmlrpc/libxmlrpc/xml_element.h    queue        attrs;           /* attribute list */</span>
+<span class='curline'><a href='../S/1238.html#L155'>queue</a>             155 ext/xmlrpc/libxmlrpc/xml_element.h    queue        children;        /* child element list */</span>
+<span class='curline'><a href='../S/1245.html#L1058'>queue</a>            1058 ext/xmlrpc/libxmlrpc/xmlrpc.c          value-&gt;v-&gt;q = (queue*)malloc(sizeof(queue));</span>
+<span class='curline'><a href='../S/1250.html#L125'>queue</a>             125 ext/xmlrpc/libxmlrpc/xmlrpc_private.h    queue *q;                                          /* list of child values              */</span>
+<span class='curline'><a href='../S/1250.html#L143'>queue</a>             143 ext/xmlrpc/libxmlrpc/xmlrpc_private.h    queue methodlist;                                  /* list of callback methods          */</span>
+<span class='curline'><a href='../S/1250.html#L144'>queue</a>             144 ext/xmlrpc/libxmlrpc/xmlrpc_private.h    queue docslist;                                    /* list of introspection callbacks   */</span>
+<span class='curline'><a href='../S/1466.html#L37'>queue</a>              37 sapi/fpm/fpm/events/devpoll.c static int fpm_event_devpoll_wait(struct fpm_event_queue_s *queue, unsigned long int timeout);</span>
+<span class='curline'><a href='../S/1466.html#L148'>queue</a>             148 sapi/fpm/fpm/events/devpoll.c static int fpm_event_devpoll_wait(struct fpm_event_queue_s *queue, unsigned long int timeout) /* {{{ */</span>
+<span class='curline'><a href='../S/1466.html#L175'>queue</a>             175 sapi/fpm/fpm/events/devpoll.c 		q = queue;</span>
+<span class='curline'><a href='../S/1468.html#L33'>queue</a>              33 sapi/fpm/fpm/events/epoll.c static int fpm_event_epoll_wait(struct fpm_event_queue_s *queue, unsigned long int timeout);</span>
+<span class='curline'><a href='../S/1468.html#L120'>queue</a>             120 sapi/fpm/fpm/events/epoll.c static int fpm_event_epoll_wait(struct fpm_event_queue_s *queue, unsigned long int timeout) /* {{{ */</span>
+<span class='curline'><a href='../S/1470.html#L36'>queue</a>              36 sapi/fpm/fpm/events/kqueue.c static int fpm_event_kqueue_wait(struct fpm_event_queue_s *queue, unsigned long int timeout);</span>
+<span class='curline'><a href='../S/1470.html#L119'>queue</a>             119 sapi/fpm/fpm/events/kqueue.c static int fpm_event_kqueue_wait(struct fpm_event_queue_s *queue, unsigned long int timeout) /* {{{ */</span>
+<span class='curline'><a href='../S/1472.html#L34'>queue</a>              34 sapi/fpm/fpm/events/poll.c static int fpm_event_poll_wait(struct fpm_event_queue_s *queue, unsigned long int timeout);</span>
+<span class='curline'><a href='../S/1472.html#L133'>queue</a>             133 sapi/fpm/fpm/events/poll.c static int fpm_event_poll_wait(struct fpm_event_queue_s *queue, unsigned long int timeout) /* {{{ */</span>
+<span class='curline'><a href='../S/1472.html#L158'>queue</a>             158 sapi/fpm/fpm/events/poll.c 		q = queue;</span>
+<span class='curline'><a href='../S/1474.html#L34'>queue</a>              34 sapi/fpm/fpm/events/port.c static int fpm_event_port_wait(struct fpm_event_queue_s *queue, unsigned long int timeout);</span>
+<span class='curline'><a href='../S/1474.html#L117'>queue</a>             117 sapi/fpm/fpm/events/port.c static int fpm_event_port_wait(struct fpm_event_queue_s *queue, unsigned long int timeout) /* {{{ */</span>
+<span class='curline'><a href='../S/1476.html#L39'>queue</a>              39 sapi/fpm/fpm/events/select.c static int fpm_event_select_wait(struct fpm_event_queue_s *queue, unsigned long int timeout);</span>
+<span class='curline'><a href='../S/1476.html#L86'>queue</a>              86 sapi/fpm/fpm/events/select.c static int fpm_event_select_wait(struct fpm_event_queue_s *queue, unsigned long int timeout) /* {{{ */</span>
+<span class='curline'><a href='../S/1476.html#L115'>queue</a>             115 sapi/fpm/fpm/events/select.c 		q = queue;</span>
+<span class='curline'><a href='../S/1495.html#L40'>queue</a>              40 sapi/fpm/fpm/fpm_events.c static struct fpm_event_s *fpm_event_queue_isset(struct fpm_event_queue_s *queue, struct fpm_event_s *ev);</span>
+<span class='curline'><a href='../S/1495.html#L41'>queue</a>              41 sapi/fpm/fpm/fpm_events.c static int fpm_event_queue_add(struct fpm_event_queue_s **queue, struct fpm_event_s *ev);</span>
+<span class='curline'><a href='../S/1495.html#L42'>queue</a>              42 sapi/fpm/fpm/fpm_events.c static int fpm_event_queue_del(struct fpm_event_queue_s **queue, struct fpm_event_s *ev);</span>
+<span class='curline'><a href='../S/1495.html#L43'>queue</a>              43 sapi/fpm/fpm/fpm_events.c static void fpm_event_queue_destroy(struct fpm_event_queue_s **queue);</span>
+<span class='curline'><a href='../S/1495.html#L126'>queue</a>             126 sapi/fpm/fpm/fpm_events.c static struct fpm_event_s *fpm_event_queue_isset(struct fpm_event_queue_s *queue, struct fpm_event_s *ev) /* {{{ */</span>
+<span class='curline'><a href='../S/1495.html#L132'>queue</a>             132 sapi/fpm/fpm/fpm_events.c 	while (queue) {</span>
+<span class='curline'><a href='../S/1495.html#L133'>queue</a>             133 sapi/fpm/fpm/fpm_events.c 		if (queue-&gt;ev == ev) {</span>
+<span class='curline'><a href='../S/1495.html#L136'>queue</a>             136 sapi/fpm/fpm/fpm_events.c 		queue = queue-&gt;next;</span>
+<span class='curline'><a href='../S/1495.html#L143'>queue</a>             143 sapi/fpm/fpm/fpm_events.c static int fpm_event_queue_add(struct fpm_event_queue_s **queue, struct fpm_event_s *ev) /* {{{ */</span>
+<span class='curline'><a href='../S/1495.html#L147'>queue</a>             147 sapi/fpm/fpm/fpm_events.c 	if (!queue || !ev) {</span>
+<span class='curline'><a href='../S/1495.html#L151'>queue</a>             151 sapi/fpm/fpm/fpm_events.c 	if (fpm_event_queue_isset(*queue, ev)) {</span>
+<span class='curline'><a href='../S/1495.html#L163'>queue</a>             163 sapi/fpm/fpm/fpm_events.c 	if (*queue) {</span>
+<span class='curline'><a href='../S/1495.html#L164'>queue</a>             164 sapi/fpm/fpm/fpm_events.c 		(*queue)-&gt;prev = elt;</span>
+<span class='curline'><a href='../S/1495.html#L165'>queue</a>             165 sapi/fpm/fpm/fpm_events.c 		elt-&gt;next = *queue;</span>
+<span class='curline'><a href='../S/1495.html#L167'>queue</a>             167 sapi/fpm/fpm/fpm_events.c 	*queue = elt;</span>
+<span class='curline'><a href='../S/1495.html#L170'>queue</a>             170 sapi/fpm/fpm/fpm_events.c 	if (*queue == fpm_event_queue_fd &amp;&amp; module-&gt;add) {</span>
+<span class='curline'><a href='../S/1495.html#L178'>queue</a>             178 sapi/fpm/fpm/fpm_events.c static int fpm_event_queue_del(struct fpm_event_queue_s **queue, struct fpm_event_s *ev) /* {{{ */</span>
+<span class='curline'><a href='../S/1495.html#L181'>queue</a>             181 sapi/fpm/fpm/fpm_events.c 	if (!queue || !ev) {</span>
+<span class='curline'><a href='../S/1495.html#L184'>queue</a>             184 sapi/fpm/fpm/fpm_events.c 	q = *queue;</span>
+<span class='curline'><a href='../S/1495.html#L193'>queue</a>             193 sapi/fpm/fpm/fpm_events.c 			if (q == *queue) {</span>
+<span class='curline'><a href='../S/1495.html#L194'>queue</a>             194 sapi/fpm/fpm/fpm_events.c 				*queue = q-&gt;next;</span>
+<span class='curline'><a href='../S/1495.html#L195'>queue</a>             195 sapi/fpm/fpm/fpm_events.c 				if (*queue) {</span>
+<span class='curline'><a href='../S/1495.html#L196'>queue</a>             196 sapi/fpm/fpm/fpm_events.c 					(*queue)-&gt;prev = NULL;</span>
+<span class='curline'><a href='../S/1495.html#L201'>queue</a>             201 sapi/fpm/fpm/fpm_events.c 			if (*queue == fpm_event_queue_fd &amp;&amp; module-&gt;remove) {</span>
+<span class='curline'><a href='../S/1495.html#L214'>queue</a>             214 sapi/fpm/fpm/fpm_events.c static void fpm_event_queue_destroy(struct fpm_event_queue_s **queue) /* {{{ */</span>
+<span class='curline'><a href='../S/1495.html#L218'>queue</a>             218 sapi/fpm/fpm/fpm_events.c 	if (!queue) {</span>
+<span class='curline'><a href='../S/1495.html#L222'>queue</a>             222 sapi/fpm/fpm/fpm_events.c 	if (*queue == fpm_event_queue_fd &amp;&amp; module-&gt;clean) {</span>
+<span class='curline'><a href='../S/1495.html#L226'>queue</a>             226 sapi/fpm/fpm/fpm_events.c 	q = *queue;</span>
+<span class='curline'><a href='../S/1495.html#L233'>queue</a>             233 sapi/fpm/fpm/fpm_events.c 	*queue = NULL;</span>
+<span class='curline'><a href='../S/1496.html#L37'>queue</a>              37 sapi/fpm/fpm/fpm_events.h 	int (*wait)(struct fpm_event_queue_s *queue, unsigned long int timeout);</span>
+</pre>
+</body>
+</html>

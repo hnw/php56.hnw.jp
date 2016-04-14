@@ -1,0 +1,129 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>ext/zip/php_zip.h</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<a id='TOP' name='TOP'></a><h2 class='header'><a href='../mains.html'>root</a>/<a href='../files/1753.html'>ext</a>/<a href='../files/1869.html'>zip</a>/php_zip.h</h2>
+<em class='comment'>/* [&lt;][&gt;][^][v][top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+<hr />
+<h2 class='header'><a href='../J/1472.html' title='Multiple included from 2 places.'>INCLUDED FROM</a></h2>
+<hr />
+<pre>
+<a id='L1' name='L1'></a>   1 <em class='comment'>/*</em>
+<a id='L2' name='L2'></a>   2 <em class='comment'>  +----------------------------------------------------------------------+</em>
+<a id='L3' name='L3'></a>   3 <em class='comment'>  | PHP Version 5                                                        |</em>
+<a id='L4' name='L4'></a>   4 <em class='comment'>  +----------------------------------------------------------------------+</em>
+<a id='L5' name='L5'></a>   5 <em class='comment'>  | Copyright (c) 1997-2016 The PHP Group                                |</em>
+<a id='L6' name='L6'></a>   6 <em class='comment'>  +----------------------------------------------------------------------+</em>
+<a id='L7' name='L7'></a>   7 <em class='comment'>  | This source file is subject to version 3.01 of the PHP license,      |</em>
+<a id='L8' name='L8'></a>   8 <em class='comment'>  | that is bundled with this package in the file LICENSE, and is        |</em>
+<a id='L9' name='L9'></a>   9 <em class='comment'>  | available through the world-wide-web at the following url:           |</em>
+<a id='L10' name='L10'></a>  10 <em class='comment'>  | http://www.php.net/license/3_01.txt.                                 |</em>
+<a id='L11' name='L11'></a>  11 <em class='comment'>  | If you did not receive a copy of the PHP license and are unable to   |</em>
+<a id='L12' name='L12'></a>  12 <em class='comment'>  | obtain it through the world-wide-web, please send a note to          |</em>
+<a id='L13' name='L13'></a>  13 <em class='comment'>  | license@php.net so we can mail you a copy immediately.               |</em>
+<a id='L14' name='L14'></a>  14 <em class='comment'>  +----------------------------------------------------------------------+</em>
+<a id='L15' name='L15'></a>  15 <em class='comment'>  | Author: Pierre-Alain Joye &lt;pajoye@php.net&gt;                           |</em>
+<a id='L16' name='L16'></a>  16 <em class='comment'>  +----------------------------------------------------------------------+</em>
+<a id='L17' name='L17'></a>  17 <em class='comment'>*/</em>
+<a id='L18' name='L18'></a>  18 
+<a id='L19' name='L19'></a>  19 
+<a id='L20' name='L20'></a>  20 <em class='sharp'>#ifndef</em> <a href='../S/1352.html#L21' title='Defined at 21 in ext/zip/php_zip.h.'>PHP_ZIP_H</a>
+<a id='L21' name='L21'></a>  21 <em class='sharp'>#define</em> <a href='../S/1352.html#L20' title='Referred from 20 in ext/zip/php_zip.h.'>PHP_ZIP_H</a>
+<a id='L22' name='L22'></a>  22 
+<a id='L23' name='L23'></a>  23 <strong class='reserved'>extern</strong> <a href='../S/1709.html#L70' title='Defined at 70 in Zend/zend_modules.h.'>zend_module_entry</a> <a href='../Y/44516.html' title='Multiple used in 3 places.'>zip_module_entry</a>;
+<a id='L24' name='L24'></a>  24 <em class='sharp'>#define</em> phpext_zip_ptr &amp;<a href='../Y/44516.html' title='Multiple used in 3 places.'>zip_module_entry</a>
+<a id='L25' name='L25'></a>  25 
+<a id='L26' name='L26'></a>  26 <em class='sharp'>#ifdef</em> <a href='../Y/7361.html' title='Multiple used in 473 places.'>ZTS</a>
+<a id='L27' name='L27'></a>  27 <em class='sharp'>#include</em> "<a href='1596.html'>TSRM.h</a>"
+<a id='L28' name='L28'></a>  28 <em class='sharp'>#endif</em>
+<a id='L29' name='L29'></a>  29 
+<a id='L30' name='L30'></a>  30 <em class='sharp'>#if</em> <strong class='reserved'>defined</strong>(HAVE_LIBZIP)
+<a id='L31' name='L31'></a>  31 <em class='sharp'>#include</em> &lt;<a href='1263.html'>zip.h</a>&gt;
+<a id='L32' name='L32'></a>  32 <em class='sharp'>#else</em>
+<a id='L33' name='L33'></a>  33 <em class='sharp'>#include</em> "<a href='1263.html'>lib/zip.h</a>"
+<a id='L34' name='L34'></a>  34 <em class='sharp'>#endif</em>
+<a id='L35' name='L35'></a>  35 
+<a id='L36' name='L36'></a>  36 <em class='sharp'>#ifndef</em> <a href='../S/1352.html#L37' title='Defined at 37 in ext/zip/php_zip.h.'>ZIP_OVERWRITE</a>
+<a id='L37' name='L37'></a>  37 <em class='sharp'>#define</em> <a href='../R/15325.html' title='Multiple referred from 2 places.'>ZIP_OVERWRITE</a> <a href='../S/1263.html#L70' title='Defined at 70 in ext/zip/lib/zip.h.'>ZIP_TRUNCATE</a>
+<a id='L38' name='L38'></a>  38 <em class='sharp'>#endif</em>
+<a id='L39' name='L39'></a>  39 
+<a id='L40' name='L40'></a>  40 <em class='sharp'>#define</em> <a href='../R/8005.html' title='Multiple referred from 2 places.'>PHP_ZIP_VERSION</a> "1.12.5"
+<a id='L41' name='L41'></a>  41 
+<a id='L42' name='L42'></a>  42 <em class='sharp'>#if</em> ((<a href='../S/1393.html#L3' title='Defined at 3 in main/php_version.h.'>PHP_MAJOR_VERSION</a> &gt;= 5 &amp;&amp; <a href='../S/1393.html#L4' title='Defined at 4 in main/php_version.h.'>PHP_MINOR_VERSION</a> &gt;= 2) || <a href='../S/1393.html#L3' title='Defined at 3 in main/php_version.h.'>PHP_MAJOR_VERSION</a> &gt;= 6)
+<a id='L43' name='L43'></a>  43 <em class='sharp'># define</em> <a href='../R/8004.html' title='Multiple referred from 7 places.'>PHP_ZIP_USE_OO</a> 1
+<a id='L44' name='L44'></a>  44 <em class='sharp'>#endif</em>
+<a id='L45' name='L45'></a>  45 
+<a id='L46' name='L46'></a>  46 <em class='sharp'>#ifndef</em>  <a href='../D/17785.html' title='Multiple defined in 5 places.'>Z_SET_REFCOUNT_P</a>
+<a id='L47' name='L47'></a>  47 <em class='sharp'># if</em> <a href='../S/1393.html#L3' title='Defined at 3 in main/php_version.h.'>PHP_MAJOR_VERSION</a> &lt; 6 &amp;&amp; (<a href='../S/1393.html#L3' title='Defined at 3 in main/php_version.h.'>PHP_MAJOR_VERSION</a> == 5 &amp;&amp; <a href='../S/1393.html#L4' title='Defined at 4 in main/php_version.h.'>PHP_MINOR_VERSION</a> &lt; 3)
+<a id='L48' name='L48'></a>  48 <em class='sharp'>#  define</em> <a href='../R/15445.html' title='Multiple referred from 83 places.'>Z_SET_REFCOUNT_P</a>(<a href='../Y/34120.html' title='Multiple used in 216 places.'>pz</a>, <a href='../Y/34324.html' title='Multiple used in 5775 places.'>rc</a>)  <a href='../Y/34120.html' title='Multiple used in 216 places.'>pz</a>-&gt;<a href='../D/28810.html' title='Multiple defined in 2 places.'>refcount</a> = <a href='../Y/34324.html' title='Multiple used in 5775 places.'>rc</a> 
+<a id='L49' name='L49'></a>  49 <em class='sharp'>#  define</em> <a href='../R/15457.html' title='Multiple referred from 52 places.'>Z_UNSET_ISREF_P</a>(<a href='../Y/34120.html' title='Multiple used in 216 places.'>pz</a>) <a href='../Y/34120.html' title='Multiple used in 216 places.'>pz</a>-&gt;<a href='../Y/23960.html' title='Multiple used in 31 places.'>is_ref</a> = 0 
+<a id='L50' name='L50'></a>  50 <em class='sharp'># endif</em>
+<a id='L51' name='L51'></a>  51 <em class='sharp'>#endif</em>
+<a id='L52' name='L52'></a>  52 
+<a id='L53' name='L53'></a>  53 <em class='comment'>/* {{{ ZIP_OPENBASEDIR_CHECKPATH(filename) */</em>
+<a id='L54' name='L54'></a>  54 <em class='sharp'>#if</em> <a href='../S/1368.html#L29' title='Defined at 29 in main/php.h.'>PHP_API_VERSION</a> &lt; 20100412
+<a id='L55' name='L55'></a>  55 <em class='sharp'># define</em> <a href='../R/15303.html' title='Multiple referred from 10 places.'>ZIP_OPENBASEDIR_CHECKPATH</a>(<a href='../Y/17928.html' title='Multiple used in 1507 places.'>filename</a>) \
+<a id='L56' name='L56'></a>  56         (<a href='../D/7589.html' title='Multiple defined in 2 places.'>PG</a>(<a href='../Y/35624.html' title='Multiple used in 20 places.'>safe_mode</a>) &amp;&amp; (!<a href='../Y/32332.html' title='Multiple used in 14 places.'>php_checkuid</a>(<a href='../Y/17928.html' title='Multiple used in 1507 places.'>filename</a>, <a href='../D/6086.html' title='Multiple defined in 8 places.'>NULL</a>, <a href='../Y/362.html' title='Multiple used in 9 places.'>CHECKUID_CHECK_FILE_AND_DIR</a>))) || <a href='../S/1359.html#L286' title='Defined at 286 in main/fopen_wrappers.c.'>php_check_open_basedir</a>(<a href='../Y/17928.html' title='Multiple used in 1507 places.'>filename</a> <a href='../D/14074.html' title='Multiple defined in 2 places.'>TSRMLS_CC</a>)
+<a id='L57' name='L57'></a>  57 <em class='sharp'>#else</em>
+<a id='L58' name='L58'></a>  58 <em class='sharp'>#define</em> <a href='../R/15303.html' title='Multiple referred from 10 places.'>ZIP_OPENBASEDIR_CHECKPATH</a>(<a href='../Y/17928.html' title='Multiple used in 1507 places.'>filename</a>) \
+<a id='L59' name='L59'></a>  59         <a href='../S/1359.html#L286' title='Defined at 286 in main/fopen_wrappers.c.'>php_check_open_basedir</a>(<a href='../Y/17928.html' title='Multiple used in 1507 places.'>filename</a> <a href='../D/14074.html' title='Multiple defined in 2 places.'>TSRMLS_CC</a>)
+<a id='L60' name='L60'></a>  60 <em class='sharp'>#endif</em>
+<a id='L61' name='L61'></a>  61 <em class='comment'>/* }}} */</em>
+<a id='L62' name='L62'></a>  62 
+<a id='L63' name='L63'></a>  63 <strong class='reserved'>typedef</strong> <strong class='reserved'>struct</strong> _ze_zip_rsrc <em class='brace'>{</em>
+<a id='L64' name='L64'></a>  64         <strong class='reserved'>struct</strong> <a href='../S/1350.html#L271' title='Defined at 271 in ext/zip/lib/zipint.h.'>zip</a> *<a href='../Y/44137.html' title='Multiple used in 591 places.'>za</a>;
+<a id='L65' name='L65'></a>  65         <strong class='reserved'>int</strong> <a href='../Y/23200.html' title='Multiple used in 6 places.'>index_current</a>;
+<a id='L66' name='L66'></a>  66         <strong class='reserved'>int</strong> <a href='../Y/29158.html' title='Multiple used in 3 places.'>num_files</a>;
+<a id='L67' name='L67'></a>  67 <em class='brace'>}</em> <a href='../R/31185.html' title='Multiple referred from 10 places.'>zip_rsrc</a>;
+<a id='L68' name='L68'></a>  68 
+<a id='L69' name='L69'></a>  69 <strong class='reserved'>typedef</strong> <a href='../S/1352.html#L67' title='Defined at 67 in ext/zip/php_zip.h.'>zip_rsrc</a> * zip_rsrc_ptr;
+<a id='L70' name='L70'></a>  70 
+<a id='L71' name='L71'></a>  71 <strong class='reserved'>typedef</strong> <strong class='reserved'>struct</strong> _ze_zip_read_rsrc <em class='brace'>{</em>
+<a id='L72' name='L72'></a>  72         <strong class='reserved'>struct</strong> <a href='../S/1350.html#L299' title='Defined at 299 in ext/zip/lib/zipint.h.'>zip_file</a> *<a href='../Y/44447.html' title='Multiple used in 116 places.'>zf</a>;
+<a id='L73' name='L73'></a>  73         <strong class='reserved'>struct</strong> <a href='../D/34540.html' title='Multiple defined in 2 places.'>zip_stat</a> <a href='../Y/35762.html' title='Multiple used in 364 places.'>sb</a>;
+<a id='L74' name='L74'></a>  74 <em class='brace'>}</em> <a href='../R/31182.html' title='Multiple referred from 11 places.'>zip_read_rsrc</a>;
+<a id='L75' name='L75'></a>  75 
+<a id='L76' name='L76'></a>  76 <em class='sharp'>#ifdef</em> <a href='../S/1352.html#L43' title='Defined at 43 in ext/zip/php_zip.h.'>PHP_ZIP_USE_OO</a> 
+<a id='L77' name='L77'></a>  77 <em class='sharp'>#define</em> <a href='../R/15187.html' title='Multiple referred from 35 places.'>ZIPARCHIVE_ME</a>(<a href='../Y/28160.html' title='Multiple used in 4617 places.'>name</a>, <a href='../Y/9189.html' title='Multiple used in 163 places.'>arg_info</a>, <a href='../D/21615.html' title='Multiple defined in 14 places.'>flags</a>) <em class='brace'>{</em>#<a href='../Y/28160.html' title='Multiple used in 4617 places.'>name</a>, <a href='../Y/13049.html' title='Multiple used in 2 places.'>c_ziparchive_</a> ##<a href='../Y/28160.html' title='Multiple used in 4617 places.'>name</a>, <a href='../Y/9189.html' title='Multiple used in 163 places.'>arg_info</a>,(<a href='../D/34357.html' title='Multiple defined in 2 places.'>zend_uint</a>) (<strong class='reserved'>sizeof</strong>(<a href='../Y/9189.html' title='Multiple used in 163 places.'>arg_info</a>)/<strong class='reserved'>sizeof</strong>(<strong class='reserved'>struct</strong> <a href='../S/1656.html#L235' title='Defined at 235 in Zend/zend_compile.h.'>_zend_arg_info</a>)-1), <a href='../D/21615.html' title='Multiple defined in 14 places.'>flags</a> <em class='brace'>}</em>,
+<a id='L78' name='L78'></a>  78 <em class='sharp'>#define</em> ZIPARCHIVE_METHOD(<a href='../Y/28160.html' title='Multiple used in 4617 places.'>name</a>) <a href='../S/1647.html#L67' title='Defined at 67 in Zend/zend_API.h.'>ZEND_NAMED_FUNCTION</a>(<a href='../Y/13049.html' title='Multiple used in 2 places.'>c_ziparchive_</a> ##<a href='../Y/28160.html' title='Multiple used in 4617 places.'>name</a>)
+<a id='L79' name='L79'></a>  79 
+<a id='L80' name='L80'></a>  80 
+<a id='L81' name='L81'></a>  81 <em class='comment'>/* Extends zend object */</em>
+<a id='L82' name='L82'></a>  82 <strong class='reserved'>typedef</strong> <strong class='reserved'>struct</strong> _ze_zip_object <em class='brace'>{</em>
+<a id='L83' name='L83'></a>  83         <a href='../S/1643.html#L317' title='Defined at 317 in Zend/zend.h.'>zend_object</a> <a href='../Y/44563.html' title='Multiple used in 133 places.'>zo</a>;
+<a id='L84' name='L84'></a>  84         <strong class='reserved'>struct</strong> <a href='../S/1350.html#L271' title='Defined at 271 in ext/zip/lib/zipint.h.'>zip</a> *<a href='../Y/44137.html' title='Multiple used in 591 places.'>za</a>;
+<a id='L85' name='L85'></a>  85         <strong class='reserved'>int</strong> <a href='../Y/12895.html' title='Multiple used in 8 places.'>buffers_cnt</a>;
+<a id='L86' name='L86'></a>  86         <strong class='reserved'>char</strong> **<a href='../Y/12894.html' title='Multiple used in 11 places.'>buffers</a>;
+<a id='L87' name='L87'></a>  87         <a href='../S/1683.html#L83' title='Defined at 83 in Zend/zend_hash.h.'>HashTable</a> *<a href='../Y/33772.html' title='Multiple used in 54 places.'>prop_handler</a>;
+<a id='L88' name='L88'></a>  88         <strong class='reserved'>char</strong> *<a href='../Y/17928.html' title='Multiple used in 1507 places.'>filename</a>;
+<a id='L89' name='L89'></a>  89         <strong class='reserved'>int</strong> <a href='../Y/17929.html' title='Multiple used in 401 places.'>filename_len</a>;
+<a id='L90' name='L90'></a>  90 <em class='brace'>}</em> <a href='../R/29805.html' title='Multiple referred from 23 places.'>ze_zip_object</a>;
+<a id='L91' name='L91'></a>  91 
+<a id='L92' name='L92'></a>  92 <a href='../S/1387.html#L98' title='Defined at 98 in main/php_streams.h.'>php_stream</a> *<a href='../S/1353.html#L252' title='Defined at 252 in ext/zip/zip_stream.c.'>php_stream_zip_opener</a>(<a href='../S/1387.html#L99' title='Defined at 99 in main/php_streams.h.'>php_stream_wrapper</a> *<a href='../Y/41303.html' title='Multiple used in 408 places.'>wrapper</a>, <strong class='reserved'>const</strong> <strong class='reserved'>char</strong> *<a href='../Y/31544.html' title='Multiple used in 1178 places.'>path</a>, <strong class='reserved'>const</strong> <strong class='reserved'>char</strong> *<a href='../S/813.html#L496' title='Defined at 496 in ext/mysqlnd/mysqlnd_structs.h.'>mode</a>, <strong class='reserved'>int</strong> <a href='../D/25249.html' title='Multiple defined in 4 places.'>options</a>, <strong class='reserved'>char</strong> **<a href='../Y/30001.html' title='Multiple used in 247 places.'>opened_path</a>, <a href='../S/1387.html#L100' title='Defined at 100 in main/php_streams.h.'>php_stream_context</a> *<a href='../Y/14267.html' title='Multiple used in 2143 places.'>context</a> <a href='../D/12338.html' title='Multiple defined in 2 places.'>STREAMS_DC</a> <a href='../D/14076.html' title='Multiple defined in 136 places.'>TSRMLS_DC</a>);
+<a id='L93' name='L93'></a>  93 <a href='../S/1387.html#L98' title='Defined at 98 in main/php_streams.h.'>php_stream</a> *<a href='../S/1353.html#L203' title='Defined at 203 in ext/zip/zip_stream.c.'>php_stream_zip_open</a>(<strong class='reserved'>const</strong> <strong class='reserved'>char</strong> *<a href='../Y/17928.html' title='Multiple used in 1507 places.'>filename</a>, <strong class='reserved'>const</strong> <strong class='reserved'>char</strong> *<a href='../Y/31544.html' title='Multiple used in 1178 places.'>path</a>, <strong class='reserved'>const</strong> <strong class='reserved'>char</strong> *<a href='../S/813.html#L496' title='Defined at 496 in ext/mysqlnd/mysqlnd_structs.h.'>mode</a> <a href='../D/12338.html' title='Multiple defined in 2 places.'>STREAMS_DC</a> <a href='../D/14076.html' title='Multiple defined in 136 places.'>TSRMLS_DC</a>);
+<a id='L94' name='L94'></a>  94 
+<a id='L95' name='L95'></a>  95 <strong class='reserved'>extern</strong> <a href='../S/1387.html#L99' title='Defined at 99 in main/php_streams.h.'>php_stream_wrapper</a> <a href='../Y/32921.html' title='Multiple used in 3 places.'>php_stream_zip_wrapper</a>;
+<a id='L96' name='L96'></a>  96 <em class='sharp'>#endif</em>
+<a id='L97' name='L97'></a>  97 
+<a id='L98' name='L98'></a>  98 <em class='sharp'>#endif</em>  <em class='comment'>/* PHP_ZIP_H */</em>
+<a id='L99' name='L99'></a>  99 
+<a id='L100' name='L100'></a> 100 <em class='comment'>/*</em>
+<a id='L101' name='L101'></a> 101 <em class='comment'> * Local variables:</em>
+<a id='L102' name='L102'></a> 102 <em class='comment'> * tab-width: 4</em>
+<a id='L103' name='L103'></a> 103 <em class='comment'> * c-basic-offset: 4</em>
+<a id='L104' name='L104'></a> 104 <em class='comment'> * End:</em>
+<a id='L105' name='L105'></a> 105 <em class='comment'> * vim600: noet sw=4 ts=4 fdm=marker</em>
+<a id='L106' name='L106'></a> 106 <em class='comment'> * vim&lt;600: noet sw=4 ts=4</em>
+<a id='L107' name='L107'></a> 107 <em class='comment'> */</em>
+</pre>
+<hr />
+<a id='BOTTOM' name='BOTTOM'></a>
+<em class='comment'>/* [&lt;][&gt;][^][v]<a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+</body>
+</html>

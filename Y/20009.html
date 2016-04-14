@@ -1,0 +1,423 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>heap</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/1644.html#L237'>heap</a>              237 Zend/zend_alloc.c 	HANDLE heap = HeapCreate(HEAP_NO_SERIALIZE, 0, 0);</span>
+<span class='curline'><a href='../S/1644.html#L240'>heap</a>              240 Zend/zend_alloc.c 	if (heap == NULL) {</span>
+<span class='curline'><a href='../S/1644.html#L245'>heap</a>              245 Zend/zend_alloc.c 		HeapDestroy(heap);</span>
+<span class='curline'><a href='../S/1644.html#L248'>heap</a>              248 Zend/zend_alloc.c 	storage-&gt;data = (void*) heap;</span>
+<span class='curline'><a href='../S/1644.html#L320'>heap</a>              320 Zend/zend_alloc.c # define ZEND_MM_STORAGE_DTOR()						heap-&gt;storage-&gt;handlers-&gt;dtor(heap-&gt;storage)</span>
+<span class='curline'><a href='../S/1644.html#L321'>heap</a>              321 Zend/zend_alloc.c # define ZEND_MM_STORAGE_ALLOC(size)				heap-&gt;storage-&gt;handlers-&gt;_alloc(heap-&gt;storage, size)</span>
+<span class='curline'><a href='../S/1644.html#L322'>heap</a>              322 Zend/zend_alloc.c # define ZEND_MM_STORAGE_REALLOC(ptr, size)			heap-&gt;storage-&gt;handlers-&gt;_realloc(heap-&gt;storage, ptr, size)</span>
+<span class='curline'><a href='../S/1644.html#L323'>heap</a>              323 Zend/zend_alloc.c # define ZEND_MM_STORAGE_FREE(ptr)					heap-&gt;storage-&gt;handlers-&gt;_free(heap-&gt;storage, ptr)</span>
+<span class='curline'><a href='../S/1644.html#L453'>heap</a>              453 Zend/zend_alloc.c #define ZEND_MM_SMALL_FREE_BUCKET(heap, index) \</span>
+<span class='curline'><a href='../S/1644.html#L454'>heap</a>              454 Zend/zend_alloc.c 	(zend_mm_free_block*) ((char*)&amp;heap-&gt;free_buckets[index * 2] + \</span>
+<span class='curline'><a href='../S/1644.html#L458'>heap</a>              458 Zend/zend_alloc.c #define ZEND_MM_REST_BUCKET(heap) \</span>
+<span class='curline'><a href='../S/1644.html#L459'>heap</a>              459 Zend/zend_alloc.c 	(zend_mm_free_block*)((char*)&amp;heap-&gt;rest_buckets[0] + \</span>
+<span class='curline'><a href='../S/1644.html#L563'>heap</a>              563 Zend/zend_alloc.c 	zend_mm_check_ptr(heap, block, 1 ZEND_FILE_LINE_RELAY_CC ZEND_FILE_LINE_ORIG_RELAY_CC)</span>
+<span class='curline'><a href='../S/1644.html#L661'>heap</a>              661 Zend/zend_alloc.c static void *_zend_mm_alloc_int(zend_mm_heap *heap, size_t size ZEND_FILE_LINE_DC ZEND_FILE_LINE_ORIG_DC) ZEND_ATTRIBUTE_MALLOC ZEND_ATTRIBUTE_ALLOC_SIZE(2);</span>
+<span class='curline'><a href='../S/1644.html#L662'>heap</a>              662 Zend/zend_alloc.c static void _zend_mm_free_int(zend_mm_heap *heap, void *p ZEND_FILE_LINE_DC ZEND_FILE_LINE_ORIG_DC);</span>
+<span class='curline'><a href='../S/1644.html#L663'>heap</a>              663 Zend/zend_alloc.c static void *_zend_mm_realloc_int(zend_mm_heap *heap, void *p, size_t size ZEND_FILE_LINE_DC ZEND_FILE_LINE_ORIG_DC) ZEND_ATTRIBUTE_ALLOC_SIZE(3);</span>
+<span class='curline'><a href='../S/1644.html#L727'>heap</a>              727 Zend/zend_alloc.c static inline void zend_mm_add_to_free_list(zend_mm_heap *heap, zend_mm_free_block *mm_block)</span>
+<span class='curline'><a href='../S/1644.html#L739'>heap</a>              739 Zend/zend_alloc.c 		p = &amp;heap-&gt;large_free_buckets[index];</span>
+<span class='curline'><a href='../S/1644.html#L745'>heap</a>              745 Zend/zend_alloc.c 			heap-&gt;large_free_bitmap |= (ZEND_MM_LONG_CONST(1) &lt;&lt; index);</span>
+<span class='curline'><a href='../S/1644.html#L776'>heap</a>              776 Zend/zend_alloc.c 		prev = ZEND_MM_SMALL_FREE_BUCKET(heap, index);</span>
+<span class='curline'><a href='../S/1644.html#L778'>heap</a>              778 Zend/zend_alloc.c 			heap-&gt;free_bitmap |= (ZEND_MM_LONG_CONST(1) &lt;&lt; index);</span>
+<span class='curline'><a href='../S/1644.html#L788'>heap</a>              788 Zend/zend_alloc.c static inline void zend_mm_remove_from_free_list(zend_mm_heap *heap, zend_mm_free_block *mm_block)</span>
+<span class='curline'><a href='../S/1644.html#L811'>heap</a>              811 Zend/zend_alloc.c 			if (mm_block-&gt;parent == &amp;heap-&gt;large_free_buckets[index]) {</span>
+<span class='curline'><a href='../S/1644.html#L812'>heap</a>              812 Zend/zend_alloc.c 				heap-&gt;large_free_bitmap &amp;= ~(ZEND_MM_LONG_CONST(1) &lt;&lt; index);</span>
+<span class='curline'><a href='../S/1644.html#L849'>heap</a>              849 Zend/zend_alloc.c 				if (EXPECTED(heap-&gt;free_buckets[index*2] == heap-&gt;free_buckets[index*2+1])) {</span>
+<span class='curline'><a href='../S/1644.html#L850'>heap</a>              850 Zend/zend_alloc.c 					heap-&gt;free_bitmap &amp;= ~(ZEND_MM_LONG_CONST(1) &lt;&lt; index);</span>
+<span class='curline'><a href='../S/1644.html#L854'>heap</a>              854 Zend/zend_alloc.c 			heap-&gt;rest_count--;</span>
+<span class='curline'><a href='../S/1644.html#L861'>heap</a>              861 Zend/zend_alloc.c static inline void zend_mm_add_to_rest_list(zend_mm_heap *heap, zend_mm_free_block *mm_block)</span>
+<span class='curline'><a href='../S/1644.html#L865'>heap</a>              865 Zend/zend_alloc.c 	while (heap-&gt;rest_count &gt;= ZEND_MM_MAX_REST_BLOCKS) {</span>
+<span class='curline'><a href='../S/1644.html#L866'>heap</a>              866 Zend/zend_alloc.c 		zend_mm_free_block *p = heap-&gt;rest_buckets[1];</span>
+<span class='curline'><a href='../S/1644.html#L869'>heap</a>              869 Zend/zend_alloc.c 			heap-&gt;rest_count--;</span>
+<span class='curline'><a href='../S/1644.html#L875'>heap</a>              875 Zend/zend_alloc.c 		zend_mm_add_to_free_list(heap, p);</span>
+<span class='curline'><a href='../S/1644.html#L880'>heap</a>              880 Zend/zend_alloc.c 		heap-&gt;rest_count++;</span>
+<span class='curline'><a href='../S/1644.html#L885'>heap</a>              885 Zend/zend_alloc.c 	prev = heap-&gt;rest_buckets[0];</span>
+<span class='curline'><a href='../S/1644.html#L892'>heap</a>              892 Zend/zend_alloc.c static inline void zend_mm_init(zend_mm_heap *heap)</span>
+<span class='curline'><a href='../S/1644.html#L897'>heap</a>              897 Zend/zend_alloc.c 	heap-&gt;free_bitmap = 0;</span>
+<span class='curline'><a href='../S/1644.html#L898'>heap</a>              898 Zend/zend_alloc.c 	heap-&gt;large_free_bitmap = 0;</span>
+<span class='curline'><a href='../S/1644.html#L900'>heap</a>              900 Zend/zend_alloc.c 	heap-&gt;cached = 0;</span>
+<span class='curline'><a href='../S/1644.html#L901'>heap</a>              901 Zend/zend_alloc.c 	memset(heap-&gt;cache, 0, sizeof(heap-&gt;cache));</span>
+<span class='curline'><a href='../S/1644.html#L905'>heap</a>              905 Zend/zend_alloc.c 		heap-&gt;cache_stat[i].count = 0;</span>
+<span class='curline'><a href='../S/1644.html#L908'>heap</a>              908 Zend/zend_alloc.c 	p = ZEND_MM_SMALL_FREE_BUCKET(heap, 0);</span>
+<span class='curline'><a href='../S/1644.html#L913'>heap</a>              913 Zend/zend_alloc.c 		heap-&gt;large_free_buckets[i] = NULL;</span>
+<span class='curline'><a href='../S/1644.html#L915'>heap</a>              915 Zend/zend_alloc.c 	heap-&gt;rest_buckets[0] = heap-&gt;rest_buckets[1] = ZEND_MM_REST_BUCKET(heap);</span>
+<span class='curline'><a href='../S/1644.html#L916'>heap</a>              916 Zend/zend_alloc.c 	heap-&gt;rest_count = 0;</span>
+<span class='curline'><a href='../S/1644.html#L919'>heap</a>              919 Zend/zend_alloc.c static void zend_mm_del_segment(zend_mm_heap *heap, zend_mm_segment *segment)</span>
+<span class='curline'><a href='../S/1644.html#L921'>heap</a>              921 Zend/zend_alloc.c 	zend_mm_segment **p = &amp;heap-&gt;segments_list;</span>
+<span class='curline'><a href='../S/1644.html#L927'>heap</a>              927 Zend/zend_alloc.c 	heap-&gt;real_size -= segment-&gt;size;</span>
+<span class='curline'><a href='../S/1644.html#L932'>heap</a>              932 Zend/zend_alloc.c static void zend_mm_free_cache(zend_mm_heap *heap)</span>
+<span class='curline'><a href='../S/1644.html#L937'>heap</a>              937 Zend/zend_alloc.c 		if (heap-&gt;cache[i]) {</span>
+<span class='curline'><a href='../S/1644.html#L938'>heap</a>              938 Zend/zend_alloc.c 			zend_mm_free_block *mm_block = heap-&gt;cache[i];</span>
+<span class='curline'><a href='../S/1644.html#L945'>heap</a>              945 Zend/zend_alloc.c 				heap-&gt;cached -= size;</span>
+<span class='curline'><a href='../S/1644.html#L950'>heap</a>              950 Zend/zend_alloc.c 					zend_mm_remove_from_free_list(heap, (zend_mm_free_block *) mm_block);</span>
+<span class='curline'><a href='../S/1644.html#L954'>heap</a>              954 Zend/zend_alloc.c 					zend_mm_remove_from_free_list(heap, (zend_mm_free_block *) next_block);</span>
+<span class='curline'><a href='../S/1644.html#L960'>heap</a>              960 Zend/zend_alloc.c 					zend_mm_del_segment(heap, (zend_mm_segment *) ((char *)mm_block - ZEND_MM_ALIGNED_SEGMENT_SIZE));</span>
+<span class='curline'><a href='../S/1644.html#L962'>heap</a>              962 Zend/zend_alloc.c 					zend_mm_add_to_free_list(heap, (zend_mm_free_block *) mm_block);</span>
+<span class='curline'><a href='../S/1644.html#L967'>heap</a>              967 Zend/zend_alloc.c 			heap-&gt;cache[i] = NULL;</span>
+<span class='curline'><a href='../S/1644.html#L969'>heap</a>              969 Zend/zend_alloc.c 			heap-&gt;cache_stat[i].count = 0;</span>
+<span class='curline'><a href='../S/1644.html#L1045'>heap</a>             1045 Zend/zend_alloc.c 	zend_mm_heap    *heap;</span>
+<span class='curline'><a href='../S/1644.html#L1098'>heap</a>             1098 Zend/zend_alloc.c 	heap = malloc(sizeof(struct _zend_mm_heap));</span>
+<span class='curline'><a href='../S/1644.html#L1099'>heap</a>             1099 Zend/zend_alloc.c 	if (heap == NULL) {</span>
+<span class='curline'><a href='../S/1644.html#L1106'>heap</a>             1106 Zend/zend_alloc.c 	heap-&gt;storage = storage;</span>
+<span class='curline'><a href='../S/1644.html#L1107'>heap</a>             1107 Zend/zend_alloc.c 	heap-&gt;block_size = block_size;</span>
+<span class='curline'><a href='../S/1644.html#L1108'>heap</a>             1108 Zend/zend_alloc.c 	heap-&gt;compact_size = 0;</span>
+<span class='curline'><a href='../S/1644.html#L1109'>heap</a>             1109 Zend/zend_alloc.c 	heap-&gt;segments_list = NULL;</span>
+<span class='curline'><a href='../S/1644.html#L1110'>heap</a>             1110 Zend/zend_alloc.c 	zend_mm_init(heap);</span>
+<span class='curline'><a href='../S/1644.html#L1112'>heap</a>             1112 Zend/zend_alloc.c 	memset(heap-&gt;cache_stat, 0, sizeof(heap-&gt;cache_stat));</span>
+<span class='curline'><a href='../S/1644.html#L1115'>heap</a>             1115 Zend/zend_alloc.c 	heap-&gt;use_zend_alloc = 1;</span>
+<span class='curline'><a href='../S/1644.html#L1116'>heap</a>             1116 Zend/zend_alloc.c 	heap-&gt;real_size = 0;</span>
+<span class='curline'><a href='../S/1644.html#L1117'>heap</a>             1117 Zend/zend_alloc.c 	heap-&gt;overflow = 0;</span>
+<span class='curline'><a href='../S/1644.html#L1118'>heap</a>             1118 Zend/zend_alloc.c 	heap-&gt;real_peak = 0;</span>
+<span class='curline'><a href='../S/1644.html#L1119'>heap</a>             1119 Zend/zend_alloc.c 	heap-&gt;limit = ZEND_MM_LONG_CONST(1)&lt;&lt;(ZEND_MM_NUM_BUCKETS-2);</span>
+<span class='curline'><a href='../S/1644.html#L1120'>heap</a>             1120 Zend/zend_alloc.c 	heap-&gt;size = 0;</span>
+<span class='curline'><a href='../S/1644.html#L1121'>heap</a>             1121 Zend/zend_alloc.c 	heap-&gt;peak = 0;</span>
+<span class='curline'><a href='../S/1644.html#L1122'>heap</a>             1122 Zend/zend_alloc.c 	heap-&gt;internal = internal;</span>
+<span class='curline'><a href='../S/1644.html#L1123'>heap</a>             1123 Zend/zend_alloc.c 	heap-&gt;reserve = NULL;</span>
+<span class='curline'><a href='../S/1644.html#L1124'>heap</a>             1124 Zend/zend_alloc.c 	heap-&gt;reserve_size = reserve_size;</span>
+<span class='curline'><a href='../S/1644.html#L1126'>heap</a>             1126 Zend/zend_alloc.c 		heap-&gt;reserve = _zend_mm_alloc_int(heap, reserve_size ZEND_FILE_LINE_CC ZEND_FILE_LINE_EMPTY_CC);</span>
+<span class='curline'><a href='../S/1644.html#L1131'>heap</a>             1131 Zend/zend_alloc.c 		zend_mm_heap *mm_heap = _zend_mm_alloc_int(heap, sizeof(zend_mm_heap)  ZEND_FILE_LINE_CC ZEND_FILE_LINE_EMPTY_CC);</span>
+<span class='curline'><a href='../S/1644.html#L1133'>heap</a>             1133 Zend/zend_alloc.c 		*mm_heap = *heap;</span>
+<span class='curline'><a href='../S/1644.html#L1136'>heap</a>             1136 Zend/zend_alloc.c 		orig = ZEND_MM_SMALL_FREE_BUCKET(heap, 0);</span>
+<span class='curline'><a href='../S/1644.html#L1157'>heap</a>             1157 Zend/zend_alloc.c 		free(heap);</span>
+<span class='curline'><a href='../S/1644.html#L1158'>heap</a>             1158 Zend/zend_alloc.c 		heap = mm_heap;</span>
+<span class='curline'><a href='../S/1644.html#L1160'>heap</a>             1160 Zend/zend_alloc.c 	return heap;</span>
+<span class='curline'><a href='../S/1644.html#L1170'>heap</a>             1170 Zend/zend_alloc.c 	zend_mm_heap *heap;</span>
+<span class='curline'><a href='../S/1644.html#L1221'>heap</a>             1221 Zend/zend_alloc.c 	heap = zend_mm_startup_ex(handlers, seg_size, ZEND_MM_RESERVE_SIZE, 0, NULL);</span>
+<span class='curline'><a href='../S/1644.html#L1222'>heap</a>             1222 Zend/zend_alloc.c 	if (heap) {</span>
+<span class='curline'><a href='../S/1644.html#L1225'>heap</a>             1225 Zend/zend_alloc.c 			heap-&gt;compact_size = zend_atoi(tmp, 0);</span>
+<span class='curline'><a href='../S/1644.html#L1227'>heap</a>             1227 Zend/zend_alloc.c 			heap-&gt;compact_size = 2 * 1024 * 1024;</span>
+<span class='curline'><a href='../S/1644.html#L1230'>heap</a>             1230 Zend/zend_alloc.c 	return heap;</span>
+<span class='curline'><a href='../S/1644.html#L1275'>heap</a>             1275 Zend/zend_alloc.c static void zend_mm_check_leaks(zend_mm_heap *heap TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1644.html#L1277'>heap</a>             1277 Zend/zend_alloc.c 	zend_mm_segment *segment = heap-&gt;segments_list;</span>
+<span class='curline'><a href='../S/1644.html#L1335'>heap</a>             1335 Zend/zend_alloc.c static int zend_mm_check_ptr(zend_mm_heap *heap, void *ptr, int silent ZEND_FILE_LINE_DC ZEND_FILE_LINE_ORIG_DC)</span>
+<span class='curline'><a href='../S/1644.html#L1367'>heap</a>             1367 Zend/zend_alloc.c 			return zend_mm_check_ptr(heap, ptr, 0 ZEND_FILE_LINE_RELAY_CC ZEND_FILE_LINE_ORIG_RELAY_CC);</span>
+<span class='curline'><a href='../S/1644.html#L1379'>heap</a>             1379 Zend/zend_alloc.c 			return zend_mm_check_ptr(heap, ptr, 0 ZEND_FILE_LINE_RELAY_CC ZEND_FILE_LINE_ORIG_RELAY_CC);</span>
+<span class='curline'><a href='../S/1644.html#L1389'>heap</a>             1389 Zend/zend_alloc.c 			return zend_mm_check_ptr(heap, ptr, 0 ZEND_FILE_LINE_RELAY_CC ZEND_FILE_LINE_ORIG_RELAY_CC);</span>
+<span class='curline'><a href='../S/1644.html#L1398'>heap</a>             1398 Zend/zend_alloc.c 			return zend_mm_check_ptr(heap, ptr, 0 ZEND_FILE_LINE_RELAY_CC ZEND_FILE_LINE_ORIG_RELAY_CC);</span>
+<span class='curline'><a href='../S/1644.html#L1420'>heap</a>             1420 Zend/zend_alloc.c 			return zend_mm_check_ptr(heap, ptr, 0 ZEND_FILE_LINE_RELAY_CC ZEND_FILE_LINE_ORIG_RELAY_CC);</span>
+<span class='curline'><a href='../S/1644.html#L1431'>heap</a>             1431 Zend/zend_alloc.c 			return zend_mm_check_ptr(heap, ptr, 0 ZEND_FILE_LINE_RELAY_CC ZEND_FILE_LINE_ORIG_RELAY_CC);</span>
+<span class='curline'><a href='../S/1644.html#L1447'>heap</a>             1447 Zend/zend_alloc.c 						return zend_mm_check_ptr(heap, ptr, 0 ZEND_FILE_LINE_RELAY_CC ZEND_FILE_LINE_ORIG_RELAY_CC);</span>
+<span class='curline'><a href='../S/1644.html#L1455'>heap</a>             1455 Zend/zend_alloc.c 					return zend_mm_check_ptr(heap, ptr, 0 ZEND_FILE_LINE_RELAY_CC ZEND_FILE_LINE_ORIG_RELAY_CC);</span>
+<span class='curline'><a href='../S/1644.html#L1463'>heap</a>             1463 Zend/zend_alloc.c 					return zend_mm_check_ptr(heap, ptr, 0 ZEND_FILE_LINE_RELAY_CC ZEND_FILE_LINE_ORIG_RELAY_CC);</span>
+<span class='curline'><a href='../S/1644.html#L1472'>heap</a>             1472 Zend/zend_alloc.c 					return zend_mm_check_ptr(heap, ptr, 0 ZEND_FILE_LINE_RELAY_CC ZEND_FILE_LINE_ORIG_RELAY_CC);</span>
+<span class='curline'><a href='../S/1644.html#L1559'>heap</a>             1559 Zend/zend_alloc.c static int zend_mm_check_heap(zend_mm_heap *heap, int silent ZEND_FILE_LINE_DC ZEND_FILE_LINE_ORIG_DC)</span>
+<span class='curline'><a href='../S/1644.html#L1561'>heap</a>             1561 Zend/zend_alloc.c 	zend_mm_segment *segment = heap-&gt;segments_list;</span>
+<span class='curline'><a href='../S/1644.html#L1578'>heap</a>             1578 Zend/zend_alloc.c 				if (!zend_mm_check_ptr(heap, ZEND_MM_DATA_OF(p), (silent?2:3) ZEND_FILE_LINE_RELAY_CC ZEND_FILE_LINE_ORIG_RELAY_CC)) {</span>
+<span class='curline'><a href='../S/1644.html#L1601'>heap</a>             1601 Zend/zend_alloc.c ZEND_API void zend_mm_shutdown(zend_mm_heap *heap, int full_shutdown, int silent TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1644.html#L1608'>heap</a>             1608 Zend/zend_alloc.c 	if (!heap-&gt;use_zend_alloc) {</span>
+<span class='curline'><a href='../S/1644.html#L1610'>heap</a>             1610 Zend/zend_alloc.c 			free(heap);</span>
+<span class='curline'><a href='../S/1644.html#L1615'>heap</a>             1615 Zend/zend_alloc.c 	if (heap-&gt;reserve) {</span>
+<span class='curline'><a href='../S/1644.html#L1618'>heap</a>             1618 Zend/zend_alloc.c 			_zend_mm_free_int(heap, heap-&gt;reserve ZEND_FILE_LINE_CC ZEND_FILE_LINE_EMPTY_CC);</span>
+<span class='curline'><a href='../S/1644.html#L1621'>heap</a>             1621 Zend/zend_alloc.c 		heap-&gt;reserve = NULL;</span>
+<span class='curline'><a href='../S/1644.html#L1656'>heap</a>             1656 Zend/zend_alloc.c 					hit += heap-&gt;cache_stat[i].hit;</span>
+<span class='curline'><a href='../S/1644.html#L1657'>heap</a>             1657 Zend/zend_alloc.c 					miss += heap-&gt;cache_stat[i].miss;</span>
+<span class='curline'><a href='../S/1644.html#L1658'>heap</a>             1658 Zend/zend_alloc.c 					fprintf(f, "%2d %8d %8d %9d %8d %8d %8d\n", i, (int)min_size, (int)max_size, ZEND_MM_TRUE_SIZE(max_size), heap-&gt;cache_stat[i].max_count, heap-&gt;cache_stat[i].hit, heap-&gt;cache_stat[i].miss);</span>
+<span class='curline'><a href='../S/1644.html#L1664'>heap</a>             1664 Zend/zend_alloc.c 			fprintf(f, "                                        %8d %8d\n", heap-&gt;cache_stat[ZEND_MM_NUM_BUCKETS].hit, heap-&gt;cache_stat[ZEND_MM_NUM_BUCKETS].miss);</span>
+<span class='curline'><a href='../S/1644.html#L1672'>heap</a>             1672 Zend/zend_alloc.c 		zend_mm_check_leaks(heap TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1644.html#L1676'>heap</a>             1676 Zend/zend_alloc.c 	internal = heap-&gt;internal;</span>
+<span class='curline'><a href='../S/1644.html#L1677'>heap</a>             1677 Zend/zend_alloc.c 	storage = heap-&gt;storage;</span>
+<span class='curline'><a href='../S/1644.html#L1678'>heap</a>             1678 Zend/zend_alloc.c 	segment = heap-&gt;segments_list;</span>
+<span class='curline'><a href='../S/1644.html#L1685'>heap</a>             1685 Zend/zend_alloc.c 		heap-&gt;segments_list = NULL;</span>
+<span class='curline'><a href='../S/1644.html#L1688'>heap</a>             1688 Zend/zend_alloc.c 			free(heap);</span>
+<span class='curline'><a href='../S/1644.html#L1693'>heap</a>             1693 Zend/zend_alloc.c 			if (heap-&gt;reserve_size) {</span>
+<span class='curline'><a href='../S/1644.html#L1699'>heap</a>             1699 Zend/zend_alloc.c 				heap-&gt;segments_list = segment;</span>
+<span class='curline'><a href='../S/1644.html#L1707'>heap</a>             1707 Zend/zend_alloc.c 				heap-&gt;segments_list = NULL;</span>
+<span class='curline'><a href='../S/1644.html#L1712'>heap</a>             1712 Zend/zend_alloc.c 		if (heap-&gt;compact_size &amp;&amp;</span>
+<span class='curline'><a href='../S/1644.html#L1713'>heap</a>             1713 Zend/zend_alloc.c 		    heap-&gt;real_peak &gt; heap-&gt;compact_size) {</span>
+<span class='curline'><a href='../S/1644.html#L1716'>heap</a>             1716 Zend/zend_alloc.c 		zend_mm_init(heap);</span>
+<span class='curline'><a href='../S/1644.html#L1717'>heap</a>             1717 Zend/zend_alloc.c 		if (heap-&gt;segments_list) {</span>
+<span class='curline'><a href='../S/1644.html#L1718'>heap</a>             1718 Zend/zend_alloc.c 			heap-&gt;real_size = heap-&gt;segments_list-&gt;size;</span>
+<span class='curline'><a href='../S/1644.html#L1719'>heap</a>             1719 Zend/zend_alloc.c 			heap-&gt;real_peak = heap-&gt;segments_list-&gt;size;</span>
+<span class='curline'><a href='../S/1644.html#L1721'>heap</a>             1721 Zend/zend_alloc.c 			heap-&gt;real_size = 0;</span>
+<span class='curline'><a href='../S/1644.html#L1722'>heap</a>             1722 Zend/zend_alloc.c 			heap-&gt;real_peak = 0;</span>
+<span class='curline'><a href='../S/1644.html#L1724'>heap</a>             1724 Zend/zend_alloc.c 		heap-&gt;size = 0;</span>
+<span class='curline'><a href='../S/1644.html#L1725'>heap</a>             1725 Zend/zend_alloc.c 		heap-&gt;peak = 0;</span>
+<span class='curline'><a href='../S/1644.html#L1726'>heap</a>             1726 Zend/zend_alloc.c 		if (heap-&gt;segments_list) {</span>
+<span class='curline'><a href='../S/1644.html#L1728'>heap</a>             1728 Zend/zend_alloc.c 			zend_mm_free_block *b = (zend_mm_free_block*)((char*)heap-&gt;segments_list + ZEND_MM_ALIGNED_SEGMENT_SIZE);</span>
+<span class='curline'><a href='../S/1644.html#L1729'>heap</a>             1729 Zend/zend_alloc.c 			size_t block_size = heap-&gt;segments_list-&gt;size - ZEND_MM_ALIGNED_SEGMENT_SIZE - ZEND_MM_ALIGNED_HEADER_SIZE;</span>
+<span class='curline'><a href='../S/1644.html#L1734'>heap</a>             1734 Zend/zend_alloc.c 			zend_mm_add_to_free_list(heap, b);</span>
+<span class='curline'><a href='../S/1644.html#L1736'>heap</a>             1736 Zend/zend_alloc.c 		if (heap-&gt;reserve_size) {</span>
+<span class='curline'><a href='../S/1644.html#L1737'>heap</a>             1737 Zend/zend_alloc.c 			heap-&gt;reserve = _zend_mm_alloc_int(heap, heap-&gt;reserve_size  ZEND_FILE_LINE_CC ZEND_FILE_LINE_EMPTY_CC);</span>
+<span class='curline'><a href='../S/1644.html#L1739'>heap</a>             1739 Zend/zend_alloc.c 		heap-&gt;overflow = 0;</span>
+<span class='curline'><a href='../S/1644.html#L1743'>heap</a>             1743 Zend/zend_alloc.c static void zend_mm_safe_error(zend_mm_heap *heap,</span>
+<span class='curline'><a href='../S/1644.html#L1752'>heap</a>             1752 Zend/zend_alloc.c 	if (heap-&gt;reserve) {</span>
+<span class='curline'><a href='../S/1644.html#L1753'>heap</a>             1753 Zend/zend_alloc.c 		_zend_mm_free_int(heap, heap-&gt;reserve ZEND_FILE_LINE_CC ZEND_FILE_LINE_EMPTY_CC);</span>
+<span class='curline'><a href='../S/1644.html#L1754'>heap</a>             1754 Zend/zend_alloc.c 		heap-&gt;reserve = NULL;</span>
+<span class='curline'><a href='../S/1644.html#L1756'>heap</a>             1756 Zend/zend_alloc.c 	if (heap-&gt;overflow == 0) {</span>
+<span class='curline'><a href='../S/1644.html#L1773'>heap</a>             1773 Zend/zend_alloc.c 		heap-&gt;overflow = 1;</span>
+<span class='curline'><a href='../S/1644.html#L1784'>heap</a>             1784 Zend/zend_alloc.c 			if (heap-&gt;overflow == 2) {</span>
+<span class='curline'><a href='../S/1644.html#L1802'>heap</a>             1802 Zend/zend_alloc.c 		heap-&gt;overflow = 2;</span>
+<span class='curline'><a href='../S/1644.html#L1807'>heap</a>             1807 Zend/zend_alloc.c static zend_mm_free_block *zend_mm_search_large_block(zend_mm_heap *heap, size_t true_size)</span>
+<span class='curline'><a href='../S/1644.html#L1811'>heap</a>             1811 Zend/zend_alloc.c 	size_t bitmap = heap-&gt;large_free_bitmap &gt;&gt; index;</span>
+<span class='curline'><a href='../S/1644.html#L1825'>heap</a>             1825 Zend/zend_alloc.c 		p = heap-&gt;large_free_buckets[index];</span>
+<span class='curline'><a href='../S/1644.html#L1871'>heap</a>             1871 Zend/zend_alloc.c 	best_fit = p = heap-&gt;large_free_buckets[index + zend_mm_low_bit(bitmap)];</span>
+<span class='curline'><a href='../S/1644.html#L1880'>heap</a>             1880 Zend/zend_alloc.c static void *_zend_mm_alloc_int(zend_mm_heap *heap, size_t size ZEND_FILE_LINE_DC ZEND_FILE_LINE_ORIG_DC)</span>
+<span class='curline'><a href='../S/1644.html#L1903'>heap</a>             1903 Zend/zend_alloc.c 		if (EXPECTED(heap-&gt;cache[index] != NULL)) {</span>
+<span class='curline'><a href='../S/1644.html#L1906'>heap</a>             1906 Zend/zend_alloc.c 			heap-&gt;cache_stat[index].count--;</span>
+<span class='curline'><a href='../S/1644.html#L1907'>heap</a>             1907 Zend/zend_alloc.c 			heap-&gt;cache_stat[index].hit++;</span>
+<span class='curline'><a href='../S/1644.html#L1909'>heap</a>             1909 Zend/zend_alloc.c 			best_fit = heap-&gt;cache[index];</span>
+<span class='curline'><a href='../S/1644.html#L1910'>heap</a>             1910 Zend/zend_alloc.c 			heap-&gt;cache[index] = best_fit-&gt;prev_free_block;</span>
+<span class='curline'><a href='../S/1644.html#L1911'>heap</a>             1911 Zend/zend_alloc.c 			heap-&gt;cached -= true_size;</span>
+<span class='curline'><a href='../S/1644.html#L1918'>heap</a>             1918 Zend/zend_alloc.c 		heap-&gt;cache_stat[index].miss++;</span>
+<span class='curline'><a href='../S/1644.html#L1922'>heap</a>             1922 Zend/zend_alloc.c 		bitmap = heap-&gt;free_bitmap &gt;&gt; index;</span>
+<span class='curline'><a href='../S/1644.html#L1926'>heap</a>             1926 Zend/zend_alloc.c 			best_fit = heap-&gt;free_buckets[index*2];</span>
+<span class='curline'><a href='../S/1644.html#L1928'>heap</a>             1928 Zend/zend_alloc.c 			heap-&gt;cache_stat[ZEND_MM_NUM_BUCKETS].hit++;</span>
+<span class='curline'><a href='../S/1644.html#L1935'>heap</a>             1935 Zend/zend_alloc.c 	heap-&gt;cache_stat[ZEND_MM_NUM_BUCKETS].miss++;</span>
+<span class='curline'><a href='../S/1644.html#L1938'>heap</a>             1938 Zend/zend_alloc.c 	best_fit = zend_mm_search_large_block(heap, true_size);</span>
+<span class='curline'><a href='../S/1644.html#L1940'>heap</a>             1940 Zend/zend_alloc.c 	if (!best_fit &amp;&amp; heap-&gt;real_size &gt;= heap-&gt;limit - heap-&gt;block_size) {</span>
+<span class='curline'><a href='../S/1644.html#L1941'>heap</a>             1941 Zend/zend_alloc.c 		zend_mm_free_block *p = heap-&gt;rest_buckets[0];</span>
+<span class='curline'><a href='../S/1644.html#L1944'>heap</a>             1944 Zend/zend_alloc.c 		while (p != ZEND_MM_REST_BUCKET(heap)) {</span>
+<span class='curline'><a href='../S/1644.html#L1958'>heap</a>             1958 Zend/zend_alloc.c 		if (true_size &gt; heap-&gt;block_size - (ZEND_MM_ALIGNED_SEGMENT_SIZE + ZEND_MM_ALIGNED_HEADER_SIZE)) {</span>
+<span class='curline'><a href='../S/1644.html#L1962'>heap</a>             1962 Zend/zend_alloc.c 			segment_size = (segment_size + (heap-&gt;block_size-1)) &amp; ~(heap-&gt;block_size-1);</span>
+<span class='curline'><a href='../S/1644.html#L1965'>heap</a>             1965 Zend/zend_alloc.c 			segment_size = heap-&gt;block_size;</span>
+<span class='curline'><a href='../S/1644.html#L1969'>heap</a>             1969 Zend/zend_alloc.c 		    heap-&gt;real_size + segment_size &gt; heap-&gt;limit) {</span>
+<span class='curline'><a href='../S/1644.html#L1972'>heap</a>             1972 Zend/zend_alloc.c 			zend_mm_free_cache(heap);</span>
+<span class='curline'><a href='../S/1644.html#L1976'>heap</a>             1976 Zend/zend_alloc.c 			zend_mm_safe_error(heap, "Allowed memory size of %ld bytes exhausted at %s:%d (tried to allocate %lu bytes)", heap-&gt;limit, __zend_filename, __zend_lineno, size);</span>
+<span class='curline'><a href='../S/1644.html#L1978'>heap</a>             1978 Zend/zend_alloc.c 			zend_mm_safe_error(heap, "Allowed memory size of %ld bytes exhausted (tried to allocate %lu bytes)", heap-&gt;limit, size);</span>
+<span class='curline'><a href='../S/1644.html#L1987'>heap</a>             1987 Zend/zend_alloc.c 			zend_mm_free_cache(heap);</span>
+<span class='curline'><a href='../S/1644.html#L1992'>heap</a>             1992 Zend/zend_alloc.c 			zend_mm_safe_error(heap, "Out of memory (allocated %ld) at %s:%d (tried to allocate %lu bytes)", heap-&gt;real_size, __zend_filename, __zend_lineno, size);</span>
+<span class='curline'><a href='../S/1644.html#L1994'>heap</a>             1994 Zend/zend_alloc.c 			zend_mm_safe_error(heap, "Out of memory (allocated %ld) (tried to allocate %lu bytes)", heap-&gt;real_size, size);</span>
+<span class='curline'><a href='../S/1644.html#L1999'>heap</a>             1999 Zend/zend_alloc.c 		heap-&gt;real_size += segment_size;</span>
+<span class='curline'><a href='../S/1644.html#L2000'>heap</a>             2000 Zend/zend_alloc.c 		if (heap-&gt;real_size &gt; heap-&gt;real_peak) {</span>
+<span class='curline'><a href='../S/1644.html#L2001'>heap</a>             2001 Zend/zend_alloc.c 			heap-&gt;real_peak = heap-&gt;real_size;</span>
+<span class='curline'><a href='../S/1644.html#L2005'>heap</a>             2005 Zend/zend_alloc.c 		segment-&gt;next_segment = heap-&gt;segments_list;</span>
+<span class='curline'><a href='../S/1644.html#L2006'>heap</a>             2006 Zend/zend_alloc.c 		heap-&gt;segments_list = segment;</span>
+<span class='curline'><a href='../S/1644.html#L2021'>heap</a>             2021 Zend/zend_alloc.c 		zend_mm_remove_from_free_list(heap, best_fit);</span>
+<span class='curline'><a href='../S/1644.html#L2041'>heap</a>             2041 Zend/zend_alloc.c 			zend_mm_add_to_free_list(heap, new_free_block);</span>
+<span class='curline'><a href='../S/1644.html#L2043'>heap</a>             2043 Zend/zend_alloc.c 			zend_mm_add_to_rest_list(heap, new_free_block);</span>
+<span class='curline'><a href='../S/1644.html#L2049'>heap</a>             2049 Zend/zend_alloc.c 	heap-&gt;size += true_size;</span>
+<span class='curline'><a href='../S/1644.html#L2050'>heap</a>             2050 Zend/zend_alloc.c 	if (heap-&gt;peak &lt; heap-&gt;size) {</span>
+<span class='curline'><a href='../S/1644.html#L2051'>heap</a>             2051 Zend/zend_alloc.c 		heap-&gt;peak = heap-&gt;size;</span>
+<span class='curline'><a href='../S/1644.html#L2060'>heap</a>             2060 Zend/zend_alloc.c static void _zend_mm_free_int(zend_mm_heap *heap, void *p ZEND_FILE_LINE_DC ZEND_FILE_LINE_ORIG_DC)</span>
+<span class='curline'><a href='../S/1644.html#L2083'>heap</a>             2083 Zend/zend_alloc.c 	if (EXPECTED(ZEND_MM_SMALL_SIZE(size)) &amp;&amp; EXPECTED(heap-&gt;cached &lt; ZEND_MM_CACHE_SIZE)) {</span>
+<span class='curline'><a href='../S/1644.html#L2085'>heap</a>             2085 Zend/zend_alloc.c 		zend_mm_free_block **cache = &amp;heap-&gt;cache[index];</span>
+<span class='curline'><a href='../S/1644.html#L2089'>heap</a>             2089 Zend/zend_alloc.c 		heap-&gt;cached += size;</span>
+<span class='curline'><a href='../S/1644.html#L2092'>heap</a>             2092 Zend/zend_alloc.c 		if (++heap-&gt;cache_stat[index].count &gt; heap-&gt;cache_stat[index].max_count) {</span>
+<span class='curline'><a href='../S/1644.html#L2093'>heap</a>             2093 Zend/zend_alloc.c 			heap-&gt;cache_stat[index].max_count = heap-&gt;cache_stat[index].count;</span>
+<span class='curline'><a href='../S/1644.html#L2101'>heap</a>             2101 Zend/zend_alloc.c 	heap-&gt;size -= size;</span>
+<span class='curline'><a href='../S/1644.html#L2105'>heap</a>             2105 Zend/zend_alloc.c 		zend_mm_remove_from_free_list(heap, (zend_mm_free_block *) next_block);</span>
+<span class='curline'><a href='../S/1644.html#L2110'>heap</a>             2110 Zend/zend_alloc.c 		zend_mm_remove_from_free_list(heap, (zend_mm_free_block *) mm_block);</span>
+<span class='curline'><a href='../S/1644.html#L2115'>heap</a>             2115 Zend/zend_alloc.c 		zend_mm_del_segment(heap, (zend_mm_segment *) ((char *)mm_block - ZEND_MM_ALIGNED_SEGMENT_SIZE));</span>
+<span class='curline'><a href='../S/1644.html#L2118'>heap</a>             2118 Zend/zend_alloc.c 		zend_mm_add_to_free_list(heap, (zend_mm_free_block *) mm_block);</span>
+<span class='curline'><a href='../S/1644.html#L2123'>heap</a>             2123 Zend/zend_alloc.c static void *_zend_mm_realloc_int(zend_mm_heap *heap, void *p, size_t size ZEND_FILE_LINE_DC ZEND_FILE_LINE_ORIG_DC)</span>
+<span class='curline'><a href='../S/1644.html#L2134'>heap</a>             2134 Zend/zend_alloc.c 		return _zend_mm_alloc_int(heap, size ZEND_FILE_LINE_RELAY_CC ZEND_FILE_LINE_ORIG_RELAY_CC);</span>
+<span class='curline'><a href='../S/1644.html#L2157'>heap</a>             2157 Zend/zend_alloc.c 				zend_mm_remove_from_free_list(heap, (zend_mm_free_block *) next_block);</span>
+<span class='curline'><a href='../S/1644.html#L2167'>heap</a>             2167 Zend/zend_alloc.c 			zend_mm_add_to_free_list(heap, new_free_block);</span>
+<span class='curline'><a href='../S/1644.html#L2168'>heap</a>             2168 Zend/zend_alloc.c 			heap-&gt;size += (true_size - orig_size);</span>
+<span class='curline'><a href='../S/1644.html#L2179'>heap</a>             2179 Zend/zend_alloc.c 		if (heap-&gt;cache[index] != NULL) {</span>
+<span class='curline'><a href='../S/1644.html#L2184'>heap</a>             2184 Zend/zend_alloc.c 			heap-&gt;cache_stat[index].count--;</span>
+<span class='curline'><a href='../S/1644.html#L2185'>heap</a>             2185 Zend/zend_alloc.c 			heap-&gt;cache_stat[index].hit++;</span>
+<span class='curline'><a href='../S/1644.html#L2187'>heap</a>             2187 Zend/zend_alloc.c 			best_fit = heap-&gt;cache[index];</span>
+<span class='curline'><a href='../S/1644.html#L2188'>heap</a>             2188 Zend/zend_alloc.c 			heap-&gt;cache[index] = best_fit-&gt;prev_free_block;</span>
+<span class='curline'><a href='../S/1644.html#L2200'>heap</a>             2200 Zend/zend_alloc.c 			heap-&gt;cached -= true_size - orig_size;</span>
+<span class='curline'><a href='../S/1644.html#L2203'>heap</a>             2203 Zend/zend_alloc.c 			cache = &amp;heap-&gt;cache[index];</span>
+<span class='curline'><a href='../S/1644.html#L2209'>heap</a>             2209 Zend/zend_alloc.c 			if (++heap-&gt;cache_stat[index].count &gt; heap-&gt;cache_stat[index].max_count) {</span>
+<span class='curline'><a href='../S/1644.html#L2210'>heap</a>             2210 Zend/zend_alloc.c 				heap-&gt;cache_stat[index].max_count = heap-&gt;cache_stat[index].count;</span>
+<span class='curline'><a href='../S/1644.html#L2229'>heap</a>             2229 Zend/zend_alloc.c 			zend_mm_remove_from_free_list(heap, (zend_mm_free_block *) next_block);</span>
+<span class='curline'><a href='../S/1644.html#L2245'>heap</a>             2245 Zend/zend_alloc.c 					zend_mm_add_to_rest_list(heap, new_free_block);</span>
+<span class='curline'><a href='../S/1644.html#L2247'>heap</a>             2247 Zend/zend_alloc.c 					zend_mm_add_to_free_list(heap, new_free_block);</span>
+<span class='curline'><a href='../S/1644.html#L2251'>heap</a>             2251 Zend/zend_alloc.c 			heap-&gt;size = heap-&gt;size + true_size - orig_size;</span>
+<span class='curline'><a href='../S/1644.html#L2252'>heap</a>             2252 Zend/zend_alloc.c 			if (heap-&gt;peak &lt; heap-&gt;size) {</span>
+<span class='curline'><a href='../S/1644.html#L2253'>heap</a>             2253 Zend/zend_alloc.c 				heap-&gt;peak = heap-&gt;size;</span>
+<span class='curline'><a href='../S/1644.html#L2259'>heap</a>             2259 Zend/zend_alloc.c 			zend_mm_remove_from_free_list(heap, (zend_mm_free_block *) next_block);</span>
+<span class='curline'><a href='../S/1644.html#L2271'>heap</a>             2271 Zend/zend_alloc.c 		if (true_size &gt; heap-&gt;block_size - (ZEND_MM_ALIGNED_SEGMENT_SIZE + ZEND_MM_ALIGNED_HEADER_SIZE)) {</span>
+<span class='curline'><a href='../S/1644.html#L2273'>heap</a>             2273 Zend/zend_alloc.c 			segment_size = (segment_size + (heap-&gt;block_size-1)) &amp; ~(heap-&gt;block_size-1);</span>
+<span class='curline'><a href='../S/1644.html#L2275'>heap</a>             2275 Zend/zend_alloc.c 			segment_size = heap-&gt;block_size;</span>
+<span class='curline'><a href='../S/1644.html#L2280'>heap</a>             2280 Zend/zend_alloc.c 		    heap-&gt;real_size + segment_size - segment_copy-&gt;size &gt; heap-&gt;limit) {</span>
+<span class='curline'><a href='../S/1644.html#L2282'>heap</a>             2282 Zend/zend_alloc.c 				zend_mm_add_to_free_list(heap, (zend_mm_free_block *) next_block);</span>
+<span class='curline'><a href='../S/1644.html#L2285'>heap</a>             2285 Zend/zend_alloc.c 			zend_mm_free_cache(heap);</span>
+<span class='curline'><a href='../S/1644.html#L2289'>heap</a>             2289 Zend/zend_alloc.c 			zend_mm_safe_error(heap, "Allowed memory size of %ld bytes exhausted at %s:%d (tried to allocate %ld bytes)", heap-&gt;limit, __zend_filename, __zend_lineno, size);</span>
+<span class='curline'><a href='../S/1644.html#L2291'>heap</a>             2291 Zend/zend_alloc.c 			zend_mm_safe_error(heap, "Allowed memory size of %ld bytes exhausted (tried to allocate %ld bytes)", heap-&gt;limit, size);</span>
+<span class='curline'><a href='../S/1644.html#L2299'>heap</a>             2299 Zend/zend_alloc.c 			zend_mm_free_cache(heap);</span>
+<span class='curline'><a href='../S/1644.html#L2304'>heap</a>             2304 Zend/zend_alloc.c 			zend_mm_safe_error(heap, "Out of memory (allocated %ld) at %s:%d (tried to allocate %ld bytes)", heap-&gt;real_size, __zend_filename, __zend_lineno, size);</span>
+<span class='curline'><a href='../S/1644.html#L2306'>heap</a>             2306 Zend/zend_alloc.c 			zend_mm_safe_error(heap, "Out of memory (allocated %ld) (tried to allocate %ld bytes)", heap-&gt;real_size, size);</span>
+<span class='curline'><a href='../S/1644.html#L2310'>heap</a>             2310 Zend/zend_alloc.c 		heap-&gt;real_size += segment_size - segment-&gt;size;</span>
+<span class='curline'><a href='../S/1644.html#L2311'>heap</a>             2311 Zend/zend_alloc.c 		if (heap-&gt;real_size &gt; heap-&gt;real_peak) {</span>
+<span class='curline'><a href='../S/1644.html#L2312'>heap</a>             2312 Zend/zend_alloc.c 			heap-&gt;real_peak = heap-&gt;real_size;</span>
+<span class='curline'><a href='../S/1644.html#L2318'>heap</a>             2318 Zend/zend_alloc.c 			zend_mm_segment **seg = &amp;heap-&gt;segments_list;</span>
+<span class='curline'><a href='../S/1644.html#L2345'>heap</a>             2345 Zend/zend_alloc.c 			zend_mm_add_to_rest_list(heap, new_free_block);</span>
+<span class='curline'><a href='../S/1644.html#L2350'>heap</a>             2350 Zend/zend_alloc.c 		heap-&gt;size = heap-&gt;size + true_size - orig_size;</span>
+<span class='curline'><a href='../S/1644.html#L2351'>heap</a>             2351 Zend/zend_alloc.c 		if (heap-&gt;peak &lt; heap-&gt;size) {</span>
+<span class='curline'><a href='../S/1644.html#L2352'>heap</a>             2352 Zend/zend_alloc.c 			heap-&gt;peak = heap-&gt;size;</span>
+<span class='curline'><a href='../S/1644.html#L2359'>heap</a>             2359 Zend/zend_alloc.c 	ptr = _zend_mm_alloc_int(heap, size ZEND_FILE_LINE_RELAY_CC ZEND_FILE_LINE_ORIG_RELAY_CC);</span>
+<span class='curline'><a href='../S/1644.html#L2365'>heap</a>             2365 Zend/zend_alloc.c 	_zend_mm_free_int(heap, p ZEND_FILE_LINE_RELAY_CC ZEND_FILE_LINE_ORIG_RELAY_CC);</span>
+<span class='curline'><a href='../S/1644.html#L2370'>heap</a>             2370 Zend/zend_alloc.c ZEND_API void *_zend_mm_alloc(zend_mm_heap *heap, size_t size ZEND_FILE_LINE_DC ZEND_FILE_LINE_ORIG_DC)</span>
+<span class='curline'><a href='../S/1644.html#L2372'>heap</a>             2372 Zend/zend_alloc.c 	return _zend_mm_alloc_int(heap, size ZEND_FILE_LINE_RELAY_CC ZEND_FILE_LINE_ORIG_RELAY_CC);</span>
+<span class='curline'><a href='../S/1644.html#L2375'>heap</a>             2375 Zend/zend_alloc.c ZEND_API void _zend_mm_free(zend_mm_heap *heap, void *p ZEND_FILE_LINE_DC ZEND_FILE_LINE_ORIG_DC)</span>
+<span class='curline'><a href='../S/1644.html#L2377'>heap</a>             2377 Zend/zend_alloc.c 	_zend_mm_free_int(heap, p ZEND_FILE_LINE_RELAY_CC ZEND_FILE_LINE_ORIG_RELAY_CC);</span>
+<span class='curline'><a href='../S/1644.html#L2380'>heap</a>             2380 Zend/zend_alloc.c ZEND_API void *_zend_mm_realloc(zend_mm_heap *heap, void *ptr, size_t size ZEND_FILE_LINE_DC ZEND_FILE_LINE_ORIG_DC)</span>
+<span class='curline'><a href='../S/1644.html#L2382'>heap</a>             2382 Zend/zend_alloc.c 	return _zend_mm_realloc_int(heap, ptr, size ZEND_FILE_LINE_RELAY_CC ZEND_FILE_LINE_ORIG_RELAY_CC);</span>
+<span class='curline'><a href='../S/1644.html#L2385'>heap</a>             2385 Zend/zend_alloc.c ZEND_API size_t _zend_mm_block_size(zend_mm_heap *heap, void *p ZEND_FILE_LINE_DC ZEND_FILE_LINE_ORIG_DC)</span>
+<span class='curline'><a href='../S/1644.html#L2762'>heap</a>             2762 Zend/zend_alloc.c ZEND_API zend_mm_storage *zend_mm_get_storage(zend_mm_heap *heap)</span>
+<span class='curline'><a href='../S/1644.html#L2764'>heap</a>             2764 Zend/zend_alloc.c 	return heap-&gt;storage;</span>
+<span class='curline'><a href='../S/1644.html#L2767'>heap</a>             2767 Zend/zend_alloc.c ZEND_API void zend_mm_set_custom_handlers(zend_mm_heap *heap,</span>
+<span class='curline'><a href='../S/1644.html#L2772'>heap</a>             2772 Zend/zend_alloc.c 	heap-&gt;use_zend_alloc = 0;</span>
+<span class='curline'><a href='../S/1644.html#L2773'>heap</a>             2773 Zend/zend_alloc.c 	heap-&gt;_malloc = _malloc;</span>
+<span class='curline'><a href='../S/1644.html#L2774'>heap</a>             2774 Zend/zend_alloc.c 	heap-&gt;_free = _free;</span>
+<span class='curline'><a href='../S/1644.html#L2775'>heap</a>             2775 Zend/zend_alloc.c 	heap-&gt;_realloc = _realloc;</span>
+<span class='curline'><a href='../S/1645.html#L194'>heap</a>              194 Zend/zend_alloc.h ZEND_API void zend_mm_shutdown(zend_mm_heap *heap, int full_shutdown, int silent TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1645.html#L195'>heap</a>              195 Zend/zend_alloc.h ZEND_API void *_zend_mm_alloc(zend_mm_heap *heap, size_t size ZEND_FILE_LINE_DC ZEND_FILE_LINE_ORIG_DC) ZEND_ATTRIBUTE_MALLOC;</span>
+<span class='curline'><a href='../S/1645.html#L196'>heap</a>              196 Zend/zend_alloc.h ZEND_API void _zend_mm_free(zend_mm_heap *heap, void *p ZEND_FILE_LINE_DC ZEND_FILE_LINE_ORIG_DC);</span>
+<span class='curline'><a href='../S/1645.html#L197'>heap</a>              197 Zend/zend_alloc.h ZEND_API void *_zend_mm_realloc(zend_mm_heap *heap, void *p, size_t size ZEND_FILE_LINE_DC ZEND_FILE_LINE_ORIG_DC);</span>
+<span class='curline'><a href='../S/1645.html#L198'>heap</a>              198 Zend/zend_alloc.h ZEND_API size_t _zend_mm_block_size(zend_mm_heap *heap, void *p ZEND_FILE_LINE_DC ZEND_FILE_LINE_ORIG_DC);</span>
+<span class='curline'><a href='../S/1645.html#L200'>heap</a>              200 Zend/zend_alloc.h #define zend_mm_alloc(heap, size)			_zend_mm_alloc((heap), (size) ZEND_FILE_LINE_CC ZEND_FILE_LINE_EMPTY_CC)</span>
+<span class='curline'><a href='../S/1645.html#L201'>heap</a>              201 Zend/zend_alloc.h #define zend_mm_free(heap, p)				_zend_mm_free((heap), (p) ZEND_FILE_LINE_CC ZEND_FILE_LINE_EMPTY_CC)</span>
+<span class='curline'><a href='../S/1645.html#L202'>heap</a>              202 Zend/zend_alloc.h #define zend_mm_realloc(heap, p, size)		_zend_mm_realloc((heap), (p), (size) ZEND_FILE_LINE_CC ZEND_FILE_LINE_EMPTY_CC)</span>
+<span class='curline'><a href='../S/1645.html#L203'>heap</a>              203 Zend/zend_alloc.h #define zend_mm_block_size(heap, p)			_zend_mm_block_size((heap), (p) ZEND_FILE_LINE_CC ZEND_FILE_LINE_EMPTY_CC)</span>
+<span class='curline'><a href='../S/1645.html#L205'>heap</a>              205 Zend/zend_alloc.h #define zend_mm_alloc_rel(heap, size)		_zend_mm_alloc((heap), (size) ZEND_FILE_LINE_RELAY_CC ZEND_FILE_LINE_CC)</span>
+<span class='curline'><a href='../S/1645.html#L206'>heap</a>              206 Zend/zend_alloc.h #define zend_mm_free_rel(heap, p)			_zend_mm_free((heap), (p) ZEND_FILE_LINE_RELAY_CC ZEND_FILE_LINE_CC)</span>
+<span class='curline'><a href='../S/1645.html#L207'>heap</a>              207 Zend/zend_alloc.h #define zend_mm_realloc_rel(heap, p, size)	_zend_mm_realloc((heap), (p), (size) ZEND_FILE_LINE_RELAY_CC ZEND_FILE_LINE_CC)</span>
+<span class='curline'><a href='../S/1645.html#L208'>heap</a>              208 Zend/zend_alloc.h #define zend_mm_block_size_rel(heap, p)		_zend_mm_block_size((heap), (p) ZEND_FILE_LINE_CC ZEND_FILE_LINE_EMPTY_CC)</span>
+<span class='curline'><a href='../S/1645.html#L235'>heap</a>              235 Zend/zend_alloc.h ZEND_API zend_mm_storage *zend_mm_get_storage(zend_mm_heap *heap);</span>
+<span class='curline'><a href='../S/1645.html#L237'>heap</a>              237 Zend/zend_alloc.h ZEND_API void zend_mm_set_custom_handlers(zend_mm_heap *heap,</span>
+<span class='curline'><a href='../S/1061.html#L73'>heap</a>               73 ext/spl/spl_heap.c 	spl_ptr_heap       *heap;</span>
+<span class='curline'><a href='../S/1061.html#L226'>heap</a>              226 ext/spl/spl_heap.c 	spl_ptr_heap *heap = emalloc(sizeof(spl_ptr_heap));</span>
+<span class='curline'><a href='../S/1061.html#L228'>heap</a>              228 ext/spl/spl_heap.c 	heap-&gt;dtor     = dtor;</span>
+<span class='curline'><a href='../S/1061.html#L229'>heap</a>              229 ext/spl/spl_heap.c 	heap-&gt;ctor     = ctor;</span>
+<span class='curline'><a href='../S/1061.html#L230'>heap</a>              230 ext/spl/spl_heap.c 	heap-&gt;cmp      = cmp;</span>
+<span class='curline'><a href='../S/1061.html#L231'>heap</a>              231 ext/spl/spl_heap.c 	heap-&gt;elements = safe_emalloc(sizeof(spl_ptr_heap_element), PTR_HEAP_BLOCK_SIZE, 0);</span>
+<span class='curline'><a href='../S/1061.html#L232'>heap</a>              232 ext/spl/spl_heap.c 	heap-&gt;max_size = PTR_HEAP_BLOCK_SIZE;</span>
+<span class='curline'><a href='../S/1061.html#L233'>heap</a>              233 ext/spl/spl_heap.c 	heap-&gt;count    = 0;</span>
+<span class='curline'><a href='../S/1061.html#L234'>heap</a>              234 ext/spl/spl_heap.c 	heap-&gt;flags    = 0;</span>
+<span class='curline'><a href='../S/1061.html#L236'>heap</a>              236 ext/spl/spl_heap.c 	return heap;</span>
+<span class='curline'><a href='../S/1061.html#L240'>heap</a>              240 ext/spl/spl_heap.c static void spl_ptr_heap_insert(spl_ptr_heap *heap, spl_ptr_heap_element elem, void *cmp_userdata TSRMLS_DC) { /* {{{ */</span>
+<span class='curline'><a href='../S/1061.html#L243'>heap</a>              243 ext/spl/spl_heap.c 	if (heap-&gt;count+1 &gt; heap-&gt;max_size) {</span>
+<span class='curline'><a href='../S/1061.html#L245'>heap</a>              245 ext/spl/spl_heap.c 		heap-&gt;elements  = (void **) safe_erealloc(heap-&gt;elements, sizeof(spl_ptr_heap_element), (heap-&gt;max_size), (sizeof(spl_ptr_heap_element) * (heap-&gt;max_size)));</span>
+<span class='curline'><a href='../S/1061.html#L246'>heap</a>              246 ext/spl/spl_heap.c 		heap-&gt;max_size *= 2;</span>
+<span class='curline'><a href='../S/1061.html#L249'>heap</a>              249 ext/spl/spl_heap.c 	heap-&gt;ctor(elem TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1061.html#L252'>heap</a>              252 ext/spl/spl_heap.c 	for(i = heap-&gt;count; i &gt; 0 &amp;&amp; heap-&gt;cmp(heap-&gt;elements[(i-1)/2], elem, cmp_userdata TSRMLS_CC) &lt; 0; i = (i-1)/2) {</span>
+<span class='curline'><a href='../S/1061.html#L253'>heap</a>              253 ext/spl/spl_heap.c 		heap-&gt;elements[i] = heap-&gt;elements[(i-1)/2];</span>
+<span class='curline'><a href='../S/1061.html#L255'>heap</a>              255 ext/spl/spl_heap.c 	heap-&gt;count++;</span>
+<span class='curline'><a href='../S/1061.html#L259'>heap</a>              259 ext/spl/spl_heap.c 		heap-&gt;flags |= SPL_HEAP_CORRUPTED;</span>
+<span class='curline'><a href='../S/1061.html#L262'>heap</a>              262 ext/spl/spl_heap.c 	heap-&gt;elements[i] = elem;</span>
+<span class='curline'><a href='../S/1061.html#L267'>heap</a>              267 ext/spl/spl_heap.c static spl_ptr_heap_element spl_ptr_heap_top(spl_ptr_heap *heap) { /* {{{ */</span>
+<span class='curline'><a href='../S/1061.html#L268'>heap</a>              268 ext/spl/spl_heap.c 	if (heap-&gt;count == 0) {</span>
+<span class='curline'><a href='../S/1061.html#L272'>heap</a>              272 ext/spl/spl_heap.c 	return heap-&gt;elements[0];</span>
+<span class='curline'><a href='../S/1061.html#L276'>heap</a>              276 ext/spl/spl_heap.c static spl_ptr_heap_element spl_ptr_heap_delete_top(spl_ptr_heap *heap, void *cmp_userdata TSRMLS_DC) { /* {{{ */</span>
+<span class='curline'><a href='../S/1061.html#L278'>heap</a>              278 ext/spl/spl_heap.c 	const int limit = (heap-&gt;count-1)/2;</span>
+<span class='curline'><a href='../S/1061.html#L282'>heap</a>              282 ext/spl/spl_heap.c 	if (heap-&gt;count == 0) {</span>
+<span class='curline'><a href='../S/1061.html#L286'>heap</a>              286 ext/spl/spl_heap.c 	top    = heap-&gt;elements[0];</span>
+<span class='curline'><a href='../S/1061.html#L287'>heap</a>              287 ext/spl/spl_heap.c 	bottom = heap-&gt;elements[--heap-&gt;count];</span>
+<span class='curline'><a href='../S/1061.html#L293'>heap</a>              293 ext/spl/spl_heap.c 		if(j != heap-&gt;count &amp;&amp; heap-&gt;cmp(heap-&gt;elements[j+1], heap-&gt;elements[j], cmp_userdata TSRMLS_CC) &gt; 0) {</span>
+<span class='curline'><a href='../S/1061.html#L298'>heap</a>              298 ext/spl/spl_heap.c 		if(heap-&gt;cmp(bottom, heap-&gt;elements[j], cmp_userdata TSRMLS_CC) &lt; 0) {</span>
+<span class='curline'><a href='../S/1061.html#L299'>heap</a>              299 ext/spl/spl_heap.c 			heap-&gt;elements[i] = heap-&gt;elements[j];</span>
+<span class='curline'><a href='../S/1061.html#L307'>heap</a>              307 ext/spl/spl_heap.c 		heap-&gt;flags |= SPL_HEAP_CORRUPTED;</span>
+<span class='curline'><a href='../S/1061.html#L310'>heap</a>              310 ext/spl/spl_heap.c 	heap-&gt;elements[i] = bottom;</span>
+<span class='curline'><a href='../S/1061.html#L311'>heap</a>              311 ext/spl/spl_heap.c 	heap-&gt;dtor(top TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1061.html#L319'>heap</a>              319 ext/spl/spl_heap.c 	spl_ptr_heap *heap = emalloc(sizeof(spl_ptr_heap));</span>
+<span class='curline'><a href='../S/1061.html#L321'>heap</a>              321 ext/spl/spl_heap.c 	heap-&gt;dtor     = from-&gt;dtor;</span>
+<span class='curline'><a href='../S/1061.html#L322'>heap</a>              322 ext/spl/spl_heap.c 	heap-&gt;ctor     = from-&gt;ctor;</span>
+<span class='curline'><a href='../S/1061.html#L323'>heap</a>              323 ext/spl/spl_heap.c 	heap-&gt;cmp      = from-&gt;cmp;</span>
+<span class='curline'><a href='../S/1061.html#L324'>heap</a>              324 ext/spl/spl_heap.c 	heap-&gt;max_size = from-&gt;max_size;</span>
+<span class='curline'><a href='../S/1061.html#L325'>heap</a>              325 ext/spl/spl_heap.c 	heap-&gt;count    = from-&gt;count;</span>
+<span class='curline'><a href='../S/1061.html#L326'>heap</a>              326 ext/spl/spl_heap.c 	heap-&gt;flags    = from-&gt;flags;</span>
+<span class='curline'><a href='../S/1061.html#L328'>heap</a>              328 ext/spl/spl_heap.c 	heap-&gt;elements = safe_emalloc(sizeof(spl_ptr_heap_element),from-&gt;max_size,0);</span>
+<span class='curline'><a href='../S/1061.html#L329'>heap</a>              329 ext/spl/spl_heap.c 	memcpy(heap-&gt;elements, from-&gt;elements, sizeof(spl_ptr_heap_element)*from-&gt;max_size);</span>
+<span class='curline'><a href='../S/1061.html#L331'>heap</a>              331 ext/spl/spl_heap.c 	for (i=0; i &lt; heap-&gt;count; ++i) {</span>
+<span class='curline'><a href='../S/1061.html#L332'>heap</a>              332 ext/spl/spl_heap.c 		heap-&gt;ctor(heap-&gt;elements[i] TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1061.html#L335'>heap</a>              335 ext/spl/spl_heap.c 	return heap;</span>
+<span class='curline'><a href='../S/1061.html#L339'>heap</a>              339 ext/spl/spl_heap.c static void spl_ptr_heap_destroy(spl_ptr_heap *heap TSRMLS_DC) { /* {{{ */</span>
+<span class='curline'><a href='../S/1061.html#L342'>heap</a>              342 ext/spl/spl_heap.c 	for (i=0; i &lt; heap-&gt;count; ++i) {</span>
+<span class='curline'><a href='../S/1061.html#L343'>heap</a>              343 ext/spl/spl_heap.c 		heap-&gt;dtor(heap-&gt;elements[i] TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1061.html#L346'>heap</a>              346 ext/spl/spl_heap.c 	efree(heap-&gt;elements);</span>
+<span class='curline'><a href='../S/1061.html#L347'>heap</a>              347 ext/spl/spl_heap.c 	efree(heap);</span>
+<span class='curline'><a href='../S/1061.html#L351'>heap</a>              351 ext/spl/spl_heap.c static int spl_ptr_heap_count(spl_ptr_heap *heap) { /* {{{ */</span>
+<span class='curline'><a href='../S/1061.html#L352'>heap</a>              352 ext/spl/spl_heap.c 	return heap-&gt;count;</span>
+<span class='curline'><a href='../S/1061.html#L366'>heap</a>              366 ext/spl/spl_heap.c 	for (i = 0; i &lt; intern-&gt;heap-&gt;count; ++i) {</span>
+<span class='curline'><a href='../S/1061.html#L367'>heap</a>              367 ext/spl/spl_heap.c 		if (intern-&gt;heap-&gt;elements[i]) {</span>
+<span class='curline'><a href='../S/1061.html#L368'>heap</a>              368 ext/spl/spl_heap.c 			zval_ptr_dtor((zval **)&amp;intern-&gt;heap-&gt;elements[i]);</span>
+<span class='curline'><a href='../S/1061.html#L372'>heap</a>              372 ext/spl/spl_heap.c 	spl_ptr_heap_destroy(intern-&gt;heap TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1061.html#L409'>heap</a>              409 ext/spl/spl_heap.c 			intern-&gt;heap = spl_ptr_heap_clone(other-&gt;heap TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1061.html#L410'>heap</a>              410 ext/spl/spl_heap.c 			for (i = 0; i &lt; intern-&gt;heap-&gt;count; ++i) {</span>
+<span class='curline'><a href='../S/1061.html#L411'>heap</a>              411 ext/spl/spl_heap.c 				if (intern-&gt;heap-&gt;elements[i]) {</span>
+<span class='curline'><a href='../S/1061.html#L412'>heap</a>              412 ext/spl/spl_heap.c 					Z_ADDREF_P((zval *)intern-&gt;heap-&gt;elements[i]);</span>
+<span class='curline'><a href='../S/1061.html#L416'>heap</a>              416 ext/spl/spl_heap.c 			intern-&gt;heap = other-&gt;heap;</span>
+<span class='curline'><a href='../S/1061.html#L421'>heap</a>              421 ext/spl/spl_heap.c 		intern-&gt;heap = spl_ptr_heap_init(spl_ptr_heap_zval_max_cmp, spl_ptr_heap_zval_ctor, spl_ptr_heap_zval_dtor);</span>
+<span class='curline'><a href='../S/1061.html#L428'>heap</a>              428 ext/spl/spl_heap.c 			intern-&gt;heap-&gt;cmp = spl_ptr_pqueue_zval_cmp;</span>
+<span class='curline'><a href='../S/1061.html#L435'>heap</a>              435 ext/spl/spl_heap.c 			intern-&gt;heap-&gt;cmp = spl_ptr_heap_zval_min_cmp;</span>
+<span class='curline'><a href='../S/1061.html#L440'>heap</a>              440 ext/spl/spl_heap.c 			intern-&gt;heap-&gt;cmp = spl_ptr_heap_zval_max_cmp;</span>
+<span class='curline'><a href='../S/1061.html#L517'>heap</a>              517 ext/spl/spl_heap.c 	*count = spl_ptr_heap_count(intern-&gt;heap);</span>
+<span class='curline'><a href='../S/1061.html#L552'>heap</a>              552 ext/spl/spl_heap.c 		add_assoc_bool_ex(&amp;zrv, pnstr, pnlen+1, intern-&gt;heap-&gt;flags&amp;SPL_HEAP_CORRUPTED);</span>
+<span class='curline'><a href='../S/1061.html#L558'>heap</a>              558 ext/spl/spl_heap.c 		for (i = 0; i &lt; intern-&gt;heap-&gt;count; ++i) {</span>
+<span class='curline'><a href='../S/1061.html#L559'>heap</a>              559 ext/spl/spl_heap.c 			add_index_zval(heap_array, i, (zval *)intern-&gt;heap-&gt;elements[i]);</span>
+<span class='curline'><a href='../S/1061.html#L560'>heap</a>              560 ext/spl/spl_heap.c 			Z_ADDREF_P(intern-&gt;heap-&gt;elements[i]);</span>
+<span class='curline'><a href='../S/1061.html#L595'>heap</a>              595 ext/spl/spl_heap.c 	count = spl_ptr_heap_count(intern-&gt;heap);</span>
+<span class='curline'><a href='../S/1061.html#L610'>heap</a>              610 ext/spl/spl_heap.c 	RETURN_BOOL(spl_ptr_heap_count(intern-&gt;heap)==0);</span>
+<span class='curline'><a href='../S/1061.html#L627'>heap</a>              627 ext/spl/spl_heap.c 	if (intern-&gt;heap-&gt;flags &amp; SPL_HEAP_CORRUPTED) {</span>
+<span class='curline'><a href='../S/1061.html#L634'>heap</a>              634 ext/spl/spl_heap.c 	spl_ptr_heap_insert(intern-&gt;heap, value, getThis() TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1061.html#L653'>heap</a>              653 ext/spl/spl_heap.c 	if (intern-&gt;heap-&gt;flags &amp; SPL_HEAP_CORRUPTED) {</span>
+<span class='curline'><a href='../S/1061.html#L658'>heap</a>              658 ext/spl/spl_heap.c 	value  = (zval *)spl_ptr_heap_delete_top(intern-&gt;heap, getThis() TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1061.html#L682'>heap</a>              682 ext/spl/spl_heap.c 	if (intern-&gt;heap-&gt;flags &amp; SPL_HEAP_CORRUPTED) {</span>
+<span class='curline'><a href='../S/1061.html#L696'>heap</a>              696 ext/spl/spl_heap.c 	spl_ptr_heap_insert(intern-&gt;heap, elem, getThis() TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1061.html#L715'>heap</a>              715 ext/spl/spl_heap.c 	if (intern-&gt;heap-&gt;flags &amp; SPL_HEAP_CORRUPTED) {</span>
+<span class='curline'><a href='../S/1061.html#L720'>heap</a>              720 ext/spl/spl_heap.c 	value  = (zval *)spl_ptr_heap_delete_top(intern-&gt;heap, getThis() TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1061.html#L758'>heap</a>              758 ext/spl/spl_heap.c 	if (intern-&gt;heap-&gt;flags &amp; SPL_HEAP_CORRUPTED) {</span>
+<span class='curline'><a href='../S/1061.html#L763'>heap</a>              763 ext/spl/spl_heap.c 	value  = (zval *)spl_ptr_heap_top(intern-&gt;heap);</span>
+<span class='curline'><a href='../S/1061.html#L812'>heap</a>              812 ext/spl/spl_heap.c 	intern-&gt;heap-&gt;flags = intern-&gt;heap-&gt;flags &amp; ~SPL_HEAP_CORRUPTED;</span>
+<span class='curline'><a href='../S/1061.html#L845'>heap</a>              845 ext/spl/spl_heap.c 	if (intern-&gt;heap-&gt;flags &amp; SPL_HEAP_CORRUPTED) {</span>
+<span class='curline'><a href='../S/1061.html#L850'>heap</a>              850 ext/spl/spl_heap.c 	value  = (zval *)spl_ptr_heap_top(intern-&gt;heap);</span>
+<span class='curline'><a href='../S/1061.html#L910'>heap</a>              910 ext/spl/spl_heap.c 	return (iterator-&gt;object-&gt;heap-&gt;count != 0 ? SUCCESS : FAILURE);</span>
+<span class='curline'><a href='../S/1061.html#L917'>heap</a>              917 ext/spl/spl_heap.c 	zval        **element  = (zval **)&amp;iterator-&gt;object-&gt;heap-&gt;elements[0];</span>
+<span class='curline'><a href='../S/1061.html#L919'>heap</a>              919 ext/spl/spl_heap.c 	if (iterator-&gt;object-&gt;heap-&gt;flags &amp; SPL_HEAP_CORRUPTED) {</span>
+<span class='curline'><a href='../S/1061.html#L924'>heap</a>              924 ext/spl/spl_heap.c 	if (iterator-&gt;object-&gt;heap-&gt;count == 0 || !*element) {</span>
+<span class='curline'><a href='../S/1061.html#L935'>heap</a>              935 ext/spl/spl_heap.c 	zval        **element  = (zval **)&amp;iterator-&gt;object-&gt;heap-&gt;elements[0];</span>
+<span class='curline'><a href='../S/1061.html#L937'>heap</a>              937 ext/spl/spl_heap.c 	if (iterator-&gt;object-&gt;heap-&gt;flags &amp; SPL_HEAP_CORRUPTED) {</span>
+<span class='curline'><a href='../S/1061.html#L942'>heap</a>              942 ext/spl/spl_heap.c 	if (iterator-&gt;object-&gt;heap-&gt;count == 0 || !*element) {</span>
+<span class='curline'><a href='../S/1061.html#L957'>heap</a>              957 ext/spl/spl_heap.c 	ZVAL_LONG(key, iterator-&gt;object-&gt;heap-&gt;count - 1);</span>
+<span class='curline'><a href='../S/1061.html#L967'>heap</a>              967 ext/spl/spl_heap.c 	if (iterator-&gt;object-&gt;heap-&gt;flags &amp; SPL_HEAP_CORRUPTED) {</span>
+<span class='curline'><a href='../S/1061.html#L972'>heap</a>              972 ext/spl/spl_heap.c 	elem = spl_ptr_heap_delete_top(iterator-&gt;object-&gt;heap, object TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1061.html#L992'>heap</a>              992 ext/spl/spl_heap.c 	RETURN_LONG(intern-&gt;heap-&gt;count - 1);</span>
+<span class='curline'><a href='../S/1061.html#L1001'>heap</a>             1001 ext/spl/spl_heap.c 	spl_ptr_heap_element  elem   = spl_ptr_heap_delete_top(intern-&gt;heap, getThis() TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1061.html#L1023'>heap</a>             1023 ext/spl/spl_heap.c 	RETURN_BOOL(intern-&gt;heap-&gt;count != 0);</span>
+<span class='curline'><a href='../S/1061.html#L1043'>heap</a>             1043 ext/spl/spl_heap.c 	zval            *element = (zval *)intern-&gt;heap-&gt;elements[0];</span>
+<span class='curline'><a href='../S/1061.html#L1049'>heap</a>             1049 ext/spl/spl_heap.c 	if (!intern-&gt;heap-&gt;count || !element) {</span>
+<span class='curline'><a href='../S/1061.html#L1062'>heap</a>             1062 ext/spl/spl_heap.c 	zval            **element = (zval **)&amp;intern-&gt;heap-&gt;elements[0];</span>
+<span class='curline'><a href='../S/1061.html#L1068'>heap</a>             1068 ext/spl/spl_heap.c 	if (!intern-&gt;heap-&gt;count || !*element) {</span>
+<span class='curline'><a href='../S/1067.html#L61665'>heap</a>             61665 ext/sqlite3/libsqlite/sqlite3.c   u32 *heap = 0;</span>
+<span class='curline'><a href='../S/1067.html#L61811'>heap</a>             61811 ext/sqlite3/libsqlite/sqlite3.c   heap = (u32*)sqlite3PageMalloc( pBt-&gt;pageSize );</span>
+<span class='curline'><a href='../S/1067.html#L61813'>heap</a>             61813 ext/sqlite3/libsqlite/sqlite3.c   if( heap==0 ){</span>
+<span class='curline'><a href='../S/1067.html#L61818'>heap</a>             61818 ext/sqlite3/libsqlite/sqlite3.c     heap[0] = 0;</span>
+<span class='curline'><a href='../S/1067.html#L61819'>heap</a>             61819 ext/sqlite3/libsqlite/sqlite3.c     btreeHeapInsert(heap, contentOffset-1);</span>
+<span class='curline'><a href='../S/1067.html#L61839'>heap</a>             61839 ext/sqlite3/libsqlite/sqlite3.c         btreeHeapInsert(heap, (pc&lt;&lt;16)|(pc+size-1));</span>
+<span class='curline'><a href='../S/1067.html#L61851'>heap</a>             61851 ext/sqlite3/libsqlite/sqlite3.c       btreeHeapInsert(heap, (i&lt;&lt;16)|(i+size-1));</span>
+<span class='curline'><a href='../S/1067.html#L61864'>heap</a>             61864 ext/sqlite3/libsqlite/sqlite3.c     assert( heap[0]&gt;0 );</span>
+<span class='curline'><a href='../S/1067.html#L61865'>heap</a>             61865 ext/sqlite3/libsqlite/sqlite3.c     assert( (heap[1]&gt;&gt;16)==0 );</span>
+<span class='curline'><a href='../S/1067.html#L61866'>heap</a>             61866 ext/sqlite3/libsqlite/sqlite3.c     btreeHeapPull(heap,&amp;prev);</span>
+<span class='curline'><a href='../S/1067.html#L61867'>heap</a>             61867 ext/sqlite3/libsqlite/sqlite3.c     while( btreeHeapPull(heap,&amp;x) ){</span>
+<span class='curline'><a href='../S/1067.html#L61883'>heap</a>             61883 ext/sqlite3/libsqlite/sqlite3.c     if( heap[0]==0 &amp;&amp; cnt!=data[hdr+7] ){</span>
+<span class='curline'><a href='../S/1067.html#L61889'>heap</a>             61889 ext/sqlite3/libsqlite/sqlite3.c   sqlite3PageFree(heap);</span>
+<span class='curline'><a href='../S/1457.html#L151'>heap</a>              151 sapi/cli/php_cli_server.c 		struct { void *block; char *p; size_t len; } heap;</span>
+<span class='curline'><a href='../S/1457.html#L982'>heap</a>              982 sapi/cli/php_cli_server.c 		return chunk-&gt;data.heap.len;</span>
+<span class='curline'><a href='../S/1457.html#L993'>heap</a>              993 sapi/cli/php_cli_server.c 		if (chunk-&gt;data.heap.block != chunk) {</span>
+<span class='curline'><a href='../S/1457.html#L994'>heap</a>              994 sapi/cli/php_cli_server.c 			pefree(chunk-&gt;data.heap.block, 1);</span>
+<span class='curline'><a href='../S/1457.html#L1074'>heap</a>             1074 sapi/cli/php_cli_server.c 	chunk-&gt;data.heap.block = block;</span>
+<span class='curline'><a href='../S/1457.html#L1075'>heap</a>             1075 sapi/cli/php_cli_server.c 	chunk-&gt;data.heap.p = buf;</span>
+<span class='curline'><a href='../S/1457.html#L1076'>heap</a>             1076 sapi/cli/php_cli_server.c 	chunk-&gt;data.heap.len = len;</span>
+<span class='curline'><a href='../S/1457.html#L1089'>heap</a>             1089 sapi/cli/php_cli_server.c 	chunk-&gt;data.heap.block = chunk;</span>
+<span class='curline'><a href='../S/1457.html#L1090'>heap</a>             1090 sapi/cli/php_cli_server.c 	chunk-&gt;data.heap.p = (char *)(chunk + 1);</span>
+<span class='curline'><a href='../S/1457.html#L1091'>heap</a>             1091 sapi/cli/php_cli_server.c 	chunk-&gt;data.heap.len = len;</span>
+<span class='curline'><a href='../S/1457.html#L1116'>heap</a>             1116 sapi/cli/php_cli_server.c 			nbytes_sent = send(fd, chunk-&gt;data.heap.p, chunk-&gt;data.heap.len, 0);</span>
+<span class='curline'><a href='../S/1457.html#L1120'>heap</a>             1120 sapi/cli/php_cli_server.c 			} else if (nbytes_sent == chunk-&gt;data.heap.len) {</span>
+<span class='curline'><a href='../S/1457.html#L1128'>heap</a>             1128 sapi/cli/php_cli_server.c 				chunk-&gt;data.heap.p += nbytes_sent;</span>
+<span class='curline'><a href='../S/1457.html#L1129'>heap</a>             1129 sapi/cli/php_cli_server.c 				chunk-&gt;data.heap.len -= nbytes_sent;</span>
+<span class='curline'><a href='../S/1457.html#L1163'>heap</a>             1163 sapi/cli/php_cli_server.c 	_nbytes_read = read(fd, chunk-&gt;data.heap.p, chunk-&gt;data.heap.len);</span>
+<span class='curline'><a href='../S/1457.html#L1173'>heap</a>             1173 sapi/cli/php_cli_server.c 	chunk-&gt;data.heap.len = _nbytes_read;</span>
+<span class='curline'><a href='../S/1457.html#L1953'>heap</a>             1953 sapi/cli/php_cli_server.c 		snprintf(chunk-&gt;data.heap.p, chunk-&gt;data.heap.len, prologue_template, status, status_string, escaped_request_uri);</span>
+<span class='curline'><a href='../S/1457.html#L1954'>heap</a>             1954 sapi/cli/php_cli_server.c 		chunk-&gt;data.heap.len = strlen(chunk-&gt;data.heap.p);</span>
+<span class='curline'><a href='../S/1457.html#L1977'>heap</a>             1977 sapi/cli/php_cli_server.c 		snprintf(chunk-&gt;data.heap.p, chunk-&gt;data.heap.len, content_template, status_string, escaped_request_uri);</span>
+<span class='curline'><a href='../S/1457.html#L1978'>heap</a>             1978 sapi/cli/php_cli_server.c 		chunk-&gt;data.heap.len = strlen(chunk-&gt;data.heap.p);</span>
+<span class='curline'><a href='../S/1581.html#L33'>heap</a>               33 sapi/phpdbg/phpdbg_win.h void phpdbg_win_set_mm_heap(zend_mm_heap *heap);</span>
+</pre>
+</body>
+</html>

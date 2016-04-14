@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>SIGG</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/1671.html#L1224'>SIGG</a>             1224 Zend/zend_execute_API.c 		SIGG(running) = 0;</span>
+<span class='curline'><a href='../S/1726.html#L79'>SIGG</a>               79 Zend/zend_signal.c 	if (SIGG(active)) {</span>
+<span class='curline'><a href='../S/1726.html#L80'>SIGG</a>               80 Zend/zend_signal.c 		if (SIGG(depth) == 0) { /* try to handle signal */</span>
+<span class='curline'><a href='../S/1726.html#L81'>SIGG</a>               81 Zend/zend_signal.c 			if (SIGG(blocked) != -1) { /* inverse */</span>
+<span class='curline'><a href='../S/1726.html#L82'>SIGG</a>               82 Zend/zend_signal.c 				SIGG(blocked) = -1; /* signal is not blocked */</span>
+<span class='curline'><a href='../S/1726.html#L84'>SIGG</a>               84 Zend/zend_signal.c 			if (SIGG(running) == 0) {</span>
+<span class='curline'><a href='../S/1726.html#L85'>SIGG</a>               85 Zend/zend_signal.c 				SIGG(running) = 1;</span>
+<span class='curline'><a href='../S/1726.html#L88'>SIGG</a>               88 Zend/zend_signal.c 				queue = SIGG(phead);</span>
+<span class='curline'><a href='../S/1726.html#L89'>SIGG</a>               89 Zend/zend_signal.c 				SIGG(phead) = NULL;</span>
+<span class='curline'><a href='../S/1726.html#L94'>SIGG</a>               94 Zend/zend_signal.c 					queue-&gt;next = SIGG(pavail);</span>
+<span class='curline'><a href='../S/1726.html#L96'>SIGG</a>               96 Zend/zend_signal.c 					SIGG(pavail) = queue;</span>
+<span class='curline'><a href='../S/1726.html#L99'>SIGG</a>               99 Zend/zend_signal.c 				SIGG(running) = 0;</span>
+<span class='curline'><a href='../S/1726.html#L102'>SIGG</a>              102 Zend/zend_signal.c 			SIGG(blocked) = 0; /* signal is blocked */</span>
+<span class='curline'><a href='../S/1726.html#L104'>SIGG</a>              104 Zend/zend_signal.c 			if ((queue = SIGG(pavail))) { /* if none available it's simply forgotton */</span>
+<span class='curline'><a href='../S/1726.html#L105'>SIGG</a>              105 Zend/zend_signal.c 				SIGG(pavail) = queue-&gt;next;</span>
+<span class='curline'><a href='../S/1726.html#L111'>SIGG</a>              111 Zend/zend_signal.c 				if (SIGG(phead) &amp;&amp; SIGG(ptail)) {</span>
+<span class='curline'><a href='../S/1726.html#L112'>SIGG</a>              112 Zend/zend_signal.c 					SIGG(ptail)-&gt;next = queue;</span>
+<span class='curline'><a href='../S/1726.html#L114'>SIGG</a>              114 Zend/zend_signal.c 					SIGG(phead) = queue;</span>
+<span class='curline'><a href='../S/1726.html#L116'>SIGG</a>              116 Zend/zend_signal.c 				SIGG(ptail) = queue;</span>
+<span class='curline'><a href='../S/1726.html#L139'>SIGG</a>              139 Zend/zend_signal.c 	if (SIGG(active)) {</span>
+<span class='curline'><a href='../S/1726.html#L141'>SIGG</a>              141 Zend/zend_signal.c 		queue = SIGG(phead);</span>
+<span class='curline'><a href='../S/1726.html#L142'>SIGG</a>              142 Zend/zend_signal.c 		SIGG(phead) = queue-&gt;next;</span>
+<span class='curline'><a href='../S/1726.html#L144'>SIGG</a>              144 Zend/zend_signal.c 		queue-&gt;next = SIGG(pavail);</span>
+<span class='curline'><a href='../S/1726.html#L146'>SIGG</a>              146 Zend/zend_signal.c 		SIGG(pavail) = queue;</span>
+<span class='curline'><a href='../S/1726.html#L162'>SIGG</a>              162 Zend/zend_signal.c 	zend_signal_entry_t p_sig = SIGG(handlers)[signo-1];</span>
+<span class='curline'><a href='../S/1726.html#L181'>SIGG</a>              181 Zend/zend_signal.c 				SIGG(handlers)[signo-1].flags   = 0;</span>
+<span class='curline'><a href='../S/1726.html#L182'>SIGG</a>              182 Zend/zend_signal.c 				SIGG(handlers)[signo-1].handler = SIG_DFL;</span>
+<span class='curline'><a href='../S/1726.html#L201'>SIGG</a>              201 Zend/zend_signal.c 		oldact-&gt;sa_flags   = SIGG(handlers)[signo-1].flags;</span>
+<span class='curline'><a href='../S/1726.html#L202'>SIGG</a>              202 Zend/zend_signal.c 		oldact-&gt;sa_handler = (void *) SIGG(handlers)[signo-1].handler;</span>
+<span class='curline'><a href='../S/1726.html#L206'>SIGG</a>              206 Zend/zend_signal.c 		SIGG(handlers)[signo-1].flags = act-&gt;sa_flags;</span>
+<span class='curline'><a href='../S/1726.html#L208'>SIGG</a>              208 Zend/zend_signal.c 			SIGG(handlers)[signo-1].handler = (void *) act-&gt;sa_sigaction;</span>
+<span class='curline'><a href='../S/1726.html#L210'>SIGG</a>              210 Zend/zend_signal.c 			SIGG(handlers)[signo-1].handler = (void *) act-&gt;sa_handler;</span>
+<span class='curline'><a href='../S/1726.html#L258'>SIGG</a>              258 Zend/zend_signal.c 		SIGG(handlers)[signo-1].flags = sa.sa_flags;</span>
+<span class='curline'><a href='../S/1726.html#L260'>SIGG</a>              260 Zend/zend_signal.c 			SIGG(handlers)[signo-1].handler = (void *)sa.sa_sigaction;</span>
+<span class='curline'><a href='../S/1726.html#L262'>SIGG</a>              262 Zend/zend_signal.c 			SIGG(handlers)[signo-1].handler = (void *)sa.sa_handler;</span>
+<span class='curline'><a href='../S/1726.html#L284'>SIGG</a>              284 Zend/zend_signal.c 	memcpy(&amp;SIGG(handlers), &amp;global_orig_handlers, sizeof(global_orig_handlers));</span>
+<span class='curline'><a href='../S/1726.html#L290'>SIGG</a>              290 Zend/zend_signal.c 	SIGG(active) = 1;</span>
+<span class='curline'><a href='../S/1726.html#L291'>SIGG</a>              291 Zend/zend_signal.c 	SIGG(depth)  = 0;</span>
+<span class='curline'><a href='../S/1726.html#L301'>SIGG</a>              301 Zend/zend_signal.c 	if (SIGG(check)) {</span>
+<span class='curline'><a href='../S/1726.html#L302'>SIGG</a>              302 Zend/zend_signal.c 		if (SIGG(depth) != 0) {</span>
+<span class='curline'><a href='../S/1726.html#L303'>SIGG</a>              303 Zend/zend_signal.c 			zend_error(E_CORE_WARNING, "zend_signal: shutdown with non-zero blocking depth (%d)", SIGG(depth));</span>
+<span class='curline'><a href='../S/1726.html#L315'>SIGG</a>              315 Zend/zend_signal.c 	SIGG(active) = 0;</span>
+<span class='curline'><a href='../S/1726.html#L316'>SIGG</a>              316 Zend/zend_signal.c 	SIGG(running) = 0;</span>
+<span class='curline'><a href='../S/1726.html#L317'>SIGG</a>              317 Zend/zend_signal.c 	SIGG(blocked) = -1;</span>
+<span class='curline'><a href='../S/1726.html#L318'>SIGG</a>              318 Zend/zend_signal.c 	SIGG(depth) = 0;</span>
+<span class='curline'><a href='../S/1727.html#L72'>SIGG</a>               72 Zend/zend_signal.h # define ZEND_SIGNAL_BLOCK_INTERRUPUTIONS() if (EXPECTED(zend_signal_globals_id)) { SIGG(depth)++; }</span>
+<span class='curline'><a href='../S/1727.html#L73'>SIGG</a>               73 Zend/zend_signal.h # define ZEND_SIGNAL_UNBLOCK_INTERRUPTIONS() if (EXPECTED(zend_signal_globals_id) &amp;&amp; UNEXPECTED((--SIGG(depth))==SIGG(blocked))) { zend_signal_handler_unblock(TSRMLS_C); }</span>
+<span class='curline'><a href='../S/1727.html#L77'>SIGG</a>               77 Zend/zend_signal.h # define ZEND_SIGNAL_BLOCK_INTERRUPUTIONS()  SIGG(depth)++;</span>
+<span class='curline'><a href='../S/1727.html#L78'>SIGG</a>               78 Zend/zend_signal.h # define ZEND_SIGNAL_UNBLOCK_INTERRUPTIONS() if (UNEXPECTED((--SIGG(depth))==SIGG(blocked))) { zend_signal_handler_unblock(TSRMLS_C); }</span>
+</pre>
+</body>
+</html>

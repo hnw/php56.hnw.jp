@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>PW32G</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/1625.html#L182'>PW32G</a>             182 win32/registry.c 	if (!PW32G(registry_directories)) {</span>
+<span class='curline'><a href='../S/1625.html#L183'>PW32G</a>             183 win32/registry.c 		PW32G(registry_directories) = (HashTable*)malloc(sizeof(HashTable));</span>
+<span class='curline'><a href='../S/1625.html#L184'>PW32G</a>             184 win32/registry.c 		if (!PW32G(registry_directories)) {</span>
+<span class='curline'><a href='../S/1625.html#L187'>PW32G</a>             187 win32/registry.c 		zend_hash_init(PW32G(registry_directories), 0, NULL, delete_internal_hashtable, 1);</span>
+<span class='curline'><a href='../S/1625.html#L188'>PW32G</a>             188 win32/registry.c 		if (!OpenPhpRegistryKey("\\Per Directory Values", &amp;PW32G(registry_key))) {</span>
+<span class='curline'><a href='../S/1625.html#L189'>PW32G</a>             189 win32/registry.c 			PW32G(registry_key) = NULL;</span>
+<span class='curline'><a href='../S/1625.html#L192'>PW32G</a>             192 win32/registry.c 		PW32G(registry_event) = CreateEvent(NULL, TRUE, FALSE, NULL);</span>
+<span class='curline'><a href='../S/1625.html#L193'>PW32G</a>             193 win32/registry.c 		if (PW32G(registry_event)) {</span>
+<span class='curline'><a href='../S/1625.html#L194'>PW32G</a>             194 win32/registry.c 			RegNotifyChangeKeyValue(PW32G(registry_key), TRUE, RegNotifyFlags, PW32G(registry_event), TRUE);</span>
+<span class='curline'><a href='../S/1625.html#L196'>PW32G</a>             196 win32/registry.c 		if (!LoadDirectory(PW32G(registry_directories), PW32G(registry_key), "", 0, NULL)) {</span>
+<span class='curline'><a href='../S/1625.html#L199'>PW32G</a>             199 win32/registry.c 	} else if (PW32G(registry_event) &amp;&amp; WaitForSingleObject(PW32G(registry_event), 0) == WAIT_OBJECT_0) {</span>
+<span class='curline'><a href='../S/1625.html#L200'>PW32G</a>             200 win32/registry.c 		RegNotifyChangeKeyValue(PW32G(registry_key), TRUE, RegNotifyFlags, PW32G(registry_event), TRUE);</span>
+<span class='curline'><a href='../S/1625.html#L201'>PW32G</a>             201 win32/registry.c 		zend_hash_clean(PW32G(registry_directories));</span>
+<span class='curline'><a href='../S/1625.html#L202'>PW32G</a>             202 win32/registry.c 		if (!LoadDirectory(PW32G(registry_directories), PW32G(registry_key), "", 0, NULL)) {</span>
+<span class='curline'><a href='../S/1625.html#L205'>PW32G</a>             205 win32/registry.c 	} else if (zend_hash_num_elements(PW32G(registry_directories)) == 0) {</span>
+<span class='curline'><a href='../S/1625.html#L252'>PW32G</a>             252 win32/registry.c 		if (zend_hash_find(PW32G(registry_directories), path, path_len+1, (void**)&amp;pht) == SUCCESS) {</span>
+<span class='curline'><a href='../S/1641.html#L65'>PW32G</a>              65 win32/wsyslog.c 	if (PW32G(log_source)) {</span>
+<span class='curline'><a href='../S/1641.html#L66'>PW32G</a>              66 win32/wsyslog.c 		DeregisterEventSource(PW32G(log_source));</span>
+<span class='curline'><a href='../S/1641.html#L67'>PW32G</a>              67 win32/wsyslog.c 		PW32G(log_source) = NULL;</span>
+<span class='curline'><a href='../S/1641.html#L69'>PW32G</a>              69 win32/wsyslog.c 	if (PW32G(log_header)) {</span>
+<span class='curline'><a href='../S/1641.html#L70'>PW32G</a>              70 win32/wsyslog.c 		STR_FREE(PW32G(log_header));</span>
+<span class='curline'><a href='../S/1641.html#L71'>PW32G</a>              71 win32/wsyslog.c 		PW32G(log_header) = NULL;</span>
+<span class='curline'><a href='../S/1641.html#L91'>PW32G</a>              91 win32/wsyslog.c 	if (!PW32G(log_source))</span>
+<span class='curline'><a href='../S/1641.html#L109'>PW32G</a>             109 win32/wsyslog.c 	strs[0] = PW32G(log_header);	/* write header */</span>
+<span class='curline'><a href='../S/1641.html#L112'>PW32G</a>             112 win32/wsyslog.c 	ReportEvent(PW32G(log_source), etype, (unsigned short) priority, evid, NULL, 2, 0, strs, NULL);</span>
+<span class='curline'><a href='../S/1641.html#L128'>PW32G</a>             128 win32/wsyslog.c 	if (PW32G(log_source)) {</span>
+<span class='curline'><a href='../S/1641.html#L132'>PW32G</a>             132 win32/wsyslog.c 	STR_FREE(PW32G(log_header));</span>
+<span class='curline'><a href='../S/1641.html#L134'>PW32G</a>             134 win32/wsyslog.c 	PW32G(log_source) = RegisterEventSource(NULL, "PHP-" PHP_VERSION);</span>
+<span class='curline'><a href='../S/1641.html#L135'>PW32G</a>             135 win32/wsyslog.c 	spprintf(&amp;PW32G(log_header), 0, (logopt &amp; LOG_PID) ? "%s[%d]" : "%s", ident, getpid());</span>
+</pre>
+</body>
+</html>

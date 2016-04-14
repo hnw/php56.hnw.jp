@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>alfi</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/1045.html#L401'>alfi</a>              401 ext/spl/php_spl.c static void autoload_func_info_dtor(autoload_func_info *alfi)</span>
+<span class='curline'><a href='../S/1045.html#L403'>alfi</a>              403 ext/spl/php_spl.c 	if (alfi-&gt;obj) {</span>
+<span class='curline'><a href='../S/1045.html#L404'>alfi</a>              404 ext/spl/php_spl.c 		zval_ptr_dtor(&amp;alfi-&gt;obj);</span>
+<span class='curline'><a href='../S/1045.html#L406'>alfi</a>              406 ext/spl/php_spl.c 	if (alfi-&gt;closure) {</span>
+<span class='curline'><a href='../S/1045.html#L407'>alfi</a>              407 ext/spl/php_spl.c 		zval_ptr_dtor(&amp;alfi-&gt;closure);</span>
+<span class='curline'><a href='../S/1045.html#L421'>alfi</a>              421 ext/spl/php_spl.c 	autoload_func_info *alfi;</span>
+<span class='curline'><a href='../S/1045.html#L435'>alfi</a>              435 ext/spl/php_spl.c 			zend_hash_get_current_data_ex(SPL_G(autoload_functions), (void **) &amp;alfi, &amp;function_pos);</span>
+<span class='curline'><a href='../S/1045.html#L436'>alfi</a>              436 ext/spl/php_spl.c 			zend_call_method(alfi-&gt;obj ? &amp;alfi-&gt;obj : NULL, alfi-&gt;ce, &amp;alfi-&gt;func_ptr, func_name, func_name_len, &amp;retval, 1, class_name, NULL TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1045.html#L475'>alfi</a>              475 ext/spl/php_spl.c 	autoload_func_info alfi;</span>
+<span class='curline'><a href='../S/1045.html#L496'>alfi</a>              496 ext/spl/php_spl.c 			alfi.ce = fcc.calling_scope;</span>
+<span class='curline'><a href='../S/1045.html#L497'>alfi</a>              497 ext/spl/php_spl.c 			alfi.func_ptr = fcc.function_handler;</span>
+<span class='curline'><a href='../S/1045.html#L500'>alfi</a>              500 ext/spl/php_spl.c 				if (!obj_ptr &amp;&amp; alfi.func_ptr &amp;&amp; !(alfi.func_ptr-&gt;common.fn_flags &amp; ZEND_ACC_STATIC)) {</span>
+<span class='curline'><a href='../S/1045.html#L511'>alfi</a>              511 ext/spl/php_spl.c 					zend_throw_exception_ex(spl_ce_LogicException, 0 TSRMLS_CC, "Passed array does not specify %s %smethod (%s)", alfi.func_ptr ? "a callable" : "an existing", !obj_ptr ? "static " : "", error);</span>
+<span class='curline'><a href='../S/1045.html#L520'>alfi</a>              520 ext/spl/php_spl.c 					zend_throw_exception_ex(spl_ce_LogicException, 0 TSRMLS_CC, "Function '%s' not %s (%s)", func_name, alfi.func_ptr ? "callable" : "found", error);</span>
+<span class='curline'><a href='../S/1045.html#L538'>alfi</a>              538 ext/spl/php_spl.c 		alfi.closure = NULL;</span>
+<span class='curline'><a href='../S/1045.html#L539'>alfi</a>              539 ext/spl/php_spl.c 		alfi.ce = fcc.calling_scope;</span>
+<span class='curline'><a href='../S/1045.html#L540'>alfi</a>              540 ext/spl/php_spl.c 		alfi.func_ptr = fcc.function_handler;</span>
+<span class='curline'><a href='../S/1045.html#L551'>alfi</a>              551 ext/spl/php_spl.c 			alfi.closure = zcallable;</span>
+<span class='curline'><a href='../S/1045.html#L562'>alfi</a>              562 ext/spl/php_spl.c 			if (alfi.closure) {</span>
+<span class='curline'><a href='../S/1045.html#L568'>alfi</a>              568 ext/spl/php_spl.c 		if (obj_ptr &amp;&amp; !(alfi.func_ptr-&gt;common.fn_flags &amp; ZEND_ACC_STATIC)) {</span>
+<span class='curline'><a href='../S/1045.html#L574'>alfi</a>              574 ext/spl/php_spl.c 			alfi.obj = obj_ptr;</span>
+<span class='curline'><a href='../S/1045.html#L575'>alfi</a>              575 ext/spl/php_spl.c 			Z_ADDREF_P(alfi.obj);</span>
+<span class='curline'><a href='../S/1045.html#L577'>alfi</a>              577 ext/spl/php_spl.c 			alfi.obj = NULL;</span>
+<span class='curline'><a href='../S/1045.html#L601'>alfi</a>              601 ext/spl/php_spl.c 		if (zend_hash_add(SPL_G(autoload_functions), lc_name, func_name_len+1, &amp;alfi.func_ptr, sizeof(autoload_func_info), NULL) == FAILURE) {</span>
+<span class='curline'><a href='../S/1045.html#L602'>alfi</a>              602 ext/spl/php_spl.c 			if (obj_ptr &amp;&amp; !(alfi.func_ptr-&gt;common.fn_flags &amp; ZEND_ACC_STATIC)) {</span>
+<span class='curline'><a href='../S/1045.html#L603'>alfi</a>              603 ext/spl/php_spl.c 				Z_DELREF_P(alfi.obj);</span>
+<span class='curline'><a href='../S/1045.html#L605'>alfi</a>              605 ext/spl/php_spl.c 			if (alfi.closure) {</span>
+<span class='curline'><a href='../S/1045.html#L606'>alfi</a>              606 ext/spl/php_spl.c 				Z_DELREF_P(alfi.closure);</span>
+<span class='curline'><a href='../S/1045.html#L712'>alfi</a>              712 ext/spl/php_spl.c 	autoload_func_info *alfi;</span>
+<span class='curline'><a href='../S/1045.html#L733'>alfi</a>              733 ext/spl/php_spl.c 			zend_hash_get_current_data_ex(SPL_G(autoload_functions), (void **) &amp;alfi, &amp;function_pos);</span>
+<span class='curline'><a href='../S/1045.html#L734'>alfi</a>              734 ext/spl/php_spl.c 			if (alfi-&gt;closure) {</span>
+<span class='curline'><a href='../S/1045.html#L735'>alfi</a>              735 ext/spl/php_spl.c 				Z_ADDREF_P(alfi-&gt;closure);</span>
+<span class='curline'><a href='../S/1045.html#L736'>alfi</a>              736 ext/spl/php_spl.c 				add_next_index_zval(return_value, alfi-&gt;closure);</span>
+<span class='curline'><a href='../S/1045.html#L737'>alfi</a>              737 ext/spl/php_spl.c 			} else if (alfi-&gt;func_ptr-&gt;common.scope) {</span>
+<span class='curline'><a href='../S/1045.html#L742'>alfi</a>              742 ext/spl/php_spl.c 				if (alfi-&gt;obj) {</span>
+<span class='curline'><a href='../S/1045.html#L743'>alfi</a>              743 ext/spl/php_spl.c 					Z_ADDREF_P(alfi-&gt;obj);</span>
+<span class='curline'><a href='../S/1045.html#L744'>alfi</a>              744 ext/spl/php_spl.c 					add_next_index_zval(tmp, alfi-&gt;obj);</span>
+<span class='curline'><a href='../S/1045.html#L746'>alfi</a>              746 ext/spl/php_spl.c 					add_next_index_string(tmp, alfi-&gt;ce-&gt;name, 1);</span>
+<span class='curline'><a href='../S/1045.html#L748'>alfi</a>              748 ext/spl/php_spl.c 				add_next_index_string(tmp, alfi-&gt;func_ptr-&gt;common.function_name, 1);</span>
+<span class='curline'><a href='../S/1045.html#L751'>alfi</a>              751 ext/spl/php_spl.c 				if (strncmp(alfi-&gt;func_ptr-&gt;common.function_name, "__lambda_func", sizeof("__lambda_func") - 1)) {</span>
+<span class='curline'><a href='../S/1045.html#L752'>alfi</a>              752 ext/spl/php_spl.c 					add_next_index_string(return_value, alfi-&gt;func_ptr-&gt;common.function_name, 1);</span>
+</pre>
+</body>
+</html>

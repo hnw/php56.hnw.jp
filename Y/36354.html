@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>shared_segments</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/846.html#L62'>shared_segments</a>    62 ext/opcache/shared_alloc_shm.c 	zend_shared_segment_shm *shared_segments;</span>
+<span class='curline'><a href='../S/846.html#L95'>shared_segments</a>    95 ext/opcache/shared_alloc_shm.c 	shared_segments = (zend_shared_segment_shm *)((char *)(*shared_segments_p) + sizeof(void *) * (*shared_segments_count));</span>
+<span class='curline'><a href='../S/846.html#L97'>shared_segments</a>    97 ext/opcache/shared_alloc_shm.c 		(*shared_segments_p)[i] = shared_segments + i;</span>
+<span class='curline'><a href='../S/846.html#L104'>shared_segments</a>   104 ext/opcache/shared_alloc_shm.c 			shared_segments[i].shm_id = shmget(IPC_PRIVATE, allocate_size, shmget_flags);</span>
+<span class='curline'><a href='../S/846.html#L106'>shared_segments</a>   106 ext/opcache/shared_alloc_shm.c 			shared_segments[i].shm_id = first_segment_id;</span>
+<span class='curline'><a href='../S/846.html#L109'>shared_segments</a>   109 ext/opcache/shared_alloc_shm.c 		if (shared_segments[i].shm_id == -1) {</span>
+<span class='curline'><a href='../S/846.html#L113'>shared_segments</a>   113 ext/opcache/shared_alloc_shm.c 		shared_segments[i].common.p = shmat(shared_segments[i].shm_id, NULL, 0);</span>
+<span class='curline'><a href='../S/846.html#L114'>shared_segments</a>   114 ext/opcache/shared_alloc_shm.c 		if (shared_segments[i].common.p == (void *)-1) {</span>
+<span class='curline'><a href='../S/846.html#L116'>shared_segments</a>   116 ext/opcache/shared_alloc_shm.c 			shmctl(shared_segments[i].shm_id, IPC_RMID, &amp;sds);</span>
+<span class='curline'><a href='../S/846.html#L119'>shared_segments</a>   119 ext/opcache/shared_alloc_shm.c 		shmctl(shared_segments[i].shm_id, IPC_RMID, &amp;sds);</span>
+<span class='curline'><a href='../S/846.html#L121'>shared_segments</a>   121 ext/opcache/shared_alloc_shm.c 		shared_segments[i].common.pos = 0;</span>
+<span class='curline'><a href='../S/846.html#L122'>shared_segments</a>   122 ext/opcache/shared_alloc_shm.c 		shared_segments[i].common.size = allocate_size;</span>
+<span class='curline'><a href='../S/861.html#L127'>shared_segments</a>   127 ext/opcache/zend_shared_alloc.c 	ZSMMG(shared_segments) = NULL;</span>
+<span class='curline'><a href='../S/861.html#L179'>shared_segments</a>   179 ext/opcache/zend_shared_alloc.c 				res = zend_shared_alloc_try(he, requested_size, &amp;ZSMMG(shared_segments), &amp;ZSMMG(shared_segments_count), &amp;error_in);</span>
+<span class='curline'><a href='../S/861.html#L196'>shared_segments</a>   196 ext/opcache/zend_shared_alloc.c 			res = zend_shared_alloc_try(he, requested_size, &amp;ZSMMG(shared_segments), &amp;ZSMMG(shared_segments_count), &amp;error_in);</span>
+<span class='curline'><a href='../S/861.html#L229'>shared_segments</a>   229 ext/opcache/zend_shared_alloc.c 	copy_shared_segments(tmp_shared_segments, ZSMMG(shared_segments)[0], ZSMMG(shared_segments_count), S_H(segment_type_size)());</span>
+<span class='curline'><a href='../S/861.html#L234'>shared_segments</a>   234 ext/opcache/zend_shared_alloc.c 	free(ZSMMG(shared_segments));</span>
+<span class='curline'><a href='../S/861.html#L235'>shared_segments</a>   235 ext/opcache/zend_shared_alloc.c 	ZSMMG(shared_segments) = tmp_shared_segments;</span>
+<span class='curline'><a href='../S/861.html#L259'>shared_segments</a>   259 ext/opcache/zend_shared_alloc.c 	copy_shared_segments(tmp_shared_segments, ZSMMG(shared_segments)[0], ZSMMG(shared_segments_count), S_H(segment_type_size)());</span>
+<span class='curline'><a href='../S/861.html#L260'>shared_segments</a>   260 ext/opcache/zend_shared_alloc.c 	ZSMMG(shared_segments) = tmp_shared_segments;</span>
+<span class='curline'><a href='../S/861.html#L263'>shared_segments</a>   263 ext/opcache/zend_shared_alloc.c 		S_H(detach_segment)(ZSMMG(shared_segments)[i]);</span>
+<span class='curline'><a href='../S/861.html#L265'>shared_segments</a>   265 ext/opcache/zend_shared_alloc.c 	efree(ZSMMG(shared_segments));</span>
+<span class='curline'><a href='../S/861.html#L266'>shared_segments</a>   266 ext/opcache/zend_shared_alloc.c 	ZSMMG(shared_segments) = NULL;</span>
+<span class='curline'><a href='../S/861.html#L279'>shared_segments</a>   279 ext/opcache/zend_shared_alloc.c 		size_t block_size = ZSMMG(shared_segments)[i]-&gt;size - ZSMMG(shared_segments)[i]-&gt;pos;</span>
+<span class='curline'><a href='../S/861.html#L313'>shared_segments</a>   313 ext/opcache/zend_shared_alloc.c 		if (ZSMMG(shared_segments)[i]-&gt;size - ZSMMG(shared_segments)[i]-&gt;pos &gt;= block_size) { /* found a valid block */</span>
+<span class='curline'><a href='../S/861.html#L314'>shared_segments</a>   314 ext/opcache/zend_shared_alloc.c 			void *retval = (void *) (((char *) ZSMMG(shared_segments)[i]-&gt;p) + ZSMMG(shared_segments)[i]-&gt;pos);</span>
+<span class='curline'><a href='../S/861.html#L316'>shared_segments</a>   316 ext/opcache/zend_shared_alloc.c 			ZSMMG(shared_segments)[i]-&gt;pos += block_size;</span>
+<span class='curline'><a href='../S/861.html#L457'>shared_segments</a>   457 ext/opcache/zend_shared_alloc.c 		ZSMMG(shared_memory_state).positions[i] = ZSMMG(shared_segments)[i]-&gt;pos;</span>
+<span class='curline'><a href='../S/861.html#L467'>shared_segments</a>   467 ext/opcache/zend_shared_alloc.c 		ZSMMG(shared_segments)[i]-&gt;pos = ZSMMG(shared_memory_state).positions[i];</span>
+<span class='curline'><a href='../S/861.html#L491'>shared_segments</a>   491 ext/opcache/zend_shared_alloc.c 		mprotect(ZSMMG(shared_segments)[i]-&gt;p, ZSMMG(shared_segments)[i]-&gt;size, mode);</span>
+<span class='curline'><a href='../S/862.html#L78'>shared_segments</a>    78 ext/opcache/zend_shared_alloc.h typedef int (*create_segments_t)(size_t requested_size, zend_shared_segment ***shared_segments, int *shared_segment_count, char **error_in);</span>
+<span class='curline'><a href='../S/862.html#L99'>shared_segments</a>    99 ext/opcache/zend_shared_alloc.h     zend_shared_segment      **shared_segments;</span>
+</pre>
+</body>
+</html>

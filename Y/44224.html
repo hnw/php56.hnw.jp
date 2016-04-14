@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>zend_constants</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/1642.html#L44'>zend_constants</a>     44 Zend/zend.c    # define GLOBAL_CONSTANTS_TABLE		EG(zend_constants)</span>
+<span class='curline'><a href='../S/1642.html#L564'>zend_constants</a>    564 Zend/zend.c    	zend_copy_constants(EG(zend_constants), GLOBAL_CONSTANTS_TABLE);</span>
+<span class='curline'><a href='../S/1642.html#L589'>zend_constants</a>    589 Zend/zend.c    	if (executor_globals-&gt;zend_constants != GLOBAL_CONSTANTS_TABLE) {</span>
+<span class='curline'><a href='../S/1642.html#L590'>zend_constants</a>    590 Zend/zend.c    		zend_hash_destroy(executor_globals-&gt;zend_constants);</span>
+<span class='curline'><a href='../S/1642.html#L591'>zend_constants</a>    591 Zend/zend.c    		free(executor_globals-&gt;zend_constants);</span>
+<span class='curline'><a href='../S/1642.html#L737'>zend_constants</a>    737 Zend/zend.c    	zend_hash_destroy(executor_globals-&gt;zend_constants);</span>
+<span class='curline'><a href='../S/1642.html#L738'>zend_constants</a>    738 Zend/zend.c    	*executor_globals-&gt;zend_constants = *GLOBAL_CONSTANTS_TABLE;</span>
+<span class='curline'><a href='../S/1642.html#L788'>zend_constants</a>    788 Zend/zend.c    	*GLOBAL_CONSTANTS_TABLE = *executor_globals-&gt;zend_constants;</span>
+<span class='curline'><a href='../S/1642.html#L803'>zend_constants</a>    803 Zend/zend.c    	free(EG(zend_constants));</span>
+<span class='curline'><a href='../S/1651.html#L1985'>zend_constants</a>   1985 Zend/zend_builtin_functions.c 		zend_hash_internal_pointer_reset_ex(EG(zend_constants), &amp;pos);</span>
+<span class='curline'><a href='../S/1651.html#L1986'>zend_constants</a>   1986 Zend/zend_builtin_functions.c 		while (zend_hash_get_current_data_ex(EG(zend_constants), (void **) &amp;val, &amp;pos) != FAILURE) {</span>
+<span class='curline'><a href='../S/1651.html#L2016'>zend_constants</a>   2016 Zend/zend_builtin_functions.c 			zend_hash_move_forward_ex(EG(zend_constants), &amp;pos);</span>
+<span class='curline'><a href='../S/1651.html#L2021'>zend_constants</a>   2021 Zend/zend_builtin_functions.c 		zend_hash_apply_with_argument(EG(zend_constants), (apply_func_arg_t) add_constant_info, return_value TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1655.html#L5665'>zend_constants</a>   5665 Zend/zend_compile.c 		if (zend_hash_find(EG(zend_constants), Z_STRVAL_P(const_name)+1, Z_STRLEN_P(const_name), (void **) &amp;c) == FAILURE) {</span>
+<span class='curline'><a href='../S/1655.html#L5668'>zend_constants</a>   5668 Zend/zend_compile.c 			if (zend_hash_find(EG(zend_constants), lookup_name, Z_STRLEN_P(const_name), (void **) &amp;c)==SUCCESS) {</span>
+<span class='curline'><a href='../S/1655.html#L5677'>zend_constants</a>   5677 Zend/zend_compile.c 	} else if (zend_hash_find(EG(zend_constants), Z_STRVAL_P(const_name), Z_STRLEN_P(const_name)+1, (void **) &amp;c) == FAILURE) {</span>
+<span class='curline'><a href='../S/1655.html#L5680'>zend_constants</a>   5680 Zend/zend_compile.c 		if (zend_hash_find(EG(zend_constants), lookup_name, Z_STRLEN_P(const_name)+1, (void **) &amp;c)==SUCCESS) {</span>
+<span class='curline'><a href='../S/1659.html#L80'>zend_constants</a>     80 Zend/zend_constants.c 	zend_hash_apply_with_argument(EG(zend_constants), (apply_func_arg_t) clean_module_constant, (void *) &amp;module_number TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1659.html#L86'>zend_constants</a>     86 Zend/zend_constants.c 	EG(zend_constants) = (HashTable *) malloc(sizeof(HashTable));</span>
+<span class='curline'><a href='../S/1659.html#L88'>zend_constants</a>     88 Zend/zend_constants.c 	if (zend_hash_init(EG(zend_constants), 20, NULL, ZEND_CONSTANT_DTOR, 1)==FAILURE) {</span>
+<span class='curline'><a href='../S/1659.html#L131'>zend_constants</a>    131 Zend/zend_constants.c 	zend_hash_destroy(EG(zend_constants));</span>
+<span class='curline'><a href='../S/1659.html#L132'>zend_constants</a>    132 Zend/zend_constants.c 	free(EG(zend_constants));</span>
+<span class='curline'><a href='../S/1659.html#L140'>zend_constants</a>    140 Zend/zend_constants.c 		zend_hash_apply(EG(zend_constants), (apply_func_t) clean_non_persistent_constant_full TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1659.html#L142'>zend_constants</a>    142 Zend/zend_constants.c 		zend_hash_reverse_apply(EG(zend_constants), (apply_func_t) clean_non_persistent_constant TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1659.html#L235'>zend_constants</a>    235 Zend/zend_constants.c 			if (zend_hash_find(EG(zend_constants), const_name, const_name_len, (void**)c) == FAILURE) {</span>
+<span class='curline'><a href='../S/1659.html#L236'>zend_constants</a>    236 Zend/zend_constants.c 				zend_hash_add(EG(zend_constants), const_name, const_name_len, (void*)&amp;tmp, sizeof(zend_constant), (void**)c);</span>
+<span class='curline'><a href='../S/1659.html#L244'>zend_constants</a>    244 Zend/zend_constants.c 			if (zend_hash_find(EG(zend_constants), "\0__CLASS__", sizeof("\0__CLASS__"), (void**)c) == FAILURE) {</span>
+<span class='curline'><a href='../S/1659.html#L245'>zend_constants</a>    245 Zend/zend_constants.c 				zend_hash_add(EG(zend_constants), "\0__CLASS__", sizeof("\0__CLASS__"), (void*)&amp;tmp, sizeof(zend_constant), (void**)c);</span>
+<span class='curline'><a href='../S/1659.html#L264'>zend_constants</a>    264 Zend/zend_constants.c 		ret = zend_hash_find(EG(zend_constants), haltname, len+1, (void **) c);</span>
+<span class='curline'><a href='../S/1659.html#L279'>zend_constants</a>    279 Zend/zend_constants.c 	if (zend_hash_find(EG(zend_constants), name, name_len+1, (void **) &amp;c) == FAILURE) {</span>
+<span class='curline'><a href='../S/1659.html#L282'>zend_constants</a>    282 Zend/zend_constants.c 		if (zend_hash_find(EG(zend_constants), lookup_name, name_len+1, (void **) &amp;c)==SUCCESS) {</span>
+<span class='curline'><a href='../S/1659.html#L397'>zend_constants</a>    397 Zend/zend_constants.c 		if (zend_hash_find(EG(zend_constants), lcname, prefix_len + 1 + const_name_len + 1, (void **) &amp;c) == SUCCESS) {</span>
+<span class='curline'><a href='../S/1659.html#L402'>zend_constants</a>    402 Zend/zend_constants.c 			if (zend_hash_find(EG(zend_constants), lcname, prefix_len + 1 + const_name_len + 1, (void **) &amp;c) == SUCCESS) {</span>
+<span class='curline'><a href='../S/1659.html#L442'>zend_constants</a>    442 Zend/zend_constants.c 	if (zend_hash_quick_find(EG(zend_constants), Z_STRVAL(key-&gt;constant), Z_STRLEN(key-&gt;constant) + 1, key-&gt;hash_value, (void **) &amp;c) == FAILURE) {</span>
+<span class='curline'><a href='../S/1659.html#L444'>zend_constants</a>    444 Zend/zend_constants.c 		if (zend_hash_quick_find(EG(zend_constants), Z_STRVAL(key-&gt;constant), Z_STRLEN(key-&gt;constant) + 1, key-&gt;hash_value, (void **) &amp;c) == FAILURE ||</span>
+<span class='curline'><a href='../S/1659.html#L448'>zend_constants</a>    448 Zend/zend_constants.c 				if (zend_hash_quick_find(EG(zend_constants), Z_STRVAL(key-&gt;constant), Z_STRLEN(key-&gt;constant) + 1, key-&gt;hash_value, (void **) &amp;c) == FAILURE) {</span>
+<span class='curline'><a href='../S/1659.html#L450'>zend_constants</a>    450 Zend/zend_constants.c 					if (zend_hash_quick_find(EG(zend_constants), Z_STRVAL(key-&gt;constant), Z_STRLEN(key-&gt;constant) + 1, key-&gt;hash_value, (void **) &amp;c) == FAILURE ||</span>
+<span class='curline'><a href='../S/1659.html#L503'>zend_constants</a>    503 Zend/zend_constants.c 		|| zend_hash_quick_add(EG(zend_constants), name, c-&gt;name_len, chash, (void *) c, sizeof(zend_constant), NULL)==FAILURE) {</span>
+<span class='curline'><a href='../S/1680.html#L199'>zend_constants</a>    199 Zend/zend_globals.h 	HashTable *zend_constants;	/* constants table */</span>
+<span class='curline'><a href='../S/830.html#L11'>zend_constants</a>     11 ext/opcache/Optimizer/block_pass.c 	if (zend_hash_find(EG(zend_constants), name, name_len + 1, (void **) &amp;c) == FAILURE) {</span>
+<span class='curline'><a href='../S/830.html#L16'>zend_constants</a>     16 ext/opcache/Optimizer/block_pass.c 		if (zend_hash_find(EG(zend_constants), lookup_name, name_len + 1, (void **) &amp;c) == SUCCESS) {</span>
+<span class='curline'><a href='../S/863.html#L457'>zend_constants</a>    457 ext/opcache/ZendAccelerator.c 	p = EG(zend_constants)-&gt;pListHead;</span>
+<span class='curline'><a href='../S/863.html#L2356'>zend_constants</a>   2356 ext/opcache/ZendAccelerator.c 		old_destructor = EG(zend_constants)-&gt;pDestructor;</span>
+<span class='curline'><a href='../S/863.html#L2357'>zend_constants</a>   2357 ext/opcache/ZendAccelerator.c 		EG(zend_constants)-&gt;pDestructor = NULL;</span>
+<span class='curline'><a href='../S/863.html#L2358'>zend_constants</a>   2358 ext/opcache/ZendAccelerator.c 		zend_hash_reverse_apply(EG(zend_constants), (apply_func_t) accel_clean_non_persistent_constant TSRMLS_CC);</span>
+<span class='curline'><a href='../S/863.html#L2359'>zend_constants</a>   2359 ext/opcache/ZendAccelerator.c 		EG(zend_constants)-&gt;pDestructor = old_destructor;</span>
+<span class='curline'><a href='../S/863.html#L2730'>zend_constants</a>   2730 ext/opcache/ZendAccelerator.c 		zend_hash_clean(EG(zend_constants));</span>
+<span class='curline'><a href='../S/856.html#L1030'>zend_constants</a>   1030 ext/opcache/zend_accelerator_util_funcs.c 			if (!zend_hash_exists(EG(zend_constants), name, len + 1)) {</span>
+<span class='curline'><a href='../S/992.html#L556'>zend_constants</a>    556 ext/readline/readline_cli.c 				retval = cli_completion_generator_define(text, textlen, &amp;cli_completion_state, pce ? &amp;(*pce)-&gt;constants_table : EG(zend_constants) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/996.html#L1135'>zend_constants</a>   1135 ext/reflection/php_reflection.c 		zend_hash_apply_with_arguments(EG(zend_constants) TSRMLS_CC, (apply_func_args_t) _extension_const_string, 4, &amp;str_constants, indent, module, &amp;num_constants);</span>
+<span class='curline'><a href='../S/996.html#L5389'>zend_constants</a>   5389 ext/reflection/php_reflection.c 	zend_hash_apply_with_arguments(EG(zend_constants) TSRMLS_CC, (apply_func_args_t) _addconstant, 2, return_value, module-&gt;module_number);</span>
+<span class='curline'><a href='../S/1006.html#L1467'>zend_constants</a>   1467 ext/session/session.c 	zend_hash_del(EG(zend_constants), "sid", sizeof("sid"));</span>
+<span class='curline'><a href='../S/1546.html#L737'>zend_constants</a>    737 sapi/phpdbg/phpdbg.c 		phpdbg_writeln("Constants\t\t%d", zend_hash_num_elements(EG(zend_constants)));</span>
+<span class='curline'><a href='../S/1572.html#L764'>zend_constants</a>    764 sapi/phpdbg/phpdbg_prompt.c 	phpdbg_writeln("Constants\t%d", zend_hash_num_elements(EG(zend_constants)));</span>
+<span class='curline'><a href='../S/1572.html#L927'>zend_constants</a>    927 sapi/phpdbg/phpdbg_prompt.c 	phpdbg_writeln("Constants\t\t%d", zend_hash_num_elements(EG(zend_constants)));</span>
+</pre>
+</body>
+</html>

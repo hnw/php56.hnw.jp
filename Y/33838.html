@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>proxy</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/51.html#L55'>proxy</a>              55 ext/com_dotnet/com_saproxy.c 	php_com_saproxy *proxy;</span>
+<span class='curline'><a href='../S/51.html#L93'>proxy</a>              93 ext/com_dotnet/com_saproxy.c 	php_com_saproxy *proxy = SA_FETCH(object);</span>
+<span class='curline'><a href='../S/51.html#L103'>proxy</a>             103 ext/com_dotnet/com_saproxy.c 	if (V_VT(&amp;proxy-&gt;obj-&gt;v) == VT_DISPATCH) {</span>
+<span class='curline'><a href='../S/51.html#L110'>proxy</a>             110 ext/com_dotnet/com_saproxy.c 		args = safe_emalloc(proxy-&gt;dimensions + 1, sizeof(zval *), 0);</span>
+<span class='curline'><a href='../S/51.html#L112'>proxy</a>             112 ext/com_dotnet/com_saproxy.c 		for (i = 1; i &lt; (UINT) proxy-&gt;dimensions; i++) {</span>
+<span class='curline'><a href='../S/51.html#L113'>proxy</a>             113 ext/com_dotnet/com_saproxy.c 			args[i-1] = proxy-&gt;indices[i];</span>
+<span class='curline'><a href='../S/51.html#L117'>proxy</a>             117 ext/com_dotnet/com_saproxy.c 		convert_to_string(proxy-&gt;indices[0]);</span>
+<span class='curline'><a href='../S/51.html#L120'>proxy</a>             120 ext/com_dotnet/com_saproxy.c 		res = php_com_do_invoke(proxy-&gt;obj, Z_STRVAL_P(proxy-&gt;indices[0]),</span>
+<span class='curline'><a href='../S/51.html#L121'>proxy</a>             121 ext/com_dotnet/com_saproxy.c 			   	Z_STRLEN_P(proxy-&gt;indices[0]), DISPATCH_METHOD|DISPATCH_PROPERTYGET, &amp;v,</span>
+<span class='curline'><a href='../S/51.html#L122'>proxy</a>             122 ext/com_dotnet/com_saproxy.c 			   	proxy-&gt;dimensions, args, 0 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/51.html#L125'>proxy</a>             125 ext/com_dotnet/com_saproxy.c 			php_com_zval_from_variant(return_value, &amp;v, proxy-&gt;obj-&gt;code_page TSRMLS_CC);</span>
+<span class='curline'><a href='../S/51.html#L134'>proxy</a>             134 ext/com_dotnet/com_saproxy.c 	} else if (!V_ISARRAY(&amp;proxy-&gt;obj-&gt;v)) {</span>
+<span class='curline'><a href='../S/51.html#L144'>proxy</a>             144 ext/com_dotnet/com_saproxy.c 	sa = V_ARRAY(&amp;proxy-&gt;obj-&gt;v);</span>
+<span class='curline'><a href='../S/51.html#L147'>proxy</a>             147 ext/com_dotnet/com_saproxy.c 	if ((UINT) proxy-&gt;dimensions &gt;= dims) {</span>
+<span class='curline'><a href='../S/51.html#L154'>proxy</a>             154 ext/com_dotnet/com_saproxy.c 	SafeArrayGetLBound(sa, proxy-&gt;dimensions, &amp;lbound);</span>
+<span class='curline'><a href='../S/51.html#L155'>proxy</a>             155 ext/com_dotnet/com_saproxy.c 	SafeArrayGetUBound(sa, proxy-&gt;dimensions, &amp;ubound);</span>
+<span class='curline'><a href='../S/51.html#L162'>proxy</a>             162 ext/com_dotnet/com_saproxy.c 	if (dims - 1 == proxy-&gt;dimensions) {</span>
+<span class='curline'><a href='../S/51.html#L174'>proxy</a>             174 ext/com_dotnet/com_saproxy.c 			convert_to_long(proxy-&gt;indices[i]);</span>
+<span class='curline'><a href='../S/51.html#L175'>proxy</a>             175 ext/com_dotnet/com_saproxy.c 			indices[i] = Z_LVAL_P(proxy-&gt;indices[i]);</span>
+<span class='curline'><a href='../S/51.html#L183'>proxy</a>             183 ext/com_dotnet/com_saproxy.c 			vt = V_VT(&amp;proxy-&gt;obj-&gt;v) &amp; ~VT_ARRAY;</span>
+<span class='curline'><a href='../S/51.html#L196'>proxy</a>             196 ext/com_dotnet/com_saproxy.c 			php_com_wrap_variant(return_value, &amp;v, proxy-&gt;obj-&gt;code_page TSRMLS_CC);</span>
+<span class='curline'><a href='../S/51.html#L213'>proxy</a>             213 ext/com_dotnet/com_saproxy.c 	php_com_saproxy *proxy = SA_FETCH(object);</span>
+<span class='curline'><a href='../S/51.html#L218'>proxy</a>             218 ext/com_dotnet/com_saproxy.c 	if (V_VT(&amp;proxy-&gt;obj-&gt;v) == VT_DISPATCH) {</span>
+<span class='curline'><a href='../S/51.html#L222'>proxy</a>             222 ext/com_dotnet/com_saproxy.c 		zval **args = safe_emalloc(proxy-&gt;dimensions + 2, sizeof(zval *), 0);</span>
+<span class='curline'><a href='../S/51.html#L224'>proxy</a>             224 ext/com_dotnet/com_saproxy.c 		for (i = 1; i &lt; (UINT) proxy-&gt;dimensions; i++) {</span>
+<span class='curline'><a href='../S/51.html#L225'>proxy</a>             225 ext/com_dotnet/com_saproxy.c 			args[i-1] = proxy-&gt;indices[i];</span>
+<span class='curline'><a href='../S/51.html#L230'>proxy</a>             230 ext/com_dotnet/com_saproxy.c 		convert_to_string(proxy-&gt;indices[0]);</span>
+<span class='curline'><a href='../S/51.html#L232'>proxy</a>             232 ext/com_dotnet/com_saproxy.c 		if (SUCCESS == php_com_do_invoke(proxy-&gt;obj, Z_STRVAL_P(proxy-&gt;indices[0]),</span>
+<span class='curline'><a href='../S/51.html#L233'>proxy</a>             233 ext/com_dotnet/com_saproxy.c 					Z_STRLEN_P(proxy-&gt;indices[0]), DISPATCH_PROPERTYPUT, &amp;v, proxy-&gt;dimensions + 1,</span>
+<span class='curline'><a href='../S/51.html#L240'>proxy</a>             240 ext/com_dotnet/com_saproxy.c 	} else if (V_ISARRAY(&amp;proxy-&gt;obj-&gt;v)) {</span>
+<span class='curline'><a href='../S/51.html#L244'>proxy</a>             244 ext/com_dotnet/com_saproxy.c 		dims = SafeArrayGetDim(V_ARRAY(&amp;proxy-&gt;obj-&gt;v));</span>
+<span class='curline'><a href='../S/51.html#L248'>proxy</a>             248 ext/com_dotnet/com_saproxy.c 			convert_to_long(proxy-&gt;indices[i]);</span>
+<span class='curline'><a href='../S/51.html#L249'>proxy</a>             249 ext/com_dotnet/com_saproxy.c 			indices[i] = Z_LVAL_P(proxy-&gt;indices[i]);</span>
+<span class='curline'><a href='../S/51.html#L256'>proxy</a>             256 ext/com_dotnet/com_saproxy.c 		if (FAILED(SafeArrayGetVartype(V_ARRAY(&amp;proxy-&gt;obj-&gt;v), &amp;vt)) || vt == VT_EMPTY) {</span>
+<span class='curline'><a href='../S/51.html#L257'>proxy</a>             257 ext/com_dotnet/com_saproxy.c 			vt = V_VT(&amp;proxy-&gt;obj-&gt;v) &amp; ~VT_ARRAY;</span>
+<span class='curline'><a href='../S/51.html#L261'>proxy</a>             261 ext/com_dotnet/com_saproxy.c 		php_com_variant_from_zval(&amp;v, value, proxy-&gt;obj-&gt;code_page TSRMLS_CC);</span>
+<span class='curline'><a href='../S/51.html#L268'>proxy</a>             268 ext/com_dotnet/com_saproxy.c 			res = SafeArrayPutElement(V_ARRAY(&amp;proxy-&gt;obj-&gt;v), indices, &amp;v);</span>
+<span class='curline'><a href='../S/51.html#L270'>proxy</a>             270 ext/com_dotnet/com_saproxy.c 			res = SafeArrayPutElement(V_ARRAY(&amp;proxy-&gt;obj-&gt;v), indices, &amp;v.lVal);</span>
+<span class='curline'><a href='../S/51.html#L365'>proxy</a>             365 ext/com_dotnet/com_saproxy.c 	php_com_saproxy *proxy = SA_FETCH(object);</span>
+<span class='curline'><a href='../S/51.html#L368'>proxy</a>             368 ext/com_dotnet/com_saproxy.c 	if (!V_ISARRAY(&amp;proxy-&gt;obj-&gt;v)) {</span>
+<span class='curline'><a href='../S/51.html#L372'>proxy</a>             372 ext/com_dotnet/com_saproxy.c 	SafeArrayGetLBound(V_ARRAY(&amp;proxy-&gt;obj-&gt;v), proxy-&gt;dimensions, &amp;lbound);</span>
+<span class='curline'><a href='../S/51.html#L373'>proxy</a>             373 ext/com_dotnet/com_saproxy.c 	SafeArrayGetUBound(V_ARRAY(&amp;proxy-&gt;obj-&gt;v), proxy-&gt;dimensions, &amp;ubound);</span>
+<span class='curline'><a href='../S/51.html#L406'>proxy</a>             406 ext/com_dotnet/com_saproxy.c 	php_com_saproxy *proxy = (php_com_saproxy *)object;</span>
+<span class='curline'><a href='../S/51.html#L409'>proxy</a>             409 ext/com_dotnet/com_saproxy.c 	for (i = 0; i &lt; proxy-&gt;dimensions; i++) {</span>
+<span class='curline'><a href='../S/51.html#L410'>proxy</a>             410 ext/com_dotnet/com_saproxy.c 		if (proxy-&gt;indices) {</span>
+<span class='curline'><a href='../S/51.html#L411'>proxy</a>             411 ext/com_dotnet/com_saproxy.c 				FREE_ZVAL(proxy-&gt;indices[i]);</span>
+<span class='curline'><a href='../S/51.html#L415'>proxy</a>             415 ext/com_dotnet/com_saproxy.c 	zval_ptr_dtor(&amp;proxy-&gt;zobj);</span>
+<span class='curline'><a href='../S/51.html#L416'>proxy</a>             416 ext/com_dotnet/com_saproxy.c 	efree(proxy-&gt;indices);</span>
+<span class='curline'><a href='../S/51.html#L417'>proxy</a>             417 ext/com_dotnet/com_saproxy.c 	efree(proxy);</span>
+<span class='curline'><a href='../S/51.html#L422'>proxy</a>             422 ext/com_dotnet/com_saproxy.c 	php_com_saproxy *proxy = (php_com_saproxy *)object;</span>
+<span class='curline'><a href='../S/51.html#L426'>proxy</a>             426 ext/com_dotnet/com_saproxy.c 	memcpy(cloneproxy, proxy, sizeof(*cloneproxy));</span>
+<span class='curline'><a href='../S/51.html#L430'>proxy</a>             430 ext/com_dotnet/com_saproxy.c 	clone_indices(cloneproxy, proxy, proxy-&gt;dimensions);</span>
+<span class='curline'><a href='../S/51.html#L437'>proxy</a>             437 ext/com_dotnet/com_saproxy.c 	php_com_saproxy *proxy, *rel = NULL;</span>
+<span class='curline'><a href='../S/51.html#L439'>proxy</a>             439 ext/com_dotnet/com_saproxy.c 	proxy = ecalloc(1, sizeof(*proxy));</span>
+<span class='curline'><a href='../S/51.html#L440'>proxy</a>             440 ext/com_dotnet/com_saproxy.c 	proxy-&gt;dimensions = 1;</span>
+<span class='curline'><a href='../S/51.html#L444'>proxy</a>             444 ext/com_dotnet/com_saproxy.c 		proxy-&gt;obj = rel-&gt;obj;</span>
+<span class='curline'><a href='../S/51.html#L445'>proxy</a>             445 ext/com_dotnet/com_saproxy.c 		proxy-&gt;zobj = rel-&gt;zobj;</span>
+<span class='curline'><a href='../S/51.html#L446'>proxy</a>             446 ext/com_dotnet/com_saproxy.c 		proxy-&gt;dimensions += rel-&gt;dimensions;</span>
+<span class='curline'><a href='../S/51.html#L448'>proxy</a>             448 ext/com_dotnet/com_saproxy.c 		proxy-&gt;obj = CDNO_FETCH(com_object);</span>
+<span class='curline'><a href='../S/51.html#L449'>proxy</a>             449 ext/com_dotnet/com_saproxy.c 		proxy-&gt;zobj = com_object;</span>
+<span class='curline'><a href='../S/51.html#L452'>proxy</a>             452 ext/com_dotnet/com_saproxy.c 	Z_ADDREF_P(proxy-&gt;zobj);</span>
+<span class='curline'><a href='../S/51.html#L453'>proxy</a>             453 ext/com_dotnet/com_saproxy.c 	proxy-&gt;indices = safe_emalloc(proxy-&gt;dimensions, sizeof(zval *), 0);</span>
+<span class='curline'><a href='../S/51.html#L456'>proxy</a>             456 ext/com_dotnet/com_saproxy.c 		clone_indices(proxy, rel, rel-&gt;dimensions);</span>
+<span class='curline'><a href='../S/51.html#L459'>proxy</a>             459 ext/com_dotnet/com_saproxy.c 	MAKE_STD_ZVAL(proxy-&gt;indices[proxy-&gt;dimensions-1]);</span>
+<span class='curline'><a href='../S/51.html#L460'>proxy</a>             460 ext/com_dotnet/com_saproxy.c 	*proxy-&gt;indices[proxy-&gt;dimensions-1] = *index;</span>
+<span class='curline'><a href='../S/51.html#L461'>proxy</a>             461 ext/com_dotnet/com_saproxy.c 	zval_copy_ctor(proxy-&gt;indices[proxy-&gt;dimensions-1]);</span>
+<span class='curline'><a href='../S/51.html#L464'>proxy</a>             464 ext/com_dotnet/com_saproxy.c 	Z_OBJ_HANDLE_P(proxy_out) = zend_objects_store_put(proxy, NULL, saproxy_free_storage, saproxy_clone TSRMLS_CC);</span>
+<span class='curline'><a href='../S/51.html#L497'>proxy</a>             497 ext/com_dotnet/com_saproxy.c 	I-&gt;indices[I-&gt;proxy-&gt;dimensions-1] = I-&gt;key;</span>
+<span class='curline'><a href='../S/51.html#L499'>proxy</a>             499 ext/com_dotnet/com_saproxy.c 	sa = V_ARRAY(&amp;I-&gt;proxy-&gt;obj-&gt;v);</span>
+<span class='curline'><a href='../S/51.html#L502'>proxy</a>             502 ext/com_dotnet/com_saproxy.c 		vt = V_VT(&amp;I-&gt;proxy-&gt;obj-&gt;v) &amp; ~VT_ARRAY;</span>
+<span class='curline'><a href='../S/51.html#L514'>proxy</a>             514 ext/com_dotnet/com_saproxy.c 	php_com_wrap_variant(return_value, &amp;v, I-&gt;proxy-&gt;obj-&gt;code_page TSRMLS_CC);</span>
+<span class='curline'><a href='../S/51.html#L556'>proxy</a>             556 ext/com_dotnet/com_saproxy.c 	php_com_saproxy *proxy = SA_FETCH(object);</span>
+<span class='curline'><a href='../S/51.html#L568'>proxy</a>             568 ext/com_dotnet/com_saproxy.c 	I-&gt;proxy = proxy;</span>
+<span class='curline'><a href='../S/51.html#L572'>proxy</a>             572 ext/com_dotnet/com_saproxy.c 	I-&gt;indices = safe_emalloc(proxy-&gt;dimensions + 1, sizeof(LONG), 0);</span>
+<span class='curline'><a href='../S/51.html#L573'>proxy</a>             573 ext/com_dotnet/com_saproxy.c 	for (i = 0; i &lt; proxy-&gt;dimensions; i++) {</span>
+<span class='curline'><a href='../S/51.html#L574'>proxy</a>             574 ext/com_dotnet/com_saproxy.c 		convert_to_long(proxy-&gt;indices[i]);</span>
+<span class='curline'><a href='../S/51.html#L575'>proxy</a>             575 ext/com_dotnet/com_saproxy.c 		I-&gt;indices[i] = Z_LVAL_P(proxy-&gt;indices[i]);</span>
+<span class='curline'><a href='../S/51.html#L578'>proxy</a>             578 ext/com_dotnet/com_saproxy.c 	SafeArrayGetLBound(V_ARRAY(&amp;proxy-&gt;obj-&gt;v), proxy-&gt;dimensions, &amp;I-&gt;imin);</span>
+<span class='curline'><a href='../S/51.html#L579'>proxy</a>             579 ext/com_dotnet/com_saproxy.c 	SafeArrayGetUBound(V_ARRAY(&amp;proxy-&gt;obj-&gt;v), proxy-&gt;dimensions, &amp;I-&gt;imax);</span>
+<span class='curline'><a href='../S/1026.html#L3279'>proxy</a>            3279 ext/soap/php_sdl.c 	    	smart_str proxy = {0};</span>
+<span class='curline'><a href='../S/1026.html#L3283'>proxy</a>            3283 ext/soap/php_sdl.c 		smart_str_appends(&amp;proxy,"tcp://");</span>
+<span class='curline'><a href='../S/1026.html#L3284'>proxy</a>            3284 ext/soap/php_sdl.c 		smart_str_appends(&amp;proxy,Z_STRVAL_PP(proxy_host));</span>
+<span class='curline'><a href='../S/1026.html#L3285'>proxy</a>            3285 ext/soap/php_sdl.c 		smart_str_appends(&amp;proxy,":");</span>
+<span class='curline'><a href='../S/1026.html#L3286'>proxy</a>            3286 ext/soap/php_sdl.c 		smart_str_appends(&amp;proxy,Z_STRVAL(str_port));</span>
+<span class='curline'><a href='../S/1026.html#L3287'>proxy</a>            3287 ext/soap/php_sdl.c 		smart_str_0(&amp;proxy);</span>
+<span class='curline'><a href='../S/1026.html#L3290'>proxy</a>            3290 ext/soap/php_sdl.c 		ZVAL_STRING(str_proxy, proxy.c, 1);</span>
+<span class='curline'><a href='../S/1026.html#L3291'>proxy</a>            3291 ext/soap/php_sdl.c 		smart_str_free(&amp;proxy);</span>
+<span class='curline'><a href='../S/1067.html#L32768'>proxy</a>            32768 ext/sqlite3/libsqlite/sqlite3.c       unixFile *proxy = pCtx-&gt;lockProxy;</span>
+<span class='curline'><a href='../S/1067.html#L32769'>proxy</a>            32769 ext/sqlite3/libsqlite/sqlite3.c       return proxy-&gt;pMethod-&gt;xCheckReservedLock((sqlite3_file*)proxy, pResOut);</span>
+<span class='curline'><a href='../S/1067.html#L32807'>proxy</a>            32807 ext/sqlite3/libsqlite/sqlite3.c       unixFile *proxy = pCtx-&gt;lockProxy;</span>
+<span class='curline'><a href='../S/1067.html#L32808'>proxy</a>            32808 ext/sqlite3/libsqlite/sqlite3.c       rc = proxy-&gt;pMethod-&gt;xLock((sqlite3_file*)proxy, eFileLock);</span>
+<span class='curline'><a href='../S/1067.html#L32809'>proxy</a>            32809 ext/sqlite3/libsqlite/sqlite3.c       pFile-&gt;eFileLock = proxy-&gt;eFileLock;</span>
+<span class='curline'><a href='../S/1067.html#L32831'>proxy</a>            32831 ext/sqlite3/libsqlite/sqlite3.c       unixFile *proxy = pCtx-&gt;lockProxy;</span>
+<span class='curline'><a href='../S/1067.html#L32832'>proxy</a>            32832 ext/sqlite3/libsqlite/sqlite3.c       rc = proxy-&gt;pMethod-&gt;xUnlock((sqlite3_file*)proxy, eFileLock);</span>
+<span class='curline'><a href='../S/1067.html#L32833'>proxy</a>            32833 ext/sqlite3/libsqlite/sqlite3.c       pFile-&gt;eFileLock = proxy-&gt;eFileLock;</span>
+</pre>
+</body>
+</html>

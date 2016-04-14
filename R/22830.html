@@ -1,0 +1,808 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>persistent</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/1645.html#L122'>persistent</a>        122 Zend/zend_alloc.h #define pemalloc(size, persistent) ((persistent)?__zend_malloc(size):emalloc(size))</span>
+<span class='curline'><a href='../S/1645.html#L123'>persistent</a>        123 Zend/zend_alloc.h #define safe_pemalloc(nmemb, size, offset, persistent)	((persistent)?_safe_malloc(nmemb, size, offset):safe_emalloc(nmemb, size, offset))</span>
+<span class='curline'><a href='../S/1645.html#L124'>persistent</a>        124 Zend/zend_alloc.h #define pefree(ptr, persistent)  ((persistent)?free(ptr):efree(ptr))</span>
+<span class='curline'><a href='../S/1645.html#L125'>persistent</a>        125 Zend/zend_alloc.h #define pecalloc(nmemb, size, persistent) ((persistent)?__zend_calloc((nmemb), (size)):ecalloc((nmemb), (size)))</span>
+<span class='curline'><a href='../S/1645.html#L126'>persistent</a>        126 Zend/zend_alloc.h #define perealloc(ptr, size, persistent) ((persistent)?__zend_realloc((ptr), (size)):erealloc((ptr), (size)))</span>
+<span class='curline'><a href='../S/1645.html#L127'>persistent</a>        127 Zend/zend_alloc.h #define safe_perealloc(ptr, nmemb, size, offset, persistent)	((persistent)?_safe_realloc((ptr), (nmemb), (size), (offset)):safe_erealloc((ptr), (nmemb), (size), (offset)))</span>
+<span class='curline'><a href='../S/1645.html#L128'>persistent</a>        128 Zend/zend_alloc.h #define perealloc_recoverable(ptr, size, persistent) ((persistent)?__zend_realloc((ptr), (size)):erealloc_recoverable((ptr), (size)))</span>
+<span class='curline'><a href='../S/1645.html#L129'>persistent</a>        129 Zend/zend_alloc.h #define pestrdup(s, persistent) ((persistent)?strdup(s):estrdup(s))</span>
+<span class='curline'><a href='../S/1645.html#L130'>persistent</a>        130 Zend/zend_alloc.h #define pestrndup(s, length, persistent) ((persistent)?zend_strndup((s),(length)):estrndup((s),(length)))</span>
+<span class='curline'><a href='../S/1645.html#L132'>persistent</a>        132 Zend/zend_alloc.h #define pemalloc_rel(size, persistent) ((persistent)?__zend_malloc(size):emalloc_rel(size))</span>
+<span class='curline'><a href='../S/1645.html#L133'>persistent</a>        133 Zend/zend_alloc.h #define pefree_rel(ptr, persistent)	((persistent)?free(ptr):efree_rel(ptr))</span>
+<span class='curline'><a href='../S/1645.html#L134'>persistent</a>        134 Zend/zend_alloc.h #define pecalloc_rel(nmemb, size, persistent) ((persistent)?__zend_calloc((nmemb), (size)):ecalloc_rel((nmemb), (size)))</span>
+<span class='curline'><a href='../S/1645.html#L135'>persistent</a>        135 Zend/zend_alloc.h #define perealloc_rel(ptr, size, persistent) ((persistent)?__zend_realloc((ptr), (size)):erealloc_rel((ptr), (size)))</span>
+<span class='curline'><a href='../S/1645.html#L136'>persistent</a>        136 Zend/zend_alloc.h #define perealloc_recoverable_rel(ptr, size, persistent) ((persistent)?__zend_realloc((ptr), (size)):erealloc_recoverable_rel((ptr), (size)))</span>
+<span class='curline'><a href='../S/1645.html#L137'>persistent</a>        137 Zend/zend_alloc.h #define pestrdup_rel(s, persistent) ((persistent)?strdup(s):estrdup_rel(s))</span>
+<span class='curline'><a href='../S/1682.html#L116'>persistent</a>        116 Zend/zend_hash.c 			pefree_rel((p)-&gt;pData, (ht)-&gt;persistent);									\</span>
+<span class='curline'><a href='../S/1682.html#L122'>persistent</a>        122 Zend/zend_hash.c 			(p)-&gt;pData = (void *) pemalloc_rel(nDataSize, (ht)-&gt;persistent);			\</span>
+<span class='curline'><a href='../S/1682.html#L125'>persistent</a>        125 Zend/zend_hash.c 			(p)-&gt;pData = (void *) perealloc_rel((p)-&gt;pData, nDataSize, (ht)-&gt;persistent);	\</span>
+<span class='curline'><a href='../S/1682.html#L136'>persistent</a>        136 Zend/zend_hash.c 		(p)-&gt;pData = (void *) pemalloc_rel(nDataSize, (ht)-&gt;persistent);\</span>
+<span class='curline'><a href='../S/1682.html#L143'>persistent</a>        143 Zend/zend_hash.c 		(ht)-&gt;arBuckets = (Bucket **) pecalloc((ht)-&gt;nTableSize, sizeof(Bucket *), (ht)-&gt;persistent);	\</span>
+<span class='curline'><a href='../S/1682.html#L185'>persistent</a>        185 Zend/zend_hash.c 		pefree(p-&gt;pData, ht-&gt;persistent);</span>
+<span class='curline'><a href='../S/1682.html#L187'>persistent</a>        187 Zend/zend_hash.c 	pefree(p, ht-&gt;persistent);</span>
+<span class='curline'><a href='../S/1682.html#L195'>persistent</a>        195 Zend/zend_hash.c ZEND_API int _zend_hash_init(HashTable *ht, uint nSize, dtor_func_t pDestructor, zend_bool persistent ZEND_FILE_LINE_DC)</span>
+<span class='curline'><a href='../S/1682.html#L219'>persistent</a>        219 Zend/zend_hash.c 	ht-&gt;persistent = persistent;</span>
+<span class='curline'><a href='../S/1682.html#L226'>persistent</a>        226 Zend/zend_hash.c ZEND_API int _zend_hash_init_ex(HashTable *ht, uint nSize, dtor_func_t pDestructor, zend_bool persistent, zend_bool bApplyProtection ZEND_FILE_LINE_DC)</span>
+<span class='curline'><a href='../S/1682.html#L228'>persistent</a>        228 Zend/zend_hash.c 	int retval = _zend_hash_init(ht, nSize, pDestructor, persistent ZEND_FILE_LINE_CC);</span>
+<span class='curline'><a href='../S/1682.html#L283'>persistent</a>        283 Zend/zend_hash.c 		p = (Bucket *) pemalloc(sizeof(Bucket), ht-&gt;persistent);</span>
+<span class='curline'><a href='../S/1682.html#L286'>persistent</a>        286 Zend/zend_hash.c 		p = (Bucket *) pemalloc(sizeof(Bucket) + nKeyLength, ht-&gt;persistent);</span>
+<span class='curline'><a href='../S/1682.html#L346'>persistent</a>        346 Zend/zend_hash.c 		p = (Bucket *) pemalloc(sizeof(Bucket), ht-&gt;persistent);</span>
+<span class='curline'><a href='../S/1682.html#L349'>persistent</a>        349 Zend/zend_hash.c 		p = (Bucket *) pemalloc(sizeof(Bucket) + nKeyLength, ht-&gt;persistent);</span>
+<span class='curline'><a href='../S/1682.html#L419'>persistent</a>        419 Zend/zend_hash.c 	p = (Bucket *) pemalloc_rel(sizeof(Bucket), ht-&gt;persistent);</span>
+<span class='curline'><a href='../S/1682.html#L454'>persistent</a>        454 Zend/zend_hash.c 		t = (Bucket **) perealloc(ht-&gt;arBuckets, (ht-&gt;nTableSize &lt;&lt; 1) * sizeof(Bucket *), ht-&gt;persistent);</span>
+<span class='curline'><a href='../S/1682.html#L551'>persistent</a>        551 Zend/zend_hash.c 			pefree(q-&gt;pData, ht-&gt;persistent);</span>
+<span class='curline'><a href='../S/1682.html#L553'>persistent</a>        553 Zend/zend_hash.c 		pefree(q, ht-&gt;persistent);</span>
+<span class='curline'><a href='../S/1682.html#L556'>persistent</a>        556 Zend/zend_hash.c 		pefree(ht-&gt;arBuckets, ht-&gt;persistent);</span>
+<span class='curline'><a href='../S/1682.html#L587'>persistent</a>        587 Zend/zend_hash.c 			pefree(q-&gt;pData, ht-&gt;persistent);</span>
+<span class='curline'><a href='../S/1682.html#L589'>persistent</a>        589 Zend/zend_hash.c 		pefree(q, ht-&gt;persistent);</span>
+<span class='curline'><a href='../S/1682.html#L602'>persistent</a>        602 Zend/zend_hash.c 		pefree(ht-&gt;arBuckets, ht-&gt;persistent);</span>
+<span class='curline'><a href='../S/1682.html#L617'>persistent</a>        617 Zend/zend_hash.c 		pefree(ht-&gt;arBuckets, ht-&gt;persistent);</span>
+<span class='curline'><a href='../S/1682.html#L1245'>persistent</a>       1245 Zend/zend_hash.c 				q = (Bucket *) pemalloc(sizeof(Bucket), ht-&gt;persistent);</span>
+<span class='curline'><a href='../S/1682.html#L1247'>persistent</a>       1247 Zend/zend_hash.c 				q = (Bucket *) pemalloc(sizeof(Bucket) + str_length, ht-&gt;persistent);</span>
+<span class='curline'><a href='../S/1682.html#L1266'>persistent</a>       1266 Zend/zend_hash.c 			pefree(p, ht-&gt;persistent);</span>
+<span class='curline'><a href='../S/1682.html#L1343'>persistent</a>       1343 Zend/zend_hash.c 			Bucket *q = pemalloc_rel(sizeof(Bucket), ht-&gt;persistent);</span>
+<span class='curline'><a href='../S/1682.html#L1377'>persistent</a>       1377 Zend/zend_hash.c 	arTmp = (Bucket **) pemalloc(ht-&gt;nNumOfElements * sizeof(Bucket *), ht-&gt;persistent);</span>
+<span class='curline'><a href='../S/1682.html#L1407'>persistent</a>       1407 Zend/zend_hash.c 	pefree(arTmp, ht-&gt;persistent);</span>
+<span class='curline'><a href='../S/1683.html#L77'>persistent</a>         77 Zend/zend_hash.h 	zend_bool persistent;</span>
+<span class='curline'><a href='../S/1683.html#L100'>persistent</a>        100 Zend/zend_hash.h ZEND_API int _zend_hash_init(HashTable *ht, uint nSize, dtor_func_t pDestructor, zend_bool persistent ZEND_FILE_LINE_DC);</span>
+<span class='curline'><a href='../S/1683.html#L101'>persistent</a>        101 Zend/zend_hash.h ZEND_API int _zend_hash_init_ex(HashTable *ht, uint nSize, dtor_func_t pDestructor, zend_bool persistent, zend_bool bApplyProtection ZEND_FILE_LINE_DC);</span>
+<span class='curline'><a href='../S/1683.html#L104'>persistent</a>        104 Zend/zend_hash.h #define zend_hash_init(ht, nSize, pHashFunction, pDestructor, persistent)						_zend_hash_init((ht), (nSize), (pDestructor), (persistent) ZEND_FILE_LINE_CC)</span>
+<span class='curline'><a href='../S/1683.html#L105'>persistent</a>        105 Zend/zend_hash.h #define zend_hash_init_ex(ht, nSize, pHashFunction, pDestructor, persistent, bApplyProtection)		_zend_hash_init_ex((ht), (nSize), (pDestructor), (persistent), (bApplyProtection) ZEND_FILE_LINE_CC)</span>
+<span class='curline'><a href='../S/1683.html#L312'>persistent</a>        312 Zend/zend_hash.h #define ZEND_INIT_SYMTABLE_EX(ht, n, persistent)			\</span>
+<span class='curline'><a href='../S/1683.html#L313'>persistent</a>        313 Zend/zend_hash.h 	zend_hash_init(ht, n, NULL, ZVAL_PTR_DTOR, persistent)</span>
+<span class='curline'><a href='../S/1707.html#L26'>persistent</a>         26 Zend/zend_llist.c ZEND_API void zend_llist_init(zend_llist *l, size_t size, llist_dtor_func_t dtor, unsigned char persistent)</span>
+<span class='curline'><a href='../S/1707.html#L33'>persistent</a>         33 Zend/zend_llist.c 	l-&gt;persistent = persistent;</span>
+<span class='curline'><a href='../S/1707.html#L39'>persistent</a>         39 Zend/zend_llist.c 	zend_llist_element *tmp = pemalloc(sizeof(zend_llist_element)+l-&gt;size-1, l-&gt;persistent);</span>
+<span class='curline'><a href='../S/1707.html#L57'>persistent</a>         57 Zend/zend_llist.c 	zend_llist_element *tmp = pemalloc(sizeof(zend_llist_element)+l-&gt;size-1, l-&gt;persistent);</span>
+<span class='curline'><a href='../S/1707.html#L87'>persistent</a>         87 Zend/zend_llist.c 			pefree((current), (l)-&gt;persistent);\</span>
+<span class='curline'><a href='../S/1707.html#L114'>persistent</a>        114 Zend/zend_llist.c 		pefree(current, l-&gt;persistent);</span>
+<span class='curline'><a href='../S/1707.html#L147'>persistent</a>        147 Zend/zend_llist.c 		pefree(old_tail, l-&gt;persistent);</span>
+<span class='curline'><a href='../S/1707.html#L162'>persistent</a>        162 Zend/zend_llist.c 	zend_llist_init(dst, src-&gt;size, src-&gt;dtor, src-&gt;persistent);</span>
+<span class='curline'><a href='../S/1708.html#L43'>persistent</a>         43 Zend/zend_llist.h 	unsigned char persistent;</span>
+<span class='curline'><a href='../S/1708.html#L50'>persistent</a>         50 Zend/zend_llist.h ZEND_API void zend_llist_init(zend_llist *l, size_t size, llist_dtor_func_t dtor, unsigned char persistent);</span>
+<span class='curline'><a href='../S/1710.html#L53'>persistent</a>         53 Zend/zend_multibyte.c static int dummy_encoding_list_parser(const char *encoding_list, size_t encoding_list_len, const zend_encoding ***return_list, size_t *return_size, int persistent TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1710.html#L55'>persistent</a>         55 Zend/zend_multibyte.c 	*return_list = pemalloc(0, persistent);</span>
+<span class='curline'><a href='../S/1710.html#L153'>persistent</a>        153 Zend/zend_multibyte.c ZEND_API int zend_multibyte_parse_encoding_list(const char *encoding_list, size_t encoding_list_len, const zend_encoding ***return_list, size_t *return_size, int persistent TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1710.html#L155'>persistent</a>        155 Zend/zend_multibyte.c 	return multibyte_functions.encoding_list_parser(encoding_list, encoding_list_len, return_list, return_size, persistent TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1711.html#L34'>persistent</a>         34 Zend/zend_multibyte.h typedef int (*zend_encoding_list_parser)(const char *encoding_list, size_t encoding_list_len, const zend_encoding ***return_list, size_t *return_size, int persistent TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1711.html#L70'>persistent</a>         70 Zend/zend_multibyte.h ZEND_API int zend_multibyte_parse_encoding_list(const char *encoding_list, size_t encoding_list_len, const zend_encoding ***return_list, size_t *return_size, int persistent TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1722.html#L28'>persistent</a>         28 Zend/zend_ptr_stack.c ZEND_API void zend_ptr_stack_init_ex(zend_ptr_stack *stack, zend_bool persistent)</span>
+<span class='curline'><a href='../S/1722.html#L32'>persistent</a>         32 Zend/zend_ptr_stack.c 	stack-&gt;persistent = persistent;</span>
+<span class='curline'><a href='../S/1722.html#L79'>persistent</a>         79 Zend/zend_ptr_stack.c 		pefree(stack-&gt;elements, stack-&gt;persistent);</span>
+<span class='curline'><a href='../S/1722.html#L101'>persistent</a>        101 Zend/zend_ptr_stack.c 			pefree(stack-&gt;elements[i], stack-&gt;persistent);</span>
+<span class='curline'><a href='../S/1723.html#L29'>persistent</a>         29 Zend/zend_ptr_stack.h 	zend_bool persistent;</span>
+<span class='curline'><a href='../S/1723.html#L37'>persistent</a>         37 Zend/zend_ptr_stack.h ZEND_API void zend_ptr_stack_init_ex(zend_ptr_stack *stack, zend_bool persistent);</span>
+<span class='curline'><a href='../S/1723.html#L52'>persistent</a>         52 Zend/zend_ptr_stack.h 		stack-&gt;elements = (void **) perealloc(stack-&gt;elements, (sizeof(void *) * (stack-&gt;max)), stack-&gt;persistent);	\</span>
+<span class='curline'><a href='../S/1735.html#L58'>persistent</a>         58 Zend/zend_string.c 	CG(interned_strings).arBuckets = (Bucket **) pecalloc(CG(interned_strings).nTableSize, sizeof(Bucket *), CG(interned_strings).persistent);</span>
+<span class='curline'><a href='../S/1735.html#L159'>persistent</a>        159 Zend/zend_string.c 			Bucket **t = (Bucket **) perealloc_recoverable(CG(interned_strings).arBuckets, (CG(interned_strings).nTableSize &lt;&lt; 1) * sizeof(Bucket *), CG(interned_strings).persistent);</span>
+<span class='curline'><a href='../S/1739.html#L62'>persistent</a>         62 Zend/zend_ts_hash.c ZEND_API int _zend_ts_hash_init(TsHashTable *ht, uint nSize, dtor_func_t pDestructor, zend_bool persistent ZEND_FILE_LINE_DC)</span>
+<span class='curline'><a href='../S/1739.html#L69'>persistent</a>         69 Zend/zend_ts_hash.c 	return _zend_hash_init(TS_HASH(ht), nSize, pDestructor, persistent ZEND_FILE_LINE_RELAY_CC);</span>
+<span class='curline'><a href='../S/1739.html#L72'>persistent</a>         72 Zend/zend_ts_hash.c ZEND_API int _zend_ts_hash_init_ex(TsHashTable *ht, uint nSize, dtor_func_t pDestructor, zend_bool persistent, zend_bool bApplyProtection ZEND_FILE_LINE_DC)</span>
+<span class='curline'><a href='../S/1739.html#L79'>persistent</a>         79 Zend/zend_ts_hash.c 	return _zend_hash_init_ex(TS_HASH(ht), nSize, pDestructor, persistent, bApplyProtection ZEND_FILE_LINE_RELAY_CC);</span>
+<span class='curline'><a href='../S/1740.html#L40'>persistent</a>         40 Zend/zend_ts_hash.h ZEND_API int _zend_ts_hash_init(TsHashTable *ht, uint nSize, dtor_func_t pDestructor, zend_bool persistent ZEND_FILE_LINE_DC);</span>
+<span class='curline'><a href='../S/1740.html#L41'>persistent</a>         41 Zend/zend_ts_hash.h ZEND_API int _zend_ts_hash_init_ex(TsHashTable *ht, uint nSize, dtor_func_t pDestructor, zend_bool persistent, zend_bool bApplyProtection ZEND_FILE_LINE_DC);</span>
+<span class='curline'><a href='../S/1740.html#L45'>persistent</a>         45 Zend/zend_ts_hash.h #define zend_ts_hash_init(ht, nSize, pHashFunction, pDestructor, persistent)	\</span>
+<span class='curline'><a href='../S/1740.html#L46'>persistent</a>         46 Zend/zend_ts_hash.h 	_zend_ts_hash_init(ht, nSize, pDestructor, persistent ZEND_FILE_LINE_CC)</span>
+<span class='curline'><a href='../S/1740.html#L47'>persistent</a>         47 Zend/zend_ts_hash.h #define zend_ts_hash_init_ex(ht, nSize, pHashFunction, pDestructor, persistent, bApplyProtection)	\</span>
+<span class='curline'><a href='../S/1740.html#L48'>persistent</a>         48 Zend/zend_ts_hash.h 	_zend_ts_hash_init_ex(ht, nSize, pDestructor, persistent, bApplyProtection ZEND_FILE_LINE_CC)</span>
+<span class='curline'><a href='../S/1740.html#L124'>persistent</a>        124 Zend/zend_ts_hash.h #define ZEND_TS_INIT_SYMTABLE_EX(ht, n, persistent)			\</span>
+<span class='curline'><a href='../S/1740.html#L125'>persistent</a>        125 Zend/zend_ts_hash.h 	zend_ts_hash_init(ht, n, NULL, ZVAL_PTR_DTOR, persistent)</span>
+<span class='curline'><a href='../S/4.html#L104'>persistent</a>        104 ext/bcmath/libbcmath/src/bcmath.h _PROTOTYPE(bc_num _bc_new_num_ex, (int length, int scale, int persistent));</span>
+<span class='curline'><a href='../S/4.html#L106'>persistent</a>        106 ext/bcmath/libbcmath/src/bcmath.h _PROTOTYPE(void _bc_free_num_ex, (bc_num *num, int persistent));</span>
+<span class='curline'><a href='../S/11.html#L48'>persistent</a>         48 ext/bcmath/libbcmath/src/init.c _bc_new_num_ex (length, scale, persistent)</span>
+<span class='curline'><a href='../S/11.html#L49'>persistent</a>         49 ext/bcmath/libbcmath/src/init.c      int length, scale, persistent;</span>
+<span class='curline'><a href='../S/11.html#L54'>persistent</a>         54 ext/bcmath/libbcmath/src/init.c   temp = (bc_num) safe_pemalloc (1, sizeof(bc_struct)+length, scale, persistent);</span>
+<span class='curline'><a href='../S/11.html#L60'>persistent</a>         60 ext/bcmath/libbcmath/src/init.c     temp = (bc_num) pemalloc (sizeof(bc_struct), persistent);</span>
+<span class='curline'><a href='../S/11.html#L69'>persistent</a>         69 ext/bcmath/libbcmath/src/init.c   temp-&gt;n_ptr = (char *) safe_pemalloc (1, length, scale, persistent);</span>
+<span class='curline'><a href='../S/11.html#L81'>persistent</a>         81 ext/bcmath/libbcmath/src/init.c _bc_free_num_ex (num, persistent)</span>
+<span class='curline'><a href='../S/11.html#L83'>persistent</a>         83 ext/bcmath/libbcmath/src/init.c     int persistent;</span>
+<span class='curline'><a href='../S/11.html#L90'>persistent</a>         90 ext/bcmath/libbcmath/src/init.c       pefree ((*num)-&gt;n_ptr, persistent);</span>
+<span class='curline'><a href='../S/11.html#L91'>persistent</a>         91 ext/bcmath/libbcmath/src/init.c 	pefree(*num, persistent);</span>
+<span class='curline'><a href='../S/31.html#L37'>persistent</a>         37 ext/bz2/bz2_filter.c 	int persistent;</span>
+<span class='curline'><a href='../S/31.html#L56'>persistent</a>         56 ext/bz2/bz2_filter.c 	return (void *)safe_pemalloc(items, size, 0, ((php_bz2_filter_data*)opaque)-&gt;persistent);</span>
+<span class='curline'><a href='../S/31.html#L61'>persistent</a>         61 ext/bz2/bz2_filter.c 	pefree((void *)address, ((php_bz2_filter_data*)opaque)-&gt;persistent);</span>
+<span class='curline'><a href='../S/31.html#L190'>persistent</a>        190 ext/bz2/bz2_filter.c 		pefree(data-&gt;inbuf, data-&gt;persistent);</span>
+<span class='curline'><a href='../S/31.html#L191'>persistent</a>        191 ext/bz2/bz2_filter.c 		pefree(data-&gt;outbuf, data-&gt;persistent);</span>
+<span class='curline'><a href='../S/31.html#L192'>persistent</a>        192 ext/bz2/bz2_filter.c 		pefree(data, data-&gt;persistent);</span>
+<span class='curline'><a href='../S/31.html#L294'>persistent</a>        294 ext/bz2/bz2_filter.c 		pefree(data-&gt;inbuf, data-&gt;persistent);</span>
+<span class='curline'><a href='../S/31.html#L295'>persistent</a>        295 ext/bz2/bz2_filter.c 		pefree(data-&gt;outbuf, data-&gt;persistent);</span>
+<span class='curline'><a href='../S/31.html#L296'>persistent</a>        296 ext/bz2/bz2_filter.c 		pefree(data, data-&gt;persistent);</span>
+<span class='curline'><a href='../S/31.html#L310'>persistent</a>        310 ext/bz2/bz2_filter.c static php_stream_filter *php_bz2_filter_create(const char *filtername, zval *filterparams, int persistent TSRMLS_DC)</span>
+<span class='curline'><a href='../S/31.html#L317'>persistent</a>        317 ext/bz2/bz2_filter.c 	data = pecalloc(1, sizeof(php_bz2_filter_data), persistent);</span>
+<span class='curline'><a href='../S/31.html#L328'>persistent</a>        328 ext/bz2/bz2_filter.c 	data-&gt;persistent = persistent;</span>
+<span class='curline'><a href='../S/31.html#L330'>persistent</a>        330 ext/bz2/bz2_filter.c 	data-&gt;strm.next_in = data-&gt;inbuf = (char *) pemalloc(data-&gt;inbuf_len, persistent);</span>
+<span class='curline'><a href='../S/31.html#L333'>persistent</a>        333 ext/bz2/bz2_filter.c 		pefree(data, persistent);</span>
+<span class='curline'><a href='../S/31.html#L337'>persistent</a>        337 ext/bz2/bz2_filter.c 	data-&gt;strm.next_out = data-&gt;outbuf = (char *) pemalloc(data-&gt;outbuf_len, persistent);</span>
+<span class='curline'><a href='../S/31.html#L340'>persistent</a>        340 ext/bz2/bz2_filter.c 		pefree(data-&gt;inbuf, persistent);</span>
+<span class='curline'><a href='../S/31.html#L341'>persistent</a>        341 ext/bz2/bz2_filter.c 		pefree(data, persistent);</span>
+<span class='curline'><a href='../S/31.html#L430'>persistent</a>        430 ext/bz2/bz2_filter.c 		pefree(data-&gt;strm.next_in, persistent);</span>
+<span class='curline'><a href='../S/31.html#L431'>persistent</a>        431 ext/bz2/bz2_filter.c 		pefree(data-&gt;strm.next_out, persistent);</span>
+<span class='curline'><a href='../S/31.html#L432'>persistent</a>        432 ext/bz2/bz2_filter.c 		pefree(data, persistent);</span>
+<span class='curline'><a href='../S/31.html#L436'>persistent</a>        436 ext/bz2/bz2_filter.c 	return php_stream_filter_alloc(fops, data, persistent);</span>
+<span class='curline'><a href='../S/81.html#L614'>persistent</a>        614 ext/dba/dba.c  static void php_dba_open(INTERNAL_FUNCTION_PARAMETERS, int persistent)</span>
+<span class='curline'><a href='../S/81.html#L627'>persistent</a>        627 ext/dba/dba.c  	int persistent_flag = persistent ? STREAM_OPEN_PERSISTENT : 0;</span>
+<span class='curline'><a href='../S/81.html#L648'>persistent</a>        648 ext/dba/dba.c  	if (persistent) {</span>
+<span class='curline'><a href='../S/81.html#L811'>persistent</a>        811 ext/dba/dba.c  	info = pemalloc(sizeof(dba_info), persistent);</span>
+<span class='curline'><a href='../S/81.html#L813'>persistent</a>        813 ext/dba/dba.c  	info-&gt;path = pestrdup(Z_STRVAL_PP(args[0]), persistent);</span>
+<span class='curline'><a href='../S/81.html#L817'>persistent</a>        817 ext/dba/dba.c  	info-&gt;flags = (hptr-&gt;flags &amp; ~DBA_LOCK_ALL) | (lock_flag &amp; DBA_LOCK_ALL) | (persistent ? DBA_PERSISTENT : 0);</span>
+<span class='curline'><a href='../S/81.html#L849'>persistent</a>        849 ext/dba/dba.c  				if (!persistent) {</span>
+<span class='curline'><a href='../S/81.html#L853'>persistent</a>        853 ext/dba/dba.c  						info-&gt;lock.name = pestrdup(opened_path, persistent);</span>
+<span class='curline'><a href='../S/81.html#L864'>persistent</a>        864 ext/dba/dba.c  					pefree(info-&gt;path, persistent);</span>
+<span class='curline'><a href='../S/81.html#L865'>persistent</a>        865 ext/dba/dba.c  					info-&gt;path = pestrdup(opened_path, persistent);</span>
+<span class='curline'><a href='../S/81.html#L868'>persistent</a>        868 ext/dba/dba.c  				if (!persistent) {</span>
+<span class='curline'><a href='../S/81.html#L871'>persistent</a>        871 ext/dba/dba.c  					info-&gt;lock.name = pestrdup(opened_path, persistent);</span>
+<span class='curline'><a href='../S/81.html#L936'>persistent</a>        936 ext/dba/dba.c  	if (persistent) {</span>
+<span class='curline'><a href='../S/81.html#L949'>persistent</a>        949 ext/dba/dba.c  	ZEND_REGISTER_RESOURCE(return_value, info, (persistent ? le_pdb : le_db));</span>
+<span class='curline'><a href='../S/102.html#L82'>persistent</a>         82 ext/dba/libinifile/inifile.c inifile * inifile_alloc(php_stream *fp, int readonly, int persistent TSRMLS_DC)</span>
+<span class='curline'><a href='../S/102.html#L93'>persistent</a>         93 ext/dba/libinifile/inifile.c 	dba = pemalloc(sizeof(inifile), persistent);</span>
+<span class='curline'><a href='../S/102.html#L102'>persistent</a>        102 ext/dba/libinifile/inifile.c void inifile_free(inifile *dba, int persistent)</span>
+<span class='curline'><a href='../S/102.html#L107'>persistent</a>        107 ext/dba/libinifile/inifile.c 		pefree(dba, persistent);</span>
+<span class='curline'><a href='../S/103.html#L63'>persistent</a>         63 ext/dba/libinifile/inifile.h inifile * inifile_alloc(php_stream *fp, int readonly, int persistent TSRMLS_DC);</span>
+<span class='curline'><a href='../S/103.html#L64'>persistent</a>         64 ext/dba/libinifile/inifile.h void inifile_free(inifile *dba, int persistent);</span>
+<span class='curline'><a href='../S/318.html#L2568'>persistent</a>       2568 ext/iconv/iconv.c 	int persistent;</span>
+<span class='curline'><a href='../S/318.html#L2582'>persistent</a>       2582 ext/iconv/iconv.c 	pefree(self-&gt;to_charset, self-&gt;persistent);</span>
+<span class='curline'><a href='../S/318.html#L2583'>persistent</a>       2583 ext/iconv/iconv.c 	pefree(self-&gt;from_charset, self-&gt;persistent);</span>
+<span class='curline'><a href='../S/318.html#L2590'>persistent</a>       2590 ext/iconv/iconv.c 		const char *from_charset, size_t from_charset_len, int persistent)</span>
+<span class='curline'><a href='../S/318.html#L2592'>persistent</a>       2592 ext/iconv/iconv.c 	if (NULL == (self-&gt;to_charset = pemalloc(to_charset_len + 1, persistent))) {</span>
+<span class='curline'><a href='../S/318.html#L2596'>persistent</a>       2596 ext/iconv/iconv.c 	if (NULL == (self-&gt;from_charset = pemalloc(from_charset_len + 1, persistent))) {</span>
+<span class='curline'><a href='../S/318.html#L2597'>persistent</a>       2597 ext/iconv/iconv.c 		pefree(self-&gt;to_charset, persistent);</span>
+<span class='curline'><a href='../S/318.html#L2608'>persistent</a>       2608 ext/iconv/iconv.c 		pefree(self-&gt;from_charset, persistent);</span>
+<span class='curline'><a href='../S/318.html#L2609'>persistent</a>       2609 ext/iconv/iconv.c 		pefree(self-&gt;to_charset, persistent);</span>
+<span class='curline'><a href='../S/318.html#L2612'>persistent</a>       2612 ext/iconv/iconv.c 	self-&gt;persistent = persistent;</span>
+<span class='curline'><a href='../S/318.html#L2624'>persistent</a>       2624 ext/iconv/iconv.c 		int persistent TSRMLS_DC)</span>
+<span class='curline'><a href='../S/318.html#L2642'>persistent</a>       2642 ext/iconv/iconv.c 	if (NULL == (out_buf = pemalloc(out_buf_size, persistent))) {</span>
+<span class='curline'><a href='../S/318.html#L2686'>persistent</a>       2686 ext/iconv/iconv.c 							if (NULL == (new_bucket = php_stream_bucket_new(stream, out_buf, (out_buf_size - ocnt), 1, persistent TSRMLS_CC))) {</span>
+<span class='curline'><a href='../S/318.html#L2693'>persistent</a>       2693 ext/iconv/iconv.c 							if (NULL == (out_buf = pemalloc(out_buf_size, persistent))) {</span>
+<span class='curline'><a href='../S/318.html#L2698'>persistent</a>       2698 ext/iconv/iconv.c 							if (NULL == (new_out_buf = perealloc(out_buf, new_out_buf_size, persistent))) {</span>
+<span class='curline'><a href='../S/318.html#L2699'>persistent</a>       2699 ext/iconv/iconv.c 								if (NULL == (new_bucket = php_stream_bucket_new(stream, out_buf, (out_buf_size - ocnt), 1, persistent TSRMLS_CC))) {</span>
+<span class='curline'><a href='../S/318.html#L2763'>persistent</a>       2763 ext/iconv/iconv.c 						if (NULL == (new_bucket = php_stream_bucket_new(stream, out_buf, (out_buf_size - ocnt), 1, persistent TSRMLS_CC))) {</span>
+<span class='curline'><a href='../S/318.html#L2770'>persistent</a>       2770 ext/iconv/iconv.c 						if (NULL == (out_buf = pemalloc(out_buf_size, persistent))) {</span>
+<span class='curline'><a href='../S/318.html#L2775'>persistent</a>       2775 ext/iconv/iconv.c 						if (NULL == (new_out_buf = perealloc(out_buf, new_out_buf_size, persistent))) {</span>
+<span class='curline'><a href='../S/318.html#L2776'>persistent</a>       2776 ext/iconv/iconv.c 							if (NULL == (new_bucket = php_stream_bucket_new(stream, out_buf, (out_buf_size - ocnt), 1, persistent TSRMLS_CC))) {</span>
+<span class='curline'><a href='../S/318.html#L2809'>persistent</a>       2809 ext/iconv/iconv.c 		if (NULL == (new_bucket = php_stream_bucket_new(stream, out_buf, (out_buf_size - ocnt), 1, persistent TSRMLS_CC))) {</span>
+<span class='curline'><a href='../S/318.html#L2814'>persistent</a>       2814 ext/iconv/iconv.c 		pefree(out_buf, persistent);</span>
+<span class='curline'><a href='../S/318.html#L2821'>persistent</a>       2821 ext/iconv/iconv.c 	pefree(out_buf, persistent);</span>
+<span class='curline'><a href='../S/318.html#L2877'>persistent</a>       2877 ext/iconv/iconv.c 	pefree(filter-&gt;abstract, ((php_iconv_stream_filter *)filter-&gt;abstract)-&gt;persistent);</span>
+<span class='curline'><a href='../S/318.html#L2888'>persistent</a>       2888 ext/iconv/iconv.c static php_stream_filter *php_iconv_stream_filter_factory_create(const char *name, zval *params, int persistent TSRMLS_DC)</span>
+<span class='curline'><a href='../S/318.html#L2914'>persistent</a>       2914 ext/iconv/iconv.c 	if (NULL == (inst = pemalloc(sizeof(php_iconv_stream_filter), persistent))) {</span>
+<span class='curline'><a href='../S/318.html#L2918'>persistent</a>       2918 ext/iconv/iconv.c 	if (php_iconv_stream_filter_ctor(inst, to_charset, to_charset_len, from_charset, from_charset_len, persistent) != PHP_ICONV_ERR_SUCCESS) {</span>
+<span class='curline'><a href='../S/318.html#L2919'>persistent</a>       2919 ext/iconv/iconv.c 		pefree(inst, persistent);</span>
+<span class='curline'><a href='../S/318.html#L2923'>persistent</a>       2923 ext/iconv/iconv.c 	if (NULL == (retval = php_stream_filter_alloc(&amp;php_iconv_stream_filter_ops, inst, persistent))) {</span>
+<span class='curline'><a href='../S/318.html#L2925'>persistent</a>       2925 ext/iconv/iconv.c 		pefree(inst, persistent);</span>
+<span class='curline'><a href='../S/320.html#L1146'>persistent</a>       1146 ext/imap/php_imap.c static void php_imap_do_open(INTERNAL_FUNCTION_PARAMETERS, int persistent)</span>
+<span class='curline'><a href='../S/326.html#L893'>persistent</a>        893 ext/interbase/interbase.c static void _php_ibase_connect(INTERNAL_FUNCTION_PARAMETERS, int persistent) /* {{{ */</span>
+<span class='curline'><a href='../S/326.html#L950'>persistent</a>        950 ext/interbase/interbase.c 		if (zend_list_find(xlink, &amp;type) &amp;&amp; ((!persistent &amp;&amp; type == le_link) || type == le_plink)) {</span>
+<span class='curline'><a href='../S/326.html#L994'>persistent</a>        994 ext/interbase/interbase.c 		if (!persistent || ((l = INI_INT("ibase.max_persistent") != -1) &amp;&amp; IBG(num_persistent) &gt;= l)) {</span>
+<span class='curline'><a href='../S/686.html#L693'>persistent</a>        693 ext/mbstring/mbstring.c php_mb_parse_encoding_list(const char *value, size_t value_length, const mbfl_encoding ***return_list, size_t *return_size, int persistent TSRMLS_DC)</span>
+<span class='curline'><a href='../S/686.html#L730'>persistent</a>        730 ext/mbstring/mbstring.c 		list = (const mbfl_encoding **)pecalloc(size, sizeof(mbfl_encoding*), persistent);</span>
+<span class='curline'><a href='../S/686.html#L778'>persistent</a>        778 ext/mbstring/mbstring.c 					pefree(list, persistent);</span>
+<span class='curline'><a href='../S/686.html#L781'>persistent</a>        781 ext/mbstring/mbstring.c 				pefree(list, persistent);</span>
+<span class='curline'><a href='../S/686.html#L812'>persistent</a>        812 ext/mbstring/mbstring.c php_mb_parse_encoding_array(zval *array, const mbfl_encoding ***return_list, size_t *return_size, int persistent TSRMLS_DC)</span>
+<span class='curline'><a href='../S/686.html#L825'>persistent</a>        825 ext/mbstring/mbstring.c 		list = (const mbfl_encoding **)pecalloc(size, sizeof(mbfl_encoding*), persistent);</span>
+<span class='curline'><a href='../S/686.html#L863'>persistent</a>        863 ext/mbstring/mbstring.c 					pefree(list, persistent);</span>
+<span class='curline'><a href='../S/686.html#L866'>persistent</a>        866 ext/mbstring/mbstring.c 				pefree(list, persistent);</span>
+<span class='curline'><a href='../S/686.html#L973'>persistent</a>        973 ext/mbstring/mbstring.c static int php_mb_zend_encoding_list_parser(const char *encoding_list, size_t encoding_list_len, const zend_encoding ***return_list, size_t *return_size, int persistent TSRMLS_DC)</span>
+<span class='curline'><a href='../S/686.html#L975'>persistent</a>        975 ext/mbstring/mbstring.c 	return php_mb_parse_encoding_list(encoding_list, encoding_list_len, (const mbfl_encoding ***)return_list, return_size, persistent TSRMLS_CC);</span>
+<span class='curline'><a href='../S/752.html#L33'>persistent</a>         33 ext/mcrypt/mcrypt_filter.c 	char persistent;</span>
+<span class='curline'><a href='../S/752.html#L66'>persistent</a>         66 ext/mcrypt/mcrypt_filter.c 			outchunk = pemalloc(chunklen, data-&gt;persistent);</span>
+<span class='curline'><a href='../S/752.html#L83'>persistent</a>         83 ext/mcrypt/mcrypt_filter.c 			newbucket = php_stream_bucket_new(stream, outchunk, n, 1, data-&gt;persistent TSRMLS_CC);</span>
+<span class='curline'><a href='../S/752.html#L114'>persistent</a>        114 ext/mcrypt/mcrypt_filter.c 		newbucket = php_stream_bucket_new(stream, data-&gt;block_buffer, data-&gt;blocksize, 0, data-&gt;persistent TSRMLS_CC);</span>
+<span class='curline'><a href='../S/752.html#L133'>persistent</a>        133 ext/mcrypt/mcrypt_filter.c 			pefree(data-&gt;block_buffer, data-&gt;persistent);</span>
+<span class='curline'><a href='../S/752.html#L139'>persistent</a>        139 ext/mcrypt/mcrypt_filter.c 		pefree(data, data-&gt;persistent);</span>
+<span class='curline'><a href='../S/752.html#L152'>persistent</a>        152 ext/mcrypt/mcrypt_filter.c static php_stream_filter *php_mcrypt_filter_create(const char *filtername, zval *filterparams, int persistent TSRMLS_DC)</span>
+<span class='curline'><a href='../S/752.html#L255'>persistent</a>        255 ext/mcrypt/mcrypt_filter.c 	data = pemalloc(sizeof(php_mcrypt_filter_data), persistent);</span>
+<span class='curline'><a href='../S/752.html#L260'>persistent</a>        260 ext/mcrypt/mcrypt_filter.c 		data-&gt;block_buffer = pemalloc(data-&gt;blocksize, persistent);</span>
+<span class='curline'><a href='../S/752.html#L266'>persistent</a>        266 ext/mcrypt/mcrypt_filter.c 	data-&gt;persistent = persistent;</span>
+<span class='curline'><a href='../S/752.html#L268'>persistent</a>        268 ext/mcrypt/mcrypt_filter.c 	return php_stream_filter_alloc(&amp;php_mcrypt_filter_ops, data, persistent);</span>
+<span class='curline'><a href='../S/755.html#L544'>persistent</a>        544 ext/mssql/php_mssql.c static void php_mssql_do_connect(INTERNAL_FUNCTION_PARAMETERS, int persistent)</span>
+<span class='curline'><a href='../S/755.html#L637'>persistent</a>        637 ext/mssql/php_mssql.c 		persistent=0;</span>
+<span class='curline'><a href='../S/755.html#L639'>persistent</a>        639 ext/mssql/php_mssql.c 	if (persistent) {</span>
+<span class='curline'><a href='../S/758.html#L720'>persistent</a>        720 ext/mysql/php_mysql.c static void php_mysql_do_connect(INTERNAL_FUNCTION_PARAMETERS, int persistent)</span>
+<span class='curline'><a href='../S/758.html#L777'>persistent</a>        777 ext/mysql/php_mysql.c 		if (persistent) {</span>
+<span class='curline'><a href='../S/758.html#L848'>persistent</a>        848 ext/mysql/php_mysql.c 		persistent=0;</span>
+<span class='curline'><a href='../S/758.html#L850'>persistent</a>        850 ext/mysql/php_mysql.c 	if (persistent) {</span>
+<span class='curline'><a href='../S/758.html#L882'>persistent</a>        882 ext/mysql/php_mysql.c 			mysql-&gt;conn = mysqlnd_init(MYSQLND_CLIENT_KNOWS_RSET_COPY_DATA, persistent);</span>
+<span class='curline'><a href='../S/758.html#L1001'>persistent</a>       1001 ext/mysql/php_mysql.c 		mysql-&gt;conn = mysqlnd_init(MYSQLND_CLIENT_KNOWS_RSET_COPY_DATA, persistent);</span>
+<span class='curline'><a href='../S/762.html#L708'>persistent</a>        708 ext/mysqli/mysqli_api.c 	if (!mysql-&gt;persistent) {</span>
+<span class='curline'><a href='../S/762.html#L734'>persistent</a>        734 ext/mysqli/mysqli_api.c 		mysql-&gt;persistent = FALSE;</span>
+<span class='curline'><a href='../S/770.html#L67'>persistent</a>         67 ext/mysqli/mysqli_nonapi.c 	zend_bool			persistent = FALSE;</span>
+<span class='curline'><a href='../S/770.html#L159'>persistent</a>        159 ext/mysqli/mysqli_nonapi.c 			mysql-&gt;persistent = persistent = TRUE;</span>
+<span class='curline'><a href='../S/770.html#L211'>persistent</a>        211 ext/mysqli/mysqli_nonapi.c 	if (persistent &amp;&amp; MyG(max_persistent) != -1 &amp;&amp;</span>
+<span class='curline'><a href='../S/770.html#L222'>persistent</a>        222 ext/mysqli/mysqli_nonapi.c 		if (!(mysql-&gt;mysql = mysqlnd_init(MYSQLND_CLIENT_KNOWS_RSET_COPY_DATA, persistent))) {</span>
+<span class='curline'><a href='../S/770.html#L277'>persistent</a>        277 ext/mysqli/mysqli_nonapi.c 	if (persistent &amp;&amp; (new_connection || is_real_connect)) {</span>
+<span class='curline'><a href='../S/770.html#L300'>persistent</a>        300 ext/mysqli/mysqli_nonapi.c 		mysql-&gt;persistent = FALSE;</span>
+<span class='curline'><a href='../S/777.html#L131'>persistent</a>        131 ext/mysqli/php_mysqli_structs.h 	zend_bool		persistent;</span>
+<span class='curline'><a href='../S/780.html#L72'>persistent</a>         72 ext/mysqlnd/mysqlnd.c 	zend_bool pers = conn-&gt;persistent;</span>
+<span class='curline'><a href='../S/780.html#L112'>persistent</a>        112 ext/mysqlnd/mysqlnd.c 	zend_bool pers = conn-&gt;persistent;</span>
+<span class='curline'><a href='../S/780.html#L206'>persistent</a>        206 ext/mysqlnd/mysqlnd.c 	mnd_pefree(conn, conn-&gt;persistent);</span>
+<span class='curline'><a href='../S/780.html#L257'>persistent</a>        257 ext/mysqlnd/mysqlnd.c 									conn-&gt;persistent);</span>
+<span class='curline'><a href='../S/780.html#L420'>persistent</a>        420 ext/mysqlnd/mysqlnd.c 		mnd_pefree(conn-&gt;last_message, conn-&gt;persistent);</span>
+<span class='curline'><a href='../S/780.html#L618'>persistent</a>        618 ext/mysqlnd/mysqlnd.c 				mnd_pefree(conn-&gt;auth_plugin_data, conn-&gt;persistent);</span>
+<span class='curline'><a href='../S/780.html#L622'>persistent</a>        622 ext/mysqlnd/mysqlnd.c 			conn-&gt;auth_plugin_data = mnd_pemalloc(conn-&gt;auth_plugin_data_len, conn-&gt;persistent);</span>
+<span class='curline'><a href='../S/780.html#L807'>persistent</a>        807 ext/mysqlnd/mysqlnd.c 	if (FAIL == net-&gt;data-&gt;m.connect_ex(conn-&gt;net, conn-&gt;scheme, conn-&gt;scheme_len, conn-&gt;persistent,</span>
+<span class='curline'><a href='../S/780.html#L834'>persistent</a>        834 ext/mysqlnd/mysqlnd.c 	conn-&gt;server_version	= mnd_pestrdup(greet_packet-&gt;server_version, conn-&gt;persistent);</span>
+<span class='curline'><a href='../S/780.html#L902'>persistent</a>        902 ext/mysqlnd/mysqlnd.c 				conn? conn-&gt;persistent:0, conn? CONN_GET_STATE(conn):-1);</span>
+<span class='curline'><a href='../S/780.html#L915'>persistent</a>        915 ext/mysqlnd/mysqlnd.c 		if (conn-&gt;persistent) {</span>
+<span class='curline'><a href='../S/780.html#L988'>persistent</a>        988 ext/mysqlnd/mysqlnd.c 		conn-&gt;scheme = mnd_pestrndup(transport, transport_len, conn-&gt;persistent);</span>
+<span class='curline'><a href='../S/780.html#L1016'>persistent</a>       1016 ext/mysqlnd/mysqlnd.c 		conn-&gt;user				= mnd_pestrdup(user, conn-&gt;persistent);</span>
+<span class='curline'><a href='../S/780.html#L1018'>persistent</a>       1018 ext/mysqlnd/mysqlnd.c 		conn-&gt;passwd			= mnd_pestrndup(passwd, passwd_len, conn-&gt;persistent);</span>
+<span class='curline'><a href='../S/780.html#L1021'>persistent</a>       1021 ext/mysqlnd/mysqlnd.c 		conn-&gt;connect_or_select_db = mnd_pestrndup(db, db_len, conn-&gt;persistent);</span>
+<span class='curline'><a href='../S/780.html#L1030'>persistent</a>       1030 ext/mysqlnd/mysqlnd.c 			conn-&gt;host = mnd_pestrdup(host, conn-&gt;persistent);</span>
+<span class='curline'><a href='../S/780.html#L1043'>persistent</a>       1043 ext/mysqlnd/mysqlnd.c 				conn-&gt;host_info =  mnd_pestrdup(p, conn-&gt;persistent);</span>
+<span class='curline'><a href='../S/780.html#L1051'>persistent</a>       1051 ext/mysqlnd/mysqlnd.c 			conn-&gt;unix_socket = mnd_pestrdup(socket_or_pipe, conn-&gt;persistent);</span>
+<span class='curline'><a href='../S/780.html#L1053'>persistent</a>       1053 ext/mysqlnd/mysqlnd.c 				conn-&gt;host_info = mnd_pestrdup("Localhost via UNIX socket", conn-&gt;persistent);</span>
+<span class='curline'><a href='../S/780.html#L1061'>persistent</a>       1061 ext/mysqlnd/mysqlnd.c 				conn-&gt;host_info =  mnd_pestrdup(p, conn-&gt;persistent);</span>
+<span class='curline'><a href='../S/780.html#L1091'>persistent</a>       1091 ext/mysqlnd/mysqlnd.c 		if (conn-&gt;persistent) {</span>
+<span class='curline'><a href='../S/780.html#L1508'>persistent</a>       1508 ext/mysqlnd/mysqlnd.c 			result = conn-&gt;m-&gt;result_init(5000, conn-&gt;persistent TSRMLS_CC);</span>
+<span class='curline'><a href='../S/780.html#L1521'>persistent</a>       1521 ext/mysqlnd/mysqlnd.c 			result-&gt;unbuf = mysqlnd_result_unbuffered_init(result-&gt;field_count, FALSE, result-&gt;persistent TSRMLS_CC);</span>
+<span class='curline'><a href='../S/780.html#L1701'>persistent</a>       1701 ext/mysqlnd/mysqlnd.c 				mnd_pefree(conn-&gt;connect_or_select_db, conn-&gt;persistent);</span>
+<span class='curline'><a href='../S/780.html#L1703'>persistent</a>       1703 ext/mysqlnd/mysqlnd.c 			conn-&gt;connect_or_select_db = mnd_pestrndup(db, db_len, conn-&gt;persistent);</span>
+<span class='curline'><a href='../S/780.html#L1914'>persistent</a>       1914 ext/mysqlnd/mysqlnd.c 		if (conn-&gt;persistent) {</span>
+<span class='curline'><a href='../S/780.html#L2370'>persistent</a>       2370 ext/mysqlnd/mysqlnd.c 			new_init_commands = mnd_perealloc(conn-&gt;options-&gt;init_commands, sizeof(char *) * (conn-&gt;options-&gt;num_commands + 1), conn-&gt;persistent);</span>
+<span class='curline'><a href='../S/780.html#L2375'>persistent</a>       2375 ext/mysqlnd/mysqlnd.c 			new_command = mnd_pestrdup(value, conn-&gt;persistent);</span>
+<span class='curline'><a href='../S/780.html#L2400'>persistent</a>       2400 ext/mysqlnd/mysqlnd.c 			new_charset_name = mnd_pestrdup(value, conn-&gt;persistent);</span>
+<span class='curline'><a href='../S/780.html#L2405'>persistent</a>       2405 ext/mysqlnd/mysqlnd.c 				mnd_pefree(conn-&gt;options-&gt;charset_name, conn-&gt;persistent);</span>
+<span class='curline'><a href='../S/780.html#L2438'>persistent</a>       2438 ext/mysqlnd/mysqlnd.c 			char * new_auth_protocol = value? mnd_pestrdup(value, conn-&gt;persistent) : NULL;</span>
+<span class='curline'><a href='../S/780.html#L2443'>persistent</a>       2443 ext/mysqlnd/mysqlnd.c 				mnd_pefree(conn-&gt;options-&gt;auth_protocol, conn-&gt;persistent);</span>
+<span class='curline'><a href='../S/780.html#L2537'>persistent</a>       2537 ext/mysqlnd/mysqlnd.c 				conn-&gt;options-&gt;connect_attr = mnd_pemalloc(sizeof(HashTable), conn-&gt;persistent);</span>
+<span class='curline'><a href='../S/780.html#L2541'>persistent</a>       2541 ext/mysqlnd/mysqlnd.c 				zend_hash_init(conn-&gt;options-&gt;connect_attr, 0, NULL, conn-&gt;persistent? connect_attr_item_pdtor:connect_attr_item_edtor, conn-&gt;persistent);</span>
+<span class='curline'><a href='../S/780.html#L2545'>persistent</a>       2545 ext/mysqlnd/mysqlnd.c 				const char * copyv = mnd_pestrdup(value, conn-&gt;persistent);</span>
+<span class='curline'><a href='../S/780.html#L3013'>persistent</a>       3013 ext/mysqlnd/mysqlnd.c 	conn-&gt;net = mysqlnd_net_init(conn-&gt;persistent, conn-&gt;stats, conn-&gt;error_info TSRMLS_CC);</span>
+<span class='curline'><a href='../S/780.html#L3014'>persistent</a>       3014 ext/mysqlnd/mysqlnd.c 	conn-&gt;protocol = mysqlnd_protocol_init(conn-&gt;persistent TSRMLS_CC);</span>
+<span class='curline'><a href='../S/780.html#L3140'>persistent</a>       3140 ext/mysqlnd/mysqlnd.c 	mnd_pefree(conn, conn-&gt;persistent);</span>
+<span class='curline'><a href='../S/780.html#L3194'>persistent</a>       3194 ext/mysqlnd/mysqlnd.c _mysqlnd_init(unsigned int flags, zend_bool persistent TSRMLS_DC)</span>
+<span class='curline'><a href='../S/780.html#L3198'>persistent</a>       3198 ext/mysqlnd/mysqlnd.c 	ret = MYSQLND_CLASS_METHOD_TABLE_NAME(mysqlnd_object_factory).get_connection(persistent TSRMLS_CC);</span>
+<span class='curline'><a href='../S/781.html#L88'>persistent</a>         88 ext/mysqlnd/mysqlnd.h #define mysqlnd_init(client_flags, persistent) _mysqlnd_init((client_flags), (persistent) TSRMLS_CC)</span>
+<span class='curline'><a href='../S/781.html#L89'>persistent</a>         89 ext/mysqlnd/mysqlnd.h PHPAPI MYSQLND * _mysqlnd_init(unsigned int client_flags, zend_bool persistent TSRMLS_DC);</span>
+<span class='curline'><a href='../S/782.html#L117'>persistent</a>        117 ext/mysqlnd/mysqlnd_alloc.c void * _mysqlnd_pemalloc(size_t size, zend_bool persistent MYSQLND_MEM_D)</span>
+<span class='curline'><a href='../S/782.html#L122'>persistent</a>        122 ext/mysqlnd/mysqlnd_alloc.c 	long * threshold = persistent? &amp;MYSQLND_G(debug_malloc_fail_threshold):&amp;MYSQLND_G(debug_emalloc_fail_threshold);</span>
+<span class='curline'><a href='../S/782.html#L137'>persistent</a>        137 ext/mysqlnd/mysqlnd_alloc.c 		ret = (persistent) ? __zend_malloc(REAL_SIZE(size)) : _emalloc(REAL_SIZE(size) ZEND_FILE_LINE_CC ZEND_FILE_LINE_ORIG_RELAY_CC);</span>
+<span class='curline'><a href='../S/782.html#L145'>persistent</a>        145 ext/mysqlnd/mysqlnd_alloc.c 	TRACE_ALLOC_INF_FMT("size=%lu ptr=%p persistent=%u", size, ret, persistent);</span>
+<span class='curline'><a href='../S/782.html#L148'>persistent</a>        148 ext/mysqlnd/mysqlnd_alloc.c 		enum mysqlnd_collected_stats s1 = persistent? STAT_MEM_MALLOC_COUNT:STAT_MEM_EMALLOC_COUNT;</span>
+<span class='curline'><a href='../S/782.html#L149'>persistent</a>        149 ext/mysqlnd/mysqlnd_alloc.c 		enum mysqlnd_collected_stats s2 = persistent? STAT_MEM_MALLOC_AMOUNT:STAT_MEM_EMALLOC_AMOUNT;</span>
+<span class='curline'><a href='../S/782.html#L201'>persistent</a>        201 ext/mysqlnd/mysqlnd_alloc.c void * _mysqlnd_pecalloc(unsigned int nmemb, size_t size, zend_bool persistent MYSQLND_MEM_D)</span>
+<span class='curline'><a href='../S/782.html#L206'>persistent</a>        206 ext/mysqlnd/mysqlnd_alloc.c 	long * threshold = persistent? &amp;MYSQLND_G(debug_calloc_fail_threshold):&amp;MYSQLND_G(debug_ecalloc_fail_threshold);</span>
+<span class='curline'><a href='../S/782.html#L220'>persistent</a>        220 ext/mysqlnd/mysqlnd_alloc.c 		ret = (persistent) ? __zend_calloc(nmemb, REAL_SIZE(size)) : _ecalloc(nmemb, REAL_SIZE(size) ZEND_FILE_LINE_CC ZEND_FILE_LINE_ORIG_RELAY_CC);</span>
+<span class='curline'><a href='../S/782.html#L231'>persistent</a>        231 ext/mysqlnd/mysqlnd_alloc.c 		enum mysqlnd_collected_stats s1 = persistent? STAT_MEM_CALLOC_COUNT:STAT_MEM_ECALLOC_COUNT;</span>
+<span class='curline'><a href='../S/782.html#L232'>persistent</a>        232 ext/mysqlnd/mysqlnd_alloc.c 		enum mysqlnd_collected_stats s2 = persistent? STAT_MEM_CALLOC_AMOUNT:STAT_MEM_ECALLOC_AMOUNT;</span>
+<span class='curline'><a href='../S/782.html#L284'>persistent</a>        284 ext/mysqlnd/mysqlnd_alloc.c void * _mysqlnd_perealloc(void *ptr, size_t new_size, zend_bool persistent MYSQLND_MEM_D)</span>
+<span class='curline'><a href='../S/782.html#L290'>persistent</a>        290 ext/mysqlnd/mysqlnd_alloc.c 	long * threshold = persistent? &amp;MYSQLND_G(debug_realloc_fail_threshold):&amp;MYSQLND_G(debug_erealloc_fail_threshold);</span>
+<span class='curline'><a href='../S/782.html#L300'>persistent</a>        300 ext/mysqlnd/mysqlnd_alloc.c 	TRACE_ALLOC_INF_FMT("ptr=%p old_size=%lu new_size=%lu   persistent=%u", ptr, old_size, new_size, persistent); </span>
+<span class='curline'><a href='../S/782.html#L306'>persistent</a>        306 ext/mysqlnd/mysqlnd_alloc.c 		ret = perealloc(REAL_PTR(ptr), REAL_SIZE(new_size), persistent);</span>
+<span class='curline'><a href='../S/782.html#L317'>persistent</a>        317 ext/mysqlnd/mysqlnd_alloc.c 		enum mysqlnd_collected_stats s1 = persistent? STAT_MEM_REALLOC_COUNT:STAT_MEM_EREALLOC_COUNT;</span>
+<span class='curline'><a href='../S/782.html#L318'>persistent</a>        318 ext/mysqlnd/mysqlnd_alloc.c 		enum mysqlnd_collected_stats s2 = persistent? STAT_MEM_REALLOC_AMOUNT:STAT_MEM_EREALLOC_AMOUNT;</span>
+<span class='curline'><a href='../S/782.html#L359'>persistent</a>        359 ext/mysqlnd/mysqlnd_alloc.c void _mysqlnd_pefree(void *ptr, zend_bool persistent MYSQLND_MEM_D)</span>
+<span class='curline'><a href='../S/782.html#L371'>persistent</a>        371 ext/mysqlnd/mysqlnd_alloc.c 	TRACE_ALLOC_INF_FMT("ptr=%p persistent=%u", ptr, persistent); </span>
+<span class='curline'><a href='../S/782.html#L378'>persistent</a>        378 ext/mysqlnd/mysqlnd_alloc.c 		(persistent) ? free(REAL_PTR(ptr)) : _efree(REAL_PTR(ptr) ZEND_FILE_LINE_CC ZEND_FILE_LINE_ORIG_RELAY_CC);</span>
+<span class='curline'><a href='../S/782.html#L382'>persistent</a>        382 ext/mysqlnd/mysqlnd_alloc.c 		MYSQLND_INC_GLOBAL_STATISTIC_W_VALUE2(persistent? STAT_MEM_FREE_COUNT:STAT_MEM_EFREE_COUNT, 1,</span>
+<span class='curline'><a href='../S/782.html#L383'>persistent</a>        383 ext/mysqlnd/mysqlnd_alloc.c 											  persistent? STAT_MEM_FREE_AMOUNT:STAT_MEM_EFREE_AMOUNT, free_amount);</span>
+<span class='curline'><a href='../S/782.html#L546'>persistent</a>        546 ext/mysqlnd/mysqlnd_alloc.c char * _mysqlnd_pestrndup(const char * const ptr, size_t length, zend_bool persistent MYSQLND_MEM_D)</span>
+<span class='curline'><a href='../S/782.html#L560'>persistent</a>        560 ext/mysqlnd/mysqlnd_alloc.c 	ret = (persistent) ? __zend_malloc(REAL_SIZE(length + 1)) : _emalloc(REAL_SIZE(length + 1) ZEND_FILE_LINE_CC ZEND_FILE_LINE_ORIG_RELAY_CC);</span>
+<span class='curline'><a href='../S/782.html#L573'>persistent</a>        573 ext/mysqlnd/mysqlnd_alloc.c 		MYSQLND_INC_GLOBAL_STATISTIC(persistent? STAT_MEM_STRNDUP_COUNT : STAT_MEM_ESTRNDUP_COUNT);</span>
+<span class='curline'><a href='../S/782.html#L582'>persistent</a>        582 ext/mysqlnd/mysqlnd_alloc.c char * _mysqlnd_pestrdup(const char * const ptr, zend_bool persistent MYSQLND_MEM_D)</span>
+<span class='curline'><a href='../S/782.html#L600'>persistent</a>        600 ext/mysqlnd/mysqlnd_alloc.c 	ret = (persistent) ? __zend_malloc(tmp_str.len + sizeof(size_t)) : _emalloc(REAL_SIZE(tmp_str.len + sizeof(size_t)) ZEND_FILE_LINE_CC ZEND_FILE_LINE_ORIG_RELAY_CC);</span>
+<span class='curline'><a href='../S/782.html#L605'>persistent</a>        605 ext/mysqlnd/mysqlnd_alloc.c 		MYSQLND_INC_GLOBAL_STATISTIC(persistent? STAT_MEM_STRDUP_COUNT : STAT_MEM_ESTRDUP_COUNT);</span>
+<span class='curline'><a href='../S/782.html#L655'>persistent</a>        655 ext/mysqlnd/mysqlnd_alloc.c static void * mysqlnd_zend_mm_pemalloc(size_t size, zend_bool persistent MYSQLND_MEM_D)</span>
+<span class='curline'><a href='../S/782.html#L657'>persistent</a>        657 ext/mysqlnd/mysqlnd_alloc.c 	return pemalloc(size, persistent);</span>
+<span class='curline'><a href='../S/782.html#L671'>persistent</a>        671 ext/mysqlnd/mysqlnd_alloc.c static void * mysqlnd_zend_mm_pecalloc(unsigned int nmemb, size_t size, zend_bool persistent MYSQLND_MEM_D)</span>
+<span class='curline'><a href='../S/782.html#L673'>persistent</a>        673 ext/mysqlnd/mysqlnd_alloc.c 	return pecalloc(nmemb, size, persistent);</span>
+<span class='curline'><a href='../S/782.html#L687'>persistent</a>        687 ext/mysqlnd/mysqlnd_alloc.c static void * mysqlnd_zend_mm_perealloc(void *ptr, size_t new_size, zend_bool persistent MYSQLND_MEM_D)</span>
+<span class='curline'><a href='../S/782.html#L689'>persistent</a>        689 ext/mysqlnd/mysqlnd_alloc.c 	return perealloc(ptr, new_size, persistent);</span>
+<span class='curline'><a href='../S/782.html#L703'>persistent</a>        703 ext/mysqlnd/mysqlnd_alloc.c static void mysqlnd_zend_mm_pefree(void * ptr, zend_bool persistent MYSQLND_MEM_D)</span>
+<span class='curline'><a href='../S/782.html#L705'>persistent</a>        705 ext/mysqlnd/mysqlnd_alloc.c 	pefree(ptr, persistent);</span>
+<span class='curline'><a href='../S/782.html#L743'>persistent</a>        743 ext/mysqlnd/mysqlnd_alloc.c static char * mysqlnd_zend_mm_pestrndup(const char * const ptr, size_t length, zend_bool persistent MYSQLND_MEM_D)</span>
+<span class='curline'><a href='../S/782.html#L745'>persistent</a>        745 ext/mysqlnd/mysqlnd_alloc.c 	return pestrndup(ptr, length, persistent);</span>
+<span class='curline'><a href='../S/782.html#L751'>persistent</a>        751 ext/mysqlnd/mysqlnd_alloc.c static char * mysqlnd_zend_mm_pestrdup(const char * const ptr, zend_bool persistent MYSQLND_MEM_D)</span>
+<span class='curline'><a href='../S/782.html#L753'>persistent</a>        753 ext/mysqlnd/mysqlnd_alloc.c 	return pestrdup(ptr, persistent);</span>
+<span class='curline'><a href='../S/783.html#L35'>persistent</a>         35 ext/mysqlnd/mysqlnd_alloc.h 	void *	(*m_pemalloc)(size_t size, zend_bool persistent MYSQLND_MEM_D);</span>
+<span class='curline'><a href='../S/783.html#L37'>persistent</a>         37 ext/mysqlnd/mysqlnd_alloc.h 	void *	(*m_pecalloc)(unsigned int nmemb, size_t size, zend_bool persistent MYSQLND_MEM_D);</span>
+<span class='curline'><a href='../S/783.html#L39'>persistent</a>         39 ext/mysqlnd/mysqlnd_alloc.h 	void *	(*m_perealloc)(void *ptr, size_t new_size, zend_bool persistent MYSQLND_MEM_D);</span>
+<span class='curline'><a href='../S/783.html#L41'>persistent</a>         41 ext/mysqlnd/mysqlnd_alloc.h 	void	(*m_pefree)(void *ptr, zend_bool persistent MYSQLND_MEM_D);</span>
+<span class='curline'><a href='../S/783.html#L46'>persistent</a>         46 ext/mysqlnd/mysqlnd_alloc.h 	char *	(*m_pestrndup)(const char * const ptr, size_t size, zend_bool persistent MYSQLND_MEM_D);</span>
+<span class='curline'><a href='../S/783.html#L47'>persistent</a>         47 ext/mysqlnd/mysqlnd_alloc.h 	char *	(*m_pestrdup)(const char * const ptr, zend_bool persistent MYSQLND_MEM_D);</span>
+<span class='curline'><a href='../S/783.html#L56'>persistent</a>         56 ext/mysqlnd/mysqlnd_alloc.h PHPAPI void *	_mysqlnd_pemalloc(size_t size, zend_bool persistent MYSQLND_MEM_D);</span>
+<span class='curline'><a href='../S/783.html#L58'>persistent</a>         58 ext/mysqlnd/mysqlnd_alloc.h PHPAPI void *	_mysqlnd_pecalloc(unsigned int nmemb, size_t size, zend_bool persistent MYSQLND_MEM_D);</span>
+<span class='curline'><a href='../S/783.html#L60'>persistent</a>         60 ext/mysqlnd/mysqlnd_alloc.h PHPAPI void *	_mysqlnd_perealloc(void *ptr, size_t new_size, zend_bool persistent MYSQLND_MEM_D);</span>
+<span class='curline'><a href='../S/783.html#L62'>persistent</a>         62 ext/mysqlnd/mysqlnd_alloc.h PHPAPI void		_mysqlnd_pefree(void *ptr, zend_bool persistent MYSQLND_MEM_D);</span>
+<span class='curline'><a href='../S/783.html#L67'>persistent</a>         67 ext/mysqlnd/mysqlnd_alloc.h PHPAPI char *	_mysqlnd_pestrndup(const char * const ptr, size_t size, zend_bool persistent MYSQLND_MEM_D);</span>
+<span class='curline'><a href='../S/783.html#L68'>persistent</a>         68 ext/mysqlnd/mysqlnd_alloc.h PHPAPI char *	_mysqlnd_pestrdup(const char * const ptr, zend_bool persistent MYSQLND_MEM_D);</span>
+<span class='curline'><a href='../S/784.html#L142'>persistent</a>        142 ext/mysqlnd/mysqlnd_auth.c 	SET_NEW_MESSAGE(conn-&gt;last_message, conn-&gt;last_message_len, auth_resp_packet-&gt;message, auth_resp_packet-&gt;message_len, conn-&gt;persistent);</span>
+<span class='curline'><a href='../S/784.html#L276'>persistent</a>        276 ext/mysqlnd/mysqlnd_auth.c 		tmp = mnd_pestrndup(user, user_len, conn-&gt;persistent);</span>
+<span class='curline'><a href='../S/784.html#L278'>persistent</a>        278 ext/mysqlnd/mysqlnd_auth.c 			mnd_pefree(conn-&gt;user, conn-&gt;persistent);</span>
+<span class='curline'><a href='../S/784.html#L282'>persistent</a>        282 ext/mysqlnd/mysqlnd_auth.c 		tmp = mnd_pestrdup(passwd, conn-&gt;persistent);</span>
+<span class='curline'><a href='../S/784.html#L284'>persistent</a>        284 ext/mysqlnd/mysqlnd_auth.c 			mnd_pefree(conn-&gt;passwd, conn-&gt;persistent);</span>
+<span class='curline'><a href='../S/784.html#L289'>persistent</a>        289 ext/mysqlnd/mysqlnd_auth.c 			mnd_pefree(conn-&gt;last_message, conn-&gt;persistent);</span>
+<span class='curline'><a href='../S/792.html#L116'>persistent</a>        116 ext/mysqlnd/mysqlnd_driver.c MYSQLND_METHOD(mysqlnd_object_factory, get_connection)(zend_bool persistent TSRMLS_DC)</span>
+<span class='curline'><a href='../S/792.html#L124'>persistent</a>        124 ext/mysqlnd/mysqlnd_driver.c 	DBG_INF_FMT("persistent=%u", persistent);</span>
+<span class='curline'><a href='../S/792.html#L125'>persistent</a>        125 ext/mysqlnd/mysqlnd_driver.c 	new_object = mnd_pecalloc(1, alloc_size_ret, persistent);</span>
+<span class='curline'><a href='../S/792.html#L129'>persistent</a>        129 ext/mysqlnd/mysqlnd_driver.c 	new_object-&gt;data = mnd_pecalloc(1, alloc_size_ret_data, persistent);</span>
+<span class='curline'><a href='../S/792.html#L131'>persistent</a>        131 ext/mysqlnd/mysqlnd_driver.c 		mnd_pefree(new_object, persistent);</span>
+<span class='curline'><a href='../S/792.html#L134'>persistent</a>        134 ext/mysqlnd/mysqlnd_driver.c 	new_object-&gt;persistent = persistent;</span>
+<span class='curline'><a href='../S/792.html#L142'>persistent</a>        142 ext/mysqlnd/mysqlnd_driver.c 	data-&gt;persistent = persistent;</span>
+<span class='curline'><a href='../S/792.html#L152'>persistent</a>        152 ext/mysqlnd/mysqlnd_driver.c 	data-&gt;error_info-&gt;error_list = mnd_pecalloc(1, sizeof(zend_llist), persistent);</span>
+<span class='curline'><a href='../S/792.html#L157'>persistent</a>        157 ext/mysqlnd/mysqlnd_driver.c 		zend_llist_init(data-&gt;error_info-&gt;error_list, sizeof(MYSQLND_ERROR_LIST_ELEMENT), (llist_dtor_func_t)mysqlnd_error_list_pdtor, persistent);</span>
+<span class='curline'><a href='../S/792.html#L173'>persistent</a>        173 ext/mysqlnd/mysqlnd_driver.c 	DBG_INF_FMT("persistent=%u", to_be_cloned-&gt;persistent);</span>
+<span class='curline'><a href='../S/792.html#L177'>persistent</a>        177 ext/mysqlnd/mysqlnd_driver.c 	new_object = mnd_pecalloc(1, alloc_size_ret, to_be_cloned-&gt;persistent);</span>
+<span class='curline'><a href='../S/792.html#L181'>persistent</a>        181 ext/mysqlnd/mysqlnd_driver.c 	new_object-&gt;persistent = to_be_cloned-&gt;persistent;</span>
+<span class='curline'><a href='../S/792.html#L199'>persistent</a>        199 ext/mysqlnd/mysqlnd_driver.c 	MYSQLND_STMT * ret = mnd_pecalloc(1, alloc_size, conn-&gt;persistent);</span>
+<span class='curline'><a href='../S/792.html#L208'>persistent</a>        208 ext/mysqlnd/mysqlnd_driver.c 		ret-&gt;persistent = conn-&gt;persistent;</span>
+<span class='curline'><a href='../S/792.html#L210'>persistent</a>        210 ext/mysqlnd/mysqlnd_driver.c 		stmt = ret-&gt;data = mnd_pecalloc(1, sizeof(MYSQLND_STMT_DATA), conn-&gt;persistent);</span>
+<span class='curline'><a href='../S/792.html#L215'>persistent</a>        215 ext/mysqlnd/mysqlnd_driver.c 		stmt-&gt;persistent = conn-&gt;persistent;</span>
+<span class='curline'><a href='../S/792.html#L220'>persistent</a>        220 ext/mysqlnd/mysqlnd_driver.c 		stmt-&gt;execute_cmd_buffer.buffer = mnd_pemalloc(stmt-&gt;execute_cmd_buffer.length, stmt-&gt;persistent);</span>
+<span class='curline'><a href='../S/792.html#L232'>persistent</a>        232 ext/mysqlnd/mysqlnd_driver.c 		stmt-&gt;error_info-&gt;error_list = mnd_pecalloc(1, sizeof(zend_llist), ret-&gt;persistent);</span>
+<span class='curline'><a href='../S/792.html#L237'>persistent</a>        237 ext/mysqlnd/mysqlnd_driver.c 		zend_llist_init(stmt-&gt;error_info-&gt;error_list, sizeof(MYSQLND_ERROR_LIST_ELEMENT), (llist_dtor_func_t) mysqlnd_error_list_pdtor, conn-&gt;persistent);</span>
+<span class='curline'><a href='../S/792.html#L254'>persistent</a>        254 ext/mysqlnd/mysqlnd_driver.c MYSQLND_METHOD(mysqlnd_object_factory, get_io_channel)(zend_bool persistent, MYSQLND_STATS * stats, MYSQLND_ERROR_INFO * error_info TSRMLS_DC)</span>
+<span class='curline'><a href='../S/792.html#L258'>persistent</a>        258 ext/mysqlnd/mysqlnd_driver.c 	MYSQLND_NET * net = mnd_pecalloc(1, net_alloc_size, persistent);</span>
+<span class='curline'><a href='../S/792.html#L259'>persistent</a>        259 ext/mysqlnd/mysqlnd_driver.c 	MYSQLND_NET_DATA * net_data = mnd_pecalloc(1, net_data_alloc_size, persistent);</span>
+<span class='curline'><a href='../S/792.html#L262'>persistent</a>        262 ext/mysqlnd/mysqlnd_driver.c 	DBG_INF_FMT("persistent=%u", persistent);</span>
+<span class='curline'><a href='../S/792.html#L265'>persistent</a>        265 ext/mysqlnd/mysqlnd_driver.c 		net-&gt;persistent = net-&gt;data-&gt;persistent = persistent;</span>
+<span class='curline'><a href='../S/792.html#L274'>persistent</a>        274 ext/mysqlnd/mysqlnd_driver.c 			mnd_pefree(net_data, persistent);</span>
+<span class='curline'><a href='../S/792.html#L278'>persistent</a>        278 ext/mysqlnd/mysqlnd_driver.c 			mnd_pefree(net, persistent);</span>
+<span class='curline'><a href='../S/792.html#L289'>persistent</a>        289 ext/mysqlnd/mysqlnd_driver.c MYSQLND_METHOD(mysqlnd_object_factory, get_protocol_decoder)(zend_bool persistent TSRMLS_DC)</span>
+<span class='curline'><a href='../S/792.html#L292'>persistent</a>        292 ext/mysqlnd/mysqlnd_driver.c 	MYSQLND_PROTOCOL *ret = mnd_pecalloc(1, alloc_size, persistent);</span>
+<span class='curline'><a href='../S/792.html#L295'>persistent</a>        295 ext/mysqlnd/mysqlnd_driver.c 	DBG_INF_FMT("persistent=%u", persistent);</span>
+<span class='curline'><a href='../S/792.html#L297'>persistent</a>        297 ext/mysqlnd/mysqlnd_driver.c 		ret-&gt;persistent = persistent;</span>
+<span class='curline'><a href='../S/798.html#L132'>persistent</a>        132 ext/mysqlnd/mysqlnd_net.c 									   const zend_bool persistent,</span>
+<span class='curline'><a href='../S/798.html#L143'>persistent</a>        143 ext/mysqlnd/mysqlnd_net.c 	if (persistent) {</span>
+<span class='curline'><a href='../S/798.html#L170'>persistent</a>        170 ext/mysqlnd/mysqlnd_net.c 											  const zend_bool persistent,</span>
+<span class='curline'><a href='../S/798.html#L190'>persistent</a>        190 ext/mysqlnd/mysqlnd_net.c 	if (persistent) {</span>
+<span class='curline'><a href='../S/798.html#L316'>persistent</a>        316 ext/mysqlnd/mysqlnd_net.c 										const zend_bool persistent,</span>
+<span class='curline'><a href='../S/798.html#L329'>persistent</a>        329 ext/mysqlnd/mysqlnd_net.c 		php_stream * net_stream = open_stream(net, scheme, scheme_len, persistent, conn_stats, error_info TSRMLS_CC);</span>
+<span class='curline'><a href='../S/798.html#L732'>persistent</a>        732 ext/mysqlnd/mysqlnd_net.c 				net-&gt;cmd_buffer.buffer = mnd_pemalloc(net-&gt;cmd_buffer.length, net-&gt;persistent);</span>
+<span class='curline'><a href='../S/798.html#L734'>persistent</a>        734 ext/mysqlnd/mysqlnd_net.c 				net-&gt;cmd_buffer.buffer = mnd_perealloc(net-&gt;cmd_buffer.buffer, net-&gt;cmd_buffer.length, net-&gt;persistent);</span>
+<span class='curline'><a href='../S/798.html#L748'>persistent</a>        748 ext/mysqlnd/mysqlnd_net.c 				zend_bool pers = net-&gt;persistent;</span>
+<span class='curline'><a href='../S/798.html#L757'>persistent</a>        757 ext/mysqlnd/mysqlnd_net.c 				zend_bool pers = net-&gt;persistent;</span>
+<span class='curline'><a href='../S/798.html#L766'>persistent</a>        766 ext/mysqlnd/mysqlnd_net.c 				zend_bool pers = net-&gt;persistent;</span>
+<span class='curline'><a href='../S/798.html#L775'>persistent</a>        775 ext/mysqlnd/mysqlnd_net.c 				zend_bool pers = net-&gt;persistent;</span>
+<span class='curline'><a href='../S/798.html#L784'>persistent</a>        784 ext/mysqlnd/mysqlnd_net.c 				zend_bool pers = net-&gt;persistent;</span>
+<span class='curline'><a href='../S/798.html#L793'>persistent</a>        793 ext/mysqlnd/mysqlnd_net.c 				zend_bool pers = net-&gt;persistent;</span>
+<span class='curline'><a href='../S/798.html#L835'>persistent</a>        835 ext/mysqlnd/mysqlnd_net.c 				zend_bool pers = net-&gt;persistent;</span>
+<span class='curline'><a href='../S/798.html#L1024'>persistent</a>       1024 ext/mysqlnd/mysqlnd_net.c 	zend_bool pers = net-&gt;persistent;</span>
+<span class='curline'><a href='../S/798.html#L1069'>persistent</a>       1069 ext/mysqlnd/mysqlnd_net.c 		zend_bool pers = net-&gt;persistent;</span>
+<span class='curline'><a href='../S/798.html#L1124'>persistent</a>       1124 ext/mysqlnd/mysqlnd_net.c 			mnd_pefree(net-&gt;cmd_buffer.buffer, net-&gt;persistent);</span>
+<span class='curline'><a href='../S/798.html#L1128'>persistent</a>       1128 ext/mysqlnd/mysqlnd_net.c 		mnd_pefree(net-&gt;data, net-&gt;data-&gt;persistent);</span>
+<span class='curline'><a href='../S/798.html#L1129'>persistent</a>       1129 ext/mysqlnd/mysqlnd_net.c 		mnd_pefree(net, net-&gt;persistent);</span>
+<span class='curline'><a href='../S/798.html#L1199'>persistent</a>       1199 ext/mysqlnd/mysqlnd_net.c mysqlnd_net_init(zend_bool persistent, MYSQLND_STATS * stats, MYSQLND_ERROR_INFO * error_info TSRMLS_DC)</span>
+<span class='curline'><a href='../S/798.html#L1203'>persistent</a>       1203 ext/mysqlnd/mysqlnd_net.c 	net = MYSQLND_CLASS_METHOD_TABLE_NAME(mysqlnd_object_factory).get_io_channel(persistent, stats, error_info TSRMLS_CC);</span>
+<span class='curline'><a href='../S/799.html#L26'>persistent</a>         26 ext/mysqlnd/mysqlnd_net.h PHPAPI MYSQLND_NET * mysqlnd_net_init(zend_bool persistent, MYSQLND_STATS * stats, MYSQLND_ERROR_INFO * error_info TSRMLS_DC);</span>
+<span class='curline'><a href='../S/802.html#L41'>persistent</a>         41 ext/mysqlnd/mysqlnd_priv.h #define pestrndup(s, length, persistent) ((persistent)?zend_strndup((s),(length)):estrndup((s),(length)))</span>
+<span class='curline'><a href='../S/802.html#L90'>persistent</a>         90 ext/mysqlnd/mysqlnd_priv.h #define SET_NEW_MESSAGE(buf, buf_len, message, len, persistent) \</span>
+<span class='curline'><a href='../S/802.html#L93'>persistent</a>         93 ext/mysqlnd/mysqlnd_priv.h 			mnd_pefree((buf), (persistent)); \</span>
+<span class='curline'><a href='../S/802.html#L96'>persistent</a>         96 ext/mysqlnd/mysqlnd_priv.h 			(buf) = mnd_pestrndup((message), (len), (persistent)); \</span>
+<span class='curline'><a href='../S/802.html#L103'>persistent</a>        103 ext/mysqlnd/mysqlnd_priv.h #define SET_EMPTY_MESSAGE(buf, buf_len, persistent) \</span>
+<span class='curline'><a href='../S/802.html#L106'>persistent</a>        106 ext/mysqlnd/mysqlnd_priv.h 			mnd_pefree((buf), (persistent)); \</span>
+<span class='curline'><a href='../S/803.html#L91'>persistent</a>         91 ext/mysqlnd/mysqlnd_ps.c 	result-&gt;stored_data	= (MYSQLND_RES_BUFFERED *) mysqlnd_result_buffered_zval_init(result-&gt;field_count, TRUE, result-&gt;persistent TSRMLS_CC);</span>
+<span class='curline'><a href='../S/803.html#L180'>persistent</a>        180 ext/mysqlnd/mysqlnd_ps.c 		result = conn-&gt;m-&gt;result_init(stmt-&gt;result-&gt;field_count, stmt-&gt;persistent TSRMLS_CC);</span>
+<span class='curline'><a href='../S/803.html#L439'>persistent</a>        439 ext/mysqlnd/mysqlnd_ps.c 		MYSQLND_RES * result = stmt-&gt;conn-&gt;m-&gt;result_init(stmt_to_prepare-&gt;field_count, stmt_to_prepare-&gt;persistent TSRMLS_CC);</span>
+<span class='curline'><a href='../S/803.html#L1497'>persistent</a>       1497 ext/mysqlnd/mysqlnd_ps.c 			stmt-&gt;param_bind = mnd_pecalloc(stmt-&gt;param_count, sizeof(MYSQLND_PARAM_BIND), stmt-&gt;persistent);</span>
+<span class='curline'><a href='../S/803.html#L1639'>persistent</a>       1639 ext/mysqlnd/mysqlnd_ps.c 			stmt-&gt;result_bind = mnd_pecalloc(stmt-&gt;field_count, sizeof(MYSQLND_RESULT_BIND), stmt-&gt;persistent);</span>
+<span class='curline'><a href='../S/803.html#L1641'>persistent</a>       1641 ext/mysqlnd/mysqlnd_ps.c 			stmt-&gt;result_bind = mnd_perealloc(stmt-&gt;result_bind, stmt-&gt;field_count * sizeof(MYSQLND_RESULT_BIND), stmt-&gt;persistent);</span>
+<span class='curline'><a href='../S/803.html#L1816'>persistent</a>       1816 ext/mysqlnd/mysqlnd_ps.c 		result = stmt-&gt;conn-&gt;m-&gt;result_init(stmt-&gt;field_count, stmt-&gt;persistent TSRMLS_CC);</span>
+<span class='curline'><a href='../S/803.html#L1821'>persistent</a>       1821 ext/mysqlnd/mysqlnd_ps.c 		result-&gt;unbuf = mysqlnd_result_unbuffered_init(stmt-&gt;field_count, TRUE, result-&gt;persistent TSRMLS_CC);</span>
+<span class='curline'><a href='../S/803.html#L2114'>persistent</a>       2114 ext/mysqlnd/mysqlnd_ps.c 		mnd_pefree(stmt-&gt;error_info-&gt;error_list, s-&gt;persistent);</span>
+<span class='curline'><a href='../S/803.html#L2231'>persistent</a>       2231 ext/mysqlnd/mysqlnd_ps.c 		mnd_pefree(stmt-&gt;execute_cmd_buffer.buffer, stmt-&gt;persistent);</span>
+<span class='curline'><a href='../S/803.html#L2252'>persistent</a>       2252 ext/mysqlnd/mysqlnd_ps.c 	zend_bool persistent = (s != NULL) ? s-&gt;persistent : 0;</span>
+<span class='curline'><a href='../S/803.html#L2262'>persistent</a>       2262 ext/mysqlnd/mysqlnd_ps.c 		mnd_pefree(stmt, persistent);</span>
+<span class='curline'><a href='../S/803.html#L2264'>persistent</a>       2264 ext/mysqlnd/mysqlnd_ps.c 	mnd_pefree(s, persistent);</span>
+<span class='curline'><a href='../S/803.html#L2281'>persistent</a>       2281 ext/mysqlnd/mysqlnd_ps.c 	DBG_RETURN(mnd_pecalloc(stmt-&gt;param_count, sizeof(MYSQLND_PARAM_BIND), stmt-&gt;persistent));</span>
+<span class='curline'><a href='../S/803.html#L2295'>persistent</a>       2295 ext/mysqlnd/mysqlnd_ps.c 	DBG_RETURN(mnd_pecalloc(stmt-&gt;field_count, sizeof(MYSQLND_RESULT_BIND), stmt-&gt;persistent));</span>
+<span class='curline'><a href='../S/803.html#L2306'>persistent</a>       2306 ext/mysqlnd/mysqlnd_ps.c 		mnd_pefree(param_bind, stmt-&gt;persistent);</span>
+<span class='curline'><a href='../S/803.html#L2318'>persistent</a>       2318 ext/mysqlnd/mysqlnd_ps.c 		mnd_pefree(result_bind, stmt-&gt;persistent);</span>
+<span class='curline'><a href='../S/805.html#L243'>persistent</a>        243 ext/mysqlnd/mysqlnd_result.c 		mnd_pefree(result-&gt;lengths, result-&gt;persistent);</span>
+<span class='curline'><a href='../S/805.html#L259'>persistent</a>        259 ext/mysqlnd/mysqlnd_result.c 	mnd_pefree(result, result-&gt;persistent);</span>
+<span class='curline'><a href='../S/805.html#L313'>persistent</a>        313 ext/mysqlnd/mysqlnd_result.c 	mnd_pefree(set-&gt;initialized, set-&gt;persistent);</span>
+<span class='curline'><a href='../S/805.html#L341'>persistent</a>        341 ext/mysqlnd/mysqlnd_result.c 		mnd_pefree(set-&gt;lengths, set-&gt;persistent);</span>
+<span class='curline'><a href='../S/805.html#L358'>persistent</a>        358 ext/mysqlnd/mysqlnd_result.c 	mnd_pefree(set, set-&gt;persistent);</span>
+<span class='curline'><a href='../S/805.html#L418'>persistent</a>        418 ext/mysqlnd/mysqlnd_result.c 	mnd_pefree(result, result-&gt;persistent);</span>
+<span class='curline'><a href='../S/805.html#L442'>persistent</a>        442 ext/mysqlnd/mysqlnd_result.c 	result-&gt;meta = result-&gt;m.result_meta_init(result-&gt;field_count, result-&gt;persistent TSRMLS_CC);</span>
+<span class='curline'><a href='../S/805.html#L545'>persistent</a>        545 ext/mysqlnd/mysqlnd_result.c 								conn-&gt;persistent);</span>
+<span class='curline'><a href='../S/805.html#L560'>persistent</a>        560 ext/mysqlnd/mysqlnd_result.c 				SET_EMPTY_MESSAGE(conn-&gt;last_message, conn-&gt;last_message_len, conn-&gt;persistent);</span>
+<span class='curline'><a href='../S/805.html#L572'>persistent</a>        572 ext/mysqlnd/mysqlnd_result.c 					result = conn-&gt;current_result = conn-&gt;m-&gt;result_init(rset_header-&gt;field_count, conn-&gt;persistent TSRMLS_CC);</span>
+<span class='curline'><a href='../S/805.html#L581'>persistent</a>        581 ext/mysqlnd/mysqlnd_result.c 						result = stmt-&gt;result = conn-&gt;m-&gt;result_init(rset_header-&gt;field_count, stmt-&gt;persistent TSRMLS_CC);</span>
+<span class='curline'><a href='../S/805.html#L1019'>persistent</a>       1019 ext/mysqlnd/mysqlnd_result.c 	result-&gt;unbuf = mysqlnd_result_unbuffered_init(result-&gt;field_count, ps, result-&gt;persistent TSRMLS_CC);</span>
+<span class='curline'><a href='../S/805.html#L1508'>persistent</a>       1508 ext/mysqlnd/mysqlnd_result.c 		result-&gt;stored_data	= (MYSQLND_RES_BUFFERED *) mysqlnd_result_buffered_zval_init(result-&gt;field_count, flags &amp; MYSQLND_STORE_PS, result-&gt;persistent TSRMLS_CC);</span>
+<span class='curline'><a href='../S/805.html#L1515'>persistent</a>       1515 ext/mysqlnd/mysqlnd_result.c 		result-&gt;stored_data	= (MYSQLND_RES_BUFFERED *) mysqlnd_result_buffered_c_init(result-&gt;field_count, flags &amp; MYSQLND_STORE_PS, result-&gt;persistent TSRMLS_CC);</span>
+<span class='curline'><a href='../S/805.html#L1555'>persistent</a>       1555 ext/mysqlnd/mysqlnd_result.c 			set-&gt;initialized = mnd_pecalloc((set-&gt;row_count / 8) + 1, sizeof(zend_uchar), set-&gt;persistent); /* +1 for safety */</span>
+<span class='curline'><a href='../S/805.html#L1996'>persistent</a>       1996 ext/mysqlnd/mysqlnd_result.c mysqlnd_result_init(unsigned int field_count, zend_bool persistent TSRMLS_DC)</span>
+<span class='curline'><a href='../S/805.html#L1999'>persistent</a>       1999 ext/mysqlnd/mysqlnd_result.c 	MYSQLND_RES * ret = mnd_pecalloc(1, alloc_size, persistent);</span>
+<span class='curline'><a href='../S/805.html#L2007'>persistent</a>       2007 ext/mysqlnd/mysqlnd_result.c 	ret-&gt;persistent		= persistent;</span>
+<span class='curline'><a href='../S/805.html#L2018'>persistent</a>       2018 ext/mysqlnd/mysqlnd_result.c mysqlnd_result_unbuffered_init(unsigned int field_count, zend_bool ps, zend_bool persistent TSRMLS_DC)</span>
+<span class='curline'><a href='../S/805.html#L2021'>persistent</a>       2021 ext/mysqlnd/mysqlnd_result.c 	MYSQLND_RES_UNBUFFERED * ret = mnd_pecalloc(1, alloc_size, persistent);</span>
+<span class='curline'><a href='../S/805.html#L2029'>persistent</a>       2029 ext/mysqlnd/mysqlnd_result.c 	if (!(ret-&gt;lengths = mnd_pecalloc(field_count, sizeof(unsigned long), persistent))) {</span>
+<span class='curline'><a href='../S/805.html#L2030'>persistent</a>       2030 ext/mysqlnd/mysqlnd_result.c 		mnd_pefree(ret, persistent);</span>
+<span class='curline'><a href='../S/805.html#L2035'>persistent</a>       2035 ext/mysqlnd/mysqlnd_result.c 		mnd_pefree(ret, persistent);</span>
+<span class='curline'><a href='../S/805.html#L2039'>persistent</a>       2039 ext/mysqlnd/mysqlnd_result.c 	ret-&gt;persistent	= persistent;</span>
+<span class='curline'><a href='../S/805.html#L2059'>persistent</a>       2059 ext/mysqlnd/mysqlnd_result.c mysqlnd_result_buffered_zval_init(unsigned int field_count, zend_bool ps, zend_bool persistent TSRMLS_DC)</span>
+<span class='curline'><a href='../S/805.html#L2062'>persistent</a>       2062 ext/mysqlnd/mysqlnd_result.c 	MYSQLND_RES_BUFFERED_ZVAL * ret = mnd_pecalloc(1, alloc_size, persistent);</span>
+<span class='curline'><a href='../S/805.html#L2069'>persistent</a>       2069 ext/mysqlnd/mysqlnd_result.c 	if (!(ret-&gt;lengths = mnd_pecalloc(field_count, sizeof(unsigned long), persistent))) {</span>
+<span class='curline'><a href='../S/805.html#L2070'>persistent</a>       2070 ext/mysqlnd/mysqlnd_result.c 		mnd_pefree(ret, persistent);</span>
+<span class='curline'><a href='../S/805.html#L2075'>persistent</a>       2075 ext/mysqlnd/mysqlnd_result.c 		mnd_pefree(ret, persistent);</span>
+<span class='curline'><a href='../S/805.html#L2079'>persistent</a>       2079 ext/mysqlnd/mysqlnd_result.c 	ret-&gt;persistent	= persistent;</span>
+<span class='curline'><a href='../S/805.html#L2102'>persistent</a>       2102 ext/mysqlnd/mysqlnd_result.c mysqlnd_result_buffered_c_init(unsigned int field_count, zend_bool ps, zend_bool persistent TSRMLS_DC)</span>
+<span class='curline'><a href='../S/805.html#L2105'>persistent</a>       2105 ext/mysqlnd/mysqlnd_result.c 	MYSQLND_RES_BUFFERED_C * ret = mnd_pecalloc(1, alloc_size, persistent);</span>
+<span class='curline'><a href='../S/805.html#L2112'>persistent</a>       2112 ext/mysqlnd/mysqlnd_result.c 	if (!(ret-&gt;lengths = mnd_pecalloc(field_count, sizeof(unsigned long), persistent))) {</span>
+<span class='curline'><a href='../S/805.html#L2113'>persistent</a>       2113 ext/mysqlnd/mysqlnd_result.c 		mnd_pefree(ret, persistent);</span>
+<span class='curline'><a href='../S/805.html#L2118'>persistent</a>       2118 ext/mysqlnd/mysqlnd_result.c 		mnd_pefree(ret, persistent);</span>
+<span class='curline'><a href='../S/805.html#L2122'>persistent</a>       2122 ext/mysqlnd/mysqlnd_result.c 	ret-&gt;persistent	= persistent;</span>
+<span class='curline'><a href='../S/806.html#L26'>persistent</a>         26 ext/mysqlnd/mysqlnd_result.h PHPAPI MYSQLND_RES * mysqlnd_result_init(unsigned int field_count, zend_bool persistent TSRMLS_DC);</span>
+<span class='curline'><a href='../S/806.html#L27'>persistent</a>         27 ext/mysqlnd/mysqlnd_result.h PHPAPI MYSQLND_RES_UNBUFFERED * mysqlnd_result_unbuffered_init(unsigned int field_count, zend_bool ps, zend_bool persistent TSRMLS_DC);</span>
+<span class='curline'><a href='../S/806.html#L28'>persistent</a>         28 ext/mysqlnd/mysqlnd_result.h PHPAPI MYSQLND_RES_BUFFERED_ZVAL * mysqlnd_result_buffered_zval_init(unsigned int field_count, zend_bool ps, zend_bool persistent TSRMLS_DC);</span>
+<span class='curline'><a href='../S/806.html#L29'>persistent</a>         29 ext/mysqlnd/mysqlnd_result.h PHPAPI MYSQLND_RES_BUFFERED_C * mysqlnd_result_buffered_c_init(unsigned int field_count, zend_bool ps, zend_bool persistent TSRMLS_DC);</span>
+<span class='curline'><a href='../S/807.html#L33'>persistent</a>         33 ext/mysqlnd/mysqlnd_result_meta.c php_mysqlnd_free_field_metadata(MYSQLND_FIELD *meta, zend_bool persistent TSRMLS_DC)</span>
+<span class='curline'><a href='../S/807.html#L37'>persistent</a>         37 ext/mysqlnd/mysqlnd_result_meta.c 			mnd_pefree(meta-&gt;root, persistent);</span>
+<span class='curline'><a href='../S/807.html#L41'>persistent</a>         41 ext/mysqlnd/mysqlnd_result_meta.c 			mnd_pefree(meta-&gt;def, persistent);</span>
+<span class='curline'><a href='../S/807.html#L109'>persistent</a>        109 ext/mysqlnd/mysqlnd_result_meta.c 	field_packet-&gt;persistent_alloc = meta-&gt;persistent;</span>
+<span class='curline'><a href='../S/807.html#L115'>persistent</a>        115 ext/mysqlnd/mysqlnd_result_meta.c 			mnd_pefree(meta-&gt;fields[i].root, meta-&gt;persistent);</span>
+<span class='curline'><a href='../S/807.html#L208'>persistent</a>        208 ext/mysqlnd/mysqlnd_result_meta.c 	DBG_INF_FMT("persistent=%u", meta-&gt;persistent);</span>
+<span class='curline'><a href='../S/807.html#L214'>persistent</a>        214 ext/mysqlnd/mysqlnd_result_meta.c 			php_mysqlnd_free_field_metadata(fields++, meta-&gt;persistent TSRMLS_CC);</span>
+<span class='curline'><a href='../S/807.html#L216'>persistent</a>        216 ext/mysqlnd/mysqlnd_result_meta.c 		mnd_pefree(meta-&gt;fields, meta-&gt;persistent);</span>
+<span class='curline'><a href='../S/807.html#L222'>persistent</a>        222 ext/mysqlnd/mysqlnd_result_meta.c 		mnd_pefree(meta-&gt;zend_hash_keys, meta-&gt;persistent);</span>
+<span class='curline'><a href='../S/807.html#L226'>persistent</a>        226 ext/mysqlnd/mysqlnd_result_meta.c 	mnd_pefree(meta, meta-&gt;persistent);</span>
+<span class='curline'><a href='../S/807.html#L235'>persistent</a>        235 ext/mysqlnd/mysqlnd_result_meta.c MYSQLND_METHOD(mysqlnd_res_meta, clone_metadata)(const MYSQLND_RES_METADATA * const meta, zend_bool persistent TSRMLS_DC)</span>
+<span class='curline'><a href='../S/807.html#L245'>persistent</a>        245 ext/mysqlnd/mysqlnd_result_meta.c 	DBG_INF_FMT("persistent=%u", persistent);</span>
+<span class='curline'><a href='../S/807.html#L247'>persistent</a>        247 ext/mysqlnd/mysqlnd_result_meta.c 	new_meta = mnd_pecalloc(1, sizeof(MYSQLND_RES_METADATA), persistent);</span>
+<span class='curline'><a href='../S/807.html#L251'>persistent</a>        251 ext/mysqlnd/mysqlnd_result_meta.c 	new_meta-&gt;persistent = persistent;</span>
+<span class='curline'><a href='../S/807.html#L254'>persistent</a>        254 ext/mysqlnd/mysqlnd_result_meta.c 	new_fields = mnd_pecalloc(meta-&gt;field_count + 1, sizeof(MYSQLND_FIELD), persistent);</span>
+<span class='curline'><a href='../S/807.html#L259'>persistent</a>        259 ext/mysqlnd/mysqlnd_result_meta.c 	new_meta-&gt;zend_hash_keys = mnd_pemalloc(len, persistent);</span>
+<span class='curline'><a href='../S/807.html#L272'>persistent</a>        272 ext/mysqlnd/mysqlnd_result_meta.c 		new_fields[i].root = mnd_pemalloc(orig_fields[i].root_len, persistent);</span>
+<span class='curline'><a href='../S/807.html#L302'>persistent</a>        302 ext/mysqlnd/mysqlnd_result_meta.c 			new_fields[i].def = mnd_pemalloc(orig_fields[i].def_length + 1, persistent);</span>
+<span class='curline'><a href='../S/807.html#L401'>persistent</a>        401 ext/mysqlnd/mysqlnd_result_meta.c mysqlnd_result_meta_init(unsigned int field_count, zend_bool persistent TSRMLS_DC)</span>
+<span class='curline'><a href='../S/807.html#L404'>persistent</a>        404 ext/mysqlnd/mysqlnd_result_meta.c 	MYSQLND_RES_METADATA *ret = mnd_pecalloc(1, alloc_size, persistent);</span>
+<span class='curline'><a href='../S/807.html#L406'>persistent</a>        406 ext/mysqlnd/mysqlnd_result_meta.c 	DBG_INF_FMT("persistent=%u", persistent);</span>
+<span class='curline'><a href='../S/807.html#L414'>persistent</a>        414 ext/mysqlnd/mysqlnd_result_meta.c 		ret-&gt;persistent = persistent;</span>
+<span class='curline'><a href='../S/807.html#L417'>persistent</a>        417 ext/mysqlnd/mysqlnd_result_meta.c 		ret-&gt;fields = mnd_pecalloc(field_count + 1, sizeof(MYSQLND_FIELD), ret-&gt;persistent);</span>
+<span class='curline'><a href='../S/807.html#L418'>persistent</a>        418 ext/mysqlnd/mysqlnd_result_meta.c 		ret-&gt;zend_hash_keys = mnd_pecalloc(field_count, sizeof(struct mysqlnd_field_hash_key), ret-&gt;persistent);</span>
+<span class='curline'><a href='../S/808.html#L26'>persistent</a>         26 ext/mysqlnd/mysqlnd_result_meta.h PHPAPI MYSQLND_RES_METADATA * mysqlnd_result_meta_init(unsigned int field_count, zend_bool persistent TSRMLS_DC);</span>
+<span class='curline'><a href='../S/813.html#L303'>persistent</a>        303 ext/mysqlnd/mysqlnd_structs.h typedef enum_func_status	(*func_mysqlnd_net__connect_ex)(MYSQLND_NET * const net, const char * const scheme, const size_t scheme_len, const zend_bool persistent, MYSQLND_STATS * const conn_stats, MYSQLND_ERROR_INFO * const error_info TSRMLS_DC);</span>
+<span class='curline'><a href='../S/813.html#L305'>persistent</a>        305 ext/mysqlnd/mysqlnd_structs.h typedef php_stream *		(*func_mysqlnd_net__open_stream)(MYSQLND_NET * const net, const char * const scheme, const size_t scheme_len, const zend_bool persistent, MYSQLND_STATS * const conn_stats, MYSQLND_ERROR_INFO * const error_info TSRMLS_DC);</span>
+<span class='curline'><a href='../S/813.html#L366'>persistent</a>        366 ext/mysqlnd/mysqlnd_structs.h typedef struct st_mysqlnd_packet_greet *		(*func_mysqlnd_protocol__get_greet_packet)(MYSQLND_PROTOCOL * const protocol, zend_bool persistent TSRMLS_DC);</span>
+<span class='curline'><a href='../S/813.html#L367'>persistent</a>        367 ext/mysqlnd/mysqlnd_structs.h typedef struct st_mysqlnd_packet_auth *			(*func_mysqlnd_protocol__get_auth_packet)(MYSQLND_PROTOCOL * const protocol, zend_bool persistent TSRMLS_DC);</span>
+<span class='curline'><a href='../S/813.html#L368'>persistent</a>        368 ext/mysqlnd/mysqlnd_structs.h typedef struct st_mysqlnd_packet_auth_response *(*func_mysqlnd_protocol__get_auth_response_packet)(MYSQLND_PROTOCOL * const protocol, zend_bool persistent TSRMLS_DC);</span>
+<span class='curline'><a href='../S/813.html#L369'>persistent</a>        369 ext/mysqlnd/mysqlnd_structs.h typedef struct st_mysqlnd_packet_change_auth_response *	(*func_mysqlnd_protocol__get_change_auth_response_packet)(MYSQLND_PROTOCOL * const protocol, zend_bool persistent TSRMLS_DC);</span>
+<span class='curline'><a href='../S/813.html#L370'>persistent</a>        370 ext/mysqlnd/mysqlnd_structs.h typedef struct st_mysqlnd_packet_ok *			(*func_mysqlnd_protocol__get_ok_packet)(MYSQLND_PROTOCOL * const protocol, zend_bool persistent TSRMLS_DC);</span>
+<span class='curline'><a href='../S/813.html#L371'>persistent</a>        371 ext/mysqlnd/mysqlnd_structs.h typedef struct st_mysqlnd_packet_command *		(*func_mysqlnd_protocol__get_command_packet)(MYSQLND_PROTOCOL * const protocol, zend_bool persistent TSRMLS_DC);</span>
+<span class='curline'><a href='../S/813.html#L372'>persistent</a>        372 ext/mysqlnd/mysqlnd_structs.h typedef struct st_mysqlnd_packet_eof *			(*func_mysqlnd_protocol__get_eof_packet)(MYSQLND_PROTOCOL * const protocol, zend_bool persistent TSRMLS_DC);</span>
+<span class='curline'><a href='../S/813.html#L373'>persistent</a>        373 ext/mysqlnd/mysqlnd_structs.h typedef struct st_mysqlnd_packet_rset_header *	(*func_mysqlnd_protocol__get_rset_header_packet)(MYSQLND_PROTOCOL * const protocol, zend_bool persistent TSRMLS_DC);</span>
+<span class='curline'><a href='../S/813.html#L374'>persistent</a>        374 ext/mysqlnd/mysqlnd_structs.h typedef struct st_mysqlnd_packet_res_field *	(*func_mysqlnd_protocol__get_result_field_packet)(MYSQLND_PROTOCOL * const protocol, zend_bool persistent TSRMLS_DC);</span>
+<span class='curline'><a href='../S/813.html#L375'>persistent</a>        375 ext/mysqlnd/mysqlnd_structs.h typedef struct st_mysqlnd_packet_row *			(*func_mysqlnd_protocol__get_row_packet)(MYSQLND_PROTOCOL * const protocol, zend_bool persistent TSRMLS_DC);</span>
+<span class='curline'><a href='../S/813.html#L376'>persistent</a>        376 ext/mysqlnd/mysqlnd_structs.h typedef struct st_mysqlnd_packet_stats *		(*func_mysqlnd_protocol__get_stats_packet)(MYSQLND_PROTOCOL * const protocol, zend_bool persistent TSRMLS_DC);</span>
+<span class='curline'><a href='../S/813.html#L377'>persistent</a>        377 ext/mysqlnd/mysqlnd_structs.h typedef struct st_mysqlnd_packet_prepare_response *(*func_mysqlnd_protocol__get_prepare_response_packet)(MYSQLND_PROTOCOL * const protocol, zend_bool persistent TSRMLS_DC);</span>
+<span class='curline'><a href='../S/813.html#L378'>persistent</a>        378 ext/mysqlnd/mysqlnd_structs.h typedef struct st_mysqlnd_packet_chg_user_resp*(*func_mysqlnd_protocol__get_change_user_response_packet)(MYSQLND_PROTOCOL * const protocol, zend_bool persistent TSRMLS_DC);</span>
+<span class='curline'><a href='../S/813.html#L379'>persistent</a>        379 ext/mysqlnd/mysqlnd_structs.h typedef struct st_mysqlnd_packet_sha256_pk_request *(*func_mysqlnd_protocol__get_sha256_pk_request_packet)(MYSQLND_PROTOCOL * const protocol, zend_bool persistent TSRMLS_DC);</span>
+<span class='curline'><a href='../S/813.html#L380'>persistent</a>        380 ext/mysqlnd/mysqlnd_structs.h typedef struct st_mysqlnd_packet_sha256_pk_request_response *(*func_mysqlnd_protocol__get_sha256_pk_request_response_packet)(MYSQLND_PROTOCOL * const protocol, zend_bool persistent TSRMLS_DC);</span>
+<span class='curline'><a href='../S/813.html#L406'>persistent</a>        406 ext/mysqlnd/mysqlnd_structs.h typedef MYSQLND * (*func_mysqlnd_object_factory__get_connection)(zend_bool persistent TSRMLS_DC);</span>
+<span class='curline'><a href='../S/813.html#L409'>persistent</a>        409 ext/mysqlnd/mysqlnd_structs.h typedef MYSQLND_NET * (*func_mysqlnd_object_factory__get_io_channel)(zend_bool persistent, MYSQLND_STATS * stats, MYSQLND_ERROR_INFO * error_info TSRMLS_DC);</span>
+<span class='curline'><a href='../S/813.html#L410'>persistent</a>        410 ext/mysqlnd/mysqlnd_structs.h typedef MYSQLND_PROTOCOL * (*func_mysqlnd_object_factory__get_protocol_decoder)(zend_bool persistent TSRMLS_DC);</span>
+<span class='curline'><a href='../S/813.html#L491'>persistent</a>        491 ext/mysqlnd/mysqlnd_structs.h typedef MYSQLND_RES * 		(*func_mysqlnd_conn_data__result_init)(unsigned int field_count, zend_bool persistent TSRMLS_DC);</span>
+<span class='curline'><a href='../S/813.html#L661'>persistent</a>        661 ext/mysqlnd/mysqlnd_structs.h typedef MYSQLND_RES_METADATA * (*func_mysqlnd_res__result_meta_init)(unsigned int field_count, zend_bool persistent TSRMLS_DC);</span>
+<span class='curline'><a href='../S/813.html#L740'>persistent</a>        740 ext/mysqlnd/mysqlnd_structs.h typedef MYSQLND_RES_METADATA *	(*func_mysqlnd_res_meta__clone_metadata)(const MYSQLND_RES_METADATA * const meta, zend_bool persistent TSRMLS_DC);</span>
+<span class='curline'><a href='../S/814.html#L475'>persistent</a>        475 ext/mysqlnd/mysqlnd_wireprotocol.c 		mnd_pefree(p, p-&gt;header.persistent);</span>
+<span class='curline'><a href='../S/814.html#L633'>persistent</a>        633 ext/mysqlnd/mysqlnd_wireprotocol.c 		mnd_pefree(p, p-&gt;header.persistent);</span>
+<span class='curline'><a href='../S/814.html#L755'>persistent</a>        755 ext/mysqlnd/mysqlnd_wireprotocol.c 		mnd_pefree(p, p-&gt;header.persistent);</span>
+<span class='curline'><a href='../S/814.html#L796'>persistent</a>        796 ext/mysqlnd/mysqlnd_wireprotocol.c 		mnd_pefree(p, p-&gt;header.persistent);</span>
+<span class='curline'><a href='../S/814.html#L884'>persistent</a>        884 ext/mysqlnd/mysqlnd_wireprotocol.c 		mnd_pefree(p, p-&gt;header.persistent);</span>
+<span class='curline'><a href='../S/814.html#L962'>persistent</a>        962 ext/mysqlnd/mysqlnd_wireprotocol.c 		mnd_pefree(_packet, ((MYSQLND_PACKET_EOF *)_packet)-&gt;header.persistent);</span>
+<span class='curline'><a href='../S/814.html#L1039'>persistent</a>       1039 ext/mysqlnd/mysqlnd_wireprotocol.c 		mnd_pefree(p, p-&gt;header.persistent);</span>
+<span class='curline'><a href='../S/814.html#L1161'>persistent</a>       1161 ext/mysqlnd/mysqlnd_wireprotocol.c 		mnd_pefree(p, p-&gt;header.persistent);</span>
+<span class='curline'><a href='../S/814.html#L1388'>persistent</a>       1388 ext/mysqlnd/mysqlnd_wireprotocol.c 		mnd_pefree(p, p-&gt;header.persistent);</span>
+<span class='curline'><a href='../S/814.html#L1900'>persistent</a>       1900 ext/mysqlnd/mysqlnd_wireprotocol.c 	DBG_INF_FMT("stack_allocation=%u persistent=%u", (int)stack_allocation, (int)p-&gt;header.persistent);</span>
+<span class='curline'><a href='../S/814.html#L1909'>persistent</a>       1909 ext/mysqlnd/mysqlnd_wireprotocol.c 		mnd_pefree(p, p-&gt;header.persistent);</span>
+<span class='curline'><a href='../S/814.html#L1948'>persistent</a>       1948 ext/mysqlnd/mysqlnd_wireprotocol.c 		mnd_pefree(p, p-&gt;header.persistent);</span>
+<span class='curline'><a href='../S/814.html#L2040'>persistent</a>       2040 ext/mysqlnd/mysqlnd_wireprotocol.c 		mnd_pefree(p, p-&gt;header.persistent);</span>
+<span class='curline'><a href='../S/814.html#L2128'>persistent</a>       2128 ext/mysqlnd/mysqlnd_wireprotocol.c 		mnd_pefree(p, p-&gt;header.persistent);</span>
+<span class='curline'><a href='../S/814.html#L2157'>persistent</a>       2157 ext/mysqlnd/mysqlnd_wireprotocol.c 		mnd_pefree(p, p-&gt;header.persistent);</span>
+<span class='curline'><a href='../S/814.html#L2211'>persistent</a>       2211 ext/mysqlnd/mysqlnd_wireprotocol.c 		mnd_pefree(p, p-&gt;header.persistent);</span>
+<span class='curline'><a href='../S/814.html#L2317'>persistent</a>       2317 ext/mysqlnd/mysqlnd_wireprotocol.c MYSQLND_METHOD(mysqlnd_protocol, get_greet_packet)(MYSQLND_PROTOCOL * const protocol, zend_bool persistent TSRMLS_DC)</span>
+<span class='curline'><a href='../S/814.html#L2319'>persistent</a>       2319 ext/mysqlnd/mysqlnd_wireprotocol.c 	struct st_mysqlnd_packet_greet * packet = mnd_pecalloc(1, packet_methods[PROT_GREET_PACKET].struct_size, persistent);</span>
+<span class='curline'><a href='../S/814.html#L2323'>persistent</a>       2323 ext/mysqlnd/mysqlnd_wireprotocol.c 		packet-&gt;header.persistent = persistent;</span>
+<span class='curline'><a href='../S/814.html#L2332'>persistent</a>       2332 ext/mysqlnd/mysqlnd_wireprotocol.c MYSQLND_METHOD(mysqlnd_protocol, get_auth_packet)(MYSQLND_PROTOCOL * const protocol, zend_bool persistent TSRMLS_DC)</span>
+<span class='curline'><a href='../S/814.html#L2334'>persistent</a>       2334 ext/mysqlnd/mysqlnd_wireprotocol.c 	struct st_mysqlnd_packet_auth * packet = mnd_pecalloc(1, packet_methods[PROT_AUTH_PACKET].struct_size, persistent);</span>
+<span class='curline'><a href='../S/814.html#L2338'>persistent</a>       2338 ext/mysqlnd/mysqlnd_wireprotocol.c 		packet-&gt;header.persistent = persistent;</span>
+<span class='curline'><a href='../S/814.html#L2347'>persistent</a>       2347 ext/mysqlnd/mysqlnd_wireprotocol.c MYSQLND_METHOD(mysqlnd_protocol, get_auth_response_packet)(MYSQLND_PROTOCOL * const protocol, zend_bool persistent TSRMLS_DC)</span>
+<span class='curline'><a href='../S/814.html#L2349'>persistent</a>       2349 ext/mysqlnd/mysqlnd_wireprotocol.c 	struct st_mysqlnd_packet_auth_response * packet = mnd_pecalloc(1, packet_methods[PROT_AUTH_RESP_PACKET].struct_size, persistent);</span>
+<span class='curline'><a href='../S/814.html#L2353'>persistent</a>       2353 ext/mysqlnd/mysqlnd_wireprotocol.c 		packet-&gt;header.persistent = persistent;</span>
+<span class='curline'><a href='../S/814.html#L2362'>persistent</a>       2362 ext/mysqlnd/mysqlnd_wireprotocol.c MYSQLND_METHOD(mysqlnd_protocol, get_change_auth_response_packet)(MYSQLND_PROTOCOL * const protocol, zend_bool persistent TSRMLS_DC)</span>
+<span class='curline'><a href='../S/814.html#L2364'>persistent</a>       2364 ext/mysqlnd/mysqlnd_wireprotocol.c 	struct st_mysqlnd_packet_change_auth_response * packet = mnd_pecalloc(1, packet_methods[PROT_CHANGE_AUTH_RESP_PACKET].struct_size, persistent);</span>
+<span class='curline'><a href='../S/814.html#L2368'>persistent</a>       2368 ext/mysqlnd/mysqlnd_wireprotocol.c 		packet-&gt;header.persistent = persistent;</span>
+<span class='curline'><a href='../S/814.html#L2377'>persistent</a>       2377 ext/mysqlnd/mysqlnd_wireprotocol.c MYSQLND_METHOD(mysqlnd_protocol, get_ok_packet)(MYSQLND_PROTOCOL * const protocol, zend_bool persistent TSRMLS_DC)</span>
+<span class='curline'><a href='../S/814.html#L2379'>persistent</a>       2379 ext/mysqlnd/mysqlnd_wireprotocol.c 	struct st_mysqlnd_packet_ok * packet = mnd_pecalloc(1, packet_methods[PROT_OK_PACKET].struct_size, persistent);</span>
+<span class='curline'><a href='../S/814.html#L2383'>persistent</a>       2383 ext/mysqlnd/mysqlnd_wireprotocol.c 		packet-&gt;header.persistent = persistent;</span>
+<span class='curline'><a href='../S/814.html#L2392'>persistent</a>       2392 ext/mysqlnd/mysqlnd_wireprotocol.c MYSQLND_METHOD(mysqlnd_protocol, get_eof_packet)(MYSQLND_PROTOCOL * const protocol, zend_bool persistent TSRMLS_DC)</span>
+<span class='curline'><a href='../S/814.html#L2394'>persistent</a>       2394 ext/mysqlnd/mysqlnd_wireprotocol.c 	struct st_mysqlnd_packet_eof * packet = mnd_pecalloc(1, packet_methods[PROT_EOF_PACKET].struct_size, persistent);</span>
+<span class='curline'><a href='../S/814.html#L2398'>persistent</a>       2398 ext/mysqlnd/mysqlnd_wireprotocol.c 		packet-&gt;header.persistent = persistent;</span>
+<span class='curline'><a href='../S/814.html#L2407'>persistent</a>       2407 ext/mysqlnd/mysqlnd_wireprotocol.c MYSQLND_METHOD(mysqlnd_protocol, get_command_packet)(MYSQLND_PROTOCOL * const protocol, zend_bool persistent TSRMLS_DC)</span>
+<span class='curline'><a href='../S/814.html#L2409'>persistent</a>       2409 ext/mysqlnd/mysqlnd_wireprotocol.c 	struct st_mysqlnd_packet_command * packet = mnd_pecalloc(1, packet_methods[PROT_CMD_PACKET].struct_size, persistent);</span>
+<span class='curline'><a href='../S/814.html#L2413'>persistent</a>       2413 ext/mysqlnd/mysqlnd_wireprotocol.c 		packet-&gt;header.persistent = persistent;</span>
+<span class='curline'><a href='../S/814.html#L2422'>persistent</a>       2422 ext/mysqlnd/mysqlnd_wireprotocol.c MYSQLND_METHOD(mysqlnd_protocol, get_rset_header_packet)(MYSQLND_PROTOCOL * const protocol, zend_bool persistent TSRMLS_DC)</span>
+<span class='curline'><a href='../S/814.html#L2424'>persistent</a>       2424 ext/mysqlnd/mysqlnd_wireprotocol.c 	struct st_mysqlnd_packet_rset_header * packet = mnd_pecalloc(1, packet_methods[PROT_RSET_HEADER_PACKET].struct_size, persistent);</span>
+<span class='curline'><a href='../S/814.html#L2428'>persistent</a>       2428 ext/mysqlnd/mysqlnd_wireprotocol.c 		packet-&gt;header.persistent = persistent;</span>
+<span class='curline'><a href='../S/814.html#L2437'>persistent</a>       2437 ext/mysqlnd/mysqlnd_wireprotocol.c MYSQLND_METHOD(mysqlnd_protocol, get_result_field_packet)(MYSQLND_PROTOCOL * const protocol, zend_bool persistent TSRMLS_DC)</span>
+<span class='curline'><a href='../S/814.html#L2439'>persistent</a>       2439 ext/mysqlnd/mysqlnd_wireprotocol.c 	struct st_mysqlnd_packet_res_field * packet = mnd_pecalloc(1, packet_methods[PROT_RSET_FLD_PACKET].struct_size, persistent);</span>
+<span class='curline'><a href='../S/814.html#L2443'>persistent</a>       2443 ext/mysqlnd/mysqlnd_wireprotocol.c 		packet-&gt;header.persistent = persistent;</span>
+<span class='curline'><a href='../S/814.html#L2452'>persistent</a>       2452 ext/mysqlnd/mysqlnd_wireprotocol.c MYSQLND_METHOD(mysqlnd_protocol, get_row_packet)(MYSQLND_PROTOCOL * const protocol, zend_bool persistent TSRMLS_DC)</span>
+<span class='curline'><a href='../S/814.html#L2454'>persistent</a>       2454 ext/mysqlnd/mysqlnd_wireprotocol.c 	struct st_mysqlnd_packet_row * packet = mnd_pecalloc(1, packet_methods[PROT_ROW_PACKET].struct_size, persistent);</span>
+<span class='curline'><a href='../S/814.html#L2458'>persistent</a>       2458 ext/mysqlnd/mysqlnd_wireprotocol.c 		packet-&gt;header.persistent = persistent;</span>
+<span class='curline'><a href='../S/814.html#L2467'>persistent</a>       2467 ext/mysqlnd/mysqlnd_wireprotocol.c MYSQLND_METHOD(mysqlnd_protocol, get_stats_packet)(MYSQLND_PROTOCOL * const protocol, zend_bool persistent TSRMLS_DC)</span>
+<span class='curline'><a href='../S/814.html#L2469'>persistent</a>       2469 ext/mysqlnd/mysqlnd_wireprotocol.c 	struct st_mysqlnd_packet_stats * packet = mnd_pecalloc(1, packet_methods[PROT_STATS_PACKET].struct_size, persistent);</span>
+<span class='curline'><a href='../S/814.html#L2473'>persistent</a>       2473 ext/mysqlnd/mysqlnd_wireprotocol.c 		packet-&gt;header.persistent = persistent;</span>
+<span class='curline'><a href='../S/814.html#L2482'>persistent</a>       2482 ext/mysqlnd/mysqlnd_wireprotocol.c MYSQLND_METHOD(mysqlnd_protocol, get_prepare_response_packet)(MYSQLND_PROTOCOL * const protocol, zend_bool persistent TSRMLS_DC)</span>
+<span class='curline'><a href='../S/814.html#L2484'>persistent</a>       2484 ext/mysqlnd/mysqlnd_wireprotocol.c 	struct st_mysqlnd_packet_prepare_response * packet = mnd_pecalloc(1, packet_methods[PROT_PREPARE_RESP_PACKET].struct_size, persistent);</span>
+<span class='curline'><a href='../S/814.html#L2488'>persistent</a>       2488 ext/mysqlnd/mysqlnd_wireprotocol.c 		packet-&gt;header.persistent = persistent;</span>
+<span class='curline'><a href='../S/814.html#L2497'>persistent</a>       2497 ext/mysqlnd/mysqlnd_wireprotocol.c MYSQLND_METHOD(mysqlnd_protocol, get_change_user_response_packet)(MYSQLND_PROTOCOL * const protocol, zend_bool persistent TSRMLS_DC)</span>
+<span class='curline'><a href='../S/814.html#L2499'>persistent</a>       2499 ext/mysqlnd/mysqlnd_wireprotocol.c 	struct st_mysqlnd_packet_chg_user_resp * packet = mnd_pecalloc(1, packet_methods[PROT_CHG_USER_RESP_PACKET].struct_size, persistent);</span>
+<span class='curline'><a href='../S/814.html#L2503'>persistent</a>       2503 ext/mysqlnd/mysqlnd_wireprotocol.c 		packet-&gt;header.persistent = persistent;</span>
+<span class='curline'><a href='../S/814.html#L2512'>persistent</a>       2512 ext/mysqlnd/mysqlnd_wireprotocol.c MYSQLND_METHOD(mysqlnd_protocol, get_sha256_pk_request_packet)(MYSQLND_PROTOCOL * const protocol, zend_bool persistent TSRMLS_DC)</span>
+<span class='curline'><a href='../S/814.html#L2514'>persistent</a>       2514 ext/mysqlnd/mysqlnd_wireprotocol.c 	struct st_mysqlnd_packet_sha256_pk_request * packet = mnd_pecalloc(1, packet_methods[PROT_SHA256_PK_REQUEST_PACKET].struct_size, persistent);</span>
+<span class='curline'><a href='../S/814.html#L2518'>persistent</a>       2518 ext/mysqlnd/mysqlnd_wireprotocol.c 		packet-&gt;header.persistent = persistent;</span>
+<span class='curline'><a href='../S/814.html#L2527'>persistent</a>       2527 ext/mysqlnd/mysqlnd_wireprotocol.c MYSQLND_METHOD(mysqlnd_protocol, get_sha256_pk_request_response_packet)(MYSQLND_PROTOCOL * const protocol, zend_bool persistent TSRMLS_DC)</span>
+<span class='curline'><a href='../S/814.html#L2529'>persistent</a>       2529 ext/mysqlnd/mysqlnd_wireprotocol.c 	struct st_mysqlnd_packet_sha256_pk_request_response * packet = mnd_pecalloc(1, packet_methods[PROT_SHA256_PK_REQUEST_RESPONSE_PACKET].struct_size, persistent);</span>
+<span class='curline'><a href='../S/814.html#L2533'>persistent</a>       2533 ext/mysqlnd/mysqlnd_wireprotocol.c 		packet-&gt;header.persistent = persistent;</span>
+<span class='curline'><a href='../S/814.html#L2562'>persistent</a>       2562 ext/mysqlnd/mysqlnd_wireprotocol.c mysqlnd_protocol_init(zend_bool persistent TSRMLS_DC)</span>
+<span class='curline'><a href='../S/814.html#L2566'>persistent</a>       2566 ext/mysqlnd/mysqlnd_wireprotocol.c 	ret = MYSQLND_CLASS_METHOD_TABLE_NAME(mysqlnd_object_factory).get_protocol_decoder(persistent TSRMLS_CC);</span>
+<span class='curline'><a href='../S/814.html#L2579'>persistent</a>       2579 ext/mysqlnd/mysqlnd_wireprotocol.c 		zend_bool pers = protocol-&gt;persistent;</span>
+<span class='curline'><a href='../S/815.html#L64'>persistent</a>         64 ext/mysqlnd/mysqlnd_wireprotocol.h 	zend_bool	persistent;</span>
+<span class='curline'><a href='../S/815.html#L324'>persistent</a>        324 ext/mysqlnd/mysqlnd_wireprotocol.h PHPAPI MYSQLND_PROTOCOL * mysqlnd_protocol_init(zend_bool persistent TSRMLS_DC);</span>
+<span class='curline'><a href='../S/818.html#L1755'>persistent</a>       1755 ext/oci8/oci8.c void php_oci_do_connect(INTERNAL_FUNCTION_PARAMETERS, int persistent, int exclusive)</span>
+<span class='curline'><a href='../S/818.html#L1771'>persistent</a>       1771 ext/oci8/oci8.c 		DTRACE_OCI8_CONNECT_ENTRY(username, dbname, charset, session_mode, persistent, exclusive);</span>
+<span class='curline'><a href='../S/818.html#L1779'>persistent</a>       1779 ext/oci8/oci8.c 	connection = php_oci_do_connect_ex(username, username_len, password, password_len, NULL, 0, dbname, dbname_len, charset, session_mode, persistent, exclusive TSRMLS_CC);</span>
+<span class='curline'><a href='../S/818.html#L1801'>persistent</a>       1801 ext/oci8/oci8.c php_oci_connection *php_oci_do_connect_ex(char *username, int username_len, char *password, int password_len, char *new_password, int new_password_len, char *dbname, int dbname_len, char *charset, long session_mode, int persistent, int exclusive TSRMLS_DC)</span>
+<span class='curline'><a href='../S/818.html#L1841'>persistent</a>       1841 ext/oci8/oci8.c 			persistent = 0;</span>
+<span class='curline'><a href='../S/818.html#L1933'>persistent</a>       1933 ext/oci8/oci8.c 		if (persistent &amp;&amp; zend_hash_find(&amp;EG(persistent_list), hashed_details.c, hashed_details.len+1, (void **) &amp;le) == SUCCESS) {</span>
+<span class='curline'><a href='../S/818.html#L1939'>persistent</a>       1939 ext/oci8/oci8.c 		} else if (!persistent &amp;&amp; zend_hash_find(&amp;EG(regular_list), hashed_details.c, hashed_details.len+1, (void **) &amp;le) == SUCCESS) {</span>
+<span class='curline'><a href='../S/818.html#L2035'>persistent</a>       2035 ext/oci8/oci8.c 			if (persistent){</span>
+<span class='curline'><a href='../S/818.html#L2059'>persistent</a>       2059 ext/oci8/oci8.c 			if (persistent) {</span>
+<span class='curline'><a href='../S/818.html#L2070'>persistent</a>       2070 ext/oci8/oci8.c 	if (persistent) {</span>
+<span class='curline'><a href='../S/824.html#L409'>persistent</a>        409 ext/oci8/php_oci8_int.h void php_oci_do_connect(INTERNAL_FUNCTION_PARAMETERS, int persistent, int exclusive);</span>
+<span class='curline'><a href='../S/824.html#L410'>persistent</a>        410 ext/oci8/php_oci8_int.h php_oci_connection *php_oci_do_connect_ex(char *username, int username_len, char *password, int password_len, char *new_password, int new_password_len, char *dbname, int dbname_len, char *charset, long session_mode, int persistent, int exclusive TSRMLS_DC);</span>
+<span class='curline'><a href='../S/827.html#L63'>persistent</a>         63 ext/odbc/php_odbc.c void odbc_do_connect(INTERNAL_FUNCTION_PARAMETERS, int persistent);</span>
+<span class='curline'><a href='../S/827.html#L2411'>persistent</a>       2411 ext/odbc/php_odbc.c int odbc_sqlconnect(odbc_connection **conn, char *db, char *uid, char *pwd, int cur_opt, int persistent TSRMLS_DC)</span>
+<span class='curline'><a href='../S/827.html#L2415'>persistent</a>       2415 ext/odbc/php_odbc.c 	*conn = (odbc_connection *)pemalloc(sizeof(odbc_connection), persistent);</span>
+<span class='curline'><a href='../S/827.html#L2416'>persistent</a>       2416 ext/odbc/php_odbc.c 	(*conn)-&gt;persistent = persistent;</span>
+<span class='curline'><a href='../S/827.html#L2476'>persistent</a>       2476 ext/odbc/php_odbc.c 			pefree(*conn, persistent);</span>
+<span class='curline'><a href='../S/827.html#L2521'>persistent</a>       2521 ext/odbc/php_odbc.c 		pefree((*conn), persistent);</span>
+<span class='curline'><a href='../S/827.html#L2543'>persistent</a>       2543 ext/odbc/php_odbc.c void odbc_do_connect(INTERNAL_FUNCTION_PARAMETERS, int persistent)</span>
+<span class='curline'><a href='../S/827.html#L2573'>persistent</a>       2573 ext/odbc/php_odbc.c 		persistent = 0;</span>
+<span class='curline'><a href='../S/827.html#L2587'>persistent</a>       2587 ext/odbc/php_odbc.c 	if (persistent) {</span>
+<span class='curline'><a href='../S/827.html#L3079'>persistent</a>       3079 ext/odbc/php_odbc.c 			if (conn-&gt;persistent) {</span>
+<span class='curline'><a href='../S/829.html#L226'>persistent</a>        226 ext/odbc/php_odbc_includes.h 	int persistent;</span>
+<span class='curline'><a href='../S/856.html#L115'>persistent</a>        115 ext/opcache/zend_accelerator_util_funcs.c 	t = (Bucket **)pemalloc(nSize * sizeof(Bucket *), ht-&gt;persistent);</span>
+<span class='curline'><a href='../S/856.html#L120'>persistent</a>        120 ext/opcache/zend_accelerator_util_funcs.c 	pefree(ht-&gt;arBuckets, ht-&gt;persistent);</span>
+<span class='curline'><a href='../S/856.html#L337'>persistent</a>        337 ext/opcache/zend_accelerator_util_funcs.c 	ht-&gt;persistent = 0;</span>
+<span class='curline'><a href='../S/856.html#L465'>persistent</a>        465 ext/opcache/zend_accelerator_util_funcs.c 	ht-&gt;persistent = 0;</span>
+<span class='curline'><a href='../S/856.html#L576'>persistent</a>        576 ext/opcache/zend_accelerator_util_funcs.c 	ht-&gt;persistent = 0;</span>
+<span class='curline'><a href='../S/941.html#L40'>persistent</a>         40 ext/pdo_mysql/mysql_driver.c #	define pdo_mysql_init(persistent) mysqlnd_init(MYSQLND_CLIENT_NO_FLAG, persistent)</span>
+<span class='curline'><a href='../S/941.html#L42'>persistent</a>         42 ext/pdo_mysql/mysql_driver.c #	define pdo_mysql_init(persistent) mysql_init(NULL)</span>
+<span class='curline'><a href='../S/958.html#L47'>persistent</a>         47 ext/pdo_pgsql/pgsql_driver.c static char * _pdo_pgsql_trim_message(const char *message, int persistent)</span>
+<span class='curline'><a href='../S/958.html#L59'>persistent</a>         59 ext/pdo_pgsql/pgsql_driver.c 	tmp = pemalloc(i + 1, persistent);</span>
+<span class='curline'><a href='../S/967.html#L1271'>persistent</a>       1271 ext/pgsql/pgsql.c static void php_pgsql_do_connect(INTERNAL_FUNCTION_PARAMETERS, int persistent)</span>
+<span class='curline'><a href='../S/967.html#L1326'>persistent</a>       1326 ext/pgsql/pgsql.c 	if (persistent &amp;&amp; PGG(allow_persistent)) {</span>
+<span class='curline'><a href='../S/968.html#L222'>persistent</a>        222 ext/pgsql/php_pgsql.h static void php_pgsql_do_connect(INTERNAL_FUNCTION_PARAMETERS,int persistent);</span>
+<span class='curline'><a href='../S/1073.html#L2717'>persistent</a>       2717 ext/standard/array.c 	arTmp = (struct bucketindex *) pemalloc((Z_ARRVAL_P(array)-&gt;nNumOfElements + 1) * sizeof(struct bucketindex), Z_ARRVAL_P(array)-&gt;persistent);</span>
+<span class='curline'><a href='../S/1073.html#L2752'>persistent</a>       2752 ext/standard/array.c 	pefree(arTmp, Z_ARRVAL_P(array)-&gt;persistent);</span>
+<span class='curline'><a href='../S/1073.html#L3027'>persistent</a>       3027 ext/standard/array.c 		list = (Bucket **) pemalloc((hash-&gt;nNumOfElements + 1) * sizeof(Bucket *), hash-&gt;persistent);</span>
+<span class='curline'><a href='../S/1073.html#L3165'>persistent</a>       3165 ext/standard/array.c 		pefree(lists[i], hash-&gt;persistent);</span>
+<span class='curline'><a href='../S/1073.html#L3444'>persistent</a>       3444 ext/standard/array.c 		list = (Bucket **) pemalloc((hash-&gt;nNumOfElements + 1) * sizeof(Bucket *), hash-&gt;persistent);</span>
+<span class='curline'><a href='../S/1073.html#L3578'>persistent</a>       3578 ext/standard/array.c 		pefree(lists[i], hash-&gt;persistent);</span>
+<span class='curline'><a href='../S/1079.html#L85'>persistent</a>         85 ext/standard/browscap.c static void convert_browscap_pattern(zval *pattern, int persistent) /* {{{ */</span>
+<span class='curline'><a href='../S/1079.html#L92'>persistent</a>         92 ext/standard/browscap.c 	t = (char *) safe_pemalloc(Z_STRLEN_P(pattern), 2, 5, persistent);</span>
+<span class='curline'><a href='../S/1079.html#L144'>persistent</a>        144 ext/standard/browscap.c 	int persistent = bdata-&gt;htab-&gt;persistent;</span>
+<span class='curline'><a href='../S/1079.html#L167'>persistent</a>        167 ext/standard/browscap.c 				new_property = (zval *) pemalloc(sizeof(zval), persistent);</span>
+<span class='curline'><a href='../S/1079.html#L176'>persistent</a>        176 ext/standard/browscap.c 					Z_STRVAL_P(new_property) = pestrndup("1", 1, persistent);</span>
+<span class='curline'><a href='../S/1079.html#L184'>persistent</a>        184 ext/standard/browscap.c 					Z_STRVAL_P(new_property) = pestrndup("", 0, persistent);</span>
+<span class='curline'><a href='../S/1079.html#L188'>persistent</a>        188 ext/standard/browscap.c 							Z_STRLEN_P(arg2), persistent);</span>
+<span class='curline'><a href='../S/1079.html#L191'>persistent</a>        191 ext/standard/browscap.c 				new_key = pestrndup(Z_STRVAL_P(arg1), Z_STRLEN_P(arg1), persistent);</span>
+<span class='curline'><a href='../S/1079.html#L194'>persistent</a>        194 ext/standard/browscap.c 				pefree(new_key, persistent);</span>
+<span class='curline'><a href='../S/1079.html#L203'>persistent</a>        203 ext/standard/browscap.c 				bdata-&gt;current_section = (zval *) pemalloc(sizeof(zval), persistent);</span>
+<span class='curline'><a href='../S/1079.html#L205'>persistent</a>        205 ext/standard/browscap.c 				processed = (zval *) pemalloc(sizeof(zval), persistent);</span>
+<span class='curline'><a href='../S/1079.html#L207'>persistent</a>        207 ext/standard/browscap.c 				unprocessed = (zval *) pemalloc(sizeof(zval), persistent);</span>
+<span class='curline'><a href='../S/1079.html#L210'>persistent</a>        210 ext/standard/browscap.c 				section_properties = (HashTable *) pemalloc(sizeof(HashTable), persistent);</span>
+<span class='curline'><a href='../S/1079.html#L212'>persistent</a>        212 ext/standard/browscap.c 						(dtor_func_t) (persistent?browscap_entry_dtor_persistent</span>
+<span class='curline'><a href='../S/1079.html#L214'>persistent</a>        214 ext/standard/browscap.c 						persistent);</span>
+<span class='curline'><a href='../S/1079.html#L218'>persistent</a>        218 ext/standard/browscap.c 					pefree(bdata-&gt;current_section_name, persistent);</span>
+<span class='curline'><a href='../S/1079.html#L221'>persistent</a>        221 ext/standard/browscap.c 						Z_STRLEN_P(arg1), persistent);</span>
+<span class='curline'><a href='../S/1079.html#L231'>persistent</a>        231 ext/standard/browscap.c 				Z_STRVAL_P(unprocessed) = pestrndup(Z_STRVAL_P(unprocessed), Z_STRLEN_P(unprocessed), persistent);</span>
+<span class='curline'><a href='../S/1079.html#L233'>persistent</a>        233 ext/standard/browscap.c 				convert_browscap_pattern(processed, persistent);</span>
+<span class='curline'><a href='../S/1079.html#L242'>persistent</a>        242 ext/standard/browscap.c static int browscap_read_file(char *filename, browser_data *browdata, int persistent TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1079.html#L250'>persistent</a>        250 ext/standard/browscap.c 	browdata-&gt;htab = pemalloc(sizeof *browdata-&gt;htab, persistent);</span>
+<span class='curline'><a href='../S/1079.html#L256'>persistent</a>        256 ext/standard/browscap.c 			(dtor_func_t) (persistent?browscap_entry_dtor_persistent</span>
+<span class='curline'><a href='../S/1079.html#L258'>persistent</a>        258 ext/standard/browscap.c 			persistent, 0) == FAILURE) {</span>
+<span class='curline'><a href='../S/1079.html#L259'>persistent</a>        259 ext/standard/browscap.c 		pefree(browdata-&gt;htab, persistent);</span>
+<span class='curline'><a href='../S/1079.html#L269'>persistent</a>        269 ext/standard/browscap.c 		pefree(browdata-&gt;htab, persistent);</span>
+<span class='curline'><a href='../S/1079.html#L280'>persistent</a>        280 ext/standard/browscap.c 		pefree(browdata-&gt;current_section_name, persistent);</span>
+<span class='curline'><a href='../S/1079.html#L299'>persistent</a>        299 ext/standard/browscap.c static void browscap_bdata_dtor(browser_data *bdata, int persistent TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1079.html#L303'>persistent</a>        303 ext/standard/browscap.c 		pefree(bdata-&gt;htab, persistent);</span>
+<span class='curline'><a href='../S/1109.html#L70'>persistent</a>         70 ext/standard/filters.c static php_stream_filter *strfilter_rot13_create(const char *filtername, zval *filterparams, int persistent TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1109.html#L72'>persistent</a>         72 ext/standard/filters.c 	return php_stream_filter_alloc(&amp;strfilter_rot13_ops, NULL, persistent);</span>
+<span class='curline'><a href='../S/1109.html#L152'>persistent</a>        152 ext/standard/filters.c static php_stream_filter *strfilter_toupper_create(const char *filtername, zval *filterparams, int persistent TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1109.html#L154'>persistent</a>        154 ext/standard/filters.c 	return php_stream_filter_alloc(&amp;strfilter_toupper_ops, NULL, persistent);</span>
+<span class='curline'><a href='../S/1109.html#L157'>persistent</a>        157 ext/standard/filters.c static php_stream_filter *strfilter_tolower_create(const char *filtername, zval *filterparams, int persistent TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1109.html#L159'>persistent</a>        159 ext/standard/filters.c 	return php_stream_filter_alloc(&amp;strfilter_tolower_ops, NULL, persistent);</span>
+<span class='curline'><a href='../S/1109.html#L176'>persistent</a>        176 ext/standard/filters.c 	int persistent;</span>
+<span class='curline'><a href='../S/1109.html#L179'>persistent</a>        179 ext/standard/filters.c static int php_strip_tags_filter_ctor(php_strip_tags_filter *inst, const char *allowed_tags, int allowed_tags_len, int persistent)</span>
+<span class='curline'><a href='../S/1109.html#L182'>persistent</a>        182 ext/standard/filters.c 		if (NULL == (inst-&gt;allowed_tags = pemalloc(allowed_tags_len, persistent))) {</span>
+<span class='curline'><a href='../S/1109.html#L191'>persistent</a>        191 ext/standard/filters.c 	inst-&gt;persistent = persistent;</span>
+<span class='curline'><a href='../S/1109.html#L199'>persistent</a>        199 ext/standard/filters.c 		pefree((void *)inst-&gt;allowed_tags, inst-&gt;persistent);</span>
+<span class='curline'><a href='../S/1109.html#L238'>persistent</a>        238 ext/standard/filters.c 	pefree(thisfilter-&gt;abstract, ((php_strip_tags_filter *)thisfilter-&gt;abstract)-&gt;persistent);</span>
+<span class='curline'><a href='../S/1109.html#L247'>persistent</a>        247 ext/standard/filters.c static php_stream_filter *strfilter_strip_tags_create(const char *filtername, zval *filterparams, int persistent TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1109.html#L252'>persistent</a>        252 ext/standard/filters.c 	inst = pemalloc(sizeof(php_strip_tags_filter), persistent);</span>
+<span class='curline'><a href='../S/1109.html#L283'>persistent</a>        283 ext/standard/filters.c 	if (php_strip_tags_filter_ctor(inst, tags_ss.c, tags_ss.len, persistent) != SUCCESS) {</span>
+<span class='curline'><a href='../S/1109.html#L287'>persistent</a>        287 ext/standard/filters.c 		pefree(inst, persistent);</span>
+<span class='curline'><a href='../S/1109.html#L295'>persistent</a>        295 ext/standard/filters.c 	return php_stream_filter_alloc(&amp;strfilter_strip_tags_ops, inst, persistent);</span>
+<span class='curline'><a href='../S/1109.html#L342'>persistent</a>        342 ext/standard/filters.c 	int persistent;</span>
+<span class='curline'><a href='../S/1109.html#L367'>persistent</a>        367 ext/standard/filters.c static php_conv_err_t php_conv_base64_encode_ctor(php_conv_base64_encode *inst, unsigned int line_len, const char *lbchars, size_t lbchars_len, int lbchars_dup, int persistent)</span>
+<span class='curline'><a href='../S/1109.html#L375'>persistent</a>        375 ext/standard/filters.c 		inst-&gt;lbchars = (lbchars_dup ? pestrdup(lbchars, persistent) : lbchars);</span>
+<span class='curline'><a href='../S/1109.html#L381'>persistent</a>        381 ext/standard/filters.c 	inst-&gt;persistent = persistent;</span>
+<span class='curline'><a href='../S/1109.html#L389'>persistent</a>        389 ext/standard/filters.c 		pefree((void *)inst-&gt;lbchars, inst-&gt;persistent);</span>
+<span class='curline'><a href='../S/1109.html#L754'>persistent</a>        754 ext/standard/filters.c 	int persistent;</span>
+<span class='curline'><a href='../S/1109.html#L769'>persistent</a>        769 ext/standard/filters.c 		pefree((void *)inst-&gt;lbchars, inst-&gt;persistent);</span>
+<span class='curline'><a href='../S/1109.html#L973'>persistent</a>        973 ext/standard/filters.c static php_conv_err_t php_conv_qprint_encode_ctor(php_conv_qprint_encode *inst, unsigned int line_len, const char *lbchars, size_t lbchars_len, int lbchars_dup, int opts, int persistent)</span>
+<span class='curline'><a href='../S/1109.html#L983'>persistent</a>        983 ext/standard/filters.c 		inst-&gt;lbchars = (lbchars_dup ? pestrdup(lbchars, persistent) : lbchars);</span>
+<span class='curline'><a href='../S/1109.html#L989'>persistent</a>        989 ext/standard/filters.c 	inst-&gt;persistent = persistent;</span>
+<span class='curline'><a href='../S/1109.html#L1005'>persistent</a>       1005 ext/standard/filters.c 	int persistent;</span>
+<span class='curline'><a href='../S/1109.html#L1014'>persistent</a>       1014 ext/standard/filters.c 		pefree((void *)inst-&gt;lbchars, inst-&gt;persistent);</span>
+<span class='curline'><a href='../S/1109.html#L1188'>persistent</a>       1188 ext/standard/filters.c static php_conv_err_t php_conv_qprint_decode_ctor(php_conv_qprint_decode *inst, const char *lbchars, size_t lbchars_len, int lbchars_dup, int persistent)</span>
+<span class='curline'><a href='../S/1109.html#L1196'>persistent</a>       1196 ext/standard/filters.c 		inst-&gt;lbchars = (lbchars_dup ? pestrdup(lbchars, persistent) : lbchars);</span>
+<span class='curline'><a href='../S/1109.html#L1203'>persistent</a>       1203 ext/standard/filters.c 	inst-&gt;persistent = persistent;</span>
+<span class='curline'><a href='../S/1109.html#L1210'>persistent</a>       1210 ext/standard/filters.c 	int persistent;</span>
+<span class='curline'><a href='../S/1109.html#L1221'>persistent</a>       1221 ext/standard/filters.c static php_conv_err_t php_conv_get_string_prop_ex(const HashTable *ht, char **pretval, size_t *pretval_len, char *field_name, size_t field_name_len, int persistent)</span>
+<span class='curline'><a href='../S/1109.html#L1234'>persistent</a>       1234 ext/standard/filters.c 			if (NULL == (*pretval = pemalloc(Z_STRLEN(zt) + 1, persistent))) {</span>
+<span class='curline'><a href='../S/1109.html#L1242'>persistent</a>       1242 ext/standard/filters.c 			if (NULL == (*pretval = pemalloc(Z_STRLEN_PP(tmpval) + 1, persistent))) {</span>
+<span class='curline'><a href='../S/1109.html#L1355'>persistent</a>       1355 ext/standard/filters.c #define GET_STR_PROP(ht, var, var_len, fldname, persistent) \</span>
+<span class='curline'><a href='../S/1109.html#L1356'>persistent</a>       1356 ext/standard/filters.c 	php_conv_get_string_prop_ex(ht, &amp;var, &amp;var_len, fldname, sizeof(fldname), persistent) </span>
+<span class='curline'><a href='../S/1109.html#L1367'>persistent</a>       1367 ext/standard/filters.c static php_conv *php_conv_open(int conv_mode, const HashTable *options, int persistent)</span>
+<span class='curline'><a href='../S/1109.html#L1394'>persistent</a>       1394 ext/standard/filters.c 			retval = pemalloc(sizeof(php_conv_base64_encode), persistent);</span>
+<span class='curline'><a href='../S/1109.html#L1396'>persistent</a>       1396 ext/standard/filters.c 				if (php_conv_base64_encode_ctor((php_conv_base64_encode *)retval, line_len, lbchars, lbchars_len, 1, persistent)) {</span>
+<span class='curline'><a href='../S/1109.html#L1404'>persistent</a>       1404 ext/standard/filters.c 				if (php_conv_base64_encode_ctor((php_conv_base64_encode *)retval, 0, NULL, 0, 0, persistent)) {</span>
+<span class='curline'><a href='../S/1109.html#L1411'>persistent</a>       1411 ext/standard/filters.c 			retval = pemalloc(sizeof(php_conv_base64_decode), persistent);</span>
+<span class='curline'><a href='../S/1109.html#L1446'>persistent</a>       1446 ext/standard/filters.c 			retval = pemalloc(sizeof(php_conv_qprint_encode), persistent);</span>
+<span class='curline'><a href='../S/1109.html#L1448'>persistent</a>       1448 ext/standard/filters.c 				if (php_conv_qprint_encode_ctor((php_conv_qprint_encode *)retval, line_len, lbchars, lbchars_len, 1, opts, persistent)) {</span>
+<span class='curline'><a href='../S/1109.html#L1454'>persistent</a>       1454 ext/standard/filters.c 				if (php_conv_qprint_encode_ctor((php_conv_qprint_encode *)retval, 0, NULL, 0, 0, opts, persistent)) {</span>
+<span class='curline'><a href='../S/1109.html#L1469'>persistent</a>       1469 ext/standard/filters.c 			retval = pemalloc(sizeof(php_conv_qprint_decode), persistent);</span>
+<span class='curline'><a href='../S/1109.html#L1471'>persistent</a>       1471 ext/standard/filters.c 				if (php_conv_qprint_decode_ctor((php_conv_qprint_decode *)retval, lbchars, lbchars_len, 1, persistent)) {</span>
+<span class='curline'><a href='../S/1109.html#L1477'>persistent</a>       1477 ext/standard/filters.c 				if (php_conv_qprint_decode_ctor((php_conv_qprint_decode *)retval, NULL, 0, 0, persistent)) {</span>
+<span class='curline'><a href='../S/1109.html#L1491'>persistent</a>       1491 ext/standard/filters.c 		pefree(retval, persistent);</span>
+<span class='curline'><a href='../S/1109.html#L1503'>persistent</a>       1503 ext/standard/filters.c 	const char *filtername, int persistent)</span>
+<span class='curline'><a href='../S/1109.html#L1505'>persistent</a>       1505 ext/standard/filters.c 	inst-&gt;persistent = persistent;</span>
+<span class='curline'><a href='../S/1109.html#L1506'>persistent</a>       1506 ext/standard/filters.c 	inst-&gt;filtername = pestrdup(filtername, persistent);</span>
+<span class='curline'><a href='../S/1109.html#L1509'>persistent</a>       1509 ext/standard/filters.c 	if ((inst-&gt;cd = php_conv_open(conv_mode, conv_opts, persistent)) == NULL) {</span>
+<span class='curline'><a href='../S/1109.html#L1518'>persistent</a>       1518 ext/standard/filters.c 		pefree(inst-&gt;cd, persistent);</span>
+<span class='curline'><a href='../S/1109.html#L1521'>persistent</a>       1521 ext/standard/filters.c 		pefree(inst-&gt;filtername, persistent);</span>
+<span class='curline'><a href='../S/1109.html#L1530'>persistent</a>       1530 ext/standard/filters.c 		pefree(inst-&gt;cd, inst-&gt;persistent);</span>
+<span class='curline'><a href='../S/1109.html#L1534'>persistent</a>       1534 ext/standard/filters.c 		pefree(inst-&gt;filtername, inst-&gt;persistent);</span>
+<span class='curline'><a href='../S/1109.html#L1544'>persistent</a>       1544 ext/standard/filters.c 		int persistent TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1109.html#L1564'>persistent</a>       1564 ext/standard/filters.c 	if (NULL == (out_buf = pemalloc(out_buf_size, persistent))) {</span>
+<span class='curline'><a href='../S/1109.html#L1612'>persistent</a>       1612 ext/standard/filters.c 						if (NULL == (new_bucket = php_stream_bucket_new(stream, out_buf, (out_buf_size - ocnt), 1, persistent TSRMLS_CC))) {</span>
+<span class='curline'><a href='../S/1109.html#L1619'>persistent</a>       1619 ext/standard/filters.c 						if (NULL == (out_buf = pemalloc(out_buf_size, persistent))) {</span>
+<span class='curline'><a href='../S/1109.html#L1624'>persistent</a>       1624 ext/standard/filters.c 						if (NULL == (new_out_buf = perealloc(out_buf, new_out_buf_size, persistent))) {</span>
+<span class='curline'><a href='../S/1109.html#L1625'>persistent</a>       1625 ext/standard/filters.c 							if (NULL == (new_bucket = php_stream_bucket_new(stream, out_buf, (out_buf_size - ocnt), 1, persistent TSRMLS_CC))) {</span>
+<span class='curline'><a href='../S/1109.html#L1684'>persistent</a>       1684 ext/standard/filters.c 					if (NULL == (new_bucket = php_stream_bucket_new(stream, out_buf, (out_buf_size - ocnt), 1, persistent TSRMLS_CC))) {</span>
+<span class='curline'><a href='../S/1109.html#L1691'>persistent</a>       1691 ext/standard/filters.c 					if (NULL == (out_buf = pemalloc(out_buf_size, persistent))) {</span>
+<span class='curline'><a href='../S/1109.html#L1696'>persistent</a>       1696 ext/standard/filters.c 					if (NULL == (new_out_buf = perealloc(out_buf, new_out_buf_size, persistent))) {</span>
+<span class='curline'><a href='../S/1109.html#L1697'>persistent</a>       1697 ext/standard/filters.c 						if (NULL == (new_bucket = php_stream_bucket_new(stream, out_buf, (out_buf_size - ocnt), 1, persistent TSRMLS_CC))) {</span>
+<span class='curline'><a href='../S/1109.html#L1724'>persistent</a>       1724 ext/standard/filters.c 		if (NULL == (new_bucket = php_stream_bucket_new(stream, out_buf, (out_buf_size - ocnt), 1, persistent TSRMLS_CC))) {</span>
+<span class='curline'><a href='../S/1109.html#L1729'>persistent</a>       1729 ext/standard/filters.c 		pefree(out_buf, persistent);</span>
+<span class='curline'><a href='../S/1109.html#L1736'>persistent</a>       1736 ext/standard/filters.c 	pefree(out_buf, persistent);</span>
+<span class='curline'><a href='../S/1109.html#L1794'>persistent</a>       1794 ext/standard/filters.c 	pefree(thisfilter-&gt;abstract, ((php_convert_filter *)thisfilter-&gt;abstract)-&gt;persistent);</span>
+<span class='curline'><a href='../S/1109.html#L1803'>persistent</a>       1803 ext/standard/filters.c static php_stream_filter *strfilter_convert_create(const char *filtername, zval *filterparams, int persistent TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1109.html#L1821'>persistent</a>       1821 ext/standard/filters.c 	inst = pemalloc(sizeof(php_convert_filter), persistent);</span>
+<span class='curline'><a href='../S/1109.html#L1835'>persistent</a>       1835 ext/standard/filters.c 		filtername, persistent) != SUCCESS) {</span>
+<span class='curline'><a href='../S/1109.html#L1839'>persistent</a>       1839 ext/standard/filters.c 	retval = php_stream_filter_alloc(&amp;strfilter_convert_ops, inst, persistent);</span>
+<span class='curline'><a href='../S/1109.html#L1842'>persistent</a>       1842 ext/standard/filters.c 		pefree(inst, persistent);</span>
+<span class='curline'><a href='../S/1109.html#L1855'>persistent</a>       1855 ext/standard/filters.c 	int persistent;</span>
+<span class='curline'><a href='../S/1109.html#L1896'>persistent</a>       1896 ext/standard/filters.c 		pefree(data, data-&gt;persistent);</span>
+<span class='curline'><a href='../S/1109.html#L1906'>persistent</a>       1906 ext/standard/filters.c static php_stream_filter *consumed_filter_create(const char *filtername, zval *filterparams, int persistent TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1109.html#L1916'>persistent</a>       1916 ext/standard/filters.c 	data = pecalloc(1, sizeof(php_consumed_filter_data), persistent);</span>
+<span class='curline'><a href='../S/1109.html#L1921'>persistent</a>       1921 ext/standard/filters.c 	data-&gt;persistent = persistent;</span>
+<span class='curline'><a href='../S/1109.html#L1926'>persistent</a>       1926 ext/standard/filters.c 	return php_stream_filter_alloc(fops, data, persistent);</span>
+<span class='curline'><a href='../S/1109.html#L1952'>persistent</a>       1952 ext/standard/filters.c 	int persistent;</span>
+<span class='curline'><a href='../S/1109.html#L2104'>persistent</a>       2104 ext/standard/filters.c 		pefree(data, data-&gt;persistent);</span>
+<span class='curline'><a href='../S/1109.html#L2114'>persistent</a>       2114 ext/standard/filters.c static php_stream_filter *chunked_filter_create(const char *filtername, zval *filterparams, int persistent TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1109.html#L2124'>persistent</a>       2124 ext/standard/filters.c 	data = (php_chunked_filter_data *)pecalloc(1, sizeof(php_chunked_filter_data), persistent);</span>
+<span class='curline'><a href='../S/1109.html#L2131'>persistent</a>       2131 ext/standard/filters.c 	data-&gt;persistent = persistent;</span>
+<span class='curline'><a href='../S/1109.html#L2134'>persistent</a>       2134 ext/standard/filters.c 	return php_stream_filter_alloc(fops, data, persistent);</span>
+<span class='curline'><a href='../S/1113.html#L32'>persistent</a>         32 ext/standard/fsock.c static void php_fsockopen_stream(INTERNAL_FUNCTION_PARAMETERS, int persistent)</span>
+<span class='curline'><a href='../S/1113.html#L54'>persistent</a>         54 ext/standard/fsock.c 	if (persistent) {</span>
+<span class='curline'><a href='../S/1199.html#L284'>persistent</a>        284 ext/standard/user_filters.c 		zval *filterparams, int persistent TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1199.html#L294'>persistent</a>        294 ext/standard/user_filters.c 	if (persistent) {</span>
+<span class='curline'><a href='../S/1205.html#L729'>persistent</a>        729 ext/sybase_ct/php_sybase_ct.c static void php_sybase_do_connect(INTERNAL_FUNCTION_PARAMETERS, int persistent)</span>
+<span class='curline'><a href='../S/1205.html#L738'>persistent</a>        738 ext/sybase_ct/php_sybase_ct.c 	if (persistent) {</span>
+<span class='curline'><a href='../S/1205.html#L759'>persistent</a>        759 ext/sybase_ct/php_sybase_ct.c 		persistent=0;</span>
+<span class='curline'><a href='../S/1205.html#L761'>persistent</a>        761 ext/sybase_ct/php_sybase_ct.c 	if (persistent) {</span>
+<span class='curline'><a href='../S/1356.html#L28'>persistent</a>         28 ext/zlib/zlib_filter.c 	int persistent;</span>
+<span class='curline'><a href='../S/1356.html#L43'>persistent</a>         43 ext/zlib/zlib_filter.c 	return (voidpf)safe_pemalloc(items, size, 0, ((php_zlib_filter_data*)opaque)-&gt;persistent);</span>
+<span class='curline'><a href='../S/1356.html#L48'>persistent</a>         48 ext/zlib/zlib_filter.c 	pefree((void*)address, ((php_zlib_filter_data*)opaque)-&gt;persistent);</span>
+<span class='curline'><a href='../S/1356.html#L164'>persistent</a>        164 ext/zlib/zlib_filter.c 		pefree(data-&gt;inbuf, data-&gt;persistent);</span>
+<span class='curline'><a href='../S/1356.html#L165'>persistent</a>        165 ext/zlib/zlib_filter.c 		pefree(data-&gt;outbuf, data-&gt;persistent);</span>
+<span class='curline'><a href='../S/1356.html#L166'>persistent</a>        166 ext/zlib/zlib_filter.c 		pefree(data, data-&gt;persistent);</span>
+<span class='curline'><a href='../S/1356.html#L271'>persistent</a>        271 ext/zlib/zlib_filter.c 		pefree(data-&gt;inbuf, data-&gt;persistent);</span>
+<span class='curline'><a href='../S/1356.html#L272'>persistent</a>        272 ext/zlib/zlib_filter.c 		pefree(data-&gt;outbuf, data-&gt;persistent);</span>
+<span class='curline'><a href='../S/1356.html#L273'>persistent</a>        273 ext/zlib/zlib_filter.c 		pefree(data, data-&gt;persistent);</span>
+<span class='curline'><a href='../S/1356.html#L287'>persistent</a>        287 ext/zlib/zlib_filter.c static php_stream_filter *php_zlib_filter_create(const char *filtername, zval *filterparams, int persistent TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1356.html#L294'>persistent</a>        294 ext/zlib/zlib_filter.c 	data = pecalloc(1, sizeof(php_zlib_filter_data), persistent);</span>
+<span class='curline'><a href='../S/1356.html#L306'>persistent</a>        306 ext/zlib/zlib_filter.c 	data-&gt;strm.next_in = data-&gt;inbuf = (Bytef *) pemalloc(data-&gt;inbuf_len, persistent);</span>
+<span class='curline'><a href='../S/1356.html#L309'>persistent</a>        309 ext/zlib/zlib_filter.c 		pefree(data, persistent);</span>
+<span class='curline'><a href='../S/1356.html#L313'>persistent</a>        313 ext/zlib/zlib_filter.c 	data-&gt;strm.next_out = data-&gt;outbuf = (Bytef *) pemalloc(data-&gt;outbuf_len, persistent);</span>
+<span class='curline'><a href='../S/1356.html#L316'>persistent</a>        316 ext/zlib/zlib_filter.c 		pefree(data-&gt;inbuf, persistent);</span>
+<span class='curline'><a href='../S/1356.html#L317'>persistent</a>        317 ext/zlib/zlib_filter.c 		pefree(data, persistent);</span>
+<span class='curline'><a href='../S/1356.html#L425'>persistent</a>        425 ext/zlib/zlib_filter.c 		pefree(data-&gt;strm.next_in, persistent);</span>
+<span class='curline'><a href='../S/1356.html#L426'>persistent</a>        426 ext/zlib/zlib_filter.c 		pefree(data-&gt;strm.next_out, persistent);</span>
+<span class='curline'><a href='../S/1356.html#L427'>persistent</a>        427 ext/zlib/zlib_filter.c 		pefree(data, persistent);</span>
+<span class='curline'><a href='../S/1356.html#L431'>persistent</a>        431 ext/zlib/zlib_filter.c 	return php_stream_filter_alloc(fops, data, persistent);</span>
+<span class='curline'><a href='../S/1378.html#L306'>persistent</a>        306 main/php_network.h #define php_stream_sock_open_from_socket(socket, persistent)	_php_stream_sock_open_from_socket((socket), (persistent) STREAMS_CC TSRMLS_CC)</span>
+<span class='curline'><a href='../S/1378.html#L307'>persistent</a>        307 main/php_network.h #define php_stream_sock_open_host(host, port, socktype, timeout, persistent)	_php_stream_sock_open_host((host), (port), (socktype), (timeout), (persistent) STREAMS_CC TSRMLS_CC)</span>
+<span class='curline'><a href='../S/1378.html#L310'>persistent</a>        310 main/php_network.h #define php_stream_sock_open_from_socket_rel(socket, persistent)	_php_stream_sock_open_from_socket((socket), (persistent) STREAMS_REL_CC TSRMLS_CC)</span>
+<span class='curline'><a href='../S/1378.html#L311'>persistent</a>        311 main/php_network.h #define php_stream_sock_open_host_rel(host, port, socktype, timeout, persistent)	_php_stream_sock_open_host((host), (port), (socktype), (timeout), (persistent) STREAMS_REL_CC TSRMLS_CC)</span>
+<span class='curline'><a href='../S/1378.html#L312'>persistent</a>        312 main/php_network.h #define php_stream_sock_open_unix_rel(path, pathlen, persistent, timeval)	_php_stream_sock_open_unix((path), (pathlen), (persistent), (timeval) STREAMS_REL_CC TSRMLS_CC)</span>
+<span class='curline'><a href='../S/1387.html#L62'>persistent</a>         62 main/php_streams.h #define php_stream_alloc_rel(ops, thisptr, persistent, mode) _php_stream_alloc((ops), (thisptr), (persistent), (mode) STREAMS_REL_CC TSRMLS_CC)</span>
+<span class='curline'><a href='../S/1387.html#L64'>persistent</a>         64 main/php_streams.h #define php_stream_copy_to_mem_rel(src, buf, maxlen, persistent) _php_stream_copy_to_mem((src), (buf), (maxlen), (persistent) STREAMS_REL_CC TSRMLS_CC)</span>
+<span class='curline'><a href='../S/1387.html#L448'>persistent</a>        448 main/php_streams.h 		int persistent STREAMS_DC TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1387.html#L449'>persistent</a>        449 main/php_streams.h #define php_stream_copy_to_mem(src, buf, maxlen, persistent) _php_stream_copy_to_mem((src), (buf), (maxlen), (persistent) STREAMS_CC TSRMLS_CC)</span>
+<span class='curline'><a href='../S/1404.html#L252'>persistent</a>        252 main/streams/filter.c PHPAPI php_stream_filter *php_stream_filter_create(const char *filtername, zval *filterparams, int persistent TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1404.html#L263'>persistent</a>        263 main/streams/filter.c 		filter = factory-&gt;create_filter(filtername, filterparams, persistent TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1404.html#L275'>persistent</a>        275 main/streams/filter.c 				filter = factory-&gt;create_filter(filtername, filterparams, persistent TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1404.html#L295'>persistent</a>        295 main/streams/filter.c PHPAPI php_stream_filter *_php_stream_filter_alloc(php_stream_filter_ops *fops, void *abstract, int persistent STREAMS_DC TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1404.html#L299'>persistent</a>        299 main/streams/filter.c 	filter = (php_stream_filter*) pemalloc_rel_orig(sizeof(php_stream_filter), persistent);</span>
+<span class='curline'><a href='../S/1404.html#L304'>persistent</a>        304 main/streams/filter.c 	filter-&gt;is_persistent = persistent;</span>
+<span class='curline'><a href='../S/1409.html#L134'>persistent</a>        134 main/streams/php_stream_filter_api.h PHPAPI php_stream_filter *_php_stream_filter_alloc(php_stream_filter_ops *fops, void *abstract, int persistent STREAMS_DC TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1409.html#L136'>persistent</a>        136 main/streams/php_stream_filter_api.h #define php_stream_filter_alloc(fops, thisptr, persistent) _php_stream_filter_alloc((fops), (thisptr), (persistent) STREAMS_CC TSRMLS_CC)</span>
+<span class='curline'><a href='../S/1409.html#L137'>persistent</a>        137 main/streams/php_stream_filter_api.h #define php_stream_filter_alloc_rel(fops, thisptr, persistent) _php_stream_filter_alloc((fops), (thisptr), (persistent) STREAMS_REL_CC TSRMLS_CC)</span>
+<span class='curline'><a href='../S/1409.html#L145'>persistent</a>        145 main/streams/php_stream_filter_api.h 	php_stream_filter *(*create_filter)(const char *filtername, zval *filterparams, int persistent TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1409.html#L152'>persistent</a>        152 main/streams/php_stream_filter_api.h PHPAPI php_stream_filter *php_stream_filter_create(const char *filtername, zval *filterparams, int persistent TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1415.html#L34'>persistent</a>         34 main/streams/php_streams_int.h #define pemalloc_rel_orig(size, persistent)	((persistent) ? malloc((size)) : emalloc_rel_orig((size)))</span>
+<span class='curline'><a href='../S/1415.html#L35'>persistent</a>         35 main/streams/php_streams_int.h #define perealloc_rel_orig(ptr, size, persistent)	((persistent) ? realloc((ptr), (size)) : erealloc_rel_orig((ptr), (size)))</span>
+<span class='curline'><a href='../S/1415.html#L37'>persistent</a>         37 main/streams/php_streams_int.h # define pemalloc_rel_orig(size, persistent)				pemalloc((size), (persistent))</span>
+<span class='curline'><a href='../S/1415.html#L38'>persistent</a>         38 main/streams/php_streams_int.h # define perealloc_rel_orig(ptr, size, persistent)			perealloc((ptr), (size), (persistent))</span>
+<span class='curline'><a href='../S/1416.html#L924'>persistent</a>        924 main/streams/plain_wrapper.c 	int persistent = options &amp; STREAM_OPEN_PERSISTENT;</span>
+<span class='curline'><a href='../S/1416.html#L942'>persistent</a>        942 main/streams/plain_wrapper.c 	if (persistent) {</span>
+<span class='curline'><a href='../S/1417.html#L1425'>persistent</a>       1425 main/streams/streams.c PHPAPI size_t _php_stream_copy_to_mem(php_stream *src, char **buf, size_t maxlen, int persistent STREAMS_DC TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1417.html#L1443'>persistent</a>       1443 main/streams/streams.c 		ptr = *buf = pemalloc_rel_orig(maxlen + 1, persistent);</span>
+<span class='curline'><a href='../S/1417.html#L1455'>persistent</a>       1455 main/streams/streams.c 			pefree(*buf, persistent);</span>
+<span class='curline'><a href='../S/1417.html#L1473'>persistent</a>       1473 main/streams/streams.c 	ptr = *buf = pemalloc_rel_orig(max_len, persistent);</span>
+<span class='curline'><a href='../S/1417.html#L1478'>persistent</a>       1478 main/streams/streams.c 			*buf = perealloc_rel_orig(*buf, max_len + step, persistent);</span>
+<span class='curline'><a href='../S/1417.html#L1486'>persistent</a>       1486 main/streams/streams.c 		*buf = perealloc_rel_orig(*buf, len + 1, persistent);</span>
+<span class='curline'><a href='../S/1417.html#L1489'>persistent</a>       1489 main/streams/streams.c 		pefree(*buf, persistent);</span>
+<span class='curline'><a href='../S/1417.html#L2025'>persistent</a>       2025 main/streams/streams.c 	int persistent = options &amp; STREAM_OPEN_PERSISTENT;</span>
+<span class='curline'><a href='../S/1417.html#L2089'>persistent</a>       2089 main/streams/streams.c 			pefree(stream-&gt;orig_path, persistent);</span>
+<span class='curline'><a href='../S/1417.html#L2091'>persistent</a>       2091 main/streams/streams.c 		copy_of_path = pestrdup(path, persistent);</span>
+<span class='curline'><a href='../S/1417.html#L2112'>persistent</a>       2112 main/streams/streams.c 					pefree(newstream-&gt;orig_path, persistent);</span>
+<span class='curline'><a href='../S/1417.html#L2114'>persistent</a>       2114 main/streams/streams.c 				newstream-&gt;orig_path = pestrdup(path, persistent);</span>
+<span class='curline'><a href='../S/1417.html#L2153'>persistent</a>       2153 main/streams/streams.c 		pefree(copy_of_path, persistent);</span>
+<span class='curline'><a href='../S/1443.html#L58'>persistent</a>         58 sapi/apache_hooks/mod_php5.c 		int top, max, persistent;</span>
+<span class='curline'><a href='../S/1443.html#L115'>persistent</a>        115 sapi/apache_hooks/mod_php5.c int sapi_stack_init_ex(sapi_stack *stack, int persistent)</span>
+<span class='curline'><a href='../S/1443.html#L118'>persistent</a>        118 sapi/apache_hooks/mod_php5.c 		stack-&gt;persistent = persistent;</span>
+<span class='curline'><a href='../S/1443.html#L119'>persistent</a>        119 sapi/apache_hooks/mod_php5.c 		stack-&gt;elements = (void **) pemalloc(sizeof(void **) * STACK_BLOCK_SIZE,  persistent);</span>
+<span class='curline'><a href='../S/1443.html#L131'>persistent</a>        131 sapi/apache_hooks/mod_php5.c 								   (sizeof(void **) * (stack-&gt;max += STACK_BLOCK_SIZE)), stack-&gt;persistent);</span>
+<span class='curline'><a href='../S/1457.html#L438'>persistent</a>        438 sapi/cli/php_cli_server.c static void append_http_status_line(smart_str *buffer, int protocol_version, int response_code, int persistent) /* {{{ */</span>
+<span class='curline'><a href='../S/1457.html#L443'>persistent</a>        443 sapi/cli/php_cli_server.c 	smart_str_appendl_ex(buffer, "HTTP", 4, persistent);</span>
+<span class='curline'><a href='../S/1457.html#L444'>persistent</a>        444 sapi/cli/php_cli_server.c 	smart_str_appendc_ex(buffer, '/', persistent);</span>
+<span class='curline'><a href='../S/1457.html#L445'>persistent</a>        445 sapi/cli/php_cli_server.c 	smart_str_append_generic_ex(buffer, protocol_version / 100, persistent, int, _unsigned);</span>
+<span class='curline'><a href='../S/1457.html#L446'>persistent</a>        446 sapi/cli/php_cli_server.c 	smart_str_appendc_ex(buffer, '.', persistent);</span>
+<span class='curline'><a href='../S/1457.html#L447'>persistent</a>        447 sapi/cli/php_cli_server.c 	smart_str_append_generic_ex(buffer, protocol_version % 100, persistent, int, _unsigned);</span>
+<span class='curline'><a href='../S/1457.html#L448'>persistent</a>        448 sapi/cli/php_cli_server.c 	smart_str_appendc_ex(buffer, ' ', persistent);</span>
+<span class='curline'><a href='../S/1457.html#L449'>persistent</a>        449 sapi/cli/php_cli_server.c 	smart_str_append_generic_ex(buffer, response_code, persistent, int, _unsigned);</span>
+<span class='curline'><a href='../S/1457.html#L450'>persistent</a>        450 sapi/cli/php_cli_server.c 	smart_str_appendc_ex(buffer, ' ', persistent);</span>
+<span class='curline'><a href='../S/1457.html#L451'>persistent</a>        451 sapi/cli/php_cli_server.c 	smart_str_appends_ex(buffer, get_status_string(response_code), persistent);</span>
+<span class='curline'><a href='../S/1457.html#L452'>persistent</a>        452 sapi/cli/php_cli_server.c 	smart_str_appendl_ex(buffer, "\r\n", 2, persistent);</span>
+<span class='curline'><a href='../S/1457.html#L455'>persistent</a>        455 sapi/cli/php_cli_server.c static void append_essential_headers(smart_str* buffer, php_cli_server_client *client, int persistent) /* {{{ */</span>
+<span class='curline'><a href='../S/1457.html#L460'>persistent</a>        460 sapi/cli/php_cli_server.c 			smart_str_appendl_ex(buffer, "Host", sizeof("Host") - 1, persistent);</span>
+<span class='curline'><a href='../S/1457.html#L461'>persistent</a>        461 sapi/cli/php_cli_server.c 			smart_str_appendl_ex(buffer, ": ", sizeof(": ") - 1, persistent);</span>
+<span class='curline'><a href='../S/1457.html#L462'>persistent</a>        462 sapi/cli/php_cli_server.c 			smart_str_appends_ex(buffer, *val, persistent);</span>
+<span class='curline'><a href='../S/1457.html#L463'>persistent</a>        463 sapi/cli/php_cli_server.c 			smart_str_appendl_ex(buffer, "\r\n", 2, persistent);</span>
+<span class='curline'><a href='../S/1457.html#L466'>persistent</a>        466 sapi/cli/php_cli_server.c 	smart_str_appendl_ex(buffer, "Connection: close\r\n", sizeof("Connection: close\r\n") - 1, persistent);</span>
+<span class='curline'><a href='../S/1457.html#L1568'>persistent</a>       1568 sapi/cli/php_cli_server.c static void normalize_vpath(char **retval, size_t *retval_len, const char *vpath, size_t vpath_len, int persistent) /* {{{ */</span>
+<span class='curline'><a href='../S/1457.html#L1576'>persistent</a>       1576 sapi/cli/php_cli_server.c 	decoded_vpath = pestrndup(vpath, vpath_len, persistent);</span>
+<span class='curline'><a href='../S/1589.html#L56'>persistent</a>         56 sapi/thttpd/thttpd.c # define do_keep_alive persistent</span>
+</pre>
+</body>
+</html>

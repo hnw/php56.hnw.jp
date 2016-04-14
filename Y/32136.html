@@ -1,0 +1,931 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>phar</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/969.html#L25'>phar</a>               25 ext/phar/dirstream.c void phar_dostat(phar_archive_data *phar, phar_entry_info *data, php_stream_statbuf *ssb, zend_bool is_dir TSRMLS_DC);</span>
+<span class='curline'><a href='../S/969.html#L309'>phar</a>              309 ext/phar/dirstream.c 	phar_archive_data *phar;</span>
+<span class='curline'><a href='../S/969.html#L340'>phar</a>              340 ext/phar/dirstream.c 	if (FAILURE == phar_get_archive(&amp;phar, resource-&gt;host, host_len, NULL, 0, &amp;error TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/969.html#L358'>phar</a>              358 ext/phar/dirstream.c 		ret = phar_make_dirstream(internal_file, &amp;phar-&gt;manifest TSRMLS_CC);</span>
+<span class='curline'><a href='../S/969.html#L363'>phar</a>              363 ext/phar/dirstream.c 	if (!phar-&gt;manifest.arBuckets) {</span>
+<span class='curline'><a href='../S/969.html#L368'>phar</a>              368 ext/phar/dirstream.c 	if (SUCCESS == zend_hash_find(&amp;phar-&gt;manifest, internal_file, strlen(internal_file), (void**)&amp;entry) &amp;&amp; !entry-&gt;is_dir) {</span>
+<span class='curline'><a href='../S/969.html#L378'>phar</a>              378 ext/phar/dirstream.c 		return phar_make_dirstream(internal_file, &amp;phar-&gt;manifest TSRMLS_CC);</span>
+<span class='curline'><a href='../S/969.html#L383'>phar</a>              383 ext/phar/dirstream.c 		zend_hash_internal_pointer_reset(&amp;phar-&gt;manifest);</span>
+<span class='curline'><a href='../S/969.html#L384'>phar</a>              384 ext/phar/dirstream.c 		while (FAILURE != zend_hash_has_more_elements(&amp;phar-&gt;manifest)) {</span>
+<span class='curline'><a href='../S/969.html#L387'>phar</a>              387 ext/phar/dirstream.c 						&amp;phar-&gt;manifest, &amp;str_key, &amp;keylen, &amp;unused, 0, NULL)) {</span>
+<span class='curline'><a href='../S/969.html#L393'>phar</a>              393 ext/phar/dirstream.c 					return phar_make_dirstream(internal_file, &amp;phar-&gt;manifest TSRMLS_CC);</span>
+<span class='curline'><a href='../S/969.html#L397'>phar</a>              397 ext/phar/dirstream.c 			if (SUCCESS != zend_hash_move_forward(&amp;phar-&gt;manifest)) {</span>
+<span class='curline'><a href='../S/969.html#L414'>phar</a>              414 ext/phar/dirstream.c 	phar_archive_data *phar = NULL;</span>
+<span class='curline'><a href='../S/969.html#L426'>phar</a>              426 ext/phar/dirstream.c 	if (FAILURE == phar_get_archive(&amp;phar, arch, arch_len, NULL, 0, NULL TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/969.html#L427'>phar</a>              427 ext/phar/dirstream.c 		phar = NULL;</span>
+<span class='curline'><a href='../S/969.html#L433'>phar</a>              433 ext/phar/dirstream.c 	if (PHAR_G(readonly) &amp;&amp; (!phar || !phar-&gt;is_data)) {</span>
+<span class='curline'><a href='../S/969.html#L457'>phar</a>              457 ext/phar/dirstream.c 	if (FAILURE == phar_get_archive(&amp;phar, resource-&gt;host, host_len, NULL, 0, &amp;error TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/969.html#L464'>phar</a>              464 ext/phar/dirstream.c 	if ((e = phar_get_entry_info_dir(phar, resource-&gt;path + 1, strlen(resource-&gt;path + 1), 2, &amp;error, 1 TSRMLS_CC))) {</span>
+<span class='curline'><a href='../S/969.html#L482'>phar</a>              482 ext/phar/dirstream.c 	if (phar_get_entry_info_dir(phar, resource-&gt;path + 1, strlen(resource-&gt;path + 1), 0, &amp;error, 1 TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/969.html#L499'>phar</a>              499 ext/phar/dirstream.c 	if (phar-&gt;is_zip) {</span>
+<span class='curline'><a href='../S/969.html#L505'>phar</a>              505 ext/phar/dirstream.c 	if (phar-&gt;is_tar) {</span>
+<span class='curline'><a href='../S/969.html#L513'>phar</a>              513 ext/phar/dirstream.c 	entry.phar = phar;</span>
+<span class='curline'><a href='../S/969.html#L519'>phar</a>              519 ext/phar/dirstream.c 	if (SUCCESS != zend_hash_add(&amp;phar-&gt;manifest, entry.filename, entry.filename_len, (void*)&amp;entry, sizeof(phar_entry_info), NULL)) {</span>
+<span class='curline'><a href='../S/969.html#L520'>phar</a>              520 ext/phar/dirstream.c 		php_stream_wrapper_log_error(wrapper, options TSRMLS_CC, "phar error: cannot create directory \"%s\" in phar \"%s\", adding to manifest failed", entry.filename, phar-&gt;fname);</span>
+<span class='curline'><a href='../S/969.html#L526'>phar</a>              526 ext/phar/dirstream.c 	phar_flush(phar, 0, 0, 0, &amp;error TSRMLS_CC);</span>
+<span class='curline'><a href='../S/969.html#L529'>phar</a>              529 ext/phar/dirstream.c 		php_stream_wrapper_log_error(wrapper, options TSRMLS_CC, "phar error: cannot create directory \"%s\" in phar \"%s\", %s", entry.filename, phar-&gt;fname, error);</span>
+<span class='curline'><a href='../S/969.html#L530'>phar</a>              530 ext/phar/dirstream.c 		zend_hash_del(&amp;phar-&gt;manifest, entry.filename, entry.filename_len);</span>
+<span class='curline'><a href='../S/969.html#L535'>phar</a>              535 ext/phar/dirstream.c 	phar_add_virtual_dirs(phar, entry.filename, entry.filename_len TSRMLS_CC);</span>
+<span class='curline'><a href='../S/969.html#L546'>phar</a>              546 ext/phar/dirstream.c 	phar_archive_data *phar = NULL;</span>
+<span class='curline'><a href='../S/969.html#L562'>phar</a>              562 ext/phar/dirstream.c 	if (FAILURE == phar_get_archive(&amp;phar, arch, arch_len, NULL, 0, NULL TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/969.html#L563'>phar</a>              563 ext/phar/dirstream.c 		phar = NULL;</span>
+<span class='curline'><a href='../S/969.html#L569'>phar</a>              569 ext/phar/dirstream.c 	if (PHAR_G(readonly) &amp;&amp; (!phar || !phar-&gt;is_data)) {</span>
+<span class='curline'><a href='../S/969.html#L593'>phar</a>              593 ext/phar/dirstream.c 	if (FAILURE == phar_get_archive(&amp;phar, resource-&gt;host, host_len, NULL, 0, &amp;error TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/969.html#L602'>phar</a>              602 ext/phar/dirstream.c 	if (!(entry = phar_get_entry_info_dir(phar, resource-&gt;path + 1, path_len, 2, &amp;error, 1 TSRMLS_CC))) {</span>
+<span class='curline'><a href='../S/969.html#L614'>phar</a>              614 ext/phar/dirstream.c 		for (zend_hash_internal_pointer_reset(&amp;phar-&gt;manifest);</span>
+<span class='curline'><a href='../S/969.html#L615'>phar</a>              615 ext/phar/dirstream.c 			HASH_KEY_NON_EXISTENT != zend_hash_get_current_key_ex(&amp;phar-&gt;manifest, &amp;str_key, &amp;key_len, &amp;unused, 0, NULL);</span>
+<span class='curline'><a href='../S/969.html#L616'>phar</a>              616 ext/phar/dirstream.c 			zend_hash_move_forward(&amp;phar-&gt;manifest)</span>
+<span class='curline'><a href='../S/969.html#L631'>phar</a>              631 ext/phar/dirstream.c 		for (zend_hash_internal_pointer_reset(&amp;phar-&gt;virtual_dirs);</span>
+<span class='curline'><a href='../S/969.html#L632'>phar</a>              632 ext/phar/dirstream.c 			HASH_KEY_NON_EXISTENT != zend_hash_get_current_key_ex(&amp;phar-&gt;virtual_dirs, &amp;str_key, &amp;key_len, &amp;unused, 0, NULL);</span>
+<span class='curline'><a href='../S/969.html#L633'>phar</a>              633 ext/phar/dirstream.c 			zend_hash_move_forward(&amp;phar-&gt;virtual_dirs)) {</span>
+<span class='curline'><a href='../S/969.html#L650'>phar</a>              650 ext/phar/dirstream.c 		zend_hash_del(&amp;phar-&gt;virtual_dirs, resource-&gt;path+1, path_len);</span>
+<span class='curline'><a href='../S/969.html#L656'>phar</a>              656 ext/phar/dirstream.c 		phar_flush(phar, 0, 0, 0, &amp;error TSRMLS_CC);</span>
+<span class='curline'><a href='../S/969.html#L659'>phar</a>              659 ext/phar/dirstream.c 			php_stream_wrapper_log_error(wrapper, options TSRMLS_CC, "phar error: cannot remove directory \"%s\" in phar \"%s\", %s", entry-&gt;filename, phar-&gt;fname, error);</span>
+<span class='curline'><a href='../S/971.html#L133'>phar</a>              133 ext/phar/func_interceptors.c 			phar_archive_data *phar;</span>
+<span class='curline'><a href='../S/971.html#L147'>phar</a>              147 ext/phar/func_interceptors.c 			if (FAILURE == phar_get_archive(&amp;phar, arch, arch_len, NULL, 0, NULL TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/971.html#L163'>phar</a>              163 ext/phar/func_interceptors.c 					if (!zend_hash_exists(&amp;(phar-&gt;manifest), entry + 1, entry_len - 1)) {</span>
+<span class='curline'><a href='../S/971.html#L171'>phar</a>              171 ext/phar/func_interceptors.c 					if (!zend_hash_exists(&amp;(phar-&gt;manifest), entry, entry_len)) {</span>
+<span class='curline'><a href='../S/971.html#L255'>phar</a>              255 ext/phar/func_interceptors.c 		phar_archive_data *phar;</span>
+<span class='curline'><a href='../S/971.html#L271'>phar</a>              271 ext/phar/func_interceptors.c 		if (FAILURE == phar_get_archive(&amp;phar, arch, arch_len, NULL, 0, NULL TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/971.html#L286'>phar</a>              286 ext/phar/func_interceptors.c 				if (!zend_hash_exists(&amp;(phar-&gt;manifest), entry + 1, entry_len - 1)) {</span>
+<span class='curline'><a href='../S/971.html#L294'>phar</a>              294 ext/phar/func_interceptors.c 				if (!zend_hash_exists(&amp;(phar-&gt;manifest), entry, entry_len)) {</span>
+<span class='curline'><a href='../S/971.html#L351'>phar</a>              351 ext/phar/func_interceptors.c 		phar_archive_data *phar;</span>
+<span class='curline'><a href='../S/971.html#L367'>phar</a>              367 ext/phar/func_interceptors.c 		if (FAILURE == phar_get_archive(&amp;phar, arch, arch_len, NULL, 0, NULL TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/971.html#L382'>phar</a>              382 ext/phar/func_interceptors.c 				if (!zend_hash_exists(&amp;(phar-&gt;manifest), entry + 1, entry_len - 1)) {</span>
+<span class='curline'><a href='../S/971.html#L390'>phar</a>              390 ext/phar/func_interceptors.c 				if (!zend_hash_exists(&amp;(phar-&gt;manifest), entry, entry_len)) {</span>
+<span class='curline'><a href='../S/971.html#L622'>phar</a>              622 ext/phar/func_interceptors.c 		phar_archive_data *phar;</span>
+<span class='curline'><a href='../S/971.html#L639'>phar</a>              639 ext/phar/func_interceptors.c 			phar = PHAR_G(last_phar);</span>
+<span class='curline'><a href='../S/971.html#L648'>phar</a>              648 ext/phar/func_interceptors.c 			if (FAILURE == phar_get_archive(&amp;phar, arch, arch_len, NULL, 0, NULL TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/971.html#L656'>phar</a>              656 ext/phar/func_interceptors.c 				if (SUCCESS == zend_hash_find(&amp;(phar-&gt;manifest), entry + 1, entry_len - 1, (void **) &amp;data)) {</span>
+<span class='curline'><a href='../S/971.html#L662'>phar</a>              662 ext/phar/func_interceptors.c 			if (SUCCESS == zend_hash_find(&amp;(phar-&gt;manifest), entry, entry_len, (void **) &amp;data)) {</span>
+<span class='curline'><a href='../S/971.html#L666'>phar</a>              666 ext/phar/func_interceptors.c 			if (zend_hash_exists(&amp;(phar-&gt;virtual_dirs), entry, entry_len)) {</span>
+<span class='curline'><a href='../S/971.html#L676'>phar</a>              676 ext/phar/func_interceptors.c 				sb.st_mtime.tv_sec = phar-&gt;max_timestamp;</span>
+<span class='curline'><a href='../S/971.html#L677'>phar</a>              677 ext/phar/func_interceptors.c 				sb.st_atime.tv_sec = phar-&gt;max_timestamp;</span>
+<span class='curline'><a href='../S/971.html#L678'>phar</a>              678 ext/phar/func_interceptors.c 				sb.st_ctime.tv_sec = phar-&gt;max_timestamp;</span>
+<span class='curline'><a href='../S/971.html#L680'>phar</a>              680 ext/phar/func_interceptors.c 				sb.st_mtime = phar-&gt;max_timestamp;</span>
+<span class='curline'><a href='../S/971.html#L681'>phar</a>              681 ext/phar/func_interceptors.c 				sb.st_atime = phar-&gt;max_timestamp;</span>
+<span class='curline'><a href='../S/971.html#L682'>phar</a>              682 ext/phar/func_interceptors.c 				sb.st_ctime = phar-&gt;max_timestamp;</span>
+<span class='curline'><a href='../S/971.html#L700'>phar</a>              700 ext/phar/func_interceptors.c 				if (SUCCESS == zend_hash_find(&amp;(phar-&gt;manifest), entry + 1, entry_len - 1, (void **) &amp;data)) {</span>
+<span class='curline'><a href='../S/971.html#L710'>phar</a>              710 ext/phar/func_interceptors.c 				if (zend_hash_exists(&amp;(phar-&gt;virtual_dirs), entry + 1, entry_len - 1)) {</span>
+<span class='curline'><a href='../S/971.html#L722'>phar</a>              722 ext/phar/func_interceptors.c 					sb.st_mtime.tv_sec = phar-&gt;max_timestamp;</span>
+<span class='curline'><a href='../S/971.html#L723'>phar</a>              723 ext/phar/func_interceptors.c 					sb.st_atime.tv_sec = phar-&gt;max_timestamp;</span>
+<span class='curline'><a href='../S/971.html#L724'>phar</a>              724 ext/phar/func_interceptors.c 					sb.st_ctime.tv_sec = phar-&gt;max_timestamp;</span>
+<span class='curline'><a href='../S/971.html#L726'>phar</a>              726 ext/phar/func_interceptors.c 					sb.st_mtime = phar-&gt;max_timestamp;</span>
+<span class='curline'><a href='../S/971.html#L727'>phar</a>              727 ext/phar/func_interceptors.c 					sb.st_atime = phar-&gt;max_timestamp;</span>
+<span class='curline'><a href='../S/971.html#L728'>phar</a>              728 ext/phar/func_interceptors.c 					sb.st_ctime = phar-&gt;max_timestamp;</span>
+<span class='curline'><a href='../S/971.html#L782'>phar</a>              782 ext/phar/func_interceptors.c 			if (!phar-&gt;is_writeable) {</span>
+<span class='curline'><a href='../S/971.html#L924'>phar</a>              924 ext/phar/func_interceptors.c 			phar_archive_data *phar;</span>
+<span class='curline'><a href='../S/971.html#L931'>phar</a>              931 ext/phar/func_interceptors.c 			if (SUCCESS == phar_get_archive(&amp;phar, arch, arch_len, NULL, 0, NULL TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/971.html#L936'>phar</a>              936 ext/phar/func_interceptors.c 					if (SUCCESS == zend_hash_find(&amp;(phar-&gt;manifest), entry + 1, entry_len - 1, (void **) &amp;etemp)) {</span>
+<span class='curline'><a href='../S/971.html#L944'>phar</a>              944 ext/phar/func_interceptors.c 					if (SUCCESS == zend_hash_find(&amp;(phar-&gt;manifest), entry, entry_len, (void **) &amp;etemp)) {</span>
+<span class='curline'><a href='../S/971.html#L991'>phar</a>              991 ext/phar/func_interceptors.c 			phar_archive_data *phar;</span>
+<span class='curline'><a href='../S/971.html#L998'>phar</a>              998 ext/phar/func_interceptors.c 			if (SUCCESS == phar_get_archive(&amp;phar, arch, arch_len, NULL, 0, NULL TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/971.html#L1003'>phar</a>             1003 ext/phar/func_interceptors.c 					if (SUCCESS == zend_hash_find(&amp;(phar-&gt;manifest), entry + 1, entry_len - 1, (void **) &amp;etemp)) {</span>
+<span class='curline'><a href='../S/971.html#L1011'>phar</a>             1011 ext/phar/func_interceptors.c 					if (SUCCESS == zend_hash_find(&amp;(phar-&gt;manifest), entry, entry_len, (void **) &amp;etemp)) {</span>
+<span class='curline'><a href='../S/973.html#L29'>phar</a>               29 ext/phar/phar.c ZEND_DECLARE_MODULE_GLOBALS(phar)</span>
+<span class='curline'><a href='../S/973.html#L38'>phar</a>               38 ext/phar/phar.c 	phar_archive_data *phar = *(phar_archive_data **)pDest;</span>
+<span class='curline'><a href='../S/973.html#L40'>phar</a>               40 ext/phar/phar.c 	if (!phar-&gt;is_data) {</span>
+<span class='curline'><a href='../S/973.html#L41'>phar</a>               41 ext/phar/phar.c 		phar-&gt;is_writeable = !keep;</span>
+<span class='curline'><a href='../S/973.html#L105'>phar</a>              105 ext/phar/phar.c 	phar_archive_data *phar;</span>
+<span class='curline'><a href='../S/973.html#L139'>phar</a>              139 ext/phar/phar.c 			if (SUCCESS == phar_open_from_filename(key, end - key, NULL, 0, 0, &amp;phar, NULL TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/973.html#L141'>phar</a>              141 ext/phar/phar.c 				phar-&gt;phar_pos = i++;</span>
+<span class='curline'><a href='../S/973.html#L142'>phar</a>              142 ext/phar/phar.c 				php_stream_close(phar-&gt;fp);</span>
+<span class='curline'><a href='../S/973.html#L143'>phar</a>              143 ext/phar/phar.c 				phar-&gt;fp = NULL;</span>
+<span class='curline'><a href='../S/973.html#L162'>phar</a>              162 ext/phar/phar.c 			if (SUCCESS == phar_open_from_filename(key, strlen(key), NULL, 0, 0, &amp;phar, NULL TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/973.html#L207'>phar</a>              207 ext/phar/phar.c void phar_destroy_phar_data(phar_archive_data *phar TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/973.html#L209'>phar</a>              209 ext/phar/phar.c 	if (phar-&gt;alias &amp;&amp; phar-&gt;alias != phar-&gt;fname) {</span>
+<span class='curline'><a href='../S/973.html#L210'>phar</a>              210 ext/phar/phar.c 		pefree(phar-&gt;alias, phar-&gt;is_persistent);</span>
+<span class='curline'><a href='../S/973.html#L211'>phar</a>              211 ext/phar/phar.c 		phar-&gt;alias = NULL;</span>
+<span class='curline'><a href='../S/973.html#L214'>phar</a>              214 ext/phar/phar.c 	if (phar-&gt;fname) {</span>
+<span class='curline'><a href='../S/973.html#L215'>phar</a>              215 ext/phar/phar.c 		pefree(phar-&gt;fname, phar-&gt;is_persistent);</span>
+<span class='curline'><a href='../S/973.html#L216'>phar</a>              216 ext/phar/phar.c 		phar-&gt;fname = NULL;</span>
+<span class='curline'><a href='../S/973.html#L219'>phar</a>              219 ext/phar/phar.c 	if (phar-&gt;signature) {</span>
+<span class='curline'><a href='../S/973.html#L220'>phar</a>              220 ext/phar/phar.c 		pefree(phar-&gt;signature, phar-&gt;is_persistent);</span>
+<span class='curline'><a href='../S/973.html#L221'>phar</a>              221 ext/phar/phar.c 		phar-&gt;signature = NULL;</span>
+<span class='curline'><a href='../S/973.html#L224'>phar</a>              224 ext/phar/phar.c 	if (phar-&gt;manifest.arBuckets) {</span>
+<span class='curline'><a href='../S/973.html#L225'>phar</a>              225 ext/phar/phar.c 		zend_hash_destroy(&amp;phar-&gt;manifest);</span>
+<span class='curline'><a href='../S/973.html#L226'>phar</a>              226 ext/phar/phar.c 		phar-&gt;manifest.arBuckets = NULL;</span>
+<span class='curline'><a href='../S/973.html#L229'>phar</a>              229 ext/phar/phar.c 	if (phar-&gt;mounted_dirs.arBuckets) {</span>
+<span class='curline'><a href='../S/973.html#L230'>phar</a>              230 ext/phar/phar.c 		zend_hash_destroy(&amp;phar-&gt;mounted_dirs);</span>
+<span class='curline'><a href='../S/973.html#L231'>phar</a>              231 ext/phar/phar.c 		phar-&gt;mounted_dirs.arBuckets = NULL;</span>
+<span class='curline'><a href='../S/973.html#L234'>phar</a>              234 ext/phar/phar.c 	if (phar-&gt;virtual_dirs.arBuckets) {</span>
+<span class='curline'><a href='../S/973.html#L235'>phar</a>              235 ext/phar/phar.c 		zend_hash_destroy(&amp;phar-&gt;virtual_dirs);</span>
+<span class='curline'><a href='../S/973.html#L236'>phar</a>              236 ext/phar/phar.c 		phar-&gt;virtual_dirs.arBuckets = NULL;</span>
+<span class='curline'><a href='../S/973.html#L239'>phar</a>              239 ext/phar/phar.c 	if (phar-&gt;metadata) {</span>
+<span class='curline'><a href='../S/973.html#L240'>phar</a>              240 ext/phar/phar.c 		if (phar-&gt;is_persistent) {</span>
+<span class='curline'><a href='../S/973.html#L241'>phar</a>              241 ext/phar/phar.c 			if (phar-&gt;metadata_len) {</span>
+<span class='curline'><a href='../S/973.html#L243'>phar</a>              243 ext/phar/phar.c 				free(phar-&gt;metadata);</span>
+<span class='curline'><a href='../S/973.html#L245'>phar</a>              245 ext/phar/phar.c 				zval_internal_ptr_dtor(&amp;phar-&gt;metadata);</span>
+<span class='curline'><a href='../S/973.html#L248'>phar</a>              248 ext/phar/phar.c 			zval_ptr_dtor(&amp;phar-&gt;metadata);</span>
+<span class='curline'><a href='../S/973.html#L250'>phar</a>              250 ext/phar/phar.c 		phar-&gt;metadata_len = 0;</span>
+<span class='curline'><a href='../S/973.html#L251'>phar</a>              251 ext/phar/phar.c 		phar-&gt;metadata = 0;</span>
+<span class='curline'><a href='../S/973.html#L254'>phar</a>              254 ext/phar/phar.c 	if (phar-&gt;fp) {</span>
+<span class='curline'><a href='../S/973.html#L255'>phar</a>              255 ext/phar/phar.c 		php_stream_close(phar-&gt;fp);</span>
+<span class='curline'><a href='../S/973.html#L256'>phar</a>              256 ext/phar/phar.c 		phar-&gt;fp = 0;</span>
+<span class='curline'><a href='../S/973.html#L259'>phar</a>              259 ext/phar/phar.c 	if (phar-&gt;ufp) {</span>
+<span class='curline'><a href='../S/973.html#L260'>phar</a>              260 ext/phar/phar.c 		php_stream_close(phar-&gt;ufp);</span>
+<span class='curline'><a href='../S/973.html#L261'>phar</a>              261 ext/phar/phar.c 		phar-&gt;ufp = 0;</span>
+<span class='curline'><a href='../S/973.html#L264'>phar</a>              264 ext/phar/phar.c 	pefree(phar, phar-&gt;is_persistent);</span>
+<span class='curline'><a href='../S/973.html#L271'>phar</a>              271 ext/phar/phar.c int phar_archive_delref(phar_archive_data *phar TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/973.html#L273'>phar</a>              273 ext/phar/phar.c 	if (phar-&gt;is_persistent) {</span>
+<span class='curline'><a href='../S/973.html#L277'>phar</a>              277 ext/phar/phar.c 	if (--phar-&gt;refcount &lt; 0) {</span>
+<span class='curline'><a href='../S/973.html#L279'>phar</a>              279 ext/phar/phar.c 		|| zend_hash_del(&amp;(PHAR_GLOBALS-&gt;phar_fname_map), phar-&gt;fname, phar-&gt;fname_len) != SUCCESS) {</span>
+<span class='curline'><a href='../S/973.html#L280'>phar</a>              280 ext/phar/phar.c 			phar_destroy_phar_data(phar TSRMLS_CC);</span>
+<span class='curline'><a href='../S/973.html#L283'>phar</a>              283 ext/phar/phar.c 	} else if (!phar-&gt;refcount) {</span>
+<span class='curline'><a href='../S/973.html#L288'>phar</a>              288 ext/phar/phar.c 		if (phar-&gt;fp &amp;&amp; !(phar-&gt;flags &amp; PHAR_FILE_COMPRESSION_MASK)) {</span>
+<span class='curline'><a href='../S/973.html#L293'>phar</a>              293 ext/phar/phar.c 			php_stream_close(phar-&gt;fp);</span>
+<span class='curline'><a href='../S/973.html#L294'>phar</a>              294 ext/phar/phar.c 			phar-&gt;fp = NULL;</span>
+<span class='curline'><a href='../S/973.html#L297'>phar</a>              297 ext/phar/phar.c 		if (!zend_hash_num_elements(&amp;phar-&gt;manifest)) {</span>
+<span class='curline'><a href='../S/973.html#L300'>phar</a>              300 ext/phar/phar.c 			if (zend_hash_del(&amp;(PHAR_GLOBALS-&gt;phar_fname_map), phar-&gt;fname, phar-&gt;fname_len) != SUCCESS) {</span>
+<span class='curline'><a href='../S/973.html#L301'>phar</a>              301 ext/phar/phar.c 				phar_destroy_phar_data(phar TSRMLS_CC);</span>
+<span class='curline'><a href='../S/973.html#L438'>phar</a>              438 ext/phar/phar.c 		if (idata-&gt;fp &amp;&amp; idata-&gt;fp != idata-&gt;phar-&gt;fp &amp;&amp; idata-&gt;fp != idata-&gt;phar-&gt;ufp &amp;&amp; idata-&gt;fp != idata-&gt;internal_file-&gt;fp) {</span>
+<span class='curline'><a href='../S/973.html#L448'>phar</a>              448 ext/phar/phar.c 	phar_archive_delref(idata-&gt;phar TSRMLS_CC);</span>
+<span class='curline'><a href='../S/973.html#L459'>phar</a>              459 ext/phar/phar.c 	phar_archive_data *phar;</span>
+<span class='curline'><a href='../S/973.html#L461'>phar</a>              461 ext/phar/phar.c 	phar = idata-&gt;phar;</span>
+<span class='curline'><a href='../S/973.html#L464'>phar</a>              464 ext/phar/phar.c 		if (idata-&gt;fp &amp;&amp; idata-&gt;fp != idata-&gt;phar-&gt;fp &amp;&amp; idata-&gt;fp != idata-&gt;phar-&gt;ufp &amp;&amp; idata-&gt;fp != idata-&gt;internal_file-&gt;fp) {</span>
+<span class='curline'><a href='../S/973.html#L467'>phar</a>              467 ext/phar/phar.c 		zend_hash_del(&amp;idata-&gt;phar-&gt;manifest, idata-&gt;internal_file-&gt;filename, idata-&gt;internal_file-&gt;filename_len);</span>
+<span class='curline'><a href='../S/973.html#L468'>phar</a>              468 ext/phar/phar.c 		idata-&gt;phar-&gt;refcount--;</span>
+<span class='curline'><a href='../S/973.html#L475'>phar</a>              475 ext/phar/phar.c 	if (!phar-&gt;donotflush) {</span>
+<span class='curline'><a href='../S/973.html#L476'>phar</a>              476 ext/phar/phar.c 		phar_flush(phar, 0, 0, 0, error TSRMLS_CC);</span>
+<span class='curline'><a href='../S/973.html#L531'>phar</a>              531 ext/phar/phar.c 	phar_archive_data *phar;</span>
+<span class='curline'><a href='../S/973.html#L543'>phar</a>              543 ext/phar/phar.c 	if (SUCCESS == phar_get_archive(&amp;phar, unixfname, fname_len, alias, alias_len, error TSRMLS_CC)</span>
+<span class='curline'><a href='../S/973.html#L544'>phar</a>              544 ext/phar/phar.c 		&amp;&amp; ((alias &amp;&amp; fname_len == phar-&gt;fname_len</span>
+<span class='curline'><a href='../S/973.html#L545'>phar</a>              545 ext/phar/phar.c 		&amp;&amp; !strncmp(unixfname, phar-&gt;fname, fname_len)) || !alias)</span>
+<span class='curline'><a href='../S/973.html#L550'>phar</a>              550 ext/phar/phar.c 	if (SUCCESS == phar_get_archive(&amp;phar, fname, fname_len, alias, alias_len, error TSRMLS_CC)</span>
+<span class='curline'><a href='../S/973.html#L551'>phar</a>              551 ext/phar/phar.c 		&amp;&amp; ((alias &amp;&amp; fname_len == phar-&gt;fname_len</span>
+<span class='curline'><a href='../S/973.html#L552'>phar</a>              552 ext/phar/phar.c 		&amp;&amp; !strncmp(fname, phar-&gt;fname, fname_len)) || !alias)</span>
+<span class='curline'><a href='../S/973.html#L564'>phar</a>              564 ext/phar/phar.c 			if (!phar-&gt;halt_offset &amp;&amp; !phar-&gt;is_brandnew &amp;&amp; (phar-&gt;is_tar || phar-&gt;is_zip)) {</span>
+<span class='curline'><a href='../S/973.html#L565'>phar</a>              565 ext/phar/phar.c 				if (PHAR_G(readonly) &amp;&amp; FAILURE == zend_hash_find(&amp;(phar-&gt;manifest), ".phar/stub.php", sizeof(".phar/stub.php")-1, (void **)&amp;stub)) {</span>
+<span class='curline'><a href='../S/973.html#L575'>phar</a>              575 ext/phar/phar.c 			*pphar = phar;</span>
+<span class='curline'><a href='../S/973.html#L587'>phar</a>              587 ext/phar/phar.c 		if (phar &amp;&amp; error &amp;&amp; !(options &amp; REPORT_ERRORS)) {</span>
+<span class='curline'><a href='../S/973.html#L1053'>phar</a>             1053 ext/phar/phar.c 	entry.phar = mydata;</span>
+<span class='curline'><a href='../S/973.html#L2403'>phar</a>             2403 ext/phar/phar.c 		if (SUCCESS != phar_open_archive_fp(idata-&gt;phar TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/973.html#L2404'>phar</a>             2404 ext/phar/phar.c 			spprintf(error, 0, "phar error: unable to open zip-based phar archive \"%s\" to verify local file header for file \"%s\"", idata-&gt;phar-&gt;fname, entry-&gt;filename);</span>
+<span class='curline'><a href='../S/973.html#L2411'>phar</a>             2411 ext/phar/phar.c 			spprintf(error, 0, "phar error: internal corruption of zip-based phar \"%s\" (cannot read local file header for file \"%s\")", idata-&gt;phar-&gt;fname, entry-&gt;filename);</span>
+<span class='curline'><a href='../S/973.html#L2424'>phar</a>             2424 ext/phar/phar.c 				spprintf(error, 0, "phar error: internal corruption of zip-based phar \"%s\" (cannot read local data descriptor for file \"%s\")", idata-&gt;phar-&gt;fname, entry-&gt;filename);</span>
+<span class='curline'><a href='../S/973.html#L2436'>phar</a>             2436 ext/phar/phar.c 			spprintf(error, 0, "phar error: internal corruption of zip-based phar \"%s\" (local header of file \"%s\" does not match central directory)", idata-&gt;phar-&gt;fname, entry-&gt;filename);</span>
+<span class='curline'><a href='../S/973.html#L2465'>phar</a>             2465 ext/phar/phar.c 		spprintf(error, 0, "phar error: internal corruption of phar \"%s\" (crc32 mismatch on file \"%s\")", idata-&gt;phar-&gt;fname, entry-&gt;filename);</span>
+<span class='curline'><a href='../S/973.html#L2549'>phar</a>             2549 ext/phar/phar.c int phar_flush(phar_archive_data *phar, char *user_stub, long len, int convert, char **error TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/973.html#L2569'>phar</a>             2569 ext/phar/phar.c 	if (phar-&gt;is_persistent) {</span>
+<span class='curline'><a href='../S/973.html#L2571'>phar</a>             2571 ext/phar/phar.c 			spprintf(error, 0, "internal error: attempt to flush cached zip-based phar \"%s\"", phar-&gt;fname);</span>
+<span class='curline'><a href='../S/973.html#L2580'>phar</a>             2580 ext/phar/phar.c 	if (!zend_hash_num_elements(&amp;phar-&gt;manifest) &amp;&amp; !user_stub) {</span>
+<span class='curline'><a href='../S/973.html#L2584'>phar</a>             2584 ext/phar/phar.c 	zend_hash_clean(&amp;phar-&gt;virtual_dirs);</span>
+<span class='curline'><a href='../S/973.html#L2586'>phar</a>             2586 ext/phar/phar.c 	if (phar-&gt;is_zip) {</span>
+<span class='curline'><a href='../S/973.html#L2587'>phar</a>             2587 ext/phar/phar.c 		return phar_zip_flush(phar, user_stub, len, convert, error TSRMLS_CC);</span>
+<span class='curline'><a href='../S/973.html#L2590'>phar</a>             2590 ext/phar/phar.c 	if (phar-&gt;is_tar) {</span>
+<span class='curline'><a href='../S/973.html#L2591'>phar</a>             2591 ext/phar/phar.c 		return phar_tar_flush(phar, user_stub, len, convert, error TSRMLS_CC);</span>
+<span class='curline'><a href='../S/973.html#L2598'>phar</a>             2598 ext/phar/phar.c 	if (phar-&gt;fp &amp;&amp; !phar-&gt;is_brandnew) {</span>
+<span class='curline'><a href='../S/973.html#L2599'>phar</a>             2599 ext/phar/phar.c 		oldfile = phar-&gt;fp;</span>
+<span class='curline'><a href='../S/973.html#L2603'>phar</a>             2603 ext/phar/phar.c 		oldfile = php_stream_open_wrapper(phar-&gt;fname, "rb", 0, NULL);</span>
+<span class='curline'><a href='../S/973.html#L2626'>phar</a>             2626 ext/phar/phar.c 					spprintf(error, 0, "unable to access resource to copy stub to new phar \"%s\"", phar-&gt;fname);</span>
+<span class='curline'><a href='../S/973.html#L2643'>phar</a>             2643 ext/phar/phar.c 					spprintf(error, 0, "unable to read resource to copy stub to new phar \"%s\"", phar-&gt;fname);</span>
+<span class='curline'><a href='../S/973.html#L2659'>phar</a>             2659 ext/phar/phar.c 				spprintf(error, 0, "illegal stub for phar \"%s\"", phar-&gt;fname);</span>
+<span class='curline'><a href='../S/973.html#L2676'>phar</a>             2676 ext/phar/phar.c 				spprintf(error, 0, "unable to create stub from string in new phar \"%s\"", phar-&gt;fname);</span>
+<span class='curline'><a href='../S/973.html#L2683'>phar</a>             2683 ext/phar/phar.c 		phar-&gt;halt_offset = len + 5;</span>
+<span class='curline'><a href='../S/973.html#L2690'>phar</a>             2690 ext/phar/phar.c 		if (!user_stub &amp;&amp; phar-&gt;halt_offset &amp;&amp; oldfile &amp;&amp; !phar-&gt;is_brandnew) {</span>
+<span class='curline'><a href='../S/973.html#L2691'>phar</a>             2691 ext/phar/phar.c 			php_stream_copy_to_stream_ex(oldfile, newfile, phar-&gt;halt_offset, &amp;written);</span>
+<span class='curline'><a href='../S/973.html#L2695'>phar</a>             2695 ext/phar/phar.c 			newstub = phar_create_default_stub(NULL, NULL, &amp;(phar-&gt;halt_offset), NULL TSRMLS_CC);</span>
+<span class='curline'><a href='../S/973.html#L2696'>phar</a>             2696 ext/phar/phar.c 			written = php_stream_write(newfile, newstub, phar-&gt;halt_offset);</span>
+<span class='curline'><a href='../S/973.html#L2698'>phar</a>             2698 ext/phar/phar.c 		if (phar-&gt;halt_offset != written) {</span>
+<span class='curline'><a href='../S/973.html#L2705'>phar</a>             2705 ext/phar/phar.c 					spprintf(error, 0, "unable to create stub in new phar \"%s\"", phar-&gt;fname);</span>
+<span class='curline'><a href='../S/973.html#L2707'>phar</a>             2707 ext/phar/phar.c 					spprintf(error, 0, "unable to copy stub of old phar to new phar \"%s\"", phar-&gt;fname);</span>
+<span class='curline'><a href='../S/973.html#L2725'>phar</a>             2725 ext/phar/phar.c 	zend_hash_apply(&amp;phar-&gt;manifest, phar_flush_clean_deleted_apply TSRMLS_CC);</span>
+<span class='curline'><a href='../S/973.html#L2729'>phar</a>             2729 ext/phar/phar.c 	if (phar-&gt;metadata) {</span>
+<span class='curline'><a href='../S/973.html#L2731'>phar</a>             2731 ext/phar/phar.c 		php_var_serialize(&amp;main_metadata_str, &amp;phar-&gt;metadata, &amp;metadata_hash TSRMLS_CC);</span>
+<span class='curline'><a href='../S/973.html#L2738'>phar</a>             2738 ext/phar/phar.c 	for (zend_hash_internal_pointer_reset(&amp;phar-&gt;manifest);</span>
+<span class='curline'><a href='../S/973.html#L2739'>phar</a>             2739 ext/phar/phar.c 		zend_hash_has_more_elements(&amp;phar-&gt;manifest) == SUCCESS;</span>
+<span class='curline'><a href='../S/973.html#L2740'>phar</a>             2740 ext/phar/phar.c 		zend_hash_move_forward(&amp;phar-&gt;manifest)) {</span>
+<span class='curline'><a href='../S/973.html#L2741'>phar</a>             2741 ext/phar/phar.c 		if (zend_hash_get_current_data(&amp;phar-&gt;manifest, (void **)&amp;entry) == FAILURE) {</span>
+<span class='curline'><a href='../S/973.html#L2767'>phar</a>             2767 ext/phar/phar.c 		phar_add_virtual_dirs(phar, entry-&gt;filename, entry-&gt;filename_len TSRMLS_CC);</span>
+<span class='curline'><a href='../S/973.html#L2803'>phar</a>             2803 ext/phar/phar.c 			newentry = phar_open_jit(phar, entry, error TSRMLS_CC);</span>
+<span class='curline'><a href='../S/973.html#L2819'>phar</a>             2819 ext/phar/phar.c 				spprintf(error, 0, "unable to seek to start of file \"%s\" while creating new phar \"%s\"", entry-&gt;filename, phar-&gt;fname);</span>
+<span class='curline'><a href='../S/973.html#L2843'>phar</a>             2843 ext/phar/phar.c 					spprintf(error, 0, "unable to gzip compress file \"%s\" to new phar \"%s\"", entry-&gt;filename, phar-&gt;fname);</span>
+<span class='curline'><a href='../S/973.html#L2847'>phar</a>             2847 ext/phar/phar.c 					spprintf(error, 0, "unable to bzip2 compress file \"%s\" to new phar \"%s\"", entry-&gt;filename, phar-&gt;fname);</span>
+<span class='curline'><a href='../S/973.html#L2874'>phar</a>             2874 ext/phar/phar.c 				spprintf(error, 0, "unable to seek to start of file \"%s\" while creating new phar \"%s\"", entry-&gt;filename, phar-&gt;fname);</span>
+<span class='curline'><a href='../S/973.html#L2885'>phar</a>             2885 ext/phar/phar.c 				spprintf(error, 0, "unable to copy compressed file contents of file \"%s\" while creating new phar \"%s\"", entry-&gt;filename, phar-&gt;fname);</span>
+<span class='curline'><a href='../S/973.html#L2912'>phar</a>             2912 ext/phar/phar.c 	restore_alias_len = phar-&gt;alias_len;</span>
+<span class='curline'><a href='../S/973.html#L2913'>phar</a>             2913 ext/phar/phar.c 	if (phar-&gt;is_temporary_alias) {</span>
+<span class='curline'><a href='../S/973.html#L2914'>phar</a>             2914 ext/phar/phar.c 		phar-&gt;alias_len = 0;</span>
+<span class='curline'><a href='../S/973.html#L2917'>phar</a>             2917 ext/phar/phar.c 	manifest_len = offset + phar-&gt;alias_len + sizeof(manifest) + main_metadata_str.len;</span>
+<span class='curline'><a href='../S/973.html#L2934'>phar</a>             2934 ext/phar/phar.c 	phar_set_32(manifest+14, phar-&gt;alias_len);</span>
+<span class='curline'><a href='../S/973.html#L2938'>phar</a>             2938 ext/phar/phar.c 	|| (size_t)phar-&gt;alias_len != php_stream_write(newfile, phar-&gt;alias, phar-&gt;alias_len)) {</span>
+<span class='curline'><a href='../S/973.html#L2945'>phar</a>             2945 ext/phar/phar.c 		phar-&gt;alias_len = restore_alias_len;</span>
+<span class='curline'><a href='../S/973.html#L2948'>phar</a>             2948 ext/phar/phar.c 			spprintf(error, 0, "unable to write manifest header of new phar \"%s\"", phar-&gt;fname);</span>
+<span class='curline'><a href='../S/973.html#L2954'>phar</a>             2954 ext/phar/phar.c 	phar-&gt;alias_len = restore_alias_len;</span>
+<span class='curline'><a href='../S/973.html#L2966'>phar</a>             2966 ext/phar/phar.c 		phar-&gt;alias_len = restore_alias_len;</span>
+<span class='curline'><a href='../S/973.html#L2969'>phar</a>             2969 ext/phar/phar.c 			spprintf(error, 0, "unable to write manifest meta-data of new phar \"%s\"", phar-&gt;fname);</span>
+<span class='curline'><a href='../S/973.html#L2980'>phar</a>             2980 ext/phar/phar.c 	for (zend_hash_internal_pointer_reset(&amp;phar-&gt;manifest);</span>
+<span class='curline'><a href='../S/973.html#L2981'>phar</a>             2981 ext/phar/phar.c 		zend_hash_has_more_elements(&amp;phar-&gt;manifest) == SUCCESS;</span>
+<span class='curline'><a href='../S/973.html#L2982'>phar</a>             2982 ext/phar/phar.c 		zend_hash_move_forward(&amp;phar-&gt;manifest)) {</span>
+<span class='curline'><a href='../S/973.html#L2984'>phar</a>             2984 ext/phar/phar.c 		if (zend_hash_get_current_data(&amp;phar-&gt;manifest, (void **)&amp;entry) == FAILURE) {</span>
+<span class='curline'><a href='../S/973.html#L3009'>phar</a>             3009 ext/phar/phar.c 					spprintf(error, 0, "unable to write filename of directory \"%s\" to manifest of new phar \"%s\"", entry-&gt;filename, phar-&gt;fname);</span>
+<span class='curline'><a href='../S/973.html#L3011'>phar</a>             3011 ext/phar/phar.c 					spprintf(error, 0, "unable to write filename of file \"%s\" to manifest of new phar \"%s\"", entry-&gt;filename, phar-&gt;fname);</span>
+<span class='curline'><a href='../S/973.html#L3043'>phar</a>             3043 ext/phar/phar.c 				spprintf(error, 0, "unable to write temporary manifest of file \"%s\" to manifest of new phar \"%s\"", entry-&gt;filename, phar-&gt;fname);</span>
+<span class='curline'><a href='../S/973.html#L3068'>phar</a>             3068 ext/phar/phar.c 	for (zend_hash_internal_pointer_reset(&amp;phar-&gt;manifest);</span>
+<span class='curline'><a href='../S/973.html#L3069'>phar</a>             3069 ext/phar/phar.c 		zend_hash_has_more_elements(&amp;phar-&gt;manifest) == SUCCESS;</span>
+<span class='curline'><a href='../S/973.html#L3070'>phar</a>             3070 ext/phar/phar.c 		zend_hash_move_forward(&amp;phar-&gt;manifest)) {</span>
+<span class='curline'><a href='../S/973.html#L3072'>phar</a>             3072 ext/phar/phar.c 		if (zend_hash_get_current_data(&amp;phar-&gt;manifest, (void **)&amp;entry) == FAILURE) {</span>
+<span class='curline'><a href='../S/973.html#L3091'>phar</a>             3091 ext/phar/phar.c 					spprintf(error, 0, "unable to seek to start of file \"%s\" while creating new phar \"%s\"", entry-&gt;filename, phar-&gt;fname);</span>
+<span class='curline'><a href='../S/973.html#L3103'>phar</a>             3103 ext/phar/phar.c 				spprintf(error, 0, "unable to seek to start of file \"%s\" while creating new phar \"%s\"", entry-&gt;filename, phar-&gt;fname);</span>
+<span class='curline'><a href='../S/973.html#L3119'>phar</a>             3119 ext/phar/phar.c 				spprintf(error, 0, "unable to write contents of file \"%s\" to new phar \"%s\"", entry-&gt;filename, phar-&gt;fname);</span>
+<span class='curline'><a href='../S/973.html#L3134'>phar</a>             3134 ext/phar/phar.c 			if (entry-&gt;fp_refcount == 0 &amp;&amp; entry-&gt;fp != phar-&gt;fp &amp;&amp; entry-&gt;fp != phar-&gt;ufp) {</span>
+<span class='curline'><a href='../S/973.html#L3151'>phar</a>             3151 ext/phar/phar.c 		if (phar-&gt;signature) {</span>
+<span class='curline'><a href='../S/973.html#L3152'>phar</a>             3152 ext/phar/phar.c 			efree(phar-&gt;signature);</span>
+<span class='curline'><a href='../S/973.html#L3153'>phar</a>             3153 ext/phar/phar.c 			phar-&gt;signature = NULL;</span>
+<span class='curline'><a href='../S/973.html#L3156'>phar</a>             3156 ext/phar/phar.c 		switch(phar-&gt;sig_flags) {</span>
+<span class='curline'><a href='../S/973.html#L3165'>phar</a>             3165 ext/phar/phar.c 					spprintf(error, 0, "unable to write contents of file \"%s\" to new phar \"%s\" with requested hash type", entry-&gt;filename, phar-&gt;fname);</span>
+<span class='curline'><a href='../S/973.html#L3173'>phar</a>             3173 ext/phar/phar.c 				if (FAILURE == phar_create_signature(phar, newfile, &amp;digest, &amp;digest_len, error TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/973.html#L3191'>phar</a>             3191 ext/phar/phar.c 				if (phar-&gt;sig_flags == PHAR_SIG_OPENSSL) {</span>
+<span class='curline'><a href='../S/973.html#L3198'>phar</a>             3198 ext/phar/phar.c 		phar_set_32(sig_buf, phar-&gt;sig_flags);</span>
+<span class='curline'><a href='../S/973.html#L3206'>phar</a>             3206 ext/phar/phar.c 	if (phar-&gt;fp &amp;&amp; free_fp) {</span>
+<span class='curline'><a href='../S/973.html#L3207'>phar</a>             3207 ext/phar/phar.c 		php_stream_close(phar-&gt;fp);</span>
+<span class='curline'><a href='../S/973.html#L3210'>phar</a>             3210 ext/phar/phar.c 	if (phar-&gt;ufp) {</span>
+<span class='curline'><a href='../S/973.html#L3212'>phar</a>             3212 ext/phar/phar.c 			php_stream_close(phar-&gt;ufp);</span>
+<span class='curline'><a href='../S/973.html#L3214'>phar</a>             3214 ext/phar/phar.c 		phar-&gt;ufp = NULL;</span>
+<span class='curline'><a href='../S/973.html#L3221'>phar</a>             3221 ext/phar/phar.c 	phar-&gt;internal_file_start = halt_offset + manifest_len + 4;</span>
+<span class='curline'><a href='../S/973.html#L3222'>phar</a>             3222 ext/phar/phar.c 	phar-&gt;halt_offset = halt_offset;</span>
+<span class='curline'><a href='../S/973.html#L3223'>phar</a>             3223 ext/phar/phar.c 	phar-&gt;is_brandnew = 0;</span>
+<span class='curline'><a href='../S/973.html#L3227'>phar</a>             3227 ext/phar/phar.c 	if (phar-&gt;donotflush) {</span>
+<span class='curline'><a href='../S/973.html#L3229'>phar</a>             3229 ext/phar/phar.c 		phar-&gt;fp = newfile;</span>
+<span class='curline'><a href='../S/973.html#L3231'>phar</a>             3231 ext/phar/phar.c 		phar-&gt;fp = php_stream_open_wrapper(phar-&gt;fname, "w+b", IGNORE_URL|STREAM_MUST_SEEK|REPORT_ERRORS, NULL);</span>
+<span class='curline'><a href='../S/973.html#L3232'>phar</a>             3232 ext/phar/phar.c 		if (!phar-&gt;fp) {</span>
+<span class='curline'><a href='../S/973.html#L3233'>phar</a>             3233 ext/phar/phar.c 			phar-&gt;fp = newfile;</span>
+<span class='curline'><a href='../S/973.html#L3235'>phar</a>             3235 ext/phar/phar.c 				spprintf(error, 4096, "unable to open new phar \"%s\" for writing", phar-&gt;fname);</span>
+<span class='curline'><a href='../S/973.html#L3240'>phar</a>             3240 ext/phar/phar.c 		if (phar-&gt;flags &amp; PHAR_FILE_COMPRESSED_GZ) {</span>
+<span class='curline'><a href='../S/973.html#L3246'>phar</a>             3246 ext/phar/phar.c 			filter = php_stream_filter_create("zlib.deflate", &amp;filterparams, php_stream_is_persistent(phar-&gt;fp) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/973.html#L3251'>phar</a>             3251 ext/phar/phar.c 					spprintf(error, 4096, "unable to compress all contents of phar \"%s\" using zlib, PHP versions older than 5.2.6 have a buggy zlib", phar-&gt;fname);</span>
+<span class='curline'><a href='../S/973.html#L3256'>phar</a>             3256 ext/phar/phar.c 			php_stream_filter_append(&amp;phar-&gt;fp-&gt;writefilters, filter);</span>
+<span class='curline'><a href='../S/973.html#L3257'>phar</a>             3257 ext/phar/phar.c 			php_stream_copy_to_stream_ex(newfile, phar-&gt;fp, PHP_STREAM_COPY_ALL, NULL);</span>
+<span class='curline'><a href='../S/973.html#L3260'>phar</a>             3260 ext/phar/phar.c 			php_stream_close(phar-&gt;fp);</span>
+<span class='curline'><a href='../S/973.html#L3262'>phar</a>             3262 ext/phar/phar.c 			phar-&gt;fp = newfile;</span>
+<span class='curline'><a href='../S/973.html#L3263'>phar</a>             3263 ext/phar/phar.c 		} else if (phar-&gt;flags &amp; PHAR_FILE_COMPRESSED_BZ2) {</span>
+<span class='curline'><a href='../S/973.html#L3264'>phar</a>             3264 ext/phar/phar.c 			filter = php_stream_filter_create("bzip2.compress", NULL, php_stream_is_persistent(phar-&gt;fp) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/973.html#L3265'>phar</a>             3265 ext/phar/phar.c 			php_stream_filter_append(&amp;phar-&gt;fp-&gt;writefilters, filter);</span>
+<span class='curline'><a href='../S/973.html#L3266'>phar</a>             3266 ext/phar/phar.c 			php_stream_copy_to_stream_ex(newfile, phar-&gt;fp, PHP_STREAM_COPY_ALL, NULL);</span>
+<span class='curline'><a href='../S/973.html#L3269'>phar</a>             3269 ext/phar/phar.c 			php_stream_close(phar-&gt;fp);</span>
+<span class='curline'><a href='../S/973.html#L3271'>phar</a>             3271 ext/phar/phar.c 			phar-&gt;fp = newfile;</span>
+<span class='curline'><a href='../S/973.html#L3273'>phar</a>             3273 ext/phar/phar.c 			php_stream_copy_to_stream_ex(newfile, phar-&gt;fp, PHP_STREAM_COPY_ALL, NULL);</span>
+<span class='curline'><a href='../S/973.html#L3279'>phar</a>             3279 ext/phar/phar.c 	if (-1 == php_stream_seek(phar-&gt;fp, phar-&gt;halt_offset, SEEK_SET)) {</span>
+<span class='curline'><a href='../S/973.html#L3281'>phar</a>             3281 ext/phar/phar.c 			spprintf(error, 0, "unable to seek to __HALT_COMPILER(); in new phar \"%s\"", phar-&gt;fname);</span>
+<span class='curline'><a href='../S/973.html#L3291'>phar</a>             3291 ext/phar/phar.c ZEND_GET_MODULE(phar)</span>
+<span class='curline'><a href='../S/973.html#L3327'>phar</a>             3327 ext/phar/phar.c 	phar_archive_data *phar;</span>
+<span class='curline'><a href='../S/973.html#L3333'>phar</a>             3333 ext/phar/phar.c 		if (SUCCESS == phar_open_from_filename((char*)file_handle-&gt;filename, strlen(file_handle-&gt;filename), NULL, 0, 0, &amp;phar, NULL TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/973.html#L3334'>phar</a>             3334 ext/phar/phar.c 			if (phar-&gt;is_zip || phar-&gt;is_tar) {</span>
+<span class='curline'><a href='../S/973.html#L3351'>phar</a>             3351 ext/phar/phar.c 			} else if (phar-&gt;flags &amp; PHAR_FILE_COMPRESSION_MASK) {</span>
+<span class='curline'><a href='../S/973.html#L3355'>phar</a>             3355 ext/phar/phar.c 				file_handle-&gt;handle.stream.handle  = phar;</span>
+<span class='curline'><a href='../S/973.html#L3360'>phar</a>             3360 ext/phar/phar.c 				phar-&gt;is_persistent ?</span>
+<span class='curline'><a href='../S/973.html#L3361'>phar</a>             3361 ext/phar/phar.c 					php_stream_rewind(PHAR_GLOBALS-&gt;cached_fp[phar-&gt;phar_pos].fp) :</span>
+<span class='curline'><a href='../S/973.html#L3362'>phar</a>             3362 ext/phar/phar.c 					php_stream_rewind(phar-&gt;fp);</span>
+<span class='curline'><a href='../S/973.html#L3392'>phar</a>             3392 ext/phar/phar.c PHP_GINIT_FUNCTION(phar) /* {{{ */</span>
+<span class='curline'><a href='../S/973.html#L3452'>phar</a>             3452 ext/phar/phar.c PHP_GSHUTDOWN_FUNCTION(phar) /* {{{ */</span>
+<span class='curline'><a href='../S/973.html#L3458'>phar</a>             3458 ext/phar/phar.c PHP_MINIT_FUNCTION(phar) /* {{{ */</span>
+<span class='curline'><a href='../S/973.html#L3477'>phar</a>             3477 ext/phar/phar.c PHP_MSHUTDOWN_FUNCTION(phar) /* {{{ */</span>
+<span class='curline'><a href='../S/973.html#L3532'>phar</a>             3532 ext/phar/phar.c PHP_RSHUTDOWN_FUNCTION(phar) /* {{{ */</span>
+<span class='curline'><a href='../S/973.html#L3579'>phar</a>             3579 ext/phar/phar.c PHP_MINFO_FUNCTION(phar) /* {{{ */</span>
+<span class='curline'><a href='../S/973.html#L3647'>phar</a>             3647 ext/phar/phar.c 	PHP_MINIT(phar),</span>
+<span class='curline'><a href='../S/973.html#L3648'>phar</a>             3648 ext/phar/phar.c 	PHP_MSHUTDOWN(phar),</span>
+<span class='curline'><a href='../S/973.html#L3650'>phar</a>             3650 ext/phar/phar.c 	PHP_RSHUTDOWN(phar),</span>
+<span class='curline'><a href='../S/973.html#L3651'>phar</a>             3651 ext/phar/phar.c 	PHP_MINFO(phar),</span>
+<span class='curline'><a href='../S/973.html#L3653'>phar</a>             3653 ext/phar/phar.c 	PHP_MODULE_GLOBALS(phar),   /* globals descriptor */</span>
+<span class='curline'><a href='../S/973.html#L3654'>phar</a>             3654 ext/phar/phar.c 	PHP_GINIT(phar),            /* globals ctor */</span>
+<span class='curline'><a href='../S/973.html#L3655'>phar</a>             3655 ext/phar/phar.c 	PHP_GSHUTDOWN(phar),        /* globals dtor */</span>
+<span class='curline'><a href='../S/974.html#L138'>phar</a>              138 ext/phar/phar_internal.h ZEND_BEGIN_MODULE_GLOBALS(phar)</span>
+<span class='curline'><a href='../S/974.html#L195'>phar</a>              195 ext/phar/phar_internal.h ZEND_END_MODULE_GLOBALS(phar)</span>
+<span class='curline'><a href='../S/974.html#L197'>phar</a>              197 ext/phar/phar_internal.h ZEND_EXTERN_MODULE_GLOBALS(phar)</span>
+<span class='curline'><a href='../S/974.html#L263'>phar</a>              263 ext/phar/phar_internal.h 	phar_archive_data        *phar;</span>
+<span class='curline'><a href='../S/974.html#L351'>phar</a>              351 ext/phar/phar_internal.h 		return entry-&gt;phar-&gt;fp;</span>
+<span class='curline'><a href='../S/974.html#L353'>phar</a>              353 ext/phar/phar_internal.h 	return PHAR_GLOBALS-&gt;cached_fp[entry-&gt;phar-&gt;phar_pos].fp;</span>
+<span class='curline'><a href='../S/974.html#L359'>phar</a>              359 ext/phar/phar_internal.h 		return entry-&gt;phar-&gt;ufp;</span>
+<span class='curline'><a href='../S/974.html#L361'>phar</a>              361 ext/phar/phar_internal.h 	return PHAR_GLOBALS-&gt;cached_fp[entry-&gt;phar-&gt;phar_pos].ufp;</span>
+<span class='curline'><a href='../S/974.html#L366'>phar</a>              366 ext/phar/phar_internal.h 	if (!entry-&gt;phar-&gt;is_persistent) {</span>
+<span class='curline'><a href='../S/974.html#L367'>phar</a>              367 ext/phar/phar_internal.h 		entry-&gt;phar-&gt;fp =  fp;</span>
+<span class='curline'><a href='../S/974.html#L371'>phar</a>              371 ext/phar/phar_internal.h 	PHAR_GLOBALS-&gt;cached_fp[entry-&gt;phar-&gt;phar_pos].fp = fp;</span>
+<span class='curline'><a href='../S/974.html#L376'>phar</a>              376 ext/phar/phar_internal.h 	if (!entry-&gt;phar-&gt;is_persistent) {</span>
+<span class='curline'><a href='../S/974.html#L377'>phar</a>              377 ext/phar/phar_internal.h 		entry-&gt;phar-&gt;ufp =  fp;</span>
+<span class='curline'><a href='../S/974.html#L381'>phar</a>              381 ext/phar/phar_internal.h 	PHAR_GLOBALS-&gt;cached_fp[entry-&gt;phar-&gt;phar_pos].ufp = fp;</span>
+<span class='curline'><a href='../S/974.html#L384'>phar</a>              384 ext/phar/phar_internal.h static inline php_stream *phar_get_pharfp(phar_archive_data *phar TSRMLS_DC)</span>
+<span class='curline'><a href='../S/974.html#L386'>phar</a>              386 ext/phar/phar_internal.h 	if (!phar-&gt;is_persistent) {</span>
+<span class='curline'><a href='../S/974.html#L387'>phar</a>              387 ext/phar/phar_internal.h 		return phar-&gt;fp;</span>
+<span class='curline'><a href='../S/974.html#L389'>phar</a>              389 ext/phar/phar_internal.h 	return PHAR_GLOBALS-&gt;cached_fp[phar-&gt;phar_pos].fp;</span>
+<span class='curline'><a href='../S/974.html#L392'>phar</a>              392 ext/phar/phar_internal.h static inline php_stream *phar_get_pharufp(phar_archive_data *phar TSRMLS_DC)</span>
+<span class='curline'><a href='../S/974.html#L394'>phar</a>              394 ext/phar/phar_internal.h 	if (!phar-&gt;is_persistent) {</span>
+<span class='curline'><a href='../S/974.html#L395'>phar</a>              395 ext/phar/phar_internal.h 		return phar-&gt;ufp;</span>
+<span class='curline'><a href='../S/974.html#L397'>phar</a>              397 ext/phar/phar_internal.h 	return PHAR_GLOBALS-&gt;cached_fp[phar-&gt;phar_pos].ufp;</span>
+<span class='curline'><a href='../S/974.html#L400'>phar</a>              400 ext/phar/phar_internal.h static inline void phar_set_pharfp(phar_archive_data *phar, php_stream *fp TSRMLS_DC)</span>
+<span class='curline'><a href='../S/974.html#L402'>phar</a>              402 ext/phar/phar_internal.h 	if (!phar-&gt;is_persistent) {</span>
+<span class='curline'><a href='../S/974.html#L403'>phar</a>              403 ext/phar/phar_internal.h 		phar-&gt;fp =  fp;</span>
+<span class='curline'><a href='../S/974.html#L407'>phar</a>              407 ext/phar/phar_internal.h 	PHAR_GLOBALS-&gt;cached_fp[phar-&gt;phar_pos].fp = fp;</span>
+<span class='curline'><a href='../S/974.html#L410'>phar</a>              410 ext/phar/phar_internal.h static inline void phar_set_pharufp(phar_archive_data *phar, php_stream *fp TSRMLS_DC)</span>
+<span class='curline'><a href='../S/974.html#L412'>phar</a>              412 ext/phar/phar_internal.h 	if (!phar-&gt;is_persistent) {</span>
+<span class='curline'><a href='../S/974.html#L413'>phar</a>              413 ext/phar/phar_internal.h 		phar-&gt;ufp =  fp;</span>
+<span class='curline'><a href='../S/974.html#L417'>phar</a>              417 ext/phar/phar_internal.h 	PHAR_GLOBALS-&gt;cached_fp[phar-&gt;phar_pos].ufp = fp;</span>
+<span class='curline'><a href='../S/974.html#L429'>phar</a>              429 ext/phar/phar_internal.h 	data = &amp;(PHAR_GLOBALS-&gt;cached_fp[entry-&gt;phar-&gt;phar_pos].manifest[entry-&gt;manifest_pos]);</span>
+<span class='curline'><a href='../S/974.html#L439'>phar</a>              439 ext/phar/phar_internal.h 	return PHAR_GLOBALS-&gt;cached_fp[entry-&gt;phar-&gt;phar_pos].manifest[entry-&gt;manifest_pos].fp_type;</span>
+<span class='curline'><a href='../S/974.html#L447'>phar</a>              447 ext/phar/phar_internal.h 	if (PHAR_GLOBALS-&gt;cached_fp[entry-&gt;phar-&gt;phar_pos].manifest[entry-&gt;manifest_pos].fp_type == PHAR_FP) {</span>
+<span class='curline'><a href='../S/974.html#L448'>phar</a>              448 ext/phar/phar_internal.h 		if (!PHAR_GLOBALS-&gt;cached_fp[entry-&gt;phar-&gt;phar_pos].manifest[entry-&gt;manifest_pos].offset) {</span>
+<span class='curline'><a href='../S/974.html#L449'>phar</a>              449 ext/phar/phar_internal.h 			PHAR_GLOBALS-&gt;cached_fp[entry-&gt;phar-&gt;phar_pos].manifest[entry-&gt;manifest_pos].offset = entry-&gt;offset;</span>
+<span class='curline'><a href='../S/974.html#L452'>phar</a>              452 ext/phar/phar_internal.h 	return PHAR_GLOBALS-&gt;cached_fp[entry-&gt;phar-&gt;phar_pos].manifest[entry-&gt;manifest_pos].offset;</span>
+<span class='curline'><a href='../S/974.html#L468'>phar</a>              468 ext/phar/phar_internal.h 	phar_archive_data        *phar;</span>
+<span class='curline'><a href='../S/974.html#L541'>phar</a>              541 ext/phar/phar_internal.h 	tmp_len = MIN(MAXPATHLEN, entry-&gt;filename_len + entry-&gt;phar-&gt;fname_len);</span>
+<span class='curline'><a href='../S/974.html#L543'>phar</a>              543 ext/phar/phar_internal.h 	len1 = MIN(entry-&gt;phar-&gt;fname_len, tmp_len);</span>
+<span class='curline'><a href='../S/974.html#L544'>phar</a>              544 ext/phar/phar_internal.h 	memcpy(tmp, entry-&gt;phar-&gt;fname, len1);</span>
+<span class='curline'><a href='../S/974.html#L556'>phar</a>              556 ext/phar/phar_internal.h void phar_destroy_phar_data(phar_archive_data *phar TSRMLS_DC);</span>
+<span class='curline'><a href='../S/974.html#L558'>phar</a>              558 ext/phar/phar_internal.h int phar_open_entry_file(phar_archive_data *phar, phar_entry_info *entry, char **error TSRMLS_DC);</span>
+<span class='curline'><a href='../S/974.html#L564'>phar</a>              564 ext/phar/phar_internal.h int phar_free_alias(phar_archive_data *phar, char *alias, int alias_len TSRMLS_DC);</span>
+<span class='curline'><a href='../S/974.html#L568'>phar</a>              568 ext/phar/phar_internal.h int phar_create_signature(phar_archive_data *phar, php_stream *fp, char **signature, int *signature_length, char **error TSRMLS_DC);</span>
+<span class='curline'><a href='../S/974.html#L575'>phar</a>              575 ext/phar/phar_internal.h void phar_remove_virtual_dirs(phar_archive_data *phar, char *filename, int filename_len TSRMLS_DC);</span>
+<span class='curline'><a href='../S/974.html#L576'>phar</a>              576 ext/phar/phar_internal.h void phar_add_virtual_dirs(phar_archive_data *phar, char *filename, int filename_len TSRMLS_DC);</span>
+<span class='curline'><a href='../S/974.html#L577'>phar</a>              577 ext/phar/phar_internal.h int phar_mount_entry(phar_archive_data *phar, char *filename, int filename_len, char *path, int path_len TSRMLS_DC);</span>
+<span class='curline'><a href='../S/974.html#L580'>phar</a>              580 ext/phar/phar_internal.h phar_entry_info * phar_open_jit(phar_archive_data *phar, phar_entry_info *entry, char **error TSRMLS_DC);</span>
+<span class='curline'><a href='../S/974.html#L588'>phar</a>              588 ext/phar/phar_internal.h int phar_create_writeable_entry(phar_archive_data *phar, phar_entry_info *entry, char **error TSRMLS_DC);</span>
+<span class='curline'><a href='../S/974.html#L590'>phar</a>              590 ext/phar/phar_internal.h int phar_open_archive_fp(phar_archive_data *phar TSRMLS_DC);</span>
+<span class='curline'><a href='../S/974.html#L597'>phar</a>              597 ext/phar/phar_internal.h int phar_tar_flush(phar_archive_data *phar, char *user_stub, long len, int defaultstub, char **error TSRMLS_DC);</span>
+<span class='curline'><a href='../S/974.html#L612'>phar</a>              612 ext/phar/phar_internal.h int phar_archive_delref(phar_archive_data *phar TSRMLS_DC);</span>
+<span class='curline'><a href='../S/974.html#L615'>phar</a>              615 ext/phar/phar_internal.h phar_entry_info *phar_get_entry_info(phar_archive_data *phar, char *path, int path_len, char **error, int security TSRMLS_DC);</span>
+<span class='curline'><a href='../S/974.html#L616'>phar</a>              616 ext/phar/phar_internal.h phar_entry_info *phar_get_entry_info_dir(phar_archive_data *phar, char *path, int path_len, char dir, char **error, int security TSRMLS_DC);</span>
+<span class='curline'><a href='../S/975.html#L165'>phar</a>              165 ext/phar/phar_object.c static int phar_file_action(phar_archive_data *phar, phar_entry_info *info, char *mime_type, int code, char *entry, int entry_len, char *arch, char *basename, char *ru, int ru_len TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/975.html#L216'>phar</a>              216 ext/phar/phar_object.c 				if (!phar_open_jit(phar, info, &amp;error TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/975.html#L348'>phar</a>              348 ext/phar/phar_object.c static void phar_do_404(phar_archive_data *phar, char *fname, int fname_len, char *f404, int f404_len, char *entry, int entry_len TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/975.html#L353'>phar</a>              353 ext/phar/phar_object.c 	if (phar &amp;&amp; f404_len) {</span>
+<span class='curline'><a href='../S/975.html#L354'>phar</a>              354 ext/phar/phar_object.c 		info = phar_get_entry_info(phar, f404, f404_len, NULL, 1 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/975.html#L357'>phar</a>              357 ext/phar/phar_object.c 			phar_file_action(phar, info, "text/html", PHAR_MIME_PHP, f404, f404_len, fname, NULL, NULL, 0 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/975.html#L572'>phar</a>              572 ext/phar/phar_object.c 	phar_archive_data *phar = NULL;</span>
+<span class='curline'><a href='../S/975.html#L778'>phar</a>              778 ext/phar/phar_object.c 		if (FAILURE == phar_get_archive(&amp;phar, fname, fname_len, NULL, 0, NULL TSRMLS_CC) ||</span>
+<span class='curline'><a href='../S/975.html#L779'>phar</a>              779 ext/phar/phar_object.c 			(info = phar_get_entry_info(phar, entry, entry_len, NULL, 0 TSRMLS_CC)) == NULL) {</span>
+<span class='curline'><a href='../S/975.html#L780'>phar</a>              780 ext/phar/phar_object.c 			phar_do_404(phar, fname, fname_len, f404, f404_len, entry, entry_len TSRMLS_CC);</span>
+<span class='curline'><a href='../S/975.html#L824'>phar</a>              824 ext/phar/phar_object.c 	if (FAILURE == phar_get_archive(&amp;phar, fname, fname_len, NULL, 0, NULL TSRMLS_CC) ||</span>
+<span class='curline'><a href='../S/975.html#L825'>phar</a>              825 ext/phar/phar_object.c 		(info = phar_get_entry_info(phar, entry, entry_len, NULL, 0 TSRMLS_CC)) == NULL) {</span>
+<span class='curline'><a href='../S/975.html#L826'>phar</a>              826 ext/phar/phar_object.c 		phar_do_404(phar, fname, fname_len, f404, f404_len, entry, entry_len TSRMLS_CC);</span>
+<span class='curline'><a href='../S/975.html#L872'>phar</a>              872 ext/phar/phar_object.c 	ret = phar_file_action(phar, info, mime_type, code, entry, entry_len, fname, pt, ru, ru_len TSRMLS_CC);</span>
+<span class='curline'><a href='../S/975.html#L1101'>phar</a>             1101 ext/phar/phar_object.c 	phar_archive_data *phar = (phar_archive_data *) object-&gt;oth;</span>
+<span class='curline'><a href='../S/975.html#L1103'>phar</a>             1103 ext/phar/phar_object.c 	if (!phar-&gt;is_persistent) {</span>
+<span class='curline'><a href='../S/975.html#L1104'>phar</a>             1104 ext/phar/phar_object.c 		phar_archive_delref(phar TSRMLS_CC);</span>
+<span class='curline'><a href='../S/975.html#L1327'>phar</a>             1327 ext/phar/phar_object.c 	phar_archive_data *phar;</span>
+<span class='curline'><a href='../S/975.html#L1338'>phar</a>             1338 ext/phar/phar_object.c 	if (FAILURE == phar_open_from_filename(fname, fname_len, NULL, 0, REPORT_ERRORS, &amp;phar, &amp;error TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/975.html#L1362'>phar</a>             1362 ext/phar/phar_object.c 	if (phar-&gt;is_persistent) {</span>
+<span class='curline'><a href='../S/975.html#L1367'>phar</a>             1367 ext/phar/phar_object.c 	if (phar-&gt;refcount) {</span>
+<span class='curline'><a href='../S/975.html#L1372'>phar</a>             1372 ext/phar/phar_object.c 	fname = estrndup(phar-&gt;fname, phar-&gt;fname_len);</span>
+<span class='curline'><a href='../S/975.html#L1378'>phar</a>             1378 ext/phar/phar_object.c 	phar_archive_delref(phar TSRMLS_CC);</span>
+<span class='curline'><a href='../S/975.html#L1985'>phar</a>             1985 ext/phar/phar_object.c 				"Cannot convert phar archive \"%s\", unable to open entry \"%s\" contents: %s", entry-&gt;phar-&gt;fname, entry-&gt;filename, error);</span>
+<span class='curline'><a href='../S/975.html#L1989'>phar</a>             1989 ext/phar/phar_object.c 				"Cannot convert phar archive \"%s\", unable to open entry \"%s\" contents", entry-&gt;phar-&gt;fname, entry-&gt;filename);</span>
+<span class='curline'><a href='../S/975.html#L2005'>phar</a>             2005 ext/phar/phar_object.c 			"Cannot convert phar archive \"%s\", unable to copy entry \"%s\" contents", entry-&gt;phar-&gt;fname, entry-&gt;filename);</span>
+<span class='curline'><a href='../S/975.html#L2025'>phar</a>             2025 ext/phar/phar_object.c 	phar_archive_data *phar = *sphar;</span>
+<span class='curline'><a href='../S/975.html#L2039'>phar</a>             2039 ext/phar/phar_object.c 		if (phar-&gt;is_zip) {</span>
+<span class='curline'><a href='../S/975.html#L2041'>phar</a>             2041 ext/phar/phar_object.c 			if (phar-&gt;is_data) {</span>
+<span class='curline'><a href='../S/975.html#L2047'>phar</a>             2047 ext/phar/phar_object.c 		} else if (phar-&gt;is_tar) {</span>
+<span class='curline'><a href='../S/975.html#L2049'>phar</a>             2049 ext/phar/phar_object.c 			switch (phar-&gt;flags) {</span>
+<span class='curline'><a href='../S/975.html#L2051'>phar</a>             2051 ext/phar/phar_object.c 					if (phar-&gt;is_data) {</span>
+<span class='curline'><a href='../S/975.html#L2058'>phar</a>             2058 ext/phar/phar_object.c 					if (phar-&gt;is_data) {</span>
+<span class='curline'><a href='../S/975.html#L2065'>phar</a>             2065 ext/phar/phar_object.c 					if (phar-&gt;is_data) {</span>
+<span class='curline'><a href='../S/975.html#L2073'>phar</a>             2073 ext/phar/phar_object.c 			switch (phar-&gt;flags) {</span>
+<span class='curline'><a href='../S/975.html#L2086'>phar</a>             2086 ext/phar/phar_object.c 		if (phar-&gt;is_data) {</span>
+<span class='curline'><a href='../S/975.html#L2087'>phar</a>             2087 ext/phar/phar_object.c 			zend_throw_exception_ex(spl_ce_BadMethodCallException, 0 TSRMLS_CC, "data phar converted from \"%s\" has invalid extension %s", phar-&gt;fname, ext);</span>
+<span class='curline'><a href='../S/975.html#L2089'>phar</a>             2089 ext/phar/phar_object.c 			zend_throw_exception_ex(spl_ce_BadMethodCallException, 0 TSRMLS_CC, "phar converted from \"%s\" has invalid extension %s", phar-&gt;fname, ext);</span>
+<span class='curline'><a href='../S/975.html#L2098'>phar</a>             2098 ext/phar/phar_object.c 	oldpath = estrndup(phar-&gt;fname, phar-&gt;fname_len);</span>
+<span class='curline'><a href='../S/975.html#L2099'>phar</a>             2099 ext/phar/phar_object.c 	oldname = zend_memrchr(phar-&gt;fname, '/', phar-&gt;fname_len);</span>
+<span class='curline'><a href='../S/975.html#L2110'>phar</a>             2110 ext/phar/phar_object.c 	phar-&gt;fname_len = spprintf(&amp;newpath, 0, "%s%s", basepath, newname);</span>
+<span class='curline'><a href='../S/975.html#L2111'>phar</a>             2111 ext/phar/phar_object.c 	phar-&gt;fname = newpath;</span>
+<span class='curline'><a href='../S/975.html#L2112'>phar</a>             2112 ext/phar/phar_object.c 	phar-&gt;ext = newpath + phar-&gt;fname_len - strlen(ext) - 1;</span>
+<span class='curline'><a href='../S/975.html#L2116'>phar</a>             2116 ext/phar/phar_object.c 	if (PHAR_G(manifest_cached) &amp;&amp; SUCCESS == zend_hash_find(&amp;cached_phars, newpath, phar-&gt;fname_len, (void **) &amp;pphar)) {</span>
+<span class='curline'><a href='../S/975.html#L2118'>phar</a>             2118 ext/phar/phar_object.c 		zend_throw_exception_ex(spl_ce_BadMethodCallException, 0 TSRMLS_CC, "Unable to add newly converted phar \"%s\" to the list of phars, new phar name is in phar.cache_list", phar-&gt;fname);</span>
+<span class='curline'><a href='../S/975.html#L2122'>phar</a>             2122 ext/phar/phar_object.c 	if (SUCCESS == zend_hash_find(&amp;(PHAR_GLOBALS-&gt;phar_fname_map), newpath, phar-&gt;fname_len, (void **) &amp;pphar)) {</span>
+<span class='curline'><a href='../S/975.html#L2123'>phar</a>             2123 ext/phar/phar_object.c 		if ((*pphar)-&gt;fname_len == phar-&gt;fname_len &amp;&amp; !memcmp((*pphar)-&gt;fname, phar-&gt;fname, phar-&gt;fname_len)) {</span>
+<span class='curline'><a href='../S/975.html#L2124'>phar</a>             2124 ext/phar/phar_object.c 			if (!zend_hash_num_elements(&amp;phar-&gt;manifest)) {</span>
+<span class='curline'><a href='../S/975.html#L2125'>phar</a>             2125 ext/phar/phar_object.c 				(*pphar)-&gt;is_tar = phar-&gt;is_tar;</span>
+<span class='curline'><a href='../S/975.html#L2126'>phar</a>             2126 ext/phar/phar_object.c 				(*pphar)-&gt;is_zip = phar-&gt;is_zip;</span>
+<span class='curline'><a href='../S/975.html#L2127'>phar</a>             2127 ext/phar/phar_object.c 				(*pphar)-&gt;is_data = phar-&gt;is_data;</span>
+<span class='curline'><a href='../S/975.html#L2128'>phar</a>             2128 ext/phar/phar_object.c 				(*pphar)-&gt;flags = phar-&gt;flags;</span>
+<span class='curline'><a href='../S/975.html#L2129'>phar</a>             2129 ext/phar/phar_object.c 				(*pphar)-&gt;fp = phar-&gt;fp;</span>
+<span class='curline'><a href='../S/975.html#L2130'>phar</a>             2130 ext/phar/phar_object.c 				phar-&gt;fp = NULL;</span>
+<span class='curline'><a href='../S/975.html#L2131'>phar</a>             2131 ext/phar/phar_object.c 				phar_destroy_phar_data(phar TSRMLS_CC);</span>
+<span class='curline'><a href='../S/975.html#L2133'>phar</a>             2133 ext/phar/phar_object.c 				phar = *pphar;</span>
+<span class='curline'><a href='../S/975.html#L2135'>phar</a>             2135 ext/phar/phar_object.c 				phar-&gt;refcount++;</span>
+<span class='curline'><a href='../S/975.html#L2142'>phar</a>             2142 ext/phar/phar_object.c 		zend_throw_exception_ex(spl_ce_BadMethodCallException, 0 TSRMLS_CC, "Unable to add newly converted phar \"%s\" to the list of phars, a phar with that name already exists", phar-&gt;fname);</span>
+<span class='curline'><a href='../S/975.html#L2151'>phar</a>             2151 ext/phar/phar_object.c 	if (!phar-&gt;is_data) {</span>
+<span class='curline'><a href='../S/975.html#L2152'>phar</a>             2152 ext/phar/phar_object.c 		if (SUCCESS != phar_detect_phar_fname_ext(newpath, phar-&gt;fname_len, (const char **) &amp;(phar-&gt;ext), &amp;(phar-&gt;ext_len), 1, 1, 1 TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/975.html#L2154'>phar</a>             2154 ext/phar/phar_object.c 			zend_throw_exception_ex(spl_ce_BadMethodCallException, 0 TSRMLS_CC, "phar \"%s\" has invalid extension %s", phar-&gt;fname, ext);</span>
+<span class='curline'><a href='../S/975.html#L2158'>phar</a>             2158 ext/phar/phar_object.c 		if (phar-&gt;alias) {</span>
+<span class='curline'><a href='../S/975.html#L2159'>phar</a>             2159 ext/phar/phar_object.c 			if (phar-&gt;is_temporary_alias) {</span>
+<span class='curline'><a href='../S/975.html#L2160'>phar</a>             2160 ext/phar/phar_object.c 				phar-&gt;alias = NULL;</span>
+<span class='curline'><a href='../S/975.html#L2161'>phar</a>             2161 ext/phar/phar_object.c 				phar-&gt;alias_len = 0;</span>
+<span class='curline'><a href='../S/975.html#L2163'>phar</a>             2163 ext/phar/phar_object.c 				phar-&gt;alias = estrndup(newpath, strlen(newpath));</span>
+<span class='curline'><a href='../S/975.html#L2164'>phar</a>             2164 ext/phar/phar_object.c 				phar-&gt;alias_len = strlen(newpath);</span>
+<span class='curline'><a href='../S/975.html#L2165'>phar</a>             2165 ext/phar/phar_object.c 				phar-&gt;is_temporary_alias = 1;</span>
+<span class='curline'><a href='../S/975.html#L2166'>phar</a>             2166 ext/phar/phar_object.c 				zend_hash_update(&amp;(PHAR_GLOBALS-&gt;phar_alias_map), newpath, phar-&gt;fname_len, (void*)&amp;phar, sizeof(phar_archive_data*), NULL);</span>
+<span class='curline'><a href='../S/975.html#L2172'>phar</a>             2172 ext/phar/phar_object.c 		if (SUCCESS != phar_detect_phar_fname_ext(newpath, phar-&gt;fname_len, (const char **) &amp;(phar-&gt;ext), &amp;(phar-&gt;ext_len), 0, 1, 1 TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/975.html#L2174'>phar</a>             2174 ext/phar/phar_object.c 			zend_throw_exception_ex(spl_ce_BadMethodCallException, 0 TSRMLS_CC, "data phar \"%s\" has invalid extension %s", phar-&gt;fname, ext);</span>
+<span class='curline'><a href='../S/975.html#L2178'>phar</a>             2178 ext/phar/phar_object.c 		phar-&gt;alias = NULL;</span>
+<span class='curline'><a href='../S/975.html#L2179'>phar</a>             2179 ext/phar/phar_object.c 		phar-&gt;alias_len = 0;</span>
+<span class='curline'><a href='../S/975.html#L2182'>phar</a>             2182 ext/phar/phar_object.c 	if ((!pphar || phar == *pphar) &amp;&amp; SUCCESS != zend_hash_update(&amp;(PHAR_GLOBALS-&gt;phar_fname_map), newpath, phar-&gt;fname_len, (void*)&amp;phar, sizeof(phar_archive_data*), NULL)) {</span>
+<span class='curline'><a href='../S/975.html#L2184'>phar</a>             2184 ext/phar/phar_object.c 		zend_throw_exception_ex(spl_ce_BadMethodCallException, 0 TSRMLS_CC, "Unable to add newly converted phar \"%s\" to the list of phars", phar-&gt;fname);</span>
+<span class='curline'><a href='../S/975.html#L2188'>phar</a>             2188 ext/phar/phar_object.c 	phar_flush(phar, 0, 0, 1, &amp;error TSRMLS_CC);</span>
+<span class='curline'><a href='../S/975.html#L2199'>phar</a>             2199 ext/phar/phar_object.c 	if (phar-&gt;is_data) {</span>
+<span class='curline'><a href='../S/975.html#L2209'>phar</a>             2209 ext/phar/phar_object.c 		zend_throw_exception_ex(spl_ce_BadMethodCallException, 0 TSRMLS_CC, "Unable to instantiate phar object when converting archive \"%s\"", phar-&gt;fname);</span>
+<span class='curline'><a href='../S/975.html#L2214'>phar</a>             2214 ext/phar/phar_object.c 	ZVAL_STRINGL(&amp;arg1, phar-&gt;fname, phar-&gt;fname_len, 0);</span>
+<span class='curline'><a href='../S/975.html#L2223'>phar</a>             2223 ext/phar/phar_object.c 	phar_archive_data *phar;</span>
+<span class='curline'><a href='../S/975.html#L2231'>phar</a>             2231 ext/phar/phar_object.c 	phar = (phar_archive_data *) ecalloc(1, sizeof(phar_archive_data));</span>
+<span class='curline'><a href='../S/975.html#L2233'>phar</a>             2233 ext/phar/phar_object.c 	phar-&gt;flags = flags;</span>
+<span class='curline'><a href='../S/975.html#L2234'>phar</a>             2234 ext/phar/phar_object.c 	phar-&gt;is_data = source-&gt;is_data;</span>
+<span class='curline'><a href='../S/975.html#L2238'>phar</a>             2238 ext/phar/phar_object.c 			phar-&gt;is_tar = 1;</span>
+<span class='curline'><a href='../S/975.html#L2241'>phar</a>             2241 ext/phar/phar_object.c 			phar-&gt;is_zip = 1;</span>
+<span class='curline'><a href='../S/975.html#L2244'>phar</a>             2244 ext/phar/phar_object.c 			phar-&gt;is_data = 0;</span>
+<span class='curline'><a href='../S/975.html#L2248'>phar</a>             2248 ext/phar/phar_object.c 	zend_hash_init(&amp;(phar-&gt;manifest), sizeof(phar_entry_info),</span>
+<span class='curline'><a href='../S/975.html#L2250'>phar</a>             2250 ext/phar/phar_object.c 	zend_hash_init(&amp;phar-&gt;mounted_dirs, sizeof(char *),</span>
+<span class='curline'><a href='../S/975.html#L2252'>phar</a>             2252 ext/phar/phar_object.c 	zend_hash_init(&amp;phar-&gt;virtual_dirs, sizeof(char *),</span>
+<span class='curline'><a href='../S/975.html#L2255'>phar</a>             2255 ext/phar/phar_object.c 	phar-&gt;fp = php_stream_fopen_tmpfile();</span>
+<span class='curline'><a href='../S/975.html#L2256'>phar</a>             2256 ext/phar/phar_object.c 	if (phar-&gt;fp == NULL) {</span>
+<span class='curline'><a href='../S/975.html#L2260'>phar</a>             2260 ext/phar/phar_object.c 	phar-&gt;fname = source-&gt;fname;</span>
+<span class='curline'><a href='../S/975.html#L2261'>phar</a>             2261 ext/phar/phar_object.c 	phar-&gt;fname_len = source-&gt;fname_len;</span>
+<span class='curline'><a href='../S/975.html#L2262'>phar</a>             2262 ext/phar/phar_object.c 	phar-&gt;is_temporary_alias = source-&gt;is_temporary_alias;</span>
+<span class='curline'><a href='../S/975.html#L2263'>phar</a>             2263 ext/phar/phar_object.c 	phar-&gt;alias = source-&gt;alias;</span>
+<span class='curline'><a href='../S/975.html#L2269'>phar</a>             2269 ext/phar/phar_object.c 		ALLOC_ZVAL(phar-&gt;metadata);</span>
+<span class='curline'><a href='../S/975.html#L2270'>phar</a>             2270 ext/phar/phar_object.c 		*phar-&gt;metadata = *t;</span>
+<span class='curline'><a href='../S/975.html#L2271'>phar</a>             2271 ext/phar/phar_object.c 		zval_copy_ctor(phar-&gt;metadata);</span>
+<span class='curline'><a href='../S/975.html#L2272'>phar</a>             2272 ext/phar/phar_object.c 		Z_SET_REFCOUNT_P(phar-&gt;metadata, 1);</span>
+<span class='curline'><a href='../S/975.html#L2274'>phar</a>             2274 ext/phar/phar_object.c 		phar-&gt;metadata_len = 0;</span>
+<span class='curline'><a href='../S/975.html#L2281'>phar</a>             2281 ext/phar/phar_object.c 			zend_hash_destroy(&amp;(phar-&gt;manifest));</span>
+<span class='curline'><a href='../S/975.html#L2282'>phar</a>             2282 ext/phar/phar_object.c 			php_stream_close(phar-&gt;fp);</span>
+<span class='curline'><a href='../S/975.html#L2283'>phar</a>             2283 ext/phar/phar_object.c 			efree(phar);</span>
+<span class='curline'><a href='../S/975.html#L2303'>phar</a>             2303 ext/phar/phar_object.c 		if (FAILURE == phar_copy_file_contents(&amp;newentry, phar-&gt;fp TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/975.html#L2304'>phar</a>             2304 ext/phar/phar_object.c 			zend_hash_destroy(&amp;(phar-&gt;manifest));</span>
+<span class='curline'><a href='../S/975.html#L2305'>phar</a>             2305 ext/phar/phar_object.c 			php_stream_close(phar-&gt;fp);</span>
+<span class='curline'><a href='../S/975.html#L2306'>phar</a>             2306 ext/phar/phar_object.c 			efree(phar);</span>
+<span class='curline'><a href='../S/975.html#L2326'>phar</a>             2326 ext/phar/phar_object.c 		newentry.is_zip = phar-&gt;is_zip;</span>
+<span class='curline'><a href='../S/975.html#L2327'>phar</a>             2327 ext/phar/phar_object.c 		newentry.is_tar = phar-&gt;is_tar;</span>
+<span class='curline'><a href='../S/975.html#L2334'>phar</a>             2334 ext/phar/phar_object.c 		newentry.phar = phar;</span>
+<span class='curline'><a href='../S/975.html#L2337'>phar</a>             2337 ext/phar/phar_object.c 		zend_hash_add(&amp;(phar-&gt;manifest), newentry.filename, newentry.filename_len, (void*)&amp;newentry, sizeof(phar_entry_info), NULL);</span>
+<span class='curline'><a href='../S/975.html#L2338'>phar</a>             2338 ext/phar/phar_object.c 		phar_add_virtual_dirs(phar, newentry.filename, newentry.filename_len TSRMLS_CC);</span>
+<span class='curline'><a href='../S/975.html#L2341'>phar</a>             2341 ext/phar/phar_object.c 	if ((ret = phar_rename_archive(&amp;phar, ext, 0 TSRMLS_CC))) {</span>
+<span class='curline'><a href='../S/975.html#L2344'>phar</a>             2344 ext/phar/phar_object.c 		if(phar != NULL) {</span>
+<span class='curline'><a href='../S/975.html#L2345'>phar</a>             2345 ext/phar/phar_object.c 			zend_hash_destroy(&amp;(phar-&gt;manifest));</span>
+<span class='curline'><a href='../S/975.html#L2346'>phar</a>             2346 ext/phar/phar_object.c 			zend_hash_destroy(&amp;(phar-&gt;mounted_dirs));</span>
+<span class='curline'><a href='../S/975.html#L2347'>phar</a>             2347 ext/phar/phar_object.c 			zend_hash_destroy(&amp;(phar-&gt;virtual_dirs));</span>
+<span class='curline'><a href='../S/975.html#L2348'>phar</a>             2348 ext/phar/phar_object.c 			if (phar-&gt;fp) {</span>
+<span class='curline'><a href='../S/975.html#L2349'>phar</a>             2349 ext/phar/phar_object.c 				php_stream_close(phar-&gt;fp);</span>
+<span class='curline'><a href='../S/975.html#L2351'>phar</a>             2351 ext/phar/phar_object.c 			efree(phar-&gt;fname);</span>
+<span class='curline'><a href='../S/975.html#L2352'>phar</a>             2352 ext/phar/phar_object.c 			efree(phar);</span>
+<span class='curline'><a href='../S/975.html#L3527'>phar</a>             3527 ext/phar/phar_object.c 	zend_hash_add(&amp;oldentry-&gt;phar-&gt;manifest, newfile, newfile_len, (void*)&amp;newentry, sizeof(phar_entry_info), NULL);</span>
+<span class='curline'><a href='../S/975.html#L3671'>phar</a>             3671 ext/phar/phar_object.c 		if (pphar[0] != data-&gt;phar) {</span>
+<span class='curline'><a href='../S/975.html#L3672'>phar</a>             3672 ext/phar/phar_object.c 			*pphar = data-&gt;phar;</span>
+<span class='curline'><a href='../S/975.html#L3707'>phar</a>             3707 ext/phar/phar_object.c 		if (data-&gt;phar != *pphar) {</span>
+<span class='curline'><a href='../S/975.html#L3708'>phar</a>             3708 ext/phar/phar_object.c 			*pphar = data-&gt;phar;</span>
+<span class='curline'><a href='../S/975.html#L4416'>phar</a>             4416 ext/phar/phar_object.c 		phar_archive_data *phar;</span>
+<span class='curline'><a href='../S/975.html#L4418'>phar</a>             4418 ext/phar/phar_object.c 		phar = phar_obj-&gt;arc.archive;</span>
+<span class='curline'><a href='../S/975.html#L4420'>phar</a>             4420 ext/phar/phar_object.c 		if (!zend_hash_num_elements(&amp;(phar-&gt;manifest))) {</span>
+<span class='curline'><a href='../S/975.html#L4424'>phar</a>             4424 ext/phar/phar_object.c 		for (zend_hash_internal_pointer_reset(&amp;phar-&gt;manifest);</span>
+<span class='curline'><a href='../S/975.html#L4425'>phar</a>             4425 ext/phar/phar_object.c 		zend_hash_has_more_elements(&amp;phar-&gt;manifest) == SUCCESS;</span>
+<span class='curline'><a href='../S/975.html#L4426'>phar</a>             4426 ext/phar/phar_object.c 		zend_hash_move_forward(&amp;phar-&gt;manifest)) {</span>
+<span class='curline'><a href='../S/975.html#L4428'>phar</a>             4428 ext/phar/phar_object.c 			if (zend_hash_get_current_data(&amp;phar-&gt;manifest, (void **)&amp;entry) == FAILURE) {</span>
+<span class='curline'><a href='../S/975.html#L4434'>phar</a>             4434 ext/phar/phar_object.c 					"Extraction from phar \"%s\" failed: %s", phar-&gt;fname, error);</span>
+<span class='curline'><a href='../S/975.html#L4649'>phar</a>             4649 ext/phar/phar_object.c 	if (PHAR_G(readonly) &amp;&amp; !entry_obj-&gt;ent.entry-&gt;phar-&gt;is_data) {</span>
+<span class='curline'><a href='../S/975.html#L4650'>phar</a>             4650 ext/phar/phar_object.c 		zend_throw_exception_ex(phar_ce_PharException, 0 TSRMLS_CC, "Cannot modify permissions for file \"%s\" in phar \"%s\", write operations are prohibited", entry_obj-&gt;ent.entry-&gt;filename, entry_obj-&gt;ent.entry-&gt;phar-&gt;fname);</span>
+<span class='curline'><a href='../S/975.html#L4659'>phar</a>             4659 ext/phar/phar_object.c 		phar_archive_data *phar = entry_obj-&gt;ent.entry-&gt;phar;</span>
+<span class='curline'><a href='../S/975.html#L4661'>phar</a>             4661 ext/phar/phar_object.c 		if (FAILURE == phar_copy_on_write(&amp;phar TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/975.html#L4662'>phar</a>             4662 ext/phar/phar_object.c 			zend_throw_exception_ex(phar_ce_PharException, 0 TSRMLS_CC, "phar \"%s\" is persistent, unable to copy on write", phar-&gt;fname);</span>
+<span class='curline'><a href='../S/975.html#L4666'>phar</a>             4666 ext/phar/phar_object.c 		zend_hash_find(&amp;phar-&gt;manifest, entry_obj-&gt;ent.entry-&gt;filename, entry_obj-&gt;ent.entry-&gt;filename_len, (void **)&amp;entry_obj-&gt;ent.entry);</span>
+<span class='curline'><a href='../S/975.html#L4673'>phar</a>             4673 ext/phar/phar_object.c 	entry_obj-&gt;ent.entry-&gt;phar-&gt;is_modified = 1;</span>
+<span class='curline'><a href='../S/975.html#L4688'>phar</a>             4688 ext/phar/phar_object.c 	phar_flush(entry_obj-&gt;ent.entry-&gt;phar, 0, 0, 0, &amp;error TSRMLS_CC);</span>
+<span class='curline'><a href='../S/975.html#L4747'>phar</a>             4747 ext/phar/phar_object.c 	if (PHAR_G(readonly) &amp;&amp; !entry_obj-&gt;ent.entry-&gt;phar-&gt;is_data) {</span>
+<span class='curline'><a href='../S/975.html#L4763'>phar</a>             4763 ext/phar/phar_object.c 		phar_archive_data *phar = entry_obj-&gt;ent.entry-&gt;phar;</span>
+<span class='curline'><a href='../S/975.html#L4765'>phar</a>             4765 ext/phar/phar_object.c 		if (FAILURE == phar_copy_on_write(&amp;phar TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/975.html#L4766'>phar</a>             4766 ext/phar/phar_object.c 			zend_throw_exception_ex(phar_ce_PharException, 0 TSRMLS_CC, "phar \"%s\" is persistent, unable to copy on write", phar-&gt;fname);</span>
+<span class='curline'><a href='../S/975.html#L4770'>phar</a>             4770 ext/phar/phar_object.c 		zend_hash_find(&amp;phar-&gt;manifest, entry_obj-&gt;ent.entry-&gt;filename, entry_obj-&gt;ent.entry-&gt;filename_len, (void **)&amp;entry_obj-&gt;ent.entry);</span>
+<span class='curline'><a href='../S/975.html#L4781'>phar</a>             4781 ext/phar/phar_object.c 	entry_obj-&gt;ent.entry-&gt;phar-&gt;is_modified = 1;</span>
+<span class='curline'><a href='../S/975.html#L4782'>phar</a>             4782 ext/phar/phar_object.c 	phar_flush(entry_obj-&gt;ent.entry-&gt;phar, 0, 0, 0, &amp;error TSRMLS_CC);</span>
+<span class='curline'><a href='../S/975.html#L4804'>phar</a>             4804 ext/phar/phar_object.c 	if (PHAR_G(readonly) &amp;&amp; !entry_obj-&gt;ent.entry-&gt;phar-&gt;is_data) {</span>
+<span class='curline'><a href='../S/975.html#L4817'>phar</a>             4817 ext/phar/phar_object.c 			phar_archive_data *phar = entry_obj-&gt;ent.entry-&gt;phar;</span>
+<span class='curline'><a href='../S/975.html#L4819'>phar</a>             4819 ext/phar/phar_object.c 			if (FAILURE == phar_copy_on_write(&amp;phar TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/975.html#L4820'>phar</a>             4820 ext/phar/phar_object.c 				zend_throw_exception_ex(phar_ce_PharException, 0 TSRMLS_CC, "phar \"%s\" is persistent, unable to copy on write", phar-&gt;fname);</span>
+<span class='curline'><a href='../S/975.html#L4824'>phar</a>             4824 ext/phar/phar_object.c 			zend_hash_find(&amp;phar-&gt;manifest, entry_obj-&gt;ent.entry-&gt;filename, entry_obj-&gt;ent.entry-&gt;filename_len, (void **)&amp;entry_obj-&gt;ent.entry);</span>
+<span class='curline'><a href='../S/975.html#L4829'>phar</a>             4829 ext/phar/phar_object.c 		entry_obj-&gt;ent.entry-&gt;phar-&gt;is_modified = 1;</span>
+<span class='curline'><a href='../S/975.html#L4831'>phar</a>             4831 ext/phar/phar_object.c 		phar_flush(entry_obj-&gt;ent.entry-&gt;phar, 0, 0, 0, &amp;error TSRMLS_CC);</span>
+<span class='curline'><a href='../S/975.html#L4864'>phar</a>             4864 ext/phar/phar_object.c 			"Phar error: Cannot retrieve contents, \"%s\" in phar \"%s\" is a directory", entry_obj-&gt;ent.entry-&gt;filename, entry_obj-&gt;ent.entry-&gt;phar-&gt;fname);</span>
+<span class='curline'><a href='../S/975.html#L4876'>phar</a>             4876 ext/phar/phar_object.c 			"Phar error: Cannot retrieve contents, \"%s\" in phar \"%s\": %s", entry_obj-&gt;ent.entry-&gt;filename, entry_obj-&gt;ent.entry-&gt;phar-&gt;fname, error);</span>
+<span class='curline'><a href='../S/975.html#L4883'>phar</a>             4883 ext/phar/phar_object.c 			"Phar error: Cannot retrieve contents of \"%s\" in phar \"%s\"", entry_obj-&gt;ent.entry-&gt;filename, entry_obj-&gt;ent.entry-&gt;phar-&gt;fname);</span>
+<span class='curline'><a href='../S/975.html#L4923'>phar</a>             4923 ext/phar/phar_object.c 	if (PHAR_G(readonly) &amp;&amp; !entry_obj-&gt;ent.entry-&gt;phar-&gt;is_data) {</span>
+<span class='curline'><a href='../S/975.html#L4936'>phar</a>             4936 ext/phar/phar_object.c 		phar_archive_data *phar = entry_obj-&gt;ent.entry-&gt;phar;</span>
+<span class='curline'><a href='../S/975.html#L4938'>phar</a>             4938 ext/phar/phar_object.c 		if (FAILURE == phar_copy_on_write(&amp;phar TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/975.html#L4939'>phar</a>             4939 ext/phar/phar_object.c 			zend_throw_exception_ex(phar_ce_PharException, 0 TSRMLS_CC, "phar \"%s\" is persistent, unable to copy on write", phar-&gt;fname);</span>
+<span class='curline'><a href='../S/975.html#L4943'>phar</a>             4943 ext/phar/phar_object.c 		zend_hash_find(&amp;phar-&gt;manifest, entry_obj-&gt;ent.entry-&gt;filename, entry_obj-&gt;ent.entry-&gt;filename_len, (void **)&amp;entry_obj-&gt;ent.entry);</span>
+<span class='curline'><a href='../S/975.html#L4961'>phar</a>             4961 ext/phar/phar_object.c 						"Phar error: Cannot decompress bzip2-compressed file \"%s\" in phar \"%s\" in order to compress with gzip: %s", entry_obj-&gt;ent.entry-&gt;filename, entry_obj-&gt;ent.entry-&gt;phar-&gt;fname, error);</span>
+<span class='curline'><a href='../S/975.html#L4992'>phar</a>             4992 ext/phar/phar_object.c 						"Phar error: Cannot decompress gzip-compressed file \"%s\" in phar \"%s\" in order to compress with bzip2: %s", entry_obj-&gt;ent.entry-&gt;filename, entry_obj-&gt;ent.entry-&gt;phar-&gt;fname, error);</span>
+<span class='curline'><a href='../S/975.html#L5012'>phar</a>             5012 ext/phar/phar_object.c 	entry_obj-&gt;ent.entry-&gt;phar-&gt;is_modified = 1;</span>
+<span class='curline'><a href='../S/975.html#L5014'>phar</a>             5014 ext/phar/phar_object.c 	phar_flush(entry_obj-&gt;ent.entry-&gt;phar, 0, 0, 0, &amp;error TSRMLS_CC);</span>
+<span class='curline'><a href='../S/975.html#L5047'>phar</a>             5047 ext/phar/phar_object.c 	if (PHAR_G(readonly) &amp;&amp; !entry_obj-&gt;ent.entry-&gt;phar-&gt;is_data) {</span>
+<span class='curline'><a href='../S/975.html#L5072'>phar</a>             5072 ext/phar/phar_object.c 		phar_archive_data *phar = entry_obj-&gt;ent.entry-&gt;phar;</span>
+<span class='curline'><a href='../S/975.html#L5074'>phar</a>             5074 ext/phar/phar_object.c 		if (FAILURE == phar_copy_on_write(&amp;phar TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/975.html#L5075'>phar</a>             5075 ext/phar/phar_object.c 			zend_throw_exception_ex(phar_ce_PharException, 0 TSRMLS_CC, "phar \"%s\" is persistent, unable to copy on write", phar-&gt;fname);</span>
+<span class='curline'><a href='../S/975.html#L5079'>phar</a>             5079 ext/phar/phar_object.c 		zend_hash_find(&amp;phar-&gt;manifest, entry_obj-&gt;ent.entry-&gt;filename, entry_obj-&gt;ent.entry-&gt;filename_len, (void **)&amp;entry_obj-&gt;ent.entry);</span>
+<span class='curline'><a href='../S/975.html#L5082'>phar</a>             5082 ext/phar/phar_object.c 		if (FAILURE == phar_open_archive_fp(entry_obj-&gt;ent.entry-&gt;phar TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/975.html#L5083'>phar</a>             5083 ext/phar/phar_object.c 			zend_throw_exception_ex(spl_ce_BadMethodCallException, 0 TSRMLS_CC, "Cannot decompress entry \"%s\", phar error: Cannot open phar archive \"%s\" for reading", entry_obj-&gt;ent.entry-&gt;filename, entry_obj-&gt;ent.entry-&gt;phar-&gt;fname);</span>
+<span class='curline'><a href='../S/975.html#L5091'>phar</a>             5091 ext/phar/phar_object.c 	entry_obj-&gt;ent.entry-&gt;phar-&gt;is_modified = 1;</span>
+<span class='curline'><a href='../S/975.html#L5093'>phar</a>             5093 ext/phar/phar_object.c 	phar_flush(entry_obj-&gt;ent.entry-&gt;phar, 0, 0, 0, &amp;error TSRMLS_CC);</span>
+<span class='curline'><a href='../S/979.html#L104'>phar</a>              104 ext/phar/stream.c 		phar_archive_data **pphar = NULL, *phar;</span>
+<span class='curline'><a href='../S/979.html#L116'>phar</a>              116 ext/phar/stream.c 		if (phar_open_or_create_filename(resource-&gt;host, arch_len, NULL, 0, 0, options, &amp;phar, &amp;error TSRMLS_CC) == FAILURE)</span>
+<span class='curline'><a href='../S/979.html#L127'>phar</a>              127 ext/phar/stream.c 		if (phar-&gt;is_persistent &amp;&amp; FAILURE == phar_copy_on_write(&amp;phar TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/979.html#L160'>phar</a>              160 ext/phar/stream.c 	phar_archive_data *phar;</span>
+<span class='curline'><a href='../S/979.html#L231'>phar</a>              231 ext/phar/stream.c 				idata-&gt;phar-&gt;is_modified = 1;</span>
+<span class='curline'><a href='../S/979.html#L235'>phar</a>              235 ext/phar/stream.c 			spprintf(opened_path, MAXPATHLEN, "phar://%s/%s", idata-&gt;phar-&gt;fname, idata-&gt;internal_file-&gt;filename);</span>
+<span class='curline'><a href='../S/979.html#L241'>phar</a>              241 ext/phar/stream.c 			if (FAILURE == phar_get_archive(&amp;phar, resource-&gt;host, host_len, NULL, 0, NULL TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/979.html#L247'>phar</a>              247 ext/phar/stream.c 			if (phar-&gt;is_tar || phar-&gt;is_zip) {</span>
+<span class='curline'><a href='../S/979.html#L253'>phar</a>              253 ext/phar/stream.c 					spprintf(opened_path, MAXPATHLEN, "%s", phar-&gt;fname);</span>
+<span class='curline'><a href='../S/979.html#L264'>phar</a>              264 ext/phar/stream.c 				entry-&gt;phar = phar;</span>
+<span class='curline'><a href='../S/979.html#L266'>phar</a>              266 ext/phar/stream.c 				entry-&gt;compressed_filesize = entry-&gt;uncompressed_filesize = phar-&gt;halt_offset;</span>
+<span class='curline'><a href='../S/979.html#L270'>phar</a>              270 ext/phar/stream.c 				idata-&gt;fp = phar_get_pharfp(phar TSRMLS_CC);</span>
+<span class='curline'><a href='../S/979.html#L271'>phar</a>              271 ext/phar/stream.c 				idata-&gt;phar = phar;</span>
+<span class='curline'><a href='../S/979.html#L273'>phar</a>              273 ext/phar/stream.c 				if (!phar-&gt;is_persistent) {</span>
+<span class='curline'><a href='../S/979.html#L274'>phar</a>              274 ext/phar/stream.c 					++(entry-&gt;phar-&gt;refcount);</span>
+<span class='curline'><a href='../S/979.html#L279'>phar</a>              279 ext/phar/stream.c 					spprintf(opened_path, MAXPATHLEN, "%s", phar-&gt;fname);</span>
+<span class='curline'><a href='../S/979.html#L301'>phar</a>              301 ext/phar/stream.c 		fprintf(stderr, "Pharname:   %s\n", idata-&gt;phar-&gt;filename);</span>
+<span class='curline'><a href='../S/979.html#L323'>phar</a>              323 ext/phar/stream.c 		if ((idata-&gt;phar-&gt;is_tar || idata-&gt;phar-&gt;is_zip) &amp;&amp; idata-&gt;internal_file-&gt;filename_len == sizeof(".phar/stub.php")-1 &amp;&amp; !strncmp(idata-&gt;internal_file-&gt;filename, ".phar/stub.php", sizeof(".phar/stub.php")-1)) {</span>
+<span class='curline'><a href='../S/979.html#L336'>phar</a>              336 ext/phar/stream.c 		spprintf(opened_path, MAXPATHLEN, "phar://%s/%s", idata-&gt;phar-&gt;fname, idata-&gt;internal_file-&gt;filename);</span>
+<span class='curline'><a href='../S/979.html#L440'>phar</a>              440 ext/phar/stream.c 		php_stream_wrapper_log_error(stream-&gt;wrapper, stream-&gt;flags TSRMLS_CC, "phar error: Could not write %d characters to \"%s\" in phar \"%s\"", (int) count, data-&gt;internal_file-&gt;filename, data-&gt;phar-&gt;fname);</span>
+<span class='curline'><a href='../S/979.html#L465'>phar</a>              465 ext/phar/stream.c 		ret = phar_flush(data-&gt;phar, 0, 0, 0, &amp;error TSRMLS_CC);</span>
+<span class='curline'><a href='../S/979.html#L481'>phar</a>              481 ext/phar/stream.c void phar_dostat(phar_archive_data *phar, phar_entry_info *data, php_stream_statbuf *ssb, zend_bool is_temp_dir TSRMLS_DC)</span>
+<span class='curline'><a href='../S/979.html#L518'>phar</a>              518 ext/phar/stream.c 		ssb-&gt;sb.st_mtime.tv_sec = phar-&gt;max_timestamp;</span>
+<span class='curline'><a href='../S/979.html#L519'>phar</a>              519 ext/phar/stream.c 		ssb-&gt;sb.st_atime.tv_sec = phar-&gt;max_timestamp;</span>
+<span class='curline'><a href='../S/979.html#L520'>phar</a>              520 ext/phar/stream.c 		ssb-&gt;sb.st_ctime.tv_sec = phar-&gt;max_timestamp;</span>
+<span class='curline'><a href='../S/979.html#L522'>phar</a>              522 ext/phar/stream.c 		ssb-&gt;sb.st_mtime = phar-&gt;max_timestamp;</span>
+<span class='curline'><a href='../S/979.html#L523'>phar</a>              523 ext/phar/stream.c 		ssb-&gt;sb.st_atime = phar-&gt;max_timestamp;</span>
+<span class='curline'><a href='../S/979.html#L524'>phar</a>              524 ext/phar/stream.c 		ssb-&gt;sb.st_ctime = phar-&gt;max_timestamp;</span>
+<span class='curline'><a href='../S/979.html#L527'>phar</a>              527 ext/phar/stream.c 	if (!phar-&gt;is_writeable) {</span>
+<span class='curline'><a href='../S/979.html#L558'>phar</a>              558 ext/phar/stream.c 	phar_dostat(data-&gt;phar, data-&gt;internal_file, ssb, 0 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/979.html#L571'>phar</a>              571 ext/phar/stream.c 	phar_archive_data *phar;</span>
+<span class='curline'><a href='../S/979.html#L596'>phar</a>              596 ext/phar/stream.c 	if (FAILURE == phar_get_archive(&amp;phar, resource-&gt;host, host_len, NULL, 0, &amp;error TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/979.html#L608'>phar</a>              608 ext/phar/stream.c 		phar_dostat(phar, NULL, ssb, 1 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/979.html#L612'>phar</a>              612 ext/phar/stream.c 	if (!phar-&gt;manifest.arBuckets) {</span>
+<span class='curline'><a href='../S/979.html#L618'>phar</a>              618 ext/phar/stream.c 	if (SUCCESS == zend_hash_find(&amp;phar-&gt;manifest, internal_file, internal_file_len, (void**)&amp;entry)) {</span>
+<span class='curline'><a href='../S/979.html#L619'>phar</a>              619 ext/phar/stream.c 		phar_dostat(phar, entry, ssb, 0 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/979.html#L623'>phar</a>              623 ext/phar/stream.c 	if (zend_hash_exists(&amp;(phar-&gt;virtual_dirs), internal_file, internal_file_len)) {</span>
+<span class='curline'><a href='../S/979.html#L624'>phar</a>              624 ext/phar/stream.c 		phar_dostat(phar, NULL, ssb, 1 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/979.html#L629'>phar</a>              629 ext/phar/stream.c 	if (phar-&gt;mounted_dirs.arBuckets &amp;&amp; zend_hash_num_elements(&amp;phar-&gt;mounted_dirs)) {</span>
+<span class='curline'><a href='../S/979.html#L635'>phar</a>              635 ext/phar/stream.c 		for (zend_hash_internal_pointer_reset_ex(&amp;phar-&gt;mounted_dirs, &amp;pos);</span>
+<span class='curline'><a href='../S/979.html#L636'>phar</a>              636 ext/phar/stream.c 			HASH_KEY_NON_EXISTENT != zend_hash_get_current_key_ex(&amp;phar-&gt;mounted_dirs, &amp;str_key, &amp;keylen, &amp;unused, 0, &amp;pos);</span>
+<span class='curline'><a href='../S/979.html#L637'>phar</a>              637 ext/phar/stream.c 			zend_hash_move_forward_ex(&amp;phar-&gt;mounted_dirs, &amp;pos)</span>
+<span class='curline'><a href='../S/979.html#L646'>phar</a>              646 ext/phar/stream.c 				if (SUCCESS != zend_hash_find(&amp;phar-&gt;manifest, str_key, keylen, (void **) &amp;entry)) {</span>
+<span class='curline'><a href='../S/979.html#L658'>phar</a>              658 ext/phar/stream.c 				if (SUCCESS != phar_mount_entry(phar, test, test_len, internal_file, internal_file_len TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/979.html#L663'>phar</a>              663 ext/phar/stream.c 				if (SUCCESS != zend_hash_find(&amp;phar-&gt;manifest, internal_file, internal_file_len, (void**)&amp;entry)) {</span>
+<span class='curline'><a href='../S/979.html#L666'>phar</a>              666 ext/phar/stream.c 				phar_dostat(phar, entry, ssb, 0 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/979.html#L761'>phar</a>              761 ext/phar/stream.c 	phar_archive_data *phar, *pfrom, *pto;</span>
+<span class='curline'><a href='../S/979.html#L840'>phar</a>              840 ext/phar/stream.c 	if (SUCCESS != phar_get_archive(&amp;phar, resource_from-&gt;host, host_len, NULL, 0, &amp;error TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/979.html#L848'>phar</a>              848 ext/phar/stream.c 	if (phar-&gt;is_persistent &amp;&amp; FAILURE == phar_copy_on_write(&amp;phar TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/979.html#L855'>phar</a>              855 ext/phar/stream.c 	if (SUCCESS == zend_hash_find(&amp;(phar-&gt;manifest), resource_from-&gt;path+1, strlen(resource_from-&gt;path)-1, (void **)&amp;entry)) {</span>
+<span class='curline'><a href='../S/979.html#L875'>phar</a>              875 ext/phar/stream.c 		zend_hash_add(&amp;(phar-&gt;manifest), resource_to-&gt;path+1, strlen(resource_to-&gt;path)-1, (void **)&amp;new, sizeof(phar_entry_info), (void **) &amp;entry);</span>
+<span class='curline'><a href='../S/979.html#L883'>phar</a>              883 ext/phar/stream.c 			zend_hash_del(&amp;(phar-&gt;manifest), entry-&gt;filename, strlen(entry-&gt;filename));</span>
+<span class='curline'><a href='../S/979.html#L891'>phar</a>              891 ext/phar/stream.c 		is_dir = zend_hash_exists(&amp;(phar-&gt;virtual_dirs), resource_from-&gt;path+1, strlen(resource_from-&gt;path)-1);</span>
+<span class='curline'><a href='../S/979.html#L911'>phar</a>              911 ext/phar/stream.c 		for (zend_hash_internal_pointer_reset(&amp;phar-&gt;manifest);</span>
+<span class='curline'><a href='../S/979.html#L912'>phar</a>              912 ext/phar/stream.c 			HASH_KEY_NON_EXISTENT != (key_type = zend_hash_get_current_key_ex(&amp;phar-&gt;manifest, &amp;str_key, &amp;key_len, &amp;unused, 0, NULL)) &amp;&amp;</span>
+<span class='curline'><a href='../S/979.html#L913'>phar</a>              913 ext/phar/stream.c 			SUCCESS == zend_hash_get_current_data(&amp;phar-&gt;manifest, (void **) &amp;entry);</span>
+<span class='curline'><a href='../S/979.html#L914'>phar</a>              914 ext/phar/stream.c 			zend_hash_move_forward(&amp;phar-&gt;manifest)</span>
+<span class='curline'><a href='../S/979.html#L933'>phar</a>              933 ext/phar/stream.c 				zend_hash_update_current_key_ex(&amp;phar-&gt;manifest, key_type, new_str_key, new_key_len, 0, HASH_UPDATE_KEY_ANYWAY, NULL);</span>
+<span class='curline'><a href='../S/979.html#L937'>phar</a>              937 ext/phar/stream.c 		for (zend_hash_internal_pointer_reset(&amp;phar-&gt;virtual_dirs);</span>
+<span class='curline'><a href='../S/979.html#L938'>phar</a>              938 ext/phar/stream.c 			HASH_KEY_NON_EXISTENT != (key_type = zend_hash_get_current_key_ex(&amp;phar-&gt;virtual_dirs, &amp;str_key, &amp;key_len, &amp;unused, 0, NULL));</span>
+<span class='curline'><a href='../S/979.html#L939'>phar</a>              939 ext/phar/stream.c 			zend_hash_move_forward(&amp;phar-&gt;virtual_dirs)</span>
+<span class='curline'><a href='../S/979.html#L951'>phar</a>              951 ext/phar/stream.c 				zend_hash_update_current_key_ex(&amp;phar-&gt;virtual_dirs, key_type, new_str_key, new_key_len, 0, HASH_UPDATE_KEY_ANYWAY, NULL);</span>
+<span class='curline'><a href='../S/979.html#L956'>phar</a>              956 ext/phar/stream.c 		for (zend_hash_internal_pointer_reset(&amp;phar-&gt;mounted_dirs);</span>
+<span class='curline'><a href='../S/979.html#L957'>phar</a>              957 ext/phar/stream.c 			HASH_KEY_NON_EXISTENT != (key_type = zend_hash_get_current_key_ex(&amp;phar-&gt;mounted_dirs, &amp;str_key, &amp;key_len, &amp;unused, 0, NULL)) &amp;&amp;</span>
+<span class='curline'><a href='../S/979.html#L958'>phar</a>              958 ext/phar/stream.c 			SUCCESS == zend_hash_get_current_data(&amp;phar-&gt;mounted_dirs, (void **) &amp;entry);</span>
+<span class='curline'><a href='../S/979.html#L959'>phar</a>              959 ext/phar/stream.c 			zend_hash_move_forward(&amp;phar-&gt;mounted_dirs)</span>
+<span class='curline'><a href='../S/979.html#L971'>phar</a>              971 ext/phar/stream.c 				zend_hash_update_current_key_ex(&amp;phar-&gt;mounted_dirs, key_type, new_str_key, new_key_len, 0, HASH_UPDATE_KEY_ANYWAY, NULL);</span>
+<span class='curline'><a href='../S/979.html#L978'>phar</a>              978 ext/phar/stream.c 		phar_flush(phar, 0, 0, 0, &amp;error TSRMLS_CC);</span>
+<span class='curline'><a href='../S/982.html#L129'>phar</a>              129 ext/phar/tar.c 	phar_archive_data *phar;</span>
+<span class='curline'><a href='../S/982.html#L130'>phar</a>              130 ext/phar/tar.c 	int ret = phar_create_or_parse_filename(fname, fname_len, alias, alias_len, is_data, options, &amp;phar, error TSRMLS_CC);</span>
+<span class='curline'><a href='../S/982.html#L137'>phar</a>              137 ext/phar/tar.c 		*pphar = phar;</span>
+<span class='curline'><a href='../S/982.html#L140'>phar</a>              140 ext/phar/tar.c 	phar-&gt;is_data = is_data;</span>
+<span class='curline'><a href='../S/982.html#L142'>phar</a>              142 ext/phar/tar.c 	if (phar-&gt;is_tar) {</span>
+<span class='curline'><a href='../S/982.html#L146'>phar</a>              146 ext/phar/tar.c 	if (phar-&gt;is_brandnew) {</span>
+<span class='curline'><a href='../S/982.html#L147'>phar</a>              147 ext/phar/tar.c 		phar-&gt;is_tar = 1;</span>
+<span class='curline'><a href='../S/982.html#L148'>phar</a>              148 ext/phar/tar.c 		phar-&gt;is_zip = 0;</span>
+<span class='curline'><a href='../S/982.html#L149'>phar</a>              149 ext/phar/tar.c 		phar-&gt;internal_file_start = 0;</span>
+<span class='curline'><a href='../S/982.html#L184'>phar</a>              184 ext/phar/tar.c 		entry-&gt;phar-&gt;metadata = entry-&gt;metadata;</span>
+<span class='curline'><a href='../S/982.html#L186'>phar</a>              186 ext/phar/tar.c 	} else if (entry-&gt;filename_len &gt;= sizeof(".phar/.metadata/") + sizeof("/.metadata.bin") - 1 &amp;&amp; SUCCESS == zend_hash_find(&amp;(entry-&gt;phar-&gt;manifest), entry-&gt;filename + sizeof(".phar/.metadata/") - 1, entry-&gt;filename_len - (sizeof("/.metadata.bin") - 1 + sizeof(".phar/.metadata/") - 1), (void *)&amp;mentry)) {</span>
+<span class='curline'><a href='../S/982.html#L251'>phar</a>              251 ext/phar/tar.c 	entry.phar = myphar;</span>
+<span class='curline'><a href='../S/982.html#L721'>phar</a>              721 ext/phar/tar.c 	phar_add_virtual_dirs(entry-&gt;phar, entry-&gt;filename, entry-&gt;filename_len TSRMLS_CC);</span>
+<span class='curline'><a href='../S/982.html#L728'>phar</a>              728 ext/phar/tar.c 				spprintf(fp-&gt;error, 4096, "tar-based phar \"%s\" cannot be created, filename \"%s\" is too long for tar file format", entry-&gt;phar-&gt;fname, entry-&gt;filename);</span>
+<span class='curline'><a href='../S/982.html#L738'>phar</a>              738 ext/phar/tar.c 				spprintf(fp-&gt;error, 4096, "tar-based phar \"%s\" cannot be created, filename \"%s\" is too long for tar file format", entry-&gt;phar-&gt;fname, entry-&gt;filename);</span>
+<span class='curline'><a href='../S/982.html#L752'>phar</a>              752 ext/phar/tar.c 			spprintf(fp-&gt;error, 4096, "tar-based phar \"%s\" cannot be created, filename \"%s\" is too large for tar file format", entry-&gt;phar-&gt;fname, entry-&gt;filename);</span>
+<span class='curline'><a href='../S/982.html#L759'>phar</a>              759 ext/phar/tar.c 			spprintf(fp-&gt;error, 4096, "tar-based phar \"%s\" cannot be created, file modification time of file \"%s\" is too large for tar file format", entry-&gt;phar-&gt;fname, entry-&gt;filename);</span>
+<span class='curline'><a href='../S/982.html#L778'>phar</a>              778 ext/phar/tar.c 			spprintf(fp-&gt;error, 4096, "tar-based phar \"%s\" cannot be created, checksum of file \"%s\" is too large for tar file format", entry-&gt;phar-&gt;fname, entry-&gt;filename);</span>
+<span class='curline'><a href='../S/982.html#L788'>phar</a>              788 ext/phar/tar.c 			spprintf(fp-&gt;error, 4096, "tar-based phar \"%s\" cannot be created, header for  file \"%s\" could not be written", entry-&gt;phar-&gt;fname, entry-&gt;filename);</span>
+<span class='curline'><a href='../S/982.html#L803'>phar</a>              803 ext/phar/tar.c 				spprintf(fp-&gt;error, 4096, "tar-based phar \"%s\" cannot be created, contents of file \"%s\" could not be written, seek failed", entry-&gt;phar-&gt;fname, entry-&gt;filename);</span>
+<span class='curline'><a href='../S/982.html#L810'>phar</a>              810 ext/phar/tar.c 				spprintf(fp-&gt;error, 4096, "tar-based phar \"%s\" cannot be created, contents of file \"%s\" could not be written", entry-&gt;phar-&gt;fname, entry-&gt;filename);</span>
+<span class='curline'><a href='../S/982.html#L834'>phar</a>              834 ext/phar/tar.c 	if (entry-&gt;fp_type == PHAR_MOD &amp;&amp; entry-&gt;fp != entry-&gt;phar-&gt;fp &amp;&amp; entry-&gt;fp != entry-&gt;phar-&gt;ufp) {</span>
+<span class='curline'><a href='../S/982.html#L878'>phar</a>              878 ext/phar/tar.c 		zend_hash_del(&amp;(entry-&gt;phar-&gt;manifest), entry-&gt;filename, entry-&gt;filename_len);</span>
+<span class='curline'><a href='../S/982.html#L895'>phar</a>              895 ext/phar/tar.c 			if (entry-&gt;phar-&gt;metadata == NULL) {</span>
+<span class='curline'><a href='../S/982.html#L898'>phar</a>              898 ext/phar/tar.c 			return phar_tar_setmetadata(entry-&gt;phar-&gt;metadata, entry, error TSRMLS_CC);</span>
+<span class='curline'><a href='../S/982.html#L901'>phar</a>              901 ext/phar/tar.c 		if (entry-&gt;filename_len &gt;= sizeof(".phar/.metadata/") + sizeof("/.metadata.bin") - 1 &amp;&amp; !zend_hash_exists(&amp;(entry-&gt;phar-&gt;manifest), entry-&gt;filename + sizeof(".phar/.metadata/") - 1, entry-&gt;filename_len - (sizeof("/.metadata.bin") - 1 + sizeof(".phar/.metadata/") - 1))) {</span>
+<span class='curline'><a href='../S/982.html#L917'>phar</a>              917 ext/phar/tar.c 		zend_hash_del(&amp;(entry-&gt;phar-&gt;manifest), lookfor, lookfor_len);</span>
+<span class='curline'><a href='../S/982.html#L922'>phar</a>              922 ext/phar/tar.c 	if (SUCCESS == zend_hash_find(&amp;(entry-&gt;phar-&gt;manifest), lookfor, lookfor_len, (void **)&amp;metadata)) {</span>
+<span class='curline'><a href='../S/982.html#L931'>phar</a>              931 ext/phar/tar.c 	newentry.phar = entry-&gt;phar;</span>
+<span class='curline'><a href='../S/982.html#L935'>phar</a>              935 ext/phar/tar.c 	if (SUCCESS != zend_hash_add(&amp;(entry-&gt;phar-&gt;manifest), lookfor, lookfor_len, (void *)&amp;newentry, sizeof(phar_entry_info), (void **)&amp;metadata)) {</span>
+<span class='curline'><a href='../S/982.html#L945'>phar</a>              945 ext/phar/tar.c int phar_tar_flush(phar_archive_data *phar, char *user_stub, long len, int defaultstub, char **error TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/982.html#L961'>phar</a>              961 ext/phar/tar.c 	entry.phar = phar;</span>
+<span class='curline'><a href='../S/982.html#L964'>phar</a>              964 ext/phar/tar.c 	if (phar-&gt;is_persistent) {</span>
+<span class='curline'><a href='../S/982.html#L966'>phar</a>              966 ext/phar/tar.c 			spprintf(error, 0, "internal error: attempt to flush cached tar-based phar \"%s\"", phar-&gt;fname);</span>
+<span class='curline'><a href='../S/982.html#L971'>phar</a>              971 ext/phar/tar.c 	if (phar-&gt;is_data) {</span>
+<span class='curline'><a href='../S/982.html#L976'>phar</a>              976 ext/phar/tar.c 	if (!phar-&gt;is_temporary_alias &amp;&amp; phar-&gt;alias_len) {</span>
+<span class='curline'><a href='../S/982.html#L984'>phar</a>              984 ext/phar/tar.c 		if (phar-&gt;alias_len != (int)php_stream_write(entry.fp, phar-&gt;alias, phar-&gt;alias_len)) {</span>
+<span class='curline'><a href='../S/982.html#L986'>phar</a>              986 ext/phar/tar.c 				spprintf(error, 0, "unable to set alias in tar-based phar \"%s\"", phar-&gt;fname);</span>
+<span class='curline'><a href='../S/982.html#L991'>phar</a>              991 ext/phar/tar.c 		entry.uncompressed_filesize = phar-&gt;alias_len;</span>
+<span class='curline'><a href='../S/982.html#L993'>phar</a>              993 ext/phar/tar.c 		if (SUCCESS != zend_hash_update(&amp;phar-&gt;manifest, entry.filename, entry.filename_len, (void*)&amp;entry, sizeof(phar_entry_info), NULL)) {</span>
+<span class='curline'><a href='../S/982.html#L995'>phar</a>              995 ext/phar/tar.c 				spprintf(error, 0, "unable to set alias in tar-based phar \"%s\"", phar-&gt;fname);</span>
+<span class='curline'><a href='../S/982.html#L1000'>phar</a>             1000 ext/phar/tar.c 		zend_hash_del(&amp;phar-&gt;manifest, ".phar/alias.txt", sizeof(".phar/alias.txt")-1);</span>
+<span class='curline'><a href='../S/982.html#L1010'>phar</a>             1010 ext/phar/tar.c 					spprintf(error, 0, "unable to access resource to copy stub to new tar-based phar \"%s\"", phar-&gt;fname);</span>
+<span class='curline'><a href='../S/982.html#L1023'>phar</a>             1023 ext/phar/tar.c 					spprintf(error, 0, "unable to read resource to copy stub to new tar-based phar \"%s\"", phar-&gt;fname);</span>
+<span class='curline'><a href='../S/982.html#L1036'>phar</a>             1036 ext/phar/tar.c 				spprintf(error, 0, "illegal stub for tar-based phar \"%s\"", phar-&gt;fname);</span>
+<span class='curline'><a href='../S/982.html#L1057'>phar</a>             1057 ext/phar/tar.c 				spprintf(error, 0, "unable to create stub from string in new tar-based phar \"%s\"", phar-&gt;fname);</span>
+<span class='curline'><a href='../S/982.html#L1068'>phar</a>             1068 ext/phar/tar.c 		zend_hash_update(&amp;phar-&gt;manifest, entry.filename, entry.filename_len, (void*)&amp;entry, sizeof(phar_entry_info), NULL);</span>
+<span class='curline'><a href='../S/982.html#L1083'>phar</a>             1083 ext/phar/tar.c 				spprintf(error, 0, "unable to %s stub in%star-based phar \"%s\", failed", user_stub ? "overwrite" : "create", user_stub ? " " : " new ", phar-&gt;fname);</span>
+<span class='curline'><a href='../S/982.html#L1093'>phar</a>             1093 ext/phar/tar.c 			if (!zend_hash_exists(&amp;phar-&gt;manifest, ".phar/stub.php", sizeof(".phar/stub.php")-1)) {</span>
+<span class='curline'><a href='../S/982.html#L1094'>phar</a>             1094 ext/phar/tar.c 				if (SUCCESS != zend_hash_add(&amp;phar-&gt;manifest, entry.filename, entry.filename_len, (void*)&amp;entry, sizeof(phar_entry_info), NULL)) {</span>
+<span class='curline'><a href='../S/982.html#L1098'>phar</a>             1098 ext/phar/tar.c 						spprintf(error, 0, "unable to create stub in tar-based phar \"%s\"", phar-&gt;fname);</span>
+<span class='curline'><a href='../S/982.html#L1107'>phar</a>             1107 ext/phar/tar.c 			if (SUCCESS != zend_hash_update(&amp;phar-&gt;manifest, entry.filename, entry.filename_len, (void*)&amp;entry, sizeof(phar_entry_info), NULL)) {</span>
+<span class='curline'><a href='../S/982.html#L1111'>phar</a>             1111 ext/phar/tar.c 					spprintf(error, 0, "unable to overwrite stub in tar-based phar \"%s\"", phar-&gt;fname);</span>
+<span class='curline'><a href='../S/982.html#L1118'>phar</a>             1118 ext/phar/tar.c 	if (phar-&gt;fp &amp;&amp; !phar-&gt;is_brandnew) {</span>
+<span class='curline'><a href='../S/982.html#L1119'>phar</a>             1119 ext/phar/tar.c 		oldfile = phar-&gt;fp;</span>
+<span class='curline'><a href='../S/982.html#L1123'>phar</a>             1123 ext/phar/tar.c 		oldfile = php_stream_open_wrapper(phar-&gt;fname, "rb", 0, NULL);</span>
+<span class='curline'><a href='../S/982.html#L1144'>phar</a>             1144 ext/phar/tar.c 	if (phar-&gt;metadata) {</span>
+<span class='curline'><a href='../S/982.html#L1146'>phar</a>             1146 ext/phar/tar.c 		if (SUCCESS == zend_hash_find(&amp;(phar-&gt;manifest), ".phar/.metadata.bin", sizeof(".phar/.metadata.bin")-1, (void **)&amp;mentry)) {</span>
+<span class='curline'><a href='../S/982.html#L1147'>phar</a>             1147 ext/phar/tar.c 			if (ZEND_HASH_APPLY_KEEP != phar_tar_setmetadata(phar-&gt;metadata, mentry, error TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/982.html#L1158'>phar</a>             1158 ext/phar/tar.c 			newentry.phar = phar;</span>
+<span class='curline'><a href='../S/982.html#L1162'>phar</a>             1162 ext/phar/tar.c 			if (SUCCESS != zend_hash_add(&amp;(phar-&gt;manifest), ".phar/.metadata.bin", sizeof(".phar/.metadata.bin")-1, (void *)&amp;newentry, sizeof(phar_entry_info), (void **)&amp;mentry)) {</span>
+<span class='curline'><a href='../S/982.html#L1163'>phar</a>             1163 ext/phar/tar.c 				spprintf(error, 0, "phar tar error: unable to add magic metadata file to manifest for phar archive \"%s\"", phar-&gt;fname);</span>
+<span class='curline'><a href='../S/982.html#L1170'>phar</a>             1170 ext/phar/tar.c 			if (ZEND_HASH_APPLY_KEEP != phar_tar_setmetadata(phar-&gt;metadata, mentry, error TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/982.html#L1171'>phar</a>             1171 ext/phar/tar.c 				zend_hash_del(&amp;(phar-&gt;manifest), ".phar/.metadata.bin", sizeof(".phar/.metadata.bin")-1);</span>
+<span class='curline'><a href='../S/982.html#L1180'>phar</a>             1180 ext/phar/tar.c 	zend_hash_apply_with_argument(&amp;phar-&gt;manifest, (apply_func_arg_t) phar_tar_setupmetadata, (void *) &amp;pass TSRMLS_CC);</span>
+<span class='curline'><a href='../S/982.html#L1192'>phar</a>             1192 ext/phar/tar.c 	zend_hash_apply_with_argument(&amp;phar-&gt;manifest, (apply_func_arg_t) phar_tar_writeheaders, (void *) &amp;pass TSRMLS_CC);</span>
+<span class='curline'><a href='../S/982.html#L1195'>phar</a>             1195 ext/phar/tar.c 	if (!phar-&gt;is_data || phar-&gt;sig_flags) {</span>
+<span class='curline'><a href='../S/982.html#L1196'>phar</a>             1196 ext/phar/tar.c 		if (FAILURE == phar_create_signature(phar, newfile, &amp;signature, &amp;signature_length, error TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/982.html#L1227'>phar</a>             1227 ext/phar/tar.c 		PHAR_SET_32(sigbuf, phar-&gt;sig_flags);</span>
+<span class='curline'><a href='../S/982.html#L1233'>phar</a>             1233 ext/phar/tar.c 				spprintf(error, 0, "phar error: unable to write signature to tar-based phar %s", phar-&gt;fname);</span>
+<span class='curline'><a href='../S/982.html#L1273'>phar</a>             1273 ext/phar/tar.c 	if (phar-&gt;fp &amp;&amp; pass.free_fp) {</span>
+<span class='curline'><a href='../S/982.html#L1274'>phar</a>             1274 ext/phar/tar.c 		php_stream_close(phar-&gt;fp);</span>
+<span class='curline'><a href='../S/982.html#L1277'>phar</a>             1277 ext/phar/tar.c 	if (phar-&gt;ufp) {</span>
+<span class='curline'><a href='../S/982.html#L1279'>phar</a>             1279 ext/phar/tar.c 			php_stream_close(phar-&gt;ufp);</span>
+<span class='curline'><a href='../S/982.html#L1281'>phar</a>             1281 ext/phar/tar.c 		phar-&gt;ufp = NULL;</span>
+<span class='curline'><a href='../S/982.html#L1284'>phar</a>             1284 ext/phar/tar.c 	phar-&gt;is_brandnew = 0;</span>
+<span class='curline'><a href='../S/982.html#L1287'>phar</a>             1287 ext/phar/tar.c 	if (phar-&gt;donotflush) {</span>
+<span class='curline'><a href='../S/982.html#L1289'>phar</a>             1289 ext/phar/tar.c 		phar-&gt;fp = newfile;</span>
+<span class='curline'><a href='../S/982.html#L1291'>phar</a>             1291 ext/phar/tar.c 		phar-&gt;fp = php_stream_open_wrapper(phar-&gt;fname, "w+b", IGNORE_URL|STREAM_MUST_SEEK|REPORT_ERRORS, NULL);</span>
+<span class='curline'><a href='../S/982.html#L1292'>phar</a>             1292 ext/phar/tar.c 		if (!phar-&gt;fp) {</span>
+<span class='curline'><a href='../S/982.html#L1293'>phar</a>             1293 ext/phar/tar.c 			phar-&gt;fp = newfile;</span>
+<span class='curline'><a href='../S/982.html#L1295'>phar</a>             1295 ext/phar/tar.c 				spprintf(error, 0, "unable to open new phar \"%s\" for writing", phar-&gt;fname);</span>
+<span class='curline'><a href='../S/982.html#L1300'>phar</a>             1300 ext/phar/tar.c 		if (phar-&gt;flags &amp; PHAR_FILE_COMPRESSED_GZ) {</span>
+<span class='curline'><a href='../S/982.html#L1311'>phar</a>             1311 ext/phar/tar.c 			filter = php_stream_filter_create("zlib.deflate", &amp;filterparams, php_stream_is_persistent(phar-&gt;fp) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/982.html#L1316'>phar</a>             1316 ext/phar/tar.c 				php_stream_copy_to_stream_ex(newfile, phar-&gt;fp, PHP_STREAM_COPY_ALL, NULL);</span>
+<span class='curline'><a href='../S/982.html#L1319'>phar</a>             1319 ext/phar/tar.c 					spprintf(error, 4096, "unable to compress all contents of phar \"%s\" using zlib, PHP versions older than 5.2.6 have a buggy zlib", phar-&gt;fname);</span>
+<span class='curline'><a href='../S/982.html#L1324'>phar</a>             1324 ext/phar/tar.c 			php_stream_filter_append(&amp;phar-&gt;fp-&gt;writefilters, filter);</span>
+<span class='curline'><a href='../S/982.html#L1325'>phar</a>             1325 ext/phar/tar.c 			php_stream_copy_to_stream_ex(newfile, phar-&gt;fp, PHP_STREAM_COPY_ALL, NULL);</span>
+<span class='curline'><a href='../S/982.html#L1328'>phar</a>             1328 ext/phar/tar.c 			php_stream_close(phar-&gt;fp);</span>
+<span class='curline'><a href='../S/982.html#L1330'>phar</a>             1330 ext/phar/tar.c 			phar-&gt;fp = newfile;</span>
+<span class='curline'><a href='../S/982.html#L1331'>phar</a>             1331 ext/phar/tar.c 		} else if (phar-&gt;flags &amp; PHAR_FILE_COMPRESSED_BZ2) {</span>
+<span class='curline'><a href='../S/982.html#L1334'>phar</a>             1334 ext/phar/tar.c 			filter = php_stream_filter_create("bzip2.compress", NULL, php_stream_is_persistent(phar-&gt;fp) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/982.html#L1335'>phar</a>             1335 ext/phar/tar.c 			php_stream_filter_append(&amp;phar-&gt;fp-&gt;writefilters, filter);</span>
+<span class='curline'><a href='../S/982.html#L1336'>phar</a>             1336 ext/phar/tar.c 			php_stream_copy_to_stream_ex(newfile, phar-&gt;fp, PHP_STREAM_COPY_ALL, NULL);</span>
+<span class='curline'><a href='../S/982.html#L1339'>phar</a>             1339 ext/phar/tar.c 			php_stream_close(phar-&gt;fp);</span>
+<span class='curline'><a href='../S/982.html#L1341'>phar</a>             1341 ext/phar/tar.c 			phar-&gt;fp = newfile;</span>
+<span class='curline'><a href='../S/982.html#L1343'>phar</a>             1343 ext/phar/tar.c 			php_stream_copy_to_stream_ex(newfile, phar-&gt;fp, PHP_STREAM_COPY_ALL, NULL);</span>
+<span class='curline'><a href='../S/984.html#L74'>phar</a>               74 ext/phar/util.c 	if (SUCCESS == zend_hash_find(&amp;(entry-&gt;phar-&gt;manifest), entry-&gt;link, strlen(entry-&gt;link), (void **)&amp;link_entry) ||</span>
+<span class='curline'><a href='../S/984.html#L75'>phar</a>               75 ext/phar/util.c 		SUCCESS == zend_hash_find(&amp;(entry-&gt;phar-&gt;manifest), link, strlen(link), (void **)&amp;link_entry)) {</span>
+<span class='curline'><a href='../S/984.html#L103'>phar</a>              103 ext/phar/util.c 			phar_open_archive_fp(entry-&gt;phar TSRMLS_CC);</span>
+<span class='curline'><a href='../S/984.html#L170'>phar</a>              170 ext/phar/util.c int phar_mount_entry(phar_archive_data *phar, char *filename, int filename_len, char *path, int path_len TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/984.html#L188'>phar</a>              188 ext/phar/util.c 	entry.phar = phar;</span>
+<span class='curline'><a href='../S/984.html#L230'>phar</a>              230 ext/phar/util.c 		if (SUCCESS != zend_hash_add(&amp;phar-&gt;mounted_dirs, entry.filename, path_len, (void *)&amp;(entry.filename), sizeof(char *), NULL)) {</span>
+<span class='curline'><a href='../S/984.html#L243'>phar</a>              243 ext/phar/util.c 	if (SUCCESS == zend_hash_add(&amp;phar-&gt;manifest, entry.filename, path_len, (void*)&amp;entry, sizeof(phar_entry_info), NULL)) {</span>
+<span class='curline'><a href='../S/984.html#L257'>phar</a>              257 ext/phar/util.c 	phar_archive_data *phar;</span>
+<span class='curline'><a href='../S/984.html#L262'>phar</a>              262 ext/phar/util.c 		pphar = &amp;phar;</span>
+<span class='curline'><a href='../S/984.html#L275'>phar</a>              275 ext/phar/util.c 		phar = PHAR_G(last_phar);</span>
+<span class='curline'><a href='../S/984.html#L288'>phar</a>              288 ext/phar/util.c 		if (FAILURE == phar_get_archive(&amp;phar, arch, arch_len, NULL, 0, NULL TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/984.html#L294'>phar</a>              294 ext/phar/util.c 			*pphar = phar;</span>
+<span class='curline'><a href='../S/984.html#L301'>phar</a>              301 ext/phar/util.c 			if (zend_hash_exists(&amp;(phar-&gt;manifest), test + 1, try_len - 1)) {</span>
+<span class='curline'><a href='../S/984.html#L308'>phar</a>              308 ext/phar/util.c 			if (zend_hash_exists(&amp;(phar-&gt;manifest), test, try_len)) {</span>
+<span class='curline'><a href='../S/984.html#L355'>phar</a>              355 ext/phar/util.c 	phar_archive_data *phar;</span>
+<span class='curline'><a href='../S/984.html#L372'>phar</a>              372 ext/phar/util.c 	if (FAILURE == phar_get_archive(&amp;phar, fname, fname_len, NULL, 0, error TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/984.html#L376'>phar</a>              376 ext/phar/util.c 	if (for_write &amp;&amp; PHAR_G(readonly) &amp;&amp; !phar-&gt;is_data) {</span>
+<span class='curline'><a href='../S/984.html#L391'>phar</a>              391 ext/phar/util.c 		if ((entry = phar_get_entry_info_dir(phar, path, path_len, allow_dir, for_create &amp;&amp; !PHAR_G(readonly) &amp;&amp; !phar-&gt;is_data ? NULL : error, security TSRMLS_CC)) == NULL) {</span>
+<span class='curline'><a href='../S/984.html#L392'>phar</a>              392 ext/phar/util.c 			if (for_create &amp;&amp; (!PHAR_G(readonly) || phar-&gt;is_data)) {</span>
+<span class='curline'><a href='../S/984.html#L398'>phar</a>              398 ext/phar/util.c 		if ((entry = phar_get_entry_info(phar, path, path_len, for_create &amp;&amp; !PHAR_G(readonly) &amp;&amp; !phar-&gt;is_data ? NULL : error, security TSRMLS_CC)) == NULL) {</span>
+<span class='curline'><a href='../S/984.html#L399'>phar</a>              399 ext/phar/util.c 			if (for_create &amp;&amp; (!PHAR_G(readonly) || phar-&gt;is_data)) {</span>
+<span class='curline'><a href='../S/984.html#L406'>phar</a>              406 ext/phar/util.c 	if (for_write &amp;&amp; phar-&gt;is_persistent) {</span>
+<span class='curline'><a href='../S/984.html#L407'>phar</a>              407 ext/phar/util.c 		if (FAILURE == phar_copy_on_write(&amp;phar TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/984.html#L442'>phar</a>              442 ext/phar/util.c 		(*ret)-&gt;phar = phar;</span>
+<span class='curline'><a href='../S/984.html#L448'>phar</a>              448 ext/phar/util.c 		if (!phar-&gt;is_persistent) {</span>
+<span class='curline'><a href='../S/984.html#L449'>phar</a>              449 ext/phar/util.c 			++(entry-&gt;phar-&gt;refcount);</span>
+<span class='curline'><a href='../S/984.html#L458'>phar</a>              458 ext/phar/util.c 			if (FAILURE == phar_create_writeable_entry(phar, entry, error TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/984.html#L473'>phar</a>              473 ext/phar/util.c 				if (FAILURE == phar_create_writeable_entry(phar, entry, error TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/984.html#L490'>phar</a>              490 ext/phar/util.c 	(*ret)-&gt;phar = phar;</span>
+<span class='curline'><a href='../S/984.html#L507'>phar</a>              507 ext/phar/util.c 	if (!phar-&gt;is_persistent) {</span>
+<span class='curline'><a href='../S/984.html#L509'>phar</a>              509 ext/phar/util.c 		++(entry-&gt;phar-&gt;refcount);</span>
+<span class='curline'><a href='../S/984.html#L521'>phar</a>              521 ext/phar/util.c 	phar_archive_data *phar;</span>
+<span class='curline'><a href='../S/984.html#L533'>phar</a>              533 ext/phar/util.c 	if (FAILURE == phar_get_archive(&amp;phar, fname, fname_len, NULL, 0, error TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/984.html#L550'>phar</a>              550 ext/phar/util.c 	if (phar-&gt;is_persistent &amp;&amp; FAILURE == phar_copy_on_write(&amp;phar TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/984.html#L587'>phar</a>              587 ext/phar/util.c 	phar_add_virtual_dirs(phar, path, path_len TSRMLS_CC);</span>
+<span class='curline'><a href='../S/984.html#L591'>phar</a>              591 ext/phar/util.c 	etemp.phar = phar;</span>
+<span class='curline'><a href='../S/984.html#L593'>phar</a>              593 ext/phar/util.c 	etemp.is_zip = phar-&gt;is_zip;</span>
+<span class='curline'><a href='../S/984.html#L595'>phar</a>              595 ext/phar/util.c 	if (phar-&gt;is_tar) {</span>
+<span class='curline'><a href='../S/984.html#L596'>phar</a>              596 ext/phar/util.c 		etemp.is_tar = phar-&gt;is_tar;</span>
+<span class='curline'><a href='../S/984.html#L600'>phar</a>              600 ext/phar/util.c 	if (FAILURE == zend_hash_add(&amp;phar-&gt;manifest, etemp.filename, path_len, (void*)&amp;etemp, sizeof(phar_entry_info), (void **) &amp;entry)) {</span>
+<span class='curline'><a href='../S/984.html#L603'>phar</a>              603 ext/phar/util.c 			spprintf(error, 0, "phar error: unable to add new entry \"%s\" to phar \"%s\"", etemp.filename, phar-&gt;fname);</span>
+<span class='curline'><a href='../S/984.html#L617'>phar</a>              617 ext/phar/util.c 	++(phar-&gt;refcount);</span>
+<span class='curline'><a href='../S/984.html#L618'>phar</a>              618 ext/phar/util.c 	ret-&gt;phar = phar;</span>
+<span class='curline'><a href='../S/984.html#L631'>phar</a>              631 ext/phar/util.c int phar_open_archive_fp(phar_archive_data *phar TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/984.html#L633'>phar</a>              633 ext/phar/util.c 	if (phar_get_pharfp(phar TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/984.html#L637'>phar</a>              637 ext/phar/util.c 	if (php_check_open_basedir(phar-&gt;fname TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/984.html#L641'>phar</a>              641 ext/phar/util.c 	phar_set_pharfp(phar, php_stream_open_wrapper(phar-&gt;fname, "rb", IGNORE_URL|STREAM_MUST_SEEK|0, NULL) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/984.html#L643'>phar</a>              643 ext/phar/util.c 	if (!phar_get_pharfp(phar TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/984.html#L685'>phar</a>              685 ext/phar/util.c 			spprintf(error, 4096, "phar error: unable to copy contents of file \"%s\" to \"%s\" in phar archive \"%s\"", source-&gt;filename, dest-&gt;filename, source-&gt;phar-&gt;fname);</span>
+<span class='curline'><a href='../S/984.html#L699'>phar</a>              699 ext/phar/util.c 	phar_archive_data *phar = entry-&gt;phar;</span>
+<span class='curline'><a href='../S/984.html#L728'>phar</a>              728 ext/phar/util.c 	if (!phar_get_pharfp(phar TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/984.html#L729'>phar</a>              729 ext/phar/util.c 		if (FAILURE == phar_open_archive_fp(phar TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/984.html#L730'>phar</a>              730 ext/phar/util.c 			spprintf(error, 4096, "phar error: Cannot open phar archive \"%s\" for reading", phar-&gt;fname);</span>
+<span class='curline'><a href='../S/984.html#L737'>phar</a>              737 ext/phar/util.c 		dummy.phar = phar;</span>
+<span class='curline'><a href='../S/984.html#L739'>phar</a>              739 ext/phar/util.c 		dummy.fp = phar_get_pharfp(phar TSRMLS_CC);</span>
+<span class='curline'><a href='../S/984.html#L749'>phar</a>              749 ext/phar/util.c 			spprintf(error, 4096, "phar error: Cannot open temporary file for decompressing phar archive \"%s\" file \"%s\"", phar-&gt;fname, entry-&gt;filename);</span>
+<span class='curline'><a href='../S/984.html#L755'>phar</a>              755 ext/phar/util.c 	dummy.phar = phar;</span>
+<span class='curline'><a href='../S/984.html#L757'>phar</a>              757 ext/phar/util.c 	dummy.fp = phar_get_pharfp(phar TSRMLS_CC);</span>
+<span class='curline'><a href='../S/984.html#L771'>phar</a>              771 ext/phar/util.c 		spprintf(error, 4096, "phar error: unable to read phar \"%s\" (cannot create %s filter while decompressing file \"%s\")", phar-&gt;fname, phar_decompress_filter(entry, 1), entry-&gt;filename);</span>
+<span class='curline'><a href='../S/984.html#L784'>phar</a>              784 ext/phar/util.c 			spprintf(error, 4096, "phar error: internal corruption of phar \"%s\" (actual filesize mismatch on file \"%s\")", phar-&gt;fname, entry-&gt;filename);</span>
+<span class='curline'><a href='../S/984.html#L795'>phar</a>              795 ext/phar/util.c 		spprintf(error, 4096, "phar error: internal corruption of phar \"%s\" (actual filesize mismatch on file \"%s\")", phar-&gt;fname, entry-&gt;filename);</span>
+<span class='curline'><a href='../S/984.html#L812'>phar</a>              812 ext/phar/util.c int phar_create_writeable_entry(phar_archive_data *phar, phar_entry_info *entry, char **error TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/984.html#L820'>phar</a>              820 ext/phar/util.c 		phar-&gt;is_modified = 1;</span>
+<span class='curline'><a href='../S/984.html#L853'>phar</a>              853 ext/phar/util.c 	phar-&gt;is_modified = 1;</span>
+<span class='curline'><a href='../S/984.html#L892'>phar</a>              892 ext/phar/util.c 			spprintf(error, 4096, "phar error: cannot separate entry file \"%s\" contents in phar archive \"%s\" for write access", entry-&gt;filename, entry-&gt;phar-&gt;fname);</span>
+<span class='curline'><a href='../S/984.html#L914'>phar</a>              914 ext/phar/util.c phar_entry_info * phar_open_jit(phar_archive_data *phar, phar_entry_info *entry, char **error TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/984.html#L924'>phar</a>              924 ext/phar/util.c 		spprintf(error, 4096, "phar error: cannot seek to start of file \"%s\" in phar \"%s\"", entry-&gt;filename, phar-&gt;fname);</span>
+<span class='curline'><a href='../S/984.html#L943'>phar</a>              943 ext/phar/util.c int phar_free_alias(phar_archive_data *phar, char *alias, int alias_len TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/984.html#L945'>phar</a>              945 ext/phar/util.c 	if (phar-&gt;refcount || phar-&gt;is_persistent) {</span>
+<span class='curline'><a href='../S/984.html#L950'>phar</a>              950 ext/phar/util.c 	if (zend_hash_del(&amp;(PHAR_GLOBALS-&gt;phar_fname_map), phar-&gt;fname, phar-&gt;fname_len) != SUCCESS) {</span>
+<span class='curline'><a href='../S/984.html#L1214'>phar</a>             1214 ext/phar/util.c phar_entry_info *phar_get_entry_info(phar_archive_data *phar, char *path, int path_len, char **error, int security TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/984.html#L1216'>phar</a>             1216 ext/phar/util.c 	return phar_get_entry_info_dir(phar, path, path_len, 0, error, security TSRMLS_CC);</span>
+<span class='curline'><a href='../S/984.html#L1224'>phar</a>             1224 ext/phar/util.c phar_entry_info *phar_get_entry_info_dir(phar_archive_data *phar, char *path, int path_len, char dir, char **error, int security TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/984.html#L1261'>phar</a>             1261 ext/phar/util.c 	if (!phar-&gt;manifest.arBuckets) {</span>
+<span class='curline'><a href='../S/984.html#L1272'>phar</a>             1272 ext/phar/util.c 	if (SUCCESS == zend_hash_find(&amp;phar-&gt;manifest, path, path_len, (void**)&amp;entry)) {</span>
+<span class='curline'><a href='../S/984.html#L1294'>phar</a>             1294 ext/phar/util.c 		if (zend_hash_exists(&amp;phar-&gt;virtual_dirs, path, path_len)) {</span>
+<span class='curline'><a href='../S/984.html#L1301'>phar</a>             1301 ext/phar/util.c 			entry-&gt;phar = phar;</span>
+<span class='curline'><a href='../S/984.html#L1306'>phar</a>             1306 ext/phar/util.c 	if (phar-&gt;mounted_dirs.arBuckets &amp;&amp; zend_hash_num_elements(&amp;phar-&gt;mounted_dirs)) {</span>
+<span class='curline'><a href='../S/984.html#L1311'>phar</a>             1311 ext/phar/util.c 		zend_hash_internal_pointer_reset(&amp;phar-&gt;mounted_dirs);</span>
+<span class='curline'><a href='../S/984.html#L1312'>phar</a>             1312 ext/phar/util.c 		while (FAILURE != zend_hash_has_more_elements(&amp;phar-&gt;mounted_dirs)) {</span>
+<span class='curline'><a href='../S/984.html#L1313'>phar</a>             1313 ext/phar/util.c 			if (HASH_KEY_NON_EXISTENT == zend_hash_get_current_key_ex(&amp;phar-&gt;mounted_dirs, &amp;str_key, &amp;keylen, &amp;unused, 0, NULL)) {</span>
+<span class='curline'><a href='../S/984.html#L1324'>phar</a>             1324 ext/phar/util.c 				if (SUCCESS != zend_hash_find(&amp;phar-&gt;manifest, str_key, keylen, (void **) &amp;entry)) {</span>
+<span class='curline'><a href='../S/984.html#L1363'>phar</a>             1363 ext/phar/util.c 				if (SUCCESS != phar_mount_entry(phar, test, test_len, path, path_len TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/984.html#L1373'>phar</a>             1373 ext/phar/util.c 				if (SUCCESS != zend_hash_find(&amp;phar-&gt;manifest, path, path_len, (void**)&amp;entry)) {</span>
+<span class='curline'><a href='../S/984.html#L1799'>phar</a>             1799 ext/phar/util.c int phar_create_signature(phar_archive_data *phar, php_stream *fp, char **signature, int *signature_length, char **error TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/984.html#L1806'>phar</a>             1806 ext/phar/util.c 	if (phar-&gt;signature) {</span>
+<span class='curline'><a href='../S/984.html#L1807'>phar</a>             1807 ext/phar/util.c 		efree(phar-&gt;signature);</span>
+<span class='curline'><a href='../S/984.html#L1808'>phar</a>             1808 ext/phar/util.c 		phar-&gt;signature = NULL;</span>
+<span class='curline'><a href='../S/984.html#L1811'>phar</a>             1811 ext/phar/util.c 	switch(phar-&gt;sig_flags) {</span>
+<span class='curline'><a href='../S/984.html#L1847'>phar</a>             1847 ext/phar/util.c 				spprintf(error, 0, "unable to write to phar \"%s\" with requested hash type", phar-&gt;fname);</span>
+<span class='curline'><a href='../S/984.html#L1864'>phar</a>             1864 ext/phar/util.c 					spprintf(error, 0, "unable to write to phar \"%s\" with requested openssl signature", phar-&gt;fname);</span>
+<span class='curline'><a href='../S/984.html#L1887'>phar</a>             1887 ext/phar/util.c 					spprintf(error, 0, "unable to initialize openssl signature for phar \"%s\"", phar-&gt;fname);</span>
+<span class='curline'><a href='../S/984.html#L1896'>phar</a>             1896 ext/phar/util.c 						spprintf(error, 0, "unable to update the openssl signature for phar \"%s\"", phar-&gt;fname);</span>
+<span class='curline'><a href='../S/984.html#L1905'>phar</a>             1905 ext/phar/util.c 					spprintf(error, 0, "unable to write phar \"%s\" with requested openssl signature", phar-&gt;fname);</span>
+<span class='curline'><a href='../S/984.html#L1919'>phar</a>             1919 ext/phar/util.c 					spprintf(error, 0, "unable to write phar \"%s\" with requested openssl signature", phar-&gt;fname);</span>
+<span class='curline'><a href='../S/984.html#L1929'>phar</a>             1929 ext/phar/util.c 			phar-&gt;sig_flags = PHAR_SIG_SHA1;</span>
+<span class='curline'><a href='../S/984.html#L1962'>phar</a>             1962 ext/phar/util.c 	phar-&gt;sig_len = phar_hex_str((const char *)*signature, *signature_length, &amp;phar-&gt;signature TSRMLS_CC);</span>
+<span class='curline'><a href='../S/984.html#L1967'>phar</a>             1967 ext/phar/util.c void phar_add_virtual_dirs(phar_archive_data *phar, char *filename, int filename_len TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/984.html#L1973'>phar</a>             1973 ext/phar/util.c 		if (!filename_len || FAILURE == zend_hash_add_empty_element(&amp;phar-&gt;virtual_dirs, filename, filename_len)) {</span>
+<span class='curline'><a href='../S/984.html#L1985'>phar</a>             1985 ext/phar/util.c 	entry-&gt;phar = (phar_archive_data *)argument;</span>
+<span class='curline'><a href='../S/984.html#L2023'>phar</a>             2023 ext/phar/util.c 	phar_archive_data *phar;</span>
+<span class='curline'><a href='../S/984.html#L2028'>phar</a>             2028 ext/phar/util.c 	phar = (phar_archive_data *) emalloc(sizeof(phar_archive_data));</span>
+<span class='curline'><a href='../S/984.html#L2029'>phar</a>             2029 ext/phar/util.c 	*phar = **pphar;</span>
+<span class='curline'><a href='../S/984.html#L2030'>phar</a>             2030 ext/phar/util.c 	phar-&gt;is_persistent = 0;</span>
+<span class='curline'><a href='../S/984.html#L2031'>phar</a>             2031 ext/phar/util.c 	fname = phar-&gt;fname;</span>
+<span class='curline'><a href='../S/984.html#L2032'>phar</a>             2032 ext/phar/util.c 	phar-&gt;fname = estrndup(phar-&gt;fname, phar-&gt;fname_len);</span>
+<span class='curline'><a href='../S/984.html#L2033'>phar</a>             2033 ext/phar/util.c 	phar-&gt;ext = phar-&gt;fname + (phar-&gt;ext - fname);</span>
+<span class='curline'><a href='../S/984.html#L2035'>phar</a>             2035 ext/phar/util.c 	if (phar-&gt;alias) {</span>
+<span class='curline'><a href='../S/984.html#L2036'>phar</a>             2036 ext/phar/util.c 		phar-&gt;alias = estrndup(phar-&gt;alias, phar-&gt;alias_len);</span>
+<span class='curline'><a href='../S/984.html#L2039'>phar</a>             2039 ext/phar/util.c 	if (phar-&gt;signature) {</span>
+<span class='curline'><a href='../S/984.html#L2040'>phar</a>             2040 ext/phar/util.c 		phar-&gt;signature = estrdup(phar-&gt;signature);</span>
+<span class='curline'><a href='../S/984.html#L2043'>phar</a>             2043 ext/phar/util.c 	if (phar-&gt;metadata) {</span>
+<span class='curline'><a href='../S/984.html#L2045'>phar</a>             2045 ext/phar/util.c 		if (phar-&gt;metadata_len) {</span>
+<span class='curline'><a href='../S/984.html#L2046'>phar</a>             2046 ext/phar/util.c 			char *buf = estrndup((char *) phar-&gt;metadata, phar-&gt;metadata_len);</span>
+<span class='curline'><a href='../S/984.html#L2047'>phar</a>             2047 ext/phar/util.c 			phar_parse_metadata(&amp;buf, &amp;phar-&gt;metadata, phar-&gt;metadata_len TSRMLS_CC);</span>
+<span class='curline'><a href='../S/984.html#L2052'>phar</a>             2052 ext/phar/util.c 			t = phar-&gt;metadata;</span>
+<span class='curline'><a href='../S/984.html#L2053'>phar</a>             2053 ext/phar/util.c 			ALLOC_ZVAL(phar-&gt;metadata);</span>
+<span class='curline'><a href='../S/984.html#L2054'>phar</a>             2054 ext/phar/util.c 			*phar-&gt;metadata = *t;</span>
+<span class='curline'><a href='../S/984.html#L2055'>phar</a>             2055 ext/phar/util.c 			zval_copy_ctor(phar-&gt;metadata);</span>
+<span class='curline'><a href='../S/984.html#L2056'>phar</a>             2056 ext/phar/util.c 			Z_SET_REFCOUNT_P(phar-&gt;metadata, 1);</span>
+<span class='curline'><a href='../S/984.html#L2063'>phar</a>             2063 ext/phar/util.c 	zend_hash_apply_with_argument(&amp;newmanifest, (apply_func_arg_t) phar_update_cached_entry, (void *)phar TSRMLS_CC);</span>
+<span class='curline'><a href='../S/984.html#L2064'>phar</a>             2064 ext/phar/util.c 	phar-&gt;manifest = newmanifest;</span>
+<span class='curline'><a href='../S/984.html#L2065'>phar</a>             2065 ext/phar/util.c 	zend_hash_init(&amp;phar-&gt;mounted_dirs, sizeof(char *),</span>
+<span class='curline'><a href='../S/984.html#L2067'>phar</a>             2067 ext/phar/util.c 	zend_hash_init(&amp;phar-&gt;virtual_dirs, sizeof(char *),</span>
+<span class='curline'><a href='../S/984.html#L2069'>phar</a>             2069 ext/phar/util.c 	zend_hash_copy(&amp;phar-&gt;virtual_dirs, &amp;(*pphar)-&gt;virtual_dirs, NULL, NULL, sizeof(void *));</span>
+<span class='curline'><a href='../S/984.html#L2070'>phar</a>             2070 ext/phar/util.c 	*pphar = phar;</span>
+<span class='curline'><a href='../S/984.html#L2076'>phar</a>             2076 ext/phar/util.c 		if (objphar[0]-&gt;arc.archive-&gt;fname_len == phar-&gt;fname_len &amp;&amp; !memcmp(objphar[0]-&gt;arc.archive-&gt;fname, phar-&gt;fname, phar-&gt;fname_len)) {</span>
+<span class='curline'><a href='../S/984.html#L2077'>phar</a>             2077 ext/phar/util.c 			objphar[0]-&gt;arc.archive = phar;</span>
+<span class='curline'><a href='../S/985.html#L298'>phar</a>              298 ext/phar/zip.c 	entry.phar = mydata;</span>
+<span class='curline'><a href='../S/985.html#L724'>phar</a>              724 ext/phar/zip.c 	phar_archive_data *phar;</span>
+<span class='curline'><a href='../S/985.html#L725'>phar</a>              725 ext/phar/zip.c 	int ret = phar_create_or_parse_filename(fname, fname_len, alias, alias_len, is_data, options, &amp;phar, error TSRMLS_CC);</span>
+<span class='curline'><a href='../S/985.html#L732'>phar</a>              732 ext/phar/zip.c 		*pphar = phar;</span>
+<span class='curline'><a href='../S/985.html#L735'>phar</a>              735 ext/phar/zip.c 	phar-&gt;is_data = is_data;</span>
+<span class='curline'><a href='../S/985.html#L737'>phar</a>              737 ext/phar/zip.c 	if (phar-&gt;is_zip) {</span>
+<span class='curline'><a href='../S/985.html#L741'>phar</a>              741 ext/phar/zip.c 	if (phar-&gt;is_brandnew) {</span>
+<span class='curline'><a href='../S/985.html#L742'>phar</a>              742 ext/phar/zip.c 		phar-&gt;internal_file_start = 0;</span>
+<span class='curline'><a href='../S/985.html#L743'>phar</a>              743 ext/phar/zip.c 		phar-&gt;is_zip = 1;</span>
+<span class='curline'><a href='../S/985.html#L744'>phar</a>              744 ext/phar/zip.c 		phar-&gt;is_tar = 0;</span>
+<span class='curline'><a href='../S/985.html#L792'>phar</a>              792 ext/phar/zip.c 	phar_add_virtual_dirs(entry-&gt;phar, entry-&gt;filename, entry-&gt;filename_len TSRMLS_CC);</span>
+<span class='curline'><a href='../S/985.html#L837'>phar</a>              837 ext/phar/zip.c 			if (entry-&gt;fp_type == PHAR_MOD &amp;&amp; entry-&gt;fp != entry-&gt;phar-&gt;fp &amp;&amp; entry-&gt;fp != entry-&gt;phar-&gt;ufp) {</span>
+<span class='curline'><a href='../S/985.html#L846'>phar</a>              846 ext/phar/zip.c 			spprintf(p-&gt;error, 0, "unable to open file contents of file \"%s\" in zip-based phar \"%s\"", entry-&gt;filename, entry-&gt;phar-&gt;fname);</span>
+<span class='curline'><a href='../S/985.html#L857'>phar</a>              857 ext/phar/zip.c 			spprintf(p-&gt;error, 0, "unable to seek to start of file \"%s\" to zip-based phar \"%s\"", entry-&gt;filename, entry-&gt;phar-&gt;fname);</span>
+<span class='curline'><a href='../S/985.html#L884'>phar</a>              884 ext/phar/zip.c 				spprintf(p-&gt;error, 0, "unable to gzip compress file \"%s\" to zip-based phar \"%s\"", entry-&gt;filename, entry-&gt;phar-&gt;fname);</span>
+<span class='curline'><a href='../S/985.html#L886'>phar</a>              886 ext/phar/zip.c 				spprintf(p-&gt;error, 0, "unable to bzip2 compress file \"%s\" to zip-based phar \"%s\"", entry-&gt;filename, entry-&gt;phar-&gt;fname);</span>
+<span class='curline'><a href='../S/985.html#L897'>phar</a>              897 ext/phar/zip.c 			spprintf(p-&gt;error, 0, "unable to create temporary file for file \"%s\" while creating zip-based phar \"%s\"", entry-&gt;filename, entry-&gt;phar-&gt;fname);</span>
+<span class='curline'><a href='../S/985.html#L904'>phar</a>              904 ext/phar/zip.c 			spprintf(p-&gt;error, 0, "unable to seek to start of file \"%s\" to zip-based phar \"%s\"", entry-&gt;filename, entry-&gt;phar-&gt;fname);</span>
+<span class='curline'><a href='../S/985.html#L911'>phar</a>              911 ext/phar/zip.c 			spprintf(p-&gt;error, 0, "unable to copy compressed file contents of file \"%s\" while creating new phar \"%s\"", entry-&gt;filename, entry-&gt;phar-&gt;fname);</span>
+<span class='curline'><a href='../S/985.html#L934'>phar</a>              934 ext/phar/zip.c 				spprintf(p-&gt;error, 0, "unable to seek to start of file \"%s\" while creating zip-based phar \"%s\"", entry-&gt;filename, entry-&gt;phar-&gt;fname);</span>
+<span class='curline'><a href='../S/985.html#L962'>phar</a>              962 ext/phar/zip.c 		spprintf(p-&gt;error, 0, "unable to write local file header of file \"%s\" to zip-based phar \"%s\"", entry-&gt;filename, entry-&gt;phar-&gt;fname);</span>
+<span class='curline'><a href='../S/985.html#L967'>phar</a>              967 ext/phar/zip.c 		spprintf(p-&gt;error, 0, "unable to write central directory entry for file \"%s\" while creating zip-based phar \"%s\"", entry-&gt;filename, entry-&gt;phar-&gt;fname);</span>
+<span class='curline'><a href='../S/985.html#L973'>phar</a>              973 ext/phar/zip.c 			spprintf(p-&gt;error, 0, "unable to write filename to local directory entry for directory \"%s\" while creating zip-based phar \"%s\"", entry-&gt;filename, entry-&gt;phar-&gt;fname);</span>
+<span class='curline'><a href='../S/985.html#L978'>phar</a>              978 ext/phar/zip.c 			spprintf(p-&gt;error, 0, "unable to write filename to local directory entry for directory \"%s\" while creating zip-based phar \"%s\"", entry-&gt;filename, entry-&gt;phar-&gt;fname);</span>
+<span class='curline'><a href='../S/985.html#L983'>phar</a>              983 ext/phar/zip.c 			spprintf(p-&gt;error, 0, "unable to write filename to central directory entry for directory \"%s\" while creating zip-based phar \"%s\"", entry-&gt;filename, entry-&gt;phar-&gt;fname);</span>
+<span class='curline'><a href='../S/985.html#L988'>phar</a>              988 ext/phar/zip.c 			spprintf(p-&gt;error, 0, "unable to write filename to central directory entry for directory \"%s\" while creating zip-based phar \"%s\"", entry-&gt;filename, entry-&gt;phar-&gt;fname);</span>
+<span class='curline'><a href='../S/985.html#L993'>phar</a>              993 ext/phar/zip.c 			spprintf(p-&gt;error, 0, "unable to write filename to local directory entry for file \"%s\" while creating zip-based phar \"%s\"", entry-&gt;filename, entry-&gt;phar-&gt;fname);</span>
+<span class='curline'><a href='../S/985.html#L998'>phar</a>              998 ext/phar/zip.c 			spprintf(p-&gt;error, 0, "unable to write filename to central directory entry for file \"%s\" while creating zip-based phar \"%s\"", entry-&gt;filename, entry-&gt;phar-&gt;fname);</span>
+<span class='curline'><a href='../S/985.html#L1004'>phar</a>             1004 ext/phar/zip.c 		spprintf(p-&gt;error, 0, "unable to write local extra permissions file header of file \"%s\" to zip-based phar \"%s\"", entry-&gt;filename, entry-&gt;phar-&gt;fname);</span>
+<span class='curline'><a href='../S/985.html#L1009'>phar</a>             1009 ext/phar/zip.c 		spprintf(p-&gt;error, 0, "unable to write central extra permissions file header of file \"%s\" to zip-based phar \"%s\"", entry-&gt;filename, entry-&gt;phar-&gt;fname);</span>
+<span class='curline'><a href='../S/985.html#L1016'>phar</a>             1016 ext/phar/zip.c 				spprintf(p-&gt;error, 0, "unable to write compressed contents of file \"%s\" in zip-based phar \"%s\"", entry-&gt;filename, entry-&gt;phar-&gt;fname);</span>
+<span class='curline'><a href='../S/985.html#L1030'>phar</a>             1030 ext/phar/zip.c 				spprintf(p-&gt;error, 0, "unable to write contents of file \"%s\" in zip-based phar \"%s\"", entry-&gt;filename, entry-&gt;phar-&gt;fname);</span>
+<span class='curline'><a href='../S/985.html#L1035'>phar</a>             1035 ext/phar/zip.c 		if (entry-&gt;fp_type == PHAR_MOD &amp;&amp; entry-&gt;fp != entry-&gt;phar-&gt;fp &amp;&amp; entry-&gt;fp != entry-&gt;phar-&gt;ufp &amp;&amp; entry-&gt;fp_refcount == 0) {</span>
+<span class='curline'><a href='../S/985.html#L1056'>phar</a>             1056 ext/phar/zip.c 			spprintf(p-&gt;error, 0, "unable to copy contents of file \"%s\" while creating zip-based phar \"%s\"", entry-&gt;filename, entry-&gt;phar-&gt;fname);</span>
+<span class='curline'><a href='../S/985.html#L1067'>phar</a>             1067 ext/phar/zip.c 			spprintf(p-&gt;error, 0, "unable to write metadata as file comment for file \"%s\" while creating zip-based phar \"%s\"", entry-&gt;filename, entry-&gt;phar-&gt;fname);</span>
+<span class='curline'><a href='../S/985.html#L1079'>phar</a>             1079 ext/phar/zip.c static int phar_zip_applysignature(phar_archive_data *phar, struct _phar_zip_pass *pass,</span>
+<span class='curline'><a href='../S/985.html#L1083'>phar</a>             1083 ext/phar/zip.c 	if (!phar-&gt;is_data || phar-&gt;sig_flags) {</span>
+<span class='curline'><a href='../S/985.html#L1106'>phar</a>             1106 ext/phar/zip.c 		if (FAILURE == phar_create_signature(phar, newfile, &amp;signature, &amp;signature_length, pass-&gt;error TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/985.html#L1127'>phar</a>             1127 ext/phar/zip.c 		PHAR_SET_32(sigbuf, phar-&gt;sig_flags);</span>
+<span class='curline'><a href='../S/985.html#L1133'>phar</a>             1133 ext/phar/zip.c 				spprintf(pass-&gt;error, 0, "phar error: unable to write signature to zip-based phar %s", phar-&gt;fname);</span>
+<span class='curline'><a href='../S/985.html#L1142'>phar</a>             1142 ext/phar/zip.c 		entry.phar = phar;</span>
+<span class='curline'><a href='../S/985.html#L1157'>phar</a>             1157 ext/phar/zip.c int phar_zip_flush(phar_archive_data *phar, char *user_stub, long len, int defaultstub, char **error TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/985.html#L1179'>phar</a>             1179 ext/phar/zip.c 	entry.phar = phar;</span>
+<span class='curline'><a href='../S/985.html#L1182'>phar</a>             1182 ext/phar/zip.c 	if (phar-&gt;is_persistent) {</span>
+<span class='curline'><a href='../S/985.html#L1184'>phar</a>             1184 ext/phar/zip.c 			spprintf(error, 0, "internal error: attempt to flush cached zip-based phar \"%s\"", phar-&gt;fname);</span>
+<span class='curline'><a href='../S/985.html#L1189'>phar</a>             1189 ext/phar/zip.c 	if (phar-&gt;is_data) {</span>
+<span class='curline'><a href='../S/985.html#L1194'>phar</a>             1194 ext/phar/zip.c 	if (!phar-&gt;is_temporary_alias &amp;&amp; phar-&gt;alias_len) {</span>
+<span class='curline'><a href='../S/985.html#L1200'>phar</a>             1200 ext/phar/zip.c 		if (phar-&gt;alias_len != (int)php_stream_write(entry.fp, phar-&gt;alias, phar-&gt;alias_len)) {</span>
+<span class='curline'><a href='../S/985.html#L1202'>phar</a>             1202 ext/phar/zip.c 				spprintf(error, 0, "unable to set alias in zip-based phar \"%s\"", phar-&gt;fname);</span>
+<span class='curline'><a href='../S/985.html#L1207'>phar</a>             1207 ext/phar/zip.c 		entry.uncompressed_filesize = entry.compressed_filesize = phar-&gt;alias_len;</span>
+<span class='curline'><a href='../S/985.html#L1211'>phar</a>             1211 ext/phar/zip.c 		if (SUCCESS != zend_hash_update(&amp;phar-&gt;manifest, entry.filename, entry.filename_len, (void*)&amp;entry, sizeof(phar_entry_info), NULL)) {</span>
+<span class='curline'><a href='../S/985.html#L1213'>phar</a>             1213 ext/phar/zip.c 				spprintf(error, 0, "unable to set alias in zip-based phar \"%s\"", phar-&gt;fname);</span>
+<span class='curline'><a href='../S/985.html#L1218'>phar</a>             1218 ext/phar/zip.c 		zend_hash_del(&amp;phar-&gt;manifest, ".phar/alias.txt", sizeof(".phar/alias.txt")-1);</span>
+<span class='curline'><a href='../S/985.html#L1222'>phar</a>             1222 ext/phar/zip.c 	if (phar-&gt;alias_len) {</span>
+<span class='curline'><a href='../S/985.html#L1223'>phar</a>             1223 ext/phar/zip.c 		if (FAILURE == phar_get_archive(&amp;phar, phar-&gt;fname, phar-&gt;fname_len, phar-&gt;alias, phar-&gt;alias_len, error TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/985.html#L1234'>phar</a>             1234 ext/phar/zip.c 					spprintf(error, 0, "unable to access resource to copy stub to new zip-based phar \"%s\"", phar-&gt;fname);</span>
+<span class='curline'><a href='../S/985.html#L1249'>phar</a>             1249 ext/phar/zip.c 					spprintf(error, 0, "unable to read resource to copy stub to new zip-based phar \"%s\"", phar-&gt;fname);</span>
+<span class='curline'><a href='../S/985.html#L1262'>phar</a>             1262 ext/phar/zip.c 				spprintf(error, 0, "illegal stub for zip-based phar \"%s\"", phar-&gt;fname);</span>
+<span class='curline'><a href='../S/985.html#L1283'>phar</a>             1283 ext/phar/zip.c 				spprintf(error, 0, "unable to create stub from string in new zip-based phar \"%s\"", phar-&gt;fname);</span>
+<span class='curline'><a href='../S/985.html#L1295'>phar</a>             1295 ext/phar/zip.c 		if (SUCCESS != zend_hash_update(&amp;phar-&gt;manifest, entry.filename, entry.filename_len, (void*)&amp;entry, sizeof(phar_entry_info), NULL)) {</span>
+<span class='curline'><a href='../S/985.html#L1300'>phar</a>             1300 ext/phar/zip.c 				spprintf(error, 0, "unable to set stub in zip-based phar \"%s\"", phar-&gt;fname);</span>
+<span class='curline'><a href='../S/985.html#L1318'>phar</a>             1318 ext/phar/zip.c 				spprintf(error, 0, "unable to %s stub in%szip-based phar \"%s\", failed", user_stub ? "overwrite" : "create", user_stub ? " " : " new ", phar-&gt;fname);</span>
+<span class='curline'><a href='../S/985.html#L1328'>phar</a>             1328 ext/phar/zip.c 			if (!zend_hash_exists(&amp;phar-&gt;manifest, ".phar/stub.php", sizeof(".phar/stub.php")-1)) {</span>
+<span class='curline'><a href='../S/985.html#L1329'>phar</a>             1329 ext/phar/zip.c 				if (SUCCESS != zend_hash_add(&amp;phar-&gt;manifest, entry.filename, entry.filename_len, (void*)&amp;entry, sizeof(phar_entry_info), NULL)) {</span>
+<span class='curline'><a href='../S/985.html#L1333'>phar</a>             1333 ext/phar/zip.c 						spprintf(error, 0, "unable to create stub in zip-based phar \"%s\"", phar-&gt;fname);</span>
+<span class='curline'><a href='../S/985.html#L1342'>phar</a>             1342 ext/phar/zip.c 			if (SUCCESS != zend_hash_update(&amp;phar-&gt;manifest, entry.filename, entry.filename_len, (void*)&amp;entry, sizeof(phar_entry_info), NULL)) {</span>
+<span class='curline'><a href='../S/985.html#L1346'>phar</a>             1346 ext/phar/zip.c 					spprintf(error, 0, "unable to overwrite stub in zip-based phar \"%s\"", phar-&gt;fname);</span>
+<span class='curline'><a href='../S/985.html#L1353'>phar</a>             1353 ext/phar/zip.c 	if (phar-&gt;fp &amp;&amp; !phar-&gt;is_brandnew) {</span>
+<span class='curline'><a href='../S/985.html#L1354'>phar</a>             1354 ext/phar/zip.c 		oldfile = phar-&gt;fp;</span>
+<span class='curline'><a href='../S/985.html#L1358'>phar</a>             1358 ext/phar/zip.c 		oldfile = php_stream_open_wrapper(phar-&gt;fname, "rb", 0, NULL);</span>
+<span class='curline'><a href='../S/985.html#L1372'>phar</a>             1372 ext/phar/zip.c 			spprintf(error, 4096, "phar zip flush of \"%s\" failed: unable to open temporary file", phar-&gt;fname);</span>
+<span class='curline'><a href='../S/985.html#L1387'>phar</a>             1387 ext/phar/zip.c 	if (!phar-&gt;is_data &amp;&amp; !phar-&gt;sig_flags) {</span>
+<span class='curline'><a href='../S/985.html#L1388'>phar</a>             1388 ext/phar/zip.c 		phar-&gt;sig_flags = PHAR_SIG_SHA1;</span>
+<span class='curline'><a href='../S/985.html#L1390'>phar</a>             1390 ext/phar/zip.c 	if (phar-&gt;sig_flags) {</span>
+<span class='curline'><a href='../S/985.html#L1391'>phar</a>             1391 ext/phar/zip.c 		PHAR_SET_16(eocd.counthere, zend_hash_num_elements(&amp;phar-&gt;manifest) + 1);</span>
+<span class='curline'><a href='../S/985.html#L1392'>phar</a>             1392 ext/phar/zip.c 		PHAR_SET_16(eocd.count, zend_hash_num_elements(&amp;phar-&gt;manifest) + 1);</span>
+<span class='curline'><a href='../S/985.html#L1394'>phar</a>             1394 ext/phar/zip.c 		PHAR_SET_16(eocd.counthere, zend_hash_num_elements(&amp;phar-&gt;manifest));</span>
+<span class='curline'><a href='../S/985.html#L1395'>phar</a>             1395 ext/phar/zip.c 		PHAR_SET_16(eocd.count, zend_hash_num_elements(&amp;phar-&gt;manifest));</span>
+<span class='curline'><a href='../S/985.html#L1397'>phar</a>             1397 ext/phar/zip.c 	zend_hash_apply_with_argument(&amp;phar-&gt;manifest, phar_zip_changed_apply, (void *) &amp;pass TSRMLS_CC);</span>
+<span class='curline'><a href='../S/985.html#L1399'>phar</a>             1399 ext/phar/zip.c 	if (phar-&gt;metadata) {</span>
+<span class='curline'><a href='../S/985.html#L1402'>phar</a>             1402 ext/phar/zip.c 		php_var_serialize(&amp;main_metadata_str, &amp;phar-&gt;metadata, &amp;metadata_hash TSRMLS_CC);</span>
+<span class='curline'><a href='../S/985.html#L1407'>phar</a>             1407 ext/phar/zip.c 			spprintf(error, 4096, "phar zip flush of \"%s\" failed: %s", phar-&gt;fname, temperr);</span>
+<span class='curline'><a href='../S/985.html#L1413'>phar</a>             1413 ext/phar/zip.c 		if (phar-&gt;metadata) {</span>
+<span class='curline'><a href='../S/985.html#L1423'>phar</a>             1423 ext/phar/zip.c 	if (FAILURE == phar_zip_applysignature(phar, &amp;pass, &amp;main_metadata_str TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/985.html#L1439'>phar</a>             1439 ext/phar/zip.c 				spprintf(error, 4096, "phar zip flush of \"%s\" failed: unable to write central-directory", phar-&gt;fname);</span>
+<span class='curline'><a href='../S/985.html#L1447'>phar</a>             1447 ext/phar/zip.c 	if (phar-&gt;metadata) {</span>
+<span class='curline'><a href='../S/985.html#L1453'>phar</a>             1453 ext/phar/zip.c 				spprintf(error, 4096, "phar zip flush of \"%s\" failed: unable to write end of central-directory", phar-&gt;fname);</span>
+<span class='curline'><a href='../S/985.html#L1460'>phar</a>             1460 ext/phar/zip.c 				spprintf(error, 4096, "phar zip flush of \"%s\" failed: unable to write metadata to zip comment", phar-&gt;fname);</span>
+<span class='curline'><a href='../S/985.html#L1470'>phar</a>             1470 ext/phar/zip.c 				spprintf(error, 4096, "phar zip flush of \"%s\" failed: unable to write end of central-directory", phar-&gt;fname);</span>
+<span class='curline'><a href='../S/985.html#L1476'>phar</a>             1476 ext/phar/zip.c 	if (phar-&gt;fp &amp;&amp; pass.free_fp) {</span>
+<span class='curline'><a href='../S/985.html#L1477'>phar</a>             1477 ext/phar/zip.c 		php_stream_close(phar-&gt;fp);</span>
+<span class='curline'><a href='../S/985.html#L1480'>phar</a>             1480 ext/phar/zip.c 	if (phar-&gt;ufp) {</span>
+<span class='curline'><a href='../S/985.html#L1482'>phar</a>             1482 ext/phar/zip.c 			php_stream_close(phar-&gt;ufp);</span>
+<span class='curline'><a href='../S/985.html#L1484'>phar</a>             1484 ext/phar/zip.c 		phar-&gt;ufp = NULL;</span>
+<span class='curline'><a href='../S/985.html#L1488'>phar</a>             1488 ext/phar/zip.c 	phar-&gt;is_brandnew = 0;</span>
+<span class='curline'><a href='../S/985.html#L1490'>phar</a>             1490 ext/phar/zip.c 	if (phar-&gt;donotflush) {</span>
+<span class='curline'><a href='../S/985.html#L1492'>phar</a>             1492 ext/phar/zip.c 		phar-&gt;fp = pass.filefp;</span>
+<span class='curline'><a href='../S/985.html#L1494'>phar</a>             1494 ext/phar/zip.c 		phar-&gt;fp = php_stream_open_wrapper(phar-&gt;fname, "w+b", IGNORE_URL|STREAM_MUST_SEEK|REPORT_ERRORS, NULL);</span>
+<span class='curline'><a href='../S/985.html#L1495'>phar</a>             1495 ext/phar/zip.c 		if (!phar-&gt;fp) {</span>
+<span class='curline'><a href='../S/985.html#L1499'>phar</a>             1499 ext/phar/zip.c 			phar-&gt;fp = pass.filefp;</span>
+<span class='curline'><a href='../S/985.html#L1501'>phar</a>             1501 ext/phar/zip.c 				spprintf(error, 4096, "unable to open new phar \"%s\" for writing", phar-&gt;fname);</span>
+<span class='curline'><a href='../S/985.html#L1506'>phar</a>             1506 ext/phar/zip.c 		php_stream_copy_to_stream_ex(pass.filefp, phar-&gt;fp, PHP_STREAM_COPY_ALL, NULL);</span>
+</pre>
+</body>
+</html>

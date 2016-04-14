@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>Thumbnail</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/172.html#L1550'>Thumbnail</a>        1550 ext/exif/exif.c 	thumbnail_data  Thumbnail;</span>
+<span class='curline'><a href='../S/172.html#L2446'>Thumbnail</a>        2446 ext/exif/exif.c 	if (!ImageInfo-&gt;read_thumbnail || !ImageInfo-&gt;Thumbnail.offset || !ImageInfo-&gt;Thumbnail.size) {</span>
+<span class='curline'><a href='../S/172.html#L2450'>Thumbnail</a>        2450 ext/exif/exif.c 	exif_error_docref(NULL EXIFERR_CC, ImageInfo, E_NOTICE, "Thumbnail: filetype = %d", ImageInfo-&gt;Thumbnail.filetype);</span>
+<span class='curline'><a href='../S/172.html#L2452'>Thumbnail</a>        2452 ext/exif/exif.c 	switch(ImageInfo-&gt;Thumbnail.filetype) {</span>
+<span class='curline'><a href='../S/172.html#L2473'>Thumbnail</a>        2473 ext/exif/exif.c 			new_data = safe_erealloc(ImageInfo-&gt;Thumbnail.data, 1, ImageInfo-&gt;Thumbnail.size, new_size);</span>
+<span class='curline'><a href='../S/172.html#L2474'>Thumbnail</a>        2474 ext/exif/exif.c 			ImageInfo-&gt;Thumbnail.data = new_data;</span>
+<span class='curline'><a href='../S/172.html#L2475'>Thumbnail</a>        2475 ext/exif/exif.c 			memmove(ImageInfo-&gt;Thumbnail.data + new_move, ImageInfo-&gt;Thumbnail.data, ImageInfo-&gt;Thumbnail.size);</span>
+<span class='curline'><a href='../S/172.html#L2476'>Thumbnail</a>        2476 ext/exif/exif.c 			ImageInfo-&gt;Thumbnail.size += new_size;</span>
+<span class='curline'><a href='../S/172.html#L2509'>Thumbnail</a>        2509 ext/exif/exif.c 						memmove(ImageInfo-&gt;Thumbnail.data+new_value, value_ptr, byte_count);</span>
+<span class='curline'><a href='../S/172.html#L2528'>Thumbnail</a>        2528 ext/exif/exif.c 	if (ImageInfo-&gt;Thumbnail.data) {</span>
+<span class='curline'><a href='../S/172.html#L2536'>Thumbnail</a>        2536 ext/exif/exif.c 	if (ImageInfo-&gt;Thumbnail.size &gt;= 65536</span>
+<span class='curline'><a href='../S/172.html#L2537'>Thumbnail</a>        2537 ext/exif/exif.c 	 || ImageInfo-&gt;Thumbnail.size &lt;= 0</span>
+<span class='curline'><a href='../S/172.html#L2538'>Thumbnail</a>        2538 ext/exif/exif.c 	 || ImageInfo-&gt;Thumbnail.offset &lt;= 0</span>
+<span class='curline'><a href='../S/172.html#L2544'>Thumbnail</a>        2544 ext/exif/exif.c 	if ((ImageInfo-&gt;Thumbnail.offset + ImageInfo-&gt;Thumbnail.size) &gt; length) {</span>
+<span class='curline'><a href='../S/172.html#L2548'>Thumbnail</a>        2548 ext/exif/exif.c 	ImageInfo-&gt;Thumbnail.data = estrndup(offset + ImageInfo-&gt;Thumbnail.offset, ImageInfo-&gt;Thumbnail.size);</span>
+<span class='curline'><a href='../S/172.html#L2912'>Thumbnail</a>        2912 ext/exif/exif.c 		if (!ImageInfo-&gt;Thumbnail.data) {</span>
+<span class='curline'><a href='../S/172.html#L2916'>Thumbnail</a>        2916 ext/exif/exif.c 					ImageInfo-&gt;Thumbnail.width = exif_convert_any_to_int(value_ptr, format, ImageInfo-&gt;motorola_intel TSRMLS_CC);</span>
+<span class='curline'><a href='../S/172.html#L2921'>Thumbnail</a>        2921 ext/exif/exif.c 					ImageInfo-&gt;Thumbnail.height = exif_convert_any_to_int(value_ptr, format, ImageInfo-&gt;motorola_intel TSRMLS_CC);</span>
+<span class='curline'><a href='../S/172.html#L2927'>Thumbnail</a>        2927 ext/exif/exif.c 					ImageInfo-&gt;Thumbnail.offset = exif_convert_any_to_int(value_ptr, format, ImageInfo-&gt;motorola_intel TSRMLS_CC);</span>
+<span class='curline'><a href='../S/172.html#L2932'>Thumbnail</a>        2932 ext/exif/exif.c 						ImageInfo-&gt;Thumbnail.filetype = ImageInfo-&gt;FileType;</span>
+<span class='curline'><a href='../S/172.html#L2935'>Thumbnail</a>        2935 ext/exif/exif.c 						ImageInfo-&gt;Thumbnail.filetype = IMAGE_FILETYPE_TIFF_MM;</span>
+<span class='curline'><a href='../S/172.html#L2937'>Thumbnail</a>        2937 ext/exif/exif.c 					ImageInfo-&gt;Thumbnail.size = exif_convert_any_to_int(value_ptr, format, ImageInfo-&gt;motorola_intel TSRMLS_CC);</span>
+<span class='curline'><a href='../S/172.html#L2941'>Thumbnail</a>        2941 ext/exif/exif.c 					if (ImageInfo-&gt;Thumbnail.filetype == IMAGE_FILETYPE_UNKNOWN) {</span>
+<span class='curline'><a href='../S/172.html#L2942'>Thumbnail</a>        2942 ext/exif/exif.c 						ImageInfo-&gt;Thumbnail.filetype = IMAGE_FILETYPE_JPEG;</span>
+<span class='curline'><a href='../S/172.html#L2943'>Thumbnail</a>        2943 ext/exif/exif.c 						ImageInfo-&gt;Thumbnail.size = exif_convert_any_to_int(value_ptr, format, ImageInfo-&gt;motorola_intel TSRMLS_CC);</span>
+<span class='curline'><a href='../S/172.html#L3163'>Thumbnail</a>        3163 ext/exif/exif.c 			exif_error_docref(NULL EXIFERR_CC, ImageInfo, E_NOTICE, "Thumbnail size: 0x%04X", ImageInfo-&gt;Thumbnail.size);</span>
+<span class='curline'><a href='../S/172.html#L3165'>Thumbnail</a>        3165 ext/exif/exif.c 			if (ImageInfo-&gt;Thumbnail.filetype != IMAGE_FILETYPE_UNKNOWN</span>
+<span class='curline'><a href='../S/172.html#L3166'>Thumbnail</a>        3166 ext/exif/exif.c 			&amp;&amp;  ImageInfo-&gt;Thumbnail.size</span>
+<span class='curline'><a href='../S/172.html#L3167'>Thumbnail</a>        3167 ext/exif/exif.c 			&amp;&amp;  ImageInfo-&gt;Thumbnail.offset</span>
+<span class='curline'><a href='../S/172.html#L3436'>Thumbnail</a>        3436 ext/exif/exif.c 	uchar           c, *data = (uchar*)ImageInfo-&gt;Thumbnail.data;</span>
+<span class='curline'><a href='../S/172.html#L3445'>Thumbnail</a>        3445 ext/exif/exif.c 		if (!ImageInfo-&gt;Thumbnail.width &amp;&amp; !ImageInfo-&gt;Thumbnail.height) {</span>
+<span class='curline'><a href='../S/172.html#L3452'>Thumbnail</a>        3452 ext/exif/exif.c 		if (pos&gt;=ImageInfo-&gt;Thumbnail.size)</span>
+<span class='curline'><a href='../S/172.html#L3455'>Thumbnail</a>        3455 ext/exif/exif.c 		if (pos&gt;=ImageInfo-&gt;Thumbnail.size)</span>
+<span class='curline'><a href='../S/172.html#L3462'>Thumbnail</a>        3462 ext/exif/exif.c 			if (pos+3&gt;=ImageInfo-&gt;Thumbnail.size)</span>
+<span class='curline'><a href='../S/172.html#L3470'>Thumbnail</a>        3470 ext/exif/exif.c 		if (pos+length&gt;=ImageInfo-&gt;Thumbnail.size) {</span>
+<span class='curline'><a href='../S/172.html#L3492'>Thumbnail</a>        3492 ext/exif/exif.c 				ImageInfo-&gt;Thumbnail.height   = sof_info.height;</span>
+<span class='curline'><a href='../S/172.html#L3493'>Thumbnail</a>        3493 ext/exif/exif.c 				ImageInfo-&gt;Thumbnail.width    = sof_info.width;</span>
+<span class='curline'><a href='../S/172.html#L3677'>Thumbnail</a>        3677 ext/exif/exif.c 							if (ImageInfo-&gt;Thumbnail.filetype != IMAGE_FILETYPE_UNKNOWN</span>
+<span class='curline'><a href='../S/172.html#L3678'>Thumbnail</a>        3678 ext/exif/exif.c 							&amp;&amp;  ImageInfo-&gt;Thumbnail.size</span>
+<span class='curline'><a href='../S/172.html#L3679'>Thumbnail</a>        3679 ext/exif/exif.c 							&amp;&amp;  ImageInfo-&gt;Thumbnail.offset</span>
+<span class='curline'><a href='../S/172.html#L3683'>Thumbnail</a>        3683 ext/exif/exif.c 								exif_error_docref(NULL EXIFERR_CC, ImageInfo, E_NOTICE, "%s THUMBNAIL @0x%04X + 0x%04X", ImageInfo-&gt;Thumbnail.data ? "Ignore" : "Read", ImageInfo-&gt;Thumbnail.offset, ImageInfo-&gt;Thumbnail.size);</span>
+<span class='curline'><a href='../S/172.html#L3685'>Thumbnail</a>        3685 ext/exif/exif.c 								if (!ImageInfo-&gt;Thumbnail.data) {</span>
+<span class='curline'><a href='../S/172.html#L3686'>Thumbnail</a>        3686 ext/exif/exif.c 									ImageInfo-&gt;Thumbnail.data = safe_emalloc(ImageInfo-&gt;Thumbnail.size, 1, 0);</span>
+<span class='curline'><a href='../S/172.html#L3687'>Thumbnail</a>        3687 ext/exif/exif.c 									php_stream_seek(ImageInfo-&gt;infile, ImageInfo-&gt;Thumbnail.offset, SEEK_SET);</span>
+<span class='curline'><a href='../S/172.html#L3688'>Thumbnail</a>        3688 ext/exif/exif.c 									fgot = php_stream_read(ImageInfo-&gt;infile, ImageInfo-&gt;Thumbnail.data, ImageInfo-&gt;Thumbnail.size);</span>
+<span class='curline'><a href='../S/172.html#L3689'>Thumbnail</a>        3689 ext/exif/exif.c 									if (fgot &lt; ImageInfo-&gt;Thumbnail.size) {</span>
+<span class='curline'><a href='../S/172.html#L3717'>Thumbnail</a>        3717 ext/exif/exif.c 					exif_error_docref(NULL EXIFERR_CC, ImageInfo, E_NOTICE, "%s THUMBNAIL @0x%04X + 0x%04X", ImageInfo-&gt;Thumbnail.data ? "Ignore" : "Read", ImageInfo-&gt;Thumbnail.offset, ImageInfo-&gt;Thumbnail.size);</span>
+<span class='curline'><a href='../S/172.html#L3719'>Thumbnail</a>        3719 ext/exif/exif.c 					if (!ImageInfo-&gt;Thumbnail.data &amp;&amp; ImageInfo-&gt;Thumbnail.offset &amp;&amp; ImageInfo-&gt;Thumbnail.size &amp;&amp; ImageInfo-&gt;read_thumbnail) {</span>
+<span class='curline'><a href='../S/172.html#L3720'>Thumbnail</a>        3720 ext/exif/exif.c 						ImageInfo-&gt;Thumbnail.data = safe_emalloc(ImageInfo-&gt;Thumbnail.size, 1, 0);</span>
+<span class='curline'><a href='../S/172.html#L3721'>Thumbnail</a>        3721 ext/exif/exif.c 						php_stream_seek(ImageInfo-&gt;infile, ImageInfo-&gt;Thumbnail.offset, SEEK_SET);</span>
+<span class='curline'><a href='../S/172.html#L3722'>Thumbnail</a>        3722 ext/exif/exif.c 						fgot = php_stream_read(ImageInfo-&gt;infile, ImageInfo-&gt;Thumbnail.data, ImageInfo-&gt;Thumbnail.size);</span>
+<span class='curline'><a href='../S/172.html#L3723'>Thumbnail</a>        3723 ext/exif/exif.c 						if (fgot &lt; ImageInfo-&gt;Thumbnail.size) {</span>
+<span class='curline'><a href='../S/172.html#L3826'>Thumbnail</a>        3826 ext/exif/exif.c 	EFREE_IF(ImageInfo-&gt;Thumbnail.data);</span>
+<span class='curline'><a href='../S/172.html#L3890'>Thumbnail</a>        3890 ext/exif/exif.c 	ImageInfo-&gt;Thumbnail.filetype = IMAGE_FILETYPE_UNKNOWN;</span>
+<span class='curline'><a href='../S/172.html#L4040'>Thumbnail</a>        4040 ext/exif/exif.c 	if (ImageInfo.Thumbnail.size) {</span>
+<span class='curline'><a href='../S/172.html#L4043'>Thumbnail</a>        4043 ext/exif/exif.c 			exif_iif_add_tag(&amp;ImageInfo, SECTION_THUMBNAIL, "THUMBNAIL", TAG_NONE, TAG_FMT_UNDEFINED, ImageInfo.Thumbnail.size, ImageInfo.Thumbnail.data TSRMLS_CC);</span>
+<span class='curline'><a href='../S/172.html#L4045'>Thumbnail</a>        4045 ext/exif/exif.c 		if (!ImageInfo.Thumbnail.width || !ImageInfo.Thumbnail.height) {</span>
+<span class='curline'><a href='../S/172.html#L4049'>Thumbnail</a>        4049 ext/exif/exif.c 		exif_iif_add_int(&amp;ImageInfo, SECTION_COMPUTED, "Thumbnail.FileType", ImageInfo.Thumbnail.filetype TSRMLS_CC);</span>
+<span class='curline'><a href='../S/172.html#L4050'>Thumbnail</a>        4050 ext/exif/exif.c 		exif_iif_add_str(&amp;ImageInfo, SECTION_COMPUTED, "Thumbnail.MimeType", (char*)php_image_type_to_mime_type(ImageInfo.Thumbnail.filetype) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/172.html#L4052'>Thumbnail</a>        4052 ext/exif/exif.c 	if (ImageInfo.Thumbnail.width &amp;&amp; ImageInfo.Thumbnail.height) {</span>
+<span class='curline'><a href='../S/172.html#L4053'>Thumbnail</a>        4053 ext/exif/exif.c 		exif_iif_add_int(&amp;ImageInfo, SECTION_COMPUTED, "Thumbnail.Height", ImageInfo.Thumbnail.height TSRMLS_CC);</span>
+<span class='curline'><a href='../S/172.html#L4054'>Thumbnail</a>        4054 ext/exif/exif.c 		exif_iif_add_int(&amp;ImageInfo, SECTION_COMPUTED, "Thumbnail.Width",  ImageInfo.Thumbnail.width TSRMLS_CC);</span>
+<span class='curline'><a href='../S/172.html#L4114'>Thumbnail</a>        4114 ext/exif/exif.c 	exif_error_docref(NULL EXIFERR_CC, &amp;ImageInfo, E_NOTICE, "Thumbnail data %d %d %d, %d x %d", ImageInfo.Thumbnail.data, ImageInfo.Thumbnail.size, ImageInfo.Thumbnail.filetype, ImageInfo.Thumbnail.width, ImageInfo.Thumbnail.height);</span>
+<span class='curline'><a href='../S/172.html#L4116'>Thumbnail</a>        4116 ext/exif/exif.c 	if (!ImageInfo.Thumbnail.data || !ImageInfo.Thumbnail.size) {</span>
+<span class='curline'><a href='../S/172.html#L4122'>Thumbnail</a>        4122 ext/exif/exif.c 	exif_error_docref(NULL EXIFERR_CC, &amp;ImageInfo, E_NOTICE, "Returning thumbnail(%d)", ImageInfo.Thumbnail.size);</span>
+<span class='curline'><a href='../S/172.html#L4125'>Thumbnail</a>        4125 ext/exif/exif.c 	ZVAL_STRINGL(return_value, ImageInfo.Thumbnail.data, ImageInfo.Thumbnail.size, 1);</span>
+<span class='curline'><a href='../S/172.html#L4127'>Thumbnail</a>        4127 ext/exif/exif.c 		if (!ImageInfo.Thumbnail.width || !ImageInfo.Thumbnail.height) {</span>
+<span class='curline'><a href='../S/172.html#L4132'>Thumbnail</a>        4132 ext/exif/exif.c 		ZVAL_LONG(p_width,  ImageInfo.Thumbnail.width);</span>
+<span class='curline'><a href='../S/172.html#L4133'>Thumbnail</a>        4133 ext/exif/exif.c 		ZVAL_LONG(p_height, ImageInfo.Thumbnail.height);</span>
+<span class='curline'><a href='../S/172.html#L4137'>Thumbnail</a>        4137 ext/exif/exif.c 		ZVAL_LONG(p_imagetype, ImageInfo.Thumbnail.filetype);</span>
+</pre>
+</body>
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>ext/openssl/php_openssl.h</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<a id='TOP' name='TOP'></a><h2 class='header'><a href='../mains.html'>root</a>/<a href='../files/1753.html'>ext</a>/<a href='../files/1825.html'>openssl</a>/php_openssl.h</h2>
+<em class='comment'>/* [&lt;][&gt;][^][v][top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+<hr />
+<h2 class='header'><a href='../J/986.html' title='Multiple included from 2 places.'>INCLUDED FROM</a></h2>
+<hr />
+<pre>
+<a id='L1' name='L1'></a>   1 <em class='comment'>/*</em>
+<a id='L2' name='L2'></a>   2 <em class='comment'>   +----------------------------------------------------------------------+</em>
+<a id='L3' name='L3'></a>   3 <em class='comment'>   | PHP Version 5                                                        |</em>
+<a id='L4' name='L4'></a>   4 <em class='comment'>   +----------------------------------------------------------------------+</em>
+<a id='L5' name='L5'></a>   5 <em class='comment'>   | Copyright (c) 1997-2016 The PHP Group                                |</em>
+<a id='L6' name='L6'></a>   6 <em class='comment'>   +----------------------------------------------------------------------+</em>
+<a id='L7' name='L7'></a>   7 <em class='comment'>   | This source file is subject to version 3.01 of the PHP license,      |</em>
+<a id='L8' name='L8'></a>   8 <em class='comment'>   | that is bundled with this package in the file LICENSE, and is        |</em>
+<a id='L9' name='L9'></a>   9 <em class='comment'>   | available through the world-wide-web at the following url:           |</em>
+<a id='L10' name='L10'></a>  10 <em class='comment'>   | http://www.php.net/license/3_01.txt                                  |</em>
+<a id='L11' name='L11'></a>  11 <em class='comment'>   | If you did not receive a copy of the PHP license and are unable to   |</em>
+<a id='L12' name='L12'></a>  12 <em class='comment'>   | obtain it through the world-wide-web, please send a note to          |</em>
+<a id='L13' name='L13'></a>  13 <em class='comment'>   | license@php.net so we can mail you a copy immediately.               |</em>
+<a id='L14' name='L14'></a>  14 <em class='comment'>   +----------------------------------------------------------------------+</em>
+<a id='L15' name='L15'></a>  15 <em class='comment'>   | Authors: Stig Venaas &lt;venaas@php.net&gt;                                |</em>
+<a id='L16' name='L16'></a>  16 <em class='comment'>   |          Wez Furlong &lt;wez@thebrainroom.com                           |</em>
+<a id='L17' name='L17'></a>  17 <em class='comment'>   +----------------------------------------------------------------------+</em>
+<a id='L18' name='L18'></a>  18 <em class='comment'> */</em>
+<a id='L19' name='L19'></a>  19 
+<a id='L20' name='L20'></a>  20 <em class='comment'>/* $Id$ */</em>
+<a id='L21' name='L21'></a>  21 
+<a id='L22' name='L22'></a>  22 <em class='sharp'>#ifndef</em> <a href='../S/866.html#L23' title='Defined at 23 in ext/openssl/php_openssl.h.'>PHP_OPENSSL_H</a>
+<a id='L23' name='L23'></a>  23 <em class='sharp'>#define</em> <a href='../S/866.html#L22' title='Referred from 22 in ext/openssl/php_openssl.h.'>PHP_OPENSSL_H</a>
+<a id='L24' name='L24'></a>  24 <em class='comment'>/* HAVE_OPENSSL would include SSL MySQL stuff */</em>
+<a id='L25' name='L25'></a>  25 <em class='sharp'>#ifdef</em> <a href='../Y/2824.html' title='Multiple used in 23 places.'>HAVE_OPENSSL_EXT</a>
+<a id='L26' name='L26'></a>  26 <strong class='reserved'>extern</strong> <a href='../S/1709.html#L70' title='Defined at 70 in Zend/zend_modules.h.'>zend_module_entry</a> <a href='../Y/30024.html' title='Multiple used in 3 places.'>openssl_module_entry</a>;
+<a id='L27' name='L27'></a>  27 <em class='sharp'>#define</em> phpext_openssl_ptr &amp;<a href='../Y/30024.html' title='Multiple used in 3 places.'>openssl_module_entry</a>
+<a id='L28' name='L28'></a>  28 
+<a id='L29' name='L29'></a>  29 <em class='sharp'>#define</em> <a href='../R/5718.html' title='Multiple referred from 3 places.'>OPENSSL_RAW_DATA</a> 1
+<a id='L30' name='L30'></a>  30 <em class='sharp'>#define</em> <a href='../R/5719.html' title='Multiple referred from 3 places.'>OPENSSL_ZERO_PADDING</a> 2
+<a id='L31' name='L31'></a>  31 
+<a id='L32' name='L32'></a>  32 <em class='sharp'>#define</em> <a href='../S/865.html#L2593' title='Referred from 2593 in ext/openssl/openssl.c.'>OPENSSL_ERROR_X509_PRIVATE_KEY_VALUES_MISMATCH</a> 0x0B080074
+<a id='L33' name='L33'></a>  33 
+<a id='L34' name='L34'></a>  34 <em class='comment'>/* Used for client-initiated handshake renegotiation DoS protection*/</em>
+<a id='L35' name='L35'></a>  35 <em class='sharp'>#define</em> <a href='../S/867.html#L1091' title='Referred from 1091 in ext/openssl/xp_ssl.c.'>OPENSSL_DEFAULT_RENEG_LIMIT</a> 2
+<a id='L36' name='L36'></a>  36 <em class='sharp'>#define</em> <a href='../S/867.html#L1092' title='Referred from 1092 in ext/openssl/xp_ssl.c.'>OPENSSL_DEFAULT_RENEG_WINDOW</a> 300
+<a id='L37' name='L37'></a>  37 <em class='sharp'>#define</em> <a href='../R/5709.html' title='Multiple referred from 2 places.'>OPENSSL_DEFAULT_STREAM_VERIFY_DEPTH</a> 9
+<a id='L38' name='L38'></a>  38 <em class='sharp'>#define</em> <a href='../R/5708.html' title='Multiple referred from 2 places.'>OPENSSL_DEFAULT_STREAM_CIPHERS</a> "ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES128-GCM-SHA256:" \
+<a id='L39' name='L39'></a>  39         "ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES256-GCM-SHA384:DHE-RSA-AES128-GCM-SHA256:" \
+<a id='L40' name='L40'></a>  40         "DHE-DSS-AES128-GCM-SHA256:kEDH+AESGCM:ECDHE-RSA-AES128-SHA256:ECDHE-ECDSA-AES128-SHA256:" \
+<a id='L41' name='L41'></a>  41         "ECDHE-RSA-AES128-SHA:ECDHE-ECDSA-AES128-SHA:ECDHE-RSA-AES256-SHA384:ECDHE-ECDSA-AES256-SHA384:" \
+<a id='L42' name='L42'></a>  42         "ECDHE-RSA-AES256-SHA:ECDHE-ECDSA-AES256-SHA:DHE-RSA-AES128-SHA256:DHE-RSA-AES128-SHA:" \
+<a id='L43' name='L43'></a>  43         "DHE-DSS-AES128-SHA256:DHE-RSA-AES256-SHA256:DHE-DSS-AES256-SHA:DHE-RSA-AES256-SHA:AES128-GCM-SHA256:" \
+<a id='L44' name='L44'></a>  44         "AES256-GCM-SHA384:AES128:AES256:HIGH:!SSLv2:!aNULL:!eNULL:!EXPORT:!DES:!MD5:!RC4:!ADH"
+<a id='L45' name='L45'></a>  45 
+<a id='L46' name='L46'></a>  46 <a href='../Y/32912.html' title='Multiple used in 4 places.'>php_stream_transport_factory_func</a> <a href='../S/867.html#L2377' title='Defined at 2377 in ext/openssl/xp_ssl.c.'>php_openssl_ssl_socket_factory</a>;
+<a id='L47' name='L47'></a>  47 
+<a id='L48' name='L48'></a>  48 <a href='../D/8401.html' title='Multiple defined in 101 places.'>PHP_MINIT_FUNCTION</a>(<a href='../Y/30004.html' title='Multiple used in 22 places.'>openssl</a>);
+<a id='L49' name='L49'></a>  49 <a href='../D/8432.html' title='Multiple defined in 78 places.'>PHP_MSHUTDOWN_FUNCTION</a>(<a href='../Y/30004.html' title='Multiple used in 22 places.'>openssl</a>);
+<a id='L50' name='L50'></a>  50 <a href='../D/8399.html' title='Multiple defined in 88 places.'>PHP_MINFO_FUNCTION</a>(<a href='../Y/30004.html' title='Multiple used in 22 places.'>openssl</a>);
+<a id='L51' name='L51'></a>  51 
+<a id='L52' name='L52'></a>  52 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/30038.html' title='Multiple used in 4 places.'>openssl_pkey_get_private</a>);
+<a id='L53' name='L53'></a>  53 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/30039.html' title='Multiple used in 4 places.'>openssl_pkey_get_public</a>);
+<a id='L54' name='L54'></a>  54 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/30036.html' title='Multiple used in 4 places.'>openssl_pkey_free</a>);
+<a id='L55' name='L55'></a>  55 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/30040.html' title='Multiple used in 3 places.'>openssl_pkey_new</a>);
+<a id='L56' name='L56'></a>  56 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/30034.html' title='Multiple used in 3 places.'>openssl_pkey_export</a>);
+<a id='L57' name='L57'></a>  57 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/30035.html' title='Multiple used in 3 places.'>openssl_pkey_export_to_file</a>);
+<a id='L58' name='L58'></a>  58 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/30037.html' title='Multiple used in 3 places.'>openssl_pkey_get_details</a>);
+<a id='L59' name='L59'></a>  59 
+<a id='L60' name='L60'></a>  60 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/30049.html' title='Multiple used in 3 places.'>openssl_sign</a>);
+<a id='L61' name='L61'></a>  61 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/30054.html' title='Multiple used in 3 places.'>openssl_verify</a>);
+<a id='L62' name='L62'></a>  62 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/30048.html' title='Multiple used in 3 places.'>openssl_seal</a>);
+<a id='L63' name='L63'></a>  63 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/30025.html' title='Multiple used in 3 places.'>openssl_open</a>);
+<a id='L64' name='L64'></a>  64 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/30042.html' title='Multiple used in 3 places.'>openssl_private_encrypt</a>);
+<a id='L65' name='L65'></a>  65 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/30041.html' title='Multiple used in 3 places.'>openssl_private_decrypt</a>);
+<a id='L66' name='L66'></a>  66 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/30046.html' title='Multiple used in 3 places.'>openssl_public_encrypt</a>);
+<a id='L67' name='L67'></a>  67 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/30045.html' title='Multiple used in 3 places.'>openssl_public_decrypt</a>);
+<a id='L68' name='L68'></a>  68 
+<a id='L69' name='L69'></a>  69 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/30026.html' title='Multiple used in 3 places.'>openssl_pbkdf2</a>);
+<a id='L70' name='L70'></a>  70 
+<a id='L71' name='L71'></a>  71 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/30033.html' title='Multiple used in 3 places.'>openssl_pkcs7_verify</a>);
+<a id='L72' name='L72'></a>  72 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/30030.html' title='Multiple used in 3 places.'>openssl_pkcs7_decrypt</a>);
+<a id='L73' name='L73'></a>  73 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/30032.html' title='Multiple used in 3 places.'>openssl_pkcs7_sign</a>);
+<a id='L74' name='L74'></a>  74 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/30031.html' title='Multiple used in 3 places.'>openssl_pkcs7_encrypt</a>);
+<a id='L75' name='L75'></a>  75 
+<a id='L76' name='L76'></a>  76 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/30016.html' title='Multiple used in 3 places.'>openssl_error_string</a>);
+<a id='L77' name='L77'></a>  77 
+<a id='L78' name='L78'></a>  78 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/30062.html' title='Multiple used in 3 places.'>openssl_x509_read</a>);
+<a id='L79' name='L79'></a>  79 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/30060.html' title='Multiple used in 3 places.'>openssl_x509_free</a>);
+<a id='L80' name='L80'></a>  80 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/30061.html' title='Multiple used in 3 places.'>openssl_x509_parse</a>);
+<a id='L81' name='L81'></a>  81 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/30056.html' title='Multiple used in 3 places.'>openssl_x509_checkpurpose</a>);
+<a id='L82' name='L82'></a>  82 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/30057.html' title='Multiple used in 3 places.'>openssl_x509_export</a>);
+<a id='L83' name='L83'></a>  83 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/30059.html' title='Multiple used in 3 places.'>openssl_x509_fingerprint</a>);
+<a id='L84' name='L84'></a>  84 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/30058.html' title='Multiple used in 3 places.'>openssl_x509_export_to_file</a>);
+<a id='L85' name='L85'></a>  85 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/30055.html' title='Multiple used in 3 places.'>openssl_x509_check_private_key</a>);
+<a id='L86' name='L86'></a>  86 
+<a id='L87' name='L87'></a>  87 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/30027.html' title='Multiple used in 3 places.'>openssl_pkcs12_export</a>);
+<a id='L88' name='L88'></a>  88 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/30028.html' title='Multiple used in 3 places.'>openssl_pkcs12_export_to_file</a>);
+<a id='L89' name='L89'></a>  89 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/30029.html' title='Multiple used in 3 places.'>openssl_pkcs12_read</a>);
+<a id='L90' name='L90'></a>  90 
+<a id='L91' name='L91'></a>  91 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/30010.html' title='Multiple used in 3 places.'>openssl_csr_new</a>);
+<a id='L92' name='L92'></a>  92 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/30006.html' title='Multiple used in 3 places.'>openssl_csr_export</a>);
+<a id='L93' name='L93'></a>  93 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/30007.html' title='Multiple used in 3 places.'>openssl_csr_export_to_file</a>);
+<a id='L94' name='L94'></a>  94 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/30011.html' title='Multiple used in 3 places.'>openssl_csr_sign</a>);
+<a id='L95' name='L95'></a>  95 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/30009.html' title='Multiple used in 3 places.'>openssl_csr_get_subject</a>);
+<a id='L96' name='L96'></a>  96 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/30008.html' title='Multiple used in 3 places.'>openssl_csr_get_public_key</a>);
+<a id='L97' name='L97'></a>  97 
+<a id='L98' name='L98'></a>  98 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/30052.html' title='Multiple used in 3 places.'>openssl_spki_new</a>);
+<a id='L99' name='L99'></a>  99 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/30053.html' title='Multiple used in 3 places.'>openssl_spki_verify</a>);
+<a id='L100' name='L100'></a> 100 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/30050.html' title='Multiple used in 3 places.'>openssl_spki_export</a>);
+<a id='L101' name='L101'></a> 101 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/30051.html' title='Multiple used in 3 places.'>openssl_spki_export_challenge</a>);
+<a id='L102' name='L102'></a> 102 
+<a id='L103' name='L103'></a> 103 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/30019.html' title='Multiple used in 3 places.'>openssl_get_cert_locations</a>);
+<a id='L104' name='L104'></a> 104 <em class='sharp'>#else</em>
+<a id='L105' name='L105'></a> 105 
+<a id='L106' name='L106'></a> 106 <em class='sharp'>#define</em> phpext_openssl_ptr <a href='../D/6086.html' title='Multiple defined in 8 places.'>NULL</a>
+<a id='L107' name='L107'></a> 107 
+<a id='L108' name='L108'></a> 108 <em class='sharp'>#endif</em>
+<a id='L109' name='L109'></a> 109 
+<a id='L110' name='L110'></a> 110 <em class='sharp'>#endif</em>
+<a id='L111' name='L111'></a> 111 
+<a id='L112' name='L112'></a> 112 <em class='comment'>/*</em>
+<a id='L113' name='L113'></a> 113 <em class='comment'> * Local variables:</em>
+<a id='L114' name='L114'></a> 114 <em class='comment'> * tab-width: 4</em>
+<a id='L115' name='L115'></a> 115 <em class='comment'> * c-basic-offset: 4</em>
+<a id='L116' name='L116'></a> 116 <em class='comment'> * End:</em>
+<a id='L117' name='L117'></a> 117 <em class='comment'> */</em>
+</pre>
+<hr />
+<a id='BOTTOM' name='BOTTOM'></a>
+<em class='comment'>/* [&lt;][&gt;][^][v]<a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+</body>
+</html>

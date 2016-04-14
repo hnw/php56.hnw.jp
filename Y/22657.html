@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>idata</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/973.html#L429'>idata</a>             429 ext/phar/phar.c int phar_entry_delref(phar_entry_data *idata TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/973.html#L433'>idata</a>             433 ext/phar/phar.c 	if (idata-&gt;internal_file &amp;&amp; !idata-&gt;internal_file-&gt;is_persistent) {</span>
+<span class='curline'><a href='../S/973.html#L434'>idata</a>             434 ext/phar/phar.c 		if (--idata-&gt;internal_file-&gt;fp_refcount &lt; 0) {</span>
+<span class='curline'><a href='../S/973.html#L435'>idata</a>             435 ext/phar/phar.c 			idata-&gt;internal_file-&gt;fp_refcount = 0;</span>
+<span class='curline'><a href='../S/973.html#L438'>idata</a>             438 ext/phar/phar.c 		if (idata-&gt;fp &amp;&amp; idata-&gt;fp != idata-&gt;phar-&gt;fp &amp;&amp; idata-&gt;fp != idata-&gt;phar-&gt;ufp &amp;&amp; idata-&gt;fp != idata-&gt;internal_file-&gt;fp) {</span>
+<span class='curline'><a href='../S/973.html#L439'>idata</a>             439 ext/phar/phar.c 			php_stream_close(idata-&gt;fp);</span>
+<span class='curline'><a href='../S/973.html#L442'>idata</a>             442 ext/phar/phar.c 		if (idata-&gt;internal_file-&gt;is_temp_dir) {</span>
+<span class='curline'><a href='../S/973.html#L443'>idata</a>             443 ext/phar/phar.c 			destroy_phar_manifest_entry((void *)idata-&gt;internal_file);</span>
+<span class='curline'><a href='../S/973.html#L444'>idata</a>             444 ext/phar/phar.c 			efree(idata-&gt;internal_file);</span>
+<span class='curline'><a href='../S/973.html#L448'>idata</a>             448 ext/phar/phar.c 	phar_archive_delref(idata-&gt;phar TSRMLS_CC);</span>
+<span class='curline'><a href='../S/973.html#L449'>idata</a>             449 ext/phar/phar.c 	efree(idata);</span>
+<span class='curline'><a href='../S/973.html#L457'>idata</a>             457 ext/phar/phar.c void phar_entry_remove(phar_entry_data *idata, char **error TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/973.html#L461'>idata</a>             461 ext/phar/phar.c 	phar = idata-&gt;phar;</span>
+<span class='curline'><a href='../S/973.html#L463'>idata</a>             463 ext/phar/phar.c 	if (idata-&gt;internal_file-&gt;fp_refcount &lt; 2) {</span>
+<span class='curline'><a href='../S/973.html#L464'>idata</a>             464 ext/phar/phar.c 		if (idata-&gt;fp &amp;&amp; idata-&gt;fp != idata-&gt;phar-&gt;fp &amp;&amp; idata-&gt;fp != idata-&gt;phar-&gt;ufp &amp;&amp; idata-&gt;fp != idata-&gt;internal_file-&gt;fp) {</span>
+<span class='curline'><a href='../S/973.html#L465'>idata</a>             465 ext/phar/phar.c 			php_stream_close(idata-&gt;fp);</span>
+<span class='curline'><a href='../S/973.html#L467'>idata</a>             467 ext/phar/phar.c 		zend_hash_del(&amp;idata-&gt;phar-&gt;manifest, idata-&gt;internal_file-&gt;filename, idata-&gt;internal_file-&gt;filename_len);</span>
+<span class='curline'><a href='../S/973.html#L468'>idata</a>             468 ext/phar/phar.c 		idata-&gt;phar-&gt;refcount--;</span>
+<span class='curline'><a href='../S/973.html#L469'>idata</a>             469 ext/phar/phar.c 		efree(idata);</span>
+<span class='curline'><a href='../S/973.html#L471'>idata</a>             471 ext/phar/phar.c 		idata-&gt;internal_file-&gt;is_deleted = 1;</span>
+<span class='curline'><a href='../S/973.html#L472'>idata</a>             472 ext/phar/phar.c 		phar_entry_delref(idata TSRMLS_CC);</span>
+<span class='curline'><a href='../S/973.html#L2387'>idata</a>            2387 ext/phar/phar.c int phar_postprocess_file(phar_entry_data *idata, php_uint32 crc32, char **error, int process_zip TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/973.html#L2390'>idata</a>            2390 ext/phar/phar.c 	int len = idata-&gt;internal_file-&gt;uncompressed_filesize;</span>
+<span class='curline'><a href='../S/973.html#L2391'>idata</a>            2391 ext/phar/phar.c 	php_stream *fp = idata-&gt;fp;</span>
+<span class='curline'><a href='../S/973.html#L2392'>idata</a>            2392 ext/phar/phar.c 	phar_entry_info *entry = idata-&gt;internal_file;</span>
+<span class='curline'><a href='../S/973.html#L2403'>idata</a>            2403 ext/phar/phar.c 		if (SUCCESS != phar_open_archive_fp(idata-&gt;phar TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/973.html#L2404'>idata</a>            2404 ext/phar/phar.c 			spprintf(error, 0, "phar error: unable to open zip-based phar archive \"%s\" to verify local file header for file \"%s\"", idata-&gt;phar-&gt;fname, entry-&gt;filename);</span>
+<span class='curline'><a href='../S/973.html#L2407'>idata</a>            2407 ext/phar/phar.c 		php_stream_seek(phar_get_entrypfp(idata-&gt;internal_file TSRMLS_CC), entry-&gt;header_offset, SEEK_SET);</span>
+<span class='curline'><a href='../S/973.html#L2409'>idata</a>            2409 ext/phar/phar.c 		if (sizeof(local) != php_stream_read(phar_get_entrypfp(idata-&gt;internal_file TSRMLS_CC), (char *) &amp;local, sizeof(local))) {</span>
+<span class='curline'><a href='../S/973.html#L2411'>idata</a>            2411 ext/phar/phar.c 			spprintf(error, 0, "phar error: internal corruption of zip-based phar \"%s\" (cannot read local file header for file \"%s\")", idata-&gt;phar-&gt;fname, entry-&gt;filename);</span>
+<span class='curline'><a href='../S/973.html#L2417'>idata</a>            2417 ext/phar/phar.c 			php_stream_seek(phar_get_entrypfp(idata-&gt;internal_file TSRMLS_CC),</span>
+<span class='curline'><a href='../S/973.html#L2422'>idata</a>            2422 ext/phar/phar.c 			if (sizeof(desc) != php_stream_read(phar_get_entrypfp(idata-&gt;internal_file TSRMLS_CC),</span>
+<span class='curline'><a href='../S/973.html#L2424'>idata</a>            2424 ext/phar/phar.c 				spprintf(error, 0, "phar error: internal corruption of zip-based phar \"%s\" (cannot read local data descriptor for file \"%s\")", idata-&gt;phar-&gt;fname, entry-&gt;filename);</span>
+<span class='curline'><a href='../S/973.html#L2436'>idata</a>            2436 ext/phar/phar.c 			spprintf(error, 0, "phar error: internal corruption of zip-based phar \"%s\" (local header of file \"%s\" does not match central directory)", idata-&gt;phar-&gt;fname, entry-&gt;filename);</span>
+<span class='curline'><a href='../S/973.html#L2444'>idata</a>            2444 ext/phar/phar.c 		if (idata-&gt;zero &amp;&amp; idata-&gt;zero != entry-&gt;offset_abs) {</span>
+<span class='curline'><a href='../S/973.html#L2445'>idata</a>            2445 ext/phar/phar.c 			idata-&gt;zero = entry-&gt;offset_abs;</span>
+<span class='curline'><a href='../S/973.html#L2453'>idata</a>            2453 ext/phar/phar.c 	php_stream_seek(fp, idata-&gt;zero, SEEK_SET);</span>
+<span class='curline'><a href='../S/973.html#L2459'>idata</a>            2459 ext/phar/phar.c 	php_stream_seek(fp, idata-&gt;zero, SEEK_SET);</span>
+<span class='curline'><a href='../S/973.html#L2465'>idata</a>            2465 ext/phar/phar.c 		spprintf(error, 0, "phar error: internal corruption of phar \"%s\" (crc32 mismatch on file \"%s\")", idata-&gt;phar-&gt;fname, entry-&gt;filename);</span>
+<span class='curline'><a href='../S/974.html#L559'>idata</a>             559 ext/phar/phar_internal.h int phar_postprocess_file(phar_entry_data *idata, php_uint32 crc32, char **error, int process_zip TSRMLS_DC);</span>
+<span class='curline'><a href='../S/974.html#L613'>idata</a>             613 ext/phar/phar_internal.h int phar_entry_delref(phar_entry_data *idata TSRMLS_DC);</span>
+<span class='curline'><a href='../S/979.html#L161'>idata</a>             161 ext/phar/stream.c 	phar_entry_data *idata;</span>
+<span class='curline'><a href='../S/979.html#L193'>idata</a>             193 ext/phar/stream.c 		if (NULL == (idata = phar_get_or_create_entry_data(resource-&gt;host, host_len, internal_file, strlen(internal_file), mode, 0, &amp;error, 1 TSRMLS_CC))) {</span>
+<span class='curline'><a href='../S/979.html#L207'>idata</a>             207 ext/phar/stream.c 		fpf = php_stream_alloc(&amp;phar_ops, idata, NULL, mode);</span>
+<span class='curline'><a href='../S/979.html#L213'>idata</a>             213 ext/phar/stream.c 			if (idata-&gt;internal_file-&gt;uncompressed_filesize == 0</span>
+<span class='curline'><a href='../S/979.html#L214'>idata</a>             214 ext/phar/stream.c 				&amp;&amp; idata-&gt;internal_file-&gt;compressed_filesize == 0</span>
+<span class='curline'><a href='../S/979.html#L219'>idata</a>             219 ext/phar/stream.c 				idata-&gt;internal_file-&gt;flags &amp;= ~PHAR_ENT_COMPRESSION_MASK;</span>
+<span class='curline'><a href='../S/979.html#L220'>idata</a>             220 ext/phar/stream.c 				idata-&gt;internal_file-&gt;flags |= Z_LVAL_PP(pzoption);</span>
+<span class='curline'><a href='../S/979.html#L223'>idata</a>             223 ext/phar/stream.c 				if (idata-&gt;internal_file-&gt;metadata) {</span>
+<span class='curline'><a href='../S/979.html#L224'>idata</a>             224 ext/phar/stream.c 					zval_ptr_dtor(&amp;idata-&gt;internal_file-&gt;metadata);</span>
+<span class='curline'><a href='../S/979.html#L225'>idata</a>             225 ext/phar/stream.c 					idata-&gt;internal_file-&gt;metadata = NULL;</span>
+<span class='curline'><a href='../S/979.html#L228'>idata</a>             228 ext/phar/stream.c 				MAKE_STD_ZVAL(idata-&gt;internal_file-&gt;metadata);</span>
+<span class='curline'><a href='../S/979.html#L230'>idata</a>             230 ext/phar/stream.c 				ZVAL_ZVAL(idata-&gt;internal_file-&gt;metadata, metadata, 1, 0);</span>
+<span class='curline'><a href='../S/979.html#L231'>idata</a>             231 ext/phar/stream.c 				idata-&gt;phar-&gt;is_modified = 1;</span>
+<span class='curline'><a href='../S/979.html#L235'>idata</a>             235 ext/phar/stream.c 			spprintf(opened_path, MAXPATHLEN, "phar://%s/%s", idata-&gt;phar-&gt;fname, idata-&gt;internal_file-&gt;filename);</span>
+<span class='curline'><a href='../S/979.html#L248'>idata</a>             248 ext/phar/stream.c 				if ((FAILURE == phar_get_entry_data(&amp;idata, resource-&gt;host, host_len, ".phar/stub.php", sizeof(".phar/stub.php")-1, "r", 0, &amp;error, 0 TSRMLS_CC)) || !idata) {</span>
+<span class='curline'><a href='../S/979.html#L269'>idata</a>             269 ext/phar/stream.c 				idata = (phar_entry_data *) ecalloc(1, sizeof(phar_entry_data));</span>
+<span class='curline'><a href='../S/979.html#L270'>idata</a>             270 ext/phar/stream.c 				idata-&gt;fp = phar_get_pharfp(phar TSRMLS_CC);</span>
+<span class='curline'><a href='../S/979.html#L271'>idata</a>             271 ext/phar/stream.c 				idata-&gt;phar = phar;</span>
+<span class='curline'><a href='../S/979.html#L272'>idata</a>             272 ext/phar/stream.c 				idata-&gt;internal_file = entry;</span>
+<span class='curline'><a href='../S/979.html#L286'>idata</a>             286 ext/phar/stream.c 		if ((FAILURE == phar_get_entry_data(&amp;idata, resource-&gt;host, host_len, internal_file, strlen(internal_file), "r", 0, &amp;error, 0 TSRMLS_CC)) || !idata) {</span>
+<span class='curline'><a href='../S/979.html#L301'>idata</a>             301 ext/phar/stream.c 		fprintf(stderr, "Pharname:   %s\n", idata-&gt;phar-&gt;filename);</span>
+<span class='curline'><a href='../S/979.html#L303'>idata</a>             303 ext/phar/stream.c 		fprintf(stderr, "Entry:      %s\n", idata-&gt;internal_file-&gt;filename);</span>
+<span class='curline'><a href='../S/979.html#L304'>idata</a>             304 ext/phar/stream.c 		fprintf(stderr, "Size:       %u\n", idata-&gt;internal_file-&gt;uncompressed_filesize);</span>
+<span class='curline'><a href='../S/979.html#L305'>idata</a>             305 ext/phar/stream.c 		fprintf(stderr, "Compressed: %u\n", idata-&gt;internal_file-&gt;flags);</span>
+<span class='curline'><a href='../S/979.html#L306'>idata</a>             306 ext/phar/stream.c 		fprintf(stderr, "Offset:     %u\n", idata-&gt;internal_file-&gt;offset_within_phar);</span>
+<span class='curline'><a href='../S/979.html#L307'>idata</a>             307 ext/phar/stream.c 		fprintf(stderr, "Cached:     %s\n", idata-&gt;internal_file-&gt;filedata ? "yes" : "no");</span>
+<span class='curline'><a href='../S/979.html#L311'>idata</a>             311 ext/phar/stream.c 	if (!idata-&gt;internal_file-&gt;is_crc_checked &amp;&amp; phar_postprocess_file(idata, idata-&gt;internal_file-&gt;crc32, &amp;error, 2 TSRMLS_CC) != SUCCESS) {</span>
+<span class='curline'><a href='../S/979.html#L314'>idata</a>             314 ext/phar/stream.c 		phar_entry_delref(idata TSRMLS_CC);</span>
+<span class='curline'><a href='../S/979.html#L320'>idata</a>             320 ext/phar/stream.c 		char *entry = idata-&gt;internal_file-&gt;filename, *cwd;</span>
+<span class='curline'><a href='../S/979.html#L323'>idata</a>             323 ext/phar/stream.c 		if ((idata-&gt;phar-&gt;is_tar || idata-&gt;phar-&gt;is_zip) &amp;&amp; idata-&gt;internal_file-&gt;filename_len == sizeof(".phar/stub.php")-1 &amp;&amp; !strncmp(idata-&gt;internal_file-&gt;filename, ".phar/stub.php", sizeof(".phar/stub.php")-1)) {</span>
+<span class='curline'><a href='../S/979.html#L336'>idata</a>             336 ext/phar/stream.c 		spprintf(opened_path, MAXPATHLEN, "phar://%s/%s", idata-&gt;phar-&gt;fname, idata-&gt;internal_file-&gt;filename);</span>
+<span class='curline'><a href='../S/979.html#L340'>idata</a>             340 ext/phar/stream.c 	fpf = php_stream_alloc(&amp;phar_ops, idata, NULL, mode);</span>
+<span class='curline'><a href='../S/979.html#L686'>idata</a>             686 ext/phar/stream.c 	phar_entry_data *idata;</span>
+<span class='curline'><a href='../S/979.html#L723'>idata</a>             723 ext/phar/stream.c 	if (FAILURE == phar_get_entry_data(&amp;idata, resource-&gt;host, host_len, internal_file, internal_file_len, "r", 0, &amp;error, 1 TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/979.html#L738'>idata</a>             738 ext/phar/stream.c 	if (idata-&gt;internal_file-&gt;fp_refcount &gt; 1) {</span>
+<span class='curline'><a href='../S/979.html#L743'>idata</a>             743 ext/phar/stream.c 		phar_entry_delref(idata TSRMLS_CC);</span>
+<span class='curline'><a href='../S/979.html#L748'>idata</a>             748 ext/phar/stream.c 	phar_entry_remove(idata, &amp;error TSRMLS_CC);</span>
+<span class='curline'><a href='../S/980.html#L25'>idata</a>              25 ext/phar/stream.h void phar_entry_remove(phar_entry_data *idata, char **error TSRMLS_DC);</span>
+</pre>
+</body>
+</html>

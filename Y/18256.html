@@ -1,0 +1,569 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>format</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/1595.html#L58'>format</a>             58 TSRM/TSRM.c    int tsrm_error(int level, const char *format, ...);</span>
+<span class='curline'><a href='../S/1595.html#L754'>format</a>            754 TSRM/TSRM.c    int tsrm_error(int level, const char *format, ...)</span>
+<span class='curline'><a href='../S/1595.html#L761'>format</a>            761 TSRM/TSRM.c    		va_start(args, format);</span>
+<span class='curline'><a href='../S/1595.html#L762'>format</a>            762 TSRM/TSRM.c    		size = vfprintf(tsrm_error_file, format, args);</span>
+<span class='curline'><a href='../S/1596.html#L136'>format</a>            136 TSRM/TSRM.h    TSRM_API int tsrm_error(int level, const char *format, ...);</span>
+<span class='curline'><a href='../S/1642.html#L49'>format</a>             49 Zend/zend.c    ZEND_API int (*zend_printf)(const char *format, ...);</span>
+<span class='curline'><a href='../S/1642.html#L56'>format</a>             56 Zend/zend.c    ZEND_API void (*zend_error_cb)(int type, const char *error_filename, const uint error_lineno, const char *format, va_list args);</span>
+<span class='curline'><a href='../S/1642.html#L57'>format</a>             57 Zend/zend.c    int (*zend_vspprintf)(char **pbuf, size_t max_len, const char *format, va_list ap);</span>
+<span class='curline'><a href='../S/1642.html#L1031'>format</a>           1031 Zend/zend.c    ZEND_API void zend_error(int type, const char *format, ...) /* {{{ */</span>
+<span class='curline'><a href='../S/1642.html#L1119'>format</a>           1119 Zend/zend.c    		va_start(args, format);</span>
+<span class='curline'><a href='../S/1642.html#L1120'>format</a>           1120 Zend/zend.c    		zend_vspprintf(&amp;dtrace_error_buffer, 0, format, args);</span>
+<span class='curline'><a href='../S/1642.html#L1127'>format</a>           1127 Zend/zend.c    	va_start(args, format);</span>
+<span class='curline'><a href='../S/1642.html#L1133'>format</a>           1133 Zend/zend.c    		zend_error_cb(type, error_filename, error_lineno, format, args);</span>
+<span class='curline'><a href='../S/1642.html#L1142'>format</a>           1142 Zend/zend.c    			zend_error_cb(type, error_filename, error_lineno, format, args);</span>
+<span class='curline'><a href='../S/1642.html#L1164'>format</a>           1164 Zend/zend.c    			Z_STRLEN_P(z_error_message) = zend_vspprintf(&amp;Z_STRVAL_P(z_error_message), 0, format, usr_copy);</span>
+<span class='curline'><a href='../S/1642.html#L1226'>format</a>           1226 Zend/zend.c    						zend_error_cb(type, error_filename, error_lineno, format, args);</span>
+<span class='curline'><a href='../S/1642.html#L1232'>format</a>           1232 Zend/zend.c    				zend_error_cb(type, error_filename, error_lineno, format, args);</span>
+<span class='curline'><a href='../S/1642.html#L1280'>format</a>           1280 Zend/zend.c    void zend_error_noreturn(int type, const char *format, ...) __attribute__ ((alias("zend_error"),noreturn));</span>
+<span class='curline'><a href='../S/1642.html#L1283'>format</a>           1283 Zend/zend.c    ZEND_API void zend_output_debug_string(zend_bool trigger_break, const char *format, ...) /* {{{ */</span>
+<span class='curline'><a href='../S/1642.html#L1288'>format</a>           1288 Zend/zend.c    	va_start(args, format);</span>
+<span class='curline'><a href='../S/1642.html#L1293'>format</a>           1293 Zend/zend.c    		vsnprintf(output_buf, 1024, format, args);</span>
+<span class='curline'><a href='../S/1642.html#L1301'>format</a>           1301 Zend/zend.c    	vfprintf(stderr, format, args);</span>
+<span class='curline'><a href='../S/1643.html#L163'>format</a>            163 Zend/zend.h    # define ZEND_ATTRIBUTE_FORMAT(type, idx, first) __attribute__ ((format(type, idx, first)))</span>
+<span class='curline'><a href='../S/1643.html#L169'>format</a>            169 Zend/zend.h    # define ZEND_ATTRIBUTE_PTR_FORMAT(type, idx, first) __attribute__ ((format(type, idx, first)))</span>
+<span class='curline'><a href='../S/1643.html#L294'>format</a>            294 Zend/zend.h    void zend_error_noreturn(int type, const char *format, ...) __attribute__ ((noreturn));</span>
+<span class='curline'><a href='../S/1643.html#L546'>format</a>            546 Zend/zend.h    	void (*error_function)(int type, const char *error_filename, const uint error_lineno, const char *format, va_list args) ZEND_ATTRIBUTE_PTR_FORMAT(printf, 4, 0);</span>
+<span class='curline'><a href='../S/1643.html#L547'>format</a>            547 Zend/zend.h    	int (*printf_function)(const char *format, ...) ZEND_ATTRIBUTE_PTR_FORMAT(printf, 1, 2);</span>
+<span class='curline'><a href='../S/1643.html#L557'>format</a>            557 Zend/zend.h    	int (*vspprintf_function)(char **pbuf, size_t max_len, const char *format, va_list ap);</span>
+<span class='curline'><a href='../S/1643.html#L654'>format</a>            654 Zend/zend.h    ZEND_API void zend_output_debug_string(zend_bool trigger_break, const char *format, ...) ZEND_ATTRIBUTE_FORMAT(printf, 2, 3);</span>
+<span class='curline'><a href='../S/1643.html#L698'>format</a>            698 Zend/zend.h    extern ZEND_API int (*zend_printf)(const char *format, ...) ZEND_ATTRIBUTE_PTR_FORMAT(printf, 1, 2);</span>
+<span class='curline'><a href='../S/1643.html#L704'>format</a>            704 Zend/zend.h    extern ZEND_API void (*zend_error_cb)(int type, const char *error_filename, const uint error_lineno, const char *format, va_list args) ZEND_ATTRIBUTE_PTR_FORMAT(printf, 4, 0);</span>
+<span class='curline'><a href='../S/1643.html#L707'>format</a>            707 Zend/zend.h    extern int (*zend_vspprintf)(char **pbuf, size_t max_len, const char *format, va_list ap);</span>
+<span class='curline'><a href='../S/1643.html#L711'>format</a>            711 Zend/zend.h    ZEND_API void zend_error(int type, const char *format, ...) ZEND_ATTRIBUTE_FORMAT(printf, 2, 3);</span>
+<span class='curline'><a href='../S/1644.html#L63'>format</a>             63 Zend/zend_alloc.c void zend_debug_alloc_output(char *format, ...)</span>
+<span class='curline'><a href='../S/1644.html#L68'>format</a>             68 Zend/zend_alloc.c 	va_start(args, format);</span>
+<span class='curline'><a href='../S/1644.html#L69'>format</a>             69 Zend/zend_alloc.c 	vsprintf(output_buf, format, args);</span>
+<span class='curline'><a href='../S/1644.html#L1744'>format</a>           1744 Zend/zend_alloc.c 	const char *format,</span>
+<span class='curline'><a href='../S/1644.html#L1776'>format</a>           1776 Zend/zend_alloc.c 				format,</span>
+<span class='curline'><a href='../S/1644.html#L1787'>format</a>           1787 Zend/zend_alloc.c 					format,</span>
+<span class='curline'><a href='../S/1645.html#L151'>format</a>            151 Zend/zend_alloc.h void zend_debug_alloc_output(char *format, ...);</span>
+<span class='curline'><a href='../S/1667.html#L657'>format</a>            657 Zend/zend_exceptions.c int zend_spprintf(char **message, int max_len, const char *format, ...) /* {{{ */</span>
+<span class='curline'><a href='../S/1667.html#L662'>format</a>            662 Zend/zend_exceptions.c 	va_start(arg, format);</span>
+<span class='curline'><a href='../S/1667.html#L663'>format</a>            663 Zend/zend_exceptions.c 	len = zend_vspprintf(message, max_len, format, arg);</span>
+<span class='curline'><a href='../S/1667.html#L859'>format</a>            859 Zend/zend_exceptions.c ZEND_API zval * zend_throw_exception_ex(zend_class_entry *exception_ce, long code TSRMLS_DC, const char *format, ...) /* {{{ */</span>
+<span class='curline'><a href='../S/1667.html#L865'>format</a>            865 Zend/zend_exceptions.c 	va_start(arg, format);</span>
+<span class='curline'><a href='../S/1667.html#L866'>format</a>            866 Zend/zend_exceptions.c 	zend_vspprintf(&amp;message, 0, format, arg);</span>
+<span class='curline'><a href='../S/1667.html#L882'>format</a>            882 Zend/zend_exceptions.c static void zend_error_va(int type, const char *file, uint lineno, const char *format, ...) /* {{{ */</span>
+<span class='curline'><a href='../S/1667.html#L886'>format</a>            886 Zend/zend_exceptions.c 	va_start(args, format);</span>
+<span class='curline'><a href='../S/1667.html#L887'>format</a>            887 Zend/zend_exceptions.c 	zend_error_cb(type, file, lineno, format, args);</span>
+<span class='curline'><a href='../S/1668.html#L44'>format</a>             44 Zend/zend_exceptions.h ZEND_API zval * zend_throw_exception_ex(zend_class_entry *exception_ce, long code TSRMLS_DC, const char *format, ...);</span>
+<span class='curline'><a href='../S/1668.html#L56'>format</a>             56 Zend/zend_exceptions.h int zend_spprintf(char **message, int max_len, const char *format, ...);</span>
+<span class='curline'><a href='../S/1728.html#L31'>format</a>             31 Zend/zend_sprintf.c int zend_sprintf(char *buffer, const char *format, ...)</span>
+<span class='curline'><a href='../S/1728.html#L35'>format</a>             35 Zend/zend_sprintf.c 	va_start(args, format);</span>
+<span class='curline'><a href='../S/1728.html#L36'>format</a>             36 Zend/zend_sprintf.c 	vsprintf(buffer, format, args);</span>
+<span class='curline'><a href='../S/69.html#L24734'>format</a>           24734 ext/date/lib/parse_date.c timelib_time *timelib_parse_from_format(char *format, char *string, size_t len, timelib_error_container **errors, const timelib_tzdb *tzdb, timelib_tz_get_wrapper tz_get_wrapper)</span>
+<span class='curline'><a href='../S/69.html#L24736'>format</a>           24736 ext/date/lib/parse_date.c 	char       *fptr = format;</span>
+<span class='curline'><a href='../S/73.html#L88'>format</a>             88 ext/date/lib/timelib.h timelib_time *timelib_parse_from_format(char *format, char *s, size_t len, timelib_error_container **errors, const timelib_tzdb *tzdb, timelib_tz_get_wrapper tz_get_wrapper);</span>
+<span class='curline'><a href='../S/79.html#L62'>format</a>             62 ext/date/php_date.c 	ZEND_ARG_INFO(0, format)</span>
+<span class='curline'><a href='../S/79.html#L67'>format</a>             67 ext/date/php_date.c 	ZEND_ARG_INFO(0, format)</span>
+<span class='curline'><a href='../S/79.html#L72'>format</a>             72 ext/date/php_date.c 	ZEND_ARG_INFO(0, format)</span>
+<span class='curline'><a href='../S/79.html#L108'>format</a>            108 ext/date/php_date.c 	ZEND_ARG_INFO(0, format)</span>
+<span class='curline'><a href='../S/79.html#L113'>format</a>            113 ext/date/php_date.c 	ZEND_ARG_INFO(0, format)</span>
+<span class='curline'><a href='../S/79.html#L138'>format</a>            138 ext/date/php_date.c 	ZEND_ARG_INFO(0, format)</span>
+<span class='curline'><a href='../S/79.html#L147'>format</a>            147 ext/date/php_date.c 	ZEND_ARG_INFO(0, format)</span>
+<span class='curline'><a href='../S/79.html#L166'>format</a>            166 ext/date/php_date.c 	ZEND_ARG_INFO(0, format)</span>
+<span class='curline'><a href='../S/79.html#L176'>format</a>            176 ext/date/php_date.c 	ZEND_ARG_INFO(0, format)</span>
+<span class='curline'><a href='../S/79.html#L185'>format</a>            185 ext/date/php_date.c 	ZEND_ARG_INFO(0, format)</span>
+<span class='curline'><a href='../S/79.html#L189'>format</a>            189 ext/date/php_date.c 	ZEND_ARG_INFO(0, format)</span>
+<span class='curline'><a href='../S/79.html#L373'>format</a>            373 ext/date/php_date.c 	ZEND_ARG_INFO(0, format)</span>
+<span class='curline'><a href='../S/79.html#L377'>format</a>            377 ext/date/php_date.c 	ZEND_ARG_INFO(0, format)</span>
+<span class='curline'><a href='../S/79.html#L458'>format</a>            458 ext/date/php_date.c 	PHP_ABSTRACT_ME(DateTimeInterface, format, arginfo_date_method_format)</span>
+<span class='curline'><a href='../S/79.html#L473'>format</a>            473 ext/date/php_date.c 	PHP_ME_MAPPING(format,		date_format,		arginfo_date_method_format, 0)</span>
+<span class='curline'><a href='../S/79.html#L495'>format</a>            495 ext/date/php_date.c 	PHP_ME_MAPPING(format,           date_format,             arginfo_date_method_format, 0)</span>
+<span class='curline'><a href='../S/79.html#L529'>format</a>            529 ext/date/php_date.c 	PHP_ME_MAPPING(format,            date_interval_format,        arginfo_date_method_interval_format, 0)</span>
+<span class='curline'><a href='../S/79.html#L1067'>format</a>           1067 ext/date/php_date.c static char *date_format(char *format, int format_len, timelib_time *t, int localtime)</span>
+<span class='curline'><a href='../S/79.html#L1105'>format</a>           1105 ext/date/php_date.c 		switch (format[i]) {</span>
+<span class='curline'><a href='../S/79.html#L1211'>format</a>           1211 ext/date/php_date.c 			default: buffer[0] = format[i]; buffer[1] = '\0'; length = 1; break;</span>
+<span class='curline'><a href='../S/79.html#L1227'>format</a>           1227 ext/date/php_date.c 	char   *format;</span>
+<span class='curline'><a href='../S/79.html#L1232'>format</a>           1232 ext/date/php_date.c 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s|l", &amp;format, &amp;format_len, &amp;ts) == FAILURE) {</span>
+<span class='curline'><a href='../S/79.html#L1239'>format</a>           1239 ext/date/php_date.c 	string = php_format_date(format, format_len, ts, localtime TSRMLS_CC);</span>
+<span class='curline'><a href='../S/79.html#L1245'>format</a>           1245 ext/date/php_date.c PHPAPI char *php_format_date(char *format, int format_len, time_t ts, int localtime TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/79.html#L1263'>format</a>           1263 ext/date/php_date.c 	string = date_format(format, format_len, t, localtime);</span>
+<span class='curline'><a href='../S/79.html#L1272'>format</a>           1272 ext/date/php_date.c PHPAPI int php_idate(char format, time_t ts, int localtime TSRMLS_DC)</span>
+<span class='curline'><a href='../S/79.html#L1316'>format</a>           1316 ext/date/php_date.c 	switch (format) {</span>
+<span class='curline'><a href='../S/79.html#L1386'>format</a>           1386 ext/date/php_date.c 	char   *format;</span>
+<span class='curline'><a href='../S/79.html#L1391'>format</a>           1391 ext/date/php_date.c 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s|l", &amp;format, &amp;format_len, &amp;ts) == FAILURE) {</span>
+<span class='curline'><a href='../S/79.html#L1404'>format</a>           1404 ext/date/php_date.c 	ret = php_idate(format[0], ts, 0 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/79.html#L1639'>format</a>           1639 ext/date/php_date.c 	char                *format, *buf;</span>
+<span class='curline'><a href='../S/79.html#L1651'>format</a>           1651 ext/date/php_date.c 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s|l", &amp;format, &amp;format_len, &amp;timestamp) == FAILURE) {</span>
+<span class='curline'><a href='../S/79.html#L1701'>format</a>           1701 ext/date/php_date.c 	while ((real_len=strftime(buf, buf_len, format, &amp;ta))==buf_len || real_len==0) {</span>
+<span class='curline'><a href='../S/79.html#L2566'>format</a>           2566 ext/date/php_date.c PHPAPI int php_date_initialize(php_date_obj *dateobj, /*const*/ char *time_str, int time_str_len, char *format, zval *timezone_object, int ctor TSRMLS_DC)</span>
+<span class='curline'><a href='../S/79.html#L2578'>format</a>           2578 ext/date/php_date.c 	if (format) {</span>
+<span class='curline'><a href='../S/79.html#L2579'>format</a>           2579 ext/date/php_date.c 		dateobj-&gt;time = timelib_parse_from_format(format, time_str_len ? time_str : "", time_str_len ? time_str_len : 0, &amp;err, DATE_TIMEZONEDB, php_date_parse_tzfile_wrapper);</span>
+<span class='curline'><a href='../S/79.html#L3055'>format</a>           3055 ext/date/php_date.c 	char                           *date, *format;</span>
+<span class='curline'><a href='../S/79.html#L3060'>format</a>           3060 ext/date/php_date.c 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ss", &amp;format, &amp;format_len, &amp;date, &amp;date_len) == FAILURE) {</span>
+<span class='curline'><a href='../S/79.html#L3064'>format</a>           3064 ext/date/php_date.c 	parsed_time = timelib_parse_from_format(format, date, date_len, &amp;error, DATE_TIMEZONEDB, php_date_parse_tzfile_wrapper);</span>
+<span class='curline'><a href='../S/79.html#L3076'>format</a>           3076 ext/date/php_date.c 	char         *format;</span>
+<span class='curline'><a href='../S/79.html#L3079'>format</a>           3079 ext/date/php_date.c 	if (zend_parse_method_parameters(ZEND_NUM_ARGS() TSRMLS_CC, getThis(), "Os", &amp;object, date_ce_interface, &amp;format, &amp;format_len) == FAILURE) {</span>
+<span class='curline'><a href='../S/79.html#L3084'>format</a>           3084 ext/date/php_date.c 	RETURN_STRING(date_format(format, format_len, dateobj-&gt;time, dateobj-&gt;time-&gt;is_localtime), 0);</span>
+<span class='curline'><a href='../S/79.html#L4007'>format</a>           4007 ext/date/php_date.c static int date_interval_initialize(timelib_rel_time **rt, /*const*/ char *format, int format_length TSRMLS_DC)</span>
+<span class='curline'><a href='../S/79.html#L4015'>format</a>           4015 ext/date/php_date.c 	timelib_strtointerval(format, format_length, &amp;b, &amp;e, &amp;p, &amp;r, &amp;errors);</span>
+<span class='curline'><a href='../S/79.html#L4018'>format</a>           4018 ext/date/php_date.c 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Unknown or bad format (%s)", format);</span>
+<span class='curline'><a href='../S/79.html#L4031'>format</a>           4031 ext/date/php_date.c 				php_error_docref(NULL TSRMLS_CC, E_WARNING, "Failed to parse interval (%s)", format);</span>
+<span class='curline'><a href='../S/79.html#L4305'>format</a>           4305 ext/date/php_date.c static char *date_interval_format(char *format, int format_len, timelib_rel_time *t)</span>
+<span class='curline'><a href='../S/79.html#L4317'>format</a>           4317 ext/date/php_date.c 			switch (format[i]) {</span>
+<span class='curline'><a href='../S/79.html#L4347'>format</a>           4347 ext/date/php_date.c 				default: buffer[0] = '%'; buffer[1] = format[i]; buffer[2] = '\0'; length = 2; break;</span>
+<span class='curline'><a href='../S/79.html#L4352'>format</a>           4352 ext/date/php_date.c 			if (format[i] == '%') {</span>
+<span class='curline'><a href='../S/79.html#L4355'>format</a>           4355 ext/date/php_date.c 				smart_str_appendc(&amp;string, format[i]);</span>
+<span class='curline'><a href='../S/79.html#L4373'>format</a>           4373 ext/date/php_date.c 	char             *format;</span>
+<span class='curline'><a href='../S/79.html#L4376'>format</a>           4376 ext/date/php_date.c 	if (zend_parse_method_parameters(ZEND_NUM_ARGS() TSRMLS_CC, getThis(), "Os", &amp;object, date_ce_interval, &amp;format, &amp;format_len) == FAILURE) {</span>
+<span class='curline'><a href='../S/79.html#L4382'>format</a>           4382 ext/date/php_date.c 	RETURN_STRING(date_interval_format(format, format_len, diobj-&gt;diff), 0);</span>
+<span class='curline'><a href='../S/79.html#L4386'>format</a>           4386 ext/date/php_date.c static int date_period_initialize(timelib_time **st, timelib_time **et, timelib_rel_time **d, long *recurrences, /*const*/ char *format, int format_length TSRMLS_DC)</span>
+<span class='curline'><a href='../S/79.html#L4394'>format</a>           4394 ext/date/php_date.c 	timelib_strtointerval(format, format_length, &amp;b, &amp;e, &amp;p, &amp;r, &amp;errors);</span>
+<span class='curline'><a href='../S/79.html#L4397'>format</a>           4397 ext/date/php_date.c 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Unknown or bad format (%s)", format);</span>
+<span class='curline'><a href='../S/80.html#L187'>format</a>            187 ext/date/php_date.h PHPAPI int php_idate(char format, time_t ts, int localtime TSRMLS_DC);</span>
+<span class='curline'><a href='../S/80.html#L192'>format</a>            192 ext/date/php_date.h PHPAPI char *php_format_date(char *format, int format_len, time_t ts, int localtime TSRMLS_DC);</span>
+<span class='curline'><a href='../S/80.html#L205'>format</a>            205 ext/date/php_date.h PHPAPI int php_date_initialize(php_date_obj *dateobj, /*const*/ char *time_str, int time_str_len, char *format, zval *timezone_object, int ctor TSRMLS_DC);</span>
+<span class='curline'><a href='../S/121.html#L1697'>format</a>           1697 ext/dom/document.c 	int file_len = 0, bytes, format, saveempty = 0;</span>
+<span class='curline'><a href='../S/121.html#L1717'>format</a>           1717 ext/dom/document.c 	format = doc_props-&gt;formatoutput;</span>
+<span class='curline'><a href='../S/121.html#L1722'>format</a>           1722 ext/dom/document.c 	bytes = xmlSaveFormatFileEnc(file, docp, NULL, format);</span>
+<span class='curline'><a href='../S/121.html#L1746'>format</a>           1746 ext/dom/document.c 	int size, format, saveempty = 0;</span>
+<span class='curline'><a href='../S/121.html#L1756'>format</a>           1756 ext/dom/document.c 	format = doc_props-&gt;formatoutput;</span>
+<span class='curline'><a href='../S/121.html#L1774'>format</a>           1774 ext/dom/document.c 		xmlNodeDump(buf, docp, node, 0, format);</span>
+<span class='curline'><a href='../S/121.html#L1791'>format</a>           1791 ext/dom/document.c 		xmlDocDumpFormatMemory(docp, &amp;mem, &amp;size, format);</span>
+<span class='curline'><a href='../S/121.html#L2226'>format</a>           2226 ext/dom/document.c 	int file_len, bytes, format;</span>
+<span class='curline'><a href='../S/121.html#L2247'>format</a>           2247 ext/dom/document.c 	format = doc_props-&gt;formatoutput;</span>
+<span class='curline'><a href='../S/121.html#L2248'>format</a>           2248 ext/dom/document.c 	bytes = htmlSaveFileFormat(file, docp, encoding, format);</span>
+<span class='curline'><a href='../S/121.html#L2268'>format</a>           2268 ext/dom/document.c 	int size = 0, format;</span>
+<span class='curline'><a href='../S/121.html#L2280'>format</a>           2280 ext/dom/document.c 	format = doc_props-&gt;formatoutput;</span>
+<span class='curline'><a href='../S/121.html#L2326'>format</a>           2326 ext/dom/document.c 		htmlDocDumpMemoryFormat(docp, &amp;mem, &amp;size, format);</span>
+<span class='curline'><a href='../S/172.html#L329'>format</a>            329 ext/exif/exif.c static char *exif_get_tagformat(int format)</span>
+<span class='curline'><a href='../S/172.html#L331'>format</a>            331 ext/exif/exif.c 	switch(format) {</span>
+<span class='curline'><a href='../S/172.html#L1157'>format</a>           1157 ext/exif/exif.c char * exif_dump_data(int *dump_free, int format, int components, int length, int motorola_intel, char *value_ptr TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/172.html#L1163'>format</a>           1163 ext/exif/exif.c 	if (format == TAG_FMT_STRING) {</span>
+<span class='curline'><a href='../S/172.html#L1166'>format</a>           1166 ext/exif/exif.c 	if (format == TAG_FMT_UNDEFINED) {</span>
+<span class='curline'><a href='../S/172.html#L1169'>format</a>           1169 ext/exif/exif.c 	if (format == TAG_FMT_IFD) {</span>
+<span class='curline'><a href='../S/172.html#L1172'>format</a>           1172 ext/exif/exif.c 	if (format == TAG_FMT_SINGLE || format == TAG_FMT_DOUBLE) {</span>
+<span class='curline'><a href='../S/172.html#L1182'>format</a>           1182 ext/exif/exif.c 		switch(format) {</span>
+<span class='curline'><a href='../S/172.html#L1232'>format</a>           1232 ext/exif/exif.c static double exif_convert_any_format(void *value, int format, int motorola_intel TSRMLS_DC)</span>
+<span class='curline'><a href='../S/172.html#L1237'>format</a>           1237 ext/exif/exif.c 	switch(format) {</span>
+<span class='curline'><a href='../S/172.html#L1281'>format</a>           1281 ext/exif/exif.c static size_t exif_convert_any_to_int(void *value, int format, int motorola_intel TSRMLS_DC)</span>
+<span class='curline'><a href='../S/172.html#L1286'>format</a>           1286 ext/exif/exif.c 	switch(format) {</span>
+<span class='curline'><a href='../S/172.html#L1360'>format</a>           1360 ext/exif/exif.c 	WORD                format;</span>
+<span class='curline'><a href='../S/172.html#L1564'>format</a>           1564 ext/exif/exif.c static void exif_error_docref(const char *docref EXIFERR_DC, const image_info_type *ImageInfo, int type, const char *format, ...)</span>
+<span class='curline'><a href='../S/172.html#L1568'>format</a>           1568 ext/exif/exif.c 	va_start(args, format);</span>
+<span class='curline'><a href='../S/172.html#L1573'>format</a>           1573 ext/exif/exif.c 		spprintf(&amp;buf, 0, "%s(%d): %s", _file, _line, format);</span>
+<span class='curline'><a href='../S/172.html#L1578'>format</a>           1578 ext/exif/exif.c 	php_verror(docref, ImageInfo-&gt;FileName?ImageInfo-&gt;FileName:"", type, format, args TSRMLS_CC);</span>
+<span class='curline'><a href='../S/172.html#L1663'>format</a>           1663 ext/exif/exif.c static void exif_iif_add_value(image_info_type *image_info, int section_index, char *name, int tag, int format, int length, void* value, int motorola_intel TSRMLS_DC)</span>
+<span class='curline'><a href='../S/172.html#L1681'>format</a>           1681 ext/exif/exif.c 	info_data-&gt;format = format;</span>
+<span class='curline'><a href='../S/172.html#L1686'>format</a>           1686 ext/exif/exif.c 	switch (format) {</span>
+<span class='curline'><a href='../S/172.html#L1737'>format</a>           1737 ext/exif/exif.c 			for (idex=0,vptr=value; idex&lt;(size_t)length; idex++,vptr=(char *) vptr + php_tiff_bytes_per_format[format]) {</span>
+<span class='curline'><a href='../S/172.html#L1741'>format</a>           1741 ext/exif/exif.c 				switch (format) {</span>
+<span class='curline'><a href='../S/172.html#L1791'>format</a>           1791 ext/exif/exif.c static void exif_iif_add_tag(image_info_type *image_info, int section_index, char *name, int tag, int format, size_t length, void* value TSRMLS_DC)</span>
+<span class='curline'><a href='../S/172.html#L1793'>format</a>           1793 ext/exif/exif.c 	exif_iif_add_value(image_info, section_index, name, tag, format, (int)length, value, image_info-&gt;motorola_intel TSRMLS_CC);</span>
+<span class='curline'><a href='../S/172.html#L1810'>format</a>           1810 ext/exif/exif.c 	info_data-&gt;format = TAG_FMT_SLONG;</span>
+<span class='curline'><a href='../S/172.html#L1832'>format</a>           1832 ext/exif/exif.c 		info_data-&gt;format = TAG_FMT_STRING;</span>
+<span class='curline'><a href='../S/172.html#L1873'>format</a>           1873 ext/exif/exif.c 		info_data-&gt;format = TAG_FMT_UNDEFINED;</span>
+<span class='curline'><a href='../S/172.html#L1897'>format</a>           1897 ext/exif/exif.c 			switch(image_info-&gt;info_list[section_index].list[i].format) {</span>
+<span class='curline'><a href='../S/172.html#L1973'>format</a>           1973 ext/exif/exif.c 				switch (info_data-&gt;format) {</span>
+<span class='curline'><a href='../S/172.html#L2021'>format</a>           2021 ext/exif/exif.c 							switch (info_data-&gt;format) {</span>
+<span class='curline'><a href='../S/172.html#L2366'>format</a>           2366 ext/exif/exif.c 	byte_count = php_tiff_bytes_per_format[info_data-&gt;format] * info_data-&gt;length;</span>
+<span class='curline'><a href='../S/172.html#L2372'>format</a>           2372 ext/exif/exif.c 	if (info_data-&gt;format == TAG_FMT_UNDEFINED || info_data-&gt;format == TAG_FMT_STRING</span>
+<span class='curline'><a href='../S/172.html#L2373'>format</a>           2373 ext/exif/exif.c 	  || (byte_count&gt;1 &amp;&amp; (info_data-&gt;format == TAG_FMT_BYTE || info_data-&gt;format == TAG_FMT_SBYTE))</span>
+<span class='curline'><a href='../S/172.html#L2377'>format</a>           2377 ext/exif/exif.c 	} else if (info_data-&gt;format == TAG_FMT_BYTE) {</span>
+<span class='curline'><a href='../S/172.html#L2380'>format</a>           2380 ext/exif/exif.c 	} else if (info_data-&gt;format == TAG_FMT_SBYTE) {</span>
+<span class='curline'><a href='../S/172.html#L2391'>format</a>           2391 ext/exif/exif.c 			switch(info_data-&gt;format) {</span>
+<span class='curline'><a href='../S/172.html#L2467'>format</a>           2467 ext/exif/exif.c 				byte_count = php_tiff_bytes_per_format[info_data-&gt;format] * info_data-&gt;length;</span>
+<span class='curline'><a href='../S/172.html#L2488'>format</a>           2488 ext/exif/exif.c 				byte_count = php_tiff_bytes_per_format[info_data-&gt;format] * info_data-&gt;length;</span>
+<span class='curline'><a href='../S/172.html#L2490'>format</a>           2490 ext/exif/exif.c 				exif_error_docref(NULL EXIFERR_CC, ImageInfo, E_NOTICE, "Thumbnail: process tag(x%04X=%s): %s%s (%d bytes)", info_data-&gt;tag, exif_get_tagname(info_data-&gt;tag, tagname, -12, tag_table_IFD TSRMLS_CC), (info_data-&gt;length&gt;1)&amp;&amp;info_data-&gt;format!=TAG_FMT_UNDEFINED&amp;&amp;info_data-&gt;format!=TAG_FMT_STRING?"ARRAY OF ":"", exif_get_tagformat(info_data-&gt;format), byte_count);</span>
+<span class='curline'><a href='../S/172.html#L2499'>format</a>           2499 ext/exif/exif.c 					php_ifd_set16u(new_data + 2, info_data-&gt;format, ImageInfo-&gt;motorola_intel);</span>
+<span class='curline'><a href='../S/172.html#L2799'>format</a>           2799 ext/exif/exif.c 	int tag, format, components;</span>
+<span class='curline'><a href='../S/172.html#L2817'>format</a>           2817 ext/exif/exif.c 	format = php_ifd_get16u(dir_entry+2, ImageInfo-&gt;motorola_intel);</span>
+<span class='curline'><a href='../S/172.html#L2820'>format</a>           2820 ext/exif/exif.c 	if (!format || format &gt; NUM_FORMATS) {</span>
+<span class='curline'><a href='../S/172.html#L2822'>format</a>           2822 ext/exif/exif.c 		exif_error_docref("exif_read_data#error_ifd" EXIFERR_CC, ImageInfo, E_WARNING, "Process tag(x%04X=%s): Illegal format code 0x%04X, suppose BYTE", tag, exif_get_tagname(tag, tagname, -12, tag_table TSRMLS_CC), format);</span>
+<span class='curline'><a href='../S/172.html#L2823'>format</a>           2823 ext/exif/exif.c 		format = TAG_FMT_BYTE;</span>
+<span class='curline'><a href='../S/172.html#L2832'>format</a>           2832 ext/exif/exif.c 	byte_count_signed = (int64_t)components * php_tiff_bytes_per_format[format];</span>
+<span class='curline'><a href='../S/172.html#L2904'>format</a>           2904 ext/exif/exif.c 	dump_data = exif_dump_data(&amp;dump_free, format, components, length, ImageInfo-&gt;motorola_intel, value_ptr TSRMLS_CC);</span>
+<span class='curline'><a href='../S/172.html#L2905'>format</a>           2905 ext/exif/exif.c 	exif_error_docref(NULL EXIFERR_CC, ImageInfo, E_NOTICE, "Process tag(x%04X=%s,@x%04X + x%04X(=%d)): %s%s %s", tag, exif_get_tagname(tag, tagname, -12, tag_table TSRMLS_CC), offset_val+displacement, byte_count, byte_count, (components&gt;1)&amp;&amp;format!=TAG_FMT_UNDEFINED&amp;&amp;format!=TAG_FMT_STRING?"ARRAY OF ":"", exif_get_tagformat(format), dump_data);</span>
+<span class='curline'><a href='../S/172.html#L2916'>format</a>           2916 ext/exif/exif.c 					ImageInfo-&gt;Thumbnail.width = exif_convert_any_to_int(value_ptr, format, ImageInfo-&gt;motorola_intel TSRMLS_CC);</span>
+<span class='curline'><a href='../S/172.html#L2921'>format</a>           2921 ext/exif/exif.c 					ImageInfo-&gt;Thumbnail.height = exif_convert_any_to_int(value_ptr, format, ImageInfo-&gt;motorola_intel TSRMLS_CC);</span>
+<span class='curline'><a href='../S/172.html#L2927'>format</a>           2927 ext/exif/exif.c 					ImageInfo-&gt;Thumbnail.offset = exif_convert_any_to_int(value_ptr, format, ImageInfo-&gt;motorola_intel TSRMLS_CC);</span>
+<span class='curline'><a href='../S/172.html#L2937'>format</a>           2937 ext/exif/exif.c 					ImageInfo-&gt;Thumbnail.size = exif_convert_any_to_int(value_ptr, format, ImageInfo-&gt;motorola_intel TSRMLS_CC);</span>
+<span class='curline'><a href='../S/172.html#L2943'>format</a>           2943 ext/exif/exif.c 						ImageInfo-&gt;Thumbnail.size = exif_convert_any_to_int(value_ptr, format, ImageInfo-&gt;motorola_intel TSRMLS_CC);</span>
+<span class='curline'><a href='../S/172.html#L2987'>format</a>           2987 ext/exif/exif.c 				ImageInfo-&gt;ApertureFNumber = (float)exif_convert_any_format(value_ptr, format, ImageInfo-&gt;motorola_intel TSRMLS_CC);</span>
+<span class='curline'><a href='../S/172.html#L2996'>format</a>           2996 ext/exif/exif.c 						= (float)exp(exif_convert_any_format(value_ptr, format, ImageInfo-&gt;motorola_intel TSRMLS_CC)*log(2)*0.5);</span>
+<span class='curline'><a href='../S/172.html#L3007'>format</a>           3007 ext/exif/exif.c 						= (float)(1/exp(exif_convert_any_format(value_ptr, format, ImageInfo-&gt;motorola_intel TSRMLS_CC)*log(2)));</span>
+<span class='curline'><a href='../S/172.html#L3015'>format</a>           3015 ext/exif/exif.c 				ImageInfo-&gt;ExifImageWidth = exif_convert_any_to_int(value_ptr, format, ImageInfo-&gt;motorola_intel TSRMLS_CC);</span>
+<span class='curline'><a href='../S/172.html#L3019'>format</a>           3019 ext/exif/exif.c 				ImageInfo-&gt;FocalplaneXRes = exif_convert_any_format(value_ptr, format, ImageInfo-&gt;motorola_intel TSRMLS_CC);</span>
+<span class='curline'><a href='../S/172.html#L3025'>format</a>           3025 ext/exif/exif.c 				ImageInfo-&gt;Distance = (float)exif_convert_any_format(value_ptr, format, ImageInfo-&gt;motorola_intel TSRMLS_CC);</span>
+<span class='curline'><a href='../S/172.html#L3029'>format</a>           3029 ext/exif/exif.c 				switch((int)exif_convert_any_format(value_ptr, format, ImageInfo-&gt;motorola_intel TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/172.html#L3045'>format</a>           3045 ext/exif/exif.c 				if (format==TAG_FMT_IFD) {</span>
+<span class='curline'><a href='../S/172.html#L3107'>format</a>           3107 ext/exif/exif.c 	exif_iif_add_tag(ImageInfo, section_index, exif_get_tagname(tag, tagname, sizeof(tagname), tag_table TSRMLS_CC), tag, format, components, value_ptr TSRMLS_CC);</span>
+<span class='curline'><a href='../S/176.html#L171'>format</a>            171 ext/fileinfo/libmagic/apprentice.c 	const int format;</span>
+<span class='curline'><a href='../S/176.html#L364'>format</a>            364 ext/fileinfo/libmagic/apprentice.c 		file_formats[p-&gt;type] = p-&gt;format;</span>
+<span class='curline'><a href='../S/210.html#L1098'>format</a>           1098 ext/gd/gd.c    void php_gd_error_method(int type, const char *format, va_list args)</span>
+<span class='curline'><a href='../S/210.html#L1102'>format</a>           1102 ext/gd/gd.c    	php_verror(NULL, "", type, format, args TSRMLS_CC);</span>
+<span class='curline'><a href='../S/216.html#L101'>format</a>            101 ext/gd/libgd/gd.c void php_gd_error_ex(int type, const char *format, ...)</span>
+<span class='curline'><a href='../S/216.html#L107'>format</a>            107 ext/gd/libgd/gd.c 	va_start(args, format);</span>
+<span class='curline'><a href='../S/216.html#L108'>format</a>            108 ext/gd/libgd/gd.c 	php_verror(NULL, "", type, format, args TSRMLS_CC);</span>
+<span class='curline'><a href='../S/216.html#L112'>format</a>            112 ext/gd/libgd/gd.c void php_gd_error(const char *format, ...)</span>
+<span class='curline'><a href='../S/216.html#L118'>format</a>            118 ext/gd/libgd/gd.c 	va_start(args, format);</span>
+<span class='curline'><a href='../S/216.html#L119'>format</a>            119 ext/gd/libgd/gd.c 	php_verror(NULL, "", E_WARNING, format, args TSRMLS_CC);</span>
+<span class='curline'><a href='../S/217.html#L49'>format</a>             49 ext/gd/libgd/gd.h void php_gd_error_ex(int type, const char *format, ...);</span>
+<span class='curline'><a href='../S/217.html#L51'>format</a>             51 ext/gd/libgd/gd.h void php_gd_error(const char *format, ...);</span>
+<span class='curline'><a href='../S/261.html#L1131'>format</a>           1131 ext/gd/libgd/gdft.c 			if (image-&gt;format != ft_glyph_format_bitmap &amp;&amp; FT_Glyph_To_Bitmap(&amp;image, ft_render_mode_normal, 0, 1)) {</span>
+<span class='curline'><a href='../S/264.html#L59'>format</a>             59 ext/gd/libgd/gdkanji.c debug (const char *format,...)</span>
+<span class='curline'><a href='../S/264.html#L64'>format</a>             64 ext/gd/libgd/gdkanji.c   va_start (args, format);</span>
+<span class='curline'><a href='../S/264.html#L66'>format</a>             66 ext/gd/libgd/gdkanji.c   vfprintf (stdout, format, args);</span>
+<span class='curline'><a href='../S/264.html#L73'>format</a>             73 ext/gd/libgd/gdkanji.c error (const char *format,...)</span>
+<span class='curline'><a href='../S/264.html#L79'>format</a>             79 ext/gd/libgd/gdkanji.c 	va_start(args, format);</span>
+<span class='curline'><a href='../S/264.html#L80'>format</a>             80 ext/gd/libgd/gdkanji.c 	vspprintf(&amp;tmp, 0, format, args);</span>
+<span class='curline'><a href='../S/281.html#L159'>format</a>            159 ext/gd/libgd/xbm.c void gdCtxPrintf(gdIOCtx * out, const char *format, ...)</span>
+<span class='curline'><a href='../S/281.html#L165'>format</a>            165 ext/gd/libgd/xbm.c 	va_start(args, format);</span>
+<span class='curline'><a href='../S/281.html#L166'>format</a>            166 ext/gd/libgd/xbm.c 	len = vspprintf(&amp;buf, 0, format, args);</span>
+<span class='curline'><a href='../S/324.html#L700'>format</a>            700 ext/interbase/ibase_query.c 					char *format = INI_STR("ibase.timestampformat");</span>
+<span class='curline'><a href='../S/324.html#L706'>format</a>            706 ext/interbase/ibase_query.c 							format = INI_STR("ibase.dateformat");</span>
+<span class='curline'><a href='../S/324.html#L709'>format</a>            709 ext/interbase/ibase_query.c 							format = INI_STR("ibase.timeformat");</span>
+<span class='curline'><a href='../S/324.html#L711'>format</a>            711 ext/interbase/ibase_query.c 					if (!strptime(Z_STRVAL_P(b_var), format, &amp;t)) {</span>
+<span class='curline'><a href='../S/324.html#L1319'>format</a>           1319 ext/interbase/ibase_query.c 		char *format;</span>
+<span class='curline'><a href='../S/324.html#L1378'>format</a>           1378 ext/interbase/ibase_query.c 			format = INI_STR("ibase.timestampformat");</span>
+<span class='curline'><a href='../S/324.html#L1382'>format</a>           1382 ext/interbase/ibase_query.c 			format = INI_STR("ibase.dateformat");</span>
+<span class='curline'><a href='../S/324.html#L1386'>format</a>           1386 ext/interbase/ibase_query.c 			format = INI_STR("ibase.timeformat");</span>
+<span class='curline'><a href='../S/324.html#L1402'>format</a>           1402 ext/interbase/ibase_query.c 				l = strftime(string_data, sizeof(string_data), format, &amp;t);</span>
+<span class='curline'><a href='../S/363.html#L45'>format</a>             45 ext/intl/converter/converter.c static inline void php_converter_throw_failure(php_converter_object *objval, UErrorCode error TSRMLS_DC, const char *format, ...) {</span>
+<span class='curline'><a href='../S/363.html#L50'>format</a>             50 ext/intl/converter/converter.c 	va_start(vargs, format);</span>
+<span class='curline'><a href='../S/363.html#L51'>format</a>             51 ext/intl/converter/converter.c 	vsnprintf(message, sizeof(message), format, vargs);</span>
+<span class='curline'><a href='../S/370.html#L134'>format</a>            134 ext/intl/dateformat/dateformat_class.c 	ZEND_ARG_INFO(0, format)</span>
+<span class='curline'><a href='../S/370.html#L187'>format</a>            187 ext/intl/dateformat/dateformat_class.c 	PHP_NAMED_FE( format, ZEND_FN( datefmt_format ), arginfo_intldateformatter_format )</span>
+<span class='curline'><a href='../S/385.html#L175'>format</a>            175 ext/intl/formatter/formatter_class.c 	PHP_NAMED_FE( format, ZEND_FN( numfmt_format ), arginfo_numberformatter_format )</span>
+<span class='curline'><a href='../S/419.html#L147'>format</a>            147 ext/intl/msgformat/msgformat_class.c 	PHP_NAMED_FE( format, ZEND_FN( msgfmt_format ), arginfo_messageformatter_format )</span>
+<span class='curline'><a href='../S/434.html#L359'>format</a>            359 ext/intl/php_intl.c 	ZEND_ARG_INFO(0, format)</span>
+<span class='curline'><a href='../S/765.html#L39'>format</a>             39 ext/mysqli/mysqli_exception.c void php_mysqli_throw_sql_exception(char *sqlstate, int errorno TSRMLS_DC, char *format, ...)</span>
+<span class='curline'><a href='../S/765.html#L45'>format</a>             45 ext/mysqli/mysqli_exception.c 	va_start(arg, format);</span>
+<span class='curline'><a href='../S/765.html#L46'>format</a>             46 ext/mysqli/mysqli_exception.c 	vspprintf(&amp;message, 0, format, arg);</span>
+<span class='curline'><a href='../S/771.html#L79'>format</a>             79 ext/mysqli/mysqli_priv.h extern void php_mysqli_throw_sql_exception(char *sqlstate, int errorno TSRMLS_DC, char *format, ...);</span>
+<span class='curline'><a href='../S/773.html#L30'>format</a>             30 ext/mysqli/mysqli_report.c extern void php_mysqli_throw_sql_exception(char *sqlstate, int errorno TSRMLS_DC, char *format, ...);</span>
+<span class='curline'><a href='../S/782.html#L615'>format</a>            615 ext/mysqlnd/mysqlnd_alloc.c PHPAPI int _mysqlnd_sprintf(char ** pbuf, size_t max_len, const char *format, ...)</span>
+<span class='curline'><a href='../S/782.html#L619'>format</a>            619 ext/mysqlnd/mysqlnd_alloc.c 	va_start(ap, format);</span>
+<span class='curline'><a href='../S/782.html#L620'>format</a>            620 ext/mysqlnd/mysqlnd_alloc.c 	len = vspprintf(pbuf, max_len, format, ap);</span>
+<span class='curline'><a href='../S/782.html#L635'>format</a>            635 ext/mysqlnd/mysqlnd_alloc.c PHPAPI int _mysqlnd_vsprintf(char ** pbuf, size_t max_len, const char * format, va_list ap)</span>
+<span class='curline'><a href='../S/782.html#L637'>format</a>            637 ext/mysqlnd/mysqlnd_alloc.c 	return vspprintf(pbuf, max_len, format, ap);</span>
+<span class='curline'><a href='../S/783.html#L48'>format</a>             48 ext/mysqlnd/mysqlnd_alloc.h 	int		(*m_sprintf)(char **pbuf, size_t max_len, const char *format, ...);</span>
+<span class='curline'><a href='../S/783.html#L49'>format</a>             49 ext/mysqlnd/mysqlnd_alloc.h 	int		(*m_vsprintf)(char **pbuf, size_t max_len, const char *format, va_list ap);</span>
+<span class='curline'><a href='../S/783.html#L69'>format</a>             69 ext/mysqlnd/mysqlnd_alloc.h PHPAPI int		_mysqlnd_sprintf(char **pbuf, size_t max_len, const char *format, ...);</span>
+<span class='curline'><a href='../S/783.html#L71'>format</a>             71 ext/mysqlnd/mysqlnd_alloc.h PHPAPI int		_mysqlnd_vsprintf(char **pbuf, size_t max_len, const char *format, va_list ap);</span>
+<span class='curline'><a href='../S/790.html#L156'>format</a>            156 ext/mysqlnd/mysqlnd_debug.c 									  const char *format, ...)</span>
+<span class='curline'><a href='../S/790.html#L230'>format</a>            230 ext/mysqlnd/mysqlnd_debug.c 	va_start(args, format);</span>
+<span class='curline'><a href='../S/790.html#L231'>format</a>            231 ext/mysqlnd/mysqlnd_debug.c 	mnd_vsprintf(&amp;buffer, 0, format, args);</span>
+<span class='curline'><a href='../S/791.html#L36'>format</a>             36 ext/mysqlnd/mysqlnd_debug.h 							   unsigned int level, const char * type, const char *format, ...);</span>
+<span class='curline'><a href='../S/791.html#L206'>format</a>            206 ext/mysqlnd/mysqlnd_debug.h static inline void DBG_INF_FMT(const char * const format, ...) {}</span>
+<span class='curline'><a href='../S/791.html#L207'>format</a>            207 ext/mysqlnd/mysqlnd_debug.h static inline void DBG_ERR_FMT(const char * const format, ...) {}</span>
+<span class='curline'><a href='../S/791.html#L217'>format</a>            217 ext/mysqlnd/mysqlnd_debug.h static inline void TRACE_ALLOC_INF_FMT(const char * const format, ...) {}</span>
+<span class='curline'><a href='../S/791.html#L218'>format</a>            218 ext/mysqlnd/mysqlnd_debug.h static inline void TRACE_ALLOC_ERR_FMT(const char * const format, ...) {}</span>
+<span class='curline'><a href='../S/827.html#L140'>format</a>            140 ext/odbc/php_odbc.c 	ZEND_ARG_INFO(0, format)</span>
+<span class='curline'><a href='../S/850.html#L31'>format</a>             31 ext/opcache/zend_accelerator_debug.c void zend_accel_error(int type, const char *format, ...)</span>
+<span class='curline'><a href='../S/850.html#L83'>format</a>             83 ext/opcache/zend_accelerator_debug.c     va_start(args, format);</span>
+<span class='curline'><a href='../S/850.html#L84'>format</a>             84 ext/opcache/zend_accelerator_debug.c     vfprintf(fLog, format, args);</span>
+<span class='curline'><a href='../S/851.html#L31'>format</a>             31 ext/opcache/zend_accelerator_debug.h void zend_accel_error(int type, const char *format, ...);</span>
+<span class='curline'><a href='../S/945.html#L55'>format</a>             55 ext/pdo_mysql/php_pdo_mysql_int.h static inline void PDO_DBG_INF_FMT(char *format, ...) {}</span>
+<span class='curline'><a href='../S/945.html#L56'>format</a>             56 ext/pdo_mysql/php_pdo_mysql_int.h static inline void PDO_DBG_ERR_FMT(char *format, ...) {}</span>
+<span class='curline'><a href='../S/975.html#L1147'>format</a>           1147 ext/phar/phar_object.c 	long format = 0;</span>
+<span class='curline'><a href='../S/975.html#L1157'>format</a>           1157 ext/phar/phar_object.c 		if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "p|ls!l", &amp;fname, &amp;fname_len, &amp;flags, &amp;alias, &amp;alias_len, &amp;format) == FAILURE) {</span>
+<span class='curline'><a href='../S/975.html#L1212'>format</a>           1212 ext/phar/phar_object.c 	if (is_data &amp;&amp; phar_data-&gt;is_tar &amp;&amp; phar_data-&gt;is_brandnew &amp;&amp; format == PHAR_FORMAT_ZIP) {</span>
+<span class='curline'><a href='../S/975.html#L2371'>format</a>           2371 ext/phar/phar_object.c 	long format = 9021976, method = 9021976;</span>
+<span class='curline'><a href='../S/975.html#L2374'>format</a>           2374 ext/phar/phar_object.c 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "|lls", &amp;format, &amp;method, &amp;ext, &amp;ext_len) == FAILURE) {</span>
+<span class='curline'><a href='../S/975.html#L2384'>format</a>           2384 ext/phar/phar_object.c 	switch (format) {</span>
+<span class='curline'><a href='../S/975.html#L2389'>format</a>           2389 ext/phar/phar_object.c 				format = PHAR_FORMAT_TAR;</span>
+<span class='curline'><a href='../S/975.html#L2391'>format</a>           2391 ext/phar/phar_object.c 				format = PHAR_FORMAT_ZIP;</span>
+<span class='curline'><a href='../S/975.html#L2393'>format</a>           2393 ext/phar/phar_object.c 				format = PHAR_FORMAT_PHAR;</span>
+<span class='curline'><a href='../S/975.html#L2414'>format</a>           2414 ext/phar/phar_object.c 			if (format == PHAR_FORMAT_ZIP) {</span>
+<span class='curline'><a href='../S/975.html#L2429'>format</a>           2429 ext/phar/phar_object.c 			if (format == PHAR_FORMAT_ZIP) {</span>
+<span class='curline'><a href='../S/975.html#L2451'>format</a>           2451 ext/phar/phar_object.c 	ret = phar_convert_to_other(phar_obj-&gt;arc.archive, format, ext, flags TSRMLS_CC);</span>
+<span class='curline'><a href='../S/975.html#L2474'>format</a>           2474 ext/phar/phar_object.c 	long format = 9021976, method = 9021976;</span>
+<span class='curline'><a href='../S/975.html#L2477'>format</a>           2477 ext/phar/phar_object.c 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "|lls", &amp;format, &amp;method, &amp;ext, &amp;ext_len) == FAILURE) {</span>
+<span class='curline'><a href='../S/975.html#L2481'>format</a>           2481 ext/phar/phar_object.c 	switch (format) {</span>
+<span class='curline'><a href='../S/975.html#L2486'>format</a>           2486 ext/phar/phar_object.c 				format = PHAR_FORMAT_TAR;</span>
+<span class='curline'><a href='../S/975.html#L2488'>format</a>           2488 ext/phar/phar_object.c 				format = PHAR_FORMAT_ZIP;</span>
+<span class='curline'><a href='../S/975.html#L2516'>format</a>           2516 ext/phar/phar_object.c 			if (format == PHAR_FORMAT_ZIP) {</span>
+<span class='curline'><a href='../S/975.html#L2531'>format</a>           2531 ext/phar/phar_object.c 			if (format == PHAR_FORMAT_ZIP) {</span>
+<span class='curline'><a href='../S/975.html#L2553'>format</a>           2553 ext/phar/phar_object.c 	ret = phar_convert_to_other(phar_obj-&gt;arc.archive, format, ext, flags TSRMLS_CC);</span>
+<span class='curline'><a href='../S/975.html#L5182'>format</a>           5182 ext/phar/phar_object.c 	ZEND_ARG_INFO(0, format)</span>
+<span class='curline'><a href='../S/996.html#L129'>format</a>            129 ext/reflection/php_reflection.c static string *string_printf(string *str, const char *format, ...)</span>
+<span class='curline'><a href='../S/996.html#L135'>format</a>            135 ext/reflection/php_reflection.c 	va_start(arg, format);</span>
+<span class='curline'><a href='../S/996.html#L136'>format</a>            136 ext/reflection/php_reflection.c 	len = zend_vspprintf(&amp;s_tmp, 0, format, arg);</span>
+<span class='curline'><a href='../S/1017.html#L512'>format</a>            512 ext/snmp/snmp.c static void php_snmp_error(zval *object, const char *docref TSRMLS_DC, int type, const char *format, ...)</span>
+<span class='curline'><a href='../S/1017.html#L522'>format</a>            522 ext/snmp/snmp.c 			va_start(args, format);</span>
+<span class='curline'><a href='../S/1017.html#L523'>format</a>            523 ext/snmp/snmp.c 			vsnprintf(snmp_object-&gt;snmp_errstr, sizeof(snmp_object-&gt;snmp_errstr) - 1, format, args);</span>
+<span class='curline'><a href='../S/1017.html#L536'>format</a>            536 ext/snmp/snmp.c 		va_start(args, format);</span>
+<span class='curline'><a href='../S/1017.html#L537'>format</a>            537 ext/snmp/snmp.c 		php_verror(docref, "", E_WARNING, format, args TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1018.html#L63'>format</a>             63 ext/soap/php_encoding.c static xmlNodePtr to_xml_datetime_ex(encodeTypePtr type, zval *data, char *format, int style, xmlNodePtr parent TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1018.html#L2979'>format</a>           2979 ext/soap/php_encoding.c static xmlNodePtr to_xml_datetime_ex(encodeTypePtr type, zval *data, char *format, int style, xmlNodePtr parent TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1018.html#L3004'>format</a>           3004 ext/soap/php_encoding.c 		while ((real_len = strftime(buf, buf_len, format, ta)) == buf_len || real_len == 0) {</span>
+<span class='curline'><a href='../S/1028.html#L205'>format</a>            205 ext/soap/php_soap.h #define soap_error0(severity, format) \</span>
+<span class='curline'><a href='../S/1028.html#L206'>format</a>            206 ext/soap/php_soap.h 	php_error(severity, "SOAP-ERROR: " format)</span>
+<span class='curline'><a href='../S/1028.html#L208'>format</a>            208 ext/soap/php_soap.h #define soap_error1(severity, format, param1) \</span>
+<span class='curline'><a href='../S/1028.html#L209'>format</a>            209 ext/soap/php_soap.h 	php_error(severity, "SOAP-ERROR: " format, param1)</span>
+<span class='curline'><a href='../S/1028.html#L211'>format</a>            211 ext/soap/php_soap.h #define soap_error2(severity, format, param1, param2) \</span>
+<span class='curline'><a href='../S/1028.html#L212'>format</a>            212 ext/soap/php_soap.h 	php_error(severity, "SOAP-ERROR: " format, param1, param2)</span>
+<span class='curline'><a href='../S/1028.html#L214'>format</a>            214 ext/soap/php_soap.h #define soap_error3(severity, format, param1, param2, param3) \</span>
+<span class='curline'><a href='../S/1028.html#L215'>format</a>            215 ext/soap/php_soap.h 	php_error(severity, "SOAP-ERROR: " format, param1, param2, param3)</span>
+<span class='curline'><a href='../S/1031.html#L71'>format</a>             71 ext/soap/soap.c static void soap_error_handler(int error_num, const char *error_filename, const uint error_lineno, const char *format, va_list args);</span>
+<span class='curline'><a href='../S/1031.html#L172'>format</a>            172 ext/soap/soap.c #define call_old_error_handler(error_num, error_filename, error_lineno, format, args) \</span>
+<span class='curline'><a href='../S/1031.html#L176'>format</a>            176 ext/soap/soap.c 	old_error_handler(error_num, error_filename, error_lineno, format, copy); \</span>
+<span class='curline'><a href='../S/1031.html#L180'>format</a>            180 ext/soap/soap.c #define call_old_error_handler(error_num, error_filename, error_lineno, format, args) \</span>
+<span class='curline'><a href='../S/1031.html#L182'>format</a>            182 ext/soap/soap.c 	old_error_handler(error_num, error_filename, error_lineno, format, args); \</span>
+<span class='curline'><a href='../S/1031.html#L2124'>format</a>           2124 ext/soap/soap.c static void soap_error_handler(int error_num, const char *error_filename, const uint error_lineno, const char *format, va_list args)</span>
+<span class='curline'><a href='../S/1031.html#L2139'>format</a>           2139 ext/soap/soap.c 		call_old_error_handler(error_num, error_filename, error_lineno, format, args);</span>
+<span class='curline'><a href='../S/1031.html#L2175'>format</a>           2175 ext/soap/soap.c 			buffer_len = vslprintf(buffer, sizeof(buffer)-1, format, argcopy);</span>
+<span class='curline'><a href='../S/1031.html#L2178'>format</a>           2178 ext/soap/soap.c 			buffer_len = vslprintf(buffer, sizeof(buffer)-1, format, args);</span>
+<span class='curline'><a href='../S/1031.html#L2198'>format</a>           2198 ext/soap/soap.c 				call_old_error_handler(error_num, error_filename, error_lineno, format, args);</span>
+<span class='curline'><a href='../S/1031.html#L2216'>format</a>           2216 ext/soap/soap.c 			call_old_error_handler(error_num, error_filename, error_lineno, format, args);</span>
+<span class='curline'><a href='../S/1031.html#L2256'>format</a>           2256 ext/soap/soap.c 				buffer_len = vslprintf(buffer, sizeof(buffer)-1, format, argcopy);</span>
+<span class='curline'><a href='../S/1031.html#L2259'>format</a>           2259 ext/soap/soap.c 				buffer_len = vslprintf(buffer, sizeof(buffer)-1, format, args);</span>
+<span class='curline'><a href='../S/1031.html#L2282'>format</a>           2282 ext/soap/soap.c 			call_old_error_handler(error_num, error_filename, error_lineno, format, args);</span>
+<span class='curline'><a href='../S/1049.html#L3062'>format</a>           3062 ext/spl/spl_directory.c 	ZEND_ARG_INFO(0, format)</span>
+<span class='curline'><a href='../S/1072.html#L47'>format</a>             47 ext/sqlite3/sqlite3.c static void php_sqlite3_error(php_sqlite3_db_object *db_obj, char *format, ...)</span>
+<span class='curline'><a href='../S/1072.html#L53'>format</a>             53 ext/sqlite3/sqlite3.c 	va_start(arg, format); </span>
+<span class='curline'><a href='../S/1072.html#L54'>format</a>             54 ext/sqlite3/sqlite3.c 	vspprintf(&amp;message, 0, format, arg);</span>
+<span class='curline'><a href='../S/1077.html#L905'>format</a>            905 ext/standard/basic_functions.c 	ZEND_ARG_INFO(0, format)</span>
+<span class='curline'><a href='../S/1077.html#L1118'>format</a>           1118 ext/standard/basic_functions.c 	ZEND_ARG_INFO(0, format)</span>
+<span class='curline'><a href='../S/1077.html#L1365'>format</a>           1365 ext/standard/basic_functions.c 	ZEND_ARG_INFO(0, format)</span>
+<span class='curline'><a href='../S/1077.html#L1370'>format</a>           1370 ext/standard/basic_functions.c 	ZEND_ARG_INFO(0, format)</span>
+<span class='curline'><a href='../S/1077.html#L1375'>format</a>           1375 ext/standard/basic_functions.c 	ZEND_ARG_INFO(0, format)</span>
+<span class='curline'><a href='../S/1077.html#L1380'>format</a>           1380 ext/standard/basic_functions.c 	ZEND_ARG_INFO(0, format)</span>
+<span class='curline'><a href='../S/1077.html#L1386'>format</a>           1386 ext/standard/basic_functions.c 	ZEND_ARG_INFO(0, format)</span>
+<span class='curline'><a href='../S/1077.html#L1392'>format</a>           1392 ext/standard/basic_functions.c 	ZEND_ARG_INFO(0, format)</span>
+<span class='curline'><a href='../S/1077.html#L1812'>format</a>           1812 ext/standard/basic_functions.c 	ZEND_ARG_INFO(0, format)</span>
+<span class='curline'><a href='../S/1077.html#L1817'>format</a>           1817 ext/standard/basic_functions.c 	ZEND_ARG_INFO(0, format)</span>
+<span class='curline'><a href='../S/1077.html#L2429'>format</a>           2429 ext/standard/basic_functions.c 	ZEND_ARG_INFO(0, format)</span>
+<span class='curline'><a href='../S/1077.html#L2443'>format</a>           2443 ext/standard/basic_functions.c 	ZEND_ARG_INFO(0, format)</span>
+<span class='curline'><a href='../S/1077.html#L2449'>format</a>           2449 ext/standard/basic_functions.c 	ZEND_ARG_INFO(0, format)</span>
+<span class='curline'><a href='../S/1077.html#L2594'>format</a>           2594 ext/standard/basic_functions.c 	ZEND_ARG_INFO(0, format)</span>
+<span class='curline'><a href='../S/1097.html#L81'>format</a>             81 ext/standard/datetime.c char *strptime(const char *s, const char *format, struct tm *tm);</span>
+<span class='curline'><a href='../S/1097.html#L90'>format</a>             90 ext/standard/datetime.c 	char      *format;</span>
+<span class='curline'><a href='../S/1097.html#L95'>format</a>             95 ext/standard/datetime.c 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ss", &amp;ts, &amp;ts_length, &amp;format, &amp;format_length) == FAILURE) {</span>
+<span class='curline'><a href='../S/1097.html#L101'>format</a>            101 ext/standard/datetime.c 	unparsed_part = strptime(ts, format, &amp;parsed_time);</span>
+<span class='curline'><a href='../S/1106.html#L1138'>format</a>           1138 ext/standard/file.c 	char *buf, *format;</span>
+<span class='curline'><a href='../S/1106.html#L1142'>format</a>           1142 ext/standard/file.c 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "rs*", &amp;file_handle, &amp;format, &amp;format_len, &amp;args, &amp;argc) == FAILURE) {</span>
+<span class='curline'><a href='../S/1106.html#L1166'>format</a>           1166 ext/standard/file.c 	result = php_sscanf_internal(buf, format, argc, args, 0, &amp;return_value TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1112.html#L394'>format</a>            394 ext/standard/formatted_print.c 	char *format, *result, padding;</span>
+<span class='curline'><a href='../S/1112.html#L434'>format</a>            434 ext/standard/formatted_print.c 	format = Z_STRVAL_PP(args[format_offset]);</span>
+<span class='curline'><a href='../S/1112.html#L444'>format</a>            444 ext/standard/formatted_print.c 		PRINTF_DEBUG(("sprintf: format[%d]='%c'\n", inpos, format[inpos]));</span>
+<span class='curline'><a href='../S/1112.html#L446'>format</a>            446 ext/standard/formatted_print.c 		if (format[inpos] != '%') {</span>
+<span class='curline'><a href='../S/1112.html#L447'>format</a>            447 ext/standard/formatted_print.c 			php_sprintf_appendchar(&amp;result, &amp;outpos, &amp;size, format[inpos++] TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1112.html#L448'>format</a>            448 ext/standard/formatted_print.c 		} else if (format[inpos + 1] == '%') {</span>
+<span class='curline'><a href='../S/1112.html#L460'>format</a>            460 ext/standard/formatted_print.c 						  format[inpos], inpos));</span>
+<span class='curline'><a href='../S/1112.html#L461'>format</a>            461 ext/standard/formatted_print.c 			if (isascii((int)format[inpos]) &amp;&amp; !isalpha((int)format[inpos])) {</span>
+<span class='curline'><a href='../S/1112.html#L464'>format</a>            464 ext/standard/formatted_print.c 				while (isdigit((int)format[temppos])) temppos++;</span>
+<span class='curline'><a href='../S/1112.html#L465'>format</a>            465 ext/standard/formatted_print.c 				if (format[temppos] == '$') {</span>
+<span class='curline'><a href='../S/1112.html#L466'>format</a>            466 ext/standard/formatted_print.c 					argnum = php_sprintf_getnumber(format, &amp;inpos);</span>
+<span class='curline'><a href='../S/1112.html#L486'>format</a>            486 ext/standard/formatted_print.c 							  format[inpos], inpos));</span>
+<span class='curline'><a href='../S/1112.html#L488'>format</a>            488 ext/standard/formatted_print.c 					if (format[inpos] == ' ' || format[inpos] == '0') {</span>
+<span class='curline'><a href='../S/1112.html#L489'>format</a>            489 ext/standard/formatted_print.c 						padding = format[inpos];</span>
+<span class='curline'><a href='../S/1112.html#L490'>format</a>            490 ext/standard/formatted_print.c 					} else if (format[inpos] == '-') {</span>
+<span class='curline'><a href='../S/1112.html#L493'>format</a>            493 ext/standard/formatted_print.c 					} else if (format[inpos] == '+') {</span>
+<span class='curline'><a href='../S/1112.html#L495'>format</a>            495 ext/standard/formatted_print.c 					} else if (format[inpos] == '\'' &amp;&amp; inpos+1&lt;format_len) {</span>
+<span class='curline'><a href='../S/1112.html#L496'>format</a>            496 ext/standard/formatted_print.c 						padding = format[++inpos];</span>
+<span class='curline'><a href='../S/1112.html#L508'>format</a>            508 ext/standard/formatted_print.c 				if (isdigit((int)format[inpos])) {</span>
+<span class='curline'><a href='../S/1112.html#L510'>format</a>            510 ext/standard/formatted_print.c 					if ((width = php_sprintf_getnumber(format, &amp;inpos)) &lt; 0) {</span>
+<span class='curline'><a href='../S/1112.html#L523'>format</a>            523 ext/standard/formatted_print.c 				if (format[inpos] == '.') {</span>
+<span class='curline'><a href='../S/1112.html#L526'>format</a>            526 ext/standard/formatted_print.c 					if (isdigit((int)format[inpos])) {</span>
+<span class='curline'><a href='../S/1112.html#L527'>format</a>            527 ext/standard/formatted_print.c 						if ((precision = php_sprintf_getnumber(format, &amp;inpos)) &lt; 0) {</span>
+<span class='curline'><a href='../S/1112.html#L554'>format</a>            554 ext/standard/formatted_print.c 			if (format[inpos] == 'l') {</span>
+<span class='curline'><a href='../S/1112.html#L557'>format</a>            557 ext/standard/formatted_print.c 			PRINTF_DEBUG(("sprintf: format character='%c'\n", format[inpos]));</span>
+<span class='curline'><a href='../S/1112.html#L569'>format</a>            569 ext/standard/formatted_print.c 			switch (format[inpos]) {</span>
+<span class='curline'><a href='../S/1112.html#L618'>format</a>            618 ext/standard/formatted_print.c 											 format[inpos], always_sign</span>
+<span class='curline'><a href='../S/1140.html#L118'>format</a>            118 ext/standard/pack.c 	char *format;</span>
+<span class='curline'><a href='../S/1140.html#L135'>format</a>            135 ext/standard/pack.c 	format = Z_STRVAL_PP(argv[0]);</span>
+<span class='curline'><a href='../S/1140.html#L145'>format</a>            145 ext/standard/pack.c 		char code = format[i++];</span>
+<span class='curline'><a href='../S/1140.html#L150'>format</a>            150 ext/standard/pack.c 			char c = format[i];</span>
+<span class='curline'><a href='../S/1140.html#L157'>format</a>            157 ext/standard/pack.c 				arg = atoi(&amp;format[i]);</span>
+<span class='curline'><a href='../S/1140.html#L159'>format</a>            159 ext/standard/pack.c 				while (format[i] &gt;= '0' &amp;&amp; format[i] &lt;= '9' &amp;&amp; i &lt; formatlen) {</span>
+<span class='curline'><a href='../S/1140.html#L579'>format</a>            579 ext/standard/pack.c 	char *format, *input, *formatarg, *inputarg;</span>
+<span class='curline'><a href='../S/1140.html#L588'>format</a>            588 ext/standard/pack.c 	format = formatarg;</span>
+<span class='curline'><a href='../S/1140.html#L597'>format</a>            597 ext/standard/pack.c 		char type = *(format++);</span>
+<span class='curline'><a href='../S/1140.html#L606'>format</a>            606 ext/standard/pack.c 			c = *format;</span>
+<span class='curline'><a href='../S/1140.html#L609'>format</a>            609 ext/standard/pack.c 				arg = atoi(format);</span>
+<span class='curline'><a href='../S/1140.html#L611'>format</a>            611 ext/standard/pack.c 				while (formatlen &gt; 0 &amp;&amp; *format &gt;= '0' &amp;&amp; *format &lt;= '9') {</span>
+<span class='curline'><a href='../S/1140.html#L612'>format</a>            612 ext/standard/pack.c 					format++;</span>
+<span class='curline'><a href='../S/1140.html#L617'>format</a>            617 ext/standard/pack.c 				format++;</span>
+<span class='curline'><a href='../S/1140.html#L623'>format</a>            623 ext/standard/pack.c 		name = format;</span>
+<span class='curline'><a href='../S/1140.html#L626'>format</a>            626 ext/standard/pack.c 		while (formatlen &gt; 0 &amp;&amp; *format != '/') {</span>
+<span class='curline'><a href='../S/1140.html#L628'>format</a>            628 ext/standard/pack.c 			format++;</span>
+<span class='curline'><a href='../S/1140.html#L631'>format</a>            631 ext/standard/pack.c 		namelen = format - name;</span>
+<span class='curline'><a href='../S/1140.html#L1024'>format</a>           1024 ext/standard/pack.c 		format++;</span>
+<span class='curline'><a href='../S/1182.html#L118'>format</a>            118 ext/standard/scanf.c static char *BuildCharSet(CharSet *cset, char *format);</span>
+<span class='curline'><a href='../S/1182.html#L141'>format</a>            141 ext/standard/scanf.c static char * BuildCharSet(CharSet *cset, char *format)</span>
+<span class='curline'><a href='../S/1182.html#L149'>format</a>            149 ext/standard/scanf.c 	ch = format;</span>
+<span class='curline'><a href='../S/1182.html#L152'>format</a>            152 ext/standard/scanf.c 		ch = ++format;</span>
+<span class='curline'><a href='../S/1182.html#L154'>format</a>            154 ext/standard/scanf.c 	end = format + 1;	/* verify this - cc */</span>
+<span class='curline'><a href='../S/1182.html#L170'>format</a>            170 ext/standard/scanf.c 	cset-&gt;chars = (char *) safe_emalloc(sizeof(char), (end - format - 1), 0);</span>
+<span class='curline'><a href='../S/1182.html#L181'>format</a>            181 ext/standard/scanf.c 	ch    = format++;</span>
+<span class='curline'><a href='../S/1182.html#L185'>format</a>            185 ext/standard/scanf.c 		ch = format++;</span>
+<span class='curline'><a href='../S/1182.html#L188'>format</a>            188 ext/standard/scanf.c 		if (*format == '-') {</span>
+<span class='curline'><a href='../S/1182.html#L200'>format</a>            200 ext/standard/scanf.c 			if (*format == ']') {</span>
+<span class='curline'><a href='../S/1182.html#L204'>format</a>            204 ext/standard/scanf.c 				ch = format++;</span>
+<span class='curline'><a href='../S/1182.html#L221'>format</a>            221 ext/standard/scanf.c 		ch = format++;</span>
+<span class='curline'><a href='../S/1182.html#L223'>format</a>            223 ext/standard/scanf.c 	return format;</span>
+<span class='curline'><a href='../S/1182.html#L311'>format</a>            311 ext/standard/scanf.c PHPAPI int ValidateFormat(char *format, int numVars, int *totalSubs)</span>
+<span class='curline'><a href='../S/1182.html#L336'>format</a>            336 ext/standard/scanf.c 	while (*format != '\0') {</span>
+<span class='curline'><a href='../S/1182.html#L337'>format</a>            337 ext/standard/scanf.c 		ch = format++;</span>
+<span class='curline'><a href='../S/1182.html#L343'>format</a>            343 ext/standard/scanf.c 		ch = format++;</span>
+<span class='curline'><a href='../S/1182.html#L349'>format</a>            349 ext/standard/scanf.c 			ch = format++;</span>
+<span class='curline'><a href='../S/1182.html#L359'>format</a>            359 ext/standard/scanf.c 			value = strtoul(format-1, &amp;end, 10);</span>
+<span class='curline'><a href='../S/1182.html#L363'>format</a>            363 ext/standard/scanf.c 			format = end+1;</span>
+<span class='curline'><a href='../S/1182.html#L364'>format</a>            364 ext/standard/scanf.c 			ch     = format++;</span>
+<span class='curline'><a href='../S/1182.html#L406'>format</a>            406 ext/standard/scanf.c 			value = strtoul(format-1, &amp;format, 10);</span>
+<span class='curline'><a href='../S/1182.html#L408'>format</a>            408 ext/standard/scanf.c 			ch = format++;</span>
+<span class='curline'><a href='../S/1182.html#L415'>format</a>            415 ext/standard/scanf.c 			ch = format++;</span>
+<span class='curline'><a href='../S/1182.html#L455'>format</a>            455 ext/standard/scanf.c 				if (*format == '\0') {</span>
+<span class='curline'><a href='../S/1182.html#L458'>format</a>            458 ext/standard/scanf.c 				ch = format++;</span>
+<span class='curline'><a href='../S/1182.html#L460'>format</a>            460 ext/standard/scanf.c 					if (*format == '\0') {</span>
+<span class='curline'><a href='../S/1182.html#L463'>format</a>            463 ext/standard/scanf.c 					ch = format++;</span>
+<span class='curline'><a href='../S/1182.html#L466'>format</a>            466 ext/standard/scanf.c 					if (*format == '\0') {</span>
+<span class='curline'><a href='../S/1182.html#L469'>format</a>            469 ext/standard/scanf.c 					ch = format++;</span>
+<span class='curline'><a href='../S/1182.html#L472'>format</a>            472 ext/standard/scanf.c 					if (*format == '\0') {</span>
+<span class='curline'><a href='../S/1182.html#L475'>format</a>            475 ext/standard/scanf.c 					ch = format++;</span>
+<span class='curline'><a href='../S/1182.html#L579'>format</a>            579 ext/standard/scanf.c PHPAPI int php_sscanf_internal( char *string, char *format,</span>
+<span class='curline'><a href='../S/1182.html#L610'>format</a>            610 ext/standard/scanf.c 					string, format, numVars, varStart);</span>
+<span class='curline'><a href='../S/1182.html#L615'>format</a>            615 ext/standard/scanf.c 	if (ValidateFormat(format, numVars, &amp;totalVars) != SCAN_SUCCESS) {</span>
+<span class='curline'><a href='../S/1182.html#L666'>format</a>            666 ext/standard/scanf.c 	while (*format != '\0') {</span>
+<span class='curline'><a href='../S/1182.html#L667'>format</a>            667 ext/standard/scanf.c 		ch    = format++;</span>
+<span class='curline'><a href='../S/1182.html#L699'>format</a>            699 ext/standard/scanf.c 		ch = format++;</span>
+<span class='curline'><a href='../S/1182.html#L710'>format</a>            710 ext/standard/scanf.c 			ch = format++;</span>
+<span class='curline'><a href='../S/1182.html#L712'>format</a>            712 ext/standard/scanf.c 			value = strtoul(format-1, &amp;end, 10);</span>
+<span class='curline'><a href='../S/1182.html#L714'>format</a>            714 ext/standard/scanf.c 				format = end+1;</span>
+<span class='curline'><a href='../S/1182.html#L715'>format</a>            715 ext/standard/scanf.c 				ch = format++;</span>
+<span class='curline'><a href='../S/1182.html#L724'>format</a>            724 ext/standard/scanf.c 			width = strtoul(format-1, &amp;format, 10);</span>
+<span class='curline'><a href='../S/1182.html#L725'>format</a>            725 ext/standard/scanf.c 			ch = format++;</span>
+<span class='curline'><a href='../S/1182.html#L734'>format</a>            734 ext/standard/scanf.c 			ch = format++;</span>
+<span class='curline'><a href='../S/1182.html#L893'>format</a>            893 ext/standard/scanf.c 				format = BuildCharSet(&amp;cset, format);</span>
+<span class='curline'><a href='../S/1183.html#L44'>format</a>             44 ext/standard/scanf.h PHPAPI int ValidateFormat(char *format, int numVars, int *totalVars);</span>
+<span class='curline'><a href='../S/1183.html#L45'>format</a>             45 ext/standard/scanf.h PHPAPI int php_sscanf_internal(char *string,char *format,int argCount,zval ***args,</span>
+<span class='curline'><a href='../S/1189.html#L5324'>format</a>           5324 ext/standard/string.c 	char *str, *format;</span>
+<span class='curline'><a href='../S/1189.html#L5327'>format</a>           5327 ext/standard/string.c 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ss*", &amp;str, &amp;str_len, &amp;format, &amp;format_len,</span>
+<span class='curline'><a href='../S/1189.html#L5332'>format</a>           5332 ext/standard/string.c 	result = php_sscanf_internal(str, format, num_args, args, 0, &amp;return_value TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1189.html#L5501'>format</a>           5501 ext/standard/string.c 	char *format, *str, *p, *e;</span>
+<span class='curline'><a href='../S/1189.html#L5505'>format</a>           5505 ext/standard/string.c 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "sd", &amp;format, &amp;format_len, &amp;value) == FAILURE) {</span>
+<span class='curline'><a href='../S/1189.html#L5509'>format</a>           5509 ext/standard/string.c 	p = format;</span>
+<span class='curline'><a href='../S/1189.html#L5525'>format</a>           5525 ext/standard/string.c 	if ((str_len = strfmon(str, str_len, format, value)) &lt; 0) {</span>
+<span class='curline'><a href='../S/1195.html#L707'>format</a>            707 ext/standard/url.c 	long format = 0;</span>
+<span class='curline'><a href='../S/1195.html#L709'>format</a>            709 ext/standard/url.c 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s|l", &amp;url, &amp;url_len, &amp;format) == FAILURE) {</span>
+<span class='curline'><a href='../S/1195.html#L743'>format</a>            743 ext/standard/url.c 		if (!format) {</span>
+<span class='curline'><a href='../S/1205.html#L1386'>format</a>           1386 ext/sybase_ct/php_sybase_ct.c 		result-&gt;datafmt[i].format = CS_FMT_NULLTERM;</span>
+<span class='curline'><a href='../S/1364.html#L747'>format</a>            747 main/main.c    PHPAPI int php_printf(const char *format, ...)</span>
+<span class='curline'><a href='../S/1364.html#L755'>format</a>            755 main/main.c    	va_start(args, format);</span>
+<span class='curline'><a href='../S/1364.html#L756'>format</a>            756 main/main.c    	size = vspprintf(&amp;buffer, 0, format, args);</span>
+<span class='curline'><a href='../S/1364.html#L771'>format</a>            771 main/main.c    PHPAPI void php_verror(const char *docref, const char *params, int type, const char *format, va_list args TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1364.html#L786'>format</a>            786 main/main.c    	buffer_len = vspprintf(&amp;buffer, 0, format, args);</span>
+<span class='curline'><a href='../S/1364.html#L960'>format</a>            960 main/main.c    PHPAPI void php_error_docref0(const char *docref TSRMLS_DC, int type, const char *format, ...)</span>
+<span class='curline'><a href='../S/1364.html#L964'>format</a>            964 main/main.c    	va_start(args, format);</span>
+<span class='curline'><a href='../S/1364.html#L965'>format</a>            965 main/main.c    	php_verror(docref, "", type, format, args TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1364.html#L972'>format</a>            972 main/main.c    PHPAPI void php_error_docref1(const char *docref TSRMLS_DC, const char *param1, int type, const char *format, ...)</span>
+<span class='curline'><a href='../S/1364.html#L976'>format</a>            976 main/main.c    	va_start(args, format);</span>
+<span class='curline'><a href='../S/1364.html#L977'>format</a>            977 main/main.c    	php_verror(docref, param1, type, format, args TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1364.html#L984'>format</a>            984 main/main.c    PHPAPI void php_error_docref2(const char *docref TSRMLS_DC, const char *param1, const char *param2, int type, const char *format, ...)</span>
+<span class='curline'><a href='../S/1364.html#L990'>format</a>            990 main/main.c    	va_start(args, format);</span>
+<span class='curline'><a href='../S/1364.html#L991'>format</a>            991 main/main.c    	php_verror(docref, params ? params : "...", type, format, args TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1364.html#L1029'>format</a>           1029 main/main.c    static void php_error_cb(int type, const char *error_filename, const uint error_lineno, const char *format, va_list args)</span>
+<span class='curline'><a href='../S/1364.html#L1035'>format</a>           1035 main/main.c    	buffer_len = vspprintf(&amp;buffer, PG(log_errors_max_len), format, args);</span>
+<span class='curline'><a href='../S/1368.html#L284'>format</a>            284 main/php.h     PHPAPI int php_printf(const char *format, ...) PHP_ATTRIBUTE_FORMAT(printf, 1,</span>
+<span class='curline'><a href='../S/1368.html#L288'>format</a>            288 main/php.h     int Debug(char *format, ...) PHP_ATTRIBUTE_FORMAT(printf, 1, 2);</span>
+<span class='curline'><a href='../S/1368.html#L302'>format</a>            302 main/php.h     PHPAPI void php_verror(const char *docref, const char *params, int type, const char *format, va_list args TSRMLS_DC) PHP_ATTRIBUTE_FORMAT(printf, 4, 0);</span>
+<span class='curline'><a href='../S/1368.html#L311'>format</a>            311 main/php.h     PHPAPI void php_error_docref0(const char *docref TSRMLS_DC, int type, const char *format, ...)</span>
+<span class='curline'><a href='../S/1368.html#L313'>format</a>            313 main/php.h     PHPAPI void php_error_docref1(const char *docref TSRMLS_DC, const char *param1, int type, const char *format, ...)</span>
+<span class='curline'><a href='../S/1368.html#L315'>format</a>            315 main/php.h     PHPAPI void php_error_docref2(const char *docref TSRMLS_DC, const char *param1, const char *param2, int type, const char *format, ...)</span>
+<span class='curline'><a href='../S/1385.html#L31'>format</a>             31 main/php_sprintf.c php_sprintf (char*s, const char* format, ...)</span>
+<span class='curline'><a href='../S/1385.html#L36'>format</a>             36 main/php_sprintf.c   va_start (args, format);</span>
+<span class='curline'><a href='../S/1385.html#L38'>format</a>             38 main/php_sprintf.c   ret = vsprintf (s, format, args);</span>
+<span class='curline'><a href='../S/1399.html#L377'>format</a>            377 main/snprintf.c PHPAPI char * php_conv_fp(register char format, register double num,</span>
+<span class='curline'><a href='../S/1399.html#L388'>format</a>            388 main/snprintf.c 	if (format == 'F') {</span>
+<span class='curline'><a href='../S/1399.html#L404'>format</a>            404 main/snprintf.c 	if (format == 'F') {</span>
+<span class='curline'><a href='../S/1399.html#L444'>format</a>            444 main/snprintf.c 	if (format != 'F') {</span>
+<span class='curline'><a href='../S/1399.html#L449'>format</a>            449 main/snprintf.c 		*s++ = format;			/* either e or E */</span>
+<span class='curline'><a href='../S/1399.html#L482'>format</a>            482 main/snprintf.c PHPAPI char * ap_php_conv_p2(register u_wide_int num, register int nbits, char format, char *buf_end, register int *len) /* {{{ */</span>
+<span class='curline'><a href='../S/1399.html#L488'>format</a>            488 main/snprintf.c 	register char *digits = (format == 'X') ? upper_digits : low_digits;</span>
+<span class='curline'><a href='../S/1399.html#L1209'>format</a>           1209 main/snprintf.c static void strx_printv(int *ccp, char *buf, size_t len, const char *format, va_list ap) /* {{{ */</span>
+<span class='curline'><a href='../S/1399.html#L1230'>format</a>           1230 main/snprintf.c 	cc = format_converter(&amp;od, format, ap);</span>
+<span class='curline'><a href='../S/1399.html#L1240'>format</a>           1240 main/snprintf.c PHPAPI int ap_php_slprintf(char *buf, size_t len, const char *format,...) /* {{{ */</span>
+<span class='curline'><a href='../S/1399.html#L1245'>format</a>           1245 main/snprintf.c 	va_start(ap, format);</span>
+<span class='curline'><a href='../S/1399.html#L1246'>format</a>           1246 main/snprintf.c 	strx_printv(&amp;cc, buf, len, format, ap);</span>
+<span class='curline'><a href='../S/1399.html#L1256'>format</a>           1256 main/snprintf.c PHPAPI int ap_php_vslprintf(char *buf, size_t len, const char *format, va_list ap) /* {{{ */</span>
+<span class='curline'><a href='../S/1399.html#L1260'>format</a>           1260 main/snprintf.c 	strx_printv(&amp;cc, buf, len, format, ap);</span>
+<span class='curline'><a href='../S/1399.html#L1269'>format</a>           1269 main/snprintf.c PHPAPI int ap_php_snprintf(char *buf, size_t len, const char *format,...) /* {{{ */</span>
+<span class='curline'><a href='../S/1399.html#L1274'>format</a>           1274 main/snprintf.c 	va_start(ap, format);</span>
+<span class='curline'><a href='../S/1399.html#L1275'>format</a>           1275 main/snprintf.c 	strx_printv(&amp;cc, buf, len, format, ap);</span>
+<span class='curline'><a href='../S/1399.html#L1281'>format</a>           1281 main/snprintf.c PHPAPI int ap_php_vsnprintf(char *buf, size_t len, const char *format, va_list ap) /* {{{ */</span>
+<span class='curline'><a href='../S/1399.html#L1285'>format</a>           1285 main/snprintf.c 	strx_printv(&amp;cc, buf, len, format, ap);</span>
+<span class='curline'><a href='../S/1399.html#L1290'>format</a>           1290 main/snprintf.c PHPAPI int ap_php_vasprintf(char **buf, const char *format, va_list ap) /* {{{ */</span>
+<span class='curline'><a href='../S/1399.html#L1296'>format</a>           1296 main/snprintf.c 	cc = ap_php_vsnprintf(NULL, 0, format, ap2);</span>
+<span class='curline'><a href='../S/1399.html#L1303'>format</a>           1303 main/snprintf.c 			if ((cc = ap_php_vsnprintf(*buf, cc, format, ap)) &lt; 0) {</span>
+<span class='curline'><a href='../S/1399.html#L1314'>format</a>           1314 main/snprintf.c PHPAPI int ap_php_asprintf(char **buf, const char *format, ...) /* {{{ */</span>
+<span class='curline'><a href='../S/1399.html#L1319'>format</a>           1319 main/snprintf.c 	va_start(ap, format);</span>
+<span class='curline'><a href='../S/1399.html#L1320'>format</a>           1320 main/snprintf.c 	cc = vasprintf(buf, format, ap);</span>
+<span class='curline'><a href='../S/1400.html#L81'>format</a>             81 main/snprintf.h PHPAPI int ap_php_slprintf(char *buf, size_t len, const char *format,...);</span>
+<span class='curline'><a href='../S/1400.html#L82'>format</a>             82 main/snprintf.h PHPAPI int ap_php_vslprintf(char *buf, size_t len, const char *format, va_list ap);</span>
+<span class='curline'><a href='../S/1400.html#L85'>format</a>             85 main/snprintf.h PHPAPI int ap_php_vasprintf(char **buf, const char *format, va_list ap);</span>
+<span class='curline'><a href='../S/1400.html#L86'>format</a>             86 main/snprintf.h PHPAPI int ap_php_asprintf(char **buf, const char *format, ...);</span>
+<span class='curline'><a href='../S/1400.html#L87'>format</a>             87 main/snprintf.h PHPAPI int php_sprintf (char* s, const char* format, ...) PHP_ATTRIBUTE_FORMAT(printf, 2, 3);</span>
+<span class='curline'><a href='../S/1400.html#L89'>format</a>             89 main/snprintf.h PHPAPI char * php_conv_fp(register char format, register double num,</span>
+<span class='curline'><a href='../S/1400.html#L159'>format</a>            159 main/snprintf.h 		 char format, char *buf_end, register int *len);</span>
+<span class='curline'><a href='../S/1401.html#L812'>format</a>            812 main/spprintf.c PHPAPI int vspprintf(char **pbuf, size_t max_len, const char *format, va_list ap) /* {{{ */</span>
+<span class='curline'><a href='../S/1401.html#L821'>format</a>            821 main/spprintf.c 	xbuf_format_converter(&amp;xbuf, format, ap);</span>
+<span class='curline'><a href='../S/1401.html#L834'>format</a>            834 main/spprintf.c PHPAPI int spprintf(char **pbuf, size_t max_len, const char *format, ...) /* {{{ */</span>
+<span class='curline'><a href='../S/1401.html#L839'>format</a>            839 main/spprintf.c 	va_start(ap, format);</span>
+<span class='curline'><a href='../S/1401.html#L840'>format</a>            840 main/spprintf.c 	cc = vspprintf(pbuf, max_len, format, ap);</span>
+<span class='curline'><a href='../S/1402.html#L40'>format</a>             40 main/spprintf.h PHPAPI int spprintf( char **pbuf, size_t max_len, const char *format, ...) PHP_ATTRIBUTE_FORMAT(printf, 3, 4);</span>
+<span class='curline'><a href='../S/1402.html#L42'>format</a>             42 main/spprintf.h PHPAPI int vspprintf(char **pbuf, size_t max_len, const char *format, va_list ap) PHP_ATTRIBUTE_FORMAT(printf, 3, 0);</span>
+<span class='curline'><a href='../S/1457.html#L329'>format</a>            329 sapi/cli/php_cli_server.c static void php_cli_server_logf(const char *format TSRMLS_DC, ...);</span>
+<span class='curline'><a href='../S/1457.html#L1269'>format</a>           1269 sapi/cli/php_cli_server.c static void php_cli_server_logf(const char *format TSRMLS_DC, ...) /* {{{ */</span>
+<span class='curline'><a href='../S/1457.html#L1276'>format</a>           1276 sapi/cli/php_cli_server.c 	va_start(ap, format);</span>
+<span class='curline'><a href='../S/1457.html#L1278'>format</a>           1278 sapi/cli/php_cli_server.c 	vspprintf(&amp;buf, 0, format, ap);</span>
+<span class='curline'><a href='../S/1497.html#L109'>format</a>            109 sapi/fpm/fpm/fpm_log.c 	char format[129];</span>
+<span class='curline'><a href='../S/1497.html#L162'>format</a>            162 sapi/fpm/fpm/fpm_log.c 			memset(format, '\0', sizeof(format)); /* reset format */</span>
+<span class='curline'><a href='../S/1497.html#L179'>format</a>            179 sapi/fpm/fpm/fpm_log.c 					if (format[0] == '\0' || !strcasecmp(format, "total")) {</span>
+<span class='curline'><a href='../S/1497.html#L183'>format</a>            183 sapi/fpm/fpm/fpm_log.c 					} else if (!strcasecmp(format, "user")) {</span>
+<span class='curline'><a href='../S/1497.html#L187'>format</a>            187 sapi/fpm/fpm/fpm_log.c 					} else if (!strcasecmp(format, "system")) {</span>
+<span class='curline'><a href='../S/1497.html#L192'>format</a>            192 sapi/fpm/fpm/fpm_log.c 						zlog(ZLOG_WARNING, "only 'total', 'user' or 'system' are allowed as a modifier for %%%c ('%s')", *s, format);</span>
+<span class='curline'><a href='../S/1497.html#L196'>format</a>            196 sapi/fpm/fpm/fpm_log.c 					format[0] = '\0';</span>
+<span class='curline'><a href='../S/1497.html#L205'>format</a>            205 sapi/fpm/fpm/fpm_log.c 					if (format[0] == '\0' || !strcasecmp(format, "seconds")) {</span>
+<span class='curline'><a href='../S/1497.html#L211'>format</a>            211 sapi/fpm/fpm/fpm_log.c 					} else if (!strcasecmp(format, "miliseconds") || !strcasecmp(format, "mili")) {</span>
+<span class='curline'><a href='../S/1497.html#L217'>format</a>            217 sapi/fpm/fpm/fpm_log.c 					} else if (!strcasecmp(format, "microseconds") || !strcasecmp(format, "micro")) {</span>
+<span class='curline'><a href='../S/1497.html#L223'>format</a>            223 sapi/fpm/fpm/fpm_log.c 						zlog(ZLOG_WARNING, "only 'seconds', 'mili', 'miliseconds', 'micro' or 'microseconds' are allowed as a modifier for %%%c ('%s')", *s, format);</span>
+<span class='curline'><a href='../S/1497.html#L226'>format</a>            226 sapi/fpm/fpm/fpm_log.c 					format[0] = '\0';</span>
+<span class='curline'><a href='../S/1497.html#L230'>format</a>            230 sapi/fpm/fpm/fpm_log.c 					if (format[0] == '\0') {</span>
+<span class='curline'><a href='../S/1497.html#L236'>format</a>            236 sapi/fpm/fpm/fpm_log.c 						char *env = fcgi_getenv((fcgi_request*) SG(server_context), format, strlen(format));</span>
+<span class='curline'><a href='../S/1497.html#L239'>format</a>            239 sapi/fpm/fpm/fpm_log.c 					format[0] = '\0';</span>
+<span class='curline'><a href='../S/1497.html#L262'>format</a>            262 sapi/fpm/fpm/fpm_log.c 					if (format[0] == '\0' || !strcasecmp(format, "bytes")) {</span>
+<span class='curline'><a href='../S/1497.html#L268'>format</a>            268 sapi/fpm/fpm/fpm_log.c 					} else if (!strcasecmp(format, "kilobytes") || !strcasecmp(format, "kilo")) {</span>
+<span class='curline'><a href='../S/1497.html#L274'>format</a>            274 sapi/fpm/fpm/fpm_log.c 					} else if (!strcasecmp(format, "megabytes") || !strcasecmp(format, "mega")) {</span>
+<span class='curline'><a href='../S/1497.html#L280'>format</a>            280 sapi/fpm/fpm/fpm_log.c 						zlog(ZLOG_WARNING, "only 'bytes', 'kilo', 'kilobytes', 'mega' or 'megabytes' are allowed as a modifier for %%%c ('%s')", *s, format);</span>
+<span class='curline'><a href='../S/1497.html#L283'>format</a>            283 sapi/fpm/fpm/fpm_log.c 					format[0] = '\0';</span>
+<span class='curline'><a href='../S/1497.html#L293'>format</a>            293 sapi/fpm/fpm/fpm_log.c 					if (format[0] == '\0') {</span>
+<span class='curline'><a href='../S/1497.html#L301'>format</a>            301 sapi/fpm/fpm/fpm_log.c 						size_t format_len = strlen(format);</span>
+<span class='curline'><a href='../S/1497.html#L310'>format</a>            310 sapi/fpm/fpm/fpm_log.c 							if (!strstr(h-&gt;header, format)) {</span>
+<span class='curline'><a href='../S/1497.html#L337'>format</a>            337 sapi/fpm/fpm/fpm_log.c 					format[0] = '\0';</span>
+<span class='curline'><a href='../S/1497.html#L392'>format</a>            392 sapi/fpm/fpm/fpm_log.c 						if (format[0] == '\0') {</span>
+<span class='curline'><a href='../S/1497.html#L395'>format</a>            395 sapi/fpm/fpm/fpm_log.c 							strftime(tmp, sizeof(tmp) - 1, format, localtime(t));</span>
+<span class='curline'><a href='../S/1497.html#L399'>format</a>            399 sapi/fpm/fpm/fpm_log.c 					format[0] = '\0';</span>
+<span class='curline'><a href='../S/1497.html#L420'>format</a>            420 sapi/fpm/fpm/fpm_log.c 								if (l &gt;= sizeof(format) - 1) {</span>
+<span class='curline'><a href='../S/1497.html#L421'>format</a>            421 sapi/fpm/fpm/fpm_log.c 									l = sizeof(format) - 1;</span>
+<span class='curline'><a href='../S/1497.html#L424'>format</a>            424 sapi/fpm/fpm/fpm_log.c 								memcpy(format, start, l);</span>
+<span class='curline'><a href='../S/1497.html#L425'>format</a>            425 sapi/fpm/fpm/fpm_log.c 								format[l] = '\0';</span>
+<span class='curline'><a href='../S/1497.html#L442'>format</a>            442 sapi/fpm/fpm/fpm_log.c 			if (*s != '}' &amp;&amp; format[0] != '\0') {</span>
+<span class='curline'><a href='../S/1533.html#L21'>format</a>             21 sapi/fpm/fpm/zlog.h 		__attribute__ ((format(printf,4,5)));</span>
+<span class='curline'><a href='../S/1566.html#L91'>format</a>             91 sapi/phpdbg/phpdbg_opcode.c 		goto format;</span>
+<span class='curline'><a href='../S/1566.html#L123'>format</a>            123 sapi/phpdbg/phpdbg_opcode.c format:</span>
+<span class='curline'><a href='../S/1576.html#L227'>format</a>            227 sapi/phpdbg/phpdbg_utils.c PHPDBG_API int phpdbg_print(int type TSRMLS_DC, FILE *fp, const char *format, ...) /* {{{ */</span>
+<span class='curline'><a href='../S/1576.html#L233'>format</a>            233 sapi/phpdbg/phpdbg_utils.c 	if (format != NULL &amp;&amp; strlen(format) &gt; 0L) {</span>
+<span class='curline'><a href='../S/1576.html#L234'>format</a>            234 sapi/phpdbg/phpdbg_utils.c 		va_start(args, format);</span>
+<span class='curline'><a href='../S/1576.html#L235'>format</a>            235 sapi/phpdbg/phpdbg_utils.c 		vspprintf(&amp;buffer, 0, format, args);</span>
+<span class='curline'><a href='../S/1576.html#L305'>format</a>            305 sapi/phpdbg/phpdbg_utils.c 		char *format = NULL, *buffer = NULL;</span>
+<span class='curline'><a href='../S/1576.html#L312'>format</a>            312 sapi/phpdbg/phpdbg_utils.c 			&amp;format, "[%s]: %s\n", buffer, fmt);</span>
+<span class='curline'><a href='../S/1576.html#L314'>format</a>            314 sapi/phpdbg/phpdbg_utils.c 			fp, format, args);</span>
+<span class='curline'><a href='../S/1576.html#L316'>format</a>            316 sapi/phpdbg/phpdbg_utils.c 		free(format);</span>
+</pre>
+</body>
+</html>

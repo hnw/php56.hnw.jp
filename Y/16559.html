@@ -1,0 +1,349 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>elements</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/1642.html#L1018'>elements</a>         1018 Zend/zend.c    			CG(stack).elements = NULL; \</span>
+<span class='curline'><a href='../S/1707.html#L199'>elements</a>          199 Zend/zend_llist.c 	zend_llist_element **elements;</span>
+<span class='curline'><a href='../S/1707.html#L206'>elements</a>          206 Zend/zend_llist.c 	elements = (zend_llist_element **) emalloc(l-&gt;count * sizeof(zend_llist_element *));</span>
+<span class='curline'><a href='../S/1707.html#L208'>elements</a>          208 Zend/zend_llist.c 	ptr = &amp;elements[0];</span>
+<span class='curline'><a href='../S/1707.html#L214'>elements</a>          214 Zend/zend_llist.c 	zend_qsort(elements, l-&gt;count, sizeof(zend_llist_element *), (compare_func_t) comp_func TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1707.html#L216'>elements</a>          216 Zend/zend_llist.c 	l-&gt;head = elements[0];</span>
+<span class='curline'><a href='../S/1707.html#L217'>elements</a>          217 Zend/zend_llist.c 	elements[0]-&gt;prev = NULL;</span>
+<span class='curline'><a href='../S/1707.html#L220'>elements</a>          220 Zend/zend_llist.c 		elements[i]-&gt;prev = elements[i-1];</span>
+<span class='curline'><a href='../S/1707.html#L221'>elements</a>          221 Zend/zend_llist.c 		elements[i-1]-&gt;next = elements[i];</span>
+<span class='curline'><a href='../S/1707.html#L223'>elements</a>          223 Zend/zend_llist.c 	elements[i-1]-&gt;next = NULL;</span>
+<span class='curline'><a href='../S/1707.html#L224'>elements</a>          224 Zend/zend_llist.c 	l-&gt;tail = elements[i-1];</span>
+<span class='curline'><a href='../S/1707.html#L225'>elements</a>          225 Zend/zend_llist.c 	efree(elements);</span>
+<span class='curline'><a href='../S/1722.html#L30'>elements</a>           30 Zend/zend_ptr_stack.c 	stack-&gt;top_element = stack-&gt;elements = NULL;</span>
+<span class='curline'><a href='../S/1722.html#L78'>elements</a>           78 Zend/zend_ptr_stack.c 	if (stack-&gt;elements) {</span>
+<span class='curline'><a href='../S/1722.html#L79'>elements</a>           79 Zend/zend_ptr_stack.c 		pefree(stack-&gt;elements, stack-&gt;persistent);</span>
+<span class='curline'><a href='../S/1722.html#L89'>elements</a>           89 Zend/zend_ptr_stack.c 		func(stack-&gt;elements[i]);</span>
+<span class='curline'><a href='../S/1722.html#L101'>elements</a>          101 Zend/zend_ptr_stack.c 			pefree(stack-&gt;elements[i], stack-&gt;persistent);</span>
+<span class='curline'><a href='../S/1722.html#L105'>elements</a>          105 Zend/zend_ptr_stack.c 	stack-&gt;top_element = stack-&gt;elements;</span>
+<span class='curline'><a href='../S/1723.html#L27'>elements</a>           27 Zend/zend_ptr_stack.h 	void **elements;</span>
+<span class='curline'><a href='../S/1723.html#L52'>elements</a>           52 Zend/zend_ptr_stack.h 		stack-&gt;elements = (void **) perealloc(stack-&gt;elements, (sizeof(void *) * (stack-&gt;max)), stack-&gt;persistent);	\</span>
+<span class='curline'><a href='../S/1723.html#L53'>elements</a>           53 Zend/zend_ptr_stack.h 		stack-&gt;top_element = stack-&gt;elements+stack-&gt;top;	\</span>
+<span class='curline'><a href='../S/1723.html#L116'>elements</a>          116 Zend/zend_ptr_stack.h     return stack-&gt;elements[stack-&gt;top - 1];</span>
+<span class='curline'><a href='../S/1729.html#L29'>elements</a>           29 Zend/zend_stack.c 	stack-&gt;elements = NULL;</span>
+<span class='curline'><a href='../S/1729.html#L36'>elements</a>           36 Zend/zend_stack.c 		stack-&gt;elements = (void **) erealloc(stack-&gt;elements,</span>
+<span class='curline'><a href='../S/1729.html#L38'>elements</a>           38 Zend/zend_stack.c 		if (!stack-&gt;elements) {</span>
+<span class='curline'><a href='../S/1729.html#L42'>elements</a>           42 Zend/zend_stack.c 	stack-&gt;elements[stack-&gt;top] = (void *) emalloc(size);</span>
+<span class='curline'><a href='../S/1729.html#L43'>elements</a>           43 Zend/zend_stack.c 	memcpy(stack-&gt;elements[stack-&gt;top], element, size);</span>
+<span class='curline'><a href='../S/1729.html#L51'>elements</a>           51 Zend/zend_stack.c 		*element = stack-&gt;elements[stack-&gt;top - 1];</span>
+<span class='curline'><a href='../S/1729.html#L63'>elements</a>           63 Zend/zend_stack.c 		efree(stack-&gt;elements[--stack-&gt;top]);</span>
+<span class='curline'><a href='../S/1729.html#L95'>elements</a>           95 Zend/zend_stack.c 	if (stack-&gt;elements) {</span>
+<span class='curline'><a href='../S/1729.html#L97'>elements</a>           97 Zend/zend_stack.c 			efree(stack-&gt;elements[i]);</span>
+<span class='curline'><a href='../S/1729.html#L99'>elements</a>           99 Zend/zend_stack.c 		efree(stack-&gt;elements);</span>
+<span class='curline'><a href='../S/1729.html#L100'>elements</a>          100 Zend/zend_stack.c 		stack-&gt;elements = NULL;</span>
+<span class='curline'><a href='../S/1729.html#L109'>elements</a>          109 Zend/zend_stack.c 	return stack-&gt;elements;</span>
+<span class='curline'><a href='../S/1729.html#L126'>elements</a>          126 Zend/zend_stack.c 				if (apply_function(stack-&gt;elements[i])) {</span>
+<span class='curline'><a href='../S/1729.html#L133'>elements</a>          133 Zend/zend_stack.c 				if (apply_function(stack-&gt;elements[i])) {</span>
+<span class='curline'><a href='../S/1729.html#L149'>elements</a>          149 Zend/zend_stack.c 				if (apply_function(stack-&gt;elements[i], arg)) {</span>
+<span class='curline'><a href='../S/1729.html#L156'>elements</a>          156 Zend/zend_stack.c 				if (apply_function(stack-&gt;elements[i], arg)) {</span>
+<span class='curline'><a href='../S/1730.html#L27'>elements</a>           27 Zend/zend_stack.h 	void **elements;</span>
+<span class='curline'><a href='../S/818.html#L1553'>elements</a>         1553 ext/oci8/oci8.c 	if (bind-&gt;array.elements) {</span>
+<span class='curline'><a href='../S/818.html#L1554'>elements</a>         1554 ext/oci8/oci8.c 		efree(bind-&gt;array.elements);</span>
+<span class='curline'><a href='../S/822.html#L1003'>elements</a>         1003 ext/oci8/oci8_statement.c 						ZVAL_LONG(*entry, ((ub4 *)(bind-&gt;array.elements))[i]);</span>
+<span class='curline'><a href='../S/822.html#L1006'>elements</a>         1006 ext/oci8/oci8_statement.c 						add_next_index_long(bind-&gt;zval, ((ub4 *)(bind-&gt;array.elements))[i]);</span>
+<span class='curline'><a href='../S/822.html#L1014'>elements</a>         1014 ext/oci8/oci8_statement.c 						ZVAL_DOUBLE(*entry, ((double *)(bind-&gt;array.elements))[i]);</span>
+<span class='curline'><a href='../S/822.html#L1017'>elements</a>         1017 ext/oci8/oci8_statement.c 						add_next_index_double(bind-&gt;zval, ((double *)(bind-&gt;array.elements))[i]);</span>
+<span class='curline'><a href='../S/822.html#L1029'>elements</a>         1029 ext/oci8/oci8_statement.c 						PHP_OCI_CALL_RETURN(errstatus, OCIDateToText, (connection-&gt;err, &amp;(((OCIDate *)(bind-&gt;array.elements))[i]), 0, 0, 0, 0, &amp;buff_len, buff));</span>
+<span class='curline'><a href='../S/822.html#L1042'>elements</a>         1042 ext/oci8/oci8_statement.c 						PHP_OCI_CALL_RETURN(errstatus, OCIDateToText, (connection-&gt;err, &amp;(((OCIDate *)(bind-&gt;array.elements))[i]), 0, 0, 0, 0, &amp;buff_len, buff));</span>
+<span class='curline'><a href='../S/822.html#L1066'>elements</a>         1066 ext/oci8/oci8_statement.c 						ZVAL_STRINGL(*entry, (char *)(((text *)bind-&gt;array.elements)+i*bind-&gt;array.max_length), curr_element_length, 1);</span>
+<span class='curline'><a href='../S/822.html#L1069'>elements</a>         1069 ext/oci8/oci8_statement.c 						add_next_index_stringl(bind-&gt;zval, (char *)(((text *)bind-&gt;array.elements)+i*bind-&gt;array.max_length), curr_element_length, 1);</span>
+<span class='curline'><a href='../S/822.html#L1609'>elements</a>         1609 ext/oci8/oci8_statement.c 								(dvoid *) bindp-&gt;array.elements,</span>
+<span class='curline'><a href='../S/822.html#L1657'>elements</a>         1657 ext/oci8/oci8_statement.c 	bind-&gt;array.elements		= (text *)safe_emalloc(max_table_length * (maxlength + 1), sizeof(text), 0);</span>
+<span class='curline'><a href='../S/822.html#L1658'>elements</a>         1658 ext/oci8/oci8_statement.c 	memset(bind-&gt;array.elements, 0, max_table_length * (maxlength + 1) * sizeof(text));</span>
+<span class='curline'><a href='../S/822.html#L1690'>elements</a>         1690 ext/oci8/oci8_statement.c 			memcpy((text *)bind-&gt;array.elements + i*maxlength, Z_STRVAL_PP(entry), element_length);</span>
+<span class='curline'><a href='../S/822.html#L1691'>elements</a>         1691 ext/oci8/oci8_statement.c 			((text *)bind-&gt;array.elements)[i*maxlength + element_length] = '\0';</span>
+<span class='curline'><a href='../S/822.html#L1695'>elements</a>         1695 ext/oci8/oci8_statement.c 			((text *)bind-&gt;array.elements)[i*maxlength] = '\0';</span>
+<span class='curline'><a href='../S/822.html#L1716'>elements</a>         1716 ext/oci8/oci8_statement.c 	bind-&gt;array.elements		= (ub4 *)safe_emalloc(max_table_length, sizeof(ub4), 0);</span>
+<span class='curline'><a href='../S/822.html#L1731'>elements</a>         1731 ext/oci8/oci8_statement.c 			((ub4 *)bind-&gt;array.elements)[i] = (ub4) Z_LVAL_PP(entry);</span>
+<span class='curline'><a href='../S/822.html#L1734'>elements</a>         1734 ext/oci8/oci8_statement.c 			((ub4 *)bind-&gt;array.elements)[i] = 0;</span>
+<span class='curline'><a href='../S/822.html#L1755'>elements</a>         1755 ext/oci8/oci8_statement.c 	bind-&gt;array.elements		= (double *)safe_emalloc(max_table_length, sizeof(double), 0);</span>
+<span class='curline'><a href='../S/822.html#L1770'>elements</a>         1770 ext/oci8/oci8_statement.c 			((double *)bind-&gt;array.elements)[i] = (double) Z_DVAL_PP(entry);</span>
+<span class='curline'><a href='../S/822.html#L1773'>elements</a>         1773 ext/oci8/oci8_statement.c 			((double *)bind-&gt;array.elements)[i] = 0;</span>
+<span class='curline'><a href='../S/822.html#L1795'>elements</a>         1795 ext/oci8/oci8_statement.c 	bind-&gt;array.elements		= (OCIDate *)safe_emalloc(max_table_length, sizeof(OCIDate), 0);</span>
+<span class='curline'><a href='../S/822.html#L1817'>elements</a>         1817 ext/oci8/oci8_statement.c 				efree(bind-&gt;array.elements);</span>
+<span class='curline'><a href='../S/822.html#L1824'>elements</a>         1824 ext/oci8/oci8_statement.c 			((OCIDate *)bind-&gt;array.elements)[i] = oci_date;</span>
+<span class='curline'><a href='../S/822.html#L1832'>elements</a>         1832 ext/oci8/oci8_statement.c 				efree(bind-&gt;array.elements);</span>
+<span class='curline'><a href='../S/822.html#L1839'>elements</a>         1839 ext/oci8/oci8_statement.c 			((OCIDate *)bind-&gt;array.elements)[i] = oci_date;</span>
+<span class='curline'><a href='../S/824.html#L246'>elements</a>          246 ext/oci8/php_oci8_int.h 		void	*elements;</span>
+<span class='curline'><a href='../S/1011.html#L248'>elements</a>          248 ext/simplexml/simplexml.c static zval * sxe_prop_dim_read(zval *object, zval *member, zend_bool elements, zend_bool attribs, int type TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1011.html#L264'>elements</a>          264 ext/simplexml/simplexml.c 			elements = 1;</span>
+<span class='curline'><a href='../S/1011.html#L285'>elements</a>          285 ext/simplexml/simplexml.c 		elements = 0;</span>
+<span class='curline'><a href='../S/1011.html#L330'>elements</a>          330 ext/simplexml/simplexml.c 		if (elements) {</span>
+<span class='curline'><a href='../S/1011.html#L452'>elements</a>          452 ext/simplexml/simplexml.c static int sxe_prop_dim_write(zval *object, zval *member, zval *value, zend_bool elements, zend_bool attribs, xmlNodePtr *pnewnode TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1011.html#L474'>elements</a>          474 ext/simplexml/simplexml.c 			elements = 1;</span>
+<span class='curline'><a href='../S/1011.html#L506'>elements</a>          506 ext/simplexml/simplexml.c 		elements = 0;</span>
+<span class='curline'><a href='../S/1011.html#L591'>elements</a>          591 ext/simplexml/simplexml.c 		if (elements) {</span>
+<span class='curline'><a href='../S/1011.html#L641'>elements</a>          641 ext/simplexml/simplexml.c 		} else if (elements) {</span>
+<span class='curline'><a href='../S/1011.html#L736'>elements</a>          736 ext/simplexml/simplexml.c static int sxe_prop_dim_exists(zval *object, zval *member, int check_empty, zend_bool elements, zend_bool attribs TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1011.html#L759'>elements</a>          759 ext/simplexml/simplexml.c 			elements = 1;</span>
+<span class='curline'><a href='../S/1011.html#L768'>elements</a>          768 ext/simplexml/simplexml.c 		elements = 0;</span>
+<span class='curline'><a href='../S/1011.html#L810'>elements</a>          810 ext/simplexml/simplexml.c 		if (elements) {</span>
+<span class='curline'><a href='../S/1011.html#L865'>elements</a>          865 ext/simplexml/simplexml.c static void sxe_prop_dim_delete(zval *object, zval *member, zend_bool elements, zend_bool attribs TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1011.html#L889'>elements</a>          889 ext/simplexml/simplexml.c 			elements = 1;</span>
+<span class='curline'><a href='../S/1011.html#L898'>elements</a>          898 ext/simplexml/simplexml.c 		elements = 0;</span>
+<span class='curline'><a href='../S/1011.html#L937'>elements</a>          937 ext/simplexml/simplexml.c 		if (elements) {</span>
+<span class='curline'><a href='../S/1018.html#L2482'>elements</a>         2482 ext/soap/php_encoding.c 			if (sdl_type &amp;&amp; sdl_type-&gt;elements &amp;&amp;</span>
+<span class='curline'><a href='../S/1018.html#L2483'>elements</a>         2483 ext/soap/php_encoding.c 			    zend_hash_num_elements(sdl_type-&gt;elements) == 1 &amp;&amp;</span>
+<span class='curline'><a href='../S/1018.html#L2484'>elements</a>         2484 ext/soap/php_encoding.c 			    (zend_hash_internal_pointer_reset(sdl_type-&gt;elements),</span>
+<span class='curline'><a href='../S/1018.html#L2485'>elements</a>         2485 ext/soap/php_encoding.c 			     zend_hash_get_current_data(sdl_type-&gt;elements, (void**)&amp;elementType) == SUCCESS) &amp;&amp;</span>
+<span class='curline'><a href='../S/1018.html#L2494'>elements</a>         2494 ext/soap/php_encoding.c 		} else if (sdl_type &amp;&amp; sdl_type-&gt;elements &amp;&amp;</span>
+<span class='curline'><a href='../S/1018.html#L2495'>elements</a>         2495 ext/soap/php_encoding.c 		           zend_hash_num_elements(sdl_type-&gt;elements) == 1 &amp;&amp;</span>
+<span class='curline'><a href='../S/1018.html#L2496'>elements</a>         2496 ext/soap/php_encoding.c 		           (zend_hash_internal_pointer_reset(sdl_type-&gt;elements),</span>
+<span class='curline'><a href='../S/1018.html#L2497'>elements</a>         2497 ext/soap/php_encoding.c 		            zend_hash_get_current_data(sdl_type-&gt;elements, (void**)&amp;elementType) == SUCCESS) &amp;&amp;</span>
+<span class='curline'><a href='../S/1018.html#L2685'>elements</a>         2685 ext/soap/php_encoding.c 		if (type-&gt;sdl_type &amp;&amp; type-&gt;sdl_type-&gt;elements &amp;&amp;</span>
+<span class='curline'><a href='../S/1018.html#L2686'>elements</a>         2686 ext/soap/php_encoding.c 		    zend_hash_num_elements(type-&gt;sdl_type-&gt;elements) == 1 &amp;&amp;</span>
+<span class='curline'><a href='../S/1018.html#L2687'>elements</a>         2687 ext/soap/php_encoding.c 		    (zend_hash_internal_pointer_reset(type-&gt;sdl_type-&gt;elements),</span>
+<span class='curline'><a href='../S/1018.html#L2688'>elements</a>         2688 ext/soap/php_encoding.c 		     zend_hash_get_current_data(type-&gt;sdl_type-&gt;elements, (void**)&amp;elementType) == SUCCESS) &amp;&amp;</span>
+<span class='curline'><a href='../S/1018.html#L2693'>elements</a>         2693 ext/soap/php_encoding.c 	} else if (type-&gt;sdl_type &amp;&amp; type-&gt;sdl_type-&gt;elements &amp;&amp;</span>
+<span class='curline'><a href='../S/1018.html#L2694'>elements</a>         2694 ext/soap/php_encoding.c 	           zend_hash_num_elements(type-&gt;sdl_type-&gt;elements) == 1 &amp;&amp;</span>
+<span class='curline'><a href='../S/1018.html#L2695'>elements</a>         2695 ext/soap/php_encoding.c 	           (zend_hash_internal_pointer_reset(type-&gt;sdl_type-&gt;elements),</span>
+<span class='curline'><a href='../S/1018.html#L2696'>elements</a>         2696 ext/soap/php_encoding.c 	            zend_hash_get_current_data(type-&gt;sdl_type-&gt;elements, (void**)&amp;elementType) == SUCCESS) &amp;&amp;</span>
+<span class='curline'><a href='../S/1018.html#L3099'>elements</a>         3099 ext/soap/php_encoding.c 	if (enc-&gt;sdl_type &amp;&amp; enc-&gt;sdl_type-&gt;kind == XSD_TYPEKIND_LIST &amp;&amp; enc-&gt;sdl_type-&gt;elements) {</span>
+<span class='curline'><a href='../S/1018.html#L3102'>elements</a>         3102 ext/soap/php_encoding.c 		zend_hash_internal_pointer_reset(enc-&gt;sdl_type-&gt;elements);</span>
+<span class='curline'><a href='../S/1018.html#L3103'>elements</a>         3103 ext/soap/php_encoding.c 		if (zend_hash_get_current_data(enc-&gt;sdl_type-&gt;elements, (void**)&amp;type) == SUCCESS) {</span>
+<span class='curline'><a href='../S/1018.html#L3200'>elements</a>         3200 ext/soap/php_encoding.c 	if (SOAP_GLOBAL(sdl) &amp;&amp; SOAP_GLOBAL(sdl)-&gt;elements &amp;&amp; data-&gt;name) {</span>
+<span class='curline'><a href='../S/1018.html#L3211'>elements</a>         3211 ext/soap/php_encoding.c 		if (zend_hash_find(SOAP_GLOBAL(sdl)-&gt;elements, nscat.c, nscat.len+1, (void **)&amp;sdl_type) == SUCCESS &amp;&amp;</span>
+<span class='curline'><a href='../S/1024.html#L360'>elements</a>          360 ext/soap/php_schema.c 			if (cur_type-&gt;elements == NULL) {</span>
+<span class='curline'><a href='../S/1024.html#L361'>elements</a>          361 ext/soap/php_schema.c 				cur_type-&gt;elements = emalloc(sizeof(HashTable));</span>
+<span class='curline'><a href='../S/1024.html#L362'>elements</a>          362 ext/soap/php_schema.c 				zend_hash_init(cur_type-&gt;elements, 0, NULL, delete_type, 0);</span>
+<span class='curline'><a href='../S/1024.html#L364'>elements</a>          364 ext/soap/php_schema.c 			zend_hash_update(cur_type-&gt;elements, newType-&gt;name, strlen(newType-&gt;name)+1, &amp;newType, sizeof(sdlTypePtr), (void **)&amp;ptr);</span>
+<span class='curline'><a href='../S/1024.html#L434'>elements</a>          434 ext/soap/php_schema.c 			if (cur_type-&gt;elements == NULL) {</span>
+<span class='curline'><a href='../S/1024.html#L435'>elements</a>          435 ext/soap/php_schema.c 				cur_type-&gt;elements = emalloc(sizeof(HashTable));</span>
+<span class='curline'><a href='../S/1024.html#L436'>elements</a>          436 ext/soap/php_schema.c 				zend_hash_init(cur_type-&gt;elements, 0, NULL, delete_type, 0);</span>
+<span class='curline'><a href='../S/1024.html#L438'>elements</a>          438 ext/soap/php_schema.c 			zend_hash_next_index_insert(cur_type-&gt;elements, &amp;newType, sizeof(sdlTypePtr), (void **)&amp;tmp);</span>
+<span class='curline'><a href='../S/1024.html#L469'>elements</a>          469 ext/soap/php_schema.c 		if (cur_type-&gt;elements == NULL) {</span>
+<span class='curline'><a href='../S/1024.html#L470'>elements</a>          470 ext/soap/php_schema.c 			cur_type-&gt;elements = emalloc(sizeof(HashTable));</span>
+<span class='curline'><a href='../S/1024.html#L471'>elements</a>          471 ext/soap/php_schema.c 			zend_hash_init(cur_type-&gt;elements, 0, NULL, delete_type, 0);</span>
+<span class='curline'><a href='../S/1024.html#L473'>elements</a>          473 ext/soap/php_schema.c 		zend_hash_next_index_insert(cur_type-&gt;elements, &amp;newType, sizeof(sdlTypePtr), (void **)&amp;tmp);</span>
+<span class='curline'><a href='../S/1024.html#L529'>elements</a>          529 ext/soap/php_schema.c 				if (cur_type-&gt;elements == NULL) {</span>
+<span class='curline'><a href='../S/1024.html#L530'>elements</a>          530 ext/soap/php_schema.c 					cur_type-&gt;elements = emalloc(sizeof(HashTable));</span>
+<span class='curline'><a href='../S/1024.html#L531'>elements</a>          531 ext/soap/php_schema.c 					zend_hash_init(cur_type-&gt;elements, 0, NULL, delete_type, 0);</span>
+<span class='curline'><a href='../S/1024.html#L533'>elements</a>          533 ext/soap/php_schema.c 				zend_hash_next_index_insert(cur_type-&gt;elements, &amp;newType, sizeof(sdlTypePtr), (void **)&amp;tmp);</span>
+<span class='curline'><a href='../S/1024.html#L565'>elements</a>          565 ext/soap/php_schema.c 			if (cur_type-&gt;elements == NULL) {</span>
+<span class='curline'><a href='../S/1024.html#L566'>elements</a>          566 ext/soap/php_schema.c 				cur_type-&gt;elements = emalloc(sizeof(HashTable));</span>
+<span class='curline'><a href='../S/1024.html#L567'>elements</a>          567 ext/soap/php_schema.c 				zend_hash_init(cur_type-&gt;elements, 0, NULL, delete_type, 0);</span>
+<span class='curline'><a href='../S/1024.html#L569'>elements</a>          569 ext/soap/php_schema.c 			zend_hash_next_index_insert(cur_type-&gt;elements, &amp;newType, sizeof(sdlTypePtr), (void **)&amp;tmp);</span>
+<span class='curline'><a href='../S/1024.html#L1545'>elements</a>         1545 ext/soap/php_schema.c 			if (sdl-&gt;elements == NULL) {</span>
+<span class='curline'><a href='../S/1024.html#L1546'>elements</a>         1546 ext/soap/php_schema.c 				sdl-&gt;elements = emalloc(sizeof(HashTable));</span>
+<span class='curline'><a href='../S/1024.html#L1547'>elements</a>         1547 ext/soap/php_schema.c 				zend_hash_init(sdl-&gt;elements, 0, NULL, delete_type, 0);</span>
+<span class='curline'><a href='../S/1024.html#L1549'>elements</a>         1549 ext/soap/php_schema.c 			addHash = sdl-&gt;elements;</span>
+<span class='curline'><a href='../S/1024.html#L1554'>elements</a>         1554 ext/soap/php_schema.c 			if (cur_type-&gt;elements == NULL) {</span>
+<span class='curline'><a href='../S/1024.html#L1555'>elements</a>         1555 ext/soap/php_schema.c 				cur_type-&gt;elements = emalloc(sizeof(HashTable));</span>
+<span class='curline'><a href='../S/1024.html#L1556'>elements</a>         1556 ext/soap/php_schema.c 				zend_hash_init(cur_type-&gt;elements, 0, NULL, delete_type, 0);</span>
+<span class='curline'><a href='../S/1024.html#L1558'>elements</a>         1558 ext/soap/php_schema.c 			addHash = cur_type-&gt;elements;</span>
+<span class='curline'><a href='../S/1024.html#L2238'>elements</a>         2238 ext/soap/php_schema.c 		if (ctx-&gt;sdl-&gt;elements != NULL) {</span>
+<span class='curline'><a href='../S/1024.html#L2239'>elements</a>         2239 ext/soap/php_schema.c 			tmp = (sdlTypePtr*)schema_find_by_ref(ctx-&gt;sdl-&gt;elements, type-&gt;ref);</span>
+<span class='curline'><a href='../S/1024.html#L2262'>elements</a>         2262 ext/soap/php_schema.c 	if (type-&gt;elements) {</span>
+<span class='curline'><a href='../S/1024.html#L2263'>elements</a>         2263 ext/soap/php_schema.c 		zend_hash_internal_pointer_reset(type-&gt;elements);</span>
+<span class='curline'><a href='../S/1024.html#L2264'>elements</a>         2264 ext/soap/php_schema.c 		while (zend_hash_get_current_data(type-&gt;elements,(void**)&amp;tmp) == SUCCESS) {</span>
+<span class='curline'><a href='../S/1024.html#L2266'>elements</a>         2266 ext/soap/php_schema.c 			zend_hash_move_forward(type-&gt;elements);</span>
+<span class='curline'><a href='../S/1024.html#L2309'>elements</a>         2309 ext/soap/php_schema.c 	if (sdl-&gt;elements) {</span>
+<span class='curline'><a href='../S/1024.html#L2310'>elements</a>         2310 ext/soap/php_schema.c 		zend_hash_internal_pointer_reset(sdl-&gt;elements);</span>
+<span class='curline'><a href='../S/1024.html#L2311'>elements</a>         2311 ext/soap/php_schema.c 		while (zend_hash_get_current_data(sdl-&gt;elements,(void**)&amp;type) == SUCCESS) {</span>
+<span class='curline'><a href='../S/1024.html#L2313'>elements</a>         2313 ext/soap/php_schema.c 			zend_hash_move_forward(sdl-&gt;elements);</span>
+<span class='curline'><a href='../S/1024.html#L2400'>elements</a>         2400 ext/soap/php_schema.c 	if (type-&gt;elements) {</span>
+<span class='curline'><a href='../S/1024.html#L2401'>elements</a>         2401 ext/soap/php_schema.c 		zend_hash_destroy(type-&gt;elements);</span>
+<span class='curline'><a href='../S/1024.html#L2402'>elements</a>         2402 ext/soap/php_schema.c 		efree(type-&gt;elements);</span>
+<span class='curline'><a href='../S/1024.html#L2447'>elements</a>         2447 ext/soap/php_schema.c 	if (type-&gt;elements) {</span>
+<span class='curline'><a href='../S/1024.html#L2448'>elements</a>         2448 ext/soap/php_schema.c 		zend_hash_destroy(type-&gt;elements);</span>
+<span class='curline'><a href='../S/1024.html#L2449'>elements</a>         2449 ext/soap/php_schema.c 		free(type-&gt;elements);</span>
+<span class='curline'><a href='../S/1026.html#L74'>elements</a>           74 ext/soap/php_sdl.c 	if (sdl-&gt;elements) {</span>
+<span class='curline'><a href='../S/1026.html#L92'>elements</a>           92 ext/soap/php_sdl.c 			if (zend_hash_find(sdl-&gt;elements, nscat, len + 1, (void **)&amp;sdl_type) == SUCCESS) {</span>
+<span class='curline'><a href='../S/1026.html#L94'>elements</a>           94 ext/soap/php_sdl.c 			} else if (zend_hash_find(sdl-&gt;elements, (char*)type, type_len + 1, (void **)&amp;sdl_type) == SUCCESS) {</span>
+<span class='curline'><a href='../S/1026.html#L99'>elements</a>           99 ext/soap/php_sdl.c 			if (zend_hash_find(sdl-&gt;elements, (char*)type, xmlStrlen(type) + 1, (void **)&amp;sdl_type) == SUCCESS) {</span>
+<span class='curline'><a href='../S/1026.html#L1284'>elements</a>         1284 ext/soap/php_sdl.c static sdlContentModelPtr sdl_deserialize_model(sdlTypePtr *types, sdlTypePtr *elements, char **in)</span>
+<span class='curline'><a href='../S/1026.html#L1295'>elements</a>         1295 ext/soap/php_sdl.c 			model-&gt;u.element = elements[i];</span>
+<span class='curline'><a href='../S/1026.html#L1304'>elements</a>         1304 ext/soap/php_sdl.c 				sdlContentModelPtr x = sdl_deserialize_model(types, elements, in);</span>
+<span class='curline'><a href='../S/1026.html#L1325'>elements</a>         1325 ext/soap/php_sdl.c 	sdlTypePtr *elements = NULL;</span>
+<span class='curline'><a href='../S/1026.html#L1372'>elements</a>         1372 ext/soap/php_sdl.c 		elements = safe_emalloc((i+1), sizeof(sdlTypePtr), 0);</span>
+<span class='curline'><a href='../S/1026.html#L1373'>elements</a>         1373 ext/soap/php_sdl.c 		elements[0] = NULL;</span>
+<span class='curline'><a href='../S/1026.html#L1374'>elements</a>         1374 ext/soap/php_sdl.c 		type-&gt;elements = emalloc(sizeof(HashTable));</span>
+<span class='curline'><a href='../S/1026.html#L1375'>elements</a>         1375 ext/soap/php_sdl.c 		zend_hash_init(type-&gt;elements, i, NULL, delete_type, 0);</span>
+<span class='curline'><a href='../S/1026.html#L1379'>elements</a>         1379 ext/soap/php_sdl.c 			sdl_deserialize_key(type-&gt;elements, t, in);</span>
+<span class='curline'><a href='../S/1026.html#L1381'>elements</a>         1381 ext/soap/php_sdl.c 			elements[i] = t;</span>
+<span class='curline'><a href='../S/1026.html#L1401'>elements</a>         1401 ext/soap/php_sdl.c 		type-&gt;model = sdl_deserialize_model(types, elements, in);</span>
+<span class='curline'><a href='../S/1026.html#L1405'>elements</a>         1405 ext/soap/php_sdl.c 	if (elements != NULL) {</span>
+<span class='curline'><a href='../S/1026.html#L1406'>elements</a>         1406 ext/soap/php_sdl.c 		efree(elements);</span>
+<span class='curline'><a href='../S/1026.html#L1650'>elements</a>         1650 ext/soap/php_sdl.c 		sdl-&gt;elements = emalloc(sizeof(HashTable));</span>
+<span class='curline'><a href='../S/1026.html#L1651'>elements</a>         1651 ext/soap/php_sdl.c 		zend_hash_init(sdl-&gt;elements, num_elements, NULL, delete_type, 0);</span>
+<span class='curline'><a href='../S/1026.html#L1653'>elements</a>         1653 ext/soap/php_sdl.c 			sdl_deserialize_key(sdl-&gt;elements, types[i], &amp;in);</span>
+<span class='curline'><a href='../S/1026.html#L1975'>elements</a>         1975 ext/soap/php_sdl.c 	if (type-&gt;elements) {</span>
+<span class='curline'><a href='../S/1026.html#L1976'>elements</a>         1976 ext/soap/php_sdl.c 		i = zend_hash_num_elements(type-&gt;elements);</span>
+<span class='curline'><a href='../S/1026.html#L1987'>elements</a>         1987 ext/soap/php_sdl.c 		zend_hash_internal_pointer_reset(type-&gt;elements);</span>
+<span class='curline'><a href='../S/1026.html#L1988'>elements</a>         1988 ext/soap/php_sdl.c 		while (zend_hash_get_current_data(type-&gt;elements, (void**)&amp;tmp) == SUCCESS) {</span>
+<span class='curline'><a href='../S/1026.html#L1989'>elements</a>         1989 ext/soap/php_sdl.c 			sdl_serialize_key(type-&gt;elements, out);</span>
+<span class='curline'><a href='../S/1026.html#L1993'>elements</a>         1993 ext/soap/php_sdl.c 			zend_hash_move_forward(type-&gt;elements);</span>
+<span class='curline'><a href='../S/1026.html#L2181'>elements</a>         2181 ext/soap/php_sdl.c 	if (sdl-&gt;elements) {</span>
+<span class='curline'><a href='../S/1026.html#L2182'>elements</a>         2182 ext/soap/php_sdl.c 		i = zend_hash_num_elements(sdl-&gt;elements);</span>
+<span class='curline'><a href='../S/1026.html#L2190'>elements</a>         2190 ext/soap/php_sdl.c 		zend_hash_internal_pointer_reset(sdl-&gt;elements);</span>
+<span class='curline'><a href='../S/1026.html#L2191'>elements</a>         2191 ext/soap/php_sdl.c 		while (zend_hash_get_current_data(sdl-&gt;elements, (void**)&amp;tmp) == SUCCESS) {</span>
+<span class='curline'><a href='../S/1026.html#L2194'>elements</a>         2194 ext/soap/php_sdl.c 			zend_hash_move_forward(sdl-&gt;elements);</span>
+<span class='curline'><a href='../S/1026.html#L2241'>elements</a>         2241 ext/soap/php_sdl.c 	if (sdl-&gt;elements) {</span>
+<span class='curline'><a href='../S/1026.html#L2243'>elements</a>         2243 ext/soap/php_sdl.c 		zend_hash_internal_pointer_reset(sdl-&gt;elements);</span>
+<span class='curline'><a href='../S/1026.html#L2244'>elements</a>         2244 ext/soap/php_sdl.c 		while (zend_hash_get_current_data(sdl-&gt;elements, (void**)&amp;tmp) == SUCCESS) {</span>
+<span class='curline'><a href='../S/1026.html#L2245'>elements</a>         2245 ext/soap/php_sdl.c 			sdl_serialize_key(sdl-&gt;elements, out);</span>
+<span class='curline'><a href='../S/1026.html#L2247'>elements</a>         2247 ext/soap/php_sdl.c 			zend_hash_move_forward(sdl-&gt;elements);</span>
+<span class='curline'><a href='../S/1026.html#L2802'>elements</a>         2802 ext/soap/php_sdl.c 	if (ptype-&gt;elements) {</span>
+<span class='curline'><a href='../S/1026.html#L2805'>elements</a>         2805 ext/soap/php_sdl.c 		ptype-&gt;elements = malloc(sizeof(HashTable));</span>
+<span class='curline'><a href='../S/1026.html#L2806'>elements</a>         2806 ext/soap/php_sdl.c 		zend_hash_init(ptype-&gt;elements, zend_hash_num_elements(type-&gt;elements), NULL, delete_type_persistent, 1);</span>
+<span class='curline'><a href='../S/1026.html#L2808'>elements</a>         2808 ext/soap/php_sdl.c 		zend_hash_internal_pointer_reset(type-&gt;elements);</span>
+<span class='curline'><a href='../S/1026.html#L2809'>elements</a>         2809 ext/soap/php_sdl.c 		while (zend_hash_get_current_data(type-&gt;elements, (void **)&amp;tmp) == SUCCESS) {</span>
+<span class='curline'><a href='../S/1026.html#L2811'>elements</a>         2811 ext/soap/php_sdl.c 			if (zend_hash_get_current_key_ex(type-&gt;elements, &amp;key, &amp;key_len, &amp;index, 0, NULL) == HASH_KEY_IS_STRING) {</span>
+<span class='curline'><a href='../S/1026.html#L2812'>elements</a>         2812 ext/soap/php_sdl.c 				zend_hash_add(ptype-&gt;elements, key, key_len, (void*)&amp;pelem, sizeof(sdlTypePtr), NULL);</span>
+<span class='curline'><a href='../S/1026.html#L2814'>elements</a>         2814 ext/soap/php_sdl.c 				zend_hash_next_index_insert(ptype-&gt;elements, (void*)&amp;pelem, sizeof(sdlTypePtr), NULL);</span>
+<span class='curline'><a href='../S/1026.html#L2817'>elements</a>         2817 ext/soap/php_sdl.c 			zend_hash_move_forward(type-&gt;elements);</span>
+<span class='curline'><a href='../S/1026.html#L3015'>elements</a>         3015 ext/soap/php_sdl.c 	if (sdl-&gt;elements) {</span>
+<span class='curline'><a href='../S/1026.html#L3019'>elements</a>         3019 ext/soap/php_sdl.c 		psdl-&gt;elements = malloc(sizeof(HashTable));</span>
+<span class='curline'><a href='../S/1026.html#L3020'>elements</a>         3020 ext/soap/php_sdl.c 		zend_hash_init(psdl-&gt;elements, zend_hash_num_elements(sdl-&gt;elements), NULL, delete_type_persistent, 1);</span>
+<span class='curline'><a href='../S/1026.html#L3022'>elements</a>         3022 ext/soap/php_sdl.c 		zend_hash_internal_pointer_reset(sdl-&gt;elements);</span>
+<span class='curline'><a href='../S/1026.html#L3023'>elements</a>         3023 ext/soap/php_sdl.c 		while (zend_hash_get_current_data(sdl-&gt;elements, (void **)&amp;tmp) == SUCCESS) {</span>
+<span class='curline'><a href='../S/1026.html#L3025'>elements</a>         3025 ext/soap/php_sdl.c 			if (zend_hash_get_current_key_ex(sdl-&gt;elements, &amp;key, &amp;key_len, &amp;index, 0, NULL) == HASH_KEY_IS_STRING) {</span>
+<span class='curline'><a href='../S/1026.html#L3026'>elements</a>         3026 ext/soap/php_sdl.c 				zend_hash_add(psdl-&gt;elements, key, key_len, (void*)&amp;ptype, sizeof(sdlTypePtr), NULL);</span>
+<span class='curline'><a href='../S/1026.html#L3028'>elements</a>         3028 ext/soap/php_sdl.c 				zend_hash_next_index_insert(psdl-&gt;elements, (void*)&amp;ptype, sizeof(sdlTypePtr), NULL);</span>
+<span class='curline'><a href='../S/1026.html#L3031'>elements</a>         3031 ext/soap/php_sdl.c 			zend_hash_move_forward(sdl-&gt;elements);</span>
+<span class='curline'><a href='../S/1026.html#L3164'>elements</a>         3164 ext/soap/php_sdl.c 	if (tmp-&gt;elements) {</span>
+<span class='curline'><a href='../S/1026.html#L3165'>elements</a>         3165 ext/soap/php_sdl.c 		zend_hash_destroy(tmp-&gt;elements);</span>
+<span class='curline'><a href='../S/1026.html#L3166'>elements</a>         3166 ext/soap/php_sdl.c 		free(tmp-&gt;elements);</span>
+<span class='curline'><a href='../S/1026.html#L3435'>elements</a>         3435 ext/soap/php_sdl.c 	if (tmp-&gt;elements) {</span>
+<span class='curline'><a href='../S/1026.html#L3436'>elements</a>         3436 ext/soap/php_sdl.c 		zend_hash_destroy(tmp-&gt;elements);</span>
+<span class='curline'><a href='../S/1026.html#L3437'>elements</a>         3437 ext/soap/php_sdl.c 		efree(tmp-&gt;elements);</span>
+<span class='curline'><a href='../S/1027.html#L57'>elements</a>           57 ext/soap/php_sdl.h 	HashTable *elements;         /* array of sdlTypesPtr */</span>
+<span class='curline'><a href='../S/1027.html#L204'>elements</a>          204 ext/soap/php_sdl.h 	HashTable          *elements;             /* array of sdlTypePtr */</span>
+<span class='curline'><a href='../S/1031.html#L4728'>elements</a>         4728 ext/soap/soap.c 			if (type-&gt;elements) {</span>
+<span class='curline'><a href='../S/1031.html#L4732'>elements</a>         4732 ext/soap/soap.c 				zend_hash_internal_pointer_reset_ex(type-&gt;elements, &amp;pos);</span>
+<span class='curline'><a href='../S/1031.html#L4733'>elements</a>         4733 ext/soap/soap.c 				if (zend_hash_get_current_data_ex(type-&gt;elements, (void **)&amp;item_type, &amp;pos) != FAILURE) {</span>
+<span class='curline'><a href='../S/1031.html#L4742'>elements</a>         4742 ext/soap/soap.c 			if (type-&gt;elements) {</span>
+<span class='curline'><a href='../S/1031.html#L4747'>elements</a>         4747 ext/soap/soap.c 				zend_hash_internal_pointer_reset_ex(type-&gt;elements, &amp;pos);</span>
+<span class='curline'><a href='../S/1031.html#L4748'>elements</a>         4748 ext/soap/soap.c 				while (zend_hash_get_current_data_ex(type-&gt;elements, (void **)&amp;item_type, &amp;pos) != FAILURE) {</span>
+<span class='curline'><a href='../S/1031.html#L4754'>elements</a>         4754 ext/soap/soap.c 					zend_hash_move_forward_ex(type-&gt;elements, &amp;pos);</span>
+<span class='curline'><a href='../S/1031.html#L4801'>elements</a>         4801 ext/soap/soap.c 					} else if (type-&gt;elements &amp;&amp;</span>
+<span class='curline'><a href='../S/1031.html#L4802'>elements</a>         4802 ext/soap/soap.c 					           zend_hash_num_elements(type-&gt;elements) == 1 &amp;&amp;</span>
+<span class='curline'><a href='../S/1031.html#L4803'>elements</a>         4803 ext/soap/soap.c 					           (zend_hash_internal_pointer_reset(type-&gt;elements),</span>
+<span class='curline'><a href='../S/1031.html#L4804'>elements</a>         4804 ext/soap/soap.c 					            zend_hash_get_current_data(type-&gt;elements, (void**)&amp;elementType) == SUCCESS) &amp;&amp;</span>
+<span class='curline'><a href='../S/1057.html#L47'>elements</a>           47 ext/spl/spl_fixedarray.c 	zval **elements;</span>
+<span class='curline'><a href='../S/1057.html#L82'>elements</a>           82 ext/spl/spl_fixedarray.c 		array-&gt;elements = ecalloc(size, sizeof(zval *));</span>
+<span class='curline'><a href='../S/1057.html#L85'>elements</a>           85 ext/spl/spl_fixedarray.c 		array-&gt;elements = NULL;</span>
+<span class='curline'><a href='../S/1057.html#L109'>elements</a>          109 ext/spl/spl_fixedarray.c 			if (array-&gt;elements[i]) {</span>
+<span class='curline'><a href='../S/1057.html#L110'>elements</a>          110 ext/spl/spl_fixedarray.c 				zval_ptr_dtor(&amp;(array-&gt;elements[i]));</span>
+<span class='curline'><a href='../S/1057.html#L114'>elements</a>          114 ext/spl/spl_fixedarray.c 		if (array-&gt;elements) {</span>
+<span class='curline'><a href='../S/1057.html#L115'>elements</a>          115 ext/spl/spl_fixedarray.c 			efree(array-&gt;elements);</span>
+<span class='curline'><a href='../S/1057.html#L116'>elements</a>          116 ext/spl/spl_fixedarray.c 			array-&gt;elements = NULL;</span>
+<span class='curline'><a href='../S/1057.html#L119'>elements</a>          119 ext/spl/spl_fixedarray.c 		array-&gt;elements = safe_erealloc(array-&gt;elements, size, sizeof(zval *), 0);</span>
+<span class='curline'><a href='../S/1057.html#L120'>elements</a>          120 ext/spl/spl_fixedarray.c 		memset(array-&gt;elements + array-&gt;size, '\0', sizeof(zval *) * (size - array-&gt;size));</span>
+<span class='curline'><a href='../S/1057.html#L125'>elements</a>          125 ext/spl/spl_fixedarray.c 			if (array-&gt;elements[i]) {</span>
+<span class='curline'><a href='../S/1057.html#L126'>elements</a>          126 ext/spl/spl_fixedarray.c 				zval_ptr_dtor(&amp;(array-&gt;elements[i]));</span>
+<span class='curline'><a href='../S/1057.html#L129'>elements</a>          129 ext/spl/spl_fixedarray.c 		array-&gt;elements = erealloc(array-&gt;elements, sizeof(zval *) * size);</span>
+<span class='curline'><a href='../S/1057.html#L140'>elements</a>          140 ext/spl/spl_fixedarray.c 		if (from-&gt;elements[i]) {</span>
+<span class='curline'><a href='../S/1057.html#L141'>elements</a>          141 ext/spl/spl_fixedarray.c 			Z_ADDREF_P(from-&gt;elements[i]);</span>
+<span class='curline'><a href='../S/1057.html#L142'>elements</a>          142 ext/spl/spl_fixedarray.c 			to-&gt;elements[i] = from-&gt;elements[i];</span>
+<span class='curline'><a href='../S/1057.html#L144'>elements</a>          144 ext/spl/spl_fixedarray.c 			to-&gt;elements[i] = NULL;</span>
+<span class='curline'><a href='../S/1057.html#L156'>elements</a>          156 ext/spl/spl_fixedarray.c 		*table = intern-&gt;array-&gt;elements;</span>
+<span class='curline'><a href='../S/1057.html#L177'>elements</a>          177 ext/spl/spl_fixedarray.c 			if (intern-&gt;array-&gt;elements[i]) {</span>
+<span class='curline'><a href='../S/1057.html#L178'>elements</a>          178 ext/spl/spl_fixedarray.c 				zend_hash_index_update(ht, i, (void *)&amp;intern-&gt;array-&gt;elements[i], sizeof(zval *), NULL);</span>
+<span class='curline'><a href='../S/1057.html#L179'>elements</a>          179 ext/spl/spl_fixedarray.c 				Z_ADDREF_P(intern-&gt;array-&gt;elements[i]);</span>
+<span class='curline'><a href='../S/1057.html#L203'>elements</a>          203 ext/spl/spl_fixedarray.c 			if (intern-&gt;array-&gt;elements[i]) {</span>
+<span class='curline'><a href='../S/1057.html#L204'>elements</a>          204 ext/spl/spl_fixedarray.c 				zval_ptr_dtor(&amp;(intern-&gt;array-&gt;elements[i]));</span>
+<span class='curline'><a href='../S/1057.html#L208'>elements</a>          208 ext/spl/spl_fixedarray.c 		if (intern-&gt;array-&gt;size &gt; 0 &amp;&amp; intern-&gt;array-&gt;elements) {</span>
+<span class='curline'><a href='../S/1057.html#L209'>elements</a>          209 ext/spl/spl_fixedarray.c 			efree(intern-&gt;array-&gt;elements);</span>
+<span class='curline'><a href='../S/1057.html#L364'>elements</a>          364 ext/spl/spl_fixedarray.c 	} else if(!intern-&gt;array-&gt;elements[index]) {</span>
+<span class='curline'><a href='../S/1057.html#L367'>elements</a>          367 ext/spl/spl_fixedarray.c 		return &amp;intern-&gt;array-&gt;elements[index];</span>
+<span class='curline'><a href='../S/1057.html#L425'>elements</a>          425 ext/spl/spl_fixedarray.c 		if (intern-&gt;array-&gt;elements[index]) {</span>
+<span class='curline'><a href='../S/1057.html#L426'>elements</a>          426 ext/spl/spl_fixedarray.c 			zval_ptr_dtor(&amp;(intern-&gt;array-&gt;elements[index]));</span>
+<span class='curline'><a href='../S/1057.html#L429'>elements</a>          429 ext/spl/spl_fixedarray.c 		intern-&gt;array-&gt;elements[index] = value;</span>
+<span class='curline'><a href='../S/1057.html#L471'>elements</a>          471 ext/spl/spl_fixedarray.c 		if (intern-&gt;array-&gt;elements[index]) {</span>
+<span class='curline'><a href='../S/1057.html#L472'>elements</a>          472 ext/spl/spl_fixedarray.c 			zval_ptr_dtor(&amp;(intern-&gt;array-&gt;elements[index]));</span>
+<span class='curline'><a href='../S/1057.html#L474'>elements</a>          474 ext/spl/spl_fixedarray.c 		intern-&gt;array-&gt;elements[index] = NULL;</span>
+<span class='curline'><a href='../S/1057.html#L511'>elements</a>          511 ext/spl/spl_fixedarray.c 		if (!intern-&gt;array-&gt;elements[index]) {</span>
+<span class='curline'><a href='../S/1057.html#L514'>elements</a>          514 ext/spl/spl_fixedarray.c 			if (zend_is_true(intern-&gt;array-&gt;elements[index])) {</span>
+<span class='curline'><a href='../S/1057.html#L629'>elements</a>          629 ext/spl/spl_fixedarray.c 			intern-&gt;array-&gt;elements[index++] = *data;</span>
+<span class='curline'><a href='../S/1057.html#L674'>elements</a>          674 ext/spl/spl_fixedarray.c 			if (intern-&gt;array-&gt;elements[i]) {</span>
+<span class='curline'><a href='../S/1057.html#L675'>elements</a>          675 ext/spl/spl_fixedarray.c 				zend_hash_index_update(Z_ARRVAL_P(return_value), i, (void *)&amp;intern-&gt;array-&gt;elements[i], sizeof(zval *), NULL);</span>
+<span class='curline'><a href='../S/1057.html#L676'>elements</a>          676 ext/spl/spl_fixedarray.c 				Z_ADDREF_P(intern-&gt;array-&gt;elements[i]);</span>
+<span class='curline'><a href='../S/1057.html#L741'>elements</a>          741 ext/spl/spl_fixedarray.c 			array-&gt;elements[num_index] = value;</span>
+<span class='curline'><a href='../S/1057.html#L758'>elements</a>          758 ext/spl/spl_fixedarray.c 			array-&gt;elements[i] = value;</span>
+<span class='curline'><a href='../S/1061.html#L59'>elements</a>           59 ext/spl/spl_heap.c 	spl_ptr_heap_element   *elements;</span>
+<span class='curline'><a href='../S/1061.html#L231'>elements</a>          231 ext/spl/spl_heap.c 	heap-&gt;elements = safe_emalloc(sizeof(spl_ptr_heap_element), PTR_HEAP_BLOCK_SIZE, 0);</span>
+<span class='curline'><a href='../S/1061.html#L245'>elements</a>          245 ext/spl/spl_heap.c 		heap-&gt;elements  = (void **) safe_erealloc(heap-&gt;elements, sizeof(spl_ptr_heap_element), (heap-&gt;max_size), (sizeof(spl_ptr_heap_element) * (heap-&gt;max_size)));</span>
+<span class='curline'><a href='../S/1061.html#L252'>elements</a>          252 ext/spl/spl_heap.c 	for(i = heap-&gt;count; i &gt; 0 &amp;&amp; heap-&gt;cmp(heap-&gt;elements[(i-1)/2], elem, cmp_userdata TSRMLS_CC) &lt; 0; i = (i-1)/2) {</span>
+<span class='curline'><a href='../S/1061.html#L253'>elements</a>          253 ext/spl/spl_heap.c 		heap-&gt;elements[i] = heap-&gt;elements[(i-1)/2];</span>
+<span class='curline'><a href='../S/1061.html#L262'>elements</a>          262 ext/spl/spl_heap.c 	heap-&gt;elements[i] = elem;</span>
+<span class='curline'><a href='../S/1061.html#L272'>elements</a>          272 ext/spl/spl_heap.c 	return heap-&gt;elements[0];</span>
+<span class='curline'><a href='../S/1061.html#L286'>elements</a>          286 ext/spl/spl_heap.c 	top    = heap-&gt;elements[0];</span>
+<span class='curline'><a href='../S/1061.html#L287'>elements</a>          287 ext/spl/spl_heap.c 	bottom = heap-&gt;elements[--heap-&gt;count];</span>
+<span class='curline'><a href='../S/1061.html#L293'>elements</a>          293 ext/spl/spl_heap.c 		if(j != heap-&gt;count &amp;&amp; heap-&gt;cmp(heap-&gt;elements[j+1], heap-&gt;elements[j], cmp_userdata TSRMLS_CC) &gt; 0) {</span>
+<span class='curline'><a href='../S/1061.html#L298'>elements</a>          298 ext/spl/spl_heap.c 		if(heap-&gt;cmp(bottom, heap-&gt;elements[j], cmp_userdata TSRMLS_CC) &lt; 0) {</span>
+<span class='curline'><a href='../S/1061.html#L299'>elements</a>          299 ext/spl/spl_heap.c 			heap-&gt;elements[i] = heap-&gt;elements[j];</span>
+<span class='curline'><a href='../S/1061.html#L310'>elements</a>          310 ext/spl/spl_heap.c 	heap-&gt;elements[i] = bottom;</span>
+<span class='curline'><a href='../S/1061.html#L328'>elements</a>          328 ext/spl/spl_heap.c 	heap-&gt;elements = safe_emalloc(sizeof(spl_ptr_heap_element),from-&gt;max_size,0);</span>
+<span class='curline'><a href='../S/1061.html#L329'>elements</a>          329 ext/spl/spl_heap.c 	memcpy(heap-&gt;elements, from-&gt;elements, sizeof(spl_ptr_heap_element)*from-&gt;max_size);</span>
+<span class='curline'><a href='../S/1061.html#L332'>elements</a>          332 ext/spl/spl_heap.c 		heap-&gt;ctor(heap-&gt;elements[i] TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1061.html#L343'>elements</a>          343 ext/spl/spl_heap.c 		heap-&gt;dtor(heap-&gt;elements[i] TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1061.html#L346'>elements</a>          346 ext/spl/spl_heap.c 	efree(heap-&gt;elements);</span>
+<span class='curline'><a href='../S/1061.html#L367'>elements</a>          367 ext/spl/spl_heap.c 		if (intern-&gt;heap-&gt;elements[i]) {</span>
+<span class='curline'><a href='../S/1061.html#L368'>elements</a>          368 ext/spl/spl_heap.c 			zval_ptr_dtor((zval **)&amp;intern-&gt;heap-&gt;elements[i]);</span>
+<span class='curline'><a href='../S/1061.html#L411'>elements</a>          411 ext/spl/spl_heap.c 				if (intern-&gt;heap-&gt;elements[i]) {</span>
+<span class='curline'><a href='../S/1061.html#L412'>elements</a>          412 ext/spl/spl_heap.c 					Z_ADDREF_P((zval *)intern-&gt;heap-&gt;elements[i]);</span>
+<span class='curline'><a href='../S/1061.html#L559'>elements</a>          559 ext/spl/spl_heap.c 			add_index_zval(heap_array, i, (zval *)intern-&gt;heap-&gt;elements[i]);</span>
+<span class='curline'><a href='../S/1061.html#L560'>elements</a>          560 ext/spl/spl_heap.c 			Z_ADDREF_P(intern-&gt;heap-&gt;elements[i]);</span>
+<span class='curline'><a href='../S/1061.html#L917'>elements</a>          917 ext/spl/spl_heap.c 	zval        **element  = (zval **)&amp;iterator-&gt;object-&gt;heap-&gt;elements[0];</span>
+<span class='curline'><a href='../S/1061.html#L935'>elements</a>          935 ext/spl/spl_heap.c 	zval        **element  = (zval **)&amp;iterator-&gt;object-&gt;heap-&gt;elements[0];</span>
+<span class='curline'><a href='../S/1061.html#L1043'>elements</a>         1043 ext/spl/spl_heap.c 	zval            *element = (zval *)intern-&gt;heap-&gt;elements[0];</span>
+<span class='curline'><a href='../S/1061.html#L1062'>elements</a>         1062 ext/spl/spl_heap.c 	zval            **element = (zval **)&amp;intern-&gt;heap-&gt;elements[0];</span>
+<span class='curline'><a href='../S/1202.html#L305'>elements</a>          305 ext/standard/var_unserializer.c static inline int process_nested_data(UNSERIALIZE_PARAMETER, HashTable *ht, long elements, int objprops)</span>
+<span class='curline'><a href='../S/1202.html#L307'>elements</a>          307 ext/standard/var_unserializer.c 	while (elements-- &gt; 0) {</span>
+<span class='curline'><a href='../S/1202.html#L357'>elements</a>          357 ext/standard/var_unserializer.c 		if (elements &amp;&amp; *(*p-1) != ';' &amp;&amp; *(*p-1) != '}') {</span>
+<span class='curline'><a href='../S/1202.html#L404'>elements</a>          404 ext/standard/var_unserializer.c 	long elements;</span>
+<span class='curline'><a href='../S/1202.html#L406'>elements</a>          406 ext/standard/var_unserializer.c 	elements = parse_iv2((*p) + 2, p);</span>
+<span class='curline'><a href='../S/1202.html#L419'>elements</a>          419 ext/standard/var_unserializer.c 	return elements;</span>
+<span class='curline'><a href='../S/1202.html#L425'>elements</a>          425 ext/standard/var_unserializer.c static inline int object_common2(UNSERIALIZE_PARAMETER, long elements)</span>
+<span class='curline'><a href='../S/1202.html#L434'>elements</a>          434 ext/standard/var_unserializer.c 	if (!process_nested_data(UNSERIALIZE_PASSTHRU, Z_OBJPROP_PP(rval), elements, 1)) {</span>
+<span class='curline'><a href='../S/1202.html#L622'>elements</a>          622 ext/standard/var_unserializer.c 	long elements;</span>
+<span class='curline'><a href='../S/1202.html#L757'>elements</a>          757 ext/standard/var_unserializer.c 	elements = object_common1(UNSERIALIZE_PASSTHRU, ce);</span>
+<span class='curline'><a href='../S/1202.html#L764'>elements</a>          764 ext/standard/var_unserializer.c 	return object_common2(UNSERIALIZE_PASSTHRU, elements);</span>
+<span class='curline'><a href='../S/1202.html#L819'>elements</a>          819 ext/standard/var_unserializer.c 	long elements = parse_iv(start + 2);</span>
+<span class='curline'><a href='../S/1202.html#L824'>elements</a>          824 ext/standard/var_unserializer.c 	if (elements &lt; 0) {</span>
+<span class='curline'><a href='../S/1202.html#L830'>elements</a>          830 ext/standard/var_unserializer.c 	array_init_size(*rval, elements);</span>
+<span class='curline'><a href='../S/1202.html#L832'>elements</a>          832 ext/standard/var_unserializer.c 	if (!process_nested_data(UNSERIALIZE_PASSTHRU, Z_ARRVAL_PP(rval), elements, 0)) {</span>
+<span class='curline'><a href='../S/1220.html#L99'>elements</a>           99 ext/wddx/wddx.c 	void **elements;</span>
+<span class='curline'><a href='../S/1220.html#L176'>elements</a>          176 ext/wddx/wddx.c 	stack-&gt;elements = (void **) safe_emalloc(sizeof(void **), STACK_BLOCK_SIZE, 0);</span>
+<span class='curline'><a href='../S/1220.html#L190'>elements</a>          190 ext/wddx/wddx.c 		stack-&gt;elements = (void **) erealloc(stack-&gt;elements,</span>
+<span class='curline'><a href='../S/1220.html#L193'>elements</a>          193 ext/wddx/wddx.c 	stack-&gt;elements[stack-&gt;top] = (void *) emalloc(size);</span>
+<span class='curline'><a href='../S/1220.html#L194'>elements</a>          194 ext/wddx/wddx.c 	memcpy(stack-&gt;elements[stack-&gt;top], element, size);</span>
+<span class='curline'><a href='../S/1220.html#L204'>elements</a>          204 ext/wddx/wddx.c 		*element = stack-&gt;elements[stack-&gt;top - 1];</span>
+<span class='curline'><a href='../S/1220.html#L231'>elements</a>          231 ext/wddx/wddx.c 	if (stack-&gt;elements) {</span>
+<span class='curline'><a href='../S/1220.html#L233'>elements</a>          233 ext/wddx/wddx.c 			if (((st_entry *)stack-&gt;elements[i])-&gt;data)	{</span>
+<span class='curline'><a href='../S/1220.html#L234'>elements</a>          234 ext/wddx/wddx.c 				zval_ptr_dtor(&amp;((st_entry *)stack-&gt;elements[i])-&gt;data);</span>
+<span class='curline'><a href='../S/1220.html#L236'>elements</a>          236 ext/wddx/wddx.c 			if (((st_entry *)stack-&gt;elements[i])-&gt;varname) {</span>
+<span class='curline'><a href='../S/1220.html#L237'>elements</a>          237 ext/wddx/wddx.c 				efree(((st_entry *)stack-&gt;elements[i])-&gt;varname);</span>
+<span class='curline'><a href='../S/1220.html#L239'>elements</a>          239 ext/wddx/wddx.c 			efree(stack-&gt;elements[i]);</span>
+<span class='curline'><a href='../S/1220.html#L241'>elements</a>          241 ext/wddx/wddx.c 		efree(stack-&gt;elements);</span>
+<span class='curline'><a href='../S/1367.html#L183'>elements</a>          183 main/output.c  		if (OG(handlers).elements) {</span>
+<span class='curline'><a href='../S/1443.html#L59'>elements</a>           59 sapi/apache_hooks/mod_php5.c 		void **elements;</span>
+<span class='curline'><a href='../S/1443.html#L119'>elements</a>          119 sapi/apache_hooks/mod_php5.c 		stack-&gt;elements = (void **) pemalloc(sizeof(void **) * STACK_BLOCK_SIZE,  persistent);</span>
+<span class='curline'><a href='../S/1443.html#L120'>elements</a>          120 sapi/apache_hooks/mod_php5.c 		if (!stack-&gt;elements) {</span>
+<span class='curline'><a href='../S/1443.html#L130'>elements</a>          130 sapi/apache_hooks/mod_php5.c 				stack-&gt;elements = (void **) perealloc(stack-&gt;elements,</span>
+<span class='curline'><a href='../S/1443.html#L132'>elements</a>          132 sapi/apache_hooks/mod_php5.c 				if (!stack-&gt;elements) {</span>
+<span class='curline'><a href='../S/1443.html#L136'>elements</a>          136 sapi/apache_hooks/mod_php5.c 		stack-&gt;elements[stack-&gt;top] = (void *) element;</span>
+<span class='curline'><a href='../S/1443.html#L144'>elements</a>          144 sapi/apache_hooks/mod_php5.c 		return stack-&gt;elements[--stack-&gt;top];</span>
+<span class='curline'><a href='../S/1443.html#L160'>elements</a>          160 sapi/apache_hooks/mod_php5.c 								retval = apply_function(stack-&gt;elements[i], arg); </span>
+<span class='curline'><a href='../S/1443.html#L165'>elements</a>          165 sapi/apache_hooks/mod_php5.c 								retval = apply_function(stack-&gt;elements[i], arg);</span>
+<span class='curline'><a href='../S/1443.html#L180'>elements</a>          180 sapi/apache_hooks/mod_php5.c 				if ((ret = apply_function(stack-&gt;elements[i], arg)) == stopval) {</span>
+<span class='curline'><a href='../S/1443.html#L187'>elements</a>          187 sapi/apache_hooks/mod_php5.c 				if ((ret = apply_function(stack-&gt;elements[i], arg)) == stopval) {</span>
+<span class='curline'><a href='../S/1443.html#L203'>elements</a>          203 sapi/apache_hooks/mod_php5.c 				if ((ret = apply_function(stack-&gt;elements[i], arg)) &gt; 0) {</span>
+<span class='curline'><a href='../S/1443.html#L210'>elements</a>          210 sapi/apache_hooks/mod_php5.c 				if ((ret = apply_function(stack-&gt;elements[i], arg)) &gt; 0) {</span>
+<span class='curline'><a href='../S/1576.html#L74'>elements</a>           74 sapi/phpdbg/phpdbg_utils.c const static phpdbg_element_t elements[] = {</span>
+<span class='curline'><a href='../S/1576.html#L364'>elements</a>          364 sapi/phpdbg/phpdbg_utils.c 	const phpdbg_element_t *element = elements;</span>
+</pre>
+</body>
+</html>

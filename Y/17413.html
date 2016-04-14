@@ -1,0 +1,132 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>extension</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/1642.html#L901'>extension</a>         901 Zend/zend.c    ZEND_API void zend_append_version_info(const zend_extension *extension) /* {{{ */</span>
+<span class='curline'><a href='../S/1642.html#L907'>extension</a>         907 Zend/zend.c    						+ strlen(extension-&gt;name)</span>
+<span class='curline'><a href='../S/1642.html#L908'>extension</a>         908 Zend/zend.c    						+ strlen(extension-&gt;version)</span>
+<span class='curline'><a href='../S/1642.html#L909'>extension</a>         909 Zend/zend.c    						+ strlen(extension-&gt;copyright)</span>
+<span class='curline'><a href='../S/1642.html#L910'>extension</a>         910 Zend/zend.c    						+ strlen(extension-&gt;author);</span>
+<span class='curline'><a href='../S/1642.html#L914'>extension</a>         914 Zend/zend.c    	snprintf(new_info, new_info_length, "    with %s v%s, %s, by %s\n", extension-&gt;name, extension-&gt;version, extension-&gt;copyright, extension-&gt;author);</span>
+<span class='curline'><a href='../S/1669.html#L59'>extension</a>          59 Zend/zend_execute.c static void zend_extension_statement_handler(const zend_extension *extension, zend_op_array *op_array TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1669.html#L60'>extension</a>          60 Zend/zend_execute.c static void zend_extension_fcall_begin_handler(const zend_extension *extension, zend_op_array *op_array TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1669.html#L61'>extension</a>          61 Zend/zend_execute.c static void zend_extension_fcall_end_handler(const zend_extension *extension, zend_op_array *op_array TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1669.html#L982'>extension</a>         982 Zend/zend_execute.c static void zend_extension_statement_handler(const zend_extension *extension, zend_op_array *op_array TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1669.html#L984'>extension</a>         984 Zend/zend_execute.c 	if (extension-&gt;statement_handler) {</span>
+<span class='curline'><a href='../S/1669.html#L985'>extension</a>         985 Zend/zend_execute.c 		extension-&gt;statement_handler(op_array);</span>
+<span class='curline'><a href='../S/1669.html#L990'>extension</a>         990 Zend/zend_execute.c static void zend_extension_fcall_begin_handler(const zend_extension *extension, zend_op_array *op_array TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1669.html#L992'>extension</a>         992 Zend/zend_execute.c 	if (extension-&gt;fcall_begin_handler) {</span>
+<span class='curline'><a href='../S/1669.html#L993'>extension</a>         993 Zend/zend_execute.c 		extension-&gt;fcall_begin_handler(op_array);</span>
+<span class='curline'><a href='../S/1669.html#L998'>extension</a>         998 Zend/zend_execute.c static void zend_extension_fcall_end_handler(const zend_extension *extension, zend_op_array *op_array TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1669.html#L1000'>extension</a>        1000 Zend/zend_execute.c 	if (extension-&gt;fcall_end_handler) {</span>
+<span class='curline'><a href='../S/1669.html#L1001'>extension</a>        1001 Zend/zend_execute.c 		extension-&gt;fcall_end_handler(op_array);</span>
+<span class='curline'><a href='../S/1671.html#L87'>extension</a>          87 Zend/zend_execute_API.c static void zend_extension_activator(zend_extension *extension TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1671.html#L89'>extension</a>          89 Zend/zend_execute_API.c 	if (extension-&gt;activate) {</span>
+<span class='curline'><a href='../S/1671.html#L90'>extension</a>          90 Zend/zend_execute_API.c 		extension-&gt;activate();</span>
+<span class='curline'><a href='../S/1671.html#L95'>extension</a>          95 Zend/zend_execute_API.c static void zend_extension_deactivator(zend_extension *extension TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1671.html#L97'>extension</a>          97 Zend/zend_execute_API.c 	if (extension-&gt;deactivate) {</span>
+<span class='curline'><a href='../S/1671.html#L98'>extension</a>          98 Zend/zend_execute_API.c 		extension-&gt;deactivate();</span>
+<span class='curline'><a href='../S/1672.html#L133'>extension</a>         133 Zend/zend_extensions.c 	zend_extension extension;</span>
+<span class='curline'><a href='../S/1672.html#L135'>extension</a>         135 Zend/zend_extensions.c 	extension = *new_extension;</span>
+<span class='curline'><a href='../S/1672.html#L136'>extension</a>         136 Zend/zend_extensions.c 	extension.handle = handle;</span>
+<span class='curline'><a href='../S/1672.html#L138'>extension</a>         138 Zend/zend_extensions.c 	zend_extension_dispatch_message(ZEND_EXTMSG_NEW_EXTENSION, &amp;extension);</span>
+<span class='curline'><a href='../S/1672.html#L140'>extension</a>         140 Zend/zend_extensions.c 	zend_llist_add_element(&amp;zend_extensions, &amp;extension);</span>
+<span class='curline'><a href='../S/1672.html#L149'>extension</a>         149 Zend/zend_extensions.c static void zend_extension_shutdown(zend_extension *extension TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1672.html#L152'>extension</a>         152 Zend/zend_extensions.c 	if (extension-&gt;shutdown) {</span>
+<span class='curline'><a href='../S/1672.html#L153'>extension</a>         153 Zend/zend_extensions.c 		extension-&gt;shutdown(extension);</span>
+<span class='curline'><a href='../S/1672.html#L158'>extension</a>         158 Zend/zend_extensions.c static int zend_extension_startup(zend_extension *extension)</span>
+<span class='curline'><a href='../S/1672.html#L161'>extension</a>         161 Zend/zend_extensions.c 	if (extension-&gt;startup) {</span>
+<span class='curline'><a href='../S/1672.html#L162'>extension</a>         162 Zend/zend_extensions.c 		if (extension-&gt;startup(extension)!=SUCCESS) {</span>
+<span class='curline'><a href='../S/1672.html#L165'>extension</a>         165 Zend/zend_extensions.c 		zend_append_version_info(extension);</span>
+<span class='curline'><a href='../S/1672.html#L195'>extension</a>         195 Zend/zend_extensions.c void zend_extension_dtor(zend_extension *extension)</span>
+<span class='curline'><a href='../S/1672.html#L198'>extension</a>         198 Zend/zend_extensions.c 	if (extension-&gt;handle) {</span>
+<span class='curline'><a href='../S/1672.html#L199'>extension</a>         199 Zend/zend_extensions.c 		DL_UNLOAD(extension-&gt;handle);</span>
+<span class='curline'><a href='../S/1672.html#L205'>extension</a>         205 Zend/zend_extensions.c static void zend_extension_message_dispatcher(const zend_extension *extension, int num_args, va_list args TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1672.html#L210'>extension</a>         210 Zend/zend_extensions.c 	if (!extension-&gt;message_handler || num_args!=2) {</span>
+<span class='curline'><a href='../S/1672.html#L215'>extension</a>         215 Zend/zend_extensions.c 	extension-&gt;message_handler(message, arg);</span>
+<span class='curline'><a href='../S/1672.html#L227'>extension</a>         227 Zend/zend_extensions.c ZEND_API int zend_get_resource_handle(zend_extension *extension)</span>
+<span class='curline'><a href='../S/1672.html#L230'>extension</a>         230 Zend/zend_extensions.c 		extension-&gt;resource_number = last_resource_number;</span>
+<span class='curline'><a href='../S/1672.html#L243'>extension</a>         243 Zend/zend_extensions.c 		zend_extension *extension = (zend_extension *) element-&gt;data;</span>
+<span class='curline'><a href='../S/1672.html#L245'>extension</a>         245 Zend/zend_extensions.c 		if (!strcmp(extension-&gt;name, extension_name)) {</span>
+<span class='curline'><a href='../S/1672.html#L246'>extension</a>         246 Zend/zend_extensions.c 			return extension;</span>
+<span class='curline'><a href='../S/1673.html#L43'>extension</a>          43 Zend/zend_extensions.h typedef int (*startup_func_t)(zend_extension *extension);</span>
+<span class='curline'><a href='../S/1673.html#L44'>extension</a>          44 Zend/zend_extensions.h typedef void (*shutdown_func_t)(zend_extension *extension);</span>
+<span class='curline'><a href='../S/1673.html#L96'>extension</a>          96 Zend/zend_extensions.h ZEND_API int zend_get_resource_handle(zend_extension *extension);</span>
+<span class='curline'><a href='../S/1673.html#L113'>extension</a>         113 Zend/zend_extensions.h void zend_extension_dtor(zend_extension *extension);</span>
+<span class='curline'><a href='../S/1673.html#L114'>extension</a>         114 Zend/zend_extensions.h ZEND_API void zend_append_version_info(const zend_extension *extension);</span>
+<span class='curline'><a href='../S/1719.html#L32'>extension</a>          32 Zend/zend_opcode.c static void zend_extension_op_array_ctor_handler(zend_extension *extension, zend_op_array *op_array TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1719.html#L34'>extension</a>          34 Zend/zend_opcode.c 	if (extension-&gt;op_array_ctor) {</span>
+<span class='curline'><a href='../S/1719.html#L35'>extension</a>          35 Zend/zend_opcode.c 		extension-&gt;op_array_ctor(op_array);</span>
+<span class='curline'><a href='../S/1719.html#L39'>extension</a>          39 Zend/zend_opcode.c static void zend_extension_op_array_dtor_handler(zend_extension *extension, zend_op_array *op_array TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1719.html#L41'>extension</a>          41 Zend/zend_opcode.c 	if (extension-&gt;op_array_dtor) {</span>
+<span class='curline'><a href='../S/1719.html#L42'>extension</a>          42 Zend/zend_opcode.c 		extension-&gt;op_array_dtor(op_array);</span>
+<span class='curline'><a href='../S/1719.html#L485'>extension</a>         485 Zend/zend_opcode.c static void zend_extension_op_array_handler(zend_extension *extension, zend_op_array *op_array TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1719.html#L487'>extension</a>         487 Zend/zend_opcode.c 	if (extension-&gt;op_array_handler) {</span>
+<span class='curline'><a href='../S/1719.html#L488'>extension</a>         488 Zend/zend_opcode.c 		extension-&gt;op_array_handler(op_array);</span>
+<span class='curline'><a href='../S/87.html#L45'>extension</a>          45 ext/dba/dba_dbm.c #define TRUNC_IT(extension, mode) \</span>
+<span class='curline'><a href='../S/87.html#L46'>extension</a>          46 ext/dba/dba_dbm.c 	snprintf(buf, MAXPATHLEN, "%s" extension, info-&gt;path); \</span>
+<span class='curline'><a href='../S/805.html#L1812'>extension</a>        1812 ext/mysqlnd/mysqlnd_result.c 										enum_mysqlnd_extension extension TSRMLS_DC ZEND_FILE_LINE_DC)</span>
+<span class='curline'><a href='../S/805.html#L1829'>extension</a>        1829 ext/mysqlnd/mysqlnd_result.c 		switch (extension) {</span>
+<span class='curline'><a href='../S/863.html#L2538'>extension</a>        2538 ext/opcache/ZendAccelerator.c static int accel_startup(zend_extension *extension)</span>
+<span class='curline'><a href='../S/865.html#L1872'>extension</a>        1872 ext/openssl/openssl.c static int openssl_x509v3_subjectAltName(BIO *bio, X509_EXTENSION *extension)</span>
+<span class='curline'><a href='../S/865.html#L1879'>extension</a>        1879 ext/openssl/openssl.c 	method = X509V3_EXT_get(extension);</span>
+<span class='curline'><a href='../S/865.html#L1884'>extension</a>        1884 ext/openssl/openssl.c 	p = extension-&gt;value-&gt;data;</span>
+<span class='curline'><a href='../S/865.html#L1885'>extension</a>        1885 ext/openssl/openssl.c 	length = extension-&gt;value-&gt;length;</span>
+<span class='curline'><a href='../S/865.html#L1947'>extension</a>        1947 ext/openssl/openssl.c 	X509_EXTENSION *extension;</span>
+<span class='curline'><a href='../S/865.html#L2034'>extension</a>        2034 ext/openssl/openssl.c 		extension = X509_get_ext(cert, i);</span>
+<span class='curline'><a href='../S/865.html#L2035'>extension</a>        2035 ext/openssl/openssl.c 		nid = OBJ_obj2nid(X509_EXTENSION_get_object(extension));</span>
+<span class='curline'><a href='../S/865.html#L2037'>extension</a>        2037 ext/openssl/openssl.c 			extname = (char *)OBJ_nid2sn(OBJ_obj2nid(X509_EXTENSION_get_object(extension)));</span>
+<span class='curline'><a href='../S/865.html#L2039'>extension</a>        2039 ext/openssl/openssl.c 			OBJ_obj2txt(buf, sizeof(buf)-1, X509_EXTENSION_get_object(extension), 1);</span>
+<span class='curline'><a href='../S/865.html#L2044'>extension</a>        2044 ext/openssl/openssl.c 			if (openssl_x509v3_subjectAltName(bio_out, extension) == 0) {</span>
+<span class='curline'><a href='../S/865.html#L2056'>extension</a>        2056 ext/openssl/openssl.c 		else if (X509V3_EXT_print(bio_out, extension, 0, 0)) {</span>
+<span class='curline'><a href='../S/865.html#L2060'>extension</a>        2060 ext/openssl/openssl.c 			add_assoc_asn1_string(subitem, extname, X509_EXTENSION_get_data(extension));</span>
+<span class='curline'><a href='../S/996.html#L373'>extension</a>         373 ext/reflection/php_reflection.c static void _zend_extension_string(string *str, zend_extension *extension, char *indent TSRMLS_DC);</span>
+<span class='curline'><a href='../S/996.html#L1188'>extension</a>        1188 ext/reflection/php_reflection.c static void _zend_extension_string(string *str, zend_extension *extension, char *indent TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/996.html#L1190'>extension</a>        1190 ext/reflection/php_reflection.c 	string_printf(str, "%sZend Extension [ %s ", indent, extension-&gt;name);</span>
+<span class='curline'><a href='../S/996.html#L1192'>extension</a>        1192 ext/reflection/php_reflection.c 	if (extension-&gt;version) {</span>
+<span class='curline'><a href='../S/996.html#L1193'>extension</a>        1193 ext/reflection/php_reflection.c 		string_printf(str, "%s ", extension-&gt;version);</span>
+<span class='curline'><a href='../S/996.html#L1195'>extension</a>        1195 ext/reflection/php_reflection.c 	if (extension-&gt;copyright) {</span>
+<span class='curline'><a href='../S/996.html#L1196'>extension</a>        1196 ext/reflection/php_reflection.c 		string_printf(str, "%s ", extension-&gt;copyright);</span>
+<span class='curline'><a href='../S/996.html#L1198'>extension</a>        1198 ext/reflection/php_reflection.c 	if (extension-&gt;author) {</span>
+<span class='curline'><a href='../S/996.html#L1199'>extension</a>        1199 ext/reflection/php_reflection.c 		string_printf(str, "by %s ", extension-&gt;author);</span>
+<span class='curline'><a href='../S/996.html#L1201'>extension</a>        1201 ext/reflection/php_reflection.c 	if (extension-&gt;URL) {</span>
+<span class='curline'><a href='../S/996.html#L1202'>extension</a>        1202 ext/reflection/php_reflection.c 		string_printf(str, "&lt;%s&gt; ", extension-&gt;URL);</span>
+<span class='curline'><a href='../S/996.html#L5610'>extension</a>        5610 ext/reflection/php_reflection.c 	zend_extension *extension;</span>
+<span class='curline'><a href='../S/996.html#L5624'>extension</a>        5624 ext/reflection/php_reflection.c 	extension = zend_get_extension(name_str);</span>
+<span class='curline'><a href='../S/996.html#L5625'>extension</a>        5625 ext/reflection/php_reflection.c 	if (!extension) {</span>
+<span class='curline'><a href='../S/996.html#L5631'>extension</a>        5631 ext/reflection/php_reflection.c 	ZVAL_STRING(name, extension-&gt;name, 1);</span>
+<span class='curline'><a href='../S/996.html#L5633'>extension</a>        5633 ext/reflection/php_reflection.c 	intern-&gt;ptr = extension;</span>
+<span class='curline'><a href='../S/996.html#L5644'>extension</a>        5644 ext/reflection/php_reflection.c 	zend_extension *extension;</span>
+<span class='curline'><a href='../S/996.html#L5650'>extension</a>        5650 ext/reflection/php_reflection.c 	GET_REFLECTION_OBJECT_PTR(extension);</span>
+<span class='curline'><a href='../S/996.html#L5652'>extension</a>        5652 ext/reflection/php_reflection.c 	_zend_extension_string(&amp;str, extension, "" TSRMLS_CC);</span>
+<span class='curline'><a href='../S/996.html#L5662'>extension</a>        5662 ext/reflection/php_reflection.c 	zend_extension *extension;</span>
+<span class='curline'><a href='../S/996.html#L5667'>extension</a>        5667 ext/reflection/php_reflection.c 	GET_REFLECTION_OBJECT_PTR(extension);</span>
+<span class='curline'><a href='../S/996.html#L5669'>extension</a>        5669 ext/reflection/php_reflection.c 	RETURN_STRING(extension-&gt;name, 1);</span>
+<span class='curline'><a href='../S/996.html#L5678'>extension</a>        5678 ext/reflection/php_reflection.c 	zend_extension *extension;</span>
+<span class='curline'><a href='../S/996.html#L5683'>extension</a>        5683 ext/reflection/php_reflection.c 	GET_REFLECTION_OBJECT_PTR(extension);</span>
+<span class='curline'><a href='../S/996.html#L5685'>extension</a>        5685 ext/reflection/php_reflection.c 	RETURN_STRING(extension-&gt;version ? extension-&gt;version : "", 1);</span>
+<span class='curline'><a href='../S/996.html#L5694'>extension</a>        5694 ext/reflection/php_reflection.c 	zend_extension *extension;</span>
+<span class='curline'><a href='../S/996.html#L5699'>extension</a>        5699 ext/reflection/php_reflection.c 	GET_REFLECTION_OBJECT_PTR(extension);</span>
+<span class='curline'><a href='../S/996.html#L5701'>extension</a>        5701 ext/reflection/php_reflection.c 	RETURN_STRING(extension-&gt;author ? extension-&gt;author : "", 1);</span>
+<span class='curline'><a href='../S/996.html#L5710'>extension</a>        5710 ext/reflection/php_reflection.c 	zend_extension *extension;</span>
+<span class='curline'><a href='../S/996.html#L5715'>extension</a>        5715 ext/reflection/php_reflection.c 	GET_REFLECTION_OBJECT_PTR(extension);</span>
+<span class='curline'><a href='../S/996.html#L5717'>extension</a>        5717 ext/reflection/php_reflection.c 	RETURN_STRING(extension-&gt;URL ? extension-&gt;URL : "", 1);</span>
+<span class='curline'><a href='../S/996.html#L5726'>extension</a>        5726 ext/reflection/php_reflection.c 	zend_extension *extension;</span>
+<span class='curline'><a href='../S/996.html#L5731'>extension</a>        5731 ext/reflection/php_reflection.c 	GET_REFLECTION_OBJECT_PTR(extension);</span>
+<span class='curline'><a href='../S/996.html#L5733'>extension</a>        5733 ext/reflection/php_reflection.c 	RETURN_STRING(extension-&gt;copyright ? extension-&gt;copyright : "", 1);</span>
+<span class='curline'><a href='../S/1072.html#L355'>extension</a>         355 ext/sqlite3/sqlite3.c 	char *extension, *lib_path, *extension_dir, *errtext = NULL;</span>
+<span class='curline'><a href='../S/1072.html#L362'>extension</a>         362 ext/sqlite3/sqlite3.c 	if (FAILURE == zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &amp;extension, &amp;extension_len)) {</span>
+<span class='curline'><a href='../S/1072.html#L389'>extension</a>         389 ext/sqlite3/sqlite3.c 		spprintf(&amp;lib_path, 0, "%s%s", extension_dir, extension);</span>
+<span class='curline'><a href='../S/1072.html#L391'>extension</a>         391 ext/sqlite3/sqlite3.c 		spprintf(&amp;lib_path, 0, "%s%c%s", extension_dir, DEFAULT_SLASH, extension);</span>
+<span class='curline'><a href='../S/1077.html#L749'>extension</a>         749 ext/standard/basic_functions.c 	ZEND_ARG_INFO(0, extension)</span>
+<span class='curline'><a href='../S/1077.html#L1525'>extension</a>        1525 ext/standard/basic_functions.c 	ZEND_ARG_INFO(0, extension)</span>
+</pre>
+</body>
+</html>

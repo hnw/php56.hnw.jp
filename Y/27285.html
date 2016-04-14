@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>mutexp</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/1595.html#L593'>mutexp</a>            593 TSRM/TSRM.c    	MUTEX_T mutexp;</span>
+<span class='curline'><a href='../S/1595.html#L595'>mutexp</a>            595 TSRM/TSRM.c    	mutexp = malloc(sizeof(CRITICAL_SECTION));</span>
+<span class='curline'><a href='../S/1595.html#L596'>mutexp</a>            596 TSRM/TSRM.c    	InitializeCriticalSection(mutexp);</span>
+<span class='curline'><a href='../S/1595.html#L598'>mutexp</a>            598 TSRM/TSRM.c    	mutexp = (MUTEX_T) malloc(sizeof(*mutexp));</span>
+<span class='curline'><a href='../S/1595.html#L599'>mutexp</a>            599 TSRM/TSRM.c    	pth_mutex_init(mutexp);</span>
+<span class='curline'><a href='../S/1595.html#L601'>mutexp</a>            601 TSRM/TSRM.c    	mutexp = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t));</span>
+<span class='curline'><a href='../S/1595.html#L602'>mutexp</a>            602 TSRM/TSRM.c    	pthread_mutex_init(mutexp,NULL);</span>
+<span class='curline'><a href='../S/1595.html#L604'>mutexp</a>            604 TSRM/TSRM.c    	mutexp = crit_init();</span>
+<span class='curline'><a href='../S/1595.html#L606'>mutexp</a>            606 TSRM/TSRM.c    	mutexp = PIPlatform_allocLocalMutex();</span>
+<span class='curline'><a href='../S/1595.html#L608'>mutexp</a>            608 TSRM/TSRM.c    	mutexp = st_mutex_new();</span>
+<span class='curline'><a href='../S/1595.html#L610'>mutexp</a>            610 TSRM/TSRM.c    	mutexp = (beos_ben*)malloc(sizeof(beos_ben));</span>
+<span class='curline'><a href='../S/1595.html#L611'>mutexp</a>            611 TSRM/TSRM.c    	mutexp-&gt;ben = 0;</span>
+<span class='curline'><a href='../S/1595.html#L612'>mutexp</a>            612 TSRM/TSRM.c    	mutexp-&gt;sem = create_sem(1, "PHP sempahore"); </span>
+<span class='curline'><a href='../S/1595.html#L617'>mutexp</a>            617 TSRM/TSRM.c    	return( mutexp );</span>
+<span class='curline'><a href='../S/1595.html#L622'>mutexp</a>            622 TSRM/TSRM.c    TSRM_API void tsrm_mutex_free(MUTEX_T mutexp)</span>
+<span class='curline'><a href='../S/1595.html#L624'>mutexp</a>            624 TSRM/TSRM.c    	if (mutexp) {</span>
+<span class='curline'><a href='../S/1595.html#L626'>mutexp</a>            626 TSRM/TSRM.c    		DeleteCriticalSection(mutexp);</span>
+<span class='curline'><a href='../S/1595.html#L627'>mutexp</a>            627 TSRM/TSRM.c    		free(mutexp);</span>
+<span class='curline'><a href='../S/1595.html#L629'>mutexp</a>            629 TSRM/TSRM.c    		free(mutexp);</span>
+<span class='curline'><a href='../S/1595.html#L631'>mutexp</a>            631 TSRM/TSRM.c    		pthread_mutex_destroy(mutexp);</span>
+<span class='curline'><a href='../S/1595.html#L632'>mutexp</a>            632 TSRM/TSRM.c    		free(mutexp);</span>
+<span class='curline'><a href='../S/1595.html#L634'>mutexp</a>            634 TSRM/TSRM.c    		crit_terminate(mutexp);</span>
+<span class='curline'><a href='../S/1595.html#L636'>mutexp</a>            636 TSRM/TSRM.c    		PISync_delete(mutexp);</span>
+<span class='curline'><a href='../S/1595.html#L638'>mutexp</a>            638 TSRM/TSRM.c    		st_mutex_destroy(mutexp);</span>
+<span class='curline'><a href='../S/1595.html#L640'>mutexp</a>            640 TSRM/TSRM.c    		delete_sem(mutexp-&gt;sem);</span>
+<span class='curline'><a href='../S/1595.html#L641'>mutexp</a>            641 TSRM/TSRM.c    		free(mutexp);  </span>
+<span class='curline'><a href='../S/1595.html#L654'>mutexp</a>            654 TSRM/TSRM.c    TSRM_API int tsrm_mutex_lock(MUTEX_T mutexp)</span>
+<span class='curline'><a href='../S/1595.html#L658'>mutexp</a>            658 TSRM/TSRM.c    	EnterCriticalSection(mutexp);</span>
+<span class='curline'><a href='../S/1595.html#L661'>mutexp</a>            661 TSRM/TSRM.c    	if (pth_mutex_acquire(mutexp, 0, NULL)) {</span>
+<span class='curline'><a href='../S/1595.html#L666'>mutexp</a>            666 TSRM/TSRM.c    	return pthread_mutex_lock(mutexp);</span>
+<span class='curline'><a href='../S/1595.html#L668'>mutexp</a>            668 TSRM/TSRM.c    	crit_enter(mutexp);</span>
+<span class='curline'><a href='../S/1595.html#L671'>mutexp</a>            671 TSRM/TSRM.c    	return PISync_lock(mutexp);</span>
+<span class='curline'><a href='../S/1595.html#L673'>mutexp</a>            673 TSRM/TSRM.c    	return st_mutex_lock(mutexp);</span>
+<span class='curline'><a href='../S/1595.html#L675'>mutexp</a>            675 TSRM/TSRM.c    	if (atomic_add(&amp;mutexp-&gt;ben, 1) != 0)  </span>
+<span class='curline'><a href='../S/1595.html#L676'>mutexp</a>            676 TSRM/TSRM.c    		return acquire_sem(mutexp-&gt;sem);   </span>
+<span class='curline'><a href='../S/1595.html#L686'>mutexp</a>            686 TSRM/TSRM.c    TSRM_API int tsrm_mutex_unlock(MUTEX_T mutexp)</span>
+<span class='curline'><a href='../S/1595.html#L690'>mutexp</a>            690 TSRM/TSRM.c    	LeaveCriticalSection(mutexp);</span>
+<span class='curline'><a href='../S/1595.html#L693'>mutexp</a>            693 TSRM/TSRM.c    	if (pth_mutex_release(mutexp)) {</span>
+<span class='curline'><a href='../S/1595.html#L698'>mutexp</a>            698 TSRM/TSRM.c    	return pthread_mutex_unlock(mutexp);</span>
+<span class='curline'><a href='../S/1595.html#L700'>mutexp</a>            700 TSRM/TSRM.c    	crit_exit(mutexp);</span>
+<span class='curline'><a href='../S/1595.html#L703'>mutexp</a>            703 TSRM/TSRM.c    	return PISync_unlock(mutexp);</span>
+<span class='curline'><a href='../S/1595.html#L705'>mutexp</a>            705 TSRM/TSRM.c    	return st_mutex_unlock(mutexp);</span>
+<span class='curline'><a href='../S/1595.html#L707'>mutexp</a>            707 TSRM/TSRM.c    	if (atomic_add(&amp;mutexp-&gt;ben, -1) != 1) </span>
+<span class='curline'><a href='../S/1595.html#L708'>mutexp</a>            708 TSRM/TSRM.c    		return release_sem(mutexp-&gt;sem);</span>
+<span class='curline'><a href='../S/1596.html#L142'>mutexp</a>            142 TSRM/TSRM.h    TSRM_API void tsrm_mutex_free(MUTEX_T mutexp);</span>
+<span class='curline'><a href='../S/1596.html#L143'>mutexp</a>            143 TSRM/TSRM.h    TSRM_API int tsrm_mutex_lock(MUTEX_T mutexp);</span>
+<span class='curline'><a href='../S/1596.html#L144'>mutexp</a>            144 TSRM/TSRM.h    TSRM_API int tsrm_mutex_unlock(MUTEX_T mutexp);</span>
+</pre>
+</body>
+</html>

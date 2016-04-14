@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>in_sqlda</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/324.html#L64'>in_sqlda</a>           64 ext/interbase/ibase_query.c 	XSQLDA *in_sqlda, *out_sqlda;</span>
+<span class='curline'><a href='../S/324.html#L159'>in_sqlda</a>          159 ext/interbase/ibase_query.c 	if (ib_query-&gt;in_sqlda) {</span>
+<span class='curline'><a href='../S/324.html#L160'>in_sqlda</a>          160 ext/interbase/ibase_query.c 		efree(ib_query-&gt;in_sqlda);</span>
+<span class='curline'><a href='../S/324.html#L338'>in_sqlda</a>          338 ext/interbase/ibase_query.c 	ib_query-&gt;in_sqlda = NULL;</span>
+<span class='curline'><a href='../S/324.html#L375'>in_sqlda</a>          375 ext/interbase/ibase_query.c 	ib_query-&gt;in_sqlda = emalloc(XSQLDA_LENGTH(1));</span>
+<span class='curline'><a href='../S/324.html#L376'>in_sqlda</a>          376 ext/interbase/ibase_query.c 	ib_query-&gt;in_sqlda-&gt;sqln = 1;</span>
+<span class='curline'><a href='../S/324.html#L377'>in_sqlda</a>          377 ext/interbase/ibase_query.c 	ib_query-&gt;in_sqlda-&gt;version = SQLDA_CURRENT_VERSION;</span>
+<span class='curline'><a href='../S/324.html#L378'>in_sqlda</a>          378 ext/interbase/ibase_query.c 	if (isc_dsql_describe_bind(IB_STATUS, &amp;ib_query-&gt;stmt, SQLDA_CURRENT_VERSION, ib_query-&gt;in_sqlda)) {</span>
+<span class='curline'><a href='../S/324.html#L384'>in_sqlda</a>          384 ext/interbase/ibase_query.c 	if (ib_query-&gt;in_sqlda-&gt;sqln &lt; ib_query-&gt;in_sqlda-&gt;sqld) {</span>
+<span class='curline'><a href='../S/324.html#L385'>in_sqlda</a>          385 ext/interbase/ibase_query.c 		ib_query-&gt;in_sqlda = erealloc(ib_query-&gt;in_sqlda, XSQLDA_LENGTH(ib_query-&gt;in_sqlda-&gt;sqld));</span>
+<span class='curline'><a href='../S/324.html#L386'>in_sqlda</a>          386 ext/interbase/ibase_query.c 		ib_query-&gt;in_sqlda-&gt;sqln = ib_query-&gt;in_sqlda-&gt;sqld;</span>
+<span class='curline'><a href='../S/324.html#L387'>in_sqlda</a>          387 ext/interbase/ibase_query.c 		ib_query-&gt;in_sqlda-&gt;version = SQLDA_CURRENT_VERSION;</span>
+<span class='curline'><a href='../S/324.html#L390'>in_sqlda</a>          390 ext/interbase/ibase_query.c 				SQLDA_CURRENT_VERSION, ib_query-&gt;in_sqlda)) {</span>
+<span class='curline'><a href='../S/324.html#L397'>in_sqlda</a>          397 ext/interbase/ibase_query.c 	if (ib_query-&gt;in_sqlda-&gt;sqld == 0) {</span>
+<span class='curline'><a href='../S/324.html#L398'>in_sqlda</a>          398 ext/interbase/ibase_query.c 		efree(ib_query-&gt;in_sqlda);</span>
+<span class='curline'><a href='../S/324.html#L399'>in_sqlda</a>          399 ext/interbase/ibase_query.c 		ib_query-&gt;in_sqlda = NULL;</span>
+<span class='curline'><a href='../S/324.html#L400'>in_sqlda</a>          400 ext/interbase/ibase_query.c 	} else if (FAILURE == _php_ibase_alloc_array(&amp;ib_query-&gt;in_array, ib_query-&gt;in_sqlda,</span>
+<span class='curline'><a href='../S/324.html#L420'>in_sqlda</a>          420 ext/interbase/ibase_query.c 	if (ib_query-&gt;in_sqlda) {</span>
+<span class='curline'><a href='../S/324.html#L421'>in_sqlda</a>          421 ext/interbase/ibase_query.c 		efree(ib_query-&gt;in_sqlda);</span>
+<span class='curline'><a href='../S/324.html#L865'>in_sqlda</a>          865 ext/interbase/ibase_query.c 	XSQLDA *in_sqlda = NULL, *out_sqlda = NULL;</span>
+<span class='curline'><a href='../S/324.html#L871'>in_sqlda</a>          871 ext/interbase/ibase_query.c 	int argc = ib_query-&gt;in_sqlda ? ib_query-&gt;in_sqlda-&gt;sqld : 0;</span>
+<span class='curline'><a href='../S/324.html#L965'>in_sqlda</a>          965 ext/interbase/ibase_query.c 	if (ib_query-&gt;in_sqlda) { /* has placeholders */</span>
+<span class='curline'><a href='../S/324.html#L967'>in_sqlda</a>          967 ext/interbase/ibase_query.c 		in_sqlda = emalloc(XSQLDA_LENGTH(ib_query-&gt;in_sqlda-&gt;sqld));</span>
+<span class='curline'><a href='../S/324.html#L968'>in_sqlda</a>          968 ext/interbase/ibase_query.c 		memcpy(in_sqlda, ib_query-&gt;in_sqlda, XSQLDA_LENGTH(ib_query-&gt;in_sqlda-&gt;sqld));</span>
+<span class='curline'><a href='../S/324.html#L969'>in_sqlda</a>          969 ext/interbase/ibase_query.c 		bind_buf = safe_emalloc(sizeof(BIND_BUF), ib_query-&gt;in_sqlda-&gt;sqld, 0);</span>
+<span class='curline'><a href='../S/324.html#L970'>in_sqlda</a>          970 ext/interbase/ibase_query.c 		if (_php_ibase_bind(in_sqlda, args, bind_buf, ib_query TSRMLS_CC) == FAILURE) {</span>
+<span class='curline'><a href='../S/324.html#L978'>in_sqlda</a>          978 ext/interbase/ibase_query.c 			&amp;ib_query-&gt;stmt, SQLDA_CURRENT_VERSION, in_sqlda, out_sqlda);</span>
+<span class='curline'><a href='../S/324.html#L981'>in_sqlda</a>          981 ext/interbase/ibase_query.c 			&amp;ib_query-&gt;stmt, SQLDA_CURRENT_VERSION, in_sqlda);</span>
+<span class='curline'><a href='../S/324.html#L1037'>in_sqlda</a>         1037 ext/interbase/ibase_query.c 	if (in_sqlda) {</span>
+<span class='curline'><a href='../S/324.html#L1038'>in_sqlda</a>         1038 ext/interbase/ibase_query.c 		efree(in_sqlda);</span>
+<span class='curline'><a href='../S/324.html#L1161'>in_sqlda</a>         1161 ext/interbase/ibase_query.c 		    expected_n = ib_query.in_sqlda ? ib_query.in_sqlda-&gt;sqld : 0;</span>
+<span class='curline'><a href='../S/324.html#L1800'>in_sqlda</a>         1800 ext/interbase/ibase_query.c 			expected_n = ib_query-&gt;in_sqlda ? ib_query-&gt;in_sqlda-&gt;sqld : 0;</span>
+<span class='curline'><a href='../S/324.html#L2055'>in_sqlda</a>         2055 ext/interbase/ibase_query.c 	if (ib_query-&gt;in_sqlda == NULL) {</span>
+<span class='curline'><a href='../S/324.html#L2058'>in_sqlda</a>         2058 ext/interbase/ibase_query.c 		RETURN_LONG(ib_query-&gt;in_sqlda-&gt;sqld);</span>
+<span class='curline'><a href='../S/324.html#L2079'>in_sqlda</a>         2079 ext/interbase/ibase_query.c 	if (ib_query-&gt;in_sqlda == NULL) {</span>
+<span class='curline'><a href='../S/324.html#L2083'>in_sqlda</a>         2083 ext/interbase/ibase_query.c 	if (field_arg &lt; 0 || field_arg &gt;= ib_query-&gt;in_sqlda-&gt;sqld) {</span>
+<span class='curline'><a href='../S/324.html#L2087'>in_sqlda</a>         2087 ext/interbase/ibase_query.c 	_php_ibase_field_info(return_value,ib_query-&gt;in_sqlda-&gt;sqlvar + field_arg);</span>
+<span class='curline'><a href='../S/936.html#L187'>in_sqlda</a>          187 ext/pdo_firebird/firebird_driver.c 			S-&gt;in_sqlda = ecalloc(1,XSQLDA_LENGTH(num_sqlda.sqld));</span>
+<span class='curline'><a href='../S/936.html#L188'>in_sqlda</a>          188 ext/pdo_firebird/firebird_driver.c 			S-&gt;in_sqlda-&gt;version = PDO_FB_SQLDA_VERSION;</span>
+<span class='curline'><a href='../S/936.html#L189'>in_sqlda</a>          189 ext/pdo_firebird/firebird_driver.c 			S-&gt;in_sqlda-&gt;sqln = num_sqlda.sqld;</span>
+<span class='curline'><a href='../S/936.html#L191'>in_sqlda</a>          191 ext/pdo_firebird/firebird_driver.c 			if (isc_dsql_describe_bind(H-&gt;isc_status, &amp;s, PDO_FB_SQLDA_VERSION, S-&gt;in_sqlda)) {</span>
+<span class='curline'><a href='../S/936.html#L210'>in_sqlda</a>          210 ext/pdo_firebird/firebird_driver.c 		if (S-&gt;in_sqlda) {</span>
+<span class='curline'><a href='../S/936.html#L211'>in_sqlda</a>          211 ext/pdo_firebird/firebird_driver.c 			efree(S-&gt;in_sqlda);</span>
+<span class='curline'><a href='../S/936.html#L228'>in_sqlda</a>          228 ext/pdo_firebird/firebird_driver.c 	XSQLDA in_sqlda, out_sqlda;</span>
+<span class='curline'><a href='../S/936.html#L231'>in_sqlda</a>          231 ext/pdo_firebird/firebird_driver.c 	in_sqlda.version = out_sqlda.version = PDO_FB_SQLDA_VERSION;</span>
+<span class='curline'><a href='../S/936.html#L232'>in_sqlda</a>          232 ext/pdo_firebird/firebird_driver.c 	in_sqlda.sqld = out_sqlda.sqld = 0;</span>
+<span class='curline'><a href='../S/936.html#L241'>in_sqlda</a>          241 ext/pdo_firebird/firebird_driver.c 	if (isc_dsql_execute2(H-&gt;isc_status, &amp;H-&gt;tr, &amp;stmt, PDO_FB_SQLDA_VERSION, &amp;in_sqlda, &amp;out_sqlda)) {</span>
+<span class='curline'><a href='../S/937.html#L74'>in_sqlda</a>           74 ext/pdo_firebird/firebird_statement.c 	if (S-&gt;in_sqlda) {</span>
+<span class='curline'><a href='../S/937.html#L75'>in_sqlda</a>           75 ext/pdo_firebird/firebird_statement.c 		free_sqlda(S-&gt;in_sqlda);</span>
+<span class='curline'><a href='../S/937.html#L76'>in_sqlda</a>           76 ext/pdo_firebird/firebird_statement.c 		efree(S-&gt;in_sqlda);</span>
+<span class='curline'><a href='../S/937.html#L103'>in_sqlda</a>          103 ext/pdo_firebird/firebird_statement.c 		if (isc_dsql_execute(H-&gt;isc_status, &amp;H-&gt;tr, &amp;S-&gt;stmt, PDO_FB_SQLDA_VERSION, S-&gt;in_sqlda)) {</span>
+<span class='curline'><a href='../S/937.html#L454'>in_sqlda</a>          454 ext/pdo_firebird/firebird_statement.c 	XSQLDA *sqlda = param-&gt;is_param ? S-&gt;in_sqlda : &amp;S-&gt;out_sqlda;</span>
+<span class='curline'><a href='../S/940.html#L120'>in_sqlda</a>          120 ext/pdo_firebird/php_pdo_firebird_int.h 	XSQLDA *in_sqlda;</span>
+</pre>
+</body>
+</html>

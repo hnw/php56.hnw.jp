@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>ib_blob</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/322.html#L37'>ib_blob</a>            37 ext/interbase/ibase_blobs.c 	ibase_blob *ib_blob = (ibase_blob *)rsrc-&gt;ptr;</span>
+<span class='curline'><a href='../S/322.html#L39'>ib_blob</a>            39 ext/interbase/ibase_blobs.c 	if (ib_blob-&gt;bl_handle != NULL) { /* blob open*/</span>
+<span class='curline'><a href='../S/322.html#L40'>ib_blob</a>            40 ext/interbase/ibase_blobs.c 		if (isc_cancel_blob(IB_STATUS, &amp;ib_blob-&gt;bl_handle)) {</span>
+<span class='curline'><a href='../S/322.html#L45'>ib_blob</a>            45 ext/interbase/ibase_blobs.c 	efree(ib_blob);</span>
+<span class='curline'><a href='../S/322.html#L96'>ib_blob</a>            96 ext/interbase/ibase_blobs.c int _php_ibase_blob_get(zval *return_value, ibase_blob *ib_blob, unsigned long max_len TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/322.html#L98'>ib_blob</a>            98 ext/interbase/ibase_blobs.c 	if (ib_blob-&gt;bl_qd.gds_quad_high || ib_blob-&gt;bl_qd.gds_quad_low) { /*not null ?*/</span>
+<span class='curline'><a href='../S/322.html#L112'>ib_blob</a>           112 ext/interbase/ibase_blobs.c 			stat = isc_get_segment(IB_STATUS, &amp;ib_blob-&gt;bl_handle, &amp;seg_len, chunk_size, &amp;bl_data[cur_len]);</span>
+<span class='curline'><a href='../S/322.html#L129'>ib_blob</a>           129 ext/interbase/ibase_blobs.c int _php_ibase_blob_add(zval **string_arg, ibase_blob *ib_blob TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/322.html#L140'>ib_blob</a>           140 ext/interbase/ibase_blobs.c 		if (isc_put_segment(IB_STATUS, &amp;ib_blob-&gt;bl_handle, chunk_size, &amp;Z_STRVAL_PP(string_arg)[put_cnt] )) {</span>
+<span class='curline'><a href='../S/322.html#L210'>ib_blob</a>           210 ext/interbase/ibase_blobs.c 	ibase_blob *ib_blob;</span>
+<span class='curline'><a href='../S/322.html#L220'>ib_blob</a>           220 ext/interbase/ibase_blobs.c 	ib_blob = (ibase_blob *) emalloc(sizeof(ibase_blob));</span>
+<span class='curline'><a href='../S/322.html#L221'>ib_blob</a>           221 ext/interbase/ibase_blobs.c 	ib_blob-&gt;bl_handle = NULL;</span>
+<span class='curline'><a href='../S/322.html#L222'>ib_blob</a>           222 ext/interbase/ibase_blobs.c 	ib_blob-&gt;type = BLOB_INPUT;</span>
+<span class='curline'><a href='../S/322.html#L224'>ib_blob</a>           224 ext/interbase/ibase_blobs.c 	if (isc_create_blob(IB_STATUS, &amp;ib_link-&gt;handle, &amp;trans-&gt;handle, &amp;ib_blob-&gt;bl_handle, &amp;ib_blob-&gt;bl_qd)) {</span>
+<span class='curline'><a href='../S/322.html#L226'>ib_blob</a>           226 ext/interbase/ibase_blobs.c 		efree(ib_blob);</span>
+<span class='curline'><a href='../S/322.html#L230'>ib_blob</a>           230 ext/interbase/ibase_blobs.c 	ZEND_REGISTER_RESOURCE(return_value, ib_blob, le_blob);</span>
+<span class='curline'><a href='../S/322.html#L243'>ib_blob</a>           243 ext/interbase/ibase_blobs.c 	ibase_blob *ib_blob;</span>
+<span class='curline'><a href='../S/322.html#L264'>ib_blob</a>           264 ext/interbase/ibase_blobs.c 	ib_blob = (ibase_blob *) emalloc(sizeof(ibase_blob));</span>
+<span class='curline'><a href='../S/322.html#L265'>ib_blob</a>           265 ext/interbase/ibase_blobs.c 	ib_blob-&gt;bl_handle = NULL;</span>
+<span class='curline'><a href='../S/322.html#L266'>ib_blob</a>           266 ext/interbase/ibase_blobs.c 	ib_blob-&gt;type = BLOB_OUTPUT;</span>
+<span class='curline'><a href='../S/322.html#L269'>ib_blob</a>           269 ext/interbase/ibase_blobs.c 		if (! _php_ibase_string_to_quad(blob_id, &amp;ib_blob-&gt;bl_qd)) {</span>
+<span class='curline'><a href='../S/322.html#L274'>ib_blob</a>           274 ext/interbase/ibase_blobs.c 		if (isc_open_blob(IB_STATUS, &amp;ib_link-&gt;handle, &amp;trans-&gt;handle, &amp;ib_blob-&gt;bl_handle,</span>
+<span class='curline'><a href='../S/322.html#L275'>ib_blob</a>           275 ext/interbase/ibase_blobs.c 				&amp;ib_blob-&gt;bl_qd)) {</span>
+<span class='curline'><a href='../S/322.html#L280'>ib_blob</a>           280 ext/interbase/ibase_blobs.c 		ZEND_REGISTER_RESOURCE(return_value, ib_blob, le_blob);</span>
+<span class='curline'><a href='../S/322.html#L285'>ib_blob</a>           285 ext/interbase/ibase_blobs.c 	efree(ib_blob);</span>
+<span class='curline'><a href='../S/322.html#L295'>ib_blob</a>           295 ext/interbase/ibase_blobs.c 	ibase_blob *ib_blob;</span>
+<span class='curline'><a href='../S/322.html#L303'>ib_blob</a>           303 ext/interbase/ibase_blobs.c 	ZEND_FETCH_RESOURCE(ib_blob, ibase_blob *, blob_arg, -1, "Interbase blob", le_blob);</span>
+<span class='curline'><a href='../S/322.html#L305'>ib_blob</a>           305 ext/interbase/ibase_blobs.c 	if (ib_blob-&gt;type != BLOB_INPUT) {</span>
+<span class='curline'><a href='../S/322.html#L310'>ib_blob</a>           310 ext/interbase/ibase_blobs.c 	if (_php_ibase_blob_add(string_arg, ib_blob TSRMLS_CC) != SUCCESS) {</span>
+<span class='curline'><a href='../S/322.html#L321'>ib_blob</a>           321 ext/interbase/ibase_blobs.c 	ibase_blob *ib_blob;</span>
+<span class='curline'><a href='../S/322.html#L329'>ib_blob</a>           329 ext/interbase/ibase_blobs.c 	ZEND_FETCH_RESOURCE(ib_blob, ibase_blob *, blob_arg, -1, "Interbase blob", le_blob);</span>
+<span class='curline'><a href='../S/322.html#L331'>ib_blob</a>           331 ext/interbase/ibase_blobs.c 	if (ib_blob-&gt;type != BLOB_OUTPUT) {</span>
+<span class='curline'><a href='../S/322.html#L338'>ib_blob</a>           338 ext/interbase/ibase_blobs.c 	if (_php_ibase_blob_get(return_value, ib_blob, Z_LVAL_PP(len_arg) TSRMLS_CC) != SUCCESS) {</span>
+<span class='curline'><a href='../S/322.html#L347'>ib_blob</a>           347 ext/interbase/ibase_blobs.c 	ibase_blob *ib_blob;</span>
+<span class='curline'><a href='../S/322.html#L355'>ib_blob</a>           355 ext/interbase/ibase_blobs.c 	ZEND_FETCH_RESOURCE(ib_blob, ibase_blob *, blob_arg, -1, "Interbase blob", le_blob);</span>
+<span class='curline'><a href='../S/322.html#L359'>ib_blob</a>           359 ext/interbase/ibase_blobs.c 		if (ib_blob-&gt;bl_qd.gds_quad_high || ib_blob-&gt;bl_qd.gds_quad_low) { /*not null ?*/</span>
+<span class='curline'><a href='../S/322.html#L360'>ib_blob</a>           360 ext/interbase/ibase_blobs.c 			if (isc_close_blob(IB_STATUS, &amp;ib_blob-&gt;bl_handle)) {</span>
+<span class='curline'><a href='../S/322.html#L365'>ib_blob</a>           365 ext/interbase/ibase_blobs.c 		ib_blob-&gt;bl_handle = NULL;</span>
+<span class='curline'><a href='../S/322.html#L367'>ib_blob</a>           367 ext/interbase/ibase_blobs.c 		RETVAL_STRINGL(_php_ibase_quad_to_string(ib_blob-&gt;bl_qd), BLOB_ID_LEN, 0);</span>
+<span class='curline'><a href='../S/322.html#L369'>ib_blob</a>           369 ext/interbase/ibase_blobs.c 		if (isc_cancel_blob(IB_STATUS, &amp;ib_blob-&gt;bl_handle)) {</span>
+<span class='curline'><a href='../S/322.html#L373'>ib_blob</a>           373 ext/interbase/ibase_blobs.c 		ib_blob-&gt;bl_handle = NULL;</span>
+<span class='curline'><a href='../S/322.html#L405'>ib_blob</a>           405 ext/interbase/ibase_blobs.c 	ibase_blob ib_blob = { NULL, BLOB_INPUT };</span>
+<span class='curline'><a href='../S/322.html#L427'>ib_blob</a>           427 ext/interbase/ibase_blobs.c 	if (! _php_ibase_string_to_quad(blob_id, &amp;ib_blob.bl_qd)) {</span>
+<span class='curline'><a href='../S/322.html#L432'>ib_blob</a>           432 ext/interbase/ibase_blobs.c 	if (ib_blob.bl_qd.gds_quad_high || ib_blob.bl_qd.gds_quad_low) { /* not null ? */</span>
+<span class='curline'><a href='../S/322.html#L433'>ib_blob</a>           433 ext/interbase/ibase_blobs.c 		if (isc_open_blob(IB_STATUS, &amp;ib_link-&gt;handle, &amp;trans-&gt;handle, &amp;ib_blob.bl_handle,</span>
+<span class='curline'><a href='../S/322.html#L434'>ib_blob</a>           434 ext/interbase/ibase_blobs.c 				&amp;ib_blob.bl_qd)) {</span>
+<span class='curline'><a href='../S/322.html#L439'>ib_blob</a>           439 ext/interbase/ibase_blobs.c 		if (_php_ibase_blob_info(ib_blob.bl_handle, &amp;bl_info TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/322.html#L442'>ib_blob</a>           442 ext/interbase/ibase_blobs.c 		if (isc_close_blob(IB_STATUS, &amp;ib_blob.bl_handle)) {</span>
+<span class='curline'><a href='../S/322.html#L467'>ib_blob</a>           467 ext/interbase/ibase_blobs.c 	add_index_bool(return_value, 4, (!ib_blob.bl_qd.gds_quad_high &amp;&amp; !ib_blob.bl_qd.gds_quad_low));</span>
+<span class='curline'><a href='../S/322.html#L468'>ib_blob</a>           468 ext/interbase/ibase_blobs.c  	add_assoc_bool(return_value, "isnull", (!ib_blob.bl_qd.gds_quad_high &amp;&amp; !ib_blob.bl_qd.gds_quad_low));</span>
+<span class='curline'><a href='../S/322.html#L542'>ib_blob</a>           542 ext/interbase/ibase_blobs.c 	ibase_blob ib_blob = { NULL, 0 };</span>
+<span class='curline'><a href='../S/322.html#L560'>ib_blob</a>           560 ext/interbase/ibase_blobs.c 		if (isc_create_blob(IB_STATUS, &amp;ib_link-&gt;handle, &amp;trans-&gt;handle, &amp;ib_blob.bl_handle,</span>
+<span class='curline'><a href='../S/322.html#L561'>ib_blob</a>           561 ext/interbase/ibase_blobs.c 				&amp;ib_blob.bl_qd)) {</span>
+<span class='curline'><a href='../S/322.html#L566'>ib_blob</a>           566 ext/interbase/ibase_blobs.c 			if (isc_put_segment(IB_STATUS, &amp;ib_blob.bl_handle, b, bl_data)) {</span>
+<span class='curline'><a href='../S/322.html#L571'>ib_blob</a>           571 ext/interbase/ibase_blobs.c 		if (isc_close_blob(IB_STATUS, &amp;ib_blob.bl_handle)) {</span>
+<span class='curline'><a href='../S/322.html#L574'>ib_blob</a>           574 ext/interbase/ibase_blobs.c 		RETURN_STRINGL( _php_ibase_quad_to_string(ib_blob.bl_qd), BLOB_ID_LEN, 0);</span>
+<span class='curline'><a href='../S/324.html#L740'>ib_blob</a>           740 ext/interbase/ibase_query.c 					ibase_blob ib_blob = { NULL, BLOB_INPUT };</span>
+<span class='curline'><a href='../S/324.html#L743'>ib_blob</a>           743 ext/interbase/ibase_query.c 							&amp;ib_query-&gt;trans-&gt;handle, &amp;ib_blob.bl_handle, &amp;ib_blob.bl_qd)) {</span>
+<span class='curline'><a href='../S/324.html#L748'>ib_blob</a>           748 ext/interbase/ibase_query.c 					if (_php_ibase_blob_add(&amp;b_var, &amp;ib_blob TSRMLS_CC) != SUCCESS) {</span>
+<span class='curline'><a href='../S/324.html#L752'>ib_blob</a>           752 ext/interbase/ibase_query.c 					if (isc_close_blob(IB_STATUS, &amp;ib_blob.bl_handle)) {</span>
+<span class='curline'><a href='../S/324.html#L756'>ib_blob</a>           756 ext/interbase/ibase_query.c 					buf[i].val.qval = ib_blob.bl_qd;</span>
+<span class='curline'><a href='../S/327.html#L178'>ib_blob</a>           178 ext/interbase/php_ibase_includes.h int _php_ibase_blob_get(zval *return_value, ibase_blob *ib_blob, unsigned long max_len TSRMLS_DC);</span>
+<span class='curline'><a href='../S/327.html#L179'>ib_blob</a>           179 ext/interbase/php_ibase_includes.h int _php_ibase_blob_add(zval **string_arg, ibase_blob *ib_blob TSRMLS_DC);</span>
+</pre>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>DATEG</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/79.html#L698'>DATEG</a>             698 ext/date/php_date.c 	if (DATEG(timezone)) {</span>
+<span class='curline'><a href='../S/79.html#L699'>DATEG</a>             699 ext/date/php_date.c 		efree(DATEG(timezone));</span>
+<span class='curline'><a href='../S/79.html#L701'>DATEG</a>             701 ext/date/php_date.c 	DATEG(timezone) = NULL;</span>
+<span class='curline'><a href='../S/79.html#L702'>DATEG</a>             702 ext/date/php_date.c 	DATEG(tzcache) = NULL;</span>
+<span class='curline'><a href='../S/79.html#L703'>DATEG</a>             703 ext/date/php_date.c 	DATEG(last_errors) = NULL;</span>
+<span class='curline'><a href='../S/79.html#L712'>DATEG</a>             712 ext/date/php_date.c 	if (DATEG(timezone)) {</span>
+<span class='curline'><a href='../S/79.html#L713'>DATEG</a>             713 ext/date/php_date.c 		efree(DATEG(timezone));</span>
+<span class='curline'><a href='../S/79.html#L715'>DATEG</a>             715 ext/date/php_date.c 	DATEG(timezone) = NULL;</span>
+<span class='curline'><a href='../S/79.html#L716'>DATEG</a>             716 ext/date/php_date.c 	if(DATEG(tzcache)) {</span>
+<span class='curline'><a href='../S/79.html#L717'>DATEG</a>             717 ext/date/php_date.c 		zend_hash_destroy(DATEG(tzcache));</span>
+<span class='curline'><a href='../S/79.html#L718'>DATEG</a>             718 ext/date/php_date.c 		FREE_HASHTABLE(DATEG(tzcache));</span>
+<span class='curline'><a href='../S/79.html#L719'>DATEG</a>             719 ext/date/php_date.c 		DATEG(tzcache) = NULL;</span>
+<span class='curline'><a href='../S/79.html#L721'>DATEG</a>             721 ext/date/php_date.c 	if (DATEG(last_errors)) {</span>
+<span class='curline'><a href='../S/79.html#L722'>DATEG</a>             722 ext/date/php_date.c 		timelib_error_container_dtor(DATEG(last_errors));</span>
+<span class='curline'><a href='../S/79.html#L723'>DATEG</a>             723 ext/date/php_date.c 		DATEG(last_errors) = NULL;</span>
+<span class='curline'><a href='../S/79.html#L874'>DATEG</a>             874 ext/date/php_date.c 	DATEG(last_errors) = NULL;</span>
+<span class='curline'><a href='../S/79.html#L884'>DATEG</a>             884 ext/date/php_date.c 	if (DATEG(last_errors)) {</span>
+<span class='curline'><a href='../S/79.html#L885'>DATEG</a>             885 ext/date/php_date.c 		timelib_error_container_dtor(DATEG(last_errors));</span>
+<span class='curline'><a href='../S/79.html#L889'>DATEG</a>             889 ext/date/php_date.c 	DATEG(default_timezone) = NULL;</span>
+<span class='curline'><a href='../S/79.html#L917'>DATEG</a>             917 ext/date/php_date.c 	if(!DATEG(tzcache)) {</span>
+<span class='curline'><a href='../S/79.html#L918'>DATEG</a>             918 ext/date/php_date.c 		ALLOC_HASHTABLE(DATEG(tzcache));</span>
+<span class='curline'><a href='../S/79.html#L919'>DATEG</a>             919 ext/date/php_date.c 		zend_hash_init(DATEG(tzcache), 4, NULL, _php_date_tzinfo_dtor, 0);</span>
+<span class='curline'><a href='../S/79.html#L922'>DATEG</a>             922 ext/date/php_date.c 	if (zend_hash_find(DATEG(tzcache), formal_tzname, strlen(formal_tzname) + 1, (void **) &amp;ptzi) == SUCCESS) {</span>
+<span class='curline'><a href='../S/79.html#L928'>DATEG</a>             928 ext/date/php_date.c 		zend_hash_add(DATEG(tzcache), formal_tzname, strlen(formal_tzname) + 1, (void *) &amp;tzi, sizeof(timelib_tzinfo*), NULL);</span>
+<span class='curline'><a href='../S/79.html#L948'>DATEG</a>             948 ext/date/php_date.c 	DATEG(timezone_valid) = 0;</span>
+<span class='curline'><a href='../S/79.html#L950'>DATEG</a>             950 ext/date/php_date.c 		if (!timelib_timezone_id_is_valid(DATEG(default_timezone), DATE_TIMEZONEDB)) {</span>
+<span class='curline'><a href='../S/79.html#L953'>DATEG</a>             953 ext/date/php_date.c 			DATEG(timezone_valid) = 1;</span>
+<span class='curline'><a href='../S/79.html#L965'>DATEG</a>             965 ext/date/php_date.c 	if (DATEG(timezone) &amp;&amp; (strlen(DATEG(timezone))) &gt; 0) {</span>
+<span class='curline'><a href='../S/79.html#L966'>DATEG</a>             966 ext/date/php_date.c 		return DATEG(timezone);</span>
+<span class='curline'><a href='../S/79.html#L969'>DATEG</a>             969 ext/date/php_date.c 	if (!DATEG(default_timezone)) {</span>
+<span class='curline'><a href='../S/79.html#L977'>DATEG</a>             977 ext/date/php_date.c 	} else if (*DATEG(default_timezone)) {</span>
+<span class='curline'><a href='../S/79.html#L978'>DATEG</a>             978 ext/date/php_date.c 		if (DATEG(timezone_valid) == 1) {</span>
+<span class='curline'><a href='../S/79.html#L979'>DATEG</a>             979 ext/date/php_date.c 			return DATEG(default_timezone);</span>
+<span class='curline'><a href='../S/79.html#L982'>DATEG</a>             982 ext/date/php_date.c 		if (!timelib_timezone_id_is_valid(DATEG(default_timezone), tzdb)) {</span>
+<span class='curline'><a href='../S/79.html#L983'>DATEG</a>             983 ext/date/php_date.c 			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Invalid date.timezone value '%s', we selected the timezone 'UTC' for now.", DATEG(default_timezone));</span>
+<span class='curline'><a href='../S/79.html#L987'>DATEG</a>             987 ext/date/php_date.c 		DATEG(timezone_valid) = 1;</span>
+<span class='curline'><a href='../S/79.html#L988'>DATEG</a>             988 ext/date/php_date.c 		return DATEG(default_timezone);</span>
+<span class='curline'><a href='../S/79.html#L2559'>DATEG</a>            2559 ext/date/php_date.c 	if (DATEG(last_errors)) {</span>
+<span class='curline'><a href='../S/79.html#L2560'>DATEG</a>            2560 ext/date/php_date.c 		timelib_error_container_dtor(DATEG(last_errors));</span>
+<span class='curline'><a href='../S/79.html#L2561'>DATEG</a>            2561 ext/date/php_date.c 		DATEG(last_errors) = NULL;</span>
+<span class='curline'><a href='../S/79.html#L2563'>DATEG</a>            2563 ext/date/php_date.c 	DATEG(last_errors) = last_errors;</span>
+<span class='curline'><a href='../S/79.html#L2947'>DATEG</a>            2947 ext/date/php_date.c 	if (DATEG(last_errors)) {</span>
+<span class='curline'><a href='../S/79.html#L2949'>DATEG</a>            2949 ext/date/php_date.c 		zval_from_error_container(return_value, DATEG(last_errors));</span>
+<span class='curline'><a href='../S/79.html#L4695'>DATEG</a>            4695 ext/date/php_date.c 	if (DATEG(timezone)) {</span>
+<span class='curline'><a href='../S/79.html#L4696'>DATEG</a>            4696 ext/date/php_date.c 		efree(DATEG(timezone));</span>
+<span class='curline'><a href='../S/79.html#L4697'>DATEG</a>            4697 ext/date/php_date.c 		DATEG(timezone) = NULL;</span>
+<span class='curline'><a href='../S/79.html#L4699'>DATEG</a>            4699 ext/date/php_date.c 	DATEG(timezone) = estrndup(zone, zone_len);</span>
+</pre>
+</body>
+</html>

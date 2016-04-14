@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>bdata</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/1079.html#L143'>bdata</a>             143 ext/standard/browscap.c 	browser_data *bdata = arg;</span>
+<span class='curline'><a href='../S/1079.html#L144'>bdata</a>             144 ext/standard/browscap.c 	int persistent = bdata-&gt;htab-&gt;persistent;</span>
+<span class='curline'><a href='../S/1079.html#L152'>bdata</a>             152 ext/standard/browscap.c 			if (bdata-&gt;current_section &amp;&amp; arg2) {</span>
+<span class='curline'><a href='../S/1079.html#L158'>bdata</a>             158 ext/standard/browscap.c 					bdata-&gt;current_section_name != NULL &amp;&amp;</span>
+<span class='curline'><a href='../S/1079.html#L159'>bdata</a>             159 ext/standard/browscap.c 					!strcasecmp(bdata-&gt;current_section_name, Z_STRVAL_P(arg2))</span>
+<span class='curline'><a href='../S/1079.html#L163'>bdata</a>             163 ext/standard/browscap.c 						"(in file %s)", bdata-&gt;current_section_name, INI_STR("browscap"));</span>
+<span class='curline'><a href='../S/1079.html#L193'>bdata</a>             193 ext/standard/browscap.c 				zend_hash_update(Z_ARRVAL_P(bdata-&gt;current_section), new_key, Z_STRLEN_P(arg1) + 1, &amp;new_property, sizeof(zval *), NULL);</span>
+<span class='curline'><a href='../S/1079.html#L203'>bdata</a>             203 ext/standard/browscap.c 				bdata-&gt;current_section = (zval *) pemalloc(sizeof(zval), persistent);</span>
+<span class='curline'><a href='../S/1079.html#L204'>bdata</a>             204 ext/standard/browscap.c 				INIT_PZVAL(bdata-&gt;current_section);</span>
+<span class='curline'><a href='../S/1079.html#L215'>bdata</a>             215 ext/standard/browscap.c 				Z_ARRVAL_P(bdata-&gt;current_section) = section_properties;</span>
+<span class='curline'><a href='../S/1079.html#L216'>bdata</a>             216 ext/standard/browscap.c 				Z_TYPE_P(bdata-&gt;current_section) = IS_ARRAY;</span>
+<span class='curline'><a href='../S/1079.html#L217'>bdata</a>             217 ext/standard/browscap.c 				if (bdata-&gt;current_section_name) {</span>
+<span class='curline'><a href='../S/1079.html#L218'>bdata</a>             218 ext/standard/browscap.c 					pefree(bdata-&gt;current_section_name, persistent);</span>
+<span class='curline'><a href='../S/1079.html#L220'>bdata</a>             220 ext/standard/browscap.c 				bdata-&gt;current_section_name = pestrndup(Z_STRVAL_P(arg1),</span>
+<span class='curline'><a href='../S/1079.html#L223'>bdata</a>             223 ext/standard/browscap.c 				zend_hash_update(bdata-&gt;htab, Z_STRVAL_P(arg1), Z_STRLEN_P(arg1) + 1, (void *) &amp;bdata-&gt;current_section, sizeof(zval *), NULL);</span>
+<span class='curline'><a href='../S/1079.html#L299'>bdata</a>             299 ext/standard/browscap.c static void browscap_bdata_dtor(browser_data *bdata, int persistent TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1079.html#L301'>bdata</a>             301 ext/standard/browscap.c 	if (bdata-&gt;htab != NULL) {</span>
+<span class='curline'><a href='../S/1079.html#L302'>bdata</a>             302 ext/standard/browscap.c 		zend_hash_destroy(bdata-&gt;htab);</span>
+<span class='curline'><a href='../S/1079.html#L303'>bdata</a>             303 ext/standard/browscap.c 		pefree(bdata-&gt;htab, persistent);</span>
+<span class='curline'><a href='../S/1079.html#L304'>bdata</a>             304 ext/standard/browscap.c 		bdata-&gt;htab = NULL;</span>
+<span class='curline'><a href='../S/1079.html#L306'>bdata</a>             306 ext/standard/browscap.c 	bdata-&gt;filename[0] = '\0';</span>
+<span class='curline'><a href='../S/1079.html#L319'>bdata</a>             319 ext/standard/browscap.c 		browser_data *bdata = &amp;BROWSCAP_G(activation_bdata);</span>
+<span class='curline'><a href='../S/1079.html#L320'>bdata</a>             320 ext/standard/browscap.c 		if (bdata-&gt;filename[0] != '\0') {</span>
+<span class='curline'><a href='../S/1079.html#L321'>bdata</a>             321 ext/standard/browscap.c 			browscap_bdata_dtor(bdata, 0 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1079.html#L323'>bdata</a>             323 ext/standard/browscap.c 		if (VCWD_REALPATH(new_value, bdata-&gt;filename) == NULL) {</span>
+<span class='curline'><a href='../S/1079.html#L355'>bdata</a>             355 ext/standard/browscap.c 	browser_data *bdata = &amp;BROWSCAP_G(activation_bdata);</span>
+<span class='curline'><a href='../S/1079.html#L356'>bdata</a>             356 ext/standard/browscap.c 	if (bdata-&gt;filename[0] != '\0') {</span>
+<span class='curline'><a href='../S/1079.html#L357'>bdata</a>             357 ext/standard/browscap.c 		browscap_bdata_dtor(bdata, 0 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1079.html#L477'>bdata</a>             477 ext/standard/browscap.c 	browser_data *bdata;</span>
+<span class='curline'><a href='../S/1079.html#L480'>bdata</a>             480 ext/standard/browscap.c 		bdata = &amp;BROWSCAP_G(activation_bdata);</span>
+<span class='curline'><a href='../S/1079.html#L481'>bdata</a>             481 ext/standard/browscap.c 		if (bdata-&gt;htab == NULL) { /* not initialized yet */</span>
+<span class='curline'><a href='../S/1079.html#L482'>bdata</a>             482 ext/standard/browscap.c 			if (browscap_read_file(bdata-&gt;filename, bdata, 0 TSRMLS_CC) == FAILURE) {</span>
+<span class='curline'><a href='../S/1079.html#L491'>bdata</a>             491 ext/standard/browscap.c 		bdata = &amp;global_bdata;</span>
+<span class='curline'><a href='../S/1079.html#L513'>bdata</a>             513 ext/standard/browscap.c 	if (zend_hash_find(bdata-&gt;htab, lookup_browser_name, agent_name_len + 1, (void **) &amp;agent) == FAILURE) {</span>
+<span class='curline'><a href='../S/1079.html#L515'>bdata</a>             515 ext/standard/browscap.c 		zend_hash_apply_with_arguments(bdata-&gt;htab TSRMLS_CC, (apply_func_args_t) browser_reg_compare, 3, lookup_browser_name, agent_name_len, &amp;found_browser_entry);</span>
+<span class='curline'><a href='../S/1079.html#L519'>bdata</a>             519 ext/standard/browscap.c 		} else if (zend_hash_find(bdata-&gt;htab, DEFAULT_SECTION_NAME, sizeof(DEFAULT_SECTION_NAME), (void **) &amp;agent) == FAILURE) {</span>
+<span class='curline'><a href='../S/1079.html#L535'>bdata</a>             535 ext/standard/browscap.c 		if (zend_hash_find(bdata-&gt;htab, Z_STRVAL_PP(z_agent_name), Z_STRLEN_PP(z_agent_name) + 1, (void **)&amp;agent) == FAILURE) {</span>
+</pre>
+</body>
+</html>

@@ -1,0 +1,310 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>sa</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/1726.html#L160'>sa</a>                160 Zend/zend_signal.c 	struct sigaction sa = {{0}};</span>
+<span class='curline'><a href='../S/1726.html#L165'>sa</a>                165 Zend/zend_signal.c 		if (sigaction(signo, NULL, &amp;sa) == 0) {</span>
+<span class='curline'><a href='../S/1726.html#L166'>sa</a>                166 Zend/zend_signal.c 			sa.sa_handler = SIG_DFL;</span>
+<span class='curline'><a href='../S/1726.html#L167'>sa</a>                167 Zend/zend_signal.c 			sigemptyset(&amp;sa.sa_mask);</span>
+<span class='curline'><a href='../S/1726.html#L172'>sa</a>                172 Zend/zend_signal.c 			if (sigaction(signo, &amp;sa, NULL) == 0) {</span>
+<span class='curline'><a href='../S/1726.html#L197'>sa</a>                197 Zend/zend_signal.c 	struct sigaction sa = {{0}};</span>
+<span class='curline'><a href='../S/1726.html#L213'>sa</a>                213 Zend/zend_signal.c 		sa.sa_flags     = SA_SIGINFO | (act-&gt;sa_flags &amp; SA_FLAGS_MASK);</span>
+<span class='curline'><a href='../S/1726.html#L214'>sa</a>                214 Zend/zend_signal.c 		sa.sa_sigaction = zend_signal_handler_defer;</span>
+<span class='curline'><a href='../S/1726.html#L215'>sa</a>                215 Zend/zend_signal.c 		sa.sa_mask      = global_sigmask;</span>
+<span class='curline'><a href='../S/1726.html#L217'>sa</a>                217 Zend/zend_signal.c 		if (sigaction(signo, &amp;sa, NULL) &lt; 0) {</span>
+<span class='curline'><a href='../S/1726.html#L235'>sa</a>                235 Zend/zend_signal.c 	struct sigaction sa = {{0}};</span>
+<span class='curline'><a href='../S/1726.html#L237'>sa</a>                237 Zend/zend_signal.c 	sa.sa_flags   = 0;</span>
+<span class='curline'><a href='../S/1726.html#L238'>sa</a>                238 Zend/zend_signal.c 	sa.sa_handler = handler;</span>
+<span class='curline'><a href='../S/1726.html#L239'>sa</a>                239 Zend/zend_signal.c 	sa.sa_mask    = global_sigmask;</span>
+<span class='curline'><a href='../S/1726.html#L241'>sa</a>                241 Zend/zend_signal.c 	return zend_sigaction(signo, &amp;sa, NULL TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1726.html#L251'>sa</a>                251 Zend/zend_signal.c 	struct sigaction sa = {{0}};</span>
+<span class='curline'><a href='../S/1726.html#L253'>sa</a>                253 Zend/zend_signal.c 	if (sigaction(signo, NULL, &amp;sa) == 0) {</span>
+<span class='curline'><a href='../S/1726.html#L254'>sa</a>                254 Zend/zend_signal.c 		if ((sa.sa_flags &amp; SA_SIGINFO) &amp;&amp; sa.sa_sigaction == handler) {</span>
+<span class='curline'><a href='../S/1726.html#L258'>sa</a>                258 Zend/zend_signal.c 		SIGG(handlers)[signo-1].flags = sa.sa_flags;</span>
+<span class='curline'><a href='../S/1726.html#L259'>sa</a>                259 Zend/zend_signal.c 		if (sa.sa_flags &amp; SA_SIGINFO) {</span>
+<span class='curline'><a href='../S/1726.html#L260'>sa</a>                260 Zend/zend_signal.c 			SIGG(handlers)[signo-1].handler = (void *)sa.sa_sigaction;</span>
+<span class='curline'><a href='../S/1726.html#L262'>sa</a>                262 Zend/zend_signal.c 			SIGG(handlers)[signo-1].handler = (void *)sa.sa_handler;</span>
+<span class='curline'><a href='../S/1726.html#L265'>sa</a>                265 Zend/zend_signal.c 		sa.sa_flags     = SA_SIGINFO; /* we'll use a siginfo handler */</span>
+<span class='curline'><a href='../S/1726.html#L266'>sa</a>                266 Zend/zend_signal.c 		sa.sa_sigaction = handler;</span>
+<span class='curline'><a href='../S/1726.html#L267'>sa</a>                267 Zend/zend_signal.c 		sa.sa_mask      = global_sigmask;</span>
+<span class='curline'><a href='../S/1726.html#L269'>sa</a>                269 Zend/zend_signal.c 		if (sigaction(signo, &amp;sa, NULL) &lt; 0) {</span>
+<span class='curline'><a href='../S/1726.html#L299'>sa</a>                299 Zend/zend_signal.c 	struct sigaction sa = {{0}};</span>
+<span class='curline'><a href='../S/1726.html#L307'>sa</a>                307 Zend/zend_signal.c 			sigaction(zend_sigs[x], NULL, &amp;sa);</span>
+<span class='curline'><a href='../S/1726.html#L308'>sa</a>                308 Zend/zend_signal.c 			if (sa.sa_sigaction != zend_signal_handler_defer) {</span>
+<span class='curline'><a href='../S/1726.html#L348'>sa</a>                348 Zend/zend_signal.c 	struct sigaction sa = {{0}};</span>
+<span class='curline'><a href='../S/1726.html#L381'>sa</a>                381 Zend/zend_signal.c 		if (sigaction(signo, NULL, &amp;sa) == 0) {</span>
+<span class='curline'><a href='../S/1726.html#L382'>sa</a>                382 Zend/zend_signal.c 			global_orig_handlers[signo-1].flags = sa.sa_flags;</span>
+<span class='curline'><a href='../S/1726.html#L383'>sa</a>                383 Zend/zend_signal.c 			if (sa.sa_flags &amp; SA_SIGINFO) {</span>
+<span class='curline'><a href='../S/1726.html#L384'>sa</a>                384 Zend/zend_signal.c 				global_orig_handlers[signo-1].handler = (void *) sa.sa_sigaction;</span>
+<span class='curline'><a href='../S/1726.html#L386'>sa</a>                386 Zend/zend_signal.c 				global_orig_handlers[signo-1].handler = (void *) sa.sa_handler;</span>
+<span class='curline'><a href='../S/1731.html#L45'>sa</a>                 45 Zend/zend_static_allocator.c void static_allocator_init(StaticAllocator *sa)</span>
+<span class='curline'><a href='../S/1731.html#L47'>sa</a>                 47 Zend/zend_static_allocator.c 	sa-&gt;Blocks = (Block *) emalloc(sizeof(Block));</span>
+<span class='curline'><a href='../S/1731.html#L48'>sa</a>                 48 Zend/zend_static_allocator.c 	block_init(sa-&gt;Blocks, ALLOCATOR_BLOCK_SIZE);</span>
+<span class='curline'><a href='../S/1731.html#L49'>sa</a>                 49 Zend/zend_static_allocator.c 	sa-&gt;num_blocks = 1;</span>
+<span class='curline'><a href='../S/1731.html#L50'>sa</a>                 50 Zend/zend_static_allocator.c 	sa-&gt;current_block = 0;</span>
+<span class='curline'><a href='../S/1731.html#L53'>sa</a>                 53 Zend/zend_static_allocator.c char *static_allocator_allocate(StaticAllocator *sa, zend_uint size)</span>
+<span class='curline'><a href='../S/1731.html#L57'>sa</a>                 57 Zend/zend_static_allocator.c 	retval = block_allocate(&amp;sa-&gt;Blocks[sa-&gt;current_block], size);</span>
+<span class='curline'><a href='../S/1731.html#L61'>sa</a>                 61 Zend/zend_static_allocator.c 	sa-&gt;Blocks = (Block *) erealloc(sa-&gt;Blocks, ++sa-&gt;num_blocks);</span>
+<span class='curline'><a href='../S/1731.html#L62'>sa</a>                 62 Zend/zend_static_allocator.c 	sa-&gt;current_block++;</span>
+<span class='curline'><a href='../S/1731.html#L63'>sa</a>                 63 Zend/zend_static_allocator.c 	block_init(&amp;sa-&gt;Blocks[sa-&gt;current_block], (size &gt; ALLOCATOR_BLOCK_SIZE) ? size : ALLOCATOR_BLOCK_SIZE);</span>
+<span class='curline'><a href='../S/1731.html#L64'>sa</a>                 64 Zend/zend_static_allocator.c 	retval = block_allocate(&amp;sa-&gt;Blocks[sa-&gt;current_block], size);</span>
+<span class='curline'><a href='../S/1731.html#L68'>sa</a>                 68 Zend/zend_static_allocator.c void static_allocator_destroy(StaticAllocator *sa)</span>
+<span class='curline'><a href='../S/1731.html#L72'>sa</a>                 72 Zend/zend_static_allocator.c 	for (i=0; i&lt;sa-&gt;num_blocks; i++) {</span>
+<span class='curline'><a href='../S/1731.html#L73'>sa</a>                 73 Zend/zend_static_allocator.c 		block_free(&amp;sa-&gt;Blocks[i]);</span>
+<span class='curline'><a href='../S/1731.html#L75'>sa</a>                 75 Zend/zend_static_allocator.c 	efree(sa-&gt;Blocks);</span>
+<span class='curline'><a href='../S/1732.html#L43'>sa</a>                 43 Zend/zend_static_allocator.h void static_allocator_init(StaticAllocator *sa);</span>
+<span class='curline'><a href='../S/1732.html#L44'>sa</a>                 44 Zend/zend_static_allocator.h char *static_allocator_allocate(StaticAllocator *sa, zend_uint size);</span>
+<span class='curline'><a href='../S/1732.html#L45'>sa</a>                 45 Zend/zend_static_allocator.h void static_allocator_destroy(StaticAllocator *sa);</span>
+<span class='curline'><a href='../S/51.html#L96'>sa</a>                 96 ext/com_dotnet/com_saproxy.c 	SAFEARRAY *sa;</span>
+<span class='curline'><a href='../S/51.html#L144'>sa</a>                144 ext/com_dotnet/com_saproxy.c 	sa = V_ARRAY(&amp;proxy-&gt;obj-&gt;v);</span>
+<span class='curline'><a href='../S/51.html#L145'>sa</a>                145 ext/com_dotnet/com_saproxy.c 	dims = SafeArrayGetDim(sa);</span>
+<span class='curline'><a href='../S/51.html#L154'>sa</a>                154 ext/com_dotnet/com_saproxy.c 	SafeArrayGetLBound(sa, proxy-&gt;dimensions, &amp;lbound);</span>
+<span class='curline'><a href='../S/51.html#L155'>sa</a>                155 ext/com_dotnet/com_saproxy.c 	SafeArrayGetUBound(sa, proxy-&gt;dimensions, &amp;ubound);</span>
+<span class='curline'><a href='../S/51.html#L182'>sa</a>                182 ext/com_dotnet/com_saproxy.c 		if (FAILED(SafeArrayGetVartype(sa, &amp;vt)) || vt == VT_EMPTY) {</span>
+<span class='curline'><a href='../S/51.html#L187'>sa</a>                187 ext/com_dotnet/com_saproxy.c 			res = SafeArrayGetElement(sa, indices, &amp;v);</span>
+<span class='curline'><a href='../S/51.html#L190'>sa</a>                190 ext/com_dotnet/com_saproxy.c 			res = SafeArrayGetElement(sa, indices, &amp;v.lVal);</span>
+<span class='curline'><a href='../S/51.html#L495'>sa</a>                495 ext/com_dotnet/com_saproxy.c 	SAFEARRAY *sa;</span>
+<span class='curline'><a href='../S/51.html#L499'>sa</a>                499 ext/com_dotnet/com_saproxy.c 	sa = V_ARRAY(&amp;I-&gt;proxy-&gt;obj-&gt;v);</span>
+<span class='curline'><a href='../S/51.html#L501'>sa</a>                501 ext/com_dotnet/com_saproxy.c 	if (FAILED(SafeArrayGetVartype(sa, &amp;vt)) || vt == VT_EMPTY) {</span>
+<span class='curline'><a href='../S/51.html#L507'>sa</a>                507 ext/com_dotnet/com_saproxy.c 		SafeArrayGetElement(sa, I-&gt;indices, &amp;v);</span>
+<span class='curline'><a href='../S/51.html#L510'>sa</a>                510 ext/com_dotnet/com_saproxy.c 		SafeArrayGetElement(sa, I-&gt;indices, &amp;v.lVal);</span>
+<span class='curline'><a href='../S/53.html#L37'>sa</a>                 37 ext/com_dotnet/com_variant.c 	SAFEARRAY *sa = NULL;</span>
+<span class='curline'><a href='../S/53.html#L67'>sa</a>                 67 ext/com_dotnet/com_variant.c 	sa = SafeArrayCreate(VT_VARIANT, 1, &amp;bound);</span>
+<span class='curline'><a href='../S/53.html#L70'>sa</a>                 70 ext/com_dotnet/com_variant.c 	SafeArrayAccessData(sa, &amp;va);</span>
+<span class='curline'><a href='../S/53.html#L71'>sa</a>                 71 ext/com_dotnet/com_variant.c 	va = (VARIANT*)sa-&gt;pvData;</span>
+<span class='curline'><a href='../S/53.html#L84'>sa</a>                 84 ext/com_dotnet/com_variant.c 	SafeArrayUnaccessData(sa);</span>
+<span class='curline'><a href='../S/53.html#L86'>sa</a>                 86 ext/com_dotnet/com_variant.c 	V_ARRAY(v) = sa;</span>
+<span class='curline'><a href='../S/53.html#L95'>sa</a>                 95 ext/com_dotnet/com_variant.c 	if (sa) {</span>
+<span class='curline'><a href='../S/53.html#L96'>sa</a>                 96 ext/com_dotnet/com_variant.c 		SafeArrayUnlock(sa);</span>
+<span class='curline'><a href='../S/53.html#L97'>sa</a>                 97 ext/com_dotnet/com_variant.c 		SafeArrayDestroy(sa);</span>
+<span class='curline'><a href='../S/176.html#L798'>sa</a>                798 ext/fileinfo/libmagic/apprentice.c 	size_t sa = apprentice_magic_strength(ma-&gt;mp);</span>
+<span class='curline'><a href='../S/176.html#L800'>sa</a>                800 ext/fileinfo/libmagic/apprentice.c 	if (sa == sb)</span>
+<span class='curline'><a href='../S/176.html#L802'>sa</a>                802 ext/fileinfo/libmagic/apprentice.c 	else if (sa &gt; sb)</span>
+<span class='curline'><a href='../S/206.html#L708'>sa</a>                708 ext/ftp/ftp.c  	struct sockaddr *sa;</span>
+<span class='curline'><a href='../S/206.html#L723'>sa</a>                723 ext/ftp/ftp.c  	sa = (struct sockaddr *) &amp;ftp-&gt;pasvaddr;</span>
+<span class='curline'><a href='../S/206.html#L725'>sa</a>                725 ext/ftp/ftp.c  	if (getpeername(ftp-&gt;fd, sa, &amp;n) &lt; 0) {</span>
+<span class='curline'><a href='../S/206.html#L730'>sa</a>                730 ext/ftp/ftp.c  	if (sa-&gt;sa_family == AF_INET6) {</span>
+<span class='curline'><a href='../S/206.html#L731'>sa</a>                731 ext/ftp/ftp.c  		struct sockaddr_in6 *sin6 = (struct sockaddr_in6 *) sa;</span>
+<span class='curline'><a href='../S/206.html#L781'>sa</a>                781 ext/ftp/ftp.c  	sin = (struct sockaddr_in *) sa;</span>
+<span class='curline'><a href='../S/206.html#L1374'>sa</a>               1374 ext/ftp/ftp.c  	struct sockaddr *sa;</span>
+<span class='curline'><a href='../S/206.html#L1391'>sa</a>               1391 ext/ftp/ftp.c  	sa = (struct sockaddr *) &amp;ftp-&gt;localaddr;</span>
+<span class='curline'><a href='../S/206.html#L1393'>sa</a>               1393 ext/ftp/ftp.c  	if ((fd = socket(sa-&gt;sa_family, SOCK_STREAM, 0)) == SOCK_ERR) {</span>
+<span class='curline'><a href='../S/206.html#L1423'>sa</a>               1423 ext/ftp/ftp.c  	php_any_addr(sa-&gt;sa_family, &amp;addr, 0);</span>
+<span class='curline'><a href='../S/206.html#L1444'>sa</a>               1444 ext/ftp/ftp.c  	if (sa-&gt;sa_family == AF_INET6) {</span>
+<span class='curline'><a href='../S/206.html#L1448'>sa</a>               1448 ext/ftp/ftp.c  		inet_ntop(AF_INET6, &amp;((struct sockaddr_in6*) sa)-&gt;sin6_addr, out, sizeof(out));</span>
+<span class='curline'><a href='../S/206.html#L1465'>sa</a>               1465 ext/ftp/ftp.c  	ipbox.ia[0] = ((struct sockaddr_in*) sa)-&gt;sin_addr;</span>
+<span class='curline'><a href='../S/975.html#L788'>sa</a>                788 ext/phar/phar_object.c 			char *tmp = NULL, sa = '\0';</span>
+<span class='curline'><a href='../S/975.html#L797'>sa</a>                797 ext/phar/phar_object.c 				sa = *tmp;</span>
+<span class='curline'><a href='../S/975.html#L810'>sa</a>                810 ext/phar/phar_object.c 				*tmp = sa;</span>
+<span class='curline'><a href='../S/1041.html#L942'>sa</a>                942 ext/sockets/sockets.c 	php_sockaddr_storage sa;</span>
+<span class='curline'><a href='../S/1041.html#L943'>sa</a>                943 ext/sockets/sockets.c 	socklen_t			 php_sa_len = sizeof(sa);</span>
+<span class='curline'><a href='../S/1041.html#L951'>sa</a>                951 ext/sockets/sockets.c 	if (!php_accept_connect(php_sock, &amp;new_sock, (struct sockaddr*)&amp;sa, &amp;php_sa_len TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/1041.html#L1182'>sa</a>               1182 ext/sockets/sockets.c 	struct sockaddr			*sa;</span>
+<span class='curline'><a href='../S/1041.html#L1198'>sa</a>               1198 ext/sockets/sockets.c 	sa = (struct sockaddr *) &amp;sa_storage;</span>
+<span class='curline'><a href='../S/1041.html#L1200'>sa</a>               1200 ext/sockets/sockets.c 	if (getsockname(php_sock-&gt;bsd_socket, sa, &amp;salen) != 0) {</span>
+<span class='curline'><a href='../S/1041.html#L1205'>sa</a>               1205 ext/sockets/sockets.c 	switch (sa-&gt;sa_family) {</span>
+<span class='curline'><a href='../S/1041.html#L1208'>sa</a>               1208 ext/sockets/sockets.c 			sin6 = (struct sockaddr_in6 *) sa;</span>
+<span class='curline'><a href='../S/1041.html#L1221'>sa</a>               1221 ext/sockets/sockets.c 			sin = (struct sockaddr_in *) sa;</span>
+<span class='curline'><a href='../S/1041.html#L1238'>sa</a>               1238 ext/sockets/sockets.c 			s_un = (struct sockaddr_un *) sa;</span>
+<span class='curline'><a href='../S/1041.html#L1246'>sa</a>               1246 ext/sockets/sockets.c 			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Unsupported address family %d", sa-&gt;sa_family);</span>
+<span class='curline'><a href='../S/1041.html#L1259'>sa</a>               1259 ext/sockets/sockets.c 	struct sockaddr			*sa;</span>
+<span class='curline'><a href='../S/1041.html#L1275'>sa</a>               1275 ext/sockets/sockets.c 	sa = (struct sockaddr *) &amp;sa_storage;</span>
+<span class='curline'><a href='../S/1041.html#L1277'>sa</a>               1277 ext/sockets/sockets.c 	if (getpeername(php_sock-&gt;bsd_socket, sa, &amp;salen) &lt; 0) {</span>
+<span class='curline'><a href='../S/1041.html#L1282'>sa</a>               1282 ext/sockets/sockets.c 	switch (sa-&gt;sa_family) {</span>
+<span class='curline'><a href='../S/1041.html#L1285'>sa</a>               1285 ext/sockets/sockets.c 			sin6 = (struct sockaddr_in6 *) sa;</span>
+<span class='curline'><a href='../S/1041.html#L1299'>sa</a>               1299 ext/sockets/sockets.c 			sin = (struct sockaddr_in *) sa;</span>
+<span class='curline'><a href='../S/1041.html#L1317'>sa</a>               1317 ext/sockets/sockets.c 			s_un = (struct sockaddr_un *) sa;</span>
+<span class='curline'><a href='../S/1041.html#L1325'>sa</a>               1325 ext/sockets/sockets.c 			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Unsupported address family %d", sa-&gt;sa_family);</span>
+<span class='curline'><a href='../S/1041.html#L1498'>sa</a>               1498 ext/sockets/sockets.c 				struct sockaddr_un *sa = (struct sockaddr_un *) sock_type;</span>
+<span class='curline'><a href='../S/1041.html#L1500'>sa</a>               1500 ext/sockets/sockets.c 				sa-&gt;sun_family = AF_UNIX;</span>
+<span class='curline'><a href='../S/1041.html#L1502'>sa</a>               1502 ext/sockets/sockets.c 				if (addr_len &gt;= sizeof(sa-&gt;sun_path)) {</span>
+<span class='curline'><a href='../S/1041.html#L1505'>sa</a>               1505 ext/sockets/sockets.c 							(int)sizeof(sa-&gt;sun_path) - 1);</span>
+<span class='curline'><a href='../S/1041.html#L1508'>sa</a>               1508 ext/sockets/sockets.c 				memcpy(&amp;sa-&gt;sun_path, addr, addr_len);</span>
+<span class='curline'><a href='../S/1041.html#L1510'>sa</a>               1510 ext/sockets/sockets.c 				retval = bind(php_sock-&gt;bsd_socket, (struct sockaddr *) sa,</span>
+<span class='curline'><a href='../S/1041.html#L1517'>sa</a>               1517 ext/sockets/sockets.c 				struct sockaddr_in *sa = (struct sockaddr_in *) sock_type;</span>
+<span class='curline'><a href='../S/1041.html#L1519'>sa</a>               1519 ext/sockets/sockets.c 				sa-&gt;sin_family = AF_INET;</span>
+<span class='curline'><a href='../S/1041.html#L1520'>sa</a>               1520 ext/sockets/sockets.c 				sa-&gt;sin_port = htons((unsigned short) port);</span>
+<span class='curline'><a href='../S/1041.html#L1522'>sa</a>               1522 ext/sockets/sockets.c 				if (! php_set_inet_addr(sa, addr, php_sock TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/1041.html#L1526'>sa</a>               1526 ext/sockets/sockets.c 				retval = bind(php_sock-&gt;bsd_socket, (struct sockaddr *)sa, sizeof(struct sockaddr_in));</span>
+<span class='curline'><a href='../S/1041.html#L1532'>sa</a>               1532 ext/sockets/sockets.c 				struct sockaddr_in6 *sa = (struct sockaddr_in6 *) sock_type;</span>
+<span class='curline'><a href='../S/1041.html#L1534'>sa</a>               1534 ext/sockets/sockets.c 				sa-&gt;sin6_family = AF_INET6;</span>
+<span class='curline'><a href='../S/1041.html#L1535'>sa</a>               1535 ext/sockets/sockets.c 				sa-&gt;sin6_port = htons((unsigned short) port);</span>
+<span class='curline'><a href='../S/1041.html#L1537'>sa</a>               1537 ext/sockets/sockets.c 				if (! php_set_inet6_addr(sa, addr, php_sock TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/1041.html#L1541'>sa</a>               1541 ext/sockets/sockets.c 				retval = bind(php_sock-&gt;bsd_socket, (struct sockaddr *)sa, sizeof(struct sockaddr_in6));</span>
+<span class='curline'><a href='../S/1187.html#L334'>sa</a>                334 ext/standard/streamsfuncs.c 	php_sockaddr_storage sa;</span>
+<span class='curline'><a href='../S/1187.html#L344'>sa</a>                344 ext/standard/streamsfuncs.c 		if (FAILURE == php_network_parse_network_address_with_port(target_addr, target_addr_len, (struct sockaddr*)&amp;sa, &amp;sl TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/1187.html#L350'>sa</a>                350 ext/standard/streamsfuncs.c 	RETURN_LONG(php_stream_xport_sendto(stream, data, datalen, flags, target_addr ? &amp;sa : NULL, sl TSRMLS_CC));</span>
+<span class='curline'><a href='../S/1366.html#L429'>sa</a>                429 main/network.c 	struct sockaddr **sal, **psal, *sa;</span>
+<span class='curline'><a href='../S/1366.html#L440'>sa</a>                440 main/network.c 		sa = *sal;</span>
+<span class='curline'><a href='../S/1366.html#L443'>sa</a>                443 main/network.c 		sock = socket(sa-&gt;sa_family, socktype, 0);</span>
+<span class='curline'><a href='../S/1366.html#L449'>sa</a>                449 main/network.c 		switch (sa-&gt;sa_family) {</span>
+<span class='curline'><a href='../S/1366.html#L452'>sa</a>                452 main/network.c 				((struct sockaddr_in6 *)sa)-&gt;sin6_family = sa-&gt;sa_family;</span>
+<span class='curline'><a href='../S/1366.html#L453'>sa</a>                453 main/network.c 				((struct sockaddr_in6 *)sa)-&gt;sin6_port = htons(port);</span>
+<span class='curline'><a href='../S/1366.html#L458'>sa</a>                458 main/network.c 				((struct sockaddr_in *)sa)-&gt;sin_family = sa-&gt;sa_family;</span>
+<span class='curline'><a href='../S/1366.html#L459'>sa</a>                459 main/network.c 				((struct sockaddr_in *)sa)-&gt;sin_port = htons(port);</span>
+<span class='curline'><a href='../S/1366.html#L465'>sa</a>                465 main/network.c 				sa = NULL;</span>
+<span class='curline'><a href='../S/1366.html#L468'>sa</a>                468 main/network.c 		if (sa) {</span>
+<span class='curline'><a href='../S/1366.html#L478'>sa</a>                478 main/network.c 			n = bind(sock, sa, socklen);</span>
+<span class='curline'><a href='../S/1366.html#L507'>sa</a>                507 main/network.c PHPAPI int php_network_parse_network_address_with_port(const char *addr, long addrlen, struct sockaddr *sa, socklen_t *sl TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1366.html#L513'>sa</a>                513 main/network.c 	struct sockaddr_in *in4 = (struct sockaddr_in*)sa;</span>
+<span class='curline'><a href='../S/1366.html#L518'>sa</a>                518 main/network.c 	struct sockaddr_in6 *in6 = (struct sockaddr_in6*)sa;</span>
+<span class='curline'><a href='../S/1366.html#L596'>sa</a>                596 main/network.c 		struct sockaddr *sa, socklen_t sl,</span>
+<span class='curline'><a href='../S/1366.html#L606'>sa</a>                606 main/network.c 		memcpy(*addr, sa, sl);</span>
+<span class='curline'><a href='../S/1366.html#L616'>sa</a>                616 main/network.c 		switch (sa-&gt;sa_family) {</span>
+<span class='curline'><a href='../S/1366.html#L619'>sa</a>                619 main/network.c 				buf = inet_ntoa(((struct sockaddr_in*)sa)-&gt;sin_addr);</span>
+<span class='curline'><a href='../S/1366.html#L622'>sa</a>                622 main/network.c 						buf, ntohs(((struct sockaddr_in*)sa)-&gt;sin_port));</span>
+<span class='curline'><a href='../S/1366.html#L629'>sa</a>                629 main/network.c 				buf = (char*)inet_ntop(sa-&gt;sa_family, &amp;((struct sockaddr_in6*)sa)-&gt;sin6_addr, (char *)&amp;abuf, sizeof(abuf));</span>
+<span class='curline'><a href='../S/1366.html#L632'>sa</a>                632 main/network.c 						buf, ntohs(((struct sockaddr_in6*)sa)-&gt;sin6_port));</span>
+<span class='curline'><a href='../S/1366.html#L640'>sa</a>                640 main/network.c 					struct sockaddr_un *ua = (struct sockaddr_un*)sa;</span>
+<span class='curline'><a href='../S/1366.html#L668'>sa</a>                668 main/network.c 	php_sockaddr_storage sa;</span>
+<span class='curline'><a href='../S/1366.html#L669'>sa</a>                669 main/network.c 	socklen_t sl = sizeof(sa);</span>
+<span class='curline'><a href='../S/1366.html#L670'>sa</a>                670 main/network.c 	memset(&amp;sa, 0, sizeof(sa));</span>
+<span class='curline'><a href='../S/1366.html#L672'>sa</a>                672 main/network.c 	if (getpeername(sock, (struct sockaddr*)&amp;sa, &amp;sl) == 0) {</span>
+<span class='curline'><a href='../S/1366.html#L673'>sa</a>                673 main/network.c 		php_network_populate_name_from_sockaddr((struct sockaddr*)&amp;sa, sl,</span>
+<span class='curline'><a href='../S/1366.html#L688'>sa</a>                688 main/network.c 	php_sockaddr_storage sa;</span>
+<span class='curline'><a href='../S/1366.html#L689'>sa</a>                689 main/network.c 	socklen_t sl = sizeof(sa);</span>
+<span class='curline'><a href='../S/1366.html#L690'>sa</a>                690 main/network.c 	memset(&amp;sa, 0, sizeof(sa));</span>
+<span class='curline'><a href='../S/1366.html#L692'>sa</a>                692 main/network.c 	if (getsockname(sock, (struct sockaddr*)&amp;sa, &amp;sl) == 0) {</span>
+<span class='curline'><a href='../S/1366.html#L693'>sa</a>                693 main/network.c 		php_network_populate_name_from_sockaddr((struct sockaddr*)&amp;sa, sl,</span>
+<span class='curline'><a href='../S/1366.html#L724'>sa</a>                724 main/network.c 	php_sockaddr_storage sa;</span>
+<span class='curline'><a href='../S/1366.html#L734'>sa</a>                734 main/network.c 		sl = sizeof(sa);</span>
+<span class='curline'><a href='../S/1366.html#L736'>sa</a>                736 main/network.c 		clisock = accept(srvsock, (struct sockaddr*)&amp;sa, &amp;sl);</span>
+<span class='curline'><a href='../S/1366.html#L739'>sa</a>                739 main/network.c 			php_network_populate_name_from_sockaddr((struct sockaddr*)&amp;sa, sl,</span>
+<span class='curline'><a href='../S/1366.html#L775'>sa</a>                775 main/network.c 	struct sockaddr **sal, **psal, *sa;</span>
+<span class='curline'><a href='../S/1366.html#L803'>sa</a>                803 main/network.c 		sa = *sal;</span>
+<span class='curline'><a href='../S/1366.html#L806'>sa</a>                806 main/network.c 		sock = socket(sa-&gt;sa_family, socktype, 0);</span>
+<span class='curline'><a href='../S/1366.html#L812'>sa</a>                812 main/network.c 		switch (sa-&gt;sa_family) {</span>
+<span class='curline'><a href='../S/1366.html#L816'>sa</a>                816 main/network.c 					((struct sockaddr_in6 *)sa)-&gt;sin6_family = sa-&gt;sa_family;</span>
+<span class='curline'><a href='../S/1366.html#L817'>sa</a>                817 main/network.c 					((struct sockaddr_in6 *)sa)-&gt;sin6_port = htons(port);</span>
+<span class='curline'><a href='../S/1366.html#L821'>sa</a>                821 main/network.c 					sa = NULL;</span>
+<span class='curline'><a href='../S/1366.html#L826'>sa</a>                826 main/network.c 				((struct sockaddr_in *)sa)-&gt;sin_family = sa-&gt;sa_family;</span>
+<span class='curline'><a href='../S/1366.html#L827'>sa</a>                827 main/network.c 				((struct sockaddr_in *)sa)-&gt;sin_port = htons(port);</span>
+<span class='curline'><a href='../S/1366.html#L833'>sa</a>                833 main/network.c 				sa = NULL;</span>
+<span class='curline'><a href='../S/1366.html#L836'>sa</a>                836 main/network.c 		if (sa) {</span>
+<span class='curline'><a href='../S/1366.html#L843'>sa</a>                843 main/network.c 				if (sa-&gt;sa_family == AF_INET) {</span>
+<span class='curline'><a href='../S/1366.html#L849'>sa</a>                849 main/network.c 					in4-&gt;sin_family = sa-&gt;sa_family;</span>
+<span class='curline'><a href='../S/1366.html#L864'>sa</a>                864 main/network.c 					in6-&gt;sin6_family = sa-&gt;sa_family;</span>
+<span class='curline'><a href='../S/1366.html#L886'>sa</a>                886 main/network.c 			n = php_network_connect_socket(sock, sa, socklen, asynchronous,</span>
+<span class='curline'><a href='../S/1378.html#L294'>sa</a>                294 main/php_network.h 		struct sockaddr *sa, socklen_t sl,</span>
+<span class='curline'><a href='../S/1378.html#L303'>sa</a>                303 main/php_network.h 		long addrlen, struct sockaddr *sa, socklen_t *sl TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1420.html#L250'>sa</a>                250 main/streams/xp_socket.c 	php_sockaddr_storage sa;</span>
+<span class='curline'><a href='../S/1420.html#L251'>sa</a>                251 main/streams/xp_socket.c 	socklen_t sl = sizeof(sa);</span>
+<span class='curline'><a href='../S/1420.html#L256'>sa</a>                256 main/streams/xp_socket.c 		ret = recvfrom(sock-&gt;socket, buf, buflen, flags, (struct sockaddr*)&amp;sa, &amp;sl);</span>
+<span class='curline'><a href='../S/1420.html#L258'>sa</a>                258 main/streams/xp_socket.c 		php_network_populate_name_from_sockaddr((struct sockaddr*)&amp;sa, sl,</span>
+<span class='curline'><a href='../S/1450.html#L136'>sa</a>                136 sapi/cgi/fastcgi.c 	struct sockaddr     sa;</span>
+<span class='curline'><a href='../S/1450.html#L415'>sa</a>                415 sapi/cgi/fastcgi.c 		sa_t sa;</span>
+<span class='curline'><a href='../S/1450.html#L416'>sa</a>                416 sapi/cgi/fastcgi.c 		socklen_t len = sizeof(sa);</span>
+<span class='curline'><a href='../S/1450.html#L459'>sa</a>                459 sapi/cgi/fastcgi.c 		if (getpeername(0, (struct sockaddr *)&amp;sa, &amp;len) != 0 &amp;&amp; errno == ENOTCONN) {</span>
+<span class='curline'><a href='../S/1450.html#L499'>sa</a>                499 sapi/cgi/fastcgi.c static PACL prepare_named_pipe_acl(PSECURITY_DESCRIPTOR sd, LPSECURITY_ATTRIBUTES sa)</span>
+<span class='curline'><a href='../S/1450.html#L551'>sa</a>                551 sapi/cgi/fastcgi.c 	sa-&gt;lpSecurityDescriptor = sd;</span>
+<span class='curline'><a href='../S/1450.html#L579'>sa</a>                579 sapi/cgi/fastcgi.c 	sa_t      sa;</span>
+<span class='curline'><a href='../S/1450.html#L606'>sa</a>                606 sapi/cgi/fastcgi.c 		memset(&amp;sa.sa_inet, 0, sizeof(sa.sa_inet));</span>
+<span class='curline'><a href='../S/1450.html#L607'>sa</a>                607 sapi/cgi/fastcgi.c 		sa.sa_inet.sin_family = AF_INET;</span>
+<span class='curline'><a href='../S/1450.html#L608'>sa</a>                608 sapi/cgi/fastcgi.c 		sa.sa_inet.sin_port = htons(port);</span>
+<span class='curline'><a href='../S/1450.html#L609'>sa</a>                609 sapi/cgi/fastcgi.c 		sock_len = sizeof(sa.sa_inet);</span>
+<span class='curline'><a href='../S/1450.html#L612'>sa</a>                612 sapi/cgi/fastcgi.c 			sa.sa_inet.sin_addr.s_addr = htonl(INADDR_ANY);</span>
+<span class='curline'><a href='../S/1450.html#L614'>sa</a>                614 sapi/cgi/fastcgi.c 			sa.sa_inet.sin_addr.s_addr = inet_addr(host);</span>
+<span class='curline'><a href='../S/1450.html#L615'>sa</a>                615 sapi/cgi/fastcgi.c 			if (sa.sa_inet.sin_addr.s_addr == INADDR_NONE) {</span>
+<span class='curline'><a href='../S/1450.html#L630'>sa</a>                630 sapi/cgi/fastcgi.c 				sa.sa_inet.sin_addr.s_addr = ((struct in_addr*)hep-&gt;h_addr_list[0])-&gt;s_addr;</span>
+<span class='curline'><a href='../S/1450.html#L640'>sa</a>                640 sapi/cgi/fastcgi.c 		memset(&amp;sa, 0, sizeof(saw));</span>
+<span class='curline'><a href='../S/1450.html#L663'>sa</a>                663 sapi/cgi/fastcgi.c 		if (path_len &gt;= sizeof(sa.sa_unix.sun_path)) {</span>
+<span class='curline'><a href='../S/1450.html#L668'>sa</a>                668 sapi/cgi/fastcgi.c 		memset(&amp;sa.sa_unix, 0, sizeof(sa.sa_unix));</span>
+<span class='curline'><a href='../S/1450.html#L669'>sa</a>                669 sapi/cgi/fastcgi.c 		sa.sa_unix.sun_family = AF_UNIX;</span>
+<span class='curline'><a href='../S/1450.html#L670'>sa</a>                670 sapi/cgi/fastcgi.c 		memcpy(sa.sa_unix.sun_path, path, path_len + 1);</span>
+<span class='curline'><a href='../S/1450.html#L673'>sa</a>                673 sapi/cgi/fastcgi.c 		sa.sa_unix.sun_len = sock_len;</span>
+<span class='curline'><a href='../S/1450.html#L680'>sa</a>                680 sapi/cgi/fastcgi.c 	if ((listen_socket = socket(sa.sa.sa_family, SOCK_STREAM, 0)) &lt; 0 ||</span>
+<span class='curline'><a href='../S/1450.html#L684'>sa</a>                684 sapi/cgi/fastcgi.c 	    bind(listen_socket, (struct sockaddr *) &amp;sa, sock_len) &lt; 0 ||</span>
+<span class='curline'><a href='../S/1450.html#L1186'>sa</a>               1186 sapi/cgi/fastcgi.c 					sa_t sa;</span>
+<span class='curline'><a href='../S/1450.html#L1187'>sa</a>               1187 sapi/cgi/fastcgi.c 					socklen_t len = sizeof(sa);</span>
+<span class='curline'><a href='../S/1450.html#L1190'>sa</a>               1190 sapi/cgi/fastcgi.c 					req-&gt;fd = accept(listen_socket, (struct sockaddr *)&amp;sa, &amp;len);</span>
+<span class='curline'><a href='../S/1450.html#L1193'>sa</a>               1193 sapi/cgi/fastcgi.c 						if (((struct sockaddr *)&amp;sa)-&gt;sa_family == AF_INET) {</span>
+<span class='curline'><a href='../S/1450.html#L1202'>sa</a>               1202 sapi/cgi/fastcgi.c 									if (allowed_clients[n] == sa.sa_inet.sin_addr.s_addr) {</span>
+<span class='curline'><a href='../S/1450.html#L1209'>sa</a>               1209 sapi/cgi/fastcgi.c 									fprintf(stderr, "Connection from disallowed IP address '%s' is dropped.\n", inet_ntoa(sa.sa_inet.sin_addr));</span>
+<span class='curline'><a href='../S/1457.html#L1296'>sa</a>               1296 sapi/cli/php_cli_server.c 	struct sockaddr *sa = NULL, **p, **sal;</span>
+<span class='curline'><a href='../S/1457.html#L1303'>sa</a>               1303 sapi/cli/php_cli_server.c 		if (sa) {</span>
+<span class='curline'><a href='../S/1457.html#L1304'>sa</a>               1304 sapi/cli/php_cli_server.c 			pefree(sa, 1);</span>
+<span class='curline'><a href='../S/1457.html#L1305'>sa</a>               1305 sapi/cli/php_cli_server.c 			sa = NULL;</span>
+<span class='curline'><a href='../S/1457.html#L1316'>sa</a>               1316 sapi/cli/php_cli_server.c 			sa = pemalloc(sizeof(struct sockaddr_in6), 1);</span>
+<span class='curline'><a href='../S/1457.html#L1317'>sa</a>               1317 sapi/cli/php_cli_server.c 			if (!sa) {</span>
+<span class='curline'><a href='../S/1457.html#L1323'>sa</a>               1323 sapi/cli/php_cli_server.c 			*(struct sockaddr_in6 *)sa = *(struct sockaddr_in6 *)*p;</span>
+<span class='curline'><a href='../S/1457.html#L1324'>sa</a>               1324 sapi/cli/php_cli_server.c 			((struct sockaddr_in6 *)sa)-&gt;sin6_port = htons(*port);</span>
+<span class='curline'><a href='../S/1457.html#L1329'>sa</a>               1329 sapi/cli/php_cli_server.c 			sa = pemalloc(sizeof(struct sockaddr_in), 1);</span>
+<span class='curline'><a href='../S/1457.html#L1330'>sa</a>               1330 sapi/cli/php_cli_server.c 			if (!sa) {</span>
+<span class='curline'><a href='../S/1457.html#L1336'>sa</a>               1336 sapi/cli/php_cli_server.c 			*(struct sockaddr_in *)sa = *(struct sockaddr_in *)*p;</span>
+<span class='curline'><a href='../S/1457.html#L1337'>sa</a>               1337 sapi/cli/php_cli_server.c 			((struct sockaddr_in *)sa)-&gt;sin_port = htons(*port);</span>
+<span class='curline'><a href='../S/1457.html#L1354'>sa</a>               1354 sapi/cli/php_cli_server.c 		if (bind(retval, sa, *socklen) == SOCK_CONN_ERR) {</span>
+<span class='curline'><a href='../S/1457.html#L1365'>sa</a>               1365 sapi/cli/php_cli_server.c 		*af = sa-&gt;sa_family;</span>
+<span class='curline'><a href='../S/1457.html#L1367'>sa</a>               1367 sapi/cli/php_cli_server.c 			if (getsockname(retval, sa, socklen)) {</span>
+<span class='curline'><a href='../S/1457.html#L1371'>sa</a>               1371 sapi/cli/php_cli_server.c 			switch (sa-&gt;sa_family) {</span>
+<span class='curline'><a href='../S/1457.html#L1374'>sa</a>               1374 sapi/cli/php_cli_server.c 				*port = ntohs(((struct sockaddr_in6 *)sa)-&gt;sin6_port);</span>
+<span class='curline'><a href='../S/1457.html#L1378'>sa</a>               1378 sapi/cli/php_cli_server.c 				*port = ntohs(((struct sockaddr_in *)sa)-&gt;sin_port);</span>
+<span class='curline'><a href='../S/1457.html#L1396'>sa</a>               1396 sapi/cli/php_cli_server.c 	if (sa) {</span>
+<span class='curline'><a href='../S/1457.html#L1397'>sa</a>               1397 sapi/cli/php_cli_server.c 		pefree(sa, 1);</span>
+<span class='curline'><a href='../S/1457.html#L2459'>sa</a>               2459 sapi/cli/php_cli_server.c 		struct sockaddr *sa = pemalloc(server-&gt;socklen, 1);</span>
+<span class='curline'><a href='../S/1457.html#L2460'>sa</a>               2460 sapi/cli/php_cli_server.c 		if (!sa) {</span>
+<span class='curline'><a href='../S/1457.html#L2463'>sa</a>               2463 sapi/cli/php_cli_server.c 		client_sock = accept(server-&gt;server_sock, sa, &amp;socklen);</span>
+<span class='curline'><a href='../S/1457.html#L2469'>sa</a>               2469 sapi/cli/php_cli_server.c 			pefree(sa, 1);</span>
+<span class='curline'><a href='../S/1457.html#L2473'>sa</a>               2473 sapi/cli/php_cli_server.c 			pefree(sa, 1);</span>
+<span class='curline'><a href='../S/1457.html#L2477'>sa</a>               2477 sapi/cli/php_cli_server.c 		if (!(client = pemalloc(sizeof(php_cli_server_client), 1)) || FAILURE == php_cli_server_client_ctor(client, server, client_sock, sa, socklen TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/1457.html#L2479'>sa</a>               2479 sapi/cli/php_cli_server.c 			pefree(sa, 1);</span>
+<span class='curline'><a href='../S/1478.html#L135'>sa</a>                135 sapi/fpm/fpm/fastcgi.c 	struct sockaddr     sa;</span>
+<span class='curline'><a href='../S/1478.html#L269'>sa</a>                269 sapi/fpm/fpm/fastcgi.c 				allowed_clients[n].sa.sa_family = AF_INET;</span>
+<span class='curline'><a href='../S/1478.html#L272'>sa</a>                272 sapi/fpm/fpm/fastcgi.c 				allowed_clients[n].sa.sa_family = AF_INET6;</span>
+<span class='curline'><a href='../S/1478.html#L279'>sa</a>                279 sapi/fpm/fpm/fastcgi.c 		allowed_clients[n].sa.sa_family = 0;</span>
+<span class='curline'><a href='../S/1478.html#L772'>sa</a>                772 sapi/fpm/fpm/fastcgi.c 	if (client_sa.sa.sa_family == AF_UNIX) {</span>
+<span class='curline'><a href='../S/1478.html#L778'>sa</a>                778 sapi/fpm/fpm/fastcgi.c 	if (client_sa.sa.sa_family == AF_INET) {</span>
+<span class='curline'><a href='../S/1478.html#L779'>sa</a>                779 sapi/fpm/fpm/fastcgi.c 		for (i=0 ; allowed_clients[i].sa.sa_family ; i++) {</span>
+<span class='curline'><a href='../S/1478.html#L780'>sa</a>                780 sapi/fpm/fpm/fastcgi.c 			if (allowed_clients[i].sa.sa_family == AF_INET</span>
+<span class='curline'><a href='../S/1478.html#L786'>sa</a>                786 sapi/fpm/fpm/fastcgi.c 	if (client_sa.sa.sa_family == AF_INET6) {</span>
+<span class='curline'><a href='../S/1478.html#L787'>sa</a>                787 sapi/fpm/fpm/fastcgi.c 		for (i=0 ; allowed_clients[i].sa.sa_family ; i++) {</span>
+<span class='curline'><a href='../S/1478.html#L788'>sa</a>                788 sapi/fpm/fpm/fastcgi.c 			if (allowed_clients[i].sa.sa_family == AF_INET6</span>
+<span class='curline'><a href='../S/1478.html#L793'>sa</a>                793 sapi/fpm/fpm/fastcgi.c 			if (allowed_clients[i].sa.sa_family == AF_INET</span>
+<span class='curline'><a href='../S/1478.html#L846'>sa</a>                846 sapi/fpm/fpm/fastcgi.c 					sa_t sa;</span>
+<span class='curline'><a href='../S/1478.html#L847'>sa</a>                847 sapi/fpm/fpm/fastcgi.c 					socklen_t len = sizeof(sa);</span>
+<span class='curline'><a href='../S/1478.html#L852'>sa</a>                852 sapi/fpm/fpm/fastcgi.c 					req-&gt;fd = accept(listen_socket, (struct sockaddr *)&amp;sa, &amp;len);</span>
+<span class='curline'><a href='../S/1478.html#L855'>sa</a>                855 sapi/fpm/fpm/fastcgi.c 					client_sa = sa;</span>
+<span class='curline'><a href='../S/1478.html#L1134'>sa</a>               1134 sapi/fpm/fpm/fastcgi.c 	if (client_sa.sa.sa_family == AF_INET) {</span>
+<span class='curline'><a href='../S/1478.html#L1135'>sa</a>               1135 sapi/fpm/fpm/fastcgi.c 		return inet_ntop(client_sa.sa.sa_family, &amp;client_sa.sa_inet.sin_addr, str, INET6_ADDRSTRLEN);</span>
+<span class='curline'><a href='../S/1478.html#L1139'>sa</a>               1139 sapi/fpm/fpm/fastcgi.c 	if (client_sa.sa.sa_family == AF_INET6</span>
+<span class='curline'><a href='../S/1478.html#L1145'>sa</a>               1145 sapi/fpm/fpm/fastcgi.c 	if (client_sa.sa.sa_family == AF_INET6) {</span>
+<span class='curline'><a href='../S/1478.html#L1146'>sa</a>               1146 sapi/fpm/fpm/fastcgi.c 		return inet_ntop(client_sa.sa.sa_family, &amp;client_sa.sa_inet6.sin6_addr, str, INET6_ADDRSTRLEN);</span>
+<span class='curline'><a href='../S/1514.html#L78'>sa</a>                 78 sapi/fpm/fpm/fpm_sockets.c static void *fpm_get_in_addr(struct sockaddr *sa) /* {{{ */</span>
+<span class='curline'><a href='../S/1514.html#L80'>sa</a>                 80 sapi/fpm/fpm/fpm_sockets.c     if (sa-&gt;sa_family == AF_INET) {</span>
+<span class='curline'><a href='../S/1514.html#L81'>sa</a>                 81 sapi/fpm/fpm/fpm_sockets.c         return &amp;(((struct sockaddr_in*)sa)-&gt;sin_addr);</span>
+<span class='curline'><a href='../S/1514.html#L84'>sa</a>                 84 sapi/fpm/fpm/fpm_sockets.c     return &amp;(((struct sockaddr_in6*)sa)-&gt;sin6_addr);</span>
+<span class='curline'><a href='../S/1514.html#L88'>sa</a>                 88 sapi/fpm/fpm/fpm_sockets.c static int fpm_get_in_port(struct sockaddr *sa) /* {{{ */</span>
+<span class='curline'><a href='../S/1514.html#L90'>sa</a>                 90 sapi/fpm/fpm/fpm_sockets.c     if (sa-&gt;sa_family == AF_INET) {</span>
+<span class='curline'><a href='../S/1514.html#L91'>sa</a>                 91 sapi/fpm/fpm/fpm_sockets.c         return ntohs(((struct sockaddr_in*)sa)-&gt;sin_port);</span>
+<span class='curline'><a href='../S/1514.html#L94'>sa</a>                 94 sapi/fpm/fpm/fpm_sockets.c     return ntohs(((struct sockaddr_in6*)sa)-&gt;sin6_port);</span>
+<span class='curline'><a href='../S/1514.html#L98'>sa</a>                 98 sapi/fpm/fpm/fpm_sockets.c static int fpm_sockets_hash_op(int sock, struct sockaddr *sa, char *key, int type, int op) /* {{{ */</span>
+<span class='curline'><a href='../S/1514.html#L104'>sa</a>                104 sapi/fpm/fpm/fpm_sockets.c 				inet_ntop(sa-&gt;sa_family, fpm_get_in_addr(sa), key, INET6_ADDRSTRLEN);</span>
+<span class='curline'><a href='../S/1514.html#L105'>sa</a>                105 sapi/fpm/fpm/fpm_sockets.c 				sprintf(key+strlen(key), ":%d", fpm_get_in_port(sa));</span>
+<span class='curline'><a href='../S/1514.html#L110'>sa</a>                110 sapi/fpm/fpm/fpm_sockets.c 				struct sockaddr_un *sa_un = (struct sockaddr_un *) sa;</span>
+<span class='curline'><a href='../S/1514.html#L163'>sa</a>                163 sapi/fpm/fpm/fpm_sockets.c static int fpm_sockets_new_listening_socket(struct fpm_worker_pool_s *wp, struct sockaddr *sa, int socklen) /* {{{ */</span>
+<span class='curline'><a href='../S/1514.html#L169'>sa</a>                169 sapi/fpm/fpm/fpm_sockets.c 	sock = socket(sa-&gt;sa_family, SOCK_STREAM, 0);</span>
+<span class='curline'><a href='../S/1514.html#L181'>sa</a>                181 sapi/fpm/fpm/fpm_sockets.c 		if (fpm_socket_unix_test_connect((struct sockaddr_un *)sa, socklen) == 0) {</span>
+<span class='curline'><a href='../S/1514.html#L182'>sa</a>                182 sapi/fpm/fpm/fpm_sockets.c 			zlog(ZLOG_ERROR, "An another FPM instance seems to already listen on %s", ((struct sockaddr_un *) sa)-&gt;sun_path);</span>
+<span class='curline'><a href='../S/1514.html#L186'>sa</a>                186 sapi/fpm/fpm/fpm_sockets.c 		unlink( ((struct sockaddr_un *) sa)-&gt;sun_path);</span>
+<span class='curline'><a href='../S/1514.html#L190'>sa</a>                190 sapi/fpm/fpm/fpm_sockets.c 	if (0 &gt; bind(sock, sa, socklen)) {</span>
+<span class='curline'><a href='../S/1514.html#L200'>sa</a>                200 sapi/fpm/fpm/fpm_sockets.c 		char *path = ((struct sockaddr_un *) sa)-&gt;sun_path;</span>
+<span class='curline'><a href='../S/1514.html#L220'>sa</a>                220 sapi/fpm/fpm/fpm_sockets.c static int fpm_sockets_get_listening_socket(struct fpm_worker_pool_s *wp, struct sockaddr *sa, int socklen) /* {{{ */</span>
+<span class='curline'><a href='../S/1514.html#L224'>sa</a>                224 sapi/fpm/fpm/fpm_sockets.c 	sock = fpm_sockets_hash_op(0, sa, 0, wp-&gt;listen_address_domain, FPM_GET_USE_SOCKET);</span>
+<span class='curline'><a href='../S/1514.html#L229'>sa</a>                229 sapi/fpm/fpm/fpm_sockets.c 	sock = fpm_sockets_new_listening_socket(wp, sa, socklen);</span>
+<span class='curline'><a href='../S/1514.html#L230'>sa</a>                230 sapi/fpm/fpm/fpm_sockets.c 	fpm_sockets_hash_op(sock, sa, 0, wp-&gt;listen_address_domain, FPM_STORE_USE_SOCKET);</span>
+<span class='curline'><a href='../S/1539.html#L202'>sa</a>                202 sapi/litespeed/lsapilib.c     struct sigaction sa;</span>
+<span class='curline'><a href='../S/1539.html#L204'>sa</a>                204 sapi/litespeed/lsapilib.c     sigaction(signo, NULL, &amp;sa);</span>
+<span class='curline'><a href='../S/1539.html#L206'>sa</a>                206 sapi/litespeed/lsapilib.c     if (sa.sa_handler == SIG_DFL)</span>
+<span class='curline'><a href='../S/1539.html#L208'>sa</a>                208 sapi/litespeed/lsapilib.c         sigemptyset(&amp;sa.sa_mask);</span>
+<span class='curline'><a href='../S/1539.html#L209'>sa</a>                209 sapi/litespeed/lsapilib.c         sa.sa_flags = 0;</span>
+<span class='curline'><a href='../S/1539.html#L210'>sa</a>                210 sapi/litespeed/lsapilib.c         sa.sa_handler = handler;</span>
+<span class='curline'><a href='../S/1539.html#L211'>sa</a>                211 sapi/litespeed/lsapilib.c         sigaction(signo, &amp;sa, NULL);</span>
+</pre>
+</body>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>mm_block</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/1644.html#L727'>mm_block</a>          727 Zend/zend_alloc.c static inline void zend_mm_add_to_free_list(zend_mm_heap *heap, zend_mm_free_block *mm_block)</span>
+<span class='curline'><a href='../S/1644.html#L732'>mm_block</a>          732 Zend/zend_alloc.c 	ZEND_MM_SET_MAGIC(mm_block, MEM_BLOCK_FREED);</span>
+<span class='curline'><a href='../S/1644.html#L734'>mm_block</a>          734 Zend/zend_alloc.c 	size = ZEND_MM_FREE_BLOCK_SIZE(mm_block);</span>
+<span class='curline'><a href='../S/1644.html#L740'>mm_block</a>          740 Zend/zend_alloc.c 		mm_block-&gt;child[0] = mm_block-&gt;child[1] = NULL;</span>
+<span class='curline'><a href='../S/1644.html#L742'>mm_block</a>          742 Zend/zend_alloc.c 			*p = mm_block;</span>
+<span class='curline'><a href='../S/1644.html#L743'>mm_block</a>          743 Zend/zend_alloc.c 			mm_block-&gt;parent = p;</span>
+<span class='curline'><a href='../S/1644.html#L744'>mm_block</a>          744 Zend/zend_alloc.c 			mm_block-&gt;prev_free_block = mm_block-&gt;next_free_block = mm_block;</span>
+<span class='curline'><a href='../S/1644.html#L755'>mm_block</a>          755 Zend/zend_alloc.c 						*p = mm_block;</span>
+<span class='curline'><a href='../S/1644.html#L756'>mm_block</a>          756 Zend/zend_alloc.c 						mm_block-&gt;parent = p;</span>
+<span class='curline'><a href='../S/1644.html#L757'>mm_block</a>          757 Zend/zend_alloc.c 						mm_block-&gt;prev_free_block = mm_block-&gt;next_free_block = mm_block;</span>
+<span class='curline'><a href='../S/1644.html#L763'>mm_block</a>          763 Zend/zend_alloc.c 					prev-&gt;next_free_block = next-&gt;prev_free_block = mm_block;</span>
+<span class='curline'><a href='../S/1644.html#L764'>mm_block</a>          764 Zend/zend_alloc.c 					mm_block-&gt;next_free_block = next;</span>
+<span class='curline'><a href='../S/1644.html#L765'>mm_block</a>          765 Zend/zend_alloc.c 					mm_block-&gt;prev_free_block = prev;</span>
+<span class='curline'><a href='../S/1644.html#L766'>mm_block</a>          766 Zend/zend_alloc.c 					mm_block-&gt;parent = NULL;</span>
+<span class='curline'><a href='../S/1644.html#L782'>mm_block</a>          782 Zend/zend_alloc.c 		mm_block-&gt;prev_free_block = prev;</span>
+<span class='curline'><a href='../S/1644.html#L783'>mm_block</a>          783 Zend/zend_alloc.c 		mm_block-&gt;next_free_block = next;</span>
+<span class='curline'><a href='../S/1644.html#L784'>mm_block</a>          784 Zend/zend_alloc.c 		prev-&gt;next_free_block = next-&gt;prev_free_block = mm_block;</span>
+<span class='curline'><a href='../S/1644.html#L788'>mm_block</a>          788 Zend/zend_alloc.c static inline void zend_mm_remove_from_free_list(zend_mm_heap *heap, zend_mm_free_block *mm_block)</span>
+<span class='curline'><a href='../S/1644.html#L790'>mm_block</a>          790 Zend/zend_alloc.c 	zend_mm_free_block *prev = mm_block-&gt;prev_free_block;</span>
+<span class='curline'><a href='../S/1644.html#L791'>mm_block</a>          791 Zend/zend_alloc.c 	zend_mm_free_block *next = mm_block-&gt;next_free_block;</span>
+<span class='curline'><a href='../S/1644.html#L793'>mm_block</a>          793 Zend/zend_alloc.c 	ZEND_MM_CHECK_MAGIC(mm_block, MEM_BLOCK_FREED);</span>
+<span class='curline'><a href='../S/1644.html#L795'>mm_block</a>          795 Zend/zend_alloc.c 	if (EXPECTED(prev == mm_block)) {</span>
+<span class='curline'><a href='../S/1644.html#L799'>mm_block</a>          799 Zend/zend_alloc.c 		if (UNEXPECTED(next != mm_block)) {</span>
+<span class='curline'><a href='../S/1644.html#L804'>mm_block</a>          804 Zend/zend_alloc.c 		rp = &amp;mm_block-&gt;child[mm_block-&gt;child[1] != NULL];</span>
+<span class='curline'><a href='../S/1644.html#L807'>mm_block</a>          807 Zend/zend_alloc.c 			size_t index = ZEND_MM_LARGE_BUCKET_INDEX(ZEND_MM_FREE_BLOCK_SIZE(mm_block));</span>
+<span class='curline'><a href='../S/1644.html#L809'>mm_block</a>          809 Zend/zend_alloc.c 			ZEND_MM_CHECK_TREE(mm_block);</span>
+<span class='curline'><a href='../S/1644.html#L810'>mm_block</a>          810 Zend/zend_alloc.c 			*mm_block-&gt;parent = NULL;</span>
+<span class='curline'><a href='../S/1644.html#L811'>mm_block</a>          811 Zend/zend_alloc.c 			if (mm_block-&gt;parent == &amp;heap-&gt;large_free_buckets[index]) {</span>
+<span class='curline'><a href='../S/1644.html#L822'>mm_block</a>          822 Zend/zend_alloc.c 			ZEND_MM_CHECK_TREE(mm_block);</span>
+<span class='curline'><a href='../S/1644.html#L823'>mm_block</a>          823 Zend/zend_alloc.c 			*mm_block-&gt;parent = prev;</span>
+<span class='curline'><a href='../S/1644.html#L824'>mm_block</a>          824 Zend/zend_alloc.c 			prev-&gt;parent = mm_block-&gt;parent;</span>
+<span class='curline'><a href='../S/1644.html#L825'>mm_block</a>          825 Zend/zend_alloc.c 			if ((prev-&gt;child[0] = mm_block-&gt;child[0])) {</span>
+<span class='curline'><a href='../S/1644.html#L829'>mm_block</a>          829 Zend/zend_alloc.c 			if ((prev-&gt;child[1] = mm_block-&gt;child[1])) {</span>
+<span class='curline'><a href='../S/1644.html#L837'>mm_block</a>          837 Zend/zend_alloc.c 		if (UNEXPECTED(prev-&gt;next_free_block != mm_block) || UNEXPECTED(next-&gt;prev_free_block != mm_block)) {</span>
+<span class='curline'><a href='../S/1644.html#L845'>mm_block</a>          845 Zend/zend_alloc.c 		if (EXPECTED(ZEND_MM_SMALL_SIZE(ZEND_MM_FREE_BLOCK_SIZE(mm_block)))) {</span>
+<span class='curline'><a href='../S/1644.html#L847'>mm_block</a>          847 Zend/zend_alloc.c 				size_t index = ZEND_MM_BUCKET_INDEX(ZEND_MM_FREE_BLOCK_SIZE(mm_block));</span>
+<span class='curline'><a href='../S/1644.html#L853'>mm_block</a>          853 Zend/zend_alloc.c 		} else if (UNEXPECTED(mm_block-&gt;parent == ZEND_MM_REST_BLOCK)) {</span>
+<span class='curline'><a href='../S/1644.html#L855'>mm_block</a>          855 Zend/zend_alloc.c 		} else if (UNEXPECTED(mm_block-&gt;parent != NULL)) {</span>
+<span class='curline'><a href='../S/1644.html#L861'>mm_block</a>          861 Zend/zend_alloc.c static inline void zend_mm_add_to_rest_list(zend_mm_heap *heap, zend_mm_free_block *mm_block)</span>
+<span class='curline'><a href='../S/1644.html#L878'>mm_block</a>          878 Zend/zend_alloc.c 	if (!ZEND_MM_SMALL_SIZE(ZEND_MM_FREE_BLOCK_SIZE(mm_block))) {</span>
+<span class='curline'><a href='../S/1644.html#L879'>mm_block</a>          879 Zend/zend_alloc.c 		mm_block-&gt;parent = ZEND_MM_REST_BLOCK;</span>
+<span class='curline'><a href='../S/1644.html#L883'>mm_block</a>          883 Zend/zend_alloc.c 	ZEND_MM_SET_MAGIC(mm_block, MEM_BLOCK_FREED);</span>
+<span class='curline'><a href='../S/1644.html#L887'>mm_block</a>          887 Zend/zend_alloc.c 	mm_block-&gt;prev_free_block = prev;</span>
+<span class='curline'><a href='../S/1644.html#L888'>mm_block</a>          888 Zend/zend_alloc.c 	mm_block-&gt;next_free_block = next;</span>
+<span class='curline'><a href='../S/1644.html#L889'>mm_block</a>          889 Zend/zend_alloc.c 	prev-&gt;next_free_block = next-&gt;prev_free_block = mm_block;</span>
+<span class='curline'><a href='../S/1644.html#L938'>mm_block</a>          938 Zend/zend_alloc.c 			zend_mm_free_block *mm_block = heap-&gt;cache[i];</span>
+<span class='curline'><a href='../S/1644.html#L940'>mm_block</a>          940 Zend/zend_alloc.c 			while (mm_block) {</span>
+<span class='curline'><a href='../S/1644.html#L941'>mm_block</a>          941 Zend/zend_alloc.c 				size_t size = ZEND_MM_BLOCK_SIZE(mm_block);</span>
+<span class='curline'><a href='../S/1644.html#L942'>mm_block</a>          942 Zend/zend_alloc.c 				zend_mm_free_block *q = mm_block-&gt;prev_free_block;</span>
+<span class='curline'><a href='../S/1644.html#L943'>mm_block</a>          943 Zend/zend_alloc.c 				zend_mm_block *next_block = ZEND_MM_NEXT_BLOCK(mm_block);</span>
+<span class='curline'><a href='../S/1644.html#L947'>mm_block</a>          947 Zend/zend_alloc.c 				if (ZEND_MM_PREV_BLOCK_IS_FREE(mm_block)) {</span>
+<span class='curline'><a href='../S/1644.html#L948'>mm_block</a>          948 Zend/zend_alloc.c 					mm_block = (zend_mm_free_block*)ZEND_MM_PREV_BLOCK(mm_block);</span>
+<span class='curline'><a href='../S/1644.html#L949'>mm_block</a>          949 Zend/zend_alloc.c 					size += ZEND_MM_FREE_BLOCK_SIZE(mm_block);</span>
+<span class='curline'><a href='../S/1644.html#L950'>mm_block</a>          950 Zend/zend_alloc.c 					zend_mm_remove_from_free_list(heap, (zend_mm_free_block *) mm_block);</span>
+<span class='curline'><a href='../S/1644.html#L956'>mm_block</a>          956 Zend/zend_alloc.c 				ZEND_MM_BLOCK(mm_block, ZEND_MM_FREE_BLOCK, size);</span>
+<span class='curline'><a href='../S/1644.html#L958'>mm_block</a>          958 Zend/zend_alloc.c 				if (ZEND_MM_IS_FIRST_BLOCK(mm_block) &amp;&amp;</span>
+<span class='curline'><a href='../S/1644.html#L959'>mm_block</a>          959 Zend/zend_alloc.c 				    ZEND_MM_IS_GUARD_BLOCK(ZEND_MM_NEXT_BLOCK(mm_block))) {</span>
+<span class='curline'><a href='../S/1644.html#L960'>mm_block</a>          960 Zend/zend_alloc.c 					zend_mm_del_segment(heap, (zend_mm_segment *) ((char *)mm_block - ZEND_MM_ALIGNED_SEGMENT_SIZE));</span>
+<span class='curline'><a href='../S/1644.html#L962'>mm_block</a>          962 Zend/zend_alloc.c 					zend_mm_add_to_free_list(heap, (zend_mm_free_block *) mm_block);</span>
+<span class='curline'><a href='../S/1644.html#L965'>mm_block</a>          965 Zend/zend_alloc.c 				mm_block = q;</span>
+<span class='curline'><a href='../S/1644.html#L2062'>mm_block</a>         2062 Zend/zend_alloc.c 	zend_mm_block *mm_block;</span>
+<span class='curline'><a href='../S/1644.html#L2074'>mm_block</a>         2074 Zend/zend_alloc.c 	mm_block = ZEND_MM_HEADER_OF(p);</span>
+<span class='curline'><a href='../S/1644.html#L2075'>mm_block</a>         2075 Zend/zend_alloc.c 	size = ZEND_MM_BLOCK_SIZE(mm_block);</span>
+<span class='curline'><a href='../S/1644.html#L2076'>mm_block</a>         2076 Zend/zend_alloc.c 	ZEND_MM_CHECK_PROTECTION(mm_block);</span>
+<span class='curline'><a href='../S/1644.html#L2079'>mm_block</a>         2079 Zend/zend_alloc.c 	memset(ZEND_MM_DATA_OF(mm_block), 0x5a, mm_block-&gt;debug.size);</span>
+<span class='curline'><a href='../S/1644.html#L2087'>mm_block</a>         2087 Zend/zend_alloc.c 		((zend_mm_free_block*)mm_block)-&gt;prev_free_block = *cache;</span>
+<span class='curline'><a href='../S/1644.html#L2088'>mm_block</a>         2088 Zend/zend_alloc.c 		*cache = (zend_mm_free_block*)mm_block;</span>
+<span class='curline'><a href='../S/1644.html#L2090'>mm_block</a>         2090 Zend/zend_alloc.c 		ZEND_MM_SET_MAGIC(mm_block, MEM_BLOCK_CACHED);</span>
+<span class='curline'><a href='../S/1644.html#L2103'>mm_block</a>         2103 Zend/zend_alloc.c 	next_block = ZEND_MM_BLOCK_AT(mm_block, size);</span>
+<span class='curline'><a href='../S/1644.html#L2108'>mm_block</a>         2108 Zend/zend_alloc.c 	if (ZEND_MM_PREV_BLOCK_IS_FREE(mm_block)) {</span>
+<span class='curline'><a href='../S/1644.html#L2109'>mm_block</a>         2109 Zend/zend_alloc.c 		mm_block = ZEND_MM_PREV_BLOCK(mm_block);</span>
+<span class='curline'><a href='../S/1644.html#L2110'>mm_block</a>         2110 Zend/zend_alloc.c 		zend_mm_remove_from_free_list(heap, (zend_mm_free_block *) mm_block);</span>
+<span class='curline'><a href='../S/1644.html#L2111'>mm_block</a>         2111 Zend/zend_alloc.c 		size += ZEND_MM_FREE_BLOCK_SIZE(mm_block);</span>
+<span class='curline'><a href='../S/1644.html#L2113'>mm_block</a>         2113 Zend/zend_alloc.c 	if (ZEND_MM_IS_FIRST_BLOCK(mm_block) &amp;&amp;</span>
+<span class='curline'><a href='../S/1644.html#L2114'>mm_block</a>         2114 Zend/zend_alloc.c 	    ZEND_MM_IS_GUARD_BLOCK(ZEND_MM_BLOCK_AT(mm_block, size))) {</span>
+<span class='curline'><a href='../S/1644.html#L2115'>mm_block</a>         2115 Zend/zend_alloc.c 		zend_mm_del_segment(heap, (zend_mm_segment *) ((char *)mm_block - ZEND_MM_ALIGNED_SEGMENT_SIZE));</span>
+<span class='curline'><a href='../S/1644.html#L2117'>mm_block</a>         2117 Zend/zend_alloc.c 		ZEND_MM_BLOCK(mm_block, ZEND_MM_FREE_BLOCK, size);</span>
+<span class='curline'><a href='../S/1644.html#L2118'>mm_block</a>         2118 Zend/zend_alloc.c 		zend_mm_add_to_free_list(heap, (zend_mm_free_block *) mm_block);</span>
+<span class='curline'><a href='../S/1644.html#L2125'>mm_block</a>         2125 Zend/zend_alloc.c 	zend_mm_block *mm_block = ZEND_MM_HEADER_OF(p);</span>
+<span class='curline'><a href='../S/1644.html#L2139'>mm_block</a>         2139 Zend/zend_alloc.c 	mm_block = ZEND_MM_HEADER_OF(p);</span>
+<span class='curline'><a href='../S/1644.html#L2141'>mm_block</a>         2141 Zend/zend_alloc.c 	orig_size = ZEND_MM_BLOCK_SIZE(mm_block);</span>
+<span class='curline'><a href='../S/1644.html#L2142'>mm_block</a>         2142 Zend/zend_alloc.c 	ZEND_MM_CHECK_PROTECTION(mm_block);</span>
+<span class='curline'><a href='../S/1644.html#L2154'>mm_block</a>         2154 Zend/zend_alloc.c 			next_block = ZEND_MM_BLOCK_AT(mm_block, orig_size);</span>
+<span class='curline'><a href='../S/1644.html#L2161'>mm_block</a>         2161 Zend/zend_alloc.c 			ZEND_MM_BLOCK(mm_block, ZEND_MM_USED_BLOCK, true_size);</span>
+<span class='curline'><a href='../S/1644.html#L2162'>mm_block</a>         2162 Zend/zend_alloc.c 			new_free_block = (zend_mm_free_block *) ZEND_MM_BLOCK_AT(mm_block, true_size);</span>
+<span class='curline'><a href='../S/1644.html#L2170'>mm_block</a>         2170 Zend/zend_alloc.c 		ZEND_MM_SET_DEBUG_INFO(mm_block, size, 0, 0);</span>
+<span class='curline'><a href='../S/1644.html#L2195'>mm_block</a>         2195 Zend/zend_alloc.c 			memcpy(ptr, p, mm_block-&gt;debug.size);</span>
+<span class='curline'><a href='../S/1644.html#L2205'>mm_block</a>         2205 Zend/zend_alloc.c 			((zend_mm_free_block*)mm_block)-&gt;prev_free_block = *cache;</span>
+<span class='curline'><a href='../S/1644.html#L2206'>mm_block</a>         2206 Zend/zend_alloc.c 			*cache = (zend_mm_free_block*)mm_block;</span>
+<span class='curline'><a href='../S/1644.html#L2207'>mm_block</a>         2207 Zend/zend_alloc.c 			ZEND_MM_SET_MAGIC(mm_block, MEM_BLOCK_CACHED);</span>
+<span class='curline'><a href='../S/1644.html#L2220'>mm_block</a>         2220 Zend/zend_alloc.c 	next_block = ZEND_MM_BLOCK_AT(mm_block, orig_size);</span>
+<span class='curline'><a href='../S/1644.html#L2233'>mm_block</a>         2233 Zend/zend_alloc.c 				ZEND_MM_BLOCK(mm_block, ZEND_MM_USED_BLOCK, true_size);</span>
+<span class='curline'><a href='../S/1644.html#L2238'>mm_block</a>         2238 Zend/zend_alloc.c 				ZEND_MM_BLOCK(mm_block, ZEND_MM_USED_BLOCK, true_size);</span>
+<span class='curline'><a href='../S/1644.html#L2239'>mm_block</a>         2239 Zend/zend_alloc.c 				new_free_block = (zend_mm_free_block *) ZEND_MM_BLOCK_AT(mm_block, true_size);</span>
+<span class='curline'><a href='../S/1644.html#L2243'>mm_block</a>         2243 Zend/zend_alloc.c 				if (ZEND_MM_IS_FIRST_BLOCK(mm_block) &amp;&amp;</span>
+<span class='curline'><a href='../S/1644.html#L2250'>mm_block</a>         2250 Zend/zend_alloc.c 			ZEND_MM_SET_DEBUG_INFO(mm_block, size, 0, 0);</span>
+<span class='curline'><a href='../S/1644.html#L2257'>mm_block</a>         2257 Zend/zend_alloc.c 		} else if (ZEND_MM_IS_FIRST_BLOCK(mm_block) &amp;&amp;</span>
+<span class='curline'><a href='../S/1644.html#L2262'>mm_block</a>         2262 Zend/zend_alloc.c 	} else if (ZEND_MM_IS_FIRST_BLOCK(mm_block) &amp;&amp; ZEND_MM_IS_GUARD_BLOCK(next_block)) {</span>
+<span class='curline'><a href='../S/1644.html#L2278'>mm_block</a>         2278 Zend/zend_alloc.c 		segment_copy = (zend_mm_segment *) ((char *)mm_block - ZEND_MM_ALIGNED_SEGMENT_SIZE);</span>
+<span class='curline'><a href='../S/1644.html#L2323'>mm_block</a>         2323 Zend/zend_alloc.c 			mm_block = (zend_mm_block *) ((char *) segment + ZEND_MM_ALIGNED_SEGMENT_SIZE);</span>
+<span class='curline'><a href='../S/1644.html#L2324'>mm_block</a>         2324 Zend/zend_alloc.c 			ZEND_MM_MARK_FIRST_BLOCK(mm_block);</span>
+<span class='curline'><a href='../S/1644.html#L2331'>mm_block</a>         2331 Zend/zend_alloc.c 		ZEND_MM_LAST_BLOCK(ZEND_MM_BLOCK_AT(mm_block, block_size));</span>
+<span class='curline'><a href='../S/1644.html#L2335'>mm_block</a>         2335 Zend/zend_alloc.c 			ZEND_MM_BLOCK(mm_block, ZEND_MM_USED_BLOCK, true_size);</span>
+<span class='curline'><a href='../S/1644.html#L2340'>mm_block</a>         2340 Zend/zend_alloc.c 			ZEND_MM_BLOCK(mm_block, ZEND_MM_USED_BLOCK, true_size);</span>
+<span class='curline'><a href='../S/1644.html#L2341'>mm_block</a>         2341 Zend/zend_alloc.c 			new_free_block = (zend_mm_free_block *) ZEND_MM_BLOCK_AT(mm_block, true_size);</span>
+<span class='curline'><a href='../S/1644.html#L2348'>mm_block</a>         2348 Zend/zend_alloc.c 		ZEND_MM_SET_DEBUG_INFO(mm_block, size, 1, 1);</span>
+<span class='curline'><a href='../S/1644.html#L2356'>mm_block</a>         2356 Zend/zend_alloc.c 		return ZEND_MM_DATA_OF(mm_block);</span>
+<span class='curline'><a href='../S/1644.html#L2361'>mm_block</a>         2361 Zend/zend_alloc.c 	memcpy(ptr, p, mm_block-&gt;debug.size);</span>
+<span class='curline'><a href='../S/1644.html#L2387'>mm_block</a>         2387 Zend/zend_alloc.c 	zend_mm_block *mm_block;</span>
+<span class='curline'><a href='../S/1644.html#L2392'>mm_block</a>         2392 Zend/zend_alloc.c 	mm_block = ZEND_MM_HEADER_OF(p);</span>
+<span class='curline'><a href='../S/1644.html#L2393'>mm_block</a>         2393 Zend/zend_alloc.c 	ZEND_MM_CHECK_PROTECTION(mm_block);</span>
+<span class='curline'><a href='../S/1644.html#L2395'>mm_block</a>         2395 Zend/zend_alloc.c 	return mm_block-&gt;debug.size;</span>
+<span class='curline'><a href='../S/1644.html#L2397'>mm_block</a>         2397 Zend/zend_alloc.c 	return ZEND_MM_BLOCK_SIZE(mm_block);</span>
+</pre>
+</body>
+</html>

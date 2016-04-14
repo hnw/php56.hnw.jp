@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>sem_ptr</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/1210.html#L138'>sem_ptr</a>           138 ext/sysvsem/sysvsem.c 	sysvsem_sem *sem_ptr = (sysvsem_sem *)rsrc-&gt;ptr;</span>
+<span class='curline'><a href='../S/1210.html#L146'>sem_ptr</a>           146 ext/sysvsem/sysvsem.c 	if (sem_ptr-&gt;count == -1 || !sem_ptr-&gt;auto_release) {</span>
+<span class='curline'><a href='../S/1210.html#L147'>sem_ptr</a>           147 ext/sysvsem/sysvsem.c 		efree(sem_ptr);</span>
+<span class='curline'><a href='../S/1210.html#L158'>sem_ptr</a>           158 ext/sysvsem/sysvsem.c 	if (sem_ptr-&gt;count) {</span>
+<span class='curline'><a href='../S/1210.html#L161'>sem_ptr</a>           161 ext/sysvsem/sysvsem.c 		sop[1].sem_op  = sem_ptr-&gt;count;</span>
+<span class='curline'><a href='../S/1210.html#L167'>sem_ptr</a>           167 ext/sysvsem/sysvsem.c 	semop(sem_ptr-&gt;semid, sop, opcount);</span>
+<span class='curline'><a href='../S/1210.html#L168'>sem_ptr</a>           168 ext/sysvsem/sysvsem.c 	efree(sem_ptr);</span>
+<span class='curline'><a href='../S/1210.html#L195'>sem_ptr</a>           195 ext/sysvsem/sysvsem.c 	sysvsem_sem *sem_ptr;</span>
+<span class='curline'><a href='../S/1210.html#L287'>sem_ptr</a>           287 ext/sysvsem/sysvsem.c 	sem_ptr = (sysvsem_sem *) emalloc(sizeof(sysvsem_sem));</span>
+<span class='curline'><a href='../S/1210.html#L288'>sem_ptr</a>           288 ext/sysvsem/sysvsem.c 	sem_ptr-&gt;key   = key;</span>
+<span class='curline'><a href='../S/1210.html#L289'>sem_ptr</a>           289 ext/sysvsem/sysvsem.c 	sem_ptr-&gt;semid = semid;</span>
+<span class='curline'><a href='../S/1210.html#L290'>sem_ptr</a>           290 ext/sysvsem/sysvsem.c 	sem_ptr-&gt;count = 0;</span>
+<span class='curline'><a href='../S/1210.html#L291'>sem_ptr</a>           291 ext/sysvsem/sysvsem.c 	sem_ptr-&gt;auto_release = auto_release;</span>
+<span class='curline'><a href='../S/1210.html#L293'>sem_ptr</a>           293 ext/sysvsem/sysvsem.c 	sem_ptr-&gt;id = ZEND_REGISTER_RESOURCE(return_value, sem_ptr, php_sysvsem_module.le_sem);</span>
+<span class='curline'><a href='../S/1210.html#L303'>sem_ptr</a>           303 ext/sysvsem/sysvsem.c 	sysvsem_sem *sem_ptr;</span>
+<span class='curline'><a href='../S/1210.html#L316'>sem_ptr</a>           316 ext/sysvsem/sysvsem.c 	ZEND_FETCH_RESOURCE(sem_ptr, sysvsem_sem *, &amp;arg_id, -1, "SysV semaphore", php_sysvsem_module.le_sem);</span>
+<span class='curline'><a href='../S/1210.html#L318'>sem_ptr</a>           318 ext/sysvsem/sysvsem.c 	if (!acquire &amp;&amp; sem_ptr-&gt;count == 0) {</span>
+<span class='curline'><a href='../S/1210.html#L319'>sem_ptr</a>           319 ext/sysvsem/sysvsem.c 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "SysV semaphore %ld (key 0x%x) is not currently acquired", Z_LVAL_P(arg_id), sem_ptr-&gt;key);</span>
+<span class='curline'><a href='../S/1210.html#L327'>sem_ptr</a>           327 ext/sysvsem/sysvsem.c 	while (semop(sem_ptr-&gt;semid, &amp;sop, 1) == -1) {</span>
+<span class='curline'><a href='../S/1210.html#L330'>sem_ptr</a>           330 ext/sysvsem/sysvsem.c 				php_error_docref(NULL TSRMLS_CC, E_WARNING, "failed to %s key 0x%x: %s", acquire ? "acquire" : "release", sem_ptr-&gt;key, strerror(errno));</span>
+<span class='curline'><a href='../S/1210.html#L336'>sem_ptr</a>           336 ext/sysvsem/sysvsem.c 	sem_ptr-&gt;count -= acquire ? -1 : 1;</span>
+<span class='curline'><a href='../S/1210.html#L368'>sem_ptr</a>           368 ext/sysvsem/sysvsem.c 	sysvsem_sem *sem_ptr;</span>
+<span class='curline'><a href='../S/1210.html#L378'>sem_ptr</a>           378 ext/sysvsem/sysvsem.c 	ZEND_FETCH_RESOURCE(sem_ptr, sysvsem_sem *, &amp;arg_id, -1, "SysV semaphore", php_sysvsem_module.le_sem);</span>
+<span class='curline'><a href='../S/1210.html#L382'>sem_ptr</a>           382 ext/sysvsem/sysvsem.c 	if (semctl(sem_ptr-&gt;semid, 0, IPC_STAT, un) &lt; 0) {</span>
+<span class='curline'><a href='../S/1210.html#L384'>sem_ptr</a>           384 ext/sysvsem/sysvsem.c 	if (semctl(sem_ptr-&gt;semid, 0, IPC_STAT, NULL) &lt; 0) {</span>
+<span class='curline'><a href='../S/1210.html#L391'>sem_ptr</a>           391 ext/sysvsem/sysvsem.c 	if (semctl(sem_ptr-&gt;semid, 0, IPC_RMID, un) &lt; 0) {</span>
+<span class='curline'><a href='../S/1210.html#L393'>sem_ptr</a>           393 ext/sysvsem/sysvsem.c 	if (semctl(sem_ptr-&gt;semid, 0, IPC_RMID, NULL) &lt; 0) {</span>
+<span class='curline'><a href='../S/1210.html#L403'>sem_ptr</a>           403 ext/sysvsem/sysvsem.c 	sem_ptr-&gt;count = -1;</span>
+</pre>
+</body>
+</html>

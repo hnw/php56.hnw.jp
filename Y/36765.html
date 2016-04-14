@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>snmp_object</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/1016.html#L102'>snmp_object</a>       102 ext/snmp/php_snmp.h typedef int (*php_snmp_read_t)(php_snmp_object *snmp_object, zval **retval TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1016.html#L103'>snmp_object</a>       103 ext/snmp/php_snmp.h typedef int (*php_snmp_write_t)(php_snmp_object *snmp_object, zval *newval TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1017.html#L515'>snmp_object</a>       515 ext/snmp/snmp.c 	php_snmp_object *snmp_object = NULL;</span>
+<span class='curline'><a href='../S/1017.html#L518'>snmp_object</a>       518 ext/snmp/snmp.c 		snmp_object = (php_snmp_object *)zend_object_store_get_object(object TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1017.html#L520'>snmp_object</a>       520 ext/snmp/snmp.c 			memset(snmp_object-&gt;snmp_errstr, 0, sizeof(snmp_object-&gt;snmp_errstr));</span>
+<span class='curline'><a href='../S/1017.html#L523'>snmp_object</a>       523 ext/snmp/snmp.c 			vsnprintf(snmp_object-&gt;snmp_errstr, sizeof(snmp_object-&gt;snmp_errstr) - 1, format, args);</span>
+<span class='curline'><a href='../S/1017.html#L526'>snmp_object</a>       526 ext/snmp/snmp.c 		snmp_object-&gt;snmp_errno = type;</span>
+<span class='curline'><a href='../S/1017.html#L533'>snmp_object</a>       533 ext/snmp/snmp.c 	if (object &amp;&amp; (snmp_object-&gt;exceptions_enabled &amp; type)) {</span>
+<span class='curline'><a href='../S/1017.html#L534'>snmp_object</a>       534 ext/snmp/snmp.c 		zend_throw_exception_ex(php_snmp_exception_ce, type TSRMLS_CC, "%s", snmp_object-&gt;snmp_errstr);</span>
+<span class='curline'><a href='../S/1017.html#L1436'>snmp_object</a>      1436 ext/snmp/snmp.c 	php_snmp_object *snmp_object;</span>
+<span class='curline'><a href='../S/1017.html#L1522'>snmp_object</a>      1522 ext/snmp/snmp.c 		snmp_object = (php_snmp_object *)zend_object_store_get_object(object TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1017.html#L1523'>snmp_object</a>      1523 ext/snmp/snmp.c 		session = snmp_object-&gt;session;</span>
+<span class='curline'><a href='../S/1017.html#L1530'>snmp_object</a>      1530 ext/snmp/snmp.c 		if (snmp_object-&gt;max_oids &gt; 0) {</span>
+<span class='curline'><a href='../S/1017.html#L1531'>snmp_object</a>      1531 ext/snmp/snmp.c 			objid_query.step = snmp_object-&gt;max_oids;</span>
+<span class='curline'><a href='../S/1017.html#L1533'>snmp_object</a>      1533 ext/snmp/snmp.c 				objid_query.max_repetitions = snmp_object-&gt;max_oids;</span>
+<span class='curline'><a href='../S/1017.html#L1536'>snmp_object</a>      1536 ext/snmp/snmp.c 		objid_query.oid_increasing_check = snmp_object-&gt;oid_increasing_check;</span>
+<span class='curline'><a href='../S/1017.html#L1537'>snmp_object</a>      1537 ext/snmp/snmp.c 		objid_query.valueretrieval = snmp_object-&gt;valueretrieval;</span>
+<span class='curline'><a href='../S/1017.html#L1539'>snmp_object</a>      1539 ext/snmp/snmp.c 		netsnmp_ds_set_boolean(NETSNMP_DS_LIBRARY_ID, NETSNMP_DS_LIB_PRINT_NUMERIC_ENUM, snmp_object-&gt;enum_print);</span>
+<span class='curline'><a href='../S/1017.html#L1541'>snmp_object</a>      1541 ext/snmp/snmp.c 		netsnmp_ds_set_boolean(NETSNMP_DS_LIBRARY_ID, NETSNMP_DS_LIB_QUICK_PRINT, snmp_object-&gt;quick_print);</span>
+<span class='curline'><a href='../S/1017.html#L1543'>snmp_object</a>      1543 ext/snmp/snmp.c 		netsnmp_ds_set_int(NETSNMP_DS_LIBRARY_ID, NETSNMP_DS_LIB_OID_OUTPUT_FORMAT, snmp_object-&gt;oid_output_format);</span>
+<span class='curline'><a href='../S/1017.html#L1810'>snmp_object</a>      1810 ext/snmp/snmp.c 	php_snmp_object *snmp_object;</span>
+<span class='curline'><a href='../S/1017.html#L1820'>snmp_object</a>      1820 ext/snmp/snmp.c 	snmp_object = (php_snmp_object *)zend_object_store_get_object(object TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1017.html#L1841'>snmp_object</a>      1841 ext/snmp/snmp.c 	if (snmp_object-&gt;session) {</span>
+<span class='curline'><a href='../S/1017.html#L1842'>snmp_object</a>      1842 ext/snmp/snmp.c 		netsnmp_session_free(&amp;(snmp_object-&gt;session));</span>
+<span class='curline'><a href='../S/1017.html#L1845'>snmp_object</a>      1845 ext/snmp/snmp.c 	if (netsnmp_session_init(&amp;(snmp_object-&gt;session), version, a1, a2, timeout, retries TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/1017.html#L1848'>snmp_object</a>      1848 ext/snmp/snmp.c 	snmp_object-&gt;max_oids = 0;</span>
+<span class='curline'><a href='../S/1017.html#L1849'>snmp_object</a>      1849 ext/snmp/snmp.c 	snmp_object-&gt;valueretrieval = SNMP_G(valueretrieval);</span>
+<span class='curline'><a href='../S/1017.html#L1850'>snmp_object</a>      1850 ext/snmp/snmp.c 	snmp_object-&gt;enum_print = netsnmp_ds_get_boolean(NETSNMP_DS_LIBRARY_ID, NETSNMP_DS_LIB_PRINT_NUMERIC_ENUM);</span>
+<span class='curline'><a href='../S/1017.html#L1851'>snmp_object</a>      1851 ext/snmp/snmp.c 	snmp_object-&gt;oid_output_format = netsnmp_ds_get_int(NETSNMP_DS_LIBRARY_ID, NETSNMP_DS_LIB_OID_OUTPUT_FORMAT);</span>
+<span class='curline'><a href='../S/1017.html#L1852'>snmp_object</a>      1852 ext/snmp/snmp.c 	snmp_object-&gt;quick_print = netsnmp_ds_get_boolean(NETSNMP_DS_LIBRARY_ID, NETSNMP_DS_LIB_QUICK_PRINT);</span>
+<span class='curline'><a href='../S/1017.html#L1853'>snmp_object</a>      1853 ext/snmp/snmp.c 	snmp_object-&gt;oid_increasing_check = TRUE;</span>
+<span class='curline'><a href='../S/1017.html#L1854'>snmp_object</a>      1854 ext/snmp/snmp.c 	snmp_object-&gt;exceptions_enabled = 0;</span>
+<span class='curline'><a href='../S/1017.html#L1862'>snmp_object</a>      1862 ext/snmp/snmp.c 	php_snmp_object *snmp_object;</span>
+<span class='curline'><a href='../S/1017.html#L1865'>snmp_object</a>      1865 ext/snmp/snmp.c 	snmp_object = (php_snmp_object *)zend_object_store_get_object(object TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1017.html#L1871'>snmp_object</a>      1871 ext/snmp/snmp.c 	netsnmp_session_free(&amp;(snmp_object-&gt;session));</span>
+<span class='curline'><a href='../S/1017.html#L1912'>snmp_object</a>      1912 ext/snmp/snmp.c 	php_snmp_object *snmp_object;</span>
+<span class='curline'><a href='../S/1017.html#L1918'>snmp_object</a>      1918 ext/snmp/snmp.c 	snmp_object = (php_snmp_object *)zend_object_store_get_object(object TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1017.html#L1925'>snmp_object</a>      1925 ext/snmp/snmp.c 	if (netsnmp_session_set_security(snmp_object-&gt;session, a1, a2, a3, a4, a5, a6, a7 TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/1017.html#L1937'>snmp_object</a>      1937 ext/snmp/snmp.c 	php_snmp_object *snmp_object;</span>
+<span class='curline'><a href='../S/1017.html#L1940'>snmp_object</a>      1940 ext/snmp/snmp.c 	snmp_object = (php_snmp_object *)zend_object_store_get_object(object TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1017.html#L1942'>snmp_object</a>      1942 ext/snmp/snmp.c 	RETVAL_LONG(snmp_object-&gt;snmp_errno);</span>
+<span class='curline'><a href='../S/1017.html#L1951'>snmp_object</a>      1951 ext/snmp/snmp.c 	php_snmp_object *snmp_object;</span>
+<span class='curline'><a href='../S/1017.html#L1954'>snmp_object</a>      1954 ext/snmp/snmp.c 	snmp_object = (php_snmp_object *)zend_object_store_get_object(object TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1017.html#L1956'>snmp_object</a>      1956 ext/snmp/snmp.c 	RETVAL_STRING(snmp_object-&gt;snmp_errstr, 1);</span>
+<span class='curline'><a href='../S/1017.html#L2128'>snmp_object</a>      2128 ext/snmp/snmp.c static int php_snmp_read_info(php_snmp_object *snmp_object, zval **retval TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1017.html#L2135'>snmp_object</a>      2135 ext/snmp/snmp.c 	if (snmp_object-&gt;session == NULL) {</span>
+<span class='curline'><a href='../S/1017.html#L2140'>snmp_object</a>      2140 ext/snmp/snmp.c 	ZVAL_STRINGL(val, snmp_object-&gt;session-&gt;peername, strlen(snmp_object-&gt;session-&gt;peername), 1);</span>
+<span class='curline'><a href='../S/1017.html#L2144'>snmp_object</a>      2144 ext/snmp/snmp.c 	ZVAL_LONG(val, snmp_object-&gt;session-&gt;remote_port);</span>
+<span class='curline'><a href='../S/1017.html#L2148'>snmp_object</a>      2148 ext/snmp/snmp.c 	ZVAL_LONG(val, snmp_object-&gt;session-&gt;timeout);</span>
+<span class='curline'><a href='../S/1017.html#L2152'>snmp_object</a>      2152 ext/snmp/snmp.c 	ZVAL_LONG(val, snmp_object-&gt;session-&gt;retries);</span>
+<span class='curline'><a href='../S/1017.html#L2160'>snmp_object</a>      2160 ext/snmp/snmp.c static int php_snmp_read_max_oids(php_snmp_object *snmp_object, zval **retval TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1017.html#L2163'>snmp_object</a>      2163 ext/snmp/snmp.c 	if (snmp_object-&gt;max_oids &gt; 0) {</span>
+<span class='curline'><a href='../S/1017.html#L2164'>snmp_object</a>      2164 ext/snmp/snmp.c 		ZVAL_LONG(*retval, snmp_object-&gt;max_oids);</span>
+<span class='curline'><a href='../S/1017.html#L2173'>snmp_object</a>      2173 ext/snmp/snmp.c 	static int php_snmp_read_##name(php_snmp_object *snmp_object, zval **retval TSRMLS_DC) \</span>
+<span class='curline'><a href='../S/1017.html#L2176'>snmp_object</a>      2176 ext/snmp/snmp.c 		ZVAL_BOOL(*retval, snmp_object-&gt;name); \</span>
+<span class='curline'><a href='../S/1017.html#L2185'>snmp_object</a>      2185 ext/snmp/snmp.c 	static int php_snmp_read_##name(php_snmp_object *snmp_object, zval **retval TSRMLS_DC) \</span>
+<span class='curline'><a href='../S/1017.html#L2188'>snmp_object</a>      2188 ext/snmp/snmp.c 		ZVAL_LONG(*retval, snmp_object-&gt;name); \</span>
+<span class='curline'><a href='../S/1017.html#L2197'>snmp_object</a>      2197 ext/snmp/snmp.c static int php_snmp_write_info(php_snmp_object *snmp_object, zval *newval TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1017.html#L2205'>snmp_object</a>      2205 ext/snmp/snmp.c static int php_snmp_write_max_oids(php_snmp_object *snmp_object, zval *newval TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1017.html#L2211'>snmp_object</a>      2211 ext/snmp/snmp.c 		snmp_object-&gt;max_oids = 0;</span>
+<span class='curline'><a href='../S/1017.html#L2223'>snmp_object</a>      2223 ext/snmp/snmp.c 		snmp_object-&gt;max_oids = Z_LVAL_P(newval);</span>
+<span class='curline'><a href='../S/1017.html#L2237'>snmp_object</a>      2237 ext/snmp/snmp.c static int php_snmp_write_valueretrieval(php_snmp_object *snmp_object, zval *newval TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1017.html#L2250'>snmp_object</a>      2250 ext/snmp/snmp.c 		snmp_object-&gt;valueretrieval = Z_LVAL_P(newval);</span>
+<span class='curline'><a href='../S/1017.html#L2265'>snmp_object</a>      2265 ext/snmp/snmp.c static int php_snmp_write_##name(php_snmp_object *snmp_object, zval *newval TSRMLS_DC) \</span>
+<span class='curline'><a href='../S/1017.html#L2275'>snmp_object</a>      2275 ext/snmp/snmp.c 	snmp_object-&gt;name = Z_LVAL_P(newval); \</span>
+<span class='curline'><a href='../S/1017.html#L2288'>snmp_object</a>      2288 ext/snmp/snmp.c static int php_snmp_write_oid_output_format(php_snmp_object *snmp_object, zval *newval TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1017.html#L2306'>snmp_object</a>      2306 ext/snmp/snmp.c 			snmp_object-&gt;oid_output_format = Z_LVAL_P(newval);</span>
+<span class='curline'><a href='../S/1017.html#L2322'>snmp_object</a>      2322 ext/snmp/snmp.c static int php_snmp_write_exceptions_enabled(php_snmp_object *snmp_object, zval *newval TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1017.html#L2333'>snmp_object</a>      2333 ext/snmp/snmp.c 	snmp_object-&gt;exceptions_enabled = Z_LVAL_P(newval);	</span>
+</pre>
+</body>
+</html>

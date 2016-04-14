@@ -1,0 +1,635 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>req</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/462.html#L2554'>req</a>              2554 ext/ldap/ldap.c int _ldap_rebind_proc(LDAP *ldap, const char *url, ber_tag_t req, ber_int_t msgid, void *params)</span>
+<span class='curline'><a href='../S/865.html#L625'>req</a>               625 ext/openssl/openssl.c static EVP_PKEY * php_openssl_generate_private_key(struct php_x509_request * req TSRMLS_DC);</span>
+<span class='curline'><a href='../S/865.html#L810'>req</a>               810 ext/openssl/openssl.c static int add_oid_section(struct php_x509_request * req TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/865.html#L817'>req</a>               817 ext/openssl/openssl.c 	str = CONF_get_string(req-&gt;req_config, NULL, "oid_section");</span>
+<span class='curline'><a href='../S/865.html#L821'>req</a>               821 ext/openssl/openssl.c 	sktmp = CONF_get_section(req-&gt;req_config, str);</span>
+<span class='curline'><a href='../S/865.html#L837'>req</a>               837 ext/openssl/openssl.c #define PHP_SSL_REQ_INIT(req)		memset(req, 0, sizeof(*req))</span>
+<span class='curline'><a href='../S/865.html#L838'>req</a>               838 ext/openssl/openssl.c #define PHP_SSL_REQ_DISPOSE(req)	php_openssl_dispose_config(req TSRMLS_CC)</span>
+<span class='curline'><a href='../S/865.html#L839'>req</a>               839 ext/openssl/openssl.c #define PHP_SSL_REQ_PARSE(req, zval)	php_openssl_parse_config(req, zval TSRMLS_CC)</span>
+<span class='curline'><a href='../S/865.html#L841'>req</a>               841 ext/openssl/openssl.c #define PHP_SSL_CONFIG_SYNTAX_CHECK(var) if (req-&gt;var &amp;&amp; php_openssl_config_check_syntax(#var, \</span>
+<span class='curline'><a href='../S/865.html#L842'>req</a>               842 ext/openssl/openssl.c 			req-&gt;config_filename, req-&gt;var, req-&gt;req_config TSRMLS_CC) == FAILURE) return FAILURE</span>
+<span class='curline'><a href='../S/865.html#L860'>req</a>               860 ext/openssl/openssl.c static int php_openssl_parse_config(struct php_x509_request * req, zval * optional_args TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/865.html#L865'>req</a>               865 ext/openssl/openssl.c 	SET_OPTIONAL_STRING_ARG("config", req-&gt;config_filename, default_ssl_conf_filename);</span>
+<span class='curline'><a href='../S/865.html#L866'>req</a>               866 ext/openssl/openssl.c 	SET_OPTIONAL_STRING_ARG("config_section_name", req-&gt;section_name, "req");</span>
+<span class='curline'><a href='../S/865.html#L867'>req</a>               867 ext/openssl/openssl.c 	req-&gt;global_config = CONF_load(NULL, default_ssl_conf_filename, NULL);</span>
+<span class='curline'><a href='../S/865.html#L868'>req</a>               868 ext/openssl/openssl.c 	req-&gt;req_config = CONF_load(NULL, req-&gt;config_filename, NULL);</span>
+<span class='curline'><a href='../S/865.html#L870'>req</a>               870 ext/openssl/openssl.c 	if (req-&gt;req_config == NULL) {</span>
+<span class='curline'><a href='../S/865.html#L875'>req</a>               875 ext/openssl/openssl.c 	str = CONF_get_string(req-&gt;req_config, NULL, "oid_file");</span>
+<span class='curline'><a href='../S/865.html#L883'>req</a>               883 ext/openssl/openssl.c 	if (add_oid_section(req TSRMLS_CC) == FAILURE) {</span>
+<span class='curline'><a href='../S/865.html#L886'>req</a>               886 ext/openssl/openssl.c 	SET_OPTIONAL_STRING_ARG("digest_alg", req-&gt;digest_name,</span>
+<span class='curline'><a href='../S/865.html#L887'>req</a>               887 ext/openssl/openssl.c 		CONF_get_string(req-&gt;req_config, req-&gt;section_name, "default_md"));</span>
+<span class='curline'><a href='../S/865.html#L888'>req</a>               888 ext/openssl/openssl.c 	SET_OPTIONAL_STRING_ARG("x509_extensions", req-&gt;extensions_section,</span>
+<span class='curline'><a href='../S/865.html#L889'>req</a>               889 ext/openssl/openssl.c 		CONF_get_string(req-&gt;req_config, req-&gt;section_name, "x509_extensions"));</span>
+<span class='curline'><a href='../S/865.html#L890'>req</a>               890 ext/openssl/openssl.c 	SET_OPTIONAL_STRING_ARG("req_extensions", req-&gt;request_extensions_section,</span>
+<span class='curline'><a href='../S/865.html#L891'>req</a>               891 ext/openssl/openssl.c 		CONF_get_string(req-&gt;req_config, req-&gt;section_name, "req_extensions"));</span>
+<span class='curline'><a href='../S/865.html#L892'>req</a>               892 ext/openssl/openssl.c 	SET_OPTIONAL_LONG_ARG("private_key_bits", req-&gt;priv_key_bits,</span>
+<span class='curline'><a href='../S/865.html#L893'>req</a>               893 ext/openssl/openssl.c 		CONF_get_number(req-&gt;req_config, req-&gt;section_name, "default_bits"));</span>
+<span class='curline'><a href='../S/865.html#L895'>req</a>               895 ext/openssl/openssl.c 	SET_OPTIONAL_LONG_ARG("private_key_type", req-&gt;priv_key_type, OPENSSL_KEYTYPE_DEFAULT);</span>
+<span class='curline'><a href='../S/865.html#L898'>req</a>               898 ext/openssl/openssl.c 		req-&gt;priv_key_encrypt = Z_BVAL_PP(item);</span>
+<span class='curline'><a href='../S/865.html#L900'>req</a>               900 ext/openssl/openssl.c 		str = CONF_get_string(req-&gt;req_config, req-&gt;section_name, "encrypt_rsa_key");</span>
+<span class='curline'><a href='../S/865.html#L902'>req</a>               902 ext/openssl/openssl.c 			str = CONF_get_string(req-&gt;req_config, req-&gt;section_name, "encrypt_key");</span>
+<span class='curline'><a href='../S/865.html#L905'>req</a>               905 ext/openssl/openssl.c 			req-&gt;priv_key_encrypt = 0;</span>
+<span class='curline'><a href='../S/865.html#L907'>req</a>               907 ext/openssl/openssl.c 			req-&gt;priv_key_encrypt = 1;</span>
+<span class='curline'><a href='../S/865.html#L911'>req</a>               911 ext/openssl/openssl.c 	if (req-&gt;priv_key_encrypt &amp;&amp; optional_args &amp;&amp; zend_hash_find(Z_ARRVAL_P(optional_args), "encrypt_key_cipher", sizeof("encrypt_key_cipher"), (void**)&amp;item) == SUCCESS </span>
+<span class='curline'><a href='../S/865.html#L919'>req</a>               919 ext/openssl/openssl.c 			req-&gt;priv_key_encrypt_cipher = cipher;</span>
+<span class='curline'><a href='../S/865.html#L922'>req</a>               922 ext/openssl/openssl.c 		req-&gt;priv_key_encrypt_cipher = NULL;</span>
+<span class='curline'><a href='../S/865.html#L928'>req</a>               928 ext/openssl/openssl.c 	if (req-&gt;digest_name == NULL) {</span>
+<span class='curline'><a href='../S/865.html#L929'>req</a>               929 ext/openssl/openssl.c 		req-&gt;digest_name = CONF_get_string(req-&gt;req_config, req-&gt;section_name, "default_md");</span>
+<span class='curline'><a href='../S/865.html#L931'>req</a>               931 ext/openssl/openssl.c 	if (req-&gt;digest_name) {</span>
+<span class='curline'><a href='../S/865.html#L932'>req</a>               932 ext/openssl/openssl.c 		req-&gt;digest = req-&gt;md_alg = EVP_get_digestbyname(req-&gt;digest_name);</span>
+<span class='curline'><a href='../S/865.html#L934'>req</a>               934 ext/openssl/openssl.c 	if (req-&gt;md_alg == NULL) {</span>
+<span class='curline'><a href='../S/865.html#L935'>req</a>               935 ext/openssl/openssl.c 		req-&gt;md_alg = req-&gt;digest = EVP_sha1();</span>
+<span class='curline'><a href='../S/865.html#L941'>req</a>               941 ext/openssl/openssl.c 	str = CONF_get_string(req-&gt;req_config, req-&gt;section_name, "string_mask");</span>
+<span class='curline'><a href='../S/865.html#L953'>req</a>               953 ext/openssl/openssl.c static void php_openssl_dispose_config(struct php_x509_request * req TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/865.html#L955'>req</a>               955 ext/openssl/openssl.c 	if (req-&gt;priv_key) {</span>
+<span class='curline'><a href='../S/865.html#L956'>req</a>               956 ext/openssl/openssl.c 		EVP_PKEY_free(req-&gt;priv_key);</span>
+<span class='curline'><a href='../S/865.html#L957'>req</a>               957 ext/openssl/openssl.c 		req-&gt;priv_key = NULL;</span>
+<span class='curline'><a href='../S/865.html#L959'>req</a>               959 ext/openssl/openssl.c 	if (req-&gt;global_config) {</span>
+<span class='curline'><a href='../S/865.html#L960'>req</a>               960 ext/openssl/openssl.c 		CONF_free(req-&gt;global_config);</span>
+<span class='curline'><a href='../S/865.html#L961'>req</a>               961 ext/openssl/openssl.c 		req-&gt;global_config = NULL;</span>
+<span class='curline'><a href='../S/865.html#L963'>req</a>               963 ext/openssl/openssl.c 	if (req-&gt;req_config) {</span>
+<span class='curline'><a href='../S/865.html#L964'>req</a>               964 ext/openssl/openssl.c 		CONF_free(req-&gt;req_config);</span>
+<span class='curline'><a href='../S/865.html#L965'>req</a>               965 ext/openssl/openssl.c 		req-&gt;req_config = NULL;</span>
+<span class='curline'><a href='../S/865.html#L2640'>req</a>              2640 ext/openssl/openssl.c static int php_openssl_make_REQ(struct php_x509_request * req, X509_REQ * csr, zval * dn, zval * attribs TSRMLS_DC)</span>
+<span class='curline'><a href='../S/865.html#L2645'>req</a>              2645 ext/openssl/openssl.c 	dn_sect = CONF_get_string(req-&gt;req_config, req-&gt;section_name, "distinguished_name");</span>
+<span class='curline'><a href='../S/865.html#L2649'>req</a>              2649 ext/openssl/openssl.c 	dn_sk = CONF_get_section(req-&gt;req_config, dn_sect);</span>
+<span class='curline'><a href='../S/865.html#L2653'>req</a>              2653 ext/openssl/openssl.c 	attr_sect = CONF_get_string(req-&gt;req_config, req-&gt;section_name, "attributes");</span>
+<span class='curline'><a href='../S/865.html#L2657'>req</a>              2657 ext/openssl/openssl.c 		attr_sk = CONF_get_section(req-&gt;req_config, attr_sect);</span>
+<span class='curline'><a href='../S/865.html#L2797'>req</a>              2797 ext/openssl/openssl.c 	X509_REQ_set_pubkey(csr, req-&gt;priv_key);</span>
+<span class='curline'><a href='../S/865.html#L2948'>req</a>              2948 ext/openssl/openssl.c 	struct php_x509_request req;</span>
+<span class='curline'><a href='../S/865.html#L2954'>req</a>              2954 ext/openssl/openssl.c 	PHP_SSL_REQ_INIT(&amp;req);</span>
+<span class='curline'><a href='../S/865.html#L2978'>req</a>              2978 ext/openssl/openssl.c 	if (PHP_SSL_REQ_PARSE(&amp;req, args) == FAILURE) {</span>
+<span class='curline'><a href='../S/865.html#L3025'>req</a>              3025 ext/openssl/openssl.c 	if (req.extensions_section) {</span>
+<span class='curline'><a href='../S/865.html#L3029'>req</a>              3029 ext/openssl/openssl.c 		X509V3_set_conf_lhash(&amp;ctx, req.req_config);</span>
+<span class='curline'><a href='../S/865.html#L3030'>req</a>              3030 ext/openssl/openssl.c 		if (!X509V3_EXT_add_conf(req.req_config, &amp;ctx, req.extensions_section, new_cert)) {</span>
+<span class='curline'><a href='../S/865.html#L3036'>req</a>              3036 ext/openssl/openssl.c 	if (!X509_sign(new_cert, priv_key, req.digest)) {</span>
+<span class='curline'><a href='../S/865.html#L3050'>req</a>              3050 ext/openssl/openssl.c 	PHP_SSL_REQ_DISPOSE(&amp;req);</span>
+<span class='curline'><a href='../S/865.html#L3074'>req</a>              3074 ext/openssl/openssl.c 	struct php_x509_request req;</span>
+<span class='curline'><a href='../S/865.html#L3086'>req</a>              3086 ext/openssl/openssl.c 	PHP_SSL_REQ_INIT(&amp;req);</span>
+<span class='curline'><a href='../S/865.html#L3088'>req</a>              3088 ext/openssl/openssl.c 	if (PHP_SSL_REQ_PARSE(&amp;req, args) == SUCCESS) {</span>
+<span class='curline'><a href='../S/865.html#L3091'>req</a>              3091 ext/openssl/openssl.c 			req.priv_key = php_openssl_evp_from_zval(&amp;out_pkey, 0, NULL, 0, &amp;key_resource TSRMLS_CC);</span>
+<span class='curline'><a href='../S/865.html#L3092'>req</a>              3092 ext/openssl/openssl.c 			if (req.priv_key != NULL) {</span>
+<span class='curline'><a href='../S/865.html#L3096'>req</a>              3096 ext/openssl/openssl.c 		if (req.priv_key == NULL) {</span>
+<span class='curline'><a href='../S/865.html#L3097'>req</a>              3097 ext/openssl/openssl.c 			php_openssl_generate_private_key(&amp;req TSRMLS_CC);</span>
+<span class='curline'><a href='../S/865.html#L3099'>req</a>              3099 ext/openssl/openssl.c 		if (req.priv_key == NULL) {</span>
+<span class='curline'><a href='../S/865.html#L3104'>req</a>              3104 ext/openssl/openssl.c 				if (php_openssl_make_REQ(&amp;req, csr, dn, attribs TSRMLS_CC) == SUCCESS) {</span>
+<span class='curline'><a href='../S/865.html#L3108'>req</a>              3108 ext/openssl/openssl.c 					X509V3_set_conf_lhash(&amp;ext_ctx, req.req_config);</span>
+<span class='curline'><a href='../S/865.html#L3111'>req</a>              3111 ext/openssl/openssl.c 					if (req.request_extensions_section &amp;&amp; !X509V3_EXT_REQ_add_conf(req.req_config,</span>
+<span class='curline'><a href='../S/865.html#L3112'>req</a>              3112 ext/openssl/openssl.c 								&amp;ext_ctx, req.request_extensions_section, csr))</span>
+<span class='curline'><a href='../S/865.html#L3114'>req</a>              3114 ext/openssl/openssl.c 						php_error_docref(NULL TSRMLS_CC, E_WARNING, "Error loading extension section %s", req.request_extensions_section);</span>
+<span class='curline'><a href='../S/865.html#L3118'>req</a>              3118 ext/openssl/openssl.c 						if (X509_REQ_sign(csr, req.priv_key, req.digest)) {</span>
+<span class='curline'><a href='../S/865.html#L3128'>req</a>              3128 ext/openssl/openssl.c 							ZVAL_RESOURCE(out_pkey, zend_list_insert(req.priv_key, le_key TSRMLS_CC));</span>
+<span class='curline'><a href='../S/865.html#L3129'>req</a>              3129 ext/openssl/openssl.c 							req.priv_key = NULL; /* make sure the cleanup code doesn't zap it! */</span>
+<span class='curline'><a href='../S/865.html#L3131'>req</a>              3131 ext/openssl/openssl.c 							req.priv_key = NULL; /* make sure the cleanup code doesn't zap it! */</span>
+<span class='curline'><a href='../S/865.html#L3138'>req</a>              3138 ext/openssl/openssl.c 						req.priv_key = NULL;</span>
+<span class='curline'><a href='../S/865.html#L3147'>req</a>              3147 ext/openssl/openssl.c 	PHP_SSL_REQ_DISPOSE(&amp;req);</span>
+<span class='curline'><a href='../S/865.html#L3381'>req</a>              3381 ext/openssl/openssl.c static EVP_PKEY * php_openssl_generate_private_key(struct php_x509_request * req TSRMLS_DC)</span>
+<span class='curline'><a href='../S/865.html#L3387'>req</a>              3387 ext/openssl/openssl.c 	if (req-&gt;priv_key_bits &lt; MIN_KEY_LENGTH) {</span>
+<span class='curline'><a href='../S/865.html#L3389'>req</a>              3389 ext/openssl/openssl.c 				MIN_KEY_LENGTH, req-&gt;priv_key_bits);</span>
+<span class='curline'><a href='../S/865.html#L3393'>req</a>              3393 ext/openssl/openssl.c 	randfile = CONF_get_string(req-&gt;req_config, req-&gt;section_name, "RANDFILE");</span>
+<span class='curline'><a href='../S/865.html#L3396'>req</a>              3396 ext/openssl/openssl.c 	if ((req-&gt;priv_key = EVP_PKEY_new()) != NULL) {</span>
+<span class='curline'><a href='../S/865.html#L3397'>req</a>              3397 ext/openssl/openssl.c 		switch(req-&gt;priv_key_type) {</span>
+<span class='curline'><a href='../S/865.html#L3399'>req</a>              3399 ext/openssl/openssl.c 				if (EVP_PKEY_assign_RSA(req-&gt;priv_key, RSA_generate_key(req-&gt;priv_key_bits, 0x10001, NULL, NULL))) {</span>
+<span class='curline'><a href='../S/865.html#L3400'>req</a>              3400 ext/openssl/openssl.c 					return_val = req-&gt;priv_key;</span>
+<span class='curline'><a href='../S/865.html#L3406'>req</a>              3406 ext/openssl/openssl.c 					DSA *dsapar = DSA_generate_parameters(req-&gt;priv_key_bits, NULL, 0, NULL, NULL, NULL, NULL);</span>
+<span class='curline'><a href='../S/865.html#L3410'>req</a>              3410 ext/openssl/openssl.c 							if (EVP_PKEY_assign_DSA(req-&gt;priv_key, dsapar)) {</span>
+<span class='curline'><a href='../S/865.html#L3411'>req</a>              3411 ext/openssl/openssl.c 								return_val = req-&gt;priv_key;</span>
+<span class='curline'><a href='../S/865.html#L3423'>req</a>              3423 ext/openssl/openssl.c 					DH *dhpar = DH_generate_parameters(req-&gt;priv_key_bits, 2, NULL, NULL);</span>
+<span class='curline'><a href='../S/865.html#L3429'>req</a>              3429 ext/openssl/openssl.c 							if (EVP_PKEY_assign_DH(req-&gt;priv_key, dhpar)) {</span>
+<span class='curline'><a href='../S/865.html#L3430'>req</a>              3430 ext/openssl/openssl.c 								return_val = req-&gt;priv_key;</span>
+<span class='curline'><a href='../S/865.html#L3447'>req</a>              3447 ext/openssl/openssl.c 		EVP_PKEY_free(req-&gt;priv_key);</span>
+<span class='curline'><a href='../S/865.html#L3448'>req</a>              3448 ext/openssl/openssl.c 		req-&gt;priv_key = NULL;</span>
+<span class='curline'><a href='../S/865.html#L3536'>req</a>              3536 ext/openssl/openssl.c 	struct php_x509_request req;</span>
+<span class='curline'><a href='../S/865.html#L3619'>req</a>              3619 ext/openssl/openssl.c 	PHP_SSL_REQ_INIT(&amp;req);</span>
+<span class='curline'><a href='../S/865.html#L3621'>req</a>              3621 ext/openssl/openssl.c 	if (PHP_SSL_REQ_PARSE(&amp;req, args) == SUCCESS)</span>
+<span class='curline'><a href='../S/865.html#L3623'>req</a>              3623 ext/openssl/openssl.c 		if (php_openssl_generate_private_key(&amp;req TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/865.html#L3625'>req</a>              3625 ext/openssl/openssl.c 			RETVAL_RESOURCE(zend_list_insert(req.priv_key, le_key TSRMLS_CC));</span>
+<span class='curline'><a href='../S/865.html#L3627'>req</a>              3627 ext/openssl/openssl.c 			req.priv_key = NULL;</span>
+<span class='curline'><a href='../S/865.html#L3630'>req</a>              3630 ext/openssl/openssl.c 	PHP_SSL_REQ_DISPOSE(&amp;req);</span>
+<span class='curline'><a href='../S/865.html#L3638'>req</a>              3638 ext/openssl/openssl.c 	struct php_x509_request req;</span>
+<span class='curline'><a href='../S/865.html#L3666'>req</a>              3666 ext/openssl/openssl.c 	PHP_SSL_REQ_INIT(&amp;req);</span>
+<span class='curline'><a href='../S/865.html#L3668'>req</a>              3668 ext/openssl/openssl.c 	if (PHP_SSL_REQ_PARSE(&amp;req, args) == SUCCESS) {</span>
+<span class='curline'><a href='../S/865.html#L3671'>req</a>              3671 ext/openssl/openssl.c 		if (passphrase &amp;&amp; req.priv_key_encrypt) {</span>
+<span class='curline'><a href='../S/865.html#L3672'>req</a>              3672 ext/openssl/openssl.c 			if (req.priv_key_encrypt_cipher) {</span>
+<span class='curline'><a href='../S/865.html#L3673'>req</a>              3673 ext/openssl/openssl.c 				cipher = req.priv_key_encrypt_cipher;</span>
+<span class='curline'><a href='../S/865.html#L3698'>req</a>              3698 ext/openssl/openssl.c 	PHP_SSL_REQ_DISPOSE(&amp;req);</span>
+<span class='curline'><a href='../S/865.html#L3713'>req</a>              3713 ext/openssl/openssl.c 	struct php_x509_request req;</span>
+<span class='curline'><a href='../S/865.html#L3735'>req</a>              3735 ext/openssl/openssl.c 	PHP_SSL_REQ_INIT(&amp;req);</span>
+<span class='curline'><a href='../S/865.html#L3737'>req</a>              3737 ext/openssl/openssl.c 	if (PHP_SSL_REQ_PARSE(&amp;req, args) == SUCCESS) {</span>
+<span class='curline'><a href='../S/865.html#L3740'>req</a>              3740 ext/openssl/openssl.c 		if (passphrase &amp;&amp; req.priv_key_encrypt) {</span>
+<span class='curline'><a href='../S/865.html#L3741'>req</a>              3741 ext/openssl/openssl.c 			if (req.priv_key_encrypt_cipher) {</span>
+<span class='curline'><a href='../S/865.html#L3742'>req</a>              3742 ext/openssl/openssl.c 				cipher = req.priv_key_encrypt_cipher;</span>
+<span class='curline'><a href='../S/865.html#L3774'>req</a>              3774 ext/openssl/openssl.c 	PHP_SSL_REQ_DISPOSE(&amp;req);</span>
+<span class='curline'><a href='../S/995.html#L150'>req</a>               150 ext/recode/recode.c 	char *req, *str;</span>
+<span class='curline'><a href='../S/995.html#L152'>req</a>               152 ext/recode/recode.c 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ss", &amp;req, &amp;req_len, &amp;str, &amp;str_len) == FAILURE) {</span>
+<span class='curline'><a href='../S/995.html#L163'>req</a>               163 ext/recode/recode.c 	if (!recode_scan_request(request, req)) {</span>
+<span class='curline'><a href='../S/995.html#L164'>req</a>               164 ext/recode/recode.c 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Illegal recode request '%s'", req);</span>
+<span class='curline'><a href='../S/995.html#L189'>req</a>               189 ext/recode/recode.c 	char *req;</span>
+<span class='curline'><a href='../S/995.html#L195'>req</a>               195 ext/recode/recode.c 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "srr", &amp;req, &amp;req_len, &amp;input, &amp;output) == FAILURE) {</span>
+<span class='curline'><a href='../S/995.html#L216'>req</a>               216 ext/recode/recode.c 	if (!recode_scan_request(request, req)) {</span>
+<span class='curline'><a href='../S/995.html#L217'>req</a>               217 ext/recode/recode.c 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Illegal recode request '%s'", req);</span>
+<span class='curline'><a href='../S/1245.html#L747'>req</a>               747 ext/xmlrpc/libxmlrpc/xmlrpc.c    XMLRPC_REQUEST req = XMLRPC_REQUEST_FromXML(in_buf, len, in_options);</span>
+<span class='curline'><a href='../S/1245.html#L749'>req</a>               749 ext/xmlrpc/libxmlrpc/xmlrpc.c    if(req) {</span>
+<span class='curline'><a href='../S/1245.html#L750'>req</a>               750 ext/xmlrpc/libxmlrpc/xmlrpc.c       xResponse = req-&gt;io;</span>
+<span class='curline'><a href='../S/1245.html#L751'>req</a>               751 ext/xmlrpc/libxmlrpc/xmlrpc.c       XMLRPC_RequestFree(req, 0);</span>
+<span class='curline'><a href='../S/1445.html#L163'>req</a>               163 sapi/apache_hooks/php_apache.c 	zval *req;</span>
+<span class='curline'><a href='../S/1445.html#L172'>req</a>               172 sapi/apache_hooks/php_apache.c 	MAKE_STD_ZVAL(req);</span>
+<span class='curline'><a href='../S/1445.html#L173'>req</a>               173 sapi/apache_hooks/php_apache.c 	object_init_ex(req, apacherequest_class_entry);</span>
+<span class='curline'><a href='../S/1445.html#L174'>req</a>               174 sapi/apache_hooks/php_apache.c 	zend_hash_index_update(Z_OBJPROP_P(req), 0, &amp;addr, sizeof(zval *), NULL);</span>
+<span class='curline'><a href='../S/1445.html#L176'>req</a>               176 sapi/apache_hooks/php_apache.c 	return req;</span>
+<span class='curline'><a href='../S/1447.html#L66'>req</a>                66 sapi/apache_hooks/sapi_apache.c 	zval *req;</span>
+<span class='curline'><a href='../S/1447.html#L81'>req</a>                81 sapi/apache_hooks/sapi_apache.c     req = php_apache_request_new(r);</span>
+<span class='curline'><a href='../S/1447.html#L82'>req</a>                82 sapi/apache_hooks/sapi_apache.c     php_register_variable_ex("request", req, PG(http_globals)[TRACK_VARS_SERVER] TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1447.html#L116'>req</a>               116 sapi/apache_hooks/sapi_apache.c 	zval_dtor(req);</span>
+<span class='curline'><a href='../S/1450.html#L744'>req</a>               744 sapi/cgi/fastcgi.c 	fcgi_request *req = (fcgi_request*)calloc(1, sizeof(fcgi_request));</span>
+<span class='curline'><a href='../S/1450.html#L745'>req</a>               745 sapi/cgi/fastcgi.c 	req-&gt;listen_socket = listen_socket;</span>
+<span class='curline'><a href='../S/1450.html#L746'>req</a>               746 sapi/cgi/fastcgi.c 	req-&gt;fd = -1;</span>
+<span class='curline'><a href='../S/1450.html#L747'>req</a>               747 sapi/cgi/fastcgi.c 	req-&gt;id = -1;</span>
+<span class='curline'><a href='../S/1450.html#L749'>req</a>               749 sapi/cgi/fastcgi.c 	req-&gt;in_len = 0;</span>
+<span class='curline'><a href='../S/1450.html#L750'>req</a>               750 sapi/cgi/fastcgi.c 	req-&gt;in_pad = 0;</span>
+<span class='curline'><a href='../S/1450.html#L752'>req</a>               752 sapi/cgi/fastcgi.c 	req-&gt;out_hdr = NULL;</span>
+<span class='curline'><a href='../S/1450.html#L753'>req</a>               753 sapi/cgi/fastcgi.c 	req-&gt;out_pos = req-&gt;out_buf;</span>
+<span class='curline'><a href='../S/1450.html#L756'>req</a>               756 sapi/cgi/fastcgi.c 	req-&gt;tcp = !GetNamedPipeInfo((HANDLE)_get_osfhandle(req-&gt;listen_socket), NULL, NULL, NULL, NULL);</span>
+<span class='curline'><a href='../S/1450.html#L760'>req</a>               760 sapi/cgi/fastcgi.c 	req-&gt;nodelay = 0;</span>
+<span class='curline'><a href='../S/1450.html#L763'>req</a>               763 sapi/cgi/fastcgi.c 	fcgi_hash_init(&amp;req-&gt;env);</span>
+<span class='curline'><a href='../S/1450.html#L765'>req</a>               765 sapi/cgi/fastcgi.c 	return req;</span>
+<span class='curline'><a href='../S/1450.html#L768'>req</a>               768 sapi/cgi/fastcgi.c void fcgi_destroy_request(fcgi_request *req)</span>
+<span class='curline'><a href='../S/1450.html#L770'>req</a>               770 sapi/cgi/fastcgi.c 	fcgi_hash_destroy(&amp;req-&gt;env);</span>
+<span class='curline'><a href='../S/1450.html#L771'>req</a>               771 sapi/cgi/fastcgi.c 	free(req);</span>
+<span class='curline'><a href='../S/1450.html#L774'>req</a>               774 sapi/cgi/fastcgi.c static inline ssize_t safe_write(fcgi_request *req, const void *buf, size_t count)</span>
+<span class='curline'><a href='../S/1450.html#L782'>req</a>               782 sapi/cgi/fastcgi.c 		if (!req-&gt;tcp) {</span>
+<span class='curline'><a href='../S/1450.html#L783'>req</a>               783 sapi/cgi/fastcgi.c 			ret = write(req-&gt;fd, ((char*)buf)+n, count-n);</span>
+<span class='curline'><a href='../S/1450.html#L785'>req</a>               785 sapi/cgi/fastcgi.c 			ret = send(req-&gt;fd, ((char*)buf)+n, count-n, 0);</span>
+<span class='curline'><a href='../S/1450.html#L791'>req</a>               791 sapi/cgi/fastcgi.c 		ret = write(req-&gt;fd, ((char*)buf)+n, count-n);</span>
+<span class='curline'><a href='../S/1450.html#L802'>req</a>               802 sapi/cgi/fastcgi.c static inline ssize_t safe_read(fcgi_request *req, const void *buf, size_t count)</span>
+<span class='curline'><a href='../S/1450.html#L810'>req</a>               810 sapi/cgi/fastcgi.c 		if (!req-&gt;tcp) {</span>
+<span class='curline'><a href='../S/1450.html#L811'>req</a>               811 sapi/cgi/fastcgi.c 			ret = read(req-&gt;fd, ((char*)buf)+n, count-n);</span>
+<span class='curline'><a href='../S/1450.html#L813'>req</a>               813 sapi/cgi/fastcgi.c 			ret = recv(req-&gt;fd, ((char*)buf)+n, count-n, 0);</span>
+<span class='curline'><a href='../S/1450.html#L819'>req</a>               819 sapi/cgi/fastcgi.c 		ret = read(req-&gt;fd, ((char*)buf)+n, count-n);</span>
+<span class='curline'><a href='../S/1450.html#L850'>req</a>               850 sapi/cgi/fastcgi.c static int fcgi_get_params(fcgi_request *req, unsigned char *p, unsigned char *end)</span>
+<span class='curline'><a href='../S/1450.html#L876'>req</a>               876 sapi/cgi/fastcgi.c 		fcgi_hash_set(&amp;req-&gt;env, FCGI_HASH_FUNC(p, name_len), (char*)p, name_len, (char*)p + name_len, val_len);</span>
+<span class='curline'><a href='../S/1450.html#L882'>req</a>               882 sapi/cgi/fastcgi.c static int fcgi_read_request(fcgi_request *req)</span>
+<span class='curline'><a href='../S/1450.html#L888'>req</a>               888 sapi/cgi/fastcgi.c 	req-&gt;keep = 0;</span>
+<span class='curline'><a href='../S/1450.html#L889'>req</a>               889 sapi/cgi/fastcgi.c 	req-&gt;closed = 0;</span>
+<span class='curline'><a href='../S/1450.html#L890'>req</a>               890 sapi/cgi/fastcgi.c 	req-&gt;in_len = 0;</span>
+<span class='curline'><a href='../S/1450.html#L891'>req</a>               891 sapi/cgi/fastcgi.c 	req-&gt;out_hdr = NULL;</span>
+<span class='curline'><a href='../S/1450.html#L892'>req</a>               892 sapi/cgi/fastcgi.c 	req-&gt;out_pos = req-&gt;out_buf;</span>
+<span class='curline'><a href='../S/1450.html#L893'>req</a>               893 sapi/cgi/fastcgi.c 	req-&gt;has_env = 1;</span>
+<span class='curline'><a href='../S/1450.html#L895'>req</a>               895 sapi/cgi/fastcgi.c 	if (safe_read(req, &amp;hdr, sizeof(fcgi_header)) != sizeof(fcgi_header) ||</span>
+<span class='curline'><a href='../S/1450.html#L904'>req</a>               904 sapi/cgi/fastcgi.c 		if (safe_read(req, &amp;hdr, sizeof(fcgi_header)) != sizeof(fcgi_header) ||</span>
+<span class='curline'><a href='../S/1450.html#L917'>req</a>               917 sapi/cgi/fastcgi.c 	req-&gt;id = (hdr.requestIdB1 &lt;&lt; 8) + hdr.requestIdB0;</span>
+<span class='curline'><a href='../S/1450.html#L920'>req</a>               920 sapi/cgi/fastcgi.c 		if (safe_read(req, buf, len+padding) != len+padding) {</span>
+<span class='curline'><a href='../S/1450.html#L924'>req</a>               924 sapi/cgi/fastcgi.c 		req-&gt;keep = (((fcgi_begin_request*)buf)-&gt;flags &amp; FCGI_KEEP_CONN);</span>
+<span class='curline'><a href='../S/1450.html#L926'>req</a>               926 sapi/cgi/fastcgi.c 		if (req-&gt;keep &amp;&amp; req-&gt;tcp &amp;&amp; !req-&gt;nodelay) {</span>
+<span class='curline'><a href='../S/1450.html#L933'>req</a>               933 sapi/cgi/fastcgi.c 			setsockopt(req-&gt;fd, IPPROTO_TCP, TCP_NODELAY, (char*)&amp;on, sizeof(on));</span>
+<span class='curline'><a href='../S/1450.html#L934'>req</a>               934 sapi/cgi/fastcgi.c 			req-&gt;nodelay = 1;</span>
+<span class='curline'><a href='../S/1450.html#L939'>req</a>               939 sapi/cgi/fastcgi.c 				fcgi_hash_set(&amp;req-&gt;env, FCGI_HASH_FUNC("FCGI_ROLE", sizeof("FCGI_ROLE")-1), "FCGI_ROLE", sizeof("FCGI_ROLE")-1, "RESPONDER", sizeof("RESPONDER")-1);</span>
+<span class='curline'><a href='../S/1450.html#L942'>req</a>               942 sapi/cgi/fastcgi.c 				fcgi_hash_set(&amp;req-&gt;env, FCGI_HASH_FUNC("FCGI_ROLE", sizeof("FCGI_ROLE")-1), "FCGI_ROLE", sizeof("FCGI_ROLE")-1, "AUTHORIZER", sizeof("AUTHORIZER")-1);</span>
+<span class='curline'><a href='../S/1450.html#L945'>req</a>               945 sapi/cgi/fastcgi.c 				fcgi_hash_set(&amp;req-&gt;env, FCGI_HASH_FUNC("FCGI_ROLE", sizeof("FCGI_ROLE")-1), "FCGI_ROLE", sizeof("FCGI_ROLE")-1, "FILTER", sizeof("FILTER")-1);</span>
+<span class='curline'><a href='../S/1450.html#L951'>req</a>               951 sapi/cgi/fastcgi.c 		if (safe_read(req, &amp;hdr, sizeof(fcgi_header)) != sizeof(fcgi_header) ||</span>
+<span class='curline'><a href='../S/1450.html#L964'>req</a>               964 sapi/cgi/fastcgi.c 			if (safe_read(req, buf, len+padding) != len+padding) {</span>
+<span class='curline'><a href='../S/1450.html#L965'>req</a>               965 sapi/cgi/fastcgi.c 				req-&gt;keep = 0;</span>
+<span class='curline'><a href='../S/1450.html#L969'>req</a>               969 sapi/cgi/fastcgi.c 			if (!fcgi_get_params(req, buf, buf+len)) {</span>
+<span class='curline'><a href='../S/1450.html#L970'>req</a>               970 sapi/cgi/fastcgi.c 				req-&gt;keep = 0;</span>
+<span class='curline'><a href='../S/1450.html#L974'>req</a>               974 sapi/cgi/fastcgi.c 			if (safe_read(req, &amp;hdr, sizeof(fcgi_header)) != sizeof(fcgi_header) ||</span>
+<span class='curline'><a href='../S/1450.html#L976'>req</a>               976 sapi/cgi/fastcgi.c 				req-&gt;keep = 0;</span>
+<span class='curline'><a href='../S/1450.html#L988'>req</a>               988 sapi/cgi/fastcgi.c 		if (safe_read(req, buf, len+padding) != len+padding) {</span>
+<span class='curline'><a href='../S/1450.html#L989'>req</a>               989 sapi/cgi/fastcgi.c 			req-&gt;keep = 0;</span>
+<span class='curline'><a href='../S/1450.html#L993'>req</a>               993 sapi/cgi/fastcgi.c 		if (!fcgi_get_params(req, buf, buf+len)) {</span>
+<span class='curline'><a href='../S/1450.html#L994'>req</a>               994 sapi/cgi/fastcgi.c 			req-&gt;keep = 0;</span>
+<span class='curline'><a href='../S/1450.html#L998'>req</a>               998 sapi/cgi/fastcgi.c 		q = req-&gt;env.list;</span>
+<span class='curline'><a href='../S/1450.html#L1032'>req</a>              1032 sapi/cgi/fastcgi.c 		if (safe_write(req, buf, sizeof(fcgi_header)+len) != (int)sizeof(fcgi_header)+len) {</span>
+<span class='curline'><a href='../S/1450.html#L1033'>req</a>              1033 sapi/cgi/fastcgi.c 			req-&gt;keep = 0;</span>
+<span class='curline'><a href='../S/1450.html#L1044'>req</a>              1044 sapi/cgi/fastcgi.c int fcgi_read(fcgi_request *req, char *str, int len)</span>
+<span class='curline'><a href='../S/1450.html#L1053'>req</a>              1053 sapi/cgi/fastcgi.c 		if (req-&gt;in_len == 0) {</span>
+<span class='curline'><a href='../S/1450.html#L1054'>req</a>              1054 sapi/cgi/fastcgi.c 			if (safe_read(req, &amp;hdr, sizeof(fcgi_header)) != sizeof(fcgi_header) ||</span>
+<span class='curline'><a href='../S/1450.html#L1057'>req</a>              1057 sapi/cgi/fastcgi.c 				req-&gt;keep = 0;</span>
+<span class='curline'><a href='../S/1450.html#L1060'>req</a>              1060 sapi/cgi/fastcgi.c 			req-&gt;in_len = (hdr.contentLengthB1 &lt;&lt; 8) | hdr.contentLengthB0;</span>
+<span class='curline'><a href='../S/1450.html#L1061'>req</a>              1061 sapi/cgi/fastcgi.c 			req-&gt;in_pad = hdr.paddingLength;</span>
+<span class='curline'><a href='../S/1450.html#L1062'>req</a>              1062 sapi/cgi/fastcgi.c 			if (req-&gt;in_len == 0) {</span>
+<span class='curline'><a href='../S/1450.html#L1067'>req</a>              1067 sapi/cgi/fastcgi.c 		if (req-&gt;in_len &gt;= rest) {</span>
+<span class='curline'><a href='../S/1450.html#L1068'>req</a>              1068 sapi/cgi/fastcgi.c 			ret = safe_read(req, str, rest);</span>
+<span class='curline'><a href='../S/1450.html#L1070'>req</a>              1070 sapi/cgi/fastcgi.c 			ret = safe_read(req, str, req-&gt;in_len);</span>
+<span class='curline'><a href='../S/1450.html#L1073'>req</a>              1073 sapi/cgi/fastcgi.c 			req-&gt;keep = 0;</span>
+<span class='curline'><a href='../S/1450.html#L1076'>req</a>              1076 sapi/cgi/fastcgi.c 			req-&gt;in_len -= ret;</span>
+<span class='curline'><a href='../S/1450.html#L1080'>req</a>              1080 sapi/cgi/fastcgi.c 			if (req-&gt;in_len == 0) {</span>
+<span class='curline'><a href='../S/1450.html#L1081'>req</a>              1081 sapi/cgi/fastcgi.c 				if (req-&gt;in_pad) {</span>
+<span class='curline'><a href='../S/1450.html#L1082'>req</a>              1082 sapi/cgi/fastcgi.c 					if (safe_read(req, buf, req-&gt;in_pad) != req-&gt;in_pad) {</span>
+<span class='curline'><a href='../S/1450.html#L1083'>req</a>              1083 sapi/cgi/fastcgi.c 						req-&gt;keep = 0;</span>
+<span class='curline'><a href='../S/1450.html#L1097'>req</a>              1097 sapi/cgi/fastcgi.c static inline void fcgi_close(fcgi_request *req, int force, int destroy)</span>
+<span class='curline'><a href='../S/1450.html#L1099'>req</a>              1099 sapi/cgi/fastcgi.c 	if (destroy &amp;&amp; req-&gt;has_env) {</span>
+<span class='curline'><a href='../S/1450.html#L1100'>req</a>              1100 sapi/cgi/fastcgi.c 		fcgi_hash_clean(&amp;req-&gt;env);</span>
+<span class='curline'><a href='../S/1450.html#L1101'>req</a>              1101 sapi/cgi/fastcgi.c 		req-&gt;has_env = 0;</span>
+<span class='curline'><a href='../S/1450.html#L1105'>req</a>              1105 sapi/cgi/fastcgi.c 	if (is_impersonate &amp;&amp; !req-&gt;tcp) {</span>
+<span class='curline'><a href='../S/1450.html#L1110'>req</a>              1110 sapi/cgi/fastcgi.c 	if ((force || !req-&gt;keep) &amp;&amp; req-&gt;fd &gt;= 0) {</span>
+<span class='curline'><a href='../S/1450.html#L1112'>req</a>              1112 sapi/cgi/fastcgi.c 		if (!req-&gt;tcp) {</span>
+<span class='curline'><a href='../S/1450.html#L1113'>req</a>              1113 sapi/cgi/fastcgi.c 			HANDLE pipe = (HANDLE)_get_osfhandle(req-&gt;fd);</span>
+<span class='curline'><a href='../S/1450.html#L1123'>req</a>              1123 sapi/cgi/fastcgi.c 				shutdown(req-&gt;fd, 1);</span>
+<span class='curline'><a href='../S/1450.html#L1125'>req</a>              1125 sapi/cgi/fastcgi.c 				recv(req-&gt;fd, (char *)(&amp;buf), sizeof(buf), 0);</span>
+<span class='curline'><a href='../S/1450.html#L1127'>req</a>              1127 sapi/cgi/fastcgi.c 			closesocket(req-&gt;fd);</span>
+<span class='curline'><a href='../S/1450.html#L1133'>req</a>              1133 sapi/cgi/fastcgi.c 			shutdown(req-&gt;fd, 1);</span>
+<span class='curline'><a href='../S/1450.html#L1135'>req</a>              1135 sapi/cgi/fastcgi.c 			recv(req-&gt;fd, (char *)(&amp;buf), sizeof(buf), 0);</span>
+<span class='curline'><a href='../S/1450.html#L1137'>req</a>              1137 sapi/cgi/fastcgi.c 		close(req-&gt;fd);</span>
+<span class='curline'><a href='../S/1450.html#L1140'>req</a>              1140 sapi/cgi/fastcgi.c 		req-&gt;nodelay = 0;</span>
+<span class='curline'><a href='../S/1450.html#L1142'>req</a>              1142 sapi/cgi/fastcgi.c 		req-&gt;fd = -1;</span>
+<span class='curline'><a href='../S/1450.html#L1146'>req</a>              1146 sapi/cgi/fastcgi.c int fcgi_accept_request(fcgi_request *req)</span>
+<span class='curline'><a href='../S/1450.html#L1154'>req</a>              1154 sapi/cgi/fastcgi.c 		if (req-&gt;fd &lt; 0) {</span>
+<span class='curline'><a href='../S/1450.html#L1160'>req</a>              1160 sapi/cgi/fastcgi.c 				if (!req-&gt;tcp) {</span>
+<span class='curline'><a href='../S/1450.html#L1161'>req</a>              1161 sapi/cgi/fastcgi.c 					pipe = (HANDLE)_get_osfhandle(req-&gt;listen_socket);</span>
+<span class='curline'><a href='../S/1450.html#L1162'>req</a>              1162 sapi/cgi/fastcgi.c 					FCGI_LOCK(req-&gt;listen_socket);</span>
+<span class='curline'><a href='../S/1450.html#L1170'>req</a>              1170 sapi/cgi/fastcgi.c 									FCGI_UNLOCK(req-&gt;listen_socket);</span>
+<span class='curline'><a href='../S/1450.html#L1178'>req</a>              1178 sapi/cgi/fastcgi.c 					req-&gt;fd = req-&gt;listen_socket;</span>
+<span class='curline'><a href='../S/1450.html#L1179'>req</a>              1179 sapi/cgi/fastcgi.c 					FCGI_UNLOCK(req-&gt;listen_socket);</span>
+<span class='curline'><a href='../S/1450.html#L1181'>req</a>              1181 sapi/cgi/fastcgi.c 					SOCKET listen_socket = (SOCKET)_get_osfhandle(req-&gt;listen_socket);</span>
+<span class='curline'><a href='../S/1450.html#L1184'>req</a>              1184 sapi/cgi/fastcgi.c 					int listen_socket = req-&gt;listen_socket;</span>
+<span class='curline'><a href='../S/1450.html#L1189'>req</a>              1189 sapi/cgi/fastcgi.c 					FCGI_LOCK(req-&gt;listen_socket);</span>
+<span class='curline'><a href='../S/1450.html#L1190'>req</a>              1190 sapi/cgi/fastcgi.c 					req-&gt;fd = accept(listen_socket, (struct sockaddr *)&amp;sa, &amp;len);</span>
+<span class='curline'><a href='../S/1450.html#L1191'>req</a>              1191 sapi/cgi/fastcgi.c 					FCGI_UNLOCK(req-&gt;listen_socket);</span>
+<span class='curline'><a href='../S/1450.html#L1192'>req</a>              1192 sapi/cgi/fastcgi.c 					if (req-&gt;fd &gt;= 0) {</span>
+<span class='curline'><a href='../S/1450.html#L1195'>req</a>              1195 sapi/cgi/fastcgi.c 							req-&gt;tcp = 1;</span>
+<span class='curline'><a href='../S/1450.html#L1210'>req</a>              1210 sapi/cgi/fastcgi.c 									closesocket(req-&gt;fd);</span>
+<span class='curline'><a href='../S/1450.html#L1211'>req</a>              1211 sapi/cgi/fastcgi.c 									req-&gt;fd = -1;</span>
+<span class='curline'><a href='../S/1450.html#L1217'>req</a>              1217 sapi/cgi/fastcgi.c 							req-&gt;tcp = 0;</span>
+<span class='curline'><a href='../S/1450.html#L1224'>req</a>              1224 sapi/cgi/fastcgi.c 				if (req-&gt;fd &lt; 0 &amp;&amp; (in_shutdown || errno != EINTR)) {</span>
+<span class='curline'><a href='../S/1450.html#L1226'>req</a>              1226 sapi/cgi/fastcgi.c 				if (req-&gt;fd &lt; 0 &amp;&amp; (in_shutdown || (errno != EINTR &amp;&amp; errno != ECONNABORTED))) {</span>
+<span class='curline'><a href='../S/1450.html#L1234'>req</a>              1234 sapi/cgi/fastcgi.c 				if (req-&gt;fd &gt;= 0) {</span>
+<span class='curline'><a href='../S/1450.html#L1239'>req</a>              1239 sapi/cgi/fastcgi.c 					fds.fd = req-&gt;fd;</span>
+<span class='curline'><a href='../S/1450.html#L1249'>req</a>              1249 sapi/cgi/fastcgi.c 					fcgi_close(req, 1, 0);</span>
+<span class='curline'><a href='../S/1450.html#L1251'>req</a>              1251 sapi/cgi/fastcgi.c 					if (req-&gt;fd &lt; FD_SETSIZE) {</span>
+<span class='curline'><a href='../S/1450.html#L1257'>req</a>              1257 sapi/cgi/fastcgi.c 						FD_SET(req-&gt;fd, &amp;set);</span>
+<span class='curline'><a href='../S/1450.html#L1260'>req</a>              1260 sapi/cgi/fastcgi.c 							ret = select(req-&gt;fd + 1, &amp;set, NULL, NULL, &amp;tv) &gt;= 0;</span>
+<span class='curline'><a href='../S/1450.html#L1262'>req</a>              1262 sapi/cgi/fastcgi.c 						if (ret &gt; 0 &amp;&amp; FD_ISSET(req-&gt;fd, &amp;set)) {</span>
+<span class='curline'><a href='../S/1450.html#L1265'>req</a>              1265 sapi/cgi/fastcgi.c 						fcgi_close(req, 1, 0);</span>
+<span class='curline'><a href='../S/1450.html#L1268'>req</a>              1268 sapi/cgi/fastcgi.c 						fcgi_close(req, 1, 0);</span>
+<span class='curline'><a href='../S/1450.html#L1277'>req</a>              1277 sapi/cgi/fastcgi.c 		if (fcgi_read_request(req)) {</span>
+<span class='curline'><a href='../S/1450.html#L1279'>req</a>              1279 sapi/cgi/fastcgi.c 			if (is_impersonate &amp;&amp; !req-&gt;tcp) {</span>
+<span class='curline'><a href='../S/1450.html#L1280'>req</a>              1280 sapi/cgi/fastcgi.c 				pipe = (HANDLE)_get_osfhandle(req-&gt;fd);</span>
+<span class='curline'><a href='../S/1450.html#L1282'>req</a>              1282 sapi/cgi/fastcgi.c 					fcgi_close(req, 1, 1);</span>
+<span class='curline'><a href='../S/1450.html#L1287'>req</a>              1287 sapi/cgi/fastcgi.c 			return req-&gt;fd;</span>
+<span class='curline'><a href='../S/1450.html#L1289'>req</a>              1289 sapi/cgi/fastcgi.c 			fcgi_close(req, 1, 1);</span>
+<span class='curline'><a href='../S/1450.html#L1294'>req</a>              1294 sapi/cgi/fastcgi.c static inline fcgi_header* open_packet(fcgi_request *req, fcgi_request_type type)</span>
+<span class='curline'><a href='../S/1450.html#L1296'>req</a>              1296 sapi/cgi/fastcgi.c 	req-&gt;out_hdr = (fcgi_header*) req-&gt;out_pos;</span>
+<span class='curline'><a href='../S/1450.html#L1297'>req</a>              1297 sapi/cgi/fastcgi.c 	req-&gt;out_hdr-&gt;type = type;</span>
+<span class='curline'><a href='../S/1450.html#L1298'>req</a>              1298 sapi/cgi/fastcgi.c 	req-&gt;out_pos += sizeof(fcgi_header);</span>
+<span class='curline'><a href='../S/1450.html#L1299'>req</a>              1299 sapi/cgi/fastcgi.c 	return req-&gt;out_hdr;</span>
+<span class='curline'><a href='../S/1450.html#L1302'>req</a>              1302 sapi/cgi/fastcgi.c static inline void close_packet(fcgi_request *req)</span>
+<span class='curline'><a href='../S/1450.html#L1304'>req</a>              1304 sapi/cgi/fastcgi.c 	if (req-&gt;out_hdr) {</span>
+<span class='curline'><a href='../S/1450.html#L1305'>req</a>              1305 sapi/cgi/fastcgi.c 		int len = req-&gt;out_pos - ((unsigned char*)req-&gt;out_hdr + sizeof(fcgi_header));</span>
+<span class='curline'><a href='../S/1450.html#L1307'>req</a>              1307 sapi/cgi/fastcgi.c 		req-&gt;out_pos += fcgi_make_header(req-&gt;out_hdr, (fcgi_request_type)req-&gt;out_hdr-&gt;type, req-&gt;id, len);</span>
+<span class='curline'><a href='../S/1450.html#L1308'>req</a>              1308 sapi/cgi/fastcgi.c 		req-&gt;out_hdr = NULL;</span>
+<span class='curline'><a href='../S/1450.html#L1312'>req</a>              1312 sapi/cgi/fastcgi.c int fcgi_flush(fcgi_request *req, int close)</span>
+<span class='curline'><a href='../S/1450.html#L1316'>req</a>              1316 sapi/cgi/fastcgi.c 	close_packet(req);</span>
+<span class='curline'><a href='../S/1450.html#L1318'>req</a>              1318 sapi/cgi/fastcgi.c 	len = req-&gt;out_pos - req-&gt;out_buf;</span>
+<span class='curline'><a href='../S/1450.html#L1321'>req</a>              1321 sapi/cgi/fastcgi.c 		fcgi_end_request_rec *rec = (fcgi_end_request_rec*)(req-&gt;out_pos);</span>
+<span class='curline'><a href='../S/1450.html#L1323'>req</a>              1323 sapi/cgi/fastcgi.c 		fcgi_make_header(&amp;rec-&gt;hdr, FCGI_END_REQUEST, req-&gt;id, sizeof(fcgi_end_request));</span>
+<span class='curline'><a href='../S/1450.html#L1332'>req</a>              1332 sapi/cgi/fastcgi.c 	if (safe_write(req, req-&gt;out_buf, len) != len) {</span>
+<span class='curline'><a href='../S/1450.html#L1333'>req</a>              1333 sapi/cgi/fastcgi.c 		req-&gt;keep = 0;</span>
+<span class='curline'><a href='../S/1450.html#L1334'>req</a>              1334 sapi/cgi/fastcgi.c 		req-&gt;out_pos = req-&gt;out_buf;</span>
+<span class='curline'><a href='../S/1450.html#L1338'>req</a>              1338 sapi/cgi/fastcgi.c 	req-&gt;out_pos = req-&gt;out_buf;</span>
+<span class='curline'><a href='../S/1450.html#L1342'>req</a>              1342 sapi/cgi/fastcgi.c int fcgi_write(fcgi_request *req, fcgi_request_type type, const char *str, int len)</span>
+<span class='curline'><a href='../S/1450.html#L1350'>req</a>              1350 sapi/cgi/fastcgi.c 	if (req-&gt;out_hdr &amp;&amp; req-&gt;out_hdr-&gt;type != type) {</span>
+<span class='curline'><a href='../S/1450.html#L1351'>req</a>              1351 sapi/cgi/fastcgi.c 		close_packet(req);</span>
+<span class='curline'><a href='../S/1450.html#L1357'>req</a>              1357 sapi/cgi/fastcgi.c 		limit = sizeof(req-&gt;out_buf) - (req-&gt;out_pos - req-&gt;out_buf);</span>
+<span class='curline'><a href='../S/1450.html#L1359'>req</a>              1359 sapi/cgi/fastcgi.c 		if (!req-&gt;out_hdr) {</span>
+<span class='curline'><a href='../S/1450.html#L1361'>req</a>              1361 sapi/cgi/fastcgi.c 				if (!fcgi_flush(req, 0)) {</span>
+<span class='curline'><a href='../S/1450.html#L1365'>req</a>              1365 sapi/cgi/fastcgi.c 			open_packet(req, type);</span>
+<span class='curline'><a href='../S/1450.html#L1367'>req</a>              1367 sapi/cgi/fastcgi.c 		limit = sizeof(req-&gt;out_buf) - (req-&gt;out_pos - req-&gt;out_buf);</span>
+<span class='curline'><a href='../S/1450.html#L1369'>req</a>              1369 sapi/cgi/fastcgi.c 			memcpy(req-&gt;out_pos, str, rest);</span>
+<span class='curline'><a href='../S/1450.html#L1370'>req</a>              1370 sapi/cgi/fastcgi.c 			req-&gt;out_pos += rest;</span>
+<span class='curline'><a href='../S/1450.html#L1373'>req</a>              1373 sapi/cgi/fastcgi.c 			memcpy(req-&gt;out_pos, str, limit);</span>
+<span class='curline'><a href='../S/1450.html#L1374'>req</a>              1374 sapi/cgi/fastcgi.c 			req-&gt;out_pos += limit;</span>
+<span class='curline'><a href='../S/1450.html#L1377'>req</a>              1377 sapi/cgi/fastcgi.c 			if (!fcgi_flush(req, 0)) {</span>
+<span class='curline'><a href='../S/1450.html#L1384'>req</a>              1384 sapi/cgi/fastcgi.c 	limit = sizeof(req-&gt;out_buf) - (req-&gt;out_pos - req-&gt;out_buf);</span>
+<span class='curline'><a href='../S/1450.html#L1385'>req</a>              1385 sapi/cgi/fastcgi.c 	if (!req-&gt;out_hdr) {</span>
+<span class='curline'><a href='../S/1450.html#L1391'>req</a>              1391 sapi/cgi/fastcgi.c 		if (!req-&gt;out_hdr) {</span>
+<span class='curline'><a href='../S/1450.html#L1392'>req</a>              1392 sapi/cgi/fastcgi.c 			open_packet(req, type);</span>
+<span class='curline'><a href='../S/1450.html#L1394'>req</a>              1394 sapi/cgi/fastcgi.c 		memcpy(req-&gt;out_pos, str, len);</span>
+<span class='curline'><a href='../S/1450.html#L1395'>req</a>              1395 sapi/cgi/fastcgi.c 		req-&gt;out_pos += len;</span>
+<span class='curline'><a href='../S/1450.html#L1396'>req</a>              1396 sapi/cgi/fastcgi.c 	} else if (len - limit &lt; sizeof(req-&gt;out_buf) - sizeof(fcgi_header)) {</span>
+<span class='curline'><a href='../S/1450.html#L1397'>req</a>              1397 sapi/cgi/fastcgi.c 		if (!req-&gt;out_hdr) {</span>
+<span class='curline'><a href='../S/1450.html#L1398'>req</a>              1398 sapi/cgi/fastcgi.c 			open_packet(req, type);</span>
+<span class='curline'><a href='../S/1450.html#L1401'>req</a>              1401 sapi/cgi/fastcgi.c 			memcpy(req-&gt;out_pos, str, limit);</span>
+<span class='curline'><a href='../S/1450.html#L1402'>req</a>              1402 sapi/cgi/fastcgi.c 			req-&gt;out_pos += limit;</span>
+<span class='curline'><a href='../S/1450.html#L1404'>req</a>              1404 sapi/cgi/fastcgi.c 		if (!fcgi_flush(req, 0)) {</span>
+<span class='curline'><a href='../S/1450.html#L1408'>req</a>              1408 sapi/cgi/fastcgi.c 			open_packet(req, type);</span>
+<span class='curline'><a href='../S/1450.html#L1409'>req</a>              1409 sapi/cgi/fastcgi.c 			memcpy(req-&gt;out_pos, str + limit, len - limit);</span>
+<span class='curline'><a href='../S/1450.html#L1410'>req</a>              1410 sapi/cgi/fastcgi.c 			req-&gt;out_pos += len - limit;</span>
+<span class='curline'><a href='../S/1450.html#L1416'>req</a>              1416 sapi/cgi/fastcgi.c 		close_packet(req);</span>
+<span class='curline'><a href='../S/1450.html#L1418'>req</a>              1418 sapi/cgi/fastcgi.c 			open_packet(req, type);</span>
+<span class='curline'><a href='../S/1450.html#L1419'>req</a>              1419 sapi/cgi/fastcgi.c 			fcgi_make_header(req-&gt;out_hdr, type, req-&gt;id, 0xfff8);</span>
+<span class='curline'><a href='../S/1450.html#L1420'>req</a>              1420 sapi/cgi/fastcgi.c 			req-&gt;out_hdr = NULL;</span>
+<span class='curline'><a href='../S/1450.html#L1421'>req</a>              1421 sapi/cgi/fastcgi.c 			if (!fcgi_flush(req, 0)) {</span>
+<span class='curline'><a href='../S/1450.html#L1424'>req</a>              1424 sapi/cgi/fastcgi.c 			if (safe_write(req, str + pos, 0xfff8) != 0xfff8) {</span>
+<span class='curline'><a href='../S/1450.html#L1425'>req</a>              1425 sapi/cgi/fastcgi.c 				req-&gt;keep = 0;</span>
+<span class='curline'><a href='../S/1450.html#L1434'>req</a>              1434 sapi/cgi/fastcgi.c 		open_packet(req, type);</span>
+<span class='curline'><a href='../S/1450.html#L1435'>req</a>              1435 sapi/cgi/fastcgi.c 		fcgi_make_header(req-&gt;out_hdr, type, req-&gt;id, (len - pos) - rest);</span>
+<span class='curline'><a href='../S/1450.html#L1436'>req</a>              1436 sapi/cgi/fastcgi.c 		req-&gt;out_hdr = NULL;</span>
+<span class='curline'><a href='../S/1450.html#L1437'>req</a>              1437 sapi/cgi/fastcgi.c 		if (!fcgi_flush(req, 0)) {</span>
+<span class='curline'><a href='../S/1450.html#L1440'>req</a>              1440 sapi/cgi/fastcgi.c 		if (safe_write(req, str + pos, (len - pos) - rest) != (len - pos) - rest) {</span>
+<span class='curline'><a href='../S/1450.html#L1441'>req</a>              1441 sapi/cgi/fastcgi.c 			req-&gt;keep = 0;</span>
+<span class='curline'><a href='../S/1450.html#L1445'>req</a>              1445 sapi/cgi/fastcgi.c 			open_packet(req, type);</span>
+<span class='curline'><a href='../S/1450.html#L1446'>req</a>              1446 sapi/cgi/fastcgi.c 			memcpy(req-&gt;out_pos, str + len - rest,  rest);</span>
+<span class='curline'><a href='../S/1450.html#L1447'>req</a>              1447 sapi/cgi/fastcgi.c 			req-&gt;out_pos += rest;</span>
+<span class='curline'><a href='../S/1450.html#L1454'>req</a>              1454 sapi/cgi/fastcgi.c int fcgi_finish_request(fcgi_request *req, int force_close)</span>
+<span class='curline'><a href='../S/1450.html#L1458'>req</a>              1458 sapi/cgi/fastcgi.c 	if (req-&gt;fd &gt;= 0) {</span>
+<span class='curline'><a href='../S/1450.html#L1459'>req</a>              1459 sapi/cgi/fastcgi.c 		if (!req-&gt;closed) {</span>
+<span class='curline'><a href='../S/1450.html#L1460'>req</a>              1460 sapi/cgi/fastcgi.c 			ret = fcgi_flush(req, 1);</span>
+<span class='curline'><a href='../S/1450.html#L1461'>req</a>              1461 sapi/cgi/fastcgi.c 			req-&gt;closed = 1;</span>
+<span class='curline'><a href='../S/1450.html#L1463'>req</a>              1463 sapi/cgi/fastcgi.c 		fcgi_close(req, force_close, 1);</span>
+<span class='curline'><a href='../S/1450.html#L1468'>req</a>              1468 sapi/cgi/fastcgi.c char* fcgi_getenv(fcgi_request *req, const char* var, int var_len)</span>
+<span class='curline'><a href='../S/1450.html#L1472'>req</a>              1472 sapi/cgi/fastcgi.c 	if (!req) return NULL;</span>
+<span class='curline'><a href='../S/1450.html#L1474'>req</a>              1474 sapi/cgi/fastcgi.c 	return fcgi_hash_get(&amp;req-&gt;env, FCGI_HASH_FUNC(var, var_len), (char*)var, var_len, &amp;val_len);</span>
+<span class='curline'><a href='../S/1450.html#L1477'>req</a>              1477 sapi/cgi/fastcgi.c char* fcgi_quick_getenv(fcgi_request *req, const char* var, int var_len, unsigned int hash_value)</span>
+<span class='curline'><a href='../S/1450.html#L1481'>req</a>              1481 sapi/cgi/fastcgi.c 	return fcgi_hash_get(&amp;req-&gt;env, hash_value, (char*)var, var_len, &amp;val_len);</span>
+<span class='curline'><a href='../S/1450.html#L1484'>req</a>              1484 sapi/cgi/fastcgi.c char* fcgi_putenv(fcgi_request *req, char* var, int var_len, char* val)</span>
+<span class='curline'><a href='../S/1450.html#L1486'>req</a>              1486 sapi/cgi/fastcgi.c 	if (!req) return NULL;</span>
+<span class='curline'><a href='../S/1450.html#L1488'>req</a>              1488 sapi/cgi/fastcgi.c 		fcgi_hash_del(&amp;req-&gt;env, FCGI_HASH_FUNC(var, var_len), var, var_len);</span>
+<span class='curline'><a href='../S/1450.html#L1491'>req</a>              1491 sapi/cgi/fastcgi.c 		return fcgi_hash_set(&amp;req-&gt;env, FCGI_HASH_FUNC(var, var_len), var, var_len, val, strlen(val));</span>
+<span class='curline'><a href='../S/1450.html#L1495'>req</a>              1495 sapi/cgi/fastcgi.c char* fcgi_quick_putenv(fcgi_request *req, char* var, int var_len, unsigned int hash_value, char* val)</span>
+<span class='curline'><a href='../S/1450.html#L1498'>req</a>              1498 sapi/cgi/fastcgi.c 		fcgi_hash_del(&amp;req-&gt;env, hash_value, var, var_len);</span>
+<span class='curline'><a href='../S/1450.html#L1501'>req</a>              1501 sapi/cgi/fastcgi.c 		return fcgi_hash_set(&amp;req-&gt;env, hash_value, var, var_len, val, strlen(val));</span>
+<span class='curline'><a href='../S/1450.html#L1505'>req</a>              1505 sapi/cgi/fastcgi.c void fcgi_loadenv(fcgi_request *req, fcgi_apply_func func, zval *array TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1450.html#L1507'>req</a>              1507 sapi/cgi/fastcgi.c 	fcgi_hash_apply(&amp;req-&gt;env, func, array TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1451.html#L122'>req</a>               122 sapi/cgi/fastcgi.h void fcgi_destroy_request(fcgi_request *req);</span>
+<span class='curline'><a href='../S/1451.html#L123'>req</a>               123 sapi/cgi/fastcgi.h int fcgi_accept_request(fcgi_request *req);</span>
+<span class='curline'><a href='../S/1451.html#L124'>req</a>               124 sapi/cgi/fastcgi.h int fcgi_finish_request(fcgi_request *req, int force_close);</span>
+<span class='curline'><a href='../S/1451.html#L126'>req</a>               126 sapi/cgi/fastcgi.h char* fcgi_getenv(fcgi_request *req, const char* var, int var_len);</span>
+<span class='curline'><a href='../S/1451.html#L127'>req</a>               127 sapi/cgi/fastcgi.h char* fcgi_putenv(fcgi_request *req, char* var, int var_len, char* val);</span>
+<span class='curline'><a href='../S/1451.html#L128'>req</a>               128 sapi/cgi/fastcgi.h char* fcgi_quick_getenv(fcgi_request *req, const char* var, int var_len, unsigned int hash_value);</span>
+<span class='curline'><a href='../S/1451.html#L129'>req</a>               129 sapi/cgi/fastcgi.h char* fcgi_quick_putenv(fcgi_request *req, char* var, int var_len, unsigned int hash_value, char* val);</span>
+<span class='curline'><a href='../S/1451.html#L130'>req</a>               130 sapi/cgi/fastcgi.h void  fcgi_loadenv(fcgi_request *req, fcgi_apply_func load_func, zval *array TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1451.html#L132'>req</a>               132 sapi/cgi/fastcgi.h int fcgi_read(fcgi_request *req, char *str, int len);</span>
+<span class='curline'><a href='../S/1451.html#L134'>req</a>               134 sapi/cgi/fastcgi.h int fcgi_write(fcgi_request *req, fcgi_request_type type, const char *str, int len);</span>
+<span class='curline'><a href='../S/1451.html#L135'>req</a>               135 sapi/cgi/fastcgi.h int fcgi_flush(fcgi_request *req, int close);</span>
+<span class='curline'><a href='../S/1457.html#L1414'>req</a>              1414 sapi/cli/php_cli_server.c static int php_cli_server_request_ctor(php_cli_server_request *req) /* {{{ */</span>
+<span class='curline'><a href='../S/1457.html#L1416'>req</a>              1416 sapi/cli/php_cli_server.c 	req-&gt;protocol_version = 0;</span>
+<span class='curline'><a href='../S/1457.html#L1417'>req</a>              1417 sapi/cli/php_cli_server.c 	req-&gt;request_uri = NULL;</span>
+<span class='curline'><a href='../S/1457.html#L1418'>req</a>              1418 sapi/cli/php_cli_server.c 	req-&gt;request_uri_len = 0;</span>
+<span class='curline'><a href='../S/1457.html#L1419'>req</a>              1419 sapi/cli/php_cli_server.c 	req-&gt;vpath = NULL;</span>
+<span class='curline'><a href='../S/1457.html#L1420'>req</a>              1420 sapi/cli/php_cli_server.c 	req-&gt;vpath_len = 0;</span>
+<span class='curline'><a href='../S/1457.html#L1421'>req</a>              1421 sapi/cli/php_cli_server.c 	req-&gt;path_translated = NULL;</span>
+<span class='curline'><a href='../S/1457.html#L1422'>req</a>              1422 sapi/cli/php_cli_server.c 	req-&gt;path_translated_len = 0;</span>
+<span class='curline'><a href='../S/1457.html#L1423'>req</a>              1423 sapi/cli/php_cli_server.c 	req-&gt;path_info = NULL;</span>
+<span class='curline'><a href='../S/1457.html#L1424'>req</a>              1424 sapi/cli/php_cli_server.c 	req-&gt;path_info_len = 0;</span>
+<span class='curline'><a href='../S/1457.html#L1425'>req</a>              1425 sapi/cli/php_cli_server.c 	req-&gt;query_string = NULL;</span>
+<span class='curline'><a href='../S/1457.html#L1426'>req</a>              1426 sapi/cli/php_cli_server.c 	req-&gt;query_string_len = 0;</span>
+<span class='curline'><a href='../S/1457.html#L1427'>req</a>              1427 sapi/cli/php_cli_server.c 	zend_hash_init(&amp;req-&gt;headers, 0, NULL, (void(*)(void*))char_ptr_dtor_p, 1);</span>
+<span class='curline'><a href='../S/1457.html#L1428'>req</a>              1428 sapi/cli/php_cli_server.c 	zend_hash_init(&amp;req-&gt;headers_original_case, 0, NULL, NULL, 1);</span>
+<span class='curline'><a href='../S/1457.html#L1429'>req</a>              1429 sapi/cli/php_cli_server.c 	req-&gt;content = NULL;</span>
+<span class='curline'><a href='../S/1457.html#L1430'>req</a>              1430 sapi/cli/php_cli_server.c 	req-&gt;content_len = 0;</span>
+<span class='curline'><a href='../S/1457.html#L1431'>req</a>              1431 sapi/cli/php_cli_server.c 	req-&gt;ext = NULL;</span>
+<span class='curline'><a href='../S/1457.html#L1432'>req</a>              1432 sapi/cli/php_cli_server.c 	req-&gt;ext_len = 0;</span>
+<span class='curline'><a href='../S/1457.html#L1436'>req</a>              1436 sapi/cli/php_cli_server.c static void php_cli_server_request_dtor(php_cli_server_request *req) /* {{{ */</span>
+<span class='curline'><a href='../S/1457.html#L1438'>req</a>              1438 sapi/cli/php_cli_server.c 	if (req-&gt;request_uri) {</span>
+<span class='curline'><a href='../S/1457.html#L1439'>req</a>              1439 sapi/cli/php_cli_server.c 		pefree(req-&gt;request_uri, 1);</span>
+<span class='curline'><a href='../S/1457.html#L1441'>req</a>              1441 sapi/cli/php_cli_server.c 	if (req-&gt;vpath) {</span>
+<span class='curline'><a href='../S/1457.html#L1442'>req</a>              1442 sapi/cli/php_cli_server.c 		pefree(req-&gt;vpath, 1);</span>
+<span class='curline'><a href='../S/1457.html#L1444'>req</a>              1444 sapi/cli/php_cli_server.c 	if (req-&gt;path_translated) {</span>
+<span class='curline'><a href='../S/1457.html#L1445'>req</a>              1445 sapi/cli/php_cli_server.c 		pefree(req-&gt;path_translated, 1);</span>
+<span class='curline'><a href='../S/1457.html#L1447'>req</a>              1447 sapi/cli/php_cli_server.c 	if (req-&gt;path_info) {</span>
+<span class='curline'><a href='../S/1457.html#L1448'>req</a>              1448 sapi/cli/php_cli_server.c 		pefree(req-&gt;path_info, 1);</span>
+<span class='curline'><a href='../S/1457.html#L1450'>req</a>              1450 sapi/cli/php_cli_server.c 	if (req-&gt;query_string) {</span>
+<span class='curline'><a href='../S/1457.html#L1451'>req</a>              1451 sapi/cli/php_cli_server.c 		pefree(req-&gt;query_string, 1);</span>
+<span class='curline'><a href='../S/1457.html#L1453'>req</a>              1453 sapi/cli/php_cli_server.c 	zend_hash_destroy(&amp;req-&gt;headers);</span>
+<span class='curline'><a href='../S/1457.html#L1454'>req</a>              1454 sapi/cli/php_cli_server.c 	zend_hash_destroy(&amp;req-&gt;headers_original_case);</span>
+<span class='curline'><a href='../S/1457.html#L1455'>req</a>              1455 sapi/cli/php_cli_server.c 	if (req-&gt;content) {</span>
+<span class='curline'><a href='../S/1457.html#L1456'>req</a>              1456 sapi/cli/php_cli_server.c 		pefree(req-&gt;content, 1);</span>
+<span class='curline'><a href='../S/1478.html#L288'>req</a>               288 sapi/fpm/fpm/fastcgi.c void fcgi_init_request(fcgi_request *req, int listen_socket)</span>
+<span class='curline'><a href='../S/1478.html#L290'>req</a>               290 sapi/fpm/fpm/fastcgi.c 	memset(req, 0, sizeof(fcgi_request));</span>
+<span class='curline'><a href='../S/1478.html#L291'>req</a>               291 sapi/fpm/fpm/fastcgi.c 	req-&gt;listen_socket = listen_socket;</span>
+<span class='curline'><a href='../S/1478.html#L292'>req</a>               292 sapi/fpm/fpm/fastcgi.c 	req-&gt;fd = -1;</span>
+<span class='curline'><a href='../S/1478.html#L293'>req</a>               293 sapi/fpm/fpm/fastcgi.c 	req-&gt;id = -1;</span>
+<span class='curline'><a href='../S/1478.html#L295'>req</a>               295 sapi/fpm/fpm/fastcgi.c 	req-&gt;in_len = 0;</span>
+<span class='curline'><a href='../S/1478.html#L296'>req</a>               296 sapi/fpm/fpm/fastcgi.c 	req-&gt;in_pad = 0;</span>
+<span class='curline'><a href='../S/1478.html#L298'>req</a>               298 sapi/fpm/fpm/fastcgi.c 	req-&gt;out_hdr = NULL;</span>
+<span class='curline'><a href='../S/1478.html#L299'>req</a>               299 sapi/fpm/fpm/fastcgi.c 	req-&gt;out_pos = req-&gt;out_buf;</span>
+<span class='curline'><a href='../S/1478.html#L302'>req</a>               302 sapi/fpm/fpm/fastcgi.c 	req-&gt;tcp = !GetNamedPipeInfo((HANDLE)_get_osfhandle(req-&gt;listen_socket), NULL, NULL, NULL, NULL);</span>
+<span class='curline'><a href='../S/1478.html#L306'>req</a>               306 sapi/fpm/fpm/fastcgi.c static inline ssize_t safe_write(fcgi_request *req, const void *buf, size_t count)</span>
+<span class='curline'><a href='../S/1478.html#L314'>req</a>               314 sapi/fpm/fpm/fastcgi.c 		if (!req-&gt;tcp) {</span>
+<span class='curline'><a href='../S/1478.html#L315'>req</a>               315 sapi/fpm/fpm/fastcgi.c 			ret = write(req-&gt;fd, ((char*)buf)+n, count-n);</span>
+<span class='curline'><a href='../S/1478.html#L317'>req</a>               317 sapi/fpm/fpm/fastcgi.c 			ret = send(req-&gt;fd, ((char*)buf)+n, count-n, 0);</span>
+<span class='curline'><a href='../S/1478.html#L323'>req</a>               323 sapi/fpm/fpm/fastcgi.c 		ret = write(req-&gt;fd, ((char*)buf)+n, count-n);</span>
+<span class='curline'><a href='../S/1478.html#L334'>req</a>               334 sapi/fpm/fpm/fastcgi.c static inline ssize_t safe_read(fcgi_request *req, const void *buf, size_t count)</span>
+<span class='curline'><a href='../S/1478.html#L342'>req</a>               342 sapi/fpm/fpm/fastcgi.c 		if (!req-&gt;tcp) {</span>
+<span class='curline'><a href='../S/1478.html#L343'>req</a>               343 sapi/fpm/fpm/fastcgi.c 			ret = read(req-&gt;fd, ((char*)buf)+n, count-n);</span>
+<span class='curline'><a href='../S/1478.html#L345'>req</a>               345 sapi/fpm/fpm/fastcgi.c 			ret = recv(req-&gt;fd, ((char*)buf)+n, count-n, 0);</span>
+<span class='curline'><a href='../S/1478.html#L351'>req</a>               351 sapi/fpm/fpm/fastcgi.c 		ret = read(req-&gt;fd, ((char*)buf)+n, count-n);</span>
+<span class='curline'><a href='../S/1478.html#L431'>req</a>               431 sapi/fpm/fpm/fastcgi.c static int fcgi_get_params(fcgi_request *req, unsigned char *p, unsigned char *end)</span>
+<span class='curline'><a href='../S/1478.html#L493'>req</a>               493 sapi/fpm/fpm/fastcgi.c 		zend_hash_update(req-&gt;env, tmp, eff_name_len+1, &amp;s, sizeof(char*), NULL);</span>
+<span class='curline'><a href='../S/1478.html#L507'>req</a>               507 sapi/fpm/fpm/fastcgi.c static int fcgi_read_request(fcgi_request *req)</span>
+<span class='curline'><a href='../S/1478.html#L513'>req</a>               513 sapi/fpm/fpm/fastcgi.c 	req-&gt;keep = 0;</span>
+<span class='curline'><a href='../S/1478.html#L514'>req</a>               514 sapi/fpm/fpm/fastcgi.c 	req-&gt;closed = 0;</span>
+<span class='curline'><a href='../S/1478.html#L515'>req</a>               515 sapi/fpm/fpm/fastcgi.c 	req-&gt;in_len = 0;</span>
+<span class='curline'><a href='../S/1478.html#L516'>req</a>               516 sapi/fpm/fpm/fastcgi.c 	req-&gt;out_hdr = NULL;</span>
+<span class='curline'><a href='../S/1478.html#L517'>req</a>               517 sapi/fpm/fpm/fastcgi.c 	req-&gt;out_pos = req-&gt;out_buf;</span>
+<span class='curline'><a href='../S/1478.html#L518'>req</a>               518 sapi/fpm/fpm/fastcgi.c 	ALLOC_HASHTABLE(req-&gt;env);</span>
+<span class='curline'><a href='../S/1478.html#L519'>req</a>               519 sapi/fpm/fpm/fastcgi.c 	zend_hash_init(req-&gt;env, 0, NULL, (void (*)(void *)) fcgi_free_var, 0);</span>
+<span class='curline'><a href='../S/1478.html#L521'>req</a>               521 sapi/fpm/fpm/fastcgi.c 	if (safe_read(req, &amp;hdr, sizeof(fcgi_header)) != sizeof(fcgi_header) ||</span>
+<span class='curline'><a href='../S/1478.html#L530'>req</a>               530 sapi/fpm/fpm/fastcgi.c 		if (safe_read(req, &amp;hdr, sizeof(fcgi_header)) != sizeof(fcgi_header) ||</span>
+<span class='curline'><a href='../S/1478.html#L543'>req</a>               543 sapi/fpm/fpm/fastcgi.c 	req-&gt;id = (hdr.requestIdB1 &lt;&lt; 8) + hdr.requestIdB0;</span>
+<span class='curline'><a href='../S/1478.html#L548'>req</a>               548 sapi/fpm/fpm/fastcgi.c 		if (safe_read(req, buf, len+padding) != len+padding) {</span>
+<span class='curline'><a href='../S/1478.html#L552'>req</a>               552 sapi/fpm/fpm/fastcgi.c 		req-&gt;keep = (((fcgi_begin_request*)buf)-&gt;flags &amp; FCGI_KEEP_CONN);</span>
+<span class='curline'><a href='../S/1478.html#L556'>req</a>               556 sapi/fpm/fpm/fastcgi.c 				zend_hash_update(req-&gt;env, "FCGI_ROLE", sizeof("FCGI_ROLE"), &amp;val, sizeof(char*), NULL);</span>
+<span class='curline'><a href='../S/1478.html#L560'>req</a>               560 sapi/fpm/fpm/fastcgi.c 				zend_hash_update(req-&gt;env, "FCGI_ROLE", sizeof("FCGI_ROLE"), &amp;val, sizeof(char*), NULL);</span>
+<span class='curline'><a href='../S/1478.html#L564'>req</a>               564 sapi/fpm/fpm/fastcgi.c 				zend_hash_update(req-&gt;env, "FCGI_ROLE", sizeof("FCGI_ROLE"), &amp;val, sizeof(char*), NULL);</span>
+<span class='curline'><a href='../S/1478.html#L570'>req</a>               570 sapi/fpm/fpm/fastcgi.c 		if (safe_read(req, &amp;hdr, sizeof(fcgi_header)) != sizeof(fcgi_header) ||</span>
+<span class='curline'><a href='../S/1478.html#L583'>req</a>               583 sapi/fpm/fpm/fastcgi.c 			if (safe_read(req, buf, len+padding) != len+padding) {</span>
+<span class='curline'><a href='../S/1478.html#L584'>req</a>               584 sapi/fpm/fpm/fastcgi.c 				req-&gt;keep = 0;</span>
+<span class='curline'><a href='../S/1478.html#L588'>req</a>               588 sapi/fpm/fpm/fastcgi.c 			if (!fcgi_get_params(req, buf, buf+len)) {</span>
+<span class='curline'><a href='../S/1478.html#L589'>req</a>               589 sapi/fpm/fpm/fastcgi.c 				req-&gt;keep = 0;</span>
+<span class='curline'><a href='../S/1478.html#L593'>req</a>               593 sapi/fpm/fpm/fastcgi.c 			if (safe_read(req, &amp;hdr, sizeof(fcgi_header)) != sizeof(fcgi_header) ||</span>
+<span class='curline'><a href='../S/1478.html#L595'>req</a>               595 sapi/fpm/fpm/fastcgi.c 				req-&gt;keep = 0;</span>
+<span class='curline'><a href='../S/1478.html#L610'>req</a>               610 sapi/fpm/fpm/fastcgi.c 		if (safe_read(req, buf, len+padding) != len+padding) {</span>
+<span class='curline'><a href='../S/1478.html#L611'>req</a>               611 sapi/fpm/fpm/fastcgi.c 			req-&gt;keep = 0;</span>
+<span class='curline'><a href='../S/1478.html#L615'>req</a>               615 sapi/fpm/fpm/fastcgi.c 		if (!fcgi_get_params(req, buf, buf+len)) {</span>
+<span class='curline'><a href='../S/1478.html#L616'>req</a>               616 sapi/fpm/fpm/fastcgi.c 			req-&gt;keep = 0;</span>
+<span class='curline'><a href='../S/1478.html#L620'>req</a>               620 sapi/fpm/fpm/fastcgi.c 		zend_hash_internal_pointer_reset_ex(req-&gt;env, &amp;pos);</span>
+<span class='curline'><a href='../S/1478.html#L621'>req</a>               621 sapi/fpm/fpm/fastcgi.c 		while ((key_type = zend_hash_get_current_key_ex(req-&gt;env, &amp;str_index, &amp;str_length, &amp;num_index, 0, &amp;pos)) != HASH_KEY_NON_EXISTENT) {</span>
+<span class='curline'><a href='../S/1478.html#L623'>req</a>               623 sapi/fpm/fpm/fastcgi.c 			zend_hash_move_forward_ex(req-&gt;env, &amp;pos);</span>
+<span class='curline'><a href='../S/1478.html#L658'>req</a>               658 sapi/fpm/fpm/fastcgi.c 		if (safe_write(req, buf, sizeof(fcgi_header)+len) != (int)sizeof(fcgi_header)+len) {</span>
+<span class='curline'><a href='../S/1478.html#L659'>req</a>               659 sapi/fpm/fpm/fastcgi.c 			req-&gt;keep = 0;</span>
+<span class='curline'><a href='../S/1478.html#L670'>req</a>               670 sapi/fpm/fpm/fastcgi.c int fcgi_read(fcgi_request *req, char *str, int len)</span>
+<span class='curline'><a href='../S/1478.html#L679'>req</a>               679 sapi/fpm/fpm/fastcgi.c 		if (req-&gt;in_len == 0) {</span>
+<span class='curline'><a href='../S/1478.html#L680'>req</a>               680 sapi/fpm/fpm/fastcgi.c 			if (safe_read(req, &amp;hdr, sizeof(fcgi_header)) != sizeof(fcgi_header) ||</span>
+<span class='curline'><a href='../S/1478.html#L683'>req</a>               683 sapi/fpm/fpm/fastcgi.c 				req-&gt;keep = 0;</span>
+<span class='curline'><a href='../S/1478.html#L686'>req</a>               686 sapi/fpm/fpm/fastcgi.c 			req-&gt;in_len = (hdr.contentLengthB1 &lt;&lt; 8) | hdr.contentLengthB0;</span>
+<span class='curline'><a href='../S/1478.html#L687'>req</a>               687 sapi/fpm/fpm/fastcgi.c 			req-&gt;in_pad = hdr.paddingLength;</span>
+<span class='curline'><a href='../S/1478.html#L688'>req</a>               688 sapi/fpm/fpm/fastcgi.c 			if (req-&gt;in_len == 0) {</span>
+<span class='curline'><a href='../S/1478.html#L693'>req</a>               693 sapi/fpm/fpm/fastcgi.c 		if (req-&gt;in_len &gt;= rest) {</span>
+<span class='curline'><a href='../S/1478.html#L694'>req</a>               694 sapi/fpm/fpm/fastcgi.c 			ret = safe_read(req, str, rest);</span>
+<span class='curline'><a href='../S/1478.html#L696'>req</a>               696 sapi/fpm/fpm/fastcgi.c 			ret = safe_read(req, str, req-&gt;in_len);</span>
+<span class='curline'><a href='../S/1478.html#L699'>req</a>               699 sapi/fpm/fpm/fastcgi.c 			req-&gt;keep = 0;</span>
+<span class='curline'><a href='../S/1478.html#L702'>req</a>               702 sapi/fpm/fpm/fastcgi.c 			req-&gt;in_len -= ret;</span>
+<span class='curline'><a href='../S/1478.html#L706'>req</a>               706 sapi/fpm/fpm/fastcgi.c 			if (req-&gt;in_len == 0) {</span>
+<span class='curline'><a href='../S/1478.html#L707'>req</a>               707 sapi/fpm/fpm/fastcgi.c 				if (req-&gt;in_pad) {</span>
+<span class='curline'><a href='../S/1478.html#L708'>req</a>               708 sapi/fpm/fpm/fastcgi.c 					if (safe_read(req, buf, req-&gt;in_pad) != req-&gt;in_pad) {</span>
+<span class='curline'><a href='../S/1478.html#L709'>req</a>               709 sapi/fpm/fpm/fastcgi.c 						req-&gt;keep = 0;</span>
+<span class='curline'><a href='../S/1478.html#L723'>req</a>               723 sapi/fpm/fpm/fastcgi.c void fcgi_close(fcgi_request *req, int force, int destroy)</span>
+<span class='curline'><a href='../S/1478.html#L725'>req</a>               725 sapi/fpm/fpm/fastcgi.c 	if (destroy &amp;&amp; req-&gt;env) {</span>
+<span class='curline'><a href='../S/1478.html#L726'>req</a>               726 sapi/fpm/fpm/fastcgi.c 		zend_hash_destroy(req-&gt;env);</span>
+<span class='curline'><a href='../S/1478.html#L727'>req</a>               727 sapi/fpm/fpm/fastcgi.c 		FREE_HASHTABLE(req-&gt;env);</span>
+<span class='curline'><a href='../S/1478.html#L728'>req</a>               728 sapi/fpm/fpm/fastcgi.c 		req-&gt;env = NULL;</span>
+<span class='curline'><a href='../S/1478.html#L732'>req</a>               732 sapi/fpm/fpm/fastcgi.c 	if (is_impersonate &amp;&amp; !req-&gt;tcp) {</span>
+<span class='curline'><a href='../S/1478.html#L737'>req</a>               737 sapi/fpm/fpm/fastcgi.c 	if ((force || !req-&gt;keep) &amp;&amp; req-&gt;fd &gt;= 0) {</span>
+<span class='curline'><a href='../S/1478.html#L739'>req</a>               739 sapi/fpm/fpm/fastcgi.c 		if (!req-&gt;tcp) {</span>
+<span class='curline'><a href='../S/1478.html#L740'>req</a>               740 sapi/fpm/fpm/fastcgi.c 			HANDLE pipe = (HANDLE)_get_osfhandle(req-&gt;fd);</span>
+<span class='curline'><a href='../S/1478.html#L750'>req</a>               750 sapi/fpm/fpm/fastcgi.c 				shutdown(req-&gt;fd, 1);</span>
+<span class='curline'><a href='../S/1478.html#L751'>req</a>               751 sapi/fpm/fpm/fastcgi.c 				while (recv(req-&gt;fd, buf, sizeof(buf), 0) &gt; 0) {}</span>
+<span class='curline'><a href='../S/1478.html#L753'>req</a>               753 sapi/fpm/fpm/fastcgi.c 			closesocket(req-&gt;fd);</span>
+<span class='curline'><a href='../S/1478.html#L759'>req</a>               759 sapi/fpm/fpm/fastcgi.c 			shutdown(req-&gt;fd, 1);</span>
+<span class='curline'><a href='../S/1478.html#L760'>req</a>               760 sapi/fpm/fpm/fastcgi.c 			while (recv(req-&gt;fd, buf, sizeof(buf), 0) &gt; 0) {}</span>
+<span class='curline'><a href='../S/1478.html#L762'>req</a>               762 sapi/fpm/fpm/fastcgi.c 		close(req-&gt;fd);</span>
+<span class='curline'><a href='../S/1478.html#L764'>req</a>               764 sapi/fpm/fpm/fastcgi.c 		req-&gt;fd = -1;</span>
+<span class='curline'><a href='../S/1478.html#L806'>req</a>               806 sapi/fpm/fpm/fastcgi.c int fcgi_accept_request(fcgi_request *req)</span>
+<span class='curline'><a href='../S/1478.html#L814'>req</a>               814 sapi/fpm/fpm/fastcgi.c 		if (req-&gt;fd &lt; 0) {</span>
+<span class='curline'><a href='../S/1478.html#L820'>req</a>               820 sapi/fpm/fpm/fastcgi.c 				if (!req-&gt;tcp) {</span>
+<span class='curline'><a href='../S/1478.html#L821'>req</a>               821 sapi/fpm/fpm/fastcgi.c 					pipe = (HANDLE)_get_osfhandle(req-&gt;listen_socket);</span>
+<span class='curline'><a href='../S/1478.html#L822'>req</a>               822 sapi/fpm/fpm/fastcgi.c 					FCGI_LOCK(req-&gt;listen_socket);</span>
+<span class='curline'><a href='../S/1478.html#L830'>req</a>               830 sapi/fpm/fpm/fastcgi.c 									FCGI_UNLOCK(req-&gt;listen_socket);</span>
+<span class='curline'><a href='../S/1478.html#L838'>req</a>               838 sapi/fpm/fpm/fastcgi.c 					req-&gt;fd = req-&gt;listen_socket;</span>
+<span class='curline'><a href='../S/1478.html#L839'>req</a>               839 sapi/fpm/fpm/fastcgi.c 					FCGI_UNLOCK(req-&gt;listen_socket);</span>
+<span class='curline'><a href='../S/1478.html#L841'>req</a>               841 sapi/fpm/fpm/fastcgi.c 					SOCKET listen_socket = (SOCKET)_get_osfhandle(req-&gt;listen_socket);</span>
+<span class='curline'><a href='../S/1478.html#L844'>req</a>               844 sapi/fpm/fpm/fastcgi.c 					int listen_socket = req-&gt;listen_socket;</span>
+<span class='curline'><a href='../S/1478.html#L851'>req</a>               851 sapi/fpm/fpm/fastcgi.c 					FCGI_LOCK(req-&gt;listen_socket);</span>
+<span class='curline'><a href='../S/1478.html#L852'>req</a>               852 sapi/fpm/fpm/fastcgi.c 					req-&gt;fd = accept(listen_socket, (struct sockaddr *)&amp;sa, &amp;len);</span>
+<span class='curline'><a href='../S/1478.html#L853'>req</a>               853 sapi/fpm/fpm/fastcgi.c 					FCGI_UNLOCK(req-&gt;listen_socket);</span>
+<span class='curline'><a href='../S/1478.html#L856'>req</a>               856 sapi/fpm/fpm/fastcgi.c 					if (req-&gt;fd &gt;= 0 &amp;&amp; !fcgi_is_allowed()) {</span>
+<span class='curline'><a href='../S/1478.html#L857'>req</a>               857 sapi/fpm/fpm/fastcgi.c 						closesocket(req-&gt;fd);</span>
+<span class='curline'><a href='../S/1478.html#L858'>req</a>               858 sapi/fpm/fpm/fastcgi.c 						req-&gt;fd = -1;</span>
+<span class='curline'><a href='../S/1478.html#L864'>req</a>               864 sapi/fpm/fpm/fastcgi.c 				if (req-&gt;fd &lt; 0 &amp;&amp; (in_shutdown || errno != EINTR)) {</span>
+<span class='curline'><a href='../S/1478.html#L866'>req</a>               866 sapi/fpm/fpm/fastcgi.c 				if (req-&gt;fd &lt; 0 &amp;&amp; (in_shutdown || (errno != EINTR &amp;&amp; errno != ECONNABORTED))) {</span>
+<span class='curline'><a href='../S/1478.html#L874'>req</a>               874 sapi/fpm/fpm/fastcgi.c 				if (req-&gt;fd &gt;= 0) {</span>
+<span class='curline'><a href='../S/1478.html#L881'>req</a>               881 sapi/fpm/fpm/fastcgi.c 					fds.fd = req-&gt;fd;</span>
+<span class='curline'><a href='../S/1478.html#L891'>req</a>               891 sapi/fpm/fpm/fastcgi.c 					fcgi_close(req, 1, 0);</span>
+<span class='curline'><a href='../S/1478.html#L895'>req</a>               895 sapi/fpm/fpm/fastcgi.c 					if (req-&gt;fd &lt; FD_SETSIZE) {</span>
+<span class='curline'><a href='../S/1478.html#L901'>req</a>               901 sapi/fpm/fpm/fastcgi.c 						FD_SET(req-&gt;fd, &amp;set);</span>
+<span class='curline'><a href='../S/1478.html#L904'>req</a>               904 sapi/fpm/fpm/fastcgi.c 							ret = select(req-&gt;fd + 1, &amp;set, NULL, NULL, &amp;tv) &gt;= 0;</span>
+<span class='curline'><a href='../S/1478.html#L906'>req</a>               906 sapi/fpm/fpm/fastcgi.c 						if (ret &gt; 0 &amp;&amp; FD_ISSET(req-&gt;fd, &amp;set)) {</span>
+<span class='curline'><a href='../S/1478.html#L909'>req</a>               909 sapi/fpm/fpm/fastcgi.c 						fcgi_close(req, 1, 0);</span>
+<span class='curline'><a href='../S/1478.html#L912'>req</a>               912 sapi/fpm/fpm/fastcgi.c 						fcgi_close(req, 1, 0);</span>
+<span class='curline'><a href='../S/1478.html#L921'>req</a>               921 sapi/fpm/fpm/fastcgi.c 		if (fcgi_read_request(req)) {</span>
+<span class='curline'><a href='../S/1478.html#L923'>req</a>               923 sapi/fpm/fpm/fastcgi.c 			if (is_impersonate &amp;&amp; !req-&gt;tcp) {</span>
+<span class='curline'><a href='../S/1478.html#L924'>req</a>               924 sapi/fpm/fpm/fastcgi.c 				pipe = (HANDLE)_get_osfhandle(req-&gt;fd);</span>
+<span class='curline'><a href='../S/1478.html#L926'>req</a>               926 sapi/fpm/fpm/fastcgi.c 					fcgi_close(req, 1, 1);</span>
+<span class='curline'><a href='../S/1478.html#L931'>req</a>               931 sapi/fpm/fpm/fastcgi.c 			return req-&gt;fd;</span>
+<span class='curline'><a href='../S/1478.html#L933'>req</a>               933 sapi/fpm/fpm/fastcgi.c 			fcgi_close(req, 1, 1);</span>
+<span class='curline'><a href='../S/1478.html#L938'>req</a>               938 sapi/fpm/fpm/fastcgi.c static inline fcgi_header* open_packet(fcgi_request *req, fcgi_request_type type)</span>
+<span class='curline'><a href='../S/1478.html#L940'>req</a>               940 sapi/fpm/fpm/fastcgi.c 	req-&gt;out_hdr = (fcgi_header*) req-&gt;out_pos;</span>
+<span class='curline'><a href='../S/1478.html#L941'>req</a>               941 sapi/fpm/fpm/fastcgi.c 	req-&gt;out_hdr-&gt;type = type;</span>
+<span class='curline'><a href='../S/1478.html#L942'>req</a>               942 sapi/fpm/fpm/fastcgi.c 	req-&gt;out_pos += sizeof(fcgi_header);</span>
+<span class='curline'><a href='../S/1478.html#L943'>req</a>               943 sapi/fpm/fpm/fastcgi.c 	return req-&gt;out_hdr;</span>
+<span class='curline'><a href='../S/1478.html#L946'>req</a>               946 sapi/fpm/fpm/fastcgi.c static inline void close_packet(fcgi_request *req)</span>
+<span class='curline'><a href='../S/1478.html#L948'>req</a>               948 sapi/fpm/fpm/fastcgi.c 	if (req-&gt;out_hdr) {</span>
+<span class='curline'><a href='../S/1478.html#L949'>req</a>               949 sapi/fpm/fpm/fastcgi.c 		int len = req-&gt;out_pos - ((unsigned char*)req-&gt;out_hdr + sizeof(fcgi_header));</span>
+<span class='curline'><a href='../S/1478.html#L951'>req</a>               951 sapi/fpm/fpm/fastcgi.c 		req-&gt;out_pos += fcgi_make_header(req-&gt;out_hdr, (fcgi_request_type)req-&gt;out_hdr-&gt;type, req-&gt;id, len);</span>
+<span class='curline'><a href='../S/1478.html#L952'>req</a>               952 sapi/fpm/fpm/fastcgi.c 		req-&gt;out_hdr = NULL;</span>
+<span class='curline'><a href='../S/1478.html#L956'>req</a>               956 sapi/fpm/fpm/fastcgi.c int fcgi_flush(fcgi_request *req, int close)</span>
+<span class='curline'><a href='../S/1478.html#L960'>req</a>               960 sapi/fpm/fpm/fastcgi.c 	close_packet(req);</span>
+<span class='curline'><a href='../S/1478.html#L962'>req</a>               962 sapi/fpm/fpm/fastcgi.c 	len = req-&gt;out_pos - req-&gt;out_buf;</span>
+<span class='curline'><a href='../S/1478.html#L965'>req</a>               965 sapi/fpm/fpm/fastcgi.c 		fcgi_end_request_rec *rec = (fcgi_end_request_rec*)(req-&gt;out_pos);</span>
+<span class='curline'><a href='../S/1478.html#L967'>req</a>               967 sapi/fpm/fpm/fastcgi.c 		fcgi_make_header(&amp;rec-&gt;hdr, FCGI_END_REQUEST, req-&gt;id, sizeof(fcgi_end_request));</span>
+<span class='curline'><a href='../S/1478.html#L976'>req</a>               976 sapi/fpm/fpm/fastcgi.c 	if (safe_write(req, req-&gt;out_buf, len) != len) {</span>
+<span class='curline'><a href='../S/1478.html#L977'>req</a>               977 sapi/fpm/fpm/fastcgi.c 		req-&gt;keep = 0;</span>
+<span class='curline'><a href='../S/1478.html#L978'>req</a>               978 sapi/fpm/fpm/fastcgi.c 		req-&gt;out_pos = req-&gt;out_buf;</span>
+<span class='curline'><a href='../S/1478.html#L982'>req</a>               982 sapi/fpm/fpm/fastcgi.c 	req-&gt;out_pos = req-&gt;out_buf;</span>
+<span class='curline'><a href='../S/1478.html#L986'>req</a>               986 sapi/fpm/fpm/fastcgi.c ssize_t fcgi_write(fcgi_request *req, fcgi_request_type type, const char *str, int len)</span>
+<span class='curline'><a href='../S/1478.html#L994'>req</a>               994 sapi/fpm/fpm/fastcgi.c 	if (req-&gt;out_hdr &amp;&amp; req-&gt;out_hdr-&gt;type != type) {</span>
+<span class='curline'><a href='../S/1478.html#L995'>req</a>               995 sapi/fpm/fpm/fastcgi.c 		close_packet(req);</span>
+<span class='curline'><a href='../S/1478.html#L999'>req</a>               999 sapi/fpm/fpm/fastcgi.c 	limit = sizeof(req-&gt;out_buf) - (req-&gt;out_pos - req-&gt;out_buf);</span>
+<span class='curline'><a href='../S/1478.html#L1000'>req</a>              1000 sapi/fpm/fpm/fastcgi.c 	if (!req-&gt;out_hdr) {</span>
+<span class='curline'><a href='../S/1478.html#L1006'>req</a>              1006 sapi/fpm/fpm/fastcgi.c 		if (!req-&gt;out_hdr) {</span>
+<span class='curline'><a href='../S/1478.html#L1007'>req</a>              1007 sapi/fpm/fpm/fastcgi.c 			open_packet(req, type);</span>
+<span class='curline'><a href='../S/1478.html#L1009'>req</a>              1009 sapi/fpm/fpm/fastcgi.c 		memcpy(req-&gt;out_pos, str, len);</span>
+<span class='curline'><a href='../S/1478.html#L1010'>req</a>              1010 sapi/fpm/fpm/fastcgi.c 		req-&gt;out_pos += len;</span>
+<span class='curline'><a href='../S/1478.html#L1011'>req</a>              1011 sapi/fpm/fpm/fastcgi.c 	} else if (len - limit &lt; sizeof(req-&gt;out_buf) - sizeof(fcgi_header)) {</span>
+<span class='curline'><a href='../S/1478.html#L1012'>req</a>              1012 sapi/fpm/fpm/fastcgi.c 		if (!req-&gt;out_hdr) {</span>
+<span class='curline'><a href='../S/1478.html#L1013'>req</a>              1013 sapi/fpm/fpm/fastcgi.c 			open_packet(req, type);</span>
+<span class='curline'><a href='../S/1478.html#L1016'>req</a>              1016 sapi/fpm/fpm/fastcgi.c 			memcpy(req-&gt;out_pos, str, limit);</span>
+<span class='curline'><a href='../S/1478.html#L1017'>req</a>              1017 sapi/fpm/fpm/fastcgi.c 			req-&gt;out_pos += limit;</span>
+<span class='curline'><a href='../S/1478.html#L1019'>req</a>              1019 sapi/fpm/fpm/fastcgi.c 		if (!fcgi_flush(req, 0)) {</span>
+<span class='curline'><a href='../S/1478.html#L1023'>req</a>              1023 sapi/fpm/fpm/fastcgi.c 			open_packet(req, type);</span>
+<span class='curline'><a href='../S/1478.html#L1024'>req</a>              1024 sapi/fpm/fpm/fastcgi.c 			memcpy(req-&gt;out_pos, str + limit, len - limit);</span>
+<span class='curline'><a href='../S/1478.html#L1025'>req</a>              1025 sapi/fpm/fpm/fastcgi.c 			req-&gt;out_pos += len - limit;</span>
+<span class='curline'><a href='../S/1478.html#L1031'>req</a>              1031 sapi/fpm/fpm/fastcgi.c 		close_packet(req);</span>
+<span class='curline'><a href='../S/1478.html#L1033'>req</a>              1033 sapi/fpm/fpm/fastcgi.c 			open_packet(req, type);</span>
+<span class='curline'><a href='../S/1478.html#L1034'>req</a>              1034 sapi/fpm/fpm/fastcgi.c 			fcgi_make_header(req-&gt;out_hdr, type, req-&gt;id, 0xfff8);</span>
+<span class='curline'><a href='../S/1478.html#L1035'>req</a>              1035 sapi/fpm/fpm/fastcgi.c 			req-&gt;out_hdr = NULL;</span>
+<span class='curline'><a href='../S/1478.html#L1036'>req</a>              1036 sapi/fpm/fpm/fastcgi.c 			if (!fcgi_flush(req, 0)) {</span>
+<span class='curline'><a href='../S/1478.html#L1039'>req</a>              1039 sapi/fpm/fpm/fastcgi.c 			if (safe_write(req, str + pos, 0xfff8) != 0xfff8) {</span>
+<span class='curline'><a href='../S/1478.html#L1040'>req</a>              1040 sapi/fpm/fpm/fastcgi.c 				req-&gt;keep = 0;</span>
+<span class='curline'><a href='../S/1478.html#L1049'>req</a>              1049 sapi/fpm/fpm/fastcgi.c 		open_packet(req, type);</span>
+<span class='curline'><a href='../S/1478.html#L1050'>req</a>              1050 sapi/fpm/fpm/fastcgi.c 		fcgi_make_header(req-&gt;out_hdr, type, req-&gt;id, (len - pos) - rest);</span>
+<span class='curline'><a href='../S/1478.html#L1051'>req</a>              1051 sapi/fpm/fpm/fastcgi.c 		req-&gt;out_hdr = NULL;</span>
+<span class='curline'><a href='../S/1478.html#L1052'>req</a>              1052 sapi/fpm/fpm/fastcgi.c 		if (!fcgi_flush(req, 0)) {</span>
+<span class='curline'><a href='../S/1478.html#L1055'>req</a>              1055 sapi/fpm/fpm/fastcgi.c 		if (safe_write(req, str + pos, (len - pos) - rest) != (len - pos) - rest) {</span>
+<span class='curline'><a href='../S/1478.html#L1056'>req</a>              1056 sapi/fpm/fpm/fastcgi.c 			req-&gt;keep = 0;</span>
+<span class='curline'><a href='../S/1478.html#L1060'>req</a>              1060 sapi/fpm/fpm/fastcgi.c 			open_packet(req, type);</span>
+<span class='curline'><a href='../S/1478.html#L1061'>req</a>              1061 sapi/fpm/fpm/fastcgi.c 			memcpy(req-&gt;out_pos, str + len - rest,  rest);</span>
+<span class='curline'><a href='../S/1478.html#L1062'>req</a>              1062 sapi/fpm/fpm/fastcgi.c 			req-&gt;out_pos += rest;</span>
+<span class='curline'><a href='../S/1478.html#L1069'>req</a>              1069 sapi/fpm/fpm/fastcgi.c int fcgi_finish_request(fcgi_request *req, int force_close)</span>
+<span class='curline'><a href='../S/1478.html#L1073'>req</a>              1073 sapi/fpm/fpm/fastcgi.c 	if (req-&gt;fd &gt;= 0) {</span>
+<span class='curline'><a href='../S/1478.html#L1074'>req</a>              1074 sapi/fpm/fpm/fastcgi.c 		if (!req-&gt;closed) {</span>
+<span class='curline'><a href='../S/1478.html#L1075'>req</a>              1075 sapi/fpm/fpm/fastcgi.c 			ret = fcgi_flush(req, 1);</span>
+<span class='curline'><a href='../S/1478.html#L1076'>req</a>              1076 sapi/fpm/fpm/fastcgi.c 			req-&gt;closed = 1;</span>
+<span class='curline'><a href='../S/1478.html#L1078'>req</a>              1078 sapi/fpm/fpm/fastcgi.c 		fcgi_close(req, force_close, 1);</span>
+<span class='curline'><a href='../S/1478.html#L1083'>req</a>              1083 sapi/fpm/fpm/fastcgi.c char* fcgi_getenv(fcgi_request *req, const char* var, int var_len)</span>
+<span class='curline'><a href='../S/1478.html#L1087'>req</a>              1087 sapi/fpm/fpm/fastcgi.c 	if (!req) return NULL;</span>
+<span class='curline'><a href='../S/1478.html#L1089'>req</a>              1089 sapi/fpm/fpm/fastcgi.c 	if (zend_hash_find(req-&gt;env, (char*)var, var_len+1, (void**)&amp;val) == SUCCESS) {</span>
+<span class='curline'><a href='../S/1478.html#L1095'>req</a>              1095 sapi/fpm/fpm/fastcgi.c char* fcgi_putenv(fcgi_request *req, char* var, int var_len, char* val)</span>
+<span class='curline'><a href='../S/1478.html#L1097'>req</a>              1097 sapi/fpm/fpm/fastcgi.c 	if (var &amp;&amp; req) {</span>
+<span class='curline'><a href='../S/1478.html#L1099'>req</a>              1099 sapi/fpm/fpm/fastcgi.c 			zend_hash_del(req-&gt;env, var, var_len+1);</span>
+<span class='curline'><a href='../S/1478.html#L1104'>req</a>              1104 sapi/fpm/fpm/fastcgi.c 			if (zend_hash_update(req-&gt;env, var, var_len+1, &amp;val, sizeof(char*), (void**)&amp;ret) == SUCCESS) {</span>
+<span class='curline'><a href='../S/1479.html#L117'>req</a>               117 sapi/fpm/fpm/fastcgi.h void fcgi_init_request(fcgi_request *req, int listen_socket);</span>
+<span class='curline'><a href='../S/1479.html#L118'>req</a>               118 sapi/fpm/fpm/fastcgi.h int fcgi_accept_request(fcgi_request *req);</span>
+<span class='curline'><a href='../S/1479.html#L119'>req</a>               119 sapi/fpm/fpm/fastcgi.h int fcgi_finish_request(fcgi_request *req, int force_close);</span>
+<span class='curline'><a href='../S/1479.html#L123'>req</a>               123 sapi/fpm/fpm/fastcgi.h void fcgi_close(fcgi_request *req, int force, int destroy);</span>
+<span class='curline'><a href='../S/1479.html#L125'>req</a>               125 sapi/fpm/fpm/fastcgi.h char* fcgi_getenv(fcgi_request *req, const char* var, int var_len);</span>
+<span class='curline'><a href='../S/1479.html#L126'>req</a>               126 sapi/fpm/fpm/fastcgi.h char* fcgi_putenv(fcgi_request *req, char* var, int var_len, char* val);</span>
+<span class='curline'><a href='../S/1479.html#L128'>req</a>               128 sapi/fpm/fpm/fastcgi.h int fcgi_read(fcgi_request *req, char *str, int len);</span>
+<span class='curline'><a href='../S/1479.html#L130'>req</a>               130 sapi/fpm/fpm/fastcgi.h ssize_t fcgi_write(fcgi_request *req, fcgi_request_type type, const char *str, int len);</span>
+<span class='curline'><a href='../S/1479.html#L131'>req</a>               131 sapi/fpm/fpm/fastcgi.h int fcgi_flush(fcgi_request *req, int close);</span>
+<span class='curline'><a href='../S/1590.html#L41'>req</a>                41 sapi/tux/php_tux.c 	user_req_t *req;</span>
+<span class='curline'><a href='../S/1590.html#L67'>req</a>                67 sapi/tux/php_tux.c 		if ((m = writev(TG(req)-&gt;sock, vec, n)) == -1 &amp;&amp; errno == EPIPE)</span>
+<span class='curline'><a href='../S/1590.html#L71'>req</a>                71 sapi/tux/php_tux.c 			TG(req)-&gt;bytes_sent += str_length;</span>
+<span class='curline'><a href='../S/1590.html#L80'>req</a>                80 sapi/tux/php_tux.c 		n = send(TG(req)-&gt;sock, str, estr - str, 0);</span>
+<span class='curline'><a href='../S/1590.html#L94'>req</a>                94 sapi/tux/php_tux.c 	TG(req)-&gt;bytes_sent += n;</span>
+<span class='curline'><a href='../S/1590.html#L124'>req</a>               124 sapi/tux/php_tux.c 	TG(req)-&gt;http_status = SG(sapi_headers).http_response_code;</span>
+<span class='curline'><a href='../S/1590.html#L126'>req</a>               126 sapi/tux/php_tux.c 	if (TG(tux_action) == TUX_ACTION_FINISH_CLOSE_REQ &amp;&amp; TG(req)-&gt;http_version == HTTP_1_1)</span>
+<span class='curline'><a href='../S/1590.html#L167'>req</a>               167 sapi/tux/php_tux.c 	TG(req)-&gt;objectlen = count_bytes;</span>
+<span class='curline'><a href='../S/1590.html#L168'>req</a>               168 sapi/tux/php_tux.c 	TG(req)-&gt;object_addr = buffer;</span>
+<span class='curline'><a href='../S/1590.html#L169'>req</a>               169 sapi/tux/php_tux.c 	if (tux(TUX_ACTION_READ_POST_DATA, TG(req)))</span>
+<span class='curline'><a href='../S/1590.html#L174'>req</a>               174 sapi/tux/php_tux.c 	return TG(req)-&gt;objectlen;</span>
+<span class='curline'><a href='../S/1590.html#L184'>req</a>               184 sapi/tux/php_tux.c 	return TG(req)-&gt;cookies;</span>
+<span class='curline'><a href='../S/1590.html#L210'>req</a>               210 sapi/tux/php_tux.c 	p = inet_ntoa(TG(req)-&gt;client_host);</span>
+<span class='curline'><a href='../S/1590.html#L218'>req</a>               218 sapi/tux/php_tux.c 	snprintf(buf, sizeof(buf), "%d", CGI_SERVER_PORT(TG(req)));</span>
+<span class='curline'><a href='../S/1590.html#L230'>req</a>               230 sapi/tux/php_tux.c 	if (TG(req)-&gt;field[0]) {								\</span>
+<span class='curline'><a href='../S/1590.html#L231'>req</a>               231 sapi/tux/php_tux.c 		php_register_variable(#name, TG(req)-&gt;field, track_vars_array TSRMLS_CC); \</span>
+<span class='curline'><a href='../S/1590.html#L324'>req</a>               324 sapi/tux/php_tux.c 	SG(request_info).query_string = strdup(TG(req)-&gt;query);</span>
+<span class='curline'><a href='../S/1590.html#L327'>req</a>               327 sapi/tux/php_tux.c 	smart_str_appends_ex(&amp;s, TG(req)-&gt;query, 1);</span>
+<span class='curline'><a href='../S/1590.html#L336'>req</a>               336 sapi/tux/php_tux.c 	smart_str_appends_ex(&amp;s, TG(req)-&gt;objectname, 1);</span>
+<span class='curline'><a href='../S/1590.html#L339'>req</a>               339 sapi/tux/php_tux.c 	SG(request_info).request_method = CGI_REQUEST_METHOD(TG(req));</span>
+<span class='curline'><a href='../S/1590.html#L340'>req</a>               340 sapi/tux/php_tux.c 	if(TG(req)-&gt;http_version == HTTP_1_1) SG(request_info).proto_num = 1001;</span>
+<span class='curline'><a href='../S/1590.html#L343'>req</a>               343 sapi/tux/php_tux.c 	SG(request_info).content_type = TG(req)-&gt;content_type;</span>
+<span class='curline'><a href='../S/1590.html#L386'>req</a>               386 sapi/tux/php_tux.c int TUXAPI_handle_events(user_req_t *req)</span>
+<span class='curline'><a href='../S/1590.html#L390'>req</a>               390 sapi/tux/php_tux.c 	if (req-&gt;event == PHP_TUX_BACKGROUND_CONN) {</span>
+<span class='curline'><a href='../S/1590.html#L391'>req</a>               391 sapi/tux/php_tux.c 		tux_closed_conn(req-&gt;sock);</span>
+<span class='curline'><a href='../S/1590.html#L392'>req</a>               392 sapi/tux/php_tux.c 		return tux(TUX_ACTION_FINISH_CLOSE_REQ, req);</span>
+<span class='curline'><a href='../S/1590.html#L395'>req</a>               395 sapi/tux/php_tux.c 	TG(req) = req;</span>
+<span class='curline'><a href='../S/1590.html#L404'>req</a>               404 sapi/tux/php_tux.c 	return tux(TG(tux_action), req);</span>
+<span class='curline'><a href='../S/1590.html#L423'>req</a>               423 sapi/tux/php_tux.c 	return TG(req)-&gt;sock;</span>
+<span class='curline'><a href='../S/1590.html#L430'>req</a>               430 sapi/tux/php_tux.c 	TG(req)-&gt;event = PHP_TUX_BACKGROUND_CONN;</span>
+<span class='curline'><a href='../S/1590.html#L431'>req</a>               431 sapi/tux/php_tux.c 	tux(TUX_ACTION_POSTPONE_REQ, TG(req));</span>
+</pre>
+</body>
+</html>

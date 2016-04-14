@@ -1,0 +1,554 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>prev</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/1644.html#L750'>prev</a>              750 Zend/zend_alloc.c 				zend_mm_free_block *prev = *p;</span>
+<span class='curline'><a href='../S/1644.html#L752'>prev</a>              752 Zend/zend_alloc.c 				if (ZEND_MM_FREE_BLOCK_SIZE(prev) != size) {</span>
+<span class='curline'><a href='../S/1644.html#L753'>prev</a>              753 Zend/zend_alloc.c 					p = &amp;prev-&gt;child[(m &gt;&gt; (ZEND_MM_NUM_BUCKETS-1)) &amp; 1];</span>
+<span class='curline'><a href='../S/1644.html#L761'>prev</a>              761 Zend/zend_alloc.c 					zend_mm_free_block *next = prev-&gt;next_free_block;</span>
+<span class='curline'><a href='../S/1644.html#L763'>prev</a>              763 Zend/zend_alloc.c 					prev-&gt;next_free_block = next-&gt;prev_free_block = mm_block;</span>
+<span class='curline'><a href='../S/1644.html#L765'>prev</a>              765 Zend/zend_alloc.c 					mm_block-&gt;prev_free_block = prev;</span>
+<span class='curline'><a href='../S/1644.html#L772'>prev</a>              772 Zend/zend_alloc.c 		zend_mm_free_block *prev, *next;</span>
+<span class='curline'><a href='../S/1644.html#L776'>prev</a>              776 Zend/zend_alloc.c 		prev = ZEND_MM_SMALL_FREE_BUCKET(heap, index);</span>
+<span class='curline'><a href='../S/1644.html#L777'>prev</a>              777 Zend/zend_alloc.c 		if (prev-&gt;prev_free_block == prev) {</span>
+<span class='curline'><a href='../S/1644.html#L780'>prev</a>              780 Zend/zend_alloc.c 		next = prev-&gt;next_free_block;</span>
+<span class='curline'><a href='../S/1644.html#L782'>prev</a>              782 Zend/zend_alloc.c 		mm_block-&gt;prev_free_block = prev;</span>
+<span class='curline'><a href='../S/1644.html#L784'>prev</a>              784 Zend/zend_alloc.c 		prev-&gt;next_free_block = next-&gt;prev_free_block = mm_block;</span>
+<span class='curline'><a href='../S/1644.html#L790'>prev</a>              790 Zend/zend_alloc.c 	zend_mm_free_block *prev = mm_block-&gt;prev_free_block;</span>
+<span class='curline'><a href='../S/1644.html#L795'>prev</a>              795 Zend/zend_alloc.c 	if (EXPECTED(prev == mm_block)) {</span>
+<span class='curline'><a href='../S/1644.html#L805'>prev</a>              805 Zend/zend_alloc.c 		prev = *rp;</span>
+<span class='curline'><a href='../S/1644.html#L806'>prev</a>              806 Zend/zend_alloc.c 		if (EXPECTED(prev == NULL)) {</span>
+<span class='curline'><a href='../S/1644.html#L815'>prev</a>              815 Zend/zend_alloc.c 			while (*(cp = &amp;(prev-&gt;child[prev-&gt;child[1] != NULL])) != NULL) {</span>
+<span class='curline'><a href='../S/1644.html#L816'>prev</a>              816 Zend/zend_alloc.c 				prev = *cp;</span>
+<span class='curline'><a href='../S/1644.html#L823'>prev</a>              823 Zend/zend_alloc.c 			*mm_block-&gt;parent = prev;</span>
+<span class='curline'><a href='../S/1644.html#L824'>prev</a>              824 Zend/zend_alloc.c 			prev-&gt;parent = mm_block-&gt;parent;</span>
+<span class='curline'><a href='../S/1644.html#L825'>prev</a>              825 Zend/zend_alloc.c 			if ((prev-&gt;child[0] = mm_block-&gt;child[0])) {</span>
+<span class='curline'><a href='../S/1644.html#L826'>prev</a>              826 Zend/zend_alloc.c 				ZEND_MM_CHECK_TREE(prev-&gt;child[0]);</span>
+<span class='curline'><a href='../S/1644.html#L827'>prev</a>              827 Zend/zend_alloc.c 				prev-&gt;child[0]-&gt;parent = &amp;prev-&gt;child[0];</span>
+<span class='curline'><a href='../S/1644.html#L829'>prev</a>              829 Zend/zend_alloc.c 			if ((prev-&gt;child[1] = mm_block-&gt;child[1])) {</span>
+<span class='curline'><a href='../S/1644.html#L830'>prev</a>              830 Zend/zend_alloc.c 				ZEND_MM_CHECK_TREE(prev-&gt;child[1]);</span>
+<span class='curline'><a href='../S/1644.html#L831'>prev</a>              831 Zend/zend_alloc.c 				prev-&gt;child[1]-&gt;parent = &amp;prev-&gt;child[1];</span>
+<span class='curline'><a href='../S/1644.html#L837'>prev</a>              837 Zend/zend_alloc.c 		if (UNEXPECTED(prev-&gt;next_free_block != mm_block) || UNEXPECTED(next-&gt;prev_free_block != mm_block)) {</span>
+<span class='curline'><a href='../S/1644.html#L842'>prev</a>              842 Zend/zend_alloc.c 		prev-&gt;next_free_block = next;</span>
+<span class='curline'><a href='../S/1644.html#L843'>prev</a>              843 Zend/zend_alloc.c 		next-&gt;prev_free_block = prev;</span>
+<span class='curline'><a href='../S/1644.html#L846'>prev</a>              846 Zend/zend_alloc.c 			if (EXPECTED(prev == next)) {</span>
+<span class='curline'><a href='../S/1644.html#L863'>prev</a>              863 Zend/zend_alloc.c 	zend_mm_free_block *prev, *next;</span>
+<span class='curline'><a href='../S/1644.html#L871'>prev</a>              871 Zend/zend_alloc.c 		prev = p-&gt;prev_free_block;</span>
+<span class='curline'><a href='../S/1644.html#L873'>prev</a>              873 Zend/zend_alloc.c 		prev-&gt;next_free_block = next;</span>
+<span class='curline'><a href='../S/1644.html#L874'>prev</a>              874 Zend/zend_alloc.c 		next-&gt;prev_free_block = prev;</span>
+<span class='curline'><a href='../S/1644.html#L885'>prev</a>              885 Zend/zend_alloc.c 	prev = heap-&gt;rest_buckets[0];</span>
+<span class='curline'><a href='../S/1644.html#L886'>prev</a>              886 Zend/zend_alloc.c 	next = prev-&gt;next_free_block;</span>
+<span class='curline'><a href='../S/1644.html#L887'>prev</a>              887 Zend/zend_alloc.c 	mm_block-&gt;prev_free_block = prev;</span>
+<span class='curline'><a href='../S/1644.html#L889'>prev</a>              889 Zend/zend_alloc.c 	prev-&gt;next_free_block = next-&gt;prev_free_block = mm_block;</span>
+<span class='curline'><a href='../S/1644.html#L1605'>prev</a>             1605 Zend/zend_alloc.c 	zend_mm_segment *prev;</span>
+<span class='curline'><a href='../S/1644.html#L1681'>prev</a>             1681 Zend/zend_alloc.c 			prev = segment;</span>
+<span class='curline'><a href='../S/1644.html#L1683'>prev</a>             1683 Zend/zend_alloc.c 			ZEND_MM_STORAGE_FREE(prev);</span>
+<span class='curline'><a href='../S/1644.html#L1695'>prev</a>             1695 Zend/zend_alloc.c 					prev = segment;</span>
+<span class='curline'><a href='../S/1644.html#L1697'>prev</a>             1697 Zend/zend_alloc.c 					ZEND_MM_STORAGE_FREE(prev);</span>
+<span class='curline'><a href='../S/1644.html#L1703'>prev</a>             1703 Zend/zend_alloc.c 					prev = segment;</span>
+<span class='curline'><a href='../S/1644.html#L1705'>prev</a>             1705 Zend/zend_alloc.c 					ZEND_MM_STORAGE_FREE(prev);</span>
+<span class='curline'><a href='../S/1651.html#L2209'>prev</a>             2209 Zend/zend_builtin_functions.c 			zend_execute_data *prev = skip-&gt;prev_execute_data;</span>
+<span class='curline'><a href='../S/1651.html#L2211'>prev</a>             2211 Zend/zend_builtin_functions.c 			while (prev) {</span>
+<span class='curline'><a href='../S/1651.html#L2212'>prev</a>             2212 Zend/zend_builtin_functions.c 				if (prev-&gt;function_state.function &amp;&amp;</span>
+<span class='curline'><a href='../S/1651.html#L2213'>prev</a>             2213 Zend/zend_builtin_functions.c 					prev-&gt;function_state.function-&gt;common.type != ZEND_USER_FUNCTION) {</span>
+<span class='curline'><a href='../S/1651.html#L2214'>prev</a>             2214 Zend/zend_builtin_functions.c 					prev = NULL;</span>
+<span class='curline'><a href='../S/1651.html#L2217'>prev</a>             2217 Zend/zend_builtin_functions.c 				if (prev-&gt;op_array) {</span>
+<span class='curline'><a href='../S/1651.html#L2218'>prev</a>             2218 Zend/zend_builtin_functions.c 					zend_printf(") called at [%s:%d]\n", prev-&gt;op_array-&gt;filename, prev-&gt;opline-&gt;lineno);</span>
+<span class='curline'><a href='../S/1651.html#L2221'>prev</a>             2221 Zend/zend_builtin_functions.c 				prev = prev-&gt;prev_execute_data;</span>
+<span class='curline'><a href='../S/1651.html#L2223'>prev</a>             2223 Zend/zend_builtin_functions.c 			if (!prev) {</span>
+<span class='curline'><a href='../S/1651.html#L2288'>prev</a>             2288 Zend/zend_builtin_functions.c 			zend_execute_data *prev = skip-&gt;prev_execute_data;</span>
+<span class='curline'><a href='../S/1651.html#L2290'>prev</a>             2290 Zend/zend_builtin_functions.c 			while (prev) {</span>
+<span class='curline'><a href='../S/1651.html#L2291'>prev</a>             2291 Zend/zend_builtin_functions.c 				if (prev-&gt;function_state.function &amp;&amp;</span>
+<span class='curline'><a href='../S/1651.html#L2292'>prev</a>             2292 Zend/zend_builtin_functions.c 					prev-&gt;function_state.function-&gt;common.type != ZEND_USER_FUNCTION &amp;&amp;</span>
+<span class='curline'><a href='../S/1651.html#L2293'>prev</a>             2293 Zend/zend_builtin_functions.c 					!(prev-&gt;function_state.function-&gt;common.type == ZEND_INTERNAL_FUNCTION &amp;&amp;</span>
+<span class='curline'><a href='../S/1651.html#L2294'>prev</a>             2294 Zend/zend_builtin_functions.c 						(prev-&gt;function_state.function-&gt;common.fn_flags &amp; ZEND_ACC_CALL_VIA_HANDLER))) {</span>
+<span class='curline'><a href='../S/1651.html#L2297'>prev</a>             2297 Zend/zend_builtin_functions.c 				if (prev-&gt;op_array) {</span>
+<span class='curline'><a href='../S/1651.html#L2298'>prev</a>             2298 Zend/zend_builtin_functions.c 					add_assoc_string_ex(stack_frame, "file", sizeof("file"), (char*)prev-&gt;op_array-&gt;filename, 1);</span>
+<span class='curline'><a href='../S/1651.html#L2299'>prev</a>             2299 Zend/zend_builtin_functions.c 					add_assoc_long_ex(stack_frame, "line", sizeof("line"), prev-&gt;opline-&gt;lineno);</span>
+<span class='curline'><a href='../S/1651.html#L2302'>prev</a>             2302 Zend/zend_builtin_functions.c 				prev = prev-&gt;prev_execute_data;</span>
+<span class='curline'><a href='../S/1669.html#L1652'>prev</a>             1652 Zend/zend_execute.c 		EG(argument_stack)-&gt;prev = NULL;</span>
+<span class='curline'><a href='../S/1669.html#L1750'>prev</a>             1750 Zend/zend_execute.c 			EG(argument_stack)-&gt;prev = p-&gt;prev;</span>
+<span class='curline'><a href='../S/1669.html#L1751'>prev</a>             1751 Zend/zend_execute.c 			p = p-&gt;prev;</span>
+<span class='curline'><a href='../S/1670.html#L172'>prev</a>              172 Zend/zend_execute.h 	zend_vm_stack prev;</span>
+<span class='curline'><a href='../S/1670.html#L191'>prev</a>              191 Zend/zend_execute.h 	page-&gt;prev = NULL;</span>
+<span class='curline'><a href='../S/1670.html#L205'>prev</a>              205 Zend/zend_execute.h 		zend_vm_stack p = stack-&gt;prev;</span>
+<span class='curline'><a href='../S/1670.html#L214'>prev</a>              214 Zend/zend_execute.h 	p-&gt;prev = EG(argument_stack);</span>
+<span class='curline'><a href='../S/1670.html#L275'>prev</a>              275 Zend/zend_execute.h 		EG(argument_stack) = p-&gt;prev;</span>
+<span class='curline'><a href='../S/1670.html#L287'>prev</a>              287 Zend/zend_execute.h 		EG(argument_stack) = p-&gt;prev;</span>
+<span class='curline'><a href='../S/1676.html#L49'>prev</a>               49 Zend/zend_gc.c 	gc_globals-&gt;roots.prev = &amp;gc_globals-&gt;roots;</span>
+<span class='curline'><a href='../S/1676.html#L107'>prev</a>              107 Zend/zend_gc.c 	GC_G(roots).prev = &amp;GC_G(roots);</span>
+<span class='curline'><a href='../S/1676.html#L154'>prev</a>              154 Zend/zend_gc.c 				GC_G(unused) = newRoot-&gt;prev;</span>
+<span class='curline'><a href='../S/1676.html#L169'>prev</a>              169 Zend/zend_gc.c 				GC_G(unused) = newRoot-&gt;prev;</span>
+<span class='curline'><a href='../S/1676.html#L174'>prev</a>              174 Zend/zend_gc.c 			newRoot-&gt;prev = &amp;GC_G(roots);</span>
+<span class='curline'><a href='../S/1676.html#L175'>prev</a>              175 Zend/zend_gc.c 			GC_G(roots).next-&gt;prev = newRoot;</span>
+<span class='curline'><a href='../S/1676.html#L207'>prev</a>              207 Zend/zend_gc.c 				GC_G(unused) = newRoot-&gt;prev;</span>
+<span class='curline'><a href='../S/1676.html#L223'>prev</a>              223 Zend/zend_gc.c 				GC_G(unused) = newRoot-&gt;prev;</span>
+<span class='curline'><a href='../S/1676.html#L228'>prev</a>              228 Zend/zend_gc.c 			newRoot-&gt;prev = &amp;GC_G(roots);</span>
+<span class='curline'><a href='../S/1676.html#L229'>prev</a>              229 Zend/zend_gc.c 			GC_G(roots).next-&gt;prev = newRoot;</span>
+<span class='curline'><a href='../S/1677.html#L82'>prev</a>               82 Zend/zend_gc.h 	struct _gc_root_buffer   *prev;		/* double-linked list               */</span>
+<span class='curline'><a href='../S/1677.html#L189'>prev</a>              189 Zend/zend_gc.h 	root-&gt;next-&gt;prev = root-&gt;prev;</span>
+<span class='curline'><a href='../S/1677.html#L190'>prev</a>              190 Zend/zend_gc.h 	root-&gt;prev-&gt;next = root-&gt;next;</span>
+<span class='curline'><a href='../S/1677.html#L191'>prev</a>              191 Zend/zend_gc.h 	root-&gt;prev = GC_G(unused);</span>
+<span class='curline'><a href='../S/1707.html#L41'>prev</a>               41 Zend/zend_llist.c 	tmp-&gt;prev = l-&gt;tail;</span>
+<span class='curline'><a href='../S/1707.html#L60'>prev</a>               60 Zend/zend_llist.c 	tmp-&gt;prev = NULL;</span>
+<span class='curline'><a href='../S/1707.html#L62'>prev</a>               62 Zend/zend_llist.c 		l-&gt;head-&gt;prev = tmp;</span>
+<span class='curline'><a href='../S/1707.html#L74'>prev</a>               74 Zend/zend_llist.c 			if ((current)-&gt;prev) {\</span>
+<span class='curline'><a href='../S/1707.html#L75'>prev</a>               75 Zend/zend_llist.c 				(current)-&gt;prev-&gt;next = (current)-&gt;next;\</span>
+<span class='curline'><a href='../S/1707.html#L80'>prev</a>               80 Zend/zend_llist.c 				(current)-&gt;next-&gt;prev = (current)-&gt;prev;\</span>
+<span class='curline'><a href='../S/1707.html#L82'>prev</a>               82 Zend/zend_llist.c 				(l)-&gt;tail = (current)-&gt;prev;\</span>
+<span class='curline'><a href='../S/1707.html#L135'>prev</a>              135 Zend/zend_llist.c 		if (old_tail-&gt;prev) {</span>
+<span class='curline'><a href='../S/1707.html#L136'>prev</a>              136 Zend/zend_llist.c 			old_tail-&gt;prev-&gt;next = NULL;</span>
+<span class='curline'><a href='../S/1707.html#L143'>prev</a>              143 Zend/zend_llist.c 		l-&gt;tail = old_tail-&gt;prev;</span>
+<span class='curline'><a href='../S/1707.html#L217'>prev</a>              217 Zend/zend_llist.c 	elements[0]-&gt;prev = NULL;</span>
+<span class='curline'><a href='../S/1707.html#L220'>prev</a>              220 Zend/zend_llist.c 		elements[i]-&gt;prev = elements[i-1];</span>
+<span class='curline'><a href='../S/1707.html#L303'>prev</a>              303 Zend/zend_llist.c 		*current = (*current)-&gt;prev;</span>
+<span class='curline'><a href='../S/1708.html#L27'>prev</a>               27 Zend/zend_llist.h 	struct _zend_llist_element *prev;</span>
+<span class='curline'><a href='../S/126.html#L78'>prev</a>               78 ext/dom/dom_iterators.c 	ret-&gt;prev = NULL;</span>
+<span class='curline'><a href='../S/142.html#L559'>prev</a>              559 ext/dom/node.c 	prevsib = nodep-&gt;prev;</span>
+<span class='curline'><a href='../S/142.html#L964'>prev</a>              964 ext/dom/node.c 		newchild-&gt;prev = prevsib;</span>
+<span class='curline'><a href='../S/142.html#L969'>prev</a>              969 ext/dom/node.c 			nextsib-&gt;prev = fragment-&gt;last;</span>
+<span class='curline'><a href='../S/142.html#L1062'>prev</a>             1062 ext/dom/node.c 			(refp-&gt;prev != NULL &amp;&amp; refp-&gt;prev-&gt;type == XML_TEXT_NODE))) {</span>
+<span class='curline'><a href='../S/142.html#L1069'>prev</a>             1069 ext/dom/node.c 			new_child-&gt;prev = refp-&gt;prev;</span>
+<span class='curline'><a href='../S/142.html#L1070'>prev</a>             1070 ext/dom/node.c 			refp-&gt;prev = new_child;</span>
+<span class='curline'><a href='../S/142.html#L1071'>prev</a>             1071 ext/dom/node.c 			if (new_child-&gt;prev != NULL) {</span>
+<span class='curline'><a href='../S/142.html#L1072'>prev</a>             1072 ext/dom/node.c 				new_child-&gt;prev-&gt;next = new_child;</span>
+<span class='curline'><a href='../S/142.html#L1097'>prev</a>             1097 ext/dom/node.c 			new_child = _php_dom_insert_fragment(parentp, refp-&gt;prev, refp, child, intern, childobj TSRMLS_CC);</span>
+<span class='curline'><a href='../S/142.html#L1119'>prev</a>             1119 ext/dom/node.c 				new_child-&gt;prev = child;</span>
+<span class='curline'><a href='../S/142.html#L1219'>prev</a>             1219 ext/dom/node.c 			prevsib = oldchild-&gt;prev;</span>
+<span class='curline'><a href='../S/142.html#L1364'>prev</a>             1364 ext/dom/node.c 			new_child-&gt;prev = child;</span>
+<span class='curline'><a href='../S/149.html#L118'>prev</a>              118 ext/dom/text.c 	while (node-&gt;prev &amp;&amp; ((node-&gt;prev-&gt;type == XML_TEXT_NODE) || (node-&gt;prev-&gt;type == XML_CDATA_SECTION_NODE))) {</span>
+<span class='curline'><a href='../S/149.html#L119'>prev</a>              119 ext/dom/text.c 		node = node-&gt;prev;</span>
+<span class='curline'><a href='../S/154.html#L52'>prev</a>               52 ext/enchant/enchant.c 	enchant_dict	*prev;</span>
+<span class='curline'><a href='../S/154.html#L565'>prev</a>              565 ext/enchant/enchant.c 		dict-&gt;prev = pos ? pbroker-&gt;dict[pos-1] : NULL;</span>
+<span class='curline'><a href='../S/154.html#L621'>prev</a>              621 ext/enchant/enchant.c 		dict-&gt;prev = pos?pbroker-&gt;dict[pos-1]:NULL;</span>
+<span class='curline'><a href='../S/176.html#L381'>prev</a>              381 ext/fileinfo/libmagic/apprentice.c 	mlp-&gt;prev-&gt;next = ml;</span>
+<span class='curline'><a href='../S/176.html#L382'>prev</a>              382 ext/fileinfo/libmagic/apprentice.c 	ml-&gt;prev = mlp-&gt;prev;</span>
+<span class='curline'><a href='../S/176.html#L384'>prev</a>              384 ext/fileinfo/libmagic/apprentice.c 	mlp-&gt;prev = ml;</span>
+<span class='curline'><a href='../S/176.html#L523'>prev</a>              523 ext/fileinfo/libmagic/apprentice.c 	mlist-&gt;next = mlist-&gt;prev = mlist;</span>
+<span class='curline'><a href='../S/186.html#L354'>prev</a>              354 ext/fileinfo/libmagic/file.h 	struct mlist *next, *prev;</span>
+<span class='curline'><a href='../S/214.html#L78'>prev</a>               78 ext/gd/gdcache.c 	gdCache_element_t *elem, *prev;</span>
+<span class='curline'><a href='../S/214.html#L83'>prev</a>               83 ext/gd/gdcache.c 		prev = elem;</span>
+<span class='curline'><a href='../S/214.html#L85'>prev</a>               85 ext/gd/gdcache.c 		pefree((char *)prev, 1);</span>
+<span class='curline'><a href='../S/214.html#L94'>prev</a>               94 ext/gd/gdcache.c 	gdCache_element_t *elem, *prev = NULL, *prevprev = NULL;</span>
+<span class='curline'><a href='../S/214.html#L107'>prev</a>              107 ext/gd/gdcache.c 				prev-&gt;next = elem-&gt;next;</span>
+<span class='curline'><a href='../S/214.html#L113'>prev</a>              113 ext/gd/gdcache.c 		prevprev = prev;</span>
+<span class='curline'><a href='../S/214.html#L114'>prev</a>              114 ext/gd/gdcache.c 		prev = elem;</span>
+<span class='curline'><a href='../S/214.html#L129'>prev</a>              129 ext/gd/gdcache.c 		elem = prev;</span>
+<span class='curline'><a href='../S/248.html#L77'>prev</a>               77 ext/gd/libgd/gdcache.c   gdCache_element_t *elem, *prev;</span>
+<span class='curline'><a href='../S/248.html#L83'>prev</a>               83 ext/gd/libgd/gdcache.c       prev = elem;</span>
+<span class='curline'><a href='../S/248.html#L85'>prev</a>               85 ext/gd/libgd/gdcache.c       gdPFree ((char *) prev);</span>
+<span class='curline'><a href='../S/248.html#L94'>prev</a>               94 ext/gd/libgd/gdcache.c   gdCache_element_t *elem, *prev = NULL, *prevprev = NULL;</span>
+<span class='curline'><a href='../S/248.html#L105'>prev</a>              105 ext/gd/libgd/gdcache.c 	      prev-&gt;next = elem-&gt;next;</span>
+<span class='curline'><a href='../S/248.html#L111'>prev</a>              111 ext/gd/libgd/gdcache.c       prevprev = prev;</span>
+<span class='curline'><a href='../S/248.html#L112'>prev</a>              112 ext/gd/libgd/gdcache.c       prev = elem;</span>
+<span class='curline'><a href='../S/248.html#L130'>prev</a>              130 ext/gd/libgd/gdcache.c       elem = prev;</span>
+<span class='curline'><a href='../S/722.html#L347'>prev</a>              347 ext/mbstring/oniguruma/oniguruma.h OnigUChar* onigenc_get_right_adjust_char_head_with_prev P_((OnigEncoding enc, const OnigUChar* start, const OnigUChar* s, const OnigUChar** prev));</span>
+<span class='curline'><a href='../S/723.html#L462'>prev</a>              462 ext/mbstring/oniguruma/regcomp.c   UChar *p, *prev;</span>
+<span class='curline'><a href='../S/723.html#L471'>prev</a>              471 ext/mbstring/oniguruma/regcomp.c   p = prev = sn-&gt;s;</span>
+<span class='curline'><a href='../S/723.html#L483'>prev</a>              483 ext/mbstring/oniguruma/regcomp.c       r = add_compile_string_length(prev, prev_len, slen, reg, ambig);</span>
+<span class='curline'><a href='../S/723.html#L485'>prev</a>              485 ext/mbstring/oniguruma/regcomp.c       prev = p;</span>
+<span class='curline'><a href='../S/723.html#L491'>prev</a>              491 ext/mbstring/oniguruma/regcomp.c   r = add_compile_string_length(prev, prev_len, slen, reg, ambig);</span>
+<span class='curline'><a href='../S/723.html#L510'>prev</a>              510 ext/mbstring/oniguruma/regcomp.c   UChar *p, *prev, *end;</span>
+<span class='curline'><a href='../S/723.html#L520'>prev</a>              520 ext/mbstring/oniguruma/regcomp.c   p = prev = sn-&gt;s;</span>
+<span class='curline'><a href='../S/723.html#L531'>prev</a>              531 ext/mbstring/oniguruma/regcomp.c       r = add_compile_string(prev, prev_len, slen, reg, ambig);</span>
+<span class='curline'><a href='../S/723.html#L534'>prev</a>              534 ext/mbstring/oniguruma/regcomp.c       prev  = p;</span>
+<span class='curline'><a href='../S/723.html#L541'>prev</a>              541 ext/mbstring/oniguruma/regcomp.c   return add_compile_string(prev, prev_len, slen, reg, ambig);</span>
+<span class='curline'><a href='../S/723.html#L1162'>prev</a>             1162 ext/mbstring/oniguruma/regcomp.c   OnigOptionType prev = reg-&gt;options;</span>
+<span class='curline'><a href='../S/723.html#L1166'>prev</a>             1166 ext/mbstring/oniguruma/regcomp.c   reg-&gt;options = prev;</span>
+<span class='curline'><a href='../S/723.html#L1170'>prev</a>             1170 ext/mbstring/oniguruma/regcomp.c   if (IS_DYNAMIC_OPTION(prev ^ node-&gt;option)) {</span>
+<span class='curline'><a href='../S/723.html#L1182'>prev</a>             1182 ext/mbstring/oniguruma/regcomp.c   OnigOptionType prev = reg-&gt;options;</span>
+<span class='curline'><a href='../S/723.html#L1184'>prev</a>             1184 ext/mbstring/oniguruma/regcomp.c   if (IS_DYNAMIC_OPTION(prev ^ node-&gt;option)) {</span>
+<span class='curline'><a href='../S/723.html#L1187'>prev</a>             1187 ext/mbstring/oniguruma/regcomp.c     r = add_opcode_option(reg, OP_SET_OPTION, prev);</span>
+<span class='curline'><a href='../S/723.html#L1195'>prev</a>             1195 ext/mbstring/oniguruma/regcomp.c   reg-&gt;options = prev;</span>
+<span class='curline'><a href='../S/723.html#L1197'>prev</a>             1197 ext/mbstring/oniguruma/regcomp.c   if (IS_DYNAMIC_OPTION(prev ^ node-&gt;option)) {</span>
+<span class='curline'><a href='../S/723.html#L1199'>prev</a>             1199 ext/mbstring/oniguruma/regcomp.c     r = add_opcode_option(reg, OP_SET_OPTION, prev);</span>
+<span class='curline'><a href='../S/723.html#L3520'>prev</a>             3520 ext/mbstring/oniguruma/regcomp.c       Node* prev = NULL_NODE;</span>
+<span class='curline'><a href='../S/723.html#L3523'>prev</a>             3523 ext/mbstring/oniguruma/regcomp.c 	prev = NCAR(node);</span>
+<span class='curline'><a href='../S/723.html#L3664'>prev</a>             3664 ext/mbstring/oniguruma/regcomp.c       Node* prev = NULL_NODE;</span>
+<span class='curline'><a href='../S/723.html#L3667'>prev</a>             3667 ext/mbstring/oniguruma/regcomp.c 	if (IS_NOT_NULL(prev) &amp;&amp; r == 0) {</span>
+<span class='curline'><a href='../S/723.html#L3668'>prev</a>             3668 ext/mbstring/oniguruma/regcomp.c 	  r = next_setup(prev, NCAR(node), reg);</span>
+<span class='curline'><a href='../S/723.html#L3670'>prev</a>             3670 ext/mbstring/oniguruma/regcomp.c 	prev = NCAR(node);</span>
+<span class='curline'><a href='../S/723.html#L5239'>prev</a>             5239 ext/mbstring/oniguruma/regcomp.c   regex_t *head, *prev;</span>
+<span class='curline'><a href='../S/723.html#L5241'>prev</a>             5241 ext/mbstring/oniguruma/regcomp.c   prev = reg;</span>
+<span class='curline'><a href='../S/723.html#L5242'>prev</a>             5242 ext/mbstring/oniguruma/regcomp.c   head = prev-&gt;chain;</span>
+<span class='curline'><a href='../S/723.html#L5246'>prev</a>             5246 ext/mbstring/oniguruma/regcomp.c       prev = head;</span>
+<span class='curline'><a href='../S/723.html#L5249'>prev</a>             5249 ext/mbstring/oniguruma/regcomp.c     prev-&gt;chain = (regex_t* )NULL;</span>
+<span class='curline'><a href='../S/724.html#L65'>prev</a>               65 ext/mbstring/oniguruma/regenc.c 				   const UChar* start, const UChar* s, const UChar** prev)</span>
+<span class='curline'><a href='../S/724.html#L70'>prev</a>               70 ext/mbstring/oniguruma/regenc.c     if (prev) *prev = (const UChar* )p;</span>
+<span class='curline'><a href='../S/724.html#L74'>prev</a>               74 ext/mbstring/oniguruma/regenc.c     if (prev) *prev = (const UChar* )NULL; /* Sorry */</span>
+<span class='curline'><a href='../S/727.html#L3053'>prev</a>             3053 ext/mbstring/oniguruma/regexec.c   UChar *prev;</span>
+<span class='curline'><a href='../S/727.html#L3100'>prev</a>             3100 ext/mbstring/oniguruma/regexec.c     prev = (UChar* )onigenc_get_prev_char_head(reg-&gt;enc, str, at);</span>
+<span class='curline'><a href='../S/727.html#L3105'>prev</a>             3105 ext/mbstring/oniguruma/regexec.c 		 at, prev, &amp;msa);</span>
+<span class='curline'><a href='../S/727.html#L3167'>prev</a>             3167 ext/mbstring/oniguruma/regexec.c       UChar* prev;</span>
+<span class='curline'><a href='../S/727.html#L3172'>prev</a>             3172 ext/mbstring/oniguruma/regexec.c 	  prev = onigenc_get_prev_char_head(reg-&gt;enc,</span>
+<span class='curline'><a href='../S/727.html#L3174'>prev</a>             3174 ext/mbstring/oniguruma/regexec.c 	  if (!ONIGENC_IS_MBC_NEWLINE(reg-&gt;enc, prev, end))</span>
+<span class='curline'><a href='../S/727.html#L3182'>prev</a>             3182 ext/mbstring/oniguruma/regexec.c 	  prev = (UChar* )onigenc_get_prev_char_head(reg-&gt;enc,</span>
+<span class='curline'><a href='../S/727.html#L3184'>prev</a>             3184 ext/mbstring/oniguruma/regexec.c 	  if (prev &amp;&amp; ONIGENC_IS_MBC_NEWLINE(reg-&gt;enc, prev, end))</span>
+<span class='curline'><a href='../S/727.html#L3290'>prev</a>             3290 ext/mbstring/oniguruma/regexec.c       UChar* prev;</span>
+<span class='curline'><a href='../S/727.html#L3295'>prev</a>             3295 ext/mbstring/oniguruma/regexec.c 	  prev = onigenc_get_prev_char_head(reg-&gt;enc, str, p);</span>
+<span class='curline'><a href='../S/727.html#L3296'>prev</a>             3296 ext/mbstring/oniguruma/regexec.c 	  if (!ONIGENC_IS_MBC_NEWLINE(reg-&gt;enc, prev, end)) {</span>
+<span class='curline'><a href='../S/727.html#L3297'>prev</a>             3297 ext/mbstring/oniguruma/regexec.c 	    p = prev;</span>
+<span class='curline'><a href='../S/727.html#L3306'>prev</a>             3306 ext/mbstring/oniguruma/regexec.c 	  prev = onigenc_get_prev_char_head(reg-&gt;enc, adjrange, p);</span>
+<span class='curline'><a href='../S/727.html#L3307'>prev</a>             3307 ext/mbstring/oniguruma/regexec.c 	  if (IS_NULL(prev)) goto fail;</span>
+<span class='curline'><a href='../S/727.html#L3308'>prev</a>             3308 ext/mbstring/oniguruma/regexec.c 	  if (ONIGENC_IS_MBC_NEWLINE(reg-&gt;enc, prev, end)) {</span>
+<span class='curline'><a href='../S/727.html#L3309'>prev</a>             3309 ext/mbstring/oniguruma/regexec.c 	    p = prev;</span>
+<span class='curline'><a href='../S/727.html#L3354'>prev</a>             3354 ext/mbstring/oniguruma/regexec.c   UChar *s, *prev;</span>
+<span class='curline'><a href='../S/727.html#L3407'>prev</a>             3407 ext/mbstring/oniguruma/regexec.c   r = match_at(reg, str, end, (upper_range), s, prev, &amp;msa); \</span>
+<span class='curline'><a href='../S/727.html#L3418'>prev</a>             3418 ext/mbstring/oniguruma/regexec.c   r = match_at(reg, str, end, (upper_range), s, prev, &amp;msa); \</span>
+<span class='curline'><a href='../S/727.html#L3429'>prev</a>             3429 ext/mbstring/oniguruma/regexec.c   r = match_at(reg, str, end, s, prev, &amp;msa);\</span>
+<span class='curline'><a href='../S/727.html#L3440'>prev</a>             3440 ext/mbstring/oniguruma/regexec.c   r = match_at(reg, str, end, s, prev, &amp;msa);\</span>
+<span class='curline'><a href='../S/727.html#L3548'>prev</a>             3548 ext/mbstring/oniguruma/regexec.c       prev = (UChar* )NULL;</span>
+<span class='curline'><a href='../S/727.html#L3577'>prev</a>             3577 ext/mbstring/oniguruma/regexec.c       prev = onigenc_get_prev_char_head(reg-&gt;enc, str, s);</span>
+<span class='curline'><a href='../S/727.html#L3579'>prev</a>             3579 ext/mbstring/oniguruma/regexec.c       prev = (UChar* )NULL;</span>
+<span class='curline'><a href='../S/727.html#L3603'>prev</a>             3603 ext/mbstring/oniguruma/regexec.c 	    prev = low_prev;</span>
+<span class='curline'><a href='../S/727.html#L3607'>prev</a>             3607 ext/mbstring/oniguruma/regexec.c 	    prev = s;</span>
+<span class='curline'><a href='../S/727.html#L3620'>prev</a>             3620 ext/mbstring/oniguruma/regexec.c             prev = s;</span>
+<span class='curline'><a href='../S/727.html#L3623'>prev</a>             3623 ext/mbstring/oniguruma/regexec.c             while (!ONIGENC_IS_MBC_NEWLINE(reg-&gt;enc, prev, end) &amp;&amp; s &lt; range) {</span>
+<span class='curline'><a href='../S/727.html#L3624'>prev</a>             3624 ext/mbstring/oniguruma/regexec.c               prev = s;</span>
+<span class='curline'><a href='../S/727.html#L3635'>prev</a>             3635 ext/mbstring/oniguruma/regexec.c       prev = s;</span>
+<span class='curline'><a href='../S/727.html#L3670'>prev</a>             3670 ext/mbstring/oniguruma/regexec.c 	    prev = onigenc_get_prev_char_head(reg-&gt;enc, str, s);</span>
+<span class='curline'><a href='../S/727.html#L3672'>prev</a>             3672 ext/mbstring/oniguruma/regexec.c 	    s = prev;</span>
+<span class='curline'><a href='../S/727.html#L3698'>prev</a>             3698 ext/mbstring/oniguruma/regexec.c       prev = onigenc_get_prev_char_head(reg-&gt;enc, str, s);</span>
+<span class='curline'><a href='../S/727.html#L3700'>prev</a>             3700 ext/mbstring/oniguruma/regexec.c       s = prev;</span>
+<span class='curline'><a href='../S/731.html#L2361'>prev</a>             2361 ext/mbstring/oniguruma/regparse.c     UChar* prev = p;</span>
+<span class='curline'><a href='../S/731.html#L2367'>prev</a>             2367 ext/mbstring/oniguruma/regparse.c     if (p == prev) {</span>
+<span class='curline'><a href='../S/731.html#L2914'>prev</a>             2914 ext/mbstring/oniguruma/regparse.c   UChar* prev;</span>
+<span class='curline'><a href='../S/731.html#L3011'>prev</a>             3011 ext/mbstring/oniguruma/regparse.c       prev = p;</span>
+<span class='curline'><a href='../S/731.html#L3022'>prev</a>             3022 ext/mbstring/oniguruma/regparse.c 	if (p &gt; prev + enclen(enc, prev) &amp;&amp; !PEND &amp;&amp; (PPEEK_IS('}'))) {</span>
+<span class='curline'><a href='../S/731.html#L3030'>prev</a>             3030 ext/mbstring/oniguruma/regparse.c 	  p = prev;</span>
+<span class='curline'><a href='../S/731.html#L3036'>prev</a>             3036 ext/mbstring/oniguruma/regparse.c 	if (p == prev) {  /* can't read nothing. */</span>
+<span class='curline'><a href='../S/731.html#L3048'>prev</a>             3048 ext/mbstring/oniguruma/regparse.c       prev = p;</span>
+<span class='curline'><a href='../S/731.html#L3052'>prev</a>             3052 ext/mbstring/oniguruma/regparse.c 	if (p == prev) {  /* can't read nothing. */</span>
+<span class='curline'><a href='../S/731.html#L3065'>prev</a>             3065 ext/mbstring/oniguruma/regparse.c 	prev = p;</span>
+<span class='curline'><a href='../S/731.html#L3068'>prev</a>             3068 ext/mbstring/oniguruma/regparse.c 	if (p == prev) {  /* can't read nothing. */</span>
+<span class='curline'><a href='../S/731.html#L3132'>prev</a>             3132 ext/mbstring/oniguruma/regparse.c   UChar* prev;</span>
+<span class='curline'><a href='../S/731.html#L3352'>prev</a>             3352 ext/mbstring/oniguruma/regparse.c       prev = p;</span>
+<span class='curline'><a href='../S/731.html#L3362'>prev</a>             3362 ext/mbstring/oniguruma/regparse.c 	if ((p &gt; prev + enclen(enc, prev)) &amp;&amp; !PEND &amp;&amp; PPEEK_IS('}')) {</span>
+<span class='curline'><a href='../S/731.html#L3369'>prev</a>             3369 ext/mbstring/oniguruma/regparse.c 	  p = prev;</span>
+<span class='curline'><a href='../S/731.html#L3375'>prev</a>             3375 ext/mbstring/oniguruma/regparse.c 	if (p == prev) {  /* can't read nothing. */</span>
+<span class='curline'><a href='../S/731.html#L3387'>prev</a>             3387 ext/mbstring/oniguruma/regparse.c       prev = p;</span>
+<span class='curline'><a href='../S/731.html#L3391'>prev</a>             3391 ext/mbstring/oniguruma/regparse.c 	if (p == prev) {  /* can't read nothing. */</span>
+<span class='curline'><a href='../S/731.html#L3403'>prev</a>             3403 ext/mbstring/oniguruma/regparse.c       prev = p;</span>
+<span class='curline'><a href='../S/731.html#L3429'>prev</a>             3429 ext/mbstring/oniguruma/regparse.c 	p = prev; PINC;</span>
+<span class='curline'><a href='../S/731.html#L3433'>prev</a>             3433 ext/mbstring/oniguruma/regparse.c       p = prev;</span>
+<span class='curline'><a href='../S/731.html#L3437'>prev</a>             3437 ext/mbstring/oniguruma/regparse.c 	prev = p;</span>
+<span class='curline'><a href='../S/731.html#L3440'>prev</a>             3440 ext/mbstring/oniguruma/regparse.c 	if (p == prev) {  /* can't read nothing. */</span>
+<span class='curline'><a href='../S/731.html#L3461'>prev</a>             3461 ext/mbstring/oniguruma/regparse.c 	  prev = p;</span>
+<span class='curline'><a href='../S/731.html#L3492'>prev</a>             3492 ext/mbstring/oniguruma/regparse.c 	    num = onig_name_to_group_numbers(env-&gt;reg, prev, name_end, &amp;backs);</span>
+<span class='curline'><a href='../S/731.html#L3495'>prev</a>             3495 ext/mbstring/oniguruma/regparse.c 			     ONIGERR_UNDEFINED_NAME_REFERENCE, prev, name_end);</span>
+<span class='curline'><a href='../S/731.html#L3533'>prev</a>             3533 ext/mbstring/oniguruma/regparse.c 	  prev = p;</span>
+<span class='curline'><a href='../S/731.html#L3538'>prev</a>             3538 ext/mbstring/oniguruma/regparse.c 	  tok-&gt;u.call.name     = prev;</span>
+<span class='curline'><a href='../S/731.html#L3793'>prev</a>             3793 ext/mbstring/oniguruma/regparse.c     OnigCodePoint prev = 0;</span>
+<span class='curline'><a href='../S/731.html#L3796'>prev</a>             3796 ext/mbstring/oniguruma/regparse.c       for (j = prev;</span>
+<span class='curline'><a href='../S/731.html#L3803'>prev</a>             3803 ext/mbstring/oniguruma/regparse.c       prev = ONIGENC_CODE_RANGE_TO(mbr, i) + 1;</span>
+<span class='curline'><a href='../S/731.html#L3805'>prev</a>             3805 ext/mbstring/oniguruma/regparse.c     for (j = prev; j &lt; sb_out; j++) {</span>
+<span class='curline'><a href='../S/731.html#L3810'>prev</a>             3810 ext/mbstring/oniguruma/regparse.c     prev = sb_out;</span>
+<span class='curline'><a href='../S/731.html#L3813'>prev</a>             3813 ext/mbstring/oniguruma/regparse.c       if (prev &lt; ONIGENC_CODE_RANGE_FROM(mbr, i)) {</span>
+<span class='curline'><a href='../S/731.html#L3814'>prev</a>             3814 ext/mbstring/oniguruma/regparse.c 	r = add_code_range_to_buf(&amp;(cc-&gt;mbuf), prev,</span>
+<span class='curline'><a href='../S/731.html#L3818'>prev</a>             3818 ext/mbstring/oniguruma/regparse.c       prev = ONIGENC_CODE_RANGE_TO(mbr, i) + 1;</span>
+<span class='curline'><a href='../S/731.html#L3820'>prev</a>             3820 ext/mbstring/oniguruma/regparse.c     if (prev &lt; 0x7fffffff) {</span>
+<span class='curline'><a href='../S/731.html#L3821'>prev</a>             3821 ext/mbstring/oniguruma/regparse.c       r = add_code_range_to_buf(&amp;(cc-&gt;mbuf), prev, 0x7fffffff);</span>
+<span class='curline'><a href='../S/731.html#L3994'>prev</a>             3994 ext/mbstring/oniguruma/regparse.c   UChar *prev, *start, *p = *src;</span>
+<span class='curline'><a href='../S/731.html#L3997'>prev</a>             3997 ext/mbstring/oniguruma/regparse.c   start = prev = p;</span>
+<span class='curline'><a href='../S/731.html#L4000'>prev</a>             4000 ext/mbstring/oniguruma/regparse.c     prev = p;</span>
+<span class='curline'><a href='../S/731.html#L4003'>prev</a>             4003 ext/mbstring/oniguruma/regparse.c       r = ONIGENC_PROPERTY_NAME_TO_CTYPE(enc, start, prev);</span>
+<span class='curline'><a href='../S/731.html#L4015'>prev</a>             4015 ext/mbstring/oniguruma/regparse.c   onig_scan_env_set_error_string(env, r, *src, prev);</span>
+<span class='curline'><a href='../S/731.html#L4691'>prev</a>             4691 ext/mbstring/oniguruma/regparse.c 	    OnigOptionType prev = env-&gt;option;</span>
+<span class='curline'><a href='../S/731.html#L4697'>prev</a>             4697 ext/mbstring/oniguruma/regparse.c 	    env-&gt;option = prev;</span>
+<span class='curline'><a href='../S/731.html#L5062'>prev</a>             5062 ext/mbstring/oniguruma/regparse.c       OnigOptionType prev = env-&gt;option;</span>
+<span class='curline'><a href='../S/731.html#L5068'>prev</a>             5068 ext/mbstring/oniguruma/regparse.c       env-&gt;option = prev;</span>
+<span class='curline'><a href='../S/775.html#L78'>prev</a>               78 ext/mysqli/mysqli_warning.c 	MYSQLI_WARNING *w, *first = NULL, *prev = NULL;</span>
+<span class='curline'><a href='../S/775.html#L93'>prev</a>               93 ext/mysqli/mysqli_warning.c 		if (prev) {</span>
+<span class='curline'><a href='../S/775.html#L94'>prev</a>               94 ext/mysqli/mysqli_warning.c 			prev-&gt;next = w;</span>
+<span class='curline'><a href='../S/775.html#L96'>prev</a>               96 ext/mysqli/mysqli_warning.c 		prev = w;</span>
+<span class='curline'><a href='../S/775.html#L128'>prev</a>              128 ext/mysqli/mysqli_warning.c 	MYSQLI_WARNING	*w, *first = NULL, *prev = NULL;</span>
+<span class='curline'><a href='../S/775.html#L170'>prev</a>              170 ext/mysqli/mysqli_warning.c 		if (prev) {</span>
+<span class='curline'><a href='../S/775.html#L171'>prev</a>              171 ext/mysqli/mysqli_warning.c 			prev-&gt;next = (void *)w;</span>
+<span class='curline'><a href='../S/775.html#L173'>prev</a>              173 ext/mysqli/mysqli_warning.c 		prev = w;</span>
+<span class='curline'><a href='../S/830.html#L1444'>prev</a>             1444 ext/opcache/Optimizer/block_pass.c 							zend_code_block *prev = blocks;</span>
+<span class='curline'><a href='../S/830.html#L1446'>prev</a>             1446 ext/opcache/Optimizer/block_pass.c 							while (prev-&gt;next != block-&gt;op1_to) {</span>
+<span class='curline'><a href='../S/830.html#L1447'>prev</a>             1447 ext/opcache/Optimizer/block_pass.c 								prev = prev-&gt;next;</span>
+<span class='curline'><a href='../S/830.html#L1449'>prev</a>             1449 ext/opcache/Optimizer/block_pass.c 							prev-&gt;next = next-&gt;next;</span>
+<span class='curline'><a href='../S/856.html#L324'>prev</a>              324 ext/opcache/zend_accelerator_util_funcs.c 	Bucket *p, *q, **prev;</span>
+<span class='curline'><a href='../S/856.html#L354'>prev</a>              354 ext/opcache/zend_accelerator_util_funcs.c 	prev = &amp;ht-&gt;pListHead;</span>
+<span class='curline'><a href='../S/856.html#L393'>prev</a>              393 ext/opcache/zend_accelerator_util_funcs.c 		*prev = q;</span>
+<span class='curline'><a href='../S/856.html#L394'>prev</a>              394 ext/opcache/zend_accelerator_util_funcs.c 		prev = &amp;q-&gt;pListNext;</span>
+<span class='curline'><a href='../S/856.html#L451'>prev</a>              451 ext/opcache/zend_accelerator_util_funcs.c 	Bucket *p, *q, **prev;</span>
+<span class='curline'><a href='../S/856.html#L481'>prev</a>              481 ext/opcache/zend_accelerator_util_funcs.c 	prev = &amp;ht-&gt;pListHead;</span>
+<span class='curline'><a href='../S/856.html#L520'>prev</a>              520 ext/opcache/zend_accelerator_util_funcs.c 		*prev = q;</span>
+<span class='curline'><a href='../S/856.html#L521'>prev</a>              521 ext/opcache/zend_accelerator_util_funcs.c 		prev = &amp;q-&gt;pListNext;</span>
+<span class='curline'><a href='../S/856.html#L563'>prev</a>              563 ext/opcache/zend_accelerator_util_funcs.c 	Bucket *p, *q, **prev;</span>
+<span class='curline'><a href='../S/856.html#L592'>prev</a>              592 ext/opcache/zend_accelerator_util_funcs.c 	prev = &amp;ht-&gt;pListHead;</span>
+<span class='curline'><a href='../S/856.html#L631'>prev</a>              631 ext/opcache/zend_accelerator_util_funcs.c 		*prev = q;</span>
+<span class='curline'><a href='../S/856.html#L632'>prev</a>              632 ext/opcache/zend_accelerator_util_funcs.c 		prev = &amp;q-&gt;pListNext;</span>
+<span class='curline'><a href='../S/876.html#L1803'>prev</a>             1803 ext/pcre/pcrelib/pcre_compile.c       for (r = recurses; r != NULL; r = r-&gt;prev) if (r-&gt;group == cs) break;</span>
+<span class='curline'><a href='../S/876.html#L1806'>prev</a>             1806 ext/pcre/pcrelib/pcre_compile.c     this_recurse.prev = recurses;</span>
+<span class='curline'><a href='../S/876.html#L2455'>prev</a>             2455 ext/pcre/pcrelib/pcre_compile.c       for (r = recurses; r != NULL; r = r-&gt;prev)</span>
+<span class='curline'><a href='../S/876.html#L2464'>prev</a>             2464 ext/pcre/pcrelib/pcre_compile.c     this_recurse.prev = recurses;</span>
+<span class='curline'><a href='../S/878.html#L629'>prev</a>              629 ext/pcre/pcrelib/pcre_exec.c const pcre_uchar *prev;</span>
+<span class='curline'><a href='../S/878.html#L874'>prev</a>              874 ext/pcre/pcrelib/pcre_exec.c     prev = ecode;</span>
+<span class='curline'><a href='../S/878.html#L930'>prev</a>              930 ext/pcre/pcrelib/pcre_exec.c       ecode = prev;</span>
+<span class='curline'><a href='../S/878.html#L935'>prev</a>              935 ext/pcre/pcrelib/pcre_exec.c       RMATCH(eptr, prev, offset_top, md, eptrb, RM66);</span>
+<span class='curline'><a href='../S/878.html#L1913'>prev</a>             1913 ext/pcre/pcrelib/pcre_exec.c     prev = ecode - GET(ecode, 1);</span>
+<span class='curline'><a href='../S/878.html#L1919'>prev</a>             1919 ext/pcre/pcrelib/pcre_exec.c     if (*prev &gt;= OP_SBRA || *prev == OP_ONCE)</span>
+<span class='curline'><a href='../S/878.html#L1931'>prev</a>             1931 ext/pcre/pcrelib/pcre_exec.c     if ((*prev &gt;= OP_ASSERT &amp;&amp; *prev &lt;= OP_ASSERTBACK_NOT) ||</span>
+<span class='curline'><a href='../S/878.html#L1932'>prev</a>             1932 ext/pcre/pcrelib/pcre_exec.c          *prev == OP_ONCE_NC)</span>
+<span class='curline'><a href='../S/878.html#L1948'>prev</a>             1948 ext/pcre/pcrelib/pcre_exec.c     if (*prev == OP_CBRA || *prev == OP_SCBRA ||</span>
+<span class='curline'><a href='../S/878.html#L1949'>prev</a>             1949 ext/pcre/pcrelib/pcre_exec.c         *prev == OP_CBRAPOS || *prev == OP_SCBRAPOS)</span>
+<span class='curline'><a href='../S/878.html#L1951'>prev</a>             1951 ext/pcre/pcrelib/pcre_exec.c       number = GET2(prev, 1+LINK_SIZE);</span>
+<span class='curline'><a href='../S/878.html#L2023'>prev</a>             2023 ext/pcre/pcrelib/pcre_exec.c       if (*prev == OP_ONCE)</span>
+<span class='curline'><a href='../S/878.html#L2027'>prev</a>             2027 ext/pcre/pcrelib/pcre_exec.c         md-&gt;once_target = prev;  /* Level at which to change to MATCH_NOMATCH */</span>
+<span class='curline'><a href='../S/878.html#L2044'>prev</a>             2044 ext/pcre/pcrelib/pcre_exec.c       if (*prev == OP_ONCE)</span>
+<span class='curline'><a href='../S/878.html#L2046'>prev</a>             2046 ext/pcre/pcrelib/pcre_exec.c         RMATCH(eptr, prev, offset_top, md, eptrb, RM8);</span>
+<span class='curline'><a href='../S/878.html#L2048'>prev</a>             2048 ext/pcre/pcrelib/pcre_exec.c         md-&gt;once_target = prev;  /* Level at which to change to MATCH_NOMATCH */</span>
+<span class='curline'><a href='../S/878.html#L2051'>prev</a>             2051 ext/pcre/pcrelib/pcre_exec.c       if (*prev &gt;= OP_SBRA)    /* Could match an empty string */</span>
+<span class='curline'><a href='../S/878.html#L2053'>prev</a>             2053 ext/pcre/pcrelib/pcre_exec.c         RMATCH(eptr, prev, offset_top, md, eptrb, RM50);</span>
+<span class='curline'><a href='../S/878.html#L2056'>prev</a>             2056 ext/pcre/pcrelib/pcre_exec.c       ecode = prev;</span>
+<span class='curline'><a href='../S/878.html#L2061'>prev</a>             2061 ext/pcre/pcrelib/pcre_exec.c       RMATCH(eptr, prev, offset_top, md, eptrb, RM13);</span>
+<span class='curline'><a href='../S/878.html#L2062'>prev</a>             2062 ext/pcre/pcrelib/pcre_exec.c       if (rrc == MATCH_ONCE &amp;&amp; md-&gt;once_target == prev) rrc = MATCH_NOMATCH;</span>
+<span class='curline'><a href='../S/878.html#L2064'>prev</a>             2064 ext/pcre/pcrelib/pcre_exec.c       if (*prev == OP_ONCE)</span>
+<span class='curline'><a href='../S/878.html#L2068'>prev</a>             2068 ext/pcre/pcrelib/pcre_exec.c         md-&gt;once_target = prev;</span>
+<span class='curline'><a href='../S/882.html#L2479'>prev</a>             2479 ext/pcre/pcrelib/pcre_internal.h   struct recurse_check *prev;</span>
+<span class='curline'><a href='../S/883.html#L225'>prev</a>              225 ext/pcre/pcrelib/pcre_jit_compile.c   struct backtrack_common *prev;</span>
+<span class='curline'><a href='../S/883.html#L5936'>prev</a>             5936 ext/pcre/pcrelib/pcre_jit_compile.c     backtrack-&gt;prev = parent-&gt;top; \</span>
+<span class='curline'><a href='../S/883.html#L5949'>prev</a>             5949 ext/pcre/pcrelib/pcre_jit_compile.c     backtrack-&gt;prev = parent-&gt;top; \</span>
+<span class='curline'><a href='../S/883.html#L6295'>prev</a>             6295 ext/pcre/pcrelib/pcre_jit_compile.c recurse_entry *prev = NULL;</span>
+<span class='curline'><a href='../S/883.html#L6315'>prev</a>             6315 ext/pcre/pcrelib/pcre_jit_compile.c   prev = entry;</span>
+<span class='curline'><a href='../S/883.html#L6329'>prev</a>             6329 ext/pcre/pcrelib/pcre_jit_compile.c   if (prev != NULL)</span>
+<span class='curline'><a href='../S/883.html#L6330'>prev</a>             6330 ext/pcre/pcrelib/pcre_jit_compile.c     prev-&gt;next = entry;</span>
+<span class='curline'><a href='../S/883.html#L7033'>prev</a>             7033 ext/pcre/pcrelib/pcre_jit_compile.c   parent-&gt;top = backtrack-&gt;prev;</span>
+<span class='curline'><a href='../S/883.html#L9658'>prev</a>             9658 ext/pcre/pcrelib/pcre_jit_compile.c   current = current-&gt;prev;</span>
+<span class='curline'><a href='../S/883.html#L10153'>prev</a>             10153 ext/pcre/pcrelib/pcre_jit_compile.c SLJIT_ASSERT(rootbacktrack.prev == NULL);</span>
+<span class='curline'><a href='../S/888.html#L410'>prev</a>              410 ext/pcre/pcrelib/pcre_study.c           for (r = recurses; r != NULL; r = r-&gt;prev) if (r-&gt;group == cs) break;</span>
+<span class='curline'><a href='../S/888.html#L420'>prev</a>              420 ext/pcre/pcrelib/pcre_study.c             this_recurse.prev = recurses;</span>
+<span class='curline'><a href='../S/888.html#L449'>prev</a>              449 ext/pcre/pcrelib/pcre_study.c         for (r = recurses; r != NULL; r = r-&gt;prev) if (r-&gt;group == cs) break;</span>
+<span class='curline'><a href='../S/888.html#L457'>prev</a>              457 ext/pcre/pcrelib/pcre_study.c           this_recurse.prev = recurses;</span>
+<span class='curline'><a href='../S/888.html#L515'>prev</a>              515 ext/pcre/pcrelib/pcre_study.c       for (r = recurses; r != NULL; r = r-&gt;prev) if (r-&gt;group == cs) break;</span>
+<span class='curline'><a href='../S/888.html#L520'>prev</a>              520 ext/pcre/pcrelib/pcre_study.c         this_recurse.prev = recurses;</span>
+<span class='curline'><a href='../S/899.html#L135'>prev</a>              135 ext/pcre/pcrelib/sljit/sljitExecAllocator.c 	struct free_block *prev;</span>
+<span class='curline'><a href='../S/899.html#L156'>prev</a>              156 ext/pcre/pcrelib/sljit/sljitExecAllocator.c 	free_block-&gt;prev = 0;</span>
+<span class='curline'><a href='../S/899.html#L158'>prev</a>              158 ext/pcre/pcrelib/sljit/sljitExecAllocator.c 		free_blocks-&gt;prev = free_block;</span>
+<span class='curline'><a href='../S/899.html#L165'>prev</a>              165 ext/pcre/pcrelib/sljit/sljitExecAllocator.c 		free_block-&gt;next-&gt;prev = free_block-&gt;prev;</span>
+<span class='curline'><a href='../S/899.html#L167'>prev</a>              167 ext/pcre/pcrelib/sljit/sljitExecAllocator.c 	if (free_block-&gt;prev)</span>
+<span class='curline'><a href='../S/899.html#L168'>prev</a>              168 ext/pcre/pcrelib/sljit/sljitExecAllocator.c 		free_block-&gt;prev-&gt;next = free_block-&gt;next;</span>
+<span class='curline'><a href='../S/900.html#L543'>prev</a>              543 ext/pcre/pcrelib/sljit/sljitLir.c 	struct sljit_memory_fragment *prev = NULL;</span>
+<span class='curline'><a href='../S/900.html#L548'>prev</a>              548 ext/pcre/pcrelib/sljit/sljitLir.c 		buf-&gt;next = prev;</span>
+<span class='curline'><a href='../S/900.html#L549'>prev</a>              549 ext/pcre/pcrelib/sljit/sljitLir.c 		prev = buf;</span>
+<span class='curline'><a href='../S/900.html#L553'>prev</a>              553 ext/pcre/pcrelib/sljit/sljitLir.c 	compiler-&gt;buf = prev;</span>
+<span class='curline'><a href='../S/903.html#L1067'>prev</a>             1067 ext/pcre/pcrelib/sljit/sljitNativeARM_64.c 	sljit_si i, tmp, offs, prev, saved_regs_size;</span>
+<span class='curline'><a href='../S/903.html#L1095'>prev</a>             1095 ext/pcre/pcrelib/sljit/sljitNativeARM_64.c 	prev = -1;</span>
+<span class='curline'><a href='../S/903.html#L1097'>prev</a>             1097 ext/pcre/pcrelib/sljit/sljitNativeARM_64.c 		if (prev == -1) {</span>
+<span class='curline'><a href='../S/903.html#L1099'>prev</a>             1099 ext/pcre/pcrelib/sljit/sljitNativeARM_64.c 				prev = i;</span>
+<span class='curline'><a href='../S/903.html#L1106'>prev</a>             1106 ext/pcre/pcrelib/sljit/sljitNativeARM_64.c 		FAIL_IF(push_inst(compiler, STP | RT(prev) | RT2(i) | RN(TMP_SP) | offs));</span>
+<span class='curline'><a href='../S/903.html#L1108'>prev</a>             1108 ext/pcre/pcrelib/sljit/sljitNativeARM_64.c 		prev = -1;</span>
+<span class='curline'><a href='../S/903.html#L1112'>prev</a>             1112 ext/pcre/pcrelib/sljit/sljitNativeARM_64.c 		if (prev == -1) {</span>
+<span class='curline'><a href='../S/903.html#L1114'>prev</a>             1114 ext/pcre/pcrelib/sljit/sljitNativeARM_64.c 				prev = i;</span>
+<span class='curline'><a href='../S/903.html#L1121'>prev</a>             1121 ext/pcre/pcrelib/sljit/sljitNativeARM_64.c 		FAIL_IF(push_inst(compiler, STP | RT(prev) | RT2(i) | RN(TMP_SP) | offs));</span>
+<span class='curline'><a href='../S/903.html#L1123'>prev</a>             1123 ext/pcre/pcrelib/sljit/sljitNativeARM_64.c 		prev = -1;</span>
+<span class='curline'><a href='../S/903.html#L1126'>prev</a>             1126 ext/pcre/pcrelib/sljit/sljitNativeARM_64.c 	SLJIT_ASSERT(prev == -1);</span>
+<span class='curline'><a href='../S/903.html#L1168'>prev</a>             1168 ext/pcre/pcrelib/sljit/sljitNativeARM_64.c 	sljit_si i, tmp, offs, prev, saved_regs_size;</span>
+<span class='curline'><a href='../S/903.html#L1198'>prev</a>             1198 ext/pcre/pcrelib/sljit/sljitNativeARM_64.c 	prev = -1;</span>
+<span class='curline'><a href='../S/903.html#L1200'>prev</a>             1200 ext/pcre/pcrelib/sljit/sljitNativeARM_64.c 		if (prev == -1) {</span>
+<span class='curline'><a href='../S/903.html#L1202'>prev</a>             1202 ext/pcre/pcrelib/sljit/sljitNativeARM_64.c 				prev = i;</span>
+<span class='curline'><a href='../S/903.html#L1209'>prev</a>             1209 ext/pcre/pcrelib/sljit/sljitNativeARM_64.c 		FAIL_IF(push_inst(compiler, LDP | RT(prev) | RT2(i) | RN(TMP_SP) | offs));</span>
+<span class='curline'><a href='../S/903.html#L1211'>prev</a>             1211 ext/pcre/pcrelib/sljit/sljitNativeARM_64.c 		prev = -1;</span>
+<span class='curline'><a href='../S/903.html#L1215'>prev</a>             1215 ext/pcre/pcrelib/sljit/sljitNativeARM_64.c 		if (prev == -1) {</span>
+<span class='curline'><a href='../S/903.html#L1217'>prev</a>             1217 ext/pcre/pcrelib/sljit/sljitNativeARM_64.c 				prev = i;</span>
+<span class='curline'><a href='../S/903.html#L1224'>prev</a>             1224 ext/pcre/pcrelib/sljit/sljitNativeARM_64.c 		FAIL_IF(push_inst(compiler, LDP | RT(prev) | RT2(i) | RN(TMP_SP) | offs));</span>
+<span class='curline'><a href='../S/903.html#L1226'>prev</a>             1226 ext/pcre/pcrelib/sljit/sljitNativeARM_64.c 		prev = -1;</span>
+<span class='curline'><a href='../S/903.html#L1229'>prev</a>             1229 ext/pcre/pcrelib/sljit/sljitNativeARM_64.c 	SLJIT_ASSERT(prev == -1);</span>
+<span class='curline'><a href='../S/1000.html#L166'>prev</a>              166 ext/session/mod_mm.c 		ps_sd *prev;</span>
+<span class='curline'><a href='../S/1000.html#L169'>prev</a>              169 ext/session/mod_mm.c 		for (prev = data-&gt;hash[slot]; prev-&gt;next != sd; prev = prev-&gt;next);</span>
+<span class='curline'><a href='../S/1000.html#L170'>prev</a>              170 ext/session/mod_mm.c 		prev-&gt;next = sd-&gt;next;</span>
+<span class='curline'><a href='../S/1000.html#L185'>prev</a>              185 ext/session/mod_mm.c 	ps_sd *ret, *prev;</span>
+<span class='curline'><a href='../S/1000.html#L190'>prev</a>              190 ext/session/mod_mm.c 	for (prev = NULL, ret = data-&gt;hash[slot]; ret; prev = ret, ret = ret-&gt;next) {</span>
+<span class='curline'><a href='../S/1000.html#L198'>prev</a>              198 ext/session/mod_mm.c 		if (prev) {</span>
+<span class='curline'><a href='../S/1000.html#L199'>prev</a>              199 ext/session/mod_mm.c 			prev-&gt;next = ret-&gt;next;</span>
+<span class='curline'><a href='../S/1006.html#L1318'>prev</a>             1318 ext/session/session.c 			if (current-&gt;prev) {</span>
+<span class='curline'><a href='../S/1006.html#L1319'>prev</a>             1319 ext/session/session.c 				current-&gt;prev-&gt;next = next;</span>
+<span class='curline'><a href='../S/1006.html#L1324'>prev</a>             1324 ext/session/session.c 				next-&gt;prev = current-&gt;prev;</span>
+<span class='curline'><a href='../S/1006.html#L1326'>prev</a>             1326 ext/session/session.c 				l-&gt;tail = current-&gt;prev;</span>
+<span class='curline'><a href='../S/1011.html#L1145'>prev</a>             1145 ext/simplexml/simplexml.c 			if (node-&gt;children != NULL || node-&gt;prev != NULL || node-&gt;next != NULL) {</span>
+<span class='curline'><a href='../S/1018.html#L3265'>prev</a>             3265 ext/soap/php_encoding.c 	ret-&gt;prev = parent-&gt;last;</span>
+<span class='curline'><a href='../S/1031.html#L114'>prev</a>              114 ext/soap/soap.c 			while (EG(argument_stack)-&gt;prev != NULL &amp;&amp; \</span>
+<span class='curline'><a href='../S/1031.html#L117'>prev</a>              117 ext/soap/soap.c 				zend_vm_stack tmp = EG(argument_stack)-&gt;prev; \</span>
+<span class='curline'><a href='../S/1051.html#L65'>prev</a>               65 ext/spl/spl_dllist.c 	struct _spl_ptr_llist_element *prev;</span>
+<span class='curline'><a href='../S/1051.html#L176'>prev</a>              176 ext/spl/spl_dllist.c 			current = current-&gt;prev;</span>
+<span class='curline'><a href='../S/1051.html#L192'>prev</a>              192 ext/spl/spl_dllist.c 	elem-&gt;prev = NULL;</span>
+<span class='curline'><a href='../S/1051.html#L196'>prev</a>              196 ext/spl/spl_dllist.c 		llist-&gt;head-&gt;prev = elem;</span>
+<span class='curline'><a href='../S/1051.html#L216'>prev</a>              216 ext/spl/spl_dllist.c 	elem-&gt;prev = llist-&gt;tail;</span>
+<span class='curline'><a href='../S/1051.html#L243'>prev</a>              243 ext/spl/spl_dllist.c 	if (tail-&gt;prev) {</span>
+<span class='curline'><a href='../S/1051.html#L244'>prev</a>              244 ext/spl/spl_dllist.c 		tail-&gt;prev-&gt;next = NULL;</span>
+<span class='curline'><a href='../S/1051.html#L249'>prev</a>              249 ext/spl/spl_dllist.c 	llist-&gt;tail = tail-&gt;prev;</span>
+<span class='curline'><a href='../S/1051.html#L299'>prev</a>              299 ext/spl/spl_dllist.c 		head-&gt;next-&gt;prev = NULL;</span>
+<span class='curline'><a href='../S/1051.html#L893'>prev</a>              893 ext/spl/spl_dllist.c 		if (element-&gt;prev) {</span>
+<span class='curline'><a href='../S/1051.html#L894'>prev</a>              894 ext/spl/spl_dllist.c 			element-&gt;prev-&gt;next = element-&gt;next;</span>
+<span class='curline'><a href='../S/1051.html#L898'>prev</a>              898 ext/spl/spl_dllist.c 			element-&gt;next-&gt;prev = element-&gt;prev;</span>
+<span class='curline'><a href='../S/1051.html#L907'>prev</a>              907 ext/spl/spl_dllist.c 			llist-&gt;tail = element-&gt;prev;</span>
+<span class='curline'><a href='../S/1051.html#L967'>prev</a>              967 ext/spl/spl_dllist.c 			*traverse_pointer_ptr = old-&gt;prev;</span>
+<span class='curline'><a href='../S/1051.html#L971'>prev</a>              971 ext/spl/spl_dllist.c 				zval *prev = (zval *)spl_ptr_llist_pop(llist TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1051.html#L973'>prev</a>              973 ext/spl/spl_dllist.c 				if (prev) {</span>
+<span class='curline'><a href='../S/1051.html#L974'>prev</a>              974 ext/spl/spl_dllist.c 					zval_ptr_dtor((zval **)&amp;prev);</span>
+<span class='curline'><a href='../S/1051.html#L981'>prev</a>              981 ext/spl/spl_dllist.c 				zval *prev = (zval *)spl_ptr_llist_shift(llist TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1051.html#L983'>prev</a>              983 ext/spl/spl_dllist.c 				if (prev) {</span>
+<span class='curline'><a href='../S/1051.html#L984'>prev</a>              984 ext/spl/spl_dllist.c 					zval_ptr_dtor((zval **)&amp;prev);</span>
+<span class='curline'><a href='../S/1051.html#L1064'>prev</a>             1064 ext/spl/spl_dllist.c SPL_METHOD(SplDoublyLinkedList, prev)</span>
+<span class='curline'><a href='../S/1051.html#L1277'>prev</a>             1277 ext/spl/spl_dllist.c 		elem-&gt;prev = element-&gt;prev;</span>
+<span class='curline'><a href='../S/1051.html#L1280'>prev</a>             1280 ext/spl/spl_dllist.c 		if (elem-&gt;prev == NULL) {</span>
+<span class='curline'><a href='../S/1051.html#L1283'>prev</a>             1283 ext/spl/spl_dllist.c 			element-&gt;prev-&gt;next = elem;</span>
+<span class='curline'><a href='../S/1051.html#L1285'>prev</a>             1285 ext/spl/spl_dllist.c 		element-&gt;prev = elem;</span>
+<span class='curline'><a href='../S/1051.html#L1391'>prev</a>             1391 ext/spl/spl_dllist.c 	SPL_ME(SplDoublyLinkedList, prev,            arginfo_dllist_void,            ZEND_ACC_PUBLIC)</span>
+<span class='curline'><a href='../S/1067.html#L8616'>prev</a>             8616 ext/sqlite3/libsqlite/sqlite3.c   HashElem *next, *prev;       /* Next and previous elements in the table */</span>
+<span class='curline'><a href='../S/1067.html#L17927'>prev</a>             17927 ext/sqlite3/libsqlite/sqlite3.c       u32 prev;       /* Index in mem3.aPool[] of previous free chunk */</span>
+<span class='curline'><a href='../S/1067.html#L17987'>prev</a>             17987 ext/sqlite3/libsqlite/sqlite3.c   u32 prev = mem3.aPool[i].u.list.prev;</span>
+<span class='curline'><a href='../S/1067.html#L17989'>prev</a>             17989 ext/sqlite3/libsqlite/sqlite3.c   if( prev==0 ){</span>
+<span class='curline'><a href='../S/1067.html#L17992'>prev</a>             17992 ext/sqlite3/libsqlite/sqlite3.c     mem3.aPool[prev].u.list.next = next;</span>
+<span class='curline'><a href='../S/1067.html#L17995'>prev</a>             17995 ext/sqlite3/libsqlite/sqlite3.c     mem3.aPool[next].u.list.prev = prev;</span>
+<span class='curline'><a href='../S/1067.html#L17998'>prev</a>             17998 ext/sqlite3/libsqlite/sqlite3.c   mem3.aPool[i].u.list.prev = 0;</span>
+<span class='curline'><a href='../S/1067.html#L18028'>prev</a>             18028 ext/sqlite3/libsqlite/sqlite3.c   mem3.aPool[i].u.list.prev = 0;</span>
+<span class='curline'><a href='../S/1067.html#L18030'>prev</a>             18030 ext/sqlite3/libsqlite/sqlite3.c     mem3.aPool[*pRoot].u.list.prev = i;</span>
+<span class='curline'><a href='../S/1067.html#L18154'>prev</a>             18154 ext/sqlite3/libsqlite/sqlite3.c   u32 iNext, prev, size, i, x;</span>
+<span class='curline'><a href='../S/1067.html#L18164'>prev</a>             18164 ext/sqlite3/libsqlite/sqlite3.c       prev = i - mem3.aPool[i-1].u.hdr.prevSize;</span>
+<span class='curline'><a href='../S/1067.html#L18165'>prev</a>             18165 ext/sqlite3/libsqlite/sqlite3.c       if( prev==iNext ){</span>
+<span class='curline'><a href='../S/1067.html#L18166'>prev</a>             18166 ext/sqlite3/libsqlite/sqlite3.c         iNext = mem3.aPool[prev].u.list.next;</span>
+<span class='curline'><a href='../S/1067.html#L18168'>prev</a>             18168 ext/sqlite3/libsqlite/sqlite3.c       memsys3Unlink(prev);</span>
+<span class='curline'><a href='../S/1067.html#L18169'>prev</a>             18169 ext/sqlite3/libsqlite/sqlite3.c       size = i + size/4 - prev;</span>
+<span class='curline'><a href='../S/1067.html#L18170'>prev</a>             18170 ext/sqlite3/libsqlite/sqlite3.c       x = mem3.aPool[prev-1].u.hdr.size4x &amp; 2;</span>
+<span class='curline'><a href='../S/1067.html#L18171'>prev</a>             18171 ext/sqlite3/libsqlite/sqlite3.c       mem3.aPool[prev-1].u.hdr.size4x = size*4 | x;</span>
+<span class='curline'><a href='../S/1067.html#L18172'>prev</a>             18172 ext/sqlite3/libsqlite/sqlite3.c       mem3.aPool[prev+size-1].u.hdr.prevSize = size;</span>
+<span class='curline'><a href='../S/1067.html#L18173'>prev</a>             18173 ext/sqlite3/libsqlite/sqlite3.c       memsys3Link(prev);</span>
+<span class='curline'><a href='../S/1067.html#L18174'>prev</a>             18174 ext/sqlite3/libsqlite/sqlite3.c       i = prev;</span>
+<span class='curline'><a href='../S/1067.html#L18597'>prev</a>             18597 ext/sqlite3/libsqlite/sqlite3.c   int prev;       /* Index of previous free chunk */</span>
+<span class='curline'><a href='../S/1067.html#L18675'>prev</a>             18675 ext/sqlite3/libsqlite/sqlite3.c   int next, prev;</span>
+<span class='curline'><a href='../S/1067.html#L18681'>prev</a>             18681 ext/sqlite3/libsqlite/sqlite3.c   prev = MEM5LINK(i)-&gt;prev;</span>
+<span class='curline'><a href='../S/1067.html#L18682'>prev</a>             18682 ext/sqlite3/libsqlite/sqlite3.c   if( prev&lt;0 ){</span>
+<span class='curline'><a href='../S/1067.html#L18685'>prev</a>             18685 ext/sqlite3/libsqlite/sqlite3.c     MEM5LINK(prev)-&gt;next = next;</span>
+<span class='curline'><a href='../S/1067.html#L18688'>prev</a>             18688 ext/sqlite3/libsqlite/sqlite3.c     MEM5LINK(next)-&gt;prev = prev;</span>
+<span class='curline'><a href='../S/1067.html#L18704'>prev</a>             18704 ext/sqlite3/libsqlite/sqlite3.c   MEM5LINK(i)-&gt;prev = -1;</span>
+<span class='curline'><a href='../S/1067.html#L18707'>prev</a>             18707 ext/sqlite3/libsqlite/sqlite3.c     MEM5LINK(x)-&gt;prev = i;</span>
+<span class='curline'><a href='../S/1067.html#L24886'>prev</a>             24886 ext/sqlite3/libsqlite/sqlite3.c     pNew-&gt;prev = pHead-&gt;prev;</span>
+<span class='curline'><a href='../S/1067.html#L24887'>prev</a>             24887 ext/sqlite3/libsqlite/sqlite3.c     if( pHead-&gt;prev ){ pHead-&gt;prev-&gt;next = pNew; }</span>
+<span class='curline'><a href='../S/1067.html#L24889'>prev</a>             24889 ext/sqlite3/libsqlite/sqlite3.c     pHead-&gt;prev = pNew;</span>
+<span class='curline'><a href='../S/1067.html#L24892'>prev</a>             24892 ext/sqlite3/libsqlite/sqlite3.c     if( pH-&gt;first ){ pH-&gt;first-&gt;prev = pNew; }</span>
+<span class='curline'><a href='../S/1067.html#L24893'>prev</a>             24893 ext/sqlite3/libsqlite/sqlite3.c     pNew-&gt;prev = 0;</span>
+<span class='curline'><a href='../S/1067.html#L24985'>prev</a>             24985 ext/sqlite3/libsqlite/sqlite3.c   if( elem-&gt;prev ){</span>
+<span class='curline'><a href='../S/1067.html#L24986'>prev</a>             24986 ext/sqlite3/libsqlite/sqlite3.c     elem-&gt;prev-&gt;next = elem-&gt;next; </span>
+<span class='curline'><a href='../S/1067.html#L24991'>prev</a>             24991 ext/sqlite3/libsqlite/sqlite3.c     elem-&gt;next-&gt;prev = elem-&gt;prev;</span>
+<span class='curline'><a href='../S/1067.html#L61666'>prev</a>             61666 ext/sqlite3/libsqlite/sqlite3.c   u32 x, prev = 0;</span>
+<span class='curline'><a href='../S/1067.html#L61866'>prev</a>             61866 ext/sqlite3/libsqlite/sqlite3.c     btreeHeapPull(heap,&amp;prev);</span>
+<span class='curline'><a href='../S/1067.html#L61868'>prev</a>             61868 ext/sqlite3/libsqlite/sqlite3.c       if( (prev&amp;0xffff)+1&gt;(x&gt;&gt;16) ){</span>
+<span class='curline'><a href='../S/1067.html#L61873'>prev</a>             61873 ext/sqlite3/libsqlite/sqlite3.c         cnt += (x&gt;&gt;16) - (prev&amp;0xffff) - 1;</span>
+<span class='curline'><a href='../S/1067.html#L61874'>prev</a>             61874 ext/sqlite3/libsqlite/sqlite3.c         prev = x;</span>
+<span class='curline'><a href='../S/1067.html#L61877'>prev</a>             61877 ext/sqlite3/libsqlite/sqlite3.c     cnt += usableSize - (prev&amp;0xffff) - 1;</span>
+<span class='curline'><a href='../S/1067.html#L132653'>prev</a>             132653 ext/sqlite3/libsqlite/sqlite3.c   Fts3HashElem *next, *prev; /* Next and previous elements in the table */</span>
+<span class='curline'><a href='../S/1067.html#L140899'>prev</a>             140899 ext/sqlite3/libsqlite/sqlite3.c     pNew-&gt;prev = pHead-&gt;prev;</span>
+<span class='curline'><a href='../S/1067.html#L140900'>prev</a>             140900 ext/sqlite3/libsqlite/sqlite3.c     if( pHead-&gt;prev ){ pHead-&gt;prev-&gt;next = pNew; }</span>
+<span class='curline'><a href='../S/1067.html#L140902'>prev</a>             140902 ext/sqlite3/libsqlite/sqlite3.c     pHead-&gt;prev = pNew;</span>
+<span class='curline'><a href='../S/1067.html#L140905'>prev</a>             140905 ext/sqlite3/libsqlite/sqlite3.c     if( pH-&gt;first ){ pH-&gt;first-&gt;prev = pNew; }</span>
+<span class='curline'><a href='../S/1067.html#L140906'>prev</a>             140906 ext/sqlite3/libsqlite/sqlite3.c     pNew-&gt;prev = 0;</span>
+<span class='curline'><a href='../S/1067.html#L140978'>prev</a>             140978 ext/sqlite3/libsqlite/sqlite3.c   if( elem-&gt;prev ){</span>
+<span class='curline'><a href='../S/1067.html#L140979'>prev</a>             140979 ext/sqlite3/libsqlite/sqlite3.c     elem-&gt;prev-&gt;next = elem-&gt;next; </span>
+<span class='curline'><a href='../S/1067.html#L140984'>prev</a>             140984 ext/sqlite3/libsqlite/sqlite3.c     elem-&gt;next-&gt;prev = elem-&gt;prev;</span>
+<span class='curline'><a href='../S/1067.html#L147466'>prev</a>             147466 ext/sqlite3/libsqlite/sqlite3.c   Blob prev = {0, 0, 0};          /* Previous term written to new node */</span>
+<span class='curline'><a href='../S/1067.html#L147487'>prev</a>             147487 ext/sqlite3/libsqlite/sqlite3.c         pNew, &amp;prev, reader.term.a, reader.term.n,</span>
+<span class='curline'><a href='../S/1067.html#L147499'>prev</a>             147499 ext/sqlite3/libsqlite/sqlite3.c   sqlite3_free(prev.a);</span>
+<span class='curline'><a href='../S/1073.html#L840'>prev</a>              840 ext/standard/array.c PHP_FUNCTION(prev)</span>
+<span class='curline'><a href='../S/1077.html#L3276'>prev</a>             3276 ext/standard/basic_functions.c 	PHP_FE(prev,															arginfo_prev)</span>
+<span class='curline'><a href='../S/1145.html#L45'>prev</a>               45 ext/standard/php_array.h PHP_FUNCTION(prev);</span>
+<span class='curline'><a href='../S/1221.html#L27'>prev</a>               27 ext/xml/compat.c 	void *prev;</span>
+<span class='curline'><a href='../S/1231.html#L299'>prev</a>              299 ext/xmlrpc/libxmlrpc/queue.c       q-&gt;head-&gt;prev = NULL;</span>
+<span class='curline'><a href='../S/1231.html#L307'>prev</a>              307 ext/xmlrpc/libxmlrpc/queue.c          n-&gt;prev = q-&gt;head;</span>
+<span class='curline'><a href='../S/1231.html#L352'>prev</a>              352 ext/xmlrpc/libxmlrpc/queue.c          q-&gt;tail-&gt;prev = NULL;</span>
+<span class='curline'><a href='../S/1231.html#L356'>prev</a>              356 ext/xmlrpc/libxmlrpc/queue.c          q-&gt;tail-&gt;prev = (datanode *)p;</span>
+<span class='curline'><a href='../S/1231.html#L408'>prev</a>              408 ext/xmlrpc/libxmlrpc/queue.c       q-&gt;head-&gt;prev = NULL;</span>
+<span class='curline'><a href='../S/1231.html#L442'>prev</a>              442 ext/xmlrpc/libxmlrpc/queue.c    p = q-&gt;tail-&gt;prev;</span>
+<span class='curline'><a href='../S/1231.html#L512'>prev</a>              512 ext/xmlrpc/libxmlrpc/queue.c    if(q-&gt;cursor-&gt;prev == NULL)</span>
+<span class='curline'><a href='../S/1231.html#L515'>prev</a>              515 ext/xmlrpc/libxmlrpc/queue.c    q-&gt;cursor = (node *)q-&gt;cursor-&gt;prev;</span>
+<span class='curline'><a href='../S/1231.html#L539'>prev</a>              539 ext/xmlrpc/libxmlrpc/queue.c    p = ((node*)iter)-&gt;prev;</span>
+<span class='curline'><a href='../S/1231.html#L557'>prev</a>              557 ext/xmlrpc/libxmlrpc/queue.c 	n-&gt;prev = p;</span>
+<span class='curline'><a href='../S/1231.html#L969'>prev</a>              969 ext/xmlrpc/libxmlrpc/queue.c    return qi ? (q_iter)((node*)qi)-&gt;prev : NULL;</span>
+<span class='curline'><a href='../S/1232.html#L31'>prev</a>               31 ext/xmlrpc/libxmlrpc/queue.h    datanode    *prev, *next ;</span>
+<span class='curline'><a href='../S/1232.html#L86'>prev</a>               86 ext/xmlrpc/libxmlrpc/queue.h #define Q_Iter_Prev_F(qi) (qi ? (q_iter)((node*)qi)-&gt;prev : NULL)</span>
+<span class='curline'><a href='../S/1280.html#L47'>prev</a>               47 ext/zip/lib/zip_extra_field.c     struct zip_extra_field *head, *prev, *def;</span>
+<span class='curline'><a href='../S/1280.html#L49'>prev</a>               49 ext/zip/lib/zip_extra_field.c     head = prev = NULL;</span>
+<span class='curline'><a href='../S/1280.html#L60'>prev</a>               60 ext/zip/lib/zip_extra_field.c         if (prev)</span>
+<span class='curline'><a href='../S/1280.html#L61'>prev</a>               61 ext/zip/lib/zip_extra_field.c             prev-&gt;next = def;</span>
+<span class='curline'><a href='../S/1280.html#L62'>prev</a>               62 ext/zip/lib/zip_extra_field.c         prev = def;</span>
+<span class='curline'><a href='../S/1280.html#L74'>prev</a>               74 ext/zip/lib/zip_extra_field.c     struct zip_extra_field *head, *prev;</span>
+<span class='curline'><a href='../S/1280.html#L79'>prev</a>               79 ext/zip/lib/zip_extra_field.c     prev = NULL;</span>
+<span class='curline'><a href='../S/1280.html#L80'>prev</a>               80 ext/zip/lib/zip_extra_field.c     for (; ef; ef=(prev ? prev-&gt;next : head)) {</span>
+<span class='curline'><a href='../S/1280.html#L85'>prev</a>               85 ext/zip/lib/zip_extra_field.c 		    if (prev)</span>
+<span class='curline'><a href='../S/1280.html#L86'>prev</a>               86 ext/zip/lib/zip_extra_field.c 			prev-&gt;next = ef-&gt;next;</span>
+<span class='curline'><a href='../S/1280.html#L101'>prev</a>              101 ext/zip/lib/zip_extra_field.c 	prev = ef;</span>
+<span class='curline'><a href='../S/1280.html#L264'>prev</a>              264 ext/zip/lib/zip_extra_field.c     struct zip_extra_field *prev, *next;</span>
+<span class='curline'><a href='../S/1280.html#L267'>prev</a>              267 ext/zip/lib/zip_extra_field.c     prev = NULL;</span>
+<span class='curline'><a href='../S/1280.html#L276'>prev</a>              276 ext/zip/lib/zip_extra_field.c             if (prev)</span>
+<span class='curline'><a href='../S/1280.html#L277'>prev</a>              277 ext/zip/lib/zip_extra_field.c                 prev-&gt;next = next;</span>
+<span class='curline'><a href='../S/1280.html#L281'>prev</a>              281 ext/zip/lib/zip_extra_field.c             prev = ef;</span>
+<span class='curline'><a href='../S/1397.html#L620'>prev</a>              620 main/SAPI.c    			if (current-&gt;prev) {</span>
+<span class='curline'><a href='../S/1397.html#L621'>prev</a>              621 main/SAPI.c    				current-&gt;prev-&gt;next = next;</span>
+<span class='curline'><a href='../S/1397.html#L626'>prev</a>              626 main/SAPI.c    				next-&gt;prev = current-&gt;prev;</span>
+<span class='curline'><a href='../S/1397.html#L628'>prev</a>              628 main/SAPI.c    				l-&gt;tail = current-&gt;prev;</span>
+<span class='curline'><a href='../S/1404.html#L84'>prev</a>               84 main/streams/filter.c 	bucket-&gt;next = bucket-&gt;prev = NULL;</span>
+<span class='curline'><a href='../S/1404.html#L195'>prev</a>              195 main/streams/filter.c 	bucket-&gt;prev = NULL;</span>
+<span class='curline'><a href='../S/1404.html#L198'>prev</a>              198 main/streams/filter.c 		brigade-&gt;head-&gt;prev = bucket;</span>
+<span class='curline'><a href='../S/1404.html#L212'>prev</a>              212 main/streams/filter.c 	bucket-&gt;prev = brigade-&gt;tail;</span>
+<span class='curline'><a href='../S/1404.html#L226'>prev</a>              226 main/streams/filter.c 	if (bucket-&gt;prev) {</span>
+<span class='curline'><a href='../S/1404.html#L227'>prev</a>              227 main/streams/filter.c 		bucket-&gt;prev-&gt;next = bucket-&gt;next;</span>
+<span class='curline'><a href='../S/1404.html#L232'>prev</a>              232 main/streams/filter.c 		bucket-&gt;next-&gt;prev = bucket-&gt;prev;</span>
+<span class='curline'><a href='../S/1404.html#L234'>prev</a>              234 main/streams/filter.c 		bucket-&gt;brigade-&gt;tail = bucket-&gt;prev;</span>
+<span class='curline'><a href='../S/1404.html#L237'>prev</a>              237 main/streams/filter.c 	bucket-&gt;next = bucket-&gt;prev = NULL;</span>
+<span class='curline'><a href='../S/1404.html#L319'>prev</a>              319 main/streams/filter.c 	filter-&gt;prev = NULL;</span>
+<span class='curline'><a href='../S/1404.html#L322'>prev</a>              322 main/streams/filter.c 		chain-&gt;head-&gt;prev = filter;</span>
+<span class='curline'><a href='../S/1404.html#L341'>prev</a>              341 main/streams/filter.c 	filter-&gt;prev = chain-&gt;tail;</span>
+<span class='curline'><a href='../S/1404.html#L425'>prev</a>              425 main/streams/filter.c 			filter-&gt;prev-&gt;next = NULL;</span>
+<span class='curline'><a href='../S/1404.html#L426'>prev</a>              426 main/streams/filter.c 			chain-&gt;tail = filter-&gt;prev;</span>
+<span class='curline'><a href='../S/1404.html#L515'>prev</a>              515 main/streams/filter.c 	if (filter-&gt;prev) {</span>
+<span class='curline'><a href='../S/1404.html#L516'>prev</a>              516 main/streams/filter.c 		filter-&gt;prev-&gt;next = filter-&gt;next;</span>
+<span class='curline'><a href='../S/1404.html#L521'>prev</a>              521 main/streams/filter.c 		filter-&gt;next-&gt;prev = filter-&gt;prev;</span>
+<span class='curline'><a href='../S/1404.html#L523'>prev</a>              523 main/streams/filter.c 		filter-&gt;chain-&gt;tail = filter-&gt;prev;</span>
+<span class='curline'><a href='../S/1409.html#L45'>prev</a>               45 main/streams/php_stream_filter_api.h 	php_stream_bucket *next, *prev;</span>
+<span class='curline'><a href='../S/1409.html#L112'>prev</a>              112 main/streams/php_stream_filter_api.h 	php_stream_filter *prev;</span>
+<span class='curline'><a href='../S/1431.html#L448'>prev</a>              448 sapi/apache/php_apache.c 		if(r-&gt;prev) r = r-&gt;prev;</span>
+<span class='curline'><a href='../S/1436.html#L238'>prev</a>              238 sapi/apache2filter/php_functions.c 		while(ctx-&gt;f-&gt;r-&gt;prev) {</span>
+<span class='curline'><a href='../S/1436.html#L239'>prev</a>              239 sapi/apache2filter/php_functions.c 			ctx-&gt;f-&gt;r = ctx-&gt;f-&gt;r-&gt;prev;</span>
+<span class='curline'><a href='../S/1436.html#L267'>prev</a>              267 sapi/apache2filter/php_functions.c 		while(ctx-&gt;f-&gt;r-&gt;prev) {</span>
+<span class='curline'><a href='../S/1436.html#L268'>prev</a>              268 sapi/apache2filter/php_functions.c 			ctx-&gt;f-&gt;r = ctx-&gt;f-&gt;r-&gt;prev;</span>
+<span class='curline'><a href='../S/1441.html#L271'>prev</a>              271 sapi/apache2handler/php_functions.c 			while(r-&gt;prev) {</span>
+<span class='curline'><a href='../S/1441.html#L272'>prev</a>              272 sapi/apache2handler/php_functions.c 				r = r-&gt;prev;</span>
+<span class='curline'><a href='../S/1441.html#L307'>prev</a>              307 sapi/apache2handler/php_functions.c 			while(r-&gt;prev) {</span>
+<span class='curline'><a href='../S/1441.html#L308'>prev</a>              308 sapi/apache2handler/php_functions.c 				r = r-&gt;prev;</span>
+<span class='curline'><a href='../S/1445.html#L1821'>prev</a>             1821 sapi/apache_hooks/php_apache.c 		if (r-&gt;prev) {</span>
+<span class='curline'><a href='../S/1445.html#L1822'>prev</a>             1822 sapi/apache_hooks/php_apache.c 			r = r-&gt;prev;</span>
+<span class='curline'><a href='../S/1484.html#L98'>prev</a>               98 sapi/fpm/fpm/fpm_children.c 		child-&gt;next-&gt;prev = child;</span>
+<span class='curline'><a href='../S/1484.html#L100'>prev</a>              100 sapi/fpm/fpm/fpm_children.c 	child-&gt;prev = 0;</span>
+<span class='curline'><a href='../S/1484.html#L110'>prev</a>              110 sapi/fpm/fpm/fpm_children.c 	if (child-&gt;prev) {</span>
+<span class='curline'><a href='../S/1484.html#L111'>prev</a>              111 sapi/fpm/fpm/fpm_children.c 		child-&gt;prev-&gt;next = child-&gt;next;</span>
+<span class='curline'><a href='../S/1484.html#L117'>prev</a>              117 sapi/fpm/fpm/fpm_children.c 		child-&gt;next-&gt;prev = child-&gt;prev;</span>
+<span class='curline'><a href='../S/1485.html#L23'>prev</a>               23 sapi/fpm/fpm/fpm_children.h 	struct fpm_child_s *prev, *next;</span>
+<span class='curline'><a href='../S/1495.html#L159'>prev</a>              159 sapi/fpm/fpm/fpm_events.c 	elt-&gt;prev = NULL;</span>
+<span class='curline'><a href='../S/1495.html#L164'>prev</a>              164 sapi/fpm/fpm/fpm_events.c 		(*queue)-&gt;prev = elt;</span>
+<span class='curline'><a href='../S/1495.html#L187'>prev</a>              187 sapi/fpm/fpm/fpm_events.c 			if (q-&gt;prev) {</span>
+<span class='curline'><a href='../S/1495.html#L188'>prev</a>              188 sapi/fpm/fpm/fpm_events.c 				q-&gt;prev-&gt;next = q-&gt;next;</span>
+<span class='curline'><a href='../S/1495.html#L191'>prev</a>              191 sapi/fpm/fpm/fpm_events.c 				q-&gt;next-&gt;prev = q-&gt;prev;</span>
+<span class='curline'><a href='../S/1495.html#L196'>prev</a>              196 sapi/fpm/fpm/fpm_events.c 					(*queue)-&gt;prev = NULL;</span>
+<span class='curline'><a href='../S/1495.html#L437'>prev</a>              437 sapi/fpm/fpm/fpm_events.c 						if (q-&gt;prev) {</span>
+<span class='curline'><a href='../S/1495.html#L438'>prev</a>              438 sapi/fpm/fpm/fpm_events.c 							q-&gt;prev-&gt;next = q-&gt;next;</span>
+<span class='curline'><a href='../S/1495.html#L441'>prev</a>              441 sapi/fpm/fpm/fpm_events.c 							q-&gt;next-&gt;prev = q-&gt;prev;</span>
+<span class='curline'><a href='../S/1495.html#L446'>prev</a>              446 sapi/fpm/fpm/fpm_events.c 								fpm_event_queue_timer-&gt;prev = NULL;</span>
+<span class='curline'><a href='../S/1496.html#L27'>prev</a>               27 sapi/fpm/fpm/fpm_events.h 	struct fpm_event_queue_s *prev;</span>
+<span class='curline'><a href='../S/1589.html#L631'>prev</a>              631 sapi/thttpd/thttpd.c 	qreq_t *m, *prev = NULL;</span>
+<span class='curline'><a href='../S/1589.html#L637'>prev</a>              637 sapi/thttpd/thttpd.c 			if (prev)</span>
+<span class='curline'><a href='../S/1589.html#L638'>prev</a>              638 sapi/thttpd/thttpd.c 				if (!(prev-&gt;next = m-&gt;next))</span>
+<span class='curline'><a href='../S/1589.html#L639'>prev</a>              639 sapi/thttpd/thttpd.c 					last_qr = prev;</span>
+<span class='curline'><a href='../S/1589.html#L648'>prev</a>              648 sapi/thttpd/thttpd.c 		prev = m;</span>
+</pre>
+</body>
+</html>

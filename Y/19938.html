@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>hdbc</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/825.html#L227'>hdbc</a>              227 ext/odbc/birdstep.c static int birdstep_add_conn(HashTable *list,VConn *conn,HDBC hdbc TSRMLS_DC)</span>
+<span class='curline'><a href='../S/825.html#L232'>hdbc</a>              232 ext/odbc/birdstep.c 	conn-&gt;hdbc = hdbc;</span>
+<span class='curline'><a href='../S/825.html#L292'>hdbc</a>              292 ext/odbc/birdstep.c 	HDBC hdbc;</span>
+<span class='curline'><a href='../S/825.html#L305'>hdbc</a>              305 ext/odbc/birdstep.c 	stat = SQLAllocConnect(henv,&amp;hdbc);</span>
+<span class='curline'><a href='../S/825.html#L310'>hdbc</a>              310 ext/odbc/birdstep.c 	stat = SQLConnect(hdbc, serv, SQL_NTS, user, SQL_NTS, pass, SQL_NTS);</span>
+<span class='curline'><a href='../S/825.html#L313'>hdbc</a>              313 ext/odbc/birdstep.c 		SQLFreeConnect(hdbc);</span>
+<span class='curline'><a href='../S/825.html#L317'>hdbc</a>              317 ext/odbc/birdstep.c 	ind = birdstep_add_conn(list,new,hdbc TSRMLS_CC);</span>
+<span class='curline'><a href='../S/825.html#L336'>hdbc</a>              336 ext/odbc/birdstep.c 	SQLDisconnect(conn-&gt;hdbc);</span>
+<span class='curline'><a href='../S/825.html#L337'>hdbc</a>              337 ext/odbc/birdstep.c 	SQLFreeConnect(conn-&gt;hdbc);</span>
+<span class='curline'><a href='../S/825.html#L364'>hdbc</a>              364 ext/odbc/birdstep.c 	stat = SQLAllocStmt(conn-&gt;hdbc,&amp;res-&gt;hstmt);</span>
+<span class='curline'><a href='../S/825.html#L585'>hdbc</a>              585 ext/odbc/birdstep.c 	stat = SQLSetConnectOption(conn-&gt;hdbc,SQL_AUTOCOMMIT,SQL_AUTOCOMMIT_ON);</span>
+<span class='curline'><a href='../S/825.html#L608'>hdbc</a>              608 ext/odbc/birdstep.c 	stat = SQLSetConnectOption(conn-&gt;hdbc,SQL_AUTOCOMMIT,SQL_AUTOCOMMIT_OFF);</span>
+<span class='curline'><a href='../S/825.html#L631'>hdbc</a>              631 ext/odbc/birdstep.c 	stat = SQLTransact(NULL,conn-&gt;hdbc,SQL_COMMIT);</span>
+<span class='curline'><a href='../S/825.html#L654'>hdbc</a>              654 ext/odbc/birdstep.c 	stat = SQLTransact(NULL,conn-&gt;hdbc,SQL_ROLLBACK);</span>
+<span class='curline'><a href='../S/826.html#L30'>hdbc</a>               30 ext/odbc/php_birdstep.h 	HDBC    hdbc;</span>
+<span class='curline'><a href='../S/827.html#L436'>hdbc</a>              436 ext/odbc/php_odbc.c 			SQLTransact(res-&gt;conn_ptr-&gt;henv, res-&gt;conn_ptr-&gt;hdbc,</span>
+<span class='curline'><a href='../S/827.html#L490'>hdbc</a>              490 ext/odbc/php_odbc.c    	safe_odbc_disconnect(conn-&gt;hdbc);</span>
+<span class='curline'><a href='../S/827.html#L491'>hdbc</a>              491 ext/odbc/php_odbc.c 	SQLFreeConnect(conn-&gt;hdbc);</span>
+<span class='curline'><a href='../S/827.html#L518'>hdbc</a>              518 ext/odbc/php_odbc.c 	safe_odbc_disconnect(conn-&gt;hdbc);</span>
+<span class='curline'><a href='../S/827.html#L519'>hdbc</a>              519 ext/odbc/php_odbc.c 	SQLFreeConnect(conn-&gt;hdbc);</span>
+<span class='curline'><a href='../S/827.html#L884'>hdbc</a>              884 ext/odbc/php_odbc.c 		conn = conn_resource-&gt;hdbc;</span>
+<span class='curline'><a href='../S/827.html#L1053'>hdbc</a>             1053 ext/odbc/php_odbc.c 	rc = SQLTransact(conn-&gt;henv, conn-&gt;hdbc, (SQLUSMALLINT)((type)?SQL_COMMIT:SQL_ROLLBACK));</span>
+<span class='curline'><a href='../S/827.html#L1205'>hdbc</a>             1205 ext/odbc/php_odbc.c 	rc = PHP_ODBC_SQLALLOCSTMT(conn-&gt;hdbc, &amp;(result-&gt;stmt));</span>
+<span class='curline'><a href='../S/827.html#L1221'>hdbc</a>             1221 ext/odbc/php_odbc.c 	rc = SQLGetInfo(conn-&gt;hdbc, SQL_FETCH_DIRECTION, (void *) &amp;scrollopts, sizeof(scrollopts), NULL);</span>
+<span class='curline'><a href='../S/827.html#L1512'>hdbc</a>             1512 ext/odbc/php_odbc.c 	rc = SQLGetInfo(result-&gt;conn_ptr-&gt;hdbc,SQL_MAX_CURSOR_NAME_LEN, (void *)&amp;max_len,sizeof(max_len),&amp;len);</span>
+<span class='curline'><a href='../S/827.html#L1526'>hdbc</a>             1526 ext/odbc/php_odbc.c 			SQLError( result-&gt;conn_ptr-&gt;henv, result-&gt;conn_ptr-&gt;hdbc,</span>
+<span class='curline'><a href='../S/827.html#L1632'>hdbc</a>             1632 ext/odbc/php_odbc.c 	rc = PHP_ODBC_SQLALLOCSTMT(conn-&gt;hdbc, &amp;(result-&gt;stmt));</span>
+<span class='curline'><a href='../S/827.html#L1648'>hdbc</a>             1648 ext/odbc/php_odbc.c 	rc = SQLGetInfo(conn-&gt;hdbc, SQL_FETCH_DIRECTION, (void *) &amp;scrollopts, sizeof(scrollopts), NULL);</span>
+<span class='curline'><a href='../S/827.html#L2418'>hdbc</a>             2418 ext/odbc/php_odbc.c 	SQLAllocConnect((*conn)-&gt;henv, &amp;((*conn)-&gt;hdbc));</span>
+<span class='curline'><a href='../S/827.html#L2421'>hdbc</a>             2421 ext/odbc/php_odbc.c 	SQLSetConnectOption((*conn)-&gt;hdbc, SQL_TRANSLATE_OPTION,</span>
+<span class='curline'><a href='../S/827.html#L2458'>hdbc</a>             2458 ext/odbc/php_odbc.c 		 rc = SQLDriverConnect((*conn)-&gt;hdbc, NULL, lpszConnStr, SQL_NTS, lpszConnStr, CONNSTRSIZE, &amp;cbszConnStr, SQL_DRIVER_NOPROMPT);</span>
+<span class='curline'><a href='../S/827.html#L2468'>hdbc</a>             2468 ext/odbc/php_odbc.c 		rc = SQLDriverConnect((*conn)-&gt;hdbc, NULL, db, SQL_NTS,	dsnbuf, sizeof(dsnbuf) - 1, &amp;dsnbuflen, SQL_DRIVER_NOPROMPT);</span>
+<span class='curline'><a href='../S/827.html#L2472'>hdbc</a>             2472 ext/odbc/php_odbc.c 		rc = SQLSetConnectOption((*conn)-&gt;hdbc, SQL_ODBC_CURSORS, cur_opt);</span>
+<span class='curline'><a href='../S/827.html#L2475'>hdbc</a>             2475 ext/odbc/php_odbc.c 			SQLFreeConnect((*conn)-&gt;hdbc);</span>
+<span class='curline'><a href='../S/827.html#L2504'>hdbc</a>             2504 ext/odbc/php_odbc.c 			rc = SQLDriverConnect((*conn)-&gt;hdbc, NULL, ldb, strlen(ldb), dsnbuf, sizeof(dsnbuf) - 1, &amp;dsnbuflen, SQL_DRIVER_NOPROMPT);</span>
+<span class='curline'><a href='../S/827.html#L2506'>hdbc</a>             2506 ext/odbc/php_odbc.c 			rc = SQLConnect((*conn)-&gt;hdbc, db, SQL_NTS, uid, SQL_NTS, pwd, SQL_NTS);</span>
+<span class='curline'><a href='../S/827.html#L2514'>hdbc</a>             2514 ext/odbc/php_odbc.c 	rc = SQLConnect((*conn)-&gt;hdbc, db, SQL_NTS, uid, SQL_NTS, pwd, SQL_NTS);</span>
+<span class='curline'><a href='../S/827.html#L2520'>hdbc</a>             2520 ext/odbc/php_odbc.c 		SQLFreeConnect((*conn)-&gt;hdbc);</span>
+<span class='curline'><a href='../S/827.html#L2638'>hdbc</a>             2638 ext/odbc/php_odbc.c 				ret = SQLGetInfo(db_conn-&gt;hdbc, </span>
+<span class='curline'><a href='../S/827.html#L2966'>hdbc</a>             2966 ext/odbc/php_odbc.c 		rc = SQLSetConnectOption(conn-&gt;hdbc, SQL_AUTOCOMMIT, (pv_onoff) ? SQL_AUTOCOMMIT_ON : SQL_AUTOCOMMIT_OFF);</span>
+<span class='curline'><a href='../S/827.html#L2975'>hdbc</a>             2975 ext/odbc/php_odbc.c 		rc = SQLGetConnectOption(conn-&gt;hdbc, SQL_AUTOCOMMIT, (PTR)&amp;status);</span>
+<span class='curline'><a href='../S/827.html#L3083'>hdbc</a>             3083 ext/odbc/php_odbc.c 			rc = SQLSetConnectOption(conn-&gt;hdbc, (unsigned short) pv_opt, pv_val);</span>
+<span class='curline'><a href='../S/827.html#L3133'>hdbc</a>             3133 ext/odbc/php_odbc.c 	rc = PHP_ODBC_SQLALLOCSTMT(conn-&gt;hdbc, &amp;(result-&gt;stmt));</span>
+<span class='curline'><a href='../S/827.html#L3200'>hdbc</a>             3200 ext/odbc/php_odbc.c 	rc = PHP_ODBC_SQLALLOCSTMT(conn-&gt;hdbc, &amp;(result-&gt;stmt));</span>
+<span class='curline'><a href='../S/827.html#L3270'>hdbc</a>             3270 ext/odbc/php_odbc.c 	rc = PHP_ODBC_SQLALLOCSTMT(conn-&gt;hdbc, &amp;(result-&gt;stmt));</span>
+<span class='curline'><a href='../S/827.html#L3346'>hdbc</a>             3346 ext/odbc/php_odbc.c 	rc = PHP_ODBC_SQLALLOCSTMT(conn-&gt;hdbc, &amp;(result-&gt;stmt));</span>
+<span class='curline'><a href='../S/827.html#L3412'>hdbc</a>             3412 ext/odbc/php_odbc.c 	rc = PHP_ODBC_SQLALLOCSTMT(conn-&gt;hdbc, &amp;(result-&gt;stmt));</span>
+<span class='curline'><a href='../S/827.html#L3469'>hdbc</a>             3469 ext/odbc/php_odbc.c 	rc = PHP_ODBC_SQLALLOCSTMT(conn-&gt;hdbc, &amp;(result-&gt;stmt));</span>
+<span class='curline'><a href='../S/827.html#L3535'>hdbc</a>             3535 ext/odbc/php_odbc.c 	rc = PHP_ODBC_SQLALLOCSTMT(conn-&gt;hdbc, &amp;(result-&gt;stmt));</span>
+<span class='curline'><a href='../S/827.html#L3602'>hdbc</a>             3602 ext/odbc/php_odbc.c 	rc = PHP_ODBC_SQLALLOCSTMT(conn-&gt;hdbc, &amp;(result-&gt;stmt));</span>
+<span class='curline'><a href='../S/827.html#L3670'>hdbc</a>             3670 ext/odbc/php_odbc.c 	rc = PHP_ODBC_SQLALLOCSTMT(conn-&gt;hdbc, &amp;(result-&gt;stmt));</span>
+<span class='curline'><a href='../S/827.html#L3739'>hdbc</a>             3739 ext/odbc/php_odbc.c 	rc = PHP_ODBC_SQLALLOCSTMT(conn-&gt;hdbc, &amp;(result-&gt;stmt));</span>
+<span class='curline'><a href='../S/827.html#L3802'>hdbc</a>             3802 ext/odbc/php_odbc.c 	rc = PHP_ODBC_SQLALLOCSTMT(conn-&gt;hdbc, &amp;(result-&gt;stmt));</span>
+<span class='curline'><a href='../S/829.html#L222'>hdbc</a>              222 ext/odbc/php_odbc_includes.h     ODBC_SQL_CONN_T hdbc;</span>
+<span class='curline'><a href='../S/829.html#L294'>hdbc</a>              294 ext/odbc/php_odbc_includes.h #define PHP_ODBC_SQLALLOCSTMT(hdbc, phstmt) SQLAllocHandle(SQL_HANDLE_STMT, hdbc, phstmt)</span>
+</pre>
+</body>
+</html>

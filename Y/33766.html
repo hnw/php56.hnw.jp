@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>prompt_spec</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/992.html#L144'>prompt_spec</a>       144 ext/readline/readline_cli.c 	char *prompt_spec = CLIR_G(prompt) ? CLIR_G(prompt) : DEFAULT_PROMPT;</span>
+<span class='curline'><a href='../S/992.html#L147'>prompt_spec</a>       147 ext/readline/readline_cli.c 		if (*prompt_spec == '\\') {</span>
+<span class='curline'><a href='../S/992.html#L148'>prompt_spec</a>       148 ext/readline/readline_cli.c 			switch (prompt_spec[1]) {</span>
+<span class='curline'><a href='../S/992.html#L151'>prompt_spec</a>       151 ext/readline/readline_cli.c 				prompt_spec++;</span>
+<span class='curline'><a href='../S/992.html#L155'>prompt_spec</a>       155 ext/readline/readline_cli.c 				prompt_spec++;</span>
+<span class='curline'><a href='../S/992.html#L159'>prompt_spec</a>       159 ext/readline/readline_cli.c 				prompt_spec++;</span>
+<span class='curline'><a href='../S/992.html#L163'>prompt_spec</a>       163 ext/readline/readline_cli.c 				prompt_spec++;</span>
+<span class='curline'><a href='../S/992.html#L169'>prompt_spec</a>       169 ext/readline/readline_cli.c 				prompt_spec++;</span>
+<span class='curline'><a href='../S/992.html#L173'>prompt_spec</a>       173 ext/readline/readline_cli.c 				prompt_spec++;</span>
+<span class='curline'><a href='../S/992.html#L177'>prompt_spec</a>       177 ext/readline/readline_cli.c 				prompt_spec++;</span>
+<span class='curline'><a href='../S/992.html#L181'>prompt_spec</a>       181 ext/readline/readline_cli.c 				prompt_spec++;</span>
+<span class='curline'><a href='../S/992.html#L187'>prompt_spec</a>       187 ext/readline/readline_cli.c 		} else if (*prompt_spec == '`') {</span>
+<span class='curline'><a href='../S/992.html#L188'>prompt_spec</a>       188 ext/readline/readline_cli.c 			char *prompt_end = strstr(prompt_spec + 1, "`");</span>
+<span class='curline'><a href='../S/992.html#L192'>prompt_spec</a>       192 ext/readline/readline_cli.c 				code = estrndup(prompt_spec + 1, prompt_end - prompt_spec - 1);</span>
+<span class='curline'><a href='../S/992.html#L196'>prompt_spec</a>       196 ext/readline/readline_cli.c 					zend_eval_stringl(code, prompt_end - prompt_spec - 1, NULL, "php prompt code" TSRMLS_CC);</span>
+<span class='curline'><a href='../S/992.html#L200'>prompt_spec</a>       200 ext/readline/readline_cli.c 				prompt_spec = prompt_end;</span>
+<span class='curline'><a href='../S/992.html#L203'>prompt_spec</a>       203 ext/readline/readline_cli.c 			smart_str_appendc(&amp;retval, *prompt_spec);</span>
+<span class='curline'><a href='../S/992.html#L205'>prompt_spec</a>       205 ext/readline/readline_cli.c 	} while (++prompt_spec &amp;&amp; *prompt_spec);</span>
+</pre>
+</body>
+</html>

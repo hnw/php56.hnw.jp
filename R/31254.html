@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>zval_gc_info</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/1676.html#L246'>zval_gc_info</a>      246 Zend/zend_gc.c 	gc_root_buffer* root_buffer = GC_ADDRESS(((zval_gc_info*)zv)-&gt;u.buffered);</span>
+<span class='curline'><a href='../S/1676.html#L254'>zval_gc_info</a>      254 Zend/zend_gc.c 		if (GC_G(next_to_free) == (zval_gc_info*)zv) {</span>
+<span class='curline'><a href='../S/1676.html#L255'>zval_gc_info</a>      255 Zend/zend_gc.c 			GC_G(next_to_free) = ((zval_gc_info*)zv)-&gt;u.next;</span>
+<span class='curline'><a href='../S/1676.html#L261'>zval_gc_info</a>      261 Zend/zend_gc.c 	((zval_gc_info*)zv)-&gt;u.buffered = NULL;</span>
+<span class='curline'><a href='../S/1676.html#L633'>zval_gc_info</a>      633 Zend/zend_gc.c 	if (((zval_gc_info*)(pz))-&gt;u.buffered == (gc_root_buffer*)GC_WHITE) {</span>
+<span class='curline'><a href='../S/1676.html#L654'>zval_gc_info</a>      654 Zend/zend_gc.c 						((zval_gc_info*)pz)-&gt;u.next = GC_G(zval_to_free);</span>
+<span class='curline'><a href='../S/1676.html#L655'>zval_gc_info</a>      655 Zend/zend_gc.c 						GC_G(zval_to_free) = (zval_gc_info*)pz;</span>
+<span class='curline'><a href='../S/1676.html#L687'>zval_gc_info</a>      687 Zend/zend_gc.c 		((zval_gc_info*)pz)-&gt;u.next = GC_G(zval_to_free);</span>
+<span class='curline'><a href='../S/1676.html#L688'>zval_gc_info</a>      688 Zend/zend_gc.c 		GC_G(zval_to_free) = (zval_gc_info*)pz;</span>
+<span class='curline'><a href='../S/1676.html#L775'>zval_gc_info</a>      775 Zend/zend_gc.c #define FREE_LIST_END ((zval_gc_info*)(~(zend_uintptr_t)GC_COLOR))</span>
+<span class='curline'><a href='../S/1676.html#L782'>zval_gc_info</a>      782 Zend/zend_gc.c 		zval_gc_info *p, *q, *orig_free_list, *orig_next_to_free;</span>
+<span class='curline'><a href='../S/1677.html#L64'>zval_gc_info</a>       64 Zend/zend_gc.h 	((zval_gc_info*)(z))-&gt;u.buffered = NULL</span>
+<span class='curline'><a href='../S/1677.html#L66'>zval_gc_info</a>       66 Zend/zend_gc.h 	GC_ADDRESS(((zval_gc_info*)(v))-&gt;u.buffered)</span>
+<span class='curline'><a href='../S/1677.html#L68'>zval_gc_info</a>       68 Zend/zend_gc.h 	GC_SET_ADDRESS(((zval_gc_info*)(v))-&gt;u.buffered, (a))</span>
+<span class='curline'><a href='../S/1677.html#L70'>zval_gc_info</a>       70 Zend/zend_gc.h 	GC_GET_COLOR(((zval_gc_info*)(v))-&gt;u.buffered)</span>
+<span class='curline'><a href='../S/1677.html#L72'>zval_gc_info</a>       72 Zend/zend_gc.h 	GC_SET_COLOR(((zval_gc_info*)(v))-&gt;u.buffered, (c))</span>
+<span class='curline'><a href='../S/1677.html#L74'>zval_gc_info</a>       74 Zend/zend_gc.h 	GC_SET_BLACK(((zval_gc_info*)(v))-&gt;u.buffered)</span>
+<span class='curline'><a href='../S/1677.html#L76'>zval_gc_info</a>       76 Zend/zend_gc.h 	GC_SET_PURPLE(((zval_gc_info*)(v))-&gt;u.buffered)</span>
+<span class='curline'><a href='../S/1677.html#L109'>zval_gc_info</a>      109 Zend/zend_gc.h 	zval_gc_info     *zval_to_free;		/* temporary list of zvals to free */</span>
+<span class='curline'><a href='../S/1677.html#L110'>zval_gc_info</a>      110 Zend/zend_gc.h 	zval_gc_info     *free_list;</span>
+<span class='curline'><a href='../S/1677.html#L111'>zval_gc_info</a>      111 Zend/zend_gc.h 	zval_gc_info     *next_to_free;</span>
+<span class='curline'><a href='../S/1677.html#L159'>zval_gc_info</a>      159 Zend/zend_gc.h 	if (GC_ADDRESS(((zval_gc_info*)z)-&gt;u.buffered)) {	\</span>
+<span class='curline'><a href='../S/1677.html#L198'>zval_gc_info</a>      198 Zend/zend_gc.h 		(z) = (zval*)malloc(sizeof(zval_gc_info));		\</span>
+<span class='curline'><a href='../S/1677.html#L206'>zval_gc_info</a>      206 Zend/zend_gc.h 		(z) = (zval*)emalloc(sizeof(zval_gc_info));		\</span>
+<span class='curline'><a href='../S/1677.html#L220'>zval_gc_info</a>      220 Zend/zend_gc.h 		(z) = (zval*)emalloc_rel(sizeof(zval_gc_info));	\</span>
+</pre>
+</body>
+</html>

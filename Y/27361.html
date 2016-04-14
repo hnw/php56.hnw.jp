@@ -1,0 +1,547 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>mysql</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/758.html#L112'>mysql</a>             112 ext/mysql/php_mysql.c #define PHP_MYSQL_VALID_RESULT(mysql)		\</span>
+<span class='curline'><a href='../S/758.html#L113'>mysql</a>             113 ext/mysql/php_mysql.c 	(mysql_num_fields(mysql)&gt;0)</span>
+<span class='curline'><a href='../S/758.html#L115'>mysql</a>             115 ext/mysql/php_mysql.c #define PHP_MYSQL_VALID_RESULT(mysql)		\</span>
+<span class='curline'><a href='../S/758.html#L116'>mysql</a>             116 ext/mysql/php_mysql.c 	(mysql_field_count(mysql)&gt;0)</span>
+<span class='curline'><a href='../S/758.html#L119'>mysql</a>             119 ext/mysql/php_mysql.c ZEND_DECLARE_MODULE_GLOBALS(mysql)</span>
+<span class='curline'><a href='../S/758.html#L120'>mysql</a>             120 ext/mysql/php_mysql.c static PHP_GINIT_FUNCTION(mysql);</span>
+<span class='curline'><a href='../S/758.html#L130'>mysql</a>             130 ext/mysql/php_mysql.c #define MYSQL_DISABLE_MQ if (mysql-&gt;multi_query) { \</span>
+<span class='curline'><a href='../S/758.html#L131'>mysql</a>             131 ext/mysql/php_mysql.c 	mysql_set_server_option(mysql-&gt;conn, MYSQL_OPTION_MULTI_STATEMENTS_OFF); \</span>
+<span class='curline'><a href='../S/758.html#L132'>mysql</a>             132 ext/mysql/php_mysql.c 	mysql-&gt;multi_query = 0; \</span>
+<span class='curline'><a href='../S/758.html#L300'>mysql</a>             300 ext/mysql/php_mysql.c 	PHP_DEP_FALIAS(mysql,				mysql_db_query,		arginfo_mysql_db_query)</span>
+<span class='curline'><a href='../S/758.html#L346'>mysql</a>             346 ext/mysql/php_mysql.c 	ZEND_MODULE_STARTUP_N(mysql),</span>
+<span class='curline'><a href='../S/758.html#L347'>mysql</a>             347 ext/mysql/php_mysql.c 	PHP_MSHUTDOWN(mysql),</span>
+<span class='curline'><a href='../S/758.html#L348'>mysql</a>             348 ext/mysql/php_mysql.c 	PHP_RINIT(mysql),</span>
+<span class='curline'><a href='../S/758.html#L349'>mysql</a>             349 ext/mysql/php_mysql.c 	PHP_RSHUTDOWN(mysql),</span>
+<span class='curline'><a href='../S/758.html#L350'>mysql</a>             350 ext/mysql/php_mysql.c 	PHP_MINFO(mysql),</span>
+<span class='curline'><a href='../S/758.html#L352'>mysql</a>             352 ext/mysql/php_mysql.c 	PHP_MODULE_GLOBALS(mysql),</span>
+<span class='curline'><a href='../S/758.html#L353'>mysql</a>             353 ext/mysql/php_mysql.c 	PHP_GINIT(mysql),</span>
+<span class='curline'><a href='../S/758.html#L361'>mysql</a>             361 ext/mysql/php_mysql.c ZEND_GET_MODULE(mysql)</span>
+<span class='curline'><a href='../S/758.html#L371'>mysql</a>             371 ext/mysql/php_mysql.c 	if (mysql-&gt;active_result_id) { \</span>
+<span class='curline'><a href='../S/758.html#L376'>mysql</a>             376 ext/mysql/php_mysql.c 			_mysql_result = (MYSQL_RES *) zend_list_find(mysql-&gt;active_result_id, &amp;type);	\</span>
+<span class='curline'><a href='../S/758.html#L381'>mysql</a>             381 ext/mysql/php_mysql.c 				zend_list_delete(mysql-&gt;active_result_id);	\</span>
+<span class='curline'><a href='../S/758.html#L382'>mysql</a>             382 ext/mysql/php_mysql.c 				mysql-&gt;active_result_id = 0;			\</span>
+<span class='curline'><a href='../S/758.html#L390'>mysql</a>             390 ext/mysql/php_mysql.c 	if (mysql-&gt;active_result_id) {			\</span>
+<span class='curline'><a href='../S/758.html#L395'>mysql</a>             395 ext/mysql/php_mysql.c 			mysql_result = (MYSQL_RES *) zend_list_find(mysql-&gt;active_result_id, &amp;type);	\</span>
+<span class='curline'><a href='../S/758.html#L401'>mysql</a>             401 ext/mysql/php_mysql.c 				zend_list_delete(mysql-&gt;active_result_id);	\</span>
+<span class='curline'><a href='../S/758.html#L402'>mysql</a>             402 ext/mysql/php_mysql.c 				mysql-&gt;active_result_id = 0;			\</span>
+<span class='curline'><a href='../S/758.html#L436'>mysql</a>             436 ext/mysql/php_mysql.c static int php_mysql_select_db(php_mysql_conn *mysql, char *db TSRMLS_DC)</span>
+<span class='curline'><a href='../S/758.html#L440'>mysql</a>             440 ext/mysql/php_mysql.c 	if (mysql_select_db(mysql-&gt;conn, db) != 0) {</span>
+<span class='curline'><a href='../S/758.html#L516'>mysql</a>             516 ext/mysql/php_mysql.c static PHP_GINIT_FUNCTION(mysql)</span>
+<span class='curline'><a href='../S/758.html#L536'>mysql</a>             536 ext/mysql/php_mysql.c 	php_mysql_conn *mysql;</span>
+<span class='curline'><a href='../S/758.html#L543'>mysql</a>             543 ext/mysql/php_mysql.c 	mysql = (php_mysql_conn *)zend_fetch_resource(&amp;zv TSRMLS_CC, -1, "MySQL-Link", NULL, 2, le_link, le_plink);</span>
+<span class='curline'><a href='../S/758.html#L545'>mysql</a>             545 ext/mysql/php_mysql.c 	if (!mysql) {</span>
+<span class='curline'><a href='../S/758.html#L549'>mysql</a>             549 ext/mysql/php_mysql.c 	return mysql-&gt;conn;</span>
+<span class='curline'><a href='../S/758.html#L560'>mysql</a>             560 ext/mysql/php_mysql.c ZEND_MODULE_STARTUP_D(mysql)</span>
+<span class='curline'><a href='../S/758.html#L596'>mysql</a>             596 ext/mysql/php_mysql.c PHP_MSHUTDOWN_FUNCTION(mysql)</span>
+<span class='curline'><a href='../S/758.html#L622'>mysql</a>             622 ext/mysql/php_mysql.c PHP_RINIT_FUNCTION(mysql)</span>
+<span class='curline'><a href='../S/758.html#L654'>mysql</a>             654 ext/mysql/php_mysql.c PHP_RSHUTDOWN_FUNCTION(mysql)</span>
+<span class='curline'><a href='../S/758.html#L680'>mysql</a>             680 ext/mysql/php_mysql.c PHP_MINFO_FUNCTION(mysql)</span>
+<span class='curline'><a href='../S/758.html#L727'>mysql</a>             727 ext/mysql/php_mysql.c 	php_mysql_conn *mysql=NULL;</span>
+<span class='curline'><a href='../S/758.html#L868'>mysql</a>             868 ext/mysql/php_mysql.c 			mysql = (php_mysql_conn *) malloc(sizeof(php_mysql_conn));</span>
+<span class='curline'><a href='../S/758.html#L869'>mysql</a>             869 ext/mysql/php_mysql.c 			if (!mysql) {</span>
+<span class='curline'><a href='../S/758.html#L872'>mysql</a>             872 ext/mysql/php_mysql.c 			mysql-&gt;active_result_id = 0;</span>
+<span class='curline'><a href='../S/758.html#L874'>mysql</a>             874 ext/mysql/php_mysql.c 			mysql-&gt;multi_query = client_flags &amp; CLIENT_MULTI_STATEMENTS? 1:0;</span>
+<span class='curline'><a href='../S/758.html#L876'>mysql</a>             876 ext/mysql/php_mysql.c 			mysql-&gt;multi_query = 0;</span>
+<span class='curline'><a href='../S/758.html#L880'>mysql</a>             880 ext/mysql/php_mysql.c 			mysql-&gt;conn = mysql_init(NULL);</span>
+<span class='curline'><a href='../S/758.html#L882'>mysql</a>             882 ext/mysql/php_mysql.c 			mysql-&gt;conn = mysqlnd_init(MYSQLND_CLIENT_KNOWS_RSET_COPY_DATA, persistent);</span>
+<span class='curline'><a href='../S/758.html#L886'>mysql</a>             886 ext/mysql/php_mysql.c 				mysql_options(mysql-&gt;conn, MYSQL_OPT_CONNECT_TIMEOUT, (const char *)&amp;connect_timeout);</span>
+<span class='curline'><a href='../S/758.html#L889'>mysql</a>             889 ext/mysql/php_mysql.c 			if (mysql_real_connect(mysql-&gt;conn, host, user, passwd, NULL, port, socket, client_flags)==NULL)</span>
+<span class='curline'><a href='../S/758.html#L891'>mysql</a>             891 ext/mysql/php_mysql.c 			if (mysqlnd_connect(mysql-&gt;conn, host, user, passwd, passwd_len, NULL, 0, port, socket, client_flags, MYSQLND_CLIENT_KNOWS_RSET_COPY_DATA TSRMLS_CC) == NULL)</span>
+<span class='curline'><a href='../S/758.html#L898'>mysql</a>             898 ext/mysql/php_mysql.c 				MySG(connect_error) = estrdup(mysql_error(mysql-&gt;conn));</span>
+<span class='curline'><a href='../S/758.html#L901'>mysql</a>             901 ext/mysql/php_mysql.c 				MySG(connect_errno) = mysql_errno(mysql-&gt;conn);</span>
+<span class='curline'><a href='../S/758.html#L903'>mysql</a>             903 ext/mysql/php_mysql.c 				free(mysql);</span>
+<span class='curline'><a href='../S/758.html#L907'>mysql</a>             907 ext/mysql/php_mysql.c 			mysql_options(mysql-&gt;conn, MYSQL_OPT_LOCAL_INFILE, (char *)&amp;MySG(allow_local_infile));</span>
+<span class='curline'><a href='../S/758.html#L911'>mysql</a>             911 ext/mysql/php_mysql.c 			new_le.ptr = mysql;</span>
+<span class='curline'><a href='../S/758.html#L913'>mysql</a>             913 ext/mysql/php_mysql.c 				free(mysql);</span>
+<span class='curline'><a href='../S/758.html#L923'>mysql</a>             923 ext/mysql/php_mysql.c 			mysql = (php_mysql_conn *) le-&gt;ptr;</span>
+<span class='curline'><a href='../S/758.html#L924'>mysql</a>             924 ext/mysql/php_mysql.c 			mysql-&gt;active_result_id = 0;</span>
+<span class='curline'><a href='../S/758.html#L926'>mysql</a>             926 ext/mysql/php_mysql.c 			mysql-&gt;multi_query = client_flags &amp; CLIENT_MULTI_STATEMENTS? 1:0;</span>
+<span class='curline'><a href='../S/758.html#L928'>mysql</a>             928 ext/mysql/php_mysql.c 			mysql-&gt;multi_query = 0;</span>
+<span class='curline'><a href='../S/758.html#L932'>mysql</a>             932 ext/mysql/php_mysql.c 			mysqlnd_end_psession(mysql-&gt;conn);</span>
+<span class='curline'><a href='../S/758.html#L934'>mysql</a>             934 ext/mysql/php_mysql.c 			if (mysql_ping(mysql-&gt;conn)) {</span>
+<span class='curline'><a href='../S/758.html#L935'>mysql</a>             935 ext/mysql/php_mysql.c 				if (mysql_errno(mysql-&gt;conn) == 2006) {</span>
+<span class='curline'><a href='../S/758.html#L937'>mysql</a>             937 ext/mysql/php_mysql.c 					if (mysql_real_connect(mysql-&gt;conn, host, user, passwd, NULL, port, socket, client_flags)==NULL)</span>
+<span class='curline'><a href='../S/758.html#L939'>mysql</a>             939 ext/mysql/php_mysql.c 					if (mysqlnd_connect(mysql-&gt;conn, host, user, passwd, passwd_len, NULL, 0, port, socket, client_flags, MYSQLND_CLIENT_KNOWS_RSET_COPY_DATA TSRMLS_CC) == NULL)</span>
+<span class='curline'><a href='../S/758.html#L947'>mysql</a>             947 ext/mysql/php_mysql.c 					mysql_options(mysql-&gt;conn, MYSQL_OPT_LOCAL_INFILE, (char *)&amp;MySG(allow_local_infile));</span>
+<span class='curline'><a href='../S/758.html#L951'>mysql</a>             951 ext/mysql/php_mysql.c 				mysqlnd_restart_psession(mysql-&gt;conn);</span>
+<span class='curline'><a href='../S/758.html#L955'>mysql</a>             955 ext/mysql/php_mysql.c 		ZEND_REGISTER_RESOURCE(return_value, mysql, le_plink);</span>
+<span class='curline'><a href='../S/758.html#L992'>mysql</a>             992 ext/mysql/php_mysql.c 		mysql = (php_mysql_conn *) emalloc(sizeof(php_mysql_conn));</span>
+<span class='curline'><a href='../S/758.html#L993'>mysql</a>             993 ext/mysql/php_mysql.c 		mysql-&gt;active_result_id = 0;</span>
+<span class='curline'><a href='../S/758.html#L995'>mysql</a>             995 ext/mysql/php_mysql.c 		mysql-&gt;multi_query = 1;</span>
+<span class='curline'><a href='../S/758.html#L999'>mysql</a>             999 ext/mysql/php_mysql.c 		mysql-&gt;conn = mysql_init(NULL);</span>
+<span class='curline'><a href='../S/758.html#L1001'>mysql</a>            1001 ext/mysql/php_mysql.c 		mysql-&gt;conn = mysqlnd_init(MYSQLND_CLIENT_KNOWS_RSET_COPY_DATA, persistent);</span>
+<span class='curline'><a href='../S/758.html#L1003'>mysql</a>            1003 ext/mysql/php_mysql.c 		if (!mysql-&gt;conn) {</span>
+<span class='curline'><a href='../S/758.html#L1007'>mysql</a>            1007 ext/mysql/php_mysql.c 			efree(mysql);</span>
+<span class='curline'><a href='../S/758.html#L1012'>mysql</a>            1012 ext/mysql/php_mysql.c 			mysql_options(mysql-&gt;conn, MYSQL_OPT_CONNECT_TIMEOUT, (const char *)&amp;connect_timeout);</span>
+<span class='curline'><a href='../S/758.html#L1016'>mysql</a>            1016 ext/mysql/php_mysql.c 		if (mysql_real_connect(mysql-&gt;conn, host, user, passwd, NULL, port, socket, client_flags)==NULL)</span>
+<span class='curline'><a href='../S/758.html#L1018'>mysql</a>            1018 ext/mysql/php_mysql.c 		if (mysqlnd_connect(mysql-&gt;conn, host, user, passwd, passwd_len, NULL, 0, port, socket, client_flags, MYSQLND_CLIENT_KNOWS_RSET_COPY_DATA TSRMLS_CC) == NULL)</span>
+<span class='curline'><a href='../S/758.html#L1025'>mysql</a>            1025 ext/mysql/php_mysql.c 			MySG(connect_error) = estrdup(mysql_error(mysql-&gt;conn));</span>
+<span class='curline'><a href='../S/758.html#L1028'>mysql</a>            1028 ext/mysql/php_mysql.c 			MySG(connect_errno) = mysql_errno(mysql-&gt;conn);</span>
+<span class='curline'><a href='../S/758.html#L1032'>mysql</a>            1032 ext/mysql/php_mysql.c 			mysqlnd_close(mysql-&gt;conn, MYSQLND_CLOSE_DISCONNECTED);</span>
+<span class='curline'><a href='../S/758.html#L1035'>mysql</a>            1035 ext/mysql/php_mysql.c 			efree(mysql);</span>
+<span class='curline'><a href='../S/758.html#L1038'>mysql</a>            1038 ext/mysql/php_mysql.c 		mysql_options(mysql-&gt;conn, MYSQL_OPT_LOCAL_INFILE, (char *)&amp;MySG(allow_local_infile));</span>
+<span class='curline'><a href='../S/758.html#L1041'>mysql</a>            1041 ext/mysql/php_mysql.c 		ZEND_REGISTER_RESOURCE(return_value, mysql, le_link);</span>
+<span class='curline'><a href='../S/758.html#L1093'>mysql</a>            1093 ext/mysql/php_mysql.c 	php_mysql_conn *mysql;</span>
+<span class='curline'><a href='../S/758.html#L1100'>mysql</a>            1100 ext/mysql/php_mysql.c 		ZEND_FETCH_RESOURCE2(mysql, php_mysql_conn *, &amp;mysql_link, -1, "MySQL-Link", le_link, le_plink);</span>
+<span class='curline'><a href='../S/758.html#L1102'>mysql</a>            1102 ext/mysql/php_mysql.c 		ZEND_FETCH_RESOURCE2(mysql, php_mysql_conn *, NULL, MySG(default_link), "MySQL-Link", le_link, le_plink);</span>
+<span class='curline'><a href='../S/758.html#L1110'>mysql</a>            1110 ext/mysql/php_mysql.c 		if ((mysql = zend_list_find(resource_id, &amp;tmp)) &amp;&amp; tmp == le_plink) {</span>
+<span class='curline'><a href='../S/758.html#L1111'>mysql</a>            1111 ext/mysql/php_mysql.c 			mysqlnd_end_psession(mysql-&gt;conn);</span>
+<span class='curline'><a href='../S/758.html#L1138'>mysql</a>            1138 ext/mysql/php_mysql.c 	php_mysql_conn *mysql;</span>
+<span class='curline'><a href='../S/758.html#L1149'>mysql</a>            1149 ext/mysql/php_mysql.c 	ZEND_FETCH_RESOURCE2(mysql, php_mysql_conn *, &amp;mysql_link, id, "MySQL-Link", le_link, le_plink);</span>
+<span class='curline'><a href='../S/758.html#L1151'>mysql</a>            1151 ext/mysql/php_mysql.c 	if (php_mysql_select_db(mysql, db TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/758.html#L1179'>mysql</a>            1179 ext/mysql/php_mysql.c 	php_mysql_conn *mysql;</span>
+<span class='curline'><a href='../S/758.html#L1190'>mysql</a>            1190 ext/mysql/php_mysql.c 	ZEND_FETCH_RESOURCE2(mysql, php_mysql_conn *, &amp;mysql_link, id, "MySQL-Link", le_link, le_plink);</span>
+<span class='curline'><a href='../S/758.html#L1192'>mysql</a>            1192 ext/mysql/php_mysql.c 	RETURN_STRING((char *)mysql_get_host_info(mysql-&gt;conn),1);</span>
+<span class='curline'><a href='../S/758.html#L1202'>mysql</a>            1202 ext/mysql/php_mysql.c 	php_mysql_conn *mysql;</span>
+<span class='curline'><a href='../S/758.html#L1213'>mysql</a>            1213 ext/mysql/php_mysql.c 	ZEND_FETCH_RESOURCE2(mysql, php_mysql_conn *, &amp;mysql_link, id, "MySQL-Link", le_link, le_plink);</span>
+<span class='curline'><a href='../S/758.html#L1215'>mysql</a>            1215 ext/mysql/php_mysql.c 	RETURN_LONG(mysql_get_proto_info(mysql-&gt;conn));</span>
+<span class='curline'><a href='../S/758.html#L1225'>mysql</a>            1225 ext/mysql/php_mysql.c 	php_mysql_conn *mysql;</span>
+<span class='curline'><a href='../S/758.html#L1236'>mysql</a>            1236 ext/mysql/php_mysql.c 	ZEND_FETCH_RESOURCE2(mysql, php_mysql_conn *, &amp;mysql_link, id, "MySQL-Link", le_link, le_plink);</span>
+<span class='curline'><a href='../S/758.html#L1238'>mysql</a>            1238 ext/mysql/php_mysql.c 	RETURN_STRING((char *)mysql_get_server_info(mysql-&gt;conn),1);</span>
+<span class='curline'><a href='../S/758.html#L1249'>mysql</a>            1249 ext/mysql/php_mysql.c 	php_mysql_conn *mysql;</span>
+<span class='curline'><a href='../S/758.html#L1260'>mysql</a>            1260 ext/mysql/php_mysql.c 	ZEND_FETCH_RESOURCE2(mysql, php_mysql_conn *, &amp;mysql_link, id, "MySQL-Link", le_link, le_plink);</span>
+<span class='curline'><a href='../S/758.html#L1262'>mysql</a>            1262 ext/mysql/php_mysql.c 	if ((str = (char *)mysql_info(mysql-&gt;conn))) {</span>
+<span class='curline'><a href='../S/758.html#L1276'>mysql</a>            1276 ext/mysql/php_mysql.c 	php_mysql_conn *mysql;</span>
+<span class='curline'><a href='../S/758.html#L1286'>mysql</a>            1286 ext/mysql/php_mysql.c 	ZEND_FETCH_RESOURCE2(mysql, php_mysql_conn *, &amp;mysql_link, id, "MySQL-Link", le_link, le_plink);</span>
+<span class='curline'><a href='../S/758.html#L1288'>mysql</a>            1288 ext/mysql/php_mysql.c 	RETURN_LONG((long) mysql_thread_id(mysql-&gt;conn));</span>
+<span class='curline'><a href='../S/758.html#L1298'>mysql</a>            1298 ext/mysql/php_mysql.c 	php_mysql_conn *mysql;</span>
+<span class='curline'><a href='../S/758.html#L1312'>mysql</a>            1312 ext/mysql/php_mysql.c 	ZEND_FETCH_RESOURCE2(mysql, php_mysql_conn *, &amp;mysql_link, id, "MySQL-Link", le_link, le_plink);</span>
+<span class='curline'><a href='../S/758.html#L1316'>mysql</a>            1316 ext/mysql/php_mysql.c 	if ((stat = (char *)mysql_stat(mysql-&gt;conn))) {</span>
+<span class='curline'><a href='../S/758.html#L1319'>mysql</a>            1319 ext/mysql/php_mysql.c 	if (mysqlnd_stat(mysql-&gt;conn, &amp;stat, &amp;stat_len) == PASS) {</span>
+<span class='curline'><a href='../S/758.html#L1334'>mysql</a>            1334 ext/mysql/php_mysql.c 	php_mysql_conn *mysql;</span>
+<span class='curline'><a href='../S/758.html#L1345'>mysql</a>            1345 ext/mysql/php_mysql.c 	ZEND_FETCH_RESOURCE2(mysql, php_mysql_conn *, &amp;mysql_link, id, "MySQL-Link", le_link, le_plink);</span>
+<span class='curline'><a href='../S/758.html#L1346'>mysql</a>            1346 ext/mysql/php_mysql.c 	RETURN_STRING((char *)mysql_character_set_name(mysql-&gt;conn), 1);</span>
+<span class='curline'><a href='../S/758.html#L1359'>mysql</a>            1359 ext/mysql/php_mysql.c 	php_mysql_conn *mysql;</span>
+<span class='curline'><a href='../S/758.html#L1370'>mysql</a>            1370 ext/mysql/php_mysql.c 	ZEND_FETCH_RESOURCE2(mysql, php_mysql_conn *, &amp;mysql_link, id, "MySQL-Link", le_link, le_plink);</span>
+<span class='curline'><a href='../S/758.html#L1372'>mysql</a>            1372 ext/mysql/php_mysql.c 	if (!mysql_set_character_set(mysql-&gt;conn, csname)) {</span>
+<span class='curline'><a href='../S/758.html#L1391'>mysql</a>            1391 ext/mysql/php_mysql.c 	php_mysql_conn *mysql;</span>
+<span class='curline'><a href='../S/758.html#L1402'>mysql</a>            1402 ext/mysql/php_mysql.c 	ZEND_FETCH_RESOURCE2(mysql, php_mysql_conn *, &amp;mysql_link, id, "MySQL-Link", le_link, le_plink);</span>
+<span class='curline'><a href='../S/758.html#L1406'>mysql</a>            1406 ext/mysql/php_mysql.c 	if (mysql_create_db(mysql-&gt;conn, db)==0) {</span>
+<span class='curline'><a href='../S/758.html#L1422'>mysql</a>            1422 ext/mysql/php_mysql.c 	php_mysql_conn *mysql;</span>
+<span class='curline'><a href='../S/758.html#L1433'>mysql</a>            1433 ext/mysql/php_mysql.c 	ZEND_FETCH_RESOURCE2(mysql, php_mysql_conn *, &amp;mysql_link, id, "MySQL-Link", le_link, le_plink);</span>
+<span class='curline'><a href='../S/758.html#L1435'>mysql</a>            1435 ext/mysql/php_mysql.c 	if (mysql_drop_db(mysql-&gt;conn, db)==0) {</span>
+<span class='curline'><a href='../S/758.html#L1449'>mysql</a>            1449 ext/mysql/php_mysql.c 	php_mysql_conn *mysql;</span>
+<span class='curline'><a href='../S/758.html#L1452'>mysql</a>            1452 ext/mysql/php_mysql.c 	ZEND_FETCH_RESOURCE2(mysql, php_mysql_conn *, &amp;mysql_link, link_id, "MySQL-Link", le_link, le_plink);</span>
+<span class='curline'><a href='../S/758.html#L1455'>mysql</a>            1455 ext/mysql/php_mysql.c 		if (!php_mysql_select_db(mysql, db TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/758.html#L1472'>mysql</a>            1472 ext/mysql/php_mysql.c 			mysql_real_query(mysql-&gt;conn, newquery, newql);</span>
+<span class='curline'><a href='../S/758.html#L1474'>mysql</a>            1474 ext/mysql/php_mysql.c 			if (mysql_errno(mysql-&gt;conn)) {</span>
+<span class='curline'><a href='../S/758.html#L1475'>mysql</a>            1475 ext/mysql/php_mysql.c 				php_error_docref("http://www.mysql.com/doc" TSRMLS_CC, E_WARNING, "%s", mysql_error(mysql-&gt;conn));</span>
+<span class='curline'><a href='../S/758.html#L1479'>mysql</a>            1479 ext/mysql/php_mysql.c     			mysql_result = mysql_use_result(mysql-&gt;conn);</span>
+<span class='curline'><a href='../S/758.html#L1495'>mysql</a>            1495 ext/mysql/php_mysql.c 	if (mysql_real_query(mysql-&gt;conn, query, query_len)!=0) {</span>
+<span class='curline'><a href='../S/758.html#L1498'>mysql</a>            1498 ext/mysql/php_mysql.c 			if (mysql_errno(mysql-&gt;conn)){</span>
+<span class='curline'><a href='../S/758.html#L1499'>mysql</a>            1499 ext/mysql/php_mysql.c 				php_error_docref("http://www.mysql.com/doc" TSRMLS_CC, E_WARNING, "%s", mysql_error(mysql-&gt;conn));</span>
+<span class='curline'><a href='../S/758.html#L1505'>mysql</a>            1505 ext/mysql/php_mysql.c 	if (mysql_query(mysql-&gt;conn, query)!=0) {</span>
+<span class='curline'><a href='../S/758.html#L1508'>mysql</a>            1508 ext/mysql/php_mysql.c 			if (mysql_errno(mysql-&gt;conn)){</span>
+<span class='curline'><a href='../S/758.html#L1509'>mysql</a>            1509 ext/mysql/php_mysql.c 				php_error_docref("http://www.mysql.com/doc" TSRMLS_CC, E_WARNING, "%s", mysql_error(mysql-&gt;conn));</span>
+<span class='curline'><a href='../S/758.html#L1516'>mysql</a>            1516 ext/mysql/php_mysql.c 		mysql_result=mysql_use_result(mysql-&gt;conn);</span>
+<span class='curline'><a href='../S/758.html#L1518'>mysql</a>            1518 ext/mysql/php_mysql.c 		mysql_result=mysql_store_result(mysql-&gt;conn);</span>
+<span class='curline'><a href='../S/758.html#L1521'>mysql</a>            1521 ext/mysql/php_mysql.c 		if (PHP_MYSQL_VALID_RESULT(mysql-&gt;conn)) { /* query should have returned rows */</span>
+<span class='curline'><a href='../S/758.html#L1531'>mysql</a>            1531 ext/mysql/php_mysql.c 		mysql-&gt;active_result_id = Z_LVAL_P(return_value);</span>
+<span class='curline'><a href='../S/758.html#L1607'>mysql</a>            1607 ext/mysql/php_mysql.c 	php_mysql_conn *mysql;</span>
+<span class='curline'><a href='../S/758.html#L1620'>mysql</a>            1620 ext/mysql/php_mysql.c 	ZEND_FETCH_RESOURCE2(mysql, php_mysql_conn *, &amp;mysql_link, id, "MySQL-Link", le_link, le_plink);</span>
+<span class='curline'><a href='../S/758.html#L1625'>mysql</a>            1625 ext/mysql/php_mysql.c 	if ((mysql_result=mysql_list_dbs(mysql-&gt;conn, NULL))==NULL) {</span>
+<span class='curline'><a href='../S/758.html#L1643'>mysql</a>            1643 ext/mysql/php_mysql.c 	php_mysql_conn *mysql;</span>
+<span class='curline'><a href='../S/758.html#L1655'>mysql</a>            1655 ext/mysql/php_mysql.c 	ZEND_FETCH_RESOURCE2(mysql, php_mysql_conn *, &amp;mysql_link, id, "MySQL-Link", le_link, le_plink);</span>
+<span class='curline'><a href='../S/758.html#L1657'>mysql</a>            1657 ext/mysql/php_mysql.c 	if (!php_mysql_select_db(mysql, db TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/758.html#L1663'>mysql</a>            1663 ext/mysql/php_mysql.c 	if ((mysql_result=mysql_list_tables(mysql-&gt;conn, NULL))==NULL) {</span>
+<span class='curline'><a href='../S/758.html#L1681'>mysql</a>            1681 ext/mysql/php_mysql.c 	php_mysql_conn *mysql;</span>
+<span class='curline'><a href='../S/758.html#L1693'>mysql</a>            1693 ext/mysql/php_mysql.c 	ZEND_FETCH_RESOURCE2(mysql, php_mysql_conn *, &amp;mysql_link, id, "MySQL-Link", le_link, le_plink);</span>
+<span class='curline'><a href='../S/758.html#L1695'>mysql</a>            1695 ext/mysql/php_mysql.c 	if (!php_mysql_select_db(mysql, db TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/758.html#L1701'>mysql</a>            1701 ext/mysql/php_mysql.c 	if ((mysql_result=mysql_list_fields(mysql-&gt;conn, table, NULL))==NULL) {</span>
+<span class='curline'><a href='../S/758.html#L1716'>mysql</a>            1716 ext/mysql/php_mysql.c 	php_mysql_conn *mysql;</span>
+<span class='curline'><a href='../S/758.html#L1728'>mysql</a>            1728 ext/mysql/php_mysql.c 	ZEND_FETCH_RESOURCE2(mysql, php_mysql_conn *, &amp;mysql_link, id, "MySQL-Link", le_link, le_plink);</span>
+<span class='curline'><a href='../S/758.html#L1732'>mysql</a>            1732 ext/mysql/php_mysql.c 	mysql_result = mysql_list_processes(mysql-&gt;conn);</span>
+<span class='curline'><a href='../S/758.html#L1750'>mysql</a>            1750 ext/mysql/php_mysql.c 	php_mysql_conn *mysql;</span>
+<span class='curline'><a href='../S/758.html#L1767'>mysql</a>            1767 ext/mysql/php_mysql.c 	ZEND_FETCH_RESOURCE2(mysql, php_mysql_conn *, &amp;mysql_link, id, "MySQL-Link", le_link, le_plink);</span>
+<span class='curline'><a href='../S/758.html#L1769'>mysql</a>            1769 ext/mysql/php_mysql.c 	RETURN_STRING((char *)mysql_error(mysql-&gt;conn), 1);</span>
+<span class='curline'><a href='../S/758.html#L1781'>mysql</a>            1781 ext/mysql/php_mysql.c 	php_mysql_conn *mysql;</span>
+<span class='curline'><a href='../S/758.html#L1798'>mysql</a>            1798 ext/mysql/php_mysql.c 	ZEND_FETCH_RESOURCE2(mysql, php_mysql_conn *, &amp;mysql_link, id, "MySQL-Link", le_link, le_plink);</span>
+<span class='curline'><a href='../S/758.html#L1800'>mysql</a>            1800 ext/mysql/php_mysql.c 	RETURN_LONG(mysql_errno(mysql-&gt;conn));</span>
+<span class='curline'><a href='../S/758.html#L1812'>mysql</a>            1812 ext/mysql/php_mysql.c 	php_mysql_conn *mysql;</span>
+<span class='curline'><a href='../S/758.html#L1823'>mysql</a>            1823 ext/mysql/php_mysql.c 	ZEND_FETCH_RESOURCE2(mysql, php_mysql_conn *, &amp;mysql_link, id, "MySQL-Link", le_link, le_plink);</span>
+<span class='curline'><a href='../S/758.html#L1826'>mysql</a>            1826 ext/mysql/php_mysql.c 	Z_LVAL_P(return_value) = (long) mysql_affected_rows(mysql-&gt;conn);</span>
+<span class='curline'><a href='../S/758.html#L1864'>mysql</a>            1864 ext/mysql/php_mysql.c 	php_mysql_conn *mysql;</span>
+<span class='curline'><a href='../S/758.html#L1876'>mysql</a>            1876 ext/mysql/php_mysql.c 	ZEND_FETCH_RESOURCE2(mysql, php_mysql_conn *, &amp;mysql_link, id, "MySQL-Link", le_link, le_plink);</span>
+<span class='curline'><a href='../S/758.html#L1879'>mysql</a>            1879 ext/mysql/php_mysql.c 	new_str_len = mysql_real_escape_string(mysql-&gt;conn, new_str, str, str_len);</span>
+<span class='curline'><a href='../S/758.html#L1892'>mysql</a>            1892 ext/mysql/php_mysql.c 	php_mysql_conn *mysql;</span>
+<span class='curline'><a href='../S/758.html#L1903'>mysql</a>            1903 ext/mysql/php_mysql.c 	ZEND_FETCH_RESOURCE2(mysql, php_mysql_conn *, &amp;mysql_link, id, "MySQL-Link", le_link, le_plink);</span>
+<span class='curline'><a href='../S/758.html#L1906'>mysql</a>            1906 ext/mysql/php_mysql.c 	Z_LVAL_P(return_value) = (long) mysql_insert_id(mysql-&gt;conn);</span>
+<span class='curline'><a href='../S/758.html#L2660'>mysql</a>            2660 ext/mysql/php_mysql.c 	php_mysql_conn *mysql;</span>
+<span class='curline'><a href='../S/758.html#L2669'>mysql</a>            2669 ext/mysql/php_mysql.c 	ZEND_FETCH_RESOURCE2(mysql, php_mysql_conn *, &amp;mysql_link, id, "MySQL-Link", le_link, le_plink);</span>
+<span class='curline'><a href='../S/758.html#L2673'>mysql</a>            2673 ext/mysql/php_mysql.c 	RETURN_BOOL(! mysql_ping(mysql-&gt;conn));</span>
+<span class='curline'><a href='../S/760.html#L56'>mysql</a>              56 ext/mysql/php_mysql_structs.h PHP_MINIT_FUNCTION(mysql);</span>
+<span class='curline'><a href='../S/760.html#L57'>mysql</a>              57 ext/mysql/php_mysql_structs.h PHP_RINIT_FUNCTION(mysql);</span>
+<span class='curline'><a href='../S/760.html#L58'>mysql</a>              58 ext/mysql/php_mysql_structs.h PHP_MSHUTDOWN_FUNCTION(mysql);</span>
+<span class='curline'><a href='../S/760.html#L59'>mysql</a>              59 ext/mysql/php_mysql_structs.h PHP_RSHUTDOWN_FUNCTION(mysql);</span>
+<span class='curline'><a href='../S/760.html#L60'>mysql</a>              60 ext/mysql/php_mysql_structs.h PHP_MINFO_FUNCTION(mysql);</span>
+<span class='curline'><a href='../S/760.html#L113'>mysql</a>             113 ext/mysql/php_mysql_structs.h ZEND_BEGIN_MODULE_GLOBALS(mysql)</span>
+<span class='curline'><a href='../S/760.html#L127'>mysql</a>             127 ext/mysql/php_mysql_structs.h ZEND_END_MODULE_GLOBALS(mysql)</span>
+<span class='curline'><a href='../S/761.html#L95'>mysql</a>              95 ext/mysqli/mysqli.c 	MYSQL *mysql = (MYSQL *) data;</span>
+<span class='curline'><a href='../S/761.html#L97'>mysql</a>              97 ext/mysqli/mysqli.c 	mysqli_close(mysql, MYSQLI_CLOSE_IMPLICIT);</span>
+<span class='curline'><a href='../S/761.html#L192'>mysql</a>             192 ext/mysqli/mysqli.c void php_clear_mysql(MY_MYSQL *mysql) {</span>
+<span class='curline'><a href='../S/761.html#L193'>mysql</a>             193 ext/mysqli/mysqli.c 	if (mysql-&gt;hash_key) {</span>
+<span class='curline'><a href='../S/761.html#L194'>mysql</a>             194 ext/mysqli/mysqli.c 		efree(mysql-&gt;hash_key);</span>
+<span class='curline'><a href='../S/761.html#L195'>mysql</a>             195 ext/mysqli/mysqli.c 		mysql-&gt;hash_key = NULL;</span>
+<span class='curline'><a href='../S/761.html#L197'>mysql</a>             197 ext/mysqli/mysqli.c 	if (mysql-&gt;li_read) {</span>
+<span class='curline'><a href='../S/761.html#L198'>mysql</a>             198 ext/mysqli/mysqli.c 		zval_ptr_dtor(&amp;(mysql-&gt;li_read));</span>
+<span class='curline'><a href='../S/761.html#L199'>mysql</a>             199 ext/mysqli/mysqli.c 		mysql-&gt;li_read = NULL;</span>
+<span class='curline'><a href='../S/761.html#L229'>mysql</a>             229 ext/mysqli/mysqli.c 		MY_MYSQL *mysql = (MY_MYSQL *)my_res-&gt;ptr;</span>
+<span class='curline'><a href='../S/761.html#L230'>mysql</a>             230 ext/mysqli/mysqli.c 		if (mysql-&gt;mysql) {</span>
+<span class='curline'><a href='../S/761.html#L231'>mysql</a>             231 ext/mysqli/mysqli.c 			php_mysqli_close(mysql, MYSQLI_CLOSE_EXPLICIT, my_res-&gt;status TSRMLS_CC);</span>
+<span class='curline'><a href='../S/761.html#L233'>mysql</a>             233 ext/mysqli/mysqli.c 		php_clear_mysql(mysql);</span>
+<span class='curline'><a href='../S/761.html#L234'>mysql</a>             234 ext/mysqli/mysqli.c 		efree(mysql);</span>
+<span class='curline'><a href='../S/761.html#L538'>mysql</a>             538 ext/mysqli/mysqli.c 		MY_MYSQL * mysql;</span>
+<span class='curline'><a href='../S/761.html#L546'>mysql</a>             546 ext/mysqli/mysqli.c 		mysql = (MY_MYSQL *)(my_res-&gt;ptr);</span>
+<span class='curline'><a href='../S/761.html#L547'>mysql</a>             547 ext/mysqli/mysqli.c 		return mysql ? mysql-&gt;mysql : NULL;</span>
+<span class='curline'><a href='../S/761.html#L1047'>mysql</a>            1047 ext/mysqli/mysqli.c 	MY_MYSQL			*mysql;</span>
+<span class='curline'><a href='../S/761.html#L1060'>mysql</a>            1060 ext/mysqli/mysqli.c 			MYSQLI_FETCH_RESOURCE_CONN(mysql, &amp;mysql_link, MYSQLI_STATUS_VALID);</span>
+<span class='curline'><a href='../S/761.html#L1064'>mysql</a>            1064 ext/mysqli/mysqli.c 			stmt-&gt;stmt = mysql_stmt_init(mysql-&gt;mysql);</span>
+<span class='curline'><a href='../S/761.html#L1070'>mysql</a>            1070 ext/mysqli/mysqli.c 			MYSQLI_FETCH_RESOURCE_CONN(mysql, &amp;mysql_link, MYSQLI_STATUS_VALID);</span>
+<span class='curline'><a href='../S/761.html#L1074'>mysql</a>            1074 ext/mysqli/mysqli.c 			if ((stmt-&gt;stmt = mysql_stmt_init(mysql-&gt;mysql))) {</span>
+<span class='curline'><a href='../S/761.html#L1107'>mysql</a>            1107 ext/mysqli/mysqli.c 	MY_MYSQL			*mysql;</span>
+<span class='curline'><a href='../S/761.html#L1128'>mysql</a>            1128 ext/mysqli/mysqli.c 	MYSQLI_FETCH_RESOURCE_CONN(mysql, &amp;mysql_link, MYSQLI_STATUS_VALID);</span>
+<span class='curline'><a href='../S/761.html#L1132'>mysql</a>            1132 ext/mysqli/mysqli.c 			result = mysql_store_result(mysql-&gt;mysql);</span>
+<span class='curline'><a href='../S/761.html#L1135'>mysql</a>            1135 ext/mysqli/mysqli.c 			result = mysql_use_result(mysql-&gt;mysql);</span>
+<span class='curline'><a href='../S/762.html#L147'>mysql</a>             147 ext/mysqli/mysqli_api.c 	MY_MYSQL 		*mysql;</span>
+<span class='curline'><a href='../S/762.html#L155'>mysql</a>             155 ext/mysqli/mysqli_api.c 	MYSQLI_FETCH_RESOURCE_CONN(mysql, &amp;mysql_link, MYSQLI_STATUS_VALID);</span>
+<span class='curline'><a href='../S/762.html#L157'>mysql</a>             157 ext/mysqli/mysqli_api.c 	rc = mysql_affected_rows(mysql-&gt;mysql);</span>
+<span class='curline'><a href='../S/762.html#L170'>mysql</a>             170 ext/mysqli/mysqli_api.c 	MY_MYSQL	*mysql;</span>
+<span class='curline'><a href='../S/762.html#L177'>mysql</a>             177 ext/mysqli/mysqli_api.c 	MYSQLI_FETCH_RESOURCE_CONN(mysql, &amp;mysql_link, MYSQLI_STATUS_VALID);</span>
+<span class='curline'><a href='../S/762.html#L179'>mysql</a>             179 ext/mysqli/mysqli_api.c 	if (mysql_autocommit(mysql-&gt;mysql, (my_bool)automode)) {</span>
+<span class='curline'><a href='../S/762.html#L637'>mysql</a>             637 ext/mysqli/mysqli_api.c 	MY_MYSQL	*mysql;</span>
+<span class='curline'><a href='../S/762.html#L649'>mysql</a>             649 ext/mysqli/mysqli_api.c 	MYSQLI_FETCH_RESOURCE_CONN(mysql, &amp;mysql_link, MYSQLI_STATUS_VALID);</span>
+<span class='curline'><a href='../S/762.html#L652'>mysql</a>             652 ext/mysqli/mysqli_api.c 	old_charset = mysql-&gt;mysql-&gt;charset;</span>
+<span class='curline'><a href='../S/762.html#L656'>mysql</a>             656 ext/mysqli/mysqli_api.c 	rc = mysqlnd_change_user_ex(mysql-&gt;mysql, user, password, dbname, FALSE, (size_t) password_len);</span>
+<span class='curline'><a href='../S/762.html#L658'>mysql</a>             658 ext/mysqli/mysqli_api.c 	rc = mysql_change_user(mysql-&gt;mysql, user, password, dbname);</span>
+<span class='curline'><a href='../S/762.html#L660'>mysql</a>             660 ext/mysqli/mysqli_api.c 	MYSQLI_REPORT_MYSQL_ERROR(mysql-&gt;mysql);</span>
+<span class='curline'><a href='../S/762.html#L666'>mysql</a>             666 ext/mysqli/mysqli_api.c 	if (mysql_get_server_version(mysql-&gt;mysql) &lt; 501023L) {</span>
+<span class='curline'><a href='../S/762.html#L672'>mysql</a>             672 ext/mysqli/mysqli_api.c 		rc = mysql_set_character_set(mysql-&gt;mysql, old_charset-&gt;csname);</span>
+<span class='curline'><a href='../S/762.html#L684'>mysql</a>             684 ext/mysqli/mysqli_api.c 	MY_MYSQL	*mysql;</span>
+<span class='curline'><a href='../S/762.html#L692'>mysql</a>             692 ext/mysqli/mysqli_api.c 	MYSQLI_FETCH_RESOURCE_CONN(mysql, &amp;mysql_link, MYSQLI_STATUS_VALID);</span>
+<span class='curline'><a href='../S/762.html#L693'>mysql</a>             693 ext/mysqli/mysqli_api.c 	cs_name = mysql_character_set_name(mysql-&gt;mysql);</span>
+<span class='curline'><a href='../S/762.html#L702'>mysql</a>             702 ext/mysqli/mysqli_api.c void php_mysqli_close(MY_MYSQL * mysql, int close_type, int resource_status TSRMLS_DC)</span>
+<span class='curline'><a href='../S/762.html#L708'>mysql</a>             708 ext/mysqli/mysqli_api.c 	if (!mysql-&gt;persistent) {</span>
+<span class='curline'><a href='../S/762.html#L709'>mysql</a>             709 ext/mysqli/mysqli_api.c 		mysqli_close(mysql-&gt;mysql, close_type);</span>
+<span class='curline'><a href='../S/762.html#L712'>mysql</a>             712 ext/mysqli/mysqli_api.c 		if (zend_hash_find(&amp;EG(persistent_list), mysql-&gt;hash_key, strlen(mysql-&gt;hash_key) + 1, (void **)&amp;le) == SUCCESS) {</span>
+<span class='curline'><a href='../S/762.html#L716'>mysql</a>             716 ext/mysqli/mysqli_api.c 				mysqlnd_end_psession(mysql-&gt;mysql);</span>
+<span class='curline'><a href='../S/762.html#L721'>mysql</a>             721 ext/mysqli/mysqli_api.c 					mysqli_commit_or_rollback_libmysql(mysql-&gt;mysql, FALSE, TRANS_COR_NO_OPT, NULL TSRMLS_CC))</span>
+<span class='curline'><a href='../S/762.html#L723'>mysql</a>             723 ext/mysqli/mysqli_api.c 					FAIL == mysqlnd_rollback(mysql-&gt;mysql, TRANS_COR_NO_OPT, NULL))</span>
+<span class='curline'><a href='../S/762.html#L726'>mysql</a>             726 ext/mysqli/mysqli_api.c 					mysqli_close(mysql-&gt;mysql, close_type);			</span>
+<span class='curline'><a href='../S/762.html#L728'>mysql</a>             728 ext/mysqli/mysqli_api.c 					zend_ptr_stack_push(&amp;plist-&gt;free_links, mysql-&gt;mysql);</span>
+<span class='curline'><a href='../S/762.html#L734'>mysql</a>             734 ext/mysqli/mysqli_api.c 		mysql-&gt;persistent = FALSE;</span>
+<span class='curline'><a href='../S/762.html#L736'>mysql</a>             736 ext/mysqli/mysqli_api.c 	mysql-&gt;mysql = NULL;</span>
+<span class='curline'><a href='../S/762.html#L738'>mysql</a>             738 ext/mysqli/mysqli_api.c 	php_clear_mysql(mysql);</span>
+<span class='curline'><a href='../S/762.html#L748'>mysql</a>             748 ext/mysqli/mysqli_api.c 	MY_MYSQL	*mysql;</span>
+<span class='curline'><a href='../S/762.html#L754'>mysql</a>             754 ext/mysqli/mysqli_api.c 	MYSQLI_FETCH_RESOURCE_CONN(mysql, &amp;mysql_link, MYSQLI_STATUS_INITIALIZED);</span>
+<span class='curline'><a href='../S/762.html#L756'>mysql</a>             756 ext/mysqli/mysqli_api.c 	php_mysqli_close(mysql, MYSQLI_CLOSE_EXPLICIT, ((MYSQLI_RESOURCE *)((mysqli_object *)zend_object_store_get_object(mysql_link TSRMLS_CC))-&gt;ptr)-&gt;status TSRMLS_CC);</span>
+<span class='curline'><a href='../S/762.html#L760'>mysql</a>             760 ext/mysqli/mysqli_api.c 	efree(mysql);</span>
+<span class='curline'><a href='../S/762.html#L770'>mysql</a>             770 ext/mysqli/mysqli_api.c 	MY_MYSQL	*mysql;</span>
+<span class='curline'><a href='../S/762.html#L779'>mysql</a>             779 ext/mysqli/mysqli_api.c 	MYSQLI_FETCH_RESOURCE_CONN(mysql, &amp;mysql_link, MYSQLI_STATUS_VALID);</span>
+<span class='curline'><a href='../S/762.html#L782'>mysql</a>             782 ext/mysqli/mysqli_api.c 	if (mysqli_commit_or_rollback_libmysql(mysql-&gt;mysql, TRUE, flags, name TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/762.html#L784'>mysql</a>             784 ext/mysqli/mysqli_api.c 	if (FAIL == mysqlnd_commit(mysql-&gt;mysql, flags, name)) {</span>
+<span class='curline'><a href='../S/762.html#L841'>mysql</a>             841 ext/mysqli/mysqli_api.c 	MY_MYSQL	*mysql;</span>
+<span class='curline'><a href='../S/762.html#L847'>mysql</a>             847 ext/mysqli/mysqli_api.c 	MYSQLI_FETCH_RESOURCE_CONN(mysql, &amp;mysql_link, MYSQLI_STATUS_VALID);</span>
+<span class='curline'><a href='../S/762.html#L849'>mysql</a>             849 ext/mysqli/mysqli_api.c 	RETURN_BOOL(!mysql_dump_debug_info(mysql-&gt;mysql))</span>
+<span class='curline'><a href='../S/762.html#L857'>mysql</a>             857 ext/mysqli/mysqli_api.c 	MY_MYSQL	*mysql;</span>
+<span class='curline'><a href='../S/762.html#L863'>mysql</a>             863 ext/mysqli/mysqli_api.c 	MYSQLI_FETCH_RESOURCE_CONN(mysql, &amp;mysql_link, MYSQLI_STATUS_VALID);</span>
+<span class='curline'><a href='../S/762.html#L864'>mysql</a>             864 ext/mysqli/mysqli_api.c 	RETURN_LONG(mysql_errno(mysql-&gt;mysql));</span>
+<span class='curline'><a href='../S/762.html#L872'>mysql</a>             872 ext/mysqli/mysqli_api.c 	MY_MYSQL	*mysql;</span>
+<span class='curline'><a href='../S/762.html#L879'>mysql</a>             879 ext/mysqli/mysqli_api.c 	MYSQLI_FETCH_RESOURCE_CONN(mysql, &amp;mysql_link, MYSQLI_STATUS_VALID);</span>
+<span class='curline'><a href='../S/762.html#L880'>mysql</a>             880 ext/mysqli/mysqli_api.c 	err = mysql_error(mysql-&gt;mysql);</span>
+<span class='curline'><a href='../S/762.html#L1355'>mysql</a>            1355 ext/mysqli/mysqli_api.c 	MY_MYSQL	*mysql;</span>
+<span class='curline'><a href='../S/762.html#L1361'>mysql</a>            1361 ext/mysqli/mysqli_api.c 	MYSQLI_FETCH_RESOURCE_CONN(mysql, &amp;mysql_link, MYSQLI_STATUS_VALID);</span>
+<span class='curline'><a href='../S/762.html#L1363'>mysql</a>            1363 ext/mysqli/mysqli_api.c 	RETURN_LONG(mysql_field_count(mysql-&gt;mysql));</span>
+<span class='curline'><a href='../S/762.html#L1447'>mysql</a>            1447 ext/mysqli/mysqli_api.c 	MY_MYSQL	*mysql;</span>
+<span class='curline'><a href='../S/762.html#L1453'>mysql</a>            1453 ext/mysqli/mysqli_api.c 	MYSQLI_FETCH_RESOURCE_CONN(mysql, &amp;mysql_link, MYSQLI_STATUS_VALID);</span>
+<span class='curline'><a href='../S/762.html#L1455'>mysql</a>            1455 ext/mysqli/mysqli_api.c 	RETURN_STRING((mysql-&gt;mysql-&gt;host_info) ? mysql-&gt;mysql-&gt;host_info : "", 1);</span>
+<span class='curline'><a href='../S/762.html#L1457'>mysql</a>            1457 ext/mysqli/mysqli_api.c 	RETURN_STRING((mysql-&gt;mysql-&gt;data-&gt;host_info) ? mysql-&gt;mysql-&gt;data-&gt;host_info : "", 1);</span>
+<span class='curline'><a href='../S/762.html#L1466'>mysql</a>            1466 ext/mysqli/mysqli_api.c 	MY_MYSQL	*mysql;</span>
+<span class='curline'><a href='../S/762.html#L1472'>mysql</a>            1472 ext/mysqli/mysqli_api.c 	MYSQLI_FETCH_RESOURCE_CONN(mysql, &amp;mysql_link, MYSQLI_STATUS_VALID);</span>
+<span class='curline'><a href='../S/762.html#L1473'>mysql</a>            1473 ext/mysqli/mysqli_api.c 	RETURN_LONG(mysql_get_proto_info(mysql-&gt;mysql));</span>
+<span class='curline'><a href='../S/762.html#L1481'>mysql</a>            1481 ext/mysqli/mysqli_api.c 	MY_MYSQL	*mysql;</span>
+<span class='curline'><a href='../S/762.html#L1488'>mysql</a>            1488 ext/mysqli/mysqli_api.c 	MYSQLI_FETCH_RESOURCE_CONN(mysql, &amp;mysql_link, MYSQLI_STATUS_VALID);</span>
+<span class='curline'><a href='../S/762.html#L1490'>mysql</a>            1490 ext/mysqli/mysqli_api.c 	info = mysql_get_server_info(mysql-&gt;mysql);</span>
+<span class='curline'><a href='../S/762.html#L1501'>mysql</a>            1501 ext/mysqli/mysqli_api.c 	MY_MYSQL	*mysql;</span>
+<span class='curline'><a href='../S/762.html#L1507'>mysql</a>            1507 ext/mysqli/mysqli_api.c 	MYSQLI_FETCH_RESOURCE_CONN(mysql, &amp;mysql_link, MYSQLI_STATUS_VALID);</span>
+<span class='curline'><a href='../S/762.html#L1509'>mysql</a>            1509 ext/mysqli/mysqli_api.c 	RETURN_LONG(mysql_get_server_version(mysql-&gt;mysql));</span>
+<span class='curline'><a href='../S/762.html#L1517'>mysql</a>            1517 ext/mysqli/mysqli_api.c 	MY_MYSQL	*mysql;</span>
+<span class='curline'><a href='../S/762.html#L1524'>mysql</a>            1524 ext/mysqli/mysqli_api.c 	MYSQLI_FETCH_RESOURCE_CONN(mysql, &amp;mysql_link, MYSQLI_STATUS_VALID);</span>
+<span class='curline'><a href='../S/762.html#L1526'>mysql</a>            1526 ext/mysqli/mysqli_api.c 	info = mysql_info(mysql-&gt;mysql);</span>
+<span class='curline'><a href='../S/762.html#L1538'>mysql</a>            1538 ext/mysqli/mysqli_api.c 	MY_MYSQL *mysql;</span>
+<span class='curline'><a href='../S/762.html#L1544'>mysql</a>            1544 ext/mysqli/mysqli_api.c 	mysql = (MY_MYSQL *)ecalloc(1, sizeof(MY_MYSQL));</span>
+<span class='curline'><a href='../S/762.html#L1547'>mysql</a>            1547 ext/mysqli/mysqli_api.c 	if (!(mysql-&gt;mysql = mysql_init(NULL)))</span>
+<span class='curline'><a href='../S/762.html#L1553'>mysql</a>            1553 ext/mysqli/mysqli_api.c 	if (!(mysql-&gt;mysql = mysqlnd_init(MYSQLND_CLIENT_KNOWS_RSET_COPY_DATA, TRUE)))</span>
+<span class='curline'><a href='../S/762.html#L1556'>mysql</a>            1556 ext/mysqli/mysqli_api.c 		efree(mysql);</span>
+<span class='curline'><a href='../S/762.html#L1561'>mysql</a>            1561 ext/mysqli/mysqli_api.c 	mysqli_resource-&gt;ptr = (void *)mysql;</span>
+<span class='curline'><a href='../S/762.html#L1585'>mysql</a>            1585 ext/mysqli/mysqli_api.c 	MY_MYSQL		*mysql;</span>
+<span class='curline'><a href='../S/762.html#L1592'>mysql</a>            1592 ext/mysqli/mysqli_api.c 	MYSQLI_FETCH_RESOURCE_CONN(mysql, &amp;mysql_link, MYSQLI_STATUS_VALID);</span>
+<span class='curline'><a href='../S/762.html#L1593'>mysql</a>            1593 ext/mysqli/mysqli_api.c 	rc = mysql_insert_id(mysql-&gt;mysql);</span>
+<span class='curline'><a href='../S/762.html#L1602'>mysql</a>            1602 ext/mysqli/mysqli_api.c 	MY_MYSQL	*mysql;</span>
+<span class='curline'><a href='../S/762.html#L1609'>mysql</a>            1609 ext/mysqli/mysqli_api.c 	MYSQLI_FETCH_RESOURCE_CONN(mysql, &amp;mysql_link, MYSQLI_STATUS_VALID);</span>
+<span class='curline'><a href='../S/762.html#L1616'>mysql</a>            1616 ext/mysqli/mysqli_api.c 	if (mysql_kill(mysql-&gt;mysql, processid)) {</span>
+<span class='curline'><a href='../S/762.html#L1617'>mysql</a>            1617 ext/mysqli/mysqli_api.c 		MYSQLI_REPORT_MYSQL_ERROR(mysql-&gt;mysql);</span>
+<span class='curline'><a href='../S/762.html#L1628'>mysql</a>            1628 ext/mysqli/mysqli_api.c 	MY_MYSQL	*mysql;</span>
+<span class='curline'><a href='../S/762.html#L1634'>mysql</a>            1634 ext/mysqli/mysqli_api.c 	MYSQLI_FETCH_RESOURCE_CONN(mysql, &amp;mysql_link, MYSQLI_STATUS_VALID);</span>
+<span class='curline'><a href='../S/762.html#L1636'>mysql</a>            1636 ext/mysqli/mysqli_api.c 	RETURN_BOOL(mysql_more_results(mysql-&gt;mysql));</span>
+<span class='curline'><a href='../S/762.html#L1643'>mysql</a>            1643 ext/mysqli/mysqli_api.c 	MY_MYSQL	*mysql;</span>
+<span class='curline'><a href='../S/762.html#L1649'>mysql</a>            1649 ext/mysqli/mysqli_api.c 	MYSQLI_FETCH_RESOURCE_CONN(mysql, &amp;mysql_link, MYSQLI_STATUS_VALID);</span>
+<span class='curline'><a href='../S/762.html#L1651'>mysql</a>            1651 ext/mysqli/mysqli_api.c 	if (!mysql_more_results(mysql-&gt;mysql)) {</span>
+<span class='curline'><a href='../S/762.html#L1657'>mysql</a>            1657 ext/mysqli/mysqli_api.c 	RETURN_BOOL(!mysql_next_result(mysql-&gt;mysql));</span>
+<span class='curline'><a href='../S/762.html#L1814'>mysql</a>            1814 ext/mysqli/mysqli_api.c 	MY_MYSQL		*mysql;</span>
+<span class='curline'><a href='../S/762.html#L1825'>mysql</a>            1825 ext/mysqli/mysqli_api.c 	MYSQLI_FETCH_RESOURCE_CONN(mysql, &amp;mysql_link, MYSQLI_STATUS_INITIALIZED);</span>
+<span class='curline'><a href='../S/762.html#L1853'>mysql</a>            1853 ext/mysqli/mysqli_api.c 			ret = mysql_options(mysql-&gt;mysql, mysql_option, Z_STRVAL_PP(mysql_value));</span>
+<span class='curline'><a href='../S/762.html#L1857'>mysql</a>            1857 ext/mysqli/mysqli_api.c 			ret = mysql_options(mysql-&gt;mysql, mysql_option, (char *)&amp;l_value);</span>
+<span class='curline'><a href='../S/762.html#L1873'>mysql</a>            1873 ext/mysqli/mysqli_api.c 	MY_MYSQL	*mysql;</span>
+<span class='curline'><a href='../S/762.html#L1880'>mysql</a>            1880 ext/mysqli/mysqli_api.c 	MYSQLI_FETCH_RESOURCE_CONN(mysql, &amp;mysql_link, MYSQLI_STATUS_VALID);</span>
+<span class='curline'><a href='../S/762.html#L1881'>mysql</a>            1881 ext/mysqli/mysqli_api.c 	rc = mysql_ping(mysql-&gt;mysql);</span>
+<span class='curline'><a href='../S/762.html#L1882'>mysql</a>            1882 ext/mysqli/mysqli_api.c 	MYSQLI_REPORT_MYSQL_ERROR(mysql-&gt;mysql);</span>
+<span class='curline'><a href='../S/762.html#L1892'>mysql</a>            1892 ext/mysqli/mysqli_api.c 	MY_MYSQL		*mysql;</span>
+<span class='curline'><a href='../S/762.html#L1902'>mysql</a>            1902 ext/mysqli/mysqli_api.c 	MYSQLI_FETCH_RESOURCE_CONN(mysql, &amp;mysql_link, MYSQLI_STATUS_VALID);</span>
+<span class='curline'><a href='../S/762.html#L1905'>mysql</a>            1905 ext/mysqli/mysqli_api.c 	if (mysql-&gt;mysql-&gt;status == MYSQL_STATUS_GET_RESULT) {</span>
+<span class='curline'><a href='../S/762.html#L1913'>mysql</a>            1913 ext/mysqli/mysqli_api.c 	if ((stmt-&gt;stmt = mysql_stmt_init(mysql-&gt;mysql))) {</span>
+<span class='curline'><a href='../S/762.html#L1923'>mysql</a>            1923 ext/mysqli/mysqli_api.c 			memcpy(sqlstate, mysql-&gt;mysql-&gt;net.sqlstate, SQLSTATE_LENGTH+1);</span>
+<span class='curline'><a href='../S/762.html#L1925'>mysql</a>            1925 ext/mysqli/mysqli_api.c 			MYSQLND_ERROR_INFO error_info = *mysql-&gt;mysql-&gt;data-&gt;error_info;</span>
+<span class='curline'><a href='../S/762.html#L1932'>mysql</a>            1932 ext/mysqli/mysqli_api.c 			mysql-&gt;mysql-&gt;net.last_errno = last_errno;</span>
+<span class='curline'><a href='../S/762.html#L1933'>mysql</a>            1933 ext/mysqli/mysqli_api.c 			memcpy(mysql-&gt;mysql-&gt;net.last_error, last_error, MYSQL_ERRMSG_SIZE);</span>
+<span class='curline'><a href='../S/762.html#L1934'>mysql</a>            1934 ext/mysqli/mysqli_api.c 			memcpy(mysql-&gt;mysql-&gt;net.sqlstate, sqlstate, SQLSTATE_LENGTH+1);</span>
+<span class='curline'><a href='../S/762.html#L1936'>mysql</a>            1936 ext/mysqli/mysqli_api.c 			*mysql-&gt;mysql-&gt;data-&gt;error_info = error_info;</span>
+<span class='curline'><a href='../S/762.html#L1951'>mysql</a>            1951 ext/mysqli/mysqli_api.c 		MYSQLI_REPORT_MYSQL_ERROR(mysql-&gt;mysql);</span>
+<span class='curline'><a href='../S/762.html#L1983'>mysql</a>            1983 ext/mysqli/mysqli_api.c 	MY_MYSQL	*mysql;</span>
+<span class='curline'><a href='../S/762.html#L1991'>mysql</a>            1991 ext/mysqli/mysqli_api.c 	MYSQLI_FETCH_RESOURCE_CONN(mysql, &amp;mysql_link, MYSQLI_STATUS_VALID);</span>
+<span class='curline'><a href='../S/762.html#L1995'>mysql</a>            1995 ext/mysqli/mysqli_api.c 	if (mysql_real_query(mysql-&gt;mysql, query, query_len)) {</span>
+<span class='curline'><a href='../S/762.html#L1996'>mysql</a>            1996 ext/mysqli/mysqli_api.c 		MYSQLI_REPORT_MYSQL_ERROR(mysql-&gt;mysql);</span>
+<span class='curline'><a href='../S/762.html#L2000'>mysql</a>            2000 ext/mysqli/mysqli_api.c 	if (!mysql_field_count(mysql-&gt;mysql)) {</span>
+<span class='curline'><a href='../S/762.html#L2002'>mysql</a>            2002 ext/mysqli/mysqli_api.c 			php_mysqli_report_index(query, mysqli_server_status(mysql-&gt;mysql) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/762.html#L2013'>mysql</a>            2013 ext/mysqli/mysqli_api.c 	MY_MYSQL	*mysql;</span>
+<span class='curline'><a href='../S/762.html#L2021'>mysql</a>            2021 ext/mysqli/mysqli_api.c 	MYSQLI_FETCH_RESOURCE_CONN(mysql, &amp;mysql_link, MYSQLI_STATUS_VALID);</span>
+<span class='curline'><a href='../S/762.html#L2024'>mysql</a>            2024 ext/mysqli/mysqli_api.c 	newstr_len = mysql_real_escape_string(mysql-&gt;mysql, newstr, escapestr, escapestr_len);</span>
+<span class='curline'><a href='../S/762.html#L2036'>mysql</a>            2036 ext/mysqli/mysqli_api.c 	MY_MYSQL	*mysql;</span>
+<span class='curline'><a href='../S/762.html#L2045'>mysql</a>            2045 ext/mysqli/mysqli_api.c 	MYSQLI_FETCH_RESOURCE_CONN(mysql, &amp;mysql_link, MYSQLI_STATUS_VALID);</span>
+<span class='curline'><a href='../S/762.html#L2048'>mysql</a>            2048 ext/mysqli/mysqli_api.c 	if (mysqli_commit_or_rollback_libmysql(mysql-&gt;mysql, FALSE, flags, name TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/762.html#L2050'>mysql</a>            2050 ext/mysqli/mysqli_api.c 	if (FAIL == mysqlnd_rollback(mysql-&gt;mysql, flags, name)) {</span>
+<span class='curline'><a href='../S/762.html#L2257'>mysql</a>            2257 ext/mysqli/mysqli_api.c 	MY_MYSQL	*mysql;</span>
+<span class='curline'><a href='../S/762.html#L2265'>mysql</a>            2265 ext/mysqli/mysqli_api.c 	MYSQLI_FETCH_RESOURCE_CONN(mysql, &amp;mysql_link, MYSQLI_STATUS_VALID);</span>
+<span class='curline'><a href='../S/762.html#L2267'>mysql</a>            2267 ext/mysqli/mysqli_api.c 	if (mysql_select_db(mysql-&gt;mysql, dbname)) {</span>
+<span class='curline'><a href='../S/762.html#L2268'>mysql</a>            2268 ext/mysqli/mysqli_api.c 		MYSQLI_REPORT_MYSQL_ERROR(mysql-&gt;mysql);</span>
+<span class='curline'><a href='../S/762.html#L2279'>mysql</a>            2279 ext/mysqli/mysqli_api.c 	MY_MYSQL	*mysql;</span>
+<span class='curline'><a href='../S/762.html#L2286'>mysql</a>            2286 ext/mysqli/mysqli_api.c 	MYSQLI_FETCH_RESOURCE_CONN(mysql, &amp;mysql_link, MYSQLI_STATUS_VALID);</span>
+<span class='curline'><a href='../S/762.html#L2287'>mysql</a>            2287 ext/mysqli/mysqli_api.c 	state = mysql_sqlstate(mysql-&gt;mysql);</span>
+<span class='curline'><a href='../S/762.html#L2298'>mysql</a>            2298 ext/mysqli/mysqli_api.c 	MY_MYSQL	*mysql;</span>
+<span class='curline'><a href='../S/762.html#L2306'>mysql</a>            2306 ext/mysqli/mysqli_api.c 	MYSQLI_FETCH_RESOURCE_CONN(mysql, &amp;mysql_link, MYSQLI_STATUS_INITIALIZED);</span>
+<span class='curline'><a href='../S/762.html#L2314'>mysql</a>            2314 ext/mysqli/mysqli_api.c 	mysql_ssl_set(mysql-&gt;mysql, ssl_parm[0], ssl_parm[1], ssl_parm[2], ssl_parm[3], ssl_parm[4]);</span>
+<span class='curline'><a href='../S/762.html#L2324'>mysql</a>            2324 ext/mysqli/mysqli_api.c 	MY_MYSQL	*mysql;</span>
+<span class='curline'><a href='../S/762.html#L2334'>mysql</a>            2334 ext/mysqli/mysqli_api.c 	MYSQLI_FETCH_RESOURCE_CONN(mysql, &amp;mysql_link, MYSQLI_STATUS_VALID);</span>
+<span class='curline'><a href='../S/762.html#L2337'>mysql</a>            2337 ext/mysqli/mysqli_api.c 	if ((stat = (char *)mysql_stat(mysql-&gt;mysql)))</span>
+<span class='curline'><a href='../S/762.html#L2341'>mysql</a>            2341 ext/mysqli/mysqli_api.c 	if (mysqlnd_stat(mysql-&gt;mysql, &amp;stat, &amp;stat_len) == PASS)</span>
+<span class='curline'><a href='../S/762.html#L2356'>mysql</a>            2356 ext/mysqli/mysqli_api.c 	MY_MYSQL *mysql;</span>
+<span class='curline'><a href='../S/762.html#L2363'>mysql</a>            2363 ext/mysqli/mysqli_api.c 	MYSQLI_FETCH_RESOURCE_CONN(mysql, &amp;mysql_link, MYSQLI_STATUS_INITIALIZED);</span>
+<span class='curline'><a href='../S/762.html#L2365'>mysql</a>            2365 ext/mysqli/mysqli_api.c 	RETURN_BOOL(!mysql_refresh(mysql-&gt;mysql, (uint8_t) options));</span>
+<span class='curline'><a href='../S/762.html#L2367'>mysql</a>            2367 ext/mysqli/mysqli_api.c 	RETURN_BOOL(!mysql_refresh(mysql-&gt;mysql, options));</span>
+<span class='curline'><a href='../S/762.html#L2487'>mysql</a>            2487 ext/mysqli/mysqli_api.c 	MY_MYSQL		*mysql;</span>
+<span class='curline'><a href='../S/762.html#L2495'>mysql</a>            2495 ext/mysqli/mysqli_api.c 	MYSQLI_FETCH_RESOURCE_CONN(mysql, &amp;mysql_link, MYSQLI_STATUS_VALID);</span>
+<span class='curline'><a href='../S/762.html#L2499'>mysql</a>            2499 ext/mysqli/mysqli_api.c 	if (!(stmt-&gt;stmt = mysql_stmt_init(mysql-&gt;mysql))) {</span>
+<span class='curline'><a href='../S/762.html#L2639'>mysql</a>            2639 ext/mysqli/mysqli_api.c 	MY_MYSQL		*mysql;</span>
+<span class='curline'><a href='../S/762.html#L2649'>mysql</a>            2649 ext/mysqli/mysqli_api.c 	MYSQLI_FETCH_RESOURCE_CONN(mysql, &amp;mysql_link, MYSQLI_STATUS_VALID);</span>
+<span class='curline'><a href='../S/762.html#L2651'>mysql</a>            2651 ext/mysqli/mysqli_api.c 	result = flags &amp; MYSQLI_STORE_RESULT_COPY_DATA? mysqlnd_store_result_ofs(mysql-&gt;mysql) : mysqlnd_store_result(mysql-&gt;mysql);</span>
+<span class='curline'><a href='../S/762.html#L2653'>mysql</a>            2653 ext/mysqli/mysqli_api.c 	result = mysql_store_result(mysql-&gt;mysql);</span>
+<span class='curline'><a href='../S/762.html#L2656'>mysql</a>            2656 ext/mysqli/mysqli_api.c 		MYSQLI_REPORT_MYSQL_ERROR(mysql-&gt;mysql);</span>
+<span class='curline'><a href='../S/762.html#L2660'>mysql</a>            2660 ext/mysqli/mysqli_api.c 		php_mysqli_report_index("from previous query", mysqli_server_status(mysql-&gt;mysql) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/762.html#L2675'>mysql</a>            2675 ext/mysqli/mysqli_api.c 	MY_MYSQL	*mysql;</span>
+<span class='curline'><a href='../S/762.html#L2681'>mysql</a>            2681 ext/mysqli/mysqli_api.c 	MYSQLI_FETCH_RESOURCE_CONN(mysql, &amp;mysql_link, MYSQLI_STATUS_VALID);</span>
+<span class='curline'><a href='../S/762.html#L2683'>mysql</a>            2683 ext/mysqli/mysqli_api.c 	RETURN_LONG((long) mysql_thread_id(mysql-&gt;mysql));</span>
+<span class='curline'><a href='../S/762.html#L2699'>mysql</a>            2699 ext/mysqli/mysqli_api.c 	MY_MYSQL		*mysql;</span>
+<span class='curline'><a href='../S/762.html#L2707'>mysql</a>            2707 ext/mysqli/mysqli_api.c 	MYSQLI_FETCH_RESOURCE_CONN(mysql, &amp;mysql_link, MYSQLI_STATUS_VALID);</span>
+<span class='curline'><a href='../S/762.html#L2709'>mysql</a>            2709 ext/mysqli/mysqli_api.c 	if (!(result = mysql_use_result(mysql-&gt;mysql))) {</span>
+<span class='curline'><a href='../S/762.html#L2710'>mysql</a>            2710 ext/mysqli/mysqli_api.c 		MYSQLI_REPORT_MYSQL_ERROR(mysql-&gt;mysql);</span>
+<span class='curline'><a href='../S/762.html#L2715'>mysql</a>            2715 ext/mysqli/mysqli_api.c 		php_mysqli_report_index("from previous query", mysqli_server_status(mysql-&gt;mysql) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/762.html#L2728'>mysql</a>            2728 ext/mysqli/mysqli_api.c 	MY_MYSQL	*mysql;</span>
+<span class='curline'><a href='../S/762.html#L2734'>mysql</a>            2734 ext/mysqli/mysqli_api.c 	MYSQLI_FETCH_RESOURCE_CONN(mysql, &amp;mysql_link, MYSQLI_STATUS_VALID);</span>
+<span class='curline'><a href='../S/762.html#L2736'>mysql</a>            2736 ext/mysqli/mysqli_api.c 	RETURN_LONG(mysql_warning_count(mysql-&gt;mysql));</span>
+<span class='curline'><a href='../S/768.html#L36'>mysql</a>              36 ext/mysqli/mysqli_libmysql.h #define mysqli_stmt_warning_count(s)		mysql_warning_count((s)-&gt;mysql)</span>
+<span class='curline'><a href='../S/768.html#L37'>mysql</a>              37 ext/mysqli/mysqli_libmysql.h #define mysqli_stmt_server_status(s)		(s)-&gt;mysql-&gt;server_status</span>
+<span class='curline'><a href='../S/768.html#L38'>mysql</a>              38 ext/mysqli/mysqli_libmysql.h #define mysqli_stmt_get_connection(s)		(s)-&gt;mysql</span>
+<span class='curline'><a href='../S/770.html#L62'>mysql</a>              62 ext/mysqli/mysqli_nonapi.c 	MY_MYSQL			*mysql = NULL;</span>
+<span class='curline'><a href='../S/770.html#L100'>mysql</a>             100 ext/mysqli/mysqli_nonapi.c 				mysql = (MY_MYSQL*) mysqli_resource-&gt;ptr;</span>
+<span class='curline'><a href='../S/770.html#L103'>mysql</a>             103 ext/mysqli/mysqli_nonapi.c 		if (!mysql) {</span>
+<span class='curline'><a href='../S/770.html#L104'>mysql</a>             104 ext/mysqli/mysqli_nonapi.c 			mysql = (MY_MYSQL *) ecalloc(1, sizeof(MY_MYSQL));</span>
+<span class='curline'><a href='../S/770.html#L117'>mysql</a>             117 ext/mysqli/mysqli_nonapi.c 		MYSQLI_FETCH_RESOURCE_CONN(mysql, &amp;object, MYSQLI_STATUS_INITIALIZED);</span>
+<span class='curline'><a href='../S/770.html#L147'>mysql</a>             147 ext/mysqli/mysqli_nonapi.c 	if (mysql-&gt;mysql &amp;&amp; mysqli_resource &amp;&amp;</span>
+<span class='curline'><a href='../S/770.html#L151'>mysql</a>             151 ext/mysqli/mysqli_nonapi.c 		php_mysqli_close(mysql, MYSQLI_CLOSE_IMPLICIT, mysqli_resource-&gt;status TSRMLS_CC);</span>
+<span class='curline'><a href='../S/770.html#L159'>mysql</a>             159 ext/mysqli/mysqli_nonapi.c 			mysql-&gt;persistent = persistent = TRUE;</span>
+<span class='curline'><a href='../S/770.html#L165'>mysql</a>             165 ext/mysqli/mysqli_nonapi.c 			mysql-&gt;hash_key = hash_key;</span>
+<span class='curline'><a href='../S/770.html#L174'>mysql</a>             174 ext/mysqli/mysqli_nonapi.c 							mysql-&gt;mysql = zend_ptr_stack_pop(&amp;plist-&gt;free_links);</span>
+<span class='curline'><a href='../S/770.html#L180'>mysql</a>             180 ext/mysqli/mysqli_nonapi.c 							if (!mysqli_change_user_silent(mysql-&gt;mysql, username, passwd, dbname, passwd_len)) {</span>
+<span class='curline'><a href='../S/770.html#L182'>mysql</a>             182 ext/mysqli/mysqli_nonapi.c 							if (!mysql_ping(mysql-&gt;mysql)) {</span>
+<span class='curline'><a href='../S/770.html#L185'>mysql</a>             185 ext/mysqli/mysqli_nonapi.c 								mysqlnd_restart_psession(mysql-&gt;mysql);</span>
+<span class='curline'><a href='../S/770.html#L190'>mysql</a>             190 ext/mysqli/mysqli_nonapi.c 								mysqli_close(mysql-&gt;mysql, MYSQLI_CLOSE_IMPLICIT);</span>
+<span class='curline'><a href='../S/770.html#L191'>mysql</a>             191 ext/mysqli/mysqli_nonapi.c 								mysql-&gt;mysql = NULL;</span>
+<span class='curline'><a href='../S/770.html#L218'>mysql</a>             218 ext/mysqli/mysqli_nonapi.c 	if (!mysql-&gt;mysql) {</span>
+<span class='curline'><a href='../S/770.html#L220'>mysql</a>             220 ext/mysqli/mysqli_nonapi.c 		if (!(mysql-&gt;mysql = mysql_init(NULL))) {</span>
+<span class='curline'><a href='../S/770.html#L222'>mysql</a>             222 ext/mysqli/mysqli_nonapi.c 		if (!(mysql-&gt;mysql = mysqlnd_init(MYSQLND_CLIENT_KNOWS_RSET_COPY_DATA, persistent))) {</span>
+<span class='curline'><a href='../S/770.html#L232'>mysql</a>             232 ext/mysqli/mysqli_nonapi.c 		mysql_options(mysql-&gt;mysql, MYSQL_OPT_USE_REMOTE_CONNECTION, (char *)&amp;external);</span>
+<span class='curline'><a href='../S/770.html#L234'>mysql</a>             234 ext/mysqli/mysqli_nonapi.c 		mysql_options(mysql-&gt;mysql, MYSQL_OPT_USE_EMBEDDED_CONNECTION, 0);</span>
+<span class='curline'><a href='../S/770.html#L242'>mysql</a>             242 ext/mysqli/mysqli_nonapi.c 	if (mysql_real_connect(mysql-&gt;mysql, hostname, username, passwd, dbname, port, socket, flags) == NULL)</span>
+<span class='curline'><a href='../S/770.html#L244'>mysql</a>             244 ext/mysqli/mysqli_nonapi.c 	if (mysqlnd_connect(mysql-&gt;mysql, hostname, username, passwd, passwd_len, dbname, dbname_len,</span>
+<span class='curline'><a href='../S/770.html#L249'>mysql</a>             249 ext/mysqli/mysqli_nonapi.c 		php_mysqli_set_error(mysql_errno(mysql-&gt;mysql), (char *) mysql_error(mysql-&gt;mysql) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/770.html#L250'>mysql</a>             250 ext/mysqli/mysqli_nonapi.c 		php_mysqli_throw_sql_exception((char *)mysql_sqlstate(mysql-&gt;mysql), mysql_errno(mysql-&gt;mysql) TSRMLS_CC,</span>
+<span class='curline'><a href='../S/770.html#L251'>mysql</a>             251 ext/mysqli/mysqli_nonapi.c 										"%s", mysql_error(mysql-&gt;mysql));</span>
+<span class='curline'><a href='../S/770.html#L254'>mysql</a>             254 ext/mysqli/mysqli_nonapi.c 			mysqli_close(mysql-&gt;mysql, MYSQLI_CLOSE_DISCONNECTED);</span>
+<span class='curline'><a href='../S/770.html#L255'>mysql</a>             255 ext/mysqli/mysqli_nonapi.c 			mysql-&gt;mysql = NULL;</span>
+<span class='curline'><a href='../S/770.html#L261'>mysql</a>             261 ext/mysqli/mysqli_nonapi.c 	php_mysqli_set_error(mysql_errno(mysql-&gt;mysql), (char *) mysql_error(mysql-&gt;mysql) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/770.html#L264'>mysql</a>             264 ext/mysqli/mysqli_nonapi.c 	mysql-&gt;mysql-&gt;reconnect = MyG(reconnect);</span>
+<span class='curline'><a href='../S/770.html#L267'>mysql</a>             267 ext/mysqli/mysqli_nonapi.c 	mysql_options(mysql-&gt;mysql, MYSQL_OPT_LOCAL_INFILE, (char *)&amp;MyG(allow_local_infile));</span>
+<span class='curline'><a href='../S/770.html#L272'>mysql</a>             272 ext/mysqli/mysqli_nonapi.c 		mysqli_resource-&gt;ptr = (void *)mysql;</span>
+<span class='curline'><a href='../S/770.html#L283'>mysql</a>             283 ext/mysqli/mysqli_nonapi.c 	mysql-&gt;multi_query = 0;</span>
+<span class='curline'><a href='../S/770.html#L297'>mysql</a>             297 ext/mysqli/mysqli_nonapi.c 	if (mysql-&gt;hash_key) {</span>
+<span class='curline'><a href='../S/770.html#L298'>mysql</a>             298 ext/mysqli/mysqli_nonapi.c 		efree(mysql-&gt;hash_key);</span>
+<span class='curline'><a href='../S/770.html#L299'>mysql</a>             299 ext/mysqli/mysqli_nonapi.c 		mysql-&gt;hash_key = NULL;</span>
+<span class='curline'><a href='../S/770.html#L300'>mysql</a>             300 ext/mysqli/mysqli_nonapi.c 		mysql-&gt;persistent = FALSE;</span>
+<span class='curline'><a href='../S/770.html#L303'>mysql</a>             303 ext/mysqli/mysqli_nonapi.c 		efree(mysql);</span>
+<span class='curline'><a href='../S/770.html#L407'>mysql</a>             407 ext/mysqli/mysqli_nonapi.c 	MY_MYSQL	*mysql;</span>
+<span class='curline'><a href='../S/770.html#L414'>mysql</a>             414 ext/mysqli/mysqli_nonapi.c 	MYSQLI_FETCH_RESOURCE_CONN(mysql, &amp;mysql_link, MYSQLI_STATUS_VALID);</span>
+<span class='curline'><a href='../S/770.html#L416'>mysql</a>             416 ext/mysqli/mysqli_nonapi.c 	mysqlnd_get_connection_stats(mysql-&gt;mysql, return_value);</span>
+<span class='curline'><a href='../S/770.html#L425'>mysql</a>             425 ext/mysqli/mysqli_nonapi.c 	MY_MYSQL	*mysql;</span>
+<span class='curline'><a href='../S/770.html#L431'>mysql</a>             431 ext/mysqli/mysqli_nonapi.c 	MYSQLI_FETCH_RESOURCE_CONN(mysql, &amp;mysql_link, MYSQLI_STATUS_VALID);</span>
+<span class='curline'><a href='../S/770.html#L434'>mysql</a>             434 ext/mysqli/mysqli_nonapi.c 	if (mysql-&gt;mysql-&gt;data-&gt;error_info-&gt;error_list) {</span>
+<span class='curline'><a href='../S/770.html#L437'>mysql</a>             437 ext/mysqli/mysqli_nonapi.c 		for (message = (MYSQLND_ERROR_LIST_ELEMENT *) zend_llist_get_first_ex(mysql-&gt;mysql-&gt;data-&gt;error_info-&gt;error_list, &amp;pos);</span>
+<span class='curline'><a href='../S/770.html#L439'>mysql</a>             439 ext/mysqli/mysqli_nonapi.c 			 message = (MYSQLND_ERROR_LIST_ELEMENT *) zend_llist_get_next_ex(mysql-&gt;mysql-&gt;data-&gt;error_info-&gt;error_list, &amp;pos)) </span>
+<span class='curline'><a href='../S/770.html#L451'>mysql</a>             451 ext/mysqli/mysqli_nonapi.c 	if (mysql_errno(mysql-&gt;mysql)) {</span>
+<span class='curline'><a href='../S/770.html#L455'>mysql</a>             455 ext/mysqli/mysqli_nonapi.c 		add_assoc_long_ex(single_error, "errno", sizeof("errno"), mysql_errno(mysql-&gt;mysql));</span>
+<span class='curline'><a href='../S/770.html#L456'>mysql</a>             456 ext/mysqli/mysqli_nonapi.c 		add_assoc_string_ex(single_error, "sqlstate", sizeof("sqlstate"), mysql_sqlstate(mysql-&gt;mysql), 1);</span>
+<span class='curline'><a href='../S/770.html#L457'>mysql</a>             457 ext/mysqli/mysqli_nonapi.c 		add_assoc_string_ex(single_error, "error", sizeof("error"), mysql_error(mysql-&gt;mysql), 1);</span>
+<span class='curline'><a href='../S/770.html#L521'>mysql</a>             521 ext/mysqli/mysqli_nonapi.c 	MY_MYSQL	*mysql;</span>
+<span class='curline'><a href='../S/770.html#L529'>mysql</a>             529 ext/mysqli/mysqli_nonapi.c 	MYSQLI_FETCH_RESOURCE_CONN(mysql, &amp;mysql_link, MYSQLI_STATUS_VALID);</span>
+<span class='curline'><a href='../S/770.html#L532'>mysql</a>             532 ext/mysqli/mysqli_nonapi.c 	if (mysql_real_query(mysql-&gt;mysql, query, query_len)) {</span>
+<span class='curline'><a href='../S/770.html#L538'>mysql</a>             538 ext/mysqli/mysqli_nonapi.c 		strcpy(s_error, mysql_error(mysql-&gt;mysql));</span>
+<span class='curline'><a href='../S/770.html#L539'>mysql</a>             539 ext/mysqli/mysqli_nonapi.c 		strcpy(s_sqlstate, mysql_sqlstate(mysql-&gt;mysql));</span>
+<span class='curline'><a href='../S/770.html#L540'>mysql</a>             540 ext/mysqli/mysqli_nonapi.c 		s_errno = mysql_errno(mysql-&gt;mysql);</span>
+<span class='curline'><a href='../S/770.html#L542'>mysql</a>             542 ext/mysqli/mysqli_nonapi.c 		MYSQLND_ERROR_INFO error_info = *mysql-&gt;mysql-&gt;data-&gt;error_info;</span>
+<span class='curline'><a href='../S/770.html#L544'>mysql</a>             544 ext/mysqli/mysqli_nonapi.c 		MYSQLI_REPORT_MYSQL_ERROR(mysql-&gt;mysql);</span>
+<span class='curline'><a href='../S/770.html#L549'>mysql</a>             549 ext/mysqli/mysqli_nonapi.c 		strcpy(mysql-&gt;mysql-&gt;net.last_error, s_error);</span>
+<span class='curline'><a href='../S/770.html#L550'>mysql</a>             550 ext/mysqli/mysqli_nonapi.c 		strcpy(mysql-&gt;mysql-&gt;net.sqlstate, s_sqlstate);</span>
+<span class='curline'><a href='../S/770.html#L551'>mysql</a>             551 ext/mysqli/mysqli_nonapi.c 		mysql-&gt;mysql-&gt;net.last_errno = s_errno;</span>
+<span class='curline'><a href='../S/770.html#L553'>mysql</a>             553 ext/mysqli/mysqli_nonapi.c 		*mysql-&gt;mysql-&gt;data-&gt;error_info = error_info;</span>
+<span class='curline'><a href='../S/770.html#L564'>mysql</a>             564 ext/mysqli/mysqli_nonapi.c 	MY_MYSQL			*mysql;</span>
+<span class='curline'><a href='../S/770.html#L589'>mysql</a>             589 ext/mysqli/mysqli_nonapi.c 	MYSQLI_FETCH_RESOURCE_CONN(mysql, &amp;mysql_link, MYSQLI_STATUS_VALID);</span>
+<span class='curline'><a href='../S/770.html#L596'>mysql</a>             596 ext/mysqli/mysqli_nonapi.c 		if (mysqli_async_query(mysql-&gt;mysql, query, query_len)) {</span>
+<span class='curline'><a href='../S/770.html#L597'>mysql</a>             597 ext/mysqli/mysqli_nonapi.c 			MYSQLI_REPORT_MYSQL_ERROR(mysql-&gt;mysql);</span>
+<span class='curline'><a href='../S/770.html#L600'>mysql</a>             600 ext/mysqli/mysqli_nonapi.c 		mysql-&gt;async_result_fetch_type = resultmode &amp; ~MYSQLI_ASYNC;</span>
+<span class='curline'><a href='../S/770.html#L605'>mysql</a>             605 ext/mysqli/mysqli_nonapi.c 	if (mysql_real_query(mysql-&gt;mysql, query, query_len)) {</span>
+<span class='curline'><a href='../S/770.html#L606'>mysql</a>             606 ext/mysqli/mysqli_nonapi.c 		MYSQLI_REPORT_MYSQL_ERROR(mysql-&gt;mysql);</span>
+<span class='curline'><a href='../S/770.html#L610'>mysql</a>             610 ext/mysqli/mysqli_nonapi.c 	if (!mysql_field_count(mysql-&gt;mysql)) {</span>
+<span class='curline'><a href='../S/770.html#L613'>mysql</a>             613 ext/mysqli/mysqli_nonapi.c 			php_mysqli_report_index(query, mysqli_server_status(mysql-&gt;mysql) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/770.html#L626'>mysql</a>             626 ext/mysqli/mysqli_nonapi.c 				result = mysqlnd_store_result_ofs(mysql-&gt;mysql);</span>
+<span class='curline'><a href='../S/770.html#L629'>mysql</a>             629 ext/mysqli/mysqli_nonapi.c 				result = mysql_store_result(mysql-&gt;mysql);</span>
+<span class='curline'><a href='../S/770.html#L632'>mysql</a>             632 ext/mysqli/mysqli_nonapi.c 			result = mysql_use_result(mysql-&gt;mysql);</span>
+<span class='curline'><a href='../S/770.html#L636'>mysql</a>             636 ext/mysqli/mysqli_nonapi.c 		php_mysqli_throw_sql_exception((char *)mysql_sqlstate(mysql-&gt;mysql), mysql_errno(mysql-&gt;mysql) TSRMLS_CC,</span>
+<span class='curline'><a href='../S/770.html#L637'>mysql</a>             637 ext/mysqli/mysqli_nonapi.c 										"%s", mysql_error(mysql-&gt;mysql));</span>
+<span class='curline'><a href='../S/770.html#L642'>mysql</a>             642 ext/mysqli/mysqli_nonapi.c 		php_mysqli_report_index(query, mysqli_server_status(mysql-&gt;mysql) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/770.html#L673'>mysql</a>             673 ext/mysqli/mysqli_nonapi.c 			MY_MYSQL *mysql;</span>
+<span class='curline'><a href='../S/770.html#L680'>mysql</a>             680 ext/mysqli/mysqli_nonapi.c 			mysql = (MY_MYSQL*) my_res-&gt;ptr;</span>
+<span class='curline'><a href='../S/770.html#L685'>mysql</a>             685 ext/mysqli/mysqli_nonapi.c 			(*out_array)[current++] = mysql-&gt;mysql;</span>
+<span class='curline'><a href='../S/770.html#L713'>mysql</a>             713 ext/mysqli/mysqli_nonapi.c 			MY_MYSQL *mysql;</span>
+<span class='curline'><a href='../S/770.html#L720'>mysql</a>             720 ext/mysqli/mysqli_nonapi.c 			mysql = (MY_MYSQL *) my_res-&gt;ptr;</span>
+<span class='curline'><a href='../S/770.html#L721'>mysql</a>             721 ext/mysqli/mysqli_nonapi.c 			if (mysql-&gt;mysql == *p) {</span>
+<span class='curline'><a href='../S/770.html#L759'>mysql</a>             759 ext/mysqli/mysqli_nonapi.c 			MY_MYSQL *mysql;</span>
+<span class='curline'><a href='../S/770.html#L761'>mysql</a>             761 ext/mysqli/mysqli_nonapi.c 			mysql = (MY_MYSQL *) ((MYSQLI_RESOURCE *)intern-&gt;ptr)-&gt;ptr;</span>
+<span class='curline'><a href='../S/770.html#L762'>mysql</a>             762 ext/mysqli/mysqli_nonapi.c 			if (mysql-&gt;mysql == *p) {</span>
+<span class='curline'><a href='../S/770.html#L848'>mysql</a>             848 ext/mysqli/mysqli_nonapi.c 	MY_MYSQL		*mysql;</span>
+<span class='curline'><a href='../S/770.html#L857'>mysql</a>             857 ext/mysqli/mysqli_nonapi.c 	MYSQLI_FETCH_RESOURCE_CONN(mysql, &amp;mysql_link, MYSQLI_STATUS_VALID);</span>
+<span class='curline'><a href='../S/770.html#L859'>mysql</a>             859 ext/mysqli/mysqli_nonapi.c 	if (FAIL == mysqlnd_reap_async_query(mysql-&gt;mysql)) {</span>
+<span class='curline'><a href='../S/770.html#L863'>mysql</a>             863 ext/mysqli/mysqli_nonapi.c 	if (!mysql_field_count(mysql-&gt;mysql)) {</span>
+<span class='curline'><a href='../S/770.html#L871'>mysql</a>             871 ext/mysqli/mysqli_nonapi.c 	switch (mysql-&gt;async_result_fetch_type) {</span>
+<span class='curline'><a href='../S/770.html#L873'>mysql</a>             873 ext/mysqli/mysqli_nonapi.c 			result = mysql_store_result(mysql-&gt;mysql);</span>
+<span class='curline'><a href='../S/770.html#L876'>mysql</a>             876 ext/mysqli/mysqli_nonapi.c 			result = mysql_use_result(mysql-&gt;mysql);</span>
+<span class='curline'><a href='../S/770.html#L881'>mysql</a>             881 ext/mysqli/mysqli_nonapi.c 		php_mysqli_throw_sql_exception((char *)mysql_sqlstate(mysql-&gt;mysql), mysql_errno(mysql-&gt;mysql) TSRMLS_CC,</span>
+<span class='curline'><a href='../S/770.html#L882'>mysql</a>             882 ext/mysqli/mysqli_nonapi.c 										"%s", mysql_error(mysql-&gt;mysql));</span>
+<span class='curline'><a href='../S/770.html#L929'>mysql</a>             929 ext/mysqli/mysqli_nonapi.c 	MY_MYSQL			*mysql;</span>
+<span class='curline'><a href='../S/770.html#L937'>mysql</a>             937 ext/mysqli/mysqli_nonapi.c 	MYSQLI_FETCH_RESOURCE_CONN(mysql, &amp;mysql_link, MYSQLI_STATUS_VALID);</span>
+<span class='curline'><a href='../S/770.html#L939'>mysql</a>             939 ext/mysqli/mysqli_nonapi.c 	if (mysql_warning_count(mysql-&gt;mysql)) {</span>
+<span class='curline'><a href='../S/770.html#L941'>mysql</a>             941 ext/mysqli/mysqli_nonapi.c 		w = php_get_warnings(mysql-&gt;mysql-&gt;data TSRMLS_CC);</span>
+<span class='curline'><a href='../S/770.html#L943'>mysql</a>             943 ext/mysqli/mysqli_nonapi.c 		w = php_get_warnings(mysql-&gt;mysql TSRMLS_CC);</span>
+<span class='curline'><a href='../S/770.html#L987'>mysql</a>             987 ext/mysqli/mysqli_nonapi.c 	MY_MYSQL	*mysql;</span>
+<span class='curline'><a href='../S/770.html#L995'>mysql</a>             995 ext/mysqli/mysqli_nonapi.c 	MYSQLI_FETCH_RESOURCE_CONN(mysql, &amp;mysql_link, MYSQLI_STATUS_VALID);</span>
+<span class='curline'><a href='../S/770.html#L997'>mysql</a>             997 ext/mysqli/mysqli_nonapi.c 	if (mysql_set_character_set(mysql-&gt;mysql, cs_name)) {</span>
+<span class='curline'><a href='../S/770.html#L1010'>mysql</a>            1010 ext/mysqli/mysqli_nonapi.c 	MY_MYSQL				*mysql;</span>
+<span class='curline'><a href='../S/770.html#L1023'>mysql</a>            1023 ext/mysqli/mysqli_nonapi.c 	MYSQLI_FETCH_RESOURCE_CONN(mysql, &amp;mysql_link, MYSQLI_STATUS_VALID);</span>
+<span class='curline'><a href='../S/770.html#L1027'>mysql</a>            1027 ext/mysqli/mysqli_nonapi.c 	mysql_get_character_set_info(mysql-&gt;mysql, &amp;cs);</span>
+<span class='curline'><a href='../S/770.html#L1037'>mysql</a>            1037 ext/mysqli/mysqli_nonapi.c 	cs = mysql-&gt;mysql-&gt;data-&gt;charset;</span>
+<span class='curline'><a href='../S/770.html#L1120'>mysql</a>            1120 ext/mysqli/mysqli_nonapi.c 	MY_MYSQL	*mysql;</span>
+<span class='curline'><a href='../S/770.html#L1130'>mysql</a>            1130 ext/mysqli/mysqli_nonapi.c 	MYSQLI_FETCH_RESOURCE_CONN(mysql, &amp;mysql_link, MYSQLI_STATUS_VALID);</span>
+<span class='curline'><a href='../S/770.html#L1144'>mysql</a>            1144 ext/mysqli/mysqli_nonapi.c 	if (mysqli_begin_transaction_libmysql(mysql-&gt;mysql, flags, name TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/770.html#L1148'>mysql</a>            1148 ext/mysqli/mysqli_nonapi.c 	if (FAIL == mysqlnd_begin_transaction(mysql-&gt;mysql, flags, name)) {</span>
+<span class='curline'><a href='../S/770.html#L1176'>mysql</a>            1176 ext/mysqli/mysqli_nonapi.c 	MY_MYSQL	*mysql;</span>
+<span class='curline'><a href='../S/770.html#L1184'>mysql</a>            1184 ext/mysqli/mysqli_nonapi.c 	MYSQLI_FETCH_RESOURCE_CONN(mysql, &amp;mysql_link, MYSQLI_STATUS_VALID);</span>
+<span class='curline'><a href='../S/770.html#L1191'>mysql</a>            1191 ext/mysqli/mysqli_nonapi.c 	if (mysqli_savepoint_libmysql(mysql-&gt;mysql, name, FALSE)) {</span>
+<span class='curline'><a href='../S/770.html#L1193'>mysql</a>            1193 ext/mysqli/mysqli_nonapi.c 	if (FAIL == mysqlnd_savepoint(mysql-&gt;mysql, name)) {</span>
+<span class='curline'><a href='../S/770.html#L1206'>mysql</a>            1206 ext/mysqli/mysqli_nonapi.c 	MY_MYSQL	*mysql;</span>
+<span class='curline'><a href='../S/770.html#L1214'>mysql</a>            1214 ext/mysqli/mysqli_nonapi.c 	MYSQLI_FETCH_RESOURCE_CONN(mysql, &amp;mysql_link, MYSQLI_STATUS_VALID);</span>
+<span class='curline'><a href='../S/770.html#L1220'>mysql</a>            1220 ext/mysqli/mysqli_nonapi.c 	if (mysqli_savepoint_libmysql(mysql-&gt;mysql, name, TRUE)) {</span>
+<span class='curline'><a href='../S/770.html#L1222'>mysql</a>            1222 ext/mysqli/mysqli_nonapi.c 	if (FAIL == mysqlnd_savepoint(mysql-&gt;mysql, name)) {</span>
+<span class='curline'><a href='../S/771.html#L64'>mysql</a>              64 ext/mysqli/mysqli_priv.h extern void php_mysqli_close(MY_MYSQL * mysql, int close_type, int resource_status TSRMLS_DC);</span>
+<span class='curline'><a href='../S/771.html#L70'>mysql</a>              70 ext/mysqli/mysqli_priv.h extern MYSQLI_WARNING *php_get_warnings(MYSQLND_CONN_DATA * mysql TSRMLS_DC);</span>
+<span class='curline'><a href='../S/771.html#L72'>mysql</a>              72 ext/mysqli/mysqli_priv.h extern MYSQLI_WARNING *php_get_warnings(MYSQL * mysql TSRMLS_DC);</span>
+<span class='curline'><a href='../S/771.html#L90'>mysql</a>              90 ext/mysqli/mysqli_priv.h #define MYSQLI_DISABLE_MQ if (mysql-&gt;multi_query) { \</span>
+<span class='curline'><a href='../S/771.html#L91'>mysql</a>              91 ext/mysqli/mysqli_priv.h 	mysql_set_server_option(mysql-&gt;mysql, MYSQL_OPTION_MULTI_STATEMENTS_OFF); \</span>
+<span class='curline'><a href='../S/771.html#L92'>mysql</a>              92 ext/mysqli/mysqli_priv.h 	mysql-&gt;multi_query = 0; \</span>
+<span class='curline'><a href='../S/771.html#L95'>mysql</a>              95 ext/mysqli/mysqli_priv.h #define MYSQLI_ENABLE_MQ if (!mysql-&gt;multi_query) { \</span>
+<span class='curline'><a href='../S/771.html#L96'>mysql</a>              96 ext/mysqli/mysqli_priv.h 	mysql_set_server_option(mysql-&gt;mysql, MYSQL_OPTION_MULTI_STATEMENTS_ON); \</span>
+<span class='curline'><a href='../S/771.html#L97'>mysql</a>              97 ext/mysqli/mysqli_priv.h 	mysql-&gt;multi_query = 1; \</span>
+<span class='curline'><a href='../S/771.html#L141'>mysql</a>             141 ext/mysqli/mysqli_priv.h #define MYSQLI_REPORT_MYSQL_ERROR(mysql) \</span>
+<span class='curline'><a href='../S/771.html#L142'>mysql</a>             142 ext/mysqli/mysqli_priv.h if ((MyG(report_mode) &amp; MYSQLI_REPORT_ERROR) &amp;&amp; mysql_errno(mysql)) { \</span>
+<span class='curline'><a href='../S/771.html#L143'>mysql</a>             143 ext/mysqli/mysqli_priv.h 	php_mysqli_report_error(mysql_sqlstate(mysql), mysql_errno(mysql), mysql_error(mysql) TSRMLS_CC); \</span>
+<span class='curline'><a href='../S/772.html#L50'>mysql</a>              50 ext/mysqli/mysqli_prop.c     p = (MYSQL *)((MY_MYSQL *)((MYSQLI_RESOURCE *)(obj-&gt;ptr))-&gt;ptr)-&gt;mysql;\</span>
+<span class='curline'><a href='../S/772.html#L160'>mysql</a>             160 ext/mysqli/mysqli_prop.c 	MY_MYSQL *mysql;</span>
+<span class='curline'><a href='../S/772.html#L167'>mysql</a>             167 ext/mysqli/mysqli_prop.c  	mysql = (MY_MYSQL *)((MYSQLI_RESOURCE *)(obj-&gt;ptr))-&gt;ptr;</span>
+<span class='curline'><a href='../S/772.html#L169'>mysql</a>             169 ext/mysqli/mysqli_prop.c 	if (!mysql) {</span>
+<span class='curline'><a href='../S/772.html#L174'>mysql</a>             174 ext/mysqli/mysqli_prop.c 		rc = mysql_affected_rows(mysql-&gt;mysql);</span>
+<span class='curline'><a href='../S/772.html#L197'>mysql</a>             197 ext/mysqli/mysqli_prop.c 	MY_MYSQL *mysql;</span>
+<span class='curline'><a href='../S/772.html#L203'>mysql</a>             203 ext/mysqli/mysqli_prop.c  	mysql = (MY_MYSQL *)((MYSQLI_RESOURCE *)(obj-&gt;ptr))-&gt;ptr;</span>
+<span class='curline'><a href='../S/772.html#L206'>mysql</a>             206 ext/mysqli/mysqli_prop.c 	if (mysql) {</span>
+<span class='curline'><a href='../S/772.html#L208'>mysql</a>             208 ext/mysqli/mysqli_prop.c 		if (mysql-&gt;mysql-&gt;data-&gt;error_info-&gt;error_list) {</span>
+<span class='curline'><a href='../S/772.html#L211'>mysql</a>             211 ext/mysqli/mysqli_prop.c 			for (message = (MYSQLND_ERROR_LIST_ELEMENT *) zend_llist_get_first_ex(mysql-&gt;mysql-&gt;data-&gt;error_info-&gt;error_list, &amp;pos);</span>
+<span class='curline'><a href='../S/772.html#L213'>mysql</a>             213 ext/mysqli/mysqli_prop.c 				 message = (MYSQLND_ERROR_LIST_ELEMENT *) zend_llist_get_next_ex(mysql-&gt;mysql-&gt;data-&gt;error_info-&gt;error_list, &amp;pos)) </span>
+<span class='curline'><a href='../S/772.html#L225'>mysql</a>             225 ext/mysqli/mysqli_prop.c 		if (mysql_errno(mysql-&gt;mysql)) {</span>
+<span class='curline'><a href='../S/772.html#L229'>mysql</a>             229 ext/mysqli/mysqli_prop.c 			add_assoc_long_ex(single_error, "errno", sizeof("errno"), mysql_errno(mysql-&gt;mysql));</span>
+<span class='curline'><a href='../S/772.html#L230'>mysql</a>             230 ext/mysqli/mysqli_prop.c 			add_assoc_string_ex(single_error, "sqlstate", sizeof("sqlstate"), mysql_sqlstate(mysql-&gt;mysql), 1);</span>
+<span class='curline'><a href='../S/772.html#L231'>mysql</a>             231 ext/mysqli/mysqli_prop.c 			add_assoc_string_ex(single_error, "error", sizeof("error"), mysql_error(mysql-&gt;mysql), 1);</span>
+<span class='curline'><a href='../S/772.html#L258'>mysql</a>             258 ext/mysqli/mysqli_prop.c 	MY_MYSQL *mysql;</span>
+<span class='curline'><a href='../S/772.html#L269'>mysql</a>             269 ext/mysqli/mysqli_prop.c  	mysql = (MY_MYSQL *)((MYSQLI_RESOURCE *)(obj-&gt;ptr))-&gt;ptr;</span>
+<span class='curline'><a href='../S/772.html#L271'>mysql</a>             271 ext/mysqli/mysqli_prop.c 	if (mysql) {</span>
+<span class='curline'><a href='../S/772.html#L275'>mysql</a>             275 ext/mysqli/mysqli_prop.c 		if (mysqlnd_stat(mysql-&gt;mysql, &amp;stat_msg, &amp;stat_msg_len) == PASS) {</span>
+<span class='curline'><a href='../S/772.html#L279'>mysql</a>             279 ext/mysqli/mysqli_prop.c 		if ((stat_msg = (char *) mysql_stat(mysql-&gt;mysql))) {</span>
+<span class='curline'><a href='../S/775.html#L76'>mysql</a>              76 ext/mysqli/mysqli_warning.c MYSQLI_WARNING *php_get_warnings(MYSQL *mysql TSRMLS_DC)</span>
+<span class='curline'><a href='../S/775.html#L82'>mysql</a>              82 ext/mysqli/mysqli_warning.c 	if (mysql_real_query(mysql, "SHOW WARNINGS", 13)) {</span>
+<span class='curline'><a href='../S/775.html#L86'>mysql</a>              86 ext/mysqli/mysqli_warning.c 	result = mysql_store_result(mysql);</span>
+<span class='curline'><a href='../S/775.html#L126'>mysql</a>             126 ext/mysqli/mysqli_warning.c MYSQLI_WARNING * php_get_warnings(MYSQLND_CONN_DATA * mysql TSRMLS_DC)</span>
+<span class='curline'><a href='../S/775.html#L132'>mysql</a>             132 ext/mysqli/mysqli_warning.c 	if (mysql-&gt;m-&gt;query(mysql, "SHOW WARNINGS", 13 TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/775.html#L136'>mysql</a>             136 ext/mysqli/mysqli_warning.c 	result = mysql-&gt;m-&gt;use_result(mysql, 0 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/775.html#L285'>mysql</a>             285 ext/mysqli/mysqli_warning.c 		MY_MYSQL *mysql;</span>
+<span class='curline'><a href='../S/775.html#L286'>mysql</a>             286 ext/mysqli/mysqli_warning.c 		MYSQLI_FETCH_RESOURCE_CONN(mysql, &amp;z, MYSQLI_STATUS_VALID);</span>
+<span class='curline'><a href='../S/775.html#L287'>mysql</a>             287 ext/mysqli/mysqli_warning.c 		if (mysql_warning_count(mysql-&gt;mysql)) {</span>
+<span class='curline'><a href='../S/775.html#L289'>mysql</a>             289 ext/mysqli/mysqli_warning.c 			w = php_get_warnings(mysql-&gt;mysql TSRMLS_CC);</span>
+<span class='curline'><a href='../S/775.html#L291'>mysql</a>             291 ext/mysqli/mysqli_warning.c 			w = php_get_warnings(mysql-&gt;mysql-&gt;data TSRMLS_CC);</span>
+<span class='curline'><a href='../S/777.html#L126'>mysql</a>             126 ext/mysqli/php_mysqli_structs.h 	MYSQL			*mysql;</span>
+<span class='curline'><a href='../S/777.html#L207'>mysql</a>             207 ext/mysqli/php_mysqli_structs.h extern void php_mysqli_close(MY_MYSQL * mysql, int close_type, int resource_status TSRMLS_DC);</span>
+<span class='curline'><a href='../S/777.html#L218'>mysql</a>             218 ext/mysqli/php_mysqli_structs.h #define MYSQLI_DISABLE_MQ if (mysql-&gt;multi_query) { \</span>
+<span class='curline'><a href='../S/777.html#L219'>mysql</a>             219 ext/mysqli/php_mysqli_structs.h 	mysql_set_server_option(mysql-&gt;mysql, MYSQL_OPTION_MULTI_STATEMENTS_OFF); \</span>
+<span class='curline'><a href='../S/777.html#L220'>mysql</a>             220 ext/mysqli/php_mysqli_structs.h 	mysql-&gt;multi_query = 0; \</span>
+<span class='curline'><a href='../S/777.html#L223'>mysql</a>             223 ext/mysqli/php_mysqli_structs.h #define MYSQLI_ENABLE_MQ if (!mysql-&gt;multi_query) { \</span>
+<span class='curline'><a href='../S/777.html#L224'>mysql</a>             224 ext/mysqli/php_mysqli_structs.h 	mysql_set_server_option(mysql-&gt;mysql, MYSQL_OPTION_MULTI_STATEMENTS_ON); \</span>
+<span class='curline'><a href='../S/777.html#L225'>mysql</a>             225 ext/mysqli/php_mysqli_structs.h 	mysql-&gt;multi_query = 1; \</span>
+<span class='curline'><a href='../S/777.html#L287'>mysql</a>             287 ext/mysqli/php_mysqli_structs.h 	if (!(__ptr)-&gt;mysql) { \</span>
+<span class='curline'><a href='../S/941.html#L802'>mysql</a>             802 ext/pdo_mysql/mysql_driver.c 	PDO_DRIVER_HEADER(mysql),</span>
+</pre>
+</body>
+</html>

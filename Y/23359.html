@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>inpos</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/1112.html#L392'>inpos</a>             392 ext/standard/formatted_print.c 	int argc, size = 240, inpos = 0, outpos = 0, temppos;</span>
+<span class='curline'><a href='../S/1112.html#L440'>inpos</a>             440 ext/standard/formatted_print.c 	while (inpos&lt;format_len) {</span>
+<span class='curline'><a href='../S/1112.html#L444'>inpos</a>             444 ext/standard/formatted_print.c 		PRINTF_DEBUG(("sprintf: format[%d]='%c'\n", inpos, format[inpos]));</span>
+<span class='curline'><a href='../S/1112.html#L446'>inpos</a>             446 ext/standard/formatted_print.c 		if (format[inpos] != '%') {</span>
+<span class='curline'><a href='../S/1112.html#L447'>inpos</a>             447 ext/standard/formatted_print.c 			php_sprintf_appendchar(&amp;result, &amp;outpos, &amp;size, format[inpos++] TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1112.html#L448'>inpos</a>             448 ext/standard/formatted_print.c 		} else if (format[inpos + 1] == '%') {</span>
+<span class='curline'><a href='../S/1112.html#L450'>inpos</a>             450 ext/standard/formatted_print.c 			inpos += 2;</span>
+<span class='curline'><a href='../S/1112.html#L457'>inpos</a>             457 ext/standard/formatted_print.c 			inpos++;			/* skip the '%' */</span>
+<span class='curline'><a href='../S/1112.html#L460'>inpos</a>             460 ext/standard/formatted_print.c 						  format[inpos], inpos));</span>
+<span class='curline'><a href='../S/1112.html#L461'>inpos</a>             461 ext/standard/formatted_print.c 			if (isascii((int)format[inpos]) &amp;&amp; !isalpha((int)format[inpos])) {</span>
+<span class='curline'><a href='../S/1112.html#L463'>inpos</a>             463 ext/standard/formatted_print.c 				temppos = inpos;</span>
+<span class='curline'><a href='../S/1112.html#L466'>inpos</a>             466 ext/standard/formatted_print.c 					argnum = php_sprintf_getnumber(format, &amp;inpos);</span>
+<span class='curline'><a href='../S/1112.html#L476'>inpos</a>             476 ext/standard/formatted_print.c 					inpos++;  /* skip the '$' */</span>
+<span class='curline'><a href='../S/1112.html#L486'>inpos</a>             486 ext/standard/formatted_print.c 							  format[inpos], inpos));</span>
+<span class='curline'><a href='../S/1112.html#L487'>inpos</a>             487 ext/standard/formatted_print.c 				for (;; inpos++) {</span>
+<span class='curline'><a href='../S/1112.html#L488'>inpos</a>             488 ext/standard/formatted_print.c 					if (format[inpos] == ' ' || format[inpos] == '0') {</span>
+<span class='curline'><a href='../S/1112.html#L489'>inpos</a>             489 ext/standard/formatted_print.c 						padding = format[inpos];</span>
+<span class='curline'><a href='../S/1112.html#L490'>inpos</a>             490 ext/standard/formatted_print.c 					} else if (format[inpos] == '-') {</span>
+<span class='curline'><a href='../S/1112.html#L493'>inpos</a>             493 ext/standard/formatted_print.c 					} else if (format[inpos] == '+') {</span>
+<span class='curline'><a href='../S/1112.html#L495'>inpos</a>             495 ext/standard/formatted_print.c 					} else if (format[inpos] == '\'' &amp;&amp; inpos+1&lt;format_len) {</span>
+<span class='curline'><a href='../S/1112.html#L496'>inpos</a>             496 ext/standard/formatted_print.c 						padding = format[++inpos];</span>
+<span class='curline'><a href='../S/1112.html#L508'>inpos</a>             508 ext/standard/formatted_print.c 				if (isdigit((int)format[inpos])) {</span>
+<span class='curline'><a href='../S/1112.html#L510'>inpos</a>             510 ext/standard/formatted_print.c 					if ((width = php_sprintf_getnumber(format, &amp;inpos)) &lt; 0) {</span>
+<span class='curline'><a href='../S/1112.html#L523'>inpos</a>             523 ext/standard/formatted_print.c 				if (format[inpos] == '.') {</span>
+<span class='curline'><a href='../S/1112.html#L524'>inpos</a>             524 ext/standard/formatted_print.c 					inpos++;</span>
+<span class='curline'><a href='../S/1112.html#L526'>inpos</a>             526 ext/standard/formatted_print.c 					if (isdigit((int)format[inpos])) {</span>
+<span class='curline'><a href='../S/1112.html#L527'>inpos</a>             527 ext/standard/formatted_print.c 						if ((precision = php_sprintf_getnumber(format, &amp;inpos)) &lt; 0) {</span>
+<span class='curline'><a href='../S/1112.html#L554'>inpos</a>             554 ext/standard/formatted_print.c 			if (format[inpos] == 'l') {</span>
+<span class='curline'><a href='../S/1112.html#L555'>inpos</a>             555 ext/standard/formatted_print.c 				inpos++;</span>
+<span class='curline'><a href='../S/1112.html#L557'>inpos</a>             557 ext/standard/formatted_print.c 			PRINTF_DEBUG(("sprintf: format character='%c'\n", format[inpos]));</span>
+<span class='curline'><a href='../S/1112.html#L569'>inpos</a>             569 ext/standard/formatted_print.c 			switch (format[inpos]) {</span>
+<span class='curline'><a href='../S/1112.html#L618'>inpos</a>             618 ext/standard/formatted_print.c 											 format[inpos], always_sign</span>
+<span class='curline'><a href='../S/1112.html#L670'>inpos</a>             670 ext/standard/formatted_print.c 			inpos++;</span>
+</pre>
+</body>
+</html>

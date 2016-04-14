@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>win32/flock.c</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<a id='TOP' name='TOP'></a><h2 class='header'><a href='../mains.html'>root</a>/<a href='../files/1901.html'>win32</a>/flock.c</h2>
+<em class='comment'>/* [&lt;][&gt;]<a href='#L55'>[^]</a>[v][top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+<hr />
+<h2 class='header'>DEFINITIONS</h2>
+This source file includes following definitions.
+<ol>
+<li><a href='#L55' title='Defined at 55.'>flock</a></li>
+</ol>
+<hr />
+<pre>
+<a id='L1' name='L1'></a>   1 <em class='comment'>/*</em>
+<a id='L2' name='L2'></a>   2 <em class='comment'> * Program:   Unix compatibility routines</em>
+<a id='L3' name='L3'></a>   3 <em class='comment'> *</em>
+<a id='L4' name='L4'></a>   4 <em class='comment'> * Author:  Mark Crispin</em>
+<a id='L5' name='L5'></a>   5 <em class='comment'> *      Networks and Distributed Computing</em>
+<a id='L6' name='L6'></a>   6 <em class='comment'> *      Computing &amp; Communications</em>
+<a id='L7' name='L7'></a>   7 <em class='comment'> *      University of Washington</em>
+<a id='L8' name='L8'></a>   8 <em class='comment'> *      Administration Building, AG-44</em>
+<a id='L9' name='L9'></a>   9 <em class='comment'> *      Seattle, WA  98195</em>
+<a id='L10' name='L10'></a>  10 <em class='comment'> *      Internet: MRC@CAC.Washington.EDU</em>
+<a id='L11' name='L11'></a>  11 <em class='comment'> *</em>
+<a id='L12' name='L12'></a>  12 <em class='comment'> * Date:    14 September 1996</em>
+<a id='L13' name='L13'></a>  13 <em class='comment'> * Last Edited: 14 August 1997</em>
+<a id='L14' name='L14'></a>  14 <em class='comment'> *</em>
+<a id='L15' name='L15'></a>  15 <em class='comment'> * Copyright 1997 by the University of Washington</em>
+<a id='L16' name='L16'></a>  16 <em class='comment'> *</em>
+<a id='L17' name='L17'></a>  17 <em class='comment'> *  Permission to use, copy, modify, and distribute this software and its</em>
+<a id='L18' name='L18'></a>  18 <em class='comment'> * documentation for any purpose and without fee is hereby granted, provided</em>
+<a id='L19' name='L19'></a>  19 <em class='comment'> * that the above copyright notice appears in all copies and that both the</em>
+<a id='L20' name='L20'></a>  20 <em class='comment'> * above copyright notice and this permission notice appear in supporting</em>
+<a id='L21' name='L21'></a>  21 <em class='comment'> * documentation, and that the name of the University of Washington not be</em>
+<a id='L22' name='L22'></a>  22 <em class='comment'> * used in advertising or publicity pertaining to distribution of the software</em>
+<a id='L23' name='L23'></a>  23 <em class='comment'> * without specific, written prior permission.  This software is made available</em>
+<a id='L24' name='L24'></a>  24 <em class='comment'> * "as is", and</em>
+<a id='L25' name='L25'></a>  25 <em class='comment'> * THE UNIVERSITY OF WASHINGTON DISCLAIMS ALL WARRANTIES, EXPRESS OR IMPLIED,</em>
+<a id='L26' name='L26'></a>  26 <em class='comment'> * WITH REGARD TO THIS SOFTWARE, INCLUDING WITHOUT LIMITATION ALL IMPLIED</em>
+<a id='L27' name='L27'></a>  27 <em class='comment'> * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE, AND IN</em>
+<a id='L28' name='L28'></a>  28 <em class='comment'> * NO EVENT SHALL THE UNIVERSITY OF WASHINGTON BE LIABLE FOR ANY SPECIAL,</em>
+<a id='L29' name='L29'></a>  29 <em class='comment'> * INDIRECT OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM</em>
+<a id='L30' name='L30'></a>  30 <em class='comment'> * LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, TORT</em>
+<a id='L31' name='L31'></a>  31 <em class='comment'> * (INCLUDING NEGLIGENCE) OR STRICT LIABILITY, ARISING OUT OF OR IN CONNECTION</em>
+<a id='L32' name='L32'></a>  32 <em class='comment'> * WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.</em>
+<a id='L33' name='L33'></a>  33 <em class='comment'> *</em>
+<a id='L34' name='L34'></a>  34 <em class='comment'> */</em>
+<a id='L35' name='L35'></a>  35 
+<a id='L36' name='L36'></a>  36 
+<a id='L37' name='L37'></a>  37 <em class='comment'>/*              DEDICATION</em>
+<a id='L38' name='L38'></a>  38 <em class='comment'></em>
+<a id='L39' name='L39'></a>  39 <em class='comment'> *  This file is dedicated to my dog, Unix, also known as Yun-chan and</em>
+<a id='L40' name='L40'></a>  40 <em class='comment'> * Unix J. Terwilliker Jehosophat Aloysius Monstrosity Animal Beast.  Unix</em>
+<a id='L41' name='L41'></a>  41 <em class='comment'> * passed away at the age of 11 1/2 on September 14, 1996, 12:18 PM PDT, after</em>
+<a id='L42' name='L42'></a>  42 <em class='comment'> * a two-month bout with cirrhosis of the liver.</em>
+<a id='L43' name='L43'></a>  43 <em class='comment'> *</em>
+<a id='L44' name='L44'></a>  44 <em class='comment'> *  He was a dear friend, and I miss him terribly.</em>
+<a id='L45' name='L45'></a>  45 <em class='comment'> *</em>
+<a id='L46' name='L46'></a>  46 <em class='comment'> *  Lift a leg, Yunie.  Luv ya forever!!!!</em>
+<a id='L47' name='L47'></a>  47 <em class='comment'> */</em>
+<a id='L48' name='L48'></a>  48 
+<a id='L49' name='L49'></a>  49 <em class='sharp'>#include</em> "<a href='1368.html'>php.h</a>"
+<a id='L50' name='L50'></a>  50 <em class='sharp'>#include</em> &lt;windows.h&gt;
+<a id='L51' name='L51'></a>  51 <em class='sharp'>#include</em> &lt;io.h&gt;
+<a id='L52' name='L52'></a>  52 <em class='sharp'>#include</em> &lt;errno.h&gt;
+<a id='L53' name='L53'></a>  53 <em class='sharp'>#include</em> "<a href='1607.html'>flock.h</a>"
+<a id='L54' name='L54'></a>  54 
+<a id='L55' name='L55'></a>  55 <a href='../D/7744.html' title='Multiple defined in 14 places.'>PHPAPI</a> <strong class='reserved'>int</strong> <a href='../R/18862.html' title='Multiple referred from 35 places.'>flock</a>(<strong class='reserved'>int</strong> <a href='../Y/17724.html' title='Multiple used in 1039 places.'>fd</a>, <strong class='reserved'>int</strong> <a href='../D/25213.html' title='Multiple defined in 2 places.'>op</a>)
+<a id='L56' name='L56'></a>  56 <em class='brace'>{</em>
+<a id='L57' name='L57'></a>  57         <a href='../Y/2568.html' title='Multiple used in 137 places.'>HANDLE</a> <a href='../Y/19940.html' title='Multiple used in 46 places.'>hdl</a> = (<a href='../Y/2568.html' title='Multiple used in 137 places.'>HANDLE</a>) <a href='../Y/7839.html' title='Multiple used in 18 places.'>_get_osfhandle</a>(<a href='../Y/17724.html' title='Multiple used in 1039 places.'>fd</a>);
+<a id='L58' name='L58'></a>  58         <a href='../D/1870.html' title='Multiple defined in 2 places.'>DWORD</a> <a href='../Y/25530.html' title='Multiple used in 98 places.'>low</a> = 1, <a href='../Y/20058.html' title='Multiple used in 76 places.'>high</a> = 0;
+<a id='L59' name='L59'></a>  59         <a href='../Y/4415.html' title='Multiple used in 12 places.'>OVERLAPPED</a> <a href='../D/25061.html' title='Multiple defined in 3 places.'>offset</a> =
+<a id='L60' name='L60'></a>  60         <em class='brace'>{</em>0, 0, 0, 0, <a href='../D/6086.html' title='Multiple defined in 8 places.'>NULL</a><em class='brace'>}</em>;
+<a id='L61' name='L61'></a>  61         <strong class='reserved'>if</strong> (<a href='../Y/19940.html' title='Multiple used in 46 places.'>hdl</a> &lt; 0)
+<a id='L62' name='L62'></a>  62                 <strong class='reserved'>return</strong> -1;                              <em class='comment'>/* error in file descriptor */</em>
+<a id='L63' name='L63'></a>  63         <em class='comment'>/* bug for bug compatible with Unix */</em>
+<a id='L64' name='L64'></a>  64         <a href='../Y/6772.html' title='Multiple used in 3 places.'>UnlockFileEx</a>(<a href='../Y/19940.html' title='Multiple used in 46 places.'>hdl</a>, 0, <a href='../Y/25530.html' title='Multiple used in 98 places.'>low</a>, <a href='../Y/20058.html' title='Multiple used in 76 places.'>high</a>, &amp;<a href='../D/25061.html' title='Multiple defined in 3 places.'>offset</a>);
+<a id='L65' name='L65'></a>  65         <strong class='reserved'>switch</strong> (<a href='../D/25213.html' title='Multiple defined in 2 places.'>op</a> &amp; ~<a href='../D/4524.html' title='Multiple defined in 2 places.'>LOCK_NB</a>) <em class='brace'>{</em>        <em class='comment'>/* translate to LockFileEx() op */</em>
+<a id='L66' name='L66'></a>  66                 <strong class='reserved'>case</strong> <a href='../D/4523.html' title='Multiple defined in 2 places.'>LOCK_EX</a>:                   <em class='comment'>/* exclusive */</em>
+<a id='L67' name='L67'></a>  67                         <strong class='reserved'>if</strong> (<a href='../Y/3680.html' title='Multiple used in 5 places.'>LockFileEx</a>(<a href='../Y/19940.html' title='Multiple used in 46 places.'>hdl</a>, <a href='../S/1067.html#L36095' title='Defined at 36095 in ext/sqlite3/libsqlite/sqlite3.c.'>LOCKFILE_EXCLUSIVE_LOCK</a> +
+<a id='L68' name='L68'></a>  68                                                 ((<a href='../D/25213.html' title='Multiple defined in 2 places.'>op</a> &amp; <a href='../D/4524.html' title='Multiple defined in 2 places.'>LOCK_NB</a>) ? <a href='../S/1067.html#L36091' title='Defined at 36091 in ext/sqlite3/libsqlite/sqlite3.c.'>LOCKFILE_FAIL_IMMEDIATELY</a> : 0),
+<a id='L69' name='L69'></a>  69                                                    0, <a href='../Y/25530.html' title='Multiple used in 98 places.'>low</a>, <a href='../Y/20058.html' title='Multiple used in 76 places.'>high</a>, &amp;<a href='../D/25061.html' title='Multiple defined in 3 places.'>offset</a>))
+<a id='L70' name='L70'></a>  70                                 <strong class='reserved'>return</strong> 0;
+<a id='L71' name='L71'></a>  71                         <strong class='reserved'>break</strong>;
+<a id='L72' name='L72'></a>  72                 <strong class='reserved'>case</strong> <a href='../D/4525.html' title='Multiple defined in 2 places.'>LOCK_SH</a>:                   <em class='comment'>/* shared */</em>
+<a id='L73' name='L73'></a>  73                         <strong class='reserved'>if</strong> (<a href='../Y/3680.html' title='Multiple used in 5 places.'>LockFileEx</a>(<a href='../Y/19940.html' title='Multiple used in 46 places.'>hdl</a>, ((<a href='../D/25213.html' title='Multiple defined in 2 places.'>op</a> &amp; <a href='../D/4524.html' title='Multiple defined in 2 places.'>LOCK_NB</a>) ? <a href='../S/1067.html#L36091' title='Defined at 36091 in ext/sqlite3/libsqlite/sqlite3.c.'>LOCKFILE_FAIL_IMMEDIATELY</a> : 0),
+<a id='L74' name='L74'></a>  74                                                    0, <a href='../Y/25530.html' title='Multiple used in 98 places.'>low</a>, <a href='../Y/20058.html' title='Multiple used in 76 places.'>high</a>, &amp;<a href='../D/25061.html' title='Multiple defined in 3 places.'>offset</a>))
+<a id='L75' name='L75'></a>  75                                 <strong class='reserved'>return</strong> 0;
+<a id='L76' name='L76'></a>  76                         <strong class='reserved'>break</strong>;
+<a id='L77' name='L77'></a>  77                 <strong class='reserved'>case</strong> <a href='../D/4526.html' title='Multiple defined in 2 places.'>LOCK_UN</a>:                   <em class='comment'>/* unlock */</em>
+<a id='L78' name='L78'></a>  78                         <strong class='reserved'>return</strong> 0;                       <em class='comment'>/* always succeeds */</em>
+<a id='L79' name='L79'></a>  79                 <strong class='reserved'>default</strong>:                                <em class='comment'>/* default */</em>
+<a id='L80' name='L80'></a>  80                         <strong class='reserved'>break</strong>;
+<a id='L81' name='L81'></a>  81         <em class='brace'>}</em>
+<a id='L82' name='L82'></a>  82         <a href='../D/21169.html' title='Multiple defined in 2 places.'>errno</a> = <a href='../Y/1691.html' title='Multiple used in 59 places.'>EINVAL</a>;                         <em class='comment'>/* bad call */</em>
+<a id='L83' name='L83'></a>  83         <strong class='reserved'>return</strong> -1;
+<a id='L84' name='L84'></a>  84 <em class='brace'>}</em>
+</pre>
+<hr />
+<a id='BOTTOM' name='BOTTOM'></a>
+<em class='comment'>/* [&lt;][&gt;][^]<a href='#L55'>[v]</a><a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+</body>
+</html>

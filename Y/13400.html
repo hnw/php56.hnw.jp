@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>cgi_sapi_module</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/1449.html#L951'>cgi_sapi_module</a>   951 sapi/cgi/cgi_main.c static sapi_module_struct cgi_sapi_module = {</span>
+<span class='curline'><a href='../S/1449.html#L1806'>cgi_sapi_module</a>  1806 sapi/cgi/cgi_main.c 	sapi_startup(&amp;cgi_sapi_module);</span>
+<span class='curline'><a href='../S/1449.html#L1808'>cgi_sapi_module</a>  1808 sapi/cgi/cgi_main.c 	cgi_sapi_module.php_ini_path_override = NULL;</span>
+<span class='curline'><a href='../S/1449.html#L1846'>cgi_sapi_module</a>  1846 sapi/cgi/cgi_main.c 				if (cgi_sapi_module.php_ini_path_override) {</span>
+<span class='curline'><a href='../S/1449.html#L1847'>cgi_sapi_module</a>  1847 sapi/cgi/cgi_main.c 					free(cgi_sapi_module.php_ini_path_override);</span>
+<span class='curline'><a href='../S/1449.html#L1849'>cgi_sapi_module</a>  1849 sapi/cgi/cgi_main.c 				cgi_sapi_module.php_ini_path_override = strdup(php_optarg);</span>
+<span class='curline'><a href='../S/1449.html#L1852'>cgi_sapi_module</a>  1852 sapi/cgi/cgi_main.c 				cgi_sapi_module.php_ini_ignore = 1;</span>
+<span class='curline'><a href='../S/1449.html#L1862'>cgi_sapi_module</a>  1862 sapi/cgi/cgi_main.c 						cgi_sapi_module.ini_entries = realloc(cgi_sapi_module.ini_entries, ini_entries_len + len + sizeof("\"\"\n\0"));</span>
+<span class='curline'><a href='../S/1449.html#L1863'>cgi_sapi_module</a>  1863 sapi/cgi/cgi_main.c 						memcpy(cgi_sapi_module.ini_entries + ini_entries_len, php_optarg, (val - php_optarg));</span>
+<span class='curline'><a href='../S/1449.html#L1865'>cgi_sapi_module</a>  1865 sapi/cgi/cgi_main.c 						memcpy(cgi_sapi_module.ini_entries + ini_entries_len, "\"", 1);</span>
+<span class='curline'><a href='../S/1449.html#L1867'>cgi_sapi_module</a>  1867 sapi/cgi/cgi_main.c 						memcpy(cgi_sapi_module.ini_entries + ini_entries_len, val, len - (val - php_optarg));</span>
+<span class='curline'><a href='../S/1449.html#L1869'>cgi_sapi_module</a>  1869 sapi/cgi/cgi_main.c 						memcpy(cgi_sapi_module.ini_entries + ini_entries_len, "\"\n\0", sizeof("\"\n\0"));</span>
+<span class='curline'><a href='../S/1449.html#L1872'>cgi_sapi_module</a>  1872 sapi/cgi/cgi_main.c 						cgi_sapi_module.ini_entries = realloc(cgi_sapi_module.ini_entries, ini_entries_len + len + sizeof("\n\0"));</span>
+<span class='curline'><a href='../S/1449.html#L1873'>cgi_sapi_module</a>  1873 sapi/cgi/cgi_main.c 						memcpy(cgi_sapi_module.ini_entries + ini_entries_len, php_optarg, len);</span>
+<span class='curline'><a href='../S/1449.html#L1874'>cgi_sapi_module</a>  1874 sapi/cgi/cgi_main.c 						memcpy(cgi_sapi_module.ini_entries + ini_entries_len + len, "\n\0", sizeof("\n\0"));</span>
+<span class='curline'><a href='../S/1449.html#L1878'>cgi_sapi_module</a>  1878 sapi/cgi/cgi_main.c 					cgi_sapi_module.ini_entries = realloc(cgi_sapi_module.ini_entries, ini_entries_len + len + sizeof("=1\n\0"));</span>
+<span class='curline'><a href='../S/1449.html#L1879'>cgi_sapi_module</a>  1879 sapi/cgi/cgi_main.c 					memcpy(cgi_sapi_module.ini_entries + ini_entries_len, php_optarg, len);</span>
+<span class='curline'><a href='../S/1449.html#L1880'>cgi_sapi_module</a>  1880 sapi/cgi/cgi_main.c 					memcpy(cgi_sapi_module.ini_entries + ini_entries_len + len, "=1\n\0", sizeof("=1\n\0"));</span>
+<span class='curline'><a href='../S/1449.html#L1903'>cgi_sapi_module</a>  1903 sapi/cgi/cgi_main.c 		cgi_sapi_module.ub_write     = sapi_fcgi_ub_write;</span>
+<span class='curline'><a href='../S/1449.html#L1904'>cgi_sapi_module</a>  1904 sapi/cgi/cgi_main.c 		cgi_sapi_module.flush        = sapi_fcgi_flush;</span>
+<span class='curline'><a href='../S/1449.html#L1905'>cgi_sapi_module</a>  1905 sapi/cgi/cgi_main.c 		cgi_sapi_module.read_post    = sapi_fcgi_read_post;</span>
+<span class='curline'><a href='../S/1449.html#L1906'>cgi_sapi_module</a>  1906 sapi/cgi/cgi_main.c 		cgi_sapi_module.getenv       = sapi_fcgi_getenv;</span>
+<span class='curline'><a href='../S/1449.html#L1907'>cgi_sapi_module</a>  1907 sapi/cgi/cgi_main.c 		cgi_sapi_module.read_cookies = sapi_fcgi_read_cookies;</span>
+<span class='curline'><a href='../S/1449.html#L1914'>cgi_sapi_module</a>  1914 sapi/cgi/cgi_main.c 	cgi_sapi_module.executable_location = argv[0];</span>
+<span class='curline'><a href='../S/1449.html#L1916'>cgi_sapi_module</a>  1916 sapi/cgi/cgi_main.c 		cgi_sapi_module.additional_functions = additional_functions;</span>
+<span class='curline'><a href='../S/1449.html#L1920'>cgi_sapi_module</a>  1920 sapi/cgi/cgi_main.c 	if (cgi_sapi_module.startup(&amp;cgi_sapi_module) == FAILURE) {</span>
+<span class='curline'><a href='../S/1449.html#L2563'>cgi_sapi_module</a>  2563 sapi/cgi/cgi_main.c 		if (cgi_sapi_module.php_ini_path_override) {</span>
+<span class='curline'><a href='../S/1449.html#L2564'>cgi_sapi_module</a>  2564 sapi/cgi/cgi_main.c 			free(cgi_sapi_module.php_ini_path_override);</span>
+<span class='curline'><a href='../S/1449.html#L2566'>cgi_sapi_module</a>  2566 sapi/cgi/cgi_main.c 		if (cgi_sapi_module.ini_entries) {</span>
+<span class='curline'><a href='../S/1449.html#L2567'>cgi_sapi_module</a>  2567 sapi/cgi/cgi_main.c 			free(cgi_sapi_module.ini_entries);</span>
+<span class='curline'><a href='../S/1499.html#L873'>cgi_sapi_module</a>   873 sapi/fpm/fpm/fpm_main.c static sapi_module_struct cgi_sapi_module = {</span>
+<span class='curline'><a href='../S/1499.html#L1643'>cgi_sapi_module</a>  1643 sapi/fpm/fpm/fpm_main.c 	sapi_startup(&amp;cgi_sapi_module);</span>
+<span class='curline'><a href='../S/1499.html#L1644'>cgi_sapi_module</a>  1644 sapi/fpm/fpm/fpm_main.c 	cgi_sapi_module.php_ini_path_override = NULL;</span>
+<span class='curline'><a href='../S/1499.html#L1645'>cgi_sapi_module</a>  1645 sapi/fpm/fpm/fpm_main.c 	cgi_sapi_module.php_ini_ignore_cwd = 1;</span>
+<span class='curline'><a href='../S/1499.html#L1659'>cgi_sapi_module</a>  1659 sapi/fpm/fpm/fpm_main.c 				if (cgi_sapi_module.php_ini_path_override) {</span>
+<span class='curline'><a href='../S/1499.html#L1660'>cgi_sapi_module</a>  1660 sapi/fpm/fpm/fpm_main.c 					free(cgi_sapi_module.php_ini_path_override);</span>
+<span class='curline'><a href='../S/1499.html#L1662'>cgi_sapi_module</a>  1662 sapi/fpm/fpm/fpm_main.c 				cgi_sapi_module.php_ini_path_override = strdup(php_optarg);</span>
+<span class='curline'><a href='../S/1499.html#L1666'>cgi_sapi_module</a>  1666 sapi/fpm/fpm/fpm_main.c 				cgi_sapi_module.php_ini_ignore = 1;</span>
+<span class='curline'><a href='../S/1499.html#L1677'>cgi_sapi_module</a>  1677 sapi/fpm/fpm/fpm_main.c 						cgi_sapi_module.ini_entries = realloc(cgi_sapi_module.ini_entries, ini_entries_len + len + sizeof("\"\"\n\0"));</span>
+<span class='curline'><a href='../S/1499.html#L1678'>cgi_sapi_module</a>  1678 sapi/fpm/fpm/fpm_main.c 						memcpy(cgi_sapi_module.ini_entries + ini_entries_len, php_optarg, (val - php_optarg));</span>
+<span class='curline'><a href='../S/1499.html#L1680'>cgi_sapi_module</a>  1680 sapi/fpm/fpm/fpm_main.c 						memcpy(cgi_sapi_module.ini_entries + ini_entries_len, "\"", 1);</span>
+<span class='curline'><a href='../S/1499.html#L1682'>cgi_sapi_module</a>  1682 sapi/fpm/fpm/fpm_main.c 						memcpy(cgi_sapi_module.ini_entries + ini_entries_len, val, len - (val - php_optarg));</span>
+<span class='curline'><a href='../S/1499.html#L1684'>cgi_sapi_module</a>  1684 sapi/fpm/fpm/fpm_main.c 						memcpy(cgi_sapi_module.ini_entries + ini_entries_len, "\"\n\0", sizeof("\"\n\0"));</span>
+<span class='curline'><a href='../S/1499.html#L1687'>cgi_sapi_module</a>  1687 sapi/fpm/fpm/fpm_main.c 						cgi_sapi_module.ini_entries = realloc(cgi_sapi_module.ini_entries, ini_entries_len + len + sizeof("\n\0"));</span>
+<span class='curline'><a href='../S/1499.html#L1688'>cgi_sapi_module</a>  1688 sapi/fpm/fpm/fpm_main.c 						memcpy(cgi_sapi_module.ini_entries + ini_entries_len, php_optarg, len);</span>
+<span class='curline'><a href='../S/1499.html#L1689'>cgi_sapi_module</a>  1689 sapi/fpm/fpm/fpm_main.c 						memcpy(cgi_sapi_module.ini_entries + ini_entries_len + len, "\n\0", sizeof("\n\0"));</span>
+<span class='curline'><a href='../S/1499.html#L1693'>cgi_sapi_module</a>  1693 sapi/fpm/fpm/fpm_main.c 					cgi_sapi_module.ini_entries = realloc(cgi_sapi_module.ini_entries, ini_entries_len + len + sizeof("=1\n\0"));</span>
+<span class='curline'><a href='../S/1499.html#L1694'>cgi_sapi_module</a>  1694 sapi/fpm/fpm/fpm_main.c 					memcpy(cgi_sapi_module.ini_entries + ini_entries_len, php_optarg, len);</span>
+<span class='curline'><a href='../S/1499.html#L1695'>cgi_sapi_module</a>  1695 sapi/fpm/fpm/fpm_main.c 					memcpy(cgi_sapi_module.ini_entries + ini_entries_len + len, "=1\n\0", sizeof("=1\n\0"));</span>
+<span class='curline'><a href='../S/1499.html#L1722'>cgi_sapi_module</a>  1722 sapi/fpm/fpm/fpm_main.c 				cgi_sapi_module.startup(&amp;cgi_sapi_module);</span>
+<span class='curline'><a href='../S/1499.html#L1759'>cgi_sapi_module</a>  1759 sapi/fpm/fpm/fpm_main.c 				cgi_sapi_module.startup(&amp;cgi_sapi_module);</span>
+<span class='curline'><a href='../S/1499.html#L1770'>cgi_sapi_module</a>  1770 sapi/fpm/fpm/fpm_main.c 				cgi_sapi_module.startup(&amp;cgi_sapi_module);</span>
+<span class='curline'><a href='../S/1499.html#L1792'>cgi_sapi_module</a>  1792 sapi/fpm/fpm/fpm_main.c 		cgi_sapi_module.phpinfo_as_text = 1;</span>
+<span class='curline'><a href='../S/1499.html#L1793'>cgi_sapi_module</a>  1793 sapi/fpm/fpm/fpm_main.c 		cgi_sapi_module.startup(&amp;cgi_sapi_module);</span>
+<span class='curline'><a href='../S/1499.html#L1810'>cgi_sapi_module</a>  1810 sapi/fpm/fpm/fpm_main.c 		cgi_sapi_module.startup(&amp;cgi_sapi_module);</span>
+<span class='curline'><a href='../S/1499.html#L1828'>cgi_sapi_module</a>  1828 sapi/fpm/fpm/fpm_main.c 	cgi_sapi_module.additional_functions = additional_functions;</span>
+<span class='curline'><a href='../S/1499.html#L1829'>cgi_sapi_module</a>  1829 sapi/fpm/fpm/fpm_main.c 	cgi_sapi_module.executable_location = argv[0];</span>
+<span class='curline'><a href='../S/1499.html#L1832'>cgi_sapi_module</a>  1832 sapi/fpm/fpm/fpm_main.c 	if (cgi_sapi_module.startup(&amp;cgi_sapi_module) == FAILURE) {</span>
+<span class='curline'><a href='../S/1499.html#L2028'>cgi_sapi_module</a>  2028 sapi/fpm/fpm/fpm_main.c 		if (cgi_sapi_module.php_ini_path_override) {</span>
+<span class='curline'><a href='../S/1499.html#L2029'>cgi_sapi_module</a>  2029 sapi/fpm/fpm/fpm_main.c 			free(cgi_sapi_module.php_ini_path_override);</span>
+<span class='curline'><a href='../S/1499.html#L2031'>cgi_sapi_module</a>  2031 sapi/fpm/fpm/fpm_main.c 		if (cgi_sapi_module.ini_entries) {</span>
+<span class='curline'><a href='../S/1499.html#L2032'>cgi_sapi_module</a>  2032 sapi/fpm/fpm/fpm_main.c 			free(cgi_sapi_module.ini_entries);</span>
+</pre>
+</body>
+</html>

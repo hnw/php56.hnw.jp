@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>ppzv</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/1643.html#L779'>ppzv</a>              779 Zend/zend.h    #define SEPARATE_ZVAL(ppzv)						\</span>
+<span class='curline'><a href='../S/1643.html#L781'>ppzv</a>              781 Zend/zend.h    		if (Z_REFCOUNT_PP((ppzv)) &gt; 1) {		\</span>
+<span class='curline'><a href='../S/1643.html#L783'>ppzv</a>              783 Zend/zend.h    			Z_DELREF_PP(ppzv);					\</span>
+<span class='curline'><a href='../S/1643.html#L785'>ppzv</a>              785 Zend/zend.h    			INIT_PZVAL_COPY(new_zv, *(ppzv));	\</span>
+<span class='curline'><a href='../S/1643.html#L786'>ppzv</a>              786 Zend/zend.h    			*(ppzv) = new_zv;					\</span>
+<span class='curline'><a href='../S/1643.html#L791'>ppzv</a>              791 Zend/zend.h    #define SEPARATE_ZVAL_IF_NOT_REF(ppzv)		\</span>
+<span class='curline'><a href='../S/1643.html#L792'>ppzv</a>              792 Zend/zend.h    	if (!PZVAL_IS_REF(*ppzv)) {				\</span>
+<span class='curline'><a href='../S/1643.html#L793'>ppzv</a>              793 Zend/zend.h    		SEPARATE_ZVAL(ppzv);				\</span>
+<span class='curline'><a href='../S/1643.html#L796'>ppzv</a>              796 Zend/zend.h    #define SEPARATE_ZVAL_TO_MAKE_IS_REF(ppzv)	\</span>
+<span class='curline'><a href='../S/1643.html#L797'>ppzv</a>              797 Zend/zend.h    	if (!PZVAL_IS_REF(*ppzv)) {				\</span>
+<span class='curline'><a href='../S/1643.html#L798'>ppzv</a>              798 Zend/zend.h    		SEPARATE_ZVAL(ppzv);				\</span>
+<span class='curline'><a href='../S/1643.html#L799'>ppzv</a>              799 Zend/zend.h    		Z_SET_ISREF_PP((ppzv));				\</span>
+<span class='curline'><a href='../S/1643.html#L812'>ppzv</a>              812 Zend/zend.h    #define MAKE_COPY_ZVAL(ppzv, pzv) 	\</span>
+<span class='curline'><a href='../S/1643.html#L813'>ppzv</a>              813 Zend/zend.h    	INIT_PZVAL_COPY(pzv, *(ppzv));	\</span>
+<span class='curline'><a href='../S/1721.html#L382'>ppzv</a>              382 Zend/zend_operators.h #define convert_to_ex_master(ppzv, lower_type, upper_type)	\</span>
+<span class='curline'><a href='../S/1721.html#L383'>ppzv</a>              383 Zend/zend_operators.h 	if (Z_TYPE_PP(ppzv)!=IS_##upper_type) {					\</span>
+<span class='curline'><a href='../S/1721.html#L384'>ppzv</a>              384 Zend/zend_operators.h 		SEPARATE_ZVAL_IF_NOT_REF(ppzv);						\</span>
+<span class='curline'><a href='../S/1721.html#L385'>ppzv</a>              385 Zend/zend_operators.h 		convert_to_##lower_type(*ppzv);						\</span>
+<span class='curline'><a href='../S/1721.html#L418'>ppzv</a>              418 Zend/zend_operators.h #define convert_to_explicit_type_ex(ppzv, str_type)	\</span>
+<span class='curline'><a href='../S/1721.html#L419'>ppzv</a>              419 Zend/zend_operators.h 	if (Z_TYPE_PP(ppzv) != str_type) {				\</span>
+<span class='curline'><a href='../S/1721.html#L420'>ppzv</a>              420 Zend/zend_operators.h 		SEPARATE_ZVAL_IF_NOT_REF(ppzv);				\</span>
+<span class='curline'><a href='../S/1721.html#L421'>ppzv</a>              421 Zend/zend_operators.h 		convert_to_explicit_type(*ppzv, str_type);	\</span>
+<span class='curline'><a href='../S/1721.html#L424'>ppzv</a>              424 Zend/zend_operators.h #define convert_to_boolean_ex(ppzv)	convert_to_ex_master(ppzv, boolean, BOOL)</span>
+<span class='curline'><a href='../S/1721.html#L425'>ppzv</a>              425 Zend/zend_operators.h #define convert_to_long_ex(ppzv)	convert_to_ex_master(ppzv, long, LONG)</span>
+<span class='curline'><a href='../S/1721.html#L426'>ppzv</a>              426 Zend/zend_operators.h #define convert_to_double_ex(ppzv)	convert_to_ex_master(ppzv, double, DOUBLE)</span>
+<span class='curline'><a href='../S/1721.html#L427'>ppzv</a>              427 Zend/zend_operators.h #define convert_to_string_ex(ppzv)	convert_to_ex_master(ppzv, string, STRING)</span>
+<span class='curline'><a href='../S/1721.html#L428'>ppzv</a>              428 Zend/zend_operators.h #define convert_to_array_ex(ppzv)	convert_to_ex_master(ppzv, array, ARRAY)</span>
+<span class='curline'><a href='../S/1721.html#L429'>ppzv</a>              429 Zend/zend_operators.h #define convert_to_object_ex(ppzv)	convert_to_ex_master(ppzv, object, OBJECT)</span>
+<span class='curline'><a href='../S/1721.html#L430'>ppzv</a>              430 Zend/zend_operators.h #define convert_to_null_ex(ppzv)	convert_to_ex_master(ppzv, null, NULL)</span>
+<span class='curline'><a href='../S/1721.html#L432'>ppzv</a>              432 Zend/zend_operators.h #define convert_scalar_to_number_ex(ppzv)							\</span>
+<span class='curline'><a href='../S/1721.html#L433'>ppzv</a>              433 Zend/zend_operators.h 	if (Z_TYPE_PP(ppzv)!=IS_LONG &amp;&amp; Z_TYPE_PP(ppzv)!=IS_DOUBLE) {	\</span>
+<span class='curline'><a href='../S/1721.html#L434'>ppzv</a>              434 Zend/zend_operators.h 		if (!Z_ISREF_PP(ppzv)) {									\</span>
+<span class='curline'><a href='../S/1721.html#L435'>ppzv</a>              435 Zend/zend_operators.h 			SEPARATE_ZVAL(ppzv);									\</span>
+<span class='curline'><a href='../S/1721.html#L437'>ppzv</a>              437 Zend/zend_operators.h 		convert_scalar_to_number(*ppzv TSRMLS_CC);					\</span>
+</pre>
+</body>
+</html>

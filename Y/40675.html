@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>varptr</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/1643.html#L831'>varptr</a>            831 Zend/zend.h    #define SEPARATE_ARG_IF_REF(varptr) \</span>
+<span class='curline'><a href='../S/1643.html#L832'>varptr</a>            832 Zend/zend.h    	if (PZVAL_IS_REF(varptr)) { \</span>
+<span class='curline'><a href='../S/1643.html#L833'>varptr</a>            833 Zend/zend.h    		zval *original_var = varptr; \</span>
+<span class='curline'><a href='../S/1643.html#L834'>varptr</a>            834 Zend/zend.h    		ALLOC_ZVAL(varptr); \</span>
+<span class='curline'><a href='../S/1643.html#L835'>varptr</a>            835 Zend/zend.h    		INIT_PZVAL_COPY(varptr, original_var); \</span>
+<span class='curline'><a href='../S/1643.html#L836'>varptr</a>            836 Zend/zend.h    		zval_copy_ctor(varptr); \</span>
+<span class='curline'><a href='../S/1643.html#L838'>varptr</a>            838 Zend/zend.h    		Z_ADDREF_P(varptr); \</span>
+<span class='curline'><a href='../S/1747.html#L3104'>varptr</a>           3104 Zend/zend_vm_def.h 	zval *varptr;</span>
+<span class='curline'><a href='../S/1747.html#L3106'>varptr</a>           3106 Zend/zend_vm_def.h 	varptr = GET_OP1_ZVAL_PTR(BP_VAR_R);</span>
+<span class='curline'><a href='../S/1747.html#L3108'>varptr</a>           3108 Zend/zend_vm_def.h 	if (varptr == &amp;EG(uninitialized_zval)) {</span>
+<span class='curline'><a href='../S/1747.html#L3110'>varptr</a>           3110 Zend/zend_vm_def.h 			Z_DELREF_P(varptr);</span>
+<span class='curline'><a href='../S/1747.html#L3112'>varptr</a>           3112 Zend/zend_vm_def.h 		ALLOC_INIT_ZVAL(varptr);</span>
+<span class='curline'><a href='../S/1747.html#L3113'>varptr</a>           3113 Zend/zend_vm_def.h 	} else if (PZVAL_IS_REF(varptr)) {</span>
+<span class='curline'><a href='../S/1747.html#L3115'>varptr</a>           3115 Zend/zend_vm_def.h 		    (OP1_TYPE == IS_VAR &amp;&amp; Z_REFCOUNT_P(varptr) &gt; 2)) {</span>
+<span class='curline'><a href='../S/1747.html#L3116'>varptr</a>           3116 Zend/zend_vm_def.h 			zval *original_var = varptr;</span>
+<span class='curline'><a href='../S/1747.html#L3118'>varptr</a>           3118 Zend/zend_vm_def.h 			ALLOC_ZVAL(varptr);</span>
+<span class='curline'><a href='../S/1747.html#L3119'>varptr</a>           3119 Zend/zend_vm_def.h 			INIT_PZVAL_COPY(varptr, original_var);</span>
+<span class='curline'><a href='../S/1747.html#L3120'>varptr</a>           3120 Zend/zend_vm_def.h 			zval_copy_ctor(varptr);</span>
+<span class='curline'><a href='../S/1747.html#L3123'>varptr</a>           3123 Zend/zend_vm_def.h 			Z_UNSET_ISREF_P(varptr);</span>
+<span class='curline'><a href='../S/1747.html#L3126'>varptr</a>           3126 Zend/zend_vm_def.h 		Z_ADDREF_P(varptr);</span>
+<span class='curline'><a href='../S/1747.html#L3128'>varptr</a>           3128 Zend/zend_vm_def.h 	zend_vm_stack_push(varptr TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1747.html#L3138'>varptr</a>           3138 Zend/zend_vm_def.h 	zval *varptr;</span>
+<span class='curline'><a href='../S/1747.html#L3151'>varptr</a>           3151 Zend/zend_vm_def.h 	varptr = GET_OP1_ZVAL_PTR(BP_VAR_R);</span>
+<span class='curline'><a href='../S/1747.html#L3154'>varptr</a>           3154 Zend/zend_vm_def.h 	    varptr != &amp;EG(uninitialized_zval) &amp;&amp;</span>
+<span class='curline'><a href='../S/1747.html#L3155'>varptr</a>           3155 Zend/zend_vm_def.h 	    (PZVAL_IS_REF(varptr) || Z_REFCOUNT_P(varptr) == 1)) {</span>
+<span class='curline'><a href='../S/1747.html#L3156'>varptr</a>           3156 Zend/zend_vm_def.h 		Z_SET_ISREF_P(varptr);</span>
+<span class='curline'><a href='../S/1747.html#L3158'>varptr</a>           3158 Zend/zend_vm_def.h 			Z_ADDREF_P(varptr);</span>
+<span class='curline'><a href='../S/1747.html#L3160'>varptr</a>           3160 Zend/zend_vm_def.h 		zend_vm_stack_push(varptr TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1747.html#L3170'>varptr</a>           3170 Zend/zend_vm_def.h 		INIT_PZVAL_COPY(valptr, varptr);</span>
+<span class='curline'><a href='../S/1747.html#L3186'>varptr</a>           3186 Zend/zend_vm_def.h 	zval *varptr;</span>
+<span class='curline'><a href='../S/1747.html#L3196'>varptr</a>           3196 Zend/zend_vm_def.h 		ALLOC_INIT_ZVAL(varptr);</span>
+<span class='curline'><a href='../S/1747.html#L3197'>varptr</a>           3197 Zend/zend_vm_def.h 		zend_vm_stack_push(varptr TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1747.html#L3210'>varptr</a>           3210 Zend/zend_vm_def.h 	varptr = *varptr_ptr;</span>
+<span class='curline'><a href='../S/1747.html#L3211'>varptr</a>           3211 Zend/zend_vm_def.h 	Z_ADDREF_P(varptr);</span>
+<span class='curline'><a href='../S/1747.html#L3212'>varptr</a>           3212 Zend/zend_vm_def.h 	zend_vm_stack_push(varptr TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L13376'>varptr</a>           13376 Zend/zend_vm_execute.h 	zval *varptr;</span>
+<span class='curline'><a href='../S/1748.html#L13378'>varptr</a>           13378 Zend/zend_vm_execute.h 	varptr = _get_zval_ptr_var(opline-&gt;op1.var, execute_data, &amp;free_op1 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L13380'>varptr</a>           13380 Zend/zend_vm_execute.h 	if (varptr == &amp;EG(uninitialized_zval)) {</span>
+<span class='curline'><a href='../S/1748.html#L13382'>varptr</a>           13382 Zend/zend_vm_execute.h 			Z_DELREF_P(varptr);</span>
+<span class='curline'><a href='../S/1748.html#L13384'>varptr</a>           13384 Zend/zend_vm_execute.h 		ALLOC_INIT_ZVAL(varptr);</span>
+<span class='curline'><a href='../S/1748.html#L13385'>varptr</a>           13385 Zend/zend_vm_execute.h 	} else if (PZVAL_IS_REF(varptr)) {</span>
+<span class='curline'><a href='../S/1748.html#L13387'>varptr</a>           13387 Zend/zend_vm_execute.h 		    (IS_VAR == IS_VAR &amp;&amp; Z_REFCOUNT_P(varptr) &gt; 2)) {</span>
+<span class='curline'><a href='../S/1748.html#L13388'>varptr</a>           13388 Zend/zend_vm_execute.h 			zval *original_var = varptr;</span>
+<span class='curline'><a href='../S/1748.html#L13390'>varptr</a>           13390 Zend/zend_vm_execute.h 			ALLOC_ZVAL(varptr);</span>
+<span class='curline'><a href='../S/1748.html#L13391'>varptr</a>           13391 Zend/zend_vm_execute.h 			INIT_PZVAL_COPY(varptr, original_var);</span>
+<span class='curline'><a href='../S/1748.html#L13392'>varptr</a>           13392 Zend/zend_vm_execute.h 			zval_copy_ctor(varptr);</span>
+<span class='curline'><a href='../S/1748.html#L13395'>varptr</a>           13395 Zend/zend_vm_execute.h 			Z_UNSET_ISREF_P(varptr);</span>
+<span class='curline'><a href='../S/1748.html#L13398'>varptr</a>           13398 Zend/zend_vm_execute.h 		Z_ADDREF_P(varptr);</span>
+<span class='curline'><a href='../S/1748.html#L13400'>varptr</a>           13400 Zend/zend_vm_execute.h 	zend_vm_stack_push(varptr TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L13410'>varptr</a>           13410 Zend/zend_vm_execute.h 	zval *varptr;</span>
+<span class='curline'><a href='../S/1748.html#L13423'>varptr</a>           13423 Zend/zend_vm_execute.h 	varptr = _get_zval_ptr_var(opline-&gt;op1.var, execute_data, &amp;free_op1 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L13426'>varptr</a>           13426 Zend/zend_vm_execute.h 	    varptr != &amp;EG(uninitialized_zval) &amp;&amp;</span>
+<span class='curline'><a href='../S/1748.html#L13427'>varptr</a>           13427 Zend/zend_vm_execute.h 	    (PZVAL_IS_REF(varptr) || Z_REFCOUNT_P(varptr) == 1)) {</span>
+<span class='curline'><a href='../S/1748.html#L13428'>varptr</a>           13428 Zend/zend_vm_execute.h 		Z_SET_ISREF_P(varptr);</span>
+<span class='curline'><a href='../S/1748.html#L13430'>varptr</a>           13430 Zend/zend_vm_execute.h 			Z_ADDREF_P(varptr);</span>
+<span class='curline'><a href='../S/1748.html#L13432'>varptr</a>           13432 Zend/zend_vm_execute.h 		zend_vm_stack_push(varptr TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L13442'>varptr</a>           13442 Zend/zend_vm_execute.h 		INIT_PZVAL_COPY(valptr, varptr);</span>
+<span class='curline'><a href='../S/1748.html#L13458'>varptr</a>           13458 Zend/zend_vm_execute.h 	zval *varptr;</span>
+<span class='curline'><a href='../S/1748.html#L13468'>varptr</a>           13468 Zend/zend_vm_execute.h 		ALLOC_INIT_ZVAL(varptr);</span>
+<span class='curline'><a href='../S/1748.html#L13469'>varptr</a>           13469 Zend/zend_vm_execute.h 		zend_vm_stack_push(varptr TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L13482'>varptr</a>           13482 Zend/zend_vm_execute.h 	varptr = *varptr_ptr;</span>
+<span class='curline'><a href='../S/1748.html#L13483'>varptr</a>           13483 Zend/zend_vm_execute.h 	Z_ADDREF_P(varptr);</span>
+<span class='curline'><a href='../S/1748.html#L13484'>varptr</a>           13484 Zend/zend_vm_execute.h 	zend_vm_stack_push(varptr TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L31057'>varptr</a>           31057 Zend/zend_vm_execute.h 	zval *varptr;</span>
+<span class='curline'><a href='../S/1748.html#L31059'>varptr</a>           31059 Zend/zend_vm_execute.h 	varptr = _get_zval_ptr_cv_BP_VAR_R(execute_data, opline-&gt;op1.var TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L31061'>varptr</a>           31061 Zend/zend_vm_execute.h 	if (varptr == &amp;EG(uninitialized_zval)) {</span>
+<span class='curline'><a href='../S/1748.html#L31063'>varptr</a>           31063 Zend/zend_vm_execute.h 			Z_DELREF_P(varptr);</span>
+<span class='curline'><a href='../S/1748.html#L31065'>varptr</a>           31065 Zend/zend_vm_execute.h 		ALLOC_INIT_ZVAL(varptr);</span>
+<span class='curline'><a href='../S/1748.html#L31066'>varptr</a>           31066 Zend/zend_vm_execute.h 	} else if (PZVAL_IS_REF(varptr)) {</span>
+<span class='curline'><a href='../S/1748.html#L31068'>varptr</a>           31068 Zend/zend_vm_execute.h 		    (IS_CV == IS_VAR &amp;&amp; Z_REFCOUNT_P(varptr) &gt; 2)) {</span>
+<span class='curline'><a href='../S/1748.html#L31069'>varptr</a>           31069 Zend/zend_vm_execute.h 			zval *original_var = varptr;</span>
+<span class='curline'><a href='../S/1748.html#L31071'>varptr</a>           31071 Zend/zend_vm_execute.h 			ALLOC_ZVAL(varptr);</span>
+<span class='curline'><a href='../S/1748.html#L31072'>varptr</a>           31072 Zend/zend_vm_execute.h 			INIT_PZVAL_COPY(varptr, original_var);</span>
+<span class='curline'><a href='../S/1748.html#L31073'>varptr</a>           31073 Zend/zend_vm_execute.h 			zval_copy_ctor(varptr);</span>
+<span class='curline'><a href='../S/1748.html#L31076'>varptr</a>           31076 Zend/zend_vm_execute.h 			Z_UNSET_ISREF_P(varptr);</span>
+<span class='curline'><a href='../S/1748.html#L31079'>varptr</a>           31079 Zend/zend_vm_execute.h 		Z_ADDREF_P(varptr);</span>
+<span class='curline'><a href='../S/1748.html#L31081'>varptr</a>           31081 Zend/zend_vm_execute.h 	zend_vm_stack_push(varptr TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L31091'>varptr</a>           31091 Zend/zend_vm_execute.h 	zval *varptr;</span>
+<span class='curline'><a href='../S/1748.html#L31104'>varptr</a>           31104 Zend/zend_vm_execute.h 	varptr = _get_zval_ptr_cv_BP_VAR_R(execute_data, opline-&gt;op1.var TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L31107'>varptr</a>           31107 Zend/zend_vm_execute.h 	    varptr != &amp;EG(uninitialized_zval) &amp;&amp;</span>
+<span class='curline'><a href='../S/1748.html#L31108'>varptr</a>           31108 Zend/zend_vm_execute.h 	    (PZVAL_IS_REF(varptr) || Z_REFCOUNT_P(varptr) == 1)) {</span>
+<span class='curline'><a href='../S/1748.html#L31109'>varptr</a>           31109 Zend/zend_vm_execute.h 		Z_SET_ISREF_P(varptr);</span>
+<span class='curline'><a href='../S/1748.html#L31111'>varptr</a>           31111 Zend/zend_vm_execute.h 			Z_ADDREF_P(varptr);</span>
+<span class='curline'><a href='../S/1748.html#L31113'>varptr</a>           31113 Zend/zend_vm_execute.h 		zend_vm_stack_push(varptr TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L31123'>varptr</a>           31123 Zend/zend_vm_execute.h 		INIT_PZVAL_COPY(valptr, varptr);</span>
+<span class='curline'><a href='../S/1748.html#L31139'>varptr</a>           31139 Zend/zend_vm_execute.h 	zval *varptr;</span>
+<span class='curline'><a href='../S/1748.html#L31149'>varptr</a>           31149 Zend/zend_vm_execute.h 		ALLOC_INIT_ZVAL(varptr);</span>
+<span class='curline'><a href='../S/1748.html#L31150'>varptr</a>           31150 Zend/zend_vm_execute.h 		zend_vm_stack_push(varptr TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L31163'>varptr</a>           31163 Zend/zend_vm_execute.h 	varptr = *varptr_ptr;</span>
+<span class='curline'><a href='../S/1748.html#L31164'>varptr</a>           31164 Zend/zend_vm_execute.h 	Z_ADDREF_P(varptr);</span>
+<span class='curline'><a href='../S/1748.html#L31165'>varptr</a>           31165 Zend/zend_vm_execute.h 	zend_vm_stack_push(varptr TSRMLS_CC);</span>
+</pre>
+</body>
+</html>

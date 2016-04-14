@@ -1,0 +1,527 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>method</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/1643.html#L515'>method</a>            515 Zend/zend.h    	union _zend_function *(*get_static_method)(zend_class_entry *ce, char* method, int method_len TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1646.html#L3091'>method</a>           3091 Zend/zend_API.c 				zval **method = NULL;</span>
+<span class='curline'><a href='../S/1646.html#L3097'>method</a>           3097 Zend/zend_API.c 					zend_hash_index_find(Z_ARRVAL_P(callable), 1, (void **) &amp;method);</span>
+<span class='curline'><a href='../S/1646.html#L3099'>method</a>           3099 Zend/zend_API.c 				if (obj &amp;&amp; method &amp;&amp;</span>
+<span class='curline'><a href='../S/1646.html#L3102'>method</a>           3102 Zend/zend_API.c 					Z_TYPE_PP(method) == IS_STRING) {</span>
+<span class='curline'><a href='../S/1646.html#L3108'>method</a>           3108 Zend/zend_API.c 							*callable_name_len = Z_STRLEN_PP(obj) + Z_STRLEN_PP(method) + sizeof("::") - 1;</span>
+<span class='curline'><a href='../S/1646.html#L3114'>method</a>           3114 Zend/zend_API.c 							memcpy(ptr, Z_STRVAL_PP(method), Z_STRLEN_PP(method) + 1);</span>
+<span class='curline'><a href='../S/1646.html#L3138'>method</a>           3138 Zend/zend_API.c 							*callable_name_len = fcc-&gt;calling_scope-&gt;name_length + Z_STRLEN_PP(method) + sizeof("::") - 1;</span>
+<span class='curline'><a href='../S/1646.html#L3144'>method</a>           3144 Zend/zend_API.c 							memcpy(ptr, Z_STRVAL_PP(method), Z_STRLEN_PP(method) + 1);</span>
+<span class='curline'><a href='../S/1646.html#L3153'>method</a>           3153 Zend/zend_API.c 					ret = zend_is_callable_check_func(check_flags, *method, fcc, strict_class, error TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1647.html#L530'>method</a>            530 Zend/zend_API.h #define add_method(arg, key, method)	add_assoc_function((arg), (key), (method))</span>
+<span class='curline'><a href='../S/1651.html#L163'>method</a>            163 Zend/zend_builtin_functions.c 	ZEND_ARG_INFO(0, method)</span>
+<span class='curline'><a href='../S/1701.html#L1123'>method</a>           1123 Zend/zend_language_parser.y 	|	method '[' dim_offset ']' { $1.EA = ZEND_PARSED_METHOD_CALL; fetch_array_dim(&amp;$$, &amp;$1, &amp;$3 TSRMLS_CC); }</span>
+<span class='curline'><a href='../S/1701.html#L1126'>method</a>           1126 Zend/zend_language_parser.y method:</span>
+<span class='curline'><a href='../S/1701.html#L1132'>method</a>           1132 Zend/zend_language_parser.y 		method						{ $$ = $1; $$.EA = ZEND_PARSED_METHOD_CALL; zend_do_push_object(&amp;$$ TSRMLS_CC); }</span>
+<span class='curline'><a href='../S/1714.html#L90'>method</a>             90 Zend/zend_object_handlers.h typedef int (*zend_object_call_method_t)(const char *method, INTERNAL_FUNCTION_PARAMETERS);</span>
+<span class='curline'><a href='../S/1714.html#L91'>method</a>             91 Zend/zend_object_handlers.h typedef union _zend_function *(*zend_object_get_method_t)(zval **object_ptr, char *method, int method_len, const struct _zend_literal *key TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1747.html#L2711'>method</a>           2711 Zend/zend_vm_def.h 			zval **method = NULL;</span>
+<span class='curline'><a href='../S/1747.html#L2715'>method</a>           2715 Zend/zend_vm_def.h 			zend_hash_index_find(Z_ARRVAL_P(function_name), 1, (void **) &amp;method);</span>
+<span class='curline'><a href='../S/1747.html#L2717'>method</a>           2717 Zend/zend_vm_def.h 			if (!obj || !method) {</span>
+<span class='curline'><a href='../S/1747.html#L2725'>method</a>           2725 Zend/zend_vm_def.h 			if (Z_TYPE_PP(method) != IS_STRING) {</span>
+<span class='curline'><a href='../S/1747.html#L2739'>method</a>           2739 Zend/zend_vm_def.h 					call-&gt;fbc = ce-&gt;get_static_method(ce, Z_STRVAL_PP(method), Z_STRLEN_PP(method) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1747.html#L2741'>method</a>           2741 Zend/zend_vm_def.h 					call-&gt;fbc = zend_std_get_static_method(ce, Z_STRVAL_PP(method), Z_STRLEN_PP(method), NULL TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1747.html#L2747'>method</a>           2747 Zend/zend_vm_def.h 				call-&gt;fbc = Z_OBJ_HT_P(call-&gt;object)-&gt;get_method(&amp;call-&gt;object, Z_STRVAL_PP(method), Z_STRLEN_PP(method), NULL TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1747.html#L2749'>method</a>           2749 Zend/zend_vm_def.h 					zend_error_noreturn(E_ERROR, "Call to undefined method %s::%s()", Z_OBJ_CLASS_NAME_P(call-&gt;object), Z_STRVAL_PP(method));</span>
+<span class='curline'><a href='../S/1747.html#L2768'>method</a>           2768 Zend/zend_vm_def.h 				zend_error_noreturn(E_ERROR, "Call to undefined method %s::%s()", ce-&gt;name, Z_STRVAL_PP(method));</span>
+<span class='curline'><a href='../S/1748.html#L1515'>method</a>           1515 Zend/zend_vm_execute.h 			zval **method = NULL;</span>
+<span class='curline'><a href='../S/1748.html#L1519'>method</a>           1519 Zend/zend_vm_execute.h 			zend_hash_index_find(Z_ARRVAL_P(function_name), 1, (void **) &amp;method);</span>
+<span class='curline'><a href='../S/1748.html#L1521'>method</a>           1521 Zend/zend_vm_execute.h 			if (!obj || !method) {</span>
+<span class='curline'><a href='../S/1748.html#L1529'>method</a>           1529 Zend/zend_vm_execute.h 			if (Z_TYPE_PP(method) != IS_STRING) {</span>
+<span class='curline'><a href='../S/1748.html#L1543'>method</a>           1543 Zend/zend_vm_execute.h 					call-&gt;fbc = ce-&gt;get_static_method(ce, Z_STRVAL_PP(method), Z_STRLEN_PP(method) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L1545'>method</a>           1545 Zend/zend_vm_execute.h 					call-&gt;fbc = zend_std_get_static_method(ce, Z_STRVAL_PP(method), Z_STRLEN_PP(method), NULL TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L1551'>method</a>           1551 Zend/zend_vm_execute.h 				call-&gt;fbc = Z_OBJ_HT_P(call-&gt;object)-&gt;get_method(&amp;call-&gt;object, Z_STRVAL_PP(method), Z_STRLEN_PP(method), NULL TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L1553'>method</a>           1553 Zend/zend_vm_execute.h 					zend_error_noreturn(E_ERROR, "Call to undefined method %s::%s()", Z_OBJ_CLASS_NAME_P(call-&gt;object), Z_STRVAL_PP(method));</span>
+<span class='curline'><a href='../S/1748.html#L1572'>method</a>           1572 Zend/zend_vm_execute.h 				zend_error_noreturn(E_ERROR, "Call to undefined method %s::%s()", ce-&gt;name, Z_STRVAL_PP(method));</span>
+<span class='curline'><a href='../S/1748.html#L1859'>method</a>           1859 Zend/zend_vm_execute.h 			zval **method = NULL;</span>
+<span class='curline'><a href='../S/1748.html#L1863'>method</a>           1863 Zend/zend_vm_execute.h 			zend_hash_index_find(Z_ARRVAL_P(function_name), 1, (void **) &amp;method);</span>
+<span class='curline'><a href='../S/1748.html#L1865'>method</a>           1865 Zend/zend_vm_execute.h 			if (!obj || !method) {</span>
+<span class='curline'><a href='../S/1748.html#L1873'>method</a>           1873 Zend/zend_vm_execute.h 			if (Z_TYPE_PP(method) != IS_STRING) {</span>
+<span class='curline'><a href='../S/1748.html#L1887'>method</a>           1887 Zend/zend_vm_execute.h 					call-&gt;fbc = ce-&gt;get_static_method(ce, Z_STRVAL_PP(method), Z_STRLEN_PP(method) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L1889'>method</a>           1889 Zend/zend_vm_execute.h 					call-&gt;fbc = zend_std_get_static_method(ce, Z_STRVAL_PP(method), Z_STRLEN_PP(method), NULL TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L1895'>method</a>           1895 Zend/zend_vm_execute.h 				call-&gt;fbc = Z_OBJ_HT_P(call-&gt;object)-&gt;get_method(&amp;call-&gt;object, Z_STRVAL_PP(method), Z_STRLEN_PP(method), NULL TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L1897'>method</a>           1897 Zend/zend_vm_execute.h 					zend_error_noreturn(E_ERROR, "Call to undefined method %s::%s()", Z_OBJ_CLASS_NAME_P(call-&gt;object), Z_STRVAL_PP(method));</span>
+<span class='curline'><a href='../S/1748.html#L1916'>method</a>           1916 Zend/zend_vm_execute.h 				zend_error_noreturn(E_ERROR, "Call to undefined method %s::%s()", ce-&gt;name, Z_STRVAL_PP(method));</span>
+<span class='curline'><a href='../S/1748.html#L2058'>method</a>           2058 Zend/zend_vm_execute.h 			zval **method = NULL;</span>
+<span class='curline'><a href='../S/1748.html#L2062'>method</a>           2062 Zend/zend_vm_execute.h 			zend_hash_index_find(Z_ARRVAL_P(function_name), 1, (void **) &amp;method);</span>
+<span class='curline'><a href='../S/1748.html#L2064'>method</a>           2064 Zend/zend_vm_execute.h 			if (!obj || !method) {</span>
+<span class='curline'><a href='../S/1748.html#L2072'>method</a>           2072 Zend/zend_vm_execute.h 			if (Z_TYPE_PP(method) != IS_STRING) {</span>
+<span class='curline'><a href='../S/1748.html#L2086'>method</a>           2086 Zend/zend_vm_execute.h 					call-&gt;fbc = ce-&gt;get_static_method(ce, Z_STRVAL_PP(method), Z_STRLEN_PP(method) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L2088'>method</a>           2088 Zend/zend_vm_execute.h 					call-&gt;fbc = zend_std_get_static_method(ce, Z_STRVAL_PP(method), Z_STRLEN_PP(method), NULL TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L2094'>method</a>           2094 Zend/zend_vm_execute.h 				call-&gt;fbc = Z_OBJ_HT_P(call-&gt;object)-&gt;get_method(&amp;call-&gt;object, Z_STRVAL_PP(method), Z_STRLEN_PP(method), NULL TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L2096'>method</a>           2096 Zend/zend_vm_execute.h 					zend_error_noreturn(E_ERROR, "Call to undefined method %s::%s()", Z_OBJ_CLASS_NAME_P(call-&gt;object), Z_STRVAL_PP(method));</span>
+<span class='curline'><a href='../S/1748.html#L2115'>method</a>           2115 Zend/zend_vm_execute.h 				zend_error_noreturn(E_ERROR, "Call to undefined method %s::%s()", ce-&gt;name, Z_STRVAL_PP(method));</span>
+<span class='curline'><a href='../S/1748.html#L2294'>method</a>           2294 Zend/zend_vm_execute.h 			zval **method = NULL;</span>
+<span class='curline'><a href='../S/1748.html#L2298'>method</a>           2298 Zend/zend_vm_execute.h 			zend_hash_index_find(Z_ARRVAL_P(function_name), 1, (void **) &amp;method);</span>
+<span class='curline'><a href='../S/1748.html#L2300'>method</a>           2300 Zend/zend_vm_execute.h 			if (!obj || !method) {</span>
+<span class='curline'><a href='../S/1748.html#L2308'>method</a>           2308 Zend/zend_vm_execute.h 			if (Z_TYPE_PP(method) != IS_STRING) {</span>
+<span class='curline'><a href='../S/1748.html#L2322'>method</a>           2322 Zend/zend_vm_execute.h 					call-&gt;fbc = ce-&gt;get_static_method(ce, Z_STRVAL_PP(method), Z_STRLEN_PP(method) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L2324'>method</a>           2324 Zend/zend_vm_execute.h 					call-&gt;fbc = zend_std_get_static_method(ce, Z_STRVAL_PP(method), Z_STRLEN_PP(method), NULL TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L2330'>method</a>           2330 Zend/zend_vm_execute.h 				call-&gt;fbc = Z_OBJ_HT_P(call-&gt;object)-&gt;get_method(&amp;call-&gt;object, Z_STRVAL_PP(method), Z_STRLEN_PP(method), NULL TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L2332'>method</a>           2332 Zend/zend_vm_execute.h 					zend_error_noreturn(E_ERROR, "Call to undefined method %s::%s()", Z_OBJ_CLASS_NAME_P(call-&gt;object), Z_STRVAL_PP(method));</span>
+<span class='curline'><a href='../S/1748.html#L2351'>method</a>           2351 Zend/zend_vm_execute.h 				zend_error_noreturn(E_ERROR, "Call to undefined method %s::%s()", ce-&gt;name, Z_STRVAL_PP(method));</span>
+<span class='curline'><a href='../S/34.html#L127'>method</a>            127 ext/calendar/calendar.c 	ZEND_ARG_INFO(0, method)</span>
+<span class='curline'><a href='../S/36.html#L34'>method</a>             34 ext/calendar/easter.c 	long method = CAL_EASTER_DEFAULT;</span>
+<span class='curline'><a href='../S/36.html#L50'>method</a>             50 ext/calendar/easter.c 		"|ll", &amp;year, &amp;method) == FAILURE) {</span>
+<span class='curline'><a href='../S/36.html#L61'>method</a>             61 ext/calendar/easter.c 	if ((year &lt;= 1582 &amp;&amp; method != CAL_EASTER_ALWAYS_GREGORIAN) ||</span>
+<span class='curline'><a href='../S/36.html#L62'>method</a>             62 ext/calendar/easter.c 	    (year &gt;= 1583 &amp;&amp; year &lt;= 1752 &amp;&amp; method != CAL_EASTER_ROMAN &amp;&amp; method != CAL_EASTER_ALWAYS_GREGORIAN) ||</span>
+<span class='curline'><a href='../S/36.html#L63'>method</a>             63 ext/calendar/easter.c 	     method == CAL_EASTER_ALWAYS_JULIAN) {		/* JULIAN CALENDAR */</span>
+<span class='curline'><a href='../S/46.html#L367'>method</a>            367 ext/com_dotnet/com_handlers.c static int com_call_method(const char *method, INTERNAL_FUNCTION_PARAMETERS)</span>
+<span class='curline'><a href='../S/46.html#L390'>method</a>            390 ext/com_dotnet/com_handlers.c 	if (SUCCESS == php_com_do_invoke_byref(obj, (char*)method, -1, DISPATCH_METHOD|DISPATCH_PROPERTYGET, &amp;v, nargs, args TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/51.html#L330'>method</a>            330 ext/com_dotnet/com_saproxy.c static int saproxy_call_method(const char *method, INTERNAL_FUNCTION_PARAMETERS)</span>
+<span class='curline'><a href='../S/60.html#L267'>method</a>            267 ext/curl/interface.c 			ch-&gt;handlers-&gt;write_header-&gt;method = PHP_CURL_IGNORE;</span>
+<span class='curline'><a href='../S/60.html#L281'>method</a>            281 ext/curl/interface.c 			ch-&gt;handlers-&gt;write-&gt;method = PHP_CURL_STDOUT;</span>
+<span class='curline'><a href='../S/60.html#L1307'>method</a>           1307 ext/curl/interface.c 	switch (t-&gt;method) {</span>
+<span class='curline'><a href='../S/60.html#L1378'>method</a>           1378 ext/curl/interface.c 	switch (t-&gt;method) {</span>
+<span class='curline'><a href='../S/60.html#L1449'>method</a>           1449 ext/curl/interface.c 	switch (t-&gt;method) {</span>
+<span class='curline'><a href='../S/60.html#L1526'>method</a>           1526 ext/curl/interface.c 	switch (t-&gt;method) {</span>
+<span class='curline'><a href='../S/60.html#L1603'>method</a>           1603 ext/curl/interface.c 	switch (t-&gt;method) {</span>
+<span class='curline'><a href='../S/60.html#L1607'>method</a>           1607 ext/curl/interface.c 			if (ch-&gt;handlers-&gt;write-&gt;method == PHP_CURL_RETURN &amp;&amp; length &gt; 0) {</span>
+<span class='curline'><a href='../S/60.html#L1971'>method</a>           1971 ext/curl/interface.c 	ch-&gt;handlers-&gt;write-&gt;method = PHP_CURL_STDOUT;</span>
+<span class='curline'><a href='../S/60.html#L1972'>method</a>           1972 ext/curl/interface.c 	ch-&gt;handlers-&gt;read-&gt;method  = PHP_CURL_DIRECT;</span>
+<span class='curline'><a href='../S/60.html#L1973'>method</a>           1973 ext/curl/interface.c 	ch-&gt;handlers-&gt;write_header-&gt;method = PHP_CURL_IGNORE;</span>
+<span class='curline'><a href='../S/60.html#L2021'>method</a>           2021 ext/curl/interface.c 	dupch-&gt;handlers-&gt;write-&gt;method = ch-&gt;handlers-&gt;write-&gt;method;</span>
+<span class='curline'><a href='../S/60.html#L2026'>method</a>           2026 ext/curl/interface.c 	dupch-&gt;handlers-&gt;read-&gt;method  = ch-&gt;handlers-&gt;read-&gt;method;</span>
+<span class='curline'><a href='../S/60.html#L2027'>method</a>           2027 ext/curl/interface.c 	dupch-&gt;handlers-&gt;write_header-&gt;method = ch-&gt;handlers-&gt;write_header-&gt;method;</span>
+<span class='curline'><a href='../S/60.html#L2068'>method</a>           2068 ext/curl/interface.c 		dupch-&gt;handlers-&gt;progress-&gt;method = ch-&gt;handlers-&gt;progress-&gt;method;</span>
+<span class='curline'><a href='../S/60.html#L2080'>method</a>           2080 ext/curl/interface.c 		dupch-&gt;handlers-&gt;fnmatch-&gt;method = ch-&gt;handlers-&gt;fnmatch-&gt;method;</span>
+<span class='curline'><a href='../S/60.html#L2404'>method</a>           2404 ext/curl/interface.c 						ch-&gt;handlers-&gt;write-&gt;method = PHP_CURL_STDOUT;</span>
+<span class='curline'><a href='../S/60.html#L2411'>method</a>           2411 ext/curl/interface.c 						ch-&gt;handlers-&gt;write-&gt;method = PHP_CURL_FILE;</span>
+<span class='curline'><a href='../S/60.html#L2425'>method</a>           2425 ext/curl/interface.c 						ch-&gt;handlers-&gt;write_header-&gt;method = PHP_CURL_IGNORE;</span>
+<span class='curline'><a href='../S/60.html#L2432'>method</a>           2432 ext/curl/interface.c 						ch-&gt;handlers-&gt;write_header-&gt;method = PHP_CURL_FILE;</span>
+<span class='curline'><a href='../S/60.html#L2585'>method</a>           2585 ext/curl/interface.c 			ch-&gt;handlers-&gt;write_header-&gt;method = PHP_CURL_USER;</span>
+<span class='curline'><a href='../S/60.html#L2752'>method</a>           2752 ext/curl/interface.c 			ch-&gt;handlers-&gt;progress-&gt;method = PHP_CURL_USER;</span>
+<span class='curline'><a href='../S/60.html#L2762'>method</a>           2762 ext/curl/interface.c 			ch-&gt;handlers-&gt;read-&gt;method = PHP_CURL_USER;</span>
+<span class='curline'><a href='../S/60.html#L2768'>method</a>           2768 ext/curl/interface.c 				ch-&gt;handlers-&gt;write-&gt;method = PHP_CURL_RETURN;</span>
+<span class='curline'><a href='../S/60.html#L2770'>method</a>           2770 ext/curl/interface.c 				ch-&gt;handlers-&gt;write-&gt;method = PHP_CURL_STDOUT;</span>
+<span class='curline'><a href='../S/60.html#L2781'>method</a>           2781 ext/curl/interface.c 			ch-&gt;handlers-&gt;write-&gt;method = PHP_CURL_USER;</span>
+<span class='curline'><a href='../S/60.html#L2877'>method</a>           2877 ext/curl/interface.c 			ch-&gt;handlers-&gt;fnmatch-&gt;method = PHP_CURL_USER;</span>
+<span class='curline'><a href='../S/60.html#L3004'>method</a>           3004 ext/curl/interface.c 	if (ch-&gt;handlers-&gt;write-&gt;method == PHP_CURL_RETURN &amp;&amp; ch-&gt;handlers-&gt;write-&gt;buf.len &gt; 0) {</span>
+<span class='curline'><a href='../S/60.html#L3010'>method</a>           3010 ext/curl/interface.c 	if (ch-&gt;handlers-&gt;write-&gt;method == PHP_CURL_FILE &amp;&amp; ch-&gt;handlers-&gt;write-&gt;fp) {</span>
+<span class='curline'><a href='../S/60.html#L3013'>method</a>           3013 ext/curl/interface.c 	if (ch-&gt;handlers-&gt;write_header-&gt;method == PHP_CURL_FILE &amp;&amp; ch-&gt;handlers-&gt;write_header-&gt;fp) {</span>
+<span class='curline'><a href='../S/60.html#L3017'>method</a>           3017 ext/curl/interface.c 	if (ch-&gt;handlers-&gt;write-&gt;method == PHP_CURL_RETURN) {</span>
+<span class='curline'><a href='../S/60.html#L3428'>method</a>           3428 ext/curl/interface.c 	ch-&gt;handlers-&gt;write-&gt;method = PHP_CURL_STDOUT;</span>
+<span class='curline'><a href='../S/60.html#L3435'>method</a>           3435 ext/curl/interface.c 	ch-&gt;handlers-&gt;write_header-&gt;method = PHP_CURL_IGNORE;</span>
+<span class='curline'><a href='../S/60.html#L3443'>method</a>           3443 ext/curl/interface.c 	ch-&gt;handlers-&gt;read-&gt;method  = PHP_CURL_DIRECT;</span>
+<span class='curline'><a href='../S/61.html#L247'>method</a>            247 ext/curl/multi.c 	if (ch-&gt;handlers-&gt;write-&gt;method == PHP_CURL_RETURN) {</span>
+<span class='curline'><a href='../S/62.html#L125'>method</a>            125 ext/curl/php_curl.h 	int             method;</span>
+<span class='curline'><a href='../S/62.html#L134'>method</a>            134 ext/curl/php_curl.h 	int             method;</span>
+<span class='curline'><a href='../S/62.html#L141'>method</a>            141 ext/curl/php_curl.h 	int    	        method;</span>
+<span class='curline'><a href='../S/182.html#L385'>method</a>            385 ext/fileinfo/libmagic/compress.c uncompressbuf(struct magic_set *ms, int fd, size_t method,</span>
+<span class='curline'><a href='../S/182.html#L394'>method</a>            394 ext/fileinfo/libmagic/compress.c 	if (method == 2)</span>
+<span class='curline'><a href='../S/182.html#L421'>method</a>            421 ext/fileinfo/libmagic/compress.c 		if (compr[method].silent)</span>
+<span class='curline'><a href='../S/182.html#L425'>method</a>            425 ext/fileinfo/libmagic/compress.c 		(void)execvp(compr[method].argv[0],</span>
+<span class='curline'><a href='../S/182.html#L426'>method</a>            426 ext/fileinfo/libmagic/compress.c 		    (char *const *)(intptr_t)compr[method].argv);</span>
+<span class='curline'><a href='../S/182.html#L429'>method</a>            429 ext/fileinfo/libmagic/compress.c 		    compr[method].argv[0], strerror(errno));</span>
+<span class='curline'><a href='../S/210.html#L879'>method</a>            879 ext/gd/gd.c    	ZEND_ARG_INFO(0, method)</span>
+<span class='curline'><a href='../S/210.html#L5128'>method</a>           5128 ext/gd/gd.c    	gdInterpolationMethod method;</span>
+<span class='curline'><a href='../S/210.html#L5133'>method</a>           5133 ext/gd/gd.c    	method = tmp_m;</span>
+<span class='curline'><a href='../S/210.html#L5151'>method</a>           5151 ext/gd/gd.c    	if (gdImageSetInterpolationMethod(im, method)) {</span>
+<span class='curline'><a href='../S/210.html#L5479'>method</a>           5479 ext/gd/gd.c    	long method = GD_BILINEAR_FIXED;</span>
+<span class='curline'><a href='../S/210.html#L5481'>method</a>           5481 ext/gd/gd.c    	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "r|l", &amp;IM, &amp;method) == FAILURE)  {</span>
+<span class='curline'><a href='../S/210.html#L5487'>method</a>           5487 ext/gd/gd.c    	if (method == -1) {</span>
+<span class='curline'><a href='../S/210.html#L5488'>method</a>           5488 ext/gd/gd.c    		 method = GD_BILINEAR_FIXED;</span>
+<span class='curline'><a href='../S/210.html#L5490'>method</a>           5490 ext/gd/gd.c    	RETURN_BOOL(gdImageSetInterpolationMethod(im, (gdInterpolationMethod) method));</span>
+<span class='curline'><a href='../S/781.html#L264'>method</a>            264 ext/mysqlnd/mysqlnd.h #define MYSQLND_METHOD(class, method) php_##class##_##method##_pub</span>
+<span class='curline'><a href='../S/781.html#L265'>method</a>            265 ext/mysqlnd/mysqlnd.h #define MYSQLND_METHOD_PRIVATE(class, method) php_##class##_##method##_priv</span>
+<span class='curline'><a href='../S/865.html#L139'>method</a>            139 ext/openssl/openssl.c 	ZEND_ARG_INFO(0, method)</span>
+<span class='curline'><a href='../S/865.html#L341'>method</a>            341 ext/openssl/openssl.c 	ZEND_ARG_INFO(0, method)</span>
+<span class='curline'><a href='../S/865.html#L348'>method</a>            348 ext/openssl/openssl.c 	ZEND_ARG_INFO(0, method)</span>
+<span class='curline'><a href='../S/865.html#L356'>method</a>            356 ext/openssl/openssl.c 	ZEND_ARG_INFO(0, method)</span>
+<span class='curline'><a href='../S/865.html#L376'>method</a>            376 ext/openssl/openssl.c 	ZEND_ARG_INFO(0, method)</span>
+<span class='curline'><a href='../S/865.html#L382'>method</a>            382 ext/openssl/openssl.c 	ZEND_ARG_INFO(0, method)</span>
+<span class='curline'><a href='../S/865.html#L390'>method</a>            390 ext/openssl/openssl.c 	ZEND_ARG_INFO(0, method)</span>
+<span class='curline'><a href='../S/865.html#L397'>method</a>            397 ext/openssl/openssl.c 	ZEND_ARG_INFO(0, method)</span>
+<span class='curline'><a href='../S/865.html#L1467'>method</a>           1467 ext/openssl/openssl.c 	zval *method = NULL;</span>
+<span class='curline'><a href='../S/865.html#L1473'>method</a>           1473 ext/openssl/openssl.c 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "rs|z", &amp;zpkey, &amp;challenge, &amp;challenge_len, &amp;method) == FAILURE) {</span>
+<span class='curline'><a href='../S/865.html#L1485'>method</a>           1485 ext/openssl/openssl.c 	if (method != NULL) {</span>
+<span class='curline'><a href='../S/865.html#L1486'>method</a>           1486 ext/openssl/openssl.c 		if (Z_TYPE_P(method) == IS_LONG) {</span>
+<span class='curline'><a href='../S/865.html#L1487'>method</a>           1487 ext/openssl/openssl.c 			algo = Z_LVAL_P(method);</span>
+<span class='curline'><a href='../S/865.html#L1776'>method</a>           1776 ext/openssl/openssl.c int php_openssl_x509_fingerprint(X509 *peer, const char *method, zend_bool raw, char **out, int *out_len TSRMLS_DC)</span>
+<span class='curline'><a href='../S/865.html#L1782'>method</a>           1782 ext/openssl/openssl.c 	if (!(mdtype = EVP_get_digestbyname(method))) {</span>
+<span class='curline'><a href='../S/865.html#L1809'>method</a>           1809 ext/openssl/openssl.c 	char *method = "sha1";</span>
+<span class='curline'><a href='../S/865.html#L1815'>method</a>           1815 ext/openssl/openssl.c 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "Z|sb", &amp;zcert, &amp;method, &amp;method_len, &amp;raw_output) == FAILURE) {</span>
+<span class='curline'><a href='../S/865.html#L1825'>method</a>           1825 ext/openssl/openssl.c 	if (php_openssl_x509_fingerprint(cert, method, raw_output, &amp;fingerprint, &amp;fingerprint_len TSRMLS_CC) == SUCCESS) {</span>
+<span class='curline'><a href='../S/865.html#L1875'>method</a>           1875 ext/openssl/openssl.c 	const X509V3_EXT_METHOD *method = NULL;</span>
+<span class='curline'><a href='../S/865.html#L1879'>method</a>           1879 ext/openssl/openssl.c 	method = X509V3_EXT_get(extension);</span>
+<span class='curline'><a href='../S/865.html#L1880'>method</a>           1880 ext/openssl/openssl.c 	if (method == NULL) {</span>
+<span class='curline'><a href='../S/865.html#L1886'>method</a>           1886 ext/openssl/openssl.c 	if (method-&gt;it) {</span>
+<span class='curline'><a href='../S/865.html#L1888'>method</a>           1888 ext/openssl/openssl.c 						       ASN1_ITEM_ptr(method-&gt;it)));</span>
+<span class='curline'><a href='../S/865.html#L1890'>method</a>           1890 ext/openssl/openssl.c 		names = (GENERAL_NAMES*)(method-&gt;d2i(NULL, &amp;p, length));</span>
+<span class='curline'><a href='../S/865.html#L3989'>method</a>           3989 ext/openssl/openssl.c 	char *method; int method_len = 0;</span>
+<span class='curline'><a href='../S/865.html#L3998'>method</a>           3998 ext/openssl/openssl.c 				&amp;method, &amp;method_len) == FAILURE) {</span>
+<span class='curline'><a href='../S/865.html#L4007'>method</a>           4007 ext/openssl/openssl.c 		digest = EVP_get_digestbyname(method);</span>
+<span class='curline'><a href='../S/865.html#L4742'>method</a>           4742 ext/openssl/openssl.c 	zval *method = NULL;</span>
+<span class='curline'><a href='../S/865.html#L4746'>method</a>           4746 ext/openssl/openssl.c 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "szZ|z", &amp;data, &amp;data_len, &amp;signature, &amp;key, &amp;method) == FAILURE) {</span>
+<span class='curline'><a href='../S/865.html#L4755'>method</a>           4755 ext/openssl/openssl.c 	if (method == NULL || Z_TYPE_P(method) == IS_LONG) {</span>
+<span class='curline'><a href='../S/865.html#L4756'>method</a>           4756 ext/openssl/openssl.c 		if (method != NULL) {</span>
+<span class='curline'><a href='../S/865.html#L4757'>method</a>           4757 ext/openssl/openssl.c 			signature_algo = Z_LVAL_P(method);</span>
+<span class='curline'><a href='../S/865.html#L4760'>method</a>           4760 ext/openssl/openssl.c 	} else if (Z_TYPE_P(method) == IS_STRING) {</span>
+<span class='curline'><a href='../S/865.html#L4761'>method</a>           4761 ext/openssl/openssl.c 		mdtype = EVP_get_digestbyname(Z_STRVAL_P(method));</span>
+<span class='curline'><a href='../S/865.html#L4804'>method</a>           4804 ext/openssl/openssl.c 	zval *method = NULL;</span>
+<span class='curline'><a href='../S/865.html#L4807'>method</a>           4807 ext/openssl/openssl.c 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ssZ|z", &amp;data, &amp;data_len, &amp;signature, &amp;signature_len, &amp;key, &amp;method) == FAILURE) {</span>
+<span class='curline'><a href='../S/865.html#L4811'>method</a>           4811 ext/openssl/openssl.c 	if (method == NULL || Z_TYPE_P(method) == IS_LONG) {</span>
+<span class='curline'><a href='../S/865.html#L4812'>method</a>           4812 ext/openssl/openssl.c 		if (method != NULL) {</span>
+<span class='curline'><a href='../S/865.html#L4813'>method</a>           4813 ext/openssl/openssl.c 			signature_algo = Z_LVAL_P(method);</span>
+<span class='curline'><a href='../S/865.html#L4816'>method</a>           4816 ext/openssl/openssl.c 	} else if (Z_TYPE_P(method) == IS_STRING) {</span>
+<span class='curline'><a href='../S/865.html#L4817'>method</a>           4817 ext/openssl/openssl.c 		mdtype = EVP_get_digestbyname(Z_STRVAL_P(method));</span>
+<span class='curline'><a href='../S/865.html#L4857'>method</a>           4857 ext/openssl/openssl.c 	char *method =NULL;</span>
+<span class='curline'><a href='../S/865.html#L4862'>method</a>           4862 ext/openssl/openssl.c 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "szza/|s", &amp;data, &amp;data_len, &amp;sealdata, &amp;ekeys, &amp;pubkeys, &amp;method, &amp;method_len) == FAILURE) {</span>
+<span class='curline'><a href='../S/865.html#L4873'>method</a>           4873 ext/openssl/openssl.c 	if (method) {</span>
+<span class='curline'><a href='../S/865.html#L4874'>method</a>           4874 ext/openssl/openssl.c 		cipher = EVP_get_cipherbyname(method);</span>
+<span class='curline'><a href='../S/865.html#L4991'>method</a>           4991 ext/openssl/openssl.c 	char *method =NULL;</span>
+<span class='curline'><a href='../S/865.html#L4995'>method</a>           4995 ext/openssl/openssl.c 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "szsZ|s", &amp;data, &amp;data_len, &amp;opendata, &amp;ekey, &amp;ekey_len, &amp;privkey, &amp;method, &amp;method_len) == FAILURE) {</span>
+<span class='curline'><a href='../S/865.html#L5005'>method</a>           5005 ext/openssl/openssl.c 	if (method) {</span>
+<span class='curline'><a href='../S/865.html#L5006'>method</a>           5006 ext/openssl/openssl.c 		cipher = EVP_get_cipherbyname(method);</span>
+<span class='curline'><a href='../S/865.html#L5091'>method</a>           5091 ext/openssl/openssl.c 	char *data, *method;</span>
+<span class='curline'><a href='../S/865.html#L5098'>method</a>           5098 ext/openssl/openssl.c 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ss|b", &amp;data, &amp;data_len, &amp;method, &amp;method_len, &amp;raw_output) == FAILURE) {</span>
+<span class='curline'><a href='../S/865.html#L5101'>method</a>           5101 ext/openssl/openssl.c 	mdtype = EVP_get_digestbyname(method);</span>
+<span class='curline'><a href='../S/865.html#L5170'>method</a>           5170 ext/openssl/openssl.c 	char *data, *method, *password, *iv = "";</span>
+<span class='curline'><a href='../S/865.html#L5178'>method</a>           5178 ext/openssl/openssl.c 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "sss|ls", &amp;data, &amp;data_len, &amp;method, &amp;method_len, &amp;password, &amp;password_len, &amp;options, &amp;iv, &amp;iv_len) == FAILURE) {</span>
+<span class='curline'><a href='../S/865.html#L5181'>method</a>           5181 ext/openssl/openssl.c 	cipher_type = EVP_get_cipherbyname(method);</span>
+<span class='curline'><a href='../S/865.html#L5249'>method</a>           5249 ext/openssl/openssl.c 	char *data, *method, *password, *iv = "";</span>
+<span class='curline'><a href='../S/865.html#L5259'>method</a>           5259 ext/openssl/openssl.c 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "sss|ls", &amp;data, &amp;data_len, &amp;method, &amp;method_len, &amp;password, &amp;password_len, &amp;options, &amp;iv, &amp;iv_len) == FAILURE) {</span>
+<span class='curline'><a href='../S/865.html#L5268'>method</a>           5268 ext/openssl/openssl.c 	cipher_type = EVP_get_cipherbyname(method);</span>
+<span class='curline'><a href='../S/865.html#L5332'>method</a>           5332 ext/openssl/openssl.c 	char *method;</span>
+<span class='curline'><a href='../S/865.html#L5336'>method</a>           5336 ext/openssl/openssl.c 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &amp;method, &amp;method_len) == FAILURE) {</span>
+<span class='curline'><a href='../S/865.html#L5345'>method</a>           5345 ext/openssl/openssl.c 	cipher_type = EVP_get_cipherbyname(method);</span>
+<span class='curline'><a href='../S/867.html#L78'>method</a>             78 ext/openssl/xp_ssl.c extern int php_openssl_x509_fingerprint(X509 *peer, const char *method, zend_bool raw, char **out, int *out_len TSRMLS_DC);</span>
+<span class='curline'><a href='../S/867.html#L114'>method</a>            114 ext/openssl/xp_ssl.c 	php_stream_xport_crypt_method_t method;</span>
+<span class='curline'><a href='../S/867.html#L271'>method</a>            271 ext/openssl/xp_ssl.c static int php_x509_fingerprint_cmp(X509 *peer, const char *method, const char *expected TSRMLS_DC)</span>
+<span class='curline'><a href='../S/867.html#L277'>method</a>            277 ext/openssl/xp_ssl.c 	if (php_openssl_x509_fingerprint(peer, method, 0, &amp;fingerprint, &amp;fingerprint_len TSRMLS_CC) == SUCCESS) {</span>
+<span class='curline'><a href='../S/867.html#L288'>method</a>            288 ext/openssl/xp_ssl.c 		const char *method = NULL;</span>
+<span class='curline'><a href='../S/867.html#L292'>method</a>            292 ext/openssl/xp_ssl.c 				method = "md5";</span>
+<span class='curline'><a href='../S/867.html#L296'>method</a>            296 ext/openssl/xp_ssl.c 				method = "sha1";</span>
+<span class='curline'><a href='../S/867.html#L300'>method</a>            300 ext/openssl/xp_ssl.c 		return method &amp;&amp; php_x509_fingerprint_cmp(peer, method, Z_STRVAL_P(val) TSRMLS_CC) == 0;</span>
+<span class='curline'><a href='../S/867.html#L1442'>method</a>           1442 ext/openssl/xp_ssl.c 	const SSL_METHOD *method;</span>
+<span class='curline'><a href='../S/867.html#L1461'>method</a>           1461 ext/openssl/xp_ssl.c 	sslsock-&gt;is_client = cparam-&gt;inputs.method &amp; STREAM_CRYPTO_IS_CLIENT;</span>
+<span class='curline'><a href='../S/867.html#L1462'>method</a>           1462 ext/openssl/xp_ssl.c 	method_flags = ((cparam-&gt;inputs.method &gt;&gt; 1) &lt;&lt; 1);</span>
+<span class='curline'><a href='../S/867.html#L1467'>method</a>           1467 ext/openssl/xp_ssl.c 		method = php_select_crypto_method(method_flags, sslsock-&gt;is_client TSRMLS_CC);</span>
+<span class='curline'><a href='../S/867.html#L1468'>method</a>           1468 ext/openssl/xp_ssl.c 		if (method == NULL) {</span>
+<span class='curline'><a href='../S/867.html#L1472'>method</a>           1472 ext/openssl/xp_ssl.c 		method = sslsock-&gt;is_client ? SSLv23_client_method() : SSLv23_server_method();</span>
+<span class='curline'><a href='../S/867.html#L1480'>method</a>           1480 ext/openssl/xp_ssl.c 	sslsock-&gt;ctx = SSL_CTX_new(method);</span>
+<span class='curline'><a href='../S/867.html#L1483'>method</a>           1483 ext/openssl/xp_ssl.c 	sslsock-&gt;ctx = SSL_CTX_new((SSL_METHOD*)method);</span>
+<span class='curline'><a href='../S/867.html#L2133'>method</a>           2133 ext/openssl/xp_ssl.c 			if (sock-&gt;method &amp; STREAM_CRYPTO_IS_CLIENT) {</span>
+<span class='curline'><a href='../S/867.html#L2134'>method</a>           2134 ext/openssl/xp_ssl.c 				sock-&gt;method = ((sock-&gt;method &gt;&gt; 1) &lt;&lt; 1);</span>
+<span class='curline'><a href='../S/867.html#L2137'>method</a>           2137 ext/openssl/xp_ssl.c 			clisockdata-&gt;method = sock-&gt;method;</span>
+<span class='curline'><a href='../S/867.html#L2139'>method</a>           2139 ext/openssl/xp_ssl.c 			if (php_stream_xport_crypto_setup(xparam-&gt;outputs.client, clisockdata-&gt;method,</span>
+<span class='curline'><a href='../S/867.html#L2247'>method</a>           2247 ext/openssl/xp_ssl.c 						if (php_stream_xport_crypto_setup(stream, sslsock-&gt;method, NULL TSRMLS_CC) &lt; 0 ||</span>
+<span class='curline'><a href='../S/867.html#L2414'>method</a>           2414 ext/openssl/xp_ssl.c 		sslsock-&gt;method = get_crypto_method(context, STREAM_CRYPTO_METHOD_ANY_CLIENT);</span>
+<span class='curline'><a href='../S/867.html#L2421'>method</a>           2421 ext/openssl/xp_ssl.c 		sslsock-&gt;method = STREAM_CRYPTO_METHOD_SSLv2_CLIENT;</span>
+<span class='curline'><a href='../S/867.html#L2429'>method</a>           2429 ext/openssl/xp_ssl.c 		sslsock-&gt;method = STREAM_CRYPTO_METHOD_SSLv3_CLIENT;</span>
+<span class='curline'><a href='../S/867.html#L2433'>method</a>           2433 ext/openssl/xp_ssl.c 		sslsock-&gt;method = get_crypto_method(context, STREAM_CRYPTO_METHOD_TLS_CLIENT);</span>
+<span class='curline'><a href='../S/867.html#L2436'>method</a>           2436 ext/openssl/xp_ssl.c 		sslsock-&gt;method = STREAM_CRYPTO_METHOD_TLSv1_0_CLIENT;</span>
+<span class='curline'><a href='../S/867.html#L2440'>method</a>           2440 ext/openssl/xp_ssl.c 		sslsock-&gt;method = STREAM_CRYPTO_METHOD_TLSv1_1_CLIENT;</span>
+<span class='curline'><a href='../S/867.html#L2448'>method</a>           2448 ext/openssl/xp_ssl.c 		sslsock-&gt;method = STREAM_CRYPTO_METHOD_TLSv1_2_CLIENT;</span>
+<span class='curline'><a href='../S/926.html#L2701'>method</a>           2701 ext/pdo/pdo_stmt.c static int row_call_method(const char *method, INTERNAL_FUNCTION_PARAMETERS)</span>
+<span class='curline'><a href='../S/975.html#L1036'>method</a>           1036 ext/phar/phar_object.c 	long method = 0;</span>
+<span class='curline'><a href='../S/975.html#L1038'>method</a>           1038 ext/phar/phar_object.c 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "|l", &amp;method) == FAILURE) {</span>
+<span class='curline'><a href='../S/975.html#L1043'>method</a>           1043 ext/phar/phar_object.c 	switch (method) {</span>
+<span class='curline'><a href='../S/975.html#L2371'>method</a>           2371 ext/phar/phar_object.c 	long format = 9021976, method = 9021976;</span>
+<span class='curline'><a href='../S/975.html#L2374'>method</a>           2374 ext/phar/phar_object.c 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "|lls", &amp;format, &amp;method, &amp;ext, &amp;ext_len) == FAILURE) {</span>
+<span class='curline'><a href='../S/975.html#L2406'>method</a>           2406 ext/phar/phar_object.c 	switch (method) {</span>
+<span class='curline'><a href='../S/975.html#L2474'>method</a>           2474 ext/phar/phar_object.c 	long format = 9021976, method = 9021976;</span>
+<span class='curline'><a href='../S/975.html#L2477'>method</a>           2477 ext/phar/phar_object.c 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "|lls", &amp;format, &amp;method, &amp;ext, &amp;ext_len) == FAILURE) {</span>
+<span class='curline'><a href='../S/975.html#L2508'>method</a>           2508 ext/phar/phar_object.c 	switch (method) {</span>
+<span class='curline'><a href='../S/975.html#L3205'>method</a>           3205 ext/phar/phar_object.c 	long method;</span>
+<span class='curline'><a href='../S/975.html#L3212'>method</a>           3212 ext/phar/phar_object.c 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "l|s", &amp;method, &amp;ext, &amp;ext_len) == FAILURE) {</span>
+<span class='curline'><a href='../S/975.html#L3228'>method</a>           3228 ext/phar/phar_object.c 	switch (method) {</span>
+<span class='curline'><a href='../S/975.html#L3318'>method</a>           3318 ext/phar/phar_object.c 	long method;</span>
+<span class='curline'><a href='../S/975.html#L3321'>method</a>           3321 ext/phar/phar_object.c 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "l", &amp;method) == FAILURE) {</span>
+<span class='curline'><a href='../S/975.html#L3331'>method</a>           3331 ext/phar/phar_object.c 	switch (method) {</span>
+<span class='curline'><a href='../S/975.html#L4557'>method</a>           4557 ext/phar/phar_object.c 	long method = 9021976;</span>
+<span class='curline'><a href='../S/975.html#L4560'>method</a>           4560 ext/phar/phar_object.c 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "|l", &amp;method) == FAILURE) {</span>
+<span class='curline'><a href='../S/975.html#L4564'>method</a>           4564 ext/phar/phar_object.c 	switch (method) {</span>
+<span class='curline'><a href='../S/975.html#L4903'>method</a>           4903 ext/phar/phar_object.c 	long method;</span>
+<span class='curline'><a href='../S/975.html#L4907'>method</a>           4907 ext/phar/phar_object.c 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "l", &amp;method) == FAILURE) {</span>
+<span class='curline'><a href='../S/975.html#L4945'>method</a>           4945 ext/phar/phar_object.c 	switch (method) {</span>
+<span class='curline'><a href='../S/975.html#L5122'>method</a>           5122 ext/phar/phar_object.c 	ZEND_ARG_INFO(0, method)</span>
+<span class='curline'><a href='../S/996.html#L1323'>method</a>           1323 ext/reflection/php_reflection.c static void reflection_method_factory(zend_class_entry *ce, zend_function *method, zval *closure_object, zval *object TSRMLS_DC)</span>
+<span class='curline'><a href='../S/996.html#L1334'>method</a>           1334 ext/reflection/php_reflection.c 	ZVAL_STRING(name, (method-&gt;common.scope &amp;&amp; method-&gt;common.scope-&gt;trait_aliases)?</span>
+<span class='curline'><a href='../S/996.html#L1335'>method</a>           1335 ext/reflection/php_reflection.c 			zend_resolve_method_name(ce, method) : method-&gt;common.function_name, 1);</span>
+<span class='curline'><a href='../S/996.html#L1336'>method</a>           1336 ext/reflection/php_reflection.c 	ZVAL_STRINGL(classname, method-&gt;common.scope-&gt;name, method-&gt;common.scope-&gt;name_length, 1);</span>
+<span class='curline'><a href='../S/996.html#L1339'>method</a>           1339 ext/reflection/php_reflection.c 	intern-&gt;ptr = method;</span>
+<span class='curline'><a href='../S/996.html#L2216'>method</a>           2216 ext/reflection/php_reflection.c 				zval **method;</span>
+<span class='curline'><a href='../S/996.html#L2222'>method</a>           2222 ext/reflection/php_reflection.c 					|| (zend_hash_index_find(Z_ARRVAL_P(reference), 1, (void **) &amp;method) == FAILURE))</span>
+<span class='curline'><a href='../S/996.html#L2240'>method</a>           2240 ext/reflection/php_reflection.c 				convert_to_string_ex(method);</span>
+<span class='curline'><a href='../S/996.html#L2241'>method</a>           2241 ext/reflection/php_reflection.c 				lcname_len = Z_STRLEN_PP(method);</span>
+<span class='curline'><a href='../S/996.html#L2242'>method</a>           2242 ext/reflection/php_reflection.c 				lcname = zend_str_tolower_dup(Z_STRVAL_PP(method), lcname_len);</span>
+<span class='curline'><a href='../S/996.html#L2253'>method</a>           2253 ext/reflection/php_reflection.c 						"Method %s::%s() does not exist", ce-&gt;name, Z_STRVAL_PP(method));</span>
+<span class='curline'><a href='../S/996.html#L3802'>method</a>           3802 ext/reflection/php_reflection.c 	zval *method;</span>
+<span class='curline'><a href='../S/996.html#L3807'>method</a>           3807 ext/reflection/php_reflection.c 		ALLOC_ZVAL(method);</span>
+<span class='curline'><a href='../S/996.html#L3817'>method</a>           3817 ext/reflection/php_reflection.c 		reflection_method_factory(ce, mptr, NULL, method TSRMLS_CC);</span>
+<span class='curline'><a href='../S/996.html#L3818'>method</a>           3818 ext/reflection/php_reflection.c 		add_next_index_zval(retval, method);</span>
+<span class='curline'><a href='../S/996.html#L6213'>method</a>           6213 ext/reflection/php_reflection.c 	REGISTER_REFLECTION_CLASS_CONST_LONG(method, "IS_STATIC", ZEND_ACC_STATIC);</span>
+<span class='curline'><a href='../S/996.html#L6214'>method</a>           6214 ext/reflection/php_reflection.c 	REGISTER_REFLECTION_CLASS_CONST_LONG(method, "IS_PUBLIC", ZEND_ACC_PUBLIC);</span>
+<span class='curline'><a href='../S/996.html#L6215'>method</a>           6215 ext/reflection/php_reflection.c 	REGISTER_REFLECTION_CLASS_CONST_LONG(method, "IS_PROTECTED", ZEND_ACC_PROTECTED);</span>
+<span class='curline'><a href='../S/996.html#L6216'>method</a>           6216 ext/reflection/php_reflection.c 	REGISTER_REFLECTION_CLASS_CONST_LONG(method, "IS_PRIVATE", ZEND_ACC_PRIVATE);</span>
+<span class='curline'><a href='../S/996.html#L6217'>method</a>           6217 ext/reflection/php_reflection.c 	REGISTER_REFLECTION_CLASS_CONST_LONG(method, "IS_ABSTRACT", ZEND_ACC_ABSTRACT);</span>
+<span class='curline'><a href='../S/996.html#L6218'>method</a>           6218 ext/reflection/php_reflection.c 	REGISTER_REFLECTION_CLASS_CONST_LONG(method, "IS_FINAL", ZEND_ACC_FINAL);</span>
+<span class='curline'><a href='../S/1017.html#L317'>method</a>            317 ext/snmp/snmp.c 	ZEND_ARG_INFO(0, method)</span>
+<span class='curline'><a href='../S/1017.html#L1758'>method</a>           1758 ext/snmp/snmp.c 	long method;</span>
+<span class='curline'><a href='../S/1017.html#L1760'>method</a>           1760 ext/snmp/snmp.c 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "l", &amp;method) == FAILURE) {</span>
+<span class='curline'><a href='../S/1017.html#L1764'>method</a>           1764 ext/snmp/snmp.c 	if (method &gt;= 0 &amp;&amp; method &lt;= (SNMP_VALUE_LIBRARY|SNMP_VALUE_PLAIN|SNMP_VALUE_OBJECT)) {</span>
+<span class='curline'><a href='../S/1017.html#L1765'>method</a>           1765 ext/snmp/snmp.c 			SNMP_G(valueretrieval) = method;</span>
+<span class='curline'><a href='../S/1017.html#L1768'>method</a>           1768 ext/snmp/snmp.c 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Unknown SNMP value retrieval method '%ld'", method);</span>
+<span class='curline'><a href='../S/1031.html#L3757'>method</a>           3757 ext/soap/soap.c 	xmlNodePtr method = NULL, param;</span>
+<span class='curline'><a href='../S/1031.html#L3771'>method</a>           3771 ext/soap/soap.c 				method = xmlNewChild(body, ns, BAD_CAST(function-&gt;responseName), NULL);</span>
+<span class='curline'><a href='../S/1031.html#L3773'>method</a>           3773 ext/soap/soap.c 				method = xmlNewChild(body, ns, BAD_CAST(function-&gt;functionName), NULL);</span>
+<span class='curline'><a href='../S/1031.html#L3781'>method</a>           3781 ext/soap/soap.c 			method = xmlNewChild(body, ns, BAD_CAST(function_name), NULL);</span>
+<span class='curline'><a href='../S/1031.html#L3802'>method</a>           3802 ext/soap/soap.c 				rpc_result = xmlNewChild(method, rpc_ns, BAD_CAST("result"), NULL);</span>
+<span class='curline'><a href='../S/1031.html#L3803'>method</a>           3803 ext/soap/soap.c 				param = serialize_parameter(parameter, ret, 0, "return", use, method TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1031.html#L3806'>method</a>           3806 ext/soap/soap.c 				param = serialize_parameter(parameter, ret, 0, "return", use, method TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1031.html#L3836'>method</a>           3836 ext/soap/soap.c 				param = serialize_parameter(parameter, *data, i, param_name, use, method TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1031.html#L3852'>method</a>           3852 ext/soap/soap.c 	if (use == SOAP_ENCODED &amp;&amp; version == SOAP_1_2 &amp;&amp; method != NULL) {</span>
+<span class='curline'><a href='../S/1031.html#L3853'>method</a>           3853 ext/soap/soap.c 		xmlSetNsProp(method, body-&gt;ns, BAD_CAST("encodingStyle"), BAD_CAST(SOAP_1_2_ENC_NAMESPACE));</span>
+<span class='curline'><a href='../S/1031.html#L3856'>method</a>           3856 ext/soap/soap.c 		*node = method;</span>
+<span class='curline'><a href='../S/1031.html#L4228'>method</a>           4228 ext/soap/soap.c 	xmlNodePtr envelope = NULL, body, method = NULL, head = NULL;</span>
+<span class='curline'><a href='../S/1031.html#L4269'>method</a>           4269 ext/soap/soap.c 				method = xmlNewChild(body, ns, BAD_CAST(function-&gt;requestName), NULL);</span>
+<span class='curline'><a href='../S/1031.html#L4271'>method</a>           4271 ext/soap/soap.c 				method = xmlNewChild(body, ns, BAD_CAST(function-&gt;functionName), NULL);</span>
+<span class='curline'><a href='../S/1031.html#L4286'>method</a>           4286 ext/soap/soap.c 				method = xmlNewChild(body, ns, BAD_CAST(function_name), NULL);</span>
+<span class='curline'><a href='../S/1031.html#L4288'>method</a>           4288 ext/soap/soap.c 				method = xmlNewChild(body, ns, BAD_CAST(function-&gt;requestName), NULL);</span>
+<span class='curline'><a href='../S/1031.html#L4290'>method</a>           4290 ext/soap/soap.c 				method = xmlNewChild(body, ns, BAD_CAST(function-&gt;functionName), NULL);</span>
+<span class='curline'><a href='../S/1031.html#L4292'>method</a>           4292 ext/soap/soap.c 				method = body;</span>
+<span class='curline'><a href='../S/1031.html#L4295'>method</a>           4295 ext/soap/soap.c 			method = body;</span>
+<span class='curline'><a href='../S/1031.html#L4311'>method</a>           4311 ext/soap/soap.c 			param = serialize_parameter(parameter, arguments[i], i, NULL, use, method TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1031.html#L4333'>method</a>           4333 ext/soap/soap.c 					param = serialize_parameter(parameter, NULL, i, NULL, use, method TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1031.html#L4411'>method</a>           4411 ext/soap/soap.c 			if (method) {</span>
+<span class='curline'><a href='../S/1031.html#L4412'>method</a>           4412 ext/soap/soap.c 				xmlSetNsProp(method, envelope-&gt;ns, BAD_CAST("encodingStyle"), BAD_CAST(SOAP_1_2_ENC_NAMESPACE));</span>
+<span class='curline'><a href='../S/1049.html#L665'>method</a>            665 ext/spl/spl_directory.c zend_function *spl_filesystem_object_get_method_check(zval **object_ptr, char *method, int method_len, const struct _zend_literal *key TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1049.html#L670'>method</a>            670 ext/spl/spl_directory.c 		method = "_bad_state_ex";</span>
+<span class='curline'><a href='../S/1049.html#L675'>method</a>            675 ext/spl/spl_directory.c 	return zend_get_std_object_handlers()-&gt;get_method(object_ptr, method, method_len, key TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1063.html#L872'>method</a>            872 ext/spl/spl_iterators.c static union _zend_function *spl_recursive_it_get_method(zval **object_ptr, char *method, int method_len, const zend_literal *key TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1063.html#L884'>method</a>            884 ext/spl/spl_iterators.c 	function_handler = std_object_handlers.get_method(object_ptr, method, method_len, key TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1063.html#L886'>method</a>            886 ext/spl/spl_iterators.c 		if (zend_hash_find(&amp;Z_OBJCE_P(zobj)-&gt;function_table, method, method_len+1, (void **) &amp;function_handler) == FAILURE) {</span>
+<span class='curline'><a href='../S/1063.html#L889'>method</a>            889 ext/spl/spl_iterators.c 				function_handler = Z_OBJ_HT_P(*object_ptr)-&gt;get_method(object_ptr, method, method_len, key TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1063.html#L1350'>method</a>           1350 ext/spl/spl_iterators.c static union _zend_function *spl_dual_it_get_method(zval **object_ptr, char *method, int method_len, const zend_literal *key TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1063.html#L1357'>method</a>           1357 ext/spl/spl_iterators.c 	function_handler = std_object_handlers.get_method(object_ptr, method, method_len, key TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1063.html#L1359'>method</a>           1359 ext/spl/spl_iterators.c 		if (zend_hash_find(&amp;intern-&gt;inner.ce-&gt;function_table, method, method_len+1, (void **) &amp;function_handler) == FAILURE) {</span>
+<span class='curline'><a href='../S/1063.html#L1362'>method</a>           1362 ext/spl/spl_iterators.c 				function_handler = Z_OBJ_HT_P(*object_ptr)-&gt;get_method(object_ptr, method, method_len, key TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1063.html#L1372'>method</a>           1372 ext/spl/spl_iterators.c int spl_dual_it_call_method(char *method, INTERNAL_FUNCTION_PARAMETERS)</span>
+<span class='curline'><a href='../S/1063.html#L1384'>method</a>           1384 ext/spl/spl_iterators.c 	ZVAL_STRING(&amp;func, method, 0);</span>
+<span class='curline'><a href='../S/1063.html#L1385'>method</a>           1385 ext/spl/spl_iterators.c 	if (!zend_is_callable(&amp;func, 0, &amp;method TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/1063.html#L1386'>method</a>           1386 ext/spl/spl_iterators.c 		php_error_docref(NULL TSRMLS_CC, E_ERROR, "Method %s::%s() does not exist", intern-&gt;inner.ce-&gt;name, method);</span>
+<span class='curline'><a href='../S/1063.html#L1407'>method</a>           1407 ext/spl/spl_iterators.c 		php_error_docref(NULL TSRMLS_CC, E_ERROR, "Unable to call %s::%s()", intern-&gt;inner.ce-&gt;name, method);</span>
+<span class='curline'><a href='../S/1077.html#L5007'>method</a>           5007 ext/standard/basic_functions.c 			zval **obj, **method;</span>
+<span class='curline'><a href='../S/1077.html#L5013'>method</a>           5013 ext/standard/basic_functions.c 						&amp;&amp; zend_hash_index_find(Z_ARRVAL_P(function), 1, (void **) &amp;method) == SUCCESS</span>
+<span class='curline'><a href='../S/1077.html#L5015'>method</a>           5015 ext/standard/basic_functions.c 						&amp;&amp; Z_TYPE_PP(method) == IS_STRING) {</span>
+<span class='curline'><a href='../S/1077.html#L5016'>method</a>           5016 ext/standard/basic_functions.c 				php_error_docref(NULL TSRMLS_CC, E_WARNING, "Unable to call %s::%s() - function does not exist", Z_OBJCE_PP(obj)-&gt;name, Z_STRVAL_PP(method));</span>
+<span class='curline'><a href='../S/1125.html#L95'>method</a>             95 ext/standard/incomplete_class.c static union _zend_function *incomplete_class_get_method(zval **object, char *method, int method_len, const zend_literal *key TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1224.html#L533'>method</a>            533 ext/xml/xml.c  			zval **method;</span>
+<span class='curline'><a href='../S/1224.html#L539'>method</a>            539 ext/xml/xml.c  					   zend_hash_index_find(Z_ARRVAL_P(handler), 1, (void **) &amp;method) == SUCCESS &amp;&amp;</span>
+<span class='curline'><a href='../S/1224.html#L541'>method</a>            541 ext/xml/xml.c  					   Z_TYPE_PP(method) == IS_STRING) {</span>
+<span class='curline'><a href='../S/1224.html#L542'>method</a>            542 ext/xml/xml.c  				php_error_docref(NULL TSRMLS_CC, E_WARNING, "Unable to call handler %s::%s()", Z_OBJCE_PP(obj)-&gt;name, Z_STRVAL_PP(method));</span>
+<span class='curline'><a href='../S/1239.html#L309'>method</a>            309 ext/xmlrpc/libxmlrpc/xml_to_dandarpc.c          xml_element* method = xml_elem_new();</span>
+<span class='curline'><a href='../S/1239.html#L310'>method</a>            310 ext/xmlrpc/libxmlrpc/xml_to_dandarpc.c          method-&gt;name = strdup(ELEM_METHODNAME);</span>
+<span class='curline'><a href='../S/1239.html#L311'>method</a>            311 ext/xmlrpc/libxmlrpc/xml_to_dandarpc.c          simplestring_add(&amp;method-&gt;text, pStr);</span>
+<span class='curline'><a href='../S/1239.html#L312'>method</a>            312 ext/xmlrpc/libxmlrpc/xml_to_dandarpc.c          Q_PushTail(&amp;wrapper-&gt;children, method);</span>
+<span class='curline'><a href='../S/1243.html#L395'>method</a>            395 ext/xmlrpc/libxmlrpc/xml_to_xmlrpc.c          xml_element* method = xml_elem_new();</span>
+<span class='curline'><a href='../S/1243.html#L396'>method</a>            396 ext/xmlrpc/libxmlrpc/xml_to_xmlrpc.c          method-&gt;name = strdup(ELEM_METHODNAME);</span>
+<span class='curline'><a href='../S/1243.html#L397'>method</a>            397 ext/xmlrpc/libxmlrpc/xml_to_xmlrpc.c          simplestring_add(&amp;method-&gt;text, pStr);</span>
+<span class='curline'><a href='../S/1243.html#L398'>method</a>            398 ext/xmlrpc/libxmlrpc/xml_to_xmlrpc.c          Q_PushTail(&amp;wrapper-&gt;children, method);</span>
+<span class='curline'><a href='../S/1245.html#L2446'>method</a>           2446 ext/xmlrpc/libxmlrpc/xmlrpc.c          sm-&gt;method = cb;</span>
+<span class='curline'><a href='../S/1245.html#L2531'>method</a>           2531 ext/xmlrpc/libxmlrpc/xmlrpc.c             return sm-&gt;method;</span>
+<span class='curline'><a href='../S/1247.html#L100'>method</a>            100 ext/xmlrpc/libxmlrpc/xmlrpc_introspection.c             dm-&gt;method(server, userData);</span>
+<span class='curline'><a href='../S/1247.html#L110'>method</a>            110 ext/xmlrpc/libxmlrpc/xmlrpc_introspection.c static inline void describe_method(XMLRPC_SERVER server, XMLRPC_VALUE vector, const char* method) {</span>
+<span class='curline'><a href='../S/1247.html#L111'>method</a>            111 ext/xmlrpc/libxmlrpc/xmlrpc_introspection.c    if(method) {</span>
+<span class='curline'><a href='../S/1247.html#L112'>method</a>            112 ext/xmlrpc/libxmlrpc/xmlrpc_introspection.c       server_method* sm = find_method(server, method);</span>
+<span class='curline'><a href='../S/1247.html#L191'>method</a>            191 ext/xmlrpc/libxmlrpc/xmlrpc_introspection.c    const char* method = XMLRPC_GetValueString(XMLRPC_VectorRewind(XMLRPC_RequestGetData(input)));</span>
+<span class='curline'><a href='../S/1247.html#L197'>method</a>            197 ext/xmlrpc/libxmlrpc/xmlrpc_introspection.c    if(method) {</span>
+<span class='curline'><a href='../S/1247.html#L198'>method</a>            198 ext/xmlrpc/libxmlrpc/xmlrpc_introspection.c       server_method* sm = find_method(server, method);</span>
+<span class='curline'><a href='../S/1247.html#L250'>method</a>            250 ext/xmlrpc/libxmlrpc/xmlrpc_introspection.c    const char* method = XMLRPC_GetValueString(XMLRPC_VectorRewind(XMLRPC_RequestGetData(input)));</span>
+<span class='curline'><a href='../S/1247.html#L256'>method</a>            256 ext/xmlrpc/libxmlrpc/xmlrpc_introspection.c    if(method) {</span>
+<span class='curline'><a href='../S/1247.html#L257'>method</a>            257 ext/xmlrpc/libxmlrpc/xmlrpc_introspection.c       server_method* sm = find_method(server, method);</span>
+<span class='curline'><a href='../S/1247.html#L584'>method</a>            584 ext/xmlrpc/libxmlrpc/xmlrpc_introspection.c          dm-&gt;method = cb;</span>
+<span class='curline'><a href='../S/1249.html#L84'>method</a>             84 ext/xmlrpc/libxmlrpc/xmlrpc_introspection_private.h    XMLRPC_IntrospectionCallback         method;</span>
+<span class='curline'><a href='../S/1250.html#L152'>method</a>            152 ext/xmlrpc/libxmlrpc/xmlrpc_private.h    XMLRPC_Callback         method;</span>
+<span class='curline'><a href='../S/1253.html#L92'>method</a>             92 ext/xmlrpc/xmlrpc-epi-php.c 	ZEND_ARG_INFO(1, method)</span>
+<span class='curline'><a href='../S/1253.html#L97'>method</a>             97 ext/xmlrpc/xmlrpc-epi-php.c 	ZEND_ARG_INFO(0, method)</span>
+<span class='curline'><a href='../S/1253.html#L715'>method</a>            715 ext/xmlrpc/xmlrpc-epi-php.c 	char *method = NULL;</span>
+<span class='curline'><a href='../S/1253.html#L719'>method</a>            719 ext/xmlrpc/xmlrpc-epi-php.c 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s!z|a", &amp;method, &amp;method_len, &amp;vals, &amp;out_opts) == FAILURE) {</span>
+<span class='curline'><a href='../S/1253.html#L730'>method</a>            730 ext/xmlrpc/xmlrpc-epi-php.c 			if (method == NULL) {</span>
+<span class='curline'><a href='../S/1253.html#L733'>method</a>            733 ext/xmlrpc/xmlrpc-epi-php.c 				XMLRPC_RequestSetMethodName(xRequest, method);</span>
+<span class='curline'><a href='../S/1253.html#L827'>method</a>            827 ext/xmlrpc/xmlrpc-epi-php.c 	zval **method;</span>
+<span class='curline'><a href='../S/1253.html#L830'>method</a>            830 ext/xmlrpc/xmlrpc-epi-php.c 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "sZ|s", &amp;xml, &amp;xml_len, &amp;method, &amp;encoding, &amp;encoding_len) == FAILURE) {</span>
+<span class='curline'><a href='../S/1253.html#L836'>method</a>            836 ext/xmlrpc/xmlrpc-epi-php.c 		zval* retval = decode_request_worker(xml, xml_len, encoding_len ? encoding : NULL, *method);</span>
+<span class='curline'><a href='../S/1319.html#L42'>method</a>             42 ext/zip/lib/zip_set_file_compression.c 			 zip_int32_t method, zip_uint32_t flags)</span>
+<span class='curline'><a href='../S/1319.html#L57'>method</a>             57 ext/zip/lib/zip_set_file_compression.c     if (method != ZIP_CM_DEFAULT &amp;&amp; method != ZIP_CM_STORE &amp;&amp; method != ZIP_CM_DEFLATE) {</span>
+<span class='curline'><a href='../S/1319.html#L68'>method</a>             68 ext/zip/lib/zip_set_file_compression.c     if (method == old_method) {</span>
+<span class='curline'><a href='../S/1319.html#L85'>method</a>             85 ext/zip/lib/zip_set_file_compression.c         e-&gt;changes-&gt;comp_method = method;</span>
+<span class='curline'><a href='../S/1413.html#L208'>method</a>            208 main/streams/php_stream_transport.h 		php_stream_xport_crypt_method_t method;</span>
+<span class='curline'><a href='../S/1418.html#L361'>method</a>            361 main/streams/transports.c 	param.inputs.method = crypto_method;</span>
+<span class='curline'><a href='../S/1427.html#L334'>method</a>            334 sapi/aolserver/aolserver.c 	ADD_STRINGX("REQUEST_METHOD", NSG(conn)-&gt;request-&gt;method);</span>
+<span class='curline'><a href='../S/1427.html#L452'>method</a>            452 sapi/aolserver/aolserver.c 	SG(request_info).request_method = NSG(conn)-&gt;request-&gt;method;</span>
+<span class='curline'><a href='../S/1429.html#L530'>method</a>            530 sapi/apache/mod_php5.c 	SG(request_info).request_method = (char *)r-&gt;method;</span>
+<span class='curline'><a href='../S/1431.html#L483'>method</a>            483 sapi/apache/php_apache.c 	if (rr-&gt;method) {</span>
+<span class='curline'><a href='../S/1431.html#L484'>method</a>            484 sapi/apache/php_apache.c 		add_property_string(return_value,"method", (char *)rr-&gt;method, 1);		</span>
+<span class='curline'><a href='../S/1436.html#L119'>method</a>            119 sapi/apache2filter/php_functions.c 		ADD_STRING(method);</span>
+<span class='curline'><a href='../S/1437.html#L408'>method</a>            408 sapi/apache2filter/sapi_apache2.c 	SG(request_info).request_method = f-&gt;r-&gt;method;</span>
+<span class='curline'><a href='../S/1441.html#L139'>method</a>            139 sapi/apache2handler/php_functions.c 		ADD_STRING(method);</span>
+<span class='curline'><a href='../S/1442.html#L479'>method</a>            479 sapi/apache2handler/sapi_apache2.c 	SG(request_info).request_method = r-&gt;method;</span>
+<span class='curline'><a href='../S/1443.html#L582'>method</a>            582 sapi/apache_hooks/mod_php5.c 	SG(request_info).request_method = (char *)r-&gt;method;</span>
+<span class='curline'><a href='../S/1445.html#L402'>method</a>            402 sapi/apache_hooks/php_apache.c 	apache_request_read_string_slot(offsetof(request_rec, method), INTERNAL_FUNCTION_PARAM_PASSTHRU);</span>
+<span class='curline'><a href='../S/1445.html#L1210'>method</a>           1210 sapi/apache_hooks/php_apache.c 	char *file, *method;</span>
+<span class='curline'><a href='../S/1445.html#L1214'>method</a>           1214 sapi/apache_hooks/php_apache.c 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ss", &amp;method, &amp;method_len, &amp;file, &amp;file_len) == FAILURE) {</span>
+<span class='curline'><a href='../S/1445.html#L1220'>method</a>           1220 sapi/apache_hooks/php_apache.c     sub_r = ap_sub_req_method_uri(method, file, r);</span>
+<span class='curline'><a href='../S/1445.html#L1302'>method</a>           1302 sapi/apache_hooks/php_apache.c 	PHP_FALIAS(method,						apache_request_method,				NULL)</span>
+<span class='curline'><a href='../S/1445.html#L1858'>method</a>           1858 sapi/apache_hooks/php_apache.c 	if (rr-&gt;method) {</span>
+<span class='curline'><a href='../S/1445.html#L1859'>method</a>           1859 sapi/apache_hooks/php_apache.c 		add_property_string(return_value,"method", (char *)rr-&gt;method, 1);		</span>
+<span class='curline'><a href='../S/1447.html#L95'>method</a>             95 sapi/apache_hooks/sapi_apache.c                 zval *method;</span>
+<span class='curline'><a href='../S/1447.html#L99'>method</a>             99 sapi/apache_hooks/sapi_apache.c                 ALLOC_ZVAL(method);</span>
+<span class='curline'><a href='../S/1447.html#L100'>method</a>            100 sapi/apache_hooks/sapi_apache.c                 ZVAL_STRING(method, tmp +2, 1);</span>
+<span class='curline'><a href='../S/1447.html#L102'>method</a>            102 sapi/apache_hooks/sapi_apache.c                 call_user_function_ex(EG(function_table), &amp;class, method, ret, 0, NULL, 0, NULL TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1447.html#L104'>method</a>            104 sapi/apache_hooks/sapi_apache.c                 zval_dtor(method);</span>
+<span class='curline'><a href='../S/1457.html#L1678'>method</a>           1678 sapi/cli/php_cli_server.c 	client-&gt;request.request_method = parser-&gt;method;</span>
+<span class='curline'><a href='../S/1459.html#L414'>method</a>            414 sapi/cli/php_http_parser.c           parser-&gt;method = PHP_HTTP_HEAD;</span>
+<span class='curline'><a href='../S/1459.html#L579'>method</a>            579 sapi/cli/php_http_parser.c         parser-&gt;method = (enum php_http_method) 0;</span>
+<span class='curline'><a href='../S/1459.html#L582'>method</a>            582 sapi/cli/php_http_parser.c           case 'C': parser-&gt;method = PHP_HTTP_CONNECT; /* or COPY, CHECKOUT */ break;</span>
+<span class='curline'><a href='../S/1459.html#L583'>method</a>            583 sapi/cli/php_http_parser.c           case 'D': parser-&gt;method = PHP_HTTP_DELETE; break;</span>
+<span class='curline'><a href='../S/1459.html#L584'>method</a>            584 sapi/cli/php_http_parser.c           case 'G': parser-&gt;method = PHP_HTTP_GET; break;</span>
+<span class='curline'><a href='../S/1459.html#L585'>method</a>            585 sapi/cli/php_http_parser.c           case 'H': parser-&gt;method = PHP_HTTP_HEAD; break;</span>
+<span class='curline'><a href='../S/1459.html#L586'>method</a>            586 sapi/cli/php_http_parser.c           case 'L': parser-&gt;method = PHP_HTTP_LOCK; break;</span>
+<span class='curline'><a href='../S/1459.html#L587'>method</a>            587 sapi/cli/php_http_parser.c           case 'M': parser-&gt;method = PHP_HTTP_MKCOL; /* or MOVE, MKCALENDAR, MKACTIVITY, MERGE, M-SEARCH */ break;</span>
+<span class='curline'><a href='../S/1459.html#L588'>method</a>            588 sapi/cli/php_http_parser.c           case 'N': parser-&gt;method = PHP_HTTP_NOTIFY; break;</span>
+<span class='curline'><a href='../S/1459.html#L589'>method</a>            589 sapi/cli/php_http_parser.c           case 'O': parser-&gt;method = PHP_HTTP_OPTIONS; break;</span>
+<span class='curline'><a href='../S/1459.html#L590'>method</a>            590 sapi/cli/php_http_parser.c           case 'P': parser-&gt;method = PHP_HTTP_POST; /* or PROPFIND or PROPPATCH or PUT */ break;</span>
+<span class='curline'><a href='../S/1459.html#L591'>method</a>            591 sapi/cli/php_http_parser.c           case 'R': parser-&gt;method = PHP_HTTP_REPORT; break;</span>
+<span class='curline'><a href='../S/1459.html#L592'>method</a>            592 sapi/cli/php_http_parser.c           case 'S': parser-&gt;method = PHP_HTTP_SUBSCRIBE; break;</span>
+<span class='curline'><a href='../S/1459.html#L593'>method</a>            593 sapi/cli/php_http_parser.c           case 'T': parser-&gt;method = PHP_HTTP_TRACE; break;</span>
+<span class='curline'><a href='../S/1459.html#L594'>method</a>            594 sapi/cli/php_http_parser.c           case 'U': parser-&gt;method = PHP_HTTP_UNLOCK; /* or UNSUBSCRIBE */ break;</span>
+<span class='curline'><a href='../S/1459.html#L595'>method</a>            595 sapi/cli/php_http_parser.c           default: parser-&gt;method = PHP_HTTP_NOT_IMPLEMENTED; break;</span>
+<span class='curline'><a href='../S/1459.html#L607'>method</a>            607 sapi/cli/php_http_parser.c         matcher = method_strings[parser-&gt;method];</span>
+<span class='curline'><a href='../S/1459.html#L609'>method</a>            609 sapi/cli/php_http_parser.c           if (parser-&gt;method != PHP_HTTP_NOT_IMPLEMENTED &amp;&amp; matcher[index] != '\0') {</span>
+<span class='curline'><a href='../S/1459.html#L610'>method</a>            610 sapi/cli/php_http_parser.c             parser-&gt;method = PHP_HTTP_NOT_IMPLEMENTED;</span>
+<span class='curline'><a href='../S/1459.html#L613'>method</a>            613 sapi/cli/php_http_parser.c         } else if (parser-&gt;method == PHP_HTTP_NOT_IMPLEMENTED || ch == matcher[index]) {</span>
+<span class='curline'><a href='../S/1459.html#L615'>method</a>            615 sapi/cli/php_http_parser.c         } else if (parser-&gt;method == PHP_HTTP_CONNECT) {</span>
+<span class='curline'><a href='../S/1459.html#L617'>method</a>            617 sapi/cli/php_http_parser.c             parser-&gt;method = PHP_HTTP_CHECKOUT;</span>
+<span class='curline'><a href='../S/1459.html#L619'>method</a>            619 sapi/cli/php_http_parser.c             parser-&gt;method = PHP_HTTP_COPY;</span>
+<span class='curline'><a href='../S/1459.html#L621'>method</a>            621 sapi/cli/php_http_parser.c             parser-&gt;method = PHP_HTTP_NOT_IMPLEMENTED;</span>
+<span class='curline'><a href='../S/1459.html#L623'>method</a>            623 sapi/cli/php_http_parser.c         } else if (parser-&gt;method == PHP_HTTP_MKCOL) {</span>
+<span class='curline'><a href='../S/1459.html#L625'>method</a>            625 sapi/cli/php_http_parser.c             parser-&gt;method = PHP_HTTP_MOVE;</span>
+<span class='curline'><a href='../S/1459.html#L627'>method</a>            627 sapi/cli/php_http_parser.c             parser-&gt;method = PHP_HTTP_MKCALENDAR;</span>
+<span class='curline'><a href='../S/1459.html#L629'>method</a>            629 sapi/cli/php_http_parser.c             parser-&gt;method = PHP_HTTP_MERGE;</span>
+<span class='curline'><a href='../S/1459.html#L631'>method</a>            631 sapi/cli/php_http_parser.c             parser-&gt;method = PHP_HTTP_MSEARCH;</span>
+<span class='curline'><a href='../S/1459.html#L633'>method</a>            633 sapi/cli/php_http_parser.c             parser-&gt;method = PHP_HTTP_MKACTIVITY;</span>
+<span class='curline'><a href='../S/1459.html#L635'>method</a>            635 sapi/cli/php_http_parser.c             parser-&gt;method = PHP_HTTP_NOT_IMPLEMENTED;</span>
+<span class='curline'><a href='../S/1459.html#L637'>method</a>            637 sapi/cli/php_http_parser.c         } else if (index == 1 &amp;&amp; parser-&gt;method == PHP_HTTP_POST &amp;&amp; ch == 'R') {</span>
+<span class='curline'><a href='../S/1459.html#L638'>method</a>            638 sapi/cli/php_http_parser.c           parser-&gt;method = PHP_HTTP_PROPFIND; /* or HTTP_PROPPATCH */</span>
+<span class='curline'><a href='../S/1459.html#L639'>method</a>            639 sapi/cli/php_http_parser.c         } else if (index == 1 &amp;&amp; parser-&gt;method == PHP_HTTP_POST &amp;&amp; ch == 'U') {</span>
+<span class='curline'><a href='../S/1459.html#L640'>method</a>            640 sapi/cli/php_http_parser.c           parser-&gt;method = PHP_HTTP_PUT;</span>
+<span class='curline'><a href='../S/1459.html#L641'>method</a>            641 sapi/cli/php_http_parser.c         } else if (index == 1 &amp;&amp; parser-&gt;method == PHP_HTTP_POST &amp;&amp; ch == 'A') {</span>
+<span class='curline'><a href='../S/1459.html#L642'>method</a>            642 sapi/cli/php_http_parser.c           parser-&gt;method = PHP_HTTP_PATCH;</span>
+<span class='curline'><a href='../S/1459.html#L643'>method</a>            643 sapi/cli/php_http_parser.c         } else if (index == 2 &amp;&amp; parser-&gt;method == PHP_HTTP_UNLOCK &amp;&amp; ch == 'S') {</span>
+<span class='curline'><a href='../S/1459.html#L644'>method</a>            644 sapi/cli/php_http_parser.c           parser-&gt;method = PHP_HTTP_UNSUBSCRIBE;</span>
+<span class='curline'><a href='../S/1459.html#L645'>method</a>            645 sapi/cli/php_http_parser.c         } else if (index == 4 &amp;&amp; parser-&gt;method == PHP_HTTP_PROPFIND &amp;&amp; ch == 'P') {</span>
+<span class='curline'><a href='../S/1459.html#L646'>method</a>            646 sapi/cli/php_http_parser.c           parser-&gt;method = PHP_HTTP_PROPPATCH;</span>
+<span class='curline'><a href='../S/1459.html#L648'>method</a>            648 sapi/cli/php_http_parser.c           parser-&gt;method = PHP_HTTP_NOT_IMPLEMENTED;</span>
+<span class='curline'><a href='../S/1459.html#L1384'>method</a>           1384 sapi/cli/php_http_parser.c         if (parser-&gt;flags &amp; F_UPGRADE || parser-&gt;method == PHP_HTTP_CONNECT) {</span>
+<span class='curline'><a href='../S/1459.html#L1617'>method</a>           1617 sapi/cli/php_http_parser.c   parser-&gt;method = 0;</span>
+<span class='curline'><a href='../S/1460.html#L128'>method</a>            128 sapi/cli/php_http_parser.h   unsigned char method;    /* requests only */</span>
+<span class='curline'><a href='../S/1546.html#L298'>method</a>            298 sapi/phpdbg/phpdbg.c          *method = NULL;</span>
+<span class='curline'><a href='../S/1546.html#L302'>method</a>            302 sapi/phpdbg/phpdbg.c     if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ss", &amp;class, &amp;clen, &amp;method, &amp;mlen) == FAILURE) {</span>
+<span class='curline'><a href='../S/1546.html#L306'>method</a>            306 sapi/phpdbg/phpdbg.c     phpdbg_set_breakpoint_method(class, method TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1546.html#L381'>method</a>            381 sapi/phpdbg/phpdbg.c     ZEND_ARG_INFO(0, method)</span>
+<span class='curline'><a href='../S/1548.html#L197'>method</a>            197 sapi/phpdbg/phpdbg_bp.c 											conditional-&gt;param.method.class, conditional-&gt;param.method.name,</span>
+<span class='curline'><a href='../S/1548.html#L499'>method</a>            499 sapi/phpdbg/phpdbg_bp.c PHPDBG_API void phpdbg_set_breakpoint_method_opline(const char *class, const char *method, zend_ulong opline TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1548.html#L506'>method</a>            506 sapi/phpdbg/phpdbg_bp.c 	new_break.func_len = strlen(method);</span>
+<span class='curline'><a href='../S/1548.html#L507'>method</a>            507 sapi/phpdbg/phpdbg_bp.c 	new_break.func_name = estrndup(method, new_break.func_len);</span>
+<span class='curline'><a href='../S/1548.html#L940'>method</a>            940 sapi/phpdbg/phpdbg_bp.c 					size_t lengths[2] = {strlen(param-&gt;method.class), ops-&gt;scope-&gt;name_length};</span>
+<span class='curline'><a href='../S/1548.html#L941'>method</a>            941 sapi/phpdbg/phpdbg_bp.c 					if (lengths[0] == lengths[1] &amp;&amp; memcmp(param-&gt;method.class, ops-&gt;scope-&gt;name, lengths[0]) == SUCCESS) {</span>
+<span class='curline'><a href='../S/1548.html#L942'>method</a>            942 sapi/phpdbg/phpdbg_bp.c 						lengths[0] = strlen(param-&gt;method.name);</span>
+<span class='curline'><a href='../S/1548.html#L945'>method</a>            945 sapi/phpdbg/phpdbg_bp.c 						if (lengths[0] == lengths[1] &amp;&amp; memcmp(param-&gt;method.name, ops-&gt;function_name, lengths[0]) == SUCCESS) {</span>
+<span class='curline'><a href='../S/1548.html#L1578'>method</a>           1578 sapi/phpdbg/phpdbg_bp.c 				 				brake-&gt;param.method.class,</span>
+<span class='curline'><a href='../S/1548.html#L1579'>method</a>           1579 sapi/phpdbg/phpdbg_bp.c 				 				brake-&gt;param.method.name,</span>
+<span class='curline'><a href='../S/1548.html#L1587'>method</a>           1587 sapi/phpdbg/phpdbg_bp.c 				 				brake-&gt;param.method.class,</span>
+<span class='curline'><a href='../S/1548.html#L1588'>method</a>           1588 sapi/phpdbg/phpdbg_bp.c 				 				brake-&gt;param.method.name,</span>
+<span class='curline'><a href='../S/1549.html#L118'>method</a>            118 sapi/phpdbg/phpdbg_bp.h PHPDBG_API void phpdbg_set_breakpoint_method_opline(const char *class, const char *method, zend_ulong opline TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1554.html#L80'>method</a>             80 sapi/phpdbg/phpdbg_cmd.c 				efree(param-&gt;method.class);</span>
+<span class='curline'><a href='../S/1554.html#L81'>method</a>             81 sapi/phpdbg/phpdbg_cmd.c 				efree(param-&gt;method.name);</span>
+<span class='curline'><a href='../S/1554.html#L115'>method</a>            115 sapi/phpdbg/phpdbg_cmd.c 				param-&gt;method.class,</span>
+<span class='curline'><a href='../S/1554.html#L116'>method</a>            116 sapi/phpdbg/phpdbg_cmd.c 				param-&gt;method.name);</span>
+<span class='curline'><a href='../S/1554.html#L142'>method</a>            142 sapi/phpdbg/phpdbg_cmd.c 				param-&gt;method.class,</span>
+<span class='curline'><a href='../S/1554.html#L143'>method</a>            143 sapi/phpdbg/phpdbg_cmd.c 				param-&gt;method.name,</span>
+<span class='curline'><a href='../S/1554.html#L181'>method</a>            181 sapi/phpdbg/phpdbg_cmd.c 			dest-&gt;method.class = estrdup(src-&gt;method.class);</span>
+<span class='curline'><a href='../S/1554.html#L182'>method</a>            182 sapi/phpdbg/phpdbg_cmd.c 			dest-&gt;method.name = estrdup(src-&gt;method.name);</span>
+<span class='curline'><a href='../S/1554.html#L200'>method</a>            200 sapi/phpdbg/phpdbg_cmd.c 			dest-&gt;method.class = estrdup(src-&gt;method.class);</span>
+<span class='curline'><a href='../S/1554.html#L201'>method</a>            201 sapi/phpdbg/phpdbg_cmd.c 			dest-&gt;method.name = estrdup(src-&gt;method.name);</span>
+<span class='curline'><a href='../S/1554.html#L227'>method</a>            227 sapi/phpdbg/phpdbg_cmd.c 			hash += zend_inline_hash_func(param-&gt;method.class, strlen(param-&gt;method.class));</span>
+<span class='curline'><a href='../S/1554.html#L228'>method</a>            228 sapi/phpdbg/phpdbg_cmd.c 			hash += zend_inline_hash_func(param-&gt;method.name, strlen(param-&gt;method.name));</span>
+<span class='curline'><a href='../S/1554.html#L252'>method</a>            252 sapi/phpdbg/phpdbg_cmd.c 			hash += zend_inline_hash_func(param-&gt;method.class, strlen(param-&gt;method.class));</span>
+<span class='curline'><a href='../S/1554.html#L253'>method</a>            253 sapi/phpdbg/phpdbg_cmd.c 			hash += zend_inline_hash_func(param-&gt;method.name, strlen(param-&gt;method.name));</span>
+<span class='curline'><a href='../S/1554.html#L316'>method</a>            316 sapi/phpdbg/phpdbg_cmd.c 						strlen(l-&gt;method.class), strlen(r-&gt;method.class)};</span>
+<span class='curline'><a href='../S/1554.html#L318'>method</a>            318 sapi/phpdbg/phpdbg_cmd.c 						if (memcmp(l-&gt;method.class, r-&gt;method.class, lengths[0]) == SUCCESS) {</span>
+<span class='curline'><a href='../S/1554.html#L319'>method</a>            319 sapi/phpdbg/phpdbg_cmd.c 							lengths[0] = strlen(l-&gt;method.name);</span>
+<span class='curline'><a href='../S/1554.html#L320'>method</a>            320 sapi/phpdbg/phpdbg_cmd.c 							lengths[1] = strlen(r-&gt;method.name);</span>
+<span class='curline'><a href='../S/1554.html#L324'>method</a>            324 sapi/phpdbg/phpdbg_cmd.c 									l-&gt;method.name, r-&gt;method.name, lengths[0]) == SUCCESS);</span>
+<span class='curline'><a href='../S/1554.html#L363'>method</a>            363 sapi/phpdbg/phpdbg_cmd.c 				fprintf(stderr, "%s METHOD_PARAM(%s::%s)\n", msg, param-&gt;method.class, param-&gt;method.name);</span>
+<span class='curline'><a href='../S/1554.html#L367'>method</a>            367 sapi/phpdbg/phpdbg_cmd.c 				fprintf(stderr, "%s NUMERIC_METHOD_PARAM(%s::%s)\n", msg, param-&gt;method.class, param-&gt;method.name);</span>
+<span class='curline'><a href='../S/1554.html#L407'>method</a>            407 sapi/phpdbg/phpdbg_cmd.c 					if (remove-&gt;method.class)</span>
+<span class='curline'><a href='../S/1554.html#L408'>method</a>            408 sapi/phpdbg/phpdbg_cmd.c 						free(remove-&gt;method.class);</span>
+<span class='curline'><a href='../S/1554.html#L409'>method</a>            409 sapi/phpdbg/phpdbg_cmd.c 					if (remove-&gt;method.name)</span>
+<span class='curline'><a href='../S/1554.html#L410'>method</a>            410 sapi/phpdbg/phpdbg_cmd.c 						free(remove-&gt;method.name);</span>
+<span class='curline'><a href='../S/1555.html#L64'>method</a>             64 sapi/phpdbg/phpdbg_cmd.h 	} method;</span>
+<span class='curline'><a href='../S/1555.html#L77'>method</a>             77 sapi/phpdbg/phpdbg_cmd.h 	(v)-&gt;method.class = NULL; \</span>
+<span class='curline'><a href='../S/1555.html#L78'>method</a>             78 sapi/phpdbg/phpdbg_cmd.h 	(v)-&gt;method.name = NULL; \</span>
+<span class='curline'><a href='../S/1564.html#L43'>method</a>             43 sapi/phpdbg/phpdbg_list.c 	PHPDBG_LIST_COMMAND_D(method,    "lists the specified method",   'm', list_method, NULL, "m"),</span>
+<span class='curline'><a href='../S/1564.html#L80'>method</a>             80 sapi/phpdbg/phpdbg_list.c PHPDBG_LIST(method) /* {{{ */</span>
+<span class='curline'><a href='../S/1564.html#L84'>method</a>             84 sapi/phpdbg/phpdbg_list.c 	if (zend_lookup_class(param-&gt;method.class, strlen(param-&gt;method.class), &amp;ce TSRMLS_CC) == SUCCESS) {</span>
+<span class='curline'><a href='../S/1564.html#L86'>method</a>             86 sapi/phpdbg/phpdbg_list.c 		char *lcname = zend_str_tolower_dup(param-&gt;method.name, strlen(param-&gt;method.name));</span>
+<span class='curline'><a href='../S/1564.html#L91'>method</a>             91 sapi/phpdbg/phpdbg_list.c 			phpdbg_error("Could not find %s::%s", param-&gt;method.class, param-&gt;method.name);</span>
+<span class='curline'><a href='../S/1564.html#L96'>method</a>             96 sapi/phpdbg/phpdbg_list.c 		phpdbg_error("Could not find the class %s", param-&gt;method.class);</span>
+<span class='curline'><a href='../S/1565.html#L32'>method</a>             32 sapi/phpdbg/phpdbg_list.h PHPDBG_LIST(method);</span>
+<span class='curline'><a href='../S/1569.html#L109'>method</a>            109 sapi/phpdbg/phpdbg_parser.y 		$$.method.class = $1.str;</span>
+<span class='curline'><a href='../S/1569.html#L110'>method</a>            110 sapi/phpdbg/phpdbg_parser.y 		$$.method.name = $3.str;</span>
+<span class='curline'><a href='../S/1569.html#L114'>method</a>            114 sapi/phpdbg/phpdbg_parser.y 		$$.method.class = $1.str;</span>
+<span class='curline'><a href='../S/1569.html#L115'>method</a>            115 sapi/phpdbg/phpdbg_parser.y 		$$.method.name = $3.str;</span>
+<span class='curline'><a href='../S/1570.html#L36'>method</a>             36 sapi/phpdbg/phpdbg_print.c 	PHPDBG_PRINT_COMMAND_D(method,     "print out the instructions in the specified method",   'm', print_method, NULL, "m"),</span>
+<span class='curline'><a href='../S/1570.html#L53'>method</a>             53 sapi/phpdbg/phpdbg_print.c static inline void phpdbg_print_function_helper(zend_function *method TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1570.html#L55'>method</a>             55 sapi/phpdbg/phpdbg_print.c 	switch (method-&gt;type) {</span>
+<span class='curline'><a href='../S/1570.html#L57'>method</a>             57 sapi/phpdbg/phpdbg_print.c 			zend_op_array* op_array = &amp;(method-&gt;op_array);</span>
+<span class='curline'><a href='../S/1570.html#L65'>method</a>             65 sapi/phpdbg/phpdbg_print.c 				if (method-&gt;common.scope) {</span>
+<span class='curline'><a href='../S/1570.html#L68'>method</a>             68 sapi/phpdbg/phpdbg_print.c 						method-&gt;common.scope-&gt;name,</span>
+<span class='curline'><a href='../S/1570.html#L69'>method</a>             69 sapi/phpdbg/phpdbg_print.c 						method-&gt;common.function_name,</span>
+<span class='curline'><a href='../S/1570.html#L73'>method</a>             73 sapi/phpdbg/phpdbg_print.c 						method-&gt;common.function_name ? op_array-&gt;line_start : 0, </span>
+<span class='curline'><a href='../S/1570.html#L74'>method</a>             74 sapi/phpdbg/phpdbg_print.c 						method-&gt;common.function_name ? op_array-&gt;line_end : 0,</span>
+<span class='curline'><a href='../S/1570.html#L75'>method</a>             75 sapi/phpdbg/phpdbg_print.c 						method-&gt;common.function_name ? method-&gt;common.function_name : "{main}",</span>
+<span class='curline'><a href='../S/1570.html#L99'>method</a>             99 sapi/phpdbg/phpdbg_print.c 			if (method-&gt;common.scope) {</span>
+<span class='curline'><a href='../S/1570.html#L100'>method</a>            100 sapi/phpdbg/phpdbg_print.c 				phpdbg_writeln("\tInternal %s::%s()", method-&gt;common.scope-&gt;name, method-&gt;common.function_name);</span>
+<span class='curline'><a href='../S/1570.html#L102'>method</a>            102 sapi/phpdbg/phpdbg_print.c 				phpdbg_writeln("\tInternal %s()", method-&gt;common.function_name);</span>
+<span class='curline'><a href='../S/1570.html#L171'>method</a>            171 sapi/phpdbg/phpdbg_print.c 			zend_function *method;</span>
+<span class='curline'><a href='../S/1570.html#L174'>method</a>            174 sapi/phpdbg/phpdbg_print.c 			     zend_hash_get_current_data_ex(&amp;(*ce)-&gt;function_table, (void**) &amp;method, &amp;position) == SUCCESS;</span>
+<span class='curline'><a href='../S/1570.html#L176'>method</a>            176 sapi/phpdbg/phpdbg_print.c 				phpdbg_print_function_helper(method TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1570.html#L186'>method</a>            186 sapi/phpdbg/phpdbg_print.c PHPDBG_PRINT(method) /* {{{ */</span>
+<span class='curline'><a href='../S/1570.html#L190'>method</a>            190 sapi/phpdbg/phpdbg_print.c 	if (zend_lookup_class(param-&gt;method.class, strlen(param-&gt;method.class), &amp;ce TSRMLS_CC) == SUCCESS) {</span>
+<span class='curline'><a href='../S/1570.html#L192'>method</a>            192 sapi/phpdbg/phpdbg_print.c 		char *lcname = zend_str_tolower_dup(param-&gt;method.name, strlen(param-&gt;method.name));</span>
+<span class='curline'><a href='../S/1570.html#L201'>method</a>            201 sapi/phpdbg/phpdbg_print.c 			phpdbg_error("The method %s could not be found", param-&gt;method.name);</span>
+<span class='curline'><a href='../S/1570.html#L206'>method</a>            206 sapi/phpdbg/phpdbg_print.c 		phpdbg_error("The class %s could not be found", param-&gt;method.class);</span>
+<span class='curline'><a href='../S/1571.html#L34'>method</a>             34 sapi/phpdbg/phpdbg_print.h PHPDBG_PRINT(method);</span>
+<span class='curline'><a href='../S/1572.html#L126'>method</a>            126 sapi/phpdbg/phpdbg_prompt.c 								next-&gt;method.class, next-&gt;method.name);</span>
+<span class='curline'><a href='../S/1572.html#L132'>method</a>            132 sapi/phpdbg/phpdbg_prompt.c 								next-&gt;method.class, next-&gt;method.name, next-&gt;num);</span>
+<span class='curline'><a href='../S/1572.html#L806'>method</a>            806 sapi/phpdbg/phpdbg_prompt.c 			phpdbg_set_breakpoint_method(param-&gt;method.class, param-&gt;method.name TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1572.html#L809'>method</a>            809 sapi/phpdbg/phpdbg_prompt.c 			phpdbg_set_breakpoint_method_opline(param-&gt;method.class, param-&gt;method.name, param-&gt;num TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1572.html#L969'>method</a>            969 sapi/phpdbg/phpdbg_prompt.c 			return PHPDBG_LIST_HANDLER(method)(PHPDBG_COMMAND_ARGS);</span>
+<span class='curline'><a href='../S/1576.html#L114'>method</a>            114 sapi/phpdbg/phpdbg_utils.c PHPDBG_API int phpdbg_is_class_method(const char *str, size_t len, char **class, char **method) /* {{{ */</span>
+<span class='curline'><a href='../S/1576.html#L141'>method</a>            141 sapi/phpdbg/phpdbg_utils.c 	if (method != NULL) {</span>
+<span class='curline'><a href='../S/1576.html#L142'>method</a>            142 sapi/phpdbg/phpdbg_utils.c 		*method = estrndup(sep+2, str + len - (sep + 2));</span>
+<span class='curline'><a href='../S/1583.html#L189'>method</a>            189 sapi/phttpd/phttpd.c     SG(request_info).request_method = PHG(cip)-&gt;hip-&gt;method;</span>
+<span class='curline'><a href='../S/1583.html#L286'>method</a>            286 sapi/phttpd/phttpd.c 	if (strcasecmp(hip-&gt;method, "GET") == 0 || </span>
+<span class='curline'><a href='../S/1583.html#L287'>method</a>            287 sapi/phttpd/phttpd.c 	    strcasecmp(hip-&gt;method, "HEAD") == 0 ||</span>
+<span class='curline'><a href='../S/1583.html#L288'>method</a>            288 sapi/phttpd/phttpd.c 	    strcasecmp(hip-&gt;method, "POST") == 0) {</span>
+<span class='curline'><a href='../S/1589.html#L454'>method</a>            454 sapi/thttpd/thttpd.c 	SG(request_info).request_method = httpd_method_str(TG(hc)-&gt;method);</span>
+<span class='curline'><a href='../S/1592.html#L145'>method</a>            145 sapi/webjames/webjames.c 	if ((WG(conn)-&gt;method == METHOD_POST) || (WG(conn)-&gt;method == METHOD_PUT)) {</span>
+<span class='curline'><a href='../S/1592.html#L150'>method</a>            150 sapi/webjames/webjames.c 	if ((WG(conn)-&gt;method == METHOD_PUT) || (WG(conn)-&gt;method == METHOD_DELETE)) ADD_FIELD("ENTITY_PATH", requesturi);</span>
+<span class='curline'><a href='../S/1592.html#L180'>method</a>            180 sapi/webjames/webjames.c 	if (WG(conn)-&gt;method==METHOD_HEAD) {</span>
+</pre>
+</body>
+</html>

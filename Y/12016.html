@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>autoload_functions</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/1045.html#L60'>autoload_functions</a>   60 ext/spl/php_spl.c 	spl_globals-&gt;autoload_functions      = NULL;</span>
+<span class='curline'><a href='../S/1045.html#L427'>autoload_functions</a>  427 ext/spl/php_spl.c 	if (SPL_G(autoload_functions)) {</span>
+<span class='curline'><a href='../S/1045.html#L432'>autoload_functions</a>  432 ext/spl/php_spl.c 		zend_hash_internal_pointer_reset_ex(SPL_G(autoload_functions), &amp;function_pos);</span>
+<span class='curline'><a href='../S/1045.html#L433'>autoload_functions</a>  433 ext/spl/php_spl.c 		while(zend_hash_has_more_elements_ex(SPL_G(autoload_functions), &amp;function_pos) == SUCCESS) {</span>
+<span class='curline'><a href='../S/1045.html#L434'>autoload_functions</a>  434 ext/spl/php_spl.c 			zend_hash_get_current_key_ex(SPL_G(autoload_functions), &amp;func_name, &amp;func_name_len, &amp;dummy, 0, &amp;function_pos);</span>
+<span class='curline'><a href='../S/1045.html#L435'>autoload_functions</a>  435 ext/spl/php_spl.c 			zend_hash_get_current_data_ex(SPL_G(autoload_functions), (void **) &amp;alfi, &amp;function_pos);</span>
+<span class='curline'><a href='../S/1045.html#L445'>autoload_functions</a>  445 ext/spl/php_spl.c 			zend_hash_move_forward_ex(SPL_G(autoload_functions), &amp;function_pos);</span>
+<span class='curline'><a href='../S/1045.html#L561'>autoload_functions</a>  561 ext/spl/php_spl.c 		if (SPL_G(autoload_functions) &amp;&amp; zend_hash_exists(SPL_G(autoload_functions), (char*)lc_name, func_name_len+1)) {</span>
+<span class='curline'><a href='../S/1045.html#L580'>autoload_functions</a>  580 ext/spl/php_spl.c 		if (!SPL_G(autoload_functions)) {</span>
+<span class='curline'><a href='../S/1045.html#L581'>autoload_functions</a>  581 ext/spl/php_spl.c 			ALLOC_HASHTABLE(SPL_G(autoload_functions));</span>
+<span class='curline'><a href='../S/1045.html#L582'>autoload_functions</a>  582 ext/spl/php_spl.c 			zend_hash_init(SPL_G(autoload_functions), 1, NULL, (dtor_func_t) autoload_func_info_dtor, 0);</span>
+<span class='curline'><a href='../S/1045.html#L594'>autoload_functions</a>  594 ext/spl/php_spl.c 			zend_hash_add(SPL_G(autoload_functions), "spl_autoload", sizeof("spl_autoload"), &amp;spl_alfi, sizeof(autoload_func_info), NULL);</span>
+<span class='curline'><a href='../S/1045.html#L595'>autoload_functions</a>  595 ext/spl/php_spl.c 			if (prepend &amp;&amp; SPL_G(autoload_functions)-&gt;nNumOfElements &gt; 1) {</span>
+<span class='curline'><a href='../S/1045.html#L597'>autoload_functions</a>  597 ext/spl/php_spl.c 				HT_MOVE_TAIL_TO_HEAD(SPL_G(autoload_functions));</span>
+<span class='curline'><a href='../S/1045.html#L601'>autoload_functions</a>  601 ext/spl/php_spl.c 		if (zend_hash_add(SPL_G(autoload_functions), lc_name, func_name_len+1, &amp;alfi.func_ptr, sizeof(autoload_func_info), NULL) == FAILURE) {</span>
+<span class='curline'><a href='../S/1045.html#L609'>autoload_functions</a>  609 ext/spl/php_spl.c 		if (prepend &amp;&amp; SPL_G(autoload_functions)-&gt;nNumOfElements &gt; 1) {</span>
+<span class='curline'><a href='../S/1045.html#L611'>autoload_functions</a>  611 ext/spl/php_spl.c 			HT_MOVE_TAIL_TO_HEAD(SPL_G(autoload_functions));</span>
+<span class='curline'><a href='../S/1045.html#L617'>autoload_functions</a>  617 ext/spl/php_spl.c 	if (SPL_G(autoload_functions)) {</span>
+<span class='curline'><a href='../S/1045.html#L669'>autoload_functions</a>  669 ext/spl/php_spl.c 	if (SPL_G(autoload_functions)) {</span>
+<span class='curline'><a href='../S/1045.html#L673'>autoload_functions</a>  673 ext/spl/php_spl.c 				zend_hash_destroy(SPL_G(autoload_functions));</span>
+<span class='curline'><a href='../S/1045.html#L674'>autoload_functions</a>  674 ext/spl/php_spl.c 				FREE_HASHTABLE(SPL_G(autoload_functions));</span>
+<span class='curline'><a href='../S/1045.html#L675'>autoload_functions</a>  675 ext/spl/php_spl.c 				SPL_G(autoload_functions) = NULL;</span>
+<span class='curline'><a href='../S/1045.html#L678'>autoload_functions</a>  678 ext/spl/php_spl.c 				zend_hash_clean(SPL_G(autoload_functions));</span>
+<span class='curline'><a href='../S/1045.html#L683'>autoload_functions</a>  683 ext/spl/php_spl.c 			success = zend_hash_del(SPL_G(autoload_functions), lc_name, func_name_len+1);</span>
+<span class='curline'><a href='../S/1045.html#L689'>autoload_functions</a>  689 ext/spl/php_spl.c 				success = zend_hash_del(SPL_G(autoload_functions), lc_name, func_name_len+1);</span>
+<span class='curline'><a href='../S/1045.html#L731'>autoload_functions</a>  731 ext/spl/php_spl.c 		zend_hash_internal_pointer_reset_ex(SPL_G(autoload_functions), &amp;function_pos);</span>
+<span class='curline'><a href='../S/1045.html#L732'>autoload_functions</a>  732 ext/spl/php_spl.c 		while(zend_hash_has_more_elements_ex(SPL_G(autoload_functions), &amp;function_pos) == SUCCESS) {</span>
+<span class='curline'><a href='../S/1045.html#L733'>autoload_functions</a>  733 ext/spl/php_spl.c 			zend_hash_get_current_data_ex(SPL_G(autoload_functions), (void **) &amp;alfi, &amp;function_pos);</span>
+<span class='curline'><a href='../S/1045.html#L757'>autoload_functions</a>  757 ext/spl/php_spl.c 				   zend_hash_get_current_key_ex(SPL_G(autoload_functions), &amp;key, &amp;len, &amp;dummy, 0, &amp;function_pos); </span>
+<span class='curline'><a href='../S/1045.html#L762'>autoload_functions</a>  762 ext/spl/php_spl.c 			zend_hash_move_forward_ex(SPL_G(autoload_functions), &amp;function_pos);</span>
+<span class='curline'><a href='../S/1045.html#L966'>autoload_functions</a>  966 ext/spl/php_spl.c 	SPL_G(autoload_functions) = NULL;</span>
+<span class='curline'><a href='../S/1045.html#L978'>autoload_functions</a>  978 ext/spl/php_spl.c 	if (SPL_G(autoload_functions)) {</span>
+<span class='curline'><a href='../S/1045.html#L979'>autoload_functions</a>  979 ext/spl/php_spl.c 		zend_hash_destroy(SPL_G(autoload_functions));</span>
+<span class='curline'><a href='../S/1045.html#L980'>autoload_functions</a>  980 ext/spl/php_spl.c 		FREE_HASHTABLE(SPL_G(autoload_functions));</span>
+<span class='curline'><a href='../S/1045.html#L981'>autoload_functions</a>  981 ext/spl/php_spl.c 		SPL_G(autoload_functions) = NULL;</span>
+<span class='curline'><a href='../S/1046.html#L62'>autoload_functions</a>   62 ext/spl/php_spl.h 	HashTable *  autoload_functions;</span>
+</pre>
+</body>
+</html>

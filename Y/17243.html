@@ -1,0 +1,565 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>exception</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/1642.html#L290'>exception</a>         290 Zend/zend.c    				zend_error(EG(exception) ? E_ERROR : E_RECOVERABLE_ERROR, "Object of class %s could not be converted to string", Z_OBJCE_P(expr)-&gt;name);</span>
+<span class='curline'><a href='../S/1642.html#L1054'>exception</a>        1054 Zend/zend.c    	if (EG(exception)) {</span>
+<span class='curline'><a href='../S/1642.html#L1065'>exception</a>        1065 Zend/zend.c    				zend_exception_error(EG(exception), E_WARNING TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1642.html#L1066'>exception</a>        1066 Zend/zend.c    				EG(exception) = NULL;</span>
+<span class='curline'><a href='../S/1642.html#L1230'>exception</a>        1230 Zend/zend.c    			} else if (!EG(exception)) {</span>
+<span class='curline'><a href='../S/1642.html#L1343'>exception</a>        1343 Zend/zend.c    			if (EG(exception)) {</span>
+<span class='curline'><a href='../S/1642.html#L1347'>exception</a>        1347 Zend/zend.c    					old_exception = EG(exception);</span>
+<span class='curline'><a href='../S/1642.html#L1348'>exception</a>        1348 Zend/zend.c    					EG(exception) = NULL;</span>
+<span class='curline'><a href='../S/1642.html#L1355'>exception</a>        1355 Zend/zend.c    						if (EG(exception)) {</span>
+<span class='curline'><a href='../S/1642.html#L1356'>exception</a>        1356 Zend/zend.c    							zval_ptr_dtor(&amp;EG(exception));</span>
+<span class='curline'><a href='../S/1642.html#L1357'>exception</a>        1357 Zend/zend.c    							EG(exception) = NULL;</span>
+<span class='curline'><a href='../S/1642.html#L1361'>exception</a>        1361 Zend/zend.c    						EG(exception) = old_exception;</span>
+<span class='curline'><a href='../S/1642.html#L1362'>exception</a>        1362 Zend/zend.c    						zend_exception_error(EG(exception), E_ERROR TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1642.html#L1365'>exception</a>        1365 Zend/zend.c    					zend_exception_error(EG(exception), E_ERROR TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1643.html#L860'>exception</a>         860 Zend/zend.h    	zend_class_entry       *exception;</span>
+<span class='curline'><a href='../S/1646.html#L3956'>exception</a>        3956 Zend/zend_API.c 	current-&gt;exception = EG(exception_class);</span>
+<span class='curline'><a href='../S/1646.html#L3981'>exception</a>        3981 Zend/zend_API.c 	EG(exception_class) = saved-&gt;handling == EH_THROW ? saved-&gt;exception : NULL;</span>
+<span class='curline'><a href='../S/1667.html#L37'>exception</a>          37 Zend/zend_exceptions.c void zend_exception_set_previous(zval *exception, zval *add_previous TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1667.html#L41'>exception</a>          41 Zend/zend_exceptions.c 	if (exception == add_previous || !add_previous || !exception) {</span>
+<span class='curline'><a href='../S/1667.html#L48'>exception</a>          48 Zend/zend_exceptions.c 	while (exception &amp;&amp; exception != add_previous &amp;&amp; Z_OBJ_HANDLE_P(exception) != Z_OBJ_HANDLE_P(add_previous)) {</span>
+<span class='curline'><a href='../S/1667.html#L51'>exception</a>          51 Zend/zend_exceptions.c 			if (Z_OBJ_HANDLE_P(ancestor) == Z_OBJ_HANDLE_P(exception)) {</span>
+<span class='curline'><a href='../S/1667.html#L57'>exception</a>          57 Zend/zend_exceptions.c 		previous = zend_read_property(default_exception_ce, exception, "previous", sizeof("previous")-1, 1 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1667.html#L59'>exception</a>          59 Zend/zend_exceptions.c 			zend_update_property(default_exception_ce, exception, "previous", sizeof("previous")-1, add_previous TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1667.html#L63'>exception</a>          63 Zend/zend_exceptions.c 		exception = previous;</span>
+<span class='curline'><a href='../S/1667.html#L70'>exception</a>          70 Zend/zend_exceptions.c 		zend_exception_set_previous(EG(exception), EG(prev_exception) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1667.html#L72'>exception</a>          72 Zend/zend_exceptions.c 	if (EG(exception)) {</span>
+<span class='curline'><a href='../S/1667.html#L73'>exception</a>          73 Zend/zend_exceptions.c 		EG(prev_exception) = EG(exception);</span>
+<span class='curline'><a href='../S/1667.html#L75'>exception</a>          75 Zend/zend_exceptions.c 	EG(exception) = NULL;</span>
+<span class='curline'><a href='../S/1667.html#L82'>exception</a>          82 Zend/zend_exceptions.c 		if (EG(exception)) {</span>
+<span class='curline'><a href='../S/1667.html#L83'>exception</a>          83 Zend/zend_exceptions.c 			zend_exception_set_previous(EG(exception), EG(prev_exception) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1667.html#L85'>exception</a>          85 Zend/zend_exceptions.c 			EG(exception) = EG(prev_exception);</span>
+<span class='curline'><a href='../S/1667.html#L92'>exception</a>          92 Zend/zend_exceptions.c void zend_throw_exception_internal(zval *exception TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1667.html#L99'>exception</a>          99 Zend/zend_exceptions.c 		if (exception != NULL) {</span>
+<span class='curline'><a href='../S/1667.html#L100'>exception</a>         100 Zend/zend_exceptions.c 			zend_get_object_classname(exception, &amp;classname, &amp;name_len TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1667.html#L108'>exception</a>         108 Zend/zend_exceptions.c 	if (exception != NULL) {</span>
+<span class='curline'><a href='../S/1667.html#L109'>exception</a>         109 Zend/zend_exceptions.c 		zval *previous = EG(exception);</span>
+<span class='curline'><a href='../S/1667.html#L110'>exception</a>         110 Zend/zend_exceptions.c 		zend_exception_set_previous(exception, EG(exception) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1667.html#L111'>exception</a>         111 Zend/zend_exceptions.c 		EG(exception) = exception;</span>
+<span class='curline'><a href='../S/1667.html#L117'>exception</a>         117 Zend/zend_exceptions.c 		if(EG(exception)) {</span>
+<span class='curline'><a href='../S/1667.html#L118'>exception</a>         118 Zend/zend_exceptions.c 			zend_exception_error(EG(exception), E_ERROR TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1667.html#L124'>exception</a>         124 Zend/zend_exceptions.c 		zend_throw_exception_hook(exception TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1667.html#L143'>exception</a>         143 Zend/zend_exceptions.c 	if (!EG(exception)) {</span>
+<span class='curline'><a href='../S/1667.html#L146'>exception</a>         146 Zend/zend_exceptions.c 	zval_ptr_dtor(&amp;EG(exception));</span>
+<span class='curline'><a href='../S/1667.html#L147'>exception</a>         147 Zend/zend_exceptions.c 	EG(exception) = NULL;</span>
+<span class='curline'><a href='../S/1667.html#L193'>exception</a>         193 Zend/zend_exceptions.c ZEND_METHOD(exception, __clone)</span>
+<span class='curline'><a href='../S/1667.html#L202'>exception</a>         202 Zend/zend_exceptions.c ZEND_METHOD(exception, __construct)</span>
+<span class='curline'><a href='../S/1667.html#L241'>exception</a>         241 Zend/zend_exceptions.c ZEND_METHOD(exception, __wakeup)</span>
+<span class='curline'><a href='../S/1667.html#L313'>exception</a>         313 Zend/zend_exceptions.c ZEND_METHOD(exception, getFile)</span>
+<span class='curline'><a href='../S/1667.html#L323'>exception</a>         323 Zend/zend_exceptions.c ZEND_METHOD(exception, getLine)</span>
+<span class='curline'><a href='../S/1667.html#L333'>exception</a>         333 Zend/zend_exceptions.c ZEND_METHOD(exception, getMessage)</span>
+<span class='curline'><a href='../S/1667.html#L343'>exception</a>         343 Zend/zend_exceptions.c ZEND_METHOD(exception, getCode)</span>
+<span class='curline'><a href='../S/1667.html#L353'>exception</a>         353 Zend/zend_exceptions.c ZEND_METHOD(exception, getTrace)</span>
+<span class='curline'><a href='../S/1667.html#L616'>exception</a>         616 Zend/zend_exceptions.c ZEND_METHOD(exception, getTraceAsString)</span>
+<span class='curline'><a href='../S/1667.html#L646'>exception</a>         646 Zend/zend_exceptions.c ZEND_METHOD(exception, getPrevious)</span>
+<span class='curline'><a href='../S/1667.html#L671'>exception</a>         671 Zend/zend_exceptions.c ZEND_METHOD(exception, __toString)</span>
+<span class='curline'><a href='../S/1667.html#L673'>exception</a>         673 Zend/zend_exceptions.c 	zval message, file, line, *trace, *exception;</span>
+<span class='curline'><a href='../S/1667.html#L683'>exception</a>         683 Zend/zend_exceptions.c 	exception = getThis();</span>
+<span class='curline'><a href='../S/1667.html#L686'>exception</a>         686 Zend/zend_exceptions.c 	while (exception &amp;&amp; Z_TYPE_P(exception) == IS_OBJECT &amp;&amp; instanceof_function(Z_OBJCE_P(exception), default_exception_ce TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/1667.html#L688'>exception</a>         688 Zend/zend_exceptions.c 		_default_exception_get_entry(exception, "message", sizeof("message")-1, &amp;message TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1667.html#L689'>exception</a>         689 Zend/zend_exceptions.c 		_default_exception_get_entry(exception, "file", sizeof("file")-1, &amp;file TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1667.html#L690'>exception</a>         690 Zend/zend_exceptions.c 		_default_exception_get_entry(exception, "line", sizeof("line")-1, &amp;line TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1667.html#L698'>exception</a>         698 Zend/zend_exceptions.c 		fci.function_table = &amp;Z_OBJCE_P(exception)-&gt;function_table;</span>
+<span class='curline'><a href='../S/1667.html#L701'>exception</a>         701 Zend/zend_exceptions.c 		fci.object_ptr = exception;</span>
+<span class='curline'><a href='../S/1667.html#L716'>exception</a>         716 Zend/zend_exceptions.c 								Z_OBJCE_P(exception)-&gt;name, Z_STRVAL(message), Z_STRVAL(file), Z_LVAL(line),</span>
+<span class='curline'><a href='../S/1667.html#L721'>exception</a>         721 Zend/zend_exceptions.c 								Z_OBJCE_P(exception)-&gt;name, Z_STRVAL(file), Z_LVAL(line),</span>
+<span class='curline'><a href='../S/1667.html#L730'>exception</a>         730 Zend/zend_exceptions.c 		exception = zend_read_property(default_exception_ce, exception, "previous", sizeof("previous")-1, 0 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1667.html#L764'>exception</a>         764 Zend/zend_exceptions.c 	ZEND_ME(exception, __clone, NULL, ZEND_ACC_PRIVATE|ZEND_ACC_FINAL)</span>
+<span class='curline'><a href='../S/1667.html#L765'>exception</a>         765 Zend/zend_exceptions.c 	ZEND_ME(exception, __construct, arginfo_exception___construct, ZEND_ACC_PUBLIC)</span>
+<span class='curline'><a href='../S/1667.html#L766'>exception</a>         766 Zend/zend_exceptions.c 	ZEND_ME(exception, __wakeup, NULL, ZEND_ACC_PUBLIC)</span>
+<span class='curline'><a href='../S/1667.html#L767'>exception</a>         767 Zend/zend_exceptions.c 	ZEND_ME(exception, getMessage, NULL, ZEND_ACC_PUBLIC|ZEND_ACC_FINAL)</span>
+<span class='curline'><a href='../S/1667.html#L768'>exception</a>         768 Zend/zend_exceptions.c 	ZEND_ME(exception, getCode, NULL, ZEND_ACC_PUBLIC|ZEND_ACC_FINAL)</span>
+<span class='curline'><a href='../S/1667.html#L769'>exception</a>         769 Zend/zend_exceptions.c 	ZEND_ME(exception, getFile, NULL, ZEND_ACC_PUBLIC|ZEND_ACC_FINAL)</span>
+<span class='curline'><a href='../S/1667.html#L770'>exception</a>         770 Zend/zend_exceptions.c 	ZEND_ME(exception, getLine, NULL, ZEND_ACC_PUBLIC|ZEND_ACC_FINAL)</span>
+<span class='curline'><a href='../S/1667.html#L771'>exception</a>         771 Zend/zend_exceptions.c 	ZEND_ME(exception, getTrace, NULL, ZEND_ACC_PUBLIC|ZEND_ACC_FINAL)</span>
+<span class='curline'><a href='../S/1667.html#L772'>exception</a>         772 Zend/zend_exceptions.c 	ZEND_ME(exception, getPrevious, NULL, ZEND_ACC_PUBLIC|ZEND_ACC_FINAL)</span>
+<span class='curline'><a href='../S/1667.html#L773'>exception</a>         773 Zend/zend_exceptions.c 	ZEND_ME(exception, getTraceAsString, NULL, ZEND_ACC_PUBLIC|ZEND_ACC_FINAL)</span>
+<span class='curline'><a href='../S/1667.html#L774'>exception</a>         774 Zend/zend_exceptions.c 	ZEND_ME(exception, __toString, NULL, 0)</span>
+<span class='curline'><a href='../S/1667.html#L893'>exception</a>         893 Zend/zend_exceptions.c ZEND_API void zend_exception_error(zval *exception, int severity TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1667.html#L895'>exception</a>         895 Zend/zend_exceptions.c 	zend_class_entry *ce_exception = Z_OBJCE_P(exception);</span>
+<span class='curline'><a href='../S/1667.html#L899'>exception</a>         899 Zend/zend_exceptions.c 		EG(exception) = NULL;</span>
+<span class='curline'><a href='../S/1667.html#L901'>exception</a>         901 Zend/zend_exceptions.c 		zend_call_method_with_0_params(&amp;exception, ce_exception, NULL, "__tostring", &amp;str);</span>
+<span class='curline'><a href='../S/1667.html#L902'>exception</a>         902 Zend/zend_exceptions.c 		if (!EG(exception)) {</span>
+<span class='curline'><a href='../S/1667.html#L906'>exception</a>         906 Zend/zend_exceptions.c 				zend_update_property_string(default_exception_ce, exception, "string", sizeof("string")-1, EG(exception) ? ce_exception-&gt;name : Z_STRVAL_P(str) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1667.html#L911'>exception</a>         911 Zend/zend_exceptions.c 		if (EG(exception)) {</span>
+<span class='curline'><a href='../S/1667.html#L914'>exception</a>         914 Zend/zend_exceptions.c 				file = zend_read_property(default_exception_ce, EG(exception), "file", sizeof("file")-1, 1 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1667.html#L915'>exception</a>         915 Zend/zend_exceptions.c 				line = zend_read_property(default_exception_ce, EG(exception), "line", sizeof("line")-1, 1 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1667.html#L924'>exception</a>         924 Zend/zend_exceptions.c 			zend_error_va(E_WARNING, file ? Z_STRVAL_P(file) : NULL, line ? Z_LVAL_P(line) : 0, "Uncaught %s in exception handling during call to %s::__tostring()", Z_OBJCE_P(EG(exception))-&gt;name, ce_exception-&gt;name);</span>
+<span class='curline'><a href='../S/1667.html#L927'>exception</a>         927 Zend/zend_exceptions.c 		str = zend_read_property(default_exception_ce, exception, "string", sizeof("string")-1, 1 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1667.html#L928'>exception</a>         928 Zend/zend_exceptions.c 		file = zend_read_property(default_exception_ce, exception, "file", sizeof("file")-1, 1 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1667.html#L929'>exception</a>         929 Zend/zend_exceptions.c 		line = zend_read_property(default_exception_ce, exception, "line", sizeof("line")-1, 1 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1667.html#L942'>exception</a>         942 Zend/zend_exceptions.c ZEND_API void zend_throw_exception_object(zval *exception TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1667.html#L946'>exception</a>         946 Zend/zend_exceptions.c 	if (exception == NULL || Z_TYPE_P(exception) != IS_OBJECT) {</span>
+<span class='curline'><a href='../S/1667.html#L950'>exception</a>         950 Zend/zend_exceptions.c 	exception_ce = Z_OBJCE_P(exception);</span>
+<span class='curline'><a href='../S/1667.html#L955'>exception</a>         955 Zend/zend_exceptions.c 	zend_throw_exception_internal(exception TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1668.html#L29'>exception</a>          29 Zend/zend_exceptions.h ZEND_API void zend_exception_set_previous(zval *exception, zval *add_previous TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1668.html#L33'>exception</a>          33 Zend/zend_exceptions.h void zend_throw_exception_internal(zval *exception TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1668.html#L45'>exception</a>          45 Zend/zend_exceptions.h ZEND_API void zend_throw_exception_object(zval *exception TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1668.html#L53'>exception</a>          53 Zend/zend_exceptions.h ZEND_API void zend_exception_error(zval *exception, int severity TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1669.html#L778'>exception</a>         778 Zend/zend_execute.c 	if (retval &amp;&amp; !EG(exception)) {</span>
+<span class='curline'><a href='../S/1669.html#L1782'>exception</a>        1782 Zend/zend_execute.c 	if (EXPECTED(!EG(exception))) { \</span>
+<span class='curline'><a href='../S/1671.html#L183'>exception</a>         183 Zend/zend_execute_API.c 	EG(exception) = NULL;</span>
+<span class='curline'><a href='../S/1671.html#L403'>exception</a>         403 Zend/zend_execute_API.c 	if(EG(exception) &amp;&amp; EG(opline_ptr) &amp;&amp; active_opline-&gt;opcode == ZEND_HANDLE_EXCEPTION &amp;&amp;</span>
+<span class='curline'><a href='../S/1671.html#L642'>exception</a>         642 Zend/zend_execute_API.c 	if (EG(exception)) {</span>
+<span class='curline'><a href='../S/1671.html#L857'>exception</a>         857 Zend/zend_execute_API.c 		if (EG(exception) &amp;&amp; fci-&gt;retval_ptr_ptr) {</span>
+<span class='curline'><a href='../S/1671.html#L881'>exception</a>         881 Zend/zend_execute_API.c 		if (EG(exception) &amp;&amp; fci-&gt;retval_ptr_ptr) {</span>
+<span class='curline'><a href='../S/1671.html#L896'>exception</a>         896 Zend/zend_execute_API.c 	if (EG(exception)) {</span>
+<span class='curline'><a href='../S/1671.html#L1125'>exception</a>        1125 Zend/zend_execute_API.c 	if (handle_exceptions &amp;&amp; EG(exception)) {</span>
+<span class='curline'><a href='../S/1671.html#L1126'>exception</a>        1126 Zend/zend_execute_API.c 		zend_exception_error(EG(exception), E_ERROR TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1671.html#L1203'>exception</a>        1203 Zend/zend_execute_API.c 	if (EG(exception)) {</span>
+<span class='curline'><a href='../S/1671.html#L1204'>exception</a>        1204 Zend/zend_execute_API.c 		zend_exception_error(EG(exception), E_ERROR TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1671.html#L1394'>exception</a>        1394 Zend/zend_execute_API.c 			if (!silent &amp;&amp; !EG(exception)) {</span>
+<span class='curline'><a href='../S/1671.html#L1417'>exception</a>        1417 Zend/zend_execute_API.c 			if ((fetch_type &amp; ZEND_FETCH_CLASS_SILENT) == 0 &amp;&amp; !EG(exception)) {</span>
+<span class='curline'><a href='../S/1678.html#L201'>exception</a>         201 Zend/zend_generators.c 		ex-&gt;delayed_exception = EG(exception);</span>
+<span class='curline'><a href='../S/1678.html#L202'>exception</a>         202 Zend/zend_generators.c 		EG(exception) = NULL;</span>
+<span class='curline'><a href='../S/1678.html#L398'>exception</a>         398 Zend/zend_generators.c 		if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1678.html#L555'>exception</a>         555 Zend/zend_generators.c 	zval *exception, *exception_copy;</span>
+<span class='curline'><a href='../S/1678.html#L558'>exception</a>         558 Zend/zend_generators.c 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "z", &amp;exception) == FAILURE) {</span>
+<span class='curline'><a href='../S/1678.html#L563'>exception</a>         563 Zend/zend_generators.c 	MAKE_COPY_ZVAL(&amp;exception, exception_copy);</span>
+<span class='curline'><a href='../S/1678.html#L720'>exception</a>         720 Zend/zend_generators.c 	ZEND_ARG_INFO(0, exception)</span>
+<span class='curline'><a href='../S/1680.html#L248'>exception</a>         248 Zend/zend_globals.h 	zval *exception, *prev_exception;</span>
+<span class='curline'><a href='../S/1695.html#L104'>exception</a>         104 Zend/zend_interfaces.c 		if (!EG(exception)) {</span>
+<span class='curline'><a href='../S/1695.html#L209'>exception</a>         209 Zend/zend_interfaces.c 		if (!EG(exception)) {</span>
+<span class='curline'><a href='../S/1695.html#L278'>exception</a>         278 Zend/zend_interfaces.c 		if (!EG(exception)) {</span>
+<span class='curline'><a href='../S/1695.html#L409'>exception</a>         409 Zend/zend_interfaces.c 	if (!retval || EG(exception)) {</span>
+<span class='curline'><a href='../S/1695.html#L429'>exception</a>         429 Zend/zend_interfaces.c 	if (result == FAILURE &amp;&amp; !EG(exception)) {</span>
+<span class='curline'><a href='../S/1695.html#L450'>exception</a>         450 Zend/zend_interfaces.c 	if (EG(exception)) {</span>
+<span class='curline'><a href='../S/1713.html#L683'>exception</a>         683 Zend/zend_object_handlers.c 			if (UNEXPECTED(!EG(exception))) {</span>
+<span class='curline'><a href='../S/1713.html#L730'>exception</a>         730 Zend/zend_object_handlers.c 			if (check_empty &amp;&amp; result &amp;&amp; EXPECTED(!EG(exception))) {</span>
+<span class='curline'><a href='../S/1713.html#L1483'>exception</a>        1483 Zend/zend_object_handlers.c 					if (EXPECTED(!EG(exception)) &amp;&amp; zobj-&gt;ce-&gt;__get &amp;&amp; !guard-&gt;in_get) {</span>
+<span class='curline'><a href='../S/1713.html#L1562'>exception</a>        1562 Zend/zend_object_handlers.c 				(zend_call_method_with_0_params(&amp;readobj, ce, &amp;ce-&gt;__tostring, "__tostring", &amp;retval) || EG(exception))) {</span>
+<span class='curline'><a href='../S/1713.html#L1563'>exception</a>        1563 Zend/zend_object_handlers.c 				if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1713.html#L1567'>exception</a>        1567 Zend/zend_object_handlers.c 					EG(exception) = NULL;</span>
+<span class='curline'><a href='../S/1715.html#L115'>exception</a>         115 Zend/zend_objects.c 		if (EG(exception)) {</span>
+<span class='curline'><a href='../S/1715.html#L116'>exception</a>         116 Zend/zend_objects.c 			if (Z_OBJ_HANDLE_P(EG(exception)) == handle) {</span>
+<span class='curline'><a href='../S/1715.html#L119'>exception</a>         119 Zend/zend_objects.c 				old_exception = EG(exception);</span>
+<span class='curline'><a href='../S/1715.html#L120'>exception</a>         120 Zend/zend_objects.c 				EG(exception) = NULL;</span>
+<span class='curline'><a href='../S/1715.html#L125'>exception</a>         125 Zend/zend_objects.c 			if (EG(exception)) {</span>
+<span class='curline'><a href='../S/1715.html#L126'>exception</a>         126 Zend/zend_objects.c 				zend_exception_set_previous(EG(exception), old_exception TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1715.html#L128'>exception</a>         128 Zend/zend_objects.c 				EG(exception) = old_exception;</span>
+<span class='curline'><a href='../S/1747.html#L1790'>exception</a>        1790 Zend/zend_vm_def.h 		if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1747.html#L1857'>exception</a>        1857 Zend/zend_vm_def.h 			if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1747.html#L1877'>exception</a>        1877 Zend/zend_vm_def.h 				if (UNEXPECTED(EG(exception) != NULL) &amp;&amp; EX(call)-&gt;is_ctor_call) {</span>
+<span class='curline'><a href='../S/1747.html#L1895'>exception</a>        1895 Zend/zend_vm_def.h 			if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1747.html#L1928'>exception</a>        1928 Zend/zend_vm_def.h 			if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1747.html#L1940'>exception</a>        1940 Zend/zend_vm_def.h 			if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1747.html#L1979'>exception</a>        1979 Zend/zend_vm_def.h 		if (EXPECTED(EG(exception) == NULL)) {</span>
+<span class='curline'><a href='../S/1747.html#L2019'>exception</a>        2019 Zend/zend_vm_def.h 			if (EXPECTED(EG(exception) == NULL)) {</span>
+<span class='curline'><a href='../S/1747.html#L2064'>exception</a>        2064 Zend/zend_vm_def.h 			if (UNEXPECTED(EG(exception) != NULL) &amp;&amp; EX(call)-&gt;is_ctor_call) {</span>
+<span class='curline'><a href='../S/1747.html#L2083'>exception</a>        2083 Zend/zend_vm_def.h 	if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1747.html#L2120'>exception</a>        2120 Zend/zend_vm_def.h 		if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1747.html#L2150'>exception</a>        2150 Zend/zend_vm_def.h 		if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1747.html#L2180'>exception</a>        2180 Zend/zend_vm_def.h 		if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1747.html#L2214'>exception</a>        2214 Zend/zend_vm_def.h 		if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1747.html#L2245'>exception</a>        2245 Zend/zend_vm_def.h 		if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1747.html#L2387'>exception</a>        2387 Zend/zend_vm_def.h 	if (EG(exception)) {</span>
+<span class='curline'><a href='../S/1747.html#L2410'>exception</a>        2410 Zend/zend_vm_def.h 			if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1747.html#L2437'>exception</a>        2437 Zend/zend_vm_def.h 		if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1747.html#L2473'>exception</a>        2473 Zend/zend_vm_def.h 		if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1747.html#L2520'>exception</a>        2520 Zend/zend_vm_def.h 			if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1747.html#L2559'>exception</a>        2559 Zend/zend_vm_def.h 				if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1747.html#L2779'>exception</a>        2779 Zend/zend_vm_def.h 			if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1747.html#L2984'>exception</a>        2984 Zend/zend_vm_def.h 	zval *exception;</span>
+<span class='curline'><a href='../S/1747.html#L2991'>exception</a>        2991 Zend/zend_vm_def.h 		if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1747.html#L2999'>exception</a>        2999 Zend/zend_vm_def.h 	ALLOC_ZVAL(exception);</span>
+<span class='curline'><a href='../S/1747.html#L3000'>exception</a>        3000 Zend/zend_vm_def.h 	INIT_PZVAL_COPY(exception, value);</span>
+<span class='curline'><a href='../S/1747.html#L3002'>exception</a>        3002 Zend/zend_vm_def.h 		zval_copy_ctor(exception);</span>
+<span class='curline'><a href='../S/1747.html#L3005'>exception</a>        3005 Zend/zend_vm_def.h 	zend_throw_exception_object(exception TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1747.html#L3015'>exception</a>        3015 Zend/zend_vm_def.h 	zval *exception;</span>
+<span class='curline'><a href='../S/1747.html#L3020'>exception</a>        3020 Zend/zend_vm_def.h 	if (EG(exception) == NULL) {</span>
+<span class='curline'><a href='../S/1747.html#L3031'>exception</a>        3031 Zend/zend_vm_def.h 	ce = Z_OBJCE_P(EG(exception));</span>
+<span class='curline'><a href='../S/1747.html#L3050'>exception</a>        3050 Zend/zend_vm_def.h 	exception = EG(exception);</span>
+<span class='curline'><a href='../S/1747.html#L3056'>exception</a>        3056 Zend/zend_vm_def.h 		*EX_CV(opline-&gt;op2.var) = EG(exception);</span>
+<span class='curline'><a href='../S/1747.html#L3060'>exception</a>        3060 Zend/zend_vm_def.h 		    &amp;EG(exception), sizeof(zval *), (void**)&amp;EX_CV(opline-&gt;op2.var));</span>
+<span class='curline'><a href='../S/1747.html#L3062'>exception</a>        3062 Zend/zend_vm_def.h 	if (UNEXPECTED(EG(exception) != exception)) {</span>
+<span class='curline'><a href='../S/1747.html#L3063'>exception</a>        3063 Zend/zend_vm_def.h 		Z_ADDREF_P(EG(exception));</span>
+<span class='curline'><a href='../S/1747.html#L3066'>exception</a>        3066 Zend/zend_vm_def.h 		EG(exception) = NULL;</span>
+<span class='curline'><a href='../S/1747.html#L3295'>exception</a>        3295 Zend/zend_vm_def.h 				if (!EG(exception)) {</span>
+<span class='curline'><a href='../S/1747.html#L3305'>exception</a>        3305 Zend/zend_vm_def.h 				if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1747.html#L3313'>exception</a>        3313 Zend/zend_vm_def.h 				if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1747.html#L3318'>exception</a>        3318 Zend/zend_vm_def.h 				if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1747.html#L3325'>exception</a>        3325 Zend/zend_vm_def.h 					if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1747.html#L3362'>exception</a>        3362 Zend/zend_vm_def.h 				if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1747.html#L3646'>exception</a>        3646 Zend/zend_vm_def.h 		if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1747.html#L3679'>exception</a>        3679 Zend/zend_vm_def.h 	if (EXPECTED(EG(exception) == NULL)) {</span>
+<span class='curline'><a href='../S/1747.html#L3687'>exception</a>        3687 Zend/zend_vm_def.h 		if (!RETURN_VALUE_USED(opline) || UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1747.html#L3746'>exception</a>        3746 Zend/zend_vm_def.h 				if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1747.html#L4029'>exception</a>        4029 Zend/zend_vm_def.h 	if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1747.html#L4061'>exception</a>        4061 Zend/zend_vm_def.h 		if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1747.html#L4120'>exception</a>        4120 Zend/zend_vm_def.h 				if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1747.html#L4380'>exception</a>        4380 Zend/zend_vm_def.h 		if (iter &amp;&amp; EXPECTED(EG(exception) == NULL)) {</span>
+<span class='curline'><a href='../S/1747.html#L4386'>exception</a>        4386 Zend/zend_vm_def.h 			if (!EG(exception)) {</span>
+<span class='curline'><a href='../S/1747.html#L4400'>exception</a>        4400 Zend/zend_vm_def.h 			if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1747.html#L4409'>exception</a>        4409 Zend/zend_vm_def.h 		if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1747.html#L4533'>exception</a>        4533 Zend/zend_vm_def.h 				if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1747.html#L4541'>exception</a>        4541 Zend/zend_vm_def.h 				if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1747.html#L4548'>exception</a>        4548 Zend/zend_vm_def.h 			if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1747.html#L4559'>exception</a>        4559 Zend/zend_vm_def.h 					if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1747.html#L5311'>exception</a>        5311 Zend/zend_vm_def.h 			zend_exception_set_previous(EG(exception), EX(delayed_exception) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1747.html#L5313'>exception</a>        5313 Zend/zend_vm_def.h 		EX(delayed_exception) = EG(exception);</span>
+<span class='curline'><a href='../S/1747.html#L5314'>exception</a>        5314 Zend/zend_vm_def.h 		EG(exception) = NULL;</span>
+<span class='curline'><a href='../S/1747.html#L5322'>exception</a>        5322 Zend/zend_vm_def.h 				zend_exception_set_previous(EG(exception), EX(delayed_exception) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1747.html#L5330'>exception</a>        5330 Zend/zend_vm_def.h 			zend_exception_set_previous(EG(exception), EX(delayed_exception) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1747.html#L5679'>exception</a>        5679 Zend/zend_vm_def.h 			EG(exception) = EX(delayed_exception);</span>
+<span class='curline'><a href='../S/1748.html#L385'>exception</a>         385 Zend/zend_vm_execute.h 	if (EG(exception)) {</span>
+<span class='curline'><a href='../S/1748.html#L426'>exception</a>         426 Zend/zend_vm_execute.h 			if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L446'>exception</a>         446 Zend/zend_vm_execute.h 				if (UNEXPECTED(EG(exception) != NULL) &amp;&amp; EX(call)-&gt;is_ctor_call) {</span>
+<span class='curline'><a href='../S/1748.html#L464'>exception</a>         464 Zend/zend_vm_execute.h 			if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L497'>exception</a>         497 Zend/zend_vm_execute.h 			if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L509'>exception</a>         509 Zend/zend_vm_execute.h 			if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L548'>exception</a>         548 Zend/zend_vm_execute.h 		if (EXPECTED(EG(exception) == NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L588'>exception</a>         588 Zend/zend_vm_execute.h 			if (EXPECTED(EG(exception) == NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L633'>exception</a>         633 Zend/zend_vm_execute.h 			if (UNEXPECTED(EG(exception) != NULL) &amp;&amp; EX(call)-&gt;is_ctor_call) {</span>
+<span class='curline'><a href='../S/1748.html#L652'>exception</a>         652 Zend/zend_vm_execute.h 	if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L771'>exception</a>         771 Zend/zend_vm_execute.h 				if (!EG(exception)) {</span>
+<span class='curline'><a href='../S/1748.html#L781'>exception</a>         781 Zend/zend_vm_execute.h 				if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L789'>exception</a>         789 Zend/zend_vm_execute.h 				if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L794'>exception</a>         794 Zend/zend_vm_execute.h 				if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L801'>exception</a>         801 Zend/zend_vm_execute.h 					if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L838'>exception</a>         838 Zend/zend_vm_execute.h 				if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L1267'>exception</a>        1267 Zend/zend_vm_execute.h 			zend_exception_set_previous(EG(exception), EX(delayed_exception) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L1269'>exception</a>        1269 Zend/zend_vm_execute.h 		EX(delayed_exception) = EG(exception);</span>
+<span class='curline'><a href='../S/1748.html#L1270'>exception</a>        1270 Zend/zend_vm_execute.h 		EG(exception) = NULL;</span>
+<span class='curline'><a href='../S/1748.html#L1278'>exception</a>        1278 Zend/zend_vm_execute.h 				zend_exception_set_previous(EG(exception), EX(delayed_exception) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L1286'>exception</a>        1286 Zend/zend_vm_execute.h 			zend_exception_set_previous(EG(exception), EX(delayed_exception) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L1382'>exception</a>        1382 Zend/zend_vm_execute.h 			EG(exception) = EX(delayed_exception);</span>
+<span class='curline'><a href='../S/1748.html#L1401'>exception</a>        1401 Zend/zend_vm_execute.h 	if (EG(exception)) {</span>
+<span class='curline'><a href='../S/1748.html#L1424'>exception</a>        1424 Zend/zend_vm_execute.h 			if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L1582'>exception</a>        1582 Zend/zend_vm_execute.h 			if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L1743'>exception</a>        1743 Zend/zend_vm_execute.h 	if (EG(exception)) {</span>
+<span class='curline'><a href='../S/1748.html#L1766'>exception</a>        1766 Zend/zend_vm_execute.h 			if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L1927'>exception</a>        1927 Zend/zend_vm_execute.h 			if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L1942'>exception</a>        1942 Zend/zend_vm_execute.h 	if (EG(exception)) {</span>
+<span class='curline'><a href='../S/1748.html#L1965'>exception</a>        1965 Zend/zend_vm_execute.h 			if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L2126'>exception</a>        2126 Zend/zend_vm_execute.h 			if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L2141'>exception</a>        2141 Zend/zend_vm_execute.h 	if (EG(exception)) {</span>
+<span class='curline'><a href='../S/1748.html#L2164'>exception</a>        2164 Zend/zend_vm_execute.h 			if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L2180'>exception</a>        2180 Zend/zend_vm_execute.h 	if (EG(exception)) {</span>
+<span class='curline'><a href='../S/1748.html#L2203'>exception</a>        2203 Zend/zend_vm_execute.h 			if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L2361'>exception</a>        2361 Zend/zend_vm_execute.h 			if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L2438'>exception</a>        2438 Zend/zend_vm_execute.h 		if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L2468'>exception</a>        2468 Zend/zend_vm_execute.h 		if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L2498'>exception</a>        2498 Zend/zend_vm_execute.h 		if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L2532'>exception</a>        2532 Zend/zend_vm_execute.h 		if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L2563'>exception</a>        2563 Zend/zend_vm_execute.h 		if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L2723'>exception</a>        2723 Zend/zend_vm_execute.h 	zval *exception;</span>
+<span class='curline'><a href='../S/1748.html#L2730'>exception</a>        2730 Zend/zend_vm_execute.h 		if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L2738'>exception</a>        2738 Zend/zend_vm_execute.h 	ALLOC_ZVAL(exception);</span>
+<span class='curline'><a href='../S/1748.html#L2739'>exception</a>        2739 Zend/zend_vm_execute.h 	INIT_PZVAL_COPY(exception, value);</span>
+<span class='curline'><a href='../S/1748.html#L2741'>exception</a>        2741 Zend/zend_vm_execute.h 		zval_copy_ctor(exception);</span>
+<span class='curline'><a href='../S/1748.html#L2744'>exception</a>        2744 Zend/zend_vm_execute.h 	zend_throw_exception_object(exception TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L2808'>exception</a>        2808 Zend/zend_vm_execute.h 		if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L2841'>exception</a>        2841 Zend/zend_vm_execute.h 	if (EXPECTED(EG(exception) == NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L2849'>exception</a>        2849 Zend/zend_vm_execute.h 		if (!RETURN_VALUE_USED(opline) || UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L3004'>exception</a>        3004 Zend/zend_vm_execute.h 	if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L3036'>exception</a>        3036 Zend/zend_vm_execute.h 		if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L3140'>exception</a>        3140 Zend/zend_vm_execute.h 		if (iter &amp;&amp; EXPECTED(EG(exception) == NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L3146'>exception</a>        3146 Zend/zend_vm_execute.h 			if (!EG(exception)) {</span>
+<span class='curline'><a href='../S/1748.html#L3160'>exception</a>        3160 Zend/zend_vm_execute.h 			if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L3169'>exception</a>        3169 Zend/zend_vm_execute.h 		if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L3834'>exception</a>        3834 Zend/zend_vm_execute.h 			if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L3873'>exception</a>        3873 Zend/zend_vm_execute.h 				if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L4006'>exception</a>        4006 Zend/zend_vm_execute.h 				if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L4188'>exception</a>        4188 Zend/zend_vm_execute.h 				if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L4836'>exception</a>        4836 Zend/zend_vm_execute.h 			if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L4875'>exception</a>        4875 Zend/zend_vm_execute.h 				if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L5700'>exception</a>        5700 Zend/zend_vm_execute.h 			if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L5739'>exception</a>        5739 Zend/zend_vm_execute.h 				if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L5963'>exception</a>        5963 Zend/zend_vm_execute.h 				if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L6435'>exception</a>        6435 Zend/zend_vm_execute.h 			if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L6474'>exception</a>        6474 Zend/zend_vm_execute.h 				if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L6683'>exception</a>        6683 Zend/zend_vm_execute.h 				if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L7294'>exception</a>        7294 Zend/zend_vm_execute.h 			if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L7333'>exception</a>        7333 Zend/zend_vm_execute.h 				if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L7408'>exception</a>        7408 Zend/zend_vm_execute.h 	zval *exception;</span>
+<span class='curline'><a href='../S/1748.html#L7413'>exception</a>        7413 Zend/zend_vm_execute.h 	if (EG(exception) == NULL) {</span>
+<span class='curline'><a href='../S/1748.html#L7424'>exception</a>        7424 Zend/zend_vm_execute.h 	ce = Z_OBJCE_P(EG(exception));</span>
+<span class='curline'><a href='../S/1748.html#L7443'>exception</a>        7443 Zend/zend_vm_execute.h 	exception = EG(exception);</span>
+<span class='curline'><a href='../S/1748.html#L7449'>exception</a>        7449 Zend/zend_vm_execute.h 		*EX_CV(opline-&gt;op2.var) = EG(exception);</span>
+<span class='curline'><a href='../S/1748.html#L7453'>exception</a>        7453 Zend/zend_vm_execute.h 		    &amp;EG(exception), sizeof(zval *), (void**)&amp;EX_CV(opline-&gt;op2.var));</span>
+<span class='curline'><a href='../S/1748.html#L7455'>exception</a>        7455 Zend/zend_vm_execute.h 	if (UNEXPECTED(EG(exception) != exception)) {</span>
+<span class='curline'><a href='../S/1748.html#L7456'>exception</a>        7456 Zend/zend_vm_execute.h 		Z_ADDREF_P(EG(exception));</span>
+<span class='curline'><a href='../S/1748.html#L7459'>exception</a>        7459 Zend/zend_vm_execute.h 		EG(exception) = NULL;</span>
+<span class='curline'><a href='../S/1748.html#L7815'>exception</a>        7815 Zend/zend_vm_execute.h 		if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L7845'>exception</a>        7845 Zend/zend_vm_execute.h 		if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L7875'>exception</a>        7875 Zend/zend_vm_execute.h 		if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L7909'>exception</a>        7909 Zend/zend_vm_execute.h 		if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L7940'>exception</a>        7940 Zend/zend_vm_execute.h 		if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L8088'>exception</a>        8088 Zend/zend_vm_execute.h 	zval *exception;</span>
+<span class='curline'><a href='../S/1748.html#L8095'>exception</a>        8095 Zend/zend_vm_execute.h 		if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L8103'>exception</a>        8103 Zend/zend_vm_execute.h 	ALLOC_ZVAL(exception);</span>
+<span class='curline'><a href='../S/1748.html#L8104'>exception</a>        8104 Zend/zend_vm_execute.h 	INIT_PZVAL_COPY(exception, value);</span>
+<span class='curline'><a href='../S/1748.html#L8106'>exception</a>        8106 Zend/zend_vm_execute.h 		zval_copy_ctor(exception);</span>
+<span class='curline'><a href='../S/1748.html#L8109'>exception</a>        8109 Zend/zend_vm_execute.h 	zend_throw_exception_object(exception TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L8174'>exception</a>        8174 Zend/zend_vm_execute.h 		if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L8207'>exception</a>        8207 Zend/zend_vm_execute.h 	if (EXPECTED(EG(exception) == NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L8215'>exception</a>        8215 Zend/zend_vm_execute.h 		if (!RETURN_VALUE_USED(opline) || UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L8370'>exception</a>        8370 Zend/zend_vm_execute.h 	if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L8402'>exception</a>        8402 Zend/zend_vm_execute.h 		if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L8506'>exception</a>        8506 Zend/zend_vm_execute.h 		if (iter &amp;&amp; EXPECTED(EG(exception) == NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L8512'>exception</a>        8512 Zend/zend_vm_execute.h 			if (!EG(exception)) {</span>
+<span class='curline'><a href='../S/1748.html#L8526'>exception</a>        8526 Zend/zend_vm_execute.h 			if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L8535'>exception</a>        8535 Zend/zend_vm_execute.h 		if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L9298'>exception</a>        9298 Zend/zend_vm_execute.h 		if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L9334'>exception</a>        9334 Zend/zend_vm_execute.h 		if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L9516'>exception</a>        9516 Zend/zend_vm_execute.h 				if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L10163'>exception</a>        10163 Zend/zend_vm_execute.h 		if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L10199'>exception</a>        10199 Zend/zend_vm_execute.h 		if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L11029'>exception</a>        11029 Zend/zend_vm_execute.h 		if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L11065'>exception</a>        11065 Zend/zend_vm_execute.h 		if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L11249'>exception</a>        11249 Zend/zend_vm_execute.h 				if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L11844'>exception</a>        11844 Zend/zend_vm_execute.h 				if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L12475'>exception</a>        12475 Zend/zend_vm_execute.h 		if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L12511'>exception</a>        12511 Zend/zend_vm_execute.h 		if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L13072'>exception</a>        13072 Zend/zend_vm_execute.h 		if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L13102'>exception</a>        13102 Zend/zend_vm_execute.h 		if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L13132'>exception</a>        13132 Zend/zend_vm_execute.h 		if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L13166'>exception</a>        13166 Zend/zend_vm_execute.h 		if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L13197'>exception</a>        13197 Zend/zend_vm_execute.h 		if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L13346'>exception</a>        13346 Zend/zend_vm_execute.h 	zval *exception;</span>
+<span class='curline'><a href='../S/1748.html#L13353'>exception</a>        13353 Zend/zend_vm_execute.h 		if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L13361'>exception</a>        13361 Zend/zend_vm_execute.h 	ALLOC_ZVAL(exception);</span>
+<span class='curline'><a href='../S/1748.html#L13362'>exception</a>        13362 Zend/zend_vm_execute.h 	INIT_PZVAL_COPY(exception, value);</span>
+<span class='curline'><a href='../S/1748.html#L13364'>exception</a>        13364 Zend/zend_vm_execute.h 		zval_copy_ctor(exception);</span>
+<span class='curline'><a href='../S/1748.html#L13367'>exception</a>        13367 Zend/zend_vm_execute.h 	zend_throw_exception_object(exception TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L13543'>exception</a>        13543 Zend/zend_vm_execute.h 		if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L13576'>exception</a>        13576 Zend/zend_vm_execute.h 	if (EXPECTED(EG(exception) == NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L13584'>exception</a>        13584 Zend/zend_vm_execute.h 		if (!RETURN_VALUE_USED(opline) || UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L13739'>exception</a>        13739 Zend/zend_vm_execute.h 	if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L13771'>exception</a>        13771 Zend/zend_vm_execute.h 		if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L13875'>exception</a>        13875 Zend/zend_vm_execute.h 		if (iter &amp;&amp; EXPECTED(EG(exception) == NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L13881'>exception</a>        13881 Zend/zend_vm_execute.h 			if (!EG(exception)) {</span>
+<span class='curline'><a href='../S/1748.html#L13895'>exception</a>        13895 Zend/zend_vm_execute.h 			if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L13904'>exception</a>        13904 Zend/zend_vm_execute.h 		if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L14028'>exception</a>        14028 Zend/zend_vm_execute.h 				if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L14036'>exception</a>        14036 Zend/zend_vm_execute.h 				if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L14043'>exception</a>        14043 Zend/zend_vm_execute.h 			if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L14054'>exception</a>        14054 Zend/zend_vm_execute.h 					if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L15723'>exception</a>        15723 Zend/zend_vm_execute.h 		if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L15759'>exception</a>        15759 Zend/zend_vm_execute.h 		if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L15805'>exception</a>        15805 Zend/zend_vm_execute.h 			if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L15844'>exception</a>        15844 Zend/zend_vm_execute.h 				if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L15977'>exception</a>        15977 Zend/zend_vm_execute.h 				if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L16159'>exception</a>        16159 Zend/zend_vm_execute.h 				if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L18076'>exception</a>        18076 Zend/zend_vm_execute.h 		if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L18112'>exception</a>        18112 Zend/zend_vm_execute.h 		if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L18159'>exception</a>        18159 Zend/zend_vm_execute.h 			if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L18198'>exception</a>        18198 Zend/zend_vm_execute.h 				if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L20347'>exception</a>        20347 Zend/zend_vm_execute.h 		if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L20394'>exception</a>        20394 Zend/zend_vm_execute.h 		if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L20430'>exception</a>        20430 Zend/zend_vm_execute.h 		if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L20477'>exception</a>        20477 Zend/zend_vm_execute.h 			if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L20516'>exception</a>        20516 Zend/zend_vm_execute.h 				if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L20740'>exception</a>        20740 Zend/zend_vm_execute.h 				if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L21925'>exception</a>        21925 Zend/zend_vm_execute.h 			if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L21964'>exception</a>        21964 Zend/zend_vm_execute.h 				if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L22173'>exception</a>        22173 Zend/zend_vm_execute.h 				if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L23818'>exception</a>        23818 Zend/zend_vm_execute.h 		if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L23864'>exception</a>        23864 Zend/zend_vm_execute.h 		if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L23900'>exception</a>        23900 Zend/zend_vm_execute.h 		if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L23946'>exception</a>        23946 Zend/zend_vm_execute.h 			if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L23985'>exception</a>        23985 Zend/zend_vm_execute.h 				if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L24643'>exception</a>        24643 Zend/zend_vm_execute.h 		if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L24676'>exception</a>        24676 Zend/zend_vm_execute.h 	if (EXPECTED(EG(exception) == NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L24684'>exception</a>        24684 Zend/zend_vm_execute.h 		if (!RETURN_VALUE_USED(opline) || UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L25514'>exception</a>        25514 Zend/zend_vm_execute.h 		if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L25550'>exception</a>        25550 Zend/zend_vm_execute.h 		if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L25628'>exception</a>        25628 Zend/zend_vm_execute.h 				if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L26927'>exception</a>        26927 Zend/zend_vm_execute.h 		if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L26963'>exception</a>        26963 Zend/zend_vm_execute.h 		if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L28249'>exception</a>        28249 Zend/zend_vm_execute.h 		if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L28285'>exception</a>        28285 Zend/zend_vm_execute.h 		if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L30001'>exception</a>        30001 Zend/zend_vm_execute.h 		if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L30037'>exception</a>        30037 Zend/zend_vm_execute.h 		if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L30768'>exception</a>        30768 Zend/zend_vm_execute.h 		if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L30798'>exception</a>        30798 Zend/zend_vm_execute.h 		if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L30828'>exception</a>        30828 Zend/zend_vm_execute.h 		if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L30862'>exception</a>        30862 Zend/zend_vm_execute.h 		if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L30893'>exception</a>        30893 Zend/zend_vm_execute.h 		if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L31027'>exception</a>        31027 Zend/zend_vm_execute.h 	zval *exception;</span>
+<span class='curline'><a href='../S/1748.html#L31034'>exception</a>        31034 Zend/zend_vm_execute.h 		if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L31042'>exception</a>        31042 Zend/zend_vm_execute.h 	ALLOC_ZVAL(exception);</span>
+<span class='curline'><a href='../S/1748.html#L31043'>exception</a>        31043 Zend/zend_vm_execute.h 	INIT_PZVAL_COPY(exception, value);</span>
+<span class='curline'><a href='../S/1748.html#L31045'>exception</a>        31045 Zend/zend_vm_execute.h 		zval_copy_ctor(exception);</span>
+<span class='curline'><a href='../S/1748.html#L31048'>exception</a>        31048 Zend/zend_vm_execute.h 	zend_throw_exception_object(exception TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L31212'>exception</a>        31212 Zend/zend_vm_execute.h 		if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L31245'>exception</a>        31245 Zend/zend_vm_execute.h 	if (EXPECTED(EG(exception) == NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L31253'>exception</a>        31253 Zend/zend_vm_execute.h 		if (!RETURN_VALUE_USED(opline) || UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L31408'>exception</a>        31408 Zend/zend_vm_execute.h 	if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L31440'>exception</a>        31440 Zend/zend_vm_execute.h 		if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L31544'>exception</a>        31544 Zend/zend_vm_execute.h 		if (iter &amp;&amp; EXPECTED(EG(exception) == NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L31550'>exception</a>        31550 Zend/zend_vm_execute.h 			if (!EG(exception)) {</span>
+<span class='curline'><a href='../S/1748.html#L31564'>exception</a>        31564 Zend/zend_vm_execute.h 			if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L31573'>exception</a>        31573 Zend/zend_vm_execute.h 		if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L33252'>exception</a>        33252 Zend/zend_vm_execute.h 		if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L33288'>exception</a>        33288 Zend/zend_vm_execute.h 		if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L33470'>exception</a>        33470 Zend/zend_vm_execute.h 				if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L35376'>exception</a>        35376 Zend/zend_vm_execute.h 		if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L35412'>exception</a>        35412 Zend/zend_vm_execute.h 		if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L37510'>exception</a>        37510 Zend/zend_vm_execute.h 		if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L37556'>exception</a>        37556 Zend/zend_vm_execute.h 		if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L37592'>exception</a>        37592 Zend/zend_vm_execute.h 		if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L37776'>exception</a>        37776 Zend/zend_vm_execute.h 				if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L39077'>exception</a>        39077 Zend/zend_vm_execute.h 				if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L40694'>exception</a>        40694 Zend/zend_vm_execute.h 		if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L40739'>exception</a>        40739 Zend/zend_vm_execute.h 		if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L40775'>exception</a>        40775 Zend/zend_vm_execute.h 		if (UNEXPECTED(EG(exception) != NULL)) {</span>
+<span class='curline'><a href='../S/458.html#L597'>exception</a>         597 ext/json/json.c 	if (EG(exception)) {</span>
+<span class='curline'><a href='../S/744.html#L982'>exception</a>         982 ext/mbstring/php_mbregex.c 					if (!EG(exception)) {</span>
+<span class='curline'><a href='../S/920.html#L941'>exception</a>         941 ext/pcre/php_pcre.c 		if (!EG(exception)) {</span>
+<span class='curline'><a href='../S/923.html#L154'>exception</a>         154 ext/pdo/pdo_dbh.c 	} else if (EG(exception) == NULL) {</span>
+<span class='curline'><a href='../S/973.html#L318'>exception</a>         318 ext/phar/phar.c 	if (EG(exception) || --phar_data-&gt;refcount &lt; 0) {</span>
+<span class='curline'><a href='../S/975.html#L705'>exception</a>         705 ext/phar/phar_object.c 			if (!EG(exception)) {</span>
+<span class='curline'><a href='../S/975.html#L1260'>exception</a>        1260 ext/phar/phar_object.c 	} else if (!EG(exception)) {</span>
+<span class='curline'><a href='../S/975.html#L1435'>exception</a>        1435 ext/phar/phar_object.c 	if (EG(exception)) {</span>
+<span class='curline'><a href='../S/975.html#L1460'>exception</a>        1460 ext/phar/phar_object.c 				if (EG(exception)) {</span>
+<span class='curline'><a href='../S/975.html#L1588'>exception</a>        1588 ext/phar/phar_object.c 			if (EG(exception)) {</span>
+<span class='curline'><a href='../S/975.html#L1779'>exception</a>        1779 ext/phar/phar_object.c 	if (EG(exception)) {</span>
+<span class='curline'><a href='../S/975.html#L1796'>exception</a>        1796 ext/phar/phar_object.c 	if (EG(exception)) {</span>
+<span class='curline'><a href='../S/992.html#L691'>exception</a>         691 ext/readline/readline_cli.c 		if (EG(exception)) {</span>
+<span class='curline'><a href='../S/992.html#L692'>exception</a>         692 ext/readline/readline_cli.c 			zend_exception_error(EG(exception), E_WARNING TSRMLS_CC);</span>
+<span class='curline'><a href='../S/996.html#L98'>exception</a>          98 ext/reflection/php_reflection.c 	if (EG(exception) &amp;&amp; Z_OBJCE_P(EG(exception)) == reflection_exception_ptr) {                            \</span>
+<span class='curline'><a href='../S/996.html#L1452'>exception</a>        1452 ext/reflection/php_reflection.c 	if (EG(exception)) {</span>
+<span class='curline'><a href='../S/996.html#L1477'>exception</a>        1477 ext/reflection/php_reflection.c 	if (result == FAILURE &amp;&amp; EG(exception) == NULL) {</span>
+<span class='curline'><a href='../S/996.html#L1502'>exception</a>        1502 ext/reflection/php_reflection.c 		if (EG(exception) &amp;&amp; Z_OBJCE_P(EG(exception)) == reflection_exception_ptr) {</span>
+<span class='curline'><a href='../S/996.html#L3393'>exception</a>        3393 ext/reflection/php_reflection.c 			if (!EG(exception)) {</span>
+<span class='curline'><a href='../S/996.html#L3952'>exception</a>        3952 ext/reflection/php_reflection.c 			if (!EG(exception)) {</span>
+<span class='curline'><a href='../S/1018.html#L2328'>exception</a>        2328 ext/soap/php_encoding.c 		if (EG(exception)) {</span>
+<span class='curline'><a href='../S/1018.html#L2334'>exception</a>        2334 ext/soap/php_encoding.c 			if (EG(exception)) {</span>
+<span class='curline'><a href='../S/1018.html#L2340'>exception</a>        2340 ext/soap/php_encoding.c 			if (EG(exception)) {</span>
+<span class='curline'><a href='../S/1018.html#L2345'>exception</a>        2345 ext/soap/php_encoding.c 			if (EG(exception)) {</span>
+<span class='curline'><a href='../S/1018.html#L2351'>exception</a>        2351 ext/soap/php_encoding.c 				if (EG(exception)) {</span>
+<span class='curline'><a href='../S/1018.html#L2363'>exception</a>        2363 ext/soap/php_encoding.c 			if (EG(exception)) {</span>
+<span class='curline'><a href='../S/1018.html#L2369'>exception</a>        2369 ext/soap/php_encoding.c 		if (EG(exception)) {</span>
+<span class='curline'><a href='../S/1031.html#L108'>exception</a>         108 ext/soap/soap.c 		if (EG(exception) == NULL || \</span>
+<span class='curline'><a href='../S/1031.html#L109'>exception</a>         109 ext/soap/soap.c 		    Z_TYPE_P(EG(exception)) != IS_OBJECT || \</span>
+<span class='curline'><a href='../S/1031.html#L110'>exception</a>         110 ext/soap/soap.c 		    !instanceof_function(Z_OBJCE_P(EG(exception)), soap_fault_class_entry TSRMLS_CC)) {\</span>
+<span class='curline'><a href='../S/1031.html#L1654'>exception</a>        1654 ext/soap/soap.c 	if (EG(exception)) {</span>
+<span class='curline'><a href='../S/1031.html#L1656'>exception</a>        1656 ext/soap/soap.c 		if (Z_TYPE_P(EG(exception)) == IS_OBJECT &amp;&amp;</span>
+<span class='curline'><a href='../S/1031.html#L1657'>exception</a>        1657 ext/soap/soap.c 		    instanceof_function(Z_OBJCE_P(EG(exception)), soap_fault_class_entry TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/1031.html#L1658'>exception</a>        1658 ext/soap/soap.c 			soap_server_fault_ex(function, EG(exception), NULL TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1031.html#L1706'>exception</a>        1706 ext/soap/soap.c 				if (EG(exception)) {</span>
+<span class='curline'><a href='../S/1031.html#L1708'>exception</a>        1708 ext/soap/soap.c 					if (Z_TYPE_P(EG(exception)) == IS_OBJECT &amp;&amp;</span>
+<span class='curline'><a href='../S/1031.html#L1709'>exception</a>        1709 ext/soap/soap.c 					    instanceof_function(Z_OBJCE_P(EG(exception)), soap_fault_class_entry TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/1031.html#L1710'>exception</a>        1710 ext/soap/soap.c 						soap_server_fault_ex(function, EG(exception), NULL TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1031.html#L1735'>exception</a>        1735 ext/soap/soap.c 					if (EG(exception)) {</span>
+<span class='curline'><a href='../S/1031.html#L1737'>exception</a>        1737 ext/soap/soap.c 						if (Z_TYPE_P(EG(exception)) == IS_OBJECT &amp;&amp;</span>
+<span class='curline'><a href='../S/1031.html#L1738'>exception</a>        1738 ext/soap/soap.c 						    instanceof_function(Z_OBJCE_P(EG(exception)), soap_fault_class_entry TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/1031.html#L1739'>exception</a>        1739 ext/soap/soap.c 							soap_server_fault_ex(function, EG(exception), NULL TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1031.html#L1821'>exception</a>        1821 ext/soap/soap.c 				} else if (EG(exception)) {</span>
+<span class='curline'><a href='../S/1031.html#L1823'>exception</a>        1823 ext/soap/soap.c 					if (Z_TYPE_P(EG(exception)) == IS_OBJECT &amp;&amp;</span>
+<span class='curline'><a href='../S/1031.html#L1824'>exception</a>        1824 ext/soap/soap.c 					    instanceof_function(Z_OBJCE_P(EG(exception)), soap_fault_class_entry TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/1031.html#L1827'>exception</a>        1827 ext/soap/soap.c 						if (zend_hash_find(Z_OBJPROP_P(EG(exception)), "headerfault", sizeof("headerfault"), (void**)&amp;tmp) == SUCCESS &amp;&amp;</span>
+<span class='curline'><a href='../S/1031.html#L1831'>exception</a>        1831 ext/soap/soap.c 						soap_server_fault_ex(function, EG(exception), h TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1031.html#L1869'>exception</a>        1869 ext/soap/soap.c 	if (EG(exception)) {</span>
+<span class='curline'><a href='../S/1031.html#L1871'>exception</a>        1871 ext/soap/soap.c 		if (Z_TYPE_P(EG(exception)) == IS_OBJECT &amp;&amp;</span>
+<span class='curline'><a href='../S/1031.html#L1872'>exception</a>        1872 ext/soap/soap.c 		    instanceof_function(Z_OBJCE_P(EG(exception)), soap_fault_class_entry TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/1031.html#L1873'>exception</a>        1873 ext/soap/soap.c 			soap_server_fault_ex(function, EG(exception), NULL TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1031.html#L1911'>exception</a>        1911 ext/soap/soap.c 	if (EG(exception)) {</span>
+<span class='curline'><a href='../S/1031.html#L1913'>exception</a>        1913 ext/soap/soap.c 		if (Z_TYPE_P(EG(exception)) == IS_OBJECT &amp;&amp;</span>
+<span class='curline'><a href='../S/1031.html#L1914'>exception</a>        1914 ext/soap/soap.c 		    instanceof_function(Z_OBJCE_P(EG(exception)), soap_fault_class_entry TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/1031.html#L1915'>exception</a>        1915 ext/soap/soap.c 			soap_server_fault_ex(function, EG(exception), NULL TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1031.html#L2160'>exception</a>        2160 ext/soap/soap.c 			zval *fault, *exception;</span>
+<span class='curline'><a href='../S/1031.html#L2189'>exception</a>        2189 ext/soap/soap.c 			MAKE_STD_ZVAL(exception);</span>
+<span class='curline'><a href='../S/1031.html#L2190'>exception</a>        2190 ext/soap/soap.c 			MAKE_COPY_ZVAL(&amp;fault, exception);</span>
+<span class='curline'><a href='../S/1031.html#L2191'>exception</a>        2191 ext/soap/soap.c 			zend_throw_exception_object(exception TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1031.html#L2805'>exception</a>        2805 ext/soap/soap.c 		if (!EG(exception) &amp;&amp;</span>
+<span class='curline'><a href='../S/1031.html#L2810'>exception</a>        2810 ext/soap/soap.c 			zval *exception;</span>
+<span class='curline'><a href='../S/1031.html#L2812'>exception</a>        2812 ext/soap/soap.c 			MAKE_STD_ZVAL(exception);</span>
+<span class='curline'><a href='../S/1031.html#L2813'>exception</a>        2813 ext/soap/soap.c 			MAKE_COPY_ZVAL(&amp;return_value, exception);</span>
+<span class='curline'><a href='../S/1031.html#L2814'>exception</a>        2814 ext/soap/soap.c 			zend_throw_exception_object(exception TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1045.html#L300'>exception</a>         300 ext/spl/php_spl.c 			if (!EG(exception)) {</span>
+<span class='curline'><a href='../S/1045.html#L335'>exception</a>         335 ext/spl/php_spl.c 	while(pos1 &amp;&amp; *pos1 &amp;&amp; !EG(exception)) {</span>
+<span class='curline'><a href='../S/1049.html#L259'>exception</a>         259 ext/spl/spl_directory.c 	if (EG(exception) || intern-&gt;u.dir.dirp == NULL) {</span>
+<span class='curline'><a href='../S/1049.html#L261'>exception</a>         261 ext/spl/spl_directory.c 		if (!EG(exception)) {</span>
+<span class='curline'><a href='../S/1049.html#L292'>exception</a>         292 ext/spl/spl_directory.c 		if (!EG(exception)) {</span>
+<span class='curline'><a href='../S/1061.html#L107'>exception</a>         107 ext/spl/spl_heap.c 		if (EG(exception)) {</span>
+<span class='curline'><a href='../S/1061.html#L146'>exception</a>         146 ext/spl/spl_heap.c 	if (EG(exception)) {</span>
+<span class='curline'><a href='../S/1061.html#L171'>exception</a>         171 ext/spl/spl_heap.c 	if (EG(exception)) {</span>
+<span class='curline'><a href='../S/1061.html#L202'>exception</a>         202 ext/spl/spl_heap.c 	if (EG(exception)) {</span>
+<span class='curline'><a href='../S/1061.html#L257'>exception</a>         257 ext/spl/spl_heap.c 	if (EG(exception)) {</span>
+<span class='curline'><a href='../S/1061.html#L305'>exception</a>         305 ext/spl/spl_heap.c 	if (EG(exception)) {</span>
+<span class='curline'><a href='../S/1063.html#L233'>exception</a>         233 ext/spl/spl_iterators.c 	while (!EG(exception)) {</span>
+<span class='curline'><a href='../S/1063.html#L239'>exception</a>         239 ext/spl/spl_iterators.c 				if (EG(exception)) {</span>
+<span class='curline'><a href='../S/1063.html#L261'>exception</a>         261 ext/spl/spl_iterators.c 				if (EG(exception)) {</span>
+<span class='curline'><a href='../S/1063.html#L297'>exception</a>         297 ext/spl/spl_iterators.c 				if (EG(exception)) {</span>
+<span class='curline'><a href='../S/1063.html#L324'>exception</a>         324 ext/spl/spl_iterators.c 				if (EG(exception)) {</span>
+<span class='curline'><a href='../S/1063.html#L361'>exception</a>         361 ext/spl/spl_iterators.c 					if (EG(exception)) {</span>
+<span class='curline'><a href='../S/1063.html#L375'>exception</a>         375 ext/spl/spl_iterators.c 				if (EG(exception)) {</span>
+<span class='curline'><a href='../S/1063.html#L404'>exception</a>         404 ext/spl/spl_iterators.c 		if (!EG(exception) &amp;&amp; (!object-&gt;endChildren || object-&gt;endChildren-&gt;common.scope != spl_ce_RecursiveIteratorIterator)) {</span>
+<span class='curline'><a href='../S/1063.html#L414'>exception</a>         414 ext/spl/spl_iterators.c 	if (!EG(exception) &amp;&amp; object-&gt;beginIteration &amp;&amp; !object-&gt;in_iteration) {</span>
+<span class='curline'><a href='../S/1063.html#L580'>exception</a>         580 ext/spl/spl_iterators.c 	if (EG(exception)) {</span>
+<span class='curline'><a href='../S/1063.html#L1518'>exception</a>        1518 ext/spl/spl_iterators.c 					if (EG(exception)) {</span>
+<span class='curline'><a href='../S/1063.html#L1714'>exception</a>        1714 ext/spl/spl_iterators.c 			if (EG(exception)) {</span>
+<span class='curline'><a href='../S/1063.html#L1721'>exception</a>        1721 ext/spl/spl_iterators.c 		return EG(exception) ? FAILURE : SUCCESS;</span>
+<span class='curline'><a href='../S/1063.html#L1853'>exception</a>        1853 ext/spl/spl_iterators.c 		if (EG(exception)) {</span>
+<span class='curline'><a href='../S/1063.html#L1951'>exception</a>        1951 ext/spl/spl_iterators.c 	if (!EG(exception) &amp;&amp; retval) {</span>
+<span class='curline'><a href='../S/1063.html#L1973'>exception</a>        1973 ext/spl/spl_iterators.c 	if (!EG(exception) &amp;&amp; retval) {</span>
+<span class='curline'><a href='../S/1063.html#L2025'>exception</a>        2025 ext/spl/spl_iterators.c 	if (EG(exception)) {</span>
+<span class='curline'><a href='../S/1063.html#L2274'>exception</a>        2274 ext/spl/spl_iterators.c 	if (!EG(exception)) {</span>
+<span class='curline'><a href='../S/1063.html#L2556'>exception</a>        2556 ext/spl/spl_iterators.c 		if (!EG(exception)) {</span>
+<span class='curline'><a href='../S/1063.html#L2708'>exception</a>        2708 ext/spl/spl_iterators.c 			if (EG(exception)) {</span>
+<span class='curline'><a href='../S/1063.html#L2720'>exception</a>        2720 ext/spl/spl_iterators.c 					if (EG(exception)) {</span>
+<span class='curline'><a href='../S/1063.html#L2738'>exception</a>        2738 ext/spl/spl_iterators.c 				if (EG(exception)) {</span>
+<span class='curline'><a href='../S/1063.html#L3555'>exception</a>        3555 ext/spl/spl_iterators.c 	if (EG(exception)) {</span>
+<span class='curline'><a href='../S/1063.html#L3562'>exception</a>        3562 ext/spl/spl_iterators.c 		if (EG(exception)) {</span>
+<span class='curline'><a href='../S/1063.html#L3568'>exception</a>        3568 ext/spl/spl_iterators.c 		if (EG(exception)) {</span>
+<span class='curline'><a href='../S/1063.html#L3571'>exception</a>        3571 ext/spl/spl_iterators.c 		if (apply_func(iter, puser TSRMLS_CC) == ZEND_HASH_APPLY_STOP || EG(exception)) {</span>
+<span class='curline'><a href='../S/1063.html#L3576'>exception</a>        3576 ext/spl/spl_iterators.c 		if (EG(exception)) {</span>
+<span class='curline'><a href='../S/1063.html#L3585'>exception</a>        3585 ext/spl/spl_iterators.c 	return EG(exception) ? FAILURE : SUCCESS;</span>
+<span class='curline'><a href='../S/1063.html#L3594'>exception</a>        3594 ext/spl/spl_iterators.c 	if (EG(exception)) {</span>
+<span class='curline'><a href='../S/1063.html#L3603'>exception</a>        3603 ext/spl/spl_iterators.c 		if (EG(exception)) {</span>
+<span class='curline'><a href='../S/1063.html#L3621'>exception</a>        3621 ext/spl/spl_iterators.c 	if (EG(exception)) {</span>
+<span class='curline'><a href='../S/1065.html#L1106'>exception</a>        1106 ext/spl/spl_observer.c 	while (zend_hash_get_current_data_ex(&amp;intern-&gt;storage, (void**)&amp;element, &amp;intern-&gt;pos) == SUCCESS &amp;&amp; !EG(exception)) {</span>
+<span class='curline'><a href='../S/1065.html#L1129'>exception</a>        1129 ext/spl/spl_observer.c 	while (zend_hash_get_current_data_ex(&amp;intern-&gt;storage, (void**)&amp;element, &amp;intern-&gt;pos) == SUCCESS &amp;&amp; !EG(exception)) {</span>
+<span class='curline'><a href='../S/1065.html#L1159'>exception</a>        1159 ext/spl/spl_observer.c 	while (zend_hash_get_current_data_ex(&amp;intern-&gt;storage, (void**)&amp;element, &amp;intern-&gt;pos) == SUCCESS &amp;&amp; !EG(exception)) {</span>
+<span class='curline'><a href='../S/1065.html#L1195'>exception</a>        1195 ext/spl/spl_observer.c 	while (zend_hash_get_current_data_ex(&amp;intern-&gt;storage, (void**)&amp;element, &amp;intern-&gt;pos) == SUCCESS &amp;&amp; !EG(exception)) {</span>
+<span class='curline'><a href='../S/1071.html#L82'>exception</a>          82 ext/sqlite3/php_sqlite3_structs.h 	zend_bool exception;</span>
+<span class='curline'><a href='../S/1072.html#L57'>exception</a>          57 ext/sqlite3/sqlite3.c 	if (db_obj &amp;&amp; db_obj-&gt;exception) {</span>
+<span class='curline'><a href='../S/1072.html#L1286'>exception</a>        1286 ext/sqlite3/sqlite3.c 	RETVAL_BOOL(db_obj-&gt;exception);</span>
+<span class='curline'><a href='../S/1072.html#L1288'>exception</a>        1288 ext/sqlite3/sqlite3.c 	db_obj-&gt;exception = enableExceptions;</span>
+<span class='curline'><a href='../S/1072.html#L2194'>exception</a>        2194 ext/sqlite3/sqlite3.c 	intern-&gt;exception = 0;</span>
+<span class='curline'><a href='../S/1073.html#L1062'>exception</a>        1062 ext/standard/array.c 	while (!EG(exception) &amp;&amp; zend_hash_get_current_data(target_hash, (void **)&amp;args[0]) == SUCCESS) {</span>
+<span class='curline'><a href='../S/1201.html#L712'>exception</a>         712 ext/standard/var.c 	if (EG(exception)) {</span>
+<span class='curline'><a href='../S/1201.html#L803'>exception</a>         803 ext/standard/var.c 					if (EG(exception)) {</span>
+<span class='curline'><a href='../S/1201.html#L930'>exception</a>         930 ext/standard/var.c 	if (EG(exception)) {</span>
+<span class='curline'><a href='../S/1201.html#L967'>exception</a>         967 ext/standard/var.c 		if (!EG(exception)) {</span>
+<span class='curline'><a href='../S/1202.html#L451'>exception</a>         451 ext/standard/var_unserializer.c 	if (EG(exception)) {</span>
+<span class='curline'><a href='../S/1202.html#L675'>exception</a>         675 ext/standard/var_unserializer.c 			if (EG(exception)) {</span>
+<span class='curline'><a href='../S/1202.html#L684'>exception</a>         684 ext/standard/var_unserializer.c 		if (EG(exception)) {</span>
+<span class='curline'><a href='../S/1202.html#L705'>exception</a>         705 ext/standard/var_unserializer.c 			if (EG(exception)) {</span>
+<span class='curline'><a href='../S/1202.html#L722'>exception</a>         722 ext/standard/var_unserializer.c 		if (EG(exception)) {</span>
+<span class='curline'><a href='../S/1224.html#L509'>exception</a>         509 ext/xml/xml.c  	if (parser &amp;&amp; handler &amp;&amp; !EG(exception)) {</span>
+<span class='curline'><a href='../S/1224.html#L555'>exception</a>         555 ext/xml/xml.c  			return EG(exception) ? NULL : retval;</span>
+<span class='curline'><a href='../S/1364.html#L1101'>exception</a>        1101 main/main.c    				if (EG(error_handling) == EH_THROW &amp;&amp; !EG(exception)) {</span>
+<span class='curline'><a href='../S/1364.html#L2192'>exception</a>        2192 main/main.c    	EG(exception) = NULL;</span>
+<span class='curline'><a href='../S/1419.html#L650'>exception</a>         650 main/streams/userspace.c 	if (EG(exception)) {</span>
+<span class='curline'><a href='../S/1419.html#L703'>exception</a>         703 main/streams/userspace.c 	if (EG(exception)) {</span>
+<span class='curline'><a href='../S/1454.html#L1131'>exception</a>        1131 sapi/cli/php_cli.c 					if (EG(exception)) {</span>
+<span class='curline'><a href='../S/1454.html#L1132'>exception</a>        1132 sapi/cli/php_cli.c 						zval *msg = zend_read_property(zend_exception_get_default(TSRMLS_C), EG(exception), "message", sizeof("message")-1, 0 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1454.html#L1134'>exception</a>        1134 sapi/cli/php_cli.c 						zval_ptr_dtor(&amp;EG(exception));</span>
+<span class='curline'><a href='../S/1454.html#L1135'>exception</a>        1135 sapi/cli/php_cli.c 						EG(exception) = NULL;</span>
+<span class='curline'><a href='../S/1572.html#L533'>exception</a>         533 sapi/phpdbg/phpdbg_prompt.c 		 exception;</span>
+<span class='curline'><a href='../S/1572.html#L540'>exception</a>         540 sapi/phpdbg/phpdbg_prompt.c 	exception = *EG(exception);</span>
+<span class='curline'><a href='../S/1572.html#L541'>exception</a>         541 sapi/phpdbg/phpdbg_prompt.c 	zval_copy_ctor(&amp;exception);</span>
+<span class='curline'><a href='../S/1572.html#L542'>exception</a>         542 sapi/phpdbg/phpdbg_prompt.c 	EG(exception) = NULL;</span>
+<span class='curline'><a href='../S/1572.html#L546'>exception</a>         546 sapi/phpdbg/phpdbg_prompt.c 		Z_OBJCE(exception)-&gt;name);</span>
+<span class='curline'><a href='../S/1572.html#L551'>exception</a>         551 sapi/phpdbg/phpdbg_prompt.c 	fci.function_table = &amp;Z_OBJCE(exception)-&gt;function_table;</span>
+<span class='curline'><a href='../S/1572.html#L554'>exception</a>         554 sapi/phpdbg/phpdbg_prompt.c 	fci.object_ptr = &amp;exception;</span>
+<span class='curline'><a href='../S/1572.html#L574'>exception</a>         574 sapi/phpdbg/phpdbg_prompt.c 	zval_dtor(&amp;exception);</span>
+<span class='curline'><a href='../S/1572.html#L660'>exception</a>         660 sapi/phpdbg/phpdbg_prompt.c 			if (EG(exception)) {</span>
+<span class='curline'><a href='../S/1572.html#L1162'>exception</a>        1162 sapi/phpdbg/phpdbg_prompt.c 	if (EG(exception)) {</span>
+</pre>
+</body>
+</html>

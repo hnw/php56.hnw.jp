@@ -1,0 +1,539 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>file_handle</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/1642.html#L1313'>file_handle</a>      1313 Zend/zend.c    	zend_file_handle *file_handle;</span>
+<span class='curline'><a href='../S/1642.html#L1320'>file_handle</a>      1320 Zend/zend.c    		file_handle = va_arg(files, zend_file_handle *);</span>
+<span class='curline'><a href='../S/1642.html#L1321'>file_handle</a>      1321 Zend/zend.c    		if (!file_handle) {</span>
+<span class='curline'><a href='../S/1642.html#L1326'>file_handle</a>      1326 Zend/zend.c                if (file_handle-&gt;filename[0] != '-' || file_handle-&gt;filename[1]) {</span>
+<span class='curline'><a href='../S/1642.html#L1333'>file_handle</a>      1333 Zend/zend.c    		EG(active_op_array) = zend_compile_file(file_handle, type TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1642.html#L1334'>file_handle</a>      1334 Zend/zend.c    		if (file_handle-&gt;opened_path) {</span>
+<span class='curline'><a href='../S/1642.html#L1336'>file_handle</a>      1336 Zend/zend.c    			zend_hash_add(&amp;EG(included_files), file_handle-&gt;opened_path, strlen(file_handle-&gt;opened_path) + 1, (void *)&amp;dummy, sizeof(int), NULL);</span>
+<span class='curline'><a href='../S/1642.html#L1338'>file_handle</a>      1338 Zend/zend.c    		zend_destroy_file_handle(file_handle TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1655.html#L97'>file_handle</a>        97 Zend/zend_compile.c ZEND_API zend_op_array *(*zend_compile_file)(zend_file_handle *file_handle, int type TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1656.html#L440'>file_handle</a>       440 Zend/zend_compile.h extern ZEND_API zend_op_array *(*zend_compile_file)(zend_file_handle *file_handle, int type TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1656.html#L675'>file_handle</a>       675 Zend/zend_compile.h ZEND_API zend_op_array *compile_file(zend_file_handle *file_handle, int type TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1656.html#L679'>file_handle</a>       679 Zend/zend_compile.h ZEND_API int open_file_for_scanning(zend_file_handle *file_handle TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1656.html#L682'>file_handle</a>       682 Zend/zend_compile.h ZEND_API void zend_destroy_file_handle(zend_file_handle *file_handle TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1662.html#L36'>file_handle</a>        36 Zend/zend_dtrace.c ZEND_API zend_op_array *dtrace_compile_file(zend_file_handle *file_handle, int type TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1662.html#L39'>file_handle</a>        39 Zend/zend_dtrace.c 	DTRACE_COMPILE_FILE_ENTRY(file_handle-&gt;opened_path, (char *)file_handle-&gt;filename);</span>
+<span class='curline'><a href='../S/1662.html#L40'>file_handle</a>        40 Zend/zend_dtrace.c 	res = compile_file(file_handle, type TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1662.html#L41'>file_handle</a>        41 Zend/zend_dtrace.c 	DTRACE_COMPILE_FILE_RETURN(file_handle-&gt;opened_path, (char *)file_handle-&gt;filename);</span>
+<span class='curline'><a href='../S/1663.html#L33'>file_handle</a>        33 Zend/zend_dtrace.h ZEND_API zend_op_array *(*zend_dtrace_compile_file)(zend_file_handle *file_handle, int type TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1663.html#L37'>file_handle</a>        37 Zend/zend_dtrace.h ZEND_API zend_op_array *dtrace_compile_file(zend_file_handle *file_handle, int type TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1702.html#L267'>file_handle</a>       267 Zend/zend_language_scanner.c ZEND_API void zend_destroy_file_handle(zend_file_handle *file_handle TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1702.html#L269'>file_handle</a>       269 Zend/zend_language_scanner.c 	zend_llist_del_element(&amp;CG(open_files), file_handle, (int (*)(void *, void *)) zend_compare_file_handles);</span>
+<span class='curline'><a href='../S/1702.html#L271'>file_handle</a>       271 Zend/zend_language_scanner.c 	file_handle-&gt;opened_path = NULL;</span>
+<span class='curline'><a href='../S/1702.html#L272'>file_handle</a>       272 Zend/zend_language_scanner.c 	if (file_handle-&gt;free_filename) {</span>
+<span class='curline'><a href='../S/1702.html#L273'>file_handle</a>       273 Zend/zend_language_scanner.c 		file_handle-&gt;filename = NULL;</span>
+<span class='curline'><a href='../S/1702.html#L479'>file_handle</a>       479 Zend/zend_language_scanner.c ZEND_API int open_file_for_scanning(zend_file_handle *file_handle TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1702.html#L486'>file_handle</a>       486 Zend/zend_language_scanner.c 	if (CG(start_lineno) == 2 &amp;&amp; file_handle-&gt;type == ZEND_HANDLE_FP &amp;&amp; file_handle-&gt;handle.fp) {</span>
+<span class='curline'><a href='../S/1702.html#L487'>file_handle</a>       487 Zend/zend_language_scanner.c 		if ((offset = ftell(file_handle-&gt;handle.fp)) == -1) {</span>
+<span class='curline'><a href='../S/1702.html#L492'>file_handle</a>       492 Zend/zend_language_scanner.c 	if (zend_stream_fixup(file_handle, &amp;buf, &amp;size TSRMLS_CC) == FAILURE) {</span>
+<span class='curline'><a href='../S/1702.html#L496'>file_handle</a>       496 Zend/zend_language_scanner.c 	zend_llist_add_element(&amp;CG(open_files), file_handle);</span>
+<span class='curline'><a href='../S/1702.html#L497'>file_handle</a>       497 Zend/zend_language_scanner.c 	if (file_handle-&gt;handle.stream.handle &gt;= (void*)file_handle &amp;&amp; file_handle-&gt;handle.stream.handle &lt;= (void*)(file_handle+1)) {</span>
+<span class='curline'><a href='../S/1702.html#L499'>file_handle</a>       499 Zend/zend_language_scanner.c 		size_t diff = (char*)file_handle-&gt;handle.stream.handle - (char*)file_handle;</span>
+<span class='curline'><a href='../S/1702.html#L501'>file_handle</a>       501 Zend/zend_language_scanner.c 		file_handle-&gt;handle.stream.handle = fh-&gt;handle.stream.handle;</span>
+<span class='curline'><a href='../S/1702.html#L505'>file_handle</a>       505 Zend/zend_language_scanner.c 	SCNG(yy_in) = file_handle;</span>
+<span class='curline'><a href='../S/1702.html#L533'>file_handle</a>       533 Zend/zend_language_scanner.c 	if (file_handle-&gt;opened_path) {</span>
+<span class='curline'><a href='../S/1702.html#L534'>file_handle</a>       534 Zend/zend_language_scanner.c 		file_path = file_handle-&gt;opened_path;</span>
+<span class='curline'><a href='../S/1702.html#L536'>file_handle</a>       536 Zend/zend_language_scanner.c 		file_path = file_handle-&gt;filename;</span>
+<span class='curline'><a href='../S/1702.html#L555'>file_handle</a>       555 Zend/zend_language_scanner.c ZEND_API zend_op_array *compile_file(zend_file_handle *file_handle, int type TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1702.html#L574'>file_handle</a>       574 Zend/zend_language_scanner.c 	if (open_file_for_scanning(file_handle TSRMLS_CC)==FAILURE) {</span>
+<span class='curline'><a href='../S/1702.html#L576'>file_handle</a>       576 Zend/zend_language_scanner.c 			zend_message_dispatcher(ZMSG_FAILED_REQUIRE_FOPEN, file_handle-&gt;filename TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1702.html#L579'>file_handle</a>       579 Zend/zend_language_scanner.c 			zend_message_dispatcher(ZMSG_FAILED_INCLUDE_FOPEN, file_handle-&gt;filename TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1702.html#L614'>file_handle</a>       614 Zend/zend_language_scanner.c 	zend_file_handle file_handle;</span>
+<span class='curline'><a href='../S/1702.html#L625'>file_handle</a>       625 Zend/zend_language_scanner.c 	file_handle.filename = Z_STRVAL_P(filename);</span>
+<span class='curline'><a href='../S/1702.html#L626'>file_handle</a>       626 Zend/zend_language_scanner.c 	file_handle.free_filename = 0;</span>
+<span class='curline'><a href='../S/1702.html#L627'>file_handle</a>       627 Zend/zend_language_scanner.c 	file_handle.type = ZEND_HANDLE_FILENAME;</span>
+<span class='curline'><a href='../S/1702.html#L628'>file_handle</a>       628 Zend/zend_language_scanner.c 	file_handle.opened_path = NULL;</span>
+<span class='curline'><a href='../S/1702.html#L629'>file_handle</a>       629 Zend/zend_language_scanner.c 	file_handle.handle.fp = NULL;</span>
+<span class='curline'><a href='../S/1702.html#L631'>file_handle</a>       631 Zend/zend_language_scanner.c 	retval = zend_compile_file(&amp;file_handle, type TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1702.html#L632'>file_handle</a>       632 Zend/zend_language_scanner.c 	if (retval &amp;&amp; file_handle.handle.stream.handle) {</span>
+<span class='curline'><a href='../S/1702.html#L635'>file_handle</a>       635 Zend/zend_language_scanner.c 		if (!file_handle.opened_path) {</span>
+<span class='curline'><a href='../S/1702.html#L636'>file_handle</a>       636 Zend/zend_language_scanner.c 			file_handle.opened_path = opened_path = estrndup(Z_STRVAL_P(filename), Z_STRLEN_P(filename));</span>
+<span class='curline'><a href='../S/1702.html#L639'>file_handle</a>       639 Zend/zend_language_scanner.c 		zend_hash_add(&amp;EG(included_files), file_handle.opened_path, strlen(file_handle.opened_path)+1, (void *)&amp;dummy, sizeof(int), NULL);</span>
+<span class='curline'><a href='../S/1702.html#L645'>file_handle</a>       645 Zend/zend_language_scanner.c 	zend_destroy_file_handle(&amp;file_handle TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1702.html#L785'>file_handle</a>       785 Zend/zend_language_scanner.c 	zend_file_handle file_handle;</span>
+<span class='curline'><a href='../S/1702.html#L787'>file_handle</a>       787 Zend/zend_language_scanner.c 	file_handle.type = ZEND_HANDLE_FILENAME;</span>
+<span class='curline'><a href='../S/1702.html#L788'>file_handle</a>       788 Zend/zend_language_scanner.c 	file_handle.filename = filename;</span>
+<span class='curline'><a href='../S/1702.html#L789'>file_handle</a>       789 Zend/zend_language_scanner.c 	file_handle.free_filename = 0;</span>
+<span class='curline'><a href='../S/1702.html#L790'>file_handle</a>       790 Zend/zend_language_scanner.c 	file_handle.opened_path = NULL;</span>
+<span class='curline'><a href='../S/1702.html#L792'>file_handle</a>       792 Zend/zend_language_scanner.c 	if (open_file_for_scanning(&amp;file_handle TSRMLS_CC)==FAILURE) {</span>
+<span class='curline'><a href='../S/1702.html#L802'>file_handle</a>       802 Zend/zend_language_scanner.c 	zend_destroy_file_handle(&amp;file_handle TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1733.html#L103'>file_handle</a>       103 Zend/zend_stream.c static inline int zend_stream_is_mmap(zend_file_handle *file_handle) { /* {{{ */</span>
+<span class='curline'><a href='../S/1733.html#L104'>file_handle</a>       104 Zend/zend_stream.c 	return file_handle-&gt;type == ZEND_HANDLE_MAPPED;</span>
+<span class='curline'><a href='../S/1733.html#L107'>file_handle</a>       107 Zend/zend_stream.c static size_t zend_stream_fsize(zend_file_handle *file_handle TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1733.html#L111'>file_handle</a>       111 Zend/zend_stream.c 	if (zend_stream_is_mmap(file_handle)) {</span>
+<span class='curline'><a href='../S/1733.html#L112'>file_handle</a>       112 Zend/zend_stream.c 		return file_handle-&gt;handle.stream.mmap.len;</span>
+<span class='curline'><a href='../S/1733.html#L114'>file_handle</a>       114 Zend/zend_stream.c 	if (file_handle-&gt;type == ZEND_HANDLE_STREAM || file_handle-&gt;type == ZEND_HANDLE_MAPPED) {</span>
+<span class='curline'><a href='../S/1733.html#L115'>file_handle</a>       115 Zend/zend_stream.c 		return file_handle-&gt;handle.stream.fsizer(file_handle-&gt;handle.stream.handle TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1733.html#L117'>file_handle</a>       117 Zend/zend_stream.c 	if (file_handle-&gt;handle.fp &amp;&amp; fstat(fileno(file_handle-&gt;handle.fp), &amp;buf) == 0) {</span>
+<span class='curline'><a href='../S/1733.html#L144'>file_handle</a>       144 Zend/zend_stream.c static int zend_stream_getc(zend_file_handle *file_handle TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1733.html#L148'>file_handle</a>       148 Zend/zend_stream.c 	if (file_handle-&gt;handle.stream.reader(file_handle-&gt;handle.stream.handle, &amp;buf, sizeof(buf) TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/1733.html#L154'>file_handle</a>       154 Zend/zend_stream.c static size_t zend_stream_read(zend_file_handle *file_handle, char *buf, size_t len TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1733.html#L156'>file_handle</a>       156 Zend/zend_stream.c 	if (!zend_stream_is_mmap(file_handle) &amp;&amp; file_handle-&gt;handle.stream.isatty) {</span>
+<span class='curline'><a href='../S/1733.html#L166'>file_handle</a>       166 Zend/zend_stream.c 		for (n = 0; n &lt; len &amp;&amp; (c = zend_stream_getc(file_handle TSRMLS_CC)) != EOF &amp;&amp; c != 4 &amp;&amp; c != '\n'; ++n) {</span>
+<span class='curline'><a href='../S/1733.html#L168'>file_handle</a>       168 Zend/zend_stream.c 		for (n = 0; n &lt; len &amp;&amp; (c = zend_stream_getc(file_handle TSRMLS_CC)) != EOF &amp;&amp; c != '\n'; ++n)  {</span>
+<span class='curline'><a href='../S/1733.html#L178'>file_handle</a>       178 Zend/zend_stream.c 	return file_handle-&gt;handle.stream.reader(file_handle-&gt;handle.stream.handle, buf, len TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1733.html#L181'>file_handle</a>       181 Zend/zend_stream.c ZEND_API int zend_stream_fixup(zend_file_handle *file_handle, char **buf, size_t *len TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1733.html#L186'>file_handle</a>       186 Zend/zend_stream.c 	if (file_handle-&gt;type == ZEND_HANDLE_FILENAME) {</span>
+<span class='curline'><a href='../S/1733.html#L187'>file_handle</a>       187 Zend/zend_stream.c 		if (zend_stream_open(file_handle-&gt;filename, file_handle TSRMLS_CC) == FAILURE) {</span>
+<span class='curline'><a href='../S/1733.html#L192'>file_handle</a>       192 Zend/zend_stream.c 	switch (file_handle-&gt;type) {		</span>
+<span class='curline'><a href='../S/1733.html#L194'>file_handle</a>       194 Zend/zend_stream.c 			file_handle-&gt;type = ZEND_HANDLE_FP;</span>
+<span class='curline'><a href='../S/1733.html#L195'>file_handle</a>       195 Zend/zend_stream.c 			file_handle-&gt;handle.fp = fdopen(file_handle-&gt;handle.fd, "rb");</span>
+<span class='curline'><a href='../S/1733.html#L198'>file_handle</a>       198 Zend/zend_stream.c 			if (!file_handle-&gt;handle.fp) {</span>
+<span class='curline'><a href='../S/1733.html#L201'>file_handle</a>       201 Zend/zend_stream.c 			memset(&amp;file_handle-&gt;handle.stream.mmap, 0, sizeof(zend_mmap));</span>
+<span class='curline'><a href='../S/1733.html#L202'>file_handle</a>       202 Zend/zend_stream.c 			file_handle-&gt;handle.stream.isatty     = isatty(fileno((FILE *)file_handle-&gt;handle.stream.handle)) ? 1 : 0;</span>
+<span class='curline'><a href='../S/1733.html#L203'>file_handle</a>       203 Zend/zend_stream.c 			file_handle-&gt;handle.stream.reader     = (zend_stream_reader_t)zend_stream_stdio_reader;</span>
+<span class='curline'><a href='../S/1733.html#L204'>file_handle</a>       204 Zend/zend_stream.c 			file_handle-&gt;handle.stream.closer     = (zend_stream_closer_t)zend_stream_stdio_closer;</span>
+<span class='curline'><a href='../S/1733.html#L205'>file_handle</a>       205 Zend/zend_stream.c 			file_handle-&gt;handle.stream.fsizer     = (zend_stream_fsizer_t)zend_stream_stdio_fsizer;</span>
+<span class='curline'><a href='../S/1733.html#L206'>file_handle</a>       206 Zend/zend_stream.c 			memset(&amp;file_handle-&gt;handle.stream.mmap, 0, sizeof(file_handle-&gt;handle.stream.mmap));</span>
+<span class='curline'><a href='../S/1733.html#L213'>file_handle</a>       213 Zend/zend_stream.c 			file_handle-&gt;handle.stream.mmap.pos = 0;</span>
+<span class='curline'><a href='../S/1733.html#L214'>file_handle</a>       214 Zend/zend_stream.c 			*buf = file_handle-&gt;handle.stream.mmap.buf;</span>
+<span class='curline'><a href='../S/1733.html#L215'>file_handle</a>       215 Zend/zend_stream.c 			*len = file_handle-&gt;handle.stream.mmap.len;</span>
+<span class='curline'><a href='../S/1733.html#L222'>file_handle</a>       222 Zend/zend_stream.c 	size = zend_stream_fsize(file_handle TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1733.html#L227'>file_handle</a>       227 Zend/zend_stream.c 	old_type = file_handle-&gt;type;</span>
+<span class='curline'><a href='../S/1733.html#L228'>file_handle</a>       228 Zend/zend_stream.c 	file_handle-&gt;type = ZEND_HANDLE_STREAM;  /* we might still be _FP but we need fsize() work */</span>
+<span class='curline'><a href='../S/1733.html#L230'>file_handle</a>       230 Zend/zend_stream.c 	if (old_type == ZEND_HANDLE_FP &amp;&amp; !file_handle-&gt;handle.stream.isatty &amp;&amp; size) {</span>
+<span class='curline'><a href='../S/1733.html#L234'>file_handle</a>       234 Zend/zend_stream.c 		if (file_handle-&gt;handle.fp &amp;&amp;</span>
+<span class='curline'><a href='../S/1733.html#L238'>file_handle</a>       238 Zend/zend_stream.c 			*buf = mmap(0, size + ZEND_MMAP_AHEAD, PROT_READ, MAP_PRIVATE, fileno(file_handle-&gt;handle.fp), 0);</span>
+<span class='curline'><a href='../S/1733.html#L240'>file_handle</a>       240 Zend/zend_stream.c 				long offset = ftell(file_handle-&gt;handle.fp);</span>
+<span class='curline'><a href='../S/1733.html#L241'>file_handle</a>       241 Zend/zend_stream.c 				file_handle-&gt;handle.stream.mmap.map = *buf;</span>
+<span class='curline'><a href='../S/1733.html#L247'>file_handle</a>       247 Zend/zend_stream.c 				file_handle-&gt;handle.stream.mmap.buf = *buf;</span>
+<span class='curline'><a href='../S/1733.html#L248'>file_handle</a>       248 Zend/zend_stream.c 				file_handle-&gt;handle.stream.mmap.len = size;</span>
+<span class='curline'><a href='../S/1733.html#L254'>file_handle</a>       254 Zend/zend_stream.c 		file_handle-&gt;handle.stream.mmap.map = 0;</span>
+<span class='curline'><a href='../S/1733.html#L255'>file_handle</a>       255 Zend/zend_stream.c 		file_handle-&gt;handle.stream.mmap.buf = *buf = safe_emalloc(1, size, ZEND_MMAP_AHEAD);</span>
+<span class='curline'><a href='../S/1733.html#L256'>file_handle</a>       256 Zend/zend_stream.c 		file_handle-&gt;handle.stream.mmap.len = zend_stream_read(file_handle, *buf, size TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1733.html#L262'>file_handle</a>       262 Zend/zend_stream.c 		while ((read = zend_stream_read(file_handle, *buf + size, remain TSRMLS_CC)) &gt; 0) {</span>
+<span class='curline'><a href='../S/1733.html#L271'>file_handle</a>       271 Zend/zend_stream.c 		file_handle-&gt;handle.stream.mmap.map = 0;</span>
+<span class='curline'><a href='../S/1733.html#L272'>file_handle</a>       272 Zend/zend_stream.c 		file_handle-&gt;handle.stream.mmap.len = size;</span>
+<span class='curline'><a href='../S/1733.html#L276'>file_handle</a>       276 Zend/zend_stream.c 		file_handle-&gt;handle.stream.mmap.buf = *buf;</span>
+<span class='curline'><a href='../S/1733.html#L279'>file_handle</a>       279 Zend/zend_stream.c 	if (file_handle-&gt;handle.stream.mmap.len == 0) {</span>
+<span class='curline'><a href='../S/1733.html#L281'>file_handle</a>       281 Zend/zend_stream.c 		file_handle-&gt;handle.stream.mmap.buf = *buf;</span>
+<span class='curline'><a href='../S/1733.html#L285'>file_handle</a>       285 Zend/zend_stream.c 		memset(file_handle-&gt;handle.stream.mmap.buf + file_handle-&gt;handle.stream.mmap.len, 0, ZEND_MMAP_AHEAD);</span>
+<span class='curline'><a href='../S/1733.html#L290'>file_handle</a>       290 Zend/zend_stream.c 	file_handle-&gt;type = ZEND_HANDLE_MAPPED;</span>
+<span class='curline'><a href='../S/1733.html#L291'>file_handle</a>       291 Zend/zend_stream.c 	file_handle-&gt;handle.stream.mmap.pos        = 0;</span>
+<span class='curline'><a href='../S/1733.html#L292'>file_handle</a>       292 Zend/zend_stream.c 	file_handle-&gt;handle.stream.mmap.old_handle = file_handle-&gt;handle.stream.handle;</span>
+<span class='curline'><a href='../S/1733.html#L293'>file_handle</a>       293 Zend/zend_stream.c 	file_handle-&gt;handle.stream.mmap.old_closer = file_handle-&gt;handle.stream.closer;</span>
+<span class='curline'><a href='../S/1733.html#L294'>file_handle</a>       294 Zend/zend_stream.c 	file_handle-&gt;handle.stream.handle          = &amp;file_handle-&gt;handle.stream;</span>
+<span class='curline'><a href='../S/1733.html#L295'>file_handle</a>       295 Zend/zend_stream.c 	file_handle-&gt;handle.stream.closer          = (zend_stream_closer_t)zend_stream_mmap_closer;</span>
+<span class='curline'><a href='../S/1733.html#L297'>file_handle</a>       297 Zend/zend_stream.c 	*buf = file_handle-&gt;handle.stream.mmap.buf;</span>
+<span class='curline'><a href='../S/1733.html#L298'>file_handle</a>       298 Zend/zend_stream.c 	*len = file_handle-&gt;handle.stream.mmap.len;</span>
+<span class='curline'><a href='../S/1734.html#L76'>file_handle</a>        76 Zend/zend_stream.h ZEND_API int zend_stream_fixup(zend_file_handle *file_handle, char **buf, size_t *len TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1747.html#L3974'>file_handle</a>      3974 Zend/zend_vm_def.h 					zend_file_handle file_handle;</span>
+<span class='curline'><a href='../S/1747.html#L3986'>file_handle</a>      3986 Zend/zend_vm_def.h 					} else if (SUCCESS == zend_stream_open(resolved_path, &amp;file_handle TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/1747.html#L3988'>file_handle</a>      3988 Zend/zend_vm_def.h 						if (!file_handle.opened_path) {</span>
+<span class='curline'><a href='../S/1747.html#L3989'>file_handle</a>      3989 Zend/zend_vm_def.h 							file_handle.opened_path = estrdup(resolved_path);</span>
+<span class='curline'><a href='../S/1747.html#L3992'>file_handle</a>      3992 Zend/zend_vm_def.h 						if (zend_hash_add_empty_element(&amp;EG(included_files), file_handle.opened_path, strlen(file_handle.opened_path)+1)==SUCCESS) {</span>
+<span class='curline'><a href='../S/1747.html#L3993'>file_handle</a>      3993 Zend/zend_vm_def.h 							new_op_array = zend_compile_file(&amp;file_handle, (opline-&gt;extended_value==ZEND_INCLUDE_ONCE?ZEND_INCLUDE:ZEND_REQUIRE) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1747.html#L3994'>file_handle</a>      3994 Zend/zend_vm_def.h 							zend_destroy_file_handle(&amp;file_handle TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1747.html#L3996'>file_handle</a>      3996 Zend/zend_vm_def.h 							zend_file_handle_dtor(&amp;file_handle TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L2949'>file_handle</a>      2949 Zend/zend_vm_execute.h 					zend_file_handle file_handle;</span>
+<span class='curline'><a href='../S/1748.html#L2961'>file_handle</a>      2961 Zend/zend_vm_execute.h 					} else if (SUCCESS == zend_stream_open(resolved_path, &amp;file_handle TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/1748.html#L2963'>file_handle</a>      2963 Zend/zend_vm_execute.h 						if (!file_handle.opened_path) {</span>
+<span class='curline'><a href='../S/1748.html#L2964'>file_handle</a>      2964 Zend/zend_vm_execute.h 							file_handle.opened_path = estrdup(resolved_path);</span>
+<span class='curline'><a href='../S/1748.html#L2967'>file_handle</a>      2967 Zend/zend_vm_execute.h 						if (zend_hash_add_empty_element(&amp;EG(included_files), file_handle.opened_path, strlen(file_handle.opened_path)+1)==SUCCESS) {</span>
+<span class='curline'><a href='../S/1748.html#L2968'>file_handle</a>      2968 Zend/zend_vm_execute.h 							new_op_array = zend_compile_file(&amp;file_handle, (opline-&gt;extended_value==ZEND_INCLUDE_ONCE?ZEND_INCLUDE:ZEND_REQUIRE) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L2969'>file_handle</a>      2969 Zend/zend_vm_execute.h 							zend_destroy_file_handle(&amp;file_handle TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L2971'>file_handle</a>      2971 Zend/zend_vm_execute.h 							zend_file_handle_dtor(&amp;file_handle TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L8315'>file_handle</a>      8315 Zend/zend_vm_execute.h 					zend_file_handle file_handle;</span>
+<span class='curline'><a href='../S/1748.html#L8327'>file_handle</a>      8327 Zend/zend_vm_execute.h 					} else if (SUCCESS == zend_stream_open(resolved_path, &amp;file_handle TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/1748.html#L8329'>file_handle</a>      8329 Zend/zend_vm_execute.h 						if (!file_handle.opened_path) {</span>
+<span class='curline'><a href='../S/1748.html#L8330'>file_handle</a>      8330 Zend/zend_vm_execute.h 							file_handle.opened_path = estrdup(resolved_path);</span>
+<span class='curline'><a href='../S/1748.html#L8333'>file_handle</a>      8333 Zend/zend_vm_execute.h 						if (zend_hash_add_empty_element(&amp;EG(included_files), file_handle.opened_path, strlen(file_handle.opened_path)+1)==SUCCESS) {</span>
+<span class='curline'><a href='../S/1748.html#L8334'>file_handle</a>      8334 Zend/zend_vm_execute.h 							new_op_array = zend_compile_file(&amp;file_handle, (opline-&gt;extended_value==ZEND_INCLUDE_ONCE?ZEND_INCLUDE:ZEND_REQUIRE) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L8335'>file_handle</a>      8335 Zend/zend_vm_execute.h 							zend_destroy_file_handle(&amp;file_handle TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L8337'>file_handle</a>      8337 Zend/zend_vm_execute.h 							zend_file_handle_dtor(&amp;file_handle TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L13684'>file_handle</a>      13684 Zend/zend_vm_execute.h 					zend_file_handle file_handle;</span>
+<span class='curline'><a href='../S/1748.html#L13696'>file_handle</a>      13696 Zend/zend_vm_execute.h 					} else if (SUCCESS == zend_stream_open(resolved_path, &amp;file_handle TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/1748.html#L13698'>file_handle</a>      13698 Zend/zend_vm_execute.h 						if (!file_handle.opened_path) {</span>
+<span class='curline'><a href='../S/1748.html#L13699'>file_handle</a>      13699 Zend/zend_vm_execute.h 							file_handle.opened_path = estrdup(resolved_path);</span>
+<span class='curline'><a href='../S/1748.html#L13702'>file_handle</a>      13702 Zend/zend_vm_execute.h 						if (zend_hash_add_empty_element(&amp;EG(included_files), file_handle.opened_path, strlen(file_handle.opened_path)+1)==SUCCESS) {</span>
+<span class='curline'><a href='../S/1748.html#L13703'>file_handle</a>      13703 Zend/zend_vm_execute.h 							new_op_array = zend_compile_file(&amp;file_handle, (opline-&gt;extended_value==ZEND_INCLUDE_ONCE?ZEND_INCLUDE:ZEND_REQUIRE) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L13704'>file_handle</a>      13704 Zend/zend_vm_execute.h 							zend_destroy_file_handle(&amp;file_handle TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L13706'>file_handle</a>      13706 Zend/zend_vm_execute.h 							zend_file_handle_dtor(&amp;file_handle TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L31353'>file_handle</a>      31353 Zend/zend_vm_execute.h 					zend_file_handle file_handle;</span>
+<span class='curline'><a href='../S/1748.html#L31365'>file_handle</a>      31365 Zend/zend_vm_execute.h 					} else if (SUCCESS == zend_stream_open(resolved_path, &amp;file_handle TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/1748.html#L31367'>file_handle</a>      31367 Zend/zend_vm_execute.h 						if (!file_handle.opened_path) {</span>
+<span class='curline'><a href='../S/1748.html#L31368'>file_handle</a>      31368 Zend/zend_vm_execute.h 							file_handle.opened_path = estrdup(resolved_path);</span>
+<span class='curline'><a href='../S/1748.html#L31371'>file_handle</a>      31371 Zend/zend_vm_execute.h 						if (zend_hash_add_empty_element(&amp;EG(included_files), file_handle.opened_path, strlen(file_handle.opened_path)+1)==SUCCESS) {</span>
+<span class='curline'><a href='../S/1748.html#L31372'>file_handle</a>      31372 Zend/zend_vm_execute.h 							new_op_array = zend_compile_file(&amp;file_handle, (opline-&gt;extended_value==ZEND_INCLUDE_ONCE?ZEND_INCLUDE:ZEND_REQUIRE) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L31373'>file_handle</a>      31373 Zend/zend_vm_execute.h 							zend_destroy_file_handle(&amp;file_handle TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L31375'>file_handle</a>      31375 Zend/zend_vm_execute.h 							zend_file_handle_dtor(&amp;file_handle TSRMLS_CC);</span>
+<span class='curline'><a href='../S/863.html#L107'>file_handle</a>       107 ext/opcache/ZendAccelerator.c static zend_op_array *(*accelerator_orig_compile_file)(zend_file_handle *file_handle, int type TSRMLS_DC);</span>
+<span class='curline'><a href='../S/863.html#L687'>file_handle</a>       687 ext/opcache/ZendAccelerator.c static accel_time_t zend_get_file_handle_timestamp_win(zend_file_handle *file_handle, size_t *size)</span>
+<span class='curline'><a href='../S/863.html#L693'>file_handle</a>       693 ext/opcache/ZendAccelerator.c 	if (!file_handle-&gt;opened_path) {</span>
+<span class='curline'><a href='../S/863.html#L712'>file_handle</a>       712 ext/opcache/ZendAccelerator.c 	if (GetFileAttributesEx(file_handle-&gt;opened_path, GetFileExInfoStandard, &amp;fdata) != 0) {</span>
+<span class='curline'><a href='../S/863.html#L731'>file_handle</a>       731 ext/opcache/ZendAccelerator.c static accel_time_t zend_get_file_handle_timestamp(zend_file_handle *file_handle, size_t *size TSRMLS_DC)</span>
+<span class='curline'><a href='../S/863.html#L740'>file_handle</a>       740 ext/opcache/ZendAccelerator.c 	    file_handle-&gt;filename == SG(request_info).path_translated) {</span>
+<span class='curline'><a href='../S/863.html#L753'>file_handle</a>       753 ext/opcache/ZendAccelerator.c 	res = zend_get_file_handle_timestamp_win(file_handle, size);</span>
+<span class='curline'><a href='../S/863.html#L759'>file_handle</a>       759 ext/opcache/ZendAccelerator.c 	switch (file_handle-&gt;type) {</span>
+<span class='curline'><a href='../S/863.html#L761'>file_handle</a>       761 ext/opcache/ZendAccelerator.c 			if (fstat(file_handle-&gt;handle.fd, &amp;statbuf) == -1) {</span>
+<span class='curline'><a href='../S/863.html#L766'>file_handle</a>       766 ext/opcache/ZendAccelerator.c 			if (fstat(fileno(file_handle-&gt;handle.fp), &amp;statbuf) == -1) {</span>
+<span class='curline'><a href='../S/863.html#L767'>file_handle</a>       767 ext/opcache/ZendAccelerator.c 				if (zend_get_stream_timestamp(file_handle-&gt;filename, &amp;statbuf TSRMLS_CC) != SUCCESS) {</span>
+<span class='curline'><a href='../S/863.html#L777'>file_handle</a>       777 ext/opcache/ZendAccelerator.c 				char *file_path = file_handle-&gt;opened_path;</span>
+<span class='curline'><a href='../S/863.html#L790'>file_handle</a>       790 ext/opcache/ZendAccelerator.c 				if (zend_get_stream_timestamp(file_handle-&gt;filename, &amp;statbuf TSRMLS_CC) != SUCCESS) {</span>
+<span class='curline'><a href='../S/863.html#L797'>file_handle</a>       797 ext/opcache/ZendAccelerator.c 				php_stream *stream = (php_stream *)file_handle-&gt;handle.stream.handle;</span>
+<span class='curline'><a href='../S/863.html#L833'>file_handle</a>       833 ext/opcache/ZendAccelerator.c static inline int do_validate_timestamps(zend_persistent_script *persistent_script, zend_file_handle *file_handle TSRMLS_DC)</span>
+<span class='curline'><a href='../S/863.html#L842'>file_handle</a>       842 ext/opcache/ZendAccelerator.c 	if (file_handle-&gt;opened_path) {</span>
+<span class='curline'><a href='../S/863.html#L843'>file_handle</a>       843 ext/opcache/ZendAccelerator.c 		if (strcmp(persistent_script-&gt;full_path, file_handle-&gt;opened_path) != 0) {</span>
+<span class='curline'><a href='../S/863.html#L848'>file_handle</a>       848 ext/opcache/ZendAccelerator.c 		full_path_ptr = accel_php_resolve_path(file_handle-&gt;filename, strlen(file_handle-&gt;filename), ZCG(include_path) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/863.html#L850'>file_handle</a>       850 ext/opcache/ZendAccelerator.c 		full_path_ptr = accelerator_orig_zend_resolve_path(file_handle-&gt;filename, strlen(file_handle-&gt;filename) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/863.html#L856'>file_handle</a>       856 ext/opcache/ZendAccelerator.c 		file_handle-&gt;opened_path = full_path_ptr;</span>
+<span class='curline'><a href='../S/863.html#L862'>file_handle</a>       862 ext/opcache/ZendAccelerator.c 			file_handle-&gt;opened_path = NULL;</span>
+<span class='curline'><a href='../S/863.html#L867'>file_handle</a>       867 ext/opcache/ZendAccelerator.c 	if (zend_get_file_handle_timestamp(file_handle, NULL TSRMLS_CC) == persistent_script-&gt;timestamp) {</span>
+<span class='curline'><a href='../S/863.html#L870'>file_handle</a>       870 ext/opcache/ZendAccelerator.c 			file_handle-&gt;opened_path = NULL;</span>
+<span class='curline'><a href='../S/863.html#L876'>file_handle</a>       876 ext/opcache/ZendAccelerator.c 		file_handle-&gt;opened_path = NULL;</span>
+<span class='curline'><a href='../S/863.html#L890'>file_handle</a>       890 ext/opcache/ZendAccelerator.c int validate_timestamp_and_record(zend_persistent_script *persistent_script, zend_file_handle *file_handle TSRMLS_DC)</span>
+<span class='curline'><a href='../S/863.html#L895'>file_handle</a>       895 ext/opcache/ZendAccelerator.c 	} else if (do_validate_timestamps(persistent_script, file_handle TSRMLS_CC) == FAILURE) {</span>
+<span class='curline'><a href='../S/863.html#L929'>file_handle</a>       929 ext/opcache/ZendAccelerator.c char *accel_make_persistent_key_ex(zend_file_handle *file_handle, int path_length, int *key_len TSRMLS_DC)</span>
+<span class='curline'><a href='../S/863.html#L935'>file_handle</a>       935 ext/opcache/ZendAccelerator.c         !IS_ABSOLUTE_PATH(file_handle-&gt;filename, path_length) &amp;&amp;</span>
+<span class='curline'><a href='../S/863.html#L936'>file_handle</a>       936 ext/opcache/ZendAccelerator.c         !is_stream_path(file_handle-&gt;filename)) {</span>
+<span class='curline'><a href='../S/863.html#L947'>file_handle</a>       947 ext/opcache/ZendAccelerator.c             zend_accel_error(ACCEL_LOG_INFO, "getcwd() failed for '%s' (%d), please try to set opcache.use_cwd to 0 in ini file", file_handle-&gt;filename, errno);</span>
+<span class='curline'><a href='../S/863.html#L948'>file_handle</a>       948 ext/opcache/ZendAccelerator.c             if (file_handle-&gt;opened_path) {</span>
+<span class='curline'><a href='../S/863.html#L949'>file_handle</a>       949 ext/opcache/ZendAccelerator.c                 cwd = file_handle-&gt;opened_path;</span>
+<span class='curline'><a href='../S/863.html#L1027'>file_handle</a>      1027 ext/opcache/ZendAccelerator.c 		memcpy(ZCG(key) + cwd_len + 1, file_handle-&gt;filename, path_length);</span>
+<span class='curline'><a href='../S/863.html#L1048'>file_handle</a>      1048 ext/opcache/ZendAccelerator.c 		memcpy(ZCG(key), file_handle-&gt;filename, key_length + 1);</span>
+<span class='curline'><a href='../S/863.html#L1055'>file_handle</a>      1055 ext/opcache/ZendAccelerator.c static inline char *accel_make_persistent_key(zend_file_handle *file_handle, int *key_len TSRMLS_DC)</span>
+<span class='curline'><a href='../S/863.html#L1057'>file_handle</a>      1057 ext/opcache/ZendAccelerator.c 	return accel_make_persistent_key_ex(file_handle, strlen(file_handle-&gt;filename), key_len TSRMLS_CC);</span>
+<span class='curline'><a href='../S/863.html#L1081'>file_handle</a>      1081 ext/opcache/ZendAccelerator.c 		zend_file_handle file_handle;</span>
+<span class='curline'><a href='../S/863.html#L1083'>file_handle</a>      1083 ext/opcache/ZendAccelerator.c 		file_handle.type = ZEND_HANDLE_FILENAME;</span>
+<span class='curline'><a href='../S/863.html#L1084'>file_handle</a>      1084 ext/opcache/ZendAccelerator.c 		file_handle.filename = realpath;</span>
+<span class='curline'><a href='../S/863.html#L1085'>file_handle</a>      1085 ext/opcache/ZendAccelerator.c 		file_handle.opened_path = realpath;</span>
+<span class='curline'><a href='../S/863.html#L1089'>file_handle</a>      1089 ext/opcache/ZendAccelerator.c 			do_validate_timestamps(persistent_script, &amp;file_handle TSRMLS_CC) == FAILURE) {</span>
+<span class='curline'><a href='../S/863.html#L1292'>file_handle</a>      1292 ext/opcache/ZendAccelerator.c static zend_persistent_script *compile_and_cache_file(zend_file_handle *file_handle, int type, char *key, unsigned int key_length, zend_op_array **op_array_p, int *from_shared_memory TSRMLS_DC)</span>
+<span class='curline'><a href='../S/863.html#L1306'>file_handle</a>      1306 ext/opcache/ZendAccelerator.c     if (file_handle-&gt;type == ZEND_HANDLE_FILENAME) {</span>
+<span class='curline'><a href='../S/863.html#L1307'>file_handle</a>      1307 ext/opcache/ZendAccelerator.c         if (accelerator_orig_zend_stream_open_function(file_handle-&gt;filename, file_handle TSRMLS_CC) == SUCCESS) {</span>
+<span class='curline'><a href='../S/863.html#L1316'>file_handle</a>      1316 ext/opcache/ZendAccelerator.c 				zend_message_dispatcher(ZMSG_FAILED_REQUIRE_FOPEN, file_handle-&gt;filename);</span>
+<span class='curline'><a href='../S/863.html#L1318'>file_handle</a>      1318 ext/opcache/ZendAccelerator.c 				zend_message_dispatcher(ZMSG_FAILED_REQUIRE_FOPEN, file_handle-&gt;filename TSRMLS_CC);</span>
+<span class='curline'><a href='../S/863.html#L1323'>file_handle</a>      1323 ext/opcache/ZendAccelerator.c 				zend_message_dispatcher(ZMSG_FAILED_INCLUDE_FOPEN, file_handle-&gt;filename);</span>
+<span class='curline'><a href='../S/863.html#L1325'>file_handle</a>      1325 ext/opcache/ZendAccelerator.c 				zend_message_dispatcher(ZMSG_FAILED_INCLUDE_FOPEN, file_handle-&gt;filename TSRMLS_CC);</span>
+<span class='curline'><a href='../S/863.html#L1333'>file_handle</a>      1333 ext/opcache/ZendAccelerator.c 	if (file_handle-&gt;opened_path &amp;&amp; zend_accel_blacklist_is_blacklisted(&amp;accel_blacklist, file_handle-&gt;opened_path)) {</span>
+<span class='curline'><a href='../S/863.html#L1335'>file_handle</a>      1335 ext/opcache/ZendAccelerator.c 		*op_array_p = accelerator_orig_compile_file(file_handle, type TSRMLS_CC);</span>
+<span class='curline'><a href='../S/863.html#L1347'>file_handle</a>      1347 ext/opcache/ZendAccelerator.c 		timestamp = zend_get_file_handle_timestamp(file_handle, ZCG(accel_directives).max_file_size &gt; 0 ? &amp;size : NULL TSRMLS_CC);</span>
+<span class='curline'><a href='../S/863.html#L1353'>file_handle</a>      1353 ext/opcache/ZendAccelerator.c 			*op_array_p = accelerator_orig_compile_file(file_handle, type TSRMLS_CC);</span>
+<span class='curline'><a href='../S/863.html#L1360'>file_handle</a>      1360 ext/opcache/ZendAccelerator.c 			*op_array_p = accelerator_orig_compile_file(file_handle, type TSRMLS_CC);</span>
+<span class='curline'><a href='../S/863.html#L1366'>file_handle</a>      1366 ext/opcache/ZendAccelerator.c 			*op_array_p = accelerator_orig_compile_file(file_handle, type TSRMLS_CC);</span>
+<span class='curline'><a href='../S/863.html#L1392'>file_handle</a>      1392 ext/opcache/ZendAccelerator.c 		op_array = *op_array_p = accelerator_orig_compile_file(file_handle, type TSRMLS_CC);</span>
+<span class='curline'><a href='../S/863.html#L1451'>file_handle</a>      1451 ext/opcache/ZendAccelerator.c 	if (file_handle-&gt;opened_path) {</span>
+<span class='curline'><a href='../S/863.html#L1452'>file_handle</a>      1452 ext/opcache/ZendAccelerator.c 		new_persistent_script-&gt;full_path_len = strlen(file_handle-&gt;opened_path);</span>
+<span class='curline'><a href='../S/863.html#L1453'>file_handle</a>      1453 ext/opcache/ZendAccelerator.c 		new_persistent_script-&gt;full_path = estrndup(file_handle-&gt;opened_path, new_persistent_script-&gt;full_path_len);</span>
+<span class='curline'><a href='../S/863.html#L1455'>file_handle</a>      1455 ext/opcache/ZendAccelerator.c 		new_persistent_script-&gt;full_path_len = strlen(file_handle-&gt;filename);</span>
+<span class='curline'><a href='../S/863.html#L1456'>file_handle</a>      1456 ext/opcache/ZendAccelerator.c 		new_persistent_script-&gt;full_path = estrndup(file_handle-&gt;filename, new_persistent_script-&gt;full_path_len);</span>
+<span class='curline'><a href='../S/863.html#L1465'>file_handle</a>      1465 ext/opcache/ZendAccelerator.c zend_op_array *persistent_compile_file(zend_file_handle *file_handle, int type TSRMLS_DC)</span>
+<span class='curline'><a href='../S/863.html#L1472'>file_handle</a>      1472 ext/opcache/ZendAccelerator.c 	if (!file_handle-&gt;filename ||</span>
+<span class='curline'><a href='../S/863.html#L1477'>file_handle</a>      1477 ext/opcache/ZendAccelerator.c 	    (is_stream_path(file_handle-&gt;filename) &amp;&amp; </span>
+<span class='curline'><a href='../S/863.html#L1478'>file_handle</a>      1478 ext/opcache/ZendAccelerator.c 	     !is_cacheable_stream_path(file_handle-&gt;filename))) {</span>
+<span class='curline'><a href='../S/863.html#L1480'>file_handle</a>      1480 ext/opcache/ZendAccelerator.c 		return accelerator_orig_compile_file(file_handle, type TSRMLS_CC);</span>
+<span class='curline'><a href='../S/863.html#L1497'>file_handle</a>      1497 ext/opcache/ZendAccelerator.c 	     file_handle-&gt;filename == SG(request_info).path_translated &amp;&amp;</span>
+<span class='curline'><a href='../S/863.html#L1510'>file_handle</a>      1510 ext/opcache/ZendAccelerator.c 			return accelerator_orig_compile_file(file_handle, type TSRMLS_CC);</span>
+<span class='curline'><a href='../S/863.html#L1519'>file_handle</a>      1519 ext/opcache/ZendAccelerator.c 		if ((key = accel_make_persistent_key(file_handle, &amp;key_length TSRMLS_CC)) == NULL) {</span>
+<span class='curline'><a href='../S/863.html#L1520'>file_handle</a>      1520 ext/opcache/ZendAccelerator.c 			return accelerator_orig_compile_file(file_handle, type TSRMLS_CC);</span>
+<span class='curline'><a href='../S/863.html#L1528'>file_handle</a>      1528 ext/opcache/ZendAccelerator.c 		    if (file_handle-&gt;type == ZEND_HANDLE_FILENAME &amp;&amp;</span>
+<span class='curline'><a href='../S/863.html#L1530'>file_handle</a>      1530 ext/opcache/ZendAccelerator.c         		accelerator_orig_zend_stream_open_function(file_handle-&gt;filename, file_handle TSRMLS_CC) == FAILURE) {</span>
+<span class='curline'><a href='../S/863.html#L1532'>file_handle</a>      1532 ext/opcache/ZendAccelerator.c 		        zend_stream_open(file_handle-&gt;filename, file_handle TSRMLS_CC) == FAILURE) {</span>
+<span class='curline'><a href='../S/863.html#L1536'>file_handle</a>      1536 ext/opcache/ZendAccelerator.c 					zend_message_dispatcher(ZMSG_FAILED_REQUIRE_FOPEN, file_handle-&gt;filename);</span>
+<span class='curline'><a href='../S/863.html#L1538'>file_handle</a>      1538 ext/opcache/ZendAccelerator.c 					zend_message_dispatcher(ZMSG_FAILED_REQUIRE_FOPEN, file_handle-&gt;filename TSRMLS_CC);</span>
+<span class='curline'><a href='../S/863.html#L1543'>file_handle</a>      1543 ext/opcache/ZendAccelerator.c 					zend_message_dispatcher(ZMSG_FAILED_INCLUDE_FOPEN, file_handle-&gt;filename);</span>
+<span class='curline'><a href='../S/863.html#L1545'>file_handle</a>      1545 ext/opcache/ZendAccelerator.c 					zend_message_dispatcher(ZMSG_FAILED_INCLUDE_FOPEN, file_handle-&gt;filename TSRMLS_CC);</span>
+<span class='curline'><a href='../S/863.html#L1551'>file_handle</a>      1551 ext/opcache/ZendAccelerator.c 			if (file_handle-&gt;opened_path &amp;&amp;</span>
+<span class='curline'><a href='../S/863.html#L1552'>file_handle</a>      1552 ext/opcache/ZendAccelerator.c 			    (bucket = zend_accel_hash_find_entry(&amp;ZCSG(hash), file_handle-&gt;opened_path, strlen(file_handle-&gt;opened_path) + 1)) != NULL) {</span>
+<span class='curline'><a href='../S/863.html#L1579'>file_handle</a>      1579 ext/opcache/ZendAccelerator.c 		if (validate_timestamp_and_record(persistent_script, file_handle TSRMLS_CC) == FAILURE) {</span>
+<span class='curline'><a href='../S/863.html#L1631'>file_handle</a>      1631 ext/opcache/ZendAccelerator.c 			return accelerator_orig_compile_file(file_handle, type TSRMLS_CC);</span>
+<span class='curline'><a href='../S/863.html#L1638'>file_handle</a>      1638 ext/opcache/ZendAccelerator.c 		persistent_script = compile_and_cache_file(file_handle, type, key, key_length, &amp;op_array, &amp;from_shared_memory TSRMLS_CC);</span>
+<span class='curline'><a href='../S/863.html#L1685'>file_handle</a>      1685 ext/opcache/ZendAccelerator.c 		zend_file_handle_dtor(file_handle);</span>
+<span class='curline'><a href='../S/863.html#L1687'>file_handle</a>      1687 ext/opcache/ZendAccelerator.c 		zend_file_handle_dtor(file_handle TSRMLS_CC);</span>
+<span class='curline'><a href='../S/864.html#L334'>file_handle</a>       334 ext/opcache/ZendAccelerator.h int  validate_timestamp_and_record(zend_persistent_script *persistent_script, zend_file_handle *file_handle TSRMLS_DC);</span>
+<span class='curline'><a href='../S/864.html#L340'>file_handle</a>       340 ext/opcache/ZendAccelerator.h char *accel_make_persistent_key_ex(zend_file_handle *file_handle, int path_length, int *key_len TSRMLS_DC);</span>
+<span class='curline'><a href='../S/864.html#L341'>file_handle</a>       341 ext/opcache/ZendAccelerator.h zend_op_array *persistent_compile_file(zend_file_handle *file_handle, int type TSRMLS_DC);</span>
+<span class='curline'><a href='../S/973.html#L3314'>file_handle</a>      3314 ext/phar/phar.c zend_op_array *(*phar_orig_compile_file)(zend_file_handle *file_handle, int type TSRMLS_DC);</span>
+<span class='curline'><a href='../S/973.html#L3322'>file_handle</a>      3322 ext/phar/phar.c static zend_op_array *phar_compile_file(zend_file_handle *file_handle, int type TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/973.html#L3329'>file_handle</a>      3329 ext/phar/phar.c 	if (!file_handle || !file_handle-&gt;filename) {</span>
+<span class='curline'><a href='../S/973.html#L3330'>file_handle</a>      3330 ext/phar/phar.c 		return phar_orig_compile_file(file_handle, type TSRMLS_CC);</span>
+<span class='curline'><a href='../S/973.html#L3332'>file_handle</a>      3332 ext/phar/phar.c 	if (strstr(file_handle-&gt;filename, ".phar") &amp;&amp; !strstr(file_handle-&gt;filename, "://")) {</span>
+<span class='curline'><a href='../S/973.html#L3333'>file_handle</a>      3333 ext/phar/phar.c 		if (SUCCESS == phar_open_from_filename((char*)file_handle-&gt;filename, strlen(file_handle-&gt;filename), NULL, 0, 0, &amp;phar, NULL TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/973.html#L3335'>file_handle</a>      3335 ext/phar/phar.c 				zend_file_handle f = *file_handle;</span>
+<span class='curline'><a href='../S/973.html#L3338'>file_handle</a>      3338 ext/phar/phar.c 				spprintf(&amp;name, 4096, "phar://%s/%s", file_handle-&gt;filename, ".phar/stub.php");</span>
+<span class='curline'><a href='../S/973.html#L3339'>file_handle</a>      3339 ext/phar/phar.c 				if (SUCCESS == phar_orig_zend_open((const char *)name, file_handle TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/973.html#L3342'>file_handle</a>      3342 ext/phar/phar.c 					file_handle-&gt;filename = f.filename;</span>
+<span class='curline'><a href='../S/973.html#L3343'>file_handle</a>      3343 ext/phar/phar.c 					if (file_handle-&gt;opened_path) {</span>
+<span class='curline'><a href='../S/973.html#L3344'>file_handle</a>      3344 ext/phar/phar.c 						efree(file_handle-&gt;opened_path);</span>
+<span class='curline'><a href='../S/973.html#L3346'>file_handle</a>      3346 ext/phar/phar.c 					file_handle-&gt;opened_path = f.opened_path;</span>
+<span class='curline'><a href='../S/973.html#L3347'>file_handle</a>      3347 ext/phar/phar.c 					file_handle-&gt;free_filename = f.free_filename;</span>
+<span class='curline'><a href='../S/973.html#L3349'>file_handle</a>      3349 ext/phar/phar.c 					*file_handle = f;</span>
+<span class='curline'><a href='../S/973.html#L3353'>file_handle</a>      3353 ext/phar/phar.c 				file_handle-&gt;type = ZEND_HANDLE_STREAM;</span>
+<span class='curline'><a href='../S/973.html#L3355'>file_handle</a>      3355 ext/phar/phar.c 				file_handle-&gt;handle.stream.handle  = phar;</span>
+<span class='curline'><a href='../S/973.html#L3356'>file_handle</a>      3356 ext/phar/phar.c 				file_handle-&gt;handle.stream.reader  = phar_zend_stream_reader;</span>
+<span class='curline'><a href='../S/973.html#L3357'>file_handle</a>      3357 ext/phar/phar.c 				file_handle-&gt;handle.stream.closer  = NULL;</span>
+<span class='curline'><a href='../S/973.html#L3358'>file_handle</a>      3358 ext/phar/phar.c 				file_handle-&gt;handle.stream.fsizer  = phar_zend_stream_fsizer;</span>
+<span class='curline'><a href='../S/973.html#L3359'>file_handle</a>      3359 ext/phar/phar.c 				file_handle-&gt;handle.stream.isatty  = 0;</span>
+<span class='curline'><a href='../S/973.html#L3363'>file_handle</a>      3363 ext/phar/phar.c 				memset(&amp;file_handle-&gt;handle.stream.mmap, 0, sizeof(file_handle-&gt;handle.stream.mmap));</span>
+<span class='curline'><a href='../S/973.html#L3371'>file_handle</a>      3371 ext/phar/phar.c 		res = phar_orig_compile_file(file_handle, type TSRMLS_CC);</span>
+<span class='curline'><a href='../S/975.html#L173'>file_handle</a>       173 ext/phar/phar_object.c 	zend_file_handle file_handle;</span>
+<span class='curline'><a href='../S/975.html#L252'>file_handle</a>       252 ext/phar/phar_object.c 			file_handle.type = ZEND_HANDLE_FILENAME;</span>
+<span class='curline'><a href='../S/975.html#L253'>file_handle</a>       253 ext/phar/phar_object.c 			file_handle.handle.fd = 0;</span>
+<span class='curline'><a href='../S/975.html#L254'>file_handle</a>       254 ext/phar/phar_object.c 			file_handle.filename = name;</span>
+<span class='curline'><a href='../S/975.html#L255'>file_handle</a>       255 ext/phar/phar_object.c 			file_handle.opened_path = NULL;</span>
+<span class='curline'><a href='../S/975.html#L256'>file_handle</a>       256 ext/phar/phar_object.c 			file_handle.free_filename = 0;</span>
+<span class='curline'><a href='../S/975.html#L277'>file_handle</a>       277 ext/phar/phar_object.c 				new_op_array = zend_compile_file(&amp;file_handle, ZEND_REQUIRE TSRMLS_CC);</span>
+<span class='curline'><a href='../S/975.html#L283'>file_handle</a>       283 ext/phar/phar_object.c 				zend_destroy_file_handle(&amp;file_handle TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1045.html#L258'>file_handle</a>       258 ext/spl/php_spl.c 	zend_file_handle file_handle;</span>
+<span class='curline'><a href='../S/1045.html#L276'>file_handle</a>       276 ext/spl/php_spl.c 	ret = php_stream_open_for_zend_ex(class_file, &amp;file_handle, USE_PATH|STREAM_OPEN_FOR_INCLUDE TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1045.html#L279'>file_handle</a>       279 ext/spl/php_spl.c 		if (!file_handle.opened_path) {</span>
+<span class='curline'><a href='../S/1045.html#L280'>file_handle</a>       280 ext/spl/php_spl.c 			file_handle.opened_path = estrndup(class_file, class_file_len);</span>
+<span class='curline'><a href='../S/1045.html#L282'>file_handle</a>       282 ext/spl/php_spl.c 		if (zend_hash_add(&amp;EG(included_files), file_handle.opened_path, strlen(file_handle.opened_path)+1, (void *)&amp;dummy, sizeof(int), NULL)==SUCCESS) {</span>
+<span class='curline'><a href='../S/1045.html#L283'>file_handle</a>       283 ext/spl/php_spl.c 			new_op_array = zend_compile_file(&amp;file_handle, ZEND_REQUIRE TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1045.html#L284'>file_handle</a>       284 ext/spl/php_spl.c 			zend_destroy_file_handle(&amp;file_handle TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1045.html#L287'>file_handle</a>       287 ext/spl/php_spl.c 			zend_file_handle_dtor(&amp;file_handle TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1077.html#L5224'>file_handle</a>      5224 ext/standard/basic_functions.c 	zend_file_handle file_handle = {0};</span>
+<span class='curline'><a href='../S/1077.html#L5232'>file_handle</a>      5232 ext/standard/basic_functions.c 	file_handle.type = ZEND_HANDLE_FILENAME;</span>
+<span class='curline'><a href='../S/1077.html#L5233'>file_handle</a>      5233 ext/standard/basic_functions.c 	file_handle.filename = filename;</span>
+<span class='curline'><a href='../S/1077.html#L5234'>file_handle</a>      5234 ext/standard/basic_functions.c 	file_handle.free_filename = 0;</span>
+<span class='curline'><a href='../S/1077.html#L5235'>file_handle</a>      5235 ext/standard/basic_functions.c 	file_handle.opened_path = NULL;</span>
+<span class='curline'><a href='../S/1077.html#L5237'>file_handle</a>      5237 ext/standard/basic_functions.c 	if (open_file_for_scanning(&amp;file_handle TSRMLS_CC) == FAILURE) {</span>
+<span class='curline'><a href='../S/1077.html#L5245'>file_handle</a>      5245 ext/standard/basic_functions.c 	zend_destroy_file_handle(&amp;file_handle TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1106.html#L1137'>file_handle</a>      1137 ext/standard/file.c 	zval *file_handle;</span>
+<span class='curline'><a href='../S/1106.html#L1142'>file_handle</a>      1142 ext/standard/file.c 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "rs*", &amp;file_handle, &amp;format, &amp;format_len, &amp;args, &amp;argc) == FAILURE) {</span>
+<span class='curline'><a href='../S/1106.html#L1146'>file_handle</a>      1146 ext/standard/file.c 	what = zend_fetch_resource(&amp;file_handle TSRMLS_CC, -1, "File-Handle", &amp;type, 2, php_file_le_stream(), php_file_le_pstream());</span>
+<span class='curline'><a href='../S/1359.html#L359'>file_handle</a>       359 main/fopen_wrappers.c PHPAPI int php_fopen_primary_script(zend_file_handle *file_handle TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1359.html#L450'>file_handle</a>       450 main/fopen_wrappers.c 	if (zend_stream_open(filename, file_handle TSRMLS_CC) == FAILURE) {</span>
+<span class='curline'><a href='../S/1360.html#L28'>file_handle</a>        28 main/fopen_wrappers.h PHPAPI int php_fopen_primary_script(zend_file_handle *file_handle TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1427.html#L407'>file_handle</a>       407 sapi/aolserver/aolserver.c 	zend_file_handle file_handle;</span>
+<span class='curline'><a href='../S/1427.html#L409'>file_handle</a>       409 sapi/aolserver/aolserver.c 	file_handle.type = ZEND_HANDLE_FILENAME;</span>
+<span class='curline'><a href='../S/1427.html#L410'>file_handle</a>       410 sapi/aolserver/aolserver.c 	file_handle.filename = SG(request_info).path_translated;</span>
+<span class='curline'><a href='../S/1427.html#L411'>file_handle</a>       411 sapi/aolserver/aolserver.c 	file_handle.free_filename = 0;</span>
+<span class='curline'><a href='../S/1427.html#L412'>file_handle</a>       412 sapi/aolserver/aolserver.c 	file_handle.opened_path = NULL;</span>
+<span class='curline'><a href='../S/1427.html#L419'>file_handle</a>       419 sapi/aolserver/aolserver.c 	php_execute_script(&amp;file_handle TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1433.html#L31'>file_handle</a>        31 sapi/apache/sapi_apache.c 	zend_file_handle file_handle;</span>
+<span class='curline'><a href='../S/1433.html#L47'>file_handle</a>        47 sapi/apache/sapi_apache.c 		file_handle.type = ZEND_HANDLE_FILENAME;</span>
+<span class='curline'><a href='../S/1433.html#L48'>file_handle</a>        48 sapi/apache/sapi_apache.c 		file_handle.handle.fd = 0;</span>
+<span class='curline'><a href='../S/1433.html#L49'>file_handle</a>        49 sapi/apache/sapi_apache.c 		file_handle.filename = SG(request_info).path_translated;</span>
+<span class='curline'><a href='../S/1433.html#L50'>file_handle</a>        50 sapi/apache/sapi_apache.c 		file_handle.opened_path = NULL;</span>
+<span class='curline'><a href='../S/1433.html#L51'>file_handle</a>        51 sapi/apache/sapi_apache.c 		file_handle.free_filename = 0;</span>
+<span class='curline'><a href='../S/1433.html#L53'>file_handle</a>        53 sapi/apache/sapi_apache.c 		(void) php_execute_script(&amp;file_handle TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1447.html#L30'>file_handle</a>        30 sapi/apache_hooks/sapi_apache.c 	zend_file_handle file_handle;</span>
+<span class='curline'><a href='../S/1447.html#L48'>file_handle</a>        48 sapi/apache_hooks/sapi_apache.c 		file_handle.type = ZEND_HANDLE_FILENAME;</span>
+<span class='curline'><a href='../S/1447.html#L49'>file_handle</a>        49 sapi/apache_hooks/sapi_apache.c 		file_handle.handle.fd = 0;</span>
+<span class='curline'><a href='../S/1447.html#L50'>file_handle</a>        50 sapi/apache_hooks/sapi_apache.c 		file_handle.filename = SG(request_info).path_translated;</span>
+<span class='curline'><a href='../S/1447.html#L51'>file_handle</a>        51 sapi/apache_hooks/sapi_apache.c 		file_handle.opened_path = NULL;</span>
+<span class='curline'><a href='../S/1447.html#L52'>file_handle</a>        52 sapi/apache_hooks/sapi_apache.c 		file_handle.free_filename = 0;</span>
+<span class='curline'><a href='../S/1447.html#L53'>file_handle</a>        53 sapi/apache_hooks/sapi_apache.c 		(void) php_execute_script(&amp;file_handle TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1447.html#L65'>file_handle</a>        65 sapi/apache_hooks/sapi_apache.c 	zend_file_handle file_handle;</span>
+<span class='curline'><a href='../S/1447.html#L87'>file_handle</a>        87 sapi/apache_hooks/sapi_apache.c 	        memset(&amp;file_handle, 0, sizeof(file_handle));</span>
+<span class='curline'><a href='../S/1447.html#L88'>file_handle</a>        88 sapi/apache_hooks/sapi_apache.c 	        file_handle.type = ZEND_HANDLE_FILENAME;</span>
+<span class='curline'><a href='../S/1447.html#L89'>file_handle</a>        89 sapi/apache_hooks/sapi_apache.c 	        file_handle.filename = handler-&gt;name;</span>
+<span class='curline'><a href='../S/1447.html#L90'>file_handle</a>        90 sapi/apache_hooks/sapi_apache.c 	        (void) php_execute_simple_script(&amp;file_handle, ret TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1448.html#L567'>file_handle</a>       567 sapi/caudium/caudium.c   zend_file_handle file_handle;</span>
+<span class='curline'><a href='../S/1448.html#L642'>file_handle</a>       642 sapi/caudium/caudium.c   file_handle.type = ZEND_HANDLE_FILENAME;</span>
+<span class='curline'><a href='../S/1448.html#L643'>file_handle</a>       643 sapi/caudium/caudium.c   file_handle.filename = THIS-&gt;filename-&gt;str;</span>
+<span class='curline'><a href='../S/1448.html#L644'>file_handle</a>       644 sapi/caudium/caudium.c   file_handle.opened_path = NULL;</span>
+<span class='curline'><a href='../S/1448.html#L645'>file_handle</a>       645 sapi/caudium/caudium.c   file_handle.free_filename = 0;</span>
+<span class='curline'><a href='../S/1448.html#L657'>file_handle</a>       657 sapi/caudium/caudium.c     php_execute_script(&amp;file_handle TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1449.html#L1738'>file_handle</a>      1738 sapi/cgi/cgi_main.c 	zend_file_handle file_handle;</span>
+<span class='curline'><a href='../S/1449.html#L2321'>file_handle</a>      2321 sapi/cgi/cgi_main.c 				file_handle.type = ZEND_HANDLE_FILENAME;</span>
+<span class='curline'><a href='../S/1449.html#L2322'>file_handle</a>      2322 sapi/cgi/cgi_main.c 				file_handle.filename = SG(request_info).path_translated;</span>
+<span class='curline'><a href='../S/1449.html#L2323'>file_handle</a>      2323 sapi/cgi/cgi_main.c 				file_handle.handle.fp = NULL;</span>
+<span class='curline'><a href='../S/1449.html#L2325'>file_handle</a>      2325 sapi/cgi/cgi_main.c 				file_handle.filename = "-";</span>
+<span class='curline'><a href='../S/1449.html#L2326'>file_handle</a>      2326 sapi/cgi/cgi_main.c 				file_handle.type = ZEND_HANDLE_FP;</span>
+<span class='curline'><a href='../S/1449.html#L2327'>file_handle</a>      2327 sapi/cgi/cgi_main.c 				file_handle.handle.fp = stdin;</span>
+<span class='curline'><a href='../S/1449.html#L2330'>file_handle</a>      2330 sapi/cgi/cgi_main.c 			file_handle.opened_path = NULL;</span>
+<span class='curline'><a href='../S/1449.html#L2331'>file_handle</a>      2331 sapi/cgi/cgi_main.c 			file_handle.free_filename = 0;</span>
+<span class='curline'><a href='../S/1449.html#L2354'>file_handle</a>      2354 sapi/cgi/cgi_main.c 				if (php_fopen_primary_script(&amp;file_handle TSRMLS_CC) == FAILURE) {</span>
+<span class='curline'><a href='../S/1449.html#L2392'>file_handle</a>      2392 sapi/cgi/cgi_main.c 				switch (file_handle.type) {</span>
+<span class='curline'><a href='../S/1449.html#L2394'>file_handle</a>      2394 sapi/cgi/cgi_main.c 						if (file_handle.handle.fd &lt; 0) {</span>
+<span class='curline'><a href='../S/1449.html#L2397'>file_handle</a>      2397 sapi/cgi/cgi_main.c 						file_handle.type = ZEND_HANDLE_FP;</span>
+<span class='curline'><a href='../S/1449.html#L2398'>file_handle</a>      2398 sapi/cgi/cgi_main.c 						file_handle.handle.fp = fdopen(file_handle.handle.fd, "rb");</span>
+<span class='curline'><a href='../S/1449.html#L2401'>file_handle</a>      2401 sapi/cgi/cgi_main.c 						if (!file_handle.handle.fp ||</span>
+<span class='curline'><a href='../S/1449.html#L2402'>file_handle</a>      2402 sapi/cgi/cgi_main.c 						    (file_handle.handle.fp == stdin)) {</span>
+<span class='curline'><a href='../S/1449.html#L2405'>file_handle</a>      2405 sapi/cgi/cgi_main.c 						c = fgetc(file_handle.handle.fp);</span>
+<span class='curline'><a href='../S/1449.html#L2408'>file_handle</a>      2408 sapi/cgi/cgi_main.c 								c = fgetc(file_handle.handle.fp);	/* skip to end of line */</span>
+<span class='curline'><a href='../S/1449.html#L2412'>file_handle</a>      2412 sapi/cgi/cgi_main.c 								if (fgetc(file_handle.handle.fp) != '\n') {</span>
+<span class='curline'><a href='../S/1449.html#L2413'>file_handle</a>      2413 sapi/cgi/cgi_main.c 									long pos = ftell(file_handle.handle.fp);</span>
+<span class='curline'><a href='../S/1449.html#L2414'>file_handle</a>      2414 sapi/cgi/cgi_main.c 									fseek(file_handle.handle.fp, pos - 1, SEEK_SET);</span>
+<span class='curline'><a href='../S/1449.html#L2419'>file_handle</a>      2419 sapi/cgi/cgi_main.c 							rewind(file_handle.handle.fp);</span>
+<span class='curline'><a href='../S/1449.html#L2423'>file_handle</a>      2423 sapi/cgi/cgi_main.c 						c = php_stream_getc((php_stream*)file_handle.handle.stream.handle);</span>
+<span class='curline'><a href='../S/1449.html#L2426'>file_handle</a>      2426 sapi/cgi/cgi_main.c 								c = php_stream_getc((php_stream*)file_handle.handle.stream.handle);	/* skip to end of line */</span>
+<span class='curline'><a href='../S/1449.html#L2430'>file_handle</a>      2430 sapi/cgi/cgi_main.c 								if (php_stream_getc((php_stream*)file_handle.handle.stream.handle) != '\n') {</span>
+<span class='curline'><a href='../S/1449.html#L2431'>file_handle</a>      2431 sapi/cgi/cgi_main.c 									long pos = php_stream_tell((php_stream*)file_handle.handle.stream.handle);</span>
+<span class='curline'><a href='../S/1449.html#L2432'>file_handle</a>      2432 sapi/cgi/cgi_main.c 									php_stream_seek((php_stream*)file_handle.handle.stream.handle, pos - 1, SEEK_SET);</span>
+<span class='curline'><a href='../S/1449.html#L2437'>file_handle</a>      2437 sapi/cgi/cgi_main.c 							php_stream_rewind((php_stream*)file_handle.handle.stream.handle);</span>
+<span class='curline'><a href='../S/1449.html#L2441'>file_handle</a>      2441 sapi/cgi/cgi_main.c 						if (file_handle.handle.stream.mmap.buf[0] == '#') {</span>
+<span class='curline'><a href='../S/1449.html#L2444'>file_handle</a>      2444 sapi/cgi/cgi_main.c 						    c = file_handle.handle.stream.mmap.buf[i++];</span>
+<span class='curline'><a href='../S/1449.html#L2445'>file_handle</a>      2445 sapi/cgi/cgi_main.c 							while (c != '\n' &amp;&amp; c != '\r' &amp;&amp; i &lt; file_handle.handle.stream.mmap.len) {</span>
+<span class='curline'><a href='../S/1449.html#L2446'>file_handle</a>      2446 sapi/cgi/cgi_main.c 								c = file_handle.handle.stream.mmap.buf[i++];</span>
+<span class='curline'><a href='../S/1449.html#L2449'>file_handle</a>      2449 sapi/cgi/cgi_main.c 								if (i &lt; file_handle.handle.stream.mmap.len &amp;&amp; file_handle.handle.stream.mmap.buf[i] == '\n') {</span>
+<span class='curline'><a href='../S/1449.html#L2453'>file_handle</a>      2453 sapi/cgi/cgi_main.c 							if(i &gt; file_handle.handle.stream.mmap.len) {</span>
+<span class='curline'><a href='../S/1449.html#L2454'>file_handle</a>      2454 sapi/cgi/cgi_main.c 								i = file_handle.handle.stream.mmap.len;</span>
+<span class='curline'><a href='../S/1449.html#L2456'>file_handle</a>      2456 sapi/cgi/cgi_main.c 							file_handle.handle.stream.mmap.buf += i;</span>
+<span class='curline'><a href='../S/1449.html#L2457'>file_handle</a>      2457 sapi/cgi/cgi_main.c 							file_handle.handle.stream.mmap.len -= i;</span>
+<span class='curline'><a href='../S/1449.html#L2467'>file_handle</a>      2467 sapi/cgi/cgi_main.c 					php_execute_script(&amp;file_handle TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1449.html#L2471'>file_handle</a>      2471 sapi/cgi/cgi_main.c 					exit_status = php_lint_script(&amp;file_handle TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1449.html#L2473'>file_handle</a>      2473 sapi/cgi/cgi_main.c 						zend_printf("No syntax errors detected in %s\n", file_handle.filename);</span>
+<span class='curline'><a href='../S/1449.html#L2475'>file_handle</a>      2475 sapi/cgi/cgi_main.c 						zend_printf("Errors parsing %s\n", file_handle.filename);</span>
+<span class='curline'><a href='../S/1449.html#L2479'>file_handle</a>      2479 sapi/cgi/cgi_main.c 					if (open_file_for_scanning(&amp;file_handle TSRMLS_CC) == SUCCESS) {</span>
+<span class='curline'><a href='../S/1449.html#L2481'>file_handle</a>      2481 sapi/cgi/cgi_main.c 						zend_file_handle_dtor(&amp;file_handle TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1449.html#L2490'>file_handle</a>      2490 sapi/cgi/cgi_main.c 						if (open_file_for_scanning(&amp;file_handle TSRMLS_CC) == SUCCESS) {</span>
+<span class='curline'><a href='../S/1449.html#L2496'>file_handle</a>      2496 sapi/cgi/cgi_main.c 							zend_file_handle_dtor(&amp;file_handle TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1449.html#L2505'>file_handle</a>      2505 sapi/cgi/cgi_main.c 					open_file_for_scanning(&amp;file_handle TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1449.html#L2507'>file_handle</a>      2507 sapi/cgi/cgi_main.c 					zend_file_handle_dtor(&amp;file_handle TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1454.html#L622'>file_handle</a>       622 sapi/cli/php_cli.c static int cli_seek_file_begin(zend_file_handle *file_handle, char *script_file, int *lineno TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1454.html#L628'>file_handle</a>       628 sapi/cli/php_cli.c 	file_handle-&gt;type = ZEND_HANDLE_FP;</span>
+<span class='curline'><a href='../S/1454.html#L629'>file_handle</a>       629 sapi/cli/php_cli.c 	file_handle-&gt;opened_path = NULL;</span>
+<span class='curline'><a href='../S/1454.html#L630'>file_handle</a>       630 sapi/cli/php_cli.c 	file_handle-&gt;free_filename = 0;</span>
+<span class='curline'><a href='../S/1454.html#L631'>file_handle</a>       631 sapi/cli/php_cli.c 	if (!(file_handle-&gt;handle.fp = VCWD_FOPEN(script_file, "rb"))) {</span>
+<span class='curline'><a href='../S/1454.html#L635'>file_handle</a>       635 sapi/cli/php_cli.c 	file_handle-&gt;filename = script_file;</span>
+<span class='curline'><a href='../S/1454.html#L638'>file_handle</a>       638 sapi/cli/php_cli.c 	c = fgetc(file_handle-&gt;handle.fp);</span>
+<span class='curline'><a href='../S/1454.html#L639'>file_handle</a>       639 sapi/cli/php_cli.c 	if (c == '#' &amp;&amp; (c = fgetc(file_handle-&gt;handle.fp)) == '!') {</span>
+<span class='curline'><a href='../S/1454.html#L641'>file_handle</a>       641 sapi/cli/php_cli.c 			c = fgetc(file_handle-&gt;handle.fp);	/* skip to end of line */</span>
+<span class='curline'><a href='../S/1454.html#L645'>file_handle</a>       645 sapi/cli/php_cli.c 			if (fgetc(file_handle-&gt;handle.fp) != '\n') {</span>
+<span class='curline'><a href='../S/1454.html#L646'>file_handle</a>       646 sapi/cli/php_cli.c 				long pos = ftell(file_handle-&gt;handle.fp);</span>
+<span class='curline'><a href='../S/1454.html#L647'>file_handle</a>       647 sapi/cli/php_cli.c 				fseek(file_handle-&gt;handle.fp, pos - 1, SEEK_SET);</span>
+<span class='curline'><a href='../S/1454.html#L652'>file_handle</a>       652 sapi/cli/php_cli.c 		rewind(file_handle-&gt;handle.fp);</span>
+<span class='curline'><a href='../S/1454.html#L662'>file_handle</a>       662 sapi/cli/php_cli.c 	zend_file_handle file_handle;</span>
+<span class='curline'><a href='../S/1454.html#L934'>file_handle</a>       934 sapi/cli/php_cli.c 			if (cli_seek_file_begin(&amp;file_handle, script_file, &amp;lineno TSRMLS_CC) != SUCCESS) {</span>
+<span class='curline'><a href='../S/1454.html#L948'>file_handle</a>       948 sapi/cli/php_cli.c 			file_handle.filename = "-";</span>
+<span class='curline'><a href='../S/1454.html#L949'>file_handle</a>       949 sapi/cli/php_cli.c 			file_handle.handle.fp = stdin;</span>
+<span class='curline'><a href='../S/1454.html#L951'>file_handle</a>       951 sapi/cli/php_cli.c 		file_handle.type = ZEND_HANDLE_FP;</span>
+<span class='curline'><a href='../S/1454.html#L952'>file_handle</a>       952 sapi/cli/php_cli.c 		file_handle.opened_path = NULL;</span>
+<span class='curline'><a href='../S/1454.html#L953'>file_handle</a>       953 sapi/cli/php_cli.c 		file_handle.free_filename = 0;</span>
+<span class='curline'><a href='../S/1454.html#L954'>file_handle</a>       954 sapi/cli/php_cli.c 		php_self = (char*)file_handle.filename;</span>
+<span class='curline'><a href='../S/1454.html#L961'>file_handle</a>       961 sapi/cli/php_cli.c 		SG(request_info).path_translated = translated_path? translated_path: (char*)file_handle.filename;</span>
+<span class='curline'><a href='../S/1454.html#L962'>file_handle</a>       962 sapi/cli/php_cli.c 		argv[php_optind-1] = (char*)file_handle.filename;</span>
+<span class='curline'><a href='../S/1454.html#L967'>file_handle</a>       967 sapi/cli/php_cli.c 			fclose(file_handle.handle.fp);</span>
+<span class='curline'><a href='../S/1454.html#L987'>file_handle</a>       987 sapi/cli/php_cli.c 			if (strcmp(file_handle.filename, "-")) {</span>
+<span class='curline'><a href='../S/1454.html#L994'>file_handle</a>       994 sapi/cli/php_cli.c 				php_execute_script(&amp;file_handle TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1454.html#L999'>file_handle</a>       999 sapi/cli/php_cli.c 			exit_status = php_lint_script(&amp;file_handle TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1454.html#L1001'>file_handle</a>      1001 sapi/cli/php_cli.c 				zend_printf("No syntax errors detected in %s\n", file_handle.filename);</span>
+<span class='curline'><a href='../S/1454.html#L1003'>file_handle</a>      1003 sapi/cli/php_cli.c 				zend_printf("Errors parsing %s\n", file_handle.filename);</span>
+<span class='curline'><a href='../S/1454.html#L1007'>file_handle</a>      1007 sapi/cli/php_cli.c 			if (open_file_for_scanning(&amp;file_handle TSRMLS_CC)==SUCCESS) {</span>
+<span class='curline'><a href='../S/1454.html#L1016'>file_handle</a>      1016 sapi/cli/php_cli.c 				if (open_file_for_scanning(&amp;file_handle TSRMLS_CC)==SUCCESS) {</span>
+<span class='curline'><a href='../S/1454.html#L1026'>file_handle</a>      1026 sapi/cli/php_cli.c 			open_file_for_scanning(&amp;file_handle TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1454.html#L1028'>file_handle</a>      1028 sapi/cli/php_cli.c 			zend_file_handle_dtor(file_handle.handle TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1454.html#L1073'>file_handle</a>      1073 sapi/cli/php_cli.c 							if (cli_seek_file_begin(&amp;file_handle, script_file, &amp;lineno TSRMLS_CC) != SUCCESS) {</span>
+<span class='curline'><a href='../S/1454.html#L1077'>file_handle</a>      1077 sapi/cli/php_cli.c 								php_execute_script(&amp;file_handle TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1463.html#L441'>file_handle</a>       441 sapi/continuity/capi.c    zend_file_handle file_handle;</span>
+<span class='curline'><a href='../S/1463.html#L446'>file_handle</a>       446 sapi/continuity/capi.c    file_handle.type = ZEND_HANDLE_FILENAME;</span>
+<span class='curline'><a href='../S/1463.html#L447'>file_handle</a>       447 sapi/continuity/capi.c    file_handle.filename = SG(request_info).path_translated;</span>
+<span class='curline'><a href='../S/1463.html#L448'>file_handle</a>       448 sapi/continuity/capi.c    file_handle.free_filename = 0;</span>
+<span class='curline'><a href='../S/1463.html#L449'>file_handle</a>       449 sapi/continuity/capi.c    file_handle.opened_path = NULL;</span>
+<span class='curline'><a href='../S/1463.html#L451'>file_handle</a>       451 sapi/continuity/capi.c    php_execute_script(&amp;file_handle TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1499.html#L1602'>file_handle</a>      1602 sapi/fpm/fpm/fpm_main.c 	zend_file_handle file_handle;</span>
+<span class='curline'><a href='../S/1499.html#L1968'>file_handle</a>      1968 sapi/fpm/fpm/fpm_main.c 			if (php_fopen_primary_script(&amp;file_handle TSRMLS_CC) == FAILURE) {</span>
+<span class='curline'><a href='../S/1499.html#L1989'>file_handle</a>      1989 sapi/fpm/fpm/fpm_main.c 			php_execute_script(&amp;file_handle TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1534.html#L835'>file_handle</a>       835 sapi/isapi/php5isapi.c 	zend_file_handle file_handle;</span>
+<span class='curline'><a href='../S/1534.html#L852'>file_handle</a>       852 sapi/isapi/php5isapi.c 			file_handle.filename = SG(request_info).path_translated;</span>
+<span class='curline'><a href='../S/1534.html#L853'>file_handle</a>       853 sapi/isapi/php5isapi.c 			file_handle.free_filename = 0;</span>
+<span class='curline'><a href='../S/1534.html#L854'>file_handle</a>       854 sapi/isapi/php5isapi.c 			file_handle.type = ZEND_HANDLE_FILENAME;</span>
+<span class='curline'><a href='../S/1534.html#L855'>file_handle</a>       855 sapi/isapi/php5isapi.c 			file_handle.opened_path = NULL;</span>
+<span class='curline'><a href='../S/1534.html#L858'>file_handle</a>       858 sapi/isapi/php5isapi.c 			if (file_handle.filename)</span>
+<span class='curline'><a href='../S/1534.html#L859'>file_handle</a>       859 sapi/isapi/php5isapi.c 				retval = php_fopen_primary_script(&amp;file_handle TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1534.html#L861'>file_handle</a>       861 sapi/isapi/php5isapi.c 			if (!file_handle.filename || retval == FAILURE) {</span>
+<span class='curline'><a href='../S/1534.html#L865'>file_handle</a>       865 sapi/isapi/php5isapi.c 				php_execute_script(&amp;file_handle TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1537.html#L513'>file_handle</a>       513 sapi/litespeed/lsapi_main.c static int lsapi_chdir_primary_script( zend_file_handle * file_handle )</span>
+<span class='curline'><a href='../S/1537.html#L522'>file_handle</a>       522 sapi/litespeed/lsapi_main.c     p = strrchr( file_handle-&gt;filename, '/' );</span>
+<span class='curline'><a href='../S/1537.html#L526'>file_handle</a>       526 sapi/litespeed/lsapi_main.c         if ( strcmp( file_handle-&gt;filename, s_cur_chdir ) != 0 ) {</span>
+<span class='curline'><a href='../S/1537.html#L527'>file_handle</a>       527 sapi/litespeed/lsapi_main.c             chdir( file_handle-&gt;filename );</span>
+<span class='curline'><a href='../S/1537.html#L533'>file_handle</a>       533 sapi/litespeed/lsapi_main.c              ( strcmp( file_handle-&gt;filename, CWDG(cwd).cwd ) != 0 ) ) {</span>
+<span class='curline'><a href='../S/1537.html#L534'>file_handle</a>       534 sapi/litespeed/lsapi_main.c             CWDG(cwd).cwd_length = p - file_handle-&gt;filename;</span>
+<span class='curline'><a href='../S/1537.html#L536'>file_handle</a>       536 sapi/litespeed/lsapi_main.c             memmove( CWDG(cwd).cwd, file_handle-&gt;filename, CWDG(cwd).cwd_length+1 );</span>
+<span class='curline'><a href='../S/1537.html#L542'>file_handle</a>       542 sapi/litespeed/lsapi_main.c     VCWD_CHDIR_FILE( file_handle-&gt;filename );</span>
+<span class='curline'><a href='../S/1537.html#L547'>file_handle</a>       547 sapi/litespeed/lsapi_main.c static int lsapi_fopen_primary_script( zend_file_handle * file_handle )</span>
+<span class='curline'><a href='../S/1537.html#L556'>file_handle</a>       556 sapi/litespeed/lsapi_main.c     file_handle-&gt;type = ZEND_HANDLE_FP;</span>
+<span class='curline'><a href='../S/1537.html#L557'>file_handle</a>       557 sapi/litespeed/lsapi_main.c     file_handle-&gt;handle.fp = fp;</span>
+<span class='curline'><a href='../S/1537.html#L558'>file_handle</a>       558 sapi/litespeed/lsapi_main.c     file_handle-&gt;filename = SG(request_info).path_translated;</span>
+<span class='curline'><a href='../S/1537.html#L559'>file_handle</a>       559 sapi/litespeed/lsapi_main.c     file_handle-&gt;free_filename = 0;</span>
+<span class='curline'><a href='../S/1537.html#L560'>file_handle</a>       560 sapi/litespeed/lsapi_main.c     file_handle-&gt;opened_path = NULL;</span>
+<span class='curline'><a href='../S/1537.html#L562'>file_handle</a>       562 sapi/litespeed/lsapi_main.c     lsapi_chdir_primary_script( file_handle );</span>
+<span class='curline'><a href='../S/1537.html#L567'>file_handle</a>       567 sapi/litespeed/lsapi_main.c static int lsapi_execute_script( zend_file_handle * file_handle TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1537.html#L571'>file_handle</a>       571 sapi/litespeed/lsapi_main.c     file_handle-&gt;type = ZEND_HANDLE_FILENAME;</span>
+<span class='curline'><a href='../S/1537.html#L572'>file_handle</a>       572 sapi/litespeed/lsapi_main.c     file_handle-&gt;handle.fd = 0;</span>
+<span class='curline'><a href='../S/1537.html#L573'>file_handle</a>       573 sapi/litespeed/lsapi_main.c     file_handle-&gt;filename = SG(request_info).path_translated;</span>
+<span class='curline'><a href='../S/1537.html#L574'>file_handle</a>       574 sapi/litespeed/lsapi_main.c     file_handle-&gt;free_filename = 0;</span>
+<span class='curline'><a href='../S/1537.html#L575'>file_handle</a>       575 sapi/litespeed/lsapi_main.c     file_handle-&gt;opened_path = NULL;</span>
+<span class='curline'><a href='../S/1537.html#L586'>file_handle</a>       586 sapi/litespeed/lsapi_main.c     php_execute_script(file_handle TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1537.html#L594'>file_handle</a>       594 sapi/litespeed/lsapi_main.c     zend_file_handle file_handle = {0};</span>
+<span class='curline'><a href='../S/1537.html#L605'>file_handle</a>       605 sapi/litespeed/lsapi_main.c         lsapi_execute_script( &amp;file_handle TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1537.html#L877'>file_handle</a>       877 sapi/litespeed/lsapi_main.c                 zend_file_handle file_handle = {0};</span>
+<span class='curline'><a href='../S/1537.html#L879'>file_handle</a>       879 sapi/litespeed/lsapi_main.c                 file_handle.type = ZEND_HANDLE_FP;</span>
+<span class='curline'><a href='../S/1537.html#L880'>file_handle</a>       880 sapi/litespeed/lsapi_main.c                 file_handle.handle.fp = VCWD_FOPEN(*p, "rb");</span>
+<span class='curline'><a href='../S/1537.html#L882'>file_handle</a>       882 sapi/litespeed/lsapi_main.c                 if ( file_handle.handle.fp ) {</span>
+<span class='curline'><a href='../S/1537.html#L891'>file_handle</a>       891 sapi/litespeed/lsapi_main.c                         fclose( file_handle.handle.fp );</span>
+<span class='curline'><a href='../S/1537.html#L900'>file_handle</a>       900 sapi/litespeed/lsapi_main.c                             file_handle.filename = *p;</span>
+<span class='curline'><a href='../S/1537.html#L901'>file_handle</a>       901 sapi/litespeed/lsapi_main.c                             file_handle.free_filename = 0;</span>
+<span class='curline'><a href='../S/1537.html#L902'>file_handle</a>       902 sapi/litespeed/lsapi_main.c                             file_handle.opened_path = NULL;</span>
+<span class='curline'><a href='../S/1537.html#L903'>file_handle</a>       903 sapi/litespeed/lsapi_main.c                             ret = php_lint_script(&amp;file_handle TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1537.html#L905'>file_handle</a>       905 sapi/litespeed/lsapi_main.c                                 zend_printf("No syntax errors detected in %s\n", file_handle.filename);</span>
+<span class='curline'><a href='../S/1537.html#L907'>file_handle</a>       907 sapi/litespeed/lsapi_main.c                                 zend_printf("Errors parsing %s\n", file_handle.filename);</span>
+<span class='curline'><a href='../S/1537.html#L911'>file_handle</a>       911 sapi/litespeed/lsapi_main.c                             file_handle.filename = *p;</span>
+<span class='curline'><a href='../S/1537.html#L912'>file_handle</a>       912 sapi/litespeed/lsapi_main.c                             file_handle.free_filename = 0;</span>
+<span class='curline'><a href='../S/1537.html#L913'>file_handle</a>       913 sapi/litespeed/lsapi_main.c                             file_handle.opened_path = NULL;</span>
+<span class='curline'><a href='../S/1537.html#L915'>file_handle</a>       915 sapi/litespeed/lsapi_main.c                             php_execute_script(&amp;file_handle TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1543.html#L113'>file_handle</a>       113 sapi/milter/php_milter.c 	zend_file_handle file_handle;</span>
+<span class='curline'><a href='../S/1543.html#L136'>file_handle</a>       136 sapi/milter/php_milter.c 	if (!(file_handle.handle.fp = VCWD_FOPEN(filename, "rb"))) {</span>
+<span class='curline'><a href='../S/1543.html#L141'>file_handle</a>       141 sapi/milter/php_milter.c 	file_handle.type = ZEND_HANDLE_FP;</span>
+<span class='curline'><a href='../S/1543.html#L142'>file_handle</a>       142 sapi/milter/php_milter.c 	file_handle.filename = filename;</span>
+<span class='curline'><a href='../S/1543.html#L143'>file_handle</a>       143 sapi/milter/php_milter.c 	file_handle.free_filename = 0;</span>
+<span class='curline'><a href='../S/1543.html#L144'>file_handle</a>       144 sapi/milter/php_milter.c 	file_handle.opened_path = NULL;</span>
+<span class='curline'><a href='../S/1543.html#L146'>file_handle</a>       146 sapi/milter/php_milter.c 	php_execute_script(&amp;file_handle TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1543.html#L179'>file_handle</a>       179 sapi/milter/php_milter.c 	zend_file_handle file_handle;</span>
+<span class='curline'><a href='../S/1543.html#L202'>file_handle</a>       202 sapi/milter/php_milter.c 	if (!(file_handle.handle.fp = VCWD_FOPEN(filename, "rb"))) {</span>
+<span class='curline'><a href='../S/1543.html#L207'>file_handle</a>       207 sapi/milter/php_milter.c 	file_handle.type = ZEND_HANDLE_FP;</span>
+<span class='curline'><a href='../S/1543.html#L208'>file_handle</a>       208 sapi/milter/php_milter.c 	file_handle.filename = filename;</span>
+<span class='curline'><a href='../S/1543.html#L209'>file_handle</a>       209 sapi/milter/php_milter.c 	file_handle.free_filename = 0;</span>
+<span class='curline'><a href='../S/1543.html#L210'>file_handle</a>       210 sapi/milter/php_milter.c 	file_handle.opened_path = NULL;</span>
+<span class='curline'><a href='../S/1543.html#L212'>file_handle</a>       212 sapi/milter/php_milter.c 	php_execute_script(&amp;file_handle TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1545.html#L963'>file_handle</a>       963 sapi/nsapi/nsapi.c 	zend_file_handle file_handle = {0};</span>
+<span class='curline'><a href='../S/1545.html#L1035'>file_handle</a>      1035 sapi/nsapi/nsapi.c 	file_handle.type = ZEND_HANDLE_FILENAME;</span>
+<span class='curline'><a href='../S/1545.html#L1036'>file_handle</a>      1036 sapi/nsapi/nsapi.c 	file_handle.filename = SG(request_info).path_translated;</span>
+<span class='curline'><a href='../S/1545.html#L1037'>file_handle</a>      1037 sapi/nsapi/nsapi.c 	file_handle.free_filename = 0;</span>
+<span class='curline'><a href='../S/1545.html#L1038'>file_handle</a>      1038 sapi/nsapi/nsapi.c 	file_handle.opened_path = NULL;</span>
+<span class='curline'><a href='../S/1545.html#L1043'>file_handle</a>      1043 sapi/nsapi/nsapi.c 			php_execute_script(&amp;file_handle TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1583.html#L244'>file_handle</a>       244 sapi/phttpd/phttpd.c 	zend_file_handle file_handle;</span>
+<span class='curline'><a href='../S/1583.html#L251'>file_handle</a>       251 sapi/phttpd/phttpd.c     file_handle.type = ZEND_HANDLE_FILENAME;</span>
+<span class='curline'><a href='../S/1583.html#L252'>file_handle</a>       252 sapi/phttpd/phttpd.c     file_handle.filename = SG(request_info).path_translated;</span>
+<span class='curline'><a href='../S/1583.html#L253'>file_handle</a>       253 sapi/phttpd/phttpd.c     file_handle.free_filename = 0;</span>
+<span class='curline'><a href='../S/1583.html#L258'>file_handle</a>       258 sapi/phttpd/phttpd.c 	php_execute_script(&amp;file_handle TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1584.html#L347'>file_handle</a>       347 sapi/pi3web/pi3web_sapi.c 	zend_file_handle file_handle = {0};</span>
+<span class='curline'><a href='../S/1584.html#L352'>file_handle</a>       352 sapi/pi3web/pi3web_sapi.c 		file_handle.filename = lpCB-&gt;lpszFileName;</span>
+<span class='curline'><a href='../S/1584.html#L353'>file_handle</a>       353 sapi/pi3web/pi3web_sapi.c 		file_handle.free_filename = 0;</span>
+<span class='curline'><a href='../S/1584.html#L354'>file_handle</a>       354 sapi/pi3web/pi3web_sapi.c 		file_handle.type = ZEND_HANDLE_FILENAME;</span>
+<span class='curline'><a href='../S/1584.html#L355'>file_handle</a>       355 sapi/pi3web/pi3web_sapi.c 		file_handle.opened_path = NULL;</span>
+<span class='curline'><a href='../S/1584.html#L362'>file_handle</a>       362 sapi/pi3web/pi3web_sapi.c 				iRet = ( php_execute_script( &amp;file_handle TSRMLS_CC ) ) ?</span>
+<span class='curline'><a href='../S/1584.html#L367'>file_handle</a>       367 sapi/pi3web/pi3web_sapi.c 				if ( open_file_for_scanning( &amp;file_handle TSRMLS_CC ) == SUCCESS )</span>
+<span class='curline'><a href='../S/1584.html#L386'>file_handle</a>       386 sapi/pi3web/pi3web_sapi.c 				if ( open_file_for_scanning( &amp;file_handle TSRMLS_CC ) == SUCCESS )</span>
+<span class='curline'><a href='../S/1584.html#L396'>file_handle</a>       396 sapi/pi3web/pi3web_sapi.c 				iRet = (php_lint_script(&amp;file_handle TSRMLS_CC) == SUCCESS) ?</span>
+<span class='curline'><a href='../S/1586.html#L578'>file_handle</a>       578 sapi/roxen/roxen.c   zend_file_handle file_handle;</span>
+<span class='curline'><a href='../S/1586.html#L583'>file_handle</a>       583 sapi/roxen/roxen.c   file_handle.type = ZEND_HANDLE_FILENAME;</span>
+<span class='curline'><a href='../S/1586.html#L584'>file_handle</a>       584 sapi/roxen/roxen.c   file_handle.filename = THIS-&gt;filename;</span>
+<span class='curline'><a href='../S/1586.html#L585'>file_handle</a>       585 sapi/roxen/roxen.c   file_handle.free_filename = 0;</span>
+<span class='curline'><a href='../S/1586.html#L586'>file_handle</a>       586 sapi/roxen/roxen.c   file_handle.opened_path = NULL;</span>
+<span class='curline'><a href='../S/1586.html#L596'>file_handle</a>       596 sapi/roxen/roxen.c   php_execute_script(&amp;file_handle TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1589.html#L412'>file_handle</a>       412 sapi/thttpd/thttpd.c 	zend_file_handle file_handle;</span>
+<span class='curline'><a href='../S/1589.html#L424'>file_handle</a>       424 sapi/thttpd/thttpd.c 		file_handle.type = ZEND_HANDLE_FILENAME;</span>
+<span class='curline'><a href='../S/1589.html#L425'>file_handle</a>       425 sapi/thttpd/thttpd.c 		file_handle.filename = SG(request_info).path_translated;</span>
+<span class='curline'><a href='../S/1589.html#L426'>file_handle</a>       426 sapi/thttpd/thttpd.c 		file_handle.free_filename = 0;</span>
+<span class='curline'><a href='../S/1589.html#L427'>file_handle</a>       427 sapi/thttpd/thttpd.c 		file_handle.opened_path = NULL;</span>
+<span class='curline'><a href='../S/1589.html#L429'>file_handle</a>       429 sapi/thttpd/thttpd.c 		php_execute_script(&amp;file_handle TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1590.html#L298'>file_handle</a>       298 sapi/tux/php_tux.c 	zend_file_handle file_handle;</span>
+<span class='curline'><a href='../S/1590.html#L300'>file_handle</a>       300 sapi/tux/php_tux.c 	file_handle.type = ZEND_HANDLE_FILENAME;</span>
+<span class='curline'><a href='../S/1590.html#L301'>file_handle</a>       301 sapi/tux/php_tux.c 	file_handle.filename = SG(request_info).path_translated;</span>
+<span class='curline'><a href='../S/1590.html#L302'>file_handle</a>       302 sapi/tux/php_tux.c 	file_handle.free_filename = 0;</span>
+<span class='curline'><a href='../S/1590.html#L303'>file_handle</a>       303 sapi/tux/php_tux.c 	file_handle.opened_path = NULL;</span>
+<span class='curline'><a href='../S/1590.html#L309'>file_handle</a>       309 sapi/tux/php_tux.c 	php_execute_script(&amp;file_handle TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1592.html#L168'>file_handle</a>       168 sapi/webjames/webjames.c 	zend_file_handle file_handle;</span>
+<span class='curline'><a href='../S/1592.html#L206'>file_handle</a>       206 sapi/webjames/webjames.c 	file_handle.type = ZEND_HANDLE_FILENAME;</span>
+<span class='curline'><a href='../S/1592.html#L207'>file_handle</a>       207 sapi/webjames/webjames.c 	file_handle.filename = SG(request_info).path_translated;</span>
+<span class='curline'><a href='../S/1592.html#L208'>file_handle</a>       208 sapi/webjames/webjames.c 	file_handle.free_filename = 0;</span>
+<span class='curline'><a href='../S/1592.html#L209'>file_handle</a>       209 sapi/webjames/webjames.c 	file_handle.opened_path = NULL;</span>
+<span class='curline'><a href='../S/1592.html#L215'>file_handle</a>       215 sapi/webjames/webjames.c 	php_execute_script(&amp;file_handle TSRMLS_CC);</span>
+</pre>
+</body>
+</html>

@@ -1,0 +1,164 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>dateobj</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/79.html#L2221'>dateobj</a>          2221 ext/date/php_date.c 	php_date_obj     *dateobj;</span>
+<span class='curline'><a href='../S/79.html#L2224'>dateobj</a>          2224 ext/date/php_date.c 	dateobj = (php_date_obj *) zend_object_store_get_object(object TSRMLS_CC);</span>
+<span class='curline'><a href='../S/79.html#L2228'>dateobj</a>          2228 ext/date/php_date.c 	if (!dateobj-&gt;time || GC_G(gc_active)) {</span>
+<span class='curline'><a href='../S/79.html#L2234'>dateobj</a>          2234 ext/date/php_date.c 	ZVAL_STRING(zv, date_format("Y-m-d H:i:s.u", 14, dateobj-&gt;time, 1), 0);</span>
+<span class='curline'><a href='../S/79.html#L2238'>dateobj</a>          2238 ext/date/php_date.c 	if (dateobj-&gt;time-&gt;is_localtime) {</span>
+<span class='curline'><a href='../S/79.html#L2240'>dateobj</a>          2240 ext/date/php_date.c 		ZVAL_LONG(zv, dateobj-&gt;time-&gt;zone_type);</span>
+<span class='curline'><a href='../S/79.html#L2244'>dateobj</a>          2244 ext/date/php_date.c 		switch (dateobj-&gt;time-&gt;zone_type) {</span>
+<span class='curline'><a href='../S/79.html#L2246'>dateobj</a>          2246 ext/date/php_date.c 				ZVAL_STRING(zv, dateobj-&gt;time-&gt;tz_info-&gt;name, 1);</span>
+<span class='curline'><a href='../S/79.html#L2250'>dateobj</a>          2250 ext/date/php_date.c 				timelib_sll utc_offset = dateobj-&gt;time-&gt;z;</span>
+<span class='curline'><a href='../S/79.html#L2261'>dateobj</a>          2261 ext/date/php_date.c 				ZVAL_STRING(zv, dateobj-&gt;time-&gt;tz_abbr, 1);</span>
+<span class='curline'><a href='../S/79.html#L2566'>dateobj</a>          2566 ext/date/php_date.c PHPAPI int php_date_initialize(php_date_obj *dateobj, /*const*/ char *time_str, int time_str_len, char *format, zval *timezone_object, int ctor TSRMLS_DC)</span>
+<span class='curline'><a href='../S/79.html#L2575'>dateobj</a>          2575 ext/date/php_date.c 	if (dateobj-&gt;time) {</span>
+<span class='curline'><a href='../S/79.html#L2576'>dateobj</a>          2576 ext/date/php_date.c 		timelib_time_dtor(dateobj-&gt;time);</span>
+<span class='curline'><a href='../S/79.html#L2579'>dateobj</a>          2579 ext/date/php_date.c 		dateobj-&gt;time = timelib_parse_from_format(format, time_str_len ? time_str : "", time_str_len ? time_str_len : 0, &amp;err, DATE_TIMEZONEDB, php_date_parse_tzfile_wrapper);</span>
+<span class='curline'><a href='../S/79.html#L2581'>dateobj</a>          2581 ext/date/php_date.c 		dateobj-&gt;time = timelib_strtotime(time_str_len ? time_str : "now", time_str_len ? time_str_len : sizeof("now") -1, &amp;err, DATE_TIMEZONEDB, php_date_parse_tzfile_wrapper);</span>
+<span class='curline'><a href='../S/79.html#L2594'>dateobj</a>          2594 ext/date/php_date.c 		timelib_time_dtor(dateobj-&gt;time);</span>
+<span class='curline'><a href='../S/79.html#L2595'>dateobj</a>          2595 ext/date/php_date.c 		dateobj-&gt;time = 0;</span>
+<span class='curline'><a href='../S/79.html#L2617'>dateobj</a>          2617 ext/date/php_date.c 	} else if (dateobj-&gt;time-&gt;tz_info) {</span>
+<span class='curline'><a href='../S/79.html#L2618'>dateobj</a>          2618 ext/date/php_date.c 		tzi = dateobj-&gt;time-&gt;tz_info;</span>
+<span class='curline'><a href='../S/79.html#L2640'>dateobj</a>          2640 ext/date/php_date.c 	timelib_fill_holes(dateobj-&gt;time, now, TIMELIB_NO_CLONE);</span>
+<span class='curline'><a href='../S/79.html#L2641'>dateobj</a>          2641 ext/date/php_date.c 	timelib_update_ts(dateobj-&gt;time, tzi);</span>
+<span class='curline'><a href='../S/79.html#L2642'>dateobj</a>          2642 ext/date/php_date.c 	timelib_update_from_sse(dateobj-&gt;time);</span>
+<span class='curline'><a href='../S/79.html#L2644'>dateobj</a>          2644 ext/date/php_date.c 	dateobj-&gt;time-&gt;have_relative = 0;</span>
+<span class='curline'><a href='../S/79.html#L2807'>dateobj</a>          2807 ext/date/php_date.c static int php_date_initialize_from_hash(php_date_obj **dateobj, HashTable *myht TSRMLS_DC)</span>
+<span class='curline'><a href='../S/79.html#L2826'>dateobj</a>          2826 ext/date/php_date.c 						ret = php_date_initialize(*dateobj, tmp, Z_STRLEN_PP(z_date) + Z_STRLEN_PP(z_timezone) + 1, NULL, NULL, 0 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/79.html#L2846'>dateobj</a>          2846 ext/date/php_date.c 						ret = php_date_initialize(*dateobj, Z_STRVAL_PP(z_date), Z_STRLEN_PP(z_date), NULL, tmp_obj, 0 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/79.html#L2861'>dateobj</a>          2861 ext/date/php_date.c 	php_date_obj     *dateobj;</span>
+<span class='curline'><a href='../S/79.html#L2872'>dateobj</a>          2872 ext/date/php_date.c 	dateobj = (php_date_obj *) zend_object_store_get_object(return_value TSRMLS_CC);</span>
+<span class='curline'><a href='../S/79.html#L2873'>dateobj</a>          2873 ext/date/php_date.c 	if (!php_date_initialize_from_hash(&amp;dateobj, myht TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/79.html#L2883'>dateobj</a>          2883 ext/date/php_date.c 	php_date_obj     *dateobj;</span>
+<span class='curline'><a href='../S/79.html#L2894'>dateobj</a>          2894 ext/date/php_date.c 	dateobj = (php_date_obj *) zend_object_store_get_object(return_value TSRMLS_CC);</span>
+<span class='curline'><a href='../S/79.html#L2895'>dateobj</a>          2895 ext/date/php_date.c 	if (!php_date_initialize_from_hash(&amp;dateobj, myht TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/79.html#L2906'>dateobj</a>          2906 ext/date/php_date.c 	php_date_obj     *dateobj;</span>
+<span class='curline'><a href='../S/79.html#L2909'>dateobj</a>          2909 ext/date/php_date.c 	dateobj = (php_date_obj *) zend_object_store_get_object(object TSRMLS_CC);</span>
+<span class='curline'><a href='../S/79.html#L2913'>dateobj</a>          2913 ext/date/php_date.c 	if (!php_date_initialize_from_hash(&amp;dateobj, myht TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/79.html#L3075'>dateobj</a>          3075 ext/date/php_date.c 	php_date_obj *dateobj;</span>
+<span class='curline'><a href='../S/79.html#L3082'>dateobj</a>          3082 ext/date/php_date.c 	dateobj = (php_date_obj *) zend_object_store_get_object(object TSRMLS_CC);</span>
+<span class='curline'><a href='../S/79.html#L3083'>dateobj</a>          3083 ext/date/php_date.c 	DATE_CHECK_INITIALIZED(dateobj-&gt;time, DateTime);</span>
+<span class='curline'><a href='../S/79.html#L3084'>dateobj</a>          3084 ext/date/php_date.c 	RETURN_STRING(date_format(format, format_len, dateobj-&gt;time, dateobj-&gt;time-&gt;is_localtime), 0);</span>
+<span class='curline'><a href='../S/79.html#L3090'>dateobj</a>          3090 ext/date/php_date.c 	php_date_obj *dateobj;</span>
+<span class='curline'><a href='../S/79.html#L3094'>dateobj</a>          3094 ext/date/php_date.c 	dateobj = (php_date_obj *) zend_object_store_get_object(object TSRMLS_CC);</span>
+<span class='curline'><a href='../S/79.html#L3096'>dateobj</a>          3096 ext/date/php_date.c 	if (!(dateobj-&gt;time)) {</span>
+<span class='curline'><a href='../S/79.html#L3113'>dateobj</a>          3113 ext/date/php_date.c 	memcpy(&amp;dateobj-&gt;time-&gt;relative, &amp;tmp_time-&gt;relative, sizeof(struct timelib_rel_time));</span>
+<span class='curline'><a href='../S/79.html#L3114'>dateobj</a>          3114 ext/date/php_date.c 	dateobj-&gt;time-&gt;have_relative = tmp_time-&gt;have_relative;</span>
+<span class='curline'><a href='../S/79.html#L3115'>dateobj</a>          3115 ext/date/php_date.c 	dateobj-&gt;time-&gt;sse_uptodate = 0;</span>
+<span class='curline'><a href='../S/79.html#L3118'>dateobj</a>          3118 ext/date/php_date.c 		dateobj-&gt;time-&gt;y = tmp_time-&gt;y;</span>
+<span class='curline'><a href='../S/79.html#L3121'>dateobj</a>          3121 ext/date/php_date.c 		dateobj-&gt;time-&gt;m = tmp_time-&gt;m;</span>
+<span class='curline'><a href='../S/79.html#L3124'>dateobj</a>          3124 ext/date/php_date.c 		dateobj-&gt;time-&gt;d = tmp_time-&gt;d;</span>
+<span class='curline'><a href='../S/79.html#L3128'>dateobj</a>          3128 ext/date/php_date.c 		dateobj-&gt;time-&gt;h = tmp_time-&gt;h;</span>
+<span class='curline'><a href='../S/79.html#L3130'>dateobj</a>          3130 ext/date/php_date.c 			dateobj-&gt;time-&gt;i = tmp_time-&gt;i;</span>
+<span class='curline'><a href='../S/79.html#L3132'>dateobj</a>          3132 ext/date/php_date.c 				dateobj-&gt;time-&gt;s = tmp_time-&gt;s;</span>
+<span class='curline'><a href='../S/79.html#L3134'>dateobj</a>          3134 ext/date/php_date.c 				dateobj-&gt;time-&gt;s = 0;</span>
+<span class='curline'><a href='../S/79.html#L3137'>dateobj</a>          3137 ext/date/php_date.c 			dateobj-&gt;time-&gt;i = 0;</span>
+<span class='curline'><a href='../S/79.html#L3138'>dateobj</a>          3138 ext/date/php_date.c 			dateobj-&gt;time-&gt;s = 0;</span>
+<span class='curline'><a href='../S/79.html#L3143'>dateobj</a>          3143 ext/date/php_date.c 	timelib_update_ts(dateobj-&gt;time, NULL);</span>
+<span class='curline'><a href='../S/79.html#L3144'>dateobj</a>          3144 ext/date/php_date.c 	timelib_update_from_sse(dateobj-&gt;time);</span>
+<span class='curline'><a href='../S/79.html#L3145'>dateobj</a>          3145 ext/date/php_date.c 	dateobj-&gt;time-&gt;have_relative = 0;</span>
+<span class='curline'><a href='../S/79.html#L3146'>dateobj</a>          3146 ext/date/php_date.c 	memset(&amp;dateobj-&gt;time-&gt;relative, 0, sizeof(dateobj-&gt;time-&gt;relative));</span>
+<span class='curline'><a href='../S/79.html#L3195'>dateobj</a>          3195 ext/date/php_date.c 	php_date_obj     *dateobj;</span>
+<span class='curline'><a href='../S/79.html#L3199'>dateobj</a>          3199 ext/date/php_date.c 	dateobj = (php_date_obj *) zend_object_store_get_object(object TSRMLS_CC);</span>
+<span class='curline'><a href='../S/79.html#L3200'>dateobj</a>          3200 ext/date/php_date.c 	DATE_CHECK_INITIALIZED(dateobj-&gt;time, DateTime);</span>
+<span class='curline'><a href='../S/79.html#L3204'>dateobj</a>          3204 ext/date/php_date.c 	new_time = timelib_add(dateobj-&gt;time, intobj-&gt;diff);</span>
+<span class='curline'><a href='../S/79.html#L3205'>dateobj</a>          3205 ext/date/php_date.c 	timelib_time_dtor(dateobj-&gt;time);</span>
+<span class='curline'><a href='../S/79.html#L3206'>dateobj</a>          3206 ext/date/php_date.c 	dateobj-&gt;time = new_time;</span>
+<span class='curline'><a href='../S/79.html#L3245'>dateobj</a>          3245 ext/date/php_date.c 	php_date_obj     *dateobj;</span>
+<span class='curline'><a href='../S/79.html#L3249'>dateobj</a>          3249 ext/date/php_date.c 	dateobj = (php_date_obj *) zend_object_store_get_object(object TSRMLS_CC);</span>
+<span class='curline'><a href='../S/79.html#L3250'>dateobj</a>          3250 ext/date/php_date.c 	DATE_CHECK_INITIALIZED(dateobj-&gt;time, DateTime);</span>
+<span class='curline'><a href='../S/79.html#L3259'>dateobj</a>          3259 ext/date/php_date.c 	new_time = timelib_sub(dateobj-&gt;time, intobj-&gt;diff);</span>
+<span class='curline'><a href='../S/79.html#L3260'>dateobj</a>          3260 ext/date/php_date.c 	timelib_time_dtor(dateobj-&gt;time);</span>
+<span class='curline'><a href='../S/79.html#L3261'>dateobj</a>          3261 ext/date/php_date.c 	dateobj-&gt;time = new_time;</span>
+<span class='curline'><a href='../S/79.html#L3324'>dateobj</a>          3324 ext/date/php_date.c 	php_date_obj     *dateobj;</span>
+<span class='curline'><a href='../S/79.html#L3330'>dateobj</a>          3330 ext/date/php_date.c 	dateobj = (php_date_obj *) zend_object_store_get_object(object TSRMLS_CC);</span>
+<span class='curline'><a href='../S/79.html#L3331'>dateobj</a>          3331 ext/date/php_date.c 	DATE_CHECK_INITIALIZED(dateobj-&gt;time, DateTime);</span>
+<span class='curline'><a href='../S/79.html#L3332'>dateobj</a>          3332 ext/date/php_date.c 	if (dateobj-&gt;time-&gt;is_localtime/* &amp;&amp; dateobj-&gt;time-&gt;tz_info*/) {</span>
+<span class='curline'><a href='../S/79.html#L3335'>dateobj</a>          3335 ext/date/php_date.c 		set_timezone_from_timelib_time(tzobj, dateobj-&gt;time);</span>
+<span class='curline'><a href='../S/79.html#L3344'>dateobj</a>          3344 ext/date/php_date.c 	php_date_obj     *dateobj;</span>
+<span class='curline'><a href='../S/79.html#L3347'>dateobj</a>          3347 ext/date/php_date.c 	dateobj = (php_date_obj *) zend_object_store_get_object(object TSRMLS_CC);</span>
+<span class='curline'><a href='../S/79.html#L3348'>dateobj</a>          3348 ext/date/php_date.c 	DATE_CHECK_INITIALIZED(dateobj-&gt;time, DateTime);</span>
+<span class='curline'><a href='../S/79.html#L3353'>dateobj</a>          3353 ext/date/php_date.c 			timelib_set_timezone_from_offset(dateobj-&gt;time, tzobj-&gt;tzi.utc_offset);</span>
+<span class='curline'><a href='../S/79.html#L3356'>dateobj</a>          3356 ext/date/php_date.c 			timelib_set_timezone_from_abbr(dateobj-&gt;time, tzobj-&gt;tzi.z);</span>
+<span class='curline'><a href='../S/79.html#L3359'>dateobj</a>          3359 ext/date/php_date.c 			timelib_set_timezone(dateobj-&gt;time, tzobj-&gt;tzi.tz);</span>
+<span class='curline'><a href='../S/79.html#L3362'>dateobj</a>          3362 ext/date/php_date.c 	timelib_unixtime2local(dateobj-&gt;time, dateobj-&gt;time-&gt;sse);</span>
+<span class='curline'><a href='../S/79.html#L3407'>dateobj</a>          3407 ext/date/php_date.c 	php_date_obj        *dateobj;</span>
+<span class='curline'><a href='../S/79.html#L3413'>dateobj</a>          3413 ext/date/php_date.c 	dateobj = (php_date_obj *) zend_object_store_get_object(object TSRMLS_CC);</span>
+<span class='curline'><a href='../S/79.html#L3414'>dateobj</a>          3414 ext/date/php_date.c 	DATE_CHECK_INITIALIZED(dateobj-&gt;time, DateTime);</span>
+<span class='curline'><a href='../S/79.html#L3415'>dateobj</a>          3415 ext/date/php_date.c 	if (dateobj-&gt;time-&gt;is_localtime/* &amp;&amp; dateobj-&gt;time-&gt;tz_info*/) {</span>
+<span class='curline'><a href='../S/79.html#L3416'>dateobj</a>          3416 ext/date/php_date.c 		switch (dateobj-&gt;time-&gt;zone_type) {</span>
+<span class='curline'><a href='../S/79.html#L3418'>dateobj</a>          3418 ext/date/php_date.c 				offset = timelib_get_time_zone_info(dateobj-&gt;time-&gt;sse, dateobj-&gt;time-&gt;tz_info);</span>
+<span class='curline'><a href='../S/79.html#L3423'>dateobj</a>          3423 ext/date/php_date.c 				RETVAL_LONG(dateobj-&gt;time-&gt;z * -60);</span>
+<span class='curline'><a href='../S/79.html#L3426'>dateobj</a>          3426 ext/date/php_date.c 				RETVAL_LONG((dateobj-&gt;time-&gt;z - (60 * dateobj-&gt;time-&gt;dst)) * -60);</span>
+<span class='curline'><a href='../S/79.html#L3438'>dateobj</a>          3438 ext/date/php_date.c 	php_date_obj *dateobj;</span>
+<span class='curline'><a href='../S/79.html#L3440'>dateobj</a>          3440 ext/date/php_date.c 	dateobj = (php_date_obj *) zend_object_store_get_object(object TSRMLS_CC);</span>
+<span class='curline'><a href='../S/79.html#L3441'>dateobj</a>          3441 ext/date/php_date.c 	DATE_CHECK_INITIALIZED(dateobj-&gt;time, DateTime);</span>
+<span class='curline'><a href='../S/79.html#L3442'>dateobj</a>          3442 ext/date/php_date.c 	dateobj-&gt;time-&gt;h = h;</span>
+<span class='curline'><a href='../S/79.html#L3443'>dateobj</a>          3443 ext/date/php_date.c 	dateobj-&gt;time-&gt;i = i;</span>
+<span class='curline'><a href='../S/79.html#L3444'>dateobj</a>          3444 ext/date/php_date.c 	dateobj-&gt;time-&gt;s = s;</span>
+<span class='curline'><a href='../S/79.html#L3445'>dateobj</a>          3445 ext/date/php_date.c 	timelib_update_ts(dateobj-&gt;time, NULL);</span>
+<span class='curline'><a href='../S/79.html#L3486'>dateobj</a>          3486 ext/date/php_date.c 	php_date_obj *dateobj;</span>
+<span class='curline'><a href='../S/79.html#L3488'>dateobj</a>          3488 ext/date/php_date.c 	dateobj = (php_date_obj *) zend_object_store_get_object(object TSRMLS_CC);</span>
+<span class='curline'><a href='../S/79.html#L3489'>dateobj</a>          3489 ext/date/php_date.c 	DATE_CHECK_INITIALIZED(dateobj-&gt;time, DateTime);</span>
+<span class='curline'><a href='../S/79.html#L3490'>dateobj</a>          3490 ext/date/php_date.c 	dateobj-&gt;time-&gt;y = y;</span>
+<span class='curline'><a href='../S/79.html#L3491'>dateobj</a>          3491 ext/date/php_date.c 	dateobj-&gt;time-&gt;m = m;</span>
+<span class='curline'><a href='../S/79.html#L3492'>dateobj</a>          3492 ext/date/php_date.c 	dateobj-&gt;time-&gt;d = d;</span>
+<span class='curline'><a href='../S/79.html#L3493'>dateobj</a>          3493 ext/date/php_date.c 	timelib_update_ts(dateobj-&gt;time, NULL);</span>
+<span class='curline'><a href='../S/79.html#L3534'>dateobj</a>          3534 ext/date/php_date.c 	php_date_obj *dateobj;</span>
+<span class='curline'><a href='../S/79.html#L3536'>dateobj</a>          3536 ext/date/php_date.c 	dateobj = (php_date_obj *) zend_object_store_get_object(object TSRMLS_CC);</span>
+<span class='curline'><a href='../S/79.html#L3537'>dateobj</a>          3537 ext/date/php_date.c 	DATE_CHECK_INITIALIZED(dateobj-&gt;time, DateTime);</span>
+<span class='curline'><a href='../S/79.html#L3538'>dateobj</a>          3538 ext/date/php_date.c 	dateobj-&gt;time-&gt;y = y;</span>
+<span class='curline'><a href='../S/79.html#L3539'>dateobj</a>          3539 ext/date/php_date.c 	dateobj-&gt;time-&gt;m = 1;</span>
+<span class='curline'><a href='../S/79.html#L3540'>dateobj</a>          3540 ext/date/php_date.c 	dateobj-&gt;time-&gt;d = 1;</span>
+<span class='curline'><a href='../S/79.html#L3541'>dateobj</a>          3541 ext/date/php_date.c 	memset(&amp;dateobj-&gt;time-&gt;relative, 0, sizeof(dateobj-&gt;time-&gt;relative));</span>
+<span class='curline'><a href='../S/79.html#L3542'>dateobj</a>          3542 ext/date/php_date.c 	dateobj-&gt;time-&gt;relative.d = timelib_daynr_from_weeknr(y, w, d);</span>
+<span class='curline'><a href='../S/79.html#L3543'>dateobj</a>          3543 ext/date/php_date.c 	dateobj-&gt;time-&gt;have_relative = 1;</span>
+<span class='curline'><a href='../S/79.html#L3545'>dateobj</a>          3545 ext/date/php_date.c 	timelib_update_ts(dateobj-&gt;time, NULL);</span>
+<span class='curline'><a href='../S/79.html#L3586'>dateobj</a>          3586 ext/date/php_date.c 	php_date_obj *dateobj;</span>
+<span class='curline'><a href='../S/79.html#L3588'>dateobj</a>          3588 ext/date/php_date.c 	dateobj = (php_date_obj *) zend_object_store_get_object(object TSRMLS_CC);</span>
+<span class='curline'><a href='../S/79.html#L3589'>dateobj</a>          3589 ext/date/php_date.c 	DATE_CHECK_INITIALIZED(dateobj-&gt;time, DateTime);</span>
+<span class='curline'><a href='../S/79.html#L3590'>dateobj</a>          3590 ext/date/php_date.c 	timelib_unixtime2local(dateobj-&gt;time, (timelib_sll)timestamp);</span>
+<span class='curline'><a href='../S/79.html#L3591'>dateobj</a>          3591 ext/date/php_date.c 	timelib_update_ts(dateobj-&gt;time, NULL);</span>
+<span class='curline'><a href='../S/79.html#L3636'>dateobj</a>          3636 ext/date/php_date.c 	php_date_obj *dateobj;</span>
+<span class='curline'><a href='../S/79.html#L3643'>dateobj</a>          3643 ext/date/php_date.c 	dateobj = (php_date_obj *) zend_object_store_get_object(object TSRMLS_CC);</span>
+<span class='curline'><a href='../S/79.html#L3644'>dateobj</a>          3644 ext/date/php_date.c 	DATE_CHECK_INITIALIZED(dateobj-&gt;time, DateTime);</span>
+<span class='curline'><a href='../S/79.html#L3645'>dateobj</a>          3645 ext/date/php_date.c 	timelib_update_ts(dateobj-&gt;time, NULL);</span>
+<span class='curline'><a href='../S/79.html#L3647'>dateobj</a>          3647 ext/date/php_date.c 	timestamp = timelib_date_to_int(dateobj-&gt;time, &amp;error);</span>
+<span class='curline'><a href='../S/79.html#L3873'>dateobj</a>          3873 ext/date/php_date.c 	php_date_obj        *dateobj;</span>
+<span class='curline'><a href='../S/79.html#L3881'>dateobj</a>          3881 ext/date/php_date.c 	dateobj = (php_date_obj *) zend_object_store_get_object(dateobject TSRMLS_CC);</span>
+<span class='curline'><a href='../S/79.html#L3882'>dateobj</a>          3882 ext/date/php_date.c 	DATE_CHECK_INITIALIZED(dateobj-&gt;time, DateTimeInterface);</span>
+<span class='curline'><a href='../S/79.html#L3886'>dateobj</a>          3886 ext/date/php_date.c 			offset = timelib_get_time_zone_info(dateobj-&gt;time-&gt;sse, tzobj-&gt;tzi.tz);</span>
+<span class='curline'><a href='../S/79.html#L4416'>dateobj</a>          4416 ext/date/php_date.c 	php_date_obj     *dateobj;</span>
+<span class='curline'><a href='../S/79.html#L4463'>dateobj</a>          4463 ext/date/php_date.c 		dateobj = (php_date_obj *) zend_object_store_get_object(start TSRMLS_CC);</span>
+<span class='curline'><a href='../S/79.html#L4465'>dateobj</a>          4465 ext/date/php_date.c 		memcpy(clone, dateobj-&gt;time, sizeof(timelib_time));</span>
+<span class='curline'><a href='../S/79.html#L4466'>dateobj</a>          4466 ext/date/php_date.c 		if (dateobj-&gt;time-&gt;tz_abbr) {</span>
+<span class='curline'><a href='../S/79.html#L4467'>dateobj</a>          4467 ext/date/php_date.c 			clone-&gt;tz_abbr = strdup(dateobj-&gt;time-&gt;tz_abbr);</span>
+<span class='curline'><a href='../S/79.html#L4469'>dateobj</a>          4469 ext/date/php_date.c 		if (dateobj-&gt;time-&gt;tz_info) {</span>
+<span class='curline'><a href='../S/79.html#L4470'>dateobj</a>          4470 ext/date/php_date.c 			clone-&gt;tz_info = dateobj-&gt;time-&gt;tz_info;</span>
+<span class='curline'><a href='../S/79.html#L4480'>dateobj</a>          4480 ext/date/php_date.c 			dateobj = (php_date_obj *) zend_object_store_get_object(end TSRMLS_CC);</span>
+<span class='curline'><a href='../S/79.html#L4481'>dateobj</a>          4481 ext/date/php_date.c 			clone = timelib_time_clone(dateobj-&gt;time);</span>
+<span class='curline'><a href='../S/79.html#L4504'>dateobj</a>          4504 ext/date/php_date.c 	php_date_obj     *dateobj;</span>
+<span class='curline'><a href='../S/79.html#L4513'>dateobj</a>          4513 ext/date/php_date.c 	dateobj = (php_date_obj *)zend_object_store_get_object(return_value TSRMLS_CC);</span>
+<span class='curline'><a href='../S/79.html#L4514'>dateobj</a>          4514 ext/date/php_date.c 	dateobj-&gt;time = timelib_time_ctor();</span>
+<span class='curline'><a href='../S/79.html#L4515'>dateobj</a>          4515 ext/date/php_date.c 	*dateobj-&gt;time = *dpobj-&gt;start;</span>
+<span class='curline'><a href='../S/79.html#L4517'>dateobj</a>          4517 ext/date/php_date.c 		dateobj-&gt;time-&gt;tz_abbr = strdup(dpobj-&gt;start-&gt;tz_abbr);</span>
+<span class='curline'><a href='../S/79.html#L4520'>dateobj</a>          4520 ext/date/php_date.c 		dateobj-&gt;time-&gt;tz_info = dpobj-&gt;start-&gt;tz_info;</span>
+<span class='curline'><a href='../S/79.html#L4531'>dateobj</a>          4531 ext/date/php_date.c         php_date_obj     *dateobj;</span>
+<span class='curline'><a href='../S/79.html#L4544'>dateobj</a>          4544 ext/date/php_date.c         dateobj = (php_date_obj *)zend_object_store_get_object(return_value TSRMLS_CC);</span>
+<span class='curline'><a href='../S/79.html#L4545'>dateobj</a>          4545 ext/date/php_date.c         dateobj-&gt;time = timelib_time_ctor();</span>
+<span class='curline'><a href='../S/79.html#L4546'>dateobj</a>          4546 ext/date/php_date.c         *dateobj-&gt;time = *dpobj-&gt;end;</span>
+<span class='curline'><a href='../S/79.html#L4548'>dateobj</a>          4548 ext/date/php_date.c                 dateobj-&gt;time-&gt;tz_abbr = strdup(dpobj-&gt;end-&gt;tz_abbr);</span>
+<span class='curline'><a href='../S/79.html#L4551'>dateobj</a>          4551 ext/date/php_date.c                 dateobj-&gt;time-&gt;tz_info = dpobj-&gt;end-&gt;tz_info;</span>
+<span class='curline'><a href='../S/80.html#L205'>dateobj</a>           205 ext/date/php_date.h PHPAPI int php_date_initialize(php_date_obj *dateobj, /*const*/ char *time_str, int time_str_len, char *format, zval *timezone_object, int ctor TSRMLS_DC);</span>
+</pre>
+</body>
+</html>

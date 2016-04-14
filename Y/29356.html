@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>objid_query</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/1017.html#L373'>objid_query</a>       373 ext/snmp/snmp.c struct objid_query {</span>
+<span class='curline'><a href='../S/1017.html#L705'>objid_query</a>       705 ext/snmp/snmp.c 							struct objid_query *objid_query)</span>
+<span class='curline'><a href='../S/1017.html#L727'>objid_query</a>       727 ext/snmp/snmp.c 		memmove((char *)root, (char *)(objid_query-&gt;vars[0].name), (objid_query-&gt;vars[0].name_length) * sizeof(oid));</span>
+<span class='curline'><a href='../S/1017.html#L728'>objid_query</a>       728 ext/snmp/snmp.c 		rootlen = objid_query-&gt;vars[0].name_length;</span>
+<span class='curline'><a href='../S/1017.html#L729'>objid_query</a>       729 ext/snmp/snmp.c 		objid_query-&gt;offset = objid_query-&gt;count;</span>
+<span class='curline'><a href='../S/1017.html#L740'>objid_query</a>       740 ext/snmp/snmp.c 	if ((st &amp; SNMP_CMD_SET) &amp;&amp; objid_query-&gt;count &gt; objid_query-&gt;step) {</span>
+<span class='curline'><a href='../S/1017.html#L751'>objid_query</a>       751 ext/snmp/snmp.c 				pdu-&gt;non_repeaters = objid_query-&gt;non_repeaters;</span>
+<span class='curline'><a href='../S/1017.html#L752'>objid_query</a>       752 ext/snmp/snmp.c 				pdu-&gt;max_repetitions = objid_query-&gt;max_repetitions;</span>
+<span class='curline'><a href='../S/1017.html#L754'>objid_query</a>       754 ext/snmp/snmp.c 			snmp_add_null_var(pdu, objid_query-&gt;vars[0].name, objid_query-&gt;vars[0].name_length);</span>
+<span class='curline'><a href='../S/1017.html#L768'>objid_query</a>       768 ext/snmp/snmp.c 			for (count = 0; objid_query-&gt;offset &lt; objid_query-&gt;count &amp;&amp; count &lt; objid_query-&gt;step; objid_query-&gt;offset++, count++){</span>
+<span class='curline'><a href='../S/1017.html#L770'>objid_query</a>       770 ext/snmp/snmp.c 					if ((snmp_errno = snmp_add_var(pdu, objid_query-&gt;vars[objid_query-&gt;offset].name, objid_query-&gt;vars[objid_query-&gt;offset].name_length, objid_query-&gt;vars[objid_query-&gt;offset].type, objid_query-&gt;vars[objid_query-&gt;offset].value))) {</span>
+<span class='curline'><a href='../S/1017.html#L771'>objid_query</a>       771 ext/snmp/snmp.c 						snprint_objid(buf, sizeof(buf), objid_query-&gt;vars[objid_query-&gt;offset].name, objid_query-&gt;vars[objid_query-&gt;offset].name_length);</span>
+<span class='curline'><a href='../S/1017.html#L772'>objid_query</a>       772 ext/snmp/snmp.c 						php_snmp_error(getThis(), NULL TSRMLS_CC, PHP_SNMP_ERRNO_OID_PARSING_ERROR, "Could not add variable: OID='%s' type='%c' value='%s': %s", buf, objid_query-&gt;vars[objid_query-&gt;offset].type, objid_query-&gt;vars[objid_query-&gt;offset].value, snmp_api_errstring(snmp_errno));</span>
+<span class='curline'><a href='../S/1017.html#L779'>objid_query</a>       779 ext/snmp/snmp.c 					snmp_add_null_var(pdu, objid_query-&gt;vars[objid_query-&gt;offset].name, objid_query-&gt;vars[objid_query-&gt;offset].name_length);</span>
+<span class='curline'><a href='../S/1017.html#L795'>objid_query</a>       795 ext/snmp/snmp.c 					if (objid_query-&gt;offset &lt; objid_query-&gt;count) { /* we have unprocessed OIDs */</span>
+<span class='curline'><a href='../S/1017.html#L826'>objid_query</a>       826 ext/snmp/snmp.c 							objid_query-&gt;offset = 0;</span>
+<span class='curline'><a href='../S/1017.html#L833'>objid_query</a>       833 ext/snmp/snmp.c 					php_snmp_getvalue(vars, snmpval TSRMLS_CC, objid_query-&gt;valueretrieval);</span>
+<span class='curline'><a href='../S/1017.html#L835'>objid_query</a>       835 ext/snmp/snmp.c 					if (objid_query-&gt;array_output) {</span>
+<span class='curline'><a href='../S/1017.html#L843'>objid_query</a>       843 ext/snmp/snmp.c 							for (count = 0; count &lt; objid_query-&gt;count; count++) {</span>
+<span class='curline'><a href='../S/1017.html#L844'>objid_query</a>       844 ext/snmp/snmp.c 								if (objid_query-&gt;vars[count].name_length == vars-&gt;name_length &amp;&amp; snmp_oid_compare(objid_query-&gt;vars[count].name, objid_query-&gt;vars[count].name_length, vars-&gt;name, vars-&gt;name_length) == 0) {</span>
+<span class='curline'><a href='../S/1017.html#L846'>objid_query</a>       846 ext/snmp/snmp.c 									objid_query-&gt;vars[count].name_length = 0; /* mark this name as used */</span>
+<span class='curline'><a href='../S/1017.html#L851'>objid_query</a>       851 ext/snmp/snmp.c 								add_assoc_zval(return_value, objid_query-&gt;vars[count].oid, snmpval);</span>
+<span class='curline'><a href='../S/1017.html#L882'>objid_query</a>       882 ext/snmp/snmp.c 						if (objid_query-&gt;oid_increasing_check == TRUE &amp;&amp; snmp_oid_compare(objid_query-&gt;vars[0].name, objid_query-&gt;vars[0].name_length, vars-&gt;name, vars-&gt;name_length) &gt;= 0) {</span>
+<span class='curline'><a href='../S/1017.html#L887'>objid_query</a>       887 ext/snmp/snmp.c 							memmove((char *)(objid_query-&gt;vars[0].name), (char *)vars-&gt;name, vars-&gt;name_length * sizeof(oid));</span>
+<span class='curline'><a href='../S/1017.html#L888'>objid_query</a>       888 ext/snmp/snmp.c 							objid_query-&gt;vars[0].name_length = vars-&gt;name_length;</span>
+<span class='curline'><a href='../S/1017.html#L893'>objid_query</a>       893 ext/snmp/snmp.c 				if (objid_query-&gt;offset &lt; objid_query-&gt;count) { /* we have unprocessed OIDs */</span>
+<span class='curline'><a href='../S/1017.html#L897'>objid_query</a>       897 ext/snmp/snmp.c 				if (st &amp; SNMP_CMD_WALK &amp;&amp; response-&gt;errstat == SNMP_ERR_TOOBIG &amp;&amp; objid_query-&gt;max_repetitions &gt; 1) { /* Answer will not fit into single packet */</span>
+<span class='curline'><a href='../S/1017.html#L898'>objid_query</a>       898 ext/snmp/snmp.c 					objid_query-&gt;max_repetitions /= 2;</span>
+<span class='curline'><a href='../S/1017.html#L908'>objid_query</a>       908 ext/snmp/snmp.c 					if (st &amp; (SNMP_CMD_GET | SNMP_CMD_GETNEXT) &amp;&amp; response-&gt;errstat == SNMP_ERR_TOOBIG &amp;&amp; objid_query-&gt;step &gt; 1) { /* Answer will not fit into single packet */</span>
+<span class='curline'><a href='../S/1017.html#L909'>objid_query</a>       909 ext/snmp/snmp.c 						objid_query-&gt;offset = ((objid_query-&gt;offset &gt; objid_query-&gt;step) ? (objid_query-&gt;offset - objid_query-&gt;step) : 0 );</span>
+<span class='curline'><a href='../S/1017.html#L910'>objid_query</a>       910 ext/snmp/snmp.c 						objid_query-&gt;step /= 2;</span>
+<span class='curline'><a href='../S/1017.html#L929'>objid_query</a>       929 ext/snmp/snmp.c 					if (objid_query-&gt;array_output) {</span>
+<span class='curline'><a href='../S/1017.html#L938'>objid_query</a>       938 ext/snmp/snmp.c 			if (objid_query-&gt;array_output) {</span>
+<span class='curline'><a href='../S/1017.html#L948'>objid_query</a>       948 ext/snmp/snmp.c 			if (objid_query-&gt;array_output) {</span>
+<span class='curline'><a href='../S/1017.html#L968'>objid_query</a>       968 ext/snmp/snmp.c static int php_snmp_parse_oid(zval *object, int st, struct objid_query *objid_query, zval **oid, zval **type, zval **value TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1017.html#L1003'>objid_query</a>      1003 ext/snmp/snmp.c 	objid_query-&gt;count = 0;</span>
+<span class='curline'><a href='../S/1017.html#L1004'>objid_query</a>      1004 ext/snmp/snmp.c 	objid_query-&gt;array_output = ((st &amp; SNMP_CMD_WALK) ? TRUE : FALSE);</span>
+<span class='curline'><a href='../S/1017.html#L1006'>objid_query</a>      1006 ext/snmp/snmp.c 		objid_query-&gt;vars = (snmpobjarg *)emalloc(sizeof(snmpobjarg));</span>
+<span class='curline'><a href='../S/1017.html#L1007'>objid_query</a>      1007 ext/snmp/snmp.c 		if (objid_query-&gt;vars == NULL) {</span>
+<span class='curline'><a href='../S/1017.html#L1009'>objid_query</a>      1009 ext/snmp/snmp.c 			efree(objid_query-&gt;vars);</span>
+<span class='curline'><a href='../S/1017.html#L1012'>objid_query</a>      1012 ext/snmp/snmp.c 		objid_query-&gt;vars[objid_query-&gt;count].oid = Z_STRVAL_PP(oid);</span>
+<span class='curline'><a href='../S/1017.html#L1017'>objid_query</a>      1017 ext/snmp/snmp.c 					efree(objid_query-&gt;vars);</span>
+<span class='curline'><a href='../S/1017.html#L1021'>objid_query</a>      1021 ext/snmp/snmp.c 				objid_query-&gt;vars[objid_query-&gt;count].type = *pptr;</span>
+<span class='curline'><a href='../S/1017.html#L1022'>objid_query</a>      1022 ext/snmp/snmp.c 				objid_query-&gt;vars[objid_query-&gt;count].value = Z_STRVAL_PP(value);</span>
+<span class='curline'><a href='../S/1017.html#L1025'>objid_query</a>      1025 ext/snmp/snmp.c 				efree(objid_query-&gt;vars);</span>
+<span class='curline'><a href='../S/1017.html#L1029'>objid_query</a>      1029 ext/snmp/snmp.c 		objid_query-&gt;count++;</span>
+<span class='curline'><a href='../S/1017.html#L1035'>objid_query</a>      1035 ext/snmp/snmp.c 		objid_query-&gt;vars = (snmpobjarg *)emalloc(sizeof(snmpobjarg) * zend_hash_num_elements(Z_ARRVAL_PP(oid)));</span>
+<span class='curline'><a href='../S/1017.html#L1036'>objid_query</a>      1036 ext/snmp/snmp.c 		if (objid_query-&gt;vars == NULL) {</span>
+<span class='curline'><a href='../S/1017.html#L1038'>objid_query</a>      1038 ext/snmp/snmp.c 			efree(objid_query-&gt;vars);</span>
+<span class='curline'><a href='../S/1017.html#L1041'>objid_query</a>      1041 ext/snmp/snmp.c 		objid_query-&gt;array_output = ( (st &amp; SNMP_CMD_SET) ? FALSE : TRUE );</span>
+<span class='curline'><a href='../S/1017.html#L1047'>objid_query</a>      1047 ext/snmp/snmp.c 			objid_query-&gt;vars[objid_query-&gt;count].oid = Z_STRVAL_PP(tmp_oid);</span>
+<span class='curline'><a href='../S/1017.html#L1051'>objid_query</a>      1051 ext/snmp/snmp.c 					objid_query-&gt;vars[objid_query-&gt;count].type = *pptr;</span>
+<span class='curline'><a href='../S/1017.html#L1057'>objid_query</a>      1057 ext/snmp/snmp.c 							efree(objid_query-&gt;vars);</span>
+<span class='curline'><a href='../S/1017.html#L1061'>objid_query</a>      1061 ext/snmp/snmp.c 						objid_query-&gt;vars[objid_query-&gt;count].type = *pptr;</span>
+<span class='curline'><a href='../S/1017.html#L1065'>objid_query</a>      1065 ext/snmp/snmp.c 						efree(objid_query-&gt;vars);</span>
+<span class='curline'><a href='../S/1017.html#L1071'>objid_query</a>      1071 ext/snmp/snmp.c 					objid_query-&gt;vars[objid_query-&gt;count].value = Z_STRVAL_PP(value);</span>
+<span class='curline'><a href='../S/1017.html#L1075'>objid_query</a>      1075 ext/snmp/snmp.c 						objid_query-&gt;vars[objid_query-&gt;count].value = Z_STRVAL_PP(tmp_value);</span>
+<span class='curline'><a href='../S/1017.html#L1079'>objid_query</a>      1079 ext/snmp/snmp.c 						efree(objid_query-&gt;vars);</span>
+<span class='curline'><a href='../S/1017.html#L1084'>objid_query</a>      1084 ext/snmp/snmp.c 			objid_query-&gt;count++;</span>
+<span class='curline'><a href='../S/1017.html#L1090'>objid_query</a>      1090 ext/snmp/snmp.c 		if (objid_query-&gt;count &gt; 1) {</span>
+<span class='curline'><a href='../S/1017.html#L1092'>objid_query</a>      1092 ext/snmp/snmp.c 			efree(objid_query-&gt;vars);</span>
+<span class='curline'><a href='../S/1017.html#L1095'>objid_query</a>      1095 ext/snmp/snmp.c 		objid_query-&gt;vars[0].name_length = MAX_NAME_LEN;</span>
+<span class='curline'><a href='../S/1017.html#L1096'>objid_query</a>      1096 ext/snmp/snmp.c 		if (strlen(objid_query-&gt;vars[0].oid)) { /* on a walk, an empty string means top of tree - no error */</span>
+<span class='curline'><a href='../S/1017.html#L1097'>objid_query</a>      1097 ext/snmp/snmp.c 			if (!snmp_parse_oid(objid_query-&gt;vars[0].oid, objid_query-&gt;vars[0].name, &amp;(objid_query-&gt;vars[0].name_length))) {</span>
+<span class='curline'><a href='../S/1017.html#L1098'>objid_query</a>      1098 ext/snmp/snmp.c 				php_snmp_error(object, NULL TSRMLS_CC, PHP_SNMP_ERRNO_OID_PARSING_ERROR, "Invalid object identifier: %s", objid_query-&gt;vars[0].oid);</span>
+<span class='curline'><a href='../S/1017.html#L1099'>objid_query</a>      1099 ext/snmp/snmp.c 				efree(objid_query-&gt;vars);</span>
+<span class='curline'><a href='../S/1017.html#L1103'>objid_query</a>      1103 ext/snmp/snmp.c 			memmove((char *)objid_query-&gt;vars[0].name, (char *)objid_mib, sizeof(objid_mib));</span>
+<span class='curline'><a href='../S/1017.html#L1104'>objid_query</a>      1104 ext/snmp/snmp.c 			objid_query-&gt;vars[0].name_length = sizeof(objid_mib) / sizeof(oid);</span>
+<span class='curline'><a href='../S/1017.html#L1107'>objid_query</a>      1107 ext/snmp/snmp.c 		for (objid_query-&gt;offset = 0; objid_query-&gt;offset &lt; objid_query-&gt;count; objid_query-&gt;offset++) {</span>
+<span class='curline'><a href='../S/1017.html#L1108'>objid_query</a>      1108 ext/snmp/snmp.c 			objid_query-&gt;vars[objid_query-&gt;offset].name_length = MAX_OID_LEN;</span>
+<span class='curline'><a href='../S/1017.html#L1109'>objid_query</a>      1109 ext/snmp/snmp.c 			if (!snmp_parse_oid(objid_query-&gt;vars[objid_query-&gt;offset].oid, objid_query-&gt;vars[objid_query-&gt;offset].name, &amp;(objid_query-&gt;vars[objid_query-&gt;offset].name_length))) {</span>
+<span class='curline'><a href='../S/1017.html#L1110'>objid_query</a>      1110 ext/snmp/snmp.c 				php_snmp_error(object, NULL TSRMLS_CC, PHP_SNMP_ERRNO_OID_PARSING_ERROR, "Invalid object identifier: %s", objid_query-&gt;vars[objid_query-&gt;offset].oid);</span>
+<span class='curline'><a href='../S/1017.html#L1111'>objid_query</a>      1111 ext/snmp/snmp.c 				efree(objid_query-&gt;vars);</span>
+<span class='curline'><a href='../S/1017.html#L1116'>objid_query</a>      1116 ext/snmp/snmp.c 	objid_query-&gt;offset = 0;</span>
+<span class='curline'><a href='../S/1017.html#L1117'>objid_query</a>      1117 ext/snmp/snmp.c 	objid_query-&gt;step = objid_query-&gt;count;</span>
+<span class='curline'><a href='../S/1017.html#L1118'>objid_query</a>      1118 ext/snmp/snmp.c 	return (objid_query-&gt;count &gt; 0);</span>
+<span class='curline'><a href='../S/1017.html#L1433'>objid_query</a>      1433 ext/snmp/snmp.c 	struct objid_query objid_query;</span>
+<span class='curline'><a href='../S/1017.html#L1439'>objid_query</a>      1439 ext/snmp/snmp.c 	objid_query.max_repetitions = -1;</span>
+<span class='curline'><a href='../S/1017.html#L1440'>objid_query</a>      1440 ext/snmp/snmp.c 	objid_query.non_repeaters = 0;</span>
+<span class='curline'><a href='../S/1017.html#L1441'>objid_query</a>      1441 ext/snmp/snmp.c 	objid_query.valueretrieval = SNMP_G(valueretrieval);</span>
+<span class='curline'><a href='../S/1017.html#L1442'>objid_query</a>      1442 ext/snmp/snmp.c 	objid_query.oid_increasing_check = TRUE;</span>
+<span class='curline'><a href='../S/1017.html#L1482'>objid_query</a>      1482 ext/snmp/snmp.c 			if (zend_parse_parameters(argc TSRMLS_CC, "Z|bll", &amp;oid, &amp;suffix_keys, &amp;(objid_query.max_repetitions), &amp;(objid_query.non_repeaters)) == FAILURE) {</span>
+<span class='curline'><a href='../S/1017.html#L1504'>objid_query</a>      1504 ext/snmp/snmp.c 	if (!php_snmp_parse_oid(getThis(), st, &amp;objid_query, oid, type, value TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/1017.html#L1510'>objid_query</a>      1510 ext/snmp/snmp.c 			efree(objid_query.vars);</span>
+<span class='curline'><a href='../S/1017.html#L1515'>objid_query</a>      1515 ext/snmp/snmp.c 			efree(objid_query.vars);</span>
+<span class='curline'><a href='../S/1017.html#L1526'>objid_query</a>      1526 ext/snmp/snmp.c 			efree(objid_query.vars);</span>
+<span class='curline'><a href='../S/1017.html#L1531'>objid_query</a>      1531 ext/snmp/snmp.c 			objid_query.step = snmp_object-&gt;max_oids;</span>
+<span class='curline'><a href='../S/1017.html#L1532'>objid_query</a>      1532 ext/snmp/snmp.c 			if (objid_query.max_repetitions &lt; 0) { /* unspecified in function call, use session-wise */</span>
+<span class='curline'><a href='../S/1017.html#L1533'>objid_query</a>      1533 ext/snmp/snmp.c 				objid_query.max_repetitions = snmp_object-&gt;max_oids;</span>
+<span class='curline'><a href='../S/1017.html#L1536'>objid_query</a>      1536 ext/snmp/snmp.c 		objid_query.oid_increasing_check = snmp_object-&gt;oid_increasing_check;</span>
+<span class='curline'><a href='../S/1017.html#L1537'>objid_query</a>      1537 ext/snmp/snmp.c 		objid_query.valueretrieval = snmp_object-&gt;valueretrieval;</span>
+<span class='curline'><a href='../S/1017.html#L1546'>objid_query</a>      1546 ext/snmp/snmp.c 	if (objid_query.max_repetitions &lt; 0) {</span>
+<span class='curline'><a href='../S/1017.html#L1547'>objid_query</a>      1547 ext/snmp/snmp.c 		objid_query.max_repetitions = 20; /* provide correct default value */</span>
+<span class='curline'><a href='../S/1017.html#L1550'>objid_query</a>      1550 ext/snmp/snmp.c 	php_snmp_internal(INTERNAL_FUNCTION_PARAM_PASSTHRU, st, session, &amp;objid_query);</span>
+<span class='curline'><a href='../S/1017.html#L1552'>objid_query</a>      1552 ext/snmp/snmp.c 	efree(objid_query.vars);</span>
+</pre>
+</body>
+</html>

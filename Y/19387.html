@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>globals</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/1603.html#L43'>globals</a>            43 TSRM/tsrm_win32.c static void tsrm_win32_ctor(tsrm_win32_globals *globals TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1603.html#L45'>globals</a>            45 TSRM/tsrm_win32.c 	globals-&gt;process = NULL;</span>
+<span class='curline'><a href='../S/1603.html#L46'>globals</a>            46 TSRM/tsrm_win32.c 	globals-&gt;shm	 = NULL;</span>
+<span class='curline'><a href='../S/1603.html#L47'>globals</a>            47 TSRM/tsrm_win32.c 	globals-&gt;process_size = 0;</span>
+<span class='curline'><a href='../S/1603.html#L48'>globals</a>            48 TSRM/tsrm_win32.c 	globals-&gt;shm_size	  = 0;</span>
+<span class='curline'><a href='../S/1603.html#L49'>globals</a>            49 TSRM/tsrm_win32.c 	globals-&gt;comspec = _strdup((GetVersion()&lt;0x80000000)?"cmd.exe":"command.com");</span>
+<span class='curline'><a href='../S/1603.html#L58'>globals</a>            58 TSRM/tsrm_win32.c 	globals-&gt;impersonation_token = INVALID_HANDLE_VALUE;</span>
+<span class='curline'><a href='../S/1603.html#L59'>globals</a>            59 TSRM/tsrm_win32.c 	globals-&gt;impersonation_token_sid = NULL;</span>
+<span class='curline'><a href='../S/1603.html#L62'>globals</a>            62 TSRM/tsrm_win32.c static void tsrm_win32_dtor(tsrm_win32_globals *globals TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1603.html#L66'>globals</a>            66 TSRM/tsrm_win32.c 	if (globals-&gt;process) {</span>
+<span class='curline'><a href='../S/1603.html#L67'>globals</a>            67 TSRM/tsrm_win32.c 		free(globals-&gt;process);</span>
+<span class='curline'><a href='../S/1603.html#L70'>globals</a>            70 TSRM/tsrm_win32.c 	if (globals-&gt;shm) {</span>
+<span class='curline'><a href='../S/1603.html#L71'>globals</a>            71 TSRM/tsrm_win32.c 		for (ptr = globals-&gt;shm; ptr &lt; (globals-&gt;shm + globals-&gt;shm_size); ptr++) {</span>
+<span class='curline'><a href='../S/1603.html#L77'>globals</a>            77 TSRM/tsrm_win32.c 		free(globals-&gt;shm);</span>
+<span class='curline'><a href='../S/1603.html#L80'>globals</a>            80 TSRM/tsrm_win32.c 	free(globals-&gt;comspec);</span>
+<span class='curline'><a href='../S/1603.html#L82'>globals</a>            82 TSRM/tsrm_win32.c 	if (globals-&gt;impersonation_token &amp;&amp; globals-&gt;impersonation_token != INVALID_HANDLE_VALUE	) {</span>
+<span class='curline'><a href='../S/1603.html#L83'>globals</a>            83 TSRM/tsrm_win32.c 		CloseHandle(globals-&gt;impersonation_token);</span>
+<span class='curline'><a href='../S/1603.html#L85'>globals</a>            85 TSRM/tsrm_win32.c 	if (globals-&gt;impersonation_token_sid) {</span>
+<span class='curline'><a href='../S/1603.html#L86'>globals</a>            86 TSRM/tsrm_win32.c 		free(globals-&gt;impersonation_token_sid);</span>
+<span class='curline'><a href='../S/1642.html#L626'>globals</a>           626 Zend/zend.c    	zval *globals;</span>
+<span class='curline'><a href='../S/1642.html#L628'>globals</a>           628 Zend/zend.c    	ALLOC_ZVAL(globals);</span>
+<span class='curline'><a href='../S/1642.html#L629'>globals</a>           629 Zend/zend.c    	Z_SET_REFCOUNT_P(globals, 1);</span>
+<span class='curline'><a href='../S/1642.html#L630'>globals</a>           630 Zend/zend.c    	Z_SET_ISREF_P(globals);</span>
+<span class='curline'><a href='../S/1642.html#L631'>globals</a>           631 Zend/zend.c    	Z_TYPE_P(globals) = IS_ARRAY;</span>
+<span class='curline'><a href='../S/1642.html#L632'>globals</a>           632 Zend/zend.c    	Z_ARRVAL_P(globals) = &amp;EG(symbol_table);</span>
+<span class='curline'><a href='../S/1642.html#L633'>globals</a>           633 Zend/zend.c    	zend_hash_update(&amp;EG(symbol_table), name, name_len + 1, &amp;globals, sizeof(zval *), NULL);</span>
+</pre>
+</body>
+</html>

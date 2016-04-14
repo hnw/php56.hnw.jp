@@ -1,0 +1,705 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>scope</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/1646.html#L771'>scope</a>             771 Zend/zend_API.c 						const char *class_name = active_function-&gt;common.scope ? active_function-&gt;common.scope-&gt;name : "";</span>
+<span class='curline'><a href='../S/1646.html#L791'>scope</a>             791 Zend/zend_API.c 					const char *class_name = active_function-&gt;common.scope ? active_function-&gt;common.scope-&gt;name : "";</span>
+<span class='curline'><a href='../S/1646.html#L814'>scope</a>             814 Zend/zend_API.c 			const char *class_name = active_function-&gt;common.scope ? active_function-&gt;common.scope-&gt;name : "";</span>
+<span class='curline'><a href='../S/1646.html#L1041'>scope</a>            1041 Zend/zend_API.c 	zend_class_entry *old_scope = EG(scope);</span>
+<span class='curline'><a href='../S/1646.html#L1043'>scope</a>            1043 Zend/zend_API.c 	EG(scope) = Z_OBJCE_P(obj);</span>
+<span class='curline'><a href='../S/1646.html#L1045'>scope</a>            1045 Zend/zend_API.c 	EG(scope) = old_scope;</span>
+<span class='curline'><a href='../S/1646.html#L1057'>scope</a>            1057 Zend/zend_API.c 		zend_class_entry **scope = EG(in_execution)?&amp;EG(scope):&amp;CG(active_class_entry);</span>
+<span class='curline'><a href='../S/1646.html#L1059'>scope</a>            1059 Zend/zend_API.c 		if ((*scope)-&gt;parent) {</span>
+<span class='curline'><a href='../S/1646.html#L1060'>scope</a>            1060 Zend/zend_API.c 			zend_class_entry *ce = *scope;</span>
+<span class='curline'><a href='../S/1646.html#L1071'>scope</a>            1071 Zend/zend_API.c 						zend_class_entry *old_scope = *scope;</span>
+<span class='curline'><a href='../S/1646.html#L1072'>scope</a>            1072 Zend/zend_API.c 						*scope = prop_info-&gt;ce;</span>
+<span class='curline'><a href='../S/1646.html#L1074'>scope</a>            1074 Zend/zend_API.c 						*scope = old_scope;</span>
+<span class='curline'><a href='../S/1646.html#L1091'>scope</a>            1091 Zend/zend_API.c 		zend_class_entry **scope = EG(in_execution)?&amp;EG(scope):&amp;CG(active_class_entry);</span>
+<span class='curline'><a href='../S/1646.html#L1092'>scope</a>            1092 Zend/zend_API.c 		zend_class_entry *old_scope = *scope;</span>
+<span class='curline'><a href='../S/1646.html#L1095'>scope</a>            1095 Zend/zend_API.c 		*scope = class_type;</span>
+<span class='curline'><a href='../S/1646.html#L1144'>scope</a>            1144 Zend/zend_API.c 		*scope = old_scope;</span>
+<span class='curline'><a href='../S/1646.html#L2029'>scope</a>            2029 Zend/zend_API.c ZEND_API int zend_register_functions(zend_class_entry *scope, const zend_function_entry *functions, HashTable *function_table, int type TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1646.html#L2056'>scope</a>            2056 Zend/zend_API.c 	if (scope) {</span>
+<span class='curline'><a href='../S/1646.html#L2057'>scope</a>            2057 Zend/zend_API.c 		class_name_len = strlen(scope-&gt;name);</span>
+<span class='curline'><a href='../S/1646.html#L2058'>scope</a>            2058 Zend/zend_API.c 		if ((lc_class_name = zend_memrchr(scope-&gt;name, '\\', class_name_len))) {</span>
+<span class='curline'><a href='../S/1646.html#L2060'>scope</a>            2060 Zend/zend_API.c 			class_name_len -= (lc_class_name - scope-&gt;name);</span>
+<span class='curline'><a href='../S/1646.html#L2063'>scope</a>            2063 Zend/zend_API.c 			lc_class_name = zend_str_tolower_dup(scope-&gt;name, class_name_len);</span>
+<span class='curline'><a href='../S/1646.html#L2070'>scope</a>            2070 Zend/zend_API.c 		internal_function-&gt;scope = scope;</span>
+<span class='curline'><a href='../S/1646.html#L2074'>scope</a>            2074 Zend/zend_API.c 				if (ptr-&gt;flags != ZEND_ACC_DEPRECATED || scope) {</span>
+<span class='curline'><a href='../S/1646.html#L2075'>scope</a>            2075 Zend/zend_API.c 					zend_error(error_type, "Invalid access level for %s%s%s() - access must be exactly one of public, protected or private", scope ? scope-&gt;name : "", scope ? "::" : "", ptr-&gt;fname);</span>
+<span class='curline'><a href='../S/1646.html#L2107'>scope</a>            2107 Zend/zend_API.c 			if (scope) {</span>
+<span class='curline'><a href='../S/1646.html#L2109'>scope</a>            2109 Zend/zend_API.c 				scope-&gt;ce_flags |= ZEND_ACC_IMPLICIT_ABSTRACT_CLASS;</span>
+<span class='curline'><a href='../S/1646.html#L2110'>scope</a>            2110 Zend/zend_API.c 				if (!(scope-&gt;ce_flags &amp; ZEND_ACC_INTERFACE)) {</span>
+<span class='curline'><a href='../S/1646.html#L2114'>scope</a>            2114 Zend/zend_API.c 					scope-&gt;ce_flags |= ZEND_ACC_EXPLICIT_ABSTRACT_CLASS;</span>
+<span class='curline'><a href='../S/1646.html#L2117'>scope</a>            2117 Zend/zend_API.c 			if (ptr-&gt;flags &amp; ZEND_ACC_STATIC &amp;&amp; (!scope || !(scope-&gt;ce_flags &amp; ZEND_ACC_INTERFACE))) {</span>
+<span class='curline'><a href='../S/1646.html#L2118'>scope</a>            2118 Zend/zend_API.c 				zend_error(error_type, "Static function %s%s%s() cannot be abstract", scope ? scope-&gt;name : "", scope ? "::" : "", ptr-&gt;fname);</span>
+<span class='curline'><a href='../S/1646.html#L2121'>scope</a>            2121 Zend/zend_API.c 			if (scope &amp;&amp; (scope-&gt;ce_flags &amp; ZEND_ACC_INTERFACE)) {</span>
+<span class='curline'><a href='../S/1646.html#L2123'>scope</a>            2123 Zend/zend_API.c 				zend_error(error_type, "Interface %s cannot contain non abstract method %s()", scope-&gt;name, ptr-&gt;fname);</span>
+<span class='curline'><a href='../S/1646.html#L2127'>scope</a>            2127 Zend/zend_API.c 				if (scope) {</span>
+<span class='curline'><a href='../S/1646.html#L2130'>scope</a>            2130 Zend/zend_API.c 				zend_error(error_type, "Method %s%s%s() cannot be a NULL function", scope ? scope-&gt;name : "", scope ? "::" : "", ptr-&gt;fname);</span>
+<span class='curline'><a href='../S/1646.html#L2156'>scope</a>            2156 Zend/zend_API.c 		if (scope) {</span>
+<span class='curline'><a href='../S/1646.html#L2168'>scope</a>            2168 Zend/zend_API.c 					zend_error(error_type, "Destructor %s::%s() cannot take arguments", scope-&gt;name, ptr-&gt;fname);</span>
+<span class='curline'><a href='../S/1646.html#L2192'>scope</a>            2192 Zend/zend_API.c 				zend_check_magic_method_implementation(scope, reg_function, error_type TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1646.html#L2200'>scope</a>            2200 Zend/zend_API.c 		if (scope) {</span>
+<span class='curline'><a href='../S/1646.html#L2207'>scope</a>            2207 Zend/zend_API.c 				zend_error(error_type, "Function registration failed - duplicate name - %s%s%s", scope ? scope-&gt;name : "", scope ? "::" : "", ptr-&gt;fname);</span>
+<span class='curline'><a href='../S/1646.html#L2215'>scope</a>            2215 Zend/zend_API.c 	if (scope) {</span>
+<span class='curline'><a href='../S/1646.html#L2216'>scope</a>            2216 Zend/zend_API.c 		scope-&gt;constructor = ctor;</span>
+<span class='curline'><a href='../S/1646.html#L2217'>scope</a>            2217 Zend/zend_API.c 		scope-&gt;destructor = dtor;</span>
+<span class='curline'><a href='../S/1646.html#L2218'>scope</a>            2218 Zend/zend_API.c 		scope-&gt;clone = clone;</span>
+<span class='curline'><a href='../S/1646.html#L2219'>scope</a>            2219 Zend/zend_API.c 		scope-&gt;__call = __call;</span>
+<span class='curline'><a href='../S/1646.html#L2220'>scope</a>            2220 Zend/zend_API.c 		scope-&gt;__callstatic = __callstatic;</span>
+<span class='curline'><a href='../S/1646.html#L2221'>scope</a>            2221 Zend/zend_API.c 		scope-&gt;__tostring = __tostring;</span>
+<span class='curline'><a href='../S/1646.html#L2222'>scope</a>            2222 Zend/zend_API.c 		scope-&gt;__get = __get;</span>
+<span class='curline'><a href='../S/1646.html#L2223'>scope</a>            2223 Zend/zend_API.c 		scope-&gt;__set = __set;</span>
+<span class='curline'><a href='../S/1646.html#L2224'>scope</a>            2224 Zend/zend_API.c 		scope-&gt;__unset = __unset;</span>
+<span class='curline'><a href='../S/1646.html#L2225'>scope</a>            2225 Zend/zend_API.c 		scope-&gt;__isset = __isset;</span>
+<span class='curline'><a href='../S/1646.html#L2226'>scope</a>            2226 Zend/zend_API.c 		scope-&gt;__debugInfo = __debugInfo;</span>
+<span class='curline'><a href='../S/1646.html#L2230'>scope</a>            2230 Zend/zend_API.c 				zend_error(error_type, "Constructor %s::%s() cannot be static", scope-&gt;name, ctor-&gt;common.function_name);</span>
+<span class='curline'><a href='../S/1646.html#L2237'>scope</a>            2237 Zend/zend_API.c 				zend_error(error_type, "Destructor %s::%s() cannot be static", scope-&gt;name, dtor-&gt;common.function_name);</span>
+<span class='curline'><a href='../S/1646.html#L2244'>scope</a>            2244 Zend/zend_API.c 				zend_error(error_type, "Constructor %s::%s() cannot be static", scope-&gt;name, clone-&gt;common.function_name);</span>
+<span class='curline'><a href='../S/1646.html#L2250'>scope</a>            2250 Zend/zend_API.c 				zend_error(error_type, "Method %s::%s() cannot be static", scope-&gt;name, __call-&gt;common.function_name);</span>
+<span class='curline'><a href='../S/1646.html#L2256'>scope</a>            2256 Zend/zend_API.c 				zend_error(error_type, "Method %s::%s() must be static", scope-&gt;name, __callstatic-&gt;common.function_name);</span>
+<span class='curline'><a href='../S/1646.html#L2262'>scope</a>            2262 Zend/zend_API.c 				zend_error(error_type, "Method %s::%s() cannot be static", scope-&gt;name, __tostring-&gt;common.function_name);</span>
+<span class='curline'><a href='../S/1646.html#L2268'>scope</a>            2268 Zend/zend_API.c 				zend_error(error_type, "Method %s::%s() cannot be static", scope-&gt;name, __get-&gt;common.function_name);</span>
+<span class='curline'><a href='../S/1646.html#L2274'>scope</a>            2274 Zend/zend_API.c 				zend_error(error_type, "Method %s::%s() cannot be static", scope-&gt;name, __set-&gt;common.function_name);</span>
+<span class='curline'><a href='../S/1646.html#L2280'>scope</a>            2280 Zend/zend_API.c 				zend_error(error_type, "Method %s::%s() cannot be static", scope-&gt;name, __unset-&gt;common.function_name);</span>
+<span class='curline'><a href='../S/1646.html#L2286'>scope</a>            2286 Zend/zend_API.c 				zend_error(error_type, "Method %s::%s() cannot be static", scope-&gt;name, __isset-&gt;common.function_name);</span>
+<span class='curline'><a href='../S/1646.html#L2292'>scope</a>            2292 Zend/zend_API.c 				zend_error(error_type, "Method %s::%s() cannot be static", scope-&gt;name, __debugInfo-&gt;common.function_name);</span>
+<span class='curline'><a href='../S/1646.html#L2694'>scope</a>            2694 Zend/zend_API.c 		if (!EG(scope)) {</span>
+<span class='curline'><a href='../S/1646.html#L2698'>scope</a>            2698 Zend/zend_API.c 			fcc-&gt;calling_scope = EG(scope);</span>
+<span class='curline'><a href='../S/1646.html#L2706'>scope</a>            2706 Zend/zend_API.c 		if (!EG(scope)) {</span>
+<span class='curline'><a href='../S/1646.html#L2708'>scope</a>            2708 Zend/zend_API.c 		} else if (!EG(scope)-&gt;parent) {</span>
+<span class='curline'><a href='../S/1646.html#L2712'>scope</a>            2712 Zend/zend_API.c 			fcc-&gt;calling_scope = EG(scope)-&gt;parent;</span>
+<span class='curline'><a href='../S/1646.html#L2733'>scope</a>            2733 Zend/zend_API.c 		zend_class_entry *scope = EG(active_op_array) ? EG(active_op_array)-&gt;scope : NULL;</span>
+<span class='curline'><a href='../S/1646.html#L2736'>scope</a>            2736 Zend/zend_API.c 		if (scope &amp;&amp; !fcc-&gt;object_ptr &amp;&amp; EG(This) &amp;&amp;</span>
+<span class='curline'><a href='../S/1646.html#L2737'>scope</a>            2737 Zend/zend_API.c 		    instanceof_function(Z_OBJCE_P(EG(This)), scope TSRMLS_CC) &amp;&amp;</span>
+<span class='curline'><a href='../S/1646.html#L2738'>scope</a>            2738 Zend/zend_API.c 		    instanceof_function(scope, fcc-&gt;calling_scope TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/1646.html#L2806'>scope</a>            2806 Zend/zend_API.c 		last_scope = EG(scope);</span>
+<span class='curline'><a href='../S/1646.html#L2808'>scope</a>            2808 Zend/zend_API.c 			EG(scope) = ce_org;</span>
+<span class='curline'><a href='../S/1646.html#L2812'>scope</a>            2812 Zend/zend_API.c 			EG(scope) = last_scope;</span>
+<span class='curline'><a href='../S/1646.html#L2815'>scope</a>            2815 Zend/zend_API.c 		EG(scope) = last_scope;</span>
+<span class='curline'><a href='../S/1646.html#L2849'>scope</a>            2849 Zend/zend_API.c 		    !strict_class &amp;&amp; EG(scope) &amp;&amp;</span>
+<span class='curline'><a href='../S/1646.html#L2850'>scope</a>            2850 Zend/zend_API.c 		    instanceof_function(fcc-&gt;function_handler-&gt;common.scope, EG(scope) TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/1646.html#L2853'>scope</a>            2853 Zend/zend_API.c 			if (zend_hash_find(&amp;EG(scope)-&gt;function_table, lmname, mlen+1, (void **) &amp;priv_fbc)==SUCCESS</span>
+<span class='curline'><a href='../S/1646.html#L2855'>scope</a>            2855 Zend/zend_API.c 				&amp;&amp; priv_fbc-&gt;common.scope == EG(scope)) {</span>
+<span class='curline'><a href='../S/1646.html#L2864'>scope</a>            2864 Zend/zend_API.c 				if (!zend_check_private(fcc-&gt;function_handler, fcc-&gt;object_ptr ? Z_OBJCE_P(fcc-&gt;object_ptr) : EG(scope), lmname, mlen TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/1646.html#L2870'>scope</a>            2870 Zend/zend_API.c 				if (!zend_check_protected(fcc-&gt;function_handler-&gt;common.scope, EG(scope))) {</span>
+<span class='curline'><a href='../S/1646.html#L2887'>scope</a>            2887 Zend/zend_API.c 				fcc-&gt;function_handler-&gt;internal_function.scope = ce_org;</span>
+<span class='curline'><a href='../S/1646.html#L2896'>scope</a>            2896 Zend/zend_API.c 					    (!fcc-&gt;function_handler-&gt;common.scope ||</span>
+<span class='curline'><a href='../S/1646.html#L2897'>scope</a>            2897 Zend/zend_API.c 					     !instanceof_function(ce_org, fcc-&gt;function_handler-&gt;common.scope TSRMLS_CC))) {</span>
+<span class='curline'><a href='../S/1646.html#L2974'>scope</a>            2974 Zend/zend_API.c 					if (!zend_check_private(fcc-&gt;function_handler, fcc-&gt;object_ptr ? Z_OBJCE_P(fcc-&gt;object_ptr) : EG(scope), lmname, mlen TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/1646.html#L2984'>scope</a>            2984 Zend/zend_API.c 					if (!zend_check_protected(fcc-&gt;function_handler-&gt;common.scope, EG(scope))) {</span>
+<span class='curline'><a href='../S/1646.html#L3710'>scope</a>            3710 Zend/zend_API.c ZEND_API void zend_update_property(zend_class_entry *scope, zval *object, const char *name, int name_length, zval *value TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1646.html#L3713'>scope</a>            3713 Zend/zend_API.c 	zend_class_entry *old_scope = EG(scope);</span>
+<span class='curline'><a href='../S/1646.html#L3715'>scope</a>            3715 Zend/zend_API.c 	EG(scope) = scope;</span>
+<span class='curline'><a href='../S/1646.html#L3730'>scope</a>            3730 Zend/zend_API.c 	EG(scope) = old_scope;</span>
+<span class='curline'><a href='../S/1646.html#L3734'>scope</a>            3734 Zend/zend_API.c ZEND_API void zend_update_property_null(zend_class_entry *scope, zval *object, const char *name, int name_length TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1646.html#L3742'>scope</a>            3742 Zend/zend_API.c 	zend_update_property(scope, object, name, name_length, tmp TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1646.html#L3746'>scope</a>            3746 Zend/zend_API.c ZEND_API void zend_update_property_bool(zend_class_entry *scope, zval *object, const char *name, int name_length, long value TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1646.html#L3754'>scope</a>            3754 Zend/zend_API.c 	zend_update_property(scope, object, name, name_length, tmp TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1646.html#L3758'>scope</a>            3758 Zend/zend_API.c ZEND_API void zend_update_property_long(zend_class_entry *scope, zval *object, const char *name, int name_length, long value TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1646.html#L3766'>scope</a>            3766 Zend/zend_API.c 	zend_update_property(scope, object, name, name_length, tmp TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1646.html#L3770'>scope</a>            3770 Zend/zend_API.c ZEND_API void zend_update_property_double(zend_class_entry *scope, zval *object, const char *name, int name_length, double value TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1646.html#L3778'>scope</a>            3778 Zend/zend_API.c 	zend_update_property(scope, object, name, name_length, tmp TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1646.html#L3782'>scope</a>            3782 Zend/zend_API.c ZEND_API void zend_update_property_string(zend_class_entry *scope, zval *object, const char *name, int name_length, const char *value TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1646.html#L3790'>scope</a>            3790 Zend/zend_API.c 	zend_update_property(scope, object, name, name_length, tmp TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1646.html#L3794'>scope</a>            3794 Zend/zend_API.c ZEND_API void zend_update_property_stringl(zend_class_entry *scope, zval *object, const char *name, int name_length, const char *value, int value_len TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1646.html#L3802'>scope</a>            3802 Zend/zend_API.c 	zend_update_property(scope, object, name, name_length, tmp TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1646.html#L3806'>scope</a>            3806 Zend/zend_API.c ZEND_API int zend_update_static_property(zend_class_entry *scope, const char *name, int name_length, zval *value TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1646.html#L3809'>scope</a>            3809 Zend/zend_API.c 	zend_class_entry *old_scope = EG(scope);</span>
+<span class='curline'><a href='../S/1646.html#L3811'>scope</a>            3811 Zend/zend_API.c 	EG(scope) = scope;</span>
+<span class='curline'><a href='../S/1646.html#L3812'>scope</a>            3812 Zend/zend_API.c 	property = zend_std_get_static_property(scope, name, name_length, 0, NULL TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1646.html#L3813'>scope</a>            3813 Zend/zend_API.c 	EG(scope) = old_scope;</span>
+<span class='curline'><a href='../S/1646.html#L3843'>scope</a>            3843 Zend/zend_API.c ZEND_API int zend_update_static_property_null(zend_class_entry *scope, const char *name, int name_length TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1646.html#L3851'>scope</a>            3851 Zend/zend_API.c 	return zend_update_static_property(scope, name, name_length, tmp TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1646.html#L3855'>scope</a>            3855 Zend/zend_API.c ZEND_API int zend_update_static_property_bool(zend_class_entry *scope, const char *name, int name_length, long value TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1646.html#L3863'>scope</a>            3863 Zend/zend_API.c 	return zend_update_static_property(scope, name, name_length, tmp TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1646.html#L3867'>scope</a>            3867 Zend/zend_API.c ZEND_API int zend_update_static_property_long(zend_class_entry *scope, const char *name, int name_length, long value TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1646.html#L3875'>scope</a>            3875 Zend/zend_API.c 	return zend_update_static_property(scope, name, name_length, tmp TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1646.html#L3879'>scope</a>            3879 Zend/zend_API.c ZEND_API int zend_update_static_property_double(zend_class_entry *scope, const char *name, int name_length, double value TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1646.html#L3887'>scope</a>            3887 Zend/zend_API.c 	return zend_update_static_property(scope, name, name_length, tmp TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1646.html#L3891'>scope</a>            3891 Zend/zend_API.c ZEND_API int zend_update_static_property_string(zend_class_entry *scope, const char *name, int name_length, const char *value TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1646.html#L3899'>scope</a>            3899 Zend/zend_API.c 	return zend_update_static_property(scope, name, name_length, tmp TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1646.html#L3903'>scope</a>            3903 Zend/zend_API.c ZEND_API int zend_update_static_property_stringl(zend_class_entry *scope, const char *name, int name_length, const char *value, int value_len TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1646.html#L3911'>scope</a>            3911 Zend/zend_API.c 	return zend_update_static_property(scope, name, name_length, tmp TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1646.html#L3915'>scope</a>            3915 Zend/zend_API.c ZEND_API zval *zend_read_property(zend_class_entry *scope, zval *object, const char *name, int name_length, zend_bool silent TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1646.html#L3918'>scope</a>            3918 Zend/zend_API.c 	zend_class_entry *old_scope = EG(scope);</span>
+<span class='curline'><a href='../S/1646.html#L3920'>scope</a>            3920 Zend/zend_API.c 	EG(scope) = scope;</span>
+<span class='curline'><a href='../S/1646.html#L3935'>scope</a>            3935 Zend/zend_API.c 	EG(scope) = old_scope;</span>
+<span class='curline'><a href='../S/1646.html#L3940'>scope</a>            3940 Zend/zend_API.c ZEND_API zval *zend_read_static_property(zend_class_entry *scope, const char *name, int name_length, zend_bool silent TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1646.html#L3943'>scope</a>            3943 Zend/zend_API.c 	zend_class_entry *old_scope = EG(scope);</span>
+<span class='curline'><a href='../S/1646.html#L3945'>scope</a>            3945 Zend/zend_API.c 	EG(scope) = scope;</span>
+<span class='curline'><a href='../S/1646.html#L3946'>scope</a>            3946 Zend/zend_API.c 	property = zend_std_get_static_property(scope, name, name_length, silent, NULL TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1646.html#L3947'>scope</a>            3947 Zend/zend_API.c 	EG(scope) = old_scope;</span>
+<span class='curline'><a href='../S/1646.html#L4022'>scope</a>            4022 Zend/zend_API.c 	    !f-&gt;common.scope ||</span>
+<span class='curline'><a href='../S/1646.html#L4023'>scope</a>            4023 Zend/zend_API.c 	    !f-&gt;common.scope-&gt;trait_aliases) {</span>
+<span class='curline'><a href='../S/1646.html#L4043'>scope</a>            4043 Zend/zend_API.c 			return zend_find_alias_name(f-&gt;common.scope, name, len);</span>
+<span class='curline'><a href='../S/1647.html#L268'>scope</a>             268 Zend/zend_API.h ZEND_API int zend_register_functions(zend_class_entry *scope, const zend_function_entry *functions, HashTable *function_table, int type TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1647.html#L326'>scope</a>             326 Zend/zend_API.h ZEND_API void zend_update_property(zend_class_entry *scope, zval *object, const char *name, int name_length, zval *value TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1647.html#L327'>scope</a>             327 Zend/zend_API.h ZEND_API void zend_update_property_null(zend_class_entry *scope, zval *object, const char *name, int name_length TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1647.html#L328'>scope</a>             328 Zend/zend_API.h ZEND_API void zend_update_property_bool(zend_class_entry *scope, zval *object, const char *name, int name_length, long value TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1647.html#L329'>scope</a>             329 Zend/zend_API.h ZEND_API void zend_update_property_long(zend_class_entry *scope, zval *object, const char *name, int name_length, long value TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1647.html#L330'>scope</a>             330 Zend/zend_API.h ZEND_API void zend_update_property_double(zend_class_entry *scope, zval *object, const char *name, int name_length, double value TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1647.html#L331'>scope</a>             331 Zend/zend_API.h ZEND_API void zend_update_property_string(zend_class_entry *scope, zval *object, const char *name, int name_length, const char *value TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1647.html#L332'>scope</a>             332 Zend/zend_API.h ZEND_API void zend_update_property_stringl(zend_class_entry *scope, zval *object, const char *name, int name_length, const char *value, int value_length TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1647.html#L334'>scope</a>             334 Zend/zend_API.h ZEND_API int zend_update_static_property(zend_class_entry *scope, const char *name, int name_length, zval *value TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1647.html#L335'>scope</a>             335 Zend/zend_API.h ZEND_API int zend_update_static_property_null(zend_class_entry *scope, const char *name, int name_length TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1647.html#L336'>scope</a>             336 Zend/zend_API.h ZEND_API int zend_update_static_property_bool(zend_class_entry *scope, const char *name, int name_length, long value TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1647.html#L337'>scope</a>             337 Zend/zend_API.h ZEND_API int zend_update_static_property_long(zend_class_entry *scope, const char *name, int name_length, long value TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1647.html#L338'>scope</a>             338 Zend/zend_API.h ZEND_API int zend_update_static_property_double(zend_class_entry *scope, const char *name, int name_length, double value TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1647.html#L339'>scope</a>             339 Zend/zend_API.h ZEND_API int zend_update_static_property_string(zend_class_entry *scope, const char *name, int name_length, const char *value TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1647.html#L340'>scope</a>             340 Zend/zend_API.h ZEND_API int zend_update_static_property_stringl(zend_class_entry *scope, const char *name, int name_length, const char *value, int value_length TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1647.html#L342'>scope</a>             342 Zend/zend_API.h ZEND_API zval *zend_read_property(zend_class_entry *scope, zval *object, const char *name, int name_length, zend_bool silent TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1647.html#L344'>scope</a>             344 Zend/zend_API.h ZEND_API zval *zend_read_static_property(zend_class_entry *scope, const char *name, int name_length, zend_bool silent TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1648.html#L105'>scope</a>             105 Zend/zend_ast.c ZEND_API void zend_ast_evaluate(zval *result, zend_ast *ast, zend_class_entry *scope TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1648.html#L111'>scope</a>             111 Zend/zend_ast.c 			zend_ast_evaluate(&amp;op1, (&amp;ast-&gt;u.child)[0], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L112'>scope</a>             112 Zend/zend_ast.c 			zend_ast_evaluate(&amp;op2, (&amp;ast-&gt;u.child)[1], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L118'>scope</a>             118 Zend/zend_ast.c 			zend_ast_evaluate(&amp;op1, (&amp;ast-&gt;u.child)[0], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L119'>scope</a>             119 Zend/zend_ast.c 			zend_ast_evaluate(&amp;op2, (&amp;ast-&gt;u.child)[1], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L125'>scope</a>             125 Zend/zend_ast.c 			zend_ast_evaluate(&amp;op1, (&amp;ast-&gt;u.child)[0], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L126'>scope</a>             126 Zend/zend_ast.c 			zend_ast_evaluate(&amp;op2, (&amp;ast-&gt;u.child)[1], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L132'>scope</a>             132 Zend/zend_ast.c 			zend_ast_evaluate(&amp;op1, (&amp;ast-&gt;u.child)[0], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L133'>scope</a>             133 Zend/zend_ast.c 			zend_ast_evaluate(&amp;op2, (&amp;ast-&gt;u.child)[1], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L139'>scope</a>             139 Zend/zend_ast.c 			zend_ast_evaluate(&amp;op1, (&amp;ast-&gt;u.child)[0], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L140'>scope</a>             140 Zend/zend_ast.c 			zend_ast_evaluate(&amp;op2, (&amp;ast-&gt;u.child)[1], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L146'>scope</a>             146 Zend/zend_ast.c 			zend_ast_evaluate(&amp;op1, (&amp;ast-&gt;u.child)[0], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L147'>scope</a>             147 Zend/zend_ast.c 			zend_ast_evaluate(&amp;op2, (&amp;ast-&gt;u.child)[1], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L153'>scope</a>             153 Zend/zend_ast.c 			zend_ast_evaluate(&amp;op1, (&amp;ast-&gt;u.child)[0], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L154'>scope</a>             154 Zend/zend_ast.c 			zend_ast_evaluate(&amp;op2, (&amp;ast-&gt;u.child)[1], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L160'>scope</a>             160 Zend/zend_ast.c 			zend_ast_evaluate(&amp;op1, (&amp;ast-&gt;u.child)[0], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L161'>scope</a>             161 Zend/zend_ast.c 			zend_ast_evaluate(&amp;op2, (&amp;ast-&gt;u.child)[1], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L167'>scope</a>             167 Zend/zend_ast.c 			zend_ast_evaluate(&amp;op1, (&amp;ast-&gt;u.child)[0], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L168'>scope</a>             168 Zend/zend_ast.c 			zend_ast_evaluate(&amp;op2, (&amp;ast-&gt;u.child)[1], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L174'>scope</a>             174 Zend/zend_ast.c 			zend_ast_evaluate(&amp;op1, (&amp;ast-&gt;u.child)[0], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L175'>scope</a>             175 Zend/zend_ast.c 			zend_ast_evaluate(&amp;op2, (&amp;ast-&gt;u.child)[1], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L181'>scope</a>             181 Zend/zend_ast.c 			zend_ast_evaluate(&amp;op1, (&amp;ast-&gt;u.child)[0], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L182'>scope</a>             182 Zend/zend_ast.c 			zend_ast_evaluate(&amp;op2, (&amp;ast-&gt;u.child)[1], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L188'>scope</a>             188 Zend/zend_ast.c 			zend_ast_evaluate(&amp;op1, (&amp;ast-&gt;u.child)[0], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L189'>scope</a>             189 Zend/zend_ast.c 			zend_ast_evaluate(&amp;op2, (&amp;ast-&gt;u.child)[1], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L195'>scope</a>             195 Zend/zend_ast.c 			zend_ast_evaluate(&amp;op1, (&amp;ast-&gt;u.child)[0], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L200'>scope</a>             200 Zend/zend_ast.c 			zend_ast_evaluate(&amp;op1, (&amp;ast-&gt;u.child)[0], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L205'>scope</a>             205 Zend/zend_ast.c 			zend_ast_evaluate(&amp;op1, (&amp;ast-&gt;u.child)[0], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L206'>scope</a>             206 Zend/zend_ast.c 			zend_ast_evaluate(&amp;op2, (&amp;ast-&gt;u.child)[1], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L212'>scope</a>             212 Zend/zend_ast.c 			zend_ast_evaluate(&amp;op1, (&amp;ast-&gt;u.child)[0], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L213'>scope</a>             213 Zend/zend_ast.c 			zend_ast_evaluate(&amp;op2, (&amp;ast-&gt;u.child)[1], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L219'>scope</a>             219 Zend/zend_ast.c 			zend_ast_evaluate(&amp;op1, (&amp;ast-&gt;u.child)[0], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L220'>scope</a>             220 Zend/zend_ast.c 			zend_ast_evaluate(&amp;op2, (&amp;ast-&gt;u.child)[1], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L226'>scope</a>             226 Zend/zend_ast.c 			zend_ast_evaluate(&amp;op1, (&amp;ast-&gt;u.child)[0], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L227'>scope</a>             227 Zend/zend_ast.c 			zend_ast_evaluate(&amp;op2, (&amp;ast-&gt;u.child)[1], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L233'>scope</a>             233 Zend/zend_ast.c 			zend_ast_evaluate(&amp;op1, (&amp;ast-&gt;u.child)[0], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L234'>scope</a>             234 Zend/zend_ast.c 			zend_ast_evaluate(&amp;op2, (&amp;ast-&gt;u.child)[1], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L240'>scope</a>             240 Zend/zend_ast.c 			zend_ast_evaluate(&amp;op1, (&amp;ast-&gt;u.child)[0], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L241'>scope</a>             241 Zend/zend_ast.c 			zend_ast_evaluate(&amp;op2, (&amp;ast-&gt;u.child)[1], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L247'>scope</a>             247 Zend/zend_ast.c 			zend_ast_evaluate(&amp;op1, (&amp;ast-&gt;u.child)[0], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L248'>scope</a>             248 Zend/zend_ast.c 			zend_ast_evaluate(&amp;op2, (&amp;ast-&gt;u.child)[1], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L255'>scope</a>             255 Zend/zend_ast.c 			if (scope) {</span>
+<span class='curline'><a href='../S/1648.html#L257'>scope</a>             257 Zend/zend_ast.c 					zval_update_constant_ex(&amp;ast-&gt;u.val, 1, scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L265'>scope</a>             265 Zend/zend_ast.c 					zval_update_constant_ex(&amp;result, 1, scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L270'>scope</a>             270 Zend/zend_ast.c 			zend_ast_evaluate(&amp;op1, (&amp;ast-&gt;u.child)[0], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L272'>scope</a>             272 Zend/zend_ast.c 				zend_ast_evaluate(&amp;op2, (&amp;ast-&gt;u.child)[1], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L281'>scope</a>             281 Zend/zend_ast.c 			zend_ast_evaluate(&amp;op1, (&amp;ast-&gt;u.child)[0], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L285'>scope</a>             285 Zend/zend_ast.c 				zend_ast_evaluate(&amp;op2, (&amp;ast-&gt;u.child)[1], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L292'>scope</a>             292 Zend/zend_ast.c 			zend_ast_evaluate(&amp;op1, (&amp;ast-&gt;u.child)[0], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L297'>scope</a>             297 Zend/zend_ast.c 					zend_ast_evaluate(result, (&amp;ast-&gt;u.child)[1], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L301'>scope</a>             301 Zend/zend_ast.c 				zend_ast_evaluate(result, (&amp;ast-&gt;u.child)[2], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L307'>scope</a>             307 Zend/zend_ast.c 			zend_ast_evaluate(&amp;op2, (&amp;ast-&gt;u.child)[0], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L313'>scope</a>             313 Zend/zend_ast.c 			zend_ast_evaluate(&amp;op2, (&amp;ast-&gt;u.child)[0], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L327'>scope</a>             327 Zend/zend_ast.c 						zend_ast_evaluate(&amp;op1, (&amp;ast-&gt;u.child)[i], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L329'>scope</a>             329 Zend/zend_ast.c 					zend_ast_evaluate(expr, (&amp;ast-&gt;u.child)[i+1], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L335'>scope</a>             335 Zend/zend_ast.c 			zend_ast_evaluate(&amp;op1, (&amp;ast-&gt;u.child)[0], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L336'>scope</a>             336 Zend/zend_ast.c 			zend_ast_evaluate(&amp;op2, (&amp;ast-&gt;u.child)[1], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1649.html#L59'>scope</a>              59 Zend/zend_ast.h ZEND_API void zend_ast_evaluate(zval *result, zend_ast *ast, zend_class_entry *scope TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1651.html#L763'>scope</a>             763 Zend/zend_builtin_functions.c 		if (EG(scope)) {</span>
+<span class='curline'><a href='../S/1651.html#L764'>scope</a>             764 Zend/zend_builtin_functions.c 			RETURN_STRINGL(EG(scope)-&gt;name, EG(scope)-&gt;name_length, 1);</span>
+<span class='curline'><a href='../S/1651.html#L788'>scope</a>             788 Zend/zend_builtin_functions.c 	} else if (!EG(scope))  {</span>
+<span class='curline'><a href='../S/1651.html#L810'>scope</a>             810 Zend/zend_builtin_functions.c 		ce = EG(scope);</span>
+<span class='curline'><a href='../S/1651.html#L921'>scope</a>             921 Zend/zend_builtin_functions.c 		     prop_info-&gt;ce != EG(scope)) ||</span>
+<span class='curline'><a href='../S/1651.html#L923'>scope</a>             923 Zend/zend_builtin_functions.c 		     !zend_check_protected(prop_info-&gt;ce, EG(scope))) ||</span>
+<span class='curline'><a href='../S/1651.html#L925'>scope</a>             925 Zend/zend_builtin_functions.c 		      ce != EG(scope) &amp;&amp;</span>
+<span class='curline'><a href='../S/1651.html#L926'>scope</a>             926 Zend/zend_builtin_functions.c 			  prop_info-&gt;ce != EG(scope))) {</span>
+<span class='curline'><a href='../S/1651.html#L1081'>scope</a>            1081 Zend/zend_builtin_functions.c 		 || (EG(scope) &amp;&amp;</span>
+<span class='curline'><a href='../S/1651.html#L1083'>scope</a>            1083 Zend/zend_builtin_functions.c 		       zend_check_protected(mptr-&gt;common.scope, EG(scope)))</span>
+<span class='curline'><a href='../S/1651.html#L1085'>scope</a>            1085 Zend/zend_builtin_functions.c 		       EG(scope) == mptr-&gt;common.scope)))) {</span>
+<span class='curline'><a href='../S/1651.html#L1097'>scope</a>            1097 Zend/zend_builtin_functions.c 			    mptr-&gt;common.scope == ce ||</span>
+<span class='curline'><a href='../S/1651.html#L1105'>scope</a>            1105 Zend/zend_builtin_functions.c 					ZVAL_STRINGL(method_name, zend_find_alias_name(mptr-&gt;common.scope, key, key_len - 1), key_len - 1, 1);</span>
+<span class='curline'><a href='../S/1651.html#L1159'>scope</a>            1159 Zend/zend_builtin_functions.c 				RETVAL_BOOL((func-&gt;common.scope == zend_ce_closure</span>
+<span class='curline'><a href='../S/1651.html#L2119'>scope</a>            2119 Zend/zend_builtin_functions.c 		function_name = (ptr-&gt;function_state.function-&gt;common.scope &amp;&amp;</span>
+<span class='curline'><a href='../S/1651.html#L2120'>scope</a>            2120 Zend/zend_builtin_functions.c 			ptr-&gt;function_state.function-&gt;common.scope-&gt;trait_aliases) ?</span>
+<span class='curline'><a href='../S/1651.html#L2124'>scope</a>            2124 Zend/zend_builtin_functions.c 						ptr-&gt;function_state.function-&gt;common.scope,</span>
+<span class='curline'><a href='../S/1651.html#L2130'>scope</a>            2130 Zend/zend_builtin_functions.c 				if (ptr-&gt;function_state.function-&gt;common.scope) {</span>
+<span class='curline'><a href='../S/1651.html#L2131'>scope</a>            2131 Zend/zend_builtin_functions.c 					class_name = ptr-&gt;function_state.function-&gt;common.scope-&gt;name;</span>
+<span class='curline'><a href='../S/1651.html#L2143'>scope</a>            2143 Zend/zend_builtin_functions.c 			} else if (ptr-&gt;function_state.function-&gt;common.scope) {</span>
+<span class='curline'><a href='../S/1651.html#L2144'>scope</a>            2144 Zend/zend_builtin_functions.c 				class_name = ptr-&gt;function_state.function-&gt;common.scope-&gt;name;</span>
+<span class='curline'><a href='../S/1651.html#L2307'>scope</a>            2307 Zend/zend_builtin_functions.c 		function_name = (ptr-&gt;function_state.function-&gt;common.scope &amp;&amp;</span>
+<span class='curline'><a href='../S/1651.html#L2308'>scope</a>            2308 Zend/zend_builtin_functions.c 			ptr-&gt;function_state.function-&gt;common.scope-&gt;trait_aliases) ?</span>
+<span class='curline'><a href='../S/1651.html#L2312'>scope</a>            2312 Zend/zend_builtin_functions.c 						ptr-&gt;function_state.function-&gt;common.scope,</span>
+<span class='curline'><a href='../S/1651.html#L2320'>scope</a>            2320 Zend/zend_builtin_functions.c 				if (ptr-&gt;function_state.function-&gt;common.scope) {</span>
+<span class='curline'><a href='../S/1651.html#L2321'>scope</a>            2321 Zend/zend_builtin_functions.c 					add_assoc_string_ex(stack_frame, "class", sizeof("class"), (char*)ptr-&gt;function_state.function-&gt;common.scope-&gt;name, 1);</span>
+<span class='curline'><a href='../S/1651.html#L2336'>scope</a>            2336 Zend/zend_builtin_functions.c 			} else if (ptr-&gt;function_state.function-&gt;common.scope) {</span>
+<span class='curline'><a href='../S/1651.html#L2337'>scope</a>            2337 Zend/zend_builtin_functions.c 				add_assoc_string_ex(stack_frame, "class", sizeof("class"), (char*)ptr-&gt;function_state.function-&gt;common.scope-&gt;name, 1);</span>
+<span class='curline'><a href='../S/1653.html#L92'>scope</a>              92 Zend/zend_closures.c 			&amp;&amp; closure-&gt;func.common.scope &amp;&amp; closure-&gt;func.type == ZEND_INTERNAL_FUNCTION) {</span>
+<span class='curline'><a href='../S/1653.html#L121'>scope</a>             121 Zend/zend_closures.c 				ce = closure-&gt;func.common.scope;</span>
+<span class='curline'><a href='../S/1653.html#L133'>scope</a>             133 Zend/zend_closures.c 		ce = closure-&gt;func.common.scope;</span>
+<span class='curline'><a href='../S/1653.html#L137'>scope</a>             137 Zend/zend_closures.c 	if (closure-&gt;func.type == ZEND_INTERNAL_FUNCTION &amp;&amp; closure-&gt;func.common.scope != NULL) {</span>
+<span class='curline'><a href='../S/1653.html#L138'>scope</a>             138 Zend/zend_closures.c 		if (ce &amp;&amp; !instanceof_function(ce, closure-&gt;func.common.scope TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/1653.html#L139'>scope</a>             139 Zend/zend_closures.c 			zend_error(E_WARNING, "Cannot bind function %s::%s to scope class %s", closure-&gt;func.common.scope-&gt;name, closure-&gt;func.common.function_name, ce-&gt;name);</span>
+<span class='curline'><a href='../S/1653.html#L143'>scope</a>             143 Zend/zend_closures.c 				!instanceof_function(Z_OBJCE_P(newthis), closure-&gt;func.common.scope TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/1653.html#L144'>scope</a>             144 Zend/zend_closures.c 			zend_error(E_WARNING, "Cannot bind internal method %s::%s() to object of class %s", closure-&gt;func.common.scope-&gt;name, closure-&gt;func.common.function_name, Z_OBJCE_P(newthis)-&gt;name);</span>
+<span class='curline'><a href='../S/1653.html#L178'>scope</a>             178 Zend/zend_closures.c 	invoke-&gt;internal_function.scope = zend_ce_closure;</span>
+<span class='curline'><a href='../S/1653.html#L304'>scope</a>             304 Zend/zend_closures.c 	zend_create_closure(&amp;result, &amp;closure-&gt;func, closure-&gt;func.common.scope, closure-&gt;this_ptr TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1653.html#L329'>scope</a>             329 Zend/zend_closures.c 		*ce_ptr = closure-&gt;func.common.scope;</span>
+<span class='curline'><a href='../S/1653.html#L457'>scope</a>             457 Zend/zend_closures.c ZEND_API void zend_create_closure(zval *res, zend_function *func, zend_class_entry *scope, zval *this_ptr TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1653.html#L469'>scope</a>             469 Zend/zend_closures.c 	if ((scope == NULL) &amp;&amp; (this_ptr != NULL)) {</span>
+<span class='curline'><a href='../S/1653.html#L472'>scope</a>             472 Zend/zend_closures.c 		scope = zend_ce_closure;</span>
+<span class='curline'><a href='../S/1653.html#L486'>scope</a>             486 Zend/zend_closures.c 		if (!func-&gt;common.scope) {</span>
+<span class='curline'><a href='../S/1653.html#L489'>scope</a>             489 Zend/zend_closures.c 			scope = NULL;</span>
+<span class='curline'><a href='../S/1653.html#L497'>scope</a>             497 Zend/zend_closures.c 	closure-&gt;func.common.scope = scope;</span>
+<span class='curline'><a href='../S/1653.html#L498'>scope</a>             498 Zend/zend_closures.c 	if (scope) {</span>
+<span class='curline'><a href='../S/1654.html#L31'>scope</a>              31 Zend/zend_closures.h ZEND_API void zend_create_closure(zval *res, zend_function *op_array, zend_class_entry *scope, zval *this_ptr TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1655.html#L1574'>scope</a>            1574 Zend/zend_compile.c 	op_array.scope = is_method?CG(active_class_entry):NULL;</span>
+<span class='curline'><a href='../S/1655.html#L1881'>scope</a>            1881 Zend/zend_compile.c 			if (CG(active_op_array)-&gt;scope &amp;&amp;</span>
+<span class='curline'><a href='../S/1655.html#L3250'>scope</a>            3250 Zend/zend_compile.c 		&amp;&amp; ((proto-&gt;common.scope-&gt;ce_flags &amp; ZEND_ACC_INTERFACE) == 0</span>
+<span class='curline'><a href='../S/1655.html#L3306'>scope</a>            3306 Zend/zend_compile.c 			if (!strcasecmp(fe_arg_info-&gt;class_name, "parent") &amp;&amp; proto-&gt;common.scope) {</span>
+<span class='curline'><a href='../S/1655.html#L3307'>scope</a>            3307 Zend/zend_compile.c 				fe_class_name = proto-&gt;common.scope-&gt;name;</span>
+<span class='curline'><a href='../S/1655.html#L3308'>scope</a>            3308 Zend/zend_compile.c 				fe_class_name_len = proto-&gt;common.scope-&gt;name_length;</span>
+<span class='curline'><a href='../S/1655.html#L3309'>scope</a>            3309 Zend/zend_compile.c 			} else if (!strcasecmp(fe_arg_info-&gt;class_name, "self") &amp;&amp; fe-&gt;common.scope) {</span>
+<span class='curline'><a href='../S/1655.html#L3310'>scope</a>            3310 Zend/zend_compile.c 				fe_class_name = fe-&gt;common.scope-&gt;name;</span>
+<span class='curline'><a href='../S/1655.html#L3311'>scope</a>            3311 Zend/zend_compile.c 				fe_class_name_len = fe-&gt;common.scope-&gt;name_length;</span>
+<span class='curline'><a href='../S/1655.html#L3317'>scope</a>            3317 Zend/zend_compile.c 			if (!strcasecmp(proto_arg_info-&gt;class_name, "parent") &amp;&amp; proto-&gt;common.scope &amp;&amp; proto-&gt;common.scope-&gt;parent) {</span>
+<span class='curline'><a href='../S/1655.html#L3318'>scope</a>            3318 Zend/zend_compile.c 				proto_class_name = proto-&gt;common.scope-&gt;parent-&gt;name;</span>
+<span class='curline'><a href='../S/1655.html#L3319'>scope</a>            3319 Zend/zend_compile.c 				proto_class_name_len = proto-&gt;common.scope-&gt;parent-&gt;name_length;</span>
+<span class='curline'><a href='../S/1655.html#L3320'>scope</a>            3320 Zend/zend_compile.c 			} else if (!strcasecmp(proto_arg_info-&gt;class_name, "self") &amp;&amp; proto-&gt;common.scope) {</span>
+<span class='curline'><a href='../S/1655.html#L3321'>scope</a>            3321 Zend/zend_compile.c 				proto_class_name = proto-&gt;common.scope-&gt;name;</span>
+<span class='curline'><a href='../S/1655.html#L3322'>scope</a>            3322 Zend/zend_compile.c 				proto_class_name_len = proto-&gt;common.scope-&gt;name_length;</span>
+<span class='curline'><a href='../S/1655.html#L3384'>scope</a>            3384 Zend/zend_compile.c 	if (fptr-&gt;common.scope) {</span>
+<span class='curline'><a href='../S/1655.html#L3385'>scope</a>            3385 Zend/zend_compile.c 		memcpy(offset, fptr-&gt;common.scope-&gt;name, fptr-&gt;common.scope-&gt;name_length);</span>
+<span class='curline'><a href='../S/1655.html#L3386'>scope</a>            3386 Zend/zend_compile.c 		offset += fptr-&gt;common.scope-&gt;name_length;</span>
+<span class='curline'><a href='../S/1655.html#L3408'>scope</a>            3408 Zend/zend_compile.c 				if (!strcasecmp(arg_info-&gt;class_name, "self") &amp;&amp; fptr-&gt;common.scope ) {</span>
+<span class='curline'><a href='../S/1655.html#L3409'>scope</a>            3409 Zend/zend_compile.c 					class_name = fptr-&gt;common.scope-&gt;name;</span>
+<span class='curline'><a href='../S/1655.html#L3410'>scope</a>            3410 Zend/zend_compile.c 					class_name_len = fptr-&gt;common.scope-&gt;name_length;</span>
+<span class='curline'><a href='../S/1655.html#L3411'>scope</a>            3411 Zend/zend_compile.c 				} else if (!strcasecmp(arg_info-&gt;class_name, "parent") &amp;&amp; fptr-&gt;common.scope-&gt;parent) {</span>
+<span class='curline'><a href='../S/1655.html#L3412'>scope</a>            3412 Zend/zend_compile.c 					class_name = fptr-&gt;common.scope-&gt;parent-&gt;name;</span>
+<span class='curline'><a href='../S/1655.html#L3413'>scope</a>            3413 Zend/zend_compile.c 					class_name_len = fptr-&gt;common.scope-&gt;parent-&gt;name_length;</span>
+<span class='curline'><a href='../S/1655.html#L3550'>scope</a>            3550 Zend/zend_compile.c 	if ((parent-&gt;common.scope-&gt;ce_flags &amp; ZEND_ACC_INTERFACE) == 0</span>
+<span class='curline'><a href='../S/1655.html#L3552'>scope</a>            3552 Zend/zend_compile.c 		&amp;&amp; parent-&gt;common.scope != (child-&gt;common.prototype ? child-&gt;common.prototype-&gt;common.scope : child-&gt;common.scope)</span>
+<span class='curline'><a href='../S/1655.html#L3555'>scope</a>            3555 Zend/zend_compile.c 			parent-&gt;common.scope-&gt;name,</span>
+<span class='curline'><a href='../S/1655.html#L3557'>scope</a>            3557 Zend/zend_compile.c 			child-&gt;common.prototype ? child-&gt;common.prototype-&gt;common.scope-&gt;name : child-&gt;common.scope-&gt;name);</span>
+<span class='curline'><a href='../S/1655.html#L3598'>scope</a>            3598 Zend/zend_compile.c 	} else if (!(parent-&gt;common.fn_flags &amp; ZEND_ACC_CTOR) || (parent-&gt;common.prototype &amp;&amp; (parent-&gt;common.prototype-&gt;common.scope-&gt;ce_flags &amp; ZEND_ACC_INTERFACE))) {</span>
+<span class='curline'><a href='../S/1655.html#L3969'>scope</a>            3969 Zend/zend_compile.c 	zend_uint    fn_flags = fn-&gt;common.scope-&gt;ce_flags;</span>
+<span class='curline'><a href='../S/1655.html#L3970'>scope</a>            3970 Zend/zend_compile.c 	zend_uint other_flags = other_fn-&gt;common.scope-&gt;ce_flags;</span>
+<span class='curline'><a href='../S/1655.html#L3973'>scope</a>            3973 Zend/zend_compile.c 		&amp;&amp; ((other_fn-&gt;common.scope-&gt;ce_flags &amp; ZEND_ACC_INTERFACE) || zend_do_perform_implementation_check(other_fn, fn TSRMLS_CC))</span>
+<span class='curline'><a href='../S/1655.html#L4028'>scope</a>            4028 Zend/zend_compile.c 		if (existing_fn-&gt;common.scope == ce) {</span>
+<span class='curline'><a href='../S/1655.html#L4057'>scope</a>            4057 Zend/zend_compile.c 				(existing_fn-&gt;common.scope-&gt;ce_flags &amp; ZEND_ACC_INTERFACE) == 0) {</span>
+<span class='curline'><a href='../S/1655.html#L4072'>scope</a>            4072 Zend/zend_compile.c 		} else if ((existing_fn-&gt;common.scope-&gt;ce_flags &amp; ZEND_ACC_TRAIT) == ZEND_ACC_TRAIT) {</span>
+<span class='curline'><a href='../S/1655.html#L4079'>scope</a>            4079 Zend/zend_compile.c 				fn-&gt;common.scope-&gt;name, fn-&gt;common.function_name,</span>
+<span class='curline'><a href='../S/1655.html#L4081'>scope</a>            4081 Zend/zend_compile.c 				existing_fn-&gt;common.scope-&gt;name, existing_fn-&gt;common.function_name);</span>
+<span class='curline'><a href='../S/1655.html#L4099'>scope</a>            4099 Zend/zend_compile.c 	if ((fn-&gt;common.scope-&gt;ce_flags &amp; ZEND_ACC_TRAIT) == ZEND_ACC_TRAIT) {</span>
+<span class='curline'><a href='../S/1655.html#L4101'>scope</a>            4101 Zend/zend_compile.c 		fn-&gt;common.scope = ce;</span>
+<span class='curline'><a href='../S/1655.html#L4138'>scope</a>            4138 Zend/zend_compile.c 				&amp;&amp; (!alias-&gt;trait_method-&gt;ce || fn-&gt;common.scope == alias-&gt;trait_method-&gt;ce)</span>
+<span class='curline'><a href='../S/1655.html#L4154'>scope</a>            4154 Zend/zend_compile.c 					alias-&gt;trait_method-&gt;ce = fn-&gt;common.scope;</span>
+<span class='curline'><a href='../S/1655.html#L4175'>scope</a>            4175 Zend/zend_compile.c 					&amp;&amp; (!alias-&gt;trait_method-&gt;ce || fn-&gt;common.scope == alias-&gt;trait_method-&gt;ce)</span>
+<span class='curline'><a href='../S/1655.html#L4183'>scope</a>            4183 Zend/zend_compile.c 						alias-&gt;trait_method-&gt;ce = fn-&gt;common.scope;</span>
+<span class='curline'><a href='../S/1655.html#L6106'>scope</a>            6106 Zend/zend_compile.c 		if (CG(active_op_array)-&gt;scope) {</span>
+<span class='curline'><a href='../S/1655.html#L6107'>scope</a>            6107 Zend/zend_compile.c 			CG(active_op_array)-&gt;scope-&gt;ce_flags |= ZEND_HAS_STATIC_IN_METHODS;</span>
+<span class='curline'><a href='../S/1655.html#L6248'>scope</a>            6248 Zend/zend_compile.c 	if (CG(active_op_array)-&gt;scope &amp;&amp; CG(active_op_array)-&gt;this_var == -1) {</span>
+<span class='curline'><a href='../S/1656.html#L271'>scope</a>             271 Zend/zend_compile.h 	zend_class_entry *scope;</span>
+<span class='curline'><a href='../S/1656.html#L328'>scope</a>             328 Zend/zend_compile.h 	zend_class_entry *scope;</span>
+<span class='curline'><a href='../S/1656.html#L340'>scope</a>             340 Zend/zend_compile.h #define ZEND_FN_SCOPE_NAME(function)  ((function) &amp;&amp; (function)-&gt;common.scope ? (function)-&gt;common.scope-&gt;name : "")</span>
+<span class='curline'><a href='../S/1656.html#L348'>scope</a>             348 Zend/zend_compile.h 		zend_class_entry *scope;</span>
+<span class='curline'><a href='../S/1659.html#L226'>scope</a>             226 Zend/zend_constants.c 		if (EG(scope) &amp;&amp; EG(scope)-&gt;name) {</span>
+<span class='curline'><a href='../S/1659.html#L231'>scope</a>             231 Zend/zend_constants.c 			const_name_len = sizeof("\0__CLASS__") + EG(scope)-&gt;name_length;</span>
+<span class='curline'><a href='../S/1659.html#L234'>scope</a>             234 Zend/zend_constants.c 			zend_str_tolower_copy(const_name + sizeof("\0__CLASS__")-1, EG(scope)-&gt;name, EG(scope)-&gt;name_length);</span>
+<span class='curline'><a href='../S/1659.html#L238'>scope</a>             238 Zend/zend_constants.c 				Z_STRVAL((**c).value) = estrndup(EG(scope)-&gt;name, EG(scope)-&gt;name_length);</span>
+<span class='curline'><a href='../S/1659.html#L239'>scope</a>             239 Zend/zend_constants.c 				Z_STRLEN((**c).value) = EG(scope)-&gt;name_length;</span>
+<span class='curline'><a href='../S/1659.html#L302'>scope</a>             302 Zend/zend_constants.c ZEND_API int zend_get_constant_ex(const char *name, uint name_len, zval *result, zend_class_entry *scope, ulong flags TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1659.html#L327'>scope</a>             327 Zend/zend_constants.c 		if (!scope) {</span>
+<span class='curline'><a href='../S/1659.html#L329'>scope</a>             329 Zend/zend_constants.c 				scope = EG(scope);</span>
+<span class='curline'><a href='../S/1659.html#L331'>scope</a>             331 Zend/zend_constants.c 				scope = CG(active_class_entry);</span>
+<span class='curline'><a href='../S/1659.html#L337'>scope</a>             337 Zend/zend_constants.c 			if (scope) {</span>
+<span class='curline'><a href='../S/1659.html#L338'>scope</a>             338 Zend/zend_constants.c 				ce = scope;</span>
+<span class='curline'><a href='../S/1659.html#L346'>scope</a>             346 Zend/zend_constants.c 			if (!scope) {</span>
+<span class='curline'><a href='../S/1659.html#L348'>scope</a>             348 Zend/zend_constants.c 			} else if (!scope-&gt;parent) {</span>
+<span class='curline'><a href='../S/1659.html#L351'>scope</a>             351 Zend/zend_constants.c 				ce = scope-&gt;parent;</span>
+<span class='curline'><a href='../S/1660.html#L70'>scope</a>              70 Zend/zend_constants.h ZEND_API int zend_get_constant_ex(const char *name, uint name_len, zval *result, zend_class_entry *scope, ulong flags TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1662.html#L50'>scope</a>              50 Zend/zend_dtrace.c 	const char *scope, *filename, *funcname, *classname;</span>
+<span class='curline'><a href='../S/1662.html#L51'>scope</a>              51 Zend/zend_dtrace.c 	scope = filename = funcname = classname = NULL;</span>
+<span class='curline'><a href='../S/1662.html#L61'>scope</a>              61 Zend/zend_dtrace.c 		classname = get_active_class_name(&amp;scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1662.html#L70'>scope</a>              70 Zend/zend_dtrace.c 		DTRACE_FUNCTION_ENTRY((char *)funcname, (char *)filename, lineno, (char *)classname, (char *)scope);</span>
+<span class='curline'><a href='../S/1662.html#L76'>scope</a>              76 Zend/zend_dtrace.c 		DTRACE_FUNCTION_RETURN((char *)funcname, (char *)filename, lineno, (char *)classname, (char *)scope);</span>
+<span class='curline'><a href='../S/1669.html#L595'>scope</a>             595 Zend/zend_execute.c 	if (zf-&gt;common.scope) {</span>
+<span class='curline'><a href='../S/1669.html#L597'>scope</a>             597 Zend/zend_execute.c 		fclass = zf-&gt;common.scope-&gt;name;</span>
+<span class='curline'><a href='../S/1670.html#L162'>scope</a>             162 Zend/zend_execute.h ZEND_API int zval_update_constant_inline_change(zval **pp, zend_class_entry *scope TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1670.html#L163'>scope</a>             163 Zend/zend_execute.h ZEND_API int zval_update_constant_no_inline_change(zval **pp, zend_class_entry *scope TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1670.html#L164'>scope</a>             164 Zend/zend_execute.h ZEND_API int zval_update_constant_ex(zval **pp, zend_bool inline_change, zend_class_entry *scope TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1671.html#L186'>scope</a>             186 Zend/zend_execute_API.c 	EG(scope) = NULL;</span>
+<span class='curline'><a href='../S/1671.html#L350'>scope</a>             350 Zend/zend_execute_API.c 			zend_class_entry *ce = EG(current_execute_data)-&gt;function_state.function-&gt;common.scope;</span>
+<span class='curline'><a href='../S/1671.html#L454'>scope</a>             454 Zend/zend_execute_API.c ZEND_API int zval_update_constant_ex(zval **pp, zend_bool inline_change, zend_class_entry *scope TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1671.html#L474'>scope</a>             474 Zend/zend_execute_API.c 		if (!zend_get_constant_ex(p-&gt;value.str.val, p-&gt;value.str.len, &amp;const_value, scope, Z_REAL_TYPE_P(p) TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/1671.html#L547'>scope</a>             547 Zend/zend_execute_API.c 		zend_ast_evaluate(&amp;const_value, Z_AST_P(p), scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1671.html#L557'>scope</a>             557 Zend/zend_execute_API.c ZEND_API int zval_update_constant_inline_change(zval **pp, zend_class_entry *scope TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1671.html#L559'>scope</a>             559 Zend/zend_execute_API.c 	return zval_update_constant_ex(pp, 1, scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1671.html#L563'>scope</a>             563 Zend/zend_execute_API.c ZEND_API int zval_update_constant_no_inline_change(zval **pp, zend_class_entry *scope TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1671.html#L565'>scope</a>             565 Zend/zend_execute_API.c 	return zval_update_constant_ex(pp, 0, scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1671.html#L708'>scope</a>             708 Zend/zend_execute_API.c 			zend_error_noreturn(E_ERROR, "Cannot call abstract method %s::%s()", EX(function_state).function-&gt;common.scope-&gt;name, EX(function_state).function-&gt;common.function_name);</span>
+<span class='curline'><a href='../S/1671.html#L712'>scope</a>             712 Zend/zend_execute_API.c 				EX(function_state).function-&gt;common.scope ? EX(function_state).function-&gt;common.scope-&gt;name : "",</span>
+<span class='curline'><a href='../S/1671.html#L713'>scope</a>             713 Zend/zend_execute_API.c 				EX(function_state).function-&gt;common.scope ? "::" : "",</span>
+<span class='curline'><a href='../S/1671.html#L737'>scope</a>             737 Zend/zend_execute_API.c 						EX(function_state).function-&gt;common.scope ? EX(function_state).function-&gt;common.scope-&gt;name : "",</span>
+<span class='curline'><a href='../S/1671.html#L738'>scope</a>             738 Zend/zend_execute_API.c 						EX(function_state).function-&gt;common.scope ? "::" : "",</span>
+<span class='curline'><a href='../S/1671.html#L774'>scope</a>             774 Zend/zend_execute_API.c 	current_scope = EG(scope);</span>
+<span class='curline'><a href='../S/1671.html#L775'>scope</a>             775 Zend/zend_execute_API.c 	EG(scope) = calling_scope;</span>
+<span class='curline'><a href='../S/1671.html#L813'>scope</a>             813 Zend/zend_execute_API.c 		EG(scope) = EX(function_state).function-&gt;common.scope;</span>
+<span class='curline'><a href='../S/1671.html#L842'>scope</a>             842 Zend/zend_execute_API.c 		if (EX(function_state).function-&gt;common.scope) {</span>
+<span class='curline'><a href='../S/1671.html#L843'>scope</a>             843 Zend/zend_execute_API.c 			EG(scope) = EX(function_state).function-&gt;common.scope;</span>
+<span class='curline'><a href='../S/1671.html#L892'>scope</a>             892 Zend/zend_execute_API.c 	EG(scope) = current_scope;</span>
+<span class='curline'><a href='../S/1671.html#L1366'>scope</a>            1366 Zend/zend_execute_API.c 			if (!EG(scope)) {</span>
+<span class='curline'><a href='../S/1671.html#L1369'>scope</a>            1369 Zend/zend_execute_API.c 			return EG(scope);</span>
+<span class='curline'><a href='../S/1671.html#L1371'>scope</a>            1371 Zend/zend_execute_API.c 			if (!EG(scope)) {</span>
+<span class='curline'><a href='../S/1671.html#L1374'>scope</a>            1374 Zend/zend_execute_API.c 			if (!EG(scope)-&gt;parent) {</span>
+<span class='curline'><a href='../S/1671.html#L1377'>scope</a>            1377 Zend/zend_execute_API.c 			return EG(scope)-&gt;parent;</span>
+<span class='curline'><a href='../S/1678.html#L309'>scope</a>             309 Zend/zend_generators.c 	execute_data-&gt;current_scope = EG(scope);</span>
+<span class='curline'><a href='../S/1678.html#L354'>scope</a>             354 Zend/zend_generators.c 		zend_class_entry *original_scope = EG(scope);</span>
+<span class='curline'><a href='../S/1678.html#L368'>scope</a>             368 Zend/zend_generators.c 		EG(scope) = generator-&gt;execute_data-&gt;current_scope;</span>
+<span class='curline'><a href='../S/1678.html#L392'>scope</a>             392 Zend/zend_generators.c 		EG(scope) = original_scope;</span>
+<span class='curline'><a href='../S/1680.html#L201'>scope</a>             201 Zend/zend_globals.h 	zend_class_entry *scope;</span>
+<span class='curline'><a href='../S/1713.html#L275'>scope</a>             275 Zend/zend_object_handlers.c 			return zend_check_protected(property_info-&gt;ce, EG(scope));</span>
+<span class='curline'><a href='../S/1713.html#L277'>scope</a>             277 Zend/zend_object_handlers.c 			if ((ce==EG(scope) || property_info-&gt;ce == EG(scope)) &amp;&amp; EG(scope)) {</span>
+<span class='curline'><a href='../S/1713.html#L352'>scope</a>             352 Zend/zend_object_handlers.c 	if (EG(scope) != ce</span>
+<span class='curline'><a href='../S/1713.html#L353'>scope</a>             353 Zend/zend_object_handlers.c 		&amp;&amp; EG(scope)</span>
+<span class='curline'><a href='../S/1713.html#L354'>scope</a>             354 Zend/zend_object_handlers.c 		&amp;&amp; is_derived_class(ce, EG(scope))</span>
+<span class='curline'><a href='../S/1713.html#L355'>scope</a>             355 Zend/zend_object_handlers.c 		&amp;&amp; zend_hash_quick_find(&amp;EG(scope)-&gt;properties_info, Z_STRVAL_P(member), Z_STRLEN_P(member)+1, h, (void **) &amp;scope_property_info)==SUCCESS</span>
+<span class='curline'><a href='../S/1713.html#L963'>scope</a>             963 Zend/zend_object_handlers.c 	if (fbc-&gt;common.scope == ce &amp;&amp; EG(scope) == ce) {</span>
+<span class='curline'><a href='../S/1713.html#L972'>scope</a>             972 Zend/zend_object_handlers.c 		if (ce == EG(scope)) {</span>
+<span class='curline'><a href='../S/1713.html#L975'>scope</a>             975 Zend/zend_object_handlers.c 				&amp;&amp; fbc-&gt;common.scope == EG(scope)) {</span>
+<span class='curline'><a href='../S/1713.html#L994'>scope</a>             994 Zend/zend_object_handlers.c ZEND_API int zend_check_protected(zend_class_entry *ce, zend_class_entry *scope) /* {{{ */</span>
+<span class='curline'><a href='../S/1713.html#L1002'>scope</a>            1002 Zend/zend_object_handlers.c 		if (fbc_scope==scope) {</span>
+<span class='curline'><a href='../S/1713.html#L1011'>scope</a>            1011 Zend/zend_object_handlers.c 	while (scope) {</span>
+<span class='curline'><a href='../S/1713.html#L1012'>scope</a>            1012 Zend/zend_object_handlers.c 		if (scope==ce) {</span>
+<span class='curline'><a href='../S/1713.html#L1015'>scope</a>            1015 Zend/zend_object_handlers.c 		scope = scope-&gt;parent;</span>
+<span class='curline'><a href='../S/1713.html#L1029'>scope</a>            1029 Zend/zend_object_handlers.c 	call_user_call-&gt;scope = ce;</span>
+<span class='curline'><a href='../S/1713.html#L1081'>scope</a>            1081 Zend/zend_object_handlers.c 				zend_error_noreturn(E_ERROR, "Call to %s method %s::%s() from context '%s'", zend_visibility_string(fbc-&gt;common.fn_flags), ZEND_FN_SCOPE_NAME(fbc), method_name, EG(scope) ? EG(scope)-&gt;name : "");</span>
+<span class='curline'><a href='../S/1713.html#L1088'>scope</a>            1088 Zend/zend_object_handlers.c 		if (EG(scope) &amp;&amp;</span>
+<span class='curline'><a href='../S/1713.html#L1089'>scope</a>            1089 Zend/zend_object_handlers.c 		    is_derived_class(fbc-&gt;common.scope, EG(scope)) &amp;&amp;</span>
+<span class='curline'><a href='../S/1713.html#L1093'>scope</a>            1093 Zend/zend_object_handlers.c 			if (zend_hash_quick_find(&amp;EG(scope)-&gt;function_table, lc_method_name, method_len+1, hash_value, (void **) &amp;priv_fbc)==SUCCESS</span>
+<span class='curline'><a href='../S/1713.html#L1095'>scope</a>            1095 Zend/zend_object_handlers.c 				&amp;&amp; priv_fbc-&gt;common.scope == EG(scope)) {</span>
+<span class='curline'><a href='../S/1713.html#L1103'>scope</a>            1103 Zend/zend_object_handlers.c 			if (UNEXPECTED(!zend_check_protected(zend_get_function_root_class(fbc), EG(scope)))) {</span>
+<span class='curline'><a href='../S/1713.html#L1107'>scope</a>            1107 Zend/zend_object_handlers.c 					zend_error_noreturn(E_ERROR, "Call to %s method %s::%s() from context '%s'", zend_visibility_string(fbc-&gt;common.fn_flags), ZEND_FN_SCOPE_NAME(fbc), method_name, EG(scope) ? EG(scope)-&gt;name : "");</span>
+<span class='curline'><a href='../S/1713.html#L1125'>scope</a>            1125 Zend/zend_object_handlers.c 	zend_class_entry *ce = EG(scope);</span>
+<span class='curline'><a href='../S/1713.html#L1169'>scope</a>            1169 Zend/zend_object_handlers.c 	callstatic_user_call-&gt;scope    = ce;</span>
+<span class='curline'><a href='../S/1713.html#L1238'>scope</a>            1238 Zend/zend_object_handlers.c 		updated_fbc = zend_check_private_int(fbc, EG(scope), lc_function_name, function_name_strlen, hash_value TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1713.html#L1245'>scope</a>            1245 Zend/zend_object_handlers.c 				zend_error_noreturn(E_ERROR, "Call to %s method %s::%s() from context '%s'", zend_visibility_string(fbc-&gt;common.fn_flags), ZEND_FN_SCOPE_NAME(fbc), function_name_strval, EG(scope) ? EG(scope)-&gt;name : "");</span>
+<span class='curline'><a href='../S/1713.html#L1251'>scope</a>            1251 Zend/zend_object_handlers.c 		if (UNEXPECTED(!zend_check_protected(zend_get_function_root_class(fbc), EG(scope)))) {</span>
+<span class='curline'><a href='../S/1713.html#L1255'>scope</a>            1255 Zend/zend_object_handlers.c 				zend_error_noreturn(E_ERROR, "Call to %s method %s::%s() from context '%s'", zend_visibility_string(fbc-&gt;common.fn_flags), ZEND_FN_SCOPE_NAME(fbc), function_name_strval, EG(scope) ? EG(scope)-&gt;name : "");</span>
+<span class='curline'><a href='../S/1713.html#L1343'>scope</a>            1343 Zend/zend_object_handlers.c 			if (UNEXPECTED(constructor-&gt;common.scope != EG(scope))) {</span>
+<span class='curline'><a href='../S/1713.html#L1344'>scope</a>            1344 Zend/zend_object_handlers.c 				if (EG(scope)) {</span>
+<span class='curline'><a href='../S/1713.html#L1345'>scope</a>            1345 Zend/zend_object_handlers.c 					zend_error_noreturn(E_ERROR, "Call to private %s::%s() from context '%s'", constructor-&gt;common.scope-&gt;name, constructor-&gt;common.function_name, EG(scope)-&gt;name);</span>
+<span class='curline'><a href='../S/1713.html#L1347'>scope</a>            1347 Zend/zend_object_handlers.c 					zend_error_noreturn(E_ERROR, "Call to private %s::%s() from invalid context", constructor-&gt;common.scope-&gt;name, constructor-&gt;common.function_name);</span>
+<span class='curline'><a href='../S/1713.html#L1355'>scope</a>            1355 Zend/zend_object_handlers.c 			if (UNEXPECTED(!zend_check_protected(zend_get_function_root_class(constructor), EG(scope)))) {</span>
+<span class='curline'><a href='../S/1713.html#L1356'>scope</a>            1356 Zend/zend_object_handlers.c 				if (EG(scope)) {</span>
+<span class='curline'><a href='../S/1713.html#L1357'>scope</a>            1357 Zend/zend_object_handlers.c 					zend_error_noreturn(E_ERROR, "Call to protected %s::%s() from context '%s'", constructor-&gt;common.scope-&gt;name, constructor-&gt;common.function_name, EG(scope)-&gt;name);</span>
+<span class='curline'><a href='../S/1713.html#L1359'>scope</a>            1359 Zend/zend_object_handlers.c 					zend_error_noreturn(E_ERROR, "Call to protected %s::%s() from invalid context", constructor-&gt;common.scope-&gt;name, constructor-&gt;common.function_name);</span>
+<span class='curline'><a href='../S/1714.html#L155'>scope</a>             155 Zend/zend_object_handlers.h 	((fbc)-&gt;common.prototype ? (fbc)-&gt;common.prototype-&gt;common.scope : (fbc)-&gt;common.scope)</span>
+<span class='curline'><a href='../S/1714.html#L175'>scope</a>             175 Zend/zend_object_handlers.h ZEND_API int zend_check_protected(zend_class_entry *ce, zend_class_entry *scope);</span>
+<span class='curline'><a href='../S/1715.html#L74'>scope</a>              74 Zend/zend_objects.c 				if (object-&gt;ce != EG(scope)) {</span>
+<span class='curline'><a href='../S/1715.html#L80'>scope</a>              80 Zend/zend_objects.c 						EG(scope) ? EG(scope)-&gt;name : "",</span>
+<span class='curline'><a href='../S/1715.html#L87'>scope</a>              87 Zend/zend_objects.c 				if (!zend_check_protected(zend_get_function_root_class(destructor), EG(scope))) {</span>
+<span class='curline'><a href='../S/1715.html#L93'>scope</a>              93 Zend/zend_objects.c 						EG(scope) ? EG(scope)-&gt;name : "",</span>
+<span class='curline'><a href='../S/1719.html#L85'>scope</a>              85 Zend/zend_opcode.c 	op_array-&gt;scope = NULL;</span>
+<span class='curline'><a href='../S/1747.html#L1888'>scope</a>            1888 Zend/zend_vm_def.h 			EG(scope) = EX(current_scope);</span>
+<span class='curline'><a href='../S/1747.html#L1921'>scope</a>            1921 Zend/zend_vm_def.h 			zend_error_noreturn(E_ERROR, "Cannot call abstract method %s::%s()", fbc-&gt;common.scope-&gt;name, fbc-&gt;common.function_name);</span>
+<span class='curline'><a href='../S/1747.html#L1925'>scope</a>            1925 Zend/zend_vm_def.h 				fbc-&gt;common.scope ? fbc-&gt;common.scope-&gt;name : "",</span>
+<span class='curline'><a href='../S/1747.html#L1926'>scope</a>            1926 Zend/zend_vm_def.h 				fbc-&gt;common.scope ? "::" : "",</span>
+<span class='curline'><a href='../S/1747.html#L1933'>scope</a>            1933 Zend/zend_vm_def.h 	if (fbc-&gt;common.scope &amp;&amp;</span>
+<span class='curline'><a href='../S/1747.html#L1939'>scope</a>            1939 Zend/zend_vm_def.h 			zend_error(E_STRICT, "Non-static method %s::%s() should not be called statically", fbc-&gt;common.scope-&gt;name, fbc-&gt;common.function_name);</span>
+<span class='curline'><a href='../S/1747.html#L1946'>scope</a>            1946 Zend/zend_vm_def.h 			zend_error_noreturn(E_ERROR, "Non-static method %s::%s() cannot be called statically", fbc-&gt;common.scope-&gt;name, fbc-&gt;common.function_name);</span>
+<span class='curline'><a href='../S/1747.html#L1950'>scope</a>            1950 Zend/zend_vm_def.h 	if (fbc-&gt;type == ZEND_USER_FUNCTION || fbc-&gt;common.scope) {</span>
+<span class='curline'><a href='../S/1747.html#L1953'>scope</a>            1953 Zend/zend_vm_def.h 		EX(current_scope) = EG(scope);</span>
+<span class='curline'><a href='../S/1747.html#L1956'>scope</a>            1956 Zend/zend_vm_def.h 		EG(scope) = (fbc-&gt;type == ZEND_USER_FUNCTION || !EX(object)) ? fbc-&gt;common.scope : NULL;</span>
+<span class='curline'><a href='../S/1747.html#L2075'>scope</a>            2075 Zend/zend_vm_def.h 		EG(scope) = EX(current_scope);</span>
+<span class='curline'><a href='../S/1747.html#L2595'>scope</a>            2595 Zend/zend_vm_def.h 		if (EG(This) &amp;&amp; Z_OBJCE_P(EG(This)) != ce-&gt;constructor-&gt;common.scope &amp;&amp; (ce-&gt;constructor-&gt;common.fn_flags &amp; ZEND_ACC_PRIVATE)) {</span>
+<span class='curline'><a href='../S/1747.html#L2610'>scope</a>            2610 Zend/zend_vm_def.h 				zend_error(E_DEPRECATED, "Non-static method %s::%s() should not be called statically, assuming $this from incompatible context", call-&gt;fbc-&gt;common.scope-&gt;name, call-&gt;fbc-&gt;common.function_name);</span>
+<span class='curline'><a href='../S/1747.html#L2613'>scope</a>            2613 Zend/zend_vm_def.h 				zend_error_noreturn(E_ERROR, "Non-static method %s::%s() cannot be called statically, assuming $this from incompatible context", call-&gt;fbc-&gt;common.scope-&gt;name, call-&gt;fbc-&gt;common.function_name);</span>
+<span class='curline'><a href='../S/1747.html#L3343'>scope</a>            3343 Zend/zend_vm_def.h 						EX(call)-&gt;fbc-&gt;common.scope ? EX(call)-&gt;fbc-&gt;common.scope-&gt;name : "",</span>
+<span class='curline'><a href='../S/1747.html#L3344'>scope</a>            3344 Zend/zend_vm_def.h 						EX(call)-&gt;fbc-&gt;common.scope ? "::" : "",</span>
+<span class='curline'><a href='../S/1747.html#L3393'>scope</a>            3393 Zend/zend_vm_def.h 			if (EG(active_op_array)-&gt;scope) {</span>
+<span class='curline'><a href='../S/1747.html#L3394'>scope</a>            3394 Zend/zend_vm_def.h 				class_name = EG(active_op_array)-&gt;scope-&gt;name;</span>
+<span class='curline'><a href='../S/1747.html#L3667'>scope</a>            3667 Zend/zend_vm_def.h 			if (UNEXPECTED(ce != EG(scope))) {</span>
+<span class='curline'><a href='../S/1747.html#L3668'>scope</a>            3668 Zend/zend_vm_def.h 				zend_error_noreturn(E_ERROR, "Call to private %s::__clone() from context '%s'", ce-&gt;name, EG(scope) ? EG(scope)-&gt;name : "");</span>
+<span class='curline'><a href='../S/1747.html#L3673'>scope</a>            3673 Zend/zend_vm_def.h 			if (UNEXPECTED(!zend_check_protected(zend_get_function_root_class(clone), EG(scope)))) {</span>
+<span class='curline'><a href='../S/1747.html#L3674'>scope</a>            3674 Zend/zend_vm_def.h 				zend_error_noreturn(E_ERROR, "Call to protected %s::__clone() from context '%s'", ce-&gt;name, EG(scope) ? EG(scope)-&gt;name : "");</span>
+<span class='curline'><a href='../S/1747.html#L3765'>scope</a>            3765 Zend/zend_vm_def.h 				zend_class_entry *old_scope = EG(scope);</span>
+<span class='curline'><a href='../S/1747.html#L3767'>scope</a>            3767 Zend/zend_vm_def.h 				EG(scope) = ce;</span>
+<span class='curline'><a href='../S/1747.html#L3769'>scope</a>            3769 Zend/zend_vm_def.h 				EG(scope) = old_scope;</span>
+<span class='curline'><a href='../S/1747.html#L4883'>scope</a>            4883 Zend/zend_vm_def.h 	zend_error_noreturn(E_ERROR, "Cannot call abstract method %s::%s()", EG(scope)-&gt;name, EX(op_array)-&gt;function_name);</span>
+<span class='curline'><a href='../S/1747.html#L5444'>scope</a>            5444 Zend/zend_vm_def.h 		zend_create_closure(&amp;EX_T(opline-&gt;result.var).tmp_var, (zend_function *) op_array,  EG(scope), EG(This) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L457'>scope</a>             457 Zend/zend_vm_execute.h 			EG(scope) = EX(current_scope);</span>
+<span class='curline'><a href='../S/1748.html#L490'>scope</a>             490 Zend/zend_vm_execute.h 			zend_error_noreturn(E_ERROR, "Cannot call abstract method %s::%s()", fbc-&gt;common.scope-&gt;name, fbc-&gt;common.function_name);</span>
+<span class='curline'><a href='../S/1748.html#L494'>scope</a>             494 Zend/zend_vm_execute.h 				fbc-&gt;common.scope ? fbc-&gt;common.scope-&gt;name : "",</span>
+<span class='curline'><a href='../S/1748.html#L495'>scope</a>             495 Zend/zend_vm_execute.h 				fbc-&gt;common.scope ? "::" : "",</span>
+<span class='curline'><a href='../S/1748.html#L502'>scope</a>             502 Zend/zend_vm_execute.h 	if (fbc-&gt;common.scope &amp;&amp;</span>
+<span class='curline'><a href='../S/1748.html#L508'>scope</a>             508 Zend/zend_vm_execute.h 			zend_error(E_STRICT, "Non-static method %s::%s() should not be called statically", fbc-&gt;common.scope-&gt;name, fbc-&gt;common.function_name);</span>
+<span class='curline'><a href='../S/1748.html#L515'>scope</a>             515 Zend/zend_vm_execute.h 			zend_error_noreturn(E_ERROR, "Non-static method %s::%s() cannot be called statically", fbc-&gt;common.scope-&gt;name, fbc-&gt;common.function_name);</span>
+<span class='curline'><a href='../S/1748.html#L519'>scope</a>             519 Zend/zend_vm_execute.h 	if (fbc-&gt;type == ZEND_USER_FUNCTION || fbc-&gt;common.scope) {</span>
+<span class='curline'><a href='../S/1748.html#L522'>scope</a>             522 Zend/zend_vm_execute.h 		EX(current_scope) = EG(scope);</span>
+<span class='curline'><a href='../S/1748.html#L525'>scope</a>             525 Zend/zend_vm_execute.h 		EG(scope) = (fbc-&gt;type == ZEND_USER_FUNCTION || !EX(object)) ? fbc-&gt;common.scope : NULL;</span>
+<span class='curline'><a href='../S/1748.html#L644'>scope</a>             644 Zend/zend_vm_execute.h 		EG(scope) = EX(current_scope);</span>
+<span class='curline'><a href='../S/1748.html#L819'>scope</a>             819 Zend/zend_vm_execute.h 						EX(call)-&gt;fbc-&gt;common.scope ? EX(call)-&gt;fbc-&gt;common.scope-&gt;name : "",</span>
+<span class='curline'><a href='../S/1748.html#L820'>scope</a>             820 Zend/zend_vm_execute.h 						EX(call)-&gt;fbc-&gt;common.scope ? "::" : "",</span>
+<span class='curline'><a href='../S/1748.html#L869'>scope</a>             869 Zend/zend_vm_execute.h 			if (EG(active_op_array)-&gt;scope) {</span>
+<span class='curline'><a href='../S/1748.html#L870'>scope</a>             870 Zend/zend_vm_execute.h 				class_name = EG(active_op_array)-&gt;scope-&gt;name;</span>
+<span class='curline'><a href='../S/1748.html#L1023'>scope</a>            1023 Zend/zend_vm_execute.h 	zend_error_noreturn(E_ERROR, "Cannot call abstract method %s::%s()", EG(scope)-&gt;name, EX(op_array)-&gt;function_name);</span>
+<span class='curline'><a href='../S/1748.html#L2829'>scope</a>            2829 Zend/zend_vm_execute.h 			if (UNEXPECTED(ce != EG(scope))) {</span>
+<span class='curline'><a href='../S/1748.html#L2830'>scope</a>            2830 Zend/zend_vm_execute.h 				zend_error_noreturn(E_ERROR, "Call to private %s::__clone() from context '%s'", ce-&gt;name, EG(scope) ? EG(scope)-&gt;name : "");</span>
+<span class='curline'><a href='../S/1748.html#L2835'>scope</a>            2835 Zend/zend_vm_execute.h 			if (UNEXPECTED(!zend_check_protected(zend_get_function_root_class(clone), EG(scope)))) {</span>
+<span class='curline'><a href='../S/1748.html#L2836'>scope</a>            2836 Zend/zend_vm_execute.h 				zend_error_noreturn(E_ERROR, "Call to protected %s::__clone() from context '%s'", ce-&gt;name, EG(scope) ? EG(scope)-&gt;name : "");</span>
+<span class='curline'><a href='../S/1748.html#L3909'>scope</a>            3909 Zend/zend_vm_execute.h 		if (EG(This) &amp;&amp; Z_OBJCE_P(EG(This)) != ce-&gt;constructor-&gt;common.scope &amp;&amp; (ce-&gt;constructor-&gt;common.fn_flags &amp; ZEND_ACC_PRIVATE)) {</span>
+<span class='curline'><a href='../S/1748.html#L3924'>scope</a>            3924 Zend/zend_vm_execute.h 				zend_error(E_DEPRECATED, "Non-static method %s::%s() should not be called statically, assuming $this from incompatible context", call-&gt;fbc-&gt;common.scope-&gt;name, call-&gt;fbc-&gt;common.function_name);</span>
+<span class='curline'><a href='../S/1748.html#L3927'>scope</a>            3927 Zend/zend_vm_execute.h 				zend_error_noreturn(E_ERROR, "Non-static method %s::%s() cannot be called statically, assuming $this from incompatible context", call-&gt;fbc-&gt;common.scope-&gt;name, call-&gt;fbc-&gt;common.function_name);</span>
+<span class='curline'><a href='../S/1748.html#L4025'>scope</a>            4025 Zend/zend_vm_execute.h 				zend_class_entry *old_scope = EG(scope);</span>
+<span class='curline'><a href='../S/1748.html#L4027'>scope</a>            4027 Zend/zend_vm_execute.h 				EG(scope) = ce;</span>
+<span class='curline'><a href='../S/1748.html#L4029'>scope</a>            4029 Zend/zend_vm_execute.h 				EG(scope) = old_scope;</span>
+<span class='curline'><a href='../S/1748.html#L4911'>scope</a>            4911 Zend/zend_vm_execute.h 		if (EG(This) &amp;&amp; Z_OBJCE_P(EG(This)) != ce-&gt;constructor-&gt;common.scope &amp;&amp; (ce-&gt;constructor-&gt;common.fn_flags &amp; ZEND_ACC_PRIVATE)) {</span>
+<span class='curline'><a href='../S/1748.html#L4926'>scope</a>            4926 Zend/zend_vm_execute.h 				zend_error(E_DEPRECATED, "Non-static method %s::%s() should not be called statically, assuming $this from incompatible context", call-&gt;fbc-&gt;common.scope-&gt;name, call-&gt;fbc-&gt;common.function_name);</span>
+<span class='curline'><a href='../S/1748.html#L4929'>scope</a>            4929 Zend/zend_vm_execute.h 				zend_error_noreturn(E_ERROR, "Non-static method %s::%s() cannot be called statically, assuming $this from incompatible context", call-&gt;fbc-&gt;common.scope-&gt;name, call-&gt;fbc-&gt;common.function_name);</span>
+<span class='curline'><a href='../S/1748.html#L5775'>scope</a>            5775 Zend/zend_vm_execute.h 		if (EG(This) &amp;&amp; Z_OBJCE_P(EG(This)) != ce-&gt;constructor-&gt;common.scope &amp;&amp; (ce-&gt;constructor-&gt;common.fn_flags &amp; ZEND_ACC_PRIVATE)) {</span>
+<span class='curline'><a href='../S/1748.html#L5790'>scope</a>            5790 Zend/zend_vm_execute.h 				zend_error(E_DEPRECATED, "Non-static method %s::%s() should not be called statically, assuming $this from incompatible context", call-&gt;fbc-&gt;common.scope-&gt;name, call-&gt;fbc-&gt;common.function_name);</span>
+<span class='curline'><a href='../S/1748.html#L5793'>scope</a>            5793 Zend/zend_vm_execute.h 				zend_error_noreturn(E_ERROR, "Non-static method %s::%s() cannot be called statically, assuming $this from incompatible context", call-&gt;fbc-&gt;common.scope-&gt;name, call-&gt;fbc-&gt;common.function_name);</span>
+<span class='curline'><a href='../S/1748.html#L6510'>scope</a>            6510 Zend/zend_vm_execute.h 		if (EG(This) &amp;&amp; Z_OBJCE_P(EG(This)) != ce-&gt;constructor-&gt;common.scope &amp;&amp; (ce-&gt;constructor-&gt;common.fn_flags &amp; ZEND_ACC_PRIVATE)) {</span>
+<span class='curline'><a href='../S/1748.html#L6525'>scope</a>            6525 Zend/zend_vm_execute.h 				zend_error(E_DEPRECATED, "Non-static method %s::%s() should not be called statically, assuming $this from incompatible context", call-&gt;fbc-&gt;common.scope-&gt;name, call-&gt;fbc-&gt;common.function_name);</span>
+<span class='curline'><a href='../S/1748.html#L6528'>scope</a>            6528 Zend/zend_vm_execute.h 				zend_error_noreturn(E_ERROR, "Non-static method %s::%s() cannot be called statically, assuming $this from incompatible context", call-&gt;fbc-&gt;common.scope-&gt;name, call-&gt;fbc-&gt;common.function_name);</span>
+<span class='curline'><a href='../S/1748.html#L6820'>scope</a>            6820 Zend/zend_vm_execute.h 		zend_create_closure(&amp;EX_T(opline-&gt;result.var).tmp_var, (zend_function *) op_array,  EG(scope), EG(This) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L7369'>scope</a>            7369 Zend/zend_vm_execute.h 		if (EG(This) &amp;&amp; Z_OBJCE_P(EG(This)) != ce-&gt;constructor-&gt;common.scope &amp;&amp; (ce-&gt;constructor-&gt;common.fn_flags &amp; ZEND_ACC_PRIVATE)) {</span>
+<span class='curline'><a href='../S/1748.html#L7384'>scope</a>            7384 Zend/zend_vm_execute.h 				zend_error(E_DEPRECATED, "Non-static method %s::%s() should not be called statically, assuming $this from incompatible context", call-&gt;fbc-&gt;common.scope-&gt;name, call-&gt;fbc-&gt;common.function_name);</span>
+<span class='curline'><a href='../S/1748.html#L7387'>scope</a>            7387 Zend/zend_vm_execute.h 				zend_error_noreturn(E_ERROR, "Non-static method %s::%s() cannot be called statically, assuming $this from incompatible context", call-&gt;fbc-&gt;common.scope-&gt;name, call-&gt;fbc-&gt;common.function_name);</span>
+<span class='curline'><a href='../S/1748.html#L8195'>scope</a>            8195 Zend/zend_vm_execute.h 			if (UNEXPECTED(ce != EG(scope))) {</span>
+<span class='curline'><a href='../S/1748.html#L8196'>scope</a>            8196 Zend/zend_vm_execute.h 				zend_error_noreturn(E_ERROR, "Call to private %s::__clone() from context '%s'", ce-&gt;name, EG(scope) ? EG(scope)-&gt;name : "");</span>
+<span class='curline'><a href='../S/1748.html#L8201'>scope</a>            8201 Zend/zend_vm_execute.h 			if (UNEXPECTED(!zend_check_protected(zend_get_function_root_class(clone), EG(scope)))) {</span>
+<span class='curline'><a href='../S/1748.html#L8202'>scope</a>            8202 Zend/zend_vm_execute.h 				zend_error_noreturn(E_ERROR, "Call to protected %s::__clone() from context '%s'", ce-&gt;name, EG(scope) ? EG(scope)-&gt;name : "");</span>
+<span class='curline'><a href='../S/1748.html#L13564'>scope</a>            13564 Zend/zend_vm_execute.h 			if (UNEXPECTED(ce != EG(scope))) {</span>
+<span class='curline'><a href='../S/1748.html#L13565'>scope</a>            13565 Zend/zend_vm_execute.h 				zend_error_noreturn(E_ERROR, "Call to private %s::__clone() from context '%s'", ce-&gt;name, EG(scope) ? EG(scope)-&gt;name : "");</span>
+<span class='curline'><a href='../S/1748.html#L13570'>scope</a>            13570 Zend/zend_vm_execute.h 			if (UNEXPECTED(!zend_check_protected(zend_get_function_root_class(clone), EG(scope)))) {</span>
+<span class='curline'><a href='../S/1748.html#L13571'>scope</a>            13571 Zend/zend_vm_execute.h 				zend_error_noreturn(E_ERROR, "Call to protected %s::__clone() from context '%s'", ce-&gt;name, EG(scope) ? EG(scope)-&gt;name : "");</span>
+<span class='curline'><a href='../S/1748.html#L15880'>scope</a>            15880 Zend/zend_vm_execute.h 		if (EG(This) &amp;&amp; Z_OBJCE_P(EG(This)) != ce-&gt;constructor-&gt;common.scope &amp;&amp; (ce-&gt;constructor-&gt;common.fn_flags &amp; ZEND_ACC_PRIVATE)) {</span>
+<span class='curline'><a href='../S/1748.html#L15895'>scope</a>            15895 Zend/zend_vm_execute.h 				zend_error(E_DEPRECATED, "Non-static method %s::%s() should not be called statically, assuming $this from incompatible context", call-&gt;fbc-&gt;common.scope-&gt;name, call-&gt;fbc-&gt;common.function_name);</span>
+<span class='curline'><a href='../S/1748.html#L15898'>scope</a>            15898 Zend/zend_vm_execute.h 				zend_error_noreturn(E_ERROR, "Non-static method %s::%s() cannot be called statically, assuming $this from incompatible context", call-&gt;fbc-&gt;common.scope-&gt;name, call-&gt;fbc-&gt;common.function_name);</span>
+<span class='curline'><a href='../S/1748.html#L15996'>scope</a>            15996 Zend/zend_vm_execute.h 				zend_class_entry *old_scope = EG(scope);</span>
+<span class='curline'><a href='../S/1748.html#L15998'>scope</a>            15998 Zend/zend_vm_execute.h 				EG(scope) = ce;</span>
+<span class='curline'><a href='../S/1748.html#L16000'>scope</a>            16000 Zend/zend_vm_execute.h 				EG(scope) = old_scope;</span>
+<span class='curline'><a href='../S/1748.html#L18234'>scope</a>            18234 Zend/zend_vm_execute.h 		if (EG(This) &amp;&amp; Z_OBJCE_P(EG(This)) != ce-&gt;constructor-&gt;common.scope &amp;&amp; (ce-&gt;constructor-&gt;common.fn_flags &amp; ZEND_ACC_PRIVATE)) {</span>
+<span class='curline'><a href='../S/1748.html#L18249'>scope</a>            18249 Zend/zend_vm_execute.h 				zend_error(E_DEPRECATED, "Non-static method %s::%s() should not be called statically, assuming $this from incompatible context", call-&gt;fbc-&gt;common.scope-&gt;name, call-&gt;fbc-&gt;common.function_name);</span>
+<span class='curline'><a href='../S/1748.html#L18252'>scope</a>            18252 Zend/zend_vm_execute.h 				zend_error_noreturn(E_ERROR, "Non-static method %s::%s() cannot be called statically, assuming $this from incompatible context", call-&gt;fbc-&gt;common.scope-&gt;name, call-&gt;fbc-&gt;common.function_name);</span>
+<span class='curline'><a href='../S/1748.html#L20552'>scope</a>            20552 Zend/zend_vm_execute.h 		if (EG(This) &amp;&amp; Z_OBJCE_P(EG(This)) != ce-&gt;constructor-&gt;common.scope &amp;&amp; (ce-&gt;constructor-&gt;common.fn_flags &amp; ZEND_ACC_PRIVATE)) {</span>
+<span class='curline'><a href='../S/1748.html#L20567'>scope</a>            20567 Zend/zend_vm_execute.h 				zend_error(E_DEPRECATED, "Non-static method %s::%s() should not be called statically, assuming $this from incompatible context", call-&gt;fbc-&gt;common.scope-&gt;name, call-&gt;fbc-&gt;common.function_name);</span>
+<span class='curline'><a href='../S/1748.html#L20570'>scope</a>            20570 Zend/zend_vm_execute.h 				zend_error_noreturn(E_ERROR, "Non-static method %s::%s() cannot be called statically, assuming $this from incompatible context", call-&gt;fbc-&gt;common.scope-&gt;name, call-&gt;fbc-&gt;common.function_name);</span>
+<span class='curline'><a href='../S/1748.html#L22000'>scope</a>            22000 Zend/zend_vm_execute.h 		if (EG(This) &amp;&amp; Z_OBJCE_P(EG(This)) != ce-&gt;constructor-&gt;common.scope &amp;&amp; (ce-&gt;constructor-&gt;common.fn_flags &amp; ZEND_ACC_PRIVATE)) {</span>
+<span class='curline'><a href='../S/1748.html#L22015'>scope</a>            22015 Zend/zend_vm_execute.h 				zend_error(E_DEPRECATED, "Non-static method %s::%s() should not be called statically, assuming $this from incompatible context", call-&gt;fbc-&gt;common.scope-&gt;name, call-&gt;fbc-&gt;common.function_name);</span>
+<span class='curline'><a href='../S/1748.html#L22018'>scope</a>            22018 Zend/zend_vm_execute.h 				zend_error_noreturn(E_ERROR, "Non-static method %s::%s() cannot be called statically, assuming $this from incompatible context", call-&gt;fbc-&gt;common.scope-&gt;name, call-&gt;fbc-&gt;common.function_name);</span>
+<span class='curline'><a href='../S/1748.html#L24021'>scope</a>            24021 Zend/zend_vm_execute.h 		if (EG(This) &amp;&amp; Z_OBJCE_P(EG(This)) != ce-&gt;constructor-&gt;common.scope &amp;&amp; (ce-&gt;constructor-&gt;common.fn_flags &amp; ZEND_ACC_PRIVATE)) {</span>
+<span class='curline'><a href='../S/1748.html#L24036'>scope</a>            24036 Zend/zend_vm_execute.h 				zend_error(E_DEPRECATED, "Non-static method %s::%s() should not be called statically, assuming $this from incompatible context", call-&gt;fbc-&gt;common.scope-&gt;name, call-&gt;fbc-&gt;common.function_name);</span>
+<span class='curline'><a href='../S/1748.html#L24039'>scope</a>            24039 Zend/zend_vm_execute.h 				zend_error_noreturn(E_ERROR, "Non-static method %s::%s() cannot be called statically, assuming $this from incompatible context", call-&gt;fbc-&gt;common.scope-&gt;name, call-&gt;fbc-&gt;common.function_name);</span>
+<span class='curline'><a href='../S/1748.html#L24664'>scope</a>            24664 Zend/zend_vm_execute.h 			if (UNEXPECTED(ce != EG(scope))) {</span>
+<span class='curline'><a href='../S/1748.html#L24665'>scope</a>            24665 Zend/zend_vm_execute.h 				zend_error_noreturn(E_ERROR, "Call to private %s::__clone() from context '%s'", ce-&gt;name, EG(scope) ? EG(scope)-&gt;name : "");</span>
+<span class='curline'><a href='../S/1748.html#L24670'>scope</a>            24670 Zend/zend_vm_execute.h 			if (UNEXPECTED(!zend_check_protected(zend_get_function_root_class(clone), EG(scope)))) {</span>
+<span class='curline'><a href='../S/1748.html#L24671'>scope</a>            24671 Zend/zend_vm_execute.h 				zend_error_noreturn(E_ERROR, "Call to protected %s::__clone() from context '%s'", ce-&gt;name, EG(scope) ? EG(scope)-&gt;name : "");</span>
+<span class='curline'><a href='../S/1748.html#L25647'>scope</a>            25647 Zend/zend_vm_execute.h 				zend_class_entry *old_scope = EG(scope);</span>
+<span class='curline'><a href='../S/1748.html#L25649'>scope</a>            25649 Zend/zend_vm_execute.h 				EG(scope) = ce;</span>
+<span class='curline'><a href='../S/1748.html#L25651'>scope</a>            25651 Zend/zend_vm_execute.h 				EG(scope) = old_scope;</span>
+<span class='curline'><a href='../S/1748.html#L31233'>scope</a>            31233 Zend/zend_vm_execute.h 			if (UNEXPECTED(ce != EG(scope))) {</span>
+<span class='curline'><a href='../S/1748.html#L31234'>scope</a>            31234 Zend/zend_vm_execute.h 				zend_error_noreturn(E_ERROR, "Call to private %s::__clone() from context '%s'", ce-&gt;name, EG(scope) ? EG(scope)-&gt;name : "");</span>
+<span class='curline'><a href='../S/1748.html#L31239'>scope</a>            31239 Zend/zend_vm_execute.h 			if (UNEXPECTED(!zend_check_protected(zend_get_function_root_class(clone), EG(scope)))) {</span>
+<span class='curline'><a href='../S/1748.html#L31240'>scope</a>            31240 Zend/zend_vm_execute.h 				zend_error_noreturn(E_ERROR, "Call to protected %s::__clone() from context '%s'", ce-&gt;name, EG(scope) ? EG(scope)-&gt;name : "");</span>
+<span class='curline'><a href='../S/46.html#L285'>scope</a>             285 ext/com_dotnet/com_handlers.c 		f.scope = obj-&gt;ce;</span>
+<span class='curline'><a href='../S/46.html#L413'>scope</a>             413 ext/com_dotnet/com_handlers.c 	f.scope = obj-&gt;ce; \</span>
+<span class='curline'><a href='../S/454.html#L323'>scope</a>             323 ext/intl/transliterator/transliterator_class.c 	if( ( EG( scope ) != Transliterator_ce_ptr ) &amp;&amp;</span>
+<span class='curline'><a href='../S/462.html#L702'>scope</a>             702 ext/ldap/ldap.c static void php_ldap_do_search(INTERNAL_FUNCTION_PARAMETERS, int scope)</span>
+<span class='curline'><a href='../S/462.html#L826'>scope</a>             826 ext/ldap/ldap.c 			ldap_search_ext(ld-&gt;link, ldap_base_dn, scope, ldap_filter, ldap_attrs, ldap_attrsonly, NULL, NULL, NULL, ldap_sizelimit, &amp;rcs[i]);</span>
+<span class='curline'><a href='../S/462.html#L868'>scope</a>             868 ext/ldap/ldap.c 		errno = ldap_search_ext_s(ld-&gt;link, ldap_base_dn, scope, ldap_filter, ldap_attrs, ldap_attrsonly, NULL, NULL, NULL, ldap_sizelimit, &amp;ldap_res);</span>
+<span class='curline'><a href='../S/758.html#L2197'>scope</a>            2197 ext/mysql/php_mysql.c 			fcc.calling_scope = EG(scope);</span>
+<span class='curline'><a href='../S/761.html#L1328'>scope</a>            1328 ext/mysqli/mysqli.c 			fcc.calling_scope = EG(scope);</span>
+<span class='curline'><a href='../S/827.html#L295'>scope</a>             295 ext/odbc/php_odbc.c 	ZEND_ARG_INFO(0, scope)</span>
+<span class='curline'><a href='../S/827.html#L3654'>scope</a>            3654 ext/odbc/php_odbc.c 	SQLUSMALLINT type, scope, nullable;</span>
+<span class='curline'><a href='../S/827.html#L3663'>scope</a>            3663 ext/odbc/php_odbc.c 	scope = (SQLUSMALLINT) vscope;</span>
+<span class='curline'><a href='../S/827.html#L3688'>scope</a>            3688 ext/odbc/php_odbc.c 			scope,</span>
+<span class='curline'><a href='../S/836.html#L275'>scope</a>             275 ext/opcache/Optimizer/pass1_5.c 					if (op_array-&gt;scope &amp;&amp; </span>
+<span class='curline'><a href='../S/836.html#L277'>scope</a>             277 ext/opcache/Optimizer/pass1_5.c 						op_array-&gt;scope-&gt;name, Z_STRLEN(ZEND_OP1_LITERAL(opline)) + 1)) {</span>
+<span class='curline'><a href='../S/836.html#L278'>scope</a>             278 ext/opcache/Optimizer/pass1_5.c 						pce = &amp;op_array-&gt;scope;</span>
+<span class='curline'><a href='../S/836.html#L292'>scope</a>             292 ext/opcache/Optimizer/pass1_5.c 				} else if (op_array-&gt;scope &amp;&amp;</span>
+<span class='curline'><a href='../S/836.html#L299'>scope</a>             299 ext/opcache/Optimizer/pass1_5.c 					pce = &amp;op_array-&gt;scope;</span>
+<span class='curline'><a href='../S/841.html#L648'>scope</a>             648 ext/opcache/Optimizer/zend_optimizer.c 			if (op_array-&gt;scope == ce) {</span>
+<span class='curline'><a href='../S/841.html#L652'>scope</a>             652 ext/opcache/Optimizer/zend_optimizer.c 				if (zend_hash_find(&amp;op_array-&gt;scope-&gt;function_table, q-&gt;arKey, q-&gt;nKeyLength, (void**)&amp;orig_op_array) == SUCCESS) {</span>
+<span class='curline'><a href='../S/856.html#L537'>scope</a>             537 ext/opcache/zend_accelerator_util_funcs.c 		if (old_ce == new_entry-&gt;scope) {</span>
+<span class='curline'><a href='../S/856.html#L538'>scope</a>             538 ext/opcache/zend_accelerator_util_funcs.c 			new_entry-&gt;scope = ce;</span>
+<span class='curline'><a href='../S/856.html#L540'>scope</a>             540 ext/opcache/zend_accelerator_util_funcs.c 			if (accel_xlat_get(new_entry-&gt;scope, new_ce) == SUCCESS) {</span>
+<span class='curline'><a href='../S/856.html#L541'>scope</a>             541 ext/opcache/zend_accelerator_util_funcs.c 				new_entry-&gt;scope = *new_ce;</span>
+<span class='curline'><a href='../S/858.html#L420'>scope</a>             420 ext/opcache/zend_persist.c 	if (op_array-&gt;scope) {</span>
+<span class='curline'><a href='../S/858.html#L421'>scope</a>             421 ext/opcache/zend_persist.c 		op_array-&gt;scope = zend_shared_alloc_get_xlat_entry(op_array-&gt;scope);</span>
+<span class='curline'><a href='../S/858.html#L454'>scope</a>             454 ext/opcache/zend_persist.c 	if (op_array-&gt;scope &amp;&amp; op_array-&gt;prototype) {</span>
+<span class='curline'><a href='../S/923.html#L484'>scope</a>             484 ext/pdo/pdo_dbh.c 		fcc.calling_scope = EG(scope);</span>
+<span class='curline'><a href='../S/923.html#L1311'>scope</a>            1311 ext/pdo/pdo_dbh.c 		ifunc-&gt;scope = dbh-&gt;std.ce;</span>
+<span class='curline'><a href='../S/926.html#L767'>scope</a>             767 ext/pdo/pdo_stmt.c 		fcc-&gt;calling_scope = EG(scope);</span>
+<span class='curline'><a href='../S/926.html#L2712'>scope</a>            2712 ext/pdo/pdo_stmt.c 	ctor.scope = pdo_row_ce;</span>
+<span class='curline'><a href='../S/967.html#L2817'>scope</a>            2817 ext/pgsql/pgsql.c 			fcc.calling_scope = EG(scope);</span>
+<span class='curline'><a href='../S/996.html#L369'>scope</a>             369 ext/reflection/php_reflection.c static void _function_string(string *str, zend_function *fptr, zend_class_entry *scope, char* indent TSRMLS_DC);</span>
+<span class='curline'><a href='../S/996.html#L523'>scope</a>             523 ext/reflection/php_reflection.c 					&amp;&amp; ((mptr-&gt;common.fn_flags &amp; ZEND_ACC_PRIVATE) == 0 || mptr-&gt;common.scope == ce))</span>
+<span class='curline'><a href='../S/996.html#L541'>scope</a>             541 ext/reflection/php_reflection.c 					&amp;&amp; ((mptr-&gt;common.fn_flags &amp; ZEND_ACC_PRIVATE) == 0 || mptr-&gt;common.scope == ce))</span>
+<span class='curline'><a href='../S/996.html#L624'>scope</a>             624 ext/reflection/php_reflection.c 					&amp;&amp; ((mptr-&gt;common.fn_flags &amp; ZEND_ACC_PRIVATE) == 0 || mptr-&gt;common.scope == ce))</span>
+<span class='curline'><a href='../S/996.html#L633'>scope</a>             633 ext/reflection/php_reflection.c 						|| mptr-&gt;common.scope == ce</span>
+<span class='curline'><a href='../S/996.html#L758'>scope</a>             758 ext/reflection/php_reflection.c 				old_scope = EG(scope);</span>
+<span class='curline'><a href='../S/996.html#L759'>scope</a>             759 ext/reflection/php_reflection.c 				EG(scope) = fptr-&gt;common.scope;</span>
+<span class='curline'><a href='../S/996.html#L761'>scope</a>             761 ext/reflection/php_reflection.c 				EG(scope) = old_scope;</span>
+<span class='curline'><a href='../S/996.html#L855'>scope</a>             855 ext/reflection/php_reflection.c static void _function_string(string *str, zend_function *fptr, zend_class_entry *scope, char* indent TSRMLS_DC)</span>
+<span class='curline'><a href='../S/996.html#L871'>scope</a>             871 ext/reflection/php_reflection.c 	string_printf(str, fptr-&gt;common.fn_flags &amp; ZEND_ACC_CLOSURE ? "Closure [ " : (fptr-&gt;common.scope ? "Method [ " : "Function [ "));</span>
+<span class='curline'><a href='../S/996.html#L880'>scope</a>             880 ext/reflection/php_reflection.c 	if (scope &amp;&amp; fptr-&gt;common.scope) {</span>
+<span class='curline'><a href='../S/996.html#L881'>scope</a>             881 ext/reflection/php_reflection.c 		if (fptr-&gt;common.scope != scope) {</span>
+<span class='curline'><a href='../S/996.html#L882'>scope</a>             882 ext/reflection/php_reflection.c 			string_printf(str, ", inherits %s", fptr-&gt;common.scope-&gt;name);</span>
+<span class='curline'><a href='../S/996.html#L883'>scope</a>             883 ext/reflection/php_reflection.c 		} else if (fptr-&gt;common.scope-&gt;parent) {</span>
+<span class='curline'><a href='../S/996.html#L886'>scope</a>             886 ext/reflection/php_reflection.c 			if (zend_hash_find(&amp;fptr-&gt;common.scope-&gt;parent-&gt;function_table, lc_name, lc_name_len + 1, (void**) &amp;overwrites) == SUCCESS) {</span>
+<span class='curline'><a href='../S/996.html#L887'>scope</a>             887 ext/reflection/php_reflection.c 				if (fptr-&gt;common.scope != overwrites-&gt;common.scope) {</span>
+<span class='curline'><a href='../S/996.html#L888'>scope</a>             888 ext/reflection/php_reflection.c 					string_printf(str, ", overwrites %s", overwrites-&gt;common.scope-&gt;name);</span>
+<span class='curline'><a href='../S/996.html#L894'>scope</a>             894 ext/reflection/php_reflection.c 	if (fptr-&gt;common.prototype &amp;&amp; fptr-&gt;common.prototype-&gt;common.scope) {</span>
+<span class='curline'><a href='../S/996.html#L895'>scope</a>             895 ext/reflection/php_reflection.c 		string_printf(str, ", prototype %s", fptr-&gt;common.prototype-&gt;common.scope-&gt;name);</span>
+<span class='curline'><a href='../S/996.html#L915'>scope</a>             915 ext/reflection/php_reflection.c 	if (fptr-&gt;common.scope) {</span>
+<span class='curline'><a href='../S/996.html#L1294'>scope</a>            1294 ext/reflection/php_reflection.c 	intern-&gt;ce = fptr-&gt;common.scope;</span>
+<span class='curline'><a href='../S/996.html#L1334'>scope</a>            1334 ext/reflection/php_reflection.c 	ZVAL_STRING(name, (method-&gt;common.scope &amp;&amp; method-&gt;common.scope-&gt;trait_aliases)?</span>
+<span class='curline'><a href='../S/996.html#L1336'>scope</a>            1336 ext/reflection/php_reflection.c 	ZVAL_STRINGL(classname, method-&gt;common.scope-&gt;name, method-&gt;common.scope-&gt;name_length, 1);</span>
+<span class='curline'><a href='../S/996.html#L1766'>scope</a>            1766 ext/reflection/php_reflection.c 		if (closure_func &amp;&amp; closure_func-&gt;common.scope) {</span>
+<span class='curline'><a href='../S/996.html#L1767'>scope</a>            1767 ext/reflection/php_reflection.c 			zend_reflection_class_factory(closure_func-&gt;common.scope, return_value TSRMLS_CC);</span>
+<span class='curline'><a href='../S/996.html#L1921'>scope</a>            1921 ext/reflection/php_reflection.c 		zend_hash_apply_with_argument(fptr-&gt;op_array.static_variables, (apply_func_arg_t) zval_update_constant_inline_change, fptr-&gt;common.scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/996.html#L1958'>scope</a>            1958 ext/reflection/php_reflection.c 	fcc.calling_scope = EG(scope);</span>
+<span class='curline'><a href='../S/996.html#L2025'>scope</a>            2025 ext/reflection/php_reflection.c 	fcc.calling_scope = EG(scope);</span>
+<span class='curline'><a href='../S/996.html#L2211'>scope</a>            2211 ext/reflection/php_reflection.c 			ce = fptr-&gt;common.scope;</span>
+<span class='curline'><a href='../S/996.html#L2387'>scope</a>            2387 ext/reflection/php_reflection.c 	if (!param-&gt;fptr-&gt;common.scope) {</span>
+<span class='curline'><a href='../S/996.html#L2390'>scope</a>            2390 ext/reflection/php_reflection.c 		reflection_method_factory(param-&gt;fptr-&gt;common.scope, _copy_function(param-&gt;fptr TSRMLS_CC), intern-&gt;obj, return_value TSRMLS_CC);</span>
+<span class='curline'><a href='../S/996.html#L2407'>scope</a>            2407 ext/reflection/php_reflection.c 	if (param-&gt;fptr-&gt;common.scope) {</span>
+<span class='curline'><a href='../S/996.html#L2408'>scope</a>            2408 ext/reflection/php_reflection.c 		zend_reflection_class_factory(param-&gt;fptr-&gt;common.scope, return_value TSRMLS_CC);</span>
+<span class='curline'><a href='../S/996.html#L2440'>scope</a>            2440 ext/reflection/php_reflection.c 			ce = param-&gt;fptr-&gt;common.scope;</span>
+<span class='curline'><a href='../S/996.html#L2448'>scope</a>            2448 ext/reflection/php_reflection.c 			ce = param-&gt;fptr-&gt;common.scope;</span>
+<span class='curline'><a href='../S/996.html#L2645'>scope</a>            2645 ext/reflection/php_reflection.c 	old_scope = EG(scope);</span>
+<span class='curline'><a href='../S/996.html#L2646'>scope</a>            2646 ext/reflection/php_reflection.c 	EG(scope) = param-&gt;fptr-&gt;common.scope;</span>
+<span class='curline'><a href='../S/996.html#L2648'>scope</a>            2648 ext/reflection/php_reflection.c 	EG(scope) = old_scope;</span>
+<span class='curline'><a href='../S/996.html#L2811'>scope</a>            2811 ext/reflection/php_reflection.c 	ZVAL_STRINGL(classname, mptr-&gt;common.scope-&gt;name, mptr-&gt;common.scope-&gt;name_length, 1);</span>
+<span class='curline'><a href='../S/996.html#L2854'>scope</a>            2854 ext/reflection/php_reflection.c 		zend_create_closure(return_value, mptr, mptr-&gt;common.scope, NULL TSRMLS_CC);</span>
+<span class='curline'><a href='../S/996.html#L2860'>scope</a>            2860 ext/reflection/php_reflection.c 		if (!instanceof_function(Z_OBJCE_P(obj), mptr-&gt;common.scope TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/996.html#L2871'>scope</a>            2871 ext/reflection/php_reflection.c 			zend_create_closure(return_value, mptr, mptr-&gt;common.scope, obj TSRMLS_CC);</span>
+<span class='curline'><a href='../S/996.html#L2902'>scope</a>            2902 ext/reflection/php_reflection.c 				mptr-&gt;common.scope-&gt;name, mptr-&gt;common.function_name);</span>
+<span class='curline'><a href='../S/996.html#L2907'>scope</a>            2907 ext/reflection/php_reflection.c 				mptr-&gt;common.scope-&gt;name, mptr-&gt;common.function_name,</span>
+<span class='curline'><a href='../S/996.html#L2925'>scope</a>            2925 ext/reflection/php_reflection.c 		obj_ce = mptr-&gt;common.scope;</span>
+<span class='curline'><a href='../S/996.html#L2935'>scope</a>            2935 ext/reflection/php_reflection.c 		if (!instanceof_function(obj_ce, mptr-&gt;common.scope TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/996.html#L2970'>scope</a>            2970 ext/reflection/php_reflection.c 			"Invocation of method %s::%s() failed", mptr-&gt;common.scope-&gt;name, mptr-&gt;common.function_name);</span>
+<span class='curline'><a href='../S/996.html#L3011'>scope</a>            3011 ext/reflection/php_reflection.c 				mptr-&gt;common.scope-&gt;name, mptr-&gt;common.function_name);</span>
+<span class='curline'><a href='../S/996.html#L3016'>scope</a>            3016 ext/reflection/php_reflection.c 				mptr-&gt;common.scope-&gt;name, mptr-&gt;common.function_name,</span>
+<span class='curline'><a href='../S/996.html#L3036'>scope</a>            3036 ext/reflection/php_reflection.c 		obj_ce = mptr-&gt;common.scope;</span>
+<span class='curline'><a href='../S/996.html#L3042'>scope</a>            3042 ext/reflection/php_reflection.c 				mptr-&gt;common.scope-&gt;name, mptr-&gt;common.function_name);</span>
+<span class='curline'><a href='../S/996.html#L3048'>scope</a>            3048 ext/reflection/php_reflection.c 		if (!instanceof_function(obj_ce, mptr-&gt;common.scope TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/996.html#L3085'>scope</a>            3085 ext/reflection/php_reflection.c 			"Invocation of method %s::%s() failed", mptr-&gt;common.scope-&gt;name, mptr-&gt;common.function_name);</span>
+<span class='curline'><a href='../S/996.html#L3250'>scope</a>            3250 ext/reflection/php_reflection.c 	RETURN_BOOL(mptr-&gt;common.fn_flags &amp; ZEND_ACC_CTOR &amp;&amp; intern-&gt;ce-&gt;constructor &amp;&amp; intern-&gt;ce-&gt;constructor-&gt;common.scope == mptr-&gt;common.scope);</span>
+<span class='curline'><a href='../S/996.html#L3299'>scope</a>            3299 ext/reflection/php_reflection.c 	zend_reflection_class_factory(mptr-&gt;common.scope, return_value TSRMLS_CC);</span>
+<span class='curline'><a href='../S/996.html#L3323'>scope</a>            3323 ext/reflection/php_reflection.c 	reflection_method_factory(mptr-&gt;common.prototype-&gt;common.scope, mptr-&gt;common.prototype, NULL, return_value TSRMLS_CC);</span>
+<span class='curline'><a href='../S/996.html#L4273'>scope</a>            4273 ext/reflection/php_reflection.c 	old_scope = EG(scope);</span>
+<span class='curline'><a href='../S/996.html#L4274'>scope</a>            4274 ext/reflection/php_reflection.c 	EG(scope) = ce;</span>
+<span class='curline'><a href='../S/996.html#L4276'>scope</a>            4276 ext/reflection/php_reflection.c 	EG(scope) = old_scope;</span>
+<span class='curline'><a href='../S/996.html#L4311'>scope</a>            4311 ext/reflection/php_reflection.c 		fcc.calling_scope = EG(scope);</span>
+<span class='curline'><a href='../S/996.html#L4381'>scope</a>            4381 ext/reflection/php_reflection.c 	old_scope = EG(scope);</span>
+<span class='curline'><a href='../S/996.html#L4382'>scope</a>            4382 ext/reflection/php_reflection.c 	EG(scope) = ce;</span>
+<span class='curline'><a href='../S/996.html#L4384'>scope</a>            4384 ext/reflection/php_reflection.c 	EG(scope) = old_scope;</span>
+<span class='curline'><a href='../S/996.html#L4416'>scope</a>            4416 ext/reflection/php_reflection.c 		fcc.calling_scope = EG(scope);</span>
+<span class='curline'><a href='../S/1011.html#L2124'>scope</a>            2124 ext/simplexml/simplexml.c 		if (intern-&gt;fptr_count-&gt;common.scope == parent) {</span>
+<span class='curline'><a href='../S/1018.html#L1234'>scope</a>            1234 ext/soap/php_encoding.c 	old_scope = EG(scope);</span>
+<span class='curline'><a href='../S/1018.html#L1235'>scope</a>            1235 ext/soap/php_encoding.c 	EG(scope) = Z_OBJCE_P(object);</span>
+<span class='curline'><a href='../S/1018.html#L1238'>scope</a>            1238 ext/soap/php_encoding.c 	EG(scope) = old_scope;</span>
+<span class='curline'><a href='../S/1018.html#L1250'>scope</a>            1250 ext/soap/php_encoding.c 		old_scope = EG(scope);</span>
+<span class='curline'><a href='../S/1018.html#L1251'>scope</a>            1251 ext/soap/php_encoding.c 		EG(scope) = Z_OBJCE_P(object);</span>
+<span class='curline'><a href='../S/1018.html#L1258'>scope</a>            1258 ext/soap/php_encoding.c 			EG(scope) = old_scope;</span>
+<span class='curline'><a href='../S/1018.html#L1264'>scope</a>            1264 ext/soap/php_encoding.c 		EG(scope) = old_scope;</span>
+<span class='curline'><a href='../S/1018.html#L1284'>scope</a>            1284 ext/soap/php_encoding.c 		old_scope = EG(scope);</span>
+<span class='curline'><a href='../S/1018.html#L1285'>scope</a>            1285 ext/soap/php_encoding.c 		EG(scope) = Z_OBJCE_P(object);</span>
+<span class='curline'><a href='../S/1018.html#L1287'>scope</a>            1287 ext/soap/php_encoding.c 		EG(scope) = old_scope;</span>
+<span class='curline'><a href='../S/1031.html#L637'>scope</a>             637 ext/soap/soap.c 		fe.scope = NULL;</span>
+<span class='curline'><a href='../S/1039.html#L23'>scope</a>              23 ext/sockets/sockaddr_conv.c 	char *scope = strchr(string, '%');</span>
+<span class='curline'><a href='../S/1039.html#L63'>scope</a>              63 ext/sockets/sockaddr_conv.c 	if (scope++) {</span>
+<span class='curline'><a href='../S/1039.html#L68'>scope</a>              68 ext/sockets/sockaddr_conv.c 		if (IS_LONG == is_numeric_string(scope, strlen(scope), &amp;lval, &amp;dval, 0)) {</span>
+<span class='curline'><a href='../S/1039.html#L73'>scope</a>              73 ext/sockets/sockaddr_conv.c 			php_string_to_if_index(scope, &amp;scope_id TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1045.html#L737'>scope</a>             737 ext/spl/php_spl.c 			} else if (alfi-&gt;func_ptr-&gt;common.scope) {</span>
+<span class='curline'><a href='../S/1047.html#L231'>scope</a>             231 ext/spl/spl_array.c 		if (intern-&gt;fptr_offset_get-&gt;common.scope == parent) {</span>
+<span class='curline'><a href='../S/1047.html#L235'>scope</a>             235 ext/spl/spl_array.c 		if (intern-&gt;fptr_offset_set-&gt;common.scope == parent) {</span>
+<span class='curline'><a href='../S/1047.html#L239'>scope</a>             239 ext/spl/spl_array.c 		if (intern-&gt;fptr_offset_has-&gt;common.scope == parent) {</span>
+<span class='curline'><a href='../S/1047.html#L243'>scope</a>             243 ext/spl/spl_array.c 		if (intern-&gt;fptr_offset_del-&gt;common.scope == parent) {</span>
+<span class='curline'><a href='../S/1047.html#L247'>scope</a>             247 ext/spl/spl_array.c 		if (intern-&gt;fptr_count-&gt;common.scope == parent) {</span>
+<span class='curline'><a href='../S/1047.html#L262'>scope</a>             262 ext/spl/spl_array.c 			if (class_type-&gt;iterator_funcs.zf_rewind-&gt;common.scope  != parent) intern-&gt;ar_flags |= SPL_ARRAY_OVERLOADED_REWIND;</span>
+<span class='curline'><a href='../S/1047.html#L263'>scope</a>             263 ext/spl/spl_array.c 			if (class_type-&gt;iterator_funcs.zf_valid-&gt;common.scope   != parent) intern-&gt;ar_flags |= SPL_ARRAY_OVERLOADED_VALID;</span>
+<span class='curline'><a href='../S/1047.html#L264'>scope</a>             264 ext/spl/spl_array.c 			if (class_type-&gt;iterator_funcs.zf_key-&gt;common.scope     != parent) intern-&gt;ar_flags |= SPL_ARRAY_OVERLOADED_KEY;</span>
+<span class='curline'><a href='../S/1047.html#L265'>scope</a>             265 ext/spl/spl_array.c 			if (class_type-&gt;iterator_funcs.zf_current-&gt;common.scope != parent) intern-&gt;ar_flags |= SPL_ARRAY_OVERLOADED_CURRENT;</span>
+<span class='curline'><a href='../S/1047.html#L266'>scope</a>             266 ext/spl/spl_array.c 			if (class_type-&gt;iterator_funcs.zf_next-&gt;common.scope    != parent) intern-&gt;ar_flags |= SPL_ARRAY_OVERLOADED_NEXT;</span>
+<span class='curline'><a href='../S/1049.html#L454'>scope</a>             454 ext/spl/spl_directory.c 	if (ce-&gt;constructor-&gt;common.scope != spl_ce_SplFileInfo) {</span>
+<span class='curline'><a href='../S/1049.html#L498'>scope</a>             498 ext/spl/spl_directory.c 		if (ce-&gt;constructor-&gt;common.scope != spl_ce_SplFileInfo) {</span>
+<span class='curline'><a href='../S/1049.html#L520'>scope</a>             520 ext/spl/spl_directory.c 		if (ce-&gt;constructor-&gt;common.scope != spl_ce_SplFileObject) {</span>
+<span class='curline'><a href='../S/1049.html#L2195'>scope</a>            2195 ext/spl/spl_directory.c 	if (SPL_HAS_FLAG(intern-&gt;flags, SPL_FILE_OBJECT_READ_CSV) || intern-&gt;u.file.func_getCurr-&gt;common.scope != spl_ce_SplFileObject) {</span>
+<span class='curline'><a href='../S/1051.html#L432'>scope</a>             432 ext/spl/spl_dllist.c 		if (intern-&gt;fptr_offset_get-&gt;common.scope == parent) {</span>
+<span class='curline'><a href='../S/1051.html#L436'>scope</a>             436 ext/spl/spl_dllist.c 		if (intern-&gt;fptr_offset_set-&gt;common.scope == parent) {</span>
+<span class='curline'><a href='../S/1051.html#L440'>scope</a>             440 ext/spl/spl_dllist.c 		if (intern-&gt;fptr_offset_has-&gt;common.scope == parent) {</span>
+<span class='curline'><a href='../S/1051.html#L444'>scope</a>             444 ext/spl/spl_dllist.c 		if (intern-&gt;fptr_offset_del-&gt;common.scope == parent) {</span>
+<span class='curline'><a href='../S/1051.html#L448'>scope</a>             448 ext/spl/spl_dllist.c 		if (intern-&gt;fptr_count-&gt;common.scope == parent) {</span>
+<span class='curline'><a href='../S/1054.html#L77'>scope</a>              77 ext/spl/spl_engine.h 	fcc.calling_scope = EG(scope);</span>
+<span class='curline'><a href='../S/1057.html#L277'>scope</a>             277 ext/spl/spl_fixedarray.c 		if (class_type-&gt;iterator_funcs.zf_rewind-&gt;common.scope  != parent) { </span>
+<span class='curline'><a href='../S/1057.html#L280'>scope</a>             280 ext/spl/spl_fixedarray.c 		if (class_type-&gt;iterator_funcs.zf_valid-&gt;common.scope   != parent) { </span>
+<span class='curline'><a href='../S/1057.html#L283'>scope</a>             283 ext/spl/spl_fixedarray.c 		if (class_type-&gt;iterator_funcs.zf_key-&gt;common.scope     != parent) { </span>
+<span class='curline'><a href='../S/1057.html#L286'>scope</a>             286 ext/spl/spl_fixedarray.c 		if (class_type-&gt;iterator_funcs.zf_current-&gt;common.scope != parent) { </span>
+<span class='curline'><a href='../S/1057.html#L289'>scope</a>             289 ext/spl/spl_fixedarray.c 		if (class_type-&gt;iterator_funcs.zf_next-&gt;common.scope    != parent) { </span>
+<span class='curline'><a href='../S/1057.html#L294'>scope</a>             294 ext/spl/spl_fixedarray.c 		if (intern-&gt;fptr_offset_get-&gt;common.scope == parent) {</span>
+<span class='curline'><a href='../S/1057.html#L298'>scope</a>             298 ext/spl/spl_fixedarray.c 		if (intern-&gt;fptr_offset_set-&gt;common.scope == parent) {</span>
+<span class='curline'><a href='../S/1057.html#L302'>scope</a>             302 ext/spl/spl_fixedarray.c 		if (intern-&gt;fptr_offset_has-&gt;common.scope == parent) {</span>
+<span class='curline'><a href='../S/1057.html#L306'>scope</a>             306 ext/spl/spl_fixedarray.c 		if (intern-&gt;fptr_offset_del-&gt;common.scope == parent) {</span>
+<span class='curline'><a href='../S/1057.html#L310'>scope</a>             310 ext/spl/spl_fixedarray.c 		if (intern-&gt;fptr_count-&gt;common.scope == parent) {</span>
+<span class='curline'><a href='../S/1061.html#L460'>scope</a>             460 ext/spl/spl_heap.c 		if (intern-&gt;fptr_cmp-&gt;common.scope == parent) {</span>
+<span class='curline'><a href='../S/1061.html#L464'>scope</a>             464 ext/spl/spl_heap.c 		if (intern-&gt;fptr_count-&gt;common.scope == parent) {</span>
+<span class='curline'><a href='../S/1063.html#L404'>scope</a>             404 ext/spl/spl_iterators.c 		if (!EG(exception) &amp;&amp; (!object-&gt;endChildren || object-&gt;endChildren-&gt;common.scope != spl_ce_RecursiveIteratorIterator)) {</span>
+<span class='curline'><a href='../S/1063.html#L542'>scope</a>             542 ext/spl/spl_iterators.c 	if (intern-&gt;beginIteration-&gt;common.scope == ce_base) {</span>
+<span class='curline'><a href='../S/1063.html#L546'>scope</a>             546 ext/spl/spl_iterators.c 	if (intern-&gt;endIteration-&gt;common.scope == ce_base) {</span>
+<span class='curline'><a href='../S/1063.html#L550'>scope</a>             550 ext/spl/spl_iterators.c 	if (intern-&gt;callHasChildren-&gt;common.scope == ce_base) {</span>
+<span class='curline'><a href='../S/1063.html#L554'>scope</a>             554 ext/spl/spl_iterators.c 	if (intern-&gt;callGetChildren-&gt;common.scope == ce_base) {</span>
+<span class='curline'><a href='../S/1063.html#L558'>scope</a>             558 ext/spl/spl_iterators.c 	if (intern-&gt;beginChildren-&gt;common.scope == ce_base) {</span>
+<span class='curline'><a href='../S/1063.html#L562'>scope</a>             562 ext/spl/spl_iterators.c 	if (intern-&gt;endChildren-&gt;common.scope == ce_base) {</span>
+<span class='curline'><a href='../S/1063.html#L566'>scope</a>             566 ext/spl/spl_iterators.c 	if (intern-&gt;nextElement-&gt;common.scope == ce_base) {</span>
+<span class='curline'><a href='../S/1065.html#L287'>scope</a>             287 ext/spl/spl_observer.c 				if (intern-&gt;fptr_get_hash-&gt;common.scope == spl_ce_SplObjectStorage) {</span>
+<span class='curline'><a href='../S/1073.html#L1365'>scope</a>            1365 ext/standard/array.c 				if (var_exists &amp;&amp; var_name_len == sizeof("this")-1  &amp;&amp; !strcmp(var_name, "this") &amp;&amp; EG(scope) &amp;&amp; EG(scope)-&gt;name_length != 0) {</span>
+<span class='curline'><a href='../S/1077.html#L4889'>scope</a>            4889 ext/standard/basic_functions.c 	if (!EG(active_op_array)-&gt;scope) {</span>
+<span class='curline'><a href='../S/1220.html#L1023'>scope</a>            1023 ext/wddx/wddx.c 						zend_class_entry *old_scope = EG(scope);</span>
+<span class='curline'><a href='../S/1220.html#L1025'>scope</a>            1025 ext/wddx/wddx.c 						EG(scope) = Z_OBJCE_P(ent2-&gt;data);</span>
+<span class='curline'><a href='../S/1220.html#L1028'>scope</a>            1028 ext/wddx/wddx.c 						EG(scope) = old_scope;</span>
+<span class='curline'><a href='../S/1419.html#L317'>scope</a>             317 main/streams/userspace.c 		fcc.calling_scope = EG(scope);</span>
+<span class='curline'><a href='../S/1548.html#L382'>scope</a>             382 sapi/phpdbg/phpdbg_bp.c 	if (op_array-&gt;scope) {</span>
+<span class='curline'><a href='../S/1548.html#L404'>scope</a>             404 sapi/phpdbg/phpdbg_bp.c 	if (op_array-&gt;scope != NULL &amp;&amp;</span>
+<span class='curline'><a href='../S/1548.html#L405'>scope</a>             405 sapi/phpdbg/phpdbg_bp.c 	    zend_hash_find(&amp;PHPDBG_G(bp)[PHPDBG_BREAK_METHOD_OPLINE], op_array-&gt;scope-&gt;name, op_array-&gt;scope-&gt;name_length, (void **)&amp;func_table) == FAILURE) {</span>
+<span class='curline'><a href='../S/1548.html#L455'>scope</a>             455 sapi/phpdbg/phpdbg_bp.c 				if (execute_data-&gt;op_array-&gt;function_name == NULL &amp;&amp; execute_data-&gt;op_array-&gt;scope == NULL &amp;&amp; !memcmp(execute_data-&gt;op_array-&gt;filename, new_break-&gt;class_name, new_break-&gt;class_len)) {</span>
+<span class='curline'><a href='../S/1548.html#L822'>scope</a>             822 sapi/phpdbg/phpdbg_bp.c 	if (ops-&gt;scope) {</span>
+<span class='curline'><a href='../S/1548.html#L845'>scope</a>             845 sapi/phpdbg/phpdbg_bp.c 	if (zend_hash_find(&amp;PHPDBG_G(bp)[PHPDBG_BREAK_METHOD], ops-&gt;scope-&gt;name,</span>
+<span class='curline'><a href='../S/1548.html#L846'>scope</a>             846 sapi/phpdbg/phpdbg_bp.c 		ops-&gt;scope-&gt;name_length, (void**)&amp;class_table) == SUCCESS) {</span>
+<span class='curline'><a href='../S/1548.html#L939'>scope</a>             939 sapi/phpdbg/phpdbg_bp.c 				if (ops-&gt;scope) {</span>
+<span class='curline'><a href='../S/1548.html#L940'>scope</a>             940 sapi/phpdbg/phpdbg_bp.c 					size_t lengths[2] = {strlen(param-&gt;method.class), ops-&gt;scope-&gt;name_length};</span>
+<span class='curline'><a href='../S/1548.html#L941'>scope</a>             941 sapi/phpdbg/phpdbg_bp.c 					if (lengths[0] == lengths[1] &amp;&amp; memcmp(param-&gt;method.class, ops-&gt;scope-&gt;name, lengths[0]) == SUCCESS) {</span>
+<span class='curline'><a href='../S/1556.html#L45'>scope</a>              45 sapi/phpdbg/phpdbg_frame.c 	EG(scope) = PHPDBG_EX(current_scope);</span>
+<span class='curline'><a href='../S/1556.html#L89'>scope</a>              89 sapi/phpdbg/phpdbg_frame.c 		EG(scope) = PHPDBG_EX(current_scope);</span>
+<span class='curline'><a href='../S/1560.html#L127'>scope</a>             127 sapi/phpdbg/phpdbg_info.c 			if (ops-&gt;scope) {</span>
+<span class='curline'><a href='../S/1560.html#L129'>scope</a>             129 sapi/phpdbg/phpdbg_info.c 				"Variables in %s::%s() (%d)", ops-&gt;scope-&gt;name, ops-&gt;function_name, zend_hash_num_elements(&amp;vars));</span>
+<span class='curline'><a href='../S/1560.html#L214'>scope</a>             214 sapi/phpdbg/phpdbg_info.c 			if (ops-&gt;scope) {</span>
+<span class='curline'><a href='../S/1560.html#L216'>scope</a>             216 sapi/phpdbg/phpdbg_info.c 				"Literal Constants in %s::%s() (%d)", ops-&gt;scope-&gt;name, ops-&gt;function_name, count);</span>
+<span class='curline'><a href='../S/1564.html#L206'>scope</a>             206 sapi/phpdbg/phpdbg_list.c 		if (EG(scope)) {</span>
+<span class='curline'><a href='../S/1564.html#L210'>scope</a>             210 sapi/phpdbg/phpdbg_list.c 			func_table = &amp;EG(scope)-&gt;function_table;</span>
+<span class='curline'><a href='../S/1570.html#L65'>scope</a>              65 sapi/phpdbg/phpdbg_print.c 				if (method-&gt;common.scope) {</span>
+<span class='curline'><a href='../S/1570.html#L68'>scope</a>              68 sapi/phpdbg/phpdbg_print.c 						method-&gt;common.scope-&gt;name,</span>
+<span class='curline'><a href='../S/1570.html#L99'>scope</a>              99 sapi/phpdbg/phpdbg_print.c 			if (method-&gt;common.scope) {</span>
+<span class='curline'><a href='../S/1570.html#L100'>scope</a>             100 sapi/phpdbg/phpdbg_print.c 				phpdbg_writeln("\tInternal %s::%s()", method-&gt;common.scope-&gt;name, method-&gt;common.function_name);</span>
+<span class='curline'><a href='../S/1570.html#L133'>scope</a>             133 sapi/phpdbg/phpdbg_print.c 			if (ops-&gt;scope) {</span>
+<span class='curline'><a href='../S/1570.html#L134'>scope</a>             134 sapi/phpdbg/phpdbg_print.c 				phpdbg_notice("Stack in %s::%s()", ops-&gt;scope-&gt;name, ops-&gt;function_name);</span>
+<span class='curline'><a href='../S/1570.html#L221'>scope</a>             221 sapi/phpdbg/phpdbg_print.c 		if (EG(scope)) {</span>
+<span class='curline'><a href='../S/1570.html#L225'>scope</a>             225 sapi/phpdbg/phpdbg_print.c 			func_table = &amp;EG(scope)-&gt;function_table;</span>
+<span class='curline'><a href='../S/1570.html#L242'>scope</a>             242 sapi/phpdbg/phpdbg_print.c 			(fbc-&gt;common.scope) ? "Method" : "Function",</span>
+</pre>
+</body>
+</html>

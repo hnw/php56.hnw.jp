@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>rb</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/438.html#L40'>rb</a>                 40 ext/intl/resourcebundle/resourcebundle_class.c 	ResourceBundle_object *rb = (ResourceBundle_object *) object;</span>
+<span class='curline'><a href='../S/438.html#L43'>rb</a>                 43 ext/intl/resourcebundle/resourcebundle_class.c 	intl_error_reset( INTL_DATA_ERROR_P(rb) TSRMLS_CC );</span>
+<span class='curline'><a href='../S/438.html#L45'>rb</a>                 45 ext/intl/resourcebundle/resourcebundle_class.c 	if (rb-&gt;me) {</span>
+<span class='curline'><a href='../S/438.html#L46'>rb</a>                 46 ext/intl/resourcebundle/resourcebundle_class.c 		ures_close( rb-&gt;me );</span>
+<span class='curline'><a href='../S/438.html#L48'>rb</a>                 48 ext/intl/resourcebundle/resourcebundle_class.c 	if (rb-&gt;child) {</span>
+<span class='curline'><a href='../S/438.html#L49'>rb</a>                 49 ext/intl/resourcebundle/resourcebundle_class.c 		ures_close( rb-&gt;child );</span>
+<span class='curline'><a href='../S/438.html#L61'>rb</a>                 61 ext/intl/resourcebundle/resourcebundle_class.c 	ResourceBundle_object *rb;</span>
+<span class='curline'><a href='../S/438.html#L63'>rb</a>                 63 ext/intl/resourcebundle/resourcebundle_class.c 	rb = ecalloc( 1, sizeof(ResourceBundle_object) );</span>
+<span class='curline'><a href='../S/438.html#L65'>rb</a>                 65 ext/intl/resourcebundle/resourcebundle_class.c 	zend_object_std_init( (zend_object *) rb, ce TSRMLS_CC );</span>
+<span class='curline'><a href='../S/438.html#L66'>rb</a>                 66 ext/intl/resourcebundle/resourcebundle_class.c 	object_properties_init((zend_object *) rb, ce);</span>
+<span class='curline'><a href='../S/438.html#L68'>rb</a>                 68 ext/intl/resourcebundle/resourcebundle_class.c 	intl_error_init( INTL_DATA_ERROR_P(rb) TSRMLS_CC );</span>
+<span class='curline'><a href='../S/438.html#L69'>rb</a>                 69 ext/intl/resourcebundle/resourcebundle_class.c 	rb-&gt;me = NULL;</span>
+<span class='curline'><a href='../S/438.html#L70'>rb</a>                 70 ext/intl/resourcebundle/resourcebundle_class.c 	rb-&gt;child = NULL;</span>
+<span class='curline'><a href='../S/438.html#L73'>rb</a>                 73 ext/intl/resourcebundle/resourcebundle_class.c 	retval.handle = zend_objects_store_put(	rb, ResourceBundle_object_destroy, NULL, NULL TSRMLS_CC );</span>
+<span class='curline'><a href='../S/438.html#L89'>rb</a>                 89 ext/intl/resourcebundle/resourcebundle_class.c 	ResourceBundle_object *rb = (ResourceBundle_object *) zend_object_store_get_object( object TSRMLS_CC);</span>
+<span class='curline'><a href='../S/438.html#L109'>rb</a>                109 ext/intl/resourcebundle/resourcebundle_class.c 		rb-&gt;me = ures_open(bundlename, locale, &amp;INTL_DATA_ERROR_CODE(rb));</span>
+<span class='curline'><a href='../S/438.html#L111'>rb</a>                111 ext/intl/resourcebundle/resourcebundle_class.c 		rb-&gt;me = ures_openDirect(bundlename, locale, &amp;INTL_DATA_ERROR_CODE(rb));</span>
+<span class='curline'><a href='../S/438.html#L114'>rb</a>                114 ext/intl/resourcebundle/resourcebundle_class.c 	INTL_CTOR_CHECK_STATUS(rb, "resourcebundle_ctor: Cannot load libICU resource bundle");</span>
+<span class='curline'><a href='../S/438.html#L116'>rb</a>                116 ext/intl/resourcebundle/resourcebundle_class.c 	if (!fallback &amp;&amp; (INTL_DATA_ERROR_CODE(rb) == U_USING_FALLBACK_WARNING ||</span>
+<span class='curline'><a href='../S/438.html#L117'>rb</a>                117 ext/intl/resourcebundle/resourcebundle_class.c 			INTL_DATA_ERROR_CODE(rb) == U_USING_DEFAULT_WARNING)) {</span>
+<span class='curline'><a href='../S/438.html#L119'>rb</a>                119 ext/intl/resourcebundle/resourcebundle_class.c 		intl_errors_set_code(NULL, INTL_DATA_ERROR_CODE(rb) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/438.html#L124'>rb</a>                124 ext/intl/resourcebundle/resourcebundle_class.c 					rb-&gt;me, ULOC_ACTUAL_LOCALE, &amp;INTL_DATA_ERROR_CODE(rb)));</span>
+<span class='curline'><a href='../S/438.html#L125'>rb</a>                125 ext/intl/resourcebundle/resourcebundle_class.c 		intl_errors_set_custom_msg(INTL_DATA_ERROR_P(rb), pbuf, 1 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/438.html#L168'>rb</a>                168 ext/intl/resourcebundle/resourcebundle_class.c 	ResourceBundle_object *rb;</span>
+<span class='curline'><a href='../S/438.html#L176'>rb</a>                176 ext/intl/resourcebundle/resourcebundle_class.c 		rb-&gt;child = ures_getByIndex( rb-&gt;me, meindex, rb-&gt;child, &amp;INTL_DATA_ERROR_CODE(rb) );</span>
+<span class='curline'><a href='../S/438.html#L179'>rb</a>                179 ext/intl/resourcebundle/resourcebundle_class.c 		rb-&gt;child = ures_getByKey(rb-&gt;me, mekey, rb-&gt;child, &amp;INTL_DATA_ERROR_CODE(rb) );</span>
+<span class='curline'><a href='../S/438.html#L181'>rb</a>                181 ext/intl/resourcebundle/resourcebundle_class.c 		intl_errors_set(INTL_DATA_ERROR_P(rb), U_ILLEGAL_ARGUMENT_ERROR,	</span>
+<span class='curline'><a href='../S/438.html#L186'>rb</a>                186 ext/intl/resourcebundle/resourcebundle_class.c 	intl_error_set_code( NULL, INTL_DATA_ERROR_CODE(rb) TSRMLS_CC );	</span>
+<span class='curline'><a href='../S/438.html#L187'>rb</a>                187 ext/intl/resourcebundle/resourcebundle_class.c 	if (U_FAILURE(INTL_DATA_ERROR_CODE(rb))) {</span>
+<span class='curline'><a href='../S/438.html#L193'>rb</a>                193 ext/intl/resourcebundle/resourcebundle_class.c 		intl_errors_set_custom_msg( INTL_DATA_ERROR_P(rb), pbuf, 1 TSRMLS_CC );</span>
+<span class='curline'><a href='../S/438.html#L198'>rb</a>                198 ext/intl/resourcebundle/resourcebundle_class.c 	if (!fallback &amp;&amp; (INTL_DATA_ERROR_CODE(rb) == U_USING_FALLBACK_WARNING || INTL_DATA_ERROR_CODE(rb) == U_USING_DEFAULT_WARNING)) {</span>
+<span class='curline'><a href='../S/438.html#L200'>rb</a>                200 ext/intl/resourcebundle/resourcebundle_class.c 		const char * locale = ures_getLocaleByType( rb-&gt;me, ULOC_ACTUAL_LOCALE, &amp;icuerror );</span>
+<span class='curline'><a href='../S/438.html#L206'>rb</a>                206 ext/intl/resourcebundle/resourcebundle_class.c 		intl_errors_set_custom_msg( INTL_DATA_ERROR_P(rb), pbuf, 1 TSRMLS_CC );</span>
+<span class='curline'><a href='../S/438.html#L211'>rb</a>                211 ext/intl/resourcebundle/resourcebundle_class.c 	resourcebundle_extract_value( return_value, rb TSRMLS_CC );</span>
+<span class='curline'><a href='../S/438.html#L261'>rb</a>                261 ext/intl/resourcebundle/resourcebundle_class.c 	ResourceBundle_object *rb;</span>
+<span class='curline'><a href='../S/438.html#L264'>rb</a>                264 ext/intl/resourcebundle/resourcebundle_class.c 	if (rb-&gt;me == NULL) {</span>
+<span class='curline'><a href='../S/438.html#L265'>rb</a>                265 ext/intl/resourcebundle/resourcebundle_class.c 		intl_errors_set(&amp;rb-&gt;error, U_ILLEGAL_ARGUMENT_ERROR,</span>
+<span class='curline'><a href='../S/438.html#L270'>rb</a>                270 ext/intl/resourcebundle/resourcebundle_class.c 	*count = ures_getSize( rb-&gt;me );</span>
+<span class='curline'><a href='../S/438.html#L298'>rb</a>                298 ext/intl/resourcebundle/resourcebundle_class.c 	len = ures_getSize( rb-&gt;me );</span>
+<span class='curline'><a href='../S/438.html#L370'>rb</a>                370 ext/intl/resourcebundle/resourcebundle_class.c 	rb = (ResourceBundle_object *) zend_object_store_get_object( object TSRMLS_CC );</span>
+<span class='curline'><a href='../S/438.html#L372'>rb</a>                372 ext/intl/resourcebundle/resourcebundle_class.c 	RETURN_LONG(INTL_DATA_ERROR_CODE(rb));</span>
+<span class='curline'><a href='../S/438.html#L398'>rb</a>                398 ext/intl/resourcebundle/resourcebundle_class.c 	rb = (ResourceBundle_object *) zend_object_store_get_object( object TSRMLS_CC );</span>
+<span class='curline'><a href='../S/438.html#L399'>rb</a>                399 ext/intl/resourcebundle/resourcebundle_class.c 	message = (char *)intl_error_get_message(INTL_DATA_ERROR_P(rb) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/439.html#L35'>rb</a>                 35 ext/intl/resourcebundle/resourcebundle_class.h #define RESOURCEBUNDLE_METHOD_INIT_VARS		INTL_METHOD_INIT_VARS(ResourceBundle, rb)</span>
+<span class='curline'><a href='../S/439.html#L36'>rb</a>                 36 ext/intl/resourcebundle/resourcebundle_class.h #define RESOURCEBUNDLE_METHOD_FETCH_OBJECT_NO_CHECK	INTL_METHOD_FETCH_OBJECT(ResourceBundle, rb)</span>
+<span class='curline'><a href='../S/439.html#L38'>rb</a>                 38 ext/intl/resourcebundle/resourcebundle_class.h 	INTL_METHOD_FETCH_OBJECT(ResourceBundle, rb);					\</span>
+<span class='curline'><a href='../S/439.html#L39'>rb</a>                 39 ext/intl/resourcebundle/resourcebundle_class.h 	if (RESOURCEBUNDLE_OBJECT(rb) == NULL) {						\</span>
+<span class='curline'><a href='../S/439.html#L40'>rb</a>                 40 ext/intl/resourcebundle/resourcebundle_class.h 		intl_errors_set(&amp;rb-&gt;error, U_ILLEGAL_ARGUMENT_ERROR,		\</span>
+<span class='curline'><a href='../S/439.html#L46'>rb</a>                 46 ext/intl/resourcebundle/resourcebundle_class.h #define RESOURCEBUNDLE_OBJECT(rb)			(rb)-&gt;me</span>
+<span class='curline'><a href='../S/440.html#L35'>rb</a>                 35 ext/intl/resourcebundle/resourcebundle_iterator.c 	ResourceBundle_object *rb = iterator-&gt;subject;</span>
+<span class='curline'><a href='../S/440.html#L37'>rb</a>                 37 ext/intl/resourcebundle/resourcebundle_iterator.c 	rb-&gt;child = ures_getByIndex( rb-&gt;me, iterator-&gt;i, rb-&gt;child, &amp;icuerror );</span>
+<span class='curline'><a href='../S/440.html#L42'>rb</a>                 42 ext/intl/resourcebundle/resourcebundle_iterator.c 			iterator-&gt;currentkey = estrdup( ures_getKey( rb-&gt;child ) );</span>
+<span class='curline'><a href='../S/440.html#L45'>rb</a>                 45 ext/intl/resourcebundle/resourcebundle_iterator.c 		resourcebundle_extract_value( iterator-&gt;current, rb TSRMLS_CC );</span>
+<span class='curline'><a href='../S/440.html#L155'>rb</a>                155 ext/intl/resourcebundle/resourcebundle_iterator.c 	ResourceBundle_object   *rb = (ResourceBundle_object *) zend_object_store_get_object( object TSRMLS_CC );</span>
+<span class='curline'><a href='../S/440.html#L166'>rb</a>                166 ext/intl/resourcebundle/resourcebundle_iterator.c 	iterator-&gt;subject = rb;</span>
+<span class='curline'><a href='../S/440.html#L171'>rb</a>                171 ext/intl/resourcebundle/resourcebundle_iterator.c 	iterator-&gt;is_table = (ures_getType( rb-&gt;me ) == URES_TABLE);</span>
+<span class='curline'><a href='../S/440.html#L172'>rb</a>                172 ext/intl/resourcebundle/resourcebundle_iterator.c 	iterator-&gt;length = ures_getSize( rb-&gt;me );</span>
+<span class='curline'><a href='../S/878.html#L323'>rb</a>                323 ext/pcre/pcrelib/pcre_exec.c #define RMATCH(ra,rb,rc,rd,re,rw) \</span>
+<span class='curline'><a href='../S/878.html#L326'>rb</a>                326 ext/pcre/pcrelib/pcre_exec.c   rrc = match(ra,rb,mstart,rc,rd,re,rdepth+1); \</span>
+<span class='curline'><a href='../S/878.html#L335'>rb</a>                335 ext/pcre/pcrelib/pcre_exec.c #define RMATCH(ra,rb,rc,rd,re,rw) \</span>
+<span class='curline'><a href='../S/878.html#L336'>rb</a>                336 ext/pcre/pcrelib/pcre_exec.c   rrc = match(ra,rb,mstart,rc,rd,re,rdepth+1)</span>
+<span class='curline'><a href='../S/878.html#L349'>rb</a>                349 ext/pcre/pcrelib/pcre_exec.c #define RMATCH(ra,rb,rc,rd,re,rw)\</span>
+<span class='curline'><a href='../S/878.html#L361'>rb</a>                361 ext/pcre/pcrelib/pcre_exec.c   newframe-&gt;Xecode = rb;\</span>
+</pre>
+</body>
+</html>

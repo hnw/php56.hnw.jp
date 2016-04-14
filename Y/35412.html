@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>rq</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/1545.html#L96'>rq</a>                 96 sapi/nsapi/nsapi.c 	Request	*rq;</span>
+<span class='curline'><a href='../S/1545.html#L224'>rq</a>                224 sapi/nsapi/nsapi.c typedef int (*nsapi_servact_prototype)(Session *sn, Request *rq);</span>
+<span class='curline'><a href='../S/1545.html#L336'>rq</a>                336 sapi/nsapi/nsapi.c 	Request *rq;</span>
+<span class='curline'><a href='../S/1545.html#L355'>rq</a>                355 sapi/nsapi/nsapi.c 		if ((rq = request_restart_internal(uri, NULL)) == NULL) {</span>
+<span class='curline'><a href='../S/1545.html#L361'>rq</a>                361 sapi/nsapi/nsapi.c 		param_free(pblock_remove("host", rq-&gt;headers));</span>
+<span class='curline'><a href='../S/1545.html#L362'>rq</a>                362 sapi/nsapi/nsapi.c 		if (value = pblock_findval("host", rc-&gt;rq-&gt;headers)) {</span>
+<span class='curline'><a href='../S/1545.html#L363'>rq</a>                363 sapi/nsapi/nsapi.c 			pblock_nvinsert("host", value, rq-&gt;headers);</span>
+<span class='curline'><a href='../S/1545.html#L369'>rq</a>                369 sapi/nsapi/nsapi.c 			rv = (*nsapi_servact_uri2path)(rc-&gt;sn, rq);</span>
+<span class='curline'><a href='../S/1545.html#L374'>rq</a>                374 sapi/nsapi/nsapi.c 			rv = (*nsapi_servact_pathchecks)(rc-&gt;sn, rq);</span>
+<span class='curline'><a href='../S/1545.html#L379'>rq</a>                379 sapi/nsapi/nsapi.c 			rv = (*nsapi_servact_fileinfo)(rc-&gt;sn, rq);</span>
+<span class='curline'><a href='../S/1545.html#L384'>rq</a>                384 sapi/nsapi/nsapi.c 			rv = (*nsapi_servact_service)(rc-&gt;sn, rq);</span>
+<span class='curline'><a href='../S/1545.html#L387'>rq</a>                387 sapi/nsapi/nsapi.c 		if (rq-&gt;status_num != 200) {</span>
+<span class='curline'><a href='../S/1545.html#L388'>rq</a>                388 sapi/nsapi/nsapi.c 			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Unable to include uri '%s' - HTTP status code %d during subrequest", uri, rq-&gt;status_num);</span>
+<span class='curline'><a href='../S/1545.html#L389'>rq</a>                389 sapi/nsapi/nsapi.c 			request_free(rq);</span>
+<span class='curline'><a href='../S/1545.html#L393'>rq</a>                393 sapi/nsapi/nsapi.c 		request_free(rq);</span>
+<span class='curline'><a href='../S/1545.html#L414'>rq</a>                414 sapi/nsapi/nsapi.c 	for (i=0; i &lt; rc-&gt;rq-&gt;headers-&gt;hsize; i++) {</span>
+<span class='curline'><a href='../S/1545.html#L415'>rq</a>                415 sapi/nsapi/nsapi.c 		entry=rc-&gt;rq-&gt;headers-&gt;ht[i];</span>
+<span class='curline'><a href='../S/1545.html#L438'>rq</a>                438 sapi/nsapi/nsapi.c 	for (i=0; i &lt; rc-&gt;rq-&gt;srvhdrs-&gt;hsize; i++) {</span>
+<span class='curline'><a href='../S/1545.html#L439'>rq</a>                439 sapi/nsapi/nsapi.c 		entry=rc-&gt;rq-&gt;srvhdrs-&gt;ht[i];</span>
+<span class='curline'><a href='../S/1545.html#L512'>rq</a>                512 sapi/nsapi/nsapi.c 	param_free(pblock_remove(header_name, rc-&gt;rq-&gt;srvhdrs));</span>
+<span class='curline'><a href='../S/1545.html#L554'>rq</a>                554 sapi/nsapi/nsapi.c 					param_free(pblock_remove(header_name, rc-&gt;rq-&gt;srvhdrs));</span>
+<span class='curline'><a href='../S/1545.html#L557'>rq</a>                557 sapi/nsapi/nsapi.c 				pblock_nvinsert(header_name, header_content, rc-&gt;rq-&gt;srvhdrs);</span>
+<span class='curline'><a href='../S/1545.html#L575'>rq</a>                575 sapi/nsapi/nsapi.c 		param_free(pblock_remove("content-type", rc-&gt;rq-&gt;srvhdrs));</span>
+<span class='curline'><a href='../S/1545.html#L577'>rq</a>                577 sapi/nsapi/nsapi.c 		pblock_nvinsert("content-type", hd, rc-&gt;rq-&gt;srvhdrs);</span>
+<span class='curline'><a href='../S/1545.html#L581'>rq</a>                581 sapi/nsapi/nsapi.c 	protocol_status(rc-&gt;sn, rc-&gt;rq, SG(sapi_headers).http_response_code, NULL);</span>
+<span class='curline'><a href='../S/1545.html#L582'>rq</a>                582 sapi/nsapi/nsapi.c 	retval = protocol_start_response(rc-&gt;sn, rc-&gt;rq);</span>
+<span class='curline'><a href='../S/1545.html#L654'>rq</a>                654 sapi/nsapi/nsapi.c 	cookie_string = pblock_findval("cookie", rc-&gt;rq-&gt;headers);</span>
+<span class='curline'><a href='../S/1545.html#L668'>rq</a>                668 sapi/nsapi/nsapi.c 		value = pblock_findval(nsapi_reqpb[i].nsapi_eq, rc-&gt;rq-&gt;reqpb);</span>
+<span class='curline'><a href='../S/1545.html#L674'>rq</a>                674 sapi/nsapi/nsapi.c 	for (i=0; i &lt; rc-&gt;rq-&gt;headers-&gt;hsize; i++) {</span>
+<span class='curline'><a href='../S/1545.html#L675'>rq</a>                675 sapi/nsapi/nsapi.c 		entry=rc-&gt;rq-&gt;headers-&gt;ht[i];</span>
+<span class='curline'><a href='../S/1545.html#L699'>rq</a>                699 sapi/nsapi/nsapi.c 		value = pblock_findval(nsapi_vars[i].nsapi_eq, rc-&gt;rq-&gt;vars);</span>
+<span class='curline'><a href='../S/1545.html#L721'>rq</a>                721 sapi/nsapi/nsapi.c 	value = http_uri2url_dynamic("", "", rc-&gt;sn, rc-&gt;rq);</span>
+<span class='curline'><a href='../S/1545.html#L783'>rq</a>                783 sapi/nsapi/nsapi.c 		log_error(LOG_INFORM, pblock_findval("fn", rc-&gt;pb), rc-&gt;sn, rc-&gt;rq, "%s", message);</span>
+<span class='curline'><a href='../S/1545.html#L791'>rq</a>                791 sapi/nsapi/nsapi.c 	return REQ_TIME( ((nsapi_request_context *)SG(server_context))-&gt;rq );</span>
+<span class='curline'><a href='../S/1545.html#L806'>rq</a>                806 sapi/nsapi/nsapi.c 		((nsapi_request_context *)SG(server_context))-&gt;rq</span>
+<span class='curline'><a href='../S/1545.html#L864'>rq</a>                864 sapi/nsapi/nsapi.c 					log_error(LOG_WARN, pblock_findval("fn", NSG(pb)), NSG(sn), NSG(rq), "Cannot change php.ini key \"%s\" to \"%s\"", entry-&gt;param-&gt;name, entry-&gt;param-&gt;value);</span>
+<span class='curline'><a href='../S/1545.html#L906'>rq</a>                906 sapi/nsapi/nsapi.c int NSAPI_PUBLIC php5_init(pblock *pb, Session *sn, Request *rq)</span>
+<span class='curline'><a href='../S/1545.html#L940'>rq</a>                940 sapi/nsapi/nsapi.c 	log_error(LOG_INFORM, pblock_findval("fn", pb), sn, rq, "Initialized PHP Module (%d threads expected)", threads);</span>
+<span class='curline'><a href='../S/1545.html#L959'>rq</a>                959 sapi/nsapi/nsapi.c int NSAPI_PUBLIC php5_execute(pblock *pb, Session *sn, Request *rq)</span>
+<span class='curline'><a href='../S/1545.html#L967'>rq</a>                967 sapi/nsapi/nsapi.c 	char *query_string    = pblock_findval("query", rq-&gt;reqpb);</span>
+<span class='curline'><a href='../S/1545.html#L968'>rq</a>                968 sapi/nsapi/nsapi.c 	char *uri             = pblock_findval("uri", rq-&gt;reqpb);</span>
+<span class='curline'><a href='../S/1545.html#L969'>rq</a>                969 sapi/nsapi/nsapi.c 	char *request_method  = pblock_findval("method", rq-&gt;reqpb);</span>
+<span class='curline'><a href='../S/1545.html#L970'>rq</a>                970 sapi/nsapi/nsapi.c 	char *content_type    = pblock_findval("content-type", rq-&gt;headers);</span>
+<span class='curline'><a href='../S/1545.html#L971'>rq</a>                971 sapi/nsapi/nsapi.c 	char *content_length  = pblock_findval("content-length", rq-&gt;headers);</span>
+<span class='curline'><a href='../S/1545.html#L983'>rq</a>                983 sapi/nsapi/nsapi.c 		path_translated = pblock_findval("path", rq-&gt;vars);</span>
+<span class='curline'><a href='../S/1545.html#L984'>rq</a>                984 sapi/nsapi/nsapi.c 		path_info       = pblock_findval("path-info", rq-&gt;vars);</span>
+<span class='curline'><a href='../S/1545.html#L988'>rq</a>                988 sapi/nsapi/nsapi.c 			log_error(LOG_WARN, pblock_findval("fn", pb), sn, rq, "Missing 'script' parameter");</span>
+<span class='curline'><a href='../S/1545.html#L993'>rq</a>                993 sapi/nsapi/nsapi.c 		path_info = pblock_findval("uri", rq-&gt;reqpb);</span>
+<span class='curline'><a href='../S/1545.html#L1000'>rq</a>               1000 sapi/nsapi/nsapi.c 		log_error(LOG_WARN, pblock_findval("fn", pb), sn, rq, "Cannot make nesting PHP requests with nsapi_virtual()");</span>
+<span class='curline'><a href='../S/1545.html#L1004'>rq</a>               1004 sapi/nsapi/nsapi.c 			protocol_status(sn, rq, 500, NULL);</span>
+<span class='curline'><a href='../S/1545.html#L1011'>rq</a>               1011 sapi/nsapi/nsapi.c 		log_error(LOG_CATASTROPHE, pblock_findval("fn", pb), sn, rq, "Insufficient memory to process PHP request!");</span>
+<span class='curline'><a href='../S/1545.html#L1016'>rq</a>               1016 sapi/nsapi/nsapi.c 	request_context-&gt;rq = rq;</span>
+<span class='curline'><a href='../S/1545.html#L1019'>rq</a>               1019 sapi/nsapi/nsapi.c 	request_context-&gt;http_error = (error_directive) ? rq-&gt;status_num : 0;</span>
+<span class='curline'><a href='../S/1545.html#L1029'>rq</a>               1029 sapi/nsapi/nsapi.c 	SG(sapi_headers).http_response_code = (error_directive) ? rq-&gt;status_num : 200;</span>
+<span class='curline'><a href='../S/1545.html#L1033'>rq</a>               1033 sapi/nsapi/nsapi.c 	php_handle_auth_data(pblock_findval("authorization", rq-&gt;headers) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1545.html#L1040'>rq</a>               1040 sapi/nsapi/nsapi.c 	fst = request_stat_path(SG(request_info).path_translated, rq);</span>
+<span class='curline'><a href='../S/1545.html#L1048'>rq</a>               1048 sapi/nsapi/nsapi.c 			log_error(LOG_WARN, pblock_findval("fn", pb), sn, rq, "Cannot prepare PHP engine!");</span>
+<span class='curline'><a href='../S/1545.html#L1052'>rq</a>               1052 sapi/nsapi/nsapi.c 				protocol_status(sn, rq, 500, NULL);</span>
+<span class='curline'><a href='../S/1545.html#L1058'>rq</a>               1058 sapi/nsapi/nsapi.c 		log_error(LOG_WARN, pblock_findval("fn", pb), sn, rq, "Cannot execute PHP script: %s (File not found)", SG(request_info).path_translated);</span>
+<span class='curline'><a href='../S/1545.html#L1062'>rq</a>               1062 sapi/nsapi/nsapi.c 			protocol_status(sn, rq, 404, NULL);</span>
+<span class='curline'><a href='../S/1545.html#L1088'>rq</a>               1088 sapi/nsapi/nsapi.c int NSAPI_PUBLIC php5_auth_trans(pblock * pb, Session * sn, Request * rq)</span>
+</pre>
+</body>
+</html>

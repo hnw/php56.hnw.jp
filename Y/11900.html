@@ -1,0 +1,224 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>ast</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/1643.html#L331'>ast</a>               331 Zend/zend.h    	zend_ast *ast;</span>
+<span class='curline'><a href='../S/1648.html#L28'>ast</a>                28 Zend/zend_ast.c 	zend_ast *ast = emalloc(sizeof(zend_ast) + sizeof(zval));</span>
+<span class='curline'><a href='../S/1648.html#L29'>ast</a>                29 Zend/zend_ast.c 	ast-&gt;kind = ZEND_CONST;</span>
+<span class='curline'><a href='../S/1648.html#L30'>ast</a>                30 Zend/zend_ast.c 	ast-&gt;children = 0;</span>
+<span class='curline'><a href='../S/1648.html#L31'>ast</a>                31 Zend/zend_ast.c 	ast-&gt;u.val = (zval*)(ast + 1);</span>
+<span class='curline'><a href='../S/1648.html#L32'>ast</a>                32 Zend/zend_ast.c 	INIT_PZVAL_COPY(ast-&gt;u.val, zv);</span>
+<span class='curline'><a href='../S/1648.html#L33'>ast</a>                33 Zend/zend_ast.c 	return ast;</span>
+<span class='curline'><a href='../S/1648.html#L38'>ast</a>                38 Zend/zend_ast.c 	zend_ast *ast = emalloc(sizeof(zend_ast));</span>
+<span class='curline'><a href='../S/1648.html#L39'>ast</a>                39 Zend/zend_ast.c 	ast-&gt;kind = kind;</span>
+<span class='curline'><a href='../S/1648.html#L40'>ast</a>                40 Zend/zend_ast.c 	ast-&gt;children = 1;</span>
+<span class='curline'><a href='../S/1648.html#L41'>ast</a>                41 Zend/zend_ast.c 	(&amp;ast-&gt;u.child)[0] = op0;</span>
+<span class='curline'><a href='../S/1648.html#L42'>ast</a>                42 Zend/zend_ast.c 	return ast;</span>
+<span class='curline'><a href='../S/1648.html#L47'>ast</a>                47 Zend/zend_ast.c 	zend_ast *ast = emalloc(sizeof(zend_ast) + sizeof(zend_ast*));</span>
+<span class='curline'><a href='../S/1648.html#L48'>ast</a>                48 Zend/zend_ast.c 	ast-&gt;kind = kind;</span>
+<span class='curline'><a href='../S/1648.html#L49'>ast</a>                49 Zend/zend_ast.c 	ast-&gt;children = 2;</span>
+<span class='curline'><a href='../S/1648.html#L50'>ast</a>                50 Zend/zend_ast.c 	(&amp;ast-&gt;u.child)[0] = op0;</span>
+<span class='curline'><a href='../S/1648.html#L51'>ast</a>                51 Zend/zend_ast.c 	(&amp;ast-&gt;u.child)[1] = op1;</span>
+<span class='curline'><a href='../S/1648.html#L52'>ast</a>                52 Zend/zend_ast.c 	return ast;</span>
+<span class='curline'><a href='../S/1648.html#L57'>ast</a>                57 Zend/zend_ast.c 	zend_ast *ast = emalloc(sizeof(zend_ast) + sizeof(zend_ast*) * 2);</span>
+<span class='curline'><a href='../S/1648.html#L58'>ast</a>                58 Zend/zend_ast.c 	ast-&gt;kind = kind;</span>
+<span class='curline'><a href='../S/1648.html#L59'>ast</a>                59 Zend/zend_ast.c 	ast-&gt;children = 3;</span>
+<span class='curline'><a href='../S/1648.html#L60'>ast</a>                60 Zend/zend_ast.c 	(&amp;ast-&gt;u.child)[0] = op0;</span>
+<span class='curline'><a href='../S/1648.html#L61'>ast</a>                61 Zend/zend_ast.c 	(&amp;ast-&gt;u.child)[1] = op1;</span>
+<span class='curline'><a href='../S/1648.html#L62'>ast</a>                62 Zend/zend_ast.c 	(&amp;ast-&gt;u.child)[2] = op2;</span>
+<span class='curline'><a href='../S/1648.html#L63'>ast</a>                63 Zend/zend_ast.c 	return ast;</span>
+<span class='curline'><a href='../S/1648.html#L68'>ast</a>                68 Zend/zend_ast.c 	zend_ast *ast = emalloc(sizeof(zend_ast) + sizeof(zend_ast*) * 3); /* use 4 children as deafult */</span>
+<span class='curline'><a href='../S/1648.html#L69'>ast</a>                69 Zend/zend_ast.c 	ast-&gt;kind = kind;</span>
+<span class='curline'><a href='../S/1648.html#L70'>ast</a>                70 Zend/zend_ast.c 	ast-&gt;children = 0;</span>
+<span class='curline'><a href='../S/1648.html#L71'>ast</a>                71 Zend/zend_ast.c 	return ast;</span>
+<span class='curline'><a href='../S/1648.html#L74'>ast</a>                74 Zend/zend_ast.c ZEND_API void zend_ast_dynamic_add(zend_ast **ast, zend_ast *op)</span>
+<span class='curline'><a href='../S/1648.html#L76'>ast</a>                76 Zend/zend_ast.c 	if ((*ast)-&gt;children &gt;= 4 &amp;&amp; (*ast)-&gt;children == ((*ast)-&gt;children &amp; -(*ast)-&gt;children)) {</span>
+<span class='curline'><a href='../S/1648.html#L77'>ast</a>                77 Zend/zend_ast.c 		*ast = erealloc(*ast, sizeof(zend_ast) + sizeof(zend_ast*) * ((*ast)-&gt;children * 2 + 1));</span>
+<span class='curline'><a href='../S/1648.html#L79'>ast</a>                79 Zend/zend_ast.c 	(&amp;(*ast)-&gt;u.child)[(*ast)-&gt;children++] = op;</span>
+<span class='curline'><a href='../S/1648.html#L82'>ast</a>                82 Zend/zend_ast.c ZEND_API void zend_ast_dynamic_shrink(zend_ast **ast)</span>
+<span class='curline'><a href='../S/1648.html#L84'>ast</a>                84 Zend/zend_ast.c 	*ast = erealloc(*ast, sizeof(zend_ast) + sizeof(zend_ast*) * ((*ast)-&gt;children - 1));</span>
+<span class='curline'><a href='../S/1648.html#L87'>ast</a>                87 Zend/zend_ast.c ZEND_API int zend_ast_is_ct_constant(zend_ast *ast)</span>
+<span class='curline'><a href='../S/1648.html#L91'>ast</a>                91 Zend/zend_ast.c 	if (ast-&gt;kind == ZEND_CONST) {</span>
+<span class='curline'><a href='../S/1648.html#L92'>ast</a>                92 Zend/zend_ast.c 		return !IS_CONSTANT_TYPE(Z_TYPE_P(ast-&gt;u.val));</span>
+<span class='curline'><a href='../S/1648.html#L94'>ast</a>                94 Zend/zend_ast.c 		for (i = 0; i &lt; ast-&gt;children; i++) {</span>
+<span class='curline'><a href='../S/1648.html#L95'>ast</a>                95 Zend/zend_ast.c 			if ((&amp;ast-&gt;u.child)[i]) {</span>
+<span class='curline'><a href='../S/1648.html#L96'>ast</a>                96 Zend/zend_ast.c 				if (!zend_ast_is_ct_constant((&amp;ast-&gt;u.child)[i])) {</span>
+<span class='curline'><a href='../S/1648.html#L105'>ast</a>               105 Zend/zend_ast.c ZEND_API void zend_ast_evaluate(zval *result, zend_ast *ast, zend_class_entry *scope TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1648.html#L109'>ast</a>               109 Zend/zend_ast.c 	switch (ast-&gt;kind) {</span>
+<span class='curline'><a href='../S/1648.html#L111'>ast</a>               111 Zend/zend_ast.c 			zend_ast_evaluate(&amp;op1, (&amp;ast-&gt;u.child)[0], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L112'>ast</a>               112 Zend/zend_ast.c 			zend_ast_evaluate(&amp;op2, (&amp;ast-&gt;u.child)[1], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L118'>ast</a>               118 Zend/zend_ast.c 			zend_ast_evaluate(&amp;op1, (&amp;ast-&gt;u.child)[0], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L119'>ast</a>               119 Zend/zend_ast.c 			zend_ast_evaluate(&amp;op2, (&amp;ast-&gt;u.child)[1], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L125'>ast</a>               125 Zend/zend_ast.c 			zend_ast_evaluate(&amp;op1, (&amp;ast-&gt;u.child)[0], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L126'>ast</a>               126 Zend/zend_ast.c 			zend_ast_evaluate(&amp;op2, (&amp;ast-&gt;u.child)[1], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L132'>ast</a>               132 Zend/zend_ast.c 			zend_ast_evaluate(&amp;op1, (&amp;ast-&gt;u.child)[0], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L133'>ast</a>               133 Zend/zend_ast.c 			zend_ast_evaluate(&amp;op2, (&amp;ast-&gt;u.child)[1], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L139'>ast</a>               139 Zend/zend_ast.c 			zend_ast_evaluate(&amp;op1, (&amp;ast-&gt;u.child)[0], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L140'>ast</a>               140 Zend/zend_ast.c 			zend_ast_evaluate(&amp;op2, (&amp;ast-&gt;u.child)[1], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L146'>ast</a>               146 Zend/zend_ast.c 			zend_ast_evaluate(&amp;op1, (&amp;ast-&gt;u.child)[0], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L147'>ast</a>               147 Zend/zend_ast.c 			zend_ast_evaluate(&amp;op2, (&amp;ast-&gt;u.child)[1], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L153'>ast</a>               153 Zend/zend_ast.c 			zend_ast_evaluate(&amp;op1, (&amp;ast-&gt;u.child)[0], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L154'>ast</a>               154 Zend/zend_ast.c 			zend_ast_evaluate(&amp;op2, (&amp;ast-&gt;u.child)[1], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L160'>ast</a>               160 Zend/zend_ast.c 			zend_ast_evaluate(&amp;op1, (&amp;ast-&gt;u.child)[0], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L161'>ast</a>               161 Zend/zend_ast.c 			zend_ast_evaluate(&amp;op2, (&amp;ast-&gt;u.child)[1], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L167'>ast</a>               167 Zend/zend_ast.c 			zend_ast_evaluate(&amp;op1, (&amp;ast-&gt;u.child)[0], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L168'>ast</a>               168 Zend/zend_ast.c 			zend_ast_evaluate(&amp;op2, (&amp;ast-&gt;u.child)[1], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L174'>ast</a>               174 Zend/zend_ast.c 			zend_ast_evaluate(&amp;op1, (&amp;ast-&gt;u.child)[0], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L175'>ast</a>               175 Zend/zend_ast.c 			zend_ast_evaluate(&amp;op2, (&amp;ast-&gt;u.child)[1], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L181'>ast</a>               181 Zend/zend_ast.c 			zend_ast_evaluate(&amp;op1, (&amp;ast-&gt;u.child)[0], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L182'>ast</a>               182 Zend/zend_ast.c 			zend_ast_evaluate(&amp;op2, (&amp;ast-&gt;u.child)[1], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L188'>ast</a>               188 Zend/zend_ast.c 			zend_ast_evaluate(&amp;op1, (&amp;ast-&gt;u.child)[0], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L189'>ast</a>               189 Zend/zend_ast.c 			zend_ast_evaluate(&amp;op2, (&amp;ast-&gt;u.child)[1], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L195'>ast</a>               195 Zend/zend_ast.c 			zend_ast_evaluate(&amp;op1, (&amp;ast-&gt;u.child)[0], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L200'>ast</a>               200 Zend/zend_ast.c 			zend_ast_evaluate(&amp;op1, (&amp;ast-&gt;u.child)[0], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L205'>ast</a>               205 Zend/zend_ast.c 			zend_ast_evaluate(&amp;op1, (&amp;ast-&gt;u.child)[0], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L206'>ast</a>               206 Zend/zend_ast.c 			zend_ast_evaluate(&amp;op2, (&amp;ast-&gt;u.child)[1], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L212'>ast</a>               212 Zend/zend_ast.c 			zend_ast_evaluate(&amp;op1, (&amp;ast-&gt;u.child)[0], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L213'>ast</a>               213 Zend/zend_ast.c 			zend_ast_evaluate(&amp;op2, (&amp;ast-&gt;u.child)[1], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L219'>ast</a>               219 Zend/zend_ast.c 			zend_ast_evaluate(&amp;op1, (&amp;ast-&gt;u.child)[0], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L220'>ast</a>               220 Zend/zend_ast.c 			zend_ast_evaluate(&amp;op2, (&amp;ast-&gt;u.child)[1], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L226'>ast</a>               226 Zend/zend_ast.c 			zend_ast_evaluate(&amp;op1, (&amp;ast-&gt;u.child)[0], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L227'>ast</a>               227 Zend/zend_ast.c 			zend_ast_evaluate(&amp;op2, (&amp;ast-&gt;u.child)[1], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L233'>ast</a>               233 Zend/zend_ast.c 			zend_ast_evaluate(&amp;op1, (&amp;ast-&gt;u.child)[0], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L234'>ast</a>               234 Zend/zend_ast.c 			zend_ast_evaluate(&amp;op2, (&amp;ast-&gt;u.child)[1], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L240'>ast</a>               240 Zend/zend_ast.c 			zend_ast_evaluate(&amp;op1, (&amp;ast-&gt;u.child)[0], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L241'>ast</a>               241 Zend/zend_ast.c 			zend_ast_evaluate(&amp;op2, (&amp;ast-&gt;u.child)[1], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L247'>ast</a>               247 Zend/zend_ast.c 			zend_ast_evaluate(&amp;op1, (&amp;ast-&gt;u.child)[0], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L248'>ast</a>               248 Zend/zend_ast.c 			zend_ast_evaluate(&amp;op2, (&amp;ast-&gt;u.child)[1], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L256'>ast</a>               256 Zend/zend_ast.c 				if (IS_CONSTANT_TYPE(Z_TYPE_P(ast-&gt;u.val))) {</span>
+<span class='curline'><a href='../S/1648.html#L257'>ast</a>               257 Zend/zend_ast.c 					zval_update_constant_ex(&amp;ast-&gt;u.val, 1, scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L259'>ast</a>               259 Zend/zend_ast.c 				*result = *ast-&gt;u.val;</span>
+<span class='curline'><a href='../S/1648.html#L262'>ast</a>               262 Zend/zend_ast.c 				*result = *ast-&gt;u.val;</span>
+<span class='curline'><a href='../S/1648.html#L270'>ast</a>               270 Zend/zend_ast.c 			zend_ast_evaluate(&amp;op1, (&amp;ast-&gt;u.child)[0], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L272'>ast</a>               272 Zend/zend_ast.c 				zend_ast_evaluate(&amp;op2, (&amp;ast-&gt;u.child)[1], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L281'>ast</a>               281 Zend/zend_ast.c 			zend_ast_evaluate(&amp;op1, (&amp;ast-&gt;u.child)[0], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L285'>ast</a>               285 Zend/zend_ast.c 				zend_ast_evaluate(&amp;op2, (&amp;ast-&gt;u.child)[1], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L292'>ast</a>               292 Zend/zend_ast.c 			zend_ast_evaluate(&amp;op1, (&amp;ast-&gt;u.child)[0], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L294'>ast</a>               294 Zend/zend_ast.c 				if (!(&amp;ast-&gt;u.child)[1]) {</span>
+<span class='curline'><a href='../S/1648.html#L297'>ast</a>               297 Zend/zend_ast.c 					zend_ast_evaluate(result, (&amp;ast-&gt;u.child)[1], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L301'>ast</a>               301 Zend/zend_ast.c 				zend_ast_evaluate(result, (&amp;ast-&gt;u.child)[2], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L307'>ast</a>               307 Zend/zend_ast.c 			zend_ast_evaluate(&amp;op2, (&amp;ast-&gt;u.child)[0], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L313'>ast</a>               313 Zend/zend_ast.c 			zend_ast_evaluate(&amp;op2, (&amp;ast-&gt;u.child)[0], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L323'>ast</a>               323 Zend/zend_ast.c 				for (i = 0; i &lt; ast-&gt;children; i+=2) {</span>
+<span class='curline'><a href='../S/1648.html#L326'>ast</a>               326 Zend/zend_ast.c 					if ((has_key = !!(&amp;ast-&gt;u.child)[i])) {</span>
+<span class='curline'><a href='../S/1648.html#L327'>ast</a>               327 Zend/zend_ast.c 						zend_ast_evaluate(&amp;op1, (&amp;ast-&gt;u.child)[i], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L329'>ast</a>               329 Zend/zend_ast.c 					zend_ast_evaluate(expr, (&amp;ast-&gt;u.child)[i+1], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L335'>ast</a>               335 Zend/zend_ast.c 			zend_ast_evaluate(&amp;op1, (&amp;ast-&gt;u.child)[0], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L336'>ast</a>               336 Zend/zend_ast.c 			zend_ast_evaluate(&amp;op2, (&amp;ast-&gt;u.child)[1], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L350'>ast</a>               350 Zend/zend_ast.c ZEND_API zend_ast *zend_ast_copy(zend_ast *ast)</span>
+<span class='curline'><a href='../S/1648.html#L352'>ast</a>               352 Zend/zend_ast.c 	if (ast == NULL) {</span>
+<span class='curline'><a href='../S/1648.html#L354'>ast</a>               354 Zend/zend_ast.c 	} else if (ast-&gt;kind == ZEND_CONST) {</span>
+<span class='curline'><a href='../S/1648.html#L355'>ast</a>               355 Zend/zend_ast.c 		zend_ast *copy = zend_ast_create_constant(ast-&gt;u.val);</span>
+<span class='curline'><a href='../S/1648.html#L358'>ast</a>               358 Zend/zend_ast.c 	} else if (ast-&gt;children) {</span>
+<span class='curline'><a href='../S/1648.html#L359'>ast</a>               359 Zend/zend_ast.c 		zend_ast *new = emalloc(sizeof(zend_ast) + sizeof(zend_ast*) * (ast-&gt;children - 1));</span>
+<span class='curline'><a href='../S/1648.html#L361'>ast</a>               361 Zend/zend_ast.c 		new-&gt;kind = ast-&gt;kind;</span>
+<span class='curline'><a href='../S/1648.html#L362'>ast</a>               362 Zend/zend_ast.c 		new-&gt;children = ast-&gt;children;</span>
+<span class='curline'><a href='../S/1648.html#L363'>ast</a>               363 Zend/zend_ast.c 		for (i = 0; i &lt; ast-&gt;children; i++) {</span>
+<span class='curline'><a href='../S/1648.html#L364'>ast</a>               364 Zend/zend_ast.c 			(&amp;new-&gt;u.child)[i] = zend_ast_copy((&amp;ast-&gt;u.child)[i]);</span>
+<span class='curline'><a href='../S/1648.html#L368'>ast</a>               368 Zend/zend_ast.c 	return zend_ast_create_dynamic(ast-&gt;kind);</span>
+<span class='curline'><a href='../S/1648.html#L371'>ast</a>               371 Zend/zend_ast.c ZEND_API void zend_ast_destroy(zend_ast *ast)</span>
+<span class='curline'><a href='../S/1648.html#L375'>ast</a>               375 Zend/zend_ast.c 	if (ast-&gt;kind == ZEND_CONST) {</span>
+<span class='curline'><a href='../S/1648.html#L376'>ast</a>               376 Zend/zend_ast.c 		zval_dtor(ast-&gt;u.val);</span>
+<span class='curline'><a href='../S/1648.html#L378'>ast</a>               378 Zend/zend_ast.c 		for (i = 0; i &lt; ast-&gt;children; i++) {</span>
+<span class='curline'><a href='../S/1648.html#L379'>ast</a>               379 Zend/zend_ast.c 			if ((&amp;ast-&gt;u.child)[i]) {</span>
+<span class='curline'><a href='../S/1648.html#L380'>ast</a>               380 Zend/zend_ast.c 				zend_ast_destroy((&amp;ast-&gt;u.child)[i]);</span>
+<span class='curline'><a href='../S/1648.html#L384'>ast</a>               384 Zend/zend_ast.c 	efree(ast);</span>
+<span class='curline'><a href='../S/1649.html#L54'>ast</a>                54 Zend/zend_ast.h ZEND_API void zend_ast_dynamic_add(zend_ast **ast, zend_ast *op);</span>
+<span class='curline'><a href='../S/1649.html#L55'>ast</a>                55 Zend/zend_ast.h ZEND_API void zend_ast_dynamic_shrink(zend_ast **ast);</span>
+<span class='curline'><a href='../S/1649.html#L57'>ast</a>                57 Zend/zend_ast.h ZEND_API int zend_ast_is_ct_constant(zend_ast *ast);</span>
+<span class='curline'><a href='../S/1649.html#L59'>ast</a>                59 Zend/zend_ast.h ZEND_API void zend_ast_evaluate(zval *result, zend_ast *ast, zend_class_entry *scope TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1649.html#L61'>ast</a>                61 Zend/zend_ast.h ZEND_API zend_ast *zend_ast_copy(zend_ast *ast);</span>
+<span class='curline'><a href='../S/1649.html#L62'>ast</a>                62 Zend/zend_ast.h ZEND_API void zend_ast_destroy(zend_ast *ast);</span>
+<span class='curline'><a href='../S/1655.html#L7429'>ast</a>              7429 Zend/zend_compile.c void zend_do_constant_expression(znode *result, zend_ast *ast TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1655.html#L7431'>ast</a>              7431 Zend/zend_compile.c 	if (ast-&gt;kind == ZEND_CONST) {</span>
+<span class='curline'><a href='../S/1655.html#L7432'>ast</a>              7432 Zend/zend_compile.c 		result-&gt;u.constant = *ast-&gt;u.val;</span>
+<span class='curline'><a href='../S/1655.html#L7433'>ast</a>              7433 Zend/zend_compile.c 		efree(ast);</span>
+<span class='curline'><a href='../S/1655.html#L7434'>ast</a>              7434 Zend/zend_compile.c 	} else if (zend_ast_is_ct_constant(ast)) {</span>
+<span class='curline'><a href='../S/1655.html#L7435'>ast</a>              7435 Zend/zend_compile.c 		zend_ast_evaluate(&amp;result-&gt;u.constant, ast, NULL TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1655.html#L7436'>ast</a>              7436 Zend/zend_compile.c 		zend_ast_destroy(ast);</span>
+<span class='curline'><a href='../S/1655.html#L7439'>ast</a>              7439 Zend/zend_compile.c 		Z_AST(result-&gt;u.constant) = ast;</span>
+<span class='curline'><a href='../S/1656.html#L96'>ast</a>                96 Zend/zend_compile.h 		zend_ast *ast;</span>
+<span class='curline'><a href='../S/1656.html#L659'>ast</a>               659 Zend/zend_compile.h void zend_do_constant_expression(znode *result, zend_ast *ast TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1701.html#L996'>ast</a>               996 Zend/zend_language_parser.y 		common_scalar	{ $$.u.ast = zend_ast_create_constant(&amp;$1.u.constant); }</span>
+<span class='curline'><a href='../S/1701.html#L997'>ast</a>               997 Zend/zend_language_parser.y 	|	static_class_name_scalar	{ $$.u.ast = zend_ast_create_constant(&amp;$1.u.constant); }</span>
+<span class='curline'><a href='../S/1701.html#L998'>ast</a>               998 Zend/zend_language_parser.y 	|	namespace_name 		{ zend_do_fetch_constant(&amp;$$, NULL, &amp;$1, ZEND_CT, 1 TSRMLS_CC); $$.u.ast = zend_ast_create_constant(&amp;$$.u.constant); }</span>
+<span class='curline'><a href='../S/1701.html#L999'>ast</a>               999 Zend/zend_language_parser.y 	|	T_NAMESPACE T_NS_SEPARATOR namespace_name { $$.op_type = IS_CONST; ZVAL_EMPTY_STRING(&amp;$$.u.constant);  zend_do_build_namespace_name(&amp;$$, &amp;$$, &amp;$3 TSRMLS_CC); $3 = $$; zend_do_fetch_constant(&amp;$$, NULL, &amp;$3, ZEND_CT, 0 TSRMLS_CC); $$.u.ast = zend_ast_create_constant(&amp;$$.u.constant); }</span>
+<span class='curline'><a href='../S/1701.html#L1000'>ast</a>              1000 Zend/zend_language_parser.y 	|	T_NS_SEPARATOR namespace_name { char *tmp = estrndup(Z_STRVAL($2.u.constant), Z_STRLEN($2.u.constant)+1); memcpy(&amp;(tmp[1]), Z_STRVAL($2.u.constant), Z_STRLEN($2.u.constant)+1); tmp[0] = '\\'; efree(Z_STRVAL($2.u.constant)); Z_STRVAL($2.u.constant) = tmp; ++Z_STRLEN($2.u.constant); zend_do_fetch_constant(&amp;$$, NULL, &amp;$2, ZEND_CT, 0 TSRMLS_CC); $$.u.ast = zend_ast_create_constant(&amp;$$.u.constant); }</span>
+<span class='curline'><a href='../S/1701.html#L1003'>ast</a>              1003 Zend/zend_language_parser.y 	|	static_class_constant { $$.u.ast = zend_ast_create_constant(&amp;$1.u.constant); }</span>
+<span class='curline'><a href='../S/1701.html#L1004'>ast</a>              1004 Zend/zend_language_parser.y 	|	T_CLASS_C			{ $$.u.ast = zend_ast_create_constant(&amp;$1.u.constant); }</span>
+<span class='curline'><a href='../S/1701.html#L1009'>ast</a>              1009 Zend/zend_language_parser.y 		static_scalar_value '[' static_scalar_value ']' { $$.u.ast = zend_ast_create_binary(ZEND_FETCH_DIM_R, $1.u.ast, $3.u.ast); }</span>
+<span class='curline'><a href='../S/1701.html#L1010'>ast</a>              1010 Zend/zend_language_parser.y 	|	static_scalar_value '+' static_scalar_value { $$.u.ast = zend_ast_create_binary(ZEND_ADD, $1.u.ast, $3.u.ast); }</span>
+<span class='curline'><a href='../S/1701.html#L1011'>ast</a>              1011 Zend/zend_language_parser.y 	|	static_scalar_value '-' static_scalar_value { $$.u.ast = zend_ast_create_binary(ZEND_SUB, $1.u.ast, $3.u.ast); }</span>
+<span class='curline'><a href='../S/1701.html#L1012'>ast</a>              1012 Zend/zend_language_parser.y 	|	static_scalar_value '*' static_scalar_value { $$.u.ast = zend_ast_create_binary(ZEND_MUL, $1.u.ast, $3.u.ast); }</span>
+<span class='curline'><a href='../S/1701.html#L1013'>ast</a>              1013 Zend/zend_language_parser.y 	|	static_scalar_value T_POW static_scalar_value { $$.u.ast = zend_ast_create_binary(ZEND_POW, $1.u.ast, $3.u.ast); }</span>
+<span class='curline'><a href='../S/1701.html#L1014'>ast</a>              1014 Zend/zend_language_parser.y 	|	static_scalar_value '/' static_scalar_value { $$.u.ast = zend_ast_create_binary(ZEND_DIV, $1.u.ast, $3.u.ast); }</span>
+<span class='curline'><a href='../S/1701.html#L1015'>ast</a>              1015 Zend/zend_language_parser.y 	|	static_scalar_value '%' static_scalar_value { $$.u.ast = zend_ast_create_binary(ZEND_MOD, $1.u.ast, $3.u.ast); }</span>
+<span class='curline'><a href='../S/1701.html#L1016'>ast</a>              1016 Zend/zend_language_parser.y 	|	'!' static_scalar_value { $$.u.ast = zend_ast_create_unary(ZEND_BOOL_NOT, $2.u.ast); }</span>
+<span class='curline'><a href='../S/1701.html#L1017'>ast</a>              1017 Zend/zend_language_parser.y 	|	'~' static_scalar_value { $$.u.ast = zend_ast_create_unary(ZEND_BW_NOT, $2.u.ast); }</span>
+<span class='curline'><a href='../S/1701.html#L1018'>ast</a>              1018 Zend/zend_language_parser.y 	|	static_scalar_value '|' static_scalar_value { $$.u.ast = zend_ast_create_binary(ZEND_BW_OR, $1.u.ast, $3.u.ast); }</span>
+<span class='curline'><a href='../S/1701.html#L1019'>ast</a>              1019 Zend/zend_language_parser.y 	|	static_scalar_value '&amp;' static_scalar_value { $$.u.ast = zend_ast_create_binary(ZEND_BW_AND, $1.u.ast, $3.u.ast); }</span>
+<span class='curline'><a href='../S/1701.html#L1020'>ast</a>              1020 Zend/zend_language_parser.y 	|	static_scalar_value '^' static_scalar_value { $$.u.ast = zend_ast_create_binary(ZEND_BW_XOR, $1.u.ast, $3.u.ast); }</span>
+<span class='curline'><a href='../S/1701.html#L1021'>ast</a>              1021 Zend/zend_language_parser.y 	|	static_scalar_value T_SL static_scalar_value { $$.u.ast = zend_ast_create_binary(ZEND_SL, $1.u.ast, $3.u.ast); }</span>
+<span class='curline'><a href='../S/1701.html#L1022'>ast</a>              1022 Zend/zend_language_parser.y 	|	static_scalar_value T_SR static_scalar_value { $$.u.ast = zend_ast_create_binary(ZEND_SR, $1.u.ast, $3.u.ast); }</span>
+<span class='curline'><a href='../S/1701.html#L1023'>ast</a>              1023 Zend/zend_language_parser.y 	|	static_scalar_value '.' static_scalar_value { $$.u.ast = zend_ast_create_binary(ZEND_CONCAT, $1.u.ast, $3.u.ast); }</span>
+<span class='curline'><a href='../S/1701.html#L1024'>ast</a>              1024 Zend/zend_language_parser.y 	|	static_scalar_value T_LOGICAL_XOR static_scalar_value { $$.u.ast = zend_ast_create_binary(ZEND_BOOL_XOR, $1.u.ast, $3.u.ast); }</span>
+<span class='curline'><a href='../S/1701.html#L1025'>ast</a>              1025 Zend/zend_language_parser.y 	|	static_scalar_value T_LOGICAL_AND static_scalar_value { $$.u.ast = zend_ast_create_binary(ZEND_BOOL_AND, $1.u.ast, $3.u.ast); }</span>
+<span class='curline'><a href='../S/1701.html#L1026'>ast</a>              1026 Zend/zend_language_parser.y 	|	static_scalar_value T_LOGICAL_OR static_scalar_value { $$.u.ast = zend_ast_create_binary(ZEND_BOOL_OR, $1.u.ast, $3.u.ast); }</span>
+<span class='curline'><a href='../S/1701.html#L1027'>ast</a>              1027 Zend/zend_language_parser.y 	|	static_scalar_value T_BOOLEAN_AND static_scalar_value { $$.u.ast = zend_ast_create_binary(ZEND_BOOL_AND, $1.u.ast, $3.u.ast); }</span>
+<span class='curline'><a href='../S/1701.html#L1028'>ast</a>              1028 Zend/zend_language_parser.y 	|	static_scalar_value T_BOOLEAN_OR static_scalar_value { $$.u.ast = zend_ast_create_binary(ZEND_BOOL_OR, $1.u.ast, $3.u.ast); }</span>
+<span class='curline'><a href='../S/1701.html#L1029'>ast</a>              1029 Zend/zend_language_parser.y 	|	static_scalar_value T_IS_IDENTICAL static_scalar_value { $$.u.ast = zend_ast_create_binary(ZEND_IS_IDENTICAL, $1.u.ast, $3.u.ast); }</span>
+<span class='curline'><a href='../S/1701.html#L1030'>ast</a>              1030 Zend/zend_language_parser.y 	|	static_scalar_value T_IS_NOT_IDENTICAL static_scalar_value { $$.u.ast = zend_ast_create_binary(ZEND_IS_NOT_IDENTICAL, $1.u.ast, $3.u.ast); }</span>
+<span class='curline'><a href='../S/1701.html#L1031'>ast</a>              1031 Zend/zend_language_parser.y 	|	static_scalar_value T_IS_EQUAL static_scalar_value { $$.u.ast = zend_ast_create_binary(ZEND_IS_EQUAL, $1.u.ast, $3.u.ast); }</span>
+<span class='curline'><a href='../S/1701.html#L1032'>ast</a>              1032 Zend/zend_language_parser.y 	|	static_scalar_value T_IS_NOT_EQUAL static_scalar_value { $$.u.ast = zend_ast_create_binary(ZEND_IS_NOT_EQUAL, $1.u.ast, $3.u.ast); }</span>
+<span class='curline'><a href='../S/1701.html#L1033'>ast</a>              1033 Zend/zend_language_parser.y 	|	static_scalar_value '&lt;' static_scalar_value { $$.u.ast = zend_ast_create_binary(ZEND_IS_SMALLER, $1.u.ast, $3.u.ast); }</span>
+<span class='curline'><a href='../S/1701.html#L1034'>ast</a>              1034 Zend/zend_language_parser.y 	|	static_scalar_value '&gt;' static_scalar_value { $$.u.ast = zend_ast_create_binary(ZEND_IS_SMALLER, $3.u.ast, $1.u.ast); }</span>
+<span class='curline'><a href='../S/1701.html#L1035'>ast</a>              1035 Zend/zend_language_parser.y 	|	static_scalar_value T_IS_SMALLER_OR_EQUAL static_scalar_value { $$.u.ast = zend_ast_create_binary(ZEND_IS_SMALLER_OR_EQUAL, $1.u.ast, $3.u.ast); }</span>
+<span class='curline'><a href='../S/1701.html#L1036'>ast</a>              1036 Zend/zend_language_parser.y 	|	static_scalar_value T_IS_GREATER_OR_EQUAL static_scalar_value { $$.u.ast = zend_ast_create_binary(ZEND_IS_SMALLER_OR_EQUAL, $3.u.ast, $1.u.ast); }</span>
+<span class='curline'><a href='../S/1701.html#L1037'>ast</a>              1037 Zend/zend_language_parser.y 	|	static_scalar_value '?' ':' static_scalar_value { $$.u.ast = zend_ast_create_ternary(ZEND_SELECT, $1.u.ast, NULL, $4.u.ast); }</span>
+<span class='curline'><a href='../S/1701.html#L1038'>ast</a>              1038 Zend/zend_language_parser.y 	|	static_scalar_value '?' static_scalar_value ':' static_scalar_value { $$.u.ast = zend_ast_create_ternary(ZEND_SELECT, $1.u.ast, $3.u.ast, $5.u.ast); }</span>
+<span class='curline'><a href='../S/1701.html#L1039'>ast</a>              1039 Zend/zend_language_parser.y 	|	'+' static_scalar_value { $$.u.ast = zend_ast_create_unary(ZEND_UNARY_PLUS, $2.u.ast); }</span>
+<span class='curline'><a href='../S/1701.html#L1040'>ast</a>              1040 Zend/zend_language_parser.y 	|	'-' static_scalar_value { $$.u.ast = zend_ast_create_unary(ZEND_UNARY_MINUS, $2.u.ast); }</span>
+<span class='curline'><a href='../S/1701.html#L1062'>ast</a>              1062 Zend/zend_language_parser.y 		/* empty */ { $$.op_type = IS_CONST; INIT_PZVAL(&amp;$$.u.constant); array_init(&amp;$$.u.constant); $$.u.ast = zend_ast_create_constant(&amp;$$.u.constant); }</span>
+<span class='curline'><a href='../S/1701.html#L1072'>ast</a>              1072 Zend/zend_language_parser.y 		non_empty_static_array_pair_list ',' static_scalar_value T_DOUBLE_ARROW static_scalar_value { zend_ast_dynamic_add(&amp;$$.u.ast, $3.u.ast); zend_ast_dynamic_add(&amp;$$.u.ast, $5.u.ast); }</span>
+<span class='curline'><a href='../S/1701.html#L1073'>ast</a>              1073 Zend/zend_language_parser.y 	|	non_empty_static_array_pair_list ',' static_scalar_value { zend_ast_dynamic_add(&amp;$$.u.ast, NULL); zend_ast_dynamic_add(&amp;$$.u.ast, $3.u.ast); }</span>
+<span class='curline'><a href='../S/1701.html#L1074'>ast</a>              1074 Zend/zend_language_parser.y 	|	static_scalar_value T_DOUBLE_ARROW static_scalar_value { $$.u.ast = zend_ast_create_dynamic(ZEND_INIT_ARRAY); zend_ast_dynamic_add(&amp;$$.u.ast, $1.u.ast); zend_ast_dynamic_add(&amp;$$.u.ast, $3.u.ast); }</span>
+<span class='curline'><a href='../S/1701.html#L1075'>ast</a>              1075 Zend/zend_language_parser.y 	|	static_scalar_value { $$.u.ast = zend_ast_create_dynamic(ZEND_INIT_ARRAY); zend_ast_dynamic_add(&amp;$$.u.ast, NULL); zend_ast_dynamic_add(&amp;$$.u.ast, $1.u.ast); }</span>
+<span class='curline'><a href='../S/1721.html#L447'>ast</a>               447 Zend/zend_operators.h #define Z_AST(zval)			(zval).value.ast</span>
+<span class='curline'><a href='../S/856.html#L226'>ast</a>               226 ext/opcache/zend_accelerator_util_funcs.c static zend_ast *zend_ast_clone(zend_ast *ast TSRMLS_DC)</span>
+<span class='curline'><a href='../S/856.html#L231'>ast</a>               231 ext/opcache/zend_accelerator_util_funcs.c 	if (ast-&gt;kind == ZEND_CONST) {</span>
+<span class='curline'><a href='../S/856.html#L236'>ast</a>               236 ext/opcache/zend_accelerator_util_funcs.c 		*node-&gt;u.val = *ast-&gt;u.val;</span>
+<span class='curline'><a href='../S/856.html#L237'>ast</a>               237 ext/opcache/zend_accelerator_util_funcs.c 		if ((Z_TYPE_P(ast-&gt;u.val) &amp; IS_CONSTANT_TYPE_MASK) &gt;= IS_ARRAY) {</span>
+<span class='curline'><a href='../S/856.html#L238'>ast</a>               238 ext/opcache/zend_accelerator_util_funcs.c 			switch ((Z_TYPE_P(ast-&gt;u.val) &amp; IS_CONSTANT_TYPE_MASK)) {</span>
+<span class='curline'><a href='../S/856.html#L241'>ast</a>               241 ext/opcache/zend_accelerator_util_funcs.c 					Z_STRVAL_P(node-&gt;u.val) = (char *) interned_estrndup(Z_STRVAL_P(ast-&gt;u.val), Z_STRLEN_P(ast-&gt;u.val));</span>
+<span class='curline'><a href='../S/856.html#L247'>ast</a>               247 ext/opcache/zend_accelerator_util_funcs.c 					if (ast-&gt;u.val-&gt;value.ht &amp;&amp; ast-&gt;u.val-&gt;value.ht != &amp;EG(symbol_table)) {</span>
+<span class='curline'><a href='../S/856.html#L249'>ast</a>               249 ext/opcache/zend_accelerator_util_funcs.c 						zend_hash_clone_zval(node-&gt;u.val-&gt;value.ht, ast-&gt;u.val-&gt;value.ht, 0);</span>
+<span class='curline'><a href='../S/856.html#L253'>ast</a>               253 ext/opcache/zend_accelerator_util_funcs.c 					Z_AST_P(node-&gt;u.val) = zend_ast_clone(Z_AST_P(ast-&gt;u.val) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/856.html#L258'>ast</a>               258 ext/opcache/zend_accelerator_util_funcs.c 		node = emalloc(sizeof(zend_ast) + sizeof(zend_ast*) * (ast-&gt;children - 1));</span>
+<span class='curline'><a href='../S/856.html#L259'>ast</a>               259 ext/opcache/zend_accelerator_util_funcs.c 		node-&gt;kind = ast-&gt;kind;</span>
+<span class='curline'><a href='../S/856.html#L260'>ast</a>               260 ext/opcache/zend_accelerator_util_funcs.c 		node-&gt;children = ast-&gt;children;</span>
+<span class='curline'><a href='../S/856.html#L261'>ast</a>               261 ext/opcache/zend_accelerator_util_funcs.c 		for (i = 0; i &lt; ast-&gt;children; i++) {</span>
+<span class='curline'><a href='../S/856.html#L262'>ast</a>               262 ext/opcache/zend_accelerator_util_funcs.c 			if ((&amp;ast-&gt;u.child)[i]) {</span>
+<span class='curline'><a href='../S/856.html#L263'>ast</a>               263 ext/opcache/zend_accelerator_util_funcs.c 				(&amp;node-&gt;u.child)[i] = zend_ast_clone((&amp;ast-&gt;u.child)[i] TSRMLS_CC);</span>
+<span class='curline'><a href='../S/858.html#L143'>ast</a>               143 ext/opcache/zend_persist.c static zend_ast *zend_persist_ast(zend_ast *ast TSRMLS_DC)</span>
+<span class='curline'><a href='../S/858.html#L148'>ast</a>               148 ext/opcache/zend_persist.c 	if (ast-&gt;kind == ZEND_CONST) {</span>
+<span class='curline'><a href='../S/858.html#L149'>ast</a>               149 ext/opcache/zend_persist.c 		node = zend_accel_memdup(ast, sizeof(zend_ast) + sizeof(zval));</span>
+<span class='curline'><a href='../S/858.html#L153'>ast</a>               153 ext/opcache/zend_persist.c 		node = zend_accel_memdup(ast, sizeof(zend_ast) + sizeof(zend_ast*) * (ast-&gt;children - 1));</span>
+<span class='curline'><a href='../S/858.html#L154'>ast</a>               154 ext/opcache/zend_persist.c 		for (i = 0; i &lt; ast-&gt;children; i++) {</span>
+<span class='curline'><a href='../S/858.html#L160'>ast</a>               160 ext/opcache/zend_persist.c 	efree(ast);</span>
+<span class='curline'><a href='../S/860.html#L98'>ast</a>                98 ext/opcache/zend_persist_calc.c static uint zend_persist_ast_calc(zend_ast *ast TSRMLS_DC)</span>
+<span class='curline'><a href='../S/860.html#L103'>ast</a>               103 ext/opcache/zend_persist_calc.c 	if (ast-&gt;kind == ZEND_CONST) {</span>
+<span class='curline'><a href='../S/860.html#L105'>ast</a>               105 ext/opcache/zend_persist_calc.c 		ADD_SIZE(zend_persist_zval_calc(ast-&gt;u.val TSRMLS_CC));</span>
+<span class='curline'><a href='../S/860.html#L107'>ast</a>               107 ext/opcache/zend_persist_calc.c 		ADD_SIZE(sizeof(zend_ast) + sizeof(zend_ast*) * (ast-&gt;children - 1));</span>
+<span class='curline'><a href='../S/860.html#L108'>ast</a>               108 ext/opcache/zend_persist_calc.c 		for (i = 0; i &lt; ast-&gt;children; i++) {</span>
+<span class='curline'><a href='../S/860.html#L109'>ast</a>               109 ext/opcache/zend_persist_calc.c 			if ((&amp;ast-&gt;u.child)[i]) {</span>
+<span class='curline'><a href='../S/860.html#L110'>ast</a>               110 ext/opcache/zend_persist_calc.c 				ADD_SIZE(zend_persist_ast_calc((&amp;ast-&gt;u.child)[i] TSRMLS_CC));</span>
+</pre>
+</body>
+</html>

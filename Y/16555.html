@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>element_name</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/1655.html#L2120'>element_name</a>     2120 Zend/zend_compile.c void zend_resolve_non_class_name(znode *element_name, zend_bool *check_namespace, zend_bool case_sensitive, HashTable *current_import_sub TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1655.html#L2125'>element_name</a>     2125 Zend/zend_compile.c 	char *lookup_name, *compound = memchr(Z_STRVAL(element_name-&gt;u.constant), '\\', Z_STRLEN(element_name-&gt;u.constant));</span>
+<span class='curline'><a href='../S/1655.html#L2127'>element_name</a>     2127 Zend/zend_compile.c 	if (Z_STRVAL(element_name-&gt;u.constant)[0] == '\\') {</span>
+<span class='curline'><a href='../S/1655.html#L2129'>element_name</a>     2129 Zend/zend_compile.c 		memmove(Z_STRVAL(element_name-&gt;u.constant), Z_STRVAL(element_name-&gt;u.constant)+1, Z_STRLEN(element_name-&gt;u.constant));</span>
+<span class='curline'><a href='../S/1655.html#L2130'>element_name</a>     2130 Zend/zend_compile.c 		--Z_STRLEN(element_name-&gt;u.constant);</span>
+<span class='curline'><a href='../S/1655.html#L2139'>element_name</a>     2139 Zend/zend_compile.c 		len = Z_STRLEN(element_name-&gt;u.constant)+1;</span>
+<span class='curline'><a href='../S/1655.html#L2141'>element_name</a>     2141 Zend/zend_compile.c 			lookup_name = estrndup(Z_STRVAL(element_name-&gt;u.constant), len);</span>
+<span class='curline'><a href='../S/1655.html#L2143'>element_name</a>     2143 Zend/zend_compile.c 			lookup_name = zend_str_tolower_dup(Z_STRVAL(element_name-&gt;u.constant), len);</span>
+<span class='curline'><a href='../S/1655.html#L2147'>element_name</a>     2147 Zend/zend_compile.c 			zval_dtor(&amp;element_name-&gt;u.constant);</span>
+<span class='curline'><a href='../S/1655.html#L2148'>element_name</a>     2148 Zend/zend_compile.c 			element_name-&gt;u.constant = **ns;</span>
+<span class='curline'><a href='../S/1655.html#L2149'>element_name</a>     2149 Zend/zend_compile.c 			zval_copy_ctor(&amp;element_name-&gt;u.constant);</span>
+<span class='curline'><a href='../S/1655.html#L2158'>element_name</a>     2158 Zend/zend_compile.c 		len = compound - Z_STRVAL(element_name-&gt;u.constant);</span>
+<span class='curline'><a href='../S/1655.html#L2160'>element_name</a>     2160 Zend/zend_compile.c 		lookup_name = zend_str_tolower_dup(Z_STRVAL(element_name-&gt;u.constant), len);</span>
+<span class='curline'><a href='../S/1655.html#L2168'>element_name</a>     2168 Zend/zend_compile.c 			Z_STRLEN(element_name-&gt;u.constant) -= len;</span>
+<span class='curline'><a href='../S/1655.html#L2169'>element_name</a>     2169 Zend/zend_compile.c 			memmove(Z_STRVAL(element_name-&gt;u.constant), Z_STRVAL(element_name-&gt;u.constant)+len, Z_STRLEN(element_name-&gt;u.constant)+1);</span>
+<span class='curline'><a href='../S/1655.html#L2170'>element_name</a>     2170 Zend/zend_compile.c 			zend_do_build_namespace_name(&amp;tmp, &amp;tmp, element_name TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1655.html#L2171'>element_name</a>     2171 Zend/zend_compile.c 			*element_name = tmp;</span>
+<span class='curline'><a href='../S/1655.html#L2180'>element_name</a>     2180 Zend/zend_compile.c 		tmp = *element_name;</span>
+<span class='curline'><a href='../S/1655.html#L2181'>element_name</a>     2181 Zend/zend_compile.c 		Z_STRLEN(tmp.u.constant) = sizeof("\\")-1 + Z_STRLEN(element_name-&gt;u.constant) + Z_STRLEN_P(CG(current_namespace));</span>
+<span class='curline'><a href='../S/1655.html#L2185'>element_name</a>     2185 Zend/zend_compile.c 		memcpy(&amp;(Z_STRVAL(tmp.u.constant)[Z_STRLEN_P(CG(current_namespace)) + sizeof("\\")-1]), Z_STRVAL(element_name-&gt;u.constant), Z_STRLEN(element_name-&gt;u.constant)+1);</span>
+<span class='curline'><a href='../S/1655.html#L2186'>element_name</a>     2186 Zend/zend_compile.c 		str_efree(Z_STRVAL(element_name-&gt;u.constant));</span>
+<span class='curline'><a href='../S/1655.html#L2187'>element_name</a>     2187 Zend/zend_compile.c 		*element_name = tmp;</span>
+<span class='curline'><a href='../S/1655.html#L2192'>element_name</a>     2192 Zend/zend_compile.c void zend_resolve_function_name(znode *element_name, zend_bool *check_namespace TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1655.html#L2194'>element_name</a>     2194 Zend/zend_compile.c 	zend_resolve_non_class_name(element_name, check_namespace, 0, CG(current_import_function) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1655.html#L2198'>element_name</a>     2198 Zend/zend_compile.c void zend_resolve_const_name(znode *element_name, zend_bool *check_namespace TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1655.html#L2200'>element_name</a>     2200 Zend/zend_compile.c 	zend_resolve_non_class_name(element_name, check_namespace, 1, CG(current_import_const) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1656.html#L453'>element_name</a>      453 Zend/zend_compile.h void zend_resolve_non_class_name(znode *element_name, zend_bool *check_namespace, zend_bool case_sensitive, HashTable *current_import_sub TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1656.html#L454'>element_name</a>      454 Zend/zend_compile.h void zend_resolve_function_name(znode *element_name, zend_bool *check_namespace TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1656.html#L455'>element_name</a>      455 Zend/zend_compile.h void zend_resolve_const_name(znode *element_name, zend_bool *check_namespace TSRMLS_DC);</span>
+</pre>
+</body>
+</html>

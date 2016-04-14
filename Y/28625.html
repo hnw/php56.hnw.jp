@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>newentry</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/973.html#L2553'>newentry</a>         2553 ext/phar/phar.c 	phar_entry_info *entry, *newentry;</span>
+<span class='curline'><a href='../S/973.html#L2803'>newentry</a>         2803 ext/phar/phar.c 			newentry = phar_open_jit(phar, entry, error TSRMLS_CC);</span>
+<span class='curline'><a href='../S/973.html#L2804'>newentry</a>         2804 ext/phar/phar.c 			if (!newentry) {</span>
+<span class='curline'><a href='../S/973.html#L2810'>newentry</a>         2810 ext/phar/phar.c 			entry = newentry;</span>
+<span class='curline'><a href='../S/975.html#L2224'>newentry</a>         2224 ext/phar/phar_object.c 	phar_entry_info *entry, newentry;</span>
+<span class='curline'><a href='../S/975.html#L2289'>newentry</a>         2289 ext/phar/phar_object.c 		newentry = *entry;</span>
+<span class='curline'><a href='../S/975.html#L2291'>newentry</a>         2291 ext/phar/phar_object.c 		if (newentry.link) {</span>
+<span class='curline'><a href='../S/975.html#L2292'>newentry</a>         2292 ext/phar/phar_object.c 			newentry.link = estrdup(newentry.link);</span>
+<span class='curline'><a href='../S/975.html#L2296'>newentry</a>         2296 ext/phar/phar_object.c 		if (newentry.tmp) {</span>
+<span class='curline'><a href='../S/975.html#L2297'>newentry</a>         2297 ext/phar/phar_object.c 			newentry.tmp = estrdup(newentry.tmp);</span>
+<span class='curline'><a href='../S/975.html#L2301'>newentry</a>         2301 ext/phar/phar_object.c 		newentry.metadata_str.c = 0;</span>
+<span class='curline'><a href='../S/975.html#L2303'>newentry</a>         2303 ext/phar/phar_object.c 		if (FAILURE == phar_copy_file_contents(&amp;newentry, phar-&gt;fp TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/975.html#L2311'>newentry</a>         2311 ext/phar/phar_object.c 		newentry.filename = estrndup(newentry.filename, newentry.filename_len);</span>
+<span class='curline'><a href='../S/975.html#L2313'>newentry</a>         2313 ext/phar/phar_object.c 		if (newentry.metadata) {</span>
+<span class='curline'><a href='../S/975.html#L2316'>newentry</a>         2316 ext/phar/phar_object.c 			t = newentry.metadata;</span>
+<span class='curline'><a href='../S/975.html#L2317'>newentry</a>         2317 ext/phar/phar_object.c 			ALLOC_ZVAL(newentry.metadata);</span>
+<span class='curline'><a href='../S/975.html#L2318'>newentry</a>         2318 ext/phar/phar_object.c 			*newentry.metadata = *t;</span>
+<span class='curline'><a href='../S/975.html#L2319'>newentry</a>         2319 ext/phar/phar_object.c 			zval_copy_ctor(newentry.metadata);</span>
+<span class='curline'><a href='../S/975.html#L2320'>newentry</a>         2320 ext/phar/phar_object.c 			Z_SET_REFCOUNT_P(newentry.metadata, 1);</span>
+<span class='curline'><a href='../S/975.html#L2322'>newentry</a>         2322 ext/phar/phar_object.c 			newentry.metadata_str.c = NULL;</span>
+<span class='curline'><a href='../S/975.html#L2323'>newentry</a>         2323 ext/phar/phar_object.c 			newentry.metadata_str.len = 0;</span>
+<span class='curline'><a href='../S/975.html#L2326'>newentry</a>         2326 ext/phar/phar_object.c 		newentry.is_zip = phar-&gt;is_zip;</span>
+<span class='curline'><a href='../S/975.html#L2327'>newentry</a>         2327 ext/phar/phar_object.c 		newentry.is_tar = phar-&gt;is_tar;</span>
+<span class='curline'><a href='../S/975.html#L2329'>newentry</a>         2329 ext/phar/phar_object.c 		if (newentry.is_tar) {</span>
+<span class='curline'><a href='../S/975.html#L2330'>newentry</a>         2330 ext/phar/phar_object.c 			newentry.tar_type = (entry-&gt;is_dir ? TAR_DIR : TAR_FILE);</span>
+<span class='curline'><a href='../S/975.html#L2333'>newentry</a>         2333 ext/phar/phar_object.c 		newentry.is_modified = 1;</span>
+<span class='curline'><a href='../S/975.html#L2334'>newentry</a>         2334 ext/phar/phar_object.c 		newentry.phar = phar;</span>
+<span class='curline'><a href='../S/975.html#L2335'>newentry</a>         2335 ext/phar/phar_object.c 		newentry.old_flags = newentry.flags &amp; ~PHAR_ENT_COMPRESSION_MASK; /* remove compression from old_flags */</span>
+<span class='curline'><a href='../S/975.html#L2336'>newentry</a>         2336 ext/phar/phar_object.c 		phar_set_inode(&amp;newentry TSRMLS_CC);</span>
+<span class='curline'><a href='../S/975.html#L2337'>newentry</a>         2337 ext/phar/phar_object.c 		zend_hash_add(&amp;(phar-&gt;manifest), newentry.filename, newentry.filename_len, (void*)&amp;newentry, sizeof(phar_entry_info), NULL);</span>
+<span class='curline'><a href='../S/975.html#L2338'>newentry</a>         2338 ext/phar/phar_object.c 		phar_add_virtual_dirs(phar, newentry.filename, newentry.filename_len TSRMLS_CC);</span>
+<span class='curline'><a href='../S/975.html#L3441'>newentry</a>         3441 ext/phar/phar_object.c 	phar_entry_info *oldentry, newentry = {0}, *temp;</span>
+<span class='curline'><a href='../S/975.html#L3498'>newentry</a>         3498 ext/phar/phar_object.c 	memcpy((void *) &amp;newentry, oldentry, sizeof(phar_entry_info));</span>
+<span class='curline'><a href='../S/975.html#L3500'>newentry</a>         3500 ext/phar/phar_object.c 	if (newentry.metadata) {</span>
+<span class='curline'><a href='../S/975.html#L3503'>newentry</a>         3503 ext/phar/phar_object.c 		t = newentry.metadata;</span>
+<span class='curline'><a href='../S/975.html#L3504'>newentry</a>         3504 ext/phar/phar_object.c 		ALLOC_ZVAL(newentry.metadata);</span>
+<span class='curline'><a href='../S/975.html#L3505'>newentry</a>         3505 ext/phar/phar_object.c 		*newentry.metadata = *t;</span>
+<span class='curline'><a href='../S/975.html#L3506'>newentry</a>         3506 ext/phar/phar_object.c 		zval_copy_ctor(newentry.metadata);</span>
+<span class='curline'><a href='../S/975.html#L3507'>newentry</a>         3507 ext/phar/phar_object.c 		Z_SET_REFCOUNT_P(newentry.metadata, 1);</span>
+<span class='curline'><a href='../S/975.html#L3509'>newentry</a>         3509 ext/phar/phar_object.c 		newentry.metadata_str.c = NULL;</span>
+<span class='curline'><a href='../S/975.html#L3510'>newentry</a>         3510 ext/phar/phar_object.c 		newentry.metadata_str.len = 0;</span>
+<span class='curline'><a href='../S/975.html#L3513'>newentry</a>         3513 ext/phar/phar_object.c 	newentry.filename = estrndup(newfile, newfile_len);</span>
+<span class='curline'><a href='../S/975.html#L3514'>newentry</a>         3514 ext/phar/phar_object.c 	newentry.filename_len = newfile_len;</span>
+<span class='curline'><a href='../S/975.html#L3515'>newentry</a>         3515 ext/phar/phar_object.c 	newentry.fp_refcount = 0;</span>
+<span class='curline'><a href='../S/975.html#L3518'>newentry</a>         3518 ext/phar/phar_object.c 		if (FAILURE == phar_copy_entry_fp(oldentry, &amp;newentry, &amp;error TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/975.html#L3519'>newentry</a>         3519 ext/phar/phar_object.c 			efree(newentry.filename);</span>
+<span class='curline'><a href='../S/975.html#L3520'>newentry</a>         3520 ext/phar/phar_object.c 			php_stream_close(newentry.fp);</span>
+<span class='curline'><a href='../S/975.html#L3527'>newentry</a>         3527 ext/phar/phar_object.c 	zend_hash_add(&amp;oldentry-&gt;phar-&gt;manifest, newfile, newfile_len, (void*)&amp;newentry, sizeof(phar_entry_info), NULL);</span>
+<span class='curline'><a href='../S/982.html#L255'>newentry</a>          255 ext/phar/tar.c 		phar_entry_info *newentry;</span>
+<span class='curline'><a href='../S/982.html#L504'>newentry</a>          504 ext/phar/tar.c 		zend_hash_update(&amp;myphar-&gt;manifest, entry.filename, entry.filename_len, (void*)&amp;entry, sizeof(phar_entry_info), (void **) &amp;newentry);</span>
+<span class='curline'><a href='../S/982.html#L505'>newentry</a>          505 ext/phar/tar.c 		ZEND_ASSERT(newentry != NULL);</span>
+<span class='curline'><a href='../S/982.html#L512'>newentry</a>          512 ext/phar/tar.c 			if (FAILURE == phar_tar_process_metadata(newentry, fp TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/982.html#L891'>newentry</a>          891 ext/phar/tar.c 	phar_entry_info *entry = (phar_entry_info *)pDest, *metadata, newentry = {0};</span>
+<span class='curline'><a href='../S/982.html#L929'>newentry</a>          929 ext/phar/tar.c 	newentry.filename = lookfor;</span>
+<span class='curline'><a href='../S/982.html#L930'>newentry</a>          930 ext/phar/tar.c 	newentry.filename_len = lookfor_len;</span>
+<span class='curline'><a href='../S/982.html#L931'>newentry</a>          931 ext/phar/tar.c 	newentry.phar = entry-&gt;phar;</span>
+<span class='curline'><a href='../S/982.html#L932'>newentry</a>          932 ext/phar/tar.c 	newentry.tar_type = TAR_FILE;</span>
+<span class='curline'><a href='../S/982.html#L933'>newentry</a>          933 ext/phar/tar.c 	newentry.is_tar = 1;</span>
+<span class='curline'><a href='../S/982.html#L935'>newentry</a>          935 ext/phar/tar.c 	if (SUCCESS != zend_hash_add(&amp;(entry-&gt;phar-&gt;manifest), lookfor, lookfor_len, (void *)&amp;newentry, sizeof(phar_entry_info), (void **)&amp;metadata)) {</span>
+<span class='curline'><a href='../S/982.html#L1154'>newentry</a>         1154 ext/phar/tar.c 			phar_entry_info newentry = {0};</span>
+<span class='curline'><a href='../S/982.html#L1156'>newentry</a>         1156 ext/phar/tar.c 			newentry.filename = estrndup(".phar/.metadata.bin", sizeof(".phar/.metadata.bin")-1);</span>
+<span class='curline'><a href='../S/982.html#L1157'>newentry</a>         1157 ext/phar/tar.c 			newentry.filename_len = sizeof(".phar/.metadata.bin")-1;</span>
+<span class='curline'><a href='../S/982.html#L1158'>newentry</a>         1158 ext/phar/tar.c 			newentry.phar = phar;</span>
+<span class='curline'><a href='../S/982.html#L1159'>newentry</a>         1159 ext/phar/tar.c 			newentry.tar_type = TAR_FILE;</span>
+<span class='curline'><a href='../S/982.html#L1160'>newentry</a>         1160 ext/phar/tar.c 			newentry.is_tar = 1;</span>
+<span class='curline'><a href='../S/982.html#L1162'>newentry</a>         1162 ext/phar/tar.c 			if (SUCCESS != zend_hash_add(&amp;(phar-&gt;manifest), ".phar/.metadata.bin", sizeof(".phar/.metadata.bin")-1, (void *)&amp;newentry, sizeof(phar_entry_info), (void **)&amp;mentry)) {</span>
+</pre>
+</body>
+</html>

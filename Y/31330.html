@@ -1,0 +1,533 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>packet</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/814.html#L35'>packet</a>             35 ext/mysqlnd/mysqlnd_wireprotocol.c #define	PACKET_READ_HEADER_AND_BODY(packet, conn, buf, buf_size, packet_type_as_text, packet_type) \</span>
+<span class='curline'><a href='../S/814.html#L38'>packet</a>             38 ext/mysqlnd/mysqlnd_wireprotocol.c 		if (FAIL == mysqlnd_read_header((conn)-&gt;net, &amp;((packet)-&gt;header), (conn)-&gt;stats, ((conn)-&gt;error_info) TSRMLS_CC)) {\</span>
+<span class='curline'><a href='../S/814.html#L45'>packet</a>             45 ext/mysqlnd/mysqlnd_wireprotocol.c 		if ((buf_size) &lt; (packet)-&gt;header.size) { \</span>
+<span class='curline'><a href='../S/814.html#L47'>packet</a>             47 ext/mysqlnd/mysqlnd_wireprotocol.c 						(buf_size), (packet)-&gt;header.size, (packet)-&gt;header.size - (buf_size)); \</span>
+<span class='curline'><a href='../S/814.html#L50'>packet</a>             50 ext/mysqlnd/mysqlnd_wireprotocol.c 		if (FAIL == conn-&gt;net-&gt;data-&gt;m.receive_ex((conn)-&gt;net, (buf), (packet)-&gt;header.size, (conn)-&gt;stats, ((conn)-&gt;error_info) TSRMLS_CC)) { \</span>
+<span class='curline'><a href='../S/814.html#L58'>packet</a>             58 ext/mysqlnd/mysqlnd_wireprotocol.c 											MYSQLND_HEADER_SIZE + (packet)-&gt;header.size, \</span>
+<span class='curline'><a href='../S/814.html#L65'>packet</a>             65 ext/mysqlnd/mysqlnd_wireprotocol.c 	if ((size_t)(p - begin) &gt; packet-&gt;header.size) { \</span>
+<span class='curline'><a href='../S/814.html#L132'>packet</a>            132 ext/mysqlnd/mysqlnd_wireprotocol.c php_mysqlnd_net_field_length(zend_uchar **packet)</span>
+<span class='curline'><a href='../S/814.html#L134'>packet</a>            134 ext/mysqlnd/mysqlnd_wireprotocol.c 	register zend_uchar *p= (zend_uchar *)*packet;</span>
+<span class='curline'><a href='../S/814.html#L137'>packet</a>            137 ext/mysqlnd/mysqlnd_wireprotocol.c 		(*packet)++;</span>
+<span class='curline'><a href='../S/814.html#L143'>packet</a>            143 ext/mysqlnd/mysqlnd_wireprotocol.c 			(*packet)++;</span>
+<span class='curline'><a href='../S/814.html#L146'>packet</a>            146 ext/mysqlnd/mysqlnd_wireprotocol.c 			(*packet) += 3;</span>
+<span class='curline'><a href='../S/814.html#L149'>packet</a>            149 ext/mysqlnd/mysqlnd_wireprotocol.c 			(*packet) += 4;</span>
+<span class='curline'><a href='../S/814.html#L152'>packet</a>            152 ext/mysqlnd/mysqlnd_wireprotocol.c 			(*packet) += 9;</span>
+<span class='curline'><a href='../S/814.html#L162'>packet</a>            162 ext/mysqlnd/mysqlnd_wireprotocol.c php_mysqlnd_net_field_length_ll(zend_uchar **packet)</span>
+<span class='curline'><a href='../S/814.html#L164'>packet</a>            164 ext/mysqlnd/mysqlnd_wireprotocol.c 	register zend_uchar *p= (zend_uchar *)*packet;</span>
+<span class='curline'><a href='../S/814.html#L167'>packet</a>            167 ext/mysqlnd/mysqlnd_wireprotocol.c 		(*packet)++;</span>
+<span class='curline'><a href='../S/814.html#L173'>packet</a>            173 ext/mysqlnd/mysqlnd_wireprotocol.c 			(*packet)++;</span>
+<span class='curline'><a href='../S/814.html#L176'>packet</a>            176 ext/mysqlnd/mysqlnd_wireprotocol.c 			(*packet) += 3;</span>
+<span class='curline'><a href='../S/814.html#L179'>packet</a>            179 ext/mysqlnd/mysqlnd_wireprotocol.c 			(*packet) += 4;</span>
+<span class='curline'><a href='../S/814.html#L182'>packet</a>            182 ext/mysqlnd/mysqlnd_wireprotocol.c 			(*packet) += 9;</span>
+<span class='curline'><a href='../S/814.html#L191'>packet</a>            191 ext/mysqlnd/mysqlnd_wireprotocol.c php_mysqlnd_net_store_length(zend_uchar *packet, uint64_t length)</span>
+<span class='curline'><a href='../S/814.html#L194'>packet</a>            194 ext/mysqlnd/mysqlnd_wireprotocol.c 		*packet = (zend_uchar) length;</span>
+<span class='curline'><a href='../S/814.html#L195'>packet</a>            195 ext/mysqlnd/mysqlnd_wireprotocol.c 		return packet + 1;</span>
+<span class='curline'><a href='../S/814.html#L199'>packet</a>            199 ext/mysqlnd/mysqlnd_wireprotocol.c 		*packet++ = 252;</span>
+<span class='curline'><a href='../S/814.html#L200'>packet</a>            200 ext/mysqlnd/mysqlnd_wireprotocol.c 		int2store(packet,(unsigned int) length);</span>
+<span class='curline'><a href='../S/814.html#L201'>packet</a>            201 ext/mysqlnd/mysqlnd_wireprotocol.c 		return packet + 2;</span>
+<span class='curline'><a href='../S/814.html#L205'>packet</a>            205 ext/mysqlnd/mysqlnd_wireprotocol.c 		*packet++ = 253;</span>
+<span class='curline'><a href='../S/814.html#L206'>packet</a>            206 ext/mysqlnd/mysqlnd_wireprotocol.c 		int3store(packet,(ulong) length);</span>
+<span class='curline'><a href='../S/814.html#L207'>packet</a>            207 ext/mysqlnd/mysqlnd_wireprotocol.c 		return packet + 3;</span>
+<span class='curline'><a href='../S/814.html#L209'>packet</a>            209 ext/mysqlnd/mysqlnd_wireprotocol.c 	*packet++ = 254;</span>
+<span class='curline'><a href='../S/814.html#L210'>packet</a>            210 ext/mysqlnd/mysqlnd_wireprotocol.c 	int8store(packet, length);</span>
+<span class='curline'><a href='../S/814.html#L211'>packet</a>            211 ext/mysqlnd/mysqlnd_wireprotocol.c 	return packet + 8;</span>
+<span class='curline'><a href='../S/814.html#L329'>packet</a>            329 ext/mysqlnd/mysqlnd_wireprotocol.c 	MYSQLND_PACKET_GREET *packet= (MYSQLND_PACKET_GREET *) _packet;</span>
+<span class='curline'><a href='../S/814.html#L333'>packet</a>            333 ext/mysqlnd/mysqlnd_wireprotocol.c 	PACKET_READ_HEADER_AND_BODY(packet, conn, buf, sizeof(buf), "greeting", PROT_GREET_PACKET);</span>
+<span class='curline'><a href='../S/814.html#L336'>packet</a>            336 ext/mysqlnd/mysqlnd_wireprotocol.c 	packet-&gt;auth_plugin_data = packet-&gt;intern_auth_plugin_data;</span>
+<span class='curline'><a href='../S/814.html#L337'>packet</a>            337 ext/mysqlnd/mysqlnd_wireprotocol.c 	packet-&gt;auth_plugin_data_len = sizeof(packet-&gt;intern_auth_plugin_data);</span>
+<span class='curline'><a href='../S/814.html#L339'>packet</a>            339 ext/mysqlnd/mysqlnd_wireprotocol.c 	if (packet-&gt;header.size &lt; sizeof(buf)) {</span>
+<span class='curline'><a href='../S/814.html#L344'>packet</a>            344 ext/mysqlnd/mysqlnd_wireprotocol.c 		buf[packet-&gt;header.size] = '\0'; </span>
+<span class='curline'><a href='../S/814.html#L347'>packet</a>            347 ext/mysqlnd/mysqlnd_wireprotocol.c 	packet-&gt;protocol_version = uint1korr(p);</span>
+<span class='curline'><a href='../S/814.html#L351'>packet</a>            351 ext/mysqlnd/mysqlnd_wireprotocol.c 	if (ERROR_MARKER == packet-&gt;protocol_version) {</span>
+<span class='curline'><a href='../S/814.html#L352'>packet</a>            352 ext/mysqlnd/mysqlnd_wireprotocol.c 		php_mysqlnd_read_error_from_line(p, packet-&gt;header.size - 1,</span>
+<span class='curline'><a href='../S/814.html#L353'>packet</a>            353 ext/mysqlnd/mysqlnd_wireprotocol.c 										 packet-&gt;error, sizeof(packet-&gt;error),</span>
+<span class='curline'><a href='../S/814.html#L354'>packet</a>            354 ext/mysqlnd/mysqlnd_wireprotocol.c 										 &amp;packet-&gt;error_no, packet-&gt;sqlstate</span>
+<span class='curline'><a href='../S/814.html#L361'>packet</a>            361 ext/mysqlnd/mysqlnd_wireprotocol.c 		if (packet-&gt;error_no == 1040) {</span>
+<span class='curline'><a href='../S/814.html#L362'>packet</a>            362 ext/mysqlnd/mysqlnd_wireprotocol.c 			memcpy(packet-&gt;sqlstate, "08004", MYSQLND_SQLSTATE_LENGTH);</span>
+<span class='curline'><a href='../S/814.html#L367'>packet</a>            367 ext/mysqlnd/mysqlnd_wireprotocol.c 	packet-&gt;server_version = estrdup((char *)p);</span>
+<span class='curline'><a href='../S/814.html#L368'>packet</a>            368 ext/mysqlnd/mysqlnd_wireprotocol.c 	p+= strlen(packet-&gt;server_version) + 1; /* eat the '\0' */</span>
+<span class='curline'><a href='../S/814.html#L371'>packet</a>            371 ext/mysqlnd/mysqlnd_wireprotocol.c 	packet-&gt;thread_id = uint4korr(p);</span>
+<span class='curline'><a href='../S/814.html#L375'>packet</a>            375 ext/mysqlnd/mysqlnd_wireprotocol.c 	memcpy(packet-&gt;auth_plugin_data, p, SCRAMBLE_LENGTH_323);</span>
+<span class='curline'><a href='../S/814.html#L383'>packet</a>            383 ext/mysqlnd/mysqlnd_wireprotocol.c 	packet-&gt;server_capabilities = uint2korr(p);</span>
+<span class='curline'><a href='../S/814.html#L387'>packet</a>            387 ext/mysqlnd/mysqlnd_wireprotocol.c 	packet-&gt;charset_no = uint1korr(p);</span>
+<span class='curline'><a href='../S/814.html#L391'>packet</a>            391 ext/mysqlnd/mysqlnd_wireprotocol.c 	packet-&gt;server_status = uint2korr(p);</span>
+<span class='curline'><a href='../S/814.html#L400'>packet</a>            400 ext/mysqlnd/mysqlnd_wireprotocol.c 	if ((size_t) (p - buf) &lt; packet-&gt;header.size) {</span>
+<span class='curline'><a href='../S/814.html#L402'>packet</a>            402 ext/mysqlnd/mysqlnd_wireprotocol.c 		memcpy(packet-&gt;auth_plugin_data + SCRAMBLE_LENGTH_323, p, SCRAMBLE_LENGTH - SCRAMBLE_LENGTH_323);</span>
+<span class='curline'><a href='../S/814.html#L406'>packet</a>            406 ext/mysqlnd/mysqlnd_wireprotocol.c 		packet-&gt;pre41 = TRUE;</span>
+<span class='curline'><a href='../S/814.html#L410'>packet</a>            410 ext/mysqlnd/mysqlnd_wireprotocol.c 	if ((size_t) (p - buf) &lt; packet-&gt;header.size) {</span>
+<span class='curline'><a href='../S/814.html#L415'>packet</a>            415 ext/mysqlnd/mysqlnd_wireprotocol.c 		packet-&gt;server_capabilities |= uint2korr(pad_start) &lt;&lt; 16;</span>
+<span class='curline'><a href='../S/814.html#L417'>packet</a>            417 ext/mysqlnd/mysqlnd_wireprotocol.c 		packet-&gt;auth_plugin_data_len = uint1korr(pad_start + 2);</span>
+<span class='curline'><a href='../S/814.html#L418'>packet</a>            418 ext/mysqlnd/mysqlnd_wireprotocol.c 		if (packet-&gt;auth_plugin_data_len &gt; SCRAMBLE_LENGTH) {</span>
+<span class='curline'><a href='../S/814.html#L420'>packet</a>            420 ext/mysqlnd/mysqlnd_wireprotocol.c 			zend_uchar * new_auth_plugin_data = emalloc(packet-&gt;auth_plugin_data_len);</span>
+<span class='curline'><a href='../S/814.html#L425'>packet</a>            425 ext/mysqlnd/mysqlnd_wireprotocol.c 			memcpy(new_auth_plugin_data, packet-&gt;auth_plugin_data, SCRAMBLE_LENGTH);</span>
+<span class='curline'><a href='../S/814.html#L427'>packet</a>            427 ext/mysqlnd/mysqlnd_wireprotocol.c 			memcpy(new_auth_plugin_data + SCRAMBLE_LENGTH, p, packet-&gt;auth_plugin_data_len - SCRAMBLE_LENGTH);</span>
+<span class='curline'><a href='../S/814.html#L428'>packet</a>            428 ext/mysqlnd/mysqlnd_wireprotocol.c 			p+= (packet-&gt;auth_plugin_data_len - SCRAMBLE_LENGTH);</span>
+<span class='curline'><a href='../S/814.html#L429'>packet</a>            429 ext/mysqlnd/mysqlnd_wireprotocol.c 			packet-&gt;auth_plugin_data = new_auth_plugin_data;</span>
+<span class='curline'><a href='../S/814.html#L433'>packet</a>            433 ext/mysqlnd/mysqlnd_wireprotocol.c 	if (packet-&gt;server_capabilities &amp; CLIENT_PLUGIN_AUTH) {</span>
+<span class='curline'><a href='../S/814.html#L436'>packet</a>            436 ext/mysqlnd/mysqlnd_wireprotocol.c 		packet-&gt;auth_protocol = estrdup((char *)p);</span>
+<span class='curline'><a href='../S/814.html#L437'>packet</a>            437 ext/mysqlnd/mysqlnd_wireprotocol.c 		p+= strlen(packet-&gt;auth_protocol) + 1; /* eat the '\0' */</span>
+<span class='curline'><a href='../S/814.html#L441'>packet</a>            441 ext/mysqlnd/mysqlnd_wireprotocol.c 				packet-&gt;protocol_version, packet-&gt;server_version, packet-&gt;thread_id);</span>
+<span class='curline'><a href='../S/814.html#L444'>packet</a>            444 ext/mysqlnd/mysqlnd_wireprotocol.c 				packet-&gt;server_capabilities, packet-&gt;charset_no, packet-&gt;server_status,</span>
+<span class='curline'><a href='../S/814.html#L445'>packet</a>            445 ext/mysqlnd/mysqlnd_wireprotocol.c 				packet-&gt;auth_protocol? packet-&gt;auth_protocol:"n/a", packet-&gt;auth_plugin_data_len);</span>
+<span class='curline'><a href='../S/814.html#L449'>packet</a>            449 ext/mysqlnd/mysqlnd_wireprotocol.c 	DBG_ERR_FMT("GREET packet %d bytes shorter than expected", p - begin - packet-&gt;header.size);</span>
+<span class='curline'><a href='../S/814.html#L451'>packet</a>            451 ext/mysqlnd/mysqlnd_wireprotocol.c 					 p - begin - packet-&gt;header.size);</span>
+<span class='curline'><a href='../S/814.html#L490'>packet</a>            490 ext/mysqlnd/mysqlnd_wireprotocol.c 	MYSQLND_PACKET_AUTH * packet= (MYSQLND_PACKET_AUTH *) _packet;</span>
+<span class='curline'><a href='../S/814.html#L494'>packet</a>            494 ext/mysqlnd/mysqlnd_wireprotocol.c 	if (!packet-&gt;is_change_user_packet) {</span>
+<span class='curline'><a href='../S/814.html#L495'>packet</a>            495 ext/mysqlnd/mysqlnd_wireprotocol.c 		int4store(p, packet-&gt;client_flags);</span>
+<span class='curline'><a href='../S/814.html#L498'>packet</a>            498 ext/mysqlnd/mysqlnd_wireprotocol.c 		int4store(p, packet-&gt;max_packet_size);</span>
+<span class='curline'><a href='../S/814.html#L501'>packet</a>            501 ext/mysqlnd/mysqlnd_wireprotocol.c 		int1store(p, packet-&gt;charset_no);</span>
+<span class='curline'><a href='../S/814.html#L508'>packet</a>            508 ext/mysqlnd/mysqlnd_wireprotocol.c 	if (packet-&gt;send_auth_data || packet-&gt;is_change_user_packet) {</span>
+<span class='curline'><a href='../S/814.html#L509'>packet</a>            509 ext/mysqlnd/mysqlnd_wireprotocol.c 		len = MIN(strlen(packet-&gt;user), MYSQLND_MAX_ALLOWED_USER_LEN);</span>
+<span class='curline'><a href='../S/814.html#L510'>packet</a>            510 ext/mysqlnd/mysqlnd_wireprotocol.c 		memcpy(p, packet-&gt;user, len);</span>
+<span class='curline'><a href='../S/814.html#L515'>packet</a>            515 ext/mysqlnd/mysqlnd_wireprotocol.c 		if (packet-&gt;auth_data == NULL) {</span>
+<span class='curline'><a href='../S/814.html#L516'>packet</a>            516 ext/mysqlnd/mysqlnd_wireprotocol.c 			packet-&gt;auth_data_len = 0;</span>
+<span class='curline'><a href='../S/814.html#L518'>packet</a>            518 ext/mysqlnd/mysqlnd_wireprotocol.c 		if (packet-&gt;auth_data_len &gt; 0xFF) {</span>
+<span class='curline'><a href='../S/814.html#L526'>packet</a>            526 ext/mysqlnd/mysqlnd_wireprotocol.c 		int1store(p, packet-&gt;auth_data_len);</span>
+<span class='curline'><a href='../S/814.html#L529'>packet</a>            529 ext/mysqlnd/mysqlnd_wireprotocol.c 		if ((sizeof(buffer) - (p - buffer)) &lt; packet-&gt;auth_data_len) {</span>
+<span class='curline'><a href='../S/814.html#L533'>packet</a>            533 ext/mysqlnd/mysqlnd_wireprotocol.c 		if (packet-&gt;auth_data_len) {</span>
+<span class='curline'><a href='../S/814.html#L534'>packet</a>            534 ext/mysqlnd/mysqlnd_wireprotocol.c 			memcpy(p, packet-&gt;auth_data, packet-&gt;auth_data_len);</span>
+<span class='curline'><a href='../S/814.html#L535'>packet</a>            535 ext/mysqlnd/mysqlnd_wireprotocol.c 			p+= packet-&gt;auth_data_len;</span>
+<span class='curline'><a href='../S/814.html#L538'>packet</a>            538 ext/mysqlnd/mysqlnd_wireprotocol.c 		if (packet-&gt;db) {</span>
+<span class='curline'><a href='../S/814.html#L540'>packet</a>            540 ext/mysqlnd/mysqlnd_wireprotocol.c 			size_t real_db_len = MIN(MYSQLND_MAX_ALLOWED_DB_LEN, packet-&gt;db_len);</span>
+<span class='curline'><a href='../S/814.html#L541'>packet</a>            541 ext/mysqlnd/mysqlnd_wireprotocol.c 			memcpy(p, packet-&gt;db, real_db_len);</span>
+<span class='curline'><a href='../S/814.html#L544'>packet</a>            544 ext/mysqlnd/mysqlnd_wireprotocol.c 		} else if (packet-&gt;is_change_user_packet) {</span>
+<span class='curline'><a href='../S/814.html#L549'>packet</a>            549 ext/mysqlnd/mysqlnd_wireprotocol.c 		if (packet-&gt;is_change_user_packet) {</span>
+<span class='curline'><a href='../S/814.html#L550'>packet</a>            550 ext/mysqlnd/mysqlnd_wireprotocol.c 			if (packet-&gt;charset_no) {</span>
+<span class='curline'><a href='../S/814.html#L551'>packet</a>            551 ext/mysqlnd/mysqlnd_wireprotocol.c 				int2store(p, packet-&gt;charset_no);</span>
+<span class='curline'><a href='../S/814.html#L556'>packet</a>            556 ext/mysqlnd/mysqlnd_wireprotocol.c 		if (packet-&gt;auth_plugin_name) {</span>
+<span class='curline'><a href='../S/814.html#L557'>packet</a>            557 ext/mysqlnd/mysqlnd_wireprotocol.c 			size_t len = MIN(strlen(packet-&gt;auth_plugin_name), sizeof(buffer) - (p - buffer) - 1);</span>
+<span class='curline'><a href='../S/814.html#L558'>packet</a>            558 ext/mysqlnd/mysqlnd_wireprotocol.c 			memcpy(p, packet-&gt;auth_plugin_name, len);</span>
+<span class='curline'><a href='../S/814.html#L563'>packet</a>            563 ext/mysqlnd/mysqlnd_wireprotocol.c 		if (packet-&gt;connect_attr &amp;&amp; zend_hash_num_elements(packet-&gt;connect_attr)) {</span>
+<span class='curline'><a href='../S/814.html#L567'>packet</a>            567 ext/mysqlnd/mysqlnd_wireprotocol.c 			zend_hash_internal_pointer_reset_ex(packet-&gt;connect_attr, &amp;pos_value);</span>
+<span class='curline'><a href='../S/814.html#L568'>packet</a>            568 ext/mysqlnd/mysqlnd_wireprotocol.c 			while (SUCCESS == zend_hash_get_current_data_ex(packet-&gt;connect_attr, (void **)&amp;entry_value, &amp;pos_value)) {</span>
+<span class='curline'><a href='../S/814.html#L574'>packet</a>            574 ext/mysqlnd/mysqlnd_wireprotocol.c 				if (HASH_KEY_IS_STRING == zend_hash_get_current_key_ex(packet-&gt;connect_attr, &amp;s_key, &amp;s_len, &amp;num_key, 0, &amp;pos_value)) {</span>
+<span class='curline'><a href='../S/814.html#L586'>packet</a>            586 ext/mysqlnd/mysqlnd_wireprotocol.c 				zend_hash_internal_pointer_reset_ex(packet-&gt;connect_attr, &amp;pos_value);</span>
+<span class='curline'><a href='../S/814.html#L587'>packet</a>            587 ext/mysqlnd/mysqlnd_wireprotocol.c 				while (SUCCESS == zend_hash_get_current_data_ex(packet-&gt;connect_attr, (void **)&amp;entry_value, &amp;pos_value)) {</span>
+<span class='curline'><a href='../S/814.html#L592'>packet</a>            592 ext/mysqlnd/mysqlnd_wireprotocol.c 					if (HASH_KEY_IS_STRING == zend_hash_get_current_key_ex(packet-&gt;connect_attr, &amp;s_key, &amp;s_len, &amp;num_key, 0, &amp;pos_value)) {</span>
+<span class='curline'><a href='../S/814.html#L609'>packet</a>            609 ext/mysqlnd/mysqlnd_wireprotocol.c 	if (packet-&gt;is_change_user_packet) {</span>
+<span class='curline'><a href='../S/814.html#L612'>packet</a>            612 ext/mysqlnd/mysqlnd_wireprotocol.c 										   packet-&gt;silent, TRUE TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/814.html#L651'>packet</a>            651 ext/mysqlnd/mysqlnd_wireprotocol.c 	register MYSQLND_PACKET_AUTH_RESPONSE * packet= (MYSQLND_PACKET_AUTH_RESPONSE *) _packet;</span>
+<span class='curline'><a href='../S/814.html#L657'>packet</a>            657 ext/mysqlnd/mysqlnd_wireprotocol.c 	PACKET_READ_HEADER_AND_BODY(packet, conn, buf, buf_len, "OK", PROT_OK_PACKET);</span>
+<span class='curline'><a href='../S/814.html#L664'>packet</a>            664 ext/mysqlnd/mysqlnd_wireprotocol.c 	buf[packet-&gt;header.size] = '\0';</span>
+<span class='curline'><a href='../S/814.html#L667'>packet</a>            667 ext/mysqlnd/mysqlnd_wireprotocol.c 	packet-&gt;response_code = uint1korr(p);</span>
+<span class='curline'><a href='../S/814.html#L671'>packet</a>            671 ext/mysqlnd/mysqlnd_wireprotocol.c 	if (ERROR_MARKER == packet-&gt;response_code) {</span>
+<span class='curline'><a href='../S/814.html#L672'>packet</a>            672 ext/mysqlnd/mysqlnd_wireprotocol.c 		php_mysqlnd_read_error_from_line(p, packet-&gt;header.size - 1,</span>
+<span class='curline'><a href='../S/814.html#L673'>packet</a>            673 ext/mysqlnd/mysqlnd_wireprotocol.c 										 packet-&gt;error, sizeof(packet-&gt;error),</span>
+<span class='curline'><a href='../S/814.html#L674'>packet</a>            674 ext/mysqlnd/mysqlnd_wireprotocol.c 										 &amp;packet-&gt;error_no, packet-&gt;sqlstate</span>
+<span class='curline'><a href='../S/814.html#L678'>packet</a>            678 ext/mysqlnd/mysqlnd_wireprotocol.c 	if (0xFE == packet-&gt;response_code) {</span>
+<span class='curline'><a href='../S/814.html#L680'>packet</a>            680 ext/mysqlnd/mysqlnd_wireprotocol.c 		if (packet-&gt;header.size &gt; (size_t) (p - buf)) {</span>
+<span class='curline'><a href='../S/814.html#L681'>packet</a>            681 ext/mysqlnd/mysqlnd_wireprotocol.c 			packet-&gt;new_auth_protocol = mnd_pestrdup((char *)p, FALSE);</span>
+<span class='curline'><a href='../S/814.html#L682'>packet</a>            682 ext/mysqlnd/mysqlnd_wireprotocol.c 			packet-&gt;new_auth_protocol_len = strlen(packet-&gt;new_auth_protocol);</span>
+<span class='curline'><a href='../S/814.html#L683'>packet</a>            683 ext/mysqlnd/mysqlnd_wireprotocol.c 			p+= packet-&gt;new_auth_protocol_len + 1; /* +1 for the \0 */</span>
+<span class='curline'><a href='../S/814.html#L685'>packet</a>            685 ext/mysqlnd/mysqlnd_wireprotocol.c 			packet-&gt;new_auth_protocol_data_len = packet-&gt;header.size - (size_t) (p - buf);</span>
+<span class='curline'><a href='../S/814.html#L686'>packet</a>            686 ext/mysqlnd/mysqlnd_wireprotocol.c 			if (packet-&gt;new_auth_protocol_data_len) {</span>
+<span class='curline'><a href='../S/814.html#L687'>packet</a>            687 ext/mysqlnd/mysqlnd_wireprotocol.c 				packet-&gt;new_auth_protocol_data = mnd_emalloc(packet-&gt;new_auth_protocol_data_len);</span>
+<span class='curline'><a href='../S/814.html#L688'>packet</a>            688 ext/mysqlnd/mysqlnd_wireprotocol.c 				memcpy(packet-&gt;new_auth_protocol_data, p, packet-&gt;new_auth_protocol_data_len);</span>
+<span class='curline'><a href='../S/814.html#L690'>packet</a>            690 ext/mysqlnd/mysqlnd_wireprotocol.c 			DBG_INF_FMT("The server requested switching auth plugin to : %s", packet-&gt;new_auth_protocol);</span>
+<span class='curline'><a href='../S/814.html#L691'>packet</a>            691 ext/mysqlnd/mysqlnd_wireprotocol.c 			DBG_INF_FMT("Server salt : [%d][%.*s]", packet-&gt;new_auth_protocol_data_len, packet-&gt;new_auth_protocol_data_len, packet-&gt;new_auth_protocol_data);</span>
+<span class='curline'><a href='../S/814.html#L695'>packet</a>            695 ext/mysqlnd/mysqlnd_wireprotocol.c 		packet-&gt;affected_rows  = php_mysqlnd_net_field_length_ll(&amp;p);</span>
+<span class='curline'><a href='../S/814.html#L698'>packet</a>            698 ext/mysqlnd/mysqlnd_wireprotocol.c 		packet-&gt;last_insert_id = php_mysqlnd_net_field_length_ll(&amp;p);</span>
+<span class='curline'><a href='../S/814.html#L701'>packet</a>            701 ext/mysqlnd/mysqlnd_wireprotocol.c 		packet-&gt;server_status = uint2korr(p);</span>
+<span class='curline'><a href='../S/814.html#L705'>packet</a>            705 ext/mysqlnd/mysqlnd_wireprotocol.c 		packet-&gt;warning_count = uint2korr(p);</span>
+<span class='curline'><a href='../S/814.html#L710'>packet</a>            710 ext/mysqlnd/mysqlnd_wireprotocol.c 		if (packet-&gt;header.size &gt; (size_t) (p - buf) &amp;&amp; (i = php_mysqlnd_net_field_length(&amp;p))) {</span>
+<span class='curline'><a href='../S/814.html#L711'>packet</a>            711 ext/mysqlnd/mysqlnd_wireprotocol.c 			packet-&gt;message_len = MIN(i, buf_len - (p - begin));</span>
+<span class='curline'><a href='../S/814.html#L712'>packet</a>            712 ext/mysqlnd/mysqlnd_wireprotocol.c 			packet-&gt;message = mnd_pestrndup((char *)p, packet-&gt;message_len, FALSE);</span>
+<span class='curline'><a href='../S/814.html#L714'>packet</a>            714 ext/mysqlnd/mysqlnd_wireprotocol.c 			packet-&gt;message = NULL;</span>
+<span class='curline'><a href='../S/814.html#L715'>packet</a>            715 ext/mysqlnd/mysqlnd_wireprotocol.c 			packet-&gt;message_len = 0;</span>
+<span class='curline'><a href='../S/814.html#L719'>packet</a>            719 ext/mysqlnd/mysqlnd_wireprotocol.c 					packet-&gt;affected_rows, packet-&gt;last_insert_id, packet-&gt;server_status,</span>
+<span class='curline'><a href='../S/814.html#L720'>packet</a>            720 ext/mysqlnd/mysqlnd_wireprotocol.c 					packet-&gt;warning_count);</span>
+<span class='curline'><a href='../S/814.html#L725'>packet</a>            725 ext/mysqlnd/mysqlnd_wireprotocol.c 	DBG_ERR_FMT("OK packet %d bytes shorter than expected", p - begin - packet-&gt;header.size);</span>
+<span class='curline'><a href='../S/814.html#L727'>packet</a>            727 ext/mysqlnd/mysqlnd_wireprotocol.c 					 p - begin - packet-&gt;header.size);</span>
+<span class='curline'><a href='../S/814.html#L765'>packet</a>            765 ext/mysqlnd/mysqlnd_wireprotocol.c 	MYSQLND_PACKET_CHANGE_AUTH_RESPONSE *packet= (MYSQLND_PACKET_CHANGE_AUTH_RESPONSE *) _packet;</span>
+<span class='curline'><a href='../S/814.html#L766'>packet</a>            766 ext/mysqlnd/mysqlnd_wireprotocol.c 	zend_uchar * buffer = conn-&gt;net-&gt;cmd_buffer.length &gt;= packet-&gt;auth_data_len? conn-&gt;net-&gt;cmd_buffer.buffer : mnd_emalloc(packet-&gt;auth_data_len);</span>
+<span class='curline'><a href='../S/814.html#L771'>packet</a>            771 ext/mysqlnd/mysqlnd_wireprotocol.c 	if (packet-&gt;auth_data_len) {</span>
+<span class='curline'><a href='../S/814.html#L772'>packet</a>            772 ext/mysqlnd/mysqlnd_wireprotocol.c 		memcpy(p, packet-&gt;auth_data, packet-&gt;auth_data_len);</span>
+<span class='curline'><a href='../S/814.html#L773'>packet</a>            773 ext/mysqlnd/mysqlnd_wireprotocol.c 		p+= packet-&gt;auth_data_len;</span>
+<span class='curline'><a href='../S/814.html#L814'>packet</a>            814 ext/mysqlnd/mysqlnd_wireprotocol.c 	register MYSQLND_PACKET_OK *packet= (MYSQLND_PACKET_OK *) _packet;</span>
+<span class='curline'><a href='../S/814.html#L818'>packet</a>            818 ext/mysqlnd/mysqlnd_wireprotocol.c 	PACKET_READ_HEADER_AND_BODY(packet, conn, buf, buf_len, "OK", PROT_OK_PACKET);</span>
+<span class='curline'><a href='../S/814.html#L822'>packet</a>            822 ext/mysqlnd/mysqlnd_wireprotocol.c 	packet-&gt;field_count = uint1korr(p);</span>
+<span class='curline'><a href='../S/814.html#L826'>packet</a>            826 ext/mysqlnd/mysqlnd_wireprotocol.c 	if (ERROR_MARKER == packet-&gt;field_count) {</span>
+<span class='curline'><a href='../S/814.html#L827'>packet</a>            827 ext/mysqlnd/mysqlnd_wireprotocol.c 		php_mysqlnd_read_error_from_line(p, packet-&gt;header.size - 1,</span>
+<span class='curline'><a href='../S/814.html#L828'>packet</a>            828 ext/mysqlnd/mysqlnd_wireprotocol.c 										 packet-&gt;error, sizeof(packet-&gt;error),</span>
+<span class='curline'><a href='../S/814.html#L829'>packet</a>            829 ext/mysqlnd/mysqlnd_wireprotocol.c 										 &amp;packet-&gt;error_no, packet-&gt;sqlstate</span>
+<span class='curline'><a href='../S/814.html#L835'>packet</a>            835 ext/mysqlnd/mysqlnd_wireprotocol.c 	packet-&gt;affected_rows  = php_mysqlnd_net_field_length_ll(&amp;p);</span>
+<span class='curline'><a href='../S/814.html#L838'>packet</a>            838 ext/mysqlnd/mysqlnd_wireprotocol.c 	packet-&gt;last_insert_id = php_mysqlnd_net_field_length_ll(&amp;p);</span>
+<span class='curline'><a href='../S/814.html#L841'>packet</a>            841 ext/mysqlnd/mysqlnd_wireprotocol.c 	packet-&gt;server_status = uint2korr(p);</span>
+<span class='curline'><a href='../S/814.html#L845'>packet</a>            845 ext/mysqlnd/mysqlnd_wireprotocol.c 	packet-&gt;warning_count = uint2korr(p);</span>
+<span class='curline'><a href='../S/814.html#L850'>packet</a>            850 ext/mysqlnd/mysqlnd_wireprotocol.c 	if (packet-&gt;header.size &gt; (size_t) (p - buf) &amp;&amp; (i = php_mysqlnd_net_field_length(&amp;p))) {</span>
+<span class='curline'><a href='../S/814.html#L851'>packet</a>            851 ext/mysqlnd/mysqlnd_wireprotocol.c 		packet-&gt;message_len = MIN(i, buf_len - (p - begin));</span>
+<span class='curline'><a href='../S/814.html#L852'>packet</a>            852 ext/mysqlnd/mysqlnd_wireprotocol.c 		packet-&gt;message = mnd_pestrndup((char *)p, packet-&gt;message_len, FALSE);</span>
+<span class='curline'><a href='../S/814.html#L854'>packet</a>            854 ext/mysqlnd/mysqlnd_wireprotocol.c 		packet-&gt;message = NULL;</span>
+<span class='curline'><a href='../S/814.html#L855'>packet</a>            855 ext/mysqlnd/mysqlnd_wireprotocol.c 		packet-&gt;message_len = 0;</span>
+<span class='curline'><a href='../S/814.html#L859'>packet</a>            859 ext/mysqlnd/mysqlnd_wireprotocol.c 				packet-&gt;affected_rows, packet-&gt;last_insert_id, packet-&gt;server_status,</span>
+<span class='curline'><a href='../S/814.html#L860'>packet</a>            860 ext/mysqlnd/mysqlnd_wireprotocol.c 				packet-&gt;warning_count);</span>
+<span class='curline'><a href='../S/814.html#L866'>packet</a>            866 ext/mysqlnd/mysqlnd_wireprotocol.c 	DBG_ERR_FMT("OK packet %d bytes shorter than expected", p - begin - packet-&gt;header.size);</span>
+<span class='curline'><a href='../S/814.html#L868'>packet</a>            868 ext/mysqlnd/mysqlnd_wireprotocol.c 					 p - begin - packet-&gt;header.size);</span>
+<span class='curline'><a href='../S/814.html#L900'>packet</a>            900 ext/mysqlnd/mysqlnd_wireprotocol.c 	MYSQLND_PACKET_EOF *packet= (MYSQLND_PACKET_EOF *) _packet;</span>
+<span class='curline'><a href='../S/814.html#L908'>packet</a>            908 ext/mysqlnd/mysqlnd_wireprotocol.c 	PACKET_READ_HEADER_AND_BODY(packet, conn, buf, buf_len, "EOF", PROT_EOF_PACKET);</span>
+<span class='curline'><a href='../S/814.html#L912'>packet</a>            912 ext/mysqlnd/mysqlnd_wireprotocol.c 	packet-&gt;field_count = uint1korr(p);</span>
+<span class='curline'><a href='../S/814.html#L916'>packet</a>            916 ext/mysqlnd/mysqlnd_wireprotocol.c 	if (ERROR_MARKER == packet-&gt;field_count) {</span>
+<span class='curline'><a href='../S/814.html#L917'>packet</a>            917 ext/mysqlnd/mysqlnd_wireprotocol.c 		php_mysqlnd_read_error_from_line(p, packet-&gt;header.size - 1,</span>
+<span class='curline'><a href='../S/814.html#L918'>packet</a>            918 ext/mysqlnd/mysqlnd_wireprotocol.c 										 packet-&gt;error, sizeof(packet-&gt;error),</span>
+<span class='curline'><a href='../S/814.html#L919'>packet</a>            919 ext/mysqlnd/mysqlnd_wireprotocol.c 										 &amp;packet-&gt;error_no, packet-&gt;sqlstate</span>
+<span class='curline'><a href='../S/814.html#L929'>packet</a>            929 ext/mysqlnd/mysqlnd_wireprotocol.c 	if (packet-&gt;header.size &gt; 1) {</span>
+<span class='curline'><a href='../S/814.html#L930'>packet</a>            930 ext/mysqlnd/mysqlnd_wireprotocol.c 		packet-&gt;warning_count = uint2korr(p);</span>
+<span class='curline'><a href='../S/814.html#L934'>packet</a>            934 ext/mysqlnd/mysqlnd_wireprotocol.c 		packet-&gt;server_status = uint2korr(p);</span>
+<span class='curline'><a href='../S/814.html#L938'>packet</a>            938 ext/mysqlnd/mysqlnd_wireprotocol.c 		packet-&gt;warning_count = 0;</span>
+<span class='curline'><a href='../S/814.html#L939'>packet</a>            939 ext/mysqlnd/mysqlnd_wireprotocol.c 		packet-&gt;server_status = 0;</span>
+<span class='curline'><a href='../S/814.html#L945'>packet</a>            945 ext/mysqlnd/mysqlnd_wireprotocol.c 				packet-&gt;field_count, packet-&gt;server_status, packet-&gt;warning_count);</span>
+<span class='curline'><a href='../S/814.html#L949'>packet</a>            949 ext/mysqlnd/mysqlnd_wireprotocol.c 	DBG_ERR_FMT("EOF packet %d bytes shorter than expected", p - begin - packet-&gt;header.size);</span>
+<span class='curline'><a href='../S/814.html#L951'>packet</a>            951 ext/mysqlnd/mysqlnd_wireprotocol.c 					 p - begin - packet-&gt;header.size);</span>
+<span class='curline'><a href='../S/814.html#L972'>packet</a>            972 ext/mysqlnd/mysqlnd_wireprotocol.c 	MYSQLND_PACKET_COMMAND * packet= (MYSQLND_PACKET_COMMAND *) _packet;</span>
+<span class='curline'><a href='../S/814.html#L992'>packet</a>            992 ext/mysqlnd/mysqlnd_wireprotocol.c 	net-&gt;data-&gt;m.consume_uneaten_data(net, packet-&gt;command TSRMLS_CC);</span>
+<span class='curline'><a href='../S/814.html#L995'>packet</a>            995 ext/mysqlnd/mysqlnd_wireprotocol.c 	if (!packet-&gt;argument || !packet-&gt;arg_len) {</span>
+<span class='curline'><a href='../S/814.html#L998'>packet</a>            998 ext/mysqlnd/mysqlnd_wireprotocol.c 		int1store(buffer + MYSQLND_HEADER_SIZE, packet-&gt;command);</span>
+<span class='curline'><a href='../S/814.html#L1001'>packet</a>           1001 ext/mysqlnd/mysqlnd_wireprotocol.c 		size_t tmp_len = packet-&gt;arg_len + 1 + MYSQLND_HEADER_SIZE;</span>
+<span class='curline'><a href='../S/814.html#L1009'>packet</a>           1009 ext/mysqlnd/mysqlnd_wireprotocol.c 		int1store(p, packet-&gt;command);</span>
+<span class='curline'><a href='../S/814.html#L1012'>packet</a>           1012 ext/mysqlnd/mysqlnd_wireprotocol.c 		memcpy(p, packet-&gt;argument, packet-&gt;arg_len);</span>
+<span class='curline'><a href='../S/814.html#L1055'>packet</a>           1055 ext/mysqlnd/mysqlnd_wireprotocol.c 	MYSQLND_PACKET_RSET_HEADER *packet= (MYSQLND_PACKET_RSET_HEADER *) _packet;</span>
+<span class='curline'><a href='../S/814.html#L1059'>packet</a>           1059 ext/mysqlnd/mysqlnd_wireprotocol.c 	PACKET_READ_HEADER_AND_BODY(packet, conn, buf, buf_len, "resultset header", PROT_RSET_HEADER_PACKET);</span>
+<span class='curline'><a href='../S/814.html#L1070'>packet</a>           1070 ext/mysqlnd/mysqlnd_wireprotocol.c 		php_mysqlnd_read_error_from_line(p, packet-&gt;header.size - 1,</span>
+<span class='curline'><a href='../S/814.html#L1071'>packet</a>           1071 ext/mysqlnd/mysqlnd_wireprotocol.c 										 packet-&gt;error_info.error, sizeof(packet-&gt;error_info.error),</span>
+<span class='curline'><a href='../S/814.html#L1072'>packet</a>           1072 ext/mysqlnd/mysqlnd_wireprotocol.c 										 &amp;packet-&gt;error_info.error_no, packet-&gt;error_info.sqlstate</span>
+<span class='curline'><a href='../S/814.html#L1078'>packet</a>           1078 ext/mysqlnd/mysqlnd_wireprotocol.c 	packet-&gt;field_count = php_mysqlnd_net_field_length(&amp;p);</span>
+<span class='curline'><a href='../S/814.html#L1081'>packet</a>           1081 ext/mysqlnd/mysqlnd_wireprotocol.c 	switch (packet-&gt;field_count) {</span>
+<span class='curline'><a href='../S/814.html#L1091'>packet</a>           1091 ext/mysqlnd/mysqlnd_wireprotocol.c 			len = packet-&gt;header.size - 1;</span>
+<span class='curline'><a href='../S/814.html#L1092'>packet</a>           1092 ext/mysqlnd/mysqlnd_wireprotocol.c 			packet-&gt;info_or_local_file = mnd_emalloc(len + 1);</span>
+<span class='curline'><a href='../S/814.html#L1093'>packet</a>           1093 ext/mysqlnd/mysqlnd_wireprotocol.c 			if (packet-&gt;info_or_local_file) {</span>
+<span class='curline'><a href='../S/814.html#L1094'>packet</a>           1094 ext/mysqlnd/mysqlnd_wireprotocol.c 				memcpy(packet-&gt;info_or_local_file, p, len);</span>
+<span class='curline'><a href='../S/814.html#L1095'>packet</a>           1095 ext/mysqlnd/mysqlnd_wireprotocol.c 				packet-&gt;info_or_local_file[len] = '\0';</span>
+<span class='curline'><a href='../S/814.html#L1096'>packet</a>           1096 ext/mysqlnd/mysqlnd_wireprotocol.c 				packet-&gt;info_or_local_file_len = len;</span>
+<span class='curline'><a href='../S/814.html#L1104'>packet</a>           1104 ext/mysqlnd/mysqlnd_wireprotocol.c 			packet-&gt;affected_rows = php_mysqlnd_net_field_length_ll(&amp;p);</span>
+<span class='curline'><a href='../S/814.html#L1107'>packet</a>           1107 ext/mysqlnd/mysqlnd_wireprotocol.c 			packet-&gt;last_insert_id = php_mysqlnd_net_field_length_ll(&amp;p);</span>
+<span class='curline'><a href='../S/814.html#L1110'>packet</a>           1110 ext/mysqlnd/mysqlnd_wireprotocol.c 			packet-&gt;server_status = uint2korr(p);</span>
+<span class='curline'><a href='../S/814.html#L1114'>packet</a>           1114 ext/mysqlnd/mysqlnd_wireprotocol.c 			packet-&gt;warning_count = uint2korr(p);</span>
+<span class='curline'><a href='../S/814.html#L1118'>packet</a>           1118 ext/mysqlnd/mysqlnd_wireprotocol.c 			if (packet-&gt;header.size  &gt; (size_t) (p - buf) &amp;&amp; (len = php_mysqlnd_net_field_length(&amp;p))) {</span>
+<span class='curline'><a href='../S/814.html#L1119'>packet</a>           1119 ext/mysqlnd/mysqlnd_wireprotocol.c 				packet-&gt;info_or_local_file = mnd_emalloc(len + 1);</span>
+<span class='curline'><a href='../S/814.html#L1120'>packet</a>           1120 ext/mysqlnd/mysqlnd_wireprotocol.c 				if (packet-&gt;info_or_local_file) {</span>
+<span class='curline'><a href='../S/814.html#L1121'>packet</a>           1121 ext/mysqlnd/mysqlnd_wireprotocol.c 					memcpy(packet-&gt;info_or_local_file, p, len);</span>
+<span class='curline'><a href='../S/814.html#L1122'>packet</a>           1122 ext/mysqlnd/mysqlnd_wireprotocol.c 					packet-&gt;info_or_local_file[len] = '\0';</span>
+<span class='curline'><a href='../S/814.html#L1123'>packet</a>           1123 ext/mysqlnd/mysqlnd_wireprotocol.c 					packet-&gt;info_or_local_file_len = len;</span>
+<span class='curline'><a href='../S/814.html#L1130'>packet</a>           1130 ext/mysqlnd/mysqlnd_wireprotocol.c 						packet-&gt;affected_rows, packet-&gt;last_insert_id,</span>
+<span class='curline'><a href='../S/814.html#L1131'>packet</a>           1131 ext/mysqlnd/mysqlnd_wireprotocol.c 						packet-&gt;server_status, packet-&gt;warning_count);</span>
+<span class='curline'><a href='../S/814.html#L1142'>packet</a>           1142 ext/mysqlnd/mysqlnd_wireprotocol.c 	DBG_ERR_FMT("RSET_HEADER packet %d bytes shorter than expected", p - begin - packet-&gt;header.size);</span>
+<span class='curline'><a href='../S/814.html#L1144'>packet</a>           1144 ext/mysqlnd/mysqlnd_wireprotocol.c 					 p - begin - packet-&gt;header.size);</span>
+<span class='curline'><a href='../S/814.html#L1189'>packet</a>           1189 ext/mysqlnd/mysqlnd_wireprotocol.c 	MYSQLND_PACKET_RES_FIELD *packet= (MYSQLND_PACKET_RES_FIELD *) _packet;</span>
+<span class='curline'><a href='../S/814.html#L1201'>packet</a>           1201 ext/mysqlnd/mysqlnd_wireprotocol.c 	PACKET_READ_HEADER_AND_BODY(packet, conn, buf, buf_len, "field", PROT_RSET_FLD_PACKET);</span>
+<span class='curline'><a href='../S/814.html#L1203'>packet</a>           1203 ext/mysqlnd/mysqlnd_wireprotocol.c 	if (packet-&gt;skip_parsing) {</span>
+<span class='curline'><a href='../S/814.html#L1212'>packet</a>           1212 ext/mysqlnd/mysqlnd_wireprotocol.c 		php_mysqlnd_read_error_from_line(p, packet-&gt;header.size - 1,</span>
+<span class='curline'><a href='../S/814.html#L1213'>packet</a>           1213 ext/mysqlnd/mysqlnd_wireprotocol.c 										 packet-&gt;error_info.error, sizeof(packet-&gt;error_info.error),</span>
+<span class='curline'><a href='../S/814.html#L1214'>packet</a>           1214 ext/mysqlnd/mysqlnd_wireprotocol.c 										 &amp;packet-&gt;error_info.error_no, packet-&gt;error_info.sqlstate</span>
+<span class='curline'><a href='../S/814.html#L1216'>packet</a>           1216 ext/mysqlnd/mysqlnd_wireprotocol.c 		DBG_ERR_FMT("Server error : (%u) %s", packet-&gt;error_info.error_no, packet-&gt;error_info.error);</span>
+<span class='curline'><a href='../S/814.html#L1218'>packet</a>           1218 ext/mysqlnd/mysqlnd_wireprotocol.c 	} else if (EODATA_MARKER == *p &amp;&amp; packet-&gt;header.size &lt; 8) {</span>
+<span class='curline'><a href='../S/814.html#L1221'>packet</a>           1221 ext/mysqlnd/mysqlnd_wireprotocol.c 		packet-&gt;stupid_list_fields_eof = TRUE;</span>
+<span class='curline'><a href='../S/814.html#L1225'>packet</a>           1225 ext/mysqlnd/mysqlnd_wireprotocol.c 	meta = packet-&gt;metadata;</span>
+<span class='curline'><a href='../S/814.html#L1294'>packet</a>           1294 ext/mysqlnd/mysqlnd_wireprotocol.c 	if (packet-&gt;header.size &gt; (size_t) (p - buf) &amp;&amp;</span>
+<span class='curline'><a href='../S/814.html#L1299'>packet</a>           1299 ext/mysqlnd/mysqlnd_wireprotocol.c 		DBG_INF_FMT("Def found, length %lu, persistent=%u", len, packet-&gt;persistent_alloc);</span>
+<span class='curline'><a href='../S/814.html#L1300'>packet</a>           1300 ext/mysqlnd/mysqlnd_wireprotocol.c 		meta-&gt;def = mnd_pemalloc(len + 1, packet-&gt;persistent_alloc);</span>
+<span class='curline'><a href='../S/814.html#L1311'>packet</a>           1311 ext/mysqlnd/mysqlnd_wireprotocol.c 	DBG_INF_FMT("allocing root. persistent=%u", packet-&gt;persistent_alloc);</span>
+<span class='curline'><a href='../S/814.html#L1312'>packet</a>           1312 ext/mysqlnd/mysqlnd_wireprotocol.c 	root_ptr = meta-&gt;root = mnd_pemalloc(total_len, packet-&gt;persistent_alloc);</span>
+<span class='curline'><a href='../S/814.html#L1373'>packet</a>           1373 ext/mysqlnd/mysqlnd_wireprotocol.c 	DBG_ERR_FMT("RSET field packet %d bytes shorter than expected", p - begin - packet-&gt;header.size);</span>
+<span class='curline'><a href='../S/814.html#L1375'>packet</a>           1375 ext/mysqlnd/mysqlnd_wireprotocol.c 			 		"shorter than expected", p - begin - packet-&gt;header.size);</span>
+<span class='curline'><a href='../S/814.html#L1802'>packet</a>           1802 ext/mysqlnd/mysqlnd_wireprotocol.c 	MYSQLND_PACKET_ROW *packet= (MYSQLND_PACKET_ROW *) _packet;</span>
+<span class='curline'><a href='../S/814.html#L1808'>packet</a>           1808 ext/mysqlnd/mysqlnd_wireprotocol.c 	if (!packet-&gt;binary_protocol &amp;&amp; packet-&gt;bit_fields_count) {</span>
+<span class='curline'><a href='../S/814.html#L1810'>packet</a>           1810 ext/mysqlnd/mysqlnd_wireprotocol.c 		post_alloc_for_bit_fields = packet-&gt;bit_fields_total_len + packet-&gt;bit_fields_count;</span>
+<span class='curline'><a href='../S/814.html#L1813'>packet</a>           1813 ext/mysqlnd/mysqlnd_wireprotocol.c 	ret = php_mysqlnd_read_row_ex(conn, packet-&gt;result_set_memory_pool, &amp;packet-&gt;row_buffer, &amp;data_size,</span>
+<span class='curline'><a href='../S/814.html#L1814'>packet</a>           1814 ext/mysqlnd/mysqlnd_wireprotocol.c 								  packet-&gt;persistent_alloc, post_alloc_for_bit_fields</span>
+<span class='curline'><a href='../S/814.html#L1820'>packet</a>           1820 ext/mysqlnd/mysqlnd_wireprotocol.c 										MYSQLND_HEADER_SIZE + packet-&gt;header.size,</span>
+<span class='curline'><a href='../S/814.html#L1825'>packet</a>           1825 ext/mysqlnd/mysqlnd_wireprotocol.c 	packet-&gt;header.size = data_size;</span>
+<span class='curline'><a href='../S/814.html#L1826'>packet</a>           1826 ext/mysqlnd/mysqlnd_wireprotocol.c 	packet-&gt;row_buffer-&gt;app = data_size;</span>
+<span class='curline'><a href='../S/814.html#L1828'>packet</a>           1828 ext/mysqlnd/mysqlnd_wireprotocol.c 	if (ERROR_MARKER == (*(p = packet-&gt;row_buffer-&gt;ptr))) {</span>
+<span class='curline'><a href='../S/814.html#L1836'>packet</a>           1836 ext/mysqlnd/mysqlnd_wireprotocol.c 										 packet-&gt;error_info.error,</span>
+<span class='curline'><a href='../S/814.html#L1837'>packet</a>           1837 ext/mysqlnd/mysqlnd_wireprotocol.c 										 sizeof(packet-&gt;error_info.error),</span>
+<span class='curline'><a href='../S/814.html#L1838'>packet</a>           1838 ext/mysqlnd/mysqlnd_wireprotocol.c 										 &amp;packet-&gt;error_info.error_no,</span>
+<span class='curline'><a href='../S/814.html#L1839'>packet</a>           1839 ext/mysqlnd/mysqlnd_wireprotocol.c 										 packet-&gt;error_info.sqlstate</span>
+<span class='curline'><a href='../S/814.html#L1842'>packet</a>           1842 ext/mysqlnd/mysqlnd_wireprotocol.c 		packet-&gt;eof = TRUE;</span>
+<span class='curline'><a href='../S/814.html#L1845'>packet</a>           1845 ext/mysqlnd/mysqlnd_wireprotocol.c 			packet-&gt;warning_count = uint2korr(p);</span>
+<span class='curline'><a href='../S/814.html#L1847'>packet</a>           1847 ext/mysqlnd/mysqlnd_wireprotocol.c 			packet-&gt;server_status = uint2korr(p);</span>
+<span class='curline'><a href='../S/814.html#L1849'>packet</a>           1849 ext/mysqlnd/mysqlnd_wireprotocol.c 			DBG_INF_FMT("server_status=%u warning_count=%u", packet-&gt;server_status, packet-&gt;warning_count);</span>
+<span class='curline'><a href='../S/814.html#L1853'>packet</a>           1853 ext/mysqlnd/mysqlnd_wireprotocol.c 									packet-&gt;binary_protocol? STAT_ROWS_FETCHED_FROM_SERVER_PS:</span>
+<span class='curline'><a href='../S/814.html#L1856'>packet</a>           1856 ext/mysqlnd/mysqlnd_wireprotocol.c 		packet-&gt;eof = FALSE;</span>
+<span class='curline'><a href='../S/814.html#L1859'>packet</a>           1859 ext/mysqlnd/mysqlnd_wireprotocol.c 		if (!packet-&gt;skip_extraction) {</span>
+<span class='curline'><a href='../S/814.html#L1860'>packet</a>           1860 ext/mysqlnd/mysqlnd_wireprotocol.c 			if (!packet-&gt;fields) {</span>
+<span class='curline'><a href='../S/814.html#L1872'>packet</a>           1872 ext/mysqlnd/mysqlnd_wireprotocol.c 				packet-&gt;fields = (zval **) mnd_pecalloc(packet-&gt;field_count, sizeof(zval *),</span>
+<span class='curline'><a href='../S/814.html#L1873'>packet</a>           1873 ext/mysqlnd/mysqlnd_wireprotocol.c 														packet-&gt;persistent_alloc);</span>
+<span class='curline'><a href='../S/814.html#L1877'>packet</a>           1877 ext/mysqlnd/mysqlnd_wireprotocol.c 										packet-&gt;binary_protocol? STAT_ROWS_SKIPPED_PS:</span>
+<span class='curline'><a href='../S/814.html#L1920'>packet</a>           1920 ext/mysqlnd/mysqlnd_wireprotocol.c 	MYSQLND_PACKET_STATS *packet= (MYSQLND_PACKET_STATS *) _packet;</span>
+<span class='curline'><a href='../S/814.html#L1926'>packet</a>           1926 ext/mysqlnd/mysqlnd_wireprotocol.c 	PACKET_READ_HEADER_AND_BODY(packet, conn, buf, buf_len, "statistics", PROT_STATS_PACKET);</span>
+<span class='curline'><a href='../S/814.html#L1928'>packet</a>           1928 ext/mysqlnd/mysqlnd_wireprotocol.c 	packet-&gt;message = mnd_emalloc(packet-&gt;header.size + 1);</span>
+<span class='curline'><a href='../S/814.html#L1929'>packet</a>           1929 ext/mysqlnd/mysqlnd_wireprotocol.c 	memcpy(packet-&gt;message, buf, packet-&gt;header.size);</span>
+<span class='curline'><a href='../S/814.html#L1930'>packet</a>           1930 ext/mysqlnd/mysqlnd_wireprotocol.c 	packet-&gt;message[packet-&gt;header.size] = '\0';</span>
+<span class='curline'><a href='../S/814.html#L1931'>packet</a>           1931 ext/mysqlnd/mysqlnd_wireprotocol.c 	packet-&gt;message_len = packet-&gt;header.size;</span>
+<span class='curline'><a href='../S/814.html#L1968'>packet</a>           1968 ext/mysqlnd/mysqlnd_wireprotocol.c 	MYSQLND_PACKET_PREPARE_RESPONSE *packet= (MYSQLND_PACKET_PREPARE_RESPONSE *) _packet;</span>
+<span class='curline'><a href='../S/814.html#L1972'>packet</a>           1972 ext/mysqlnd/mysqlnd_wireprotocol.c 	PACKET_READ_HEADER_AND_BODY(packet, conn, buf, buf_len, "prepare", PROT_PREPARE_RESP_PACKET);</span>
+<span class='curline'><a href='../S/814.html#L1975'>packet</a>           1975 ext/mysqlnd/mysqlnd_wireprotocol.c 	data_size = packet-&gt;header.size;</span>
+<span class='curline'><a href='../S/814.html#L1976'>packet</a>           1976 ext/mysqlnd/mysqlnd_wireprotocol.c 	packet-&gt;error_code = uint1korr(p);</span>
+<span class='curline'><a href='../S/814.html#L1980'>packet</a>           1980 ext/mysqlnd/mysqlnd_wireprotocol.c 	if (ERROR_MARKER == packet-&gt;error_code) {</span>
+<span class='curline'><a href='../S/814.html#L1982'>packet</a>           1982 ext/mysqlnd/mysqlnd_wireprotocol.c 										 packet-&gt;error_info.error,</span>
+<span class='curline'><a href='../S/814.html#L1983'>packet</a>           1983 ext/mysqlnd/mysqlnd_wireprotocol.c 										 sizeof(packet-&gt;error_info.error),</span>
+<span class='curline'><a href='../S/814.html#L1984'>packet</a>           1984 ext/mysqlnd/mysqlnd_wireprotocol.c 										 &amp;packet-&gt;error_info.error_no,</span>
+<span class='curline'><a href='../S/814.html#L1985'>packet</a>           1985 ext/mysqlnd/mysqlnd_wireprotocol.c 										 packet-&gt;error_info.sqlstate</span>
+<span class='curline'><a href='../S/814.html#L1998'>packet</a>           1998 ext/mysqlnd/mysqlnd_wireprotocol.c 	packet-&gt;stmt_id = uint4korr(p);</span>
+<span class='curline'><a href='../S/814.html#L2003'>packet</a>           2003 ext/mysqlnd/mysqlnd_wireprotocol.c 	packet-&gt;field_count = uint2korr(p);</span>
+<span class='curline'><a href='../S/814.html#L2007'>packet</a>           2007 ext/mysqlnd/mysqlnd_wireprotocol.c 	packet-&gt;param_count = uint2korr(p);</span>
+<span class='curline'><a href='../S/814.html#L2016'>packet</a>           2016 ext/mysqlnd/mysqlnd_wireprotocol.c 		packet-&gt;warning_count = uint2korr(p);</span>
+<span class='curline'><a href='../S/814.html#L2020'>packet</a>           2020 ext/mysqlnd/mysqlnd_wireprotocol.c 				packet-&gt;stmt_id, packet-&gt;field_count, packet-&gt;param_count);</span>
+<span class='curline'><a href='../S/814.html#L2026'>packet</a>           2026 ext/mysqlnd/mysqlnd_wireprotocol.c 	DBG_ERR_FMT("PREPARE packet %d bytes shorter than expected", p - begin - packet-&gt;header.size);</span>
+<span class='curline'><a href='../S/814.html#L2028'>packet</a>           2028 ext/mysqlnd/mysqlnd_wireprotocol.c 					 p - begin - packet-&gt;header.size);</span>
+<span class='curline'><a href='../S/814.html#L2055'>packet</a>           2055 ext/mysqlnd/mysqlnd_wireprotocol.c 	MYSQLND_PACKET_CHG_USER_RESPONSE *packet= (MYSQLND_PACKET_CHG_USER_RESPONSE *) _packet;</span>
+<span class='curline'><a href='../S/814.html#L2059'>packet</a>           2059 ext/mysqlnd/mysqlnd_wireprotocol.c 	PACKET_READ_HEADER_AND_BODY(packet, conn, buf, buf_len, "change user response", PROT_CHG_USER_RESP_PACKET);</span>
+<span class='curline'><a href='../S/814.html#L2068'>packet</a>           2068 ext/mysqlnd/mysqlnd_wireprotocol.c 	packet-&gt;response_code = uint1korr(p);</span>
+<span class='curline'><a href='../S/814.html#L2071'>packet</a>           2071 ext/mysqlnd/mysqlnd_wireprotocol.c 	if (packet-&gt;header.size == 1 &amp;&amp; buf[0] == EODATA_MARKER &amp;&amp; packet-&gt;server_capabilities &amp; CLIENT_SECURE_CONNECTION) {</span>
+<span class='curline'><a href='../S/814.html#L2073'>packet</a>           2073 ext/mysqlnd/mysqlnd_wireprotocol.c 		packet-&gt;server_asked_323_auth = TRUE;</span>
+<span class='curline'><a href='../S/814.html#L2077'>packet</a>           2077 ext/mysqlnd/mysqlnd_wireprotocol.c 	if (ERROR_MARKER == packet-&gt;response_code) {</span>
+<span class='curline'><a href='../S/814.html#L2078'>packet</a>           2078 ext/mysqlnd/mysqlnd_wireprotocol.c 		php_mysqlnd_read_error_from_line(p, packet-&gt;header.size - 1,</span>
+<span class='curline'><a href='../S/814.html#L2079'>packet</a>           2079 ext/mysqlnd/mysqlnd_wireprotocol.c 										 packet-&gt;error_info.error,</span>
+<span class='curline'><a href='../S/814.html#L2080'>packet</a>           2080 ext/mysqlnd/mysqlnd_wireprotocol.c 										 sizeof(packet-&gt;error_info.error),</span>
+<span class='curline'><a href='../S/814.html#L2081'>packet</a>           2081 ext/mysqlnd/mysqlnd_wireprotocol.c 										 &amp;packet-&gt;error_info.error_no,</span>
+<span class='curline'><a href='../S/814.html#L2082'>packet</a>           2082 ext/mysqlnd/mysqlnd_wireprotocol.c 										 packet-&gt;error_info.sqlstate</span>
+<span class='curline'><a href='../S/814.html#L2086'>packet</a>           2086 ext/mysqlnd/mysqlnd_wireprotocol.c 	if (packet-&gt;response_code == 0xFE &amp;&amp; packet-&gt;header.size &gt; (size_t) (p - buf)) {</span>
+<span class='curline'><a href='../S/814.html#L2087'>packet</a>           2087 ext/mysqlnd/mysqlnd_wireprotocol.c 		packet-&gt;new_auth_protocol = mnd_pestrdup((char *)p, FALSE);</span>
+<span class='curline'><a href='../S/814.html#L2088'>packet</a>           2088 ext/mysqlnd/mysqlnd_wireprotocol.c 		packet-&gt;new_auth_protocol_len = strlen(packet-&gt;new_auth_protocol);</span>
+<span class='curline'><a href='../S/814.html#L2089'>packet</a>           2089 ext/mysqlnd/mysqlnd_wireprotocol.c 		p+= packet-&gt;new_auth_protocol_len + 1; /* +1 for the \0 */</span>
+<span class='curline'><a href='../S/814.html#L2090'>packet</a>           2090 ext/mysqlnd/mysqlnd_wireprotocol.c 		packet-&gt;new_auth_protocol_data_len = packet-&gt;header.size - (size_t) (p - buf);</span>
+<span class='curline'><a href='../S/814.html#L2091'>packet</a>           2091 ext/mysqlnd/mysqlnd_wireprotocol.c 		if (packet-&gt;new_auth_protocol_data_len) {</span>
+<span class='curline'><a href='../S/814.html#L2092'>packet</a>           2092 ext/mysqlnd/mysqlnd_wireprotocol.c 			packet-&gt;new_auth_protocol_data = mnd_emalloc(packet-&gt;new_auth_protocol_data_len);</span>
+<span class='curline'><a href='../S/814.html#L2093'>packet</a>           2093 ext/mysqlnd/mysqlnd_wireprotocol.c 			memcpy(packet-&gt;new_auth_protocol_data, p, packet-&gt;new_auth_protocol_data_len);</span>
+<span class='curline'><a href='../S/814.html#L2095'>packet</a>           2095 ext/mysqlnd/mysqlnd_wireprotocol.c 		DBG_INF_FMT("The server requested switching auth plugin to : %s", packet-&gt;new_auth_protocol);</span>
+<span class='curline'><a href='../S/814.html#L2096'>packet</a>           2096 ext/mysqlnd/mysqlnd_wireprotocol.c 		DBG_INF_FMT("Server salt : [%*s]", packet-&gt;new_auth_protocol_data_len, packet-&gt;new_auth_protocol_data);</span>
+<span class='curline'><a href='../S/814.html#L2101'>packet</a>           2101 ext/mysqlnd/mysqlnd_wireprotocol.c 	DBG_ERR_FMT("CHANGE_USER packet %d bytes shorter than expected", p - begin - packet-&gt;header.size);</span>
+<span class='curline'><a href='../S/814.html#L2103'>packet</a>           2103 ext/mysqlnd/mysqlnd_wireprotocol.c 						 p - begin - packet-&gt;header.size);</span>
+<span class='curline'><a href='../S/814.html#L2172'>packet</a>           2172 ext/mysqlnd/mysqlnd_wireprotocol.c 	MYSQLND_PACKET_SHA256_PK_REQUEST_RESPONSE * packet= (MYSQLND_PACKET_SHA256_PK_REQUEST_RESPONSE *) _packet;</span>
+<span class='curline'><a href='../S/814.html#L2177'>packet</a>           2177 ext/mysqlnd/mysqlnd_wireprotocol.c 	PACKET_READ_HEADER_AND_BODY(packet, conn, buf, sizeof(buf), "SHA256_PK_REQUEST_RESPONSE", PROT_SHA256_PK_REQUEST_RESPONSE_PACKET);</span>
+<span class='curline'><a href='../S/814.html#L2183'>packet</a>           2183 ext/mysqlnd/mysqlnd_wireprotocol.c 	packet-&gt;public_key_len = packet-&gt;header.size - (p - buf);</span>
+<span class='curline'><a href='../S/814.html#L2184'>packet</a>           2184 ext/mysqlnd/mysqlnd_wireprotocol.c 	packet-&gt;public_key = mnd_emalloc(packet-&gt;public_key_len + 1);</span>
+<span class='curline'><a href='../S/814.html#L2185'>packet</a>           2185 ext/mysqlnd/mysqlnd_wireprotocol.c 	memcpy(packet-&gt;public_key, p, packet-&gt;public_key_len);</span>
+<span class='curline'><a href='../S/814.html#L2186'>packet</a>           2186 ext/mysqlnd/mysqlnd_wireprotocol.c 	packet-&gt;public_key[packet-&gt;public_key_len] = '\0';</span>
+<span class='curline'><a href='../S/814.html#L2191'>packet</a>           2191 ext/mysqlnd/mysqlnd_wireprotocol.c 	DBG_ERR_FMT("OK packet %d bytes shorter than expected", p - begin - packet-&gt;header.size);</span>
+<span class='curline'><a href='../S/814.html#L2193'>packet</a>           2193 ext/mysqlnd/mysqlnd_wireprotocol.c 					 p - begin - packet-&gt;header.size);</span>
+<span class='curline'><a href='../S/814.html#L2319'>packet</a>           2319 ext/mysqlnd/mysqlnd_wireprotocol.c 	struct st_mysqlnd_packet_greet * packet = mnd_pecalloc(1, packet_methods[PROT_GREET_PACKET].struct_size, persistent);</span>
+<span class='curline'><a href='../S/814.html#L2321'>packet</a>           2321 ext/mysqlnd/mysqlnd_wireprotocol.c 	if (packet) {</span>
+<span class='curline'><a href='../S/814.html#L2322'>packet</a>           2322 ext/mysqlnd/mysqlnd_wireprotocol.c 		packet-&gt;header.m = &amp;packet_methods[PROT_GREET_PACKET];</span>
+<span class='curline'><a href='../S/814.html#L2323'>packet</a>           2323 ext/mysqlnd/mysqlnd_wireprotocol.c 		packet-&gt;header.persistent = persistent;</span>
+<span class='curline'><a href='../S/814.html#L2325'>packet</a>           2325 ext/mysqlnd/mysqlnd_wireprotocol.c 	DBG_RETURN(packet);</span>
+<span class='curline'><a href='../S/814.html#L2334'>packet</a>           2334 ext/mysqlnd/mysqlnd_wireprotocol.c 	struct st_mysqlnd_packet_auth * packet = mnd_pecalloc(1, packet_methods[PROT_AUTH_PACKET].struct_size, persistent);</span>
+<span class='curline'><a href='../S/814.html#L2336'>packet</a>           2336 ext/mysqlnd/mysqlnd_wireprotocol.c 	if (packet) {</span>
+<span class='curline'><a href='../S/814.html#L2337'>packet</a>           2337 ext/mysqlnd/mysqlnd_wireprotocol.c 		packet-&gt;header.m = &amp;packet_methods[PROT_AUTH_PACKET];</span>
+<span class='curline'><a href='../S/814.html#L2338'>packet</a>           2338 ext/mysqlnd/mysqlnd_wireprotocol.c 		packet-&gt;header.persistent = persistent;</span>
+<span class='curline'><a href='../S/814.html#L2340'>packet</a>           2340 ext/mysqlnd/mysqlnd_wireprotocol.c 	DBG_RETURN(packet);</span>
+<span class='curline'><a href='../S/814.html#L2349'>packet</a>           2349 ext/mysqlnd/mysqlnd_wireprotocol.c 	struct st_mysqlnd_packet_auth_response * packet = mnd_pecalloc(1, packet_methods[PROT_AUTH_RESP_PACKET].struct_size, persistent);</span>
+<span class='curline'><a href='../S/814.html#L2351'>packet</a>           2351 ext/mysqlnd/mysqlnd_wireprotocol.c 	if (packet) {</span>
+<span class='curline'><a href='../S/814.html#L2352'>packet</a>           2352 ext/mysqlnd/mysqlnd_wireprotocol.c 		packet-&gt;header.m = &amp;packet_methods[PROT_AUTH_RESP_PACKET];</span>
+<span class='curline'><a href='../S/814.html#L2353'>packet</a>           2353 ext/mysqlnd/mysqlnd_wireprotocol.c 		packet-&gt;header.persistent = persistent;</span>
+<span class='curline'><a href='../S/814.html#L2355'>packet</a>           2355 ext/mysqlnd/mysqlnd_wireprotocol.c 	DBG_RETURN(packet);</span>
+<span class='curline'><a href='../S/814.html#L2364'>packet</a>           2364 ext/mysqlnd/mysqlnd_wireprotocol.c 	struct st_mysqlnd_packet_change_auth_response * packet = mnd_pecalloc(1, packet_methods[PROT_CHANGE_AUTH_RESP_PACKET].struct_size, persistent);</span>
+<span class='curline'><a href='../S/814.html#L2366'>packet</a>           2366 ext/mysqlnd/mysqlnd_wireprotocol.c 	if (packet) {</span>
+<span class='curline'><a href='../S/814.html#L2367'>packet</a>           2367 ext/mysqlnd/mysqlnd_wireprotocol.c 		packet-&gt;header.m = &amp;packet_methods[PROT_CHANGE_AUTH_RESP_PACKET];</span>
+<span class='curline'><a href='../S/814.html#L2368'>packet</a>           2368 ext/mysqlnd/mysqlnd_wireprotocol.c 		packet-&gt;header.persistent = persistent;</span>
+<span class='curline'><a href='../S/814.html#L2370'>packet</a>           2370 ext/mysqlnd/mysqlnd_wireprotocol.c 	DBG_RETURN(packet);</span>
+<span class='curline'><a href='../S/814.html#L2379'>packet</a>           2379 ext/mysqlnd/mysqlnd_wireprotocol.c 	struct st_mysqlnd_packet_ok * packet = mnd_pecalloc(1, packet_methods[PROT_OK_PACKET].struct_size, persistent);</span>
+<span class='curline'><a href='../S/814.html#L2381'>packet</a>           2381 ext/mysqlnd/mysqlnd_wireprotocol.c 	if (packet) {</span>
+<span class='curline'><a href='../S/814.html#L2382'>packet</a>           2382 ext/mysqlnd/mysqlnd_wireprotocol.c 		packet-&gt;header.m = &amp;packet_methods[PROT_OK_PACKET];</span>
+<span class='curline'><a href='../S/814.html#L2383'>packet</a>           2383 ext/mysqlnd/mysqlnd_wireprotocol.c 		packet-&gt;header.persistent = persistent;</span>
+<span class='curline'><a href='../S/814.html#L2385'>packet</a>           2385 ext/mysqlnd/mysqlnd_wireprotocol.c 	DBG_RETURN(packet);</span>
+<span class='curline'><a href='../S/814.html#L2394'>packet</a>           2394 ext/mysqlnd/mysqlnd_wireprotocol.c 	struct st_mysqlnd_packet_eof * packet = mnd_pecalloc(1, packet_methods[PROT_EOF_PACKET].struct_size, persistent);</span>
+<span class='curline'><a href='../S/814.html#L2396'>packet</a>           2396 ext/mysqlnd/mysqlnd_wireprotocol.c 	if (packet) {</span>
+<span class='curline'><a href='../S/814.html#L2397'>packet</a>           2397 ext/mysqlnd/mysqlnd_wireprotocol.c 		packet-&gt;header.m = &amp;packet_methods[PROT_EOF_PACKET];</span>
+<span class='curline'><a href='../S/814.html#L2398'>packet</a>           2398 ext/mysqlnd/mysqlnd_wireprotocol.c 		packet-&gt;header.persistent = persistent;</span>
+<span class='curline'><a href='../S/814.html#L2400'>packet</a>           2400 ext/mysqlnd/mysqlnd_wireprotocol.c 	DBG_RETURN(packet);</span>
+<span class='curline'><a href='../S/814.html#L2409'>packet</a>           2409 ext/mysqlnd/mysqlnd_wireprotocol.c 	struct st_mysqlnd_packet_command * packet = mnd_pecalloc(1, packet_methods[PROT_CMD_PACKET].struct_size, persistent);</span>
+<span class='curline'><a href='../S/814.html#L2411'>packet</a>           2411 ext/mysqlnd/mysqlnd_wireprotocol.c 	if (packet) {</span>
+<span class='curline'><a href='../S/814.html#L2412'>packet</a>           2412 ext/mysqlnd/mysqlnd_wireprotocol.c 		packet-&gt;header.m = &amp;packet_methods[PROT_CMD_PACKET];</span>
+<span class='curline'><a href='../S/814.html#L2413'>packet</a>           2413 ext/mysqlnd/mysqlnd_wireprotocol.c 		packet-&gt;header.persistent = persistent;</span>
+<span class='curline'><a href='../S/814.html#L2415'>packet</a>           2415 ext/mysqlnd/mysqlnd_wireprotocol.c 	DBG_RETURN(packet);</span>
+<span class='curline'><a href='../S/814.html#L2424'>packet</a>           2424 ext/mysqlnd/mysqlnd_wireprotocol.c 	struct st_mysqlnd_packet_rset_header * packet = mnd_pecalloc(1, packet_methods[PROT_RSET_HEADER_PACKET].struct_size, persistent);</span>
+<span class='curline'><a href='../S/814.html#L2426'>packet</a>           2426 ext/mysqlnd/mysqlnd_wireprotocol.c 	if (packet) {</span>
+<span class='curline'><a href='../S/814.html#L2427'>packet</a>           2427 ext/mysqlnd/mysqlnd_wireprotocol.c 		packet-&gt;header.m = &amp;packet_methods[PROT_RSET_HEADER_PACKET];</span>
+<span class='curline'><a href='../S/814.html#L2428'>packet</a>           2428 ext/mysqlnd/mysqlnd_wireprotocol.c 		packet-&gt;header.persistent = persistent;</span>
+<span class='curline'><a href='../S/814.html#L2430'>packet</a>           2430 ext/mysqlnd/mysqlnd_wireprotocol.c 	DBG_RETURN(packet);</span>
+<span class='curline'><a href='../S/814.html#L2439'>packet</a>           2439 ext/mysqlnd/mysqlnd_wireprotocol.c 	struct st_mysqlnd_packet_res_field * packet = mnd_pecalloc(1, packet_methods[PROT_RSET_FLD_PACKET].struct_size, persistent);</span>
+<span class='curline'><a href='../S/814.html#L2441'>packet</a>           2441 ext/mysqlnd/mysqlnd_wireprotocol.c 	if (packet) {</span>
+<span class='curline'><a href='../S/814.html#L2442'>packet</a>           2442 ext/mysqlnd/mysqlnd_wireprotocol.c 		packet-&gt;header.m = &amp;packet_methods[PROT_RSET_FLD_PACKET];</span>
+<span class='curline'><a href='../S/814.html#L2443'>packet</a>           2443 ext/mysqlnd/mysqlnd_wireprotocol.c 		packet-&gt;header.persistent = persistent;</span>
+<span class='curline'><a href='../S/814.html#L2445'>packet</a>           2445 ext/mysqlnd/mysqlnd_wireprotocol.c 	DBG_RETURN(packet);</span>
+<span class='curline'><a href='../S/814.html#L2454'>packet</a>           2454 ext/mysqlnd/mysqlnd_wireprotocol.c 	struct st_mysqlnd_packet_row * packet = mnd_pecalloc(1, packet_methods[PROT_ROW_PACKET].struct_size, persistent);</span>
+<span class='curline'><a href='../S/814.html#L2456'>packet</a>           2456 ext/mysqlnd/mysqlnd_wireprotocol.c 	if (packet) {</span>
+<span class='curline'><a href='../S/814.html#L2457'>packet</a>           2457 ext/mysqlnd/mysqlnd_wireprotocol.c 		packet-&gt;header.m = &amp;packet_methods[PROT_ROW_PACKET];</span>
+<span class='curline'><a href='../S/814.html#L2458'>packet</a>           2458 ext/mysqlnd/mysqlnd_wireprotocol.c 		packet-&gt;header.persistent = persistent;</span>
+<span class='curline'><a href='../S/814.html#L2460'>packet</a>           2460 ext/mysqlnd/mysqlnd_wireprotocol.c 	DBG_RETURN(packet);</span>
+<span class='curline'><a href='../S/814.html#L2469'>packet</a>           2469 ext/mysqlnd/mysqlnd_wireprotocol.c 	struct st_mysqlnd_packet_stats * packet = mnd_pecalloc(1, packet_methods[PROT_STATS_PACKET].struct_size, persistent);</span>
+<span class='curline'><a href='../S/814.html#L2471'>packet</a>           2471 ext/mysqlnd/mysqlnd_wireprotocol.c 	if (packet) {</span>
+<span class='curline'><a href='../S/814.html#L2472'>packet</a>           2472 ext/mysqlnd/mysqlnd_wireprotocol.c 		packet-&gt;header.m = &amp;packet_methods[PROT_STATS_PACKET];</span>
+<span class='curline'><a href='../S/814.html#L2473'>packet</a>           2473 ext/mysqlnd/mysqlnd_wireprotocol.c 		packet-&gt;header.persistent = persistent;</span>
+<span class='curline'><a href='../S/814.html#L2475'>packet</a>           2475 ext/mysqlnd/mysqlnd_wireprotocol.c 	DBG_RETURN(packet);</span>
+<span class='curline'><a href='../S/814.html#L2484'>packet</a>           2484 ext/mysqlnd/mysqlnd_wireprotocol.c 	struct st_mysqlnd_packet_prepare_response * packet = mnd_pecalloc(1, packet_methods[PROT_PREPARE_RESP_PACKET].struct_size, persistent);</span>
+<span class='curline'><a href='../S/814.html#L2486'>packet</a>           2486 ext/mysqlnd/mysqlnd_wireprotocol.c 	if (packet) {</span>
+<span class='curline'><a href='../S/814.html#L2487'>packet</a>           2487 ext/mysqlnd/mysqlnd_wireprotocol.c 		packet-&gt;header.m = &amp;packet_methods[PROT_PREPARE_RESP_PACKET];</span>
+<span class='curline'><a href='../S/814.html#L2488'>packet</a>           2488 ext/mysqlnd/mysqlnd_wireprotocol.c 		packet-&gt;header.persistent = persistent;</span>
+<span class='curline'><a href='../S/814.html#L2490'>packet</a>           2490 ext/mysqlnd/mysqlnd_wireprotocol.c 	DBG_RETURN(packet);</span>
+<span class='curline'><a href='../S/814.html#L2499'>packet</a>           2499 ext/mysqlnd/mysqlnd_wireprotocol.c 	struct st_mysqlnd_packet_chg_user_resp * packet = mnd_pecalloc(1, packet_methods[PROT_CHG_USER_RESP_PACKET].struct_size, persistent);</span>
+<span class='curline'><a href='../S/814.html#L2501'>packet</a>           2501 ext/mysqlnd/mysqlnd_wireprotocol.c 	if (packet) {</span>
+<span class='curline'><a href='../S/814.html#L2502'>packet</a>           2502 ext/mysqlnd/mysqlnd_wireprotocol.c 		packet-&gt;header.m = &amp;packet_methods[PROT_CHG_USER_RESP_PACKET];</span>
+<span class='curline'><a href='../S/814.html#L2503'>packet</a>           2503 ext/mysqlnd/mysqlnd_wireprotocol.c 		packet-&gt;header.persistent = persistent;</span>
+<span class='curline'><a href='../S/814.html#L2505'>packet</a>           2505 ext/mysqlnd/mysqlnd_wireprotocol.c 	DBG_RETURN(packet);</span>
+<span class='curline'><a href='../S/814.html#L2514'>packet</a>           2514 ext/mysqlnd/mysqlnd_wireprotocol.c 	struct st_mysqlnd_packet_sha256_pk_request * packet = mnd_pecalloc(1, packet_methods[PROT_SHA256_PK_REQUEST_PACKET].struct_size, persistent);</span>
+<span class='curline'><a href='../S/814.html#L2516'>packet</a>           2516 ext/mysqlnd/mysqlnd_wireprotocol.c 	if (packet) {</span>
+<span class='curline'><a href='../S/814.html#L2517'>packet</a>           2517 ext/mysqlnd/mysqlnd_wireprotocol.c 		packet-&gt;header.m = &amp;packet_methods[PROT_SHA256_PK_REQUEST_PACKET];</span>
+<span class='curline'><a href='../S/814.html#L2518'>packet</a>           2518 ext/mysqlnd/mysqlnd_wireprotocol.c 		packet-&gt;header.persistent = persistent;</span>
+<span class='curline'><a href='../S/814.html#L2520'>packet</a>           2520 ext/mysqlnd/mysqlnd_wireprotocol.c 	DBG_RETURN(packet);</span>
+<span class='curline'><a href='../S/814.html#L2529'>packet</a>           2529 ext/mysqlnd/mysqlnd_wireprotocol.c 	struct st_mysqlnd_packet_sha256_pk_request_response * packet = mnd_pecalloc(1, packet_methods[PROT_SHA256_PK_REQUEST_RESPONSE_PACKET].struct_size, persistent);</span>
+<span class='curline'><a href='../S/814.html#L2531'>packet</a>           2531 ext/mysqlnd/mysqlnd_wireprotocol.c 	if (packet) {</span>
+<span class='curline'><a href='../S/814.html#L2532'>packet</a>           2532 ext/mysqlnd/mysqlnd_wireprotocol.c 		packet-&gt;header.m = &amp;packet_methods[PROT_SHA256_PK_REQUEST_RESPONSE_PACKET];</span>
+<span class='curline'><a href='../S/814.html#L2533'>packet</a>           2533 ext/mysqlnd/mysqlnd_wireprotocol.c 		packet-&gt;header.persistent = persistent;</span>
+<span class='curline'><a href='../S/814.html#L2535'>packet</a>           2535 ext/mysqlnd/mysqlnd_wireprotocol.c 	DBG_RETURN(packet);</span>
+<span class='curline'><a href='../S/815.html#L39'>packet</a>             39 ext/mysqlnd/mysqlnd_wireprotocol.h #define PACKET_WRITE(packet, conn)	((packet)-&gt;header.m-&gt;write_to_net((packet), (conn) TSRMLS_CC))</span>
+<span class='curline'><a href='../S/815.html#L40'>packet</a>             40 ext/mysqlnd/mysqlnd_wireprotocol.h #define PACKET_READ(packet, conn)	((packet)-&gt;header.m-&gt;read_from_net((packet), (conn) TSRMLS_CC))</span>
+<span class='curline'><a href='../S/815.html#L41'>packet</a>             41 ext/mysqlnd/mysqlnd_wireprotocol.h #define PACKET_FREE(packet) \</span>
+<span class='curline'><a href='../S/815.html#L43'>packet</a>             43 ext/mysqlnd/mysqlnd_wireprotocol.h 		DBG_INF_FMT("PACKET_FREE(%p)", packet); \</span>
+<span class='curline'><a href='../S/815.html#L44'>packet</a>             44 ext/mysqlnd/mysqlnd_wireprotocol.h 		if ((packet)) { \</span>
+<span class='curline'><a href='../S/815.html#L45'>packet</a>             45 ext/mysqlnd/mysqlnd_wireprotocol.h 			((packet)-&gt;header.m-&gt;free_mem((packet), FALSE TSRMLS_CC)); \</span>
+<span class='curline'><a href='../S/815.html#L54'>packet</a>             54 ext/mysqlnd/mysqlnd_wireprotocol.h 	enum_func_status	(*read_from_net)(void * packet, MYSQLND_CONN_DATA * conn TSRMLS_DC);</span>
+<span class='curline'><a href='../S/815.html#L55'>packet</a>             55 ext/mysqlnd/mysqlnd_wireprotocol.h 	size_t				(*write_to_net)(void * packet, MYSQLND_CONN_DATA * conn TSRMLS_DC);</span>
+<span class='curline'><a href='../S/815.html#L56'>packet</a>             56 ext/mysqlnd/mysqlnd_wireprotocol.h 	void				(*free_mem)(void *packet, zend_bool stack_allocation TSRMLS_DC);</span>
+<span class='curline'><a href='../S/815.html#L303'>packet</a>            303 ext/mysqlnd/mysqlnd_wireprotocol.h unsigned long	php_mysqlnd_net_field_length(zend_uchar **packet);</span>
+<span class='curline'><a href='../S/815.html#L304'>packet</a>            304 ext/mysqlnd/mysqlnd_wireprotocol.h zend_uchar *	php_mysqlnd_net_store_length(zend_uchar *packet, uint64_t length);</span>
+<span class='curline'><a href='../S/1219.html#L51'>packet</a>             51 ext/wddx/php_wddx_api.h #define php_wddx_add_chunk(packet, str)	smart_str_appends(packet, str)</span>
+<span class='curline'><a href='../S/1219.html#L52'>packet</a>             52 ext/wddx/php_wddx_api.h #define php_wddx_add_chunk_ex(packet, str, len)	smart_str_appendl(packet, str, len)</span>
+<span class='curline'><a href='../S/1219.html#L53'>packet</a>             53 ext/wddx/php_wddx_api.h #define php_wddx_add_chunk_static(packet, str) smart_str_appendl(packet, str, sizeof(str)-1)</span>
+<span class='curline'><a href='../S/1219.html#L58'>packet</a>             58 ext/wddx/php_wddx_api.h void		 php_wddx_destructor(wddx_packet *packet);</span>
+<span class='curline'><a href='../S/1219.html#L60'>packet</a>             60 ext/wddx/php_wddx_api.h void 		 php_wddx_packet_start(wddx_packet *packet, char *comment, int comment_len);</span>
+<span class='curline'><a href='../S/1219.html#L61'>packet</a>             61 ext/wddx/php_wddx_api.h void 		 php_wddx_packet_end(wddx_packet *packet);</span>
+<span class='curline'><a href='../S/1219.html#L63'>packet</a>             63 ext/wddx/php_wddx_api.h void 		 php_wddx_serialize_var(wddx_packet *packet, zval *var, char *name, int name_len TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1219.html#L65'>packet</a>             65 ext/wddx/php_wddx_api.h #define php_wddx_gather(packet) estrndup(packet-&gt;c, packet-&gt;len)</span>
+<span class='curline'><a href='../S/1220.html#L129'>packet</a>            129 ext/wddx/wddx.c 	ZEND_ARG_INFO(0, packet)</span>
+<span class='curline'><a href='../S/1220.html#L264'>packet</a>            264 ext/wddx/wddx.c 	wddx_packet *packet;</span>
+<span class='curline'><a href='../S/1220.html#L267'>packet</a>            267 ext/wddx/wddx.c 	packet = php_wddx_constructor();</span>
+<span class='curline'><a href='../S/1220.html#L269'>packet</a>            269 ext/wddx/wddx.c 	php_wddx_packet_start(packet, NULL, 0);</span>
+<span class='curline'><a href='../S/1220.html#L270'>packet</a>            270 ext/wddx/wddx.c 	php_wddx_add_chunk_static(packet, WDDX_STRUCT_S);</span>
+<span class='curline'><a href='../S/1220.html#L273'>packet</a>            273 ext/wddx/wddx.c 		php_wddx_serialize_var(packet, *struc, key, key_length TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1220.html#L276'>packet</a>            276 ext/wddx/wddx.c 	php_wddx_add_chunk_static(packet, WDDX_STRUCT_E);</span>
+<span class='curline'><a href='../S/1220.html#L277'>packet</a>            277 ext/wddx/wddx.c 	php_wddx_packet_end(packet);</span>
+<span class='curline'><a href='../S/1220.html#L278'>packet</a>            278 ext/wddx/wddx.c 	*newstr = php_wddx_gather(packet);</span>
+<span class='curline'><a href='../S/1220.html#L279'>packet</a>            279 ext/wddx/wddx.c 	php_wddx_destructor(packet);</span>
+<span class='curline'><a href='../S/1220.html#L370'>packet</a>            370 ext/wddx/wddx.c void php_wddx_packet_start(wddx_packet *packet, char *comment, int comment_len)</span>
+<span class='curline'><a href='../S/1220.html#L372'>packet</a>            372 ext/wddx/wddx.c 	php_wddx_add_chunk_static(packet, WDDX_PACKET_S);</span>
+<span class='curline'><a href='../S/1220.html#L374'>packet</a>            374 ext/wddx/wddx.c 		php_wddx_add_chunk_static(packet, WDDX_HEADER_S);</span>
+<span class='curline'><a href='../S/1220.html#L375'>packet</a>            375 ext/wddx/wddx.c 		php_wddx_add_chunk_static(packet, WDDX_COMMENT_S);</span>
+<span class='curline'><a href='../S/1220.html#L376'>packet</a>            376 ext/wddx/wddx.c 		php_wddx_add_chunk_ex(packet, comment, comment_len);</span>
+<span class='curline'><a href='../S/1220.html#L377'>packet</a>            377 ext/wddx/wddx.c 		php_wddx_add_chunk_static(packet, WDDX_COMMENT_E);</span>
+<span class='curline'><a href='../S/1220.html#L378'>packet</a>            378 ext/wddx/wddx.c 		php_wddx_add_chunk_static(packet, WDDX_HEADER_E);</span>
+<span class='curline'><a href='../S/1220.html#L380'>packet</a>            380 ext/wddx/wddx.c 		php_wddx_add_chunk_static(packet, WDDX_HEADER);</span>
+<span class='curline'><a href='../S/1220.html#L382'>packet</a>            382 ext/wddx/wddx.c 	php_wddx_add_chunk_static(packet, WDDX_DATA_S);</span>
+<span class='curline'><a href='../S/1220.html#L388'>packet</a>            388 ext/wddx/wddx.c void php_wddx_packet_end(wddx_packet *packet)</span>
+<span class='curline'><a href='../S/1220.html#L390'>packet</a>            390 ext/wddx/wddx.c 	php_wddx_add_chunk_static(packet, WDDX_DATA_E);</span>
+<span class='curline'><a href='../S/1220.html#L391'>packet</a>            391 ext/wddx/wddx.c 	php_wddx_add_chunk_static(packet, WDDX_PACKET_E);</span>
+<span class='curline'><a href='../S/1220.html#L397'>packet</a>            397 ext/wddx/wddx.c 		php_wddx_add_chunk_ex(packet, buf, l);    \</span>
+<span class='curline'><a href='../S/1220.html#L403'>packet</a>            403 ext/wddx/wddx.c static void php_wddx_serialize_string(wddx_packet *packet, zval *var TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1220.html#L405'>packet</a>            405 ext/wddx/wddx.c 	php_wddx_add_chunk_static(packet, WDDX_STRING_S);</span>
+<span class='curline'><a href='../S/1220.html#L413'>packet</a>            413 ext/wddx/wddx.c 		php_wddx_add_chunk_ex(packet, buf, buf_len);</span>
+<span class='curline'><a href='../S/1220.html#L417'>packet</a>            417 ext/wddx/wddx.c 	php_wddx_add_chunk_static(packet, WDDX_STRING_E);</span>
+<span class='curline'><a href='../S/1220.html#L423'>packet</a>            423 ext/wddx/wddx.c static void php_wddx_serialize_number(wddx_packet *packet, zval *var)</span>
+<span class='curline'><a href='../S/1220.html#L434'>packet</a>            434 ext/wddx/wddx.c 	php_wddx_add_chunk(packet, tmp_buf);</span>
+<span class='curline'><a href='../S/1220.html#L440'>packet</a>            440 ext/wddx/wddx.c static void php_wddx_serialize_boolean(wddx_packet *packet, zval *var)</span>
+<span class='curline'><a href='../S/1220.html#L442'>packet</a>            442 ext/wddx/wddx.c 	php_wddx_add_chunk(packet, Z_LVAL_P(var) ? WDDX_BOOLEAN_TRUE : WDDX_BOOLEAN_FALSE);</span>
+<span class='curline'><a href='../S/1220.html#L448'>packet</a>            448 ext/wddx/wddx.c static void php_wddx_serialize_unset(wddx_packet *packet)</span>
+<span class='curline'><a href='../S/1220.html#L450'>packet</a>            450 ext/wddx/wddx.c 	php_wddx_add_chunk_static(packet, WDDX_NULL);</span>
+<span class='curline'><a href='../S/1220.html#L456'>packet</a>            456 ext/wddx/wddx.c static void php_wddx_serialize_object(wddx_packet *packet, zval *obj)</span>
+<span class='curline'><a href='../S/1220.html#L480'>packet</a>            480 ext/wddx/wddx.c 			php_wddx_add_chunk_static(packet, WDDX_STRUCT_S);</span>
+<span class='curline'><a href='../S/1220.html#L482'>packet</a>            482 ext/wddx/wddx.c 			php_wddx_add_chunk(packet, tmp_buf);</span>
+<span class='curline'><a href='../S/1220.html#L483'>packet</a>            483 ext/wddx/wddx.c 			php_wddx_add_chunk_static(packet, WDDX_STRING_S);</span>
+<span class='curline'><a href='../S/1220.html#L484'>packet</a>            484 ext/wddx/wddx.c 			php_wddx_add_chunk_ex(packet, class_name, name_len);</span>
+<span class='curline'><a href='../S/1220.html#L485'>packet</a>            485 ext/wddx/wddx.c 			php_wddx_add_chunk_static(packet, WDDX_STRING_E);</span>
+<span class='curline'><a href='../S/1220.html#L486'>packet</a>            486 ext/wddx/wddx.c 			php_wddx_add_chunk_static(packet, WDDX_VAR_E);</span>
+<span class='curline'><a href='../S/1220.html#L501'>packet</a>            501 ext/wddx/wddx.c 					php_wddx_serialize_var(packet, *ent, Z_STRVAL_PP(varname), Z_STRLEN_PP(varname) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1220.html#L505'>packet</a>            505 ext/wddx/wddx.c 			php_wddx_add_chunk_static(packet, WDDX_STRUCT_E);</span>
+<span class='curline'><a href='../S/1220.html#L514'>packet</a>            514 ext/wddx/wddx.c 		php_wddx_add_chunk_static(packet, WDDX_STRUCT_S);</span>
+<span class='curline'><a href='../S/1220.html#L516'>packet</a>            516 ext/wddx/wddx.c 		php_wddx_add_chunk(packet, tmp_buf);</span>
+<span class='curline'><a href='../S/1220.html#L517'>packet</a>            517 ext/wddx/wddx.c 		php_wddx_add_chunk_static(packet, WDDX_STRING_S);</span>
+<span class='curline'><a href='../S/1220.html#L518'>packet</a>            518 ext/wddx/wddx.c 		php_wddx_add_chunk_ex(packet, class_name, name_len);</span>
+<span class='curline'><a href='../S/1220.html#L519'>packet</a>            519 ext/wddx/wddx.c 		php_wddx_add_chunk_static(packet, WDDX_STRING_E);</span>
+<span class='curline'><a href='../S/1220.html#L520'>packet</a>            520 ext/wddx/wddx.c 		php_wddx_add_chunk_static(packet, WDDX_VAR_E);</span>
+<span class='curline'><a href='../S/1220.html#L536'>packet</a>            536 ext/wddx/wddx.c 				php_wddx_serialize_var(packet, *ent, prop_name, strlen(prop_name)+1 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1220.html#L539'>packet</a>            539 ext/wddx/wddx.c 				php_wddx_serialize_var(packet, *ent, tmp_buf, key_len TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1220.html#L542'>packet</a>            542 ext/wddx/wddx.c 		php_wddx_add_chunk_static(packet, WDDX_STRUCT_E);</span>
+<span class='curline'><a href='../S/1220.html#L556'>packet</a>            556 ext/wddx/wddx.c static void php_wddx_serialize_array(wddx_packet *packet, zval *arr)</span>
+<span class='curline'><a href='../S/1220.html#L591'>packet</a>            591 ext/wddx/wddx.c 		php_wddx_add_chunk_static(packet, WDDX_STRUCT_S);</span>
+<span class='curline'><a href='../S/1220.html#L594'>packet</a>            594 ext/wddx/wddx.c 		php_wddx_add_chunk(packet, tmp_buf);</span>
+<span class='curline'><a href='../S/1220.html#L608'>packet</a>            608 ext/wddx/wddx.c 				php_wddx_serialize_var(packet, *ent, key, key_len TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1220.html#L611'>packet</a>            611 ext/wddx/wddx.c 				php_wddx_serialize_var(packet, *ent, tmp_buf, key_len TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1220.html#L614'>packet</a>            614 ext/wddx/wddx.c 			php_wddx_serialize_var(packet, *ent, NULL, 0 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1220.html#L619'>packet</a>            619 ext/wddx/wddx.c 		php_wddx_add_chunk_static(packet, WDDX_STRUCT_E);</span>
+<span class='curline'><a href='../S/1220.html#L621'>packet</a>            621 ext/wddx/wddx.c 		php_wddx_add_chunk_static(packet, WDDX_ARRAY_E);</span>
+<span class='curline'><a href='../S/1220.html#L628'>packet</a>            628 ext/wddx/wddx.c void php_wddx_serialize_var(wddx_packet *packet, zval *var, char *name, int name_len TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1220.html#L639'>packet</a>            639 ext/wddx/wddx.c 		php_wddx_add_chunk(packet, tmp_buf);</span>
+<span class='curline'><a href='../S/1220.html#L646'>packet</a>            646 ext/wddx/wddx.c 			php_wddx_serialize_string(packet, var TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1220.html#L651'>packet</a>            651 ext/wddx/wddx.c 			php_wddx_serialize_number(packet, var);</span>
+<span class='curline'><a href='../S/1220.html#L655'>packet</a>            655 ext/wddx/wddx.c 			php_wddx_serialize_boolean(packet, var);</span>
+<span class='curline'><a href='../S/1220.html#L659'>packet</a>            659 ext/wddx/wddx.c 			php_wddx_serialize_unset(packet);</span>
+<span class='curline'><a href='../S/1220.html#L669'>packet</a>            669 ext/wddx/wddx.c 			php_wddx_serialize_array(packet, var);</span>
+<span class='curline'><a href='../S/1220.html#L680'>packet</a>            680 ext/wddx/wddx.c  			php_wddx_serialize_object(packet, var);</span>
+<span class='curline'><a href='../S/1220.html#L686'>packet</a>            686 ext/wddx/wddx.c 		php_wddx_add_chunk_static(packet, WDDX_VAR_E);</span>
+<span class='curline'><a href='../S/1220.html#L693'>packet</a>            693 ext/wddx/wddx.c static void php_wddx_add_var(wddx_packet *packet, zval *name_var)</span>
+<span class='curline'><a href='../S/1220.html#L705'>packet</a>            705 ext/wddx/wddx.c 			php_wddx_serialize_var(packet, *val, Z_STRVAL_P(name_var), Z_STRLEN_P(name_var) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1220.html#L724'>packet</a>            724 ext/wddx/wddx.c 			php_wddx_add_var(packet, *val);</span>
+<span class='curline'><a href='../S/1220.html#L1177'>packet</a>           1177 ext/wddx/wddx.c 	wddx_packet *packet;</span>
+<span class='curline'><a href='../S/1220.html#L1183'>packet</a>           1183 ext/wddx/wddx.c 	packet = php_wddx_constructor();</span>
+<span class='curline'><a href='../S/1220.html#L1185'>packet</a>           1185 ext/wddx/wddx.c 	php_wddx_packet_start(packet, comment, comment_len);</span>
+<span class='curline'><a href='../S/1220.html#L1186'>packet</a>           1186 ext/wddx/wddx.c 	php_wddx_serialize_var(packet, var, NULL, 0 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1220.html#L1187'>packet</a>           1187 ext/wddx/wddx.c 	php_wddx_packet_end(packet);</span>
+<span class='curline'><a href='../S/1220.html#L1189'>packet</a>           1189 ext/wddx/wddx.c 	ZVAL_STRINGL(return_value, packet-&gt;c, packet-&gt;len, 1);</span>
+<span class='curline'><a href='../S/1220.html#L1190'>packet</a>           1190 ext/wddx/wddx.c 	smart_str_free(packet);</span>
+<span class='curline'><a href='../S/1220.html#L1191'>packet</a>           1191 ext/wddx/wddx.c 	efree(packet);</span>
+<span class='curline'><a href='../S/1220.html#L1200'>packet</a>           1200 ext/wddx/wddx.c 	wddx_packet *packet;</span>
+<span class='curline'><a href='../S/1220.html#L1207'>packet</a>           1207 ext/wddx/wddx.c 	packet = php_wddx_constructor();</span>
+<span class='curline'><a href='../S/1220.html#L1209'>packet</a>           1209 ext/wddx/wddx.c 	php_wddx_packet_start(packet, NULL, 0);</span>
+<span class='curline'><a href='../S/1220.html#L1210'>packet</a>           1210 ext/wddx/wddx.c 	php_wddx_add_chunk_static(packet, WDDX_STRUCT_S);</span>
+<span class='curline'><a href='../S/1220.html#L1216'>packet</a>           1216 ext/wddx/wddx.c 		php_wddx_add_var(packet, *args[i]);</span>
+<span class='curline'><a href='../S/1220.html#L1219'>packet</a>           1219 ext/wddx/wddx.c 	php_wddx_add_chunk_static(packet, WDDX_STRUCT_E);</span>
+<span class='curline'><a href='../S/1220.html#L1220'>packet</a>           1220 ext/wddx/wddx.c 	php_wddx_packet_end(packet);</span>
+<span class='curline'><a href='../S/1220.html#L1224'>packet</a>           1224 ext/wddx/wddx.c 	ZVAL_STRINGL(return_value, packet-&gt;c, packet-&gt;len, 1);</span>
+<span class='curline'><a href='../S/1220.html#L1225'>packet</a>           1225 ext/wddx/wddx.c 	smart_str_free(packet);</span>
+<span class='curline'><a href='../S/1220.html#L1226'>packet</a>           1226 ext/wddx/wddx.c 	efree(packet);</span>
+<span class='curline'><a href='../S/1220.html#L1234'>packet</a>           1234 ext/wddx/wddx.c 	smart_str *packet;</span>
+<span class='curline'><a href='../S/1220.html#L1236'>packet</a>           1236 ext/wddx/wddx.c 	packet = (smart_str *)emalloc(sizeof(smart_str));</span>
+<span class='curline'><a href='../S/1220.html#L1237'>packet</a>           1237 ext/wddx/wddx.c 	packet-&gt;c = NULL;</span>
+<span class='curline'><a href='../S/1220.html#L1239'>packet</a>           1239 ext/wddx/wddx.c 	return packet;</span>
+<span class='curline'><a href='../S/1220.html#L1245'>packet</a>           1245 ext/wddx/wddx.c void php_wddx_destructor(wddx_packet *packet)</span>
+<span class='curline'><a href='../S/1220.html#L1247'>packet</a>           1247 ext/wddx/wddx.c 	smart_str_free(packet);</span>
+<span class='curline'><a href='../S/1220.html#L1248'>packet</a>           1248 ext/wddx/wddx.c 	efree(packet);</span>
+<span class='curline'><a href='../S/1220.html#L1258'>packet</a>           1258 ext/wddx/wddx.c 	wddx_packet *packet;</span>
+<span class='curline'><a href='../S/1220.html#L1266'>packet</a>           1266 ext/wddx/wddx.c 	packet = php_wddx_constructor();</span>
+<span class='curline'><a href='../S/1220.html#L1268'>packet</a>           1268 ext/wddx/wddx.c 	php_wddx_packet_start(packet, comment, comment_len);</span>
+<span class='curline'><a href='../S/1220.html#L1269'>packet</a>           1269 ext/wddx/wddx.c 	php_wddx_add_chunk_static(packet, WDDX_STRUCT_S);</span>
+<span class='curline'><a href='../S/1220.html#L1271'>packet</a>           1271 ext/wddx/wddx.c 	ZEND_REGISTER_RESOURCE(return_value, packet, le_wddx);</span>
+<span class='curline'><a href='../S/1220.html#L1280'>packet</a>           1280 ext/wddx/wddx.c 	wddx_packet *packet = NULL;</span>
+<span class='curline'><a href='../S/1220.html#L1286'>packet</a>           1286 ext/wddx/wddx.c 	ZEND_FETCH_RESOURCE(packet, wddx_packet *, &amp;packet_id, -1, "WDDX packet ID", le_wddx);</span>
+<span class='curline'><a href='../S/1220.html#L1288'>packet</a>           1288 ext/wddx/wddx.c 	php_wddx_add_chunk_static(packet, WDDX_STRUCT_E);</span>
+<span class='curline'><a href='../S/1220.html#L1290'>packet</a>           1290 ext/wddx/wddx.c 	php_wddx_packet_end(packet);</span>
+<span class='curline'><a href='../S/1220.html#L1292'>packet</a>           1292 ext/wddx/wddx.c 	ZVAL_STRINGL(return_value, packet-&gt;c, packet-&gt;len, 1);</span>
+<span class='curline'><a href='../S/1220.html#L1305'>packet</a>           1305 ext/wddx/wddx.c 	wddx_packet *packet = NULL;</span>
+<span class='curline'><a href='../S/1220.html#L1311'>packet</a>           1311 ext/wddx/wddx.c 	if (!ZEND_FETCH_RESOURCE_NO_RETURN(packet, wddx_packet *, &amp;packet_id, -1, "WDDX packet ID", le_wddx)) {</span>
+<span class='curline'><a href='../S/1220.html#L1316'>packet</a>           1316 ext/wddx/wddx.c 	if (!packet) {</span>
+<span class='curline'><a href='../S/1220.html#L1325'>packet</a>           1325 ext/wddx/wddx.c 		php_wddx_add_var(packet, (*args[i]));</span>
+<span class='curline'><a href='../S/1220.html#L1337'>packet</a>           1337 ext/wddx/wddx.c 	zval *packet;</span>
+<span class='curline'><a href='../S/1220.html#L1342'>packet</a>           1342 ext/wddx/wddx.c 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "z", &amp;packet) == FAILURE) {</span>
+<span class='curline'><a href='../S/1220.html#L1346'>packet</a>           1346 ext/wddx/wddx.c 	if (Z_TYPE_P(packet) == IS_STRING) {</span>
+<span class='curline'><a href='../S/1220.html#L1347'>packet</a>           1347 ext/wddx/wddx.c 		payload 	= Z_STRVAL_P(packet);</span>
+<span class='curline'><a href='../S/1220.html#L1348'>packet</a>           1348 ext/wddx/wddx.c 		payload_len = Z_STRLEN_P(packet);</span>
+<span class='curline'><a href='../S/1220.html#L1349'>packet</a>           1349 ext/wddx/wddx.c 	} else if (Z_TYPE_P(packet) == IS_RESOURCE) {</span>
+<span class='curline'><a href='../S/1220.html#L1350'>packet</a>           1350 ext/wddx/wddx.c 		php_stream_from_zval(stream, &amp;packet);</span>
+</pre>
+</body>
+</html>

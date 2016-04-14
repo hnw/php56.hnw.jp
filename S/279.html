@@ -1,0 +1,203 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>ext/gd/libgd/webpimg.h</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<a id='TOP' name='TOP'></a><h2 class='header'><a href='../mains.html'>root</a>/<a href='../files/1753.html'>ext</a>/<a href='../files/1777.html'>gd</a>/<a href='../files/1778.html'>libgd</a>/webpimg.h</h2>
+<em class='comment'>/* [&lt;][&gt;][^][v][top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+<hr />
+<h2 class='header'><a href='../J/399.html' title='Multiple included from 2 places.'>INCLUDED FROM</a></h2>
+<hr />
+<pre>
+<a id='L1' name='L1'></a>   1 <em class='comment'>/*===========================================================================*</em>
+<a id='L2' name='L2'></a>   2 <em class='comment'> - Copyright 2010 Google Inc.</em>
+<a id='L3' name='L3'></a>   3 <em class='comment'> -</em>
+<a id='L4' name='L4'></a>   4 <em class='comment'> - This code is licensed under the same terms as WebM:</em>
+<a id='L5' name='L5'></a>   5 <em class='comment'> - Software License Agreement:  http://www.webmproject.org/license/software/</em>
+<a id='L6' name='L6'></a>   6 <em class='comment'> - Additional IP Rights Grant:  http://www.webmproject.org/license/additional/</em>
+<a id='L7' name='L7'></a>   7 <em class='comment'> *===========================================================================*/</em>
+<a id='L8' name='L8'></a>   8 
+<a id='L9' name='L9'></a>   9 <em class='comment'>/*</em>
+<a id='L10' name='L10'></a>  10 <em class='comment'> * Encoding/Decoding of WebP still image compression format.</em>
+<a id='L11' name='L11'></a>  11 <em class='comment'> *</em>
+<a id='L12' name='L12'></a>  12 <em class='comment'> * 1. WebPDecode: Takes an array of bytes (string) corresponding to the WebP</em>
+<a id='L13' name='L13'></a>  13 <em class='comment'> *                encoded image and generates output in the YUV format with</em>
+<a id='L14' name='L14'></a>  14 <em class='comment'> *                the color components U, V subsampled to 1/2 resolution along</em>
+<a id='L15' name='L15'></a>  15 <em class='comment'> *                each dimension.</em>
+<a id='L16' name='L16'></a>  16 <em class='comment'> *</em>
+<a id='L17' name='L17'></a>  17 <em class='comment'> * 2. YUV420toRGBA: Converts from YUV (with color subsampling) such as produced</em>
+<a id='L18' name='L18'></a>  18 <em class='comment'> *                  by the WebPDecode routine into 32 bits per pixel RGBA data</em>
+<a id='L19' name='L19'></a>  19 <em class='comment'> *                  array. This data array can be directly used by the Leptonica</em>
+<a id='L20' name='L20'></a>  20 <em class='comment'> *                  Pix in-memory image format.</em>
+<a id='L21' name='L21'></a>  21 <em class='comment'> *</em>
+<a id='L22' name='L22'></a>  22 <em class='comment'> * 3. WebPEncode: Takes a Y, U, V data buffers (with color components U and V</em>
+<a id='L23' name='L23'></a>  23 <em class='comment'> *                subsampled to 1/2 resolution) and generates the WebP string</em>
+<a id='L24' name='L24'></a>  24 <em class='comment'> *</em>
+<a id='L25' name='L25'></a>  25 <em class='comment'> * 4. RGBAToYUV420: Generates Y, U, V data (with color subsampling) from 32 bits</em>
+<a id='L26' name='L26'></a>  26 <em class='comment'> *                  per pixel RGBA data buffer. The resulting YUV data can be</em>
+<a id='L27' name='L27'></a>  27 <em class='comment'> *                  directly fed into the WebPEncode routine.</em>
+<a id='L28' name='L28'></a>  28 <em class='comment'> *</em>
+<a id='L29' name='L29'></a>  29 <em class='comment'> * 5. AdjustColorspace:</em>
+<a id='L30' name='L30'></a>  30 <em class='comment'> *</em>
+<a id='L31' name='L31'></a>  31 <em class='comment'> * 6. AdjustColorspaceBack:</em>
+<a id='L32' name='L32'></a>  32 <em class='comment'> */</em>
+<a id='L33' name='L33'></a>  33 
+<a id='L34' name='L34'></a>  34 <em class='sharp'>#ifndef</em> <a href='../S/279.html#L35' title='Defined at 35 in ext/gd/libgd/webpimg.h.'>THIRD_PARTY_VP8_VP8IMG_H_</a>
+<a id='L35' name='L35'></a>  35 <em class='sharp'>#define</em> <a href='../S/279.html#L34' title='Referred from 34 in ext/gd/libgd/webpimg.h.'>THIRD_PARTY_VP8_VP8IMG_H_</a>
+<a id='L36' name='L36'></a>  36 
+<a id='L37' name='L37'></a>  37 <em class='sharp'>#ifdef</em> <a href='../Y/7608.html' title='Multiple used in 93 places.'>__cplusplus</a>
+<a id='L38' name='L38'></a>  38 <strong class='reserved'>extern</strong> "C" <em class='brace'>{</em>
+<a id='L39' name='L39'></a>  39 <em class='sharp'>#endif</em>  <em class='comment'>/* __cplusplus */</em>
+<a id='L40' name='L40'></a>  40 
+<a id='L41' name='L41'></a>  41 <strong class='reserved'>typedef</strong> <strong class='reserved'>unsigned</strong> <strong class='reserved'>char</strong> <a href='../R/29000.html' title='Multiple referred from 86 places.'>uint8</a>;
+<a id='L42' name='L42'></a>  42 <strong class='reserved'>typedef</strong> <strong class='reserved'>unsigned</strong> <strong class='reserved'>int</strong> <a href='../R/28993.html' title='Multiple referred from 89 places.'>uint32</a>;
+<a id='L43' name='L43'></a>  43 <strong class='reserved'>typedef</strong> <strong class='reserved'>enum</strong> WebPResultType <em class='brace'>{</em>
+<a id='L44' name='L44'></a>  44   <a href='../R/29422.html' title='Multiple referred from 9 places.'>webp_success</a> = 0,
+<a id='L45' name='L45'></a>  45   <a href='../R/29421.html' title='Multiple referred from 18 places.'>webp_failure</a> = -1
+<a id='L46' name='L46'></a>  46 <em class='brace'>}</em> <a href='../R/12966.html' title='Multiple referred from 10 places.'>WebPResult</a>;
+<a id='L47' name='L47'></a>  47 
+<a id='L48' name='L48'></a>  48 <em class='comment'>/* Takes an array of bytes (string) corresponding to the WebP</em>
+<a id='L49' name='L49'></a>  49 <em class='comment'> * encoded image and generates output in the YUV format with</em>
+<a id='L50' name='L50'></a>  50 <em class='comment'> * the color components U, V subsampled to 1/2 resolution along</em>
+<a id='L51' name='L51'></a>  51 <em class='comment'> * each dimension.</em>
+<a id='L52' name='L52'></a>  52 <em class='comment'> * Input:</em>
+<a id='L53' name='L53'></a>  53 <em class='comment'> *      1. data: the WebP data stream (array of bytes)</em>
+<a id='L54' name='L54'></a>  54 <em class='comment'> *      2. data_size: count of bytes in the WebP data stream</em>
+<a id='L55' name='L55'></a>  55 <em class='comment'> *</em>
+<a id='L56' name='L56'></a>  56 <em class='comment'> * Output:</em>
+<a id='L57' name='L57'></a>  57 <em class='comment'> *      3. p_Y/p_U/p_V : pointer to the Y/U/V data buffer (this routine will</em>
+<a id='L58' name='L58'></a>  58 <em class='comment'> *                       allocate memory for the buffer, fill the buffer with</em>
+<a id='L59' name='L59'></a>  59 <em class='comment'> *                       appropriate data and transfer owner ship of the buffer</em>
+<a id='L60' name='L60'></a>  60 <em class='comment'> *                       to caller. Caller is responsible for freeing the memory).</em>
+<a id='L61' name='L61'></a>  61 <em class='comment'> *                       Note that the memory for Y, U, V buffers is alloacted</em>
+<a id='L62' name='L62'></a>  62 <em class='comment'> *                       in one chunk, hence one should call free(*p_Y) only.</em>
+<a id='L63' name='L63'></a>  63 <em class='comment'> *                       Do not try to free the U and V buffers.</em>
+<a id='L64' name='L64'></a>  64 <em class='comment'> *</em>
+<a id='L65' name='L65'></a>  65 <em class='comment'> *      6. p_width: this routine returns the width of the decoded image here</em>
+<a id='L66' name='L66'></a>  66 <em class='comment'> *      7. p_height: this routine returns the width of the decoded image here</em>
+<a id='L67' name='L67'></a>  67 <em class='comment'> * Return: success/failure</em>
+<a id='L68' name='L68'></a>  68 <em class='comment'> */</em>
+<a id='L69' name='L69'></a>  69 <a href='../S/279.html#L46' title='Defined at 46 in ext/gd/libgd/webpimg.h.'>WebPResult</a> <a href='../S/278.html#L452' title='Defined at 452 in ext/gd/libgd/webpimg.c.'>WebPDecode</a>(<strong class='reserved'>const</strong> <a href='../S/279.html#L41' title='Defined at 41 in ext/gd/libgd/webpimg.h.'>uint8</a>* <a href='../D/20513.html' title='Multiple defined in 7 places.'>data</a>,
+<a id='L70' name='L70'></a>  70                       <strong class='reserved'>int</strong> <a href='../Y/14990.html' title='Multiple used in 87 places.'>data_size</a>,
+<a id='L71' name='L71'></a>  71                       <a href='../S/279.html#L41' title='Defined at 41 in ext/gd/libgd/webpimg.h.'>uint8</a>** <a href='../Y/31272.html' title='Multiple used in 9 places.'>p_Y</a>,
+<a id='L72' name='L72'></a>  72                       <a href='../S/279.html#L41' title='Defined at 41 in ext/gd/libgd/webpimg.h.'>uint8</a>** <a href='../Y/31270.html' title='Multiple used in 9 places.'>p_U</a>,
+<a id='L73' name='L73'></a>  73                       <a href='../S/279.html#L41' title='Defined at 41 in ext/gd/libgd/webpimg.h.'>uint8</a>** <a href='../Y/31271.html' title='Multiple used in 8 places.'>p_V</a>,
+<a id='L74' name='L74'></a>  74                       <strong class='reserved'>int</strong>* <a href='../Y/31314.html' title='Multiple used in 9 places.'>p_width</a>,
+<a id='L75' name='L75'></a>  75                       <strong class='reserved'>int</strong>* <a href='../Y/31285.html' title='Multiple used in 9 places.'>p_height</a>);
+<a id='L76' name='L76'></a>  76 
+<a id='L77' name='L77'></a>  77 <em class='comment'>/* WebPEncode: Takes a Y, U, V data buffers (with color components U and V</em>
+<a id='L78' name='L78'></a>  78 <em class='comment'> *             subsampled to 1/2 resolution) and generates the WebP string.</em>
+<a id='L79' name='L79'></a>  79 <em class='comment'> * Input:</em>
+<a id='L80' name='L80'></a>  80 <em class='comment'> *      1, 2, 3. Y, U, V: The input YUV data buffers</em>
+<a id='L81' name='L81'></a>  81 <em class='comment'> *      4, 5. y_width, y_height: The width and height of the image whose data</em>
+<a id='L82' name='L82'></a>  82 <em class='comment'> *                               is in Y, U, V. This matches the Y plane. The U</em>
+<a id='L83' name='L83'></a>  83 <em class='comment'> *                               and V planes typically have 1/2 width and</em>
+<a id='L84' name='L84'></a>  84 <em class='comment'> *                               height.</em>
+<a id='L85' name='L85'></a>  85 <em class='comment'> *      6. y_stride: The width (in bytes) of one row of Y data. This may not</em>
+<a id='L86' name='L86'></a>  86 <em class='comment'> *                   match width if there is end of row padding (e.g., for 32</em>
+<a id='L87' name='L87'></a>  87 <em class='comment'> *                   bit row alignment).</em>
+<a id='L88' name='L88'></a>  88 <em class='comment'> *      7. QP: the quantization parameter. This parameter controls the</em>
+<a id='L89' name='L89'></a>  89 <em class='comment'> *             compression vs quality tradeoff. Use smaller numbers for better</em>
+<a id='L90' name='L90'></a>  90 <em class='comment'> *             quality (compression will be lesser) and vice versa. 20 is a</em>
+<a id='L91' name='L91'></a>  91 <em class='comment'> *             good optimal value.</em>
+<a id='L92' name='L92'></a>  92 <em class='comment'> * Output:</em>
+<a id='L93' name='L93'></a>  93 <em class='comment'> *      8. p_out: the output array of bytes corresponding to the encoded WebP</em>
+<a id='L94' name='L94'></a>  94 <em class='comment'> *                image. This routine allocates memory for the buffer, fills it</em>
+<a id='L95' name='L95'></a>  95 <em class='comment'> *                with appropriate values and transfers ownership to caller.</em>
+<a id='L96' name='L96'></a>  96 <em class='comment'> *                Caller responsible for freeing of memory.</em>
+<a id='L97' name='L97'></a>  97 <em class='comment'> * Return: success/failure</em>
+<a id='L98' name='L98'></a>  98 <em class='comment'> */</em>
+<a id='L99' name='L99'></a>  99 <a href='../S/279.html#L46' title='Defined at 46 in ext/gd/libgd/webpimg.h.'>WebPResult</a> <a href='../S/278.html#L742' title='Defined at 742 in ext/gd/libgd/webpimg.c.'>WebPEncode</a>(<strong class='reserved'>const</strong> <a href='../S/279.html#L41' title='Defined at 41 in ext/gd/libgd/webpimg.h.'>uint8</a>* <a href='../Y/7321.html' title='Multiple used in 87 places.'>Y</a>,
+<a id='L100' name='L100'></a> 100                       <strong class='reserved'>const</strong> <a href='../S/279.html#L41' title='Defined at 41 in ext/gd/libgd/webpimg.h.'>uint8</a>* <a href='../Y/6395.html' title='Multiple used in 46 places.'>U</a>,
+<a id='L101' name='L101'></a> 101                       <strong class='reserved'>const</strong> <a href='../S/279.html#L41' title='Defined at 41 in ext/gd/libgd/webpimg.h.'>uint8</a>* <a href='../Y/6785.html' title='Multiple used in 85 places.'>V</a>,
+<a id='L102' name='L102'></a> 102                       <strong class='reserved'>int</strong> <a href='../Y/42177.html' title='Multiple used in 45 places.'>y_width</a>,
+<a id='L103' name='L103'></a> 103                       <strong class='reserved'>int</strong> <a href='../Y/42171.html' title='Multiple used in 40 places.'>y_height</a>,
+<a id='L104' name='L104'></a> 104                       <strong class='reserved'>int</strong> <a href='../Y/42176.html' title='Multiple used in 28 places.'>y_stride</a>,
+<a id='L105' name='L105'></a> 105                       <strong class='reserved'>int</strong> <a href='../Y/40490.html' title='Multiple used in 28 places.'>uv_width</a>,
+<a id='L106' name='L106'></a> 106                       <strong class='reserved'>int</strong> <a href='../Y/40488.html' title='Multiple used in 15 places.'>uv_height</a>,
+<a id='L107' name='L107'></a> 107                       <strong class='reserved'>int</strong> <a href='../Y/40489.html' title='Multiple used in 34 places.'>uv_stride</a>,
+<a id='L108' name='L108'></a> 108                       <strong class='reserved'>int</strong> <a href='../Y/5018.html' title='Multiple used in 9 places.'>QP</a>,
+<a id='L109' name='L109'></a> 109                       <strong class='reserved'>unsigned</strong> <strong class='reserved'>char</strong>** <a href='../Y/31298.html' title='Multiple used in 14 places.'>p_out</a>,
+<a id='L110' name='L110'></a> 110                       <strong class='reserved'>int</strong>* <a href='../Y/31299.html' title='Multiple used in 11 places.'>p_out_size_bytes</a>,
+<a id='L111' name='L111'></a> 111                       <strong class='reserved'>double</strong>* <a href='../Y/33897.html' title='Multiple used in 7 places.'>psnr</a>);
+<a id='L112' name='L112'></a> 112 
+<a id='L113' name='L113'></a> 113 <em class='comment'>/* Converts from YUV (with color subsampling) such as produced by the WebPDecode</em>
+<a id='L114' name='L114'></a> 114 <em class='comment'> * routine into 32 bits per pixel RGBA data array. This data array can be</em>
+<a id='L115' name='L115'></a> 115 <em class='comment'> * directly used by the Leptonica Pix in-memory image format.</em>
+<a id='L116' name='L116'></a> 116 <em class='comment'> * Input:</em>
+<a id='L117' name='L117'></a> 117 <em class='comment'> *      1, 2, 3. Y, U, V: the input data buffers</em>
+<a id='L118' name='L118'></a> 118 <em class='comment'> *      4. pixwpl: the desired words per line corresponding to the supplied</em>
+<a id='L119' name='L119'></a> 119 <em class='comment'> *                 output pixdata.</em>
+<a id='L120' name='L120'></a> 120 <em class='comment'> *      5. width, height: the dimensions of the image whose data resides in Y,</em>
+<a id='L121' name='L121'></a> 121 <em class='comment'> *                        U, V.</em>
+<a id='L122' name='L122'></a> 122 <em class='comment'> * Output:</em>
+<a id='L123' name='L123'></a> 123 <em class='comment'> *     6. pixdata: the output data buffer. Caller should allocate</em>
+<a id='L124' name='L124'></a> 124 <em class='comment'> *                 height * pixwpl bytes of memory before calling this routine.</em>
+<a id='L125' name='L125'></a> 125 <em class='comment'> */</em>
+<a id='L126' name='L126'></a> 126 <strong class='reserved'>void</strong> <a href='../S/278.html#L326' title='Defined at 326 in ext/gd/libgd/webpimg.c.'>YUV420toRGBA</a>(<a href='../S/279.html#L41' title='Defined at 41 in ext/gd/libgd/webpimg.h.'>uint8</a>* <a href='../Y/7321.html' title='Multiple used in 87 places.'>Y</a>,
+<a id='L127' name='L127'></a> 127                   <a href='../S/279.html#L41' title='Defined at 41 in ext/gd/libgd/webpimg.h.'>uint8</a>* <a href='../Y/6395.html' title='Multiple used in 46 places.'>U</a>,
+<a id='L128' name='L128'></a> 128                   <a href='../S/279.html#L41' title='Defined at 41 in ext/gd/libgd/webpimg.h.'>uint8</a>* <a href='../Y/6785.html' title='Multiple used in 85 places.'>V</a>,
+<a id='L129' name='L129'></a> 129                   <strong class='reserved'>int</strong> <a href='../Y/41282.html' title='Multiple used in 9 places.'>words_per_line</a>,
+<a id='L130' name='L130'></a> 130                   <strong class='reserved'>int</strong> <a href='../Y/41223.html' title='Multiple used in 306 places.'>width</a>,
+<a id='L131' name='L131'></a> 131                   <strong class='reserved'>int</strong> <a href='../Y/20022.html' title='Multiple used in 213 places.'>height</a>,
+<a id='L132' name='L132'></a> 132                   <a href='../D/32236.html' title='Multiple defined in 4 places.'>uint32</a>* <a href='../Y/33100.html' title='Multiple used in 9 places.'>pixdata</a>);
+<a id='L133' name='L133'></a> 133 
+<a id='L134' name='L134'></a> 134 <em class='comment'>/* Generates Y, U, V data (with color subsampling) from 32 bits</em>
+<a id='L135' name='L135'></a> 135 <em class='comment'> * per pixel RGBA data buffer. The resulting YUV data can be directly fed into</em>
+<a id='L136' name='L136'></a> 136 <em class='comment'> * the WebPEncode routine.</em>
+<a id='L137' name='L137'></a> 137 <em class='comment'> * Input:</em>
+<a id='L138' name='L138'></a> 138 <em class='comment'> *    1. pix data input rgba data buffer</em>
+<a id='L139' name='L139'></a> 139 <em class='comment'> *    2. words per line corresponding to pixdata</em>
+<a id='L140' name='L140'></a> 140 <em class='comment'> *    3, 4. image width and height respectively</em>
+<a id='L141' name='L141'></a> 141 <em class='comment'> * Output:</em>
+<a id='L142' name='L142'></a> 142 <em class='comment'> *    5, 6, 7. Output YUV data buffers</em>
+<a id='L143' name='L143'></a> 143 <em class='comment'> */</em>
+<a id='L144' name='L144'></a> 144 <strong class='reserved'>void</strong> <a href='../S/278.html#L595' title='Defined at 595 in ext/gd/libgd/webpimg.c.'>RGBAToYUV420</a>(<a href='../D/32236.html' title='Multiple defined in 4 places.'>uint32</a>* <a href='../Y/33100.html' title='Multiple used in 9 places.'>pixdata</a>,
+<a id='L145' name='L145'></a> 145                   <strong class='reserved'>int</strong> <a href='../Y/41282.html' title='Multiple used in 9 places.'>words_per_line</a>,
+<a id='L146' name='L146'></a> 146                   <strong class='reserved'>int</strong> <a href='../Y/41223.html' title='Multiple used in 306 places.'>width</a>,
+<a id='L147' name='L147'></a> 147                   <strong class='reserved'>int</strong> <a href='../Y/20022.html' title='Multiple used in 213 places.'>height</a>,
+<a id='L148' name='L148'></a> 148                   <a href='../S/279.html#L41' title='Defined at 41 in ext/gd/libgd/webpimg.h.'>uint8</a>* <a href='../Y/7321.html' title='Multiple used in 87 places.'>Y</a>,
+<a id='L149' name='L149'></a> 149                   <a href='../S/279.html#L41' title='Defined at 41 in ext/gd/libgd/webpimg.h.'>uint8</a>* <a href='../Y/6395.html' title='Multiple used in 46 places.'>U</a>,
+<a id='L150' name='L150'></a> 150                   <a href='../S/279.html#L41' title='Defined at 41 in ext/gd/libgd/webpimg.h.'>uint8</a>* <a href='../Y/6785.html' title='Multiple used in 85 places.'>V</a>);
+<a id='L151' name='L151'></a> 151 
+<a id='L152' name='L152'></a> 152 <em class='comment'>/* This function adjust from YUV420J (jpeg decoding) to YUV420 (webp input)</em>
+<a id='L153' name='L153'></a> 153 <em class='comment'> * Hints: http://en.wikipedia.org/wiki/YCbCr</em>
+<a id='L154' name='L154'></a> 154 <em class='comment'> */</em>
+<a id='L155' name='L155'></a> 155 <strong class='reserved'>void</strong> <a href='../S/278.html#L804' title='Defined at 804 in ext/gd/libgd/webpimg.c.'>AdjustColorspace</a>(<a href='../S/279.html#L41' title='Defined at 41 in ext/gd/libgd/webpimg.h.'>uint8</a>* <a href='../Y/7321.html' title='Multiple used in 87 places.'>Y</a>, <a href='../S/279.html#L41' title='Defined at 41 in ext/gd/libgd/webpimg.h.'>uint8</a>* <a href='../Y/6395.html' title='Multiple used in 46 places.'>U</a>, <a href='../S/279.html#L41' title='Defined at 41 in ext/gd/libgd/webpimg.h.'>uint8</a>* <a href='../Y/6785.html' title='Multiple used in 85 places.'>V</a>, <strong class='reserved'>int</strong> <a href='../Y/41223.html' title='Multiple used in 306 places.'>width</a>, <strong class='reserved'>int</strong> <a href='../Y/20022.html' title='Multiple used in 213 places.'>height</a>);
+<a id='L156' name='L156'></a> 156 
+<a id='L157' name='L157'></a> 157 <em class='comment'>/* Inverse function: convert from YUV420 to YUV420J */</em>
+<a id='L158' name='L158'></a> 158 <strong class='reserved'>void</strong> <a href='../S/278.html#L832' title='Defined at 832 in ext/gd/libgd/webpimg.c.'>AdjustColorspaceBack</a>(<a href='../S/279.html#L41' title='Defined at 41 in ext/gd/libgd/webpimg.h.'>uint8</a>* <a href='../Y/7321.html' title='Multiple used in 87 places.'>Y</a>, <a href='../S/279.html#L41' title='Defined at 41 in ext/gd/libgd/webpimg.h.'>uint8</a>* <a href='../Y/6395.html' title='Multiple used in 46 places.'>U</a>, <a href='../S/279.html#L41' title='Defined at 41 in ext/gd/libgd/webpimg.h.'>uint8</a>* <a href='../Y/6785.html' title='Multiple used in 85 places.'>V</a>, <strong class='reserved'>int</strong> <a href='../Y/41223.html' title='Multiple used in 306 places.'>width</a>, <strong class='reserved'>int</strong> <a href='../Y/20022.html' title='Multiple used in 213 places.'>height</a>);
+<a id='L159' name='L159'></a> 159 
+<a id='L160' name='L160'></a> 160 <em class='comment'>/* Checks WebP image header and outputs height and width information of</em>
+<a id='L161' name='L161'></a> 161 <em class='comment'> * the image</em>
+<a id='L162' name='L162'></a> 162 <em class='comment'> *</em>
+<a id='L163' name='L163'></a> 163 <em class='comment'> * Input:</em>
+<a id='L164' name='L164'></a> 164 <em class='comment'> *      1. data: the WebP data stream (array of bytes)</em>
+<a id='L165' name='L165'></a> 165 <em class='comment'> *      2. data_size: count of bytes in the WebP data stream</em>
+<a id='L166' name='L166'></a> 166 <em class='comment'> *</em>
+<a id='L167' name='L167'></a> 167 <em class='comment'> * Outut:</em>
+<a id='L168' name='L168'></a> 168 <em class='comment'> *      width/height: width and height of the image</em>
+<a id='L169' name='L169'></a> 169 <em class='comment'> *</em>
+<a id='L170' name='L170'></a> 170 <em class='comment'> * Return: success/failure</em>
+<a id='L171' name='L171'></a> 171 <em class='comment'> */</em>
+<a id='L172' name='L172'></a> 172 <a href='../S/279.html#L46' title='Defined at 46 in ext/gd/libgd/webpimg.h.'>WebPResult</a> <a href='../S/278.html#L863' title='Defined at 863 in ext/gd/libgd/webpimg.c.'>WebPGetInfo</a>(<strong class='reserved'>const</strong> <a href='../S/279.html#L41' title='Defined at 41 in ext/gd/libgd/webpimg.h.'>uint8</a>* <a href='../D/20513.html' title='Multiple defined in 7 places.'>data</a>,
+<a id='L173' name='L173'></a> 173                        <strong class='reserved'>int</strong> <a href='../Y/14990.html' title='Multiple used in 87 places.'>data_size</a>,
+<a id='L174' name='L174'></a> 174                        <strong class='reserved'>int</strong> *<a href='../Y/41223.html' title='Multiple used in 306 places.'>width</a>,
+<a id='L175' name='L175'></a> 175                        <strong class='reserved'>int</strong> *<a href='../Y/20022.html' title='Multiple used in 213 places.'>height</a>);
+<a id='L176' name='L176'></a> 176 
+<a id='L177' name='L177'></a> 177 <em class='sharp'>#ifdef</em> <a href='../Y/7608.html' title='Multiple used in 93 places.'>__cplusplus</a>
+<a id='L178' name='L178'></a> 178 <em class='brace'>}</em>
+<a id='L179' name='L179'></a> 179 <em class='sharp'>#endif</em>  <em class='comment'>/* __cplusplus */</em>
+<a id='L180' name='L180'></a> 180 
+<a id='L181' name='L181'></a> 181 <em class='sharp'>#endif</em>  <em class='comment'>/* THIRD_PARTY_VP8_VP8IMG_H_ */</em>
+</pre>
+<hr />
+<a id='BOTTOM' name='BOTTOM'></a>
+<em class='comment'>/* [&lt;][&gt;][^][v]<a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+</body>
+</html>

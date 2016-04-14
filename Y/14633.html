@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>ctxt</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/121.html#L1494'>ctxt</a>             1494 ext/dom/document.c     xmlParserCtxtPtr ctxt = NULL;</span>
+<span class='curline'><a href='../S/121.html#L1528'>ctxt</a>             1528 ext/dom/document.c 			ctxt = xmlCreateFileParserCtxt(file_dest);</span>
+<span class='curline'><a href='../S/121.html#L1532'>ctxt</a>             1532 ext/dom/document.c 		ctxt = xmlCreateMemoryParserCtxt(source, source_len);</span>
+<span class='curline'><a href='../S/121.html#L1535'>ctxt</a>             1535 ext/dom/document.c 	if (ctxt == NULL) {</span>
+<span class='curline'><a href='../S/121.html#L1547'>ctxt</a>             1547 ext/dom/document.c 			if(ctxt-&gt;directory != NULL) {</span>
+<span class='curline'><a href='../S/121.html#L1548'>ctxt</a>             1548 ext/dom/document.c 				xmlFree((char *) ctxt-&gt;directory);</span>
+<span class='curline'><a href='../S/121.html#L1555'>ctxt</a>             1555 ext/dom/document.c 			ctxt-&gt;directory = (char *) xmlCanonicPath((const xmlChar *) resolved_path);</span>
+<span class='curline'><a href='../S/121.html#L1559'>ctxt</a>             1559 ext/dom/document.c 	ctxt-&gt;vctxt.error = php_libxml_ctx_error;</span>
+<span class='curline'><a href='../S/121.html#L1560'>ctxt</a>             1560 ext/dom/document.c 	ctxt-&gt;vctxt.warning = php_libxml_ctx_warning;</span>
+<span class='curline'><a href='../S/121.html#L1562'>ctxt</a>             1562 ext/dom/document.c 	if (ctxt-&gt;sax != NULL) {</span>
+<span class='curline'><a href='../S/121.html#L1563'>ctxt</a>             1563 ext/dom/document.c 		ctxt-&gt;sax-&gt;error = php_libxml_ctx_error;</span>
+<span class='curline'><a href='../S/121.html#L1564'>ctxt</a>             1564 ext/dom/document.c 		ctxt-&gt;sax-&gt;warning = php_libxml_ctx_warning;</span>
+<span class='curline'><a href='../S/121.html#L1580'>ctxt</a>             1580 ext/dom/document.c 	xmlCtxtUseOptions(ctxt, options);</span>
+<span class='curline'><a href='../S/121.html#L1582'>ctxt</a>             1582 ext/dom/document.c 	ctxt-&gt;recovery = recover;</span>
+<span class='curline'><a href='../S/121.html#L1588'>ctxt</a>             1588 ext/dom/document.c 	xmlParseDocument(ctxt);</span>
+<span class='curline'><a href='../S/121.html#L1590'>ctxt</a>             1590 ext/dom/document.c 	if (ctxt-&gt;wellFormed || recover) {</span>
+<span class='curline'><a href='../S/121.html#L1591'>ctxt</a>             1591 ext/dom/document.c 		ret = ctxt-&gt;myDoc;</span>
+<span class='curline'><a href='../S/121.html#L1592'>ctxt</a>             1592 ext/dom/document.c 		if (ctxt-&gt;recovery) {</span>
+<span class='curline'><a href='../S/121.html#L1596'>ctxt</a>             1596 ext/dom/document.c 		if (ret &amp;&amp; ret-&gt;URL == NULL &amp;&amp; ctxt-&gt;directory != NULL) {</span>
+<span class='curline'><a href='../S/121.html#L1597'>ctxt</a>             1597 ext/dom/document.c 			ret-&gt;URL = xmlStrdup(ctxt-&gt;directory);</span>
+<span class='curline'><a href='../S/121.html#L1601'>ctxt</a>             1601 ext/dom/document.c 		xmlFreeDoc(ctxt-&gt;myDoc);</span>
+<span class='curline'><a href='../S/121.html#L1602'>ctxt</a>             1602 ext/dom/document.c 		ctxt-&gt;myDoc = NULL;</span>
+<span class='curline'><a href='../S/121.html#L1605'>ctxt</a>             1605 ext/dom/document.c 	xmlFreeParserCtxt(ctxt);</span>
+<span class='curline'><a href='../S/121.html#L2126'>ctxt</a>             2126 ext/dom/document.c 	htmlParserCtxtPtr ctxt;</span>
+<span class='curline'><a href='../S/121.html#L2144'>ctxt</a>             2144 ext/dom/document.c 		ctxt = htmlCreateFileParserCtxt(source, NULL);</span>
+<span class='curline'><a href='../S/121.html#L2147'>ctxt</a>             2147 ext/dom/document.c 		ctxt = htmlCreateMemoryParserCtxt(source, source_len);</span>
+<span class='curline'><a href='../S/121.html#L2150'>ctxt</a>             2150 ext/dom/document.c 	if (!ctxt) {</span>
+<span class='curline'><a href='../S/121.html#L2155'>ctxt</a>             2155 ext/dom/document.c 		htmlCtxtUseOptions(ctxt, options);</span>
+<span class='curline'><a href='../S/121.html#L2158'>ctxt</a>             2158 ext/dom/document.c 	ctxt-&gt;vctxt.error = php_libxml_ctx_error;</span>
+<span class='curline'><a href='../S/121.html#L2159'>ctxt</a>             2159 ext/dom/document.c 	ctxt-&gt;vctxt.warning = php_libxml_ctx_warning;</span>
+<span class='curline'><a href='../S/121.html#L2160'>ctxt</a>             2160 ext/dom/document.c 	if (ctxt-&gt;sax != NULL) {</span>
+<span class='curline'><a href='../S/121.html#L2161'>ctxt</a>             2161 ext/dom/document.c 		ctxt-&gt;sax-&gt;error = php_libxml_ctx_error;</span>
+<span class='curline'><a href='../S/121.html#L2162'>ctxt</a>             2162 ext/dom/document.c 		ctxt-&gt;sax-&gt;warning = php_libxml_ctx_warning;</span>
+<span class='curline'><a href='../S/121.html#L2164'>ctxt</a>             2164 ext/dom/document.c 	htmlParseDocument(ctxt);</span>
+<span class='curline'><a href='../S/121.html#L2165'>ctxt</a>             2165 ext/dom/document.c 	newdoc = ctxt-&gt;myDoc;</span>
+<span class='curline'><a href='../S/121.html#L2166'>ctxt</a>             2166 ext/dom/document.c 	htmlFreeParserCtxt(ctxt);</span>
+<span class='curline'><a href='../S/153.html#L75'>ctxt</a>               75 ext/dom/xpath.c static void dom_xpath_ext_function_php(xmlXPathParserContextPtr ctxt, int nargs, int type) /* {{{ */</span>
+<span class='curline'><a href='../S/153.html#L95'>ctxt</a>               95 ext/dom/xpath.c 		intern = (dom_xpath_object *) ctxt-&gt;context-&gt;userData;</span>
+<span class='curline'><a href='../S/153.html#L110'>ctxt</a>              110 ext/dom/xpath.c 			obj = valuePop(ctxt);</span>
+<span class='curline'><a href='../S/153.html#L123'>ctxt</a>              123 ext/dom/xpath.c 		obj = valuePop(ctxt);</span>
+<span class='curline'><a href='../S/153.html#L183'>ctxt</a>              183 ext/dom/xpath.c 	obj = valuePop(ctxt);</span>
+<span class='curline'><a href='../S/153.html#L212'>ctxt</a>              212 ext/dom/xpath.c 		valuePush(ctxt, xmlXPathNewString((xmlChar *)""));</span>
+<span class='curline'><a href='../S/153.html#L233'>ctxt</a>              233 ext/dom/xpath.c 				valuePush(ctxt, xmlXPathNewNodeSet(nodep));</span>
+<span class='curline'><a href='../S/153.html#L235'>ctxt</a>              235 ext/dom/xpath.c 				valuePush(ctxt, xmlXPathNewBoolean(retval-&gt;value.lval));</span>
+<span class='curline'><a href='../S/153.html#L238'>ctxt</a>              238 ext/dom/xpath.c 				valuePush(ctxt, xmlXPathNewString((xmlChar *)""));</span>
+<span class='curline'><a href='../S/153.html#L241'>ctxt</a>              241 ext/dom/xpath.c 				valuePush(ctxt, xmlXPathNewString( Z_STRVAL_P(retval)));</span>
+<span class='curline'><a href='../S/153.html#L258'>ctxt</a>              258 ext/dom/xpath.c static void dom_xpath_ext_function_string_php(xmlXPathParserContextPtr ctxt, int nargs) /* {{{ */</span>
+<span class='curline'><a href='../S/153.html#L260'>ctxt</a>              260 ext/dom/xpath.c 	dom_xpath_ext_function_php(ctxt, nargs, 1);</span>
+<span class='curline'><a href='../S/153.html#L264'>ctxt</a>              264 ext/dom/xpath.c static void dom_xpath_ext_function_object_php(xmlXPathParserContextPtr ctxt, int nargs) /* {{{ */</span>
+<span class='curline'><a href='../S/153.html#L266'>ctxt</a>              266 ext/dom/xpath.c 	dom_xpath_ext_function_php(ctxt, nargs, 2);</span>
+<span class='curline'><a href='../S/464.html#L492'>ctxt</a>              492 ext/libxml/libxml.c 		error_copy.ctxt = NULL;</span>
+<span class='curline'><a href='../S/1029.html#L82'>ctxt</a>               82 ext/soap/php_xml.c 	xmlParserCtxtPtr ctxt = NULL;</span>
+<span class='curline'><a href='../S/1029.html#L92'>ctxt</a>               92 ext/soap/php_xml.c 	ctxt = xmlCreateFileParserCtxt(filename);</span>
+<span class='curline'><a href='../S/1029.html#L94'>ctxt</a>               94 ext/soap/php_xml.c 	if (ctxt) {</span>
+<span class='curline'><a href='../S/1029.html#L97'>ctxt</a>               97 ext/soap/php_xml.c 		ctxt-&gt;keepBlanks = 0;</span>
+<span class='curline'><a href='../S/1029.html#L98'>ctxt</a>               98 ext/soap/php_xml.c 		ctxt-&gt;sax-&gt;ignorableWhitespace = soap_ignorableWhitespace;</span>
+<span class='curline'><a href='../S/1029.html#L99'>ctxt</a>               99 ext/soap/php_xml.c 		ctxt-&gt;sax-&gt;comment = soap_Comment;</span>
+<span class='curline'><a href='../S/1029.html#L100'>ctxt</a>              100 ext/soap/php_xml.c 		ctxt-&gt;sax-&gt;warning = NULL;</span>
+<span class='curline'><a href='../S/1029.html#L101'>ctxt</a>              101 ext/soap/php_xml.c 		ctxt-&gt;sax-&gt;error = NULL;</span>
+<span class='curline'><a href='../S/1029.html#L104'>ctxt</a>              104 ext/soap/php_xml.c 		ctxt-&gt;options |= XML_PARSE_HUGE;</span>
+<span class='curline'><a href='../S/1029.html#L107'>ctxt</a>              107 ext/soap/php_xml.c 		xmlParseDocument(ctxt);</span>
+<span class='curline'><a href='../S/1029.html#L109'>ctxt</a>              109 ext/soap/php_xml.c 		if (ctxt-&gt;wellFormed) {</span>
+<span class='curline'><a href='../S/1029.html#L110'>ctxt</a>              110 ext/soap/php_xml.c 			ret = ctxt-&gt;myDoc;</span>
+<span class='curline'><a href='../S/1029.html#L111'>ctxt</a>              111 ext/soap/php_xml.c 			if (ret-&gt;URL == NULL &amp;&amp; ctxt-&gt;directory != NULL) {</span>
+<span class='curline'><a href='../S/1029.html#L112'>ctxt</a>              112 ext/soap/php_xml.c 				ret-&gt;URL = xmlCharStrdup(ctxt-&gt;directory);</span>
+<span class='curline'><a href='../S/1029.html#L116'>ctxt</a>              116 ext/soap/php_xml.c 			xmlFreeDoc(ctxt-&gt;myDoc);</span>
+<span class='curline'><a href='../S/1029.html#L117'>ctxt</a>              117 ext/soap/php_xml.c 			ctxt-&gt;myDoc = NULL;</span>
+<span class='curline'><a href='../S/1029.html#L119'>ctxt</a>              119 ext/soap/php_xml.c 		xmlFreeParserCtxt(ctxt);</span>
+<span class='curline'><a href='../S/1029.html#L136'>ctxt</a>              136 ext/soap/php_xml.c 	xmlParserCtxtPtr ctxt = NULL;</span>
+<span class='curline'><a href='../S/1029.html#L144'>ctxt</a>              144 ext/soap/php_xml.c 	ctxt = xmlCreateMemoryParserCtxt(buf, buf_size);</span>
+<span class='curline'><a href='../S/1029.html#L145'>ctxt</a>              145 ext/soap/php_xml.c 	if (ctxt) {</span>
+<span class='curline'><a href='../S/1029.html#L148'>ctxt</a>              148 ext/soap/php_xml.c 		ctxt-&gt;sax-&gt;ignorableWhitespace = soap_ignorableWhitespace;</span>
+<span class='curline'><a href='../S/1029.html#L149'>ctxt</a>              149 ext/soap/php_xml.c 		ctxt-&gt;sax-&gt;comment = soap_Comment;</span>
+<span class='curline'><a href='../S/1029.html#L150'>ctxt</a>              150 ext/soap/php_xml.c 		ctxt-&gt;sax-&gt;warning = NULL;</span>
+<span class='curline'><a href='../S/1029.html#L151'>ctxt</a>              151 ext/soap/php_xml.c 		ctxt-&gt;sax-&gt;error = NULL;</span>
+<span class='curline'><a href='../S/1029.html#L154'>ctxt</a>              154 ext/soap/php_xml.c 		ctxt-&gt;options |= XML_PARSE_HUGE;</span>
+<span class='curline'><a href='../S/1029.html#L157'>ctxt</a>              157 ext/soap/php_xml.c 		xmlParseDocument(ctxt);</span>
+<span class='curline'><a href='../S/1029.html#L159'>ctxt</a>              159 ext/soap/php_xml.c 		if (ctxt-&gt;wellFormed) {</span>
+<span class='curline'><a href='../S/1029.html#L160'>ctxt</a>              160 ext/soap/php_xml.c 			ret = ctxt-&gt;myDoc;</span>
+<span class='curline'><a href='../S/1029.html#L161'>ctxt</a>              161 ext/soap/php_xml.c 			if (ret-&gt;URL == NULL &amp;&amp; ctxt-&gt;directory != NULL) {</span>
+<span class='curline'><a href='../S/1029.html#L162'>ctxt</a>              162 ext/soap/php_xml.c 				ret-&gt;URL = xmlCharStrdup(ctxt-&gt;directory);</span>
+<span class='curline'><a href='../S/1029.html#L166'>ctxt</a>              166 ext/soap/php_xml.c 			xmlFreeDoc(ctxt-&gt;myDoc);</span>
+<span class='curline'><a href='../S/1029.html#L167'>ctxt</a>              167 ext/soap/php_xml.c 			ctxt-&gt;myDoc = NULL;</span>
+<span class='curline'><a href='../S/1029.html#L169'>ctxt</a>              169 ext/soap/php_xml.c 		xmlFreeParserCtxt(ctxt);</span>
+<span class='curline'><a href='../S/1257.html#L76'>ctxt</a>               76 ext/xsl/php_xsl.h void xsl_ext_function_string_php(xmlXPathParserContextPtr ctxt, int nargs);</span>
+<span class='curline'><a href='../S/1257.html#L77'>ctxt</a>               77 ext/xsl/php_xsl.h void xsl_ext_function_object_php(xmlXPathParserContextPtr ctxt, int nargs);</span>
+<span class='curline'><a href='../S/1259.html#L182'>ctxt</a>              182 ext/xsl/xsltprocessor.c static void xsl_ext_function_php(xmlXPathParserContextPtr ctxt, int nargs, int type) /* {{{ */</span>
+<span class='curline'><a href='../S/1259.html#L203'>ctxt</a>              203 ext/xsl/xsltprocessor.c 		tctxt = xsltXPathGetTransformContext(ctxt);</span>
+<span class='curline'><a href='../S/1259.html#L225'>ctxt</a>              225 ext/xsl/xsltprocessor.c 			obj = valuePop(ctxt);</span>
+<span class='curline'><a href='../S/1259.html#L240'>ctxt</a>              240 ext/xsl/xsltprocessor.c 		obj = valuePop(ctxt);</span>
+<span class='curline'><a href='../S/1259.html#L310'>ctxt</a>              310 ext/xsl/xsltprocessor.c 	obj = valuePop(ctxt);</span>
+<span class='curline'><a href='../S/1259.html#L316'>ctxt</a>              316 ext/xsl/xsltprocessor.c 		valuePush(ctxt, xmlXPathNewString(""));</span>
+<span class='curline'><a href='../S/1259.html#L338'>ctxt</a>              338 ext/xsl/xsltprocessor.c 		valuePush(ctxt, xmlXPathNewString(""));</span>
+<span class='curline'><a href='../S/1259.html#L342'>ctxt</a>              342 ext/xsl/xsltprocessor.c 		valuePush(ctxt, xmlXPathNewString(""));</span>
+<span class='curline'><a href='../S/1259.html#L348'>ctxt</a>              348 ext/xsl/xsltprocessor.c 				valuePush(ctxt, xmlXPathNewString(""));</span>
+<span class='curline'><a href='../S/1259.html#L364'>ctxt</a>              364 ext/xsl/xsltprocessor.c 				valuePush(ctxt, xmlXPathNewNodeSet(nodep));</span>
+<span class='curline'><a href='../S/1259.html#L366'>ctxt</a>              366 ext/xsl/xsltprocessor.c 				valuePush(ctxt, xmlXPathNewBoolean(retval-&gt;value.lval));</span>
+<span class='curline'><a href='../S/1259.html#L369'>ctxt</a>              369 ext/xsl/xsltprocessor.c 				valuePush(ctxt, xmlXPathNewString(""));</span>
+<span class='curline'><a href='../S/1259.html#L372'>ctxt</a>              372 ext/xsl/xsltprocessor.c 				valuePush(ctxt, xmlXPathNewString( Z_STRVAL_P(retval)));</span>
+<span class='curline'><a href='../S/1259.html#L389'>ctxt</a>              389 ext/xsl/xsltprocessor.c void xsl_ext_function_string_php(xmlXPathParserContextPtr ctxt, int nargs) /* {{{ */</span>
+<span class='curline'><a href='../S/1259.html#L391'>ctxt</a>              391 ext/xsl/xsltprocessor.c 	xsl_ext_function_php(ctxt, nargs, 1);</span>
+<span class='curline'><a href='../S/1259.html#L395'>ctxt</a>              395 ext/xsl/xsltprocessor.c void xsl_ext_function_object_php(xmlXPathParserContextPtr ctxt, int nargs) /* {{{ */</span>
+<span class='curline'><a href='../S/1259.html#L397'>ctxt</a>              397 ext/xsl/xsltprocessor.c 	xsl_ext_function_php(ctxt, nargs, 2);</span>
+<span class='curline'><a href='../S/1259.html#L493'>ctxt</a>              493 ext/xsl/xsltprocessor.c 	xsltTransformContextPtr ctxt;</span>
+<span class='curline'><a href='../S/1259.html#L545'>ctxt</a>              545 ext/xsl/xsltprocessor.c 	ctxt = xsltNewTransformContext(style, doc);</span>
+<span class='curline'><a href='../S/1259.html#L546'>ctxt</a>              546 ext/xsl/xsltprocessor.c 	ctxt-&gt;_private = (void *) intern;</span>
+<span class='curline'><a href='../S/1259.html#L555'>ctxt</a>              555 ext/xsl/xsltprocessor.c 		ctxt-&gt;xinclude = Z_LVAL_P(doXInclude);</span>
+<span class='curline'><a href='../S/1259.html#L607'>ctxt</a>              607 ext/xsl/xsltprocessor.c 		if (0 != xsltSetCtxtSecurityPrefs(secPrefs, ctxt)) {</span>
+<span class='curline'><a href='../S/1259.html#L615'>ctxt</a>              615 ext/xsl/xsltprocessor.c 		newdocp = xsltApplyStylesheetUser(style, doc, (const char**) params,  NULL, f, ctxt);</span>
+<span class='curline'><a href='../S/1259.html#L621'>ctxt</a>              621 ext/xsl/xsltprocessor.c 	xsltFreeTransformContext(ctxt);</span>
+</pre>
+</body>
+</html>

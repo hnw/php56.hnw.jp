@@ -1,0 +1,631 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>ns</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/1647.html#L63'>ns</a>                 63 Zend/zend_API.h #define ZEND_NS_NAME(ns, name)			ns "\\" name</span>
+<span class='curline'><a href='../S/1647.html#L88'>ns</a>                 88 Zend/zend_API.h #define ZEND_NS_FENTRY(ns, zend_name, name, arg_info, flags)		ZEND_RAW_FENTRY(ZEND_NS_NAME(ns, #zend_name), name, arg_info, flags)</span>
+<span class='curline'><a href='../S/1647.html#L90'>ns</a>                 90 Zend/zend_API.h #define ZEND_NS_RAW_FENTRY(ns, zend_name, name, arg_info, flags)	ZEND_RAW_FENTRY(ZEND_NS_NAME(ns, zend_name), name, arg_info, flags)</span>
+<span class='curline'><a href='../S/1647.html#L91'>ns</a>                 91 Zend/zend_API.h #define ZEND_NS_RAW_NAMED_FE(ns, zend_name, name, arg_info)			ZEND_NS_RAW_FENTRY(ns, #zend_name, name, arg_info, 0)</span>
+<span class='curline'><a href='../S/1647.html#L93'>ns</a>                 93 Zend/zend_API.h #define ZEND_NS_NAMED_FE(ns, zend_name, name, arg_info)	ZEND_NS_FENTRY(ns, zend_name, name, arg_info, 0)</span>
+<span class='curline'><a href='../S/1647.html#L94'>ns</a>                 94 Zend/zend_API.h #define ZEND_NS_FE(ns, name, arg_info)					ZEND_NS_FENTRY(ns, name, ZEND_FN(name), arg_info, 0)</span>
+<span class='curline'><a href='../S/1647.html#L95'>ns</a>                 95 Zend/zend_API.h #define ZEND_NS_DEP_FE(ns, name, arg_info)				ZEND_NS_FENTRY(ns, name, ZEND_FN(name), arg_info, ZEND_ACC_DEPRECATED)</span>
+<span class='curline'><a href='../S/1647.html#L96'>ns</a>                 96 Zend/zend_API.h #define ZEND_NS_FALIAS(ns, name, alias, arg_info)		ZEND_NS_FENTRY(ns, name, ZEND_FN(alias), arg_info, 0)</span>
+<span class='curline'><a href='../S/1647.html#L97'>ns</a>                 97 Zend/zend_API.h #define ZEND_NS_DEP_FALIAS(ns, name, alias, arg_info)	ZEND_NS_FENTRY(ns, name, ZEND_FN(alias), arg_info, ZEND_ACC_DEPRECATED)</span>
+<span class='curline'><a href='../S/1647.html#L221'>ns</a>                221 Zend/zend_API.h #define INIT_NS_CLASS_ENTRY(class_container, ns, class_name, functions) \</span>
+<span class='curline'><a href='../S/1647.html#L222'>ns</a>                222 Zend/zend_API.h 	INIT_CLASS_ENTRY(class_container, ZEND_NS_NAME(ns, class_name), functions)</span>
+<span class='curline'><a href='../S/1647.html#L223'>ns</a>                223 Zend/zend_API.h #define INIT_OVERLOADED_NS_CLASS_ENTRY_EX(class_container, ns, class_name, functions, handle_fcall, handle_propget, handle_propset, handle_propunset, handle_propisset) \</span>
+<span class='curline'><a href='../S/1647.html#L224'>ns</a>                224 Zend/zend_API.h 	INIT_OVERLOADED_CLASS_ENTRY_EX(class_container, ZEND_NS_NAME(ns, class_name), sizeof(ZEND_NS_NAME(ns, class_name))-1, functions, handle_fcall, handle_propget, handle_propset, handle_propunset, handle_propisset)</span>
+<span class='curline'><a href='../S/1647.html#L225'>ns</a>                225 Zend/zend_API.h #define INIT_OVERLOADED_NS_CLASS_ENTRY(class_container, ns, class_name, functions, handle_fcall, handle_propget, handle_propset) \</span>
+<span class='curline'><a href='../S/1647.html#L226'>ns</a>                226 Zend/zend_API.h 	INIT_OVERLOADED_CLASS_ENTRY(class_container, ZEND_NS_NAME(ns, class_name), functions, handle_fcall, handle_propget, handle_propset)</span>
+<span class='curline'><a href='../S/1647.html#L288'>ns</a>                288 Zend/zend_API.h #define zend_register_ns_class_alias(ns, name, ce) \</span>
+<span class='curline'><a href='../S/1647.html#L289'>ns</a>                289 Zend/zend_API.h 	zend_register_class_alias_ex(ZEND_NS_NAME(ns, name), sizeof(ZEND_NS_NAME(ns, name))-1, ce TSRMLS_CC)</span>
+<span class='curline'><a href='../S/1655.html#L2124'>ns</a>               2124 Zend/zend_compile.c 	zval **ns;</span>
+<span class='curline'><a href='../S/1655.html#L2146'>ns</a>               2146 Zend/zend_compile.c 		if (zend_hash_find(current_import_sub, lookup_name, len, (void**)&amp;ns) == SUCCESS) {</span>
+<span class='curline'><a href='../S/1655.html#L2148'>ns</a>               2148 Zend/zend_compile.c 			element_name-&gt;u.constant = **ns;</span>
+<span class='curline'><a href='../S/1655.html#L2162'>ns</a>               2162 Zend/zend_compile.c 		if (zend_hash_find(CG(current_import), lookup_name, len+1, (void**)&amp;ns) == SUCCESS) {</span>
+<span class='curline'><a href='../S/1655.html#L2165'>ns</a>               2165 Zend/zend_compile.c 			tmp.u.constant = **ns;</span>
+<span class='curline'><a href='../S/1655.html#L2267'>ns</a>               2267 Zend/zend_compile.c 	zval **ns;</span>
+<span class='curline'><a href='../S/1655.html#L2290'>ns</a>               2290 Zend/zend_compile.c 				if (zend_hash_find(CG(current_import), lcname, len+1, (void**)&amp;ns) == SUCCESS) {</span>
+<span class='curline'><a href='../S/1655.html#L2293'>ns</a>               2293 Zend/zend_compile.c 					tmp.u.constant = **ns;</span>
+<span class='curline'><a href='../S/1655.html#L2319'>ns</a>               2319 Zend/zend_compile.c 		    zend_hash_find(CG(current_import), lcname, Z_STRLEN(class_name-&gt;u.constant)+1, (void**)&amp;ns) == SUCCESS) {</span>
+<span class='curline'><a href='../S/1655.html#L2322'>ns</a>               2322 Zend/zend_compile.c 			class_name-&gt;u.constant = **ns;</span>
+<span class='curline'><a href='../S/1655.html#L7158'>ns</a>               7158 Zend/zend_compile.c 	zval *name, *ns, tmp;</span>
+<span class='curline'><a href='../S/1655.html#L7167'>ns</a>               7167 Zend/zend_compile.c 	MAKE_STD_ZVAL(ns);</span>
+<span class='curline'><a href='../S/1655.html#L7168'>ns</a>               7168 Zend/zend_compile.c 	ZVAL_ZVAL(ns, &amp;ns_name-&gt;u.constant, 0, 0);</span>
+<span class='curline'><a href='../S/1655.html#L7177'>ns</a>               7177 Zend/zend_compile.c 		p = zend_memrchr(Z_STRVAL_P(ns), '\\', Z_STRLEN_P(ns));</span>
+<span class='curline'><a href='../S/1655.html#L7181'>ns</a>               7181 Zend/zend_compile.c 			ZVAL_ZVAL(name, ns, 1, 0);</span>
+<span class='curline'><a href='../S/1655.html#L7192'>ns</a>               7192 Zend/zend_compile.c 		zend_error_noreturn(E_COMPILE_ERROR, "Cannot use %s as %s because '%s' is a special class name", Z_STRVAL_P(ns), Z_STRVAL_P(name), Z_STRVAL_P(name));</span>
+<span class='curline'><a href='../S/1655.html#L7203'>ns</a>               7203 Zend/zend_compile.c 			char *tmp2 = zend_str_tolower_dup(Z_STRVAL_P(ns), Z_STRLEN_P(ns));</span>
+<span class='curline'><a href='../S/1655.html#L7205'>ns</a>               7205 Zend/zend_compile.c 			if (Z_STRLEN_P(ns) != Z_STRLEN_P(CG(current_namespace)) + 1 + Z_STRLEN_P(name) ||</span>
+<span class='curline'><a href='../S/1655.html#L7206'>ns</a>               7206 Zend/zend_compile.c 				memcmp(tmp2, c_ns_name, Z_STRLEN_P(ns))) {</span>
+<span class='curline'><a href='../S/1655.html#L7207'>ns</a>               7207 Zend/zend_compile.c 				zend_error_noreturn(E_COMPILE_ERROR, "Cannot use %s as %s because the name is already in use", Z_STRVAL_P(ns), Z_STRVAL_P(name));</span>
+<span class='curline'><a href='../S/1655.html#L7215'>ns</a>               7215 Zend/zend_compile.c 		char *c_tmp = zend_str_tolower_dup(Z_STRVAL_P(ns), Z_STRLEN_P(ns));</span>
+<span class='curline'><a href='../S/1655.html#L7217'>ns</a>               7217 Zend/zend_compile.c 		if (Z_STRLEN_P(ns) != Z_STRLEN_P(name) ||</span>
+<span class='curline'><a href='../S/1655.html#L7218'>ns</a>               7218 Zend/zend_compile.c 			memcmp(c_tmp, lcname, Z_STRLEN_P(ns))) {</span>
+<span class='curline'><a href='../S/1655.html#L7219'>ns</a>               7219 Zend/zend_compile.c 			zend_error_noreturn(E_COMPILE_ERROR, "Cannot use %s as %s because the name is already in use", Z_STRVAL_P(ns), Z_STRVAL_P(name));</span>
+<span class='curline'><a href='../S/1655.html#L7224'>ns</a>               7224 Zend/zend_compile.c 	if (zend_hash_add(CG(current_import), lcname, Z_STRLEN_P(name)+1, &amp;ns, sizeof(zval*), NULL) != SUCCESS) {</span>
+<span class='curline'><a href='../S/1655.html#L7225'>ns</a>               7225 Zend/zend_compile.c 		zend_error_noreturn(E_COMPILE_ERROR, "Cannot use %s as %s because the name is already in use", Z_STRVAL_P(ns), Z_STRVAL_P(name));</span>
+<span class='curline'><a href='../S/1655.html#L7241'>ns</a>               7241 Zend/zend_compile.c 	zval *name, *ns, tmp;</span>
+<span class='curline'><a href='../S/1655.html#L7244'>ns</a>               7244 Zend/zend_compile.c 	MAKE_STD_ZVAL(ns);</span>
+<span class='curline'><a href='../S/1655.html#L7245'>ns</a>               7245 Zend/zend_compile.c 	ZVAL_ZVAL(ns, &amp;ns_name-&gt;u.constant, 0, 0);</span>
+<span class='curline'><a href='../S/1655.html#L7254'>ns</a>               7254 Zend/zend_compile.c 		p = zend_memrchr(Z_STRVAL_P(ns), '\\', Z_STRLEN_P(ns));</span>
+<span class='curline'><a href='../S/1655.html#L7258'>ns</a>               7258 Zend/zend_compile.c 			ZVAL_ZVAL(name, ns, 1, 0);</span>
+<span class='curline'><a href='../S/1655.html#L7277'>ns</a>               7277 Zend/zend_compile.c 			char *tmp2 = zend_str_tolower_dup(Z_STRVAL_P(ns), Z_STRLEN_P(ns));</span>
+<span class='curline'><a href='../S/1655.html#L7279'>ns</a>               7279 Zend/zend_compile.c 			if (Z_STRLEN_P(ns) != Z_STRLEN_P(CG(current_namespace)) + 1 + Z_STRLEN_P(name) ||</span>
+<span class='curline'><a href='../S/1655.html#L7280'>ns</a>               7280 Zend/zend_compile.c 				memcmp(tmp2, c_ns_name, Z_STRLEN_P(ns))) {</span>
+<span class='curline'><a href='../S/1655.html#L7281'>ns</a>               7281 Zend/zend_compile.c 				zend_error(E_COMPILE_ERROR, "Cannot use %s %s as %s because the name is already in use", is_function ? "function" : "const", Z_STRVAL_P(ns), Z_STRVAL_P(name));</span>
+<span class='curline'><a href='../S/1655.html#L7290'>ns</a>               7290 Zend/zend_compile.c 			char *c_tmp = zend_str_tolower_dup(Z_STRVAL_P(ns), Z_STRLEN_P(ns));</span>
+<span class='curline'><a href='../S/1655.html#L7292'>ns</a>               7292 Zend/zend_compile.c 			if (Z_STRLEN_P(ns) != Z_STRLEN_P(name) ||</span>
+<span class='curline'><a href='../S/1655.html#L7293'>ns</a>               7293 Zend/zend_compile.c 				memcmp(c_tmp, lookup_name, Z_STRLEN_P(ns))) {</span>
+<span class='curline'><a href='../S/1655.html#L7294'>ns</a>               7294 Zend/zend_compile.c 				zend_error(E_COMPILE_ERROR, "Cannot use function %s as %s because the name is already in use", Z_STRVAL_P(ns), Z_STRVAL_P(name));</span>
+<span class='curline'><a href='../S/1655.html#L7302'>ns</a>               7302 Zend/zend_compile.c 			char *c_tmp = zend_str_tolower_dup(Z_STRVAL_P(ns), Z_STRLEN_P(ns));</span>
+<span class='curline'><a href='../S/1655.html#L7304'>ns</a>               7304 Zend/zend_compile.c 			if (Z_STRLEN_P(ns) != Z_STRLEN_P(name) ||</span>
+<span class='curline'><a href='../S/1655.html#L7305'>ns</a>               7305 Zend/zend_compile.c 				memcmp(c_tmp, lookup_name, Z_STRLEN_P(ns))) {</span>
+<span class='curline'><a href='../S/1655.html#L7306'>ns</a>               7306 Zend/zend_compile.c 				zend_error(E_COMPILE_ERROR, "Cannot use const %s as %s because the name is already in use", Z_STRVAL_P(ns), Z_STRVAL_P(name));</span>
+<span class='curline'><a href='../S/1655.html#L7312'>ns</a>               7312 Zend/zend_compile.c 	if (zend_hash_add(current_import_sub, lookup_name, Z_STRLEN_P(name)+1, &amp;ns, sizeof(zval*), NULL) != SUCCESS) {</span>
+<span class='curline'><a href='../S/1655.html#L7313'>ns</a>               7313 Zend/zend_compile.c 		zend_error(E_COMPILE_ERROR, "Cannot use %s %s as %s because the name is already in use", is_function ? "function" : "const", Z_STRVAL_P(ns), Z_STRVAL_P(name));</span>
+<span class='curline'><a href='../S/1660.html#L48'>ns</a>                 48 Zend/zend_constants.h #define REGISTER_NS_NULL_CONSTANT(ns, name, flags)  zend_register_null_constant(ZEND_NS_NAME(ns, name), sizeof(ZEND_NS_NAME(ns, name)), (flags), module_number TSRMLS_CC)</span>
+<span class='curline'><a href='../S/1660.html#L49'>ns</a>                 49 Zend/zend_constants.h #define REGISTER_NS_BOOL_CONSTANT(ns, name, bval, flags)  zend_register_bool_constant(ZEND_NS_NAME(ns, name), sizeof(ZEND_NS_NAME(ns, name)), (bval), (flags), module_number TSRMLS_CC)</span>
+<span class='curline'><a href='../S/1660.html#L50'>ns</a>                 50 Zend/zend_constants.h #define REGISTER_NS_LONG_CONSTANT(ns, name, lval, flags)  zend_register_long_constant(ZEND_NS_NAME(ns, name), sizeof(ZEND_NS_NAME(ns, name)), (lval), (flags), module_number TSRMLS_CC)</span>
+<span class='curline'><a href='../S/1660.html#L51'>ns</a>                 51 Zend/zend_constants.h #define REGISTER_NS_DOUBLE_CONSTANT(ns, name, dval, flags)  zend_register_double_constant(ZEND_NS_NAME(ns, name), sizeof(ZEND_NS_NAME(ns, name)), (dval), (flags), module_number TSRMLS_CC)</span>
+<span class='curline'><a href='../S/1660.html#L52'>ns</a>                 52 Zend/zend_constants.h #define REGISTER_NS_STRING_CONSTANT(ns, name, str, flags)  zend_register_string_constant(ZEND_NS_NAME(ns, name), sizeof(ZEND_NS_NAME(ns, name)), (str), (flags), module_number TSRMLS_CC)</span>
+<span class='curline'><a href='../S/1660.html#L53'>ns</a>                 53 Zend/zend_constants.h #define REGISTER_NS_STRINGL_CONSTANT(ns, name, str, len, flags)  zend_register_stringl_constant(ZEND_NS_NAME(ns, name), sizeof(ZEND_NS_NAME(ns, name)), (str), (len), (flags), module_number TSRMLS_CC)</span>
+<span class='curline'><a href='../S/121.html#L1147'>ns</a>               1147 ext/dom/document.c 		if ((retnodep-&gt;type == XML_ATTRIBUTE_NODE) &amp;&amp; (nodep-&gt;ns != NULL)) {</span>
+<span class='curline'><a href='../S/121.html#L1151'>ns</a>               1151 ext/dom/document.c 			nsptr = xmlSearchNsByHref (nodep-&gt;doc, root, nodep-&gt;ns-&gt;href);</span>
+<span class='curline'><a href='../S/121.html#L1154'>ns</a>               1154 ext/dom/document.c 				nsptr = dom_get_ns(root, (char *) nodep-&gt;ns-&gt;href, &amp;errorcode, (char *) nodep-&gt;ns-&gt;prefix);</span>
+<span class='curline'><a href='../S/121.html#L1221'>ns</a>               1221 ext/dom/document.c 	nodep-&gt;ns = nsptr;</span>
+<span class='curline'><a href='../S/126.html#L226'>ns</a>                226 ext/dom/dom_iterators.c 					curnode = dom_get_elements_by_tag_name_ns_raw(basenode, objmap-&gt;ns, objmap-&gt;local, &amp;previndex, iter-&gt;index);</span>
+<span class='curline'><a href='../S/126.html#L306'>ns</a>                306 ext/dom/dom_iterators.c 					curnode = dom_get_elements_by_tag_name_ns_raw(nodep, objmap-&gt;ns, objmap-&gt;local, &amp;curindex, 0);</span>
+<span class='curline'><a href='../S/137.html#L241'>ns</a>                241 ext/dom/element.c 	xmlNsPtr ns;</span>
+<span class='curline'><a href='../S/137.html#L252'>ns</a>                252 ext/dom/element.c 	ns = nodep-&gt;ns;</span>
+<span class='curline'><a href='../S/137.html#L253'>ns</a>                253 ext/dom/element.c 	if (ns != NULL &amp;&amp; ns-&gt;prefix) {</span>
+<span class='curline'><a href='../S/137.html#L254'>ns</a>                254 ext/dom/element.c 		qname = xmlStrdup(ns-&gt;prefix);</span>
+<span class='curline'><a href='../S/137.html#L289'>ns</a>                289 ext/dom/element.c 		xmlNsPtr ns;</span>
+<span class='curline'><a href='../S/137.html#L292'>ns</a>                292 ext/dom/element.c 			ns = elem-&gt;nsDef;</span>
+<span class='curline'><a href='../S/137.html#L293'>ns</a>                293 ext/dom/element.c 			while (ns) {</span>
+<span class='curline'><a href='../S/137.html#L294'>ns</a>                294 ext/dom/element.c 				if (xmlStrEqual(ns-&gt;prefix, nqname)) {</span>
+<span class='curline'><a href='../S/137.html#L297'>ns</a>                297 ext/dom/element.c 				ns = ns-&gt;next;</span>
+<span class='curline'><a href='../S/137.html#L300'>ns</a>                300 ext/dom/element.c 			return (xmlNodePtr)ns;</span>
+<span class='curline'><a href='../S/137.html#L302'>ns</a>                302 ext/dom/element.c 		ns = xmlSearchNs(elem-&gt;doc, elem, prefix);</span>
+<span class='curline'><a href='../S/137.html#L306'>ns</a>                306 ext/dom/element.c 		if (ns != NULL) {</span>
+<span class='curline'><a href='../S/137.html#L307'>ns</a>                307 ext/dom/element.c 			return (xmlNodePtr)xmlHasNsProp(elem, nqname, ns-&gt;href);</span>
+<span class='curline'><a href='../S/137.html#L521'>ns</a>                521 ext/dom/element.c 		attrp-&gt;ns = curns;</span>
+<span class='curline'><a href='../S/137.html#L698'>ns</a>                698 ext/dom/element.c static xmlNsPtr _dom_new_reconNs(xmlDocPtr doc, xmlNodePtr tree, xmlNsPtr ns) /* {{{ */</span>
+<span class='curline'><a href='../S/137.html#L704'>ns</a>                704 ext/dom/element.c 	if ((tree == NULL) || (ns == NULL) || (ns-&gt;type != XML_NAMESPACE_DECL)) {</span>
+<span class='curline'><a href='../S/137.html#L713'>ns</a>                713 ext/dom/element.c 	if (ns-&gt;prefix == NULL)</span>
+<span class='curline'><a href='../S/137.html#L716'>ns</a>                716 ext/dom/element.c 		snprintf((char *) prefix, sizeof(prefix), "%.20s", (char *)ns-&gt;prefix);</span>
+<span class='curline'><a href='../S/137.html#L721'>ns</a>                721 ext/dom/element.c 		if (ns-&gt;prefix == NULL)</span>
+<span class='curline'><a href='../S/137.html#L725'>ns</a>                725 ext/dom/element.c 			(char *)ns-&gt;prefix, counter++);</span>
+<span class='curline'><a href='../S/137.html#L732'>ns</a>                732 ext/dom/element.c 	def = xmlNewNs(tree, ns-&gt;href, prefix);</span>
+<span class='curline'><a href='../S/137.html#L988'>ns</a>                988 ext/dom/element.c     nsp = attrp-&gt;ns;</span>
+<span class='curline'><a href='../S/142.html#L202'>ns</a>                202 ext/dom/node.c 	xmlNsPtr ns;</span>
+<span class='curline'><a href='../S/142.html#L216'>ns</a>                216 ext/dom/node.c 			ns = nodep-&gt;ns;</span>
+<span class='curline'><a href='../S/142.html#L217'>ns</a>                217 ext/dom/node.c 			if (ns != NULL &amp;&amp; ns-&gt;prefix) {</span>
+<span class='curline'><a href='../S/142.html#L218'>ns</a>                218 ext/dom/node.c 				qname = xmlStrdup(ns-&gt;prefix);</span>
+<span class='curline'><a href='../S/142.html#L227'>ns</a>                227 ext/dom/node.c 			ns = nodep-&gt;ns;</span>
+<span class='curline'><a href='../S/142.html#L228'>ns</a>                228 ext/dom/node.c 			if (ns != NULL &amp;&amp; ns-&gt;prefix) {</span>
+<span class='curline'><a href='../S/142.html#L700'>ns</a>                700 ext/dom/node.c 			if (nodep-&gt;ns != NULL) {</span>
+<span class='curline'><a href='../S/142.html#L701'>ns</a>                701 ext/dom/node.c 				str = (char *) nodep-&gt;ns-&gt;href;</span>
+<span class='curline'><a href='../S/142.html#L730'>ns</a>                730 ext/dom/node.c 	xmlNsPtr ns;</span>
+<span class='curline'><a href='../S/142.html#L744'>ns</a>                744 ext/dom/node.c 			ns = nodep-&gt;ns;</span>
+<span class='curline'><a href='../S/142.html#L745'>ns</a>                745 ext/dom/node.c 			if (ns != NULL &amp;&amp; ns-&gt;prefix) {</span>
+<span class='curline'><a href='../S/142.html#L746'>ns</a>                746 ext/dom/node.c 				str = (char *) ns-&gt;prefix;</span>
+<span class='curline'><a href='../S/142.html#L769'>ns</a>                769 ext/dom/node.c 	xmlNsPtr ns = NULL, curns;</span>
+<span class='curline'><a href='../S/142.html#L792'>ns</a>                792 ext/dom/node.c 			if (nsnode &amp;&amp; nodep-&gt;ns != NULL &amp;&amp; !xmlStrEqual(nodep-&gt;ns-&gt;prefix, (xmlChar *)prefix)) {</span>
+<span class='curline'><a href='../S/142.html#L793'>ns</a>                793 ext/dom/node.c 				strURI = (char *) nodep-&gt;ns-&gt;href;</span>
+<span class='curline'><a href='../S/142.html#L799'>ns</a>                799 ext/dom/node.c 					ns = NULL;</span>
+<span class='curline'><a href='../S/142.html#L803'>ns</a>                803 ext/dom/node.c 						if (xmlStrEqual((xmlChar *)prefix, curns-&gt;prefix) &amp;&amp; xmlStrEqual(nodep-&gt;ns-&gt;href, curns-&gt;href)) {</span>
+<span class='curline'><a href='../S/142.html#L804'>ns</a>                804 ext/dom/node.c 							ns = curns;</span>
+<span class='curline'><a href='../S/142.html#L809'>ns</a>                809 ext/dom/node.c 					if (ns == NULL) {</span>
+<span class='curline'><a href='../S/142.html#L810'>ns</a>                810 ext/dom/node.c 						ns = xmlNewNs(nsnode, nodep-&gt;ns-&gt;href, (xmlChar *)prefix);</span>
+<span class='curline'><a href='../S/142.html#L814'>ns</a>                814 ext/dom/node.c 				if (ns == NULL) {</span>
+<span class='curline'><a href='../S/142.html#L822'>ns</a>                822 ext/dom/node.c 				xmlSetNs(nodep, ns);</span>
+<span class='curline'><a href='../S/142.html#L1083'>ns</a>               1083 ext/dom/node.c 			if (child-&gt;ns == NULL)</span>
+<span class='curline'><a href='../S/142.html#L1086'>ns</a>               1086 ext/dom/node.c 				lastattr = xmlHasNsProp(refp-&gt;parent, child-&gt;name, child-&gt;ns-&gt;href);</span>
+<span class='curline'><a href='../S/142.html#L1125'>ns</a>               1125 ext/dom/node.c 			if (child-&gt;ns == NULL)</span>
+<span class='curline'><a href='../S/142.html#L1128'>ns</a>               1128 ext/dom/node.c 				lastattr = xmlHasNsProp(parentp, child-&gt;name, child-&gt;ns-&gt;href);</span>
+<span class='curline'><a href='../S/142.html#L1370'>ns</a>               1370 ext/dom/node.c 		if (child-&gt;ns == NULL)</span>
+<span class='curline'><a href='../S/142.html#L1373'>ns</a>               1373 ext/dom/node.c 			lastattr = xmlHasNsProp(nodep, child-&gt;name, child-&gt;ns-&gt;href);</span>
+<span class='curline'><a href='../S/142.html#L1456'>ns</a>               1456 ext/dom/node.c 		if (n-&gt;ns != NULL) {</span>
+<span class='curline'><a href='../S/142.html#L1457'>ns</a>               1457 ext/dom/node.c 			xmlNsPtr ns;</span>
+<span class='curline'><a href='../S/142.html#L1458'>ns</a>               1458 ext/dom/node.c 			ns = xmlSearchNs(n-&gt;doc, node, n-&gt;ns-&gt;prefix);</span>
+<span class='curline'><a href='../S/142.html#L1459'>ns</a>               1459 ext/dom/node.c 			if (ns == NULL) {</span>
+<span class='curline'><a href='../S/142.html#L1460'>ns</a>               1460 ext/dom/node.c 				ns = xmlSearchNs(n-&gt;doc, n, n-&gt;ns-&gt;prefix);</span>
+<span class='curline'><a href='../S/142.html#L1461'>ns</a>               1461 ext/dom/node.c 				if (ns != NULL) {</span>
+<span class='curline'><a href='../S/142.html#L1467'>ns</a>               1467 ext/dom/node.c 					node-&gt;ns = xmlNewNs(root, ns-&gt;href, ns-&gt;prefix);</span>
+<span class='curline'><a href='../S/142.html#L1470'>ns</a>               1470 ext/dom/node.c 				node-&gt;ns = ns;</span>
+<span class='curline'><a href='../S/143.html#L87'>ns</a>                 87 ext/dom/nodelist.c 						curnode = dom_get_elements_by_tag_name_ns_raw(nodep, objmap-&gt;ns, objmap-&gt;local, &amp;count, -1);</span>
+<span class='curline'><a href='../S/143.html#L158'>ns</a>                158 ext/dom/nodelist.c 							itemnode = dom_get_elements_by_tag_name_ns_raw(nodep, objmap-&gt;ns, objmap-&gt;local, &amp;count, index);</span>
+<span class='curline'><a href='../S/145.html#L1119'>ns</a>               1119 ext/dom/php_dom.c void dom_namednode_iter(dom_object *basenode, int ntype, dom_object *intern, xmlHashTablePtr ht, xmlChar *local, xmlChar *ns TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/145.html#L1138'>ns</a>               1138 ext/dom/php_dom.c 	mapptr-&gt;ns = ns;</span>
+<span class='curline'><a href='../S/145.html#L1260'>ns</a>               1260 ext/dom/php_dom.c 		if (objmap-&gt;ns) {</span>
+<span class='curline'><a href='../S/145.html#L1261'>ns</a>               1261 ext/dom/php_dom.c 			xmlFree(objmap-&gt;ns);</span>
+<span class='curline'><a href='../S/145.html#L1301'>ns</a>               1301 ext/dom/php_dom.c 	objmap-&gt;ns = NULL;</span>
+<span class='curline'><a href='../S/145.html#L1485'>ns</a>               1485 ext/dom/php_dom.c xmlNode *dom_get_elements_by_tag_name_ns_raw(xmlNodePtr nodep, char *ns, char *local, int *cur, int index) /* {{{ */</span>
+<span class='curline'><a href='../S/145.html#L1492'>ns</a>               1492 ext/dom/php_dom.c 				if (ns == NULL || (nodep-&gt;ns != NULL &amp;&amp; (xmlStrEqual(nodep-&gt;ns-&gt;href, (xmlChar *)ns) || xmlStrEqual((xmlChar *)"*", (xmlChar *)ns)))) {</span>
+<span class='curline'><a href='../S/145.html#L1500'>ns</a>               1500 ext/dom/php_dom.c 			ret = dom_get_elements_by_tag_name_ns_raw(nodep-&gt;children, ns, local, cur, index);</span>
+<span class='curline'><a href='../S/145.html#L1559'>ns</a>               1559 ext/dom/php_dom.c void dom_set_old_ns(xmlDoc *doc, xmlNs *ns) {</span>
+<span class='curline'><a href='../S/145.html#L1580'>ns</a>               1580 ext/dom/php_dom.c 	cur-&gt;next = ns;</span>
+<span class='curline'><a href='../S/146.html#L86'>ns</a>                 86 ext/dom/php_dom.h 	xmlChar *ns;</span>
+<span class='curline'><a href='../S/146.html#L110'>ns</a>                110 ext/dom/php_dom.h void dom_set_old_ns(xmlDoc *doc, xmlNs *ns);</span>
+<span class='curline'><a href='../S/146.html#L113'>ns</a>                113 ext/dom/php_dom.h xmlNode *dom_get_elements_by_tag_name_ns_raw(xmlNodePtr nodep, char *ns, char *local, int *cur, int index);</span>
+<span class='curline'><a href='../S/146.html#L120'>ns</a>                120 ext/dom/php_dom.h void dom_namednode_iter(dom_object *basenode, int ntype, dom_object *intern, xmlHashTablePtr ht, xmlChar *local, xmlChar *ns TSRMLS_DC);</span>
+<span class='curline'><a href='../S/153.html#L165'>ns</a>                165 ext/dom/xpath.c 								node-&gt;ns = curns;</span>
+<span class='curline'><a href='../S/153.html#L397'>ns</a>                397 ext/dom/xpath.c 	xmlNsPtr *ns = NULL;</span>
+<span class='curline'><a href='../S/153.html#L435'>ns</a>                435 ext/dom/xpath.c 		ns = xmlGetNsList(docp, nodep);</span>
+<span class='curline'><a href='../S/153.html#L437'>ns</a>                437 ext/dom/xpath.c 		if (ns != NULL) {</span>
+<span class='curline'><a href='../S/153.html#L438'>ns</a>                438 ext/dom/xpath.c 			while (ns[nsnbr] != NULL)</span>
+<span class='curline'><a href='../S/153.html#L444'>ns</a>                444 ext/dom/xpath.c     ctxp-&gt;namespaces = ns;</span>
+<span class='curline'><a href='../S/153.html#L450'>ns</a>                450 ext/dom/xpath.c 	if (ns != NULL) {</span>
+<span class='curline'><a href='../S/153.html#L451'>ns</a>                451 ext/dom/xpath.c 		xmlFree(ns);</span>
+<span class='curline'><a href='../S/153.html#L500'>ns</a>                500 ext/dom/xpath.c 						node-&gt;ns = curns;</span>
+<span class='curline'><a href='../S/179.html#L601'>ns</a>                601 ext/fileinfo/libmagic/cdf.c 	size_t ss = CDF_SEC_SIZE(h), ns, nd;</span>
+<span class='curline'><a href='../S/179.html#L605'>ns</a>                605 ext/fileinfo/libmagic/cdf.c 	ns = cdf_count_chain(sat, sid, ss);</span>
+<span class='curline'><a href='../S/179.html#L606'>ns</a>                606 ext/fileinfo/libmagic/cdf.c 	if (ns == (size_t)-1)</span>
+<span class='curline'><a href='../S/179.html#L611'>ns</a>                611 ext/fileinfo/libmagic/cdf.c 	dir-&gt;dir_len = ns * nd;</span>
+<span class='curline'><a href='../S/179.html#L622'>ns</a>                622 ext/fileinfo/libmagic/cdf.c 	for (j = i = 0; i &lt; ns; i++, j++) {</span>
+<span class='curline'><a href='../S/464.html#L212'>ns</a>                212 ext/libxml/libxml.c 				if (node-&gt;ns) {</span>
+<span class='curline'><a href='../S/464.html#L213'>ns</a>                213 ext/libxml/libxml.c 					xmlFreeNs(node-&gt;ns);</span>
+<span class='curline'><a href='../S/464.html#L214'>ns</a>                214 ext/libxml/libxml.c 					node-&gt;ns = NULL;</span>
+<span class='curline'><a href='../S/1011.html#L131'>ns</a>                131 ext/simplexml/simplexml.c 	if (name == NULL &amp;&amp; (node-&gt;ns == NULL || node-&gt;ns-&gt;prefix == NULL)) {</span>
+<span class='curline'><a href='../S/1011.html#L135'>ns</a>                135 ext/simplexml/simplexml.c 	if (node-&gt;ns &amp;&amp; !xmlStrcmp(prefix ? node-&gt;ns-&gt;prefix : node-&gt;ns-&gt;href, name)) {</span>
+<span class='curline'><a href='../S/1011.html#L356'>ns</a>                356 ext/simplexml/simplexml.c 					node = xmlNewTextChild(mynode-&gt;parent, mynode-&gt;ns, mynode-&gt;name, NULL);</span>
+<span class='curline'><a href='../S/1011.html#L525'>ns</a>                525 ext/simplexml/simplexml.c 			node = xmlNewChild(mynode, mynode-&gt;ns, sxe-&gt;iter.name, NULL);</span>
+<span class='curline'><a href='../S/1011.html#L644'>ns</a>                644 ext/simplexml/simplexml.c 					newnode = xmlNewTextChild(mynode-&gt;parent, mynode-&gt;ns, mynode-&gt;name, value ? (xmlChar *)Z_STRVAL_P(value) : NULL);</span>
+<span class='curline'><a href='../S/1011.html#L646'>ns</a>                646 ext/simplexml/simplexml.c 					newnode = xmlNewTextChild(mynode, mynode-&gt;ns, (xmlChar *)Z_STRVAL_P(member), value ? (xmlChar *)Z_STRVAL_P(value) : NULL);</span>
+<span class='curline'><a href='../S/1011.html#L653'>ns</a>                653 ext/simplexml/simplexml.c 				newnode = xmlNewTextChild(mynode-&gt;parent, mynode-&gt;ns, mynode-&gt;name, value ? (xmlChar *)Z_STRVAL_P(value) : NULL);</span>
+<span class='curline'><a href='../S/1011.html#L1252'>ns</a>               1252 ext/simplexml/simplexml.c 	xmlNsPtr          *ns = NULL;</span>
+<span class='curline'><a href='../S/1011.html#L1281'>ns</a>               1281 ext/simplexml/simplexml.c  	ns = xmlGetNsList((xmlDocPtr) sxe-&gt;document-&gt;ptr, nodeptr);</span>
+<span class='curline'><a href='../S/1011.html#L1282'>ns</a>               1282 ext/simplexml/simplexml.c 	if (ns != NULL) {</span>
+<span class='curline'><a href='../S/1011.html#L1283'>ns</a>               1283 ext/simplexml/simplexml.c 		while (ns[nsnbr] != NULL) {</span>
+<span class='curline'><a href='../S/1011.html#L1288'>ns</a>               1288 ext/simplexml/simplexml.c 	sxe-&gt;xpath-&gt;namespaces = ns;</span>
+<span class='curline'><a href='../S/1011.html#L1292'>ns</a>               1292 ext/simplexml/simplexml.c 	if (ns != NULL) {</span>
+<span class='curline'><a href='../S/1011.html#L1293'>ns</a>               1293 ext/simplexml/simplexml.c 		xmlFree(ns);</span>
+<span class='curline'><a href='../S/1011.html#L1319'>ns</a>               1319 ext/simplexml/simplexml.c 					_node_as_zval(sxe, nodeptr-&gt;parent, value, SXE_ITER_ATTRLIST, (char*)nodeptr-&gt;name, nodeptr-&gt;ns ? (xmlChar *)nodeptr-&gt;ns-&gt;href : NULL, 0 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1011.html#L1440'>ns</a>               1440 ext/simplexml/simplexml.c #define SXE_NS_PREFIX(ns) (ns-&gt;prefix ? (char*)ns-&gt;prefix : "")</span>
+<span class='curline'><a href='../S/1011.html#L1442'>ns</a>               1442 ext/simplexml/simplexml.c static inline void sxe_add_namespace_name(zval *return_value, xmlNsPtr ns) /* {{{ */</span>
+<span class='curline'><a href='../S/1011.html#L1444'>ns</a>               1444 ext/simplexml/simplexml.c 	char *prefix = SXE_NS_PREFIX(ns);</span>
+<span class='curline'><a href='../S/1011.html#L1446'>ns</a>               1446 ext/simplexml/simplexml.c 		add_assoc_string(return_value, prefix, (char*)ns-&gt;href, 1);</span>
+<span class='curline'><a href='../S/1011.html#L1455'>ns</a>               1455 ext/simplexml/simplexml.c 	if (node-&gt;ns) {</span>
+<span class='curline'><a href='../S/1011.html#L1456'>ns</a>               1456 ext/simplexml/simplexml.c 		sxe_add_namespace_name(return_value, node-&gt;ns);</span>
+<span class='curline'><a href='../S/1011.html#L1461'>ns</a>               1461 ext/simplexml/simplexml.c 		if (attr-&gt;ns) {</span>
+<span class='curline'><a href='../S/1011.html#L1462'>ns</a>               1462 ext/simplexml/simplexml.c 			sxe_add_namespace_name(return_value, attr-&gt;ns);</span>
+<span class='curline'><a href='../S/1011.html#L1499'>ns</a>               1499 ext/simplexml/simplexml.c 		} else if (node-&gt;type == XML_ATTRIBUTE_NODE &amp;&amp; node-&gt;ns) {</span>
+<span class='curline'><a href='../S/1011.html#L1500'>ns</a>               1500 ext/simplexml/simplexml.c 			sxe_add_namespace_name(return_value, node-&gt;ns);</span>
+<span class='curline'><a href='../S/1011.html#L1508'>ns</a>               1508 ext/simplexml/simplexml.c 	xmlNsPtr ns;</span>
+<span class='curline'><a href='../S/1011.html#L1511'>ns</a>               1511 ext/simplexml/simplexml.c 		ns = node-&gt;nsDef;</span>
+<span class='curline'><a href='../S/1011.html#L1512'>ns</a>               1512 ext/simplexml/simplexml.c 		while (ns != NULL) {</span>
+<span class='curline'><a href='../S/1011.html#L1513'>ns</a>               1513 ext/simplexml/simplexml.c 			sxe_add_namespace_name(return_value, ns);</span>
+<span class='curline'><a href='../S/1011.html#L1514'>ns</a>               1514 ext/simplexml/simplexml.c 			ns = ns-&gt;next;</span>
+<span class='curline'><a href='../S/1011.html#L1676'>ns</a>               1676 ext/simplexml/simplexml.c 			newnode-&gt;ns = NULL;</span>
+<span class='curline'><a href='../S/1011.html#L1683'>ns</a>               1683 ext/simplexml/simplexml.c 			newnode-&gt;ns = nsptr;</span>
+<span class='curline'><a href='../S/1011.html#L2167'>ns</a>               2167 ext/simplexml/simplexml.c 	char           *ns = NULL;</span>
+<span class='curline'><a href='../S/1011.html#L2173'>ns</a>               2173 ext/simplexml/simplexml.c 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "p|C!lsb", &amp;filename, &amp;filename_len, &amp;ce, &amp;options, &amp;ns, &amp;ns_len, &amp;isprefix) == FAILURE) {</span>
+<span class='curline'><a href='../S/1011.html#L2187'>ns</a>               2187 ext/simplexml/simplexml.c 	sxe-&gt;iter.nsprefix = ns_len ? xmlStrdup((xmlChar *)ns) : NULL;</span>
+<span class='curline'><a href='../S/1011.html#L2205'>ns</a>               2205 ext/simplexml/simplexml.c 	char           *ns = NULL;</span>
+<span class='curline'><a href='../S/1011.html#L2211'>ns</a>               2211 ext/simplexml/simplexml.c 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s|C!lsb", &amp;data, &amp;data_len, &amp;ce, &amp;options, &amp;ns, &amp;ns_len, &amp;isprefix) == FAILURE) {</span>
+<span class='curline'><a href='../S/1011.html#L2225'>ns</a>               2225 ext/simplexml/simplexml.c 	sxe-&gt;iter.nsprefix = ns_len ? xmlStrdup((xmlChar *)ns) : NULL;</span>
+<span class='curline'><a href='../S/1011.html#L2240'>ns</a>               2240 ext/simplexml/simplexml.c 	char           *data, *ns = NULL;</span>
+<span class='curline'><a href='../S/1011.html#L2248'>ns</a>               2248 ext/simplexml/simplexml.c 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s|lbsb", &amp;data, &amp;data_len, &amp;options, &amp;is_url, &amp;ns, &amp;ns_len, &amp;isprefix) == FAILURE) {</span>
+<span class='curline'><a href='../S/1011.html#L2263'>ns</a>               2263 ext/simplexml/simplexml.c 	sxe-&gt;iter.nsprefix = ns_len ? xmlStrdup((xmlChar *)ns) : NULL;</span>
+<span class='curline'><a href='../S/1011.html#L2502'>ns</a>               2502 ext/simplexml/simplexml.c 	ZEND_ARG_INFO(0, ns)</span>
+<span class='curline'><a href='../S/1011.html#L2510'>ns</a>               2510 ext/simplexml/simplexml.c 	ZEND_ARG_INFO(0, ns)</span>
+<span class='curline'><a href='../S/1011.html#L2525'>ns</a>               2525 ext/simplexml/simplexml.c 	ZEND_ARG_INFO(0, ns)</span>
+<span class='curline'><a href='../S/1011.html#L2542'>ns</a>               2542 ext/simplexml/simplexml.c 	ZEND_ARG_INFO(0, ns)</span>
+<span class='curline'><a href='../S/1011.html#L2550'>ns</a>               2550 ext/simplexml/simplexml.c 	ZEND_ARG_INFO(0, ns)</span>
+<span class='curline'><a href='../S/1011.html#L2560'>ns</a>               2560 ext/simplexml/simplexml.c 	ZEND_ARG_INFO(0, ns)</span>
+<span class='curline'><a href='../S/1018.html#L92'>ns</a>                 92 ext/soap/php_encoding.c static void set_ns_prop(xmlNodePtr node, char *ns, char *name, char *val);</span>
+<span class='curline'><a href='../S/1018.html#L96'>ns</a>                 96 ext/soap/php_encoding.c static void get_type_str(xmlNodePtr node, const char* ns, const char* type, smart_str* ret);</span>
+<span class='curline'><a href='../S/1018.html#L97'>ns</a>                 97 ext/soap/php_encoding.c static void set_ns_and_type_ex(xmlNodePtr node, char *ns, char *type);</span>
+<span class='curline'><a href='../S/1018.html#L308'>ns</a>                308 ext/soap/php_encoding.c 			xmlSetNs(node, (*node_ptr)-&gt;ns);</span>
+<span class='curline'><a href='../S/1018.html#L312'>ns</a>                312 ext/soap/php_encoding.c 					if (attr == NULL || attr-&gt;ns == NULL) {</span>
+<span class='curline'><a href='../S/1018.html#L514'>ns</a>                514 ext/soap/php_encoding.c 			if (encode-&gt;details.ns) {</span>
+<span class='curline'><a href='../S/1018.html#L515'>ns</a>                515 ext/soap/php_encoding.c 				smart_str_appends(&amp;nscat, encode-&gt;details.ns);</span>
+<span class='curline'><a href='../S/1018.html#L549'>ns</a>                549 ext/soap/php_encoding.c 			if (encode-&gt;details.ns) {</span>
+<span class='curline'><a href='../S/1018.html#L550'>ns</a>                550 ext/soap/php_encoding.c 				smart_str_appends(&amp;nscat, encode-&gt;details.ns);</span>
+<span class='curline'><a href='../S/1018.html#L565'>ns</a>                565 ext/soap/php_encoding.c 				char *ns, *cptype;</span>
+<span class='curline'><a href='../S/1018.html#L568'>ns</a>                568 ext/soap/php_encoding.c 				parse_namespace(type_attr-&gt;children-&gt;content, &amp;cptype, &amp;ns);</span>
+<span class='curline'><a href='../S/1018.html#L569'>ns</a>                569 ext/soap/php_encoding.c 				nsptr = xmlSearchNs(data-&gt;doc, data, BAD_CAST(ns));</span>
+<span class='curline'><a href='../S/1018.html#L577'>ns</a>                577 ext/soap/php_encoding.c 				if (ns) {efree(ns);}</span>
+<span class='curline'><a href='../S/1018.html#L2209'>ns</a>               2209 ext/soap/php_encoding.c                                    xmlNsPtr ns,</span>
+<span class='curline'><a href='../S/1018.html#L2244'>ns</a>               2244 ext/soap/php_encoding.c 					xmlSetNs(xparam, ns);</span>
+<span class='curline'><a href='../S/1018.html#L2250'>ns</a>               2250 ext/soap/php_encoding.c 	 			  add_xml_array_elements(xmlParam, type, enc, ns, dimension-1, dims+1, *zdata, style TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1018.html#L2252'>ns</a>               2252 ext/soap/php_encoding.c 	 			  add_xml_array_elements(xmlParam, type, enc, ns, dimension-1, dims+1, NULL, style TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1018.html#L2268'>ns</a>               2268 ext/soap/php_encoding.c 					xmlSetNs(xparam, ns);</span>
+<span class='curline'><a href='../S/1018.html#L2273'>ns</a>               2273 ext/soap/php_encoding.c  			  add_xml_array_elements(xmlParam, type, enc, ns, dimension-1, dims+1, NULL, style TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1018.html#L2402'>ns</a>               2402 ext/soap/php_encoding.c 			if ((*ext)-&gt;ns != NULL) {</span>
+<span class='curline'><a href='../S/1018.html#L2403'>ns</a>               2403 ext/soap/php_encoding.c 				enc = get_encoder(SOAP_GLOBAL(sdl), (*ext)-&gt;ns, value);</span>
+<span class='curline'><a href='../S/1018.html#L2404'>ns</a>               2404 ext/soap/php_encoding.c 				get_type_str(xmlParam, (*ext)-&gt;ns, value, &amp;array_type);</span>
+<span class='curline'><a href='../S/1018.html#L2440'>ns</a>               2440 ext/soap/php_encoding.c 			if ((*ext)-&gt;ns != NULL) {</span>
+<span class='curline'><a href='../S/1018.html#L2441'>ns</a>               2441 ext/soap/php_encoding.c 				enc = get_encoder(SOAP_GLOBAL(sdl), (*ext)-&gt;ns, (*ext)-&gt;val);</span>
+<span class='curline'><a href='../S/1018.html#L2442'>ns</a>               2442 ext/soap/php_encoding.c 				get_type_str(xmlParam, (*ext)-&gt;ns, (*ext)-&gt;val, &amp;array_type);</span>
+<span class='curline'><a href='../S/1018.html#L2490'>ns</a>               2490 ext/soap/php_encoding.c 				get_type_str(xmlParam, elementType-&gt;encode-&gt;details.ns, elementType-&gt;encode-&gt;details.type_str, &amp;array_type);</span>
+<span class='curline'><a href='../S/1018.html#L2503'>ns</a>               2503 ext/soap/php_encoding.c 			get_type_str(xmlParam, elementType-&gt;encode-&gt;details.ns, elementType-&gt;encode-&gt;details.type_str, &amp;array_type);</span>
+<span class='curline'><a href='../S/1018.html#L2544'>ns</a>               2544 ext/soap/php_encoding.c 		add_xml_array_elements(xmlParam, element_type, enc, enc?encode_add_ns(xmlParam,enc-&gt;details.ns):NULL, dimension, dims, data, style TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1018.html#L2583'>ns</a>               2583 ext/soap/php_encoding.c 		char *type, *end, *ns;</span>
+<span class='curline'><a href='../S/1018.html#L2586'>ns</a>               2586 ext/soap/php_encoding.c 		parse_namespace(attr-&gt;children-&gt;content, &amp;type, &amp;ns);</span>
+<span class='curline'><a href='../S/1018.html#L2587'>ns</a>               2587 ext/soap/php_encoding.c 		nsptr = xmlSearchNs(attr-&gt;doc, attr-&gt;parent, BAD_CAST(ns));</span>
+<span class='curline'><a href='../S/1018.html#L2599'>ns</a>               2599 ext/soap/php_encoding.c 		if (ns) {efree(ns);}</span>
+<span class='curline'><a href='../S/1018.html#L2604'>ns</a>               2604 ext/soap/php_encoding.c 		char *type, *ns;</span>
+<span class='curline'><a href='../S/1018.html#L2607'>ns</a>               2607 ext/soap/php_encoding.c 		parse_namespace(attr-&gt;children-&gt;content, &amp;type, &amp;ns);</span>
+<span class='curline'><a href='../S/1018.html#L2608'>ns</a>               2608 ext/soap/php_encoding.c 		nsptr = xmlSearchNs(attr-&gt;doc, attr-&gt;parent, BAD_CAST(ns));</span>
+<span class='curline'><a href='../S/1018.html#L2613'>ns</a>               2613 ext/soap/php_encoding.c 		if (ns) {efree(ns);}</span>
+<span class='curline'><a href='../S/1018.html#L2644'>ns</a>               2644 ext/soap/php_encoding.c 		if ((*ext)-&gt;ns != NULL) {</span>
+<span class='curline'><a href='../S/1018.html#L2645'>ns</a>               2645 ext/soap/php_encoding.c 			enc = get_encoder(SOAP_GLOBAL(sdl), (*ext)-&gt;ns, type);</span>
+<span class='curline'><a href='../S/1018.html#L2660'>ns</a>               2660 ext/soap/php_encoding.c 		if ((*ext)-&gt;ns != NULL) {</span>
+<span class='curline'><a href='../S/1018.html#L2661'>ns</a>               2661 ext/soap/php_encoding.c 			enc = get_encoder(SOAP_GLOBAL(sdl), (*ext)-&gt;ns, (*ext)-&gt;val);</span>
+<span class='curline'><a href='../S/1018.html#L2957'>ns</a>               2957 ext/soap/php_encoding.c 		char *ns, *cptype;</span>
+<span class='curline'><a href='../S/1018.html#L2965'>ns</a>               2965 ext/soap/php_encoding.c 		parse_namespace(type_name, &amp;cptype, &amp;ns);</span>
+<span class='curline'><a href='../S/1018.html#L2966'>ns</a>               2966 ext/soap/php_encoding.c 		nsptr = xmlSearchNs(data-&gt;doc, data, BAD_CAST(ns));</span>
+<span class='curline'><a href='../S/1018.html#L2972'>ns</a>               2972 ext/soap/php_encoding.c 		if (ns) {efree(ns);}</span>
+<span class='curline'><a href='../S/1018.html#L3204'>ns</a>               3204 ext/soap/php_encoding.c 		if (data-&gt;ns &amp;&amp; data-&gt;ns-&gt;href) {</span>
+<span class='curline'><a href='../S/1018.html#L3205'>ns</a>               3205 ext/soap/php_encoding.c 			smart_str_appends(&amp;nscat, (char*)data-&gt;ns-&gt;href);</span>
+<span class='curline'><a href='../S/1018.html#L3421'>ns</a>               3421 ext/soap/php_encoding.c 			if (href == NULL || href-&gt;ns == NULL) {break;}</span>
+<span class='curline'><a href='../S/1018.html#L3462'>ns</a>               3462 ext/soap/php_encoding.c 	set_ns_and_type_ex(node, type-&gt;ns, type-&gt;type_str);</span>
+<span class='curline'><a href='../S/1018.html#L3465'>ns</a>               3465 ext/soap/php_encoding.c static void set_ns_and_type_ex(xmlNodePtr node, char *ns, char *type)</span>
+<span class='curline'><a href='../S/1018.html#L3468'>ns</a>               3468 ext/soap/php_encoding.c 	get_type_str(node, ns, type, &amp;nstype);</span>
+<span class='curline'><a href='../S/1018.html#L3495'>ns</a>               3495 ext/soap/php_encoding.c 				cur = node-&gt;ns;</span>
+<span class='curline'><a href='../S/1018.html#L3510'>ns</a>               3510 ext/soap/php_encoding.c xmlNsPtr encode_add_ns(xmlNodePtr node, const char* ns)</span>
+<span class='curline'><a href='../S/1018.html#L3514'>ns</a>               3514 ext/soap/php_encoding.c 	if (ns == NULL) {</span>
+<span class='curline'><a href='../S/1018.html#L3518'>ns</a>               3518 ext/soap/php_encoding.c 	xmlns = xmlSearchNsByHref(node-&gt;doc, node, BAD_CAST(ns));</span>
+<span class='curline'><a href='../S/1018.html#L3520'>ns</a>               3520 ext/soap/php_encoding.c 		xmlns = xmlSearchNsPrefixByHref(node-&gt;doc, node, BAD_CAST(ns));</span>
+<span class='curline'><a href='../S/1018.html#L3526'>ns</a>               3526 ext/soap/php_encoding.c 		if (zend_hash_find(&amp;SOAP_GLOBAL(defEncNs), (char*)ns, strlen(ns) + 1, (void **)&amp;prefix) == SUCCESS) {</span>
+<span class='curline'><a href='../S/1018.html#L3527'>ns</a>               3527 ext/soap/php_encoding.c 			xmlns = xmlNewNs(node-&gt;doc-&gt;children, BAD_CAST(ns), prefix);</span>
+<span class='curline'><a href='../S/1018.html#L3545'>ns</a>               3545 ext/soap/php_encoding.c 			xmlns = xmlNewNs(node-&gt;doc-&gt;children, BAD_CAST(ns), BAD_CAST(prefix.c));</span>
+<span class='curline'><a href='../S/1018.html#L3552'>ns</a>               3552 ext/soap/php_encoding.c static void set_ns_prop(xmlNodePtr node, char *ns, char *name, char *val)</span>
+<span class='curline'><a href='../S/1018.html#L3554'>ns</a>               3554 ext/soap/php_encoding.c 	xmlSetNsProp(node, encode_add_ns(node, ns), BAD_CAST(name), BAD_CAST(val));</span>
+<span class='curline'><a href='../S/1018.html#L3705'>ns</a>               3705 ext/soap/php_encoding.c 				xmlNsPtr ns = encode_add_ns(node, cur_ns);</span>
+<span class='curline'><a href='../S/1018.html#L3707'>ns</a>               3707 ext/soap/php_encoding.c 				smart_str_appends(type, (char*)ns-&gt;prefix);</span>
+<span class='curline'><a href='../S/1018.html#L3722'>ns</a>               3722 ext/soap/php_encoding.c 			get_type_str(node, enc-&gt;details.ns, enc-&gt;details.type_str, type);</span>
+<span class='curline'><a href='../S/1018.html#L3728'>ns</a>               3728 ext/soap/php_encoding.c static void get_type_str(xmlNodePtr node, const char* ns, const char* type, smart_str* ret)</span>
+<span class='curline'><a href='../S/1018.html#L3732'>ns</a>               3732 ext/soap/php_encoding.c 	if (ns) {</span>
+<span class='curline'><a href='../S/1018.html#L3735'>ns</a>               3735 ext/soap/php_encoding.c 		    strcmp(ns,SOAP_1_1_ENC_NAMESPACE) == 0) {</span>
+<span class='curline'><a href='../S/1018.html#L3736'>ns</a>               3736 ext/soap/php_encoding.c 			ns = SOAP_1_2_ENC_NAMESPACE;</span>
+<span class='curline'><a href='../S/1018.html#L3738'>ns</a>               3738 ext/soap/php_encoding.c 		           strcmp(ns,SOAP_1_2_ENC_NAMESPACE) == 0) {</span>
+<span class='curline'><a href='../S/1018.html#L3739'>ns</a>               3739 ext/soap/php_encoding.c 			ns = SOAP_1_1_ENC_NAMESPACE;</span>
+<span class='curline'><a href='../S/1018.html#L3741'>ns</a>               3741 ext/soap/php_encoding.c 		xmlns = encode_add_ns(node, ns);</span>
+<span class='curline'><a href='../S/1018.html#L3765'>ns</a>               3765 ext/soap/php_encoding.c 	if (t-&gt;details.ns) {</span>
+<span class='curline'><a href='../S/1018.html#L3766'>ns</a>               3766 ext/soap/php_encoding.c 		efree(t-&gt;details.ns);</span>
+<span class='curline'><a href='../S/1018.html#L3780'>ns</a>               3780 ext/soap/php_encoding.c 	if (t-&gt;details.ns) {</span>
+<span class='curline'><a href='../S/1018.html#L3781'>ns</a>               3781 ext/soap/php_encoding.c 		free(t-&gt;details.ns);</span>
+<span class='curline'><a href='../S/1019.html#L179'>ns</a>                179 ext/soap/php_encoding.h 	char *ns;</span>
+<span class='curline'><a href='../S/1019.html#L206'>ns</a>                206 ext/soap/php_encoding.h xmlNsPtr encode_add_ns(xmlNodePtr node, const char* ns);</span>
+<span class='curline'><a href='../S/1022.html#L84'>ns</a>                 84 ext/soap/php_packet_soap.c 		if (attr-&gt;ns == NULL) {</span>
+<span class='curline'><a href='../S/1022.html#L132'>ns</a>                132 ext/soap/php_packet_soap.c 		if (attr-&gt;ns == NULL) {</span>
+<span class='curline'><a href='../S/1022.html#L160'>ns</a>                160 ext/soap/php_packet_soap.c 			if (attr-&gt;ns == NULL) {</span>
+<span class='curline'><a href='../S/1022.html#L260'>ns</a>                260 ext/soap/php_packet_soap.c 			char *name, *ns = NULL;</span>
+<span class='curline'><a href='../S/1022.html#L275'>ns</a>                275 ext/soap/php_packet_soap.c 							ns = param-&gt;element-&gt;namens;</span>
+<span class='curline'><a href='../S/1022.html#L289'>ns</a>                289 ext/soap/php_packet_soap.c 					cur = get_node_ex(resp, name, ns);</span>
+<span class='curline'><a href='../S/1022.html#L406'>ns</a>                406 ext/soap/php_packet_soap.c 					if (trav-&gt;ns) {</span>
+<span class='curline'><a href='../S/1022.html#L407'>ns</a>                407 ext/soap/php_packet_soap.c 						smart_str_appends(&amp;key, (char*)trav-&gt;ns-&gt;href);</span>
+<span class='curline'><a href='../S/1024.html#L49'>ns</a>                 49 ext/soap/php_schema.c static encodePtr create_encoder(sdlPtr sdl, sdlTypePtr cur_type, const xmlChar *ns, const xmlChar *type)</span>
+<span class='curline'><a href='../S/1024.html#L58'>ns</a>                 58 ext/soap/php_schema.c 	smart_str_appends(&amp;nscat, (char*)ns);</span>
+<span class='curline'><a href='../S/1024.html#L64'>ns</a>                 64 ext/soap/php_schema.c 		if (enc-&gt;details.ns) {</span>
+<span class='curline'><a href='../S/1024.html#L65'>ns</a>                 65 ext/soap/php_schema.c 			efree(enc-&gt;details.ns);</span>
+<span class='curline'><a href='../S/1024.html#L76'>ns</a>                 76 ext/soap/php_schema.c 	enc-&gt;details.ns = estrdup((char*)ns);</span>
+<span class='curline'><a href='../S/1024.html#L89'>ns</a>                 89 ext/soap/php_schema.c static encodePtr get_create_encoder(sdlPtr sdl, sdlTypePtr cur_type, const xmlChar *ns, const xmlChar *type)</span>
+<span class='curline'><a href='../S/1024.html#L91'>ns</a>                 91 ext/soap/php_schema.c 	encodePtr enc = get_encoder(sdl, (char*)ns, (char*)type);</span>
+<span class='curline'><a href='../S/1024.html#L93'>ns</a>                 93 ext/soap/php_schema.c 		enc = create_encoder(sdl, cur_type, ns, type);</span>
+<span class='curline'><a href='../S/1024.html#L98'>ns</a>                 98 ext/soap/php_schema.c static void schema_load_file(sdlCtx *ctx, xmlAttrPtr ns, xmlChar *location, xmlAttrPtr tns, int import TSRMLS_DC) {</span>
+<span class='curline'><a href='../S/1024.html#L119'>ns</a>                119 ext/soap/php_schema.c 			if (ns != NULL &amp;&amp; (new_tns == NULL || xmlStrcmp(ns-&gt;children-&gt;content, new_tns-&gt;children-&gt;content) != 0)) {</span>
+<span class='curline'><a href='../S/1024.html#L121'>ns</a>                121 ext/soap/php_schema.c 				soap_error2(E_ERROR, "Parsing Schema: can't import schema from '%s', unexpected 'targetNamespace'='%s'", location, ns-&gt;children-&gt;content);</span>
+<span class='curline'><a href='../S/1024.html#L123'>ns</a>                123 ext/soap/php_schema.c 			if (ns == NULL &amp;&amp; new_tns != NULL) {</span>
+<span class='curline'><a href='../S/1024.html#L231'>ns</a>                231 ext/soap/php_schema.c 			xmlAttrPtr ns, location;</span>
+<span class='curline'><a href='../S/1024.html#L234'>ns</a>                234 ext/soap/php_schema.c 			ns = get_attribute(trav-&gt;properties, "namespace");</span>
+<span class='curline'><a href='../S/1024.html#L237'>ns</a>                237 ext/soap/php_schema.c 			if (ns != NULL &amp;&amp; tns != NULL &amp;&amp; xmlStrcmp(ns-&gt;children-&gt;content, tns-&gt;children-&gt;content) == 0) {</span>
+<span class='curline'><a href='../S/1024.html#L254'>ns</a>                254 ext/soap/php_schema.c 			schema_load_file(ctx, ns, uri, tns, 1 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1024.html#L308'>ns</a>                308 ext/soap/php_schema.c 	xmlAttrPtr name, ns;</span>
+<span class='curline'><a href='../S/1024.html#L310'>ns</a>                310 ext/soap/php_schema.c 	ns = get_attribute(simpleType-&gt;properties, "targetNamespace");</span>
+<span class='curline'><a href='../S/1024.html#L311'>ns</a>                311 ext/soap/php_schema.c 	if (ns == NULL) {</span>
+<span class='curline'><a href='../S/1024.html#L312'>ns</a>                312 ext/soap/php_schema.c 		ns = tns;</span>
+<span class='curline'><a href='../S/1024.html#L325'>ns</a>                325 ext/soap/php_schema.c 			newType-&gt;namens = estrdup((char*)ns-&gt;children-&gt;content);</span>
+<span class='curline'><a href='../S/1024.html#L339'>ns</a>                339 ext/soap/php_schema.c 		cur_type-&gt;encode-&gt;details.ns = estrdup(newType-&gt;namens);</span>
+<span class='curline'><a href='../S/1024.html#L355'>ns</a>                355 ext/soap/php_schema.c 		newType-&gt;namens = estrdup((char*)ns-&gt;children-&gt;content);</span>
+<span class='curline'><a href='../S/1024.html#L368'>ns</a>                368 ext/soap/php_schema.c 		create_encoder(sdl, cur_type, ns-&gt;children-&gt;content, name-&gt;children-&gt;content);</span>
+<span class='curline'><a href='../S/1024.html#L418'>ns</a>                418 ext/soap/php_schema.c 		char *type, *ns;</span>
+<span class='curline'><a href='../S/1024.html#L421'>ns</a>                421 ext/soap/php_schema.c 		parse_namespace(itemType-&gt;children-&gt;content, &amp;type, &amp;ns);</span>
+<span class='curline'><a href='../S/1024.html#L422'>ns</a>                422 ext/soap/php_schema.c 		nsptr = xmlSearchNs(listType-&gt;doc, listType, BAD_CAST(ns));</span>
+<span class='curline'><a href='../S/1024.html#L441'>ns</a>                441 ext/soap/php_schema.c 		if (ns) {efree(ns);}</span>
+<span class='curline'><a href='../S/1024.html#L501'>ns</a>                501 ext/soap/php_schema.c 		char *type, *ns;</span>
+<span class='curline'><a href='../S/1024.html#L516'>ns</a>                516 ext/soap/php_schema.c 			parse_namespace(BAD_CAST(start), &amp;type, &amp;ns);</span>
+<span class='curline'><a href='../S/1024.html#L517'>ns</a>                517 ext/soap/php_schema.c 			nsptr = xmlSearchNs(unionType-&gt;doc, unionType, BAD_CAST(ns));</span>
+<span class='curline'><a href='../S/1024.html#L536'>ns</a>                536 ext/soap/php_schema.c 			if (ns) {efree(ns);}</span>
+<span class='curline'><a href='../S/1024.html#L643'>ns</a>                643 ext/soap/php_schema.c 		char *type, *ns;</span>
+<span class='curline'><a href='../S/1024.html#L646'>ns</a>                646 ext/soap/php_schema.c 		parse_namespace(base-&gt;children-&gt;content, &amp;type, &amp;ns);</span>
+<span class='curline'><a href='../S/1024.html#L647'>ns</a>                647 ext/soap/php_schema.c 		nsptr = xmlSearchNs(restType-&gt;doc, restType, BAD_CAST(ns));</span>
+<span class='curline'><a href='../S/1024.html#L652'>ns</a>                652 ext/soap/php_schema.c 		if (ns) {efree(ns);}</span>
+<span class='curline'><a href='../S/1024.html#L748'>ns</a>                748 ext/soap/php_schema.c 		char *type, *ns;</span>
+<span class='curline'><a href='../S/1024.html#L751'>ns</a>                751 ext/soap/php_schema.c 		parse_namespace(base-&gt;children-&gt;content, &amp;type, &amp;ns);</span>
+<span class='curline'><a href='../S/1024.html#L752'>ns</a>                752 ext/soap/php_schema.c 		nsptr = xmlSearchNs(restType-&gt;doc, restType, BAD_CAST(ns));</span>
+<span class='curline'><a href='../S/1024.html#L757'>ns</a>                757 ext/soap/php_schema.c 		if (ns) {efree(ns);}</span>
+<span class='curline'><a href='../S/1024.html#L873'>ns</a>                873 ext/soap/php_schema.c 		char *type, *ns;</span>
+<span class='curline'><a href='../S/1024.html#L876'>ns</a>                876 ext/soap/php_schema.c 		parse_namespace(base-&gt;children-&gt;content, &amp;type, &amp;ns);</span>
+<span class='curline'><a href='../S/1024.html#L877'>ns</a>                877 ext/soap/php_schema.c 		nsptr = xmlSearchNs(extType-&gt;doc, extType, BAD_CAST(ns));</span>
+<span class='curline'><a href='../S/1024.html#L882'>ns</a>                882 ext/soap/php_schema.c 		if (ns) {efree(ns);}</span>
+<span class='curline'><a href='../S/1024.html#L928'>ns</a>                928 ext/soap/php_schema.c 		char *type, *ns;</span>
+<span class='curline'><a href='../S/1024.html#L931'>ns</a>                931 ext/soap/php_schema.c 		parse_namespace(base-&gt;children-&gt;content, &amp;type, &amp;ns);</span>
+<span class='curline'><a href='../S/1024.html#L932'>ns</a>                932 ext/soap/php_schema.c 		nsptr = xmlSearchNs(extType-&gt;doc, extType, BAD_CAST(ns));</span>
+<span class='curline'><a href='../S/1024.html#L937'>ns</a>                937 ext/soap/php_schema.c 		if (ns) {efree(ns);}</span>
+<span class='curline'><a href='../S/1024.html#L1060'>ns</a>               1060 ext/soap/php_schema.c 	xmlAttrPtr ns, name, ref = NULL;</span>
+<span class='curline'><a href='../S/1024.html#L1063'>ns</a>               1063 ext/soap/php_schema.c 	ns = get_attribute(groupType-&gt;properties, "targetNamespace");</span>
+<span class='curline'><a href='../S/1024.html#L1064'>ns</a>               1064 ext/soap/php_schema.c 	if (ns == NULL) {</span>
+<span class='curline'><a href='../S/1024.html#L1065'>ns</a>               1065 ext/soap/php_schema.c 		ns = tns;</span>
+<span class='curline'><a href='../S/1024.html#L1077'>ns</a>               1077 ext/soap/php_schema.c 			char *type, *ns;</span>
+<span class='curline'><a href='../S/1024.html#L1080'>ns</a>               1080 ext/soap/php_schema.c 			parse_namespace(ref-&gt;children-&gt;content, &amp;type, &amp;ns);</span>
+<span class='curline'><a href='../S/1024.html#L1081'>ns</a>               1081 ext/soap/php_schema.c 			nsptr = xmlSearchNs(groupType-&gt;doc, groupType, BAD_CAST(ns));</span>
+<span class='curline'><a href='../S/1024.html#L1085'>ns</a>               1085 ext/soap/php_schema.c 				xmlAttrPtr ns = get_attribute(groupType-&gt;properties, "targetNamespace");</span>
+<span class='curline'><a href='../S/1024.html#L1086'>ns</a>               1086 ext/soap/php_schema.c 				if (ns == NULL) {</span>
+<span class='curline'><a href='../S/1024.html#L1087'>ns</a>               1087 ext/soap/php_schema.c 					ns = tns;</span>
+<span class='curline'><a href='../S/1024.html#L1089'>ns</a>               1089 ext/soap/php_schema.c 				if (ns) {</span>
+<span class='curline'><a href='../S/1024.html#L1090'>ns</a>               1090 ext/soap/php_schema.c 					smart_str_appends(&amp;key, (char*)ns-&gt;children-&gt;content);</span>
+<span class='curline'><a href='../S/1024.html#L1102'>ns</a>               1102 ext/soap/php_schema.c 			if (ns) {efree(ns);}</span>
+<span class='curline'><a href='../S/1024.html#L1109'>ns</a>               1109 ext/soap/php_schema.c 			smart_str_appends(&amp;key, (char*)ns-&gt;children-&gt;content);</span>
+<span class='curline'><a href='../S/1024.html#L1360'>ns</a>               1360 ext/soap/php_schema.c 	xmlAttrPtr attrs, name, ns;</span>
+<span class='curline'><a href='../S/1024.html#L1363'>ns</a>               1363 ext/soap/php_schema.c 	ns = get_attribute(attrs, "targetNamespace");</span>
+<span class='curline'><a href='../S/1024.html#L1364'>ns</a>               1364 ext/soap/php_schema.c 	if (ns == NULL) {</span>
+<span class='curline'><a href='../S/1024.html#L1365'>ns</a>               1365 ext/soap/php_schema.c 		ns = tns;</span>
+<span class='curline'><a href='../S/1024.html#L1378'>ns</a>               1378 ext/soap/php_schema.c 			newType-&gt;namens = estrdup((char*)ns-&gt;children-&gt;content);</span>
+<span class='curline'><a href='../S/1024.html#L1392'>ns</a>               1392 ext/soap/php_schema.c 		cur_type-&gt;encode-&gt;details.ns = estrdup(newType-&gt;namens);</span>
+<span class='curline'><a href='../S/1024.html#L1408'>ns</a>               1408 ext/soap/php_schema.c 		newType-&gt;namens = estrdup((char*)ns-&gt;children-&gt;content);</span>
+<span class='curline'><a href='../S/1024.html#L1413'>ns</a>               1413 ext/soap/php_schema.c 		create_encoder(sdl, cur_type, ns-&gt;children-&gt;content, name-&gt;children-&gt;content);</span>
+<span class='curline'><a href='../S/1024.html#L1489'>ns</a>               1489 ext/soap/php_schema.c 	xmlAttrPtr attrs, attr, ns, name, type, ref = NULL;</span>
+<span class='curline'><a href='../S/1024.html#L1492'>ns</a>               1492 ext/soap/php_schema.c 	ns = get_attribute(attrs, "targetNamespace");</span>
+<span class='curline'><a href='../S/1024.html#L1493'>ns</a>               1493 ext/soap/php_schema.c 	if (ns == NULL) {</span>
+<span class='curline'><a href='../S/1024.html#L1494'>ns</a>               1494 ext/soap/php_schema.c 		ns = tns;</span>
+<span class='curline'><a href='../S/1024.html#L1512'>ns</a>               1512 ext/soap/php_schema.c 			char *type, *ns;</span>
+<span class='curline'><a href='../S/1024.html#L1515'>ns</a>               1515 ext/soap/php_schema.c 			parse_namespace(ref-&gt;children-&gt;content, &amp;type, &amp;ns);</span>
+<span class='curline'><a href='../S/1024.html#L1516'>ns</a>               1516 ext/soap/php_schema.c 			nsptr = xmlSearchNs(element-&gt;doc, element, BAD_CAST(ns));</span>
+<span class='curline'><a href='../S/1024.html#L1521'>ns</a>               1521 ext/soap/php_schema.c 				xmlAttrPtr ns = get_attribute(attrs, "targetNamespace");</span>
+<span class='curline'><a href='../S/1024.html#L1522'>ns</a>               1522 ext/soap/php_schema.c 				if (ns == NULL) {</span>
+<span class='curline'><a href='../S/1024.html#L1523'>ns</a>               1523 ext/soap/php_schema.c 					ns = tns;</span>
+<span class='curline'><a href='../S/1024.html#L1525'>ns</a>               1525 ext/soap/php_schema.c 				if (ns) {</span>
+<span class='curline'><a href='../S/1024.html#L1526'>ns</a>               1526 ext/soap/php_schema.c 					smart_str_appends(&amp;nscat, (char*)ns-&gt;children-&gt;content);</span>
+<span class='curline'><a href='../S/1024.html#L1534'>ns</a>               1534 ext/soap/php_schema.c 			if (ns) {efree(ns);}</span>
+<span class='curline'><a href='../S/1024.html#L1539'>ns</a>               1539 ext/soap/php_schema.c 			newType-&gt;namens = estrdup((char*)ns-&gt;children-&gt;content);</span>
+<span class='curline'><a href='../S/1024.html#L1746'>ns</a>               1746 ext/soap/php_schema.c 			char *attr_name, *ns;</span>
+<span class='curline'><a href='../S/1024.html#L1749'>ns</a>               1749 ext/soap/php_schema.c 			parse_namespace(ref-&gt;children-&gt;content, &amp;attr_name, &amp;ns);</span>
+<span class='curline'><a href='../S/1024.html#L1750'>ns</a>               1750 ext/soap/php_schema.c 			nsptr = xmlSearchNs(attrType-&gt;doc, attrType, BAD_CAST(ns));</span>
+<span class='curline'><a href='../S/1024.html#L1755'>ns</a>               1755 ext/soap/php_schema.c 				xmlAttrPtr ns = get_attribute(attrType-&gt;properties, "targetNamespace");</span>
+<span class='curline'><a href='../S/1024.html#L1756'>ns</a>               1756 ext/soap/php_schema.c 				if (ns == NULL) {</span>
+<span class='curline'><a href='../S/1024.html#L1757'>ns</a>               1757 ext/soap/php_schema.c 					ns = tns;</span>
+<span class='curline'><a href='../S/1024.html#L1759'>ns</a>               1759 ext/soap/php_schema.c 				if (ns) {</span>
+<span class='curline'><a href='../S/1024.html#L1760'>ns</a>               1760 ext/soap/php_schema.c 					smart_str_appends(&amp;key, (char*)ns-&gt;children-&gt;content);</span>
+<span class='curline'><a href='../S/1024.html#L1768'>ns</a>               1768 ext/soap/php_schema.c 			if (ns) {efree(ns);}</span>
+<span class='curline'><a href='../S/1024.html#L1770'>ns</a>               1770 ext/soap/php_schema.c 			xmlAttrPtr ns;</span>
+<span class='curline'><a href='../S/1024.html#L1772'>ns</a>               1772 ext/soap/php_schema.c 			ns = get_attribute(attrType-&gt;properties, "targetNamespace");</span>
+<span class='curline'><a href='../S/1024.html#L1773'>ns</a>               1773 ext/soap/php_schema.c 			if (ns == NULL) {</span>
+<span class='curline'><a href='../S/1024.html#L1774'>ns</a>               1774 ext/soap/php_schema.c 				ns = tns;</span>
+<span class='curline'><a href='../S/1024.html#L1776'>ns</a>               1776 ext/soap/php_schema.c 			if (ns != NULL) {</span>
+<span class='curline'><a href='../S/1024.html#L1777'>ns</a>               1777 ext/soap/php_schema.c 				smart_str_appends(&amp;key, (char*)ns-&gt;children-&gt;content);</span>
+<span class='curline'><a href='../S/1024.html#L1779'>ns</a>               1779 ext/soap/php_schema.c 				newAttr-&gt;namens = estrdup((char*)ns-&gt;children-&gt;content);</span>
+<span class='curline'><a href='../S/1024.html#L1860'>ns</a>               1860 ext/soap/php_schema.c 				char *value, *ns;</span>
+<span class='curline'><a href='../S/1024.html#L1864'>ns</a>               1864 ext/soap/php_schema.c 				parse_namespace(attr-&gt;children-&gt;content, &amp;value, &amp;ns);</span>
+<span class='curline'><a href='../S/1024.html#L1865'>ns</a>               1865 ext/soap/php_schema.c 				nsptr = xmlSearchNs(attr-&gt;doc, attr-&gt;parent, BAD_CAST(ns));</span>
+<span class='curline'><a href='../S/1024.html#L1867'>ns</a>               1867 ext/soap/php_schema.c 					ext-&gt;ns = estrdup((char*)nsptr-&gt;href);</span>
+<span class='curline'><a href='../S/1024.html#L1872'>ns</a>               1872 ext/soap/php_schema.c 				if (ns) {efree(ns);}</span>
+<span class='curline'><a href='../S/1024.html#L1957'>ns</a>               1957 ext/soap/php_schema.c 			xmlAttrPtr ns;</span>
+<span class='curline'><a href='../S/1024.html#L1961'>ns</a>               1961 ext/soap/php_schema.c 			ns = get_attribute(attrGroup-&gt;properties, "targetNamespace");</span>
+<span class='curline'><a href='../S/1024.html#L1962'>ns</a>               1962 ext/soap/php_schema.c 			if (ns == NULL) {</span>
+<span class='curline'><a href='../S/1024.html#L1963'>ns</a>               1963 ext/soap/php_schema.c 				ns = tns;</span>
+<span class='curline'><a href='../S/1024.html#L1968'>ns</a>               1968 ext/soap/php_schema.c 			newType-&gt;namens = estrdup((char*)ns-&gt;children-&gt;content);</span>
+<span class='curline'><a href='../S/1024.html#L1982'>ns</a>               1982 ext/soap/php_schema.c 			char *group_name, *ns;</span>
+<span class='curline'><a href='../S/1024.html#L1993'>ns</a>               1993 ext/soap/php_schema.c 			parse_namespace(ref-&gt;children-&gt;content, &amp;group_name, &amp;ns);</span>
+<span class='curline'><a href='../S/1024.html#L1994'>ns</a>               1994 ext/soap/php_schema.c 			nsptr = xmlSearchNs(attrGroup-&gt;doc, attrGroup, BAD_CAST(ns));</span>
+<span class='curline'><a href='../S/1024.html#L2003'>ns</a>               2003 ext/soap/php_schema.c 			if (ns) {efree(ns);}</span>
+<span class='curline'><a href='../S/1024.html#L2055'>ns</a>               2055 ext/soap/php_schema.c 	if (new_attr-&gt;ns) {</span>
+<span class='curline'><a href='../S/1024.html#L2056'>ns</a>               2056 ext/soap/php_schema.c 		new_attr-&gt;ns = estrdup(new_attr-&gt;ns);</span>
+<span class='curline'><a href='../S/1024.html#L2483'>ns</a>               2483 ext/soap/php_schema.c 	if (attr-&gt;ns) {</span>
+<span class='curline'><a href='../S/1024.html#L2484'>ns</a>               2484 ext/soap/php_schema.c 		efree(attr-&gt;ns);</span>
+<span class='curline'><a href='../S/1024.html#L2496'>ns</a>               2496 ext/soap/php_schema.c 	if (attr-&gt;ns) {</span>
+<span class='curline'><a href='../S/1024.html#L2497'>ns</a>               2497 ext/soap/php_schema.c 		free(attr-&gt;ns);</span>
+<span class='curline'><a href='../S/1026.html#L53'>ns</a>                 53 ext/soap/php_sdl.c 	char *ns, *cptype;</span>
+<span class='curline'><a href='../S/1026.html#L55'>ns</a>                 55 ext/soap/php_sdl.c 	parse_namespace(type, &amp;cptype, &amp;ns);</span>
+<span class='curline'><a href='../S/1026.html#L56'>ns</a>                 56 ext/soap/php_sdl.c 	nsptr = xmlSearchNs(node-&gt;doc, node, BAD_CAST(ns));</span>
+<span class='curline'><a href='../S/1026.html#L66'>ns</a>                 66 ext/soap/php_sdl.c 	if (ns) {efree(ns);}</span>
+<span class='curline'><a href='../S/1026.html#L76'>ns</a>                 76 ext/soap/php_sdl.c 		char *ns, *cptype;</span>
+<span class='curline'><a href='../S/1026.html#L79'>ns</a>                 79 ext/soap/php_sdl.c 		parse_namespace(type, &amp;cptype, &amp;ns);</span>
+<span class='curline'><a href='../S/1026.html#L80'>ns</a>                 80 ext/soap/php_sdl.c 		nsptr = xmlSearchNs(node-&gt;doc, node, BAD_CAST(ns));</span>
+<span class='curline'><a href='../S/1026.html#L105'>ns</a>                105 ext/soap/php_sdl.c 		if (ns) {efree(ns);}</span>
+<span class='curline'><a href='../S/1026.html#L110'>ns</a>                110 ext/soap/php_sdl.c encodePtr get_encoder(sdlPtr sdl, const char *ns, const char *type)</span>
+<span class='curline'><a href='../S/1026.html#L114'>ns</a>                114 ext/soap/php_sdl.c 	int ns_len = ns ? strlen(ns) : 0;</span>
+<span class='curline'><a href='../S/1026.html#L119'>ns</a>                119 ext/soap/php_sdl.c 	memcpy(nscat, ns, ns_len);</span>
+<span class='curline'><a href='../S/1026.html#L128'>ns</a>                128 ext/soap/php_sdl.c 	      memcmp(ns, SOAP_1_1_ENC_NAMESPACE, sizeof(SOAP_1_1_ENC_NAMESPACE)-1) == 0) ||</span>
+<span class='curline'><a href='../S/1026.html#L130'>ns</a>                130 ext/soap/php_sdl.c 	      memcmp(ns, SOAP_1_2_ENC_NAMESPACE, sizeof(SOAP_1_2_ENC_NAMESPACE)-1) == 0))) {</span>
+<span class='curline'><a href='../S/1026.html#L149'>ns</a>                149 ext/soap/php_sdl.c 				new_enc-&gt;details.ns = zend_strndup(ns, ns_len);</span>
+<span class='curline'><a href='../S/1026.html#L152'>ns</a>                152 ext/soap/php_sdl.c 				new_enc-&gt;details.ns = estrndup(ns, ns_len);</span>
+<span class='curline'><a href='../S/1026.html#L198'>ns</a>                198 ext/soap/php_sdl.c sdlBindingPtr get_binding_from_name(sdlPtr sdl, char *name, char *ns)</span>
+<span class='curline'><a href='../S/1026.html#L203'>ns</a>                203 ext/soap/php_sdl.c 	smart_str_appends(&amp;key, ns);</span>
+<span class='curline'><a href='../S/1026.html#L216'>ns</a>                216 ext/soap/php_sdl.c 	if (node-&gt;ns &amp;&amp; strcmp((char*)node-&gt;ns-&gt;href, WSDL_NAMESPACE) != 0) {</span>
+<span class='curline'><a href='../S/1026.html#L222'>ns</a>                222 ext/soap/php_sdl.c 			soap_error1(E_ERROR, "Parsing WSDL: Unknown required WSDL extension '%s'", node-&gt;ns-&gt;href);</span>
+<span class='curline'><a href='../S/1026.html#L493'>ns</a>                493 ext/soap/php_sdl.c 		h-&gt;ns = estrdup((char*)tmp-&gt;children-&gt;content);</span>
+<span class='curline'><a href='../S/1026.html#L520'>ns</a>                520 ext/soap/php_sdl.c 				if (!h-&gt;ns &amp;&amp; h-&gt;element-&gt;namens) {</span>
+<span class='curline'><a href='../S/1026.html#L521'>ns</a>                521 ext/soap/php_sdl.c 					h-&gt;ns = estrdup(h-&gt;element-&gt;namens);</span>
+<span class='curline'><a href='../S/1026.html#L542'>ns</a>                542 ext/soap/php_sdl.c 				if (hf-&gt;ns) {</span>
+<span class='curline'><a href='../S/1026.html#L543'>ns</a>                543 ext/soap/php_sdl.c 					smart_str_appends(&amp;key,hf-&gt;ns);</span>
+<span class='curline'><a href='../S/1026.html#L580'>ns</a>                580 ext/soap/php_sdl.c 				binding-&gt;ns = estrdup((char*)tmp-&gt;children-&gt;content);</span>
+<span class='curline'><a href='../S/1026.html#L647'>ns</a>                647 ext/soap/php_sdl.c 			if (h-&gt;ns) {</span>
+<span class='curline'><a href='../S/1026.html#L648'>ns</a>                648 ext/soap/php_sdl.c 				smart_str_appends(&amp;key,h-&gt;ns);</span>
+<span class='curline'><a href='../S/1026.html#L689'>ns</a>                689 ext/soap/php_sdl.c 		if (trav-&gt;ns != NULL &amp;&amp; strcmp((char*)trav-&gt;ns-&gt;href, WSDL_NAMESPACE) != 0) {</span>
+<span class='curline'><a href='../S/1026.html#L793'>ns</a>                793 ext/soap/php_sdl.c 					if (node_is_equal(trav2,"address") &amp;&amp; trav2-&gt;ns) {</span>
+<span class='curline'><a href='../S/1026.html#L794'>ns</a>                794 ext/soap/php_sdl.c 						if (!strncmp((char*)trav2-&gt;ns-&gt;href, WSDL_SOAP11_NAMESPACE, sizeof(WSDL_SOAP11_NAMESPACE))) {</span>
+<span class='curline'><a href='../S/1026.html#L798'>ns</a>                798 ext/soap/php_sdl.c 						} else if (!strncmp((char*)trav2-&gt;ns-&gt;href, WSDL_SOAP12_NAMESPACE, sizeof(WSDL_SOAP12_NAMESPACE))) {</span>
+<span class='curline'><a href='../S/1026.html#L802'>ns</a>                802 ext/soap/php_sdl.c 						} else if (!strncmp((char*)trav2-&gt;ns-&gt;href, RPC_SOAP12_NAMESPACE, sizeof(RPC_SOAP12_NAMESPACE))) {</span>
+<span class='curline'><a href='../S/1026.html#L806'>ns</a>                806 ext/soap/php_sdl.c 						} else if (!strncmp((char*)trav2-&gt;ns-&gt;href, WSDL_HTTP11_NAMESPACE, sizeof(WSDL_HTTP11_NAMESPACE))) {</span>
+<span class='curline'><a href='../S/1026.html#L809'>ns</a>                809 ext/soap/php_sdl.c 						} else if (!strncmp((char*)trav2-&gt;ns-&gt;href, WSDL_HTTP12_NAMESPACE, sizeof(WSDL_HTTP12_NAMESPACE))) {</span>
+<span class='curline'><a href='../S/1026.html#L1096'>ns</a>               1096 ext/soap/php_sdl.c 												binding-&gt;ns = estrdup((char*)tmp-&gt;children-&gt;content);</span>
+<span class='curline'><a href='../S/1026.html#L1249'>ns</a>               1249 ext/soap/php_sdl.c 			x-&gt;ns = sdl_deserialize_string(in);</span>
+<span class='curline'><a href='../S/1026.html#L1416'>ns</a>               1416 ext/soap/php_sdl.c 	enc-&gt;details.ns = sdl_deserialize_string(in);</span>
+<span class='curline'><a href='../S/1026.html#L1423'>ns</a>               1423 ext/soap/php_sdl.c 		int ns_len = strlen(enc-&gt;details.ns);</span>
+<span class='curline'><a href='../S/1026.html#L1427'>ns</a>               1427 ext/soap/php_sdl.c 		      memcmp(enc-&gt;details.ns, SOAP_1_1_ENC_NAMESPACE, sizeof(SOAP_1_1_ENC_NAMESPACE)-1) == 0) ||</span>
+<span class='curline'><a href='../S/1026.html#L1429'>ns</a>               1429 ext/soap/php_sdl.c 		      memcmp(enc-&gt;details.ns, SOAP_1_2_ENC_NAMESPACE, sizeof(SOAP_1_2_ENC_NAMESPACE)-1) == 0))) {</span>
+<span class='curline'><a href='../S/1026.html#L1463'>ns</a>               1463 ext/soap/php_sdl.c 	body-&gt;ns = sdl_deserialize_string(in);</span>
+<span class='curline'><a href='../S/1026.html#L1479'>ns</a>               1479 ext/soap/php_sdl.c 			tmp-&gt;ns = sdl_deserialize_string(in);</span>
+<span class='curline'><a href='../S/1026.html#L1500'>ns</a>               1500 ext/soap/php_sdl.c 					tmp2-&gt;ns = sdl_deserialize_string(in);</span>
+<span class='curline'><a href='../S/1026.html#L1750'>ns</a>               1750 ext/soap/php_sdl.c 						binding-&gt;ns = sdl_deserialize_string(&amp;in);</span>
+<span class='curline'><a href='../S/1026.html#L1865'>ns</a>               1865 ext/soap/php_sdl.c 			sdl_serialize_string((*tmp)-&gt;ns, out);</span>
+<span class='curline'><a href='../S/1026.html#L2028'>ns</a>               2028 ext/soap/php_sdl.c 	sdl_serialize_string(enc-&gt;details.ns, out);</span>
+<span class='curline'><a href='../S/1026.html#L2065'>ns</a>               2065 ext/soap/php_sdl.c 	sdl_serialize_string(body-&gt;ns, out);</span>
+<span class='curline'><a href='../S/1026.html#L2082'>ns</a>               2082 ext/soap/php_sdl.c 			sdl_serialize_string((*tmp)-&gt;ns, out);</span>
+<span class='curline'><a href='../S/1026.html#L2101'>ns</a>               2101 ext/soap/php_sdl.c 					sdl_serialize_string((*tmp2)-&gt;ns, out);</span>
+<span class='curline'><a href='../S/1026.html#L2341'>ns</a>               2341 ext/soap/php_sdl.c 						sdl_serialize_string(binding-&gt;ns, out);</span>
+<span class='curline'><a href='../S/1026.html#L2463'>ns</a>               2463 ext/soap/php_sdl.c 		if (pheader-&gt;ns) {</span>
+<span class='curline'><a href='../S/1026.html#L2464'>ns</a>               2464 ext/soap/php_sdl.c 			pheader-&gt;ns = strdup(pheader-&gt;ns);</span>
+<span class='curline'><a href='../S/1026.html#L2499'>ns</a>               2499 ext/soap/php_sdl.c 	if (body-&gt;ns) {</span>
+<span class='curline'><a href='../S/1026.html#L2500'>ns</a>               2500 ext/soap/php_sdl.c 		body-&gt;ns = strdup(body-&gt;ns);</span>
+<span class='curline'><a href='../S/1026.html#L2588'>ns</a>               2588 ext/soap/php_sdl.c 			if (soap_binding-&gt;ns) {</span>
+<span class='curline'><a href='../S/1026.html#L2589'>ns</a>               2589 ext/soap/php_sdl.c 				soap_binding-&gt;ns = strdup(soap_binding-&gt;ns);</span>
+<span class='curline'><a href='../S/1026.html#L2653'>ns</a>               2653 ext/soap/php_sdl.c 				if ((*tmp)-&gt;ns) {</span>
+<span class='curline'><a href='../S/1026.html#L2654'>ns</a>               2654 ext/soap/php_sdl.c 					pextra-&gt;ns = strdup((*tmp)-&gt;ns);</span>
+<span class='curline'><a href='../S/1026.html#L2858'>ns</a>               2858 ext/soap/php_sdl.c 	if (penc-&gt;details.ns) {</span>
+<span class='curline'><a href='../S/1026.html#L2859'>ns</a>               2859 ext/soap/php_sdl.c 		penc-&gt;details.ns = strdup(penc-&gt;details.ns);</span>
+<span class='curline'><a href='../S/1026.html#L3513'>ns</a>               3513 ext/soap/php_sdl.c 	if (body.ns) {</span>
+<span class='curline'><a href='../S/1026.html#L3514'>ns</a>               3514 ext/soap/php_sdl.c 		efree(body.ns);</span>
+<span class='curline'><a href='../S/1026.html#L3524'>ns</a>               3524 ext/soap/php_sdl.c 	if (body.ns) {</span>
+<span class='curline'><a href='../S/1026.html#L3525'>ns</a>               3525 ext/soap/php_sdl.c 		free(body.ns);</span>
+<span class='curline'><a href='../S/1026.html#L3635'>ns</a>               3635 ext/soap/php_sdl.c 	if (hdr-&gt;ns) {</span>
+<span class='curline'><a href='../S/1026.html#L3636'>ns</a>               3636 ext/soap/php_sdl.c 		efree(hdr-&gt;ns);</span>
+<span class='curline'><a href='../S/1026.html#L3651'>ns</a>               3651 ext/soap/php_sdl.c 	if (hdr-&gt;ns) {</span>
+<span class='curline'><a href='../S/1026.html#L3652'>ns</a>               3652 ext/soap/php_sdl.c 		free(hdr-&gt;ns);</span>
+<span class='curline'><a href='../S/1026.html#L3674'>ns</a>               3674 ext/soap/php_sdl.c 		if (binding-&gt;ns) {</span>
+<span class='curline'><a href='../S/1026.html#L3675'>ns</a>               3675 ext/soap/php_sdl.c 			efree(binding-&gt;ns);</span>
+<span class='curline'><a href='../S/1026.html#L3695'>ns</a>               3695 ext/soap/php_sdl.c 		if (binding-&gt;ns) {</span>
+<span class='curline'><a href='../S/1026.html#L3696'>ns</a>               3696 ext/soap/php_sdl.c 			free(binding-&gt;ns);</span>
+<span class='curline'><a href='../S/1027.html#L98'>ns</a>                 98 ext/soap/php_sdl.h 	char                *ns;</span>
+<span class='curline'><a href='../S/1027.html#L107'>ns</a>                107 ext/soap/php_sdl.h 	char                *ns;</span>
+<span class='curline'><a href='../S/1027.html#L113'>ns</a>                113 ext/soap/php_sdl.h 	char                *ns;</span>
+<span class='curline'><a href='../S/1027.html#L240'>ns</a>                240 ext/soap/php_sdl.h 	char *ns;</span>
+<span class='curline'><a href='../S/1027.html#L260'>ns</a>                260 ext/soap/php_sdl.h encodePtr get_encoder(sdlPtr sdl, const char *ns, const char *type);</span>
+<span class='curline'><a href='../S/1027.html#L264'>ns</a>                264 ext/soap/php_sdl.h sdlBindingPtr get_binding_from_name(sdlPtr sdl, char *name, char *ns);</span>
+<span class='curline'><a href='../S/1029.html#L188'>ns</a>                188 ext/soap/php_xml.c 	if (node-&gt;ns) {</span>
+<span class='curline'><a href='../S/1029.html#L189'>ns</a>                189 ext/soap/php_xml.c 		return node-&gt;ns;</span>
+<span class='curline'><a href='../S/1029.html#L190'>ns</a>                190 ext/soap/php_xml.c 	} else if (node-&gt;parent-&gt;ns) {</span>
+<span class='curline'><a href='../S/1029.html#L191'>ns</a>                191 ext/soap/php_xml.c 		return node-&gt;parent-&gt;ns;</span>
+<span class='curline'><a href='../S/1029.html#L199'>ns</a>                199 ext/soap/php_xml.c 	if (node-&gt;ns) {</span>
+<span class='curline'><a href='../S/1029.html#L200'>ns</a>                200 ext/soap/php_xml.c 		return node-&gt;ns;</span>
+<span class='curline'><a href='../S/1029.html#L206'>ns</a>                206 ext/soap/php_xml.c int attr_is_equal_ex(xmlAttrPtr node, char *name, char *ns)</span>
+<span class='curline'><a href='../S/1029.html#L209'>ns</a>                209 ext/soap/php_xml.c 		if (ns) {</span>
+<span class='curline'><a href='../S/1029.html#L212'>ns</a>                212 ext/soap/php_xml.c 				return (strcmp((char*)nsPtr-&gt;href, ns) == 0);</span>
+<span class='curline'><a href='../S/1029.html#L222'>ns</a>                222 ext/soap/php_xml.c int node_is_equal_ex(xmlNodePtr node, char *name, char *ns)</span>
+<span class='curline'><a href='../S/1029.html#L225'>ns</a>                225 ext/soap/php_xml.c 		if (ns) {</span>
+<span class='curline'><a href='../S/1029.html#L228'>ns</a>                228 ext/soap/php_xml.c 				return (strcmp((char*)nsPtr-&gt;href, ns) == 0);</span>
+<span class='curline'><a href='../S/1029.html#L239'>ns</a>                239 ext/soap/php_xml.c xmlAttrPtr get_attribute_ex(xmlAttrPtr node, char *name, char *ns)</span>
+<span class='curline'><a href='../S/1029.html#L242'>ns</a>                242 ext/soap/php_xml.c 		if (attr_is_equal_ex(node, name, ns)) {</span>
+<span class='curline'><a href='../S/1029.html#L250'>ns</a>                250 ext/soap/php_xml.c xmlNodePtr get_node_ex(xmlNodePtr node, char *name, char *ns)</span>
+<span class='curline'><a href='../S/1029.html#L253'>ns</a>                253 ext/soap/php_xml.c 		if (node_is_equal_ex(node, name, ns)) {</span>
+<span class='curline'><a href='../S/1029.html#L261'>ns</a>                261 ext/soap/php_xml.c xmlNodePtr get_node_recurisve_ex(xmlNodePtr node, char *name, char *ns)</span>
+<span class='curline'><a href='../S/1029.html#L264'>ns</a>                264 ext/soap/php_xml.c 		if (node_is_equal_ex(node, name, ns)) {</span>
+<span class='curline'><a href='../S/1029.html#L267'>ns</a>                267 ext/soap/php_xml.c 			xmlNodePtr tmp = get_node_recurisve_ex(node-&gt;children, name, ns);</span>
+<span class='curline'><a href='../S/1030.html#L38'>ns</a>                 38 ext/soap/php_xml.h int attr_is_equal_ex(xmlAttrPtr node, char *name, char *ns);</span>
+<span class='curline'><a href='../S/1030.html#L39'>ns</a>                 39 ext/soap/php_xml.h int node_is_equal_ex(xmlNodePtr node, char *name, char *ns);</span>
+<span class='curline'><a href='../S/1030.html#L40'>ns</a>                 40 ext/soap/php_xml.h xmlAttrPtr get_attribute_ex(xmlAttrPtr node,char *name, char *ns);</span>
+<span class='curline'><a href='../S/1030.html#L41'>ns</a>                 41 ext/soap/php_xml.h xmlNodePtr get_node_ex(xmlNodePtr node,char *name, char *ns);</span>
+<span class='curline'><a href='../S/1030.html#L42'>ns</a>                 42 ext/soap/php_xml.h xmlNodePtr get_node_recursive_ex(xmlNodePtr node,char *name, char *ns);</span>
+<span class='curline'><a href='../S/1030.html#L48'>ns</a>                 48 ext/soap/php_xml.h #define FOREACHATTRNODEEX(n,c,ns,i) \</span>
+<span class='curline'><a href='../S/1030.html#L54'>ns</a>                 54 ext/soap/php_xml.h 			i = get_attribute_ex(n,c,ns); \</span>
+<span class='curline'><a href='../S/1030.html#L62'>ns</a>                 62 ext/soap/php_xml.h #define FOREACHNODEEX(n,c,ns,i) \</span>
+<span class='curline'><a href='../S/1031.html#L549'>ns</a>                549 ext/soap/soap.c 			if (defaultEncoding[i].details.ns != NULL) {</span>
+<span class='curline'><a href='../S/1031.html#L551'>ns</a>                551 ext/soap/soap.c 				spprintf(&amp;ns_type, 0, "%s:%s", defaultEncoding[i].details.ns, defaultEncoding[i].details.type_str);</span>
+<span class='curline'><a href='../S/1031.html#L812'>ns</a>                812 ext/soap/soap.c 	char *name, *ns;</span>
+<span class='curline'><a href='../S/1031.html#L816'>ns</a>                816 ext/soap/soap.c 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ss|zbz", &amp;ns, &amp;ns_len, &amp;name, &amp;name_len, &amp;data, &amp;must_understand, &amp;actor) == FAILURE) {</span>
+<span class='curline'><a href='../S/1031.html#L828'>ns</a>                828 ext/soap/soap.c 	add_property_stringl(this_ptr, "namespace", ns, ns_len, 1);</span>
+<span class='curline'><a href='../S/1031.html#L956'>ns</a>                956 ext/soap/soap.c 	char *stype = NULL, *ns = NULL, *name = NULL, *namens = NULL;</span>
+<span class='curline'><a href='../S/1031.html#L959'>ns</a>                959 ext/soap/soap.c 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "z!z|ssss", &amp;data, &amp;type, &amp;stype, &amp;stype_len, &amp;ns, &amp;ns_len, &amp;name, &amp;name_len, &amp;namens, &amp;namens_len) == FAILURE) {</span>
+<span class='curline'><a href='../S/1031.html#L981'>ns</a>                981 ext/soap/soap.c 	if (ns &amp;&amp; ns_len &gt; 0) {</span>
+<span class='curline'><a href='../S/1031.html#L982'>ns</a>                982 ext/soap/soap.c 		add_property_stringl(this_ptr, "enc_ns", ns, ns_len, 1);</span>
+<span class='curline'><a href='../S/1031.html#L1060'>ns</a>               1060 ext/soap/soap.c 				new_enc-&gt;details.ns = estrdup(enc-&gt;details.ns);</span>
+<span class='curline'><a href='../S/1031.html#L1067'>ns</a>               1067 ext/soap/soap.c 					new_enc-&gt;details.ns = estrdup(type_ns);</span>
+<span class='curline'><a href='../S/1031.html#L1629'>ns</a>               1629 ext/soap/soap.c 		if (env &amp;&amp; env-&gt;ns) {</span>
+<span class='curline'><a href='../S/1031.html#L1630'>ns</a>               1630 ext/soap/soap.c 			if (strcmp((char*)env-&gt;ns-&gt;href, SOAP_1_1_ENV_NAMESPACE) == 0) {</span>
+<span class='curline'><a href='../S/1031.html#L1632'>ns</a>               1632 ext/soap/soap.c 			} else if (strcmp((char*)env-&gt;ns-&gt;href,SOAP_1_2_ENV_NAMESPACE) == 0) {</span>
+<span class='curline'><a href='../S/1031.html#L2724'>ns</a>               2724 ext/soap/soap.c  					request = serialize_function_call(this_ptr, fn, NULL, fnb-&gt;input.ns, real_args, arg_count, soap_version, soap_headers TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1031.html#L3492'>ns</a>               3492 ext/soap/soap.c 		if (attr-&gt;ns == NULL) {</span>
+<span class='curline'><a href='../S/1031.html#L3532'>ns</a>               3532 ext/soap/soap.c 		if (attr-&gt;ns == NULL) {</span>
+<span class='curline'><a href='../S/1031.html#L3600'>ns</a>               3600 ext/soap/soap.c 			if (attr-&gt;ns == NULL) {</span>
+<span class='curline'><a href='../S/1031.html#L3665'>ns</a>               3665 ext/soap/soap.c 						if (hdr_func-&gt;ns) {</span>
+<span class='curline'><a href='../S/1031.html#L3666'>ns</a>               3666 ext/soap/soap.c 							smart_str_appends(&amp;key, (char*)hdr_func-&gt;ns-&gt;href);</span>
+<span class='curline'><a href='../S/1031.html#L3761'>ns</a>               3761 ext/soap/soap.c 	xmlNsPtr ns = NULL;</span>
+<span class='curline'><a href='../S/1031.html#L3769'>ns</a>               3769 ext/soap/soap.c 			ns = encode_add_ns(body, fnb-&gt;output.ns);</span>
+<span class='curline'><a href='../S/1031.html#L3771'>ns</a>               3771 ext/soap/soap.c 				method = xmlNewChild(body, ns, BAD_CAST(function-&gt;responseName), NULL);</span>
+<span class='curline'><a href='../S/1031.html#L3773'>ns</a>               3773 ext/soap/soap.c 				method = xmlNewChild(body, ns, BAD_CAST(function-&gt;functionName), NULL);</span>
+<span class='curline'><a href='../S/1031.html#L3780'>ns</a>               3780 ext/soap/soap.c 			ns = encode_add_ns(body, uri);</span>
+<span class='curline'><a href='../S/1031.html#L3781'>ns</a>               3781 ext/soap/soap.c 			method = xmlNewChild(body, ns, BAD_CAST(function_name), NULL);</span>
+<span class='curline'><a href='../S/1031.html#L3812'>ns</a>               3812 ext/soap/soap.c 					ns = encode_add_ns(param, parameter-&gt;element-&gt;namens);</span>
+<span class='curline'><a href='../S/1031.html#L3814'>ns</a>               3814 ext/soap/soap.c 					xmlSetNs(param, ns);</span>
+<span class='curline'><a href='../S/1031.html#L3817'>ns</a>               3817 ext/soap/soap.c 				ns = encode_add_ns(param, uri);</span>
+<span class='curline'><a href='../S/1031.html#L3819'>ns</a>               3819 ext/soap/soap.c 				xmlSetNs(param, ns);</span>
+<span class='curline'><a href='../S/1031.html#L3841'>ns</a>               3841 ext/soap/soap.c 						ns = encode_add_ns(param, parameter-&gt;element-&gt;namens);</span>
+<span class='curline'><a href='../S/1031.html#L3843'>ns</a>               3843 ext/soap/soap.c 						xmlSetNs(param, ns);</span>
+<span class='curline'><a href='../S/1031.html#L3853'>ns</a>               3853 ext/soap/soap.c 		xmlSetNsProp(method, body-&gt;ns, BAD_CAST("encodingStyle"), BAD_CAST(SOAP_1_2_ENC_NAMESPACE));</span>
+<span class='curline'><a href='../S/1031.html#L3865'>ns</a>               3865 ext/soap/soap.c 	xmlNsPtr ns = NULL;</span>
+<span class='curline'><a href='../S/1031.html#L3877'>ns</a>               3877 ext/soap/soap.c 		ns = xmlNewNs(envelope, BAD_CAST(SOAP_1_1_ENV_NAMESPACE), BAD_CAST(SOAP_1_1_ENV_NS_PREFIX));</span>
+<span class='curline'><a href='../S/1031.html#L3878'>ns</a>               3878 ext/soap/soap.c 		xmlSetNs(envelope,ns);</span>
+<span class='curline'><a href='../S/1031.html#L3881'>ns</a>               3881 ext/soap/soap.c 		ns = xmlNewNs(envelope, BAD_CAST(SOAP_1_2_ENV_NAMESPACE), BAD_CAST(SOAP_1_2_ENV_NS_PREFIX));</span>
+<span class='curline'><a href='../S/1031.html#L3882'>ns</a>               3882 ext/soap/soap.c 		xmlSetNs(envelope,ns);</span>
+<span class='curline'><a href='../S/1031.html#L3903'>ns</a>               3903 ext/soap/soap.c 			char *hdr_ns   = headers-&gt;hdr?headers-&gt;hdr-&gt;ns:NULL;</span>
+<span class='curline'><a href='../S/1031.html#L3906'>ns</a>               3906 ext/soap/soap.c 			head = xmlNewChild(envelope, ns, BAD_CAST("Header"), NULL);</span>
+<span class='curline'><a href='../S/1031.html#L3954'>ns</a>               3954 ext/soap/soap.c 		body = xmlNewChild(envelope, ns, BAD_CAST("Body"), NULL);</span>
+<span class='curline'><a href='../S/1031.html#L3955'>ns</a>               3955 ext/soap/soap.c 		param = xmlNewChild(body, ns, BAD_CAST("Fault"), NULL);</span>
+<span class='curline'><a href='../S/1031.html#L3972'>ns</a>               3972 ext/soap/soap.c 						fault_ns = fb-&gt;ns;</span>
+<span class='curline'><a href='../S/1031.html#L3988'>ns</a>               3988 ext/soap/soap.c 				  fault_ns = fb-&gt;ns;</span>
+<span class='curline'><a href='../S/1031.html#L4037'>ns</a>               4037 ext/soap/soap.c 				xmlNodePtr node = xmlNewChild(param, ns, BAD_CAST("Code"), NULL);</span>
+<span class='curline'><a href='../S/1031.html#L4039'>ns</a>               4039 ext/soap/soap.c 				node = xmlNewChild(node, ns, BAD_CAST("Value"), NULL);</span>
+<span class='curline'><a href='../S/1031.html#L4051'>ns</a>               4051 ext/soap/soap.c 				xmlNodePtr node = xmlNewChild(param, ns, BAD_CAST("Reason"), NULL);</span>
+<span class='curline'><a href='../S/1031.html#L4054'>ns</a>               4054 ext/soap/soap.c 				xmlSetNs(node, ns);</span>
+<span class='curline'><a href='../S/1031.html#L4093'>ns</a>               4093 ext/soap/soap.c 						if (fb-&gt;ns) {</span>
+<span class='curline'><a href='../S/1031.html#L4094'>ns</a>               4094 ext/soap/soap.c 							xmlNsPtr ns = encode_add_ns(x, fb-&gt;ns);</span>
+<span class='curline'><a href='../S/1031.html#L4095'>ns</a>               4095 ext/soap/soap.c 							xmlSetNs(x, ns);</span>
+<span class='curline'><a href='../S/1031.html#L4100'>ns</a>               4100 ext/soap/soap.c 						ns = encode_add_ns(x, sparam-&gt;element-&gt;namens);</span>
+<span class='curline'><a href='../S/1031.html#L4102'>ns</a>               4102 ext/soap/soap.c 						xmlSetNs(x, ns);</span>
+<span class='curline'><a href='../S/1031.html#L4107'>ns</a>               4107 ext/soap/soap.c 				xmlSetNsProp(x, envelope-&gt;ns, BAD_CAST("encodingStyle"), BAD_CAST(SOAP_1_2_ENC_NAMESPACE));</span>
+<span class='curline'><a href='../S/1031.html#L4118'>ns</a>               4118 ext/soap/soap.c 			head = xmlNewChild(envelope, ns, BAD_CAST("Header"), NULL);</span>
+<span class='curline'><a href='../S/1031.html#L4125'>ns</a>               4125 ext/soap/soap.c 					char *hdr_ns   = h-&gt;hdr?h-&gt;hdr-&gt;ns:NULL;</span>
+<span class='curline'><a href='../S/1031.html#L4197'>ns</a>               4197 ext/soap/soap.c 		body = xmlNewChild(envelope, ns, BAD_CAST("Body"), NULL);</span>
+<span class='curline'><a href='../S/1031.html#L4209'>ns</a>               4209 ext/soap/soap.c 			xmlSetNsProp(envelope, envelope-&gt;ns, BAD_CAST("encodingStyle"), BAD_CAST(SOAP_1_1_ENC_NAMESPACE));</span>
+<span class='curline'><a href='../S/1031.html#L4229'>ns</a>               4229 ext/soap/soap.c 	xmlNsPtr ns = NULL;</span>
+<span class='curline'><a href='../S/1031.html#L4241'>ns</a>               4241 ext/soap/soap.c 		ns = xmlNewNs(envelope, BAD_CAST(SOAP_1_1_ENV_NAMESPACE), BAD_CAST(SOAP_1_1_ENV_NS_PREFIX));</span>
+<span class='curline'><a href='../S/1031.html#L4242'>ns</a>               4242 ext/soap/soap.c 		xmlSetNs(envelope, ns);</span>
+<span class='curline'><a href='../S/1031.html#L4245'>ns</a>               4245 ext/soap/soap.c 		ns = xmlNewNs(envelope, BAD_CAST(SOAP_1_2_ENV_NAMESPACE), BAD_CAST(SOAP_1_2_ENV_NS_PREFIX));</span>
+<span class='curline'><a href='../S/1031.html#L4246'>ns</a>               4246 ext/soap/soap.c 		xmlSetNs(envelope, ns);</span>
+<span class='curline'><a href='../S/1031.html#L4253'>ns</a>               4253 ext/soap/soap.c 		head = xmlNewChild(envelope, ns, BAD_CAST("Header"), NULL);</span>
+<span class='curline'><a href='../S/1031.html#L4256'>ns</a>               4256 ext/soap/soap.c 	body = xmlNewChild(envelope, ns, BAD_CAST("Body"), NULL);</span>
+<span class='curline'><a href='../S/1031.html#L4267'>ns</a>               4267 ext/soap/soap.c 			ns = encode_add_ns(body, fnb-&gt;input.ns);</span>
+<span class='curline'><a href='../S/1031.html#L4269'>ns</a>               4269 ext/soap/soap.c 				method = xmlNewChild(body, ns, BAD_CAST(function-&gt;requestName), NULL);</span>
+<span class='curline'><a href='../S/1031.html#L4271'>ns</a>               4271 ext/soap/soap.c 				method = xmlNewChild(body, ns, BAD_CAST(function-&gt;functionName), NULL);</span>
+<span class='curline'><a href='../S/1031.html#L4284'>ns</a>               4284 ext/soap/soap.c 			ns = encode_add_ns(body, uri);</span>
+<span class='curline'><a href='../S/1031.html#L4286'>ns</a>               4286 ext/soap/soap.c 				method = xmlNewChild(body, ns, BAD_CAST(function_name), NULL);</span>
+<span class='curline'><a href='../S/1031.html#L4288'>ns</a>               4288 ext/soap/soap.c 				method = xmlNewChild(body, ns, BAD_CAST(function-&gt;requestName), NULL);</span>
+<span class='curline'><a href='../S/1031.html#L4290'>ns</a>               4290 ext/soap/soap.c 				method = xmlNewChild(body, ns, BAD_CAST(function-&gt;functionName), NULL);</span>
+<span class='curline'><a href='../S/1031.html#L4316'>ns</a>               4316 ext/soap/soap.c 					ns = encode_add_ns(param, parameter-&gt;element-&gt;namens);</span>
+<span class='curline'><a href='../S/1031.html#L4318'>ns</a>               4318 ext/soap/soap.c 					xmlSetNs(param, ns);</span>
+<span class='curline'><a href='../S/1031.html#L4338'>ns</a>               4338 ext/soap/soap.c 							ns = encode_add_ns(param, parameter-&gt;element-&gt;namens);</span>
+<span class='curline'><a href='../S/1031.html#L4340'>ns</a>               4340 ext/soap/soap.c 							xmlSetNs(param, ns);</span>
+<span class='curline'><a href='../S/1031.html#L4356'>ns</a>               4356 ext/soap/soap.c 			zval **name, **ns, **tmp;</span>
+<span class='curline'><a href='../S/1031.html#L4365'>ns</a>               4365 ext/soap/soap.c 			    zend_hash_find(ht, "namespace", sizeof("namespace"), (void**)&amp;ns) == SUCCESS &amp;&amp;</span>
+<span class='curline'><a href='../S/1031.html#L4366'>ns</a>               4366 ext/soap/soap.c 			    Z_TYPE_PP(ns) == IS_STRING) {</span>
+<span class='curline'><a href='../S/1031.html#L4376'>ns</a>               4376 ext/soap/soap.c 					smart_str_appendl(&amp;key, Z_STRVAL_PP(ns), Z_STRLEN_PP(ns));</span>
+<span class='curline'><a href='../S/1031.html#L4397'>ns</a>               4397 ext/soap/soap.c 				nsptr = encode_add_ns(h, Z_STRVAL_PP(ns));</span>
+<span class='curline'><a href='../S/1031.html#L4408'>ns</a>               4408 ext/soap/soap.c 			xmlSetNsProp(envelope, envelope-&gt;ns, BAD_CAST("encodingStyle"), BAD_CAST(SOAP_1_1_ENC_NAMESPACE));</span>
+<span class='curline'><a href='../S/1031.html#L4412'>ns</a>               4412 ext/soap/soap.c 				xmlSetNsProp(method, envelope-&gt;ns, BAD_CAST("encodingStyle"), BAD_CAST(SOAP_1_2_ENC_NAMESPACE));</span>
+<span class='curline'><a href='../S/1031.html#L4576'>ns</a>               4576 ext/soap/soap.c 								if ((*param)-&gt;element-&gt;namens != NULL &amp;&amp; node-&gt;ns != NULL) {</span>
+<span class='curline'><a href='../S/1031.html#L4577'>ns</a>               4577 ext/soap/soap.c 									if (strcmp((*param)-&gt;element-&gt;namens, (char*)node-&gt;ns-&gt;href) != 0) {</span>
+<span class='curline'><a href='../S/1031.html#L4581'>ns</a>               4581 ext/soap/soap.c 								} else if ((void*)(*param)-&gt;element-&gt;namens != (void*)node-&gt;ns) {</span>
+<span class='curline'><a href='../S/1102.html#L339'>ns</a>                339 ext/standard/dns.c 	int ns;</span>
+<span class='curline'><a href='../S/1102.html#L340'>ns</a>                340 ext/standard/dns.c 	for (ns = 0; ns &lt; MAXNS; ns++) {</span>
+<span class='curline'><a href='../S/1102.html#L341'>ns</a>                341 ext/standard/dns.c 		if (res._u._ext.nsaddrs[ns] != NULL) {</span>
+<span class='curline'><a href='../S/1102.html#L342'>ns</a>                342 ext/standard/dns.c 			free (res._u._ext.nsaddrs[ns]);</span>
+<span class='curline'><a href='../S/1102.html#L343'>ns</a>                343 ext/standard/dns.c 			res._u._ext.nsaddrs[ns] = NULL;</span>
+<span class='curline'><a href='../S/1102.html#L783'>ns</a>                783 ext/standard/dns.c 	int n, qd, an, ns = 0, ar = 0;</span>
+<span class='curline'><a href='../S/1102.html#L936'>ns</a>                936 ext/standard/dns.c 			ns = ntohs(hp-&gt;nscount);</span>
+<span class='curline'><a href='../S/1102.html#L965'>ns</a>                965 ext/standard/dns.c 				while (ns-- &gt; 0 &amp;&amp; cp &amp;&amp; cp &lt; end) {</span>
+<span class='curline'><a href='../S/1259.html#L287'>ns</a>                287 ext/xsl/xsltprocessor.c 								node-&gt;ns = curns;</span>
+<span class='curline'><a href='../S/1259.html#L463'>ns</a>                463 ext/xsl/xsltprocessor.c 				if (nodep-&gt;type == XML_ELEMENT_NODE &amp;&amp; xmlStrEqual(nodep-&gt;name, "key") &amp;&amp; xmlStrEqual(nodep-&gt;ns-&gt;href, XSLT_NAMESPACE)) {</span>
+</pre>
+</body>
+</html>

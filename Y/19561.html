@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>greet_packet</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/780.html#L442'>greet_packet</a>      442 ext/mysqlnd/mysqlnd.c 			const MYSQLND_PACKET_GREET * const greet_packet,</span>
+<span class='curline'><a href='../S/780.html#L490'>greet_packet</a>      490 ext/mysqlnd/mysqlnd.c 		auth_packet-&gt;charset_no	= greet_packet-&gt;charset_no;</span>
+<span class='curline'><a href='../S/780.html#L495'>greet_packet</a>      495 ext/mysqlnd/mysqlnd.c 		zend_bool server_has_ssl = (greet_packet-&gt;server_capabilities &amp; CLIENT_SSL)? TRUE:FALSE;</span>
+<span class='curline'><a href='../S/780.html#L699'>greet_packet</a>      699 ext/mysqlnd/mysqlnd.c 			const MYSQLND_PACKET_GREET * const greet_packet,</span>
+<span class='curline'><a href='../S/780.html#L707'>greet_packet</a>      707 ext/mysqlnd/mysqlnd.c 	ret = mysqlnd_switch_to_ssl_if_needed(conn, greet_packet, options, mysql_flags TSRMLS_CC);</span>
+<span class='curline'><a href='../S/780.html#L710'>greet_packet</a>      710 ext/mysqlnd/mysqlnd.c 										 greet_packet-&gt;auth_plugin_data, greet_packet-&gt;auth_plugin_data_len, greet_packet-&gt;auth_protocol,</span>
+<span class='curline'><a href='../S/780.html#L711'>greet_packet</a>      711 ext/mysqlnd/mysqlnd.c 										 greet_packet-&gt;charset_no, options, mysql_flags, FALSE /*silent*/, FALSE/*is_change*/ TSRMLS_CC);</span>
+<span class='curline'><a href='../S/780.html#L796'>greet_packet</a>      796 ext/mysqlnd/mysqlnd.c 	MYSQLND_PACKET_GREET * greet_packet;</span>
+<span class='curline'><a href='../S/780.html#L801'>greet_packet</a>      801 ext/mysqlnd/mysqlnd.c 	greet_packet = conn-&gt;protocol-&gt;m.get_greet_packet(conn-&gt;protocol, FALSE TSRMLS_CC);</span>
+<span class='curline'><a href='../S/780.html#L802'>greet_packet</a>      802 ext/mysqlnd/mysqlnd.c 	if (!greet_packet) {</span>
+<span class='curline'><a href='../S/780.html#L815'>greet_packet</a>      815 ext/mysqlnd/mysqlnd.c 	if (FAIL == PACKET_READ(greet_packet, conn)) {</span>
+<span class='curline'><a href='../S/780.html#L819'>greet_packet</a>      819 ext/mysqlnd/mysqlnd.c 	} else if (greet_packet-&gt;error_no) {</span>
+<span class='curline'><a href='../S/780.html#L820'>greet_packet</a>      820 ext/mysqlnd/mysqlnd.c 		DBG_ERR_FMT("errorno=%u error=%s", greet_packet-&gt;error_no, greet_packet-&gt;error);</span>
+<span class='curline'><a href='../S/780.html#L821'>greet_packet</a>      821 ext/mysqlnd/mysqlnd.c 		SET_CLIENT_ERROR(*conn-&gt;error_info, greet_packet-&gt;error_no, greet_packet-&gt;sqlstate, greet_packet-&gt;error);</span>
+<span class='curline'><a href='../S/780.html#L823'>greet_packet</a>      823 ext/mysqlnd/mysqlnd.c 	} else if (greet_packet-&gt;pre41) {</span>
+<span class='curline'><a href='../S/780.html#L824'>greet_packet</a>      824 ext/mysqlnd/mysqlnd.c 		DBG_ERR_FMT("Connecting to 3.22, 3.23 &amp; 4.0 is not supported. Server is %-.32s", greet_packet-&gt;server_version);</span>
+<span class='curline'><a href='../S/780.html#L826'>greet_packet</a>      826 ext/mysqlnd/mysqlnd.c 						" is not supported. Server is %-.32s", greet_packet-&gt;server_version);</span>
+<span class='curline'><a href='../S/780.html#L832'>greet_packet</a>      832 ext/mysqlnd/mysqlnd.c 	conn-&gt;thread_id			= greet_packet-&gt;thread_id;</span>
+<span class='curline'><a href='../S/780.html#L833'>greet_packet</a>      833 ext/mysqlnd/mysqlnd.c 	conn-&gt;protocol_version	= greet_packet-&gt;protocol_version;</span>
+<span class='curline'><a href='../S/780.html#L834'>greet_packet</a>      834 ext/mysqlnd/mysqlnd.c 	conn-&gt;server_version	= mnd_pestrdup(greet_packet-&gt;server_version, conn-&gt;persistent);</span>
+<span class='curline'><a href='../S/780.html#L836'>greet_packet</a>      836 ext/mysqlnd/mysqlnd.c 	conn-&gt;greet_charset = mysqlnd_find_charset_nr(greet_packet-&gt;charset_no);</span>
+<span class='curline'><a href='../S/780.html#L839'>greet_packet</a>      839 ext/mysqlnd/mysqlnd.c 			"Server sent charset (%d) unknown to the client. Please, report to the developers", greet_packet-&gt;charset_no);</span>
+<span class='curline'><a href='../S/780.html#L846'>greet_packet</a>      846 ext/mysqlnd/mysqlnd.c 	conn-&gt;server_capabilities 	= greet_packet-&gt;server_capabilities;</span>
+<span class='curline'><a href='../S/780.html#L849'>greet_packet</a>      849 ext/mysqlnd/mysqlnd.c 												   greet_packet, conn-&gt;options, mysql_flags TSRMLS_CC))</span>
+<span class='curline'><a href='../S/780.html#L855'>greet_packet</a>      855 ext/mysqlnd/mysqlnd.c 	conn-&gt;upsert_status-&gt;server_status = greet_packet-&gt;server_status;</span>
+<span class='curline'><a href='../S/780.html#L858'>greet_packet</a>      858 ext/mysqlnd/mysqlnd.c 	PACKET_FREE(greet_packet);</span>
+<span class='curline'><a href='../S/780.html#L863'>greet_packet</a>      863 ext/mysqlnd/mysqlnd.c 	PACKET_FREE(greet_packet);</span>
+</pre>
+</body>
+</html>

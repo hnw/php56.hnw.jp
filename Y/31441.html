@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>parent_ce</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/1646.html#L2538'>parent_ce</a>        2538 Zend/zend_API.c ZEND_API zend_class_entry *zend_register_internal_class_ex(zend_class_entry *class_entry, zend_class_entry *parent_ce, char *parent_name TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1646.html#L2542'>parent_ce</a>        2542 Zend/zend_API.c 	if (!parent_ce &amp;&amp; parent_name) {</span>
+<span class='curline'><a href='../S/1646.html#L2547'>parent_ce</a>        2547 Zend/zend_API.c 			parent_ce = *pce;</span>
+<span class='curline'><a href='../S/1646.html#L2553'>parent_ce</a>        2553 Zend/zend_API.c 	if (parent_ce) {</span>
+<span class='curline'><a href='../S/1646.html#L2554'>parent_ce</a>        2554 Zend/zend_API.c 		zend_do_inheritance(register_class, parent_ce TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1647.html#L280'>parent_ce</a>         280 Zend/zend_API.h ZEND_API zend_class_entry *zend_register_internal_class_ex(zend_class_entry *class_entry, zend_class_entry *parent_ce, char *parent_name TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1655.html#L3639'>parent_ce</a>        3639 Zend/zend_compile.c 	zend_class_entry *parent_ce = ce-&gt;parent;</span>
+<span class='curline'><a href='../S/1655.html#L3660'>parent_ce</a>        3660 Zend/zend_compile.c 				(parent_info-&gt;flags &amp; ZEND_ACC_STATIC) ? "static " : "non static ", parent_ce-&gt;name, hash_key-&gt;arKey,</span>
+<span class='curline'><a href='../S/1655.html#L3670'>parent_ce</a>        3670 Zend/zend_compile.c 			zend_error_noreturn(E_COMPILE_ERROR, "Access level to %s::$%s must be %s (as in class %s)%s", ce-&gt;name, hash_key-&gt;arKey, zend_visibility_string(parent_info-&gt;flags), parent_ce-&gt;name, (parent_info-&gt;flags&amp;ZEND_ACC_PUBLIC) ? "" : " or weaker");</span>
+<span class='curline'><a href='../S/1655.html#L3742'>parent_ce</a>        3742 Zend/zend_compile.c # define zval_property_ctor(parent_ce, ce) \</span>
+<span class='curline'><a href='../S/1655.html#L3743'>parent_ce</a>        3743 Zend/zend_compile.c 	((void (*)(void *)) (((parent_ce)-&gt;type != (ce)-&gt;type) ? zval_internal_ctor : zval_add_ref))</span>
+<span class='curline'><a href='../S/1655.html#L3745'>parent_ce</a>        3745 Zend/zend_compile.c # define zval_property_ctor(parent_ce, ce) \</span>
+<span class='curline'><a href='../S/1655.html#L3749'>parent_ce</a>        3749 Zend/zend_compile.c ZEND_API void zend_do_inheritance(zend_class_entry *ce, zend_class_entry *parent_ce TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1655.html#L3754'>parent_ce</a>        3754 Zend/zend_compile.c 		&amp;&amp; !(parent_ce-&gt;ce_flags &amp; ZEND_ACC_INTERFACE)) {</span>
+<span class='curline'><a href='../S/1655.html#L3755'>parent_ce</a>        3755 Zend/zend_compile.c 		zend_error_noreturn(E_COMPILE_ERROR, "Interface %s may not inherit from class (%s)", ce-&gt;name, parent_ce-&gt;name);</span>
+<span class='curline'><a href='../S/1655.html#L3757'>parent_ce</a>        3757 Zend/zend_compile.c 	if (parent_ce-&gt;ce_flags &amp; ZEND_ACC_FINAL_CLASS) {</span>
+<span class='curline'><a href='../S/1655.html#L3758'>parent_ce</a>        3758 Zend/zend_compile.c 		zend_error_noreturn(E_COMPILE_ERROR, "Class %s may not inherit from final class (%s)", ce-&gt;name, parent_ce-&gt;name);</span>
+<span class='curline'><a href='../S/1655.html#L3761'>parent_ce</a>        3761 Zend/zend_compile.c 	ce-&gt;parent = parent_ce;</span>
+<span class='curline'><a href='../S/1655.html#L3764'>parent_ce</a>        3764 Zend/zend_compile.c 		ce-&gt;serialize   = parent_ce-&gt;serialize;</span>
+<span class='curline'><a href='../S/1655.html#L3767'>parent_ce</a>        3767 Zend/zend_compile.c 		ce-&gt;unserialize = parent_ce-&gt;unserialize;</span>
+<span class='curline'><a href='../S/1655.html#L3771'>parent_ce</a>        3771 Zend/zend_compile.c 	zend_do_inherit_interfaces(ce, parent_ce TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1655.html#L3774'>parent_ce</a>        3774 Zend/zend_compile.c 	if (parent_ce-&gt;default_properties_count) {</span>
+<span class='curline'><a href='../S/1655.html#L3775'>parent_ce</a>        3775 Zend/zend_compile.c 		int i = ce-&gt;default_properties_count + parent_ce-&gt;default_properties_count;</span>
+<span class='curline'><a href='../S/1655.html#L3779'>parent_ce</a>        3779 Zend/zend_compile.c 			while (i-- &gt; parent_ce-&gt;default_properties_count) {</span>
+<span class='curline'><a href='../S/1655.html#L3780'>parent_ce</a>        3780 Zend/zend_compile.c 				ce-&gt;default_properties_table[i] = ce-&gt;default_properties_table[i - parent_ce-&gt;default_properties_count];</span>
+<span class='curline'><a href='../S/1655.html#L3783'>parent_ce</a>        3783 Zend/zend_compile.c 		for (i = 0; i &lt; parent_ce-&gt;default_properties_count; i++) {</span>
+<span class='curline'><a href='../S/1655.html#L3784'>parent_ce</a>        3784 Zend/zend_compile.c 			ce-&gt;default_properties_table[i] = parent_ce-&gt;default_properties_table[i];</span>
+<span class='curline'><a href='../S/1655.html#L3787'>parent_ce</a>        3787 Zend/zend_compile.c 				if (parent_ce-&gt;type != ce-&gt;type) {</span>
+<span class='curline'><a href='../S/1655.html#L3801'>parent_ce</a>        3801 Zend/zend_compile.c 		ce-&gt;default_properties_count += parent_ce-&gt;default_properties_count;</span>
+<span class='curline'><a href='../S/1655.html#L3804'>parent_ce</a>        3804 Zend/zend_compile.c 	if (parent_ce-&gt;type != ce-&gt;type) {</span>
+<span class='curline'><a href='../S/1655.html#L3806'>parent_ce</a>        3806 Zend/zend_compile.c 		zend_update_class_constants(parent_ce  TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1655.html#L3807'>parent_ce</a>        3807 Zend/zend_compile.c 		if (parent_ce-&gt;default_static_members_count) {</span>
+<span class='curline'><a href='../S/1655.html#L3808'>parent_ce</a>        3808 Zend/zend_compile.c 			int i = ce-&gt;default_static_members_count + parent_ce-&gt;default_static_members_count;</span>
+<span class='curline'><a href='../S/1655.html#L3812'>parent_ce</a>        3812 Zend/zend_compile.c 				while (i-- &gt; parent_ce-&gt;default_static_members_count) {</span>
+<span class='curline'><a href='../S/1655.html#L3813'>parent_ce</a>        3813 Zend/zend_compile.c 					ce-&gt;default_static_members_table[i] = ce-&gt;default_static_members_table[i - parent_ce-&gt;default_static_members_count];</span>
+<span class='curline'><a href='../S/1655.html#L3816'>parent_ce</a>        3816 Zend/zend_compile.c 			for (i = 0; i &lt; parent_ce-&gt;default_static_members_count; i++) {</span>
+<span class='curline'><a href='../S/1655.html#L3817'>parent_ce</a>        3817 Zend/zend_compile.c 				SEPARATE_ZVAL_TO_MAKE_IS_REF(&amp;CE_STATIC_MEMBERS(parent_ce)[i]);</span>
+<span class='curline'><a href='../S/1655.html#L3818'>parent_ce</a>        3818 Zend/zend_compile.c 				ce-&gt;default_static_members_table[i] = CE_STATIC_MEMBERS(parent_ce)[i];</span>
+<span class='curline'><a href='../S/1655.html#L3821'>parent_ce</a>        3821 Zend/zend_compile.c 			ce-&gt;default_static_members_count += parent_ce-&gt;default_static_members_count;</span>
+<span class='curline'><a href='../S/1655.html#L3825'>parent_ce</a>        3825 Zend/zend_compile.c 		if (parent_ce-&gt;default_static_members_count) {</span>
+<span class='curline'><a href='../S/1655.html#L3826'>parent_ce</a>        3826 Zend/zend_compile.c 			int i = ce-&gt;default_static_members_count + parent_ce-&gt;default_static_members_count;</span>
+<span class='curline'><a href='../S/1655.html#L3830'>parent_ce</a>        3830 Zend/zend_compile.c 				while (i-- &gt; parent_ce-&gt;default_static_members_count) {</span>
+<span class='curline'><a href='../S/1655.html#L3831'>parent_ce</a>        3831 Zend/zend_compile.c 					ce-&gt;default_static_members_table[i] = ce-&gt;default_static_members_table[i - parent_ce-&gt;default_static_members_count];</span>
+<span class='curline'><a href='../S/1655.html#L3834'>parent_ce</a>        3834 Zend/zend_compile.c 			for (i = 0; i &lt; parent_ce-&gt;default_static_members_count; i++) {</span>
+<span class='curline'><a href='../S/1655.html#L3835'>parent_ce</a>        3835 Zend/zend_compile.c 				SEPARATE_ZVAL_TO_MAKE_IS_REF(&amp;parent_ce-&gt;default_static_members_table[i]);</span>
+<span class='curline'><a href='../S/1655.html#L3836'>parent_ce</a>        3836 Zend/zend_compile.c 				ce-&gt;default_static_members_table[i] = parent_ce-&gt;default_static_members_table[i];</span>
+<span class='curline'><a href='../S/1655.html#L3839'>parent_ce</a>        3839 Zend/zend_compile.c 			ce-&gt;default_static_members_count += parent_ce-&gt;default_static_members_count;</span>
+<span class='curline'><a href='../S/1655.html#L3851'>parent_ce</a>        3851 Zend/zend_compile.c 				property_info-&gt;offset += parent_ce-&gt;default_static_members_count;</span>
+<span class='curline'><a href='../S/1655.html#L3853'>parent_ce</a>        3853 Zend/zend_compile.c 				property_info-&gt;offset += parent_ce-&gt;default_properties_count;</span>
+<span class='curline'><a href='../S/1655.html#L3858'>parent_ce</a>        3858 Zend/zend_compile.c 	zend_hash_merge_ex(&amp;ce-&gt;properties_info, &amp;parent_ce-&gt;properties_info, (copy_ctor_func_t) (ce-&gt;type &amp; ZEND_INTERNAL_CLASS ? zend_duplicate_property_info_internal : zend_duplicate_property_info), sizeof(zend_property_info), (merge_checker_func_t) do_inherit_property_access_check, ce);</span>
+<span class='curline'><a href='../S/1655.html#L3860'>parent_ce</a>        3860 Zend/zend_compile.c 	zend_hash_merge(&amp;ce-&gt;constants_table, &amp;parent_ce-&gt;constants_table, zval_property_ctor(parent_ce, ce), NULL, sizeof(zval *), 0);</span>
+<span class='curline'><a href='../S/1655.html#L3861'>parent_ce</a>        3861 Zend/zend_compile.c 	zend_hash_merge_ex(&amp;ce-&gt;function_table, &amp;parent_ce-&gt;function_table, (copy_ctor_func_t) do_inherit_method, sizeof(zend_function), (merge_checker_func_t) do_inherit_method_check, ce);</span>
+<span class='curline'><a href='../S/1655.html#L3870'>parent_ce</a>        3870 Zend/zend_compile.c 	ce-&gt;ce_flags |= parent_ce-&gt;ce_flags &amp; ZEND_HAS_STATIC_IN_METHODS;</span>
+<span class='curline'><a href='../S/1655.html#L4730'>parent_ce</a>        4730 Zend/zend_compile.c ZEND_API zend_class_entry *do_bind_inherited_class(const zend_op_array *op_array, const zend_op *opline, HashTable *class_table, zend_class_entry *parent_ce, zend_bool compile_time TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1655.html#L4760'>parent_ce</a>        4760 Zend/zend_compile.c 	if (parent_ce-&gt;ce_flags &amp; ZEND_ACC_INTERFACE) {</span>
+<span class='curline'><a href='../S/1655.html#L4761'>parent_ce</a>        4761 Zend/zend_compile.c 		zend_error_noreturn(E_COMPILE_ERROR, "Class %s cannot extend from interface %s", ce-&gt;name, parent_ce-&gt;name);</span>
+<span class='curline'><a href='../S/1655.html#L4762'>parent_ce</a>        4762 Zend/zend_compile.c 	} else if ((parent_ce-&gt;ce_flags &amp; ZEND_ACC_TRAIT) == ZEND_ACC_TRAIT) {</span>
+<span class='curline'><a href='../S/1655.html#L4763'>parent_ce</a>        4763 Zend/zend_compile.c 		zend_error_noreturn(E_COMPILE_ERROR, "Class %s cannot extend from trait %s", ce-&gt;name, parent_ce-&gt;name);</span>
+<span class='curline'><a href='../S/1655.html#L4766'>parent_ce</a>        4766 Zend/zend_compile.c 	zend_do_inheritance(ce, parent_ce TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1656.html#L544'>parent_ce</a>         544 Zend/zend_compile.h ZEND_API zend_class_entry *do_bind_inherited_class(const zend_op_array *op_array, const zend_op *opline, HashTable *class_table, zend_class_entry *parent_ce, zend_bool compile_time TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1656.html#L558'>parent_ce</a>         558 Zend/zend_compile.h ZEND_API void zend_do_inheritance(zend_class_entry *ce, zend_class_entry *parent_ce TSRMLS_DC);</span>
+<span class='curline'><a href='../S/146.html#L129'>parent_ce</a>         129 ext/dom/php_dom.h #define REGISTER_DOM_CLASS(ce, name, parent_ce, funcs, entry) \</span>
+<span class='curline'><a href='../S/146.html#L132'>parent_ce</a>         132 ext/dom/php_dom.h entry = zend_register_internal_class_ex(&amp;ce, parent_ce, NULL TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1059.html#L56'>parent_ce</a>          56 ext/spl/spl_functions.c PHPAPI void spl_register_sub_class(zend_class_entry ** ppce, zend_class_entry * parent_ce, char * class_name, void *obj_ctor, const zend_function_entry * function_list TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1059.html#L61'>parent_ce</a>          61 ext/spl/spl_functions.c 	*ppce = zend_register_internal_class_ex(&amp;ce, parent_ce, NULL TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1059.html#L67'>parent_ce</a>          67 ext/spl/spl_functions.c 		(*ppce)-&gt;create_object = parent_ce-&gt;create_object;</span>
+<span class='curline'><a href='../S/1060.html#L53'>parent_ce</a>          53 ext/spl/spl_functions.h void spl_register_sub_class(zend_class_entry ** ppce, zend_class_entry * parent_ce, char * class_name, create_object_func_t ctor, const zend_function_entry * function_list TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1257.html#L79'>parent_ce</a>          79 ext/xsl/php_xsl.h #define REGISTER_XSL_CLASS(ce, name, parent_ce, funcs, entry) \</span>
+<span class='curline'><a href='../S/1257.html#L82'>parent_ce</a>          82 ext/xsl/php_xsl.h entry = zend_register_internal_class_ex(&amp;ce, parent_ce, NULL TSRMLS_CC);</span>
+</pre>
+</body>
+</html>

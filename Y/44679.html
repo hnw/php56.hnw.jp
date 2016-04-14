@@ -1,0 +1,247 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>zvalue</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/1742.html#L31'>zvalue</a>             31 Zend/zend_variables.c ZEND_API void _zval_dtor_func(zval *zvalue ZEND_FILE_LINE_DC)</span>
+<span class='curline'><a href='../S/1742.html#L33'>zvalue</a>             33 Zend/zend_variables.c 	switch (Z_TYPE_P(zvalue) &amp; IS_CONSTANT_TYPE_MASK) {</span>
+<span class='curline'><a href='../S/1742.html#L36'>zvalue</a>             36 Zend/zend_variables.c 			CHECK_ZVAL_STRING_REL(zvalue);</span>
+<span class='curline'><a href='../S/1742.html#L37'>zvalue</a>             37 Zend/zend_variables.c 			str_efree_rel(zvalue-&gt;value.str.val);</span>
+<span class='curline'><a href='../S/1742.html#L42'>zvalue</a>             42 Zend/zend_variables.c 				if (zvalue-&gt;value.ht &amp;&amp; (zvalue-&gt;value.ht != &amp;EG(symbol_table))) {</span>
+<span class='curline'><a href='../S/1742.html#L44'>zvalue</a>             44 Zend/zend_variables.c 					Z_TYPE_P(zvalue) = IS_NULL;</span>
+<span class='curline'><a href='../S/1742.html#L45'>zvalue</a>             45 Zend/zend_variables.c 					zend_hash_destroy(zvalue-&gt;value.ht);</span>
+<span class='curline'><a href='../S/1742.html#L46'>zvalue</a>             46 Zend/zend_variables.c 					FREE_HASHTABLE(zvalue-&gt;value.ht);</span>
+<span class='curline'><a href='../S/1742.html#L51'>zvalue</a>             51 Zend/zend_variables.c 			zend_ast_destroy(Z_AST_P(zvalue));</span>
+<span class='curline'><a href='../S/1742.html#L57'>zvalue</a>             57 Zend/zend_variables.c 				Z_OBJ_HT_P(zvalue)-&gt;del_ref(zvalue TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1742.html#L65'>zvalue</a>             65 Zend/zend_variables.c 				zend_list_delete(zvalue-&gt;value.lval);</span>
+<span class='curline'><a href='../S/1742.html#L79'>zvalue</a>             79 Zend/zend_variables.c ZEND_API void _zval_internal_dtor(zval *zvalue ZEND_FILE_LINE_DC)</span>
+<span class='curline'><a href='../S/1742.html#L81'>zvalue</a>             81 Zend/zend_variables.c 	switch (Z_TYPE_P(zvalue) &amp; IS_CONSTANT_TYPE_MASK) {</span>
+<span class='curline'><a href='../S/1742.html#L84'>zvalue</a>             84 Zend/zend_variables.c 			CHECK_ZVAL_STRING_REL(zvalue);</span>
+<span class='curline'><a href='../S/1742.html#L85'>zvalue</a>             85 Zend/zend_variables.c 			str_free(zvalue-&gt;value.str.val);</span>
+<span class='curline'><a href='../S/1742.html#L109'>zvalue</a>            109 Zend/zend_variables.c ZEND_API void _zval_copy_ctor_func(zval *zvalue ZEND_FILE_LINE_DC)</span>
+<span class='curline'><a href='../S/1742.html#L111'>zvalue</a>            111 Zend/zend_variables.c 	switch (Z_TYPE_P(zvalue) &amp; IS_CONSTANT_TYPE_MASK) {</span>
+<span class='curline'><a href='../S/1742.html#L115'>zvalue</a>            115 Zend/zend_variables.c 				zend_list_addref(zvalue-&gt;value.lval);</span>
+<span class='curline'><a href='../S/1742.html#L124'>zvalue</a>            124 Zend/zend_variables.c 			CHECK_ZVAL_STRING_REL(zvalue);</span>
+<span class='curline'><a href='../S/1742.html#L125'>zvalue</a>            125 Zend/zend_variables.c 			if (!IS_INTERNED(zvalue-&gt;value.str.val)) {</span>
+<span class='curline'><a href='../S/1742.html#L126'>zvalue</a>            126 Zend/zend_variables.c 				zvalue-&gt;value.str.val = (char *) estrndup_rel(zvalue-&gt;value.str.val, zvalue-&gt;value.str.len);</span>
+<span class='curline'><a href='../S/1742.html#L131'>zvalue</a>            131 Zend/zend_variables.c 				HashTable *original_ht = zvalue-&gt;value.ht;</span>
+<span class='curline'><a href='../S/1742.html#L135'>zvalue</a>            135 Zend/zend_variables.c 				if (zvalue-&gt;value.ht == &amp;EG(symbol_table)) {</span>
+<span class='curline'><a href='../S/1742.html#L140'>zvalue</a>            140 Zend/zend_variables.c 				zvalue-&gt;value.ht = tmp_ht;</span>
+<span class='curline'><a href='../S/1742.html#L146'>zvalue</a>            146 Zend/zend_variables.c 			Z_AST_P(zvalue) = zend_ast_copy(Z_AST_P(zvalue));</span>
+<span class='curline'><a href='../S/1742.html#L151'>zvalue</a>            151 Zend/zend_variables.c 				Z_OBJ_HT_P(zvalue)-&gt;add_ref(zvalue TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1742.html#L164'>zvalue</a>            164 Zend/zend_variables.c ZEND_API void _zval_dtor_wrapper(zval *zvalue)</span>
+<span class='curline'><a href='../S/1742.html#L168'>zvalue</a>            168 Zend/zend_variables.c 	GC_REMOVE_ZVAL_FROM_BUFFER(zvalue);</span>
+<span class='curline'><a href='../S/1742.html#L169'>zvalue</a>            169 Zend/zend_variables.c 	zval_dtor(zvalue);</span>
+<span class='curline'><a href='../S/1742.html#L174'>zvalue</a>            174 Zend/zend_variables.c ZEND_API void _zval_copy_ctor_wrapper(zval *zvalue)</span>
+<span class='curline'><a href='../S/1742.html#L176'>zvalue</a>            176 Zend/zend_variables.c 	zval_copy_ctor(zvalue);</span>
+<span class='curline'><a href='../S/1742.html#L180'>zvalue</a>            180 Zend/zend_variables.c ZEND_API void _zval_internal_dtor_wrapper(zval *zvalue)</span>
+<span class='curline'><a href='../S/1742.html#L182'>zvalue</a>            182 Zend/zend_variables.c 	zval_internal_dtor(zvalue);</span>
+<span class='curline'><a href='../S/1743.html#L28'>zvalue</a>             28 Zend/zend_variables.h ZEND_API void _zval_dtor_func(zval *zvalue ZEND_FILE_LINE_DC);</span>
+<span class='curline'><a href='../S/1743.html#L30'>zvalue</a>             30 Zend/zend_variables.h static zend_always_inline void _zval_dtor(zval *zvalue ZEND_FILE_LINE_DC)</span>
+<span class='curline'><a href='../S/1743.html#L32'>zvalue</a>             32 Zend/zend_variables.h 	if (zvalue-&gt;type &lt;= IS_BOOL) {</span>
+<span class='curline'><a href='../S/1743.html#L35'>zvalue</a>             35 Zend/zend_variables.h 	_zval_dtor_func(zvalue ZEND_FILE_LINE_RELAY_CC);</span>
+<span class='curline'><a href='../S/1743.html#L38'>zvalue</a>             38 Zend/zend_variables.h ZEND_API void _zval_copy_ctor_func(zval *zvalue ZEND_FILE_LINE_DC);</span>
+<span class='curline'><a href='../S/1743.html#L40'>zvalue</a>             40 Zend/zend_variables.h static zend_always_inline void _zval_copy_ctor(zval *zvalue ZEND_FILE_LINE_DC)</span>
+<span class='curline'><a href='../S/1743.html#L42'>zvalue</a>             42 Zend/zend_variables.h 	if (zvalue-&gt;type &lt;= IS_BOOL) {</span>
+<span class='curline'><a href='../S/1743.html#L45'>zvalue</a>             45 Zend/zend_variables.h 	_zval_copy_ctor_func(zvalue ZEND_FILE_LINE_RELAY_CC);</span>
+<span class='curline'><a href='../S/1743.html#L52'>zvalue</a>             52 Zend/zend_variables.h ZEND_API void _zval_internal_dtor(zval *zvalue ZEND_FILE_LINE_DC);</span>
+<span class='curline'><a href='../S/1743.html#L53'>zvalue</a>             53 Zend/zend_variables.h ZEND_API void _zval_internal_ptr_dtor(zval **zvalue ZEND_FILE_LINE_DC);</span>
+<span class='curline'><a href='../S/1743.html#L54'>zvalue</a>             54 Zend/zend_variables.h ZEND_API void _zval_dtor_wrapper(zval *zvalue);</span>
+<span class='curline'><a href='../S/1743.html#L55'>zvalue</a>             55 Zend/zend_variables.h #define zval_copy_ctor(zvalue) _zval_copy_ctor((zvalue) ZEND_FILE_LINE_CC)</span>
+<span class='curline'><a href='../S/1743.html#L56'>zvalue</a>             56 Zend/zend_variables.h #define zval_dtor(zvalue) _zval_dtor((zvalue) ZEND_FILE_LINE_CC)</span>
+<span class='curline'><a href='../S/1743.html#L58'>zvalue</a>             58 Zend/zend_variables.h #define zval_internal_dtor(zvalue) _zval_internal_dtor((zvalue) ZEND_FILE_LINE_CC)</span>
+<span class='curline'><a href='../S/1743.html#L59'>zvalue</a>             59 Zend/zend_variables.h #define zval_internal_ptr_dtor(zvalue) _zval_internal_ptr_dtor((zvalue) ZEND_FILE_LINE_CC)</span>
+<span class='curline'><a href='../S/1743.html#L63'>zvalue</a>             63 Zend/zend_variables.h ZEND_API void _zval_copy_ctor_wrapper(zval *zvalue);</span>
+<span class='curline'><a href='../S/1743.html#L65'>zvalue</a>             65 Zend/zend_variables.h ZEND_API void _zval_internal_dtor_wrapper(zval *zvalue);</span>
+<span class='curline'><a href='../S/1743.html#L66'>zvalue</a>             66 Zend/zend_variables.h ZEND_API void _zval_internal_ptr_dtor_wrapper(zval **zvalue);</span>
+<span class='curline'><a href='../S/53.html#L406'>zvalue</a>            406 ext/com_dotnet/com_variant.c 	zval *zvalue = NULL;</span>
+<span class='curline'><a href='../S/53.html#L417'>zvalue</a>            417 ext/com_dotnet/com_variant.c 		"z!|ll", &amp;zvalue, &amp;vt, &amp;codepage)) {</span>
+<span class='curline'><a href='../S/53.html#L427'>zvalue</a>            427 ext/com_dotnet/com_variant.c 	if (zvalue) {</span>
+<span class='curline'><a href='../S/53.html#L428'>zvalue</a>            428 ext/com_dotnet/com_variant.c 		php_com_variant_from_zval(&amp;obj-&gt;v, zvalue, obj-&gt;code_page TSRMLS_CC);</span>
+<span class='curline'><a href='../S/53.html#L475'>zvalue</a>            475 ext/com_dotnet/com_variant.c 	zval *zobj, *zvalue = NULL;</span>
+<span class='curline'><a href='../S/53.html#L479'>zvalue</a>            479 ext/com_dotnet/com_variant.c 			"Oz!", &amp;zobj, php_com_variant_class_entry, &amp;zvalue)) {</span>
+<span class='curline'><a href='../S/53.html#L498'>zvalue</a>            498 ext/com_dotnet/com_variant.c 	php_com_variant_from_zval(&amp;obj-&gt;v, zvalue, obj-&gt;code_page TSRMLS_CC);</span>
+<span class='curline'><a href='../S/60.html#L2098'>zvalue</a>           2098 ext/curl/interface.c static int _php_curl_setopt(php_curl *ch, long option, zval **zvalue TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/60.html#L2105'>zvalue</a>           2105 ext/curl/interface.c 			if(Z_BVAL_PP(zvalue) == 1) {</span>
+<span class='curline'><a href='../S/60.html#L2259'>zvalue</a>           2259 ext/curl/interface.c 			convert_to_long_ex(zvalue);</span>
+<span class='curline'><a href='../S/60.html#L2262'>zvalue</a>           2262 ext/curl/interface.c 				(PG(open_basedir) &amp;&amp; *PG(open_basedir)) &amp;&amp; (Z_LVAL_PP(zvalue) &amp; CURLPROTO_FILE)) {</span>
+<span class='curline'><a href='../S/60.html#L2267'>zvalue</a>           2267 ext/curl/interface.c 			error = curl_easy_setopt(ch-&gt;cp, option, Z_LVAL_PP(zvalue));</span>
+<span class='curline'><a href='../S/60.html#L2270'>zvalue</a>           2270 ext/curl/interface.c 			convert_to_long_ex(zvalue);</span>
+<span class='curline'><a href='../S/60.html#L2271'>zvalue</a>           2271 ext/curl/interface.c 			ch-&gt;safe_upload = (Z_LVAL_PP(zvalue) != 0);</span>
+<span class='curline'><a href='../S/60.html#L2332'>zvalue</a>           2332 ext/curl/interface.c 			convert_to_string_ex(zvalue);</span>
+<span class='curline'><a href='../S/60.html#L2333'>zvalue</a>           2333 ext/curl/interface.c 			return php_curl_option_str(ch, option, Z_STRVAL_PP(zvalue), Z_STRLEN_PP(zvalue), 0 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/60.html#L2352'>zvalue</a>           2352 ext/curl/interface.c 			if (Z_TYPE_PP(zvalue) == IS_NULL) {</span>
+<span class='curline'><a href='../S/60.html#L2355'>zvalue</a>           2355 ext/curl/interface.c 				convert_to_string_ex(zvalue);</span>
+<span class='curline'><a href='../S/60.html#L2356'>zvalue</a>           2356 ext/curl/interface.c 				return php_curl_option_str(ch, option, Z_STRVAL_PP(zvalue), Z_STRLEN_PP(zvalue), 0 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/60.html#L2363'>zvalue</a>           2363 ext/curl/interface.c 			convert_to_string_ex(zvalue);</span>
+<span class='curline'><a href='../S/60.html#L2364'>zvalue</a>           2364 ext/curl/interface.c 			return php_curl_option_str(ch, option, Z_STRVAL_PP(zvalue), Z_STRLEN_PP(zvalue), 1 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/60.html#L2368'>zvalue</a>           2368 ext/curl/interface.c 			convert_to_string_ex(zvalue);</span>
+<span class='curline'><a href='../S/60.html#L2369'>zvalue</a>           2369 ext/curl/interface.c 			return php_curl_option_url(ch, Z_STRVAL_PP(zvalue), Z_STRLEN_PP(zvalue) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/60.html#L2380'>zvalue</a>           2380 ext/curl/interface.c 			if (Z_TYPE_PP(zvalue) != IS_NULL) {</span>
+<span class='curline'><a href='../S/60.html#L2381'>zvalue</a>           2381 ext/curl/interface.c 				what = zend_fetch_resource(zvalue TSRMLS_CC, -1, "File-Handle", &amp;type, 1, php_file_le_stream(), php_file_le_pstream());</span>
+<span class='curline'><a href='../S/60.html#L2409'>zvalue</a>           2409 ext/curl/interface.c 						Z_ADDREF_PP(zvalue);</span>
+<span class='curline'><a href='../S/60.html#L2412'>zvalue</a>           2412 ext/curl/interface.c 						ch-&gt;handlers-&gt;write-&gt;stream = *zvalue;</span>
+<span class='curline'><a href='../S/60.html#L2430'>zvalue</a>           2430 ext/curl/interface.c 						Z_ADDREF_PP(zvalue);</span>
+<span class='curline'><a href='../S/60.html#L2433'>zvalue</a>           2433 ext/curl/interface.c 						ch-&gt;handlers-&gt;write_header-&gt;stream = *zvalue;</span>
+<span class='curline'><a href='../S/60.html#L2451'>zvalue</a>           2451 ext/curl/interface.c 						Z_ADDREF_PP(zvalue);</span>
+<span class='curline'><a href='../S/60.html#L2453'>zvalue</a>           2453 ext/curl/interface.c 						ch-&gt;handlers-&gt;read-&gt;fd = Z_LVAL_PP(zvalue);</span>
+<span class='curline'><a href='../S/60.html#L2454'>zvalue</a>           2454 ext/curl/interface.c 						ch-&gt;handlers-&gt;read-&gt;stream = *zvalue;</span>
+<span class='curline'><a href='../S/60.html#L2467'>zvalue</a>           2467 ext/curl/interface.c 						zval_add_ref(zvalue);</span>
+<span class='curline'><a href='../S/60.html#L2468'>zvalue</a>           2468 ext/curl/interface.c 						ch-&gt;handlers-&gt;std_err = *zvalue;</span>
+<span class='curline'><a href='../S/60.html#L2499'>zvalue</a>           2499 ext/curl/interface.c 			ph = HASH_OF(*zvalue);</span>
+<span class='curline'><a href='../S/60.html#L2566'>zvalue</a>           2566 ext/curl/interface.c 			convert_to_long_ex(zvalue);</span>
+<span class='curline'><a href='../S/60.html#L2569'>zvalue</a>           2569 ext/curl/interface.c 				if (Z_LVAL_PP(zvalue) != 0) {</span>
+<span class='curline'><a href='../S/60.html#L2575'>zvalue</a>           2575 ext/curl/interface.c 			error = curl_easy_setopt(ch-&gt;cp, option, Z_LVAL_PP(zvalue));</span>
+<span class='curline'><a href='../S/60.html#L2583'>zvalue</a>           2583 ext/curl/interface.c 			zval_add_ref(zvalue);</span>
+<span class='curline'><a href='../S/60.html#L2584'>zvalue</a>           2584 ext/curl/interface.c 			ch-&gt;handlers-&gt;write_header-&gt;func_name = *zvalue;</span>
+<span class='curline'><a href='../S/60.html#L2589'>zvalue</a>           2589 ext/curl/interface.c 			if (Z_TYPE_PP(zvalue) == IS_ARRAY || Z_TYPE_PP(zvalue) == IS_OBJECT) {</span>
+<span class='curline'><a href='../S/60.html#L2595'>zvalue</a>           2595 ext/curl/interface.c 				postfields = HASH_OF(*zvalue);</span>
+<span class='curline'><a href='../S/60.html#L2724'>zvalue</a>           2724 ext/curl/interface.c 				convert_to_string_ex(zvalue);</span>
+<span class='curline'><a href='../S/60.html#L2726'>zvalue</a>           2726 ext/curl/interface.c 				error = curl_easy_setopt(ch-&gt;cp, CURLOPT_POSTFIELDSIZE, Z_STRLEN_PP(zvalue));</span>
+<span class='curline'><a href='../S/60.html#L2727'>zvalue</a>           2727 ext/curl/interface.c 				error = curl_easy_setopt(ch-&gt;cp, CURLOPT_COPYPOSTFIELDS, Z_STRVAL_PP(zvalue));</span>
+<span class='curline'><a href='../S/60.html#L2731'>zvalue</a>           2731 ext/curl/interface.c 				convert_to_string_ex(zvalue);</span>
+<span class='curline'><a href='../S/60.html#L2732'>zvalue</a>           2732 ext/curl/interface.c 				post = estrndup(Z_STRVAL_PP(zvalue), Z_STRLEN_PP(zvalue));</span>
+<span class='curline'><a href='../S/60.html#L2736'>zvalue</a>           2736 ext/curl/interface.c 				error = curl_easy_setopt(ch-&gt;cp, CURLOPT_POSTFIELDSIZE, Z_STRLEN_PP(zvalue));</span>
+<span class='curline'><a href='../S/60.html#L2750'>zvalue</a>           2750 ext/curl/interface.c 			zval_add_ref(zvalue);</span>
+<span class='curline'><a href='../S/60.html#L2751'>zvalue</a>           2751 ext/curl/interface.c 			ch-&gt;handlers-&gt;progress-&gt;func_name = *zvalue;</span>
+<span class='curline'><a href='../S/60.html#L2760'>zvalue</a>           2760 ext/curl/interface.c 			zval_add_ref(zvalue);</span>
+<span class='curline'><a href='../S/60.html#L2761'>zvalue</a>           2761 ext/curl/interface.c 			ch-&gt;handlers-&gt;read-&gt;func_name = *zvalue;</span>
+<span class='curline'><a href='../S/60.html#L2766'>zvalue</a>           2766 ext/curl/interface.c 			convert_to_long_ex(zvalue);</span>
+<span class='curline'><a href='../S/60.html#L2767'>zvalue</a>           2767 ext/curl/interface.c 			if (Z_LVAL_PP(zvalue)) {</span>
+<span class='curline'><a href='../S/60.html#L2779'>zvalue</a>           2779 ext/curl/interface.c 			zval_add_ref(zvalue);</span>
+<span class='curline'><a href='../S/60.html#L2780'>zvalue</a>           2780 ext/curl/interface.c 			ch-&gt;handlers-&gt;write-&gt;func_name = *zvalue;</span>
+<span class='curline'><a href='../S/60.html#L2787'>zvalue</a>           2787 ext/curl/interface.c 			convert_to_long_ex(zvalue);</span>
+<span class='curline'><a href='../S/60.html#L2788'>zvalue</a>           2788 ext/curl/interface.c 			error = curl_easy_setopt(ch-&gt;cp, option, (curl_off_t)Z_LVAL_PP(zvalue));</span>
+<span class='curline'><a href='../S/60.html#L2794'>zvalue</a>           2794 ext/curl/interface.c 			convert_to_long_ex(zvalue);</span>
+<span class='curline'><a href='../S/60.html#L2795'>zvalue</a>           2795 ext/curl/interface.c 			error = curl_easy_setopt(ch-&gt;cp, CURLOPT_POSTREDIR, Z_LVAL_PP(zvalue) &amp; CURL_REDIR_POST_ALL);</span>
+<span class='curline'><a href='../S/60.html#L2804'>zvalue</a>           2804 ext/curl/interface.c 			zval_add_ref(zvalue);</span>
+<span class='curline'><a href='../S/60.html#L2805'>zvalue</a>           2805 ext/curl/interface.c 			ch-&gt;handlers-&gt;passwd = *zvalue;</span>
+<span class='curline'><a href='../S/60.html#L2833'>zvalue</a>           2833 ext/curl/interface.c 			convert_to_string_ex(zvalue);</span>
+<span class='curline'><a href='../S/60.html#L2835'>zvalue</a>           2835 ext/curl/interface.c 			if (Z_STRLEN_PP(zvalue) &amp;&amp; php_check_open_basedir(Z_STRVAL_PP(zvalue) TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/60.html#L2839'>zvalue</a>           2839 ext/curl/interface.c 			return php_curl_option_str(ch, option, Z_STRVAL_PP(zvalue), Z_STRLEN_PP(zvalue), 0 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/60.html#L2843'>zvalue</a>           2843 ext/curl/interface.c 			convert_to_long_ex(zvalue);</span>
+<span class='curline'><a href='../S/60.html#L2844'>zvalue</a>           2844 ext/curl/interface.c 			if (Z_LVAL_PP(zvalue) == 1) {</span>
+<span class='curline'><a href='../S/60.html#L2858'>zvalue</a>           2858 ext/curl/interface.c 				ZEND_FETCH_RESOURCE_NO_RETURN(sh, php_curlsh *, zvalue, -1, le_curl_share_handle_name, le_curl_share_handle);</span>
+<span class='curline'><a href='../S/60.html#L2875'>zvalue</a>           2875 ext/curl/interface.c 			zval_add_ref(zvalue);</span>
+<span class='curline'><a href='../S/60.html#L2876'>zvalue</a>           2876 ext/curl/interface.c 			ch-&gt;handlers-&gt;fnmatch-&gt;func_name = *zvalue;</span>
+<span class='curline'><a href='../S/60.html#L2896'>zvalue</a>           2896 ext/curl/interface.c 	zval       *zid, **zvalue;</span>
+<span class='curline'><a href='../S/60.html#L2900'>zvalue</a>           2900 ext/curl/interface.c 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "rlZ", &amp;zid, &amp;options, &amp;zvalue) == FAILURE) {</span>
+<span class='curline'><a href='../S/60.html#L2911'>zvalue</a>           2911 ext/curl/interface.c 	if (_php_curl_setopt(ch, options, zvalue TSRMLS_CC) == SUCCESS) {</span>
+<span class='curline'><a href='../S/61.html#L385'>zvalue</a>            385 ext/curl/multi.c static int _php_curl_multi_setopt(php_curlm *mh, long option, zval **zvalue, zval *return_value TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/61.html#L396'>zvalue</a>            396 ext/curl/multi.c 			convert_to_long_ex(zvalue);</span>
+<span class='curline'><a href='../S/61.html#L397'>zvalue</a>            397 ext/curl/multi.c 			error = curl_multi_setopt(mh-&gt;multi, option, Z_LVAL_PP(zvalue));</span>
+<span class='curline'><a href='../S/61.html#L418'>zvalue</a>            418 ext/curl/multi.c 	zval       *z_mh, **zvalue;</span>
+<span class='curline'><a href='../S/61.html#L422'>zvalue</a>            422 ext/curl/multi.c 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "rlZ", &amp;z_mh, &amp;options, &amp;zvalue) == FAILURE) {</span>
+<span class='curline'><a href='../S/61.html#L428'>zvalue</a>            428 ext/curl/multi.c 	if (!_php_curl_multi_setopt(mh, options, zvalue, return_value TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/63.html#L69'>zvalue</a>             69 ext/curl/share.c static int _php_curl_share_setopt(php_curlsh *sh, long option, zval **zvalue, zval *return_value TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/63.html#L76'>zvalue</a>             76 ext/curl/share.c 			convert_to_long_ex(zvalue);</span>
+<span class='curline'><a href='../S/63.html#L77'>zvalue</a>             77 ext/curl/share.c 			error = curl_share_setopt(sh-&gt;share, option, Z_LVAL_PP(zvalue));</span>
+<span class='curline'><a href='../S/63.html#L98'>zvalue</a>             98 ext/curl/share.c 	zval       *zid, **zvalue;</span>
+<span class='curline'><a href='../S/63.html#L102'>zvalue</a>            102 ext/curl/share.c 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "rlZ", &amp;zid, &amp;options, &amp;zvalue) == FAILURE) {</span>
+<span class='curline'><a href='../S/63.html#L108'>zvalue</a>            108 ext/curl/share.c 	if (!_php_curl_share_setopt(sh, options, zvalue, return_value TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/841.html#L33'>zvalue</a>             33 ext/opcache/Optimizer/zend_optimizer.c static void zend_optimizer_zval_dtor_wrapper(zval *zvalue)</span>
+<span class='curline'><a href='../S/841.html#L35'>zvalue</a>             35 ext/opcache/Optimizer/zend_optimizer.c 	zval_dtor(zvalue);</span>
+<span class='curline'><a href='../S/863.html#L2202'>zvalue</a>           2202 ext/opcache/ZendAccelerator.c 	zval *zvalue = *zval_ptr;</span>
+<span class='curline'><a href='../S/863.html#L2204'>zvalue</a>           2204 ext/opcache/ZendAccelerator.c 	if (Z_DELREF_P(zvalue) == 0) {</span>
+<span class='curline'><a href='../S/863.html#L2206'>zvalue</a>           2206 ext/opcache/ZendAccelerator.c 		switch (Z_TYPE_P(zvalue) &amp; IS_CONSTANT_TYPE_MASK) {</span>
+<span class='curline'><a href='../S/863.html#L2208'>zvalue</a>           2208 ext/opcache/ZendAccelerator.c 		switch (Z_TYPE_P(zvalue) &amp; ~IS_CONSTANT_INDEX) {</span>
+<span class='curline'><a href='../S/863.html#L2217'>zvalue</a>           2217 ext/opcache/ZendAccelerator.c 					GC_REMOVE_ZVAL_FROM_BUFFER(zvalue);</span>
+<span class='curline'><a href='../S/863.html#L2219'>zvalue</a>           2219 ext/opcache/ZendAccelerator.c 					if (zvalue-&gt;value.ht &amp;&amp; (zvalue-&gt;value.ht != &amp;EG(symbol_table))) {</span>
+<span class='curline'><a href='../S/863.html#L2221'>zvalue</a>           2221 ext/opcache/ZendAccelerator.c 						Z_TYPE_P(zvalue) = IS_NULL;</span>
+<span class='curline'><a href='../S/863.html#L2222'>zvalue</a>           2222 ext/opcache/ZendAccelerator.c 						zvalue-&gt;value.ht-&gt;pDestructor = (dtor_func_t)accel_fast_zval_ptr_dtor;</span>
+<span class='curline'><a href='../S/863.html#L2223'>zvalue</a>           2223 ext/opcache/ZendAccelerator.c 						accel_fast_hash_destroy(zvalue-&gt;value.ht);</span>
+<span class='curline'><a href='../S/863.html#L2232'>zvalue</a>           2232 ext/opcache/ZendAccelerator.c 					GC_REMOVE_ZVAL_FROM_BUFFER(zvalue);</span>
+<span class='curline'><a href='../S/863.html#L2234'>zvalue</a>           2234 ext/opcache/ZendAccelerator.c 					Z_OBJ_HT_P(zvalue)-&gt;del_ref(zvalue TSRMLS_CC);</span>
+<span class='curline'><a href='../S/863.html#L2242'>zvalue</a>           2242 ext/opcache/ZendAccelerator.c 					zend_list_delete(zvalue-&gt;value.lval);</span>
+<span class='curline'><a href='../S/1065.html#L158'>zvalue</a>            158 ext/spl/spl_observer.c 		zend_object_value zvalue;</span>
+<span class='curline'><a href='../S/1065.html#L159'>zvalue</a>            159 ext/spl/spl_observer.c 		memset(&amp;zvalue, 0, sizeof(zend_object_value));</span>
+<span class='curline'><a href='../S/1065.html#L160'>zvalue</a>            160 ext/spl/spl_observer.c 		zvalue.handle = Z_OBJ_HANDLE_P(obj);</span>
+<span class='curline'><a href='../S/1065.html#L161'>zvalue</a>            161 ext/spl/spl_observer.c 		zvalue.handlers = Z_OBJ_HT_P(obj);</span>
+<span class='curline'><a href='../S/1065.html#L163'>zvalue</a>            163 ext/spl/spl_observer.c 		memcpy(hash, (char *)&amp;zvalue, hash_len);</span>
+<span class='curline'><a href='../S/1079.html#L58'>zvalue</a>             58 ext/standard/browscap.c static void browscap_entry_dtor_request(zval **zvalue) /* {{{ */</span>
+<span class='curline'><a href='../S/1079.html#L60'>zvalue</a>             60 ext/standard/browscap.c 	if (Z_TYPE_PP(zvalue) == IS_ARRAY) {</span>
+<span class='curline'><a href='../S/1079.html#L61'>zvalue</a>             61 ext/standard/browscap.c 		zend_hash_destroy(Z_ARRVAL_PP(zvalue));</span>
+<span class='curline'><a href='../S/1079.html#L62'>zvalue</a>             62 ext/standard/browscap.c 		efree(Z_ARRVAL_PP(zvalue));</span>
+<span class='curline'><a href='../S/1079.html#L63'>zvalue</a>             63 ext/standard/browscap.c 	} else if (Z_TYPE_PP(zvalue) == IS_STRING) {</span>
+<span class='curline'><a href='../S/1079.html#L64'>zvalue</a>             64 ext/standard/browscap.c 		if (Z_STRVAL_PP(zvalue)) {</span>
+<span class='curline'><a href='../S/1079.html#L65'>zvalue</a>             65 ext/standard/browscap.c 			efree(Z_STRVAL_PP(zvalue));</span>
+<span class='curline'><a href='../S/1079.html#L68'>zvalue</a>             68 ext/standard/browscap.c 	efree(*zvalue);</span>
+<span class='curline'><a href='../S/1079.html#L72'>zvalue</a>             72 ext/standard/browscap.c static void browscap_entry_dtor_persistent(zval **zvalue) /* {{{ */ {</span>
+<span class='curline'><a href='../S/1079.html#L73'>zvalue</a>             73 ext/standard/browscap.c 	if (Z_TYPE_PP(zvalue) == IS_ARRAY) {</span>
+<span class='curline'><a href='../S/1079.html#L74'>zvalue</a>             74 ext/standard/browscap.c 		zend_hash_destroy(Z_ARRVAL_PP(zvalue));</span>
+<span class='curline'><a href='../S/1079.html#L75'>zvalue</a>             75 ext/standard/browscap.c 		free(Z_ARRVAL_PP(zvalue));</span>
+<span class='curline'><a href='../S/1079.html#L76'>zvalue</a>             76 ext/standard/browscap.c 	} else if (Z_TYPE_PP(zvalue) == IS_STRING) {</span>
+<span class='curline'><a href='../S/1079.html#L77'>zvalue</a>             77 ext/standard/browscap.c 		if (Z_STRVAL_PP(zvalue)) {</span>
+<span class='curline'><a href='../S/1079.html#L78'>zvalue</a>             78 ext/standard/browscap.c 			free(Z_STRVAL_PP(zvalue));</span>
+<span class='curline'><a href='../S/1079.html#L81'>zvalue</a>             81 ext/standard/browscap.c 	free(*zvalue);</span>
+<span class='curline'><a href='../S/1187.html#L1030'>zvalue</a>           1030 ext/standard/streamsfuncs.c 	zval *options = NULL, *zcontext = NULL, *zvalue = NULL;</span>
+<span class='curline'><a href='../S/1187.html#L1037'>zvalue</a>           1037 ext/standard/streamsfuncs.c 				&amp;optionname, &amp;optionlen, &amp;zvalue) == FAILURE) {</span>
+<span class='curline'><a href='../S/1187.html#L1056'>zvalue</a>           1056 ext/standard/streamsfuncs.c 		php_stream_context_set_option(context, wrappername, optionname, zvalue);</span>
+<span class='curline'><a href='../S/1374.html#L192'>zvalue</a>            192 main/php_ini.c PHPAPI void config_zval_dtor(zval *zvalue)</span>
+<span class='curline'><a href='../S/1374.html#L194'>zvalue</a>            194 main/php_ini.c 	if (Z_TYPE_P(zvalue) == IS_ARRAY) {</span>
+<span class='curline'><a href='../S/1374.html#L195'>zvalue</a>            195 main/php_ini.c 		zend_hash_destroy(Z_ARRVAL_P(zvalue));</span>
+<span class='curline'><a href='../S/1374.html#L196'>zvalue</a>            196 main/php_ini.c 		free(Z_ARRVAL_P(zvalue));</span>
+<span class='curline'><a href='../S/1374.html#L197'>zvalue</a>            197 main/php_ini.c 	} else if (Z_TYPE_P(zvalue) == IS_STRING) {</span>
+<span class='curline'><a href='../S/1374.html#L198'>zvalue</a>            198 main/php_ini.c 		free(Z_STRVAL_P(zvalue));</span>
+<span class='curline'><a href='../S/1375.html#L27'>zvalue</a>             27 main/php_ini.h PHPAPI void config_zval_dtor(zval *zvalue);</span>
+<span class='curline'><a href='../S/1419.html#L975'>zvalue</a>            975 main/streams/userspace.c 	zval *zvalue = NULL;</span>
+<span class='curline'><a href='../S/1419.html#L993'>zvalue</a>            993 main/streams/userspace.c 		MAKE_STD_ZVAL(zvalue);</span>
+<span class='curline'><a href='../S/1419.html#L994'>zvalue</a>            994 main/streams/userspace.c 		ZVAL_LONG(zvalue, 0);</span>
+<span class='curline'><a href='../S/1419.html#L997'>zvalue</a>            997 main/streams/userspace.c 			Z_LVAL_P(zvalue) |= PHP_LOCK_NB;</span>
+<span class='curline'><a href='../S/1419.html#L1001'>zvalue</a>           1001 main/streams/userspace.c 			Z_LVAL_P(zvalue) |= PHP_LOCK_SH;</span>
+<span class='curline'><a href='../S/1419.html#L1004'>zvalue</a>           1004 main/streams/userspace.c 			Z_LVAL_P(zvalue) |= PHP_LOCK_EX;</span>
+<span class='curline'><a href='../S/1419.html#L1007'>zvalue</a>           1007 main/streams/userspace.c 			Z_LVAL_P(zvalue) |= PHP_LOCK_UN;</span>
+<span class='curline'><a href='../S/1419.html#L1011'>zvalue</a>           1011 main/streams/userspace.c 		args[0] = &amp;zvalue;</span>
+<span class='curline'><a href='../S/1419.html#L1052'>zvalue</a>           1052 main/streams/userspace.c 				MAKE_STD_ZVAL(zvalue);</span>
+<span class='curline'><a href='../S/1419.html#L1053'>zvalue</a>           1053 main/streams/userspace.c 				ZVAL_LONG(zvalue, (long)new_size);</span>
+<span class='curline'><a href='../S/1419.html#L1054'>zvalue</a>           1054 main/streams/userspace.c 				args[0] = &amp;zvalue;</span>
+<span class='curline'><a href='../S/1419.html#L1094'>zvalue</a>           1094 main/streams/userspace.c 		ALLOC_INIT_ZVAL(zvalue);</span>
+<span class='curline'><a href='../S/1419.html#L1098'>zvalue</a>           1098 main/streams/userspace.c 		args[1] = &amp;zvalue;</span>
+<span class='curline'><a href='../S/1419.html#L1104'>zvalue</a>           1104 main/streams/userspace.c 			ZVAL_LONG(zvalue, value);</span>
+<span class='curline'><a href='../S/1419.html#L1113'>zvalue</a>           1113 main/streams/userspace.c 			ZVAL_LONG(zvalue, tv.tv_sec);</span>
+<span class='curline'><a href='../S/1419.html#L1118'>zvalue</a>           1118 main/streams/userspace.c 			ZVAL_LONG(zvalue, value);</span>
+<span class='curline'><a href='../S/1419.html#L1157'>zvalue</a>           1157 main/streams/userspace.c 	if (zvalue) {</span>
+<span class='curline'><a href='../S/1419.html#L1158'>zvalue</a>           1158 main/streams/userspace.c 		zval_ptr_dtor(&amp;zvalue);</span>
+<span class='curline'><a href='../S/1419.html#L1382'>zvalue</a>           1382 main/streams/userspace.c 	zval *zfilename, *zoption, *zvalue, *zfuncname, *zretval;</span>
+<span class='curline'><a href='../S/1419.html#L1388'>zvalue</a>           1388 main/streams/userspace.c 	MAKE_STD_ZVAL(zvalue);</span>
+<span class='curline'><a href='../S/1419.html#L1391'>zvalue</a>           1391 main/streams/userspace.c 			array_init(zvalue);</span>
+<span class='curline'><a href='../S/1419.html#L1394'>zvalue</a>           1394 main/streams/userspace.c 				add_index_long(zvalue, 0, newtime-&gt;modtime);</span>
+<span class='curline'><a href='../S/1419.html#L1395'>zvalue</a>           1395 main/streams/userspace.c 				add_index_long(zvalue, 1, newtime-&gt;actime);</span>
+<span class='curline'><a href='../S/1419.html#L1401'>zvalue</a>           1401 main/streams/userspace.c 			ZVAL_LONG(zvalue, *(long *)value);</span>
+<span class='curline'><a href='../S/1419.html#L1405'>zvalue</a>           1405 main/streams/userspace.c 			ZVAL_STRING(zvalue, value, 1);</span>
+<span class='curline'><a href='../S/1419.html#L1409'>zvalue</a>           1409 main/streams/userspace.c 			zval_ptr_dtor(&amp;zvalue);</span>
+<span class='curline'><a href='../S/1419.html#L1416'>zvalue</a>           1416 main/streams/userspace.c 		zval_ptr_dtor(&amp;zvalue);</span>
+<span class='curline'><a href='../S/1419.html#L1429'>zvalue</a>           1429 main/streams/userspace.c 	args[2] = &amp;zvalue;</span>
+<span class='curline'><a href='../S/1419.html#L1456'>zvalue</a>           1456 main/streams/userspace.c 	zval_ptr_dtor(&amp;zvalue);</span>
+<span class='curline'><a href='../S/1450.html#L1524'>zvalue</a>           1524 sapi/cgi/fastcgi.c 	zval * zvalue;</span>
+<span class='curline'><a href='../S/1450.html#L1525'>zvalue</a>           1525 sapi/cgi/fastcgi.c 	zvalue = pemalloc(sizeof(*zvalue), 1);</span>
+<span class='curline'><a href='../S/1450.html#L1526'>zvalue</a>           1526 sapi/cgi/fastcgi.c 	Z_TYPE_P(zvalue) = IS_STRING;</span>
+<span class='curline'><a href='../S/1450.html#L1527'>zvalue</a>           1527 sapi/cgi/fastcgi.c 	Z_STRVAL_P(zvalue) = pestrndup(value, value_len, 1);</span>
+<span class='curline'><a href='../S/1450.html#L1528'>zvalue</a>           1528 sapi/cgi/fastcgi.c 	Z_STRLEN_P(zvalue) = value_len;</span>
+<span class='curline'><a href='../S/1450.html#L1529'>zvalue</a>           1529 sapi/cgi/fastcgi.c 	zend_hash_add(&amp;fcgi_mgmt_vars, name, name_len, &amp;zvalue, sizeof(zvalue), NULL);</span>
+<span class='curline'><a href='../S/1478.html#L1114'>zvalue</a>           1114 sapi/fpm/fpm/fastcgi.c 	zval * zvalue;</span>
+<span class='curline'><a href='../S/1478.html#L1115'>zvalue</a>           1115 sapi/fpm/fpm/fastcgi.c 	zvalue = pemalloc(sizeof(*zvalue), 1);</span>
+<span class='curline'><a href='../S/1478.html#L1116'>zvalue</a>           1116 sapi/fpm/fpm/fastcgi.c 	Z_TYPE_P(zvalue) = IS_STRING;</span>
+<span class='curline'><a href='../S/1478.html#L1117'>zvalue</a>           1117 sapi/fpm/fpm/fastcgi.c 	Z_STRVAL_P(zvalue) = pestrndup(value, value_len, 1);</span>
+<span class='curline'><a href='../S/1478.html#L1118'>zvalue</a>           1118 sapi/fpm/fpm/fastcgi.c 	Z_STRLEN_P(zvalue) = value_len;</span>
+<span class='curline'><a href='../S/1478.html#L1119'>zvalue</a>           1119 sapi/fpm/fpm/fastcgi.c 	zend_hash_add(&amp;fcgi_mgmt_vars, name, name_len + 1, &amp;zvalue, sizeof(zvalue), NULL);</span>
+<span class='curline'><a href='../S/1586.html#L516'>zvalue</a>            516 sapi/roxen/roxen.c 	MAKE_STD_ZVAL(zvalue);										\</span>
+<span class='curline'><a href='../S/1586.html#L517'>zvalue</a>            517 sapi/roxen/roxen.c 	zvalue-&gt;type = IS_STRING;										\</span>
+<span class='curline'><a href='../S/1586.html#L518'>zvalue</a>            518 sapi/roxen/roxen.c 	zvalue-&gt;value.str.len = strlen(buf);							\</span>
+<span class='curline'><a href='../S/1586.html#L519'>zvalue</a>            519 sapi/roxen/roxen.c 	zvalue-&gt;value.str.val = estrndup(buf, zvalue-&gt;value.str.len);	\</span>
+<span class='curline'><a href='../S/1586.html#L521'>zvalue</a>            521 sapi/roxen/roxen.c 			&amp;zvalue, sizeof(zval *), NULL)</span>
+<span class='curline'><a href='../S/1586.html#L528'>zvalue</a>            528 sapi/roxen/roxen.c   zval *zvalue;</span>
+<span class='curline'><a href='../S/1586.html#L550'>zvalue</a>            550 sapi/roxen/roxen.c 	MAKE_STD_ZVAL(zvalue);</span>
+<span class='curline'><a href='../S/1586.html#L551'>zvalue</a>            551 sapi/roxen/roxen.c 	zvalue-&gt;type = IS_STRING;</span>
+<span class='curline'><a href='../S/1586.html#L552'>zvalue</a>            552 sapi/roxen/roxen.c 	zvalue-&gt;value.str.len = val-&gt;u.string-&gt;len;</span>
+<span class='curline'><a href='../S/1586.html#L553'>zvalue</a>            553 sapi/roxen/roxen.c 	zvalue-&gt;value.str.val = estrndup(val-&gt;u.string-&gt;str, zvalue-&gt;value.str.len);</span>
+<span class='curline'><a href='../S/1586.html#L555'>zvalue</a>            555 sapi/roxen/roxen.c 	zend_hash_update(&amp;EG(symbol_table), buf, buf_len + 1, &amp;zvalue, sizeof(zval *), NULL);</span>
+</pre>
+</body>
+</html>

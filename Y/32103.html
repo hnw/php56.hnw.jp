@@ -1,0 +1,374 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>pgsql</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/958.html#L1268'>pgsql</a>            1268 ext/pdo_pgsql/pgsql_driver.c 	PDO_DRIVER_HEADER(pgsql),</span>
+<span class='curline'><a href='../S/967.html#L95'>pgsql</a>              95 ext/pgsql/pgsql.c ZEND_DECLARE_MODULE_GLOBALS(pgsql)</span>
+<span class='curline'><a href='../S/967.html#L96'>pgsql</a>              96 ext/pgsql/pgsql.c static PHP_GINIT_FUNCTION(pgsql);</span>
+<span class='curline'><a href='../S/967.html#L759'>pgsql</a>             759 ext/pgsql/pgsql.c 	PHP_MINIT(pgsql),</span>
+<span class='curline'><a href='../S/967.html#L760'>pgsql</a>             760 ext/pgsql/pgsql.c 	PHP_MSHUTDOWN(pgsql),</span>
+<span class='curline'><a href='../S/967.html#L761'>pgsql</a>             761 ext/pgsql/pgsql.c 	PHP_RINIT(pgsql),</span>
+<span class='curline'><a href='../S/967.html#L762'>pgsql</a>             762 ext/pgsql/pgsql.c 	PHP_RSHUTDOWN(pgsql),</span>
+<span class='curline'><a href='../S/967.html#L763'>pgsql</a>             763 ext/pgsql/pgsql.c 	PHP_MINFO(pgsql),</span>
+<span class='curline'><a href='../S/967.html#L765'>pgsql</a>             765 ext/pgsql/pgsql.c 	PHP_MODULE_GLOBALS(pgsql),</span>
+<span class='curline'><a href='../S/967.html#L766'>pgsql</a>             766 ext/pgsql/pgsql.c 	PHP_GINIT(pgsql),</span>
+<span class='curline'><a href='../S/967.html#L774'>pgsql</a>             774 ext/pgsql/pgsql.c ZEND_GET_MODULE(pgsql)</span>
+<span class='curline'><a href='../S/967.html#L898'>pgsql</a>             898 ext/pgsql/pgsql.c static inline char * _php_pgsql_trim_result(PGconn * pgsql, char **buf)</span>
+<span class='curline'><a href='../S/967.html#L900'>pgsql</a>             900 ext/pgsql/pgsql.c 	return *buf = _php_pgsql_trim_message(PQerrorMessage(pgsql), NULL);</span>
+<span class='curline'><a href='../S/967.html#L904'>pgsql</a>             904 ext/pgsql/pgsql.c #define PQErrorMessageTrim(pgsql, buf) _php_pgsql_trim_result(pgsql, buf)</span>
+<span class='curline'><a href='../S/967.html#L906'>pgsql</a>             906 ext/pgsql/pgsql.c #define PHP_PQ_ERROR(text, pgsql) {										\</span>
+<span class='curline'><a href='../S/967.html#L907'>pgsql</a>             907 ext/pgsql/pgsql.c 		char *msgbuf = _php_pgsql_trim_message(PQerrorMessage(pgsql), NULL); \</span>
+<span class='curline'><a href='../S/967.html#L1092'>pgsql</a>            1092 ext/pgsql/pgsql.c static PHP_GINIT_FUNCTION(pgsql)</span>
+<span class='curline'><a href='../S/967.html#L1102'>pgsql</a>            1102 ext/pgsql/pgsql.c PHP_MINIT_FUNCTION(pgsql)</span>
+<span class='curline'><a href='../S/967.html#L1205'>pgsql</a>            1205 ext/pgsql/pgsql.c PHP_MSHUTDOWN_FUNCTION(pgsql)</span>
+<span class='curline'><a href='../S/967.html#L1216'>pgsql</a>            1216 ext/pgsql/pgsql.c PHP_RINIT_FUNCTION(pgsql)</span>
+<span class='curline'><a href='../S/967.html#L1226'>pgsql</a>            1226 ext/pgsql/pgsql.c PHP_RSHUTDOWN_FUNCTION(pgsql)</span>
+<span class='curline'><a href='../S/967.html#L1238'>pgsql</a>            1238 ext/pgsql/pgsql.c PHP_MINFO_FUNCTION(pgsql)</span>
+<span class='curline'><a href='../S/967.html#L1274'>pgsql</a>            1274 ext/pgsql/pgsql.c 	PGconn *pgsql;</span>
+<span class='curline'><a href='../S/967.html#L1346'>pgsql</a>            1346 ext/pgsql/pgsql.c 				pgsql=PQconnectdb(connstring);</span>
+<span class='curline'><a href='../S/967.html#L1348'>pgsql</a>            1348 ext/pgsql/pgsql.c 				pgsql=PQsetdb(host,port,options,tty,dbname);</span>
+<span class='curline'><a href='../S/967.html#L1350'>pgsql</a>            1350 ext/pgsql/pgsql.c 			if (pgsql==NULL || PQstatus(pgsql)==CONNECTION_BAD) {</span>
+<span class='curline'><a href='../S/967.html#L1351'>pgsql</a>            1351 ext/pgsql/pgsql.c 				PHP_PQ_ERROR("Unable to connect to PostgreSQL server: %s", pgsql)</span>
+<span class='curline'><a href='../S/967.html#L1352'>pgsql</a>            1352 ext/pgsql/pgsql.c 				if (pgsql) {</span>
+<span class='curline'><a href='../S/967.html#L1353'>pgsql</a>            1353 ext/pgsql/pgsql.c 					PQfinish(pgsql);</span>
+<span class='curline'><a href='../S/967.html#L1360'>pgsql</a>            1360 ext/pgsql/pgsql.c 			new_le.ptr = pgsql;</span>
+<span class='curline'><a href='../S/967.html#L1395'>pgsql</a>            1395 ext/pgsql/pgsql.c 			pgsql = (PGconn *) le-&gt;ptr;</span>
+<span class='curline'><a href='../S/967.html#L1397'>pgsql</a>            1397 ext/pgsql/pgsql.c 			if (PQprotocolVersion(pgsql) &gt;= 3 &amp;&amp; atof(PQparameterStatus(pgsql, "server_version")) &gt;= 7.2) {</span>
+<span class='curline'><a href='../S/967.html#L1401'>pgsql</a>            1401 ext/pgsql/pgsql.c 				pg_result = PQexec(pgsql, "RESET ALL;");</span>
+<span class='curline'><a href='../S/967.html#L1405'>pgsql</a>            1405 ext/pgsql/pgsql.c 		ZEND_REGISTER_RESOURCE(return_value, pgsql, le_plink);</span>
+<span class='curline'><a href='../S/967.html#L1443'>pgsql</a>            1443 ext/pgsql/pgsql.c 				pgsql = PQconnectStart(connstring);</span>
+<span class='curline'><a href='../S/967.html#L1444'>pgsql</a>            1444 ext/pgsql/pgsql.c 				if (pgsql==NULL || PQstatus(pgsql)==CONNECTION_BAD) {</span>
+<span class='curline'><a href='../S/967.html#L1445'>pgsql</a>            1445 ext/pgsql/pgsql.c 					PHP_PQ_ERROR("Unable to connect to PostgreSQL server: %s", pgsql);</span>
+<span class='curline'><a href='../S/967.html#L1446'>pgsql</a>            1446 ext/pgsql/pgsql.c 					if (pgsql) {</span>
+<span class='curline'><a href='../S/967.html#L1447'>pgsql</a>            1447 ext/pgsql/pgsql.c 						PQfinish(pgsql);</span>
+<span class='curline'><a href='../S/967.html#L1457'>pgsql</a>            1457 ext/pgsql/pgsql.c 				pgsql = PQconnectdb(connstring);</span>
+<span class='curline'><a href='../S/967.html#L1459'>pgsql</a>            1459 ext/pgsql/pgsql.c 				pgsql = PQsetdb(host,port,options,tty,dbname);</span>
+<span class='curline'><a href='../S/967.html#L1461'>pgsql</a>            1461 ext/pgsql/pgsql.c 			if (pgsql==NULL || PQstatus(pgsql)==CONNECTION_BAD) {</span>
+<span class='curline'><a href='../S/967.html#L1462'>pgsql</a>            1462 ext/pgsql/pgsql.c 				PHP_PQ_ERROR("Unable to connect to PostgreSQL server: %s", pgsql);</span>
+<span class='curline'><a href='../S/967.html#L1463'>pgsql</a>            1463 ext/pgsql/pgsql.c 				if (pgsql) {</span>
+<span class='curline'><a href='../S/967.html#L1464'>pgsql</a>            1464 ext/pgsql/pgsql.c 					PQfinish(pgsql);</span>
+<span class='curline'><a href='../S/967.html#L1471'>pgsql</a>            1471 ext/pgsql/pgsql.c 		ZEND_REGISTER_RESOURCE(return_value, pgsql, le_link);</span>
+<span class='curline'><a href='../S/967.html#L1483'>pgsql</a>            1483 ext/pgsql/pgsql.c 		PQsetNoticeProcessor(pgsql, _php_pgsql_notice_handler, (void*)Z_RESVAL_P(return_value));</span>
+<span class='curline'><a href='../S/967.html#L1525'>pgsql</a>            1525 ext/pgsql/pgsql.c 	PGconn *pgsql;</span>
+<span class='curline'><a href='../S/967.html#L1536'>pgsql</a>            1536 ext/pgsql/pgsql.c 	ZEND_FETCH_RESOURCE2(pgsql, PGconn *, &amp;pgsql_link, id, "PostgreSQL link", le_link, le_plink);</span>
+<span class='curline'><a href='../S/967.html#L1538'>pgsql</a>            1538 ext/pgsql/pgsql.c 	ret = PQconnectPoll(pgsql);</span>
+<span class='curline'><a href='../S/967.html#L1558'>pgsql</a>            1558 ext/pgsql/pgsql.c 	PGconn *pgsql;</span>
+<span class='curline'><a href='../S/967.html#L1573'>pgsql</a>            1573 ext/pgsql/pgsql.c 	ZEND_FETCH_RESOURCE2(pgsql, PGconn *, &amp;pgsql_link, id, "PostgreSQL link", le_link, le_plink);</span>
+<span class='curline'><a href='../S/967.html#L1605'>pgsql</a>            1605 ext/pgsql/pgsql.c 	PGconn *pgsql;</span>
+<span class='curline'><a href='../S/967.html#L1621'>pgsql</a>            1621 ext/pgsql/pgsql.c 	ZEND_FETCH_RESOURCE2(pgsql, PGconn *, &amp;pgsql_link, id, "PostgreSQL link", le_link, le_plink);</span>
+<span class='curline'><a href='../S/967.html#L1625'>pgsql</a>            1625 ext/pgsql/pgsql.c 			Z_STRVAL_P(return_value) = PQdb(pgsql);</span>
+<span class='curline'><a href='../S/967.html#L1628'>pgsql</a>            1628 ext/pgsql/pgsql.c 			RETURN_STRING(PQErrorMessageTrim(pgsql, &amp;msgbuf), 0);</span>
+<span class='curline'><a href='../S/967.html#L1631'>pgsql</a>            1631 ext/pgsql/pgsql.c 			Z_STRVAL_P(return_value) = PQoptions(pgsql);</span>
+<span class='curline'><a href='../S/967.html#L1634'>pgsql</a>            1634 ext/pgsql/pgsql.c 			Z_STRVAL_P(return_value) = PQport(pgsql);</span>
+<span class='curline'><a href='../S/967.html#L1637'>pgsql</a>            1637 ext/pgsql/pgsql.c 			Z_STRVAL_P(return_value) = PQtty(pgsql);</span>
+<span class='curline'><a href='../S/967.html#L1640'>pgsql</a>            1640 ext/pgsql/pgsql.c 			Z_STRVAL_P(return_value) = PQhost(pgsql);</span>
+<span class='curline'><a href='../S/967.html#L1646'>pgsql</a>            1646 ext/pgsql/pgsql.c 			add_assoc_long(return_value, "protocol", PQprotocolVersion(pgsql));</span>
+<span class='curline'><a href='../S/967.html#L1648'>pgsql</a>            1648 ext/pgsql/pgsql.c 			if (PQprotocolVersion(pgsql) &gt;= 3) {</span>
+<span class='curline'><a href='../S/967.html#L1651'>pgsql</a>            1651 ext/pgsql/pgsql.c 				add_assoc_string(return_value, "server", (char*)PQparameterStatus(pgsql, "server_version"), 1);</span>
+<span class='curline'><a href='../S/967.html#L1652'>pgsql</a>            1652 ext/pgsql/pgsql.c 				tmp = (char*)PQparameterStatus(pgsql, "server_encoding");</span>
+<span class='curline'><a href='../S/967.html#L1654'>pgsql</a>            1654 ext/pgsql/pgsql.c 				tmp = (char*)PQparameterStatus(pgsql, "client_encoding");</span>
+<span class='curline'><a href='../S/967.html#L1656'>pgsql</a>            1656 ext/pgsql/pgsql.c 				tmp = (char*)PQparameterStatus(pgsql, "is_superuser");</span>
+<span class='curline'><a href='../S/967.html#L1658'>pgsql</a>            1658 ext/pgsql/pgsql.c 				tmp = (char*)PQparameterStatus(pgsql, "session_authorization");</span>
+<span class='curline'><a href='../S/967.html#L1660'>pgsql</a>            1660 ext/pgsql/pgsql.c 				tmp = (char*)PQparameterStatus(pgsql, "DateStyle");</span>
+<span class='curline'><a href='../S/967.html#L1662'>pgsql</a>            1662 ext/pgsql/pgsql.c 				tmp = (char*)PQparameterStatus(pgsql, "IntervalStyle");</span>
+<span class='curline'><a href='../S/967.html#L1664'>pgsql</a>            1664 ext/pgsql/pgsql.c 				tmp = (char*)PQparameterStatus(pgsql, "TimeZone");</span>
+<span class='curline'><a href='../S/967.html#L1666'>pgsql</a>            1666 ext/pgsql/pgsql.c 				tmp = (char*)PQparameterStatus(pgsql, "integer_datetimes");</span>
+<span class='curline'><a href='../S/967.html#L1668'>pgsql</a>            1668 ext/pgsql/pgsql.c 				tmp = (char*)PQparameterStatus(pgsql, "standard_conforming_strings");</span>
+<span class='curline'><a href='../S/967.html#L1670'>pgsql</a>            1670 ext/pgsql/pgsql.c 				tmp = (char*)PQparameterStatus(pgsql, "application_name");</span>
+<span class='curline'><a href='../S/967.html#L1753'>pgsql</a>            1753 ext/pgsql/pgsql.c 	PGconn *pgsql;</span>
+<span class='curline'><a href='../S/967.html#L1769'>pgsql</a>            1769 ext/pgsql/pgsql.c 	ZEND_FETCH_RESOURCE2(pgsql, PGconn *, &amp;pgsql_link, id, "PostgreSQL link", le_link, le_plink);</span>
+<span class='curline'><a href='../S/967.html#L1771'>pgsql</a>            1771 ext/pgsql/pgsql.c 	param = (char*)PQparameterStatus(pgsql, param);</span>
+<span class='curline'><a href='../S/967.html#L1787'>pgsql</a>            1787 ext/pgsql/pgsql.c 	PGconn *pgsql;</span>
+<span class='curline'><a href='../S/967.html#L1800'>pgsql</a>            1800 ext/pgsql/pgsql.c 	ZEND_FETCH_RESOURCE2(pgsql, PGconn *, &amp;pgsql_link, id, "PostgreSQL link", le_link, le_plink);</span>
+<span class='curline'><a href='../S/967.html#L1803'>pgsql</a>            1803 ext/pgsql/pgsql.c 	res = PQexec(pgsql, "SELECT 1;");</span>
+<span class='curline'><a href='../S/967.html#L1807'>pgsql</a>            1807 ext/pgsql/pgsql.c 	if (PQstatus(pgsql) == CONNECTION_OK)</span>
+<span class='curline'><a href='../S/967.html#L1811'>pgsql</a>            1811 ext/pgsql/pgsql.c 	PQreset(pgsql);</span>
+<span class='curline'><a href='../S/967.html#L1812'>pgsql</a>            1812 ext/pgsql/pgsql.c 	if (PQstatus(pgsql) == CONNECTION_OK) {</span>
+<span class='curline'><a href='../S/967.html#L1827'>pgsql</a>            1827 ext/pgsql/pgsql.c 	PGconn *pgsql;</span>
+<span class='curline'><a href='../S/967.html#L1848'>pgsql</a>            1848 ext/pgsql/pgsql.c 	ZEND_FETCH_RESOURCE2(pgsql, PGconn *, &amp;pgsql_link, id, "PostgreSQL link", le_link, le_plink);</span>
+<span class='curline'><a href='../S/967.html#L1850'>pgsql</a>            1850 ext/pgsql/pgsql.c 	if (PQ_SETNONBLOCKING(pgsql, 0)) {</span>
+<span class='curline'><a href='../S/967.html#L1854'>pgsql</a>            1854 ext/pgsql/pgsql.c 	while ((pgsql_result = PQgetResult(pgsql))) {</span>
+<span class='curline'><a href='../S/967.html#L1861'>pgsql</a>            1861 ext/pgsql/pgsql.c 	pgsql_result = PQexec(pgsql, query);</span>
+<span class='curline'><a href='../S/967.html#L1862'>pgsql</a>            1862 ext/pgsql/pgsql.c 	if ((PGG(auto_reset_persistent) &amp; 2) &amp;&amp; PQstatus(pgsql) != CONNECTION_OK) {</span>
+<span class='curline'><a href='../S/967.html#L1864'>pgsql</a>            1864 ext/pgsql/pgsql.c 		PQreset(pgsql);</span>
+<span class='curline'><a href='../S/967.html#L1865'>pgsql</a>            1865 ext/pgsql/pgsql.c 		pgsql_result = PQexec(pgsql, query);</span>
+<span class='curline'><a href='../S/967.html#L1871'>pgsql</a>            1871 ext/pgsql/pgsql.c 		status = (ExecStatusType) PQstatus(pgsql);</span>
+<span class='curline'><a href='../S/967.html#L1879'>pgsql</a>            1879 ext/pgsql/pgsql.c 			PHP_PQ_ERROR("Query failed: %s", pgsql);</span>
+<span class='curline'><a href='../S/967.html#L1887'>pgsql</a>            1887 ext/pgsql/pgsql.c 				pg_result-&gt;conn = pgsql;</span>
+<span class='curline'><a href='../S/967.html#L1929'>pgsql</a>            1929 ext/pgsql/pgsql.c 	PGconn *pgsql;</span>
+<span class='curline'><a href='../S/967.html#L1950'>pgsql</a>            1950 ext/pgsql/pgsql.c 	ZEND_FETCH_RESOURCE2(pgsql, PGconn *, &amp;pgsql_link, id, "PostgreSQL link", le_link, le_plink);</span>
+<span class='curline'><a href='../S/967.html#L1952'>pgsql</a>            1952 ext/pgsql/pgsql.c 	if (PQ_SETNONBLOCKING(pgsql, 0)) {</span>
+<span class='curline'><a href='../S/967.html#L1956'>pgsql</a>            1956 ext/pgsql/pgsql.c 	while ((pgsql_result = PQgetResult(pgsql))) {</span>
+<span class='curline'><a href='../S/967.html#L1997'>pgsql</a>            1997 ext/pgsql/pgsql.c 	pgsql_result = PQexecParams(pgsql, query, num_params, </span>
+<span class='curline'><a href='../S/967.html#L1999'>pgsql</a>            1999 ext/pgsql/pgsql.c 	if ((PGG(auto_reset_persistent) &amp; 2) &amp;&amp; PQstatus(pgsql) != CONNECTION_OK) {</span>
+<span class='curline'><a href='../S/967.html#L2001'>pgsql</a>            2001 ext/pgsql/pgsql.c 		PQreset(pgsql);</span>
+<span class='curline'><a href='../S/967.html#L2002'>pgsql</a>            2002 ext/pgsql/pgsql.c 		pgsql_result = PQexecParams(pgsql, query, num_params, </span>
+<span class='curline'><a href='../S/967.html#L2009'>pgsql</a>            2009 ext/pgsql/pgsql.c 		status = (ExecStatusType) PQstatus(pgsql);</span>
+<span class='curline'><a href='../S/967.html#L2019'>pgsql</a>            2019 ext/pgsql/pgsql.c 			PHP_PQ_ERROR("Query failed: %s", pgsql);</span>
+<span class='curline'><a href='../S/967.html#L2027'>pgsql</a>            2027 ext/pgsql/pgsql.c 				pg_result-&gt;conn = pgsql;</span>
+<span class='curline'><a href='../S/967.html#L2050'>pgsql</a>            2050 ext/pgsql/pgsql.c 	PGconn *pgsql;</span>
+<span class='curline'><a href='../S/967.html#L2071'>pgsql</a>            2071 ext/pgsql/pgsql.c 	ZEND_FETCH_RESOURCE2(pgsql, PGconn *, &amp;pgsql_link, id, "PostgreSQL link", le_link, le_plink);</span>
+<span class='curline'><a href='../S/967.html#L2073'>pgsql</a>            2073 ext/pgsql/pgsql.c 	if (PQ_SETNONBLOCKING(pgsql, 0)) {</span>
+<span class='curline'><a href='../S/967.html#L2077'>pgsql</a>            2077 ext/pgsql/pgsql.c 	while ((pgsql_result = PQgetResult(pgsql))) {</span>
+<span class='curline'><a href='../S/967.html#L2084'>pgsql</a>            2084 ext/pgsql/pgsql.c 	pgsql_result = PQprepare(pgsql, stmtname, query, 0, NULL);</span>
+<span class='curline'><a href='../S/967.html#L2085'>pgsql</a>            2085 ext/pgsql/pgsql.c 	if ((PGG(auto_reset_persistent) &amp; 2) &amp;&amp; PQstatus(pgsql) != CONNECTION_OK) {</span>
+<span class='curline'><a href='../S/967.html#L2087'>pgsql</a>            2087 ext/pgsql/pgsql.c 		PQreset(pgsql);</span>
+<span class='curline'><a href='../S/967.html#L2088'>pgsql</a>            2088 ext/pgsql/pgsql.c 		pgsql_result = PQprepare(pgsql, stmtname, query, 0, NULL);</span>
+<span class='curline'><a href='../S/967.html#L2094'>pgsql</a>            2094 ext/pgsql/pgsql.c 		status = (ExecStatusType) PQstatus(pgsql);</span>
+<span class='curline'><a href='../S/967.html#L2102'>pgsql</a>            2102 ext/pgsql/pgsql.c 			PHP_PQ_ERROR("Query failed: %s", pgsql);</span>
+<span class='curline'><a href='../S/967.html#L2110'>pgsql</a>            2110 ext/pgsql/pgsql.c 				pg_result-&gt;conn = pgsql;</span>
+<span class='curline'><a href='../S/967.html#L2136'>pgsql</a>            2136 ext/pgsql/pgsql.c 	PGconn *pgsql;</span>
+<span class='curline'><a href='../S/967.html#L2157'>pgsql</a>            2157 ext/pgsql/pgsql.c 	ZEND_FETCH_RESOURCE2(pgsql, PGconn *, &amp;pgsql_link, id, "PostgreSQL link", le_link, le_plink);</span>
+<span class='curline'><a href='../S/967.html#L2159'>pgsql</a>            2159 ext/pgsql/pgsql.c 	if (PQ_SETNONBLOCKING(pgsql, 0)) {</span>
+<span class='curline'><a href='../S/967.html#L2163'>pgsql</a>            2163 ext/pgsql/pgsql.c 	while ((pgsql_result = PQgetResult(pgsql))) {</span>
+<span class='curline'><a href='../S/967.html#L2204'>pgsql</a>            2204 ext/pgsql/pgsql.c 	pgsql_result = PQexecPrepared(pgsql, stmtname, num_params, </span>
+<span class='curline'><a href='../S/967.html#L2206'>pgsql</a>            2206 ext/pgsql/pgsql.c 	if ((PGG(auto_reset_persistent) &amp; 2) &amp;&amp; PQstatus(pgsql) != CONNECTION_OK) {</span>
+<span class='curline'><a href='../S/967.html#L2208'>pgsql</a>            2208 ext/pgsql/pgsql.c 		PQreset(pgsql);</span>
+<span class='curline'><a href='../S/967.html#L2209'>pgsql</a>            2209 ext/pgsql/pgsql.c 		pgsql_result = PQexecPrepared(pgsql, stmtname, num_params, </span>
+<span class='curline'><a href='../S/967.html#L2216'>pgsql</a>            2216 ext/pgsql/pgsql.c 		status = (ExecStatusType) PQstatus(pgsql);</span>
+<span class='curline'><a href='../S/967.html#L2226'>pgsql</a>            2226 ext/pgsql/pgsql.c 			PHP_PQ_ERROR("Query failed: %s", pgsql);</span>
+<span class='curline'><a href='../S/967.html#L2234'>pgsql</a>            2234 ext/pgsql/pgsql.c 				pg_result-&gt;conn = pgsql;</span>
+<span class='curline'><a href='../S/967.html#L2340'>pgsql</a>            2340 ext/pgsql/pgsql.c static char *get_field_name(PGconn *pgsql, Oid oid, HashTable *list TSRMLS_DC)</span>
+<span class='curline'><a href='../S/967.html#L2360'>pgsql</a>            2360 ext/pgsql/pgsql.c 		if ((result = PQexec(pgsql,"select oid,typname from pg_type")) == NULL || PQresultStatus(result) != PGRES_TUPLES_OK) {</span>
+<span class='curline'><a href='../S/967.html#L3112'>pgsql</a>            3112 ext/pgsql/pgsql.c 	PGconn *pgsql;</span>
+<span class='curline'><a href='../S/967.html#L3129'>pgsql</a>            3129 ext/pgsql/pgsql.c 	ZEND_FETCH_RESOURCE2(pgsql, PGconn *, &amp;pgsql_link, id, "PostgreSQL link", le_link, le_plink);</span>
+<span class='curline'><a href='../S/967.html#L3142'>pgsql</a>            3142 ext/pgsql/pgsql.c 	PQtrace(pgsql, fp);</span>
+<span class='curline'><a href='../S/967.html#L3153'>pgsql</a>            3153 ext/pgsql/pgsql.c 	PGconn *pgsql;</span>
+<span class='curline'><a href='../S/967.html#L3168'>pgsql</a>            3168 ext/pgsql/pgsql.c 	ZEND_FETCH_RESOURCE2(pgsql, PGconn *, &amp;pgsql_link, id, "PostgreSQL link", le_link, le_plink);</span>
+<span class='curline'><a href='../S/967.html#L3169'>pgsql</a>            3169 ext/pgsql/pgsql.c 	PQuntrace(pgsql);</span>
+<span class='curline'><a href='../S/967.html#L3179'>pgsql</a>            3179 ext/pgsql/pgsql.c 	PGconn *pgsql;</span>
+<span class='curline'><a href='../S/967.html#L3200'>pgsql</a>            3200 ext/pgsql/pgsql.c 	ZEND_FETCH_RESOURCE2(pgsql, PGconn *, &amp;pgsql_link, id, "PostgreSQL link", le_link, le_plink);</span>
+<span class='curline'><a href='../S/967.html#L3229'>pgsql</a>            3229 ext/pgsql/pgsql.c 		if ((pgsql_oid = lo_create(pgsql, wanted_oid)) == InvalidOid) {</span>
+<span class='curline'><a href='../S/967.html#L3238'>pgsql</a>            3238 ext/pgsql/pgsql.c 	if ((pgsql_oid = lo_creat(pgsql, INV_READ|INV_WRITE)) == InvalidOid) {</span>
+<span class='curline'><a href='../S/967.html#L3255'>pgsql</a>            3255 ext/pgsql/pgsql.c 	PGconn *pgsql;</span>
+<span class='curline'><a href='../S/967.html#L3307'>pgsql</a>            3307 ext/pgsql/pgsql.c 	ZEND_FETCH_RESOURCE2(pgsql, PGconn *, &amp;pgsql_link, id, "PostgreSQL link", le_link, le_plink);</span>
+<span class='curline'><a href='../S/967.html#L3309'>pgsql</a>            3309 ext/pgsql/pgsql.c 	if (lo_unlink(pgsql, oid) == -1) {</span>
+<span class='curline'><a href='../S/967.html#L3325'>pgsql</a>            3325 ext/pgsql/pgsql.c 	PGconn *pgsql;</span>
+<span class='curline'><a href='../S/967.html#L3379'>pgsql</a>            3379 ext/pgsql/pgsql.c 	ZEND_FETCH_RESOURCE2(pgsql, PGconn *, &amp;pgsql_link, id, "PostgreSQL link", le_link, le_plink);</span>
+<span class='curline'><a href='../S/967.html#L3402'>pgsql</a>            3402 ext/pgsql/pgsql.c 	if ((pgsql_lofd = lo_open(pgsql, oid, pgsql_mode)) == -1) {</span>
+<span class='curline'><a href='../S/967.html#L3404'>pgsql</a>            3404 ext/pgsql/pgsql.c 			if ((oid = lo_creat(pgsql, INV_READ|INV_WRITE)) == 0) {</span>
+<span class='curline'><a href='../S/967.html#L3409'>pgsql</a>            3409 ext/pgsql/pgsql.c 				if ((pgsql_lofd = lo_open(pgsql, oid, pgsql_mode)) == -1) {</span>
+<span class='curline'><a href='../S/967.html#L3410'>pgsql</a>            3410 ext/pgsql/pgsql.c 					if (lo_unlink(pgsql, oid) == -1) {</span>
+<span class='curline'><a href='../S/967.html#L3419'>pgsql</a>            3419 ext/pgsql/pgsql.c 					pgsql_lofp-&gt;conn = pgsql;</span>
+<span class='curline'><a href='../S/967.html#L3431'>pgsql</a>            3431 ext/pgsql/pgsql.c 		pgsql_lofp-&gt;conn = pgsql;</span>
+<span class='curline'><a href='../S/967.html#L3443'>pgsql</a>            3443 ext/pgsql/pgsql.c 	pgLofp *pgsql;</span>
+<span class='curline'><a href='../S/967.html#L3449'>pgsql</a>            3449 ext/pgsql/pgsql.c 	ZEND_FETCH_RESOURCE(pgsql, pgLofp *, &amp;pgsql_lofp, -1, "PostgreSQL large object", le_lofp);</span>
+<span class='curline'><a href='../S/967.html#L3451'>pgsql</a>            3451 ext/pgsql/pgsql.c 	if (lo_close((PGconn *)pgsql-&gt;conn, pgsql-&gt;lofd) &lt; 0) {</span>
+<span class='curline'><a href='../S/967.html#L3452'>pgsql</a>            3452 ext/pgsql/pgsql.c 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Unable to close PostgreSQL large object descriptor %d", pgsql-&gt;lofd);</span>
+<span class='curline'><a href='../S/967.html#L3473'>pgsql</a>            3473 ext/pgsql/pgsql.c 	pgLofp *pgsql;</span>
+<span class='curline'><a href='../S/967.html#L3479'>pgsql</a>            3479 ext/pgsql/pgsql.c 	ZEND_FETCH_RESOURCE(pgsql, pgLofp *, &amp;pgsql_id, -1, "PostgreSQL large object", le_lofp);</span>
+<span class='curline'><a href='../S/967.html#L3486'>pgsql</a>            3486 ext/pgsql/pgsql.c 	if ((nbytes = lo_read((PGconn *)pgsql-&gt;conn, pgsql-&gt;lofd, buf, buf_len))&lt;0) {</span>
+<span class='curline'><a href='../S/967.html#L3505'>pgsql</a>            3505 ext/pgsql/pgsql.c 	pgLofp *pgsql;</span>
+<span class='curline'><a href='../S/967.html#L3527'>pgsql</a>            3527 ext/pgsql/pgsql.c 	ZEND_FETCH_RESOURCE(pgsql, pgLofp *, &amp;pgsql_id, -1, "PostgreSQL large object", le_lofp);</span>
+<span class='curline'><a href='../S/967.html#L3529'>pgsql</a>            3529 ext/pgsql/pgsql.c 	if ((nbytes = lo_write((PGconn *)pgsql-&gt;conn, pgsql-&gt;lofd, str, len)) == -1) {</span>
+<span class='curline'><a href='../S/967.html#L3545'>pgsql</a>            3545 ext/pgsql/pgsql.c 	pgLofp *pgsql;</span>
+<span class='curline'><a href='../S/967.html#L3551'>pgsql</a>            3551 ext/pgsql/pgsql.c 	ZEND_FETCH_RESOURCE(pgsql, pgLofp *, &amp;pgsql_id, -1, "PostgreSQL large object", le_lofp);</span>
+<span class='curline'><a href='../S/967.html#L3554'>pgsql</a>            3554 ext/pgsql/pgsql.c 	while ((nbytes = lo_read((PGconn *)pgsql-&gt;conn, pgsql-&gt;lofd, buf, PGSQL_LO_READ_BUF_SIZE))&gt;0) {</span>
+<span class='curline'><a href='../S/967.html#L3570'>pgsql</a>            3570 ext/pgsql/pgsql.c 	PGconn *pgsql;</span>
+<span class='curline'><a href='../S/967.html#L3599'>pgsql</a>            3599 ext/pgsql/pgsql.c 	ZEND_FETCH_RESOURCE2(pgsql, PGconn *, &amp;pgsql_link, id, "PostgreSQL link", le_link, le_plink);</span>
+<span class='curline'><a href='../S/967.html#L3630'>pgsql</a>            3630 ext/pgsql/pgsql.c        returned_oid = lo_import_with_oid(pgsql, file_in, wanted_oid);</span>
+<span class='curline'><a href='../S/967.html#L3640'>pgsql</a>            3640 ext/pgsql/pgsql.c 	returned_oid = lo_import(pgsql, file_in);</span>
+<span class='curline'><a href='../S/967.html#L3659'>pgsql</a>            3659 ext/pgsql/pgsql.c 	PGconn *pgsql;</span>
+<span class='curline'><a href='../S/967.html#L3732'>pgsql</a>            3732 ext/pgsql/pgsql.c 	ZEND_FETCH_RESOURCE2(pgsql, PGconn *, &amp;pgsql_link, id, "PostgreSQL link", le_link, le_plink);</span>
+<span class='curline'><a href='../S/967.html#L3734'>pgsql</a>            3734 ext/pgsql/pgsql.c 	if (lo_export(pgsql, oid, file_out) == -1) {</span>
+<span class='curline'><a href='../S/967.html#L3747'>pgsql</a>            3747 ext/pgsql/pgsql.c 	pgLofp *pgsql;</span>
+<span class='curline'><a href='../S/967.html#L3758'>pgsql</a>            3758 ext/pgsql/pgsql.c 	ZEND_FETCH_RESOURCE(pgsql, pgLofp *, &amp;pgsql_id, -1, "PostgreSQL large object", le_lofp);</span>
+<span class='curline'><a href='../S/967.html#L3761'>pgsql</a>            3761 ext/pgsql/pgsql.c 	if (PQserverVersion((PGconn *)pgsql-&gt;conn) &gt;= 90300) {</span>
+<span class='curline'><a href='../S/967.html#L3762'>pgsql</a>            3762 ext/pgsql/pgsql.c 		result = lo_lseek64((PGconn *)pgsql-&gt;conn, pgsql-&gt;lofd, offset, whence);</span>
+<span class='curline'><a href='../S/967.html#L3764'>pgsql</a>            3764 ext/pgsql/pgsql.c 		result = lo_lseek((PGconn *)pgsql-&gt;conn, pgsql-&gt;lofd, offset, whence);</span>
+<span class='curline'><a href='../S/967.html#L3767'>pgsql</a>            3767 ext/pgsql/pgsql.c 	result = lo_lseek((PGconn *)pgsql-&gt;conn, pgsql-&gt;lofd, offset, whence);</span>
+<span class='curline'><a href='../S/967.html#L3783'>pgsql</a>            3783 ext/pgsql/pgsql.c 	pgLofp *pgsql;</span>
+<span class='curline'><a href='../S/967.html#L3790'>pgsql</a>            3790 ext/pgsql/pgsql.c 	ZEND_FETCH_RESOURCE(pgsql, pgLofp *, &amp;pgsql_id, -1, "PostgreSQL large object", le_lofp);</span>
+<span class='curline'><a href='../S/967.html#L3793'>pgsql</a>            3793 ext/pgsql/pgsql.c 	if (PQserverVersion((PGconn *)pgsql-&gt;conn) &gt;= 90300) {</span>
+<span class='curline'><a href='../S/967.html#L3794'>pgsql</a>            3794 ext/pgsql/pgsql.c 		offset = lo_tell64((PGconn *)pgsql-&gt;conn, pgsql-&gt;lofd);</span>
+<span class='curline'><a href='../S/967.html#L3796'>pgsql</a>            3796 ext/pgsql/pgsql.c 		offset = lo_tell((PGconn *)pgsql-&gt;conn, pgsql-&gt;lofd);</span>
+<span class='curline'><a href='../S/967.html#L3799'>pgsql</a>            3799 ext/pgsql/pgsql.c 	offset = lo_tell((PGconn *)pgsql-&gt;conn, pgsql-&gt;lofd);</span>
+<span class='curline'><a href='../S/967.html#L3812'>pgsql</a>            3812 ext/pgsql/pgsql.c 	pgLofp *pgsql;</span>
+<span class='curline'><a href='../S/967.html#L3820'>pgsql</a>            3820 ext/pgsql/pgsql.c 	ZEND_FETCH_RESOURCE(pgsql, pgLofp *, &amp;pgsql_id, -1, "PostgreSQL large object", le_lofp);</span>
+<span class='curline'><a href='../S/967.html#L3823'>pgsql</a>            3823 ext/pgsql/pgsql.c 	if (PQserverVersion((PGconn *)pgsql-&gt;conn) &gt;= 90300) {</span>
+<span class='curline'><a href='../S/967.html#L3824'>pgsql</a>            3824 ext/pgsql/pgsql.c 		result = lo_truncate64((PGconn *)pgsql-&gt;conn, pgsql-&gt;lofd, size);</span>
+<span class='curline'><a href='../S/967.html#L3826'>pgsql</a>            3826 ext/pgsql/pgsql.c 		result = lo_truncate((PGconn *)pgsql-&gt;conn, pgsql-&gt;lofd, size);</span>
+<span class='curline'><a href='../S/967.html#L3829'>pgsql</a>            3829 ext/pgsql/pgsql.c 	result = lo_truncate((PGconn *)pgsql-&gt;conn, pgsql-&gt;lofd, size);</span>
+<span class='curline'><a href='../S/967.html#L3848'>pgsql</a>            3848 ext/pgsql/pgsql.c 	PGconn *pgsql;</span>
+<span class='curline'><a href='../S/967.html#L3866'>pgsql</a>            3866 ext/pgsql/pgsql.c 	ZEND_FETCH_RESOURCE2(pgsql, PGconn *, &amp;pgsql_link, id, "PostgreSQL link", le_link, le_plink);</span>
+<span class='curline'><a href='../S/967.html#L3869'>pgsql</a>            3869 ext/pgsql/pgsql.c 		Z_LVAL_P(return_value) = PQsetErrorVerbosity(pgsql, verbosity);</span>
+<span class='curline'><a href='../S/967.html#L3887'>pgsql</a>            3887 ext/pgsql/pgsql.c 	PGconn *pgsql;</span>
+<span class='curline'><a href='../S/967.html#L3905'>pgsql</a>            3905 ext/pgsql/pgsql.c 	ZEND_FETCH_RESOURCE2(pgsql, PGconn *, &amp;pgsql_link, id, "PostgreSQL link", le_link, le_plink);</span>
+<span class='curline'><a href='../S/967.html#L3907'>pgsql</a>            3907 ext/pgsql/pgsql.c 	Z_LVAL_P(return_value) = PQsetClientEncoding(pgsql, encoding);</span>
+<span class='curline'><a href='../S/967.html#L3918'>pgsql</a>            3918 ext/pgsql/pgsql.c 	PGconn *pgsql;</span>
+<span class='curline'><a href='../S/967.html#L3933'>pgsql</a>            3933 ext/pgsql/pgsql.c 	ZEND_FETCH_RESOURCE2(pgsql, PGconn *, &amp;pgsql_link, id, "PostgreSQL link", le_link, le_plink);</span>
+<span class='curline'><a href='../S/967.html#L3937'>pgsql</a>            3937 ext/pgsql/pgsql.c 	Z_STRVAL_P(return_value) = (char *) pg_encoding_to_char(PQclientEncoding(pgsql));</span>
+<span class='curline'><a href='../S/967.html#L3955'>pgsql</a>            3955 ext/pgsql/pgsql.c 	PGconn *pgsql;</span>
+<span class='curline'><a href='../S/967.html#L3971'>pgsql</a>            3971 ext/pgsql/pgsql.c 	ZEND_FETCH_RESOURCE2(pgsql, PGconn *, &amp;pgsql_link, id, "PostgreSQL link", le_link, le_plink);</span>
+<span class='curline'><a href='../S/967.html#L3973'>pgsql</a>            3973 ext/pgsql/pgsql.c 	result = PQendcopy(pgsql);</span>
+<span class='curline'><a href='../S/967.html#L3976'>pgsql</a>            3976 ext/pgsql/pgsql.c 		PHP_PQ_ERROR("Query failed: %s", pgsql);</span>
+<span class='curline'><a href='../S/967.html#L3991'>pgsql</a>            3991 ext/pgsql/pgsql.c 	PGconn *pgsql;</span>
+<span class='curline'><a href='../S/967.html#L4010'>pgsql</a>            4010 ext/pgsql/pgsql.c 	ZEND_FETCH_RESOURCE2(pgsql, PGconn *, &amp;pgsql_link, id, "PostgreSQL link", le_link, le_plink);</span>
+<span class='curline'><a href='../S/967.html#L4012'>pgsql</a>            4012 ext/pgsql/pgsql.c 	result = PQputline(pgsql, query);</span>
+<span class='curline'><a href='../S/967.html#L4014'>pgsql</a>            4014 ext/pgsql/pgsql.c 		PHP_PQ_ERROR("Query failed: %s", pgsql);</span>
+<span class='curline'><a href='../S/967.html#L4030'>pgsql</a>            4030 ext/pgsql/pgsql.c 	PGconn *pgsql;</span>
+<span class='curline'><a href='../S/967.html#L4050'>pgsql</a>            4050 ext/pgsql/pgsql.c 	ZEND_FETCH_RESOURCE2(pgsql, PGconn *, &amp;pgsql_link, id, "PostgreSQL link", le_link, le_plink);</span>
+<span class='curline'><a href='../S/967.html#L4059'>pgsql</a>            4059 ext/pgsql/pgsql.c 	while ((pgsql_result = PQgetResult(pgsql))) {</span>
+<span class='curline'><a href='../S/967.html#L4062'>pgsql</a>            4062 ext/pgsql/pgsql.c 	pgsql_result = PQexec(pgsql, query);</span>
+<span class='curline'><a href='../S/967.html#L4071'>pgsql</a>            4071 ext/pgsql/pgsql.c 		status = (ExecStatusType) PQstatus(pgsql);</span>
+<span class='curline'><a href='../S/967.html#L4082'>pgsql</a>            4082 ext/pgsql/pgsql.c 					ret = PQgetCopyData(pgsql, &amp;csv, 0);</span>
+<span class='curline'><a href='../S/967.html#L4089'>pgsql</a>            4089 ext/pgsql/pgsql.c 							PHP_PQ_ERROR("getline failed: %s", pgsql);</span>
+<span class='curline'><a href='../S/967.html#L4101'>pgsql</a>            4101 ext/pgsql/pgsql.c 					if ((ret = PQgetline(pgsql, copybuf, COPYBUFSIZ))) {</span>
+<span class='curline'><a href='../S/967.html#L4102'>pgsql</a>            4102 ext/pgsql/pgsql.c 						PHP_PQ_ERROR("getline failed: %s", pgsql);</span>
+<span class='curline'><a href='../S/967.html#L4135'>pgsql</a>            4135 ext/pgsql/pgsql.c 				if (PQendcopy(pgsql)) {</span>
+<span class='curline'><a href='../S/967.html#L4136'>pgsql</a>            4136 ext/pgsql/pgsql.c 					PHP_PQ_ERROR("endcopy failed: %s", pgsql);</span>
+<span class='curline'><a href='../S/967.html#L4140'>pgsql</a>            4140 ext/pgsql/pgsql.c 				while ((pgsql_result = PQgetResult(pgsql))) {</span>
+<span class='curline'><a href='../S/967.html#L4150'>pgsql</a>            4150 ext/pgsql/pgsql.c 			PHP_PQ_ERROR("Copy command failed: %s", pgsql);</span>
+<span class='curline'><a href='../S/967.html#L4169'>pgsql</a>            4169 ext/pgsql/pgsql.c 	PGconn *pgsql;</span>
+<span class='curline'><a href='../S/967.html#L4187'>pgsql</a>            4187 ext/pgsql/pgsql.c 	ZEND_FETCH_RESOURCE2(pgsql, PGconn *, &amp;pgsql_link, id, "PostgreSQL link", le_link, le_plink);</span>
+<span class='curline'><a href='../S/967.html#L4190'>pgsql</a>            4190 ext/pgsql/pgsql.c 	while ((pgsql_result = PQgetResult(pgsql))) {</span>
+<span class='curline'><a href='../S/967.html#L4193'>pgsql</a>            4193 ext/pgsql/pgsql.c 	pgsql_result = PQexec(pgsql, query);</span>
+<span class='curline'><a href='../S/967.html#L4203'>pgsql</a>            4203 ext/pgsql/pgsql.c 		status = (ExecStatusType) PQstatus(pgsql);</span>
+<span class='curline'><a href='../S/967.html#L4224'>pgsql</a>            4224 ext/pgsql/pgsql.c 					if (PQputCopyData(pgsql, query, strlen(query)) != 1) {</span>
+<span class='curline'><a href='../S/967.html#L4228'>pgsql</a>            4228 ext/pgsql/pgsql.c 						PHP_PQ_ERROR("copy failed: %s", pgsql);</span>
+<span class='curline'><a href='../S/967.html#L4236'>pgsql</a>            4236 ext/pgsql/pgsql.c 				if (PQputCopyEnd(pgsql, NULL) != 1) {</span>
+<span class='curline'><a href='../S/967.html#L4237'>pgsql</a>            4237 ext/pgsql/pgsql.c 					PHP_PQ_ERROR("putcopyend failed: %s", pgsql);</span>
+<span class='curline'><a href='../S/967.html#L4252'>pgsql</a>            4252 ext/pgsql/pgsql.c 					if (PQputline(pgsql, query)==EOF) {</span>
+<span class='curline'><a href='../S/967.html#L4256'>pgsql</a>            4256 ext/pgsql/pgsql.c 						PHP_PQ_ERROR("copy failed: %s", pgsql);</span>
+<span class='curline'><a href='../S/967.html#L4264'>pgsql</a>            4264 ext/pgsql/pgsql.c 				if (PQputline(pgsql, "\\.\n") == EOF) {</span>
+<span class='curline'><a href='../S/967.html#L4265'>pgsql</a>            4265 ext/pgsql/pgsql.c 					PHP_PQ_ERROR("putline failed: %s", pgsql);</span>
+<span class='curline'><a href='../S/967.html#L4268'>pgsql</a>            4268 ext/pgsql/pgsql.c 				if (PQendcopy(pgsql)) {</span>
+<span class='curline'><a href='../S/967.html#L4269'>pgsql</a>            4269 ext/pgsql/pgsql.c 					PHP_PQ_ERROR("endcopy failed: %s", pgsql);</span>
+<span class='curline'><a href='../S/967.html#L4273'>pgsql</a>            4273 ext/pgsql/pgsql.c 				while ((pgsql_result = PQgetResult(pgsql))) {</span>
+<span class='curline'><a href='../S/967.html#L4275'>pgsql</a>            4275 ext/pgsql/pgsql.c 						PHP_PQ_ERROR("Copy command failed: %s", pgsql);</span>
+<span class='curline'><a href='../S/967.html#L4291'>pgsql</a>            4291 ext/pgsql/pgsql.c 			PHP_PQ_ERROR("Copy command failed: %s", pgsql);</span>
+<span class='curline'><a href='../S/967.html#L4306'>pgsql</a>            4306 ext/pgsql/pgsql.c 	PGconn *pgsql;</span>
+<span class='curline'><a href='../S/967.html#L4331'>pgsql</a>            4331 ext/pgsql/pgsql.c 		ZEND_FETCH_RESOURCE2(pgsql, PGconn *, &amp;pgsql_link, id, "PostgreSQL link", le_link, le_plink);</span>
+<span class='curline'><a href='../S/967.html#L4332'>pgsql</a>            4332 ext/pgsql/pgsql.c 		to_len = (int) PQescapeStringConn(pgsql, to, from, (size_t)from_len, NULL);</span>
+<span class='curline'><a href='../S/967.html#L4349'>pgsql</a>            4349 ext/pgsql/pgsql.c 	PGconn *pgsql;</span>
+<span class='curline'><a href='../S/967.html#L4371'>pgsql</a>            4371 ext/pgsql/pgsql.c 		ZEND_FETCH_RESOURCE2(pgsql, PGconn *, &amp;pgsql_link, id, "PostgreSQL link", le_link, le_plink);</span>
+<span class='curline'><a href='../S/967.html#L4372'>pgsql</a>            4372 ext/pgsql/pgsql.c 		to = (char *)PQescapeByteaConn(pgsql, (unsigned char *)from, (size_t)from_len, &amp;to_len);</span>
+<span class='curline'><a href='../S/967.html#L4520'>pgsql</a>            4520 ext/pgsql/pgsql.c 	PGconn *pgsql;</span>
+<span class='curline'><a href='../S/967.html#L4546'>pgsql</a>            4546 ext/pgsql/pgsql.c 	ZEND_FETCH_RESOURCE2(pgsql, PGconn *, &amp;pgsql_link, id, "PostgreSQL link", le_link, le_plink);</span>
+<span class='curline'><a href='../S/967.html#L4547'>pgsql</a>            4547 ext/pgsql/pgsql.c 	if (pgsql == NULL) {</span>
+<span class='curline'><a href='../S/967.html#L4553'>pgsql</a>            4553 ext/pgsql/pgsql.c 		tmp = PGSQLescapeLiteral(pgsql, from, (size_t)from_len);</span>
+<span class='curline'><a href='../S/967.html#L4555'>pgsql</a>            4555 ext/pgsql/pgsql.c 		tmp = PGSQLescapeIdentifier(pgsql, from, (size_t)from_len);</span>
+<span class='curline'><a href='../S/967.html#L4663'>pgsql</a>            4663 ext/pgsql/pgsql.c 	PGconn *pgsql;</span>
+<span class='curline'><a href='../S/967.html#L4670'>pgsql</a>            4670 ext/pgsql/pgsql.c 	ZEND_FETCH_RESOURCE2(pgsql, PGconn *, &amp;pgsql_link, id, "PostgreSQL link", le_link, le_plink);</span>
+<span class='curline'><a href='../S/967.html#L4672'>pgsql</a>            4672 ext/pgsql/pgsql.c 	RETURN_LONG(PQstatus(pgsql));</span>
+<span class='curline'><a href='../S/967.html#L4685'>pgsql</a>            4685 ext/pgsql/pgsql.c 	PGconn *pgsql;</span>
+<span class='curline'><a href='../S/967.html#L4692'>pgsql</a>            4692 ext/pgsql/pgsql.c 	ZEND_FETCH_RESOURCE2(pgsql, PGconn *, &amp;pgsql_link, id, "PostgreSQL link", le_link, le_plink);</span>
+<span class='curline'><a href='../S/967.html#L4694'>pgsql</a>            4694 ext/pgsql/pgsql.c 	RETURN_LONG(PQtransactionStatus(pgsql));</span>
+<span class='curline'><a href='../S/967.html#L4707'>pgsql</a>            4707 ext/pgsql/pgsql.c 	PGconn *pgsql;</span>
+<span class='curline'><a href='../S/967.html#L4714'>pgsql</a>            4714 ext/pgsql/pgsql.c 	ZEND_FETCH_RESOURCE2(pgsql, PGconn *, &amp;pgsql_link, id, "PostgreSQL link", le_link, le_plink);</span>
+<span class='curline'><a href='../S/967.html#L4716'>pgsql</a>            4716 ext/pgsql/pgsql.c 	PQreset(pgsql);</span>
+<span class='curline'><a href='../S/967.html#L4717'>pgsql</a>            4717 ext/pgsql/pgsql.c 	if (PQstatus(pgsql) == CONNECTION_BAD) {</span>
+<span class='curline'><a href='../S/967.html#L4731'>pgsql</a>            4731 ext/pgsql/pgsql.c static int php_pgsql_flush_query(PGconn *pgsql TSRMLS_DC) </span>
+<span class='curline'><a href='../S/967.html#L4736'>pgsql</a>            4736 ext/pgsql/pgsql.c 	if (PQ_SETNONBLOCKING(pgsql, 1)) {</span>
+<span class='curline'><a href='../S/967.html#L4740'>pgsql</a>            4740 ext/pgsql/pgsql.c 	while ((res = PQgetResult(pgsql))) {</span>
+<span class='curline'><a href='../S/967.html#L4744'>pgsql</a>            4744 ext/pgsql/pgsql.c 	PQ_SETNONBLOCKING(pgsql, 0);</span>
+<span class='curline'><a href='../S/967.html#L4756'>pgsql</a>            4756 ext/pgsql/pgsql.c 	PGconn *pgsql;</span>
+<span class='curline'><a href='../S/967.html#L4764'>pgsql</a>            4764 ext/pgsql/pgsql.c 	ZEND_FETCH_RESOURCE2(pgsql, PGconn *, &amp;pgsql_link, id, "PostgreSQL link", le_link, le_plink);</span>
+<span class='curline'><a href='../S/967.html#L4766'>pgsql</a>            4766 ext/pgsql/pgsql.c 	if (PQ_SETNONBLOCKING(pgsql, 1)) {</span>
+<span class='curline'><a href='../S/967.html#L4772'>pgsql</a>            4772 ext/pgsql/pgsql.c 			PQconsumeInput(pgsql);</span>
+<span class='curline'><a href='../S/967.html#L4773'>pgsql</a>            4773 ext/pgsql/pgsql.c 			Z_LVAL_P(return_value) = PQisBusy(pgsql);</span>
+<span class='curline'><a href='../S/967.html#L4777'>pgsql</a>            4777 ext/pgsql/pgsql.c 			Z_LVAL_P(return_value) = PQrequestCancel(pgsql);</span>
+<span class='curline'><a href='../S/967.html#L4779'>pgsql</a>            4779 ext/pgsql/pgsql.c 			while ((pgsql_result = PQgetResult(pgsql))) {</span>
+<span class='curline'><a href='../S/967.html#L4787'>pgsql</a>            4787 ext/pgsql/pgsql.c 	if (PQ_SETNONBLOCKING(pgsql, 0)) {</span>
+<span class='curline'><a href='../S/967.html#L4810'>pgsql</a>            4810 ext/pgsql/pgsql.c static int _php_pgsql_link_has_results(PGconn *pgsql)</span>
+<span class='curline'><a href='../S/967.html#L4813'>pgsql</a>            4813 ext/pgsql/pgsql.c 	while ((result = PQgetResult(pgsql))) {</span>
+<span class='curline'><a href='../S/967.html#L4828'>pgsql</a>            4828 ext/pgsql/pgsql.c 	PGconn *pgsql;</span>
+<span class='curline'><a href='../S/967.html#L4836'>pgsql</a>            4836 ext/pgsql/pgsql.c 	ZEND_FETCH_RESOURCE2(pgsql, PGconn *, &amp;pgsql_link, id, "PostgreSQL link", le_link, le_plink);</span>
+<span class='curline'><a href='../S/967.html#L4838'>pgsql</a>            4838 ext/pgsql/pgsql.c 	is_non_blocking = PQisnonblocking(pgsql);</span>
+<span class='curline'><a href='../S/967.html#L4840'>pgsql</a>            4840 ext/pgsql/pgsql.c 	if (is_non_blocking == 0 &amp;&amp; PQ_SETNONBLOCKING(pgsql, 1) == -1) {</span>
+<span class='curline'><a href='../S/967.html#L4845'>pgsql</a>            4845 ext/pgsql/pgsql.c 	if (_php_pgsql_link_has_results(pgsql)) {</span>
+<span class='curline'><a href='../S/967.html#L4851'>pgsql</a>            4851 ext/pgsql/pgsql.c 		if (!PQsendQuery(pgsql, query)) {</span>
+<span class='curline'><a href='../S/967.html#L4854'>pgsql</a>            4854 ext/pgsql/pgsql.c 		ret = PQflush(pgsql);</span>
+<span class='curline'><a href='../S/967.html#L4856'>pgsql</a>            4856 ext/pgsql/pgsql.c 		if (!PQsendQuery(pgsql, query)) {</span>
+<span class='curline'><a href='../S/967.html#L4857'>pgsql</a>            4857 ext/pgsql/pgsql.c 			if ((PGG(auto_reset_persistent) &amp; 2) &amp;&amp; PQstatus(pgsql) != CONNECTION_OK) {</span>
+<span class='curline'><a href='../S/967.html#L4858'>pgsql</a>            4858 ext/pgsql/pgsql.c 				PQreset(pgsql);</span>
+<span class='curline'><a href='../S/967.html#L4860'>pgsql</a>            4860 ext/pgsql/pgsql.c 			if (!PQsendQuery(pgsql, query)) {</span>
+<span class='curline'><a href='../S/967.html#L4866'>pgsql</a>            4866 ext/pgsql/pgsql.c 		while ((ret = PQflush(pgsql))) {</span>
+<span class='curline'><a href='../S/967.html#L4874'>pgsql</a>            4874 ext/pgsql/pgsql.c 		if (PQ_SETNONBLOCKING(pgsql, 0)) {</span>
+<span class='curline'><a href='../S/967.html#L4899'>pgsql</a>            4899 ext/pgsql/pgsql.c 	PGconn *pgsql;</span>
+<span class='curline'><a href='../S/967.html#L4911'>pgsql</a>            4911 ext/pgsql/pgsql.c 	ZEND_FETCH_RESOURCE2(pgsql, PGconn *, &amp;pgsql_link, id, "PostgreSQL link", le_link, le_plink);</span>
+<span class='curline'><a href='../S/967.html#L4913'>pgsql</a>            4913 ext/pgsql/pgsql.c 	is_non_blocking = PQisnonblocking(pgsql);</span>
+<span class='curline'><a href='../S/967.html#L4915'>pgsql</a>            4915 ext/pgsql/pgsql.c 	if (is_non_blocking == 0 &amp;&amp; PQ_SETNONBLOCKING(pgsql, 1) == -1) {</span>
+<span class='curline'><a href='../S/967.html#L4920'>pgsql</a>            4920 ext/pgsql/pgsql.c 	if (_php_pgsql_link_has_results(pgsql)) {</span>
+<span class='curline'><a href='../S/967.html#L4958'>pgsql</a>            4958 ext/pgsql/pgsql.c 	if (PQsendQueryParams(pgsql, query, num_params, NULL, (const char * const *)params, NULL, NULL, 0)) {</span>
+<span class='curline'><a href='../S/967.html#L4964'>pgsql</a>            4964 ext/pgsql/pgsql.c 		if ((PGG(auto_reset_persistent) &amp; 2) &amp;&amp; PQstatus(pgsql) != CONNECTION_OK) {</span>
+<span class='curline'><a href='../S/967.html#L4965'>pgsql</a>            4965 ext/pgsql/pgsql.c 			PQreset(pgsql);</span>
+<span class='curline'><a href='../S/967.html#L4967'>pgsql</a>            4967 ext/pgsql/pgsql.c 		if (!PQsendQueryParams(pgsql, query, num_params, NULL, (const char * const *)params, NULL, NULL, 0)) {</span>
+<span class='curline'><a href='../S/967.html#L4974'>pgsql</a>            4974 ext/pgsql/pgsql.c 		ret = PQflush(pgsql);</span>
+<span class='curline'><a href='../S/967.html#L4977'>pgsql</a>            4977 ext/pgsql/pgsql.c 		while ((ret = PQflush(pgsql))) {</span>
+<span class='curline'><a href='../S/967.html#L4985'>pgsql</a>            4985 ext/pgsql/pgsql.c 		if (PQ_SETNONBLOCKING(pgsql, 0) != 0) {</span>
+<span class='curline'><a href='../S/967.html#L5009'>pgsql</a>            5009 ext/pgsql/pgsql.c 	PGconn *pgsql;</span>
+<span class='curline'><a href='../S/967.html#L5021'>pgsql</a>            5021 ext/pgsql/pgsql.c 	ZEND_FETCH_RESOURCE2(pgsql, PGconn *, &amp;pgsql_link, id, "PostgreSQL link", le_link, le_plink);</span>
+<span class='curline'><a href='../S/967.html#L5023'>pgsql</a>            5023 ext/pgsql/pgsql.c 	is_non_blocking = PQisnonblocking(pgsql);</span>
+<span class='curline'><a href='../S/967.html#L5025'>pgsql</a>            5025 ext/pgsql/pgsql.c 	if (is_non_blocking == 0 &amp;&amp; PQ_SETNONBLOCKING(pgsql, 1) == -1) {</span>
+<span class='curline'><a href='../S/967.html#L5030'>pgsql</a>            5030 ext/pgsql/pgsql.c 	if (_php_pgsql_link_has_results(pgsql)) {</span>
+<span class='curline'><a href='../S/967.html#L5035'>pgsql</a>            5035 ext/pgsql/pgsql.c 	if (!PQsendPrepare(pgsql, stmtname, query, 0, NULL)) {</span>
+<span class='curline'><a href='../S/967.html#L5039'>pgsql</a>            5039 ext/pgsql/pgsql.c 			if ((PGG(auto_reset_persistent) &amp; 2) &amp;&amp; PQstatus(pgsql) != CONNECTION_OK) {</span>
+<span class='curline'><a href='../S/967.html#L5040'>pgsql</a>            5040 ext/pgsql/pgsql.c 				PQreset(pgsql);</span>
+<span class='curline'><a href='../S/967.html#L5042'>pgsql</a>            5042 ext/pgsql/pgsql.c 			if (!PQsendPrepare(pgsql, stmtname, query, 0, NULL)) {</span>
+<span class='curline'><a href='../S/967.html#L5049'>pgsql</a>            5049 ext/pgsql/pgsql.c 		ret = PQflush(pgsql);</span>
+<span class='curline'><a href='../S/967.html#L5052'>pgsql</a>            5052 ext/pgsql/pgsql.c 		while ((ret = PQflush(pgsql))) {</span>
+<span class='curline'><a href='../S/967.html#L5059'>pgsql</a>            5059 ext/pgsql/pgsql.c 		if (PQ_SETNONBLOCKING(pgsql, 0) != 0) {</span>
+<span class='curline'><a href='../S/967.html#L5086'>pgsql</a>            5086 ext/pgsql/pgsql.c 	PGconn *pgsql;</span>
+<span class='curline'><a href='../S/967.html#L5098'>pgsql</a>            5098 ext/pgsql/pgsql.c 	ZEND_FETCH_RESOURCE2(pgsql, PGconn *, &amp;pgsql_link, id, "PostgreSQL link", le_link, le_plink);</span>
+<span class='curline'><a href='../S/967.html#L5100'>pgsql</a>            5100 ext/pgsql/pgsql.c 	is_non_blocking = PQisnonblocking(pgsql);</span>
+<span class='curline'><a href='../S/967.html#L5102'>pgsql</a>            5102 ext/pgsql/pgsql.c 	if (is_non_blocking == 0 &amp;&amp; PQ_SETNONBLOCKING(pgsql, 1) == -1) {</span>
+<span class='curline'><a href='../S/967.html#L5107'>pgsql</a>            5107 ext/pgsql/pgsql.c 	if (_php_pgsql_link_has_results(pgsql)) {</span>
+<span class='curline'><a href='../S/967.html#L5145'>pgsql</a>            5145 ext/pgsql/pgsql.c 	if (PQsendQueryPrepared(pgsql, stmtname, num_params, (const char * const *)params, NULL, NULL, 0)) {</span>
+<span class='curline'><a href='../S/967.html#L5151'>pgsql</a>            5151 ext/pgsql/pgsql.c 		if ((PGG(auto_reset_persistent) &amp; 2) &amp;&amp; PQstatus(pgsql) != CONNECTION_OK) {</span>
+<span class='curline'><a href='../S/967.html#L5152'>pgsql</a>            5152 ext/pgsql/pgsql.c 			PQreset(pgsql);</span>
+<span class='curline'><a href='../S/967.html#L5154'>pgsql</a>            5154 ext/pgsql/pgsql.c 		if (!PQsendQueryPrepared(pgsql, stmtname, num_params, (const char * const *)params, NULL, NULL, 0)) {</span>
+<span class='curline'><a href='../S/967.html#L5161'>pgsql</a>            5161 ext/pgsql/pgsql.c 		ret = PQflush(pgsql);</span>
+<span class='curline'><a href='../S/967.html#L5164'>pgsql</a>            5164 ext/pgsql/pgsql.c 		while ((ret = PQflush(pgsql))) {</span>
+<span class='curline'><a href='../S/967.html#L5171'>pgsql</a>            5171 ext/pgsql/pgsql.c 		if (PQ_SETNONBLOCKING(pgsql, 0) != 0) {</span>
+<span class='curline'><a href='../S/967.html#L5193'>pgsql</a>            5193 ext/pgsql/pgsql.c 	PGconn *pgsql;</span>
+<span class='curline'><a href='../S/967.html#L5201'>pgsql</a>            5201 ext/pgsql/pgsql.c 	ZEND_FETCH_RESOURCE2(pgsql, PGconn *, &amp;pgsql_link, id, "PostgreSQL link", le_link, le_plink);</span>
+<span class='curline'><a href='../S/967.html#L5203'>pgsql</a>            5203 ext/pgsql/pgsql.c 	pgsql_result = PQgetResult(pgsql);</span>
+<span class='curline'><a href='../S/967.html#L5209'>pgsql</a>            5209 ext/pgsql/pgsql.c 	pg_result-&gt;conn = pgsql;</span>
+<span class='curline'><a href='../S/967.html#L5256'>pgsql</a>            5256 ext/pgsql/pgsql.c 	PGconn *pgsql;</span>
+<span class='curline'><a href='../S/967.html#L5264'>pgsql</a>            5264 ext/pgsql/pgsql.c 	ZEND_FETCH_RESOURCE2(pgsql, PGconn *, &amp;pgsql_link, id, "PostgreSQL link", le_link, le_plink);</span>
+<span class='curline'><a href='../S/967.html#L5271'>pgsql</a>            5271 ext/pgsql/pgsql.c 	PQconsumeInput(pgsql);</span>
+<span class='curline'><a href='../S/967.html#L5272'>pgsql</a>            5272 ext/pgsql/pgsql.c 	pgsql_notify = PQnotifies(pgsql);</span>
+<span class='curline'><a href='../S/967.html#L5282'>pgsql</a>            5282 ext/pgsql/pgsql.c 		if (PQprotocolVersion(pgsql) &gt;= 3 &amp;&amp; atof(PQparameterStatus(pgsql, "server_version")) &gt;= 9.0) {</span>
+<span class='curline'><a href='../S/967.html#L5295'>pgsql</a>            5295 ext/pgsql/pgsql.c 		if (PQprotocolVersion(pgsql) &gt;= 3 &amp;&amp; atof(PQparameterStatus(pgsql, "server_version")) &gt;= 9.0) {</span>
+<span class='curline'><a href='../S/967.html#L5314'>pgsql</a>            5314 ext/pgsql/pgsql.c 	PGconn *pgsql;</span>
+<span class='curline'><a href='../S/967.html#L5321'>pgsql</a>            5321 ext/pgsql/pgsql.c 	ZEND_FETCH_RESOURCE2(pgsql, PGconn *, &amp;pgsql_link, id, "PostgreSQL link", le_link, le_plink);</span>
+<span class='curline'><a href='../S/967.html#L5323'>pgsql</a>            5323 ext/pgsql/pgsql.c 	RETURN_LONG(PQbackendPID(pgsql));</span>
+<span class='curline'><a href='../S/967.html#L5349'>pgsql</a>            5349 ext/pgsql/pgsql.c 	PGconn *pgsql = (PGconn *) stream-&gt;abstract;</span>
+<span class='curline'><a href='../S/967.html#L5352'>pgsql</a>            5352 ext/pgsql/pgsql.c 			return PQ_SETNONBLOCKING(pgsql, value);</span>
+<span class='curline'><a href='../S/967.html#L5360'>pgsql</a>            5360 ext/pgsql/pgsql.c 	PGconn *pgsql = (PGconn *) stream-&gt;abstract;</span>
+<span class='curline'><a href='../S/967.html#L5368'>pgsql</a>            5368 ext/pgsql/pgsql.c 				fd_number = PQsocket(pgsql);</span>
+<span class='curline'><a href='../S/967.html#L5387'>pgsql</a>            5387 ext/pgsql/pgsql.c 	PGconn *pgsql;</span>
+<span class='curline'><a href='../S/967.html#L5394'>pgsql</a>            5394 ext/pgsql/pgsql.c 	ZEND_FETCH_RESOURCE2(pgsql, PGconn *, &amp;pgsql_link, id, "PostgreSQL link", le_link, le_plink);</span>
+<span class='curline'><a href='../S/967.html#L5396'>pgsql</a>            5396 ext/pgsql/pgsql.c 	stream = php_stream_alloc(&amp;php_stream_pgsql_fd_ops, pgsql, NULL, "r");</span>
+<span class='curline'><a href='../S/967.html#L5413'>pgsql</a>            5413 ext/pgsql/pgsql.c 	PGconn *pgsql;</span>
+<span class='curline'><a href='../S/967.html#L5419'>pgsql</a>            5419 ext/pgsql/pgsql.c 	ZEND_FETCH_RESOURCE2(pgsql, PGconn *, &amp;pgsql_link, id, "PostgreSQL link", le_link, le_plink);</span>
+<span class='curline'><a href='../S/967.html#L5421'>pgsql</a>            5421 ext/pgsql/pgsql.c 	RETURN_BOOL(PQconsumeInput(pgsql));</span>
+<span class='curline'><a href='../S/967.html#L5431'>pgsql</a>            5431 ext/pgsql/pgsql.c 	PGconn *pgsql;</span>
+<span class='curline'><a href='../S/967.html#L5439'>pgsql</a>            5439 ext/pgsql/pgsql.c 	ZEND_FETCH_RESOURCE2(pgsql, PGconn *, &amp;pgsql_link, id, "PostgreSQL link", le_link, le_plink);</span>
+<span class='curline'><a href='../S/967.html#L5441'>pgsql</a>            5441 ext/pgsql/pgsql.c 	is_non_blocking = PQisnonblocking(pgsql);</span>
+<span class='curline'><a href='../S/967.html#L5443'>pgsql</a>            5443 ext/pgsql/pgsql.c 	if (is_non_blocking == 0 &amp;&amp; PQ_SETNONBLOCKING(pgsql, 1) == -1) {</span>
+<span class='curline'><a href='../S/967.html#L5448'>pgsql</a>            5448 ext/pgsql/pgsql.c 	ret = PQflush(pgsql);</span>
+<span class='curline'><a href='../S/967.html#L5450'>pgsql</a>            5450 ext/pgsql/pgsql.c 	if (is_non_blocking == 0 &amp;&amp; PQ_SETNONBLOCKING(pgsql, 0) == -1) {</span>
+<span class='curline'><a href='../S/967.html#L5586'>pgsql</a>            5586 ext/pgsql/pgsql.c 	PGconn *pgsql;</span>
+<span class='curline'><a href='../S/967.html#L5594'>pgsql</a>            5594 ext/pgsql/pgsql.c 	ZEND_FETCH_RESOURCE2(pgsql, PGconn *, &amp;pgsql_link, id, "PostgreSQL link", le_link, le_plink);</span>
+<span class='curline'><a href='../S/967.html#L5597'>pgsql</a>            5597 ext/pgsql/pgsql.c 	if (php_pgsql_meta_data(pgsql, table_name, return_value, extended TSRMLS_CC) == FAILURE) {</span>
+<span class='curline'><a href='../S/968.html#L62'>pgsql</a>              62 ext/pgsql/php_pgsql.h PHP_MINIT_FUNCTION(pgsql);</span>
+<span class='curline'><a href='../S/968.html#L63'>pgsql</a>              63 ext/pgsql/php_pgsql.h PHP_MSHUTDOWN_FUNCTION(pgsql);</span>
+<span class='curline'><a href='../S/968.html#L64'>pgsql</a>              64 ext/pgsql/php_pgsql.h PHP_RINIT_FUNCTION(pgsql);</span>
+<span class='curline'><a href='../S/968.html#L65'>pgsql</a>              65 ext/pgsql/php_pgsql.h PHP_RSHUTDOWN_FUNCTION(pgsql);</span>
+<span class='curline'><a href='../S/968.html#L66'>pgsql</a>              66 ext/pgsql/php_pgsql.h PHP_MINFO_FUNCTION(pgsql);</span>
+<span class='curline'><a href='../S/968.html#L225'>pgsql</a>             225 ext/pgsql/php_pgsql.h static char *get_field_name(PGconn *pgsql, Oid oid, HashTable *list TSRMLS_DC);</span>
+<span class='curline'><a href='../S/968.html#L311'>pgsql</a>             311 ext/pgsql/php_pgsql.h ZEND_BEGIN_MODULE_GLOBALS(pgsql)</span>
+<span class='curline'><a href='../S/968.html#L320'>pgsql</a>             320 ext/pgsql/php_pgsql.h ZEND_END_MODULE_GLOBALS(pgsql)</span>
+<span class='curline'><a href='../S/968.html#L322'>pgsql</a>             322 ext/pgsql/php_pgsql.h ZEND_EXTERN_MODULE_GLOBALS(pgsql)</span>
+</pre>
+</body>
+</html>

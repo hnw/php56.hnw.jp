@@ -1,0 +1,157 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>dim</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/1655.html#L811'>dim</a>               811 Zend/zend_compile.c void fetch_array_dim(znode *result, const znode *parent, const znode *dim TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1655.html#L833'>dim</a>               833 Zend/zend_compile.c 	SET_NODE(opline.op2, dim);</span>
+<span class='curline'><a href='../S/1656.html#L478'>dim</a>               478 Zend/zend_compile.h void fetch_array_dim(znode *result, const znode *parent, const znode *dim TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1669.html#L1031'>dim</a>              1031 Zend/zend_execute.c static inline zval **zend_fetch_dimension_address_inner(HashTable *ht, const zval *dim, int dim_type, int type TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1669.html#L1038'>dim</a>              1038 Zend/zend_execute.c 	switch (dim-&gt;type) {</span>
+<span class='curline'><a href='../S/1669.html#L1047'>dim</a>              1047 Zend/zend_execute.c 			offset_key = dim-&gt;value.str.val;</span>
+<span class='curline'><a href='../S/1669.html#L1048'>dim</a>              1048 Zend/zend_execute.c 			offset_key_length = dim-&gt;value.str.len;</span>
+<span class='curline'><a href='../S/1669.html#L1051'>dim</a>              1051 Zend/zend_execute.c 				hval = Z_HASH_P(dim);</span>
+<span class='curline'><a href='../S/1669.html#L1080'>dim</a>              1080 Zend/zend_execute.c 			hval = zend_dval_to_lval(Z_DVAL_P(dim));</span>
+<span class='curline'><a href='../S/1669.html#L1083'>dim</a>              1083 Zend/zend_execute.c 			zend_error(E_STRICT, "Resource ID#%ld used as offset, casting to integer (%ld)", Z_LVAL_P(dim), Z_LVAL_P(dim));</span>
+<span class='curline'><a href='../S/1669.html#L1087'>dim</a>              1087 Zend/zend_execute.c 			hval = Z_LVAL_P(dim);</span>
+<span class='curline'><a href='../S/1669.html#L1120'>dim</a>              1120 Zend/zend_execute.c static void zend_fetch_dimension_address(temp_variable *result, zval **container_ptr, zval *dim, int dim_type, int type TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1669.html#L1133'>dim</a>              1133 Zend/zend_execute.c 			if (dim == NULL) {</span>
+<span class='curline'><a href='../S/1669.html#L1143'>dim</a>              1143 Zend/zend_execute.c 				retval = zend_fetch_dimension_address_inner(Z_ARRVAL_P(container), dim, dim_type, type TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1669.html#L1177'>dim</a>              1177 Zend/zend_execute.c 				if (dim == NULL) {</span>
+<span class='curline'><a href='../S/1669.html#L1185'>dim</a>              1185 Zend/zend_execute.c 				if (Z_TYPE_P(dim) != IS_LONG) {</span>
+<span class='curline'><a href='../S/1669.html#L1187'>dim</a>              1187 Zend/zend_execute.c 					switch(Z_TYPE_P(dim)) {</span>
+<span class='curline'><a href='../S/1669.html#L1190'>dim</a>              1190 Zend/zend_execute.c 							if (IS_LONG == is_numeric_string(Z_STRVAL_P(dim), Z_STRLEN_P(dim), NULL, NULL, -1)) {</span>
+<span class='curline'><a href='../S/1669.html#L1194'>dim</a>              1194 Zend/zend_execute.c 								zend_error(E_WARNING, "Illegal string offset '%s'", dim-&gt;value.str.val);</span>
+<span class='curline'><a href='../S/1669.html#L1208'>dim</a>              1208 Zend/zend_execute.c 					tmp = *dim;</span>
+<span class='curline'><a href='../S/1669.html#L1211'>dim</a>              1211 Zend/zend_execute.c 					dim = &amp;tmp;</span>
+<span class='curline'><a href='../S/1669.html#L1216'>dim</a>              1216 Zend/zend_execute.c 				result-&gt;str_offset.offset = Z_LVAL_P(dim);</span>
+<span class='curline'><a href='../S/1669.html#L1229'>dim</a>              1229 Zend/zend_execute.c 					zval *orig = dim;</span>
+<span class='curline'><a href='../S/1669.html#L1230'>dim</a>              1230 Zend/zend_execute.c 					MAKE_REAL_ZVAL_PTR(dim);</span>
+<span class='curline'><a href='../S/1669.html#L1233'>dim</a>              1233 Zend/zend_execute.c 				overloaded_result = Z_OBJ_HT_P(container)-&gt;read_dimension(container, dim, type TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1669.html#L1258'>dim</a>              1258 Zend/zend_execute.c 					zval_ptr_dtor(&amp;dim);</span>
+<span class='curline'><a href='../S/1669.html#L1284'>dim</a>              1284 Zend/zend_execute.c static void zend_fetch_dimension_address_read(temp_variable *result, zval *container, zval *dim, int dim_type, int type TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1669.html#L1291'>dim</a>              1291 Zend/zend_execute.c 			retval = zend_fetch_dimension_address_inner(Z_ARRVAL_P(container), dim, dim_type, type TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1669.html#L1305'>dim</a>              1305 Zend/zend_execute.c 				if (Z_TYPE_P(dim) != IS_LONG) {</span>
+<span class='curline'><a href='../S/1669.html#L1306'>dim</a>              1306 Zend/zend_execute.c 					switch(Z_TYPE_P(dim)) {</span>
+<span class='curline'><a href='../S/1669.html#L1309'>dim</a>              1309 Zend/zend_execute.c 							if (IS_LONG == is_numeric_string(Z_STRVAL_P(dim), Z_STRLEN_P(dim), NULL, NULL, -1)) {</span>
+<span class='curline'><a href='../S/1669.html#L1313'>dim</a>              1313 Zend/zend_execute.c 								zend_error(E_WARNING, "Illegal string offset '%s'", dim-&gt;value.str.val);</span>
+<span class='curline'><a href='../S/1669.html#L1328'>dim</a>              1328 Zend/zend_execute.c 					ZVAL_COPY_VALUE(&amp;tmp, dim);</span>
+<span class='curline'><a href='../S/1669.html#L1331'>dim</a>              1331 Zend/zend_execute.c 					dim = &amp;tmp;</span>
+<span class='curline'><a href='../S/1669.html#L1338'>dim</a>              1338 Zend/zend_execute.c 				if (Z_LVAL_P(dim) &lt; 0 || Z_STRLEN_P(container) &lt;= Z_LVAL_P(dim)) {</span>
+<span class='curline'><a href='../S/1669.html#L1340'>dim</a>              1340 Zend/zend_execute.c 						zend_error(E_NOTICE, "Uninitialized string offset: %ld", Z_LVAL_P(dim));</span>
+<span class='curline'><a href='../S/1669.html#L1346'>dim</a>              1346 Zend/zend_execute.c 					Z_STRVAL_P(ptr)[0] = Z_STRVAL_P(container)[Z_LVAL_P(dim)];</span>
+<span class='curline'><a href='../S/1669.html#L1362'>dim</a>              1362 Zend/zend_execute.c 					zval *orig = dim;</span>
+<span class='curline'><a href='../S/1669.html#L1363'>dim</a>              1363 Zend/zend_execute.c 					MAKE_REAL_ZVAL_PTR(dim);</span>
+<span class='curline'><a href='../S/1669.html#L1366'>dim</a>              1366 Zend/zend_execute.c 				overloaded_result = Z_OBJ_HT_P(container)-&gt;read_dimension(container, dim, type TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1669.html#L1378'>dim</a>              1378 Zend/zend_execute.c 					zval_ptr_dtor(&amp;dim);</span>
+<span class='curline'><a href='../S/1669.html#L1390'>dim</a>              1390 Zend/zend_execute.c ZEND_API void zend_fetch_dimension_by_zval(zval **result, zval *container, zval *dim TSRMLS_DC) {</span>
+<span class='curline'><a href='../S/1669.html#L1392'>dim</a>              1392 Zend/zend_execute.c 	zend_fetch_dimension_address_read(&amp;tmp, container, dim, IS_TMP_VAR, BP_VAR_R TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1670.html#L365'>dim</a>               365 Zend/zend_execute.h ZEND_API void zend_fetch_dimension_by_zval(zval **result, zval *container, zval *dim TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1747.html#L463'>dim</a>               463 Zend/zend_vm_def.h 					zval *dim = GET_OP2_ZVAL_PTR(BP_VAR_R);</span>
+<span class='curline'><a href='../S/1747.html#L465'>dim</a>               465 Zend/zend_vm_def.h 					zend_fetch_dimension_address(&amp;EX_T((opline+1)-&gt;op2.var), container, dim, OP2_TYPE, BP_VAR_RW TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1747.html#L1656'>dim</a>              1656 Zend/zend_vm_def.h 		zval *dim = GET_OP2_ZVAL_PTR(BP_VAR_R);</span>
+<span class='curline'><a href='../S/1747.html#L1659'>dim</a>              1659 Zend/zend_vm_def.h 		zend_fetch_dimension_address(&amp;EX_T((opline+1)-&gt;op2.var), object_ptr, dim, OP2_TYPE, BP_VAR_W TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L14639'>dim</a>              14639 Zend/zend_vm_execute.h 					zval *dim = opline-&gt;op2.zv;</span>
+<span class='curline'><a href='../S/1748.html#L14641'>dim</a>              14641 Zend/zend_vm_execute.h 					zend_fetch_dimension_address(&amp;EX_T((opline+1)-&gt;op2.var), container, dim, IS_CONST, BP_VAR_RW TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L15599'>dim</a>              15599 Zend/zend_vm_execute.h 		zval *dim = opline-&gt;op2.zv;</span>
+<span class='curline'><a href='../S/1748.html#L15602'>dim</a>              15602 Zend/zend_vm_execute.h 		zend_fetch_dimension_address(&amp;EX_T((opline+1)-&gt;op2.var), object_ptr, dim, IS_CONST, BP_VAR_W TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L17152'>dim</a>              17152 Zend/zend_vm_execute.h 					zval *dim = _get_zval_ptr_tmp(opline-&gt;op2.var, execute_data, &amp;free_op2 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L17154'>dim</a>              17154 Zend/zend_vm_execute.h 					zend_fetch_dimension_address(&amp;EX_T((opline+1)-&gt;op2.var), container, dim, IS_TMP_VAR, BP_VAR_RW TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L17951'>dim</a>              17951 Zend/zend_vm_execute.h 		zval *dim = _get_zval_ptr_tmp(opline-&gt;op2.var, execute_data, &amp;free_op2 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L17954'>dim</a>              17954 Zend/zend_vm_execute.h 		zend_fetch_dimension_address(&amp;EX_T((opline+1)-&gt;op2.var), object_ptr, dim, IS_TMP_VAR, BP_VAR_W TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L19252'>dim</a>              19252 Zend/zend_vm_execute.h 					zval *dim = _get_zval_ptr_var(opline-&gt;op2.var, execute_data, &amp;free_op2 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L19254'>dim</a>              19254 Zend/zend_vm_execute.h 					zend_fetch_dimension_address(&amp;EX_T((opline+1)-&gt;op2.var), container, dim, IS_VAR, BP_VAR_RW TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L20213'>dim</a>              20213 Zend/zend_vm_execute.h 		zval *dim = _get_zval_ptr_var(opline-&gt;op2.var, execute_data, &amp;free_op2 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L20216'>dim</a>              20216 Zend/zend_vm_execute.h 		zend_fetch_dimension_address(&amp;EX_T((opline+1)-&gt;op2.var), object_ptr, dim, IS_VAR, BP_VAR_W TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L21458'>dim</a>              21458 Zend/zend_vm_execute.h 					zval *dim = NULL;</span>
+<span class='curline'><a href='../S/1748.html#L21460'>dim</a>              21460 Zend/zend_vm_execute.h 					zend_fetch_dimension_address(&amp;EX_T((opline+1)-&gt;op2.var), container, dim, IS_UNUSED, BP_VAR_RW TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L21858'>dim</a>              21858 Zend/zend_vm_execute.h 		zval *dim = NULL;</span>
+<span class='curline'><a href='../S/1748.html#L21861'>dim</a>              21861 Zend/zend_vm_execute.h 		zend_fetch_dimension_address(&amp;EX_T((opline+1)-&gt;op2.var), object_ptr, dim, IS_UNUSED, BP_VAR_W TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L22888'>dim</a>              22888 Zend/zend_vm_execute.h 					zval *dim = _get_zval_ptr_cv_BP_VAR_R(execute_data, opline-&gt;op2.var TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L22890'>dim</a>              22890 Zend/zend_vm_execute.h 					zend_fetch_dimension_address(&amp;EX_T((opline+1)-&gt;op2.var), container, dim, IS_CV, BP_VAR_RW TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L23686'>dim</a>              23686 Zend/zend_vm_execute.h 		zval *dim = _get_zval_ptr_cv_BP_VAR_R(execute_data, opline-&gt;op2.var TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L23689'>dim</a>              23689 Zend/zend_vm_execute.h 		zend_fetch_dimension_address(&amp;EX_T((opline+1)-&gt;op2.var), object_ptr, dim, IS_CV, BP_VAR_W TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L24849'>dim</a>              24849 Zend/zend_vm_execute.h 					zval *dim = opline-&gt;op2.zv;</span>
+<span class='curline'><a href='../S/1748.html#L24851'>dim</a>              24851 Zend/zend_vm_execute.h 					zend_fetch_dimension_address(&amp;EX_T((opline+1)-&gt;op2.var), container, dim, IS_CONST, BP_VAR_RW TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L26262'>dim</a>              26262 Zend/zend_vm_execute.h 					zval *dim = _get_zval_ptr_tmp(opline-&gt;op2.var, execute_data, &amp;free_op2 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L26264'>dim</a>              26264 Zend/zend_vm_execute.h 					zend_fetch_dimension_address(&amp;EX_T((opline+1)-&gt;op2.var), container, dim, IS_TMP_VAR, BP_VAR_RW TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L27584'>dim</a>              27584 Zend/zend_vm_execute.h 					zval *dim = _get_zval_ptr_var(opline-&gt;op2.var, execute_data, &amp;free_op2 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L27586'>dim</a>              27586 Zend/zend_vm_execute.h 					zend_fetch_dimension_address(&amp;EX_T((opline+1)-&gt;op2.var), container, dim, IS_VAR, BP_VAR_RW TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L28907'>dim</a>              28907 Zend/zend_vm_execute.h 					zval *dim = NULL;</span>
+<span class='curline'><a href='../S/1748.html#L28909'>dim</a>              28909 Zend/zend_vm_execute.h 					zend_fetch_dimension_address(&amp;EX_T((opline+1)-&gt;op2.var), container, dim, IS_UNUSED, BP_VAR_RW TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L29338'>dim</a>              29338 Zend/zend_vm_execute.h 					zval *dim = _get_zval_ptr_cv_BP_VAR_R(execute_data, opline-&gt;op2.var TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L29340'>dim</a>              29340 Zend/zend_vm_execute.h 					zend_fetch_dimension_address(&amp;EX_T((opline+1)-&gt;op2.var), container, dim, IS_CV, BP_VAR_RW TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L32173'>dim</a>              32173 Zend/zend_vm_execute.h 					zval *dim = opline-&gt;op2.zv;</span>
+<span class='curline'><a href='../S/1748.html#L32175'>dim</a>              32175 Zend/zend_vm_execute.h 					zend_fetch_dimension_address(&amp;EX_T((opline+1)-&gt;op2.var), container, dim, IS_CONST, BP_VAR_RW TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L33128'>dim</a>              33128 Zend/zend_vm_execute.h 		zval *dim = opline-&gt;op2.zv;</span>
+<span class='curline'><a href='../S/1748.html#L33131'>dim</a>              33131 Zend/zend_vm_execute.h 		zend_fetch_dimension_address(&amp;EX_T((opline+1)-&gt;op2.var), object_ptr, dim, IS_CONST, BP_VAR_W TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L34457'>dim</a>              34457 Zend/zend_vm_execute.h 					zval *dim = _get_zval_ptr_tmp(opline-&gt;op2.var, execute_data, &amp;free_op2 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L34459'>dim</a>              34459 Zend/zend_vm_execute.h 					zend_fetch_dimension_address(&amp;EX_T((opline+1)-&gt;op2.var), container, dim, IS_TMP_VAR, BP_VAR_RW TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L35251'>dim</a>              35251 Zend/zend_vm_execute.h 		zval *dim = _get_zval_ptr_tmp(opline-&gt;op2.var, execute_data, &amp;free_op2 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L35254'>dim</a>              35254 Zend/zend_vm_execute.h 		zend_fetch_dimension_address(&amp;EX_T((opline+1)-&gt;op2.var), object_ptr, dim, IS_TMP_VAR, BP_VAR_W TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L36420'>dim</a>              36420 Zend/zend_vm_execute.h 					zval *dim = _get_zval_ptr_var(opline-&gt;op2.var, execute_data, &amp;free_op2 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L36422'>dim</a>              36422 Zend/zend_vm_execute.h 					zend_fetch_dimension_address(&amp;EX_T((opline+1)-&gt;op2.var), container, dim, IS_VAR, BP_VAR_RW TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L37376'>dim</a>              37376 Zend/zend_vm_execute.h 		zval *dim = _get_zval_ptr_var(opline-&gt;op2.var, execute_data, &amp;free_op2 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L37379'>dim</a>              37379 Zend/zend_vm_execute.h 		zend_fetch_dimension_address(&amp;EX_T((opline+1)-&gt;op2.var), object_ptr, dim, IS_VAR, BP_VAR_W TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L38488'>dim</a>              38488 Zend/zend_vm_execute.h 					zval *dim = NULL;</span>
+<span class='curline'><a href='../S/1748.html#L38490'>dim</a>              38490 Zend/zend_vm_execute.h 					zend_fetch_dimension_address(&amp;EX_T((opline+1)-&gt;op2.var), container, dim, IS_UNUSED, BP_VAR_RW TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L38887'>dim</a>              38887 Zend/zend_vm_execute.h 		zval *dim = NULL;</span>
+<span class='curline'><a href='../S/1748.html#L38890'>dim</a>              38890 Zend/zend_vm_execute.h 		zend_fetch_dimension_address(&amp;EX_T((opline+1)-&gt;op2.var), object_ptr, dim, IS_UNUSED, BP_VAR_W TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L39769'>dim</a>              39769 Zend/zend_vm_execute.h 					zval *dim = _get_zval_ptr_cv_BP_VAR_R(execute_data, opline-&gt;op2.var TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L39771'>dim</a>              39771 Zend/zend_vm_execute.h 					zend_fetch_dimension_address(&amp;EX_T((opline+1)-&gt;op2.var), container, dim, IS_CV, BP_VAR_RW TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L40562'>dim</a>              40562 Zend/zend_vm_execute.h 		zval *dim = _get_zval_ptr_cv_BP_VAR_R(execute_data, opline-&gt;op2.var TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L40565'>dim</a>              40565 Zend/zend_vm_execute.h 		zend_fetch_dimension_address(&amp;EX_T((opline+1)-&gt;op2.var), object_ptr, dim, IS_CV, BP_VAR_W TSRMLS_CC);</span>
+<span class='curline'><a href='../S/324.html#L221'>dim</a>               221 ext/interbase/ibase_query.c 		unsigned short dim;</span>
+<span class='curline'><a href='../S/324.html#L302'>dim</a>               302 ext/interbase/ibase_query.c 			for (dim = 0; dim &lt; ar_desc-&gt;array_desc_dimensions; dim++) {</span>
+<span class='curline'><a href='../S/324.html#L303'>dim</a>               303 ext/interbase/ibase_query.c 				ar_size *= 1 + ar_desc-&gt;array_desc_bounds[dim].array_bound_upper</span>
+<span class='curline'><a href='../S/324.html#L304'>dim</a>               304 ext/interbase/ibase_query.c 					-ar_desc-&gt;array_desc_bounds[dim].array_bound_lower;</span>
+<span class='curline'><a href='../S/324.html#L434'>dim</a>               434 ext/interbase/ibase_query.c 	ibase_array *array, int dim TSRMLS_DC)</span>
+<span class='curline'><a href='../S/324.html#L437'>dim</a>               437 ext/interbase/ibase_query.c 	int u_bound = array-&gt;ar_desc.array_desc_bounds[dim].array_bound_upper,</span>
+<span class='curline'><a href='../S/324.html#L438'>dim</a>               438 ext/interbase/ibase_query.c 		l_bound = array-&gt;ar_desc.array_desc_bounds[dim].array_bound_lower,</span>
+<span class='curline'><a href='../S/324.html#L443'>dim</a>               443 ext/interbase/ibase_query.c 	if (dim &lt; array-&gt;ar_desc.array_desc_dimensions) {</span>
+<span class='curline'><a href='../S/324.html#L460'>dim</a>               460 ext/interbase/ibase_query.c 			if (_php_ibase_bind_array(*subval, buf, slice_size, array, dim+1 TSRMLS_CC) == FAILURE)</span>
+<span class='curline'><a href='../S/324.html#L1426'>dim</a>              1426 ext/interbase/ibase_query.c 	ibase_array *ib_array, int dim, int flag TSRMLS_DC)</span>
+<span class='curline'><a href='../S/324.html#L1432'>dim</a>              1432 ext/interbase/ibase_query.c 		u_bound = ib_array-&gt;ar_desc.array_desc_bounds[dim].array_bound_upper,</span>
+<span class='curline'><a href='../S/324.html#L1433'>dim</a>              1433 ext/interbase/ibase_query.c 		l_bound = ib_array-&gt;ar_desc.array_desc_bounds[dim].array_bound_lower,</span>
+<span class='curline'><a href='../S/324.html#L1437'>dim</a>              1437 ext/interbase/ibase_query.c 	if (dim &lt; ib_array-&gt;ar_desc.array_desc_dimensions) { /* array again */</span>
+<span class='curline'><a href='../S/324.html#L1447'>dim</a>              1447 ext/interbase/ibase_query.c 			if (FAILURE == _php_ibase_arr_zval(slice_zval, data, slice_size, ib_array, dim + 1,</span>
+<span class='curline'><a href='../S/1124.html#L106'>dim</a>               106 ext/standard/image.c 	unsigned char dim[5];</span>
+<span class='curline'><a href='../S/1124.html#L111'>dim</a>               111 ext/standard/image.c 	if (php_stream_read(stream, dim, sizeof(dim)) != sizeof(dim))</span>
+<span class='curline'><a href='../S/1124.html#L115'>dim</a>               115 ext/standard/image.c 	result-&gt;width    = (unsigned int)dim[0] | (((unsigned int)dim[1])&lt;&lt;8);</span>
+<span class='curline'><a href='../S/1124.html#L116'>dim</a>               116 ext/standard/image.c 	result-&gt;height   = (unsigned int)dim[2] | (((unsigned int)dim[3])&lt;&lt;8);</span>
+<span class='curline'><a href='../S/1124.html#L117'>dim</a>               117 ext/standard/image.c 	result-&gt;bits     = dim[4]&amp;0x80 ? ((((unsigned int)dim[4])&amp;0x07) + 1) : 0;</span>
+<span class='curline'><a href='../S/1124.html#L129'>dim</a>               129 ext/standard/image.c 	unsigned char dim[8];</span>
+<span class='curline'><a href='../S/1124.html#L134'>dim</a>               134 ext/standard/image.c 	if (php_stream_read(stream, dim, sizeof(dim)) != sizeof(dim))</span>
+<span class='curline'><a href='../S/1124.html#L138'>dim</a>               138 ext/standard/image.c 	result-&gt;height   =  (((unsigned int)dim[0]) &lt;&lt; 24) + (((unsigned int)dim[1]) &lt;&lt; 16) + (((unsigned int)dim[2]) &lt;&lt; 8) + ((unsigned int)dim[3]);</span>
+<span class='curline'><a href='../S/1124.html#L139'>dim</a>               139 ext/standard/image.c 	result-&gt;width    =  (((unsigned int)dim[4]) &lt;&lt; 24) + (((unsigned int)dim[5]) &lt;&lt; 16) + (((unsigned int)dim[6]) &lt;&lt; 8) + ((unsigned int)dim[7]);</span>
+<span class='curline'><a href='../S/1124.html#L150'>dim</a>               150 ext/standard/image.c 	unsigned char dim[16];</span>
+<span class='curline'><a href='../S/1124.html#L156'>dim</a>               156 ext/standard/image.c 	if (php_stream_read(stream, dim, sizeof(dim)) != sizeof(dim))</span>
+<span class='curline'><a href='../S/1124.html#L159'>dim</a>               159 ext/standard/image.c 	size   = (((unsigned int)dim[ 3]) &lt;&lt; 24) + (((unsigned int)dim[ 2]) &lt;&lt; 16) + (((unsigned int)dim[ 1]) &lt;&lt; 8) + ((unsigned int) dim[ 0]);</span>
+<span class='curline'><a href='../S/1124.html#L162'>dim</a>               162 ext/standard/image.c 		result-&gt;width    =  (((unsigned int)dim[ 5]) &lt;&lt; 8) + ((unsigned int) dim[ 4]);</span>
+<span class='curline'><a href='../S/1124.html#L163'>dim</a>               163 ext/standard/image.c 		result-&gt;height   =  (((unsigned int)dim[ 7]) &lt;&lt; 8) + ((unsigned int) dim[ 6]);</span>
+<span class='curline'><a href='../S/1124.html#L164'>dim</a>               164 ext/standard/image.c 		result-&gt;bits     =  ((unsigned int)dim[11]);</span>
+<span class='curline'><a href='../S/1124.html#L167'>dim</a>               167 ext/standard/image.c 		result-&gt;width    =  (((unsigned int)dim[ 7]) &lt;&lt; 24) + (((unsigned int)dim[ 6]) &lt;&lt; 16) + (((unsigned int)dim[ 5]) &lt;&lt; 8) + ((unsigned int) dim[ 4]);</span>
+<span class='curline'><a href='../S/1124.html#L168'>dim</a>               168 ext/standard/image.c 		result-&gt;height   =  (((unsigned int)dim[11]) &lt;&lt; 24) + (((unsigned int)dim[10]) &lt;&lt; 16) + (((unsigned int)dim[ 9]) &lt;&lt; 8) + ((unsigned int) dim[ 8]);</span>
+<span class='curline'><a href='../S/1124.html#L170'>dim</a>               170 ext/standard/image.c 		result-&gt;bits     =  (((unsigned int)dim[15]) &lt;&lt;  8) +  ((unsigned int)dim[14]);</span>
+<span class='curline'><a href='../S/1124.html#L299'>dim</a>               299 ext/standard/image.c 	unsigned char dim[9];</span>
+<span class='curline'><a href='../S/1124.html#L312'>dim</a>               312 ext/standard/image.c 	if((php_stream_read(stream, dim, sizeof(dim))) &lt; sizeof(dim))</span>
+<span class='curline'><a href='../S/1124.html#L316'>dim</a>               316 ext/standard/image.c 	result-&gt;width  = (((unsigned int)dim[0]) &lt;&lt; 24) + (((unsigned int)dim[1]) &lt;&lt; 16) + (((unsigned int)dim[2]) &lt;&lt; 8) + ((unsigned int)dim[3]);</span>
+<span class='curline'><a href='../S/1124.html#L317'>dim</a>               317 ext/standard/image.c 	result-&gt;height = (((unsigned int)dim[4]) &lt;&lt; 24) + (((unsigned int)dim[5]) &lt;&lt; 16) + (((unsigned int)dim[6]) &lt;&lt; 8) + ((unsigned int)dim[7]);</span>
+<span class='curline'><a href='../S/1124.html#L318'>dim</a>               318 ext/standard/image.c 	result-&gt;bits   = (unsigned int)dim[8];</span>
+<span class='curline'><a href='../S/1124.html#L1094'>dim</a>              1094 ext/standard/image.c 	unsigned char dim[16];</span>
+<span class='curline'><a href='../S/1124.html#L1097'>dim</a>              1097 ext/standard/image.c 	if (php_stream_read(stream, dim, 2) != 2)</span>
+<span class='curline'><a href='../S/1124.html#L1100'>dim</a>              1100 ext/standard/image.c 	num_icons = (((unsigned int)dim[1]) &lt;&lt; 8) + ((unsigned int) dim[0]);</span>
+<span class='curline'><a href='../S/1124.html#L1109'>dim</a>              1109 ext/standard/image.c 		if (php_stream_read(stream, dim, sizeof(dim)) != sizeof(dim))</span>
+<span class='curline'><a href='../S/1124.html#L1112'>dim</a>              1112 ext/standard/image.c 		if ((((unsigned int)dim[7]) &lt;&lt;  8) +  ((unsigned int)dim[6]) &gt;= result-&gt;bits)</span>
+<span class='curline'><a href='../S/1124.html#L1114'>dim</a>              1114 ext/standard/image.c 			result-&gt;width    =  (unsigned int)dim[0];</span>
+<span class='curline'><a href='../S/1124.html#L1115'>dim</a>              1115 ext/standard/image.c 			result-&gt;height   =  (unsigned int)dim[1];</span>
+<span class='curline'><a href='../S/1124.html#L1116'>dim</a>              1116 ext/standard/image.c 			result-&gt;bits     =  (((unsigned int)dim[7]) &lt;&lt;  8) +  ((unsigned int)dim[6]);</span>
+</pre>
+</body>
+</html>

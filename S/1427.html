@@ -1,0 +1,666 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>sapi/aolserver/aolserver.c</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<a id='TOP' name='TOP'></a><h2 class='header'><a href='../mains.html'>root</a>/<a href='../files/1875.html'>sapi</a>/<a href='../files/1876.html'>aolserver</a>/aolserver.c</h2>
+<em class='comment'>/* [&lt;][&gt;]<a href='#L89'>[^]</a><a href='#L597'>[v]</a>[top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+<hr />
+<h2 class='header'>DEFINITIONS</h2>
+This source file includes following definitions.
+<ol>
+<li><a href='#L89' title='Defined at 89.'>php_ns_sapi_ub_write</a></li>
+<li><a href='#L114' title='Defined at 114.'>php_ns_sapi_header_handler</a></li>
+<li><a href='#L148' title='Defined at 148.'>php_ns_sapi_send_headers</a></li>
+<li><a href='#L165' title='Defined at 165.'>php_ns_sapi_read_post</a></li>
+<li><a href='#L188' title='Defined at 188.'>php_ns_sapi_read_cookies</a></li>
+<li><a href='#L201' title='Defined at 201.'>php_info_aolserver</a></li>
+<li><a href='#L266' title='Defined at 266.'>PHP_FUNCTION</a></li>
+<li><a href='#L281' title='Defined at 281.'>php_ns_startup</a></li>
+<li><a href='#L304' title='Defined at 304.'>php_ns_sapi_register_variables</a></li>
+<li><a href='#L405' title='Defined at 405.'>php_ns_module_main</a></li>
+<li><a href='#L431' title='Defined at 431.'>php_ns_request_ctor</a></li>
+<li><a href='#L480' title='Defined at 480.'>php_ns_request_dtor</a></li>
+<li><a href='#L494' title='Defined at 494.'>php_ns_request_handler</a></li>
+<li><a href='#L519' title='Defined at 519.'>php_ns_config</a></li>
+<li><a href='#L577' title='Defined at 577.'>php_ns_server_shutdown</a></li>
+<li><a href='#L597' title='Defined at 597.'>Ns_ModuleInit</a></li>
+</ol>
+<hr />
+<pre>
+<a id='L1' name='L1'></a>   1 <em class='comment'>/*</em>
+<a id='L2' name='L2'></a>   2 <em class='comment'>   +----------------------------------------------------------------------+</em>
+<a id='L3' name='L3'></a>   3 <em class='comment'>   | PHP Version 5                                                        |</em>
+<a id='L4' name='L4'></a>   4 <em class='comment'>   +----------------------------------------------------------------------+</em>
+<a id='L5' name='L5'></a>   5 <em class='comment'>   | Copyright (c) 1997-2016 The PHP Group                                |</em>
+<a id='L6' name='L6'></a>   6 <em class='comment'>   +----------------------------------------------------------------------+</em>
+<a id='L7' name='L7'></a>   7 <em class='comment'>   | This source file is subject to version 3.01 of the PHP license,      |</em>
+<a id='L8' name='L8'></a>   8 <em class='comment'>   | that is bundled with this package in the file LICENSE, and is        |</em>
+<a id='L9' name='L9'></a>   9 <em class='comment'>   | available through the world-wide-web at the following url:           |</em>
+<a id='L10' name='L10'></a>  10 <em class='comment'>   | http://www.php.net/license/3_01.txt                                  |</em>
+<a id='L11' name='L11'></a>  11 <em class='comment'>   | If you did not receive a copy of the PHP license and are unable to   |</em>
+<a id='L12' name='L12'></a>  12 <em class='comment'>   | obtain it through the world-wide-web, please send a note to          |</em>
+<a id='L13' name='L13'></a>  13 <em class='comment'>   | license@php.net so we can mail you a copy immediately.               |</em>
+<a id='L14' name='L14'></a>  14 <em class='comment'>   +----------------------------------------------------------------------+</em>
+<a id='L15' name='L15'></a>  15 <em class='comment'>   | Author: Sascha Schumann &lt;sascha@schumann.cx&gt;                         |</em>
+<a id='L16' name='L16'></a>  16 <em class='comment'>   +----------------------------------------------------------------------+</em>
+<a id='L17' name='L17'></a>  17 <em class='comment'> */</em>
+<a id='L18' name='L18'></a>  18 
+<a id='L19' name='L19'></a>  19 <em class='comment'>/*</em>
+<a id='L20' name='L20'></a>  20 <em class='comment'> * TODO:</em>
+<a id='L21' name='L21'></a>  21 <em class='comment'> * - write documentation</em>
+<a id='L22' name='L22'></a>  22 <em class='comment'> * - CGI/1.1 conformance</em>
+<a id='L23' name='L23'></a>  23 <em class='comment'> */</em>
+<a id='L24' name='L24'></a>  24 
+<a id='L25' name='L25'></a>  25 <em class='comment'>/* $Id$ */</em>
+<a id='L26' name='L26'></a>  26 
+<a id='L27' name='L27'></a>  27 <em class='comment'>/* conflict between PHP and AOLserver headers */</em>
+<a id='L28' name='L28'></a>  28 <em class='sharp'>#define</em> <a href='../R/1603.html' title='Multiple referred from 2 places.'>Debug</a> php_Debug
+<a id='L29' name='L29'></a>  29 <em class='sharp'>#include</em> "<a href='1368.html'>php.h</a>"
+<a id='L30' name='L30'></a>  30 <em class='sharp'>#undef</em> <a href='../R/1603.html' title='Multiple referred from 2 places.'>Debug</a>
+<a id='L31' name='L31'></a>  31 
+<a id='L32' name='L32'></a>  32 <em class='sharp'>#ifdef</em> HAVE_AOLSERVER
+<a id='L33' name='L33'></a>  33 
+<a id='L34' name='L34'></a>  34 <em class='sharp'>#ifndef</em> <a href='../Y/7361.html' title='Multiple used in 473 places.'>ZTS</a>
+<a id='L35' name='L35'></a>  35 <em class='sharp'>#error</em> AOLserver module is only useable in thread-safe mode
+<a id='L36' name='L36'></a>  36 <em class='sharp'>#endif</em>
+<a id='L37' name='L37'></a>  37 
+<a id='L38' name='L38'></a>  38 <em class='sharp'>#include</em> "<a href='1127.html'>ext/standard/info.h</a>"
+<a id='L39' name='L39'></a>  39 <em class='sharp'>#define</em> <a href='../R/9074.html' title='Multiple referred from 14 places.'>SECTION</a>(<a href='../Y/28160.html' title='Multiple used in 4617 places.'>name</a>)  <a href='../S/1381.html#L171' title='Defined at 171 in main/php_output.h.'>PUTS</a>("&lt;h2&gt;" <a href='../Y/28160.html' title='Multiple used in 4617 places.'>name</a> "&lt;/h2&gt;\n")
+<a id='L40' name='L40'></a>  40 
+<a id='L41' name='L41'></a>  41 <em class='sharp'>#define</em> <a href='../R/5273.html' title='Multiple referred from 7 places.'>NS_BUF_SIZE</a> 511
+<a id='L42' name='L42'></a>  42 
+<a id='L43' name='L43'></a>  43 <em class='sharp'>#include</em> "<a href='1375.html'>php_ini.h</a>"
+<a id='L44' name='L44'></a>  44 <em class='sharp'>#include</em> "<a href='1373.html'>php_globals.h</a>"
+<a id='L45' name='L45'></a>  45 <em class='sharp'>#include</em> "<a href='1398.html'>SAPI.h</a>"
+<a id='L46' name='L46'></a>  46 <em class='sharp'>#include</em> "<a href='1376.html'>php_main.h</a>"
+<a id='L47' name='L47'></a>  47 <em class='sharp'>#include</em> "<a href='1392.html'>php_variables.h</a>"
+<a id='L48' name='L48'></a>  48 
+<a id='L49' name='L49'></a>  49 <em class='sharp'>#include</em> "ns.h"
+<a id='L50' name='L50'></a>  50 
+<a id='L51' name='L51'></a>  51 <em class='sharp'>#include</em> "<a href='1393.html'>php_version.h</a>"
+<a id='L52' name='L52'></a>  52 
+<a id='L53' name='L53'></a>  53 <em class='comment'>/* This symbol is used by AOLserver to tell the API version we expect */</em>
+<a id='L54' name='L54'></a>  54 
+<a id='L55' name='L55'></a>  55 <strong class='reserved'>int</strong> Ns_ModuleVersion = 1;
+<a id='L56' name='L56'></a>  56 
+<a id='L57' name='L57'></a>  57 <em class='sharp'>#define</em> <a href='../R/5240.html' title='Multiple referred from 59 places.'>NSG</a>(<a href='../Y/40497.html' title='Multiple used in 3064 places.'>v</a>) <a href='../S/1596.html#L164' title='Defined at 164 in TSRM/TSRM.h.'>TSRMG</a>(<a href='../Y/29018.html' title='Multiple used in 3 places.'>ns_globals_id</a>, <a href='../S/1427.html#L72' title='Defined at 72 in sapi/aolserver/aolserver.c.'>ns_globals_struct</a> *, <a href='../Y/40497.html' title='Multiple used in 3064 places.'>v</a>)
+<a id='L58' name='L58'></a>  58 
+<a id='L59' name='L59'></a>  59 <em class='comment'>/* php_ns_context is per-server (thus only once at all) */</em>
+<a id='L60' name='L60'></a>  60 
+<a id='L61' name='L61'></a>  61 <strong class='reserved'>typedef</strong> <strong class='reserved'>struct</strong> <em class='brace'>{</em>
+<a id='L62' name='L62'></a>  62         <a href='../S/1398.html#L68' title='Defined at 68 in main/SAPI.h.'>sapi_module_struct</a> *<a href='../Y/35653.html' title='Multiple used in 318 places.'>sapi_module</a>;
+<a id='L63' name='L63'></a>  63         <strong class='reserved'>char</strong> *<a href='../Y/29027.html' title='Multiple used in 7 places.'>ns_server</a>;
+<a id='L64' name='L64'></a>  64         <strong class='reserved'>char</strong> *<a href='../Y/29020.html' title='Multiple used in 4 places.'>ns_module</a>;
+<a id='L65' name='L65'></a>  65 <em class='brace'>}</em> <a href='../R/24039.html' title='Multiple referred from 5 places.'>php_ns_context</a>;
+<a id='L66' name='L66'></a>  66 
+<a id='L67' name='L67'></a>  67 <em class='comment'>/* ns_globals_struct is per-thread */</em>
+<a id='L68' name='L68'></a>  68 
+<a id='L69' name='L69'></a>  69 <strong class='reserved'>typedef</strong> <strong class='reserved'>struct</strong> <em class='brace'>{</em>
+<a id='L70' name='L70'></a>  70         <a href='../Y/4029.html' title='Multiple used in 2 places.'>Ns_Conn</a> *<a href='../D/20273.html' title='Multiple defined in 24 places.'>conn</a>;
+<a id='L71' name='L71'></a>  71         <a href='../Y/36596.html' title='Multiple used in 2694 places.'>size_t</a> <a href='../Y/14974.html' title='Multiple used in 5 places.'>data_avail</a>;
+<a id='L72' name='L72'></a>  72 <em class='brace'>}</em> <a href='../R/22038.html' title='Multiple referred from 2 places.'>ns_globals_struct</a>;
+<a id='L73' name='L73'></a>  73 
+<a id='L74' name='L74'></a>  74 <em class='comment'>/* TSRM id */</em>
+<a id='L75' name='L75'></a>  75 
+<a id='L76' name='L76'></a>  76 <strong class='reserved'>static</strong> <strong class='reserved'>int</strong> <a href='../Y/29018.html' title='Multiple used in 3 places.'>ns_globals_id</a>;
+<a id='L77' name='L77'></a>  77 
+<a id='L78' name='L78'></a>  78 <em class='comment'>/* global context */</em>
+<a id='L79' name='L79'></a>  79 
+<a id='L80' name='L80'></a>  80 <strong class='reserved'>static</strong> <a href='../S/1427.html#L65' title='Defined at 65 in sapi/aolserver/aolserver.c.'>php_ns_context</a> *<a href='../Y/19369.html' title='Multiple used in 4 places.'>global_context</a>;
+<a id='L81' name='L81'></a>  81 
+<a id='L82' name='L82'></a>  82 <strong class='reserved'>static</strong> <strong class='reserved'>void</strong> <a href='../S/1427.html#L519' title='Defined at 519 in sapi/aolserver/aolserver.c.'>php_ns_config</a>(<a href='../S/1427.html#L65' title='Defined at 65 in sapi/aolserver/aolserver.c.'>php_ns_context</a> *<a href='../Y/14628.html' title='Multiple used in 1919 places.'>ctx</a>, <strong class='reserved'>char</strong> <a href='../Y/19362.html' title='Multiple used in 19 places.'>global</a>);
+<a id='L83' name='L83'></a>  83 
+<a id='L84' name='L84'></a>  84 <em class='comment'>/*</em>
+<a id='L85' name='L85'></a>  85 <em class='comment'> * php_ns_sapi_ub_write() writes data to the client connection.</em>
+<a id='L86' name='L86'></a>  86 <em class='comment'> */</em>
+<a id='L87' name='L87'></a>  87 
+<a id='L88' name='L88'></a>  88 <strong class='reserved'>static</strong> <strong class='reserved'>int</strong>
+<a id='L89' name='L89'></a>  89 <a href='../S/1427.html#L377' title='Referred from 377 in sapi/aolserver/aolserver.c.'>php_ns_sapi_ub_write</a>(<strong class='reserved'>const</strong> <strong class='reserved'>char</strong> *<a href='../Y/37895.html' title='Multiple used in 2900 places.'>str</a>, <a href='../D/32232.html' title='Multiple defined in 3 places.'>uint</a> <a href='../Y/37927.html' title='Multiple used in 154 places.'>str_length</a> <a href='../D/14076.html' title='Multiple defined in 136 places.'>TSRMLS_DC</a>)
+<a id='L90' name='L90'></a>  90 <em class='brace'>{</em>
+<a id='L91' name='L91'></a>  91         <strong class='reserved'>int</strong> <a href='../D/24846.html' title='Multiple defined in 3 places.'>n</a>;
+<a id='L92' name='L92'></a>  92         <a href='../D/32232.html' title='Multiple defined in 3 places.'>uint</a> <a href='../Y/36048.html' title='Multiple used in 31 places.'>sent</a> = 0;
+<a id='L93' name='L93'></a>  93 
+<a id='L94' name='L94'></a>  94         <strong class='reserved'>while</strong> (<a href='../Y/37927.html' title='Multiple used in 154 places.'>str_length</a> &gt; 0) <em class='brace'>{</em>
+<a id='L95' name='L95'></a>  95                 <a href='../D/24846.html' title='Multiple defined in 3 places.'>n</a> = Ns_ConnWrite(<a href='../D/6033.html' title='Multiple defined in 3 places.'>NSG</a>(<a href='../D/20273.html' title='Multiple defined in 24 places.'>conn</a>), (<strong class='reserved'>void</strong> *) <a href='../Y/37895.html' title='Multiple used in 2900 places.'>str</a>, <a href='../Y/37927.html' title='Multiple used in 154 places.'>str_length</a>);
+<a id='L96' name='L96'></a>  96 
+<a id='L97' name='L97'></a>  97                 <strong class='reserved'>if</strong> (<a href='../D/24846.html' title='Multiple defined in 3 places.'>n</a> == -1)
+<a id='L98' name='L98'></a>  98                         <a href='../S/1364.html#L2671' title='Defined at 2671 in main/main.c.'>php_handle_aborted_connection</a>();
+<a id='L99' name='L99'></a>  99 
+<a id='L100' name='L100'></a> 100                 <a href='../Y/37895.html' title='Multiple used in 2900 places.'>str</a> += <a href='../D/24846.html' title='Multiple defined in 3 places.'>n</a>;
+<a id='L101' name='L101'></a> 101                 <a href='../Y/36048.html' title='Multiple used in 31 places.'>sent</a> += <a href='../D/24846.html' title='Multiple defined in 3 places.'>n</a>;
+<a id='L102' name='L102'></a> 102                 <a href='../Y/37927.html' title='Multiple used in 154 places.'>str_length</a> -= <a href='../D/24846.html' title='Multiple defined in 3 places.'>n</a>;
+<a id='L103' name='L103'></a> 103         <em class='brace'>}</em>
+<a id='L104' name='L104'></a> 104         
+<a id='L105' name='L105'></a> 105         <strong class='reserved'>return</strong> <a href='../Y/36048.html' title='Multiple used in 31 places.'>sent</a>;
+<a id='L106' name='L106'></a> 106 <em class='brace'>}</em>
+<a id='L107' name='L107'></a> 107 
+<a id='L108' name='L108'></a> 108 <em class='comment'>/*</em>
+<a id='L109' name='L109'></a> 109 <em class='comment'> * php_ns_sapi_header_handler() sets a HTTP reply header to be </em>
+<a id='L110' name='L110'></a> 110 <em class='comment'> * sent to the client.</em>
+<a id='L111' name='L111'></a> 111 <em class='comment'> */</em>
+<a id='L112' name='L112'></a> 112 
+<a id='L113' name='L113'></a> 113 <strong class='reserved'>static</strong> <strong class='reserved'>int</strong>
+<a id='L114' name='L114'></a> 114 <a href='../S/1427.html#L384' title='Referred from 384 in sapi/aolserver/aolserver.c.'>php_ns_sapi_header_handler</a>(<a href='../S/1398.html#L55' title='Defined at 55 in main/SAPI.h.'>sapi_header_struct</a> *<a href='../Y/35650.html' title='Multiple used in 87 places.'>sapi_header</a>, <a href='../S/1398.html#L64' title='Defined at 64 in main/SAPI.h.'>sapi_headers_struct</a> *<a href='../Y/35652.html' title='Multiple used in 273 places.'>sapi_headers</a> <a href='../D/14076.html' title='Multiple defined in 136 places.'>TSRMLS_DC</a>)
+<a id='L115' name='L115'></a> 115 <em class='brace'>{</em>
+<a id='L116' name='L116'></a> 116         <strong class='reserved'>char</strong> *<a href='../Y/19975.html' title='Multiple used in 68 places.'>header_name</a>, *<a href='../Y/19964.html' title='Multiple used in 50 places.'>header_content</a>;
+<a id='L117' name='L117'></a> 117         <strong class='reserved'>char</strong> *<a href='../Y/30495.html' title='Multiple used in 13216 places.'>p</a>;
+<a id='L118' name='L118'></a> 118 
+<a id='L119' name='L119'></a> 119         <a href='../Y/19975.html' title='Multiple used in 68 places.'>header_name</a> = <a href='../Y/35650.html' title='Multiple used in 87 places.'>sapi_header</a>-&gt;<a href='../D/23076.html' title='Multiple defined in 2 places.'>header</a>;
+<a id='L120' name='L120'></a> 120         <a href='../Y/19964.html' title='Multiple used in 50 places.'>header_content</a> = <a href='../Y/30495.html' title='Multiple used in 13216 places.'>p</a> = <a href='../Y/37955.html' title='Multiple used in 222 places.'>strchr</a>(<a href='../Y/19975.html' title='Multiple used in 68 places.'>header_name</a>, ':');
+<a id='L121' name='L121'></a> 121 
+<a id='L122' name='L122'></a> 122         <strong class='reserved'>if</strong> (<a href='../Y/30495.html' title='Multiple used in 13216 places.'>p</a>) <em class='brace'>{</em>
+<a id='L123' name='L123'></a> 123                 *<a href='../Y/30495.html' title='Multiple used in 13216 places.'>p</a> = '\0';
+<a id='L124' name='L124'></a> 124                 <strong class='reserved'>do</strong> <em class='brace'>{</em>
+<a id='L125' name='L125'></a> 125                         <a href='../Y/19964.html' title='Multiple used in 50 places.'>header_content</a>++;
+<a id='L126' name='L126'></a> 126                 <em class='brace'>}</em> <strong class='reserved'>while</strong> (*<a href='../Y/19964.html' title='Multiple used in 50 places.'>header_content</a> == ' ');
+<a id='L127' name='L127'></a> 127 
+<a id='L128' name='L128'></a> 128                 <strong class='reserved'>if</strong> (!<a href='../D/31513.html' title='Multiple defined in 11 places.'>strcasecmp</a>(<a href='../Y/19975.html' title='Multiple used in 68 places.'>header_name</a>, "Content-type")) <em class='brace'>{</em>
+<a id='L129' name='L129'></a> 129                         Ns_ConnSetTypeHeader(<a href='../D/6033.html' title='Multiple defined in 3 places.'>NSG</a>(<a href='../D/20273.html' title='Multiple defined in 24 places.'>conn</a>), <a href='../Y/19964.html' title='Multiple used in 50 places.'>header_content</a>);
+<a id='L130' name='L130'></a> 130                 <em class='brace'>}</em> <strong class='reserved'>else</strong> <em class='brace'>{</em>
+<a id='L131' name='L131'></a> 131                         Ns_ConnSetHeaders(<a href='../D/6033.html' title='Multiple defined in 3 places.'>NSG</a>(<a href='../D/20273.html' title='Multiple defined in 24 places.'>conn</a>), <a href='../Y/19975.html' title='Multiple used in 68 places.'>header_name</a>, <a href='../Y/19964.html' title='Multiple used in 50 places.'>header_content</a>);
+<a id='L132' name='L132'></a> 132                 <em class='brace'>}</em>
+<a id='L133' name='L133'></a> 133 
+<a id='L134' name='L134'></a> 134                 *<a href='../Y/30495.html' title='Multiple used in 13216 places.'>p</a> = ':';
+<a id='L135' name='L135'></a> 135         <em class='brace'>}</em>
+<a id='L136' name='L136'></a> 136 
+<a id='L137' name='L137'></a> 137         <a href='../S/1397.html#L117' title='Defined at 117 in main/SAPI.c.'>sapi_free_header</a>(<a href='../Y/35650.html' title='Multiple used in 87 places.'>sapi_header</a>);
+<a id='L138' name='L138'></a> 138         
+<a id='L139' name='L139'></a> 139         <strong class='reserved'>return</strong> 0;
+<a id='L140' name='L140'></a> 140 <em class='brace'>}</em>
+<a id='L141' name='L141'></a> 141 
+<a id='L142' name='L142'></a> 142 <em class='comment'>/*</em>
+<a id='L143' name='L143'></a> 143 <em class='comment'> * php_ns_sapi_send_headers() flushes the headers to the client.</em>
+<a id='L144' name='L144'></a> 144 <em class='comment'> * Called before real content is sent by PHP.</em>
+<a id='L145' name='L145'></a> 145 <em class='comment'> */</em>
+<a id='L146' name='L146'></a> 146 
+<a id='L147' name='L147'></a> 147 <strong class='reserved'>static</strong> <strong class='reserved'>int</strong>
+<a id='L148' name='L148'></a> 148 <a href='../S/1427.html#L385' title='Referred from 385 in sapi/aolserver/aolserver.c.'>php_ns_sapi_send_headers</a>(<a href='../S/1398.html#L64' title='Defined at 64 in main/SAPI.h.'>sapi_headers_struct</a> *<a href='../Y/35652.html' title='Multiple used in 273 places.'>sapi_headers</a> <a href='../D/14076.html' title='Multiple defined in 136 places.'>TSRMLS_DC</a>)
+<a id='L149' name='L149'></a> 149 <em class='brace'>{</em>
+<a id='L150' name='L150'></a> 150         <strong class='reserved'>if</strong>(<a href='../D/10562.html' title='Multiple defined in 2 places.'>SG</a>(<a href='../Y/35652.html' title='Multiple used in 273 places.'>sapi_headers</a>).<a href='../Y/36029.html' title='Multiple used in 25 places.'>send_default_content_type</a>) <em class='brace'>{</em>
+<a id='L151' name='L151'></a> 151                 Ns_ConnSetRequiredHeaders(<a href='../D/6033.html' title='Multiple defined in 3 places.'>NSG</a>(<a href='../D/20273.html' title='Multiple defined in 24 places.'>conn</a>), "text/html", 0);
+<a id='L152' name='L152'></a> 152         <em class='brace'>}</em>
+<a id='L153' name='L153'></a> 153         
+<a id='L154' name='L154'></a> 154         Ns_ConnFlushHeaders(<a href='../D/6033.html' title='Multiple defined in 3 places.'>NSG</a>(<a href='../D/20273.html' title='Multiple defined in 24 places.'>conn</a>), <a href='../D/10562.html' title='Multiple defined in 2 places.'>SG</a>(<a href='../Y/35652.html' title='Multiple used in 273 places.'>sapi_headers</a>).<a href='../Y/22095.html' title='Multiple used in 97 places.'>http_response_code</a>);
+<a id='L155' name='L155'></a> 155         
+<a id='L156' name='L156'></a> 156         <strong class='reserved'>return</strong> <a href='../S/1398.html#L290' title='Defined at 290 in main/SAPI.h.'>SAPI_HEADER_SENT_SUCCESSFULLY</a>;
+<a id='L157' name='L157'></a> 157 <em class='brace'>}</em>
+<a id='L158' name='L158'></a> 158 
+<a id='L159' name='L159'></a> 159 <em class='comment'>/*</em>
+<a id='L160' name='L160'></a> 160 <em class='comment'> * php_ns_sapi_read_post() reads a specified number of bytes from</em>
+<a id='L161' name='L161'></a> 161 <em class='comment'> * the client. Used for POST/PUT requests.</em>
+<a id='L162' name='L162'></a> 162 <em class='comment'> */</em>
+<a id='L163' name='L163'></a> 163 
+<a id='L164' name='L164'></a> 164 <strong class='reserved'>static</strong> <strong class='reserved'>int</strong>
+<a id='L165' name='L165'></a> 165 <a href='../S/1427.html#L388' title='Referred from 388 in sapi/aolserver/aolserver.c.'>php_ns_sapi_read_post</a>(<strong class='reserved'>char</strong> *<a href='../Y/12847.html' title='Multiple used in 3901 places.'>buf</a>, <a href='../D/32232.html' title='Multiple defined in 3 places.'>uint</a> <a href='../Y/14394.html' title='Multiple used in 72 places.'>count_bytes</a> <a href='../D/14076.html' title='Multiple defined in 136 places.'>TSRMLS_DC</a>)
+<a id='L166' name='L166'></a> 166 <em class='brace'>{</em>
+<a id='L167' name='L167'></a> 167         <a href='../D/32232.html' title='Multiple defined in 3 places.'>uint</a> <a href='../Y/26052.html' title='Multiple used in 7 places.'>max_read</a>;
+<a id='L168' name='L168'></a> 168         <a href='../D/32232.html' title='Multiple defined in 3 places.'>uint</a> <a href='../Y/39339.html' title='Multiple used in 39 places.'>total_read</a> = 0;
+<a id='L169' name='L169'></a> 169 
+<a id='L170' name='L170'></a> 170         <a href='../Y/26052.html' title='Multiple used in 7 places.'>max_read</a> = <a href='../D/5206.html' title='Multiple defined in 20 places.'>MIN</a>(<a href='../D/6033.html' title='Multiple defined in 3 places.'>NSG</a>(<a href='../Y/14974.html' title='Multiple used in 5 places.'>data_avail</a>), <a href='../Y/14394.html' title='Multiple used in 72 places.'>count_bytes</a>);
+<a id='L171' name='L171'></a> 171         
+<a id='L172' name='L172'></a> 172         <a href='../Y/39339.html' title='Multiple used in 39 places.'>total_read</a> = Ns_ConnRead(<a href='../D/6033.html' title='Multiple defined in 3 places.'>NSG</a>(<a href='../D/20273.html' title='Multiple defined in 24 places.'>conn</a>), <a href='../Y/12847.html' title='Multiple used in 3901 places.'>buf</a>, <a href='../Y/26052.html' title='Multiple used in 7 places.'>max_read</a>);
+<a id='L173' name='L173'></a> 173         
+<a id='L174' name='L174'></a> 174         <strong class='reserved'>if</strong>(<a href='../Y/39339.html' title='Multiple used in 39 places.'>total_read</a> == <a href='../Y/3981.html' title='Multiple used in 2 places.'>NS_ERROR</a>) <em class='brace'>{</em>
+<a id='L175' name='L175'></a> 175                 <a href='../Y/39339.html' title='Multiple used in 39 places.'>total_read</a> = -1;
+<a id='L176' name='L176'></a> 176         <em class='brace'>}</em> <strong class='reserved'>else</strong> <em class='brace'>{</em>
+<a id='L177' name='L177'></a> 177                 <a href='../D/6033.html' title='Multiple defined in 3 places.'>NSG</a>(<a href='../Y/14974.html' title='Multiple used in 5 places.'>data_avail</a>) -= <a href='../Y/39339.html' title='Multiple used in 39 places.'>total_read</a>;
+<a id='L178' name='L178'></a> 178         <em class='brace'>}</em>
+<a id='L179' name='L179'></a> 179 
+<a id='L180' name='L180'></a> 180         <strong class='reserved'>return</strong> <a href='../Y/39339.html' title='Multiple used in 39 places.'>total_read</a>;
+<a id='L181' name='L181'></a> 181 <em class='brace'>}</em>
+<a id='L182' name='L182'></a> 182 
+<a id='L183' name='L183'></a> 183 <em class='comment'>/* </em>
+<a id='L184' name='L184'></a> 184 <em class='comment'> * php_ns_sapi_read_cookies() returns the Cookie header from</em>
+<a id='L185' name='L185'></a> 185 <em class='comment'> * the HTTP request header</em>
+<a id='L186' name='L186'></a> 186 <em class='comment'> */</em>
+<a id='L187' name='L187'></a> 187         
+<a id='L188' name='L188'></a> 188 <strong class='reserved'>static</strong> <strong class='reserved'>char</strong> *<a href='../S/1427.html#L389' title='Referred from 389 in sapi/aolserver/aolserver.c.'>php_ns_sapi_read_cookies</a>(<a href='../D/14075.html' title='Multiple defined in 2 places.'>TSRMLS_D</a>)
+<a id='L189' name='L189'></a> 189 <em class='brace'>{</em>
+<a id='L190' name='L190'></a> 190         <strong class='reserved'>int</strong> <a href='../Y/22121.html' title='Multiple used in 12184 places.'>i</a>;
+<a id='L191' name='L191'></a> 191         <strong class='reserved'>char</strong> *<a href='../Y/22073.html' title='Multiple used in 9 places.'>http_cookie</a> = <a href='../D/6086.html' title='Multiple defined in 8 places.'>NULL</a>;
+<a id='L192' name='L192'></a> 192         
+<a id='L193' name='L193'></a> 193         <a href='../Y/22121.html' title='Multiple used in 12184 places.'>i</a> = <a href='../Y/4065.html' title='Multiple used in 3 places.'>Ns_SetIFind</a>(<a href='../D/6033.html' title='Multiple defined in 3 places.'>NSG</a>(<a href='../D/20273.html' title='Multiple defined in 24 places.'>conn</a>-&gt;<a href='../Y/19993.html' title='Multiple used in 280 places.'>headers</a>), "cookie");
+<a id='L194' name='L194'></a> 194         <strong class='reserved'>if</strong>(<a href='../Y/22121.html' title='Multiple used in 12184 places.'>i</a> != -1) <em class='brace'>{</em>
+<a id='L195' name='L195'></a> 195                 <a href='../Y/22073.html' title='Multiple used in 9 places.'>http_cookie</a> = <a href='../Y/4068.html' title='Multiple used in 8 places.'>Ns_SetValue</a>(<a href='../D/6033.html' title='Multiple defined in 3 places.'>NSG</a>(<a href='../D/20273.html' title='Multiple defined in 24 places.'>conn</a>-&gt;<a href='../Y/19993.html' title='Multiple used in 280 places.'>headers</a>), <a href='../Y/22121.html' title='Multiple used in 12184 places.'>i</a>);
+<a id='L196' name='L196'></a> 196         <em class='brace'>}</em>
+<a id='L197' name='L197'></a> 197 
+<a id='L198' name='L198'></a> 198         <strong class='reserved'>return</strong> <a href='../Y/22073.html' title='Multiple used in 9 places.'>http_cookie</a>;
+<a id='L199' name='L199'></a> 199 <em class='brace'>}</em>
+<a id='L200' name='L200'></a> 200 
+<a id='L201' name='L201'></a> 201 <strong class='reserved'>static</strong> <strong class='reserved'>void</strong> <a href='../S/1427.html#L261' title='Referred from 261 in sapi/aolserver/aolserver.c.'>php_info_aolserver</a>(<a href='../S/1709.html#L33' title='Defined at 33 in Zend/zend_modules.h.'>ZEND_MODULE_INFO_FUNC_ARGS</a>)
+<a id='L202' name='L202'></a> 202 <em class='brace'>{</em>
+<a id='L203' name='L203'></a> 203         <strong class='reserved'>char</strong> <a href='../Y/12847.html' title='Multiple used in 3901 places.'>buf</a>[512];
+<a id='L204' name='L204'></a> 204         <strong class='reserved'>int</strong> <a href='../Y/40179.html' title='Multiple used in 5 places.'>uptime</a> = Ns_InfoUptime();
+<a id='L205' name='L205'></a> 205         <strong class='reserved'>int</strong> <a href='../Y/22121.html' title='Multiple used in 12184 places.'>i</a>;
+<a id='L206' name='L206'></a> 206         
+<a id='L207' name='L207'></a> 207         <a href='../S/1126.html#L1177' title='Defined at 1177 in ext/standard/info.c.'>php_info_print_table_start</a>();
+<a id='L208' name='L208'></a> 208         <a href='../S/1126.html#L1331' title='Defined at 1331 in ext/standard/info.c.'>php_info_print_table_row</a>(2, "SAPI module version", "$Id$");
+<a id='L209' name='L209'></a> 209         <a href='../S/1126.html#L1331' title='Defined at 1331 in ext/standard/info.c.'>php_info_print_table_row</a>(2, "Build date", <a href='../Y/4049.html' title='Multiple used in 2 places.'>Ns_InfoBuildDate</a>());
+<a id='L210' name='L210'></a> 210         <a href='../S/1126.html#L1331' title='Defined at 1331 in ext/standard/info.c.'>php_info_print_table_row</a>(2, "Config file path", Ns_InfoConfigFile());
+<a id='L211' name='L211'></a> 211         <a href='../S/1126.html#L1331' title='Defined at 1331 in ext/standard/info.c.'>php_info_print_table_row</a>(2, "Error Log path", Ns_InfoErrorLog());
+<a id='L212' name='L212'></a> 212         <a href='../S/1126.html#L1331' title='Defined at 1331 in ext/standard/info.c.'>php_info_print_table_row</a>(2, "Installation path", Ns_InfoHomePath());
+<a id='L213' name='L213'></a> 213         <a href='../S/1126.html#L1331' title='Defined at 1331 in ext/standard/info.c.'>php_info_print_table_row</a>(2, "Hostname of server", Ns_InfoHostname());
+<a id='L214' name='L214'></a> 214         <a href='../S/1126.html#L1331' title='Defined at 1331 in ext/standard/info.c.'>php_info_print_table_row</a>(2, "Source code label", Ns_InfoLabel());
+<a id='L215' name='L215'></a> 215         <a href='../S/1126.html#L1331' title='Defined at 1331 in ext/standard/info.c.'>php_info_print_table_row</a>(2, "Server platform", Ns_InfoPlatform());
+<a id='L216' name='L216'></a> 216         <a href='../D/29759.html' title='Multiple defined in 5 places.'>snprintf</a>(<a href='../Y/12847.html' title='Multiple used in 3901 places.'>buf</a>, 511, "%s/%s", <a href='../Y/4056.html' title='Multiple used in 2 places.'>Ns_InfoServerName</a>(), <a href='../Y/4057.html' title='Multiple used in 2 places.'>Ns_InfoServerVersion</a>());
+<a id='L217' name='L217'></a> 217         <a href='../S/1126.html#L1331' title='Defined at 1331 in ext/standard/info.c.'>php_info_print_table_row</a>(2, "Server version", <a href='../Y/12847.html' title='Multiple used in 3901 places.'>buf</a>);
+<a id='L218' name='L218'></a> 218         <a href='../D/29759.html' title='Multiple defined in 5 places.'>snprintf</a>(<a href='../Y/12847.html' title='Multiple used in 3901 places.'>buf</a>, 511, "%d day(s), %02d:%02d:%02d", 
+<a id='L219' name='L219'></a> 219                         <a href='../Y/40179.html' title='Multiple used in 5 places.'>uptime</a> / 86400,
+<a id='L220' name='L220'></a> 220                         (<a href='../Y/40179.html' title='Multiple used in 5 places.'>uptime</a> / 3600) % 24,
+<a id='L221' name='L221'></a> 221                         (<a href='../Y/40179.html' title='Multiple used in 5 places.'>uptime</a> / 60) % 60,
+<a id='L222' name='L222'></a> 222                         <a href='../Y/40179.html' title='Multiple used in 5 places.'>uptime</a> % 60);
+<a id='L223' name='L223'></a> 223         <a href='../S/1126.html#L1331' title='Defined at 1331 in ext/standard/info.c.'>php_info_print_table_row</a>(2, "Server uptime", <a href='../Y/12847.html' title='Multiple used in 3901 places.'>buf</a>);
+<a id='L224' name='L224'></a> 224         <a href='../S/1126.html#L1187' title='Defined at 1187 in ext/standard/info.c.'>php_info_print_table_end</a>();
+<a id='L225' name='L225'></a> 225 
+<a id='L226' name='L226'></a> 226         <a href='../D/10442.html' title='Multiple defined in 5 places.'>SECTION</a>("HTTP Headers Information");
+<a id='L227' name='L227'></a> 227         <a href='../S/1126.html#L1177' title='Defined at 1177 in ext/standard/info.c.'>php_info_print_table_start</a>();
+<a id='L228' name='L228'></a> 228         <a href='../S/1126.html#L1232' title='Defined at 1232 in ext/standard/info.c.'>php_info_print_table_colspan_header</a>(2, "HTTP Request Headers");
+<a id='L229' name='L229'></a> 229         <a href='../S/1126.html#L1331' title='Defined at 1331 in ext/standard/info.c.'>php_info_print_table_row</a>(2, "HTTP Request", <a href='../D/6033.html' title='Multiple defined in 3 places.'>NSG</a>(<a href='../D/20273.html' title='Multiple defined in 24 places.'>conn</a>)-&gt;<a href='../S/813.html#L793' title='Defined at 793 in ext/mysqlnd/mysqlnd_structs.h.'>request</a>-&gt;<a href='../Y/25173.html' title='Multiple used in 315 places.'>line</a>);
+<a id='L230' name='L230'></a> 230         <strong class='reserved'>for</strong> (<a href='../Y/22121.html' title='Multiple used in 12184 places.'>i</a> = 0; <a href='../Y/22121.html' title='Multiple used in 12184 places.'>i</a> &lt; <a href='../Y/4067.html' title='Multiple used in 5 places.'>Ns_SetSize</a>(<a href='../D/6033.html' title='Multiple defined in 3 places.'>NSG</a>(<a href='../D/20273.html' title='Multiple defined in 24 places.'>conn</a>)-&gt;<a href='../Y/19993.html' title='Multiple used in 280 places.'>headers</a>); <a href='../Y/22121.html' title='Multiple used in 12184 places.'>i</a>++) <em class='brace'>{</em>
+<a id='L231' name='L231'></a> 231                 <a href='../S/1126.html#L1331' title='Defined at 1331 in ext/standard/info.c.'>php_info_print_table_row</a>(2, <a href='../Y/4066.html' title='Multiple used in 5 places.'>Ns_SetKey</a>(<a href='../D/6033.html' title='Multiple defined in 3 places.'>NSG</a>(<a href='../D/20273.html' title='Multiple defined in 24 places.'>conn</a>)-&gt;<a href='../Y/19993.html' title='Multiple used in 280 places.'>headers</a>, <a href='../Y/22121.html' title='Multiple used in 12184 places.'>i</a>), <a href='../Y/4068.html' title='Multiple used in 8 places.'>Ns_SetValue</a>(<a href='../D/6033.html' title='Multiple defined in 3 places.'>NSG</a>(<a href='../D/20273.html' title='Multiple defined in 24 places.'>conn</a>)-&gt;<a href='../Y/19993.html' title='Multiple used in 280 places.'>headers</a>, <a href='../Y/22121.html' title='Multiple used in 12184 places.'>i</a>));
+<a id='L232' name='L232'></a> 232         <em class='brace'>}</em>
+<a id='L233' name='L233'></a> 233 
+<a id='L234' name='L234'></a> 234         <a href='../S/1126.html#L1232' title='Defined at 1232 in ext/standard/info.c.'>php_info_print_table_colspan_header</a>(2, "HTTP Response Headers");
+<a id='L235' name='L235'></a> 235         <strong class='reserved'>for</strong> (<a href='../Y/22121.html' title='Multiple used in 12184 places.'>i</a> = 0; <a href='../Y/22121.html' title='Multiple used in 12184 places.'>i</a> &lt; <a href='../Y/4067.html' title='Multiple used in 5 places.'>Ns_SetSize</a>(<a href='../D/6033.html' title='Multiple defined in 3 places.'>NSG</a>(<a href='../D/20273.html' title='Multiple defined in 24 places.'>conn</a>)-&gt;<a href='../Y/30445.html' title='Multiple used in 3 places.'>outputheaders</a>); <a href='../Y/22121.html' title='Multiple used in 12184 places.'>i</a>++) <em class='brace'>{</em>
+<a id='L236' name='L236'></a> 236                 <a href='../S/1126.html#L1331' title='Defined at 1331 in ext/standard/info.c.'>php_info_print_table_row</a>(2, <a href='../Y/4066.html' title='Multiple used in 5 places.'>Ns_SetKey</a>(<a href='../D/6033.html' title='Multiple defined in 3 places.'>NSG</a>(<a href='../D/20273.html' title='Multiple defined in 24 places.'>conn</a>)-&gt;<a href='../Y/30445.html' title='Multiple used in 3 places.'>outputheaders</a>, <a href='../Y/22121.html' title='Multiple used in 12184 places.'>i</a>), <a href='../Y/4068.html' title='Multiple used in 8 places.'>Ns_SetValue</a>(<a href='../D/6033.html' title='Multiple defined in 3 places.'>NSG</a>(<a href='../D/20273.html' title='Multiple defined in 24 places.'>conn</a>)-&gt;<a href='../Y/30445.html' title='Multiple used in 3 places.'>outputheaders</a>, <a href='../Y/22121.html' title='Multiple used in 12184 places.'>i</a>));
+<a id='L237' name='L237'></a> 237         <em class='brace'>}</em>
+<a id='L238' name='L238'></a> 238         <a href='../S/1126.html#L1187' title='Defined at 1187 in ext/standard/info.c.'>php_info_print_table_end</a>();
+<a id='L239' name='L239'></a> 239 <em class='brace'>}</em>
+<a id='L240' name='L240'></a> 240 
+<a id='L241' name='L241'></a> 241 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/19271.html' title='Multiple used in 11 places.'>getallheaders</a>);
+<a id='L242' name='L242'></a> 242 
+<a id='L243' name='L243'></a> 243 <em class='comment'>/* {{{ arginfo */</em>
+<a id='L244' name='L244'></a> 244 <a href='../S/1647.html#L111' title='Defined at 111 in Zend/zend_API.h.'>ZEND_BEGIN_ARG_INFO</a>(<a href='../Y/9253.html' title='Multiple used in 2 places.'>arginfo_aolserver_getallheaders</a>, 0)
+<a id='L245' name='L245'></a> 245 <a href='../S/1647.html#L113' title='Defined at 113 in Zend/zend_API.h.'>ZEND_END_ARG_INFO</a>()
+<a id='L246' name='L246'></a> 246 <em class='comment'>/* }}} */</em>
+<a id='L247' name='L247'></a> 247 
+<a id='L248' name='L248'></a> 248 <strong class='reserved'>static</strong> <strong class='reserved'>const</strong> <a href='../Y/44266.html' title='Multiple used in 309 places.'>zend_function_entry</a> <a href='../Y/8866.html' title='Multiple used in 2 places.'>aolserver_functions</a>[] = <em class='brace'>{</em>
+<a id='L249' name='L249'></a> 249         <a href='../S/1368.html#L352' title='Defined at 352 in main/php.h.'>PHP_FE</a>(<a href='../Y/19271.html' title='Multiple used in 11 places.'>getallheaders</a>, <a href='../Y/9253.html' title='Multiple used in 2 places.'>arginfo_aolserver_getallheaders</a>)
+<a id='L250' name='L250'></a> 250         <em class='brace'>{</em><a href='../D/6086.html' title='Multiple defined in 8 places.'>NULL</a>, <a href='../D/6086.html' title='Multiple defined in 8 places.'>NULL</a>, <a href='../D/6086.html' title='Multiple defined in 8 places.'>NULL</a><em class='brace'>}</em>
+<a id='L251' name='L251'></a> 251 <em class='brace'>}</em>;
+<a id='L252' name='L252'></a> 252 
+<a id='L253' name='L253'></a> 253 <strong class='reserved'>static</strong> <a href='../S/1709.html#L70' title='Defined at 70 in Zend/zend_modules.h.'>zend_module_entry</a> <a href='../Y/32306.html' title='Multiple used in 2 places.'>php_aolserver_module</a> = <em class='brace'>{</em>
+<a id='L254' name='L254'></a> 254         <a href='../S/1709.html#L44' title='Defined at 44 in Zend/zend_modules.h.'>STANDARD_MODULE_HEADER</a>,
+<a id='L255' name='L255'></a> 255         "AOLserver",
+<a id='L256' name='L256'></a> 256         <a href='../Y/8866.html' title='Multiple used in 2 places.'>aolserver_functions</a>,
+<a id='L257' name='L257'></a> 257         <a href='../D/6086.html' title='Multiple defined in 8 places.'>NULL</a>,
+<a id='L258' name='L258'></a> 258         <a href='../D/6086.html' title='Multiple defined in 8 places.'>NULL</a>,
+<a id='L259' name='L259'></a> 259         <a href='../D/6086.html' title='Multiple defined in 8 places.'>NULL</a>,
+<a id='L260' name='L260'></a> 260         <a href='../D/6086.html' title='Multiple defined in 8 places.'>NULL</a>,
+<a id='L261' name='L261'></a> 261         <a href='../S/1427.html#L201' title='Defined at 201 in sapi/aolserver/aolserver.c.'>php_info_aolserver</a>,
+<a id='L262' name='L262'></a> 262         <a href='../D/6086.html' title='Multiple defined in 8 places.'>NULL</a>,
+<a id='L263' name='L263'></a> 263         <a href='../S/1709.html#L61' title='Defined at 61 in Zend/zend_modules.h.'>STANDARD_MODULE_PROPERTIES</a>
+<a id='L264' name='L264'></a> 264 <em class='brace'>}</em>;
+<a id='L265' name='L265'></a> 265 
+<a id='L266' name='L266'></a> 266 <a href='../R/7174.html' title='Multiple referred from 2238 places.'>PHP_FUNCTION</a>(<a href='../Y/19271.html' title='Multiple used in 11 places.'>getallheaders</a>)
+<a id='L267' name='L267'></a> 267 <em class='brace'>{</em>
+<a id='L268' name='L268'></a> 268         <strong class='reserved'>int</strong> <a href='../Y/22121.html' title='Multiple used in 12184 places.'>i</a>;
+<a id='L269' name='L269'></a> 269 
+<a id='L270' name='L270'></a> 270         <a href='../S/1647.html#L363' title='Defined at 363 in Zend/zend_API.h.'>array_init</a>(<a href='../S/813.html#L635' title='Defined at 635 in ext/mysqlnd/mysqlnd_structs.h.'>return_value</a>);
+<a id='L271' name='L271'></a> 271         
+<a id='L272' name='L272'></a> 272         <strong class='reserved'>for</strong> (<a href='../Y/22121.html' title='Multiple used in 12184 places.'>i</a> = 0; <a href='../Y/22121.html' title='Multiple used in 12184 places.'>i</a> &lt; <a href='../Y/4067.html' title='Multiple used in 5 places.'>Ns_SetSize</a>(<a href='../D/6033.html' title='Multiple defined in 3 places.'>NSG</a>(<a href='../D/20273.html' title='Multiple defined in 24 places.'>conn</a>-&gt;<a href='../Y/19993.html' title='Multiple used in 280 places.'>headers</a>)); <a href='../Y/22121.html' title='Multiple used in 12184 places.'>i</a>++) <em class='brace'>{</em>
+<a id='L273' name='L273'></a> 273                 <strong class='reserved'>char</strong> *<a href='../D/23451.html' title='Multiple defined in 3 places.'>key</a> = <a href='../Y/4066.html' title='Multiple used in 5 places.'>Ns_SetKey</a>(<a href='../D/6033.html' title='Multiple defined in 3 places.'>NSG</a>(<a href='../D/20273.html' title='Multiple defined in 24 places.'>conn</a>-&gt;<a href='../Y/19993.html' title='Multiple used in 280 places.'>headers</a>), <a href='../Y/22121.html' title='Multiple used in 12184 places.'>i</a>);
+<a id='L274' name='L274'></a> 274                 <strong class='reserved'>char</strong> *<a href='../S/1737.html#L277' title='Defined at 277 in Zend/zend_strtod.c.'>value</a> = <a href='../Y/4068.html' title='Multiple used in 8 places.'>Ns_SetValue</a>(<a href='../D/6033.html' title='Multiple defined in 3 places.'>NSG</a>(<a href='../D/20273.html' title='Multiple defined in 24 places.'>conn</a>-&gt;<a href='../Y/19993.html' title='Multiple used in 280 places.'>headers</a>), <a href='../Y/22121.html' title='Multiple used in 12184 places.'>i</a>);
+<a id='L275' name='L275'></a> 275                 
+<a id='L276' name='L276'></a> 276                 <a href='../S/1647.html#L393' title='Defined at 393 in Zend/zend_API.h.'>add_assoc_string</a>(<a href='../S/813.html#L635' title='Defined at 635 in ext/mysqlnd/mysqlnd_structs.h.'>return_value</a>, <a href='../D/23451.html' title='Multiple defined in 3 places.'>key</a>, <a href='../S/1737.html#L277' title='Defined at 277 in Zend/zend_strtod.c.'>value</a>, 1);
+<a id='L277' name='L277'></a> 277         <em class='brace'>}</em>
+<a id='L278' name='L278'></a> 278 <em class='brace'>}</em>
+<a id='L279' name='L279'></a> 279 
+<a id='L280' name='L280'></a> 280 <strong class='reserved'>static</strong> <strong class='reserved'>int</strong>
+<a id='L281' name='L281'></a> 281 <a href='../S/1427.html#L371' title='Referred from 371 in sapi/aolserver/aolserver.c.'>php_ns_startup</a>(<a href='../S/1398.html#L68' title='Defined at 68 in main/SAPI.h.'>sapi_module_struct</a> *<a href='../Y/35653.html' title='Multiple used in 318 places.'>sapi_module</a>)
+<a id='L282' name='L282'></a> 282 <em class='brace'>{</em>
+<a id='L283' name='L283'></a> 283         <strong class='reserved'>if</strong> (<a href='../S/1364.html#L2081' title='Defined at 2081 in main/main.c.'>php_module_startup</a>(<a href='../Y/35653.html' title='Multiple used in 318 places.'>sapi_module</a>, &amp;<a href='../Y/32306.html' title='Multiple used in 2 places.'>php_aolserver_module</a>, 1) == <a href='../S/1643.html#L283' title='Defined at 283 in Zend/zend.h.'>FAILURE</a>) <em class='brace'>{</em>
+<a id='L284' name='L284'></a> 284                 <strong class='reserved'>return</strong> <a href='../S/1643.html#L283' title='Defined at 283 in Zend/zend.h.'>FAILURE</a>;
+<a id='L285' name='L285'></a> 285         <em class='brace'>}</em> <strong class='reserved'>else</strong> <em class='brace'>{</em>
+<a id='L286' name='L286'></a> 286                 <strong class='reserved'>return</strong> <a href='../D/12833.html' title='Multiple defined in 2 places.'>SUCCESS</a>;
+<a id='L287' name='L287'></a> 287         <em class='brace'>}</em>
+<a id='L288' name='L288'></a> 288 <em class='brace'>}</em>
+<a id='L289' name='L289'></a> 289 
+<a id='L290' name='L290'></a> 290 
+<a id='L291' name='L291'></a> 291 <em class='comment'>/*</em>
+<a id='L292' name='L292'></a> 292 <em class='comment'> * php_ns_sapi_register_variables() populates the php script environment</em>
+<a id='L293' name='L293'></a> 293 <em class='comment'> * with a number of variables. HTTP_* variables are created for</em>
+<a id='L294' name='L294'></a> 294 <em class='comment'> * the HTTP header data, so that a script can access these.</em>
+<a id='L295' name='L295'></a> 295 <em class='comment'> */</em>
+<a id='L296' name='L296'></a> 296 
+<a id='L297' name='L297'></a> 297 <em class='sharp'>#define</em> <a href='../R/79.html' title='Multiple referred from 11 places.'>ADD_STRINGX</a>(<a href='../Y/28160.html' title='Multiple used in 4617 places.'>name</a>, <a href='../Y/12847.html' title='Multiple used in 3901 places.'>buf</a>)                                                                          \
+<a id='L298' name='L298'></a> 298         <a href='../S/1391.html#L40' title='Defined at 40 in main/php_variables.c.'>php_register_variable</a>(<a href='../Y/28160.html' title='Multiple used in 4617 places.'>name</a>, <a href='../Y/12847.html' title='Multiple used in 3901 places.'>buf</a>, <a href='../Y/39380.html' title='Multiple used in 238 places.'>track_vars_array</a> <a href='../D/14074.html' title='Multiple defined in 2 places.'>TSRMLS_CC</a>)
+<a id='L299' name='L299'></a> 299 
+<a id='L300' name='L300'></a> 300 <em class='sharp'>#define</em> <a href='../R/78.html' title='Multiple referred from 45 places.'>ADD_STRING</a>(<a href='../Y/28160.html' title='Multiple used in 4617 places.'>name</a>)                                                                                \
+<a id='L301' name='L301'></a> 301         <a href='../S/1427.html#L297' title='Defined at 297 in sapi/aolserver/aolserver.c.'>ADD_STRINGX</a>(<a href='../Y/28160.html' title='Multiple used in 4617 places.'>name</a>, <a href='../Y/12847.html' title='Multiple used in 3901 places.'>buf</a>)
+<a id='L302' name='L302'></a> 302 
+<a id='L303' name='L303'></a> 303 <strong class='reserved'>static</strong> <strong class='reserved'>void</strong>
+<a id='L304' name='L304'></a> 304 <a href='../S/1427.html#L391' title='Referred from 391 in sapi/aolserver/aolserver.c.'>php_ns_sapi_register_variables</a>(<a href='../S/1741.html#L55' title='Defined at 55 in Zend/zend_types.h.'>zval</a> *<a href='../Y/39380.html' title='Multiple used in 238 places.'>track_vars_array</a> <a href='../D/14076.html' title='Multiple defined in 136 places.'>TSRMLS_DC</a>)
+<a id='L305' name='L305'></a> 305 <em class='brace'>{</em>
+<a id='L306' name='L306'></a> 306         <strong class='reserved'>int</strong> <a href='../Y/22121.html' title='Multiple used in 12184 places.'>i</a>;
+<a id='L307' name='L307'></a> 307         <strong class='reserved'>char</strong> <a href='../Y/12847.html' title='Multiple used in 3901 places.'>buf</a>[<a href='../S/1427.html#L41' title='Defined at 41 in sapi/aolserver/aolserver.c.'>NS_BUF_SIZE</a> + 1];
+<a id='L308' name='L308'></a> 308         <strong class='reserved'>char</strong> *<a href='../Y/39059.html' title='Multiple used in 3942 places.'>tmp</a>;
+<a id='L309' name='L309'></a> 309 
+<a id='L310' name='L310'></a> 310         <strong class='reserved'>for</strong>(<a href='../Y/22121.html' title='Multiple used in 12184 places.'>i</a> = 0; <a href='../Y/22121.html' title='Multiple used in 12184 places.'>i</a> &lt; <a href='../Y/4067.html' title='Multiple used in 5 places.'>Ns_SetSize</a>(<a href='../D/6033.html' title='Multiple defined in 3 places.'>NSG</a>(<a href='../D/20273.html' title='Multiple defined in 24 places.'>conn</a>-&gt;<a href='../Y/19993.html' title='Multiple used in 280 places.'>headers</a>)); <a href='../Y/22121.html' title='Multiple used in 12184 places.'>i</a>++) <em class='brace'>{</em>
+<a id='L311' name='L311'></a> 311                 <strong class='reserved'>char</strong> *<a href='../D/23451.html' title='Multiple defined in 3 places.'>key</a> = <a href='../Y/4066.html' title='Multiple used in 5 places.'>Ns_SetKey</a>(<a href='../D/6033.html' title='Multiple defined in 3 places.'>NSG</a>(<a href='../D/20273.html' title='Multiple defined in 24 places.'>conn</a>-&gt;<a href='../Y/19993.html' title='Multiple used in 280 places.'>headers</a>), <a href='../Y/22121.html' title='Multiple used in 12184 places.'>i</a>);
+<a id='L312' name='L312'></a> 312                 <strong class='reserved'>char</strong> *<a href='../S/1737.html#L277' title='Defined at 277 in Zend/zend_strtod.c.'>value</a> = <a href='../Y/4068.html' title='Multiple used in 8 places.'>Ns_SetValue</a>(<a href='../D/6033.html' title='Multiple defined in 3 places.'>NSG</a>(<a href='../D/20273.html' title='Multiple defined in 24 places.'>conn</a>-&gt;<a href='../Y/19993.html' title='Multiple used in 280 places.'>headers</a>), <a href='../Y/22121.html' title='Multiple used in 12184 places.'>i</a>);
+<a id='L313' name='L313'></a> 313                 <strong class='reserved'>char</strong> *<a href='../Y/30495.html' title='Multiple used in 13216 places.'>p</a>;
+<a id='L314' name='L314'></a> 314                 <strong class='reserved'>char</strong> <a href='../Y/12995.html' title='Multiple used in 8103 places.'>c</a>;
+<a id='L315' name='L315'></a> 315 
+<a id='L316' name='L316'></a> 316                 <a href='../D/29759.html' title='Multiple defined in 5 places.'>snprintf</a>(<a href='../Y/12847.html' title='Multiple used in 3901 places.'>buf</a>, <a href='../S/1427.html#L41' title='Defined at 41 in sapi/aolserver/aolserver.c.'>NS_BUF_SIZE</a>, "HTTP_%s", <a href='../D/23451.html' title='Multiple defined in 3 places.'>key</a>);
+<a id='L317' name='L317'></a> 317                 
+<a id='L318' name='L318'></a> 318                 <strong class='reserved'>for</strong>(<a href='../Y/30495.html' title='Multiple used in 13216 places.'>p</a> = <a href='../Y/12847.html' title='Multiple used in 3901 places.'>buf</a> + 5; (<a href='../Y/12995.html' title='Multiple used in 8103 places.'>c</a> = *<a href='../Y/30495.html' title='Multiple used in 13216 places.'>p</a>); <a href='../Y/30495.html' title='Multiple used in 13216 places.'>p</a>++) <em class='brace'>{</em>
+<a id='L319' name='L319'></a> 319                         <a href='../Y/12995.html' title='Multiple used in 8103 places.'>c</a> = <a href='../Y/39349.html' title='Multiple used in 36 places.'>toupper</a>(<a href='../Y/12995.html' title='Multiple used in 8103 places.'>c</a>);
+<a id='L320' name='L320'></a> 320                         <strong class='reserved'>if</strong>(<a href='../Y/12995.html' title='Multiple used in 8103 places.'>c</a> &lt; 'A' || <a href='../Y/12995.html' title='Multiple used in 8103 places.'>c</a> &gt; 'Z') <em class='brace'>{</em>
+<a id='L321' name='L321'></a> 321                                 <a href='../Y/12995.html' title='Multiple used in 8103 places.'>c</a> = '_';
+<a id='L322' name='L322'></a> 322                         <em class='brace'>}</em>
+<a id='L323' name='L323'></a> 323                         *<a href='../Y/30495.html' title='Multiple used in 13216 places.'>p</a> = <a href='../Y/12995.html' title='Multiple used in 8103 places.'>c</a>;
+<a id='L324' name='L324'></a> 324                 <em class='brace'>}</em>
+<a id='L325' name='L325'></a> 325 
+<a id='L326' name='L326'></a> 326                 <a href='../S/1427.html#L297' title='Defined at 297 in sapi/aolserver/aolserver.c.'>ADD_STRINGX</a>(<a href='../Y/12847.html' title='Multiple used in 3901 places.'>buf</a>, <a href='../S/1737.html#L277' title='Defined at 277 in Zend/zend_strtod.c.'>value</a>);
+<a id='L327' name='L327'></a> 327         <em class='brace'>}</em>
+<a id='L328' name='L328'></a> 328         
+<a id='L329' name='L329'></a> 329         <a href='../D/29759.html' title='Multiple defined in 5 places.'>snprintf</a>(<a href='../Y/12847.html' title='Multiple used in 3901 places.'>buf</a>, <a href='../S/1427.html#L41' title='Defined at 41 in sapi/aolserver/aolserver.c.'>NS_BUF_SIZE</a>, "%s/%s", <a href='../Y/4056.html' title='Multiple used in 2 places.'>Ns_InfoServerName</a>(), <a href='../Y/4057.html' title='Multiple used in 2 places.'>Ns_InfoServerVersion</a>());
+<a id='L330' name='L330'></a> 330         <a href='../D/101.html' title='Multiple defined in 7 places.'>ADD_STRING</a>("SERVER_SOFTWARE");
+<a id='L331' name='L331'></a> 331         <a href='../D/29759.html' title='Multiple defined in 5 places.'>snprintf</a>(<a href='../Y/12847.html' title='Multiple used in 3901 places.'>buf</a>, <a href='../S/1427.html#L41' title='Defined at 41 in sapi/aolserver/aolserver.c.'>NS_BUF_SIZE</a>, "HTTP/%1.1f", <a href='../D/6033.html' title='Multiple defined in 3 places.'>NSG</a>(<a href='../D/20273.html' title='Multiple defined in 24 places.'>conn</a>)-&gt;<a href='../S/813.html#L793' title='Defined at 793 in ext/mysqlnd/mysqlnd_structs.h.'>request</a>-&gt;<a href='../Y/40723.html' title='Multiple used in 237 places.'>version</a>);
+<a id='L332' name='L332'></a> 332         <a href='../D/101.html' title='Multiple defined in 7 places.'>ADD_STRING</a>("SERVER_PROTOCOL");
+<a id='L333' name='L333'></a> 333 
+<a id='L334' name='L334'></a> 334         <a href='../S/1427.html#L297' title='Defined at 297 in sapi/aolserver/aolserver.c.'>ADD_STRINGX</a>("REQUEST_METHOD", <a href='../D/6033.html' title='Multiple defined in 3 places.'>NSG</a>(<a href='../D/20273.html' title='Multiple defined in 24 places.'>conn</a>)-&gt;<a href='../S/813.html#L793' title='Defined at 793 in ext/mysqlnd/mysqlnd_structs.h.'>request</a>-&gt;<a href='../Y/26655.html' title='Multiple used in 513 places.'>method</a>);
+<a id='L335' name='L335'></a> 335 
+<a id='L336' name='L336'></a> 336         <strong class='reserved'>if</strong>(<a href='../D/6033.html' title='Multiple defined in 3 places.'>NSG</a>(<a href='../D/20273.html' title='Multiple defined in 24 places.'>conn</a>)-&gt;<a href='../S/813.html#L793' title='Defined at 793 in ext/mysqlnd/mysqlnd_structs.h.'>request</a>-&gt;<a href='../D/28715.html' title='Multiple defined in 2 places.'>query</a>)
+<a id='L337' name='L337'></a> 337                 <a href='../S/1427.html#L297' title='Defined at 297 in sapi/aolserver/aolserver.c.'>ADD_STRINGX</a>("QUERY_STRING", <a href='../D/6033.html' title='Multiple defined in 3 places.'>NSG</a>(<a href='../D/20273.html' title='Multiple defined in 24 places.'>conn</a>)-&gt;<a href='../S/813.html#L793' title='Defined at 793 in ext/mysqlnd/mysqlnd_structs.h.'>request</a>-&gt;<a href='../D/28715.html' title='Multiple defined in 2 places.'>query</a>);
+<a id='L338' name='L338'></a> 338         
+<a id='L339' name='L339'></a> 339         <a href='../S/1427.html#L297' title='Defined at 297 in sapi/aolserver/aolserver.c.'>ADD_STRINGX</a>("SERVER_BUILDDATE", <a href='../Y/4049.html' title='Multiple used in 2 places.'>Ns_InfoBuildDate</a>());
+<a id='L340' name='L340'></a> 340 
+<a id='L341' name='L341'></a> 341         <a href='../S/1427.html#L297' title='Defined at 297 in sapi/aolserver/aolserver.c.'>ADD_STRINGX</a>("REMOTE_ADDR", Ns_ConnPeer(<a href='../D/6033.html' title='Multiple defined in 3 places.'>NSG</a>(<a href='../D/20273.html' title='Multiple defined in 24 places.'>conn</a>)));
+<a id='L342' name='L342'></a> 342 
+<a id='L343' name='L343'></a> 343         <a href='../D/29759.html' title='Multiple defined in 5 places.'>snprintf</a>(<a href='../Y/12847.html' title='Multiple used in 3901 places.'>buf</a>, <a href='../S/1427.html#L41' title='Defined at 41 in sapi/aolserver/aolserver.c.'>NS_BUF_SIZE</a>, "%d", Ns_ConnPeerPort(<a href='../D/6033.html' title='Multiple defined in 3 places.'>NSG</a>(<a href='../D/20273.html' title='Multiple defined in 24 places.'>conn</a>)));
+<a id='L344' name='L344'></a> 344         <a href='../D/101.html' title='Multiple defined in 7 places.'>ADD_STRING</a>("REMOTE_PORT");
+<a id='L345' name='L345'></a> 345 
+<a id='L346' name='L346'></a> 346         <a href='../D/29759.html' title='Multiple defined in 5 places.'>snprintf</a>(<a href='../Y/12847.html' title='Multiple used in 3901 places.'>buf</a>, <a href='../S/1427.html#L41' title='Defined at 41 in sapi/aolserver/aolserver.c.'>NS_BUF_SIZE</a>, "%d", Ns_ConnPort(<a href='../D/6033.html' title='Multiple defined in 3 places.'>NSG</a>(<a href='../D/20273.html' title='Multiple defined in 24 places.'>conn</a>)));
+<a id='L347' name='L347'></a> 347         <a href='../D/101.html' title='Multiple defined in 7 places.'>ADD_STRING</a>("SERVER_PORT");
+<a id='L348' name='L348'></a> 348 
+<a id='L349' name='L349'></a> 349         <a href='../Y/39059.html' title='Multiple used in 3942 places.'>tmp</a> = Ns_ConnHost(<a href='../D/6033.html' title='Multiple defined in 3 places.'>NSG</a>(<a href='../D/20273.html' title='Multiple defined in 24 places.'>conn</a>));
+<a id='L350' name='L350'></a> 350         <strong class='reserved'>if</strong> (<a href='../Y/39059.html' title='Multiple used in 3942 places.'>tmp</a>)
+<a id='L351' name='L351'></a> 351                 <a href='../S/1427.html#L297' title='Defined at 297 in sapi/aolserver/aolserver.c.'>ADD_STRINGX</a>("SERVER_NAME", <a href='../Y/39059.html' title='Multiple used in 3942 places.'>tmp</a>);
+<a id='L352' name='L352'></a> 352 
+<a id='L353' name='L353'></a> 353         <a href='../S/1427.html#L297' title='Defined at 297 in sapi/aolserver/aolserver.c.'>ADD_STRINGX</a>("PATH_TRANSLATED", <a href='../D/10562.html' title='Multiple defined in 2 places.'>SG</a>(<a href='../Y/34905.html' title='Multiple used in 585 places.'>request_info</a>).<a href='../Y/31564.html' title='Multiple used in 183 places.'>path_translated</a>);
+<a id='L354' name='L354'></a> 354         <a href='../S/1427.html#L297' title='Defined at 297 in sapi/aolserver/aolserver.c.'>ADD_STRINGX</a>("REQUEST_URI", <a href='../D/10562.html' title='Multiple defined in 2 places.'>SG</a>(<a href='../Y/34905.html' title='Multiple used in 585 places.'>request_info</a>).<a href='../Y/34926.html' title='Multiple used in 94 places.'>request_uri</a>);
+<a id='L355' name='L355'></a> 355         <a href='../S/1427.html#L297' title='Defined at 297 in sapi/aolserver/aolserver.c.'>ADD_STRINGX</a>("PHP_SELF", <a href='../D/10562.html' title='Multiple defined in 2 places.'>SG</a>(<a href='../Y/34905.html' title='Multiple used in 585 places.'>request_info</a>).<a href='../Y/34926.html' title='Multiple used in 94 places.'>request_uri</a>);
+<a id='L356' name='L356'></a> 356 
+<a id='L357' name='L357'></a> 357         <a href='../S/1427.html#L297' title='Defined at 297 in sapi/aolserver/aolserver.c.'>ADD_STRINGX</a>("GATEWAY_INTERFACE", "CGI/1.1");
+<a id='L358' name='L358'></a> 358 
+<a id='L359' name='L359'></a> 359         <a href='../D/29759.html' title='Multiple defined in 5 places.'>snprintf</a>(<a href='../Y/12847.html' title='Multiple used in 3901 places.'>buf</a>, <a href='../S/1427.html#L41' title='Defined at 41 in sapi/aolserver/aolserver.c.'>NS_BUF_SIZE</a>, "%d", Ns_InfoBootTime());
+<a id='L360' name='L360'></a> 360         <a href='../D/101.html' title='Multiple defined in 7 places.'>ADD_STRING</a>("SERVER_BOOTTIME");
+<a id='L361' name='L361'></a> 361 <em class='brace'>}</em>
+<a id='L362' name='L362'></a> 362 
+<a id='L363' name='L363'></a> 363 
+<a id='L364' name='L364'></a> 364 
+<a id='L365' name='L365'></a> 365 <em class='comment'>/* this structure is static (as in "it does not change") */</em>
+<a id='L366' name='L366'></a> 366 
+<a id='L367' name='L367'></a> 367 <strong class='reserved'>static</strong> <a href='../S/1398.html#L68' title='Defined at 68 in main/SAPI.h.'>sapi_module_struct</a> <a href='../Y/8867.html' title='Multiple used in 4 places.'>aolserver_sapi_module</a> = <em class='brace'>{</em>
+<a id='L368' name='L368'></a> 368         "aolserver",
+<a id='L369' name='L369'></a> 369         "AOLserver",
+<a id='L370' name='L370'></a> 370 
+<a id='L371' name='L371'></a> 371         <a href='../S/1427.html#L281' title='Defined at 281 in sapi/aolserver/aolserver.c.'>php_ns_startup</a>,                                                 <em class='comment'>/* startup */</em>
+<a id='L372' name='L372'></a> 372         <a href='../S/1364.html#L2442' title='Defined at 2442 in main/main.c.'>php_module_shutdown_wrapper</a>,                    <em class='comment'>/* shutdown */</em>
+<a id='L373' name='L373'></a> 373 
+<a id='L374' name='L374'></a> 374         <a href='../D/6086.html' title='Multiple defined in 8 places.'>NULL</a>,                                                                   <em class='comment'>/* activate */</em>
+<a id='L375' name='L375'></a> 375         <a href='../D/6086.html' title='Multiple defined in 8 places.'>NULL</a>,                                                                   <em class='comment'>/* deactivate */</em>
+<a id='L376' name='L376'></a> 376 
+<a id='L377' name='L377'></a> 377         <a href='../S/1427.html#L89' title='Defined at 89 in sapi/aolserver/aolserver.c.'>php_ns_sapi_ub_write</a>,                                   <em class='comment'>/* unbuffered write */</em>
+<a id='L378' name='L378'></a> 378         <a href='../D/6086.html' title='Multiple defined in 8 places.'>NULL</a>,                                                                   <em class='comment'>/* flush */</em>
+<a id='L379' name='L379'></a> 379         <a href='../D/6086.html' title='Multiple defined in 8 places.'>NULL</a>,                                                                   <em class='comment'>/* get uid */</em>
+<a id='L380' name='L380'></a> 380         <a href='../D/6086.html' title='Multiple defined in 8 places.'>NULL</a>,                                                                   <em class='comment'>/* getenv */</em>
+<a id='L381' name='L381'></a> 381 
+<a id='L382' name='L382'></a> 382         <a href='../S/1368.html#L292' title='Defined at 292 in main/php.h.'>php_error</a>,                                                              <em class='comment'>/* error handler */</em>
+<a id='L383' name='L383'></a> 383 
+<a id='L384' name='L384'></a> 384         <a href='../S/1427.html#L114' title='Defined at 114 in sapi/aolserver/aolserver.c.'>php_ns_sapi_header_handler</a>,                             <em class='comment'>/* header handler */</em>
+<a id='L385' name='L385'></a> 385         <a href='../S/1427.html#L148' title='Defined at 148 in sapi/aolserver/aolserver.c.'>php_ns_sapi_send_headers</a>,                               <em class='comment'>/* send headers handler */</em>
+<a id='L386' name='L386'></a> 386         <a href='../D/6086.html' title='Multiple defined in 8 places.'>NULL</a>,                                                                   <em class='comment'>/* send header handler */</em>
+<a id='L387' name='L387'></a> 387 
+<a id='L388' name='L388'></a> 388         <a href='../S/1427.html#L165' title='Defined at 165 in sapi/aolserver/aolserver.c.'>php_ns_sapi_read_post</a>,                                  <em class='comment'>/* read POST data */</em>
+<a id='L389' name='L389'></a> 389         <a href='../S/1427.html#L188' title='Defined at 188 in sapi/aolserver/aolserver.c.'>php_ns_sapi_read_cookies</a>,                               <em class='comment'>/* read Cookies */</em>
+<a id='L390' name='L390'></a> 390 
+<a id='L391' name='L391'></a> 391         <a href='../S/1427.html#L304' title='Defined at 304 in sapi/aolserver/aolserver.c.'>php_ns_sapi_register_variables</a>,
+<a id='L392' name='L392'></a> 392         <a href='../D/6086.html' title='Multiple defined in 8 places.'>NULL</a>,                                                                   <em class='comment'>/* Log message */</em>
+<a id='L393' name='L393'></a> 393         <a href='../D/6086.html' title='Multiple defined in 8 places.'>NULL</a>,                                                                   <em class='comment'>/* Get request time */</em>
+<a id='L394' name='L394'></a> 394         <a href='../D/6086.html' title='Multiple defined in 8 places.'>NULL</a>,                                                   <em class='comment'>/* child terminate */</em>
+<a id='L395' name='L395'></a> 395 
+<a id='L396' name='L396'></a> 396         <a href='../S/1398.html#L311' title='Defined at 311 in main/SAPI.h.'>STANDARD_SAPI_MODULE_PROPERTIES</a>
+<a id='L397' name='L397'></a> 397 <em class='brace'>}</em>;
+<a id='L398' name='L398'></a> 398 
+<a id='L399' name='L399'></a> 399 <em class='comment'>/*</em>
+<a id='L400' name='L400'></a> 400 <em class='comment'> * php_ns_module_main() is called by the per-request handler and</em>
+<a id='L401' name='L401'></a> 401 <em class='comment'> * "executes" the script</em>
+<a id='L402' name='L402'></a> 402 <em class='comment'> */</em>
+<a id='L403' name='L403'></a> 403 
+<a id='L404' name='L404'></a> 404 <strong class='reserved'>static</strong> <strong class='reserved'>int</strong>
+<a id='L405' name='L405'></a> 405 <a href='../S/1427.html#L505' title='Referred from 505 in sapi/aolserver/aolserver.c.'>php_ns_module_main</a>(<a href='../D/14075.html' title='Multiple defined in 2 places.'>TSRMLS_D</a>)
+<a id='L406' name='L406'></a> 406 <em class='brace'>{</em>
+<a id='L407' name='L407'></a> 407         <a href='../S/1734.html#L72' title='Defined at 72 in Zend/zend_stream.h.'>zend_file_handle</a> <a href='../Y/17883.html' title='Multiple used in 525 places.'>file_handle</a>;
+<a id='L408' name='L408'></a> 408 
+<a id='L409' name='L409'></a> 409         <a href='../Y/17883.html' title='Multiple used in 525 places.'>file_handle</a>.<a href='../D/32025.html' title='Multiple defined in 3 places.'>type</a> = <a href='../S/1734.html#L37' title='Defined at 37 in Zend/zend_stream.h.'>ZEND_HANDLE_FILENAME</a>;
+<a id='L410' name='L410'></a> 410         <a href='../Y/17883.html' title='Multiple used in 525 places.'>file_handle</a>.<a href='../Y/17928.html' title='Multiple used in 1507 places.'>filename</a> = <a href='../D/10562.html' title='Multiple defined in 2 places.'>SG</a>(<a href='../Y/34905.html' title='Multiple used in 585 places.'>request_info</a>).<a href='../Y/31564.html' title='Multiple used in 183 places.'>path_translated</a>;
+<a id='L411' name='L411'></a> 411         <a href='../Y/17883.html' title='Multiple used in 525 places.'>file_handle</a>.<a href='../Y/18409.html' title='Multiple used in 46 places.'>free_filename</a> = 0;
+<a id='L412' name='L412'></a> 412         <a href='../Y/17883.html' title='Multiple used in 525 places.'>file_handle</a>.<a href='../Y/30001.html' title='Multiple used in 247 places.'>opened_path</a> = <a href='../D/6086.html' title='Multiple defined in 8 places.'>NULL</a>;
+<a id='L413' name='L413'></a> 413         
+<a id='L414' name='L414'></a> 414         <a href='../S/1427.html#L519' title='Defined at 519 in sapi/aolserver/aolserver.c.'>php_ns_config</a>(<a href='../Y/19369.html' title='Multiple used in 4 places.'>global_context</a>, 0);
+<a id='L415' name='L415'></a> 415         <strong class='reserved'>if</strong> (<a href='../D/27414.html' title='Multiple defined in 2 places.'>php_request_startup</a>(<a href='../D/14073.html' title='Multiple defined in 2 places.'>TSRMLS_C</a>) == <a href='../S/1643.html#L283' title='Defined at 283 in Zend/zend.h.'>FAILURE</a>) <em class='brace'>{</em>
+<a id='L416' name='L416'></a> 416                 <strong class='reserved'>return</strong> <a href='../Y/3981.html' title='Multiple used in 2 places.'>NS_ERROR</a>;
+<a id='L417' name='L417'></a> 417         <em class='brace'>}</em>
+<a id='L418' name='L418'></a> 418         
+<a id='L419' name='L419'></a> 419         <a href='../S/1364.html#L2515' title='Defined at 2515 in main/main.c.'>php_execute_script</a>(&amp;<a href='../Y/17883.html' title='Multiple used in 525 places.'>file_handle</a> <a href='../D/14074.html' title='Multiple defined in 2 places.'>TSRMLS_CC</a>);
+<a id='L420' name='L420'></a> 420         <a href='../S/1364.html#L1818' title='Defined at 1818 in main/main.c.'>php_request_shutdown</a>(<a href='../D/6086.html' title='Multiple defined in 8 places.'>NULL</a>);
+<a id='L421' name='L421'></a> 421 
+<a id='L422' name='L422'></a> 422         <strong class='reserved'>return</strong> <a href='../Y/3982.html' title='Multiple used in 3 places.'>NS_OK</a>;
+<a id='L423' name='L423'></a> 423 <em class='brace'>}</em>
+<a id='L424' name='L424'></a> 424 
+<a id='L425' name='L425'></a> 425 <em class='comment'>/*</em>
+<a id='L426' name='L426'></a> 426 <em class='comment'> * php_ns_request_ctor() initializes the per-request data structure</em>
+<a id='L427' name='L427'></a> 427 <em class='comment'> * and fills it with data provided by the web server</em>
+<a id='L428' name='L428'></a> 428 <em class='comment'> */</em>
+<a id='L429' name='L429'></a> 429 
+<a id='L430' name='L430'></a> 430 <strong class='reserved'>static</strong> <strong class='reserved'>void</strong> 
+<a id='L431' name='L431'></a> 431 <a href='../S/1427.html#L503' title='Referred from 503 in sapi/aolserver/aolserver.c.'>php_ns_request_ctor</a>(<a href='../D/14075.html' title='Multiple defined in 2 places.'>TSRMLS_D</a>)
+<a id='L432' name='L432'></a> 432 <em class='brace'>{</em>
+<a id='L433' name='L433'></a> 433         <strong class='reserved'>char</strong> *<a href='../Y/36089.html' title='Multiple used in 423 places.'>server</a>;
+<a id='L434' name='L434'></a> 434         <a href='../Y/4044.html' title='Multiple used in 2 places.'>Ns_DString</a> <a href='../Y/16196.html' title='Multiple used in 28 places.'>ds</a>;
+<a id='L435' name='L435'></a> 435         <strong class='reserved'>char</strong> *<a href='../Y/35355.html' title='Multiple used in 174 places.'>root</a>;
+<a id='L436' name='L436'></a> 436         <strong class='reserved'>int</strong> <a href='../Y/23199.html' title='Multiple used in 873 places.'>index</a>;
+<a id='L437' name='L437'></a> 437         <strong class='reserved'>char</strong> *<a href='../Y/39059.html' title='Multiple used in 3942 places.'>tmp</a>;
+<a id='L438' name='L438'></a> 438         
+<a id='L439' name='L439'></a> 439         <a href='../Y/36089.html' title='Multiple used in 423 places.'>server</a> = <a href='../Y/4039.html' title='Multiple used in 2 places.'>Ns_ConnServer</a>(<a href='../D/6033.html' title='Multiple defined in 3 places.'>NSG</a>(<a href='../D/20273.html' title='Multiple defined in 24 places.'>conn</a>));
+<a id='L440' name='L440'></a> 440         
+<a id='L441' name='L441'></a> 441 <em class='sharp'>#define</em> <a href='../R/25939.html' title='Multiple referred from 5 places.'>safe_strdup</a>(<a href='../Y/41379.html' title='Multiple used in 2301 places.'>x</a>) ((<a href='../Y/41379.html' title='Multiple used in 2301 places.'>x</a>)?<a href='../D/31518.html' title='Multiple defined in 2 places.'>strdup</a>((<a href='../Y/41379.html' title='Multiple used in 2301 places.'>x</a>)):<a href='../D/6086.html' title='Multiple defined in 8 places.'>NULL</a>)
+<a id='L442' name='L442'></a> 442         <a href='../D/10562.html' title='Multiple defined in 2 places.'>SG</a>(<a href='../Y/34905.html' title='Multiple used in 585 places.'>request_info</a>).<a href='../Y/34199.html' title='Multiple used in 99 places.'>query_string</a> = <a href='../D/29099.html' title='Multiple defined in 3 places.'>safe_strdup</a>(<a href='../D/6033.html' title='Multiple defined in 3 places.'>NSG</a>(<a href='../D/20273.html' title='Multiple defined in 24 places.'>conn</a>-&gt;<a href='../S/813.html#L793' title='Defined at 793 in ext/mysqlnd/mysqlnd_structs.h.'>request</a>-&gt;<a href='../D/28715.html' title='Multiple defined in 2 places.'>query</a>));
+<a id='L443' name='L443'></a> 443 
+<a id='L444' name='L444'></a> 444         <a href='../Y/4046.html' title='Multiple used in 2 places.'>Ns_DStringInit</a>(&amp;<a href='../Y/16196.html' title='Multiple used in 28 places.'>ds</a>);
+<a id='L445' name='L445'></a> 445         <a href='../Y/4069.html' title='Multiple used in 2 places.'>Ns_UrlToFile</a>(&amp;<a href='../Y/16196.html' title='Multiple used in 28 places.'>ds</a>, <a href='../Y/36089.html' title='Multiple used in 423 places.'>server</a>, <a href='../D/6033.html' title='Multiple defined in 3 places.'>NSG</a>(<a href='../D/20273.html' title='Multiple defined in 24 places.'>conn</a>-&gt;<a href='../S/813.html#L793' title='Defined at 793 in ext/mysqlnd/mysqlnd_structs.h.'>request</a>-&gt;<a href='../Y/40215.html' title='Multiple used in 178 places.'>url</a>));
+<a id='L446' name='L446'></a> 446         
+<a id='L447' name='L447'></a> 447         <em class='comment'>/* path_translated is the absolute path to the file */</em>
+<a id='L448' name='L448'></a> 448         <a href='../D/10562.html' title='Multiple defined in 2 places.'>SG</a>(<a href='../Y/34905.html' title='Multiple used in 585 places.'>request_info</a>).<a href='../Y/31564.html' title='Multiple used in 183 places.'>path_translated</a> = <a href='../D/29099.html' title='Multiple defined in 3 places.'>safe_strdup</a>(<a href='../Y/4047.html' title='Multiple used in 2 places.'>Ns_DStringValue</a>(&amp;<a href='../Y/16196.html' title='Multiple used in 28 places.'>ds</a>));
+<a id='L449' name='L449'></a> 449         <a href='../Y/4045.html' title='Multiple used in 2 places.'>Ns_DStringFree</a>(&amp;<a href='../Y/16196.html' title='Multiple used in 28 places.'>ds</a>);
+<a id='L450' name='L450'></a> 450         <a href='../Y/35355.html' title='Multiple used in 174 places.'>root</a> = <a href='../Y/4061.html' title='Multiple used in 2 places.'>Ns_PageRoot</a>(<a href='../Y/36089.html' title='Multiple used in 423 places.'>server</a>);
+<a id='L451' name='L451'></a> 451         <a href='../D/10562.html' title='Multiple defined in 2 places.'>SG</a>(<a href='../Y/34905.html' title='Multiple used in 585 places.'>request_info</a>).<a href='../Y/34926.html' title='Multiple used in 94 places.'>request_uri</a> = <a href='../D/31518.html' title='Multiple defined in 2 places.'>strdup</a>(<a href='../D/10562.html' title='Multiple defined in 2 places.'>SG</a>(<a href='../Y/34905.html' title='Multiple used in 585 places.'>request_info</a>).<a href='../Y/31564.html' title='Multiple used in 183 places.'>path_translated</a> + <a href='../S/882.html#L373' title='Defined at 373 in ext/pcre/pcrelib/pcre_internal.h.'>strlen</a>(<a href='../Y/35355.html' title='Multiple used in 174 places.'>root</a>));
+<a id='L452' name='L452'></a> 452         <a href='../D/10562.html' title='Multiple defined in 2 places.'>SG</a>(<a href='../Y/34905.html' title='Multiple used in 585 places.'>request_info</a>).<a href='../Y/34907.html' title='Multiple used in 60 places.'>request_method</a> = <a href='../D/6033.html' title='Multiple defined in 3 places.'>NSG</a>(<a href='../D/20273.html' title='Multiple defined in 24 places.'>conn</a>)-&gt;<a href='../S/813.html#L793' title='Defined at 793 in ext/mysqlnd/mysqlnd_structs.h.'>request</a>-&gt;<a href='../Y/26655.html' title='Multiple used in 513 places.'>method</a>;
+<a id='L453' name='L453'></a> 453         <strong class='reserved'>if</strong>(<a href='../D/6033.html' title='Multiple defined in 3 places.'>NSG</a>(<a href='../D/20273.html' title='Multiple defined in 24 places.'>conn</a>)-&gt;<a href='../S/813.html#L793' title='Defined at 793 in ext/mysqlnd/mysqlnd_structs.h.'>request</a>-&gt;<a href='../Y/40723.html' title='Multiple used in 237 places.'>version</a> &gt; 1.0) <a href='../D/10562.html' title='Multiple defined in 2 places.'>SG</a>(<a href='../Y/34905.html' title='Multiple used in 585 places.'>request_info</a>).<a href='../Y/33819.html' title='Multiple used in 20 places.'>proto_num</a> = 1001;
+<a id='L454' name='L454'></a> 454         <strong class='reserved'>else</strong> <a href='../D/10562.html' title='Multiple defined in 2 places.'>SG</a>(<a href='../Y/34905.html' title='Multiple used in 585 places.'>request_info</a>).<a href='../Y/33819.html' title='Multiple used in 20 places.'>proto_num</a> = 1000;
+<a id='L455' name='L455'></a> 455         <a href='../D/10562.html' title='Multiple defined in 2 places.'>SG</a>(<a href='../Y/34905.html' title='Multiple used in 585 places.'>request_info</a>).<a href='../Y/14251.html' title='Multiple used in 87 places.'>content_length</a> = <a href='../Y/4032.html' title='Multiple used in 2 places.'>Ns_ConnContentLength</a>(<a href='../D/6033.html' title='Multiple defined in 3 places.'>NSG</a>(<a href='../D/20273.html' title='Multiple defined in 24 places.'>conn</a>));
+<a id='L456' name='L456'></a> 456         <a href='../Y/23199.html' title='Multiple used in 873 places.'>index</a> = <a href='../Y/4065.html' title='Multiple used in 3 places.'>Ns_SetIFind</a>(<a href='../D/6033.html' title='Multiple defined in 3 places.'>NSG</a>(<a href='../D/20273.html' title='Multiple defined in 24 places.'>conn</a>)-&gt;<a href='../Y/19993.html' title='Multiple used in 280 places.'>headers</a>, "content-type");
+<a id='L457' name='L457'></a> 457         <a href='../D/10562.html' title='Multiple defined in 2 places.'>SG</a>(<a href='../Y/34905.html' title='Multiple used in 585 places.'>request_info</a>).<a href='../Y/14256.html' title='Multiple used in 92 places.'>content_type</a> = <a href='../Y/23199.html' title='Multiple used in 873 places.'>index</a> == -1 ? <a href='../D/6086.html' title='Multiple defined in 8 places.'>NULL</a> : 
+<a id='L458' name='L458'></a> 458                 <a href='../Y/4068.html' title='Multiple used in 8 places.'>Ns_SetValue</a>(<a href='../D/6033.html' title='Multiple defined in 3 places.'>NSG</a>(<a href='../D/20273.html' title='Multiple defined in 24 places.'>conn</a>)-&gt;<a href='../Y/19993.html' title='Multiple used in 280 places.'>headers</a>, <a href='../Y/23199.html' title='Multiple used in 873 places.'>index</a>);
+<a id='L459' name='L459'></a> 459         <a href='../D/10562.html' title='Multiple defined in 2 places.'>SG</a>(<a href='../Y/35652.html' title='Multiple used in 273 places.'>sapi_headers</a>).<a href='../Y/22095.html' title='Multiple used in 97 places.'>http_response_code</a> = 200;
+<a id='L460' name='L460'></a> 460 
+<a id='L461' name='L461'></a> 461         <a href='../Y/39059.html' title='Multiple used in 3942 places.'>tmp</a> = <a href='../Y/4031.html' title='Multiple used in 2 places.'>Ns_ConnAuthUser</a>(<a href='../D/6033.html' title='Multiple defined in 3 places.'>NSG</a>(<a href='../D/20273.html' title='Multiple defined in 24 places.'>conn</a>));
+<a id='L462' name='L462'></a> 462         <strong class='reserved'>if</strong> (<a href='../Y/39059.html' title='Multiple used in 3942 places.'>tmp</a>)
+<a id='L463' name='L463'></a> 463                 <a href='../Y/39059.html' title='Multiple used in 3942 places.'>tmp</a> = <a href='../S/1645.html#L77' title='Defined at 77 in Zend/zend_alloc.h.'>estrdup</a>(<a href='../Y/39059.html' title='Multiple used in 3942 places.'>tmp</a>);
+<a id='L464' name='L464'></a> 464         <a href='../D/10562.html' title='Multiple defined in 2 places.'>SG</a>(<a href='../Y/34905.html' title='Multiple used in 585 places.'>request_info</a>).<a href='../Y/11979.html' title='Multiple used in 45 places.'>auth_user</a> = <a href='../Y/39059.html' title='Multiple used in 3942 places.'>tmp</a>;
+<a id='L465' name='L465'></a> 465 
+<a id='L466' name='L466'></a> 466         <a href='../Y/39059.html' title='Multiple used in 3942 places.'>tmp</a> = <a href='../Y/4030.html' title='Multiple used in 2 places.'>Ns_ConnAuthPasswd</a>(<a href='../D/6033.html' title='Multiple defined in 3 places.'>NSG</a>(<a href='../D/20273.html' title='Multiple defined in 24 places.'>conn</a>));
+<a id='L467' name='L467'></a> 467         <strong class='reserved'>if</strong> (<a href='../Y/39059.html' title='Multiple used in 3942 places.'>tmp</a>)
+<a id='L468' name='L468'></a> 468                 <a href='../Y/39059.html' title='Multiple used in 3942 places.'>tmp</a> = <a href='../S/1645.html#L77' title='Defined at 77 in Zend/zend_alloc.h.'>estrdup</a>(<a href='../Y/39059.html' title='Multiple used in 3942 places.'>tmp</a>);
+<a id='L469' name='L469'></a> 469         <a href='../D/10562.html' title='Multiple defined in 2 places.'>SG</a>(<a href='../Y/34905.html' title='Multiple used in 585 places.'>request_info</a>).<a href='../Y/11973.html' title='Multiple used in 28 places.'>auth_password</a> = <a href='../Y/39059.html' title='Multiple used in 3942 places.'>tmp</a>;
+<a id='L470' name='L470'></a> 470 
+<a id='L471' name='L471'></a> 471         <a href='../D/6033.html' title='Multiple defined in 3 places.'>NSG</a>(<a href='../Y/14974.html' title='Multiple used in 5 places.'>data_avail</a>) = <a href='../D/10562.html' title='Multiple defined in 2 places.'>SG</a>(<a href='../Y/34905.html' title='Multiple used in 585 places.'>request_info</a>).<a href='../Y/14251.html' title='Multiple used in 87 places.'>content_length</a>;
+<a id='L472' name='L472'></a> 472 <em class='brace'>}</em>
+<a id='L473' name='L473'></a> 473 
+<a id='L474' name='L474'></a> 474 <em class='comment'>/*</em>
+<a id='L475' name='L475'></a> 475 <em class='comment'> * php_ns_request_dtor() destroys all data associated with</em>
+<a id='L476' name='L476'></a> 476 <em class='comment'> * the per-request structure </em>
+<a id='L477' name='L477'></a> 477 <em class='comment'> */</em>
+<a id='L478' name='L478'></a> 478 
+<a id='L479' name='L479'></a> 479 <strong class='reserved'>static</strong> <strong class='reserved'>void</strong>
+<a id='L480' name='L480'></a> 480 <a href='../S/1427.html#L507' title='Referred from 507 in sapi/aolserver/aolserver.c.'>php_ns_request_dtor</a>(<a href='../D/14075.html' title='Multiple defined in 2 places.'>TSRMLS_D</a>)
+<a id='L481' name='L481'></a> 481 <em class='brace'>{</em>
+<a id='L482' name='L482'></a> 482         <a href='../S/1228.html#L36' title='Defined at 36 in ext/xmlrpc/libxmlrpc/base64.h.'>free</a>(<a href='../D/10562.html' title='Multiple defined in 2 places.'>SG</a>(<a href='../Y/34905.html' title='Multiple used in 585 places.'>request_info</a>).<a href='../Y/31564.html' title='Multiple used in 183 places.'>path_translated</a>);
+<a id='L483' name='L483'></a> 483         <strong class='reserved'>if</strong> (<a href='../D/10562.html' title='Multiple defined in 2 places.'>SG</a>(<a href='../Y/34905.html' title='Multiple used in 585 places.'>request_info</a>).<a href='../Y/34199.html' title='Multiple used in 99 places.'>query_string</a>)
+<a id='L484' name='L484'></a> 484                 <a href='../S/1228.html#L36' title='Defined at 36 in ext/xmlrpc/libxmlrpc/base64.h.'>free</a>(<a href='../D/10562.html' title='Multiple defined in 2 places.'>SG</a>(<a href='../Y/34905.html' title='Multiple used in 585 places.'>request_info</a>).<a href='../Y/34199.html' title='Multiple used in 99 places.'>query_string</a>);
+<a id='L485' name='L485'></a> 485         <a href='../S/1228.html#L36' title='Defined at 36 in ext/xmlrpc/libxmlrpc/base64.h.'>free</a>(<a href='../D/10562.html' title='Multiple defined in 2 places.'>SG</a>(<a href='../Y/34905.html' title='Multiple used in 585 places.'>request_info</a>).<a href='../Y/34926.html' title='Multiple used in 94 places.'>request_uri</a>);
+<a id='L486' name='L486'></a> 486 <em class='brace'>}</em>
+<a id='L487' name='L487'></a> 487 
+<a id='L488' name='L488'></a> 488 <em class='comment'>/*</em>
+<a id='L489' name='L489'></a> 489 <em class='comment'> * The php_ns_request_handler() is called per request and handles</em>
+<a id='L490' name='L490'></a> 490 <em class='comment'> * everything for one request.</em>
+<a id='L491' name='L491'></a> 491 <em class='comment'> */</em>
+<a id='L492' name='L492'></a> 492 
+<a id='L493' name='L493'></a> 493 <strong class='reserved'>static</strong> <strong class='reserved'>int</strong>
+<a id='L494' name='L494'></a> 494 <a href='../R/24043.html' title='Multiple referred from 3 places.'>php_ns_request_handler</a>(<strong class='reserved'>void</strong> *<a href='../Y/14267.html' title='Multiple used in 2143 places.'>context</a>, <a href='../Y/4029.html' title='Multiple used in 2 places.'>Ns_Conn</a> *<a href='../D/20273.html' title='Multiple defined in 24 places.'>conn</a>)
+<a id='L495' name='L495'></a> 495 <em class='brace'>{</em>
+<a id='L496' name='L496'></a> 496         <strong class='reserved'>int</strong> <a href='../Y/37807.html' title='Multiple used in 1740 places.'>status</a> = <a href='../Y/3982.html' title='Multiple used in 3 places.'>NS_OK</a>;
+<a id='L497' name='L497'></a> 497         <a href='../D/14077.html' title='Multiple defined in 2 places.'>TSRMLS_FETCH</a>();
+<a id='L498' name='L498'></a> 498         
+<a id='L499' name='L499'></a> 499         <a href='../D/6033.html' title='Multiple defined in 3 places.'>NSG</a>(<a href='../D/20273.html' title='Multiple defined in 24 places.'>conn</a>) = <a href='../D/20273.html' title='Multiple defined in 24 places.'>conn</a>;
+<a id='L500' name='L500'></a> 500         
+<a id='L501' name='L501'></a> 501         <a href='../D/10562.html' title='Multiple defined in 2 places.'>SG</a>(<a href='../Y/36099.html' title='Multiple used in 256 places.'>server_context</a>) = <a href='../Y/19369.html' title='Multiple used in 4 places.'>global_context</a>;
+<a id='L502' name='L502'></a> 502 
+<a id='L503' name='L503'></a> 503         <a href='../S/1427.html#L431' title='Defined at 431 in sapi/aolserver/aolserver.c.'>php_ns_request_ctor</a>(<a href='../D/14073.html' title='Multiple defined in 2 places.'>TSRMLS_C</a>);
+<a id='L504' name='L504'></a> 504         
+<a id='L505' name='L505'></a> 505         <a href='../Y/37807.html' title='Multiple used in 1740 places.'>status</a> = <a href='../S/1427.html#L405' title='Defined at 405 in sapi/aolserver/aolserver.c.'>php_ns_module_main</a>(<a href='../D/14073.html' title='Multiple defined in 2 places.'>TSRMLS_C</a>);
+<a id='L506' name='L506'></a> 506         
+<a id='L507' name='L507'></a> 507         <a href='../S/1427.html#L480' title='Defined at 480 in sapi/aolserver/aolserver.c.'>php_ns_request_dtor</a>(<a href='../D/14073.html' title='Multiple defined in 2 places.'>TSRMLS_C</a>);
+<a id='L508' name='L508'></a> 508 
+<a id='L509' name='L509'></a> 509         <strong class='reserved'>return</strong> <a href='../Y/37807.html' title='Multiple used in 1740 places.'>status</a>;
+<a id='L510' name='L510'></a> 510 <em class='brace'>}</em>
+<a id='L511' name='L511'></a> 511 
+<a id='L512' name='L512'></a> 512 <em class='comment'>/*</em>
+<a id='L513' name='L513'></a> 513 <em class='comment'> * php_ns_config() fetches the configuration data.</em>
+<a id='L514' name='L514'></a> 514 <em class='comment'> *</em>
+<a id='L515' name='L515'></a> 515 <em class='comment'> * It understands the "map" and "php_value" command.</em>
+<a id='L516' name='L516'></a> 516 <em class='comment'> */</em>
+<a id='L517' name='L517'></a> 517 
+<a id='L518' name='L518'></a> 518 <strong class='reserved'>static</strong> <strong class='reserved'>void</strong> 
+<a id='L519' name='L519'></a> 519 <a href='../R/24038.html' title='Multiple referred from 3 places.'>php_ns_config</a>(<a href='../S/1427.html#L65' title='Defined at 65 in sapi/aolserver/aolserver.c.'>php_ns_context</a> *<a href='../Y/14628.html' title='Multiple used in 1919 places.'>ctx</a>, <strong class='reserved'>char</strong> <a href='../Y/19362.html' title='Multiple used in 19 places.'>global</a>)
+<a id='L520' name='L520'></a> 520 <em class='brace'>{</em>
+<a id='L521' name='L521'></a> 521         <strong class='reserved'>int</strong> <a href='../Y/22121.html' title='Multiple used in 12184 places.'>i</a>;
+<a id='L522' name='L522'></a> 522         <strong class='reserved'>char</strong> *<a href='../Y/31544.html' title='Multiple used in 1178 places.'>path</a>;
+<a id='L523' name='L523'></a> 523         Ns_Set *<a href='../Y/36164.html' title='Multiple used in 253 places.'>set</a>;
+<a id='L524' name='L524'></a> 524 
+<a id='L525' name='L525'></a> 525         <a href='../Y/31544.html' title='Multiple used in 1178 places.'>path</a> = Ns_ConfigGetPath(<a href='../Y/14628.html' title='Multiple used in 1919 places.'>ctx</a>-&gt;<a href='../Y/29027.html' title='Multiple used in 7 places.'>ns_server</a>, <a href='../Y/14628.html' title='Multiple used in 1919 places.'>ctx</a>-&gt;<a href='../Y/29020.html' title='Multiple used in 4 places.'>ns_module</a>, <a href='../D/6086.html' title='Multiple defined in 8 places.'>NULL</a>);
+<a id='L526' name='L526'></a> 526         <a href='../Y/36164.html' title='Multiple used in 253 places.'>set</a> = Ns_ConfigGetSection(<a href='../Y/31544.html' title='Multiple used in 1178 places.'>path</a>);
+<a id='L527' name='L527'></a> 527 
+<a id='L528' name='L528'></a> 528         <strong class='reserved'>for</strong> (<a href='../Y/22121.html' title='Multiple used in 12184 places.'>i</a> = 0; <a href='../Y/36164.html' title='Multiple used in 253 places.'>set</a> &amp;&amp; <a href='../Y/22121.html' title='Multiple used in 12184 places.'>i</a> &lt; <a href='../Y/4067.html' title='Multiple used in 5 places.'>Ns_SetSize</a>(<a href='../Y/36164.html' title='Multiple used in 253 places.'>set</a>); <a href='../Y/22121.html' title='Multiple used in 12184 places.'>i</a>++) <em class='brace'>{</em>
+<a id='L529' name='L529'></a> 529                 <strong class='reserved'>char</strong> *<a href='../D/23451.html' title='Multiple defined in 3 places.'>key</a> = <a href='../Y/4066.html' title='Multiple used in 5 places.'>Ns_SetKey</a>(<a href='../Y/36164.html' title='Multiple used in 253 places.'>set</a>, <a href='../Y/22121.html' title='Multiple used in 12184 places.'>i</a>);
+<a id='L530' name='L530'></a> 530                 <strong class='reserved'>char</strong> *<a href='../S/1737.html#L277' title='Defined at 277 in Zend/zend_strtod.c.'>value</a> = <a href='../Y/4068.html' title='Multiple used in 8 places.'>Ns_SetValue</a>(<a href='../Y/36164.html' title='Multiple used in 253 places.'>set</a>, <a href='../Y/22121.html' title='Multiple used in 12184 places.'>i</a>);
+<a id='L531' name='L531'></a> 531 
+<a id='L532' name='L532'></a> 532                 <strong class='reserved'>if</strong> (<a href='../Y/19362.html' title='Multiple used in 19 places.'>global</a> &amp;&amp; !<a href='../D/31513.html' title='Multiple defined in 11 places.'>strcasecmp</a>(<a href='../D/23451.html' title='Multiple defined in 3 places.'>key</a>, "map")) <em class='brace'>{</em>
+<a id='L533' name='L533'></a> 533                         <a href='../Y/4059.html' title='Multiple used in 3 places.'>Ns_Log</a>(<a href='../Y/4026.html' title='Multiple used in 2 places.'>Notice</a>, "Registering PHP for \"%s\"", <a href='../S/1737.html#L277' title='Defined at 277 in Zend/zend_strtod.c.'>value</a>);
+<a id='L534' name='L534'></a> 534                         <a href='../Y/4062.html' title='Multiple used in 3 places.'>Ns_RegisterRequest</a>(<a href='../Y/14628.html' title='Multiple used in 1919 places.'>ctx</a>-&gt;<a href='../Y/29027.html' title='Multiple used in 7 places.'>ns_server</a>, "GET", <a href='../S/1737.html#L277' title='Defined at 277 in Zend/zend_strtod.c.'>value</a>, <a href='../S/1427.html#L494' title='Defined at 494 in sapi/aolserver/aolserver.c.'>php_ns_request_handler</a>, <a href='../D/6086.html' title='Multiple defined in 8 places.'>NULL</a>, <a href='../Y/14628.html' title='Multiple used in 1919 places.'>ctx</a>, 0);
+<a id='L535' name='L535'></a> 535                         <a href='../Y/4062.html' title='Multiple used in 3 places.'>Ns_RegisterRequest</a>(<a href='../Y/14628.html' title='Multiple used in 1919 places.'>ctx</a>-&gt;<a href='../Y/29027.html' title='Multiple used in 7 places.'>ns_server</a>, "POST", <a href='../S/1737.html#L277' title='Defined at 277 in Zend/zend_strtod.c.'>value</a>, <a href='../S/1427.html#L494' title='Defined at 494 in sapi/aolserver/aolserver.c.'>php_ns_request_handler</a>, <a href='../D/6086.html' title='Multiple defined in 8 places.'>NULL</a>, <a href='../Y/14628.html' title='Multiple used in 1919 places.'>ctx</a>, 0);
+<a id='L536' name='L536'></a> 536                         <a href='../Y/4062.html' title='Multiple used in 3 places.'>Ns_RegisterRequest</a>(<a href='../Y/14628.html' title='Multiple used in 1919 places.'>ctx</a>-&gt;<a href='../Y/29027.html' title='Multiple used in 7 places.'>ns_server</a>, "HEAD", <a href='../S/1737.html#L277' title='Defined at 277 in Zend/zend_strtod.c.'>value</a>, <a href='../S/1427.html#L494' title='Defined at 494 in sapi/aolserver/aolserver.c.'>php_ns_request_handler</a>, <a href='../D/6086.html' title='Multiple defined in 8 places.'>NULL</a>, <a href='../Y/14628.html' title='Multiple used in 1919 places.'>ctx</a>, 0);
+<a id='L537' name='L537'></a> 537 
+<a id='L538' name='L538'></a> 538         <em class='comment'>/* </em>
+<a id='L539' name='L539'></a> 539 <em class='comment'>         * Deactivated for now. The ini system will cause random crashes when </em>
+<a id='L540' name='L540'></a> 540 <em class='comment'>         * accessed from here (since there are no locks to protect the global </em>
+<a id='L541' name='L541'></a> 541 <em class='comment'>         * known_directives) </em>
+<a id='L542' name='L542'></a> 542 <em class='comment'>         */</em>
+<a id='L543' name='L543'></a> 543 
+<a id='L544' name='L544'></a> 544                 <em class='brace'>}</em> <strong class='reserved'>else</strong> <strong class='reserved'>if</strong> (!<a href='../Y/19362.html' title='Multiple used in 19 places.'>global</a> &amp;&amp; !<a href='../D/31513.html' title='Multiple defined in 11 places.'>strcasecmp</a>(<a href='../D/23451.html' title='Multiple defined in 3 places.'>key</a>, "php_value")) <em class='brace'>{</em>
+<a id='L545' name='L545'></a> 545                         <a href='../Y/4059.html' title='Multiple used in 3 places.'>Ns_Log</a>(<a href='../Y/4026.html' title='Multiple used in 2 places.'>Notice</a>, "php_value has been deactivated temporarily. Please use a php.ini file to pass directives to PHP. Thanks.");
+<a id='L546' name='L546'></a> 546 <em class='sharp'>#if</em> 0
+<a id='L547' name='L547'></a> 547                         <strong class='reserved'>char</strong> *<a href='../Y/40518.html' title='Multiple used in 2351 places.'>val</a>;
+<a id='L548' name='L548'></a> 548 
+<a id='L549' name='L549'></a> 549                         <a href='../Y/40518.html' title='Multiple used in 2351 places.'>val</a> = <a href='../Y/37955.html' title='Multiple used in 222 places.'>strchr</a>(<a href='../S/1737.html#L277' title='Defined at 277 in Zend/zend_strtod.c.'>value</a>, ' ');
+<a id='L550' name='L550'></a> 550                         <strong class='reserved'>if</strong> (<a href='../Y/40518.html' title='Multiple used in 2351 places.'>val</a>) <em class='brace'>{</em>
+<a id='L551' name='L551'></a> 551                                 <strong class='reserved'>char</strong> *<a href='../Y/28509.html' title='Multiple used in 25 places.'>new_key</a>;
+<a id='L552' name='L552'></a> 552                                 
+<a id='L553' name='L553'></a> 553                                 <a href='../Y/28509.html' title='Multiple used in 25 places.'>new_key</a> = <a href='../S/1645.html#L78' title='Defined at 78 in Zend/zend_alloc.h.'>estrndup</a>(<a href='../S/1737.html#L277' title='Defined at 277 in Zend/zend_strtod.c.'>value</a>, <a href='../Y/40518.html' title='Multiple used in 2351 places.'>val</a> - <a href='../S/1737.html#L277' title='Defined at 277 in Zend/zend_strtod.c.'>value</a>);
+<a id='L554' name='L554'></a> 554                                 
+<a id='L555' name='L555'></a> 555                                 <strong class='reserved'>do</strong> <em class='brace'>{</em> 
+<a id='L556' name='L556'></a> 556                                         <a href='../Y/40518.html' title='Multiple used in 2351 places.'>val</a>++; 
+<a id='L557' name='L557'></a> 557                                 <em class='brace'>}</em> <strong class='reserved'>while</strong>(*<a href='../Y/40518.html' title='Multiple used in 2351 places.'>val</a> == ' ');
+<a id='L558' name='L558'></a> 558 
+<a id='L559' name='L559'></a> 559                                 <a href='../Y/4059.html' title='Multiple used in 3 places.'>Ns_Log</a>(<a href='../D/1885.html' title='Multiple defined in 2 places.'>Debug</a>, "PHP configuration option '%s=%s'", <a href='../Y/28509.html' title='Multiple used in 25 places.'>new_key</a>, <a href='../Y/40518.html' title='Multiple used in 2351 places.'>val</a>);
+<a id='L560' name='L560'></a> 560                                 <a href='../S/1688.html#L247' title='Defined at 247 in Zend/zend_ini.c.'>zend_alter_ini_entry</a>(<a href='../Y/28509.html' title='Multiple used in 25 places.'>new_key</a>, <a href='../S/882.html#L373' title='Defined at 373 in ext/pcre/pcrelib/pcre_internal.h.'>strlen</a>(<a href='../Y/28509.html' title='Multiple used in 25 places.'>new_key</a>) + 1, <a href='../Y/40518.html' title='Multiple used in 2351 places.'>val</a>, 
+<a id='L561' name='L561'></a> 561                                                 <a href='../S/882.html#L373' title='Defined at 373 in ext/pcre/pcrelib/pcre_internal.h.'>strlen</a>(<a href='../Y/40518.html' title='Multiple used in 2351 places.'>val</a>) + 1, <a href='../S/1375.html#L46' title='Defined at 46 in main/php_ini.h.'>PHP_INI_SYSTEM</a>, <a href='../S/1375.html#L76' title='Defined at 76 in main/php_ini.h.'>PHP_INI_STAGE_ACTIVATE</a>);
+<a id='L562' name='L562'></a> 562                                 
+<a id='L563' name='L563'></a> 563                                 <a href='../D/21052.html' title='Multiple defined in 3 places.'>efree</a>(<a href='../Y/28509.html' title='Multiple used in 25 places.'>new_key</a>);
+<a id='L564' name='L564'></a> 564                         <em class='brace'>}</em>
+<a id='L565' name='L565'></a> 565 <em class='sharp'>#endif</em>
+<a id='L566' name='L566'></a> 566                 <em class='brace'>}</em>
+<a id='L567' name='L567'></a> 567                 
+<a id='L568' name='L568'></a> 568         <em class='brace'>}</em>
+<a id='L569' name='L569'></a> 569 <em class='brace'>}</em>
+<a id='L570' name='L570'></a> 570         
+<a id='L571' name='L571'></a> 571 <em class='comment'>/*</em>
+<a id='L572' name='L572'></a> 572 <em class='comment'> * php_ns_server_shutdown() performs the last steps before the</em>
+<a id='L573' name='L573'></a> 573 <em class='comment'> * server exits. Shutdowns basic services and frees memory</em>
+<a id='L574' name='L574'></a> 574 <em class='comment'> */</em>
+<a id='L575' name='L575'></a> 575 
+<a id='L576' name='L576'></a> 576 <strong class='reserved'>static</strong> <strong class='reserved'>void</strong>
+<a id='L577' name='L577'></a> 577 <a href='../S/1427.html#L620' title='Referred from 620 in sapi/aolserver/aolserver.c.'>php_ns_server_shutdown</a>(<strong class='reserved'>void</strong> *<a href='../Y/14267.html' title='Multiple used in 2143 places.'>context</a>)
+<a id='L578' name='L578'></a> 578 <em class='brace'>{</em>
+<a id='L579' name='L579'></a> 579         <a href='../S/1427.html#L65' title='Defined at 65 in sapi/aolserver/aolserver.c.'>php_ns_context</a> *<a href='../Y/14628.html' title='Multiple used in 1919 places.'>ctx</a> = (<a href='../S/1427.html#L65' title='Defined at 65 in sapi/aolserver/aolserver.c.'>php_ns_context</a> *) <a href='../Y/14267.html' title='Multiple used in 2143 places.'>context</a>;
+<a id='L580' name='L580'></a> 580         
+<a id='L581' name='L581'></a> 581         <a href='../Y/14628.html' title='Multiple used in 1919 places.'>ctx</a>-&gt;<a href='../Y/35653.html' title='Multiple used in 318 places.'>sapi_module</a>-&gt;<a href='../D/29587.html' title='Multiple defined in 7 places.'>shutdown</a>(<a href='../Y/14628.html' title='Multiple used in 1919 places.'>ctx</a>-&gt;<a href='../Y/35653.html' title='Multiple used in 318 places.'>sapi_module</a>);
+<a id='L582' name='L582'></a> 582         <a href='../S/1397.html#L101' title='Defined at 101 in main/SAPI.c.'>sapi_shutdown</a>();
+<a id='L583' name='L583'></a> 583         <a href='../S/1595.html#L165' title='Defined at 165 in TSRM/TSRM.c.'>tsrm_shutdown</a>();
+<a id='L584' name='L584'></a> 584 
+<a id='L585' name='L585'></a> 585         <a href='../S/1228.html#L36' title='Defined at 36 in ext/xmlrpc/libxmlrpc/base64.h.'>free</a>(<a href='../Y/14628.html' title='Multiple used in 1919 places.'>ctx</a>-&gt;<a href='../Y/29020.html' title='Multiple used in 4 places.'>ns_module</a>);
+<a id='L586' name='L586'></a> 586         <a href='../S/1228.html#L36' title='Defined at 36 in ext/xmlrpc/libxmlrpc/base64.h.'>free</a>(<a href='../Y/14628.html' title='Multiple used in 1919 places.'>ctx</a>-&gt;<a href='../Y/29027.html' title='Multiple used in 7 places.'>ns_server</a>);
+<a id='L587' name='L587'></a> 587         <a href='../S/1228.html#L36' title='Defined at 36 in ext/xmlrpc/libxmlrpc/base64.h.'>free</a>(<a href='../Y/14628.html' title='Multiple used in 1919 places.'>ctx</a>);
+<a id='L588' name='L588'></a> 588 <em class='brace'>}</em>
+<a id='L589' name='L589'></a> 589 
+<a id='L590' name='L590'></a> 590 <em class='comment'>/*</em>
+<a id='L591' name='L591'></a> 591 <em class='comment'> * Ns_ModuleInit() is called by AOLserver once at startup</em>
+<a id='L592' name='L592'></a> 592 <em class='comment'> *</em>
+<a id='L593' name='L593'></a> 593 <em class='comment'> * This functions allocates basic structures and initializes</em>
+<a id='L594' name='L594'></a> 594 <em class='comment'> * basic services.</em>
+<a id='L595' name='L595'></a> 595 <em class='comment'> */</em>
+<a id='L596' name='L596'></a> 596 
+<a id='L597' name='L597'></a> 597 <strong class='reserved'>int</strong> Ns_ModuleInit(<strong class='reserved'>char</strong> *<a href='../Y/36089.html' title='Multiple used in 423 places.'>server</a>, <strong class='reserved'>char</strong> *<a href='../Y/26901.html' title='Multiple used in 360 places.'>module</a>)
+<a id='L598' name='L598'></a> 598 <em class='brace'>{</em>
+<a id='L599' name='L599'></a> 599         <a href='../S/1427.html#L65' title='Defined at 65 in sapi/aolserver/aolserver.c.'>php_ns_context</a> *<a href='../Y/14628.html' title='Multiple used in 1919 places.'>ctx</a>;
+<a id='L600' name='L600'></a> 600         
+<a id='L601' name='L601'></a> 601         <a href='../S/1595.html#L120' title='Defined at 120 in TSRM/TSRM.c.'>tsrm_startup</a>(1, 1, 0, <a href='../D/6086.html' title='Multiple defined in 8 places.'>NULL</a>);
+<a id='L602' name='L602'></a> 602         <a href='../S/1397.html#L76' title='Defined at 76 in main/SAPI.c.'>sapi_startup</a>(&amp;<a href='../Y/8867.html' title='Multiple used in 4 places.'>aolserver_sapi_module</a>);
+<a id='L603' name='L603'></a> 603         <a href='../Y/35653.html' title='Multiple used in 318 places.'>sapi_module</a>.<a href='../Y/37714.html' title='Multiple used in 42 places.'>startup</a>(&amp;<a href='../Y/8867.html' title='Multiple used in 4 places.'>aolserver_sapi_module</a>);
+<a id='L604' name='L604'></a> 604         
+<a id='L605' name='L605'></a> 605         <em class='comment'>/* TSRM is used to allocate a per-thread structure */</em>
+<a id='L606' name='L606'></a> 606         <a href='../S/1595.html#L215' title='Defined at 215 in TSRM/TSRM.c.'>ts_allocate_id</a>(&amp;<a href='../Y/29018.html' title='Multiple used in 3 places.'>ns_globals_id</a>, <strong class='reserved'>sizeof</strong>(<a href='../S/1427.html#L72' title='Defined at 72 in sapi/aolserver/aolserver.c.'>ns_globals_struct</a>), <a href='../D/6086.html' title='Multiple defined in 8 places.'>NULL</a>, <a href='../D/6086.html' title='Multiple defined in 8 places.'>NULL</a>);
+<a id='L607' name='L607'></a> 607         
+<a id='L608' name='L608'></a> 608         <em class='comment'>/* the context contains data valid for all threads */</em>
+<a id='L609' name='L609'></a> 609         <a href='../Y/14628.html' title='Multiple used in 1919 places.'>ctx</a> = <a href='../S/1228.html#L35' title='Defined at 35 in ext/xmlrpc/libxmlrpc/base64.h.'>malloc</a>(<strong class='reserved'>sizeof</strong> *<a href='../Y/14628.html' title='Multiple used in 1919 places.'>ctx</a>);
+<a id='L610' name='L610'></a> 610         <a href='../Y/14628.html' title='Multiple used in 1919 places.'>ctx</a>-&gt;<a href='../Y/35653.html' title='Multiple used in 318 places.'>sapi_module</a> = &amp;<a href='../Y/8867.html' title='Multiple used in 4 places.'>aolserver_sapi_module</a>;
+<a id='L611' name='L611'></a> 611         <a href='../Y/14628.html' title='Multiple used in 1919 places.'>ctx</a>-&gt;<a href='../Y/29027.html' title='Multiple used in 7 places.'>ns_server</a> = <a href='../D/31518.html' title='Multiple defined in 2 places.'>strdup</a>(<a href='../Y/36089.html' title='Multiple used in 423 places.'>server</a>);
+<a id='L612' name='L612'></a> 612         <a href='../Y/14628.html' title='Multiple used in 1919 places.'>ctx</a>-&gt;<a href='../Y/29020.html' title='Multiple used in 4 places.'>ns_module</a> = <a href='../D/31518.html' title='Multiple defined in 2 places.'>strdup</a>(<a href='../Y/26901.html' title='Multiple used in 360 places.'>module</a>);
+<a id='L613' name='L613'></a> 613         
+<a id='L614' name='L614'></a> 614         <em class='comment'>/* read the configuration */</em>
+<a id='L615' name='L615'></a> 615         <a href='../S/1427.html#L519' title='Defined at 519 in sapi/aolserver/aolserver.c.'>php_ns_config</a>(<a href='../Y/14628.html' title='Multiple used in 1919 places.'>ctx</a>, 1);
+<a id='L616' name='L616'></a> 616 
+<a id='L617' name='L617'></a> 617         <a href='../Y/19369.html' title='Multiple used in 4 places.'>global_context</a> = <a href='../Y/14628.html' title='Multiple used in 1919 places.'>ctx</a>;
+<a id='L618' name='L618'></a> 618 
+<a id='L619' name='L619'></a> 619         <em class='comment'>/* register shutdown handler */</em>
+<a id='L620' name='L620'></a> 620         Ns_RegisterServerShutdown(<a href='../Y/36089.html' title='Multiple used in 423 places.'>server</a>, <a href='../S/1427.html#L577' title='Defined at 577 in sapi/aolserver/aolserver.c.'>php_ns_server_shutdown</a>, <a href='../Y/14628.html' title='Multiple used in 1919 places.'>ctx</a>);
+<a id='L621' name='L621'></a> 621 
+<a id='L622' name='L622'></a> 622         <strong class='reserved'>return</strong> <a href='../Y/3982.html' title='Multiple used in 3 places.'>NS_OK</a>;
+<a id='L623' name='L623'></a> 623 <em class='brace'>}</em>
+<a id='L624' name='L624'></a> 624 
+<a id='L625' name='L625'></a> 625 <em class='sharp'>#endif</em>
+</pre>
+<hr />
+<a id='BOTTOM' name='BOTTOM'></a>
+<em class='comment'>/* [&lt;][&gt;]<a href='#L89'>[^]</a><a href='#L597'>[v]</a><a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+</body>
+</html>

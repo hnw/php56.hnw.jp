@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>event</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/323.html#L39'>event</a>              39 ext/interbase/ibase_events.c void _php_ibase_free_event(ibase_event *event TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/323.html#L43'>event</a>              43 ext/interbase/ibase_events.c 	event-&gt;state = DEAD;</span>
+<span class='curline'><a href='../S/323.html#L45'>event</a>              45 ext/interbase/ibase_events.c 	if (event-&gt;link != NULL) {</span>
+<span class='curline'><a href='../S/323.html#L48'>event</a>              48 ext/interbase/ibase_events.c 		if (event-&gt;link-&gt;handle != NULL &amp;&amp;</span>
+<span class='curline'><a href='../S/323.html#L49'>event</a>              49 ext/interbase/ibase_events.c 				isc_cancel_events(IB_STATUS, &amp;event-&gt;link-&gt;handle, &amp;event-&gt;event_id)) {</span>
+<span class='curline'><a href='../S/323.html#L54'>event</a>              54 ext/interbase/ibase_events.c 		for (node = &amp;event-&gt;link-&gt;event_head; *node != event; node = &amp;(*node)-&gt;event_next);</span>
+<span class='curline'><a href='../S/323.html#L55'>event</a>              55 ext/interbase/ibase_events.c 		*node = event-&gt;event_next;</span>
+<span class='curline'><a href='../S/323.html#L58'>event</a>              58 ext/interbase/ibase_events.c 	if (event-&gt;callback) {</span>
+<span class='curline'><a href='../S/323.html#L59'>event</a>              59 ext/interbase/ibase_events.c 		zval_dtor(event-&gt;callback);</span>
+<span class='curline'><a href='../S/323.html#L60'>event</a>              60 ext/interbase/ibase_events.c 		FREE_ZVAL(event-&gt;callback);</span>
+<span class='curline'><a href='../S/323.html#L61'>event</a>              61 ext/interbase/ibase_events.c 		event-&gt;callback = NULL;</span>
+<span class='curline'><a href='../S/323.html#L63'>event</a>              63 ext/interbase/ibase_events.c 		_php_ibase_event_free(event-&gt;event_buffer,event-&gt;result_buffer);</span>
+<span class='curline'><a href='../S/323.html#L65'>event</a>              65 ext/interbase/ibase_events.c 		for (i = 0; i &lt; event-&gt;event_count; ++i) {</span>
+<span class='curline'><a href='../S/323.html#L66'>event</a>              66 ext/interbase/ibase_events.c 			efree(event-&gt;events[i]);</span>
+<span class='curline'><a href='../S/323.html#L68'>event</a>              68 ext/interbase/ibase_events.c 		efree(event-&gt;events);</span>
+<span class='curline'><a href='../S/323.html#L197'>event</a>             197 ext/interbase/ibase_events.c static isc_callback _php_ibase_callback(ibase_event *event, /* {{{ */</span>
+<span class='curline'><a href='../S/323.html#L201'>event</a>             201 ext/interbase/ibase_events.c 	TSRMLS_FETCH_FROM_CTX(event-&gt;thread_ctx);</span>
+<span class='curline'><a href='../S/323.html#L208'>event</a>             208 ext/interbase/ibase_events.c 	switch (event-&gt;state) {</span>
+<span class='curline'><a href='../S/323.html#L220'>event</a>             220 ext/interbase/ibase_events.c 			memcpy(event-&gt;result_buffer, result_buf, buffer_size);</span>
+<span class='curline'><a href='../S/323.html#L224'>event</a>             224 ext/interbase/ibase_events.c 			ZVAL_RESOURCE(&amp;link_id, event-&gt;link_res_id);</span>
+<span class='curline'><a href='../S/323.html#L227'>event</a>             227 ext/interbase/ibase_events.c 			isc_event_counts(occurred_event, buffer_size, event-&gt;event_buffer, event-&gt;result_buffer);</span>
+<span class='curline'><a href='../S/323.html#L228'>event</a>             228 ext/interbase/ibase_events.c 			for (i = 0; i &lt; event-&gt;event_count; ++i) {</span>
+<span class='curline'><a href='../S/323.html#L230'>event</a>             230 ext/interbase/ibase_events.c 					ZVAL_STRING(&amp;event_name,event-&gt;events[i],0);</span>
+<span class='curline'><a href='../S/323.html#L237'>event</a>             237 ext/interbase/ibase_events.c 					event-&gt;callback, &amp;return_value, 2, args TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/323.html#L238'>event</a>             238 ext/interbase/ibase_events.c 				_php_ibase_module_error("Error calling callback %s" TSRMLS_CC, Z_STRVAL_P(event-&gt;callback));</span>
+<span class='curline'><a href='../S/323.html#L243'>event</a>             243 ext/interbase/ibase_events.c 				event-&gt;state = DEAD;</span>
+<span class='curline'><a href='../S/323.html#L248'>event</a>             248 ext/interbase/ibase_events.c 			if (isc_que_events(IB_STATUS, &amp;event-&gt;link-&gt;handle, &amp;event-&gt;event_id, buffer_size,</span>
+<span class='curline'><a href='../S/323.html#L249'>event</a>             249 ext/interbase/ibase_events.c 				event-&gt;event_buffer,(isc_callback)_php_ibase_callback, (void *)event)) {</span>
+<span class='curline'><a href='../S/323.html#L253'>event</a>             253 ext/interbase/ibase_events.c 			event-&gt;state = ACTIVE;</span>
+<span class='curline'><a href='../S/323.html#L271'>event</a>             271 ext/interbase/ibase_events.c 	ibase_event *event;</span>
+<span class='curline'><a href='../S/323.html#L335'>event</a>             335 ext/interbase/ibase_events.c 	event = (ibase_event *) safe_emalloc(sizeof(ibase_event), 1, 0);</span>
+<span class='curline'><a href='../S/323.html#L336'>event</a>             336 ext/interbase/ibase_events.c 	TSRMLS_SET_CTX(event-&gt;thread_ctx);</span>
+<span class='curline'><a href='../S/323.html#L337'>event</a>             337 ext/interbase/ibase_events.c 	event-&gt;link_res_id = link_res_id;</span>
+<span class='curline'><a href='../S/323.html#L338'>event</a>             338 ext/interbase/ibase_events.c 	event-&gt;link = ib_link;</span>
+<span class='curline'><a href='../S/323.html#L339'>event</a>             339 ext/interbase/ibase_events.c 	event-&gt;event_count = 0;</span>
+<span class='curline'><a href='../S/323.html#L340'>event</a>             340 ext/interbase/ibase_events.c 	event-&gt;state = NEW;</span>
+<span class='curline'><a href='../S/323.html#L341'>event</a>             341 ext/interbase/ibase_events.c 	event-&gt;events = (char **) safe_emalloc(sizeof(char *),ZEND_NUM_ARGS()-i,0);</span>
+<span class='curline'><a href='../S/323.html#L343'>event</a>             343 ext/interbase/ibase_events.c 	ALLOC_ZVAL(event-&gt;callback);</span>
+<span class='curline'><a href='../S/323.html#L344'>event</a>             344 ext/interbase/ibase_events.c 	*event-&gt;callback = **cb_arg;</span>
+<span class='curline'><a href='../S/323.html#L345'>event</a>             345 ext/interbase/ibase_events.c 	INIT_PZVAL(event-&gt;callback);</span>
+<span class='curline'><a href='../S/323.html#L346'>event</a>             346 ext/interbase/ibase_events.c 	zval_copy_ctor(event-&gt;callback);</span>
+<span class='curline'><a href='../S/323.html#L350'>event</a>             350 ext/interbase/ibase_events.c 		event-&gt;events[event-&gt;event_count++] = estrdup(Z_STRVAL_PP(args[i]));</span>
+<span class='curline'><a href='../S/323.html#L354'>event</a>             354 ext/interbase/ibase_events.c 	_php_ibase_event_block(ib_link, event-&gt;event_count, event-&gt;events,</span>
+<span class='curline'><a href='../S/323.html#L355'>event</a>             355 ext/interbase/ibase_events.c 		&amp;buffer_size, &amp;event-&gt;event_buffer, &amp;event-&gt;result_buffer);</span>
+<span class='curline'><a href='../S/323.html#L358'>event</a>             358 ext/interbase/ibase_events.c 	if (isc_que_events(IB_STATUS, &amp;ib_link-&gt;handle, &amp;event-&gt;event_id, buffer_size,</span>
+<span class='curline'><a href='../S/323.html#L359'>event</a>             359 ext/interbase/ibase_events.c 		event-&gt;event_buffer,(isc_callback)_php_ibase_callback, (void *)event)) {</span>
+<span class='curline'><a href='../S/323.html#L362'>event</a>             362 ext/interbase/ibase_events.c 		efree(event);</span>
+<span class='curline'><a href='../S/323.html#L367'>event</a>             367 ext/interbase/ibase_events.c 	event-&gt;event_next = ib_link-&gt;event_head;</span>
+<span class='curline'><a href='../S/323.html#L368'>event</a>             368 ext/interbase/ibase_events.c 	ib_link-&gt;event_head = event;</span>
+<span class='curline'><a href='../S/323.html#L370'>event</a>             370 ext/interbase/ibase_events.c 	ZEND_REGISTER_RESOURCE(return_value, event, le_event);</span>
+<span class='curline'><a href='../S/323.html#L385'>event</a>             385 ext/interbase/ibase_events.c 		ibase_event *event;</span>
+<span class='curline'><a href='../S/323.html#L387'>event</a>             387 ext/interbase/ibase_events.c 		ZEND_FETCH_RESOURCE(event, ibase_event *, &amp;event_arg, -1, "Interbase event", le_event);</span>
+<span class='curline'><a href='../S/323.html#L389'>event</a>             389 ext/interbase/ibase_events.c 		event-&gt;state = DEAD;</span>
+<span class='curline'><a href='../S/326.html#L304'>event</a>             304 ext/interbase/interbase.c 	ZEND_ARG_INFO(0, event)</span>
+<span class='curline'><a href='../S/326.html#L311'>event</a>             311 ext/interbase/interbase.c 	ZEND_ARG_INFO(0, event)</span>
+<span class='curline'><a href='../S/326.html#L316'>event</a>             316 ext/interbase/interbase.c 	ZEND_ARG_INFO(0, event)</span>
+<span class='curline'><a href='../S/327.html#L76'>event</a>              76 ext/interbase/php_ibase_includes.h 	struct event *event_head;</span>
+<span class='curline'><a href='../S/327.html#L106'>event</a>             106 ext/interbase/php_ibase_includes.h 	struct event *event_next;</span>
+<span class='curline'><a href='../S/327.html#L183'>event</a>             183 ext/interbase/php_ibase_includes.h void _php_ibase_free_event(ibase_event *event TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1006.html#L64'>event</a>              64 ext/session/session.c static int php_session_rfc1867_callback(unsigned int event, void *event_data, void **extra TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1006.html#L65'>event</a>              65 ext/session/session.c static int (*php_session_rfc1867_orig_callback)(unsigned int event, void *event_data, void **extra TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1006.html#L2652'>event</a>            2652 ext/session/session.c static int php_session_rfc1867_callback(unsigned int event, void *event_data, void **extra TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1006.html#L2658'>event</a>            2658 ext/session/session.c 		retval = php_session_rfc1867_orig_callback(event, event_data, extra TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1006.html#L2666'>event</a>            2666 ext/session/session.c 	switch(event) {</span>
+<span class='curline'><a href='../S/1395.html#L60'>event</a>              60 main/rfc1867.c PHPAPI int (*php_rfc1867_callback)(unsigned int event, void *event_data, void **extra TSRMLS_DC) = NULL;</span>
+<span class='curline'><a href='../S/1396.html#L81'>event</a>              81 main/rfc1867.h extern PHPAPI int (*php_rfc1867_callback)(unsigned int event, void *event_data, void **extra TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1457.html#L2448'>event</a>            2448 sapi/cli/php_cli_server.c static int php_cli_server_do_event_for_each_fd_callback(void *_params, int fd, int event) /* {{{ */</span>
+<span class='curline'><a href='../S/1457.html#L2491'>event</a>            2491 sapi/cli/php_cli_server.c 			if (event &amp; POLLIN) {</span>
+<span class='curline'><a href='../S/1457.html#L2494'>event</a>            2494 sapi/cli/php_cli_server.c 			if (event &amp; POLLOUT) {</span>
+<span class='curline'><a href='../S/1518.html#L117'>event</a>             117 sapi/fpm/fpm/fpm_stdio.c 	struct fpm_event_s *event;</span>
+<span class='curline'><a href='../S/1518.html#L129'>event</a>             129 sapi/fpm/fpm/fpm_stdio.c 		event = &amp;child-&gt;ev_stdout;</span>
+<span class='curline'><a href='../S/1518.html#L131'>event</a>             131 sapi/fpm/fpm/fpm_stdio.c 		event = &amp;child-&gt;ev_stderr;</span>
+<span class='curline'><a href='../S/1518.html#L147'>event</a>             147 sapi/fpm/fpm/fpm_stdio.c 					fpm_event_del(event);</span>
+<span class='curline'><a href='../S/1590.html#L390'>event</a>             390 sapi/tux/php_tux.c 	if (req-&gt;event == PHP_TUX_BACKGROUND_CONN) {</span>
+<span class='curline'><a href='../S/1590.html#L430'>event</a>             430 sapi/tux/php_tux.c 	TG(req)-&gt;event = PHP_TUX_BACKGROUND_CONN;</span>
+</pre>
+</body>
+</html>

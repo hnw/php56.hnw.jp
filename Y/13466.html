@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>charset_token</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/320.html#L4218'>charset_token</a>    4218 ext/imap/php_imap.c 	long charset_token, encoding_token, end_token, end, offset=0, i;</span>
+<span class='curline'><a href='../S/320.html#L4233'>charset_token</a>    4233 ext/imap/php_imap.c 		if ((charset_token = (long)php_memnstr(&amp;string[offset], "=?", 2, string + end))) {	/* Is there anything encoded in the string? */</span>
+<span class='curline'><a href='../S/320.html#L4234'>charset_token</a>    4234 ext/imap/php_imap.c 			charset_token -= (long)string;</span>
+<span class='curline'><a href='../S/320.html#L4235'>charset_token</a>    4235 ext/imap/php_imap.c 			if (offset != charset_token) {	/* Is there anything before the encoded data? */</span>
+<span class='curline'><a href='../S/320.html#L4237'>charset_token</a>    4237 ext/imap/php_imap.c 				memcpy(text, &amp;string[offset], charset_token-offset);</span>
+<span class='curline'><a href='../S/320.html#L4238'>charset_token</a>    4238 ext/imap/php_imap.c 				text[charset_token - offset] = 0x00;</span>
+<span class='curline'><a href='../S/320.html#L4245'>charset_token</a>    4245 ext/imap/php_imap.c 			if ((encoding_token = (long)php_memnstr(&amp;string[charset_token+2], "?", 1, string+end))) {		/* Find token for encoding */</span>
+<span class='curline'><a href='../S/320.html#L4249'>charset_token</a>    4249 ext/imap/php_imap.c 					memcpy(charset, &amp;string[charset_token + 2], encoding_token - (charset_token + 2));	/* Extract charset encoding */</span>
+<span class='curline'><a href='../S/320.html#L4250'>charset_token</a>    4250 ext/imap/php_imap.c 					charset[encoding_token-(charset_token + 2)] = 0x00;</span>
+<span class='curline'><a href='../S/320.html#L4290'>charset_token</a>    4290 ext/imap/php_imap.c 			charset_token = offset;</span>
+<span class='curline'><a href='../S/320.html#L4294'>charset_token</a>    4294 ext/imap/php_imap.c 		memcpy(text, &amp;string[charset_token], end - charset_token);	/* Extract unencoded text from string */</span>
+<span class='curline'><a href='../S/320.html#L4295'>charset_token</a>    4295 ext/imap/php_imap.c 		text[end - charset_token] = 0x00;</span>
+</pre>
+</body>
+</html>

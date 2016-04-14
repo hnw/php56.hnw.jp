@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>sapi_header</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/1117.html#L265'>sapi_header</a>       265 ext/standard/head.c 	sapi_header_struct *sapi_header = (sapi_header_struct *)data;</span>
+<span class='curline'><a href='../S/1117.html#L267'>sapi_header</a>       267 ext/standard/head.c 	if (arg &amp;&amp; sapi_header) {</span>
+<span class='curline'><a href='../S/1117.html#L268'>sapi_header</a>       268 ext/standard/head.c 		add_next_index_string((zval *)arg, (char *)(sapi_header-&gt;header), 1);</span>
+<span class='curline'><a href='../S/1397.html#L117'>sapi_header</a>       117 main/SAPI.c    SAPI_API void sapi_free_header(sapi_header_struct *sapi_header)</span>
+<span class='curline'><a href='../S/1397.html#L119'>sapi_header</a>       119 main/SAPI.c    	efree(sapi_header-&gt;header);</span>
+<span class='curline'><a href='../S/1397.html#L655'>sapi_header</a>       655 main/SAPI.c    static void sapi_header_add_op(sapi_header_op_enum op, sapi_header_struct *sapi_header TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1397.html#L658'>sapi_header</a>       658 main/SAPI.c    		(SAPI_HEADER_ADD &amp; sapi_module.header_handler(sapi_header, op, &amp;SG(sapi_headers) TSRMLS_CC))) {</span>
+<span class='curline'><a href='../S/1397.html#L660'>sapi_header</a>       660 main/SAPI.c    			char *colon_offset = strchr(sapi_header-&gt;header, ':');</span>
+<span class='curline'><a href='../S/1397.html#L666'>sapi_header</a>       666 main/SAPI.c    		        sapi_remove_header(&amp;SG(sapi_headers).headers, sapi_header-&gt;header, strlen(sapi_header-&gt;header));</span>
+<span class='curline'><a href='../S/1397.html#L670'>sapi_header</a>       670 main/SAPI.c    		zend_llist_add_element(&amp;SG(sapi_headers).headers, (void *) sapi_header);</span>
+<span class='curline'><a href='../S/1397.html#L672'>sapi_header</a>       672 main/SAPI.c    		sapi_free_header(sapi_header);</span>
+<span class='curline'><a href='../S/1397.html#L678'>sapi_header</a>       678 main/SAPI.c    	sapi_header_struct sapi_header;</span>
+<span class='curline'><a href='../S/1397.html#L718'>sapi_header</a>       718 main/SAPI.c    				sapi_module.header_handler(&amp;sapi_header, op, &amp;SG(sapi_headers) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1397.html#L744'>sapi_header</a>       744 main/SAPI.c    			sapi_header.header = header_line;</span>
+<span class='curline'><a href='../S/1397.html#L745'>sapi_header</a>       745 main/SAPI.c    			sapi_header.header_len = header_line_len;</span>
+<span class='curline'><a href='../S/1397.html#L746'>sapi_header</a>       746 main/SAPI.c    			sapi_module.header_handler(&amp;sapi_header, op, &amp;SG(sapi_headers) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1397.html#L770'>sapi_header</a>       770 main/SAPI.c    	sapi_header.header = header_line;</span>
+<span class='curline'><a href='../S/1397.html#L771'>sapi_header</a>       771 main/SAPI.c    	sapi_header.header_len = header_line_len;</span>
+<span class='curline'><a href='../S/1397.html#L812'>sapi_header</a>       812 main/SAPI.c    					sapi_header.header = newheader;</span>
+<span class='curline'><a href='../S/1397.html#L813'>sapi_header</a>       813 main/SAPI.c    					sapi_header.header_len = newlen - 1;</span>
+<span class='curline'><a href='../S/1397.html#L845'>sapi_header</a>       845 main/SAPI.c    			if (sapi_header.header==header_line) {</span>
+<span class='curline'><a href='../S/1397.html#L853'>sapi_header</a>       853 main/SAPI.c    	sapi_header_add_op(op, &amp;sapi_header TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1398.html#L192'>sapi_header</a>       192 main/SAPI.h    SAPI_API void sapi_free_header(sapi_header_struct *sapi_header);</span>
+<span class='curline'><a href='../S/1398.html#L237'>sapi_header</a>       237 main/SAPI.h    	int (*header_handler)(sapi_header_struct *sapi_header, sapi_header_op_enum op, sapi_headers_struct *sapi_headers TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1398.html#L239'>sapi_header</a>       239 main/SAPI.h    	void (*send_header)(sapi_header_struct *sapi_header, void *server_context TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1427.html#L114'>sapi_header</a>       114 sapi/aolserver/aolserver.c php_ns_sapi_header_handler(sapi_header_struct *sapi_header, sapi_headers_struct *sapi_headers TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1427.html#L119'>sapi_header</a>       119 sapi/aolserver/aolserver.c 	header_name = sapi_header-&gt;header;</span>
+<span class='curline'><a href='../S/1427.html#L137'>sapi_header</a>       137 sapi/aolserver/aolserver.c 	sapi_free_header(sapi_header);</span>
+<span class='curline'><a href='../S/1429.html#L38'>sapi_header</a>        38 sapi/apache/mod_php5.c static int sapi_apache_header_handler(sapi_header_struct *sapi_header, sapi_header_op_enum op, sapi_headers_struct *sapi_headers TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1429.html#L166'>sapi_header</a>       166 sapi/apache/mod_php5.c static int sapi_apache_header_handler(sapi_header_struct *sapi_header, sapi_header_op_enum op, sapi_headers_struct *sapi_headers TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1429.html#L180'>sapi_header</a>       180 sapi/apache/mod_php5.c 			table_unset(r-&gt;headers_out, sapi_header-&gt;header);</span>
+<span class='curline'><a href='../S/1429.html#L185'>sapi_header</a>       185 sapi/apache/mod_php5.c 			header_name = sapi_header-&gt;header;</span>
+<span class='curline'><a href='../S/1437.html#L94'>sapi_header</a>        94 sapi/apache2filter/sapi_apache2.c php_apache_sapi_header_handler(sapi_header_struct *sapi_header, sapi_header_op_enum op, sapi_headers_struct *sapi_headers TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1437.html#L103'>sapi_header</a>       103 sapi/apache2filter/sapi_apache2.c 			apr_table_unset(ctx-&gt;r-&gt;headers_out, sapi_header-&gt;header);</span>
+<span class='curline'><a href='../S/1437.html#L112'>sapi_header</a>       112 sapi/apache2filter/sapi_apache2.c 			val = strchr(sapi_header-&gt;header, ':');</span>
+<span class='curline'><a href='../S/1437.html#L115'>sapi_header</a>       115 sapi/apache2filter/sapi_apache2.c 				sapi_free_header(sapi_header);</span>
+<span class='curline'><a href='../S/1437.html#L126'>sapi_header</a>       126 sapi/apache2filter/sapi_apache2.c 			if (!strcasecmp(sapi_header-&gt;header, "content-type"))</span>
+<span class='curline'><a href='../S/1437.html#L128'>sapi_header</a>       128 sapi/apache2filter/sapi_apache2.c                        else if (!strcasecmp(sapi_header-&gt;header, "content-length"))</span>
+<span class='curline'><a href='../S/1437.html#L131'>sapi_header</a>       131 sapi/apache2filter/sapi_apache2.c 				apr_table_set(ctx-&gt;r-&gt;headers_out, sapi_header-&gt;header, val);</span>
+<span class='curline'><a href='../S/1437.html#L133'>sapi_header</a>       133 sapi/apache2filter/sapi_apache2.c 				apr_table_add(ctx-&gt;r-&gt;headers_out, sapi_header-&gt;header, val);</span>
+<span class='curline'><a href='../S/1442.html#L92'>sapi_header</a>        92 sapi/apache2handler/sapi_apache2.c php_apache_sapi_header_handler(sapi_header_struct *sapi_header, sapi_header_op_enum op, sapi_headers_struct *sapi_headers TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1442.html#L101'>sapi_header</a>       101 sapi/apache2handler/sapi_apache2.c 			apr_table_unset(ctx-&gt;r-&gt;headers_out, sapi_header-&gt;header);</span>
+<span class='curline'><a href='../S/1442.html#L110'>sapi_header</a>       110 sapi/apache2handler/sapi_apache2.c 			val = strchr(sapi_header-&gt;header, ':');</span>
+<span class='curline'><a href='../S/1442.html#L123'>sapi_header</a>       123 sapi/apache2handler/sapi_apache2.c 			if (!strcasecmp(sapi_header-&gt;header, "content-type")) {</span>
+<span class='curline'><a href='../S/1442.html#L128'>sapi_header</a>       128 sapi/apache2handler/sapi_apache2.c 			} else if (!strcasecmp(sapi_header-&gt;header, "content-length")) {</span>
+<span class='curline'><a href='../S/1442.html#L139'>sapi_header</a>       139 sapi/apache2handler/sapi_apache2.c 				apr_table_set(ctx-&gt;r-&gt;headers_out, sapi_header-&gt;header, val);</span>
+<span class='curline'><a href='../S/1442.html#L141'>sapi_header</a>       141 sapi/apache2handler/sapi_apache2.c 				apr_table_add(ctx-&gt;r-&gt;headers_out, sapi_header-&gt;header, val);</span>
+<span class='curline'><a href='../S/1443.html#L37'>sapi_header</a>        37 sapi/apache_hooks/mod_php5.c static int sapi_apache_header_handler(sapi_header_struct *sapi_header, sapi_header_op_enum op, sapi_headers_struct *sapi_headers TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1443.html#L311'>sapi_header</a>       311 sapi/apache_hooks/mod_php5.c static int sapi_apache_header_handler(sapi_header_struct *sapi_header, sapi_header_op_enum op, sapi_headers_struct *sapi_headers TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1443.html#L325'>sapi_header</a>       325 sapi/apache_hooks/mod_php5.c 			table_unset(r-&gt;headers_out, sapi_header-&gt;header);</span>
+<span class='curline'><a href='../S/1443.html#L330'>sapi_header</a>       330 sapi/apache_hooks/mod_php5.c 			header_name = sapi_header-&gt;header;</span>
+<span class='curline'><a href='../S/1448.html#L337'>sapi_header</a>       337 sapi/caudium/caudium.c php_caudium_sapi_header_handler(sapi_header_struct *sapi_header,</span>
+<span class='curline'><a href='../S/1448.html#L341'>sapi_header</a>       341 sapi/caudium/caudium.c   header_name = sapi_header-&gt;header;</span>
+<span class='curline'><a href='../S/1448.html#L350'>sapi_header</a>       350 sapi/caudium/caudium.c   sapi_free_header(sapi_header);</span>
+<span class='curline'><a href='../S/1454.html#L410'>sapi_header</a>       410 sapi/cli/php_cli.c static void sapi_cli_send_header(sapi_header_struct *sapi_header, void *server_context TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1463.html#L146'>sapi_header</a>       146 sapi/continuity/capi.c static int sapi_capi_header_handler(sapi_header_struct * sapi_header, sapi_headers_struct * sapi_headers TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1463.html#L153'>sapi_header</a>       153 sapi/continuity/capi.c    header_name = sapi_header-&gt;header;</span>
+<span class='curline'><a href='../S/1463.html#L167'>sapi_header</a>       167 sapi/continuity/capi.c    efree(sapi_header-&gt;header);</span>
+<span class='curline'><a href='../S/1464.html#L89'>sapi_header</a>        89 sapi/embed/php_embed.c static void php_embed_send_header(sapi_header_struct *sapi_header, void *server_context TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1534.html#L218'>sapi_header</a>       218 sapi/isapi/php5isapi.c static int sapi_isapi_header_handler(sapi_header_struct *sapi_header, sapi_header_op_enum op, sapi_headers_struct *sapi_headers TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1534.html#L225'>sapi_header</a>       225 sapi/isapi/php5isapi.c static void accumulate_header_length(sapi_header_struct *sapi_header, uint *total_length TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1534.html#L227'>sapi_header</a>       227 sapi/isapi/php5isapi.c 	*total_length += sapi_header-&gt;header_len+2;</span>
+<span class='curline'><a href='../S/1534.html#L231'>sapi_header</a>       231 sapi/isapi/php5isapi.c static void concat_header(sapi_header_struct *sapi_header, char **combined_headers_ptr TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1534.html#L233'>sapi_header</a>       233 sapi/isapi/php5isapi.c 	memcpy(*combined_headers_ptr, sapi_header-&gt;header, sapi_header-&gt;header_len);</span>
+<span class='curline'><a href='../S/1534.html#L234'>sapi_header</a>       234 sapi/isapi/php5isapi.c 	*combined_headers_ptr += sapi_header-&gt;header_len;</span>
+<span class='curline'><a href='../S/1545.html#L493'>sapi_header</a>       493 sapi/nsapi/nsapi.c static int php_nsapi_remove_header(sapi_header_struct *sapi_header TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1545.html#L499'>sapi_header</a>       499 sapi/nsapi/nsapi.c 	header_name = pool_strdup(rc-&gt;sn-&gt;pool, sapi_header-&gt;header);</span>
+<span class='curline'><a href='../S/1545.html#L518'>sapi_header</a>       518 sapi/nsapi/nsapi.c static int sapi_nsapi_header_handler(sapi_header_struct *sapi_header, sapi_header_op_enum op, sapi_headers_struct *sapi_headers TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1545.html#L531'>sapi_header</a>       531 sapi/nsapi/nsapi.c 			php_nsapi_remove_header(sapi_header TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1545.html#L537'>sapi_header</a>       537 sapi/nsapi/nsapi.c 			header_name = pool_strdup(rc-&gt;sn-&gt;pool, sapi_header-&gt;header);</span>
+<span class='curline'><a href='../S/1546.html#L463'>sapi_header</a>       463 sapi/phpdbg/phpdbg.c static void php_sapi_phpdbg_send_header(sapi_header_struct *sapi_header, void *server_context TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1583.html#L70'>sapi_header</a>        70 sapi/phttpd/phttpd.c php_phttpd_sapi_header_handler(sapi_header_struct *sapi_header, sapi_headers_struct *sapi_headers TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1583.html#L77'>sapi_header</a>        77 sapi/phttpd/phttpd.c     header_name = sapi_header-&gt;header;</span>
+<span class='curline'><a href='../S/1583.html#L91'>sapi_header</a>        91 sapi/phttpd/phttpd.c     sapi_free_header(sapi_header);</span>
+<span class='curline'><a href='../S/1584.html#L139'>sapi_header</a>       139 sapi/pi3web/pi3web_sapi.c static int sapi_pi3web_header_handler(sapi_header_struct *sapi_header, sapi_headers_struct *sapi_headers TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1584.html#L145'>sapi_header</a>       145 sapi/pi3web/pi3web_sapi.c static void accumulate_header_length(sapi_header_struct *sapi_header, uint *total_length TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1584.html#L147'>sapi_header</a>       147 sapi/pi3web/pi3web_sapi.c 	*total_length += sapi_header-&gt;header_len+2;</span>
+<span class='curline'><a href='../S/1584.html#L151'>sapi_header</a>       151 sapi/pi3web/pi3web_sapi.c static void concat_header(sapi_header_struct *sapi_header, char **combined_headers_ptr TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1584.html#L153'>sapi_header</a>       153 sapi/pi3web/pi3web_sapi.c 	memcpy(*combined_headers_ptr, sapi_header-&gt;header, sapi_header-&gt;header_len);</span>
+<span class='curline'><a href='../S/1584.html#L154'>sapi_header</a>       154 sapi/pi3web/pi3web_sapi.c 	*combined_headers_ptr += sapi_header-&gt;header_len;</span>
+<span class='curline'><a href='../S/1586.html#L326'>sapi_header</a>       326 sapi/roxen/roxen.c php_roxen_sapi_header_handler(sapi_header_struct *sapi_header,</span>
+<span class='curline'><a href='../S/1586.html#L330'>sapi_header</a>       330 sapi/roxen/roxen.c   header_name = sapi_header-&gt;header;</span>
+<span class='curline'><a href='../S/1586.html#L339'>sapi_header</a>       339 sapi/roxen/roxen.c   sapi_free_header(sapi_header);</span>
+<span class='curline'><a href='../S/1592.html#L64'>sapi_header</a>        64 sapi/webjames/webjames.c static void sapi_webjames_send_header(sapi_header_struct *sapi_header, void *server_context TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1592.html#L67'>sapi_header</a>        67 sapi/webjames/webjames.c 	char *header = sapi_header-&gt;header;</span>
+<span class='curline'><a href='../S/1592.html#L68'>sapi_header</a>        68 sapi/webjames/webjames.c 	int len = sapi_header-&gt;header_len;</span>
+<span class='curline'><a href='../S/1592.html#L70'>sapi_header</a>        70 sapi/webjames/webjames.c 		while (sapi_header &amp;&amp; len &gt; 0) {</span>
+</pre>
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>new_object</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/1715.html#L160'>new_object</a>        160 Zend/zend_objects.c ZEND_API void zend_objects_clone_members(zend_object *new_object, zend_object_value new_obj_val, zend_object *old_object, zend_object_handle handle TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1715.html#L165'>new_object</a>        165 Zend/zend_objects.c 		if (!new_object-&gt;properties_table) {</span>
+<span class='curline'><a href='../S/1715.html#L166'>new_object</a>        166 Zend/zend_objects.c 			new_object-&gt;properties_table = emalloc(sizeof(zval*) * old_object-&gt;ce-&gt;default_properties_count);</span>
+<span class='curline'><a href='../S/1715.html#L167'>new_object</a>        167 Zend/zend_objects.c 			memset(new_object-&gt;properties_table, 0, sizeof(zval*) * old_object-&gt;ce-&gt;default_properties_count);</span>
+<span class='curline'><a href='../S/1715.html#L170'>new_object</a>        170 Zend/zend_objects.c 			if (!new_object-&gt;properties) {</span>
+<span class='curline'><a href='../S/1715.html#L171'>new_object</a>        171 Zend/zend_objects.c 				if (new_object-&gt;properties_table[i]) {</span>
+<span class='curline'><a href='../S/1715.html#L172'>new_object</a>        172 Zend/zend_objects.c 					zval_ptr_dtor(&amp;new_object-&gt;properties_table[i]);</span>
+<span class='curline'><a href='../S/1715.html#L176'>new_object</a>        176 Zend/zend_objects.c 				new_object-&gt;properties_table[i] = old_object-&gt;properties_table[i];</span>
+<span class='curline'><a href='../S/1715.html#L177'>new_object</a>        177 Zend/zend_objects.c 				if (new_object-&gt;properties_table[i]) {</span>
+<span class='curline'><a href='../S/1715.html#L178'>new_object</a>        178 Zend/zend_objects.c 					Z_ADDREF_P(new_object-&gt;properties_table[i]);</span>
+<span class='curline'><a href='../S/1715.html#L184'>new_object</a>        184 Zend/zend_objects.c 		if (!new_object-&gt;properties) {</span>
+<span class='curline'><a href='../S/1715.html#L185'>new_object</a>        185 Zend/zend_objects.c 			ALLOC_HASHTABLE(new_object-&gt;properties);</span>
+<span class='curline'><a href='../S/1715.html#L186'>new_object</a>        186 Zend/zend_objects.c 			zend_hash_init(new_object-&gt;properties, 0, NULL, ZVAL_PTR_DTOR, 0);</span>
+<span class='curline'><a href='../S/1715.html#L188'>new_object</a>        188 Zend/zend_objects.c 		zend_hash_copy(new_object-&gt;properties, old_object-&gt;properties, (copy_ctor_func_t) zval_add_ref, (void *) NULL /* Not used anymore */, sizeof(zval *));</span>
+<span class='curline'><a href='../S/1715.html#L196'>new_object</a>        196 Zend/zend_objects.c 					if (zend_hash_quick_find(new_object-&gt;properties, prop_info-&gt;name, prop_info-&gt;name_length+1, prop_info-&gt;h, (void**)&amp;new_object-&gt;properties_table[prop_info-&gt;offset]) == FAILURE) {</span>
+<span class='curline'><a href='../S/1715.html#L197'>new_object</a>        197 Zend/zend_objects.c 						new_object-&gt;properties_table[prop_info-&gt;offset] = NULL;</span>
+<span class='curline'><a href='../S/1715.html#L222'>new_object</a>        222 Zend/zend_objects.c 	zend_object *new_object;</span>
+<span class='curline'><a href='../S/1715.html#L228'>new_object</a>        228 Zend/zend_objects.c 	new_obj_val = zend_objects_new(&amp;new_object, old_object-&gt;ce TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1715.html#L230'>new_object</a>        230 Zend/zend_objects.c 	zend_objects_clone_members(new_object, new_obj_val, old_object, handle TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1716.html#L33'>new_object</a>         33 Zend/zend_objects.h ZEND_API void zend_objects_clone_members(zend_object *new_object, zend_object_value new_obj_val, zend_object *old_object, zend_object_handle handle TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1717.html#L254'>new_object</a>        254 Zend/zend_objects_API.c 	void *new_object;</span>
+<span class='curline'><a href='../S/1717.html#L264'>new_object</a>        264 Zend/zend_objects_API.c 	obj-&gt;clone(obj-&gt;object, &amp;new_object TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1717.html#L267'>new_object</a>        267 Zend/zend_objects_API.c 	retval.handle = zend_objects_store_put(new_object, obj-&gt;dtor, obj-&gt;free_storage, obj-&gt;clone TSRMLS_CC);</span>
+<span class='curline'><a href='../S/79.html#L2172'>new_object</a>       2172 ext/date/php_date.c 	zval *new_object;</span>
+<span class='curline'><a href='../S/79.html#L2174'>new_object</a>       2174 ext/date/php_date.c 	ALLOC_ZVAL(new_object);</span>
+<span class='curline'><a href='../S/79.html#L2175'>new_object</a>       2175 ext/date/php_date.c 	Z_OBJVAL_P(new_object) = date_object_clone_date(object TSRMLS_CC);</span>
+<span class='curline'><a href='../S/79.html#L2176'>new_object</a>       2176 ext/date/php_date.c 	Z_SET_REFCOUNT_P(new_object, 1);</span>
+<span class='curline'><a href='../S/79.html#L2177'>new_object</a>       2177 ext/date/php_date.c 	Z_SET_ISREF_P(new_object);</span>
+<span class='curline'><a href='../S/79.html#L2178'>new_object</a>       2178 ext/date/php_date.c 	Z_TYPE_P(new_object) = IS_OBJECT;</span>
+<span class='curline'><a href='../S/79.html#L2180'>new_object</a>       2180 ext/date/php_date.c 	return new_object;</span>
+<span class='curline'><a href='../S/79.html#L3176'>new_object</a>       3176 ext/date/php_date.c 	zval *object, *new_object;</span>
+<span class='curline'><a href='../S/79.html#L3184'>new_object</a>       3184 ext/date/php_date.c 	new_object = date_clone_immutable(object TSRMLS_CC);</span>
+<span class='curline'><a href='../S/79.html#L3185'>new_object</a>       3185 ext/date/php_date.c 	if (php_date_modify(new_object, modify, modify_len TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/79.html#L3186'>new_object</a>       3186 ext/date/php_date.c 		RETURN_ZVAL(new_object, 0, 1);</span>
+<span class='curline'><a href='../S/79.html#L3230'>new_object</a>       3230 ext/date/php_date.c 	zval *object, *interval, *new_object;</span>
+<span class='curline'><a href='../S/79.html#L3236'>new_object</a>       3236 ext/date/php_date.c 	new_object = date_clone_immutable(object TSRMLS_CC);</span>
+<span class='curline'><a href='../S/79.html#L3237'>new_object</a>       3237 ext/date/php_date.c 	php_date_add(new_object, interval, return_value TSRMLS_CC);</span>
+<span class='curline'><a href='../S/79.html#L3239'>new_object</a>       3239 ext/date/php_date.c 	RETURN_ZVAL(new_object, 0, 1);</span>
+<span class='curline'><a href='../S/79.html#L3285'>new_object</a>       3285 ext/date/php_date.c 	zval *object, *interval, *new_object;</span>
+<span class='curline'><a href='../S/79.html#L3291'>new_object</a>       3291 ext/date/php_date.c 	new_object = date_clone_immutable(object TSRMLS_CC);</span>
+<span class='curline'><a href='../S/79.html#L3292'>new_object</a>       3292 ext/date/php_date.c 	php_date_sub(new_object, interval, return_value TSRMLS_CC);</span>
+<span class='curline'><a href='../S/79.html#L3294'>new_object</a>       3294 ext/date/php_date.c 	RETURN_ZVAL(new_object, 0, 1);</span>
+<span class='curline'><a href='../S/79.html#L3387'>new_object</a>       3387 ext/date/php_date.c 	zval *object, *new_object;</span>
+<span class='curline'><a href='../S/79.html#L3394'>new_object</a>       3394 ext/date/php_date.c 	new_object = date_clone_immutable(object TSRMLS_CC);</span>
+<span class='curline'><a href='../S/79.html#L3395'>new_object</a>       3395 ext/date/php_date.c 	php_date_timezone_set(new_object, timezone_object, return_value TSRMLS_CC);</span>
+<span class='curline'><a href='../S/79.html#L3397'>new_object</a>       3397 ext/date/php_date.c 	RETURN_ZVAL(new_object, 0, 1);</span>
+<span class='curline'><a href='../S/79.html#L3470'>new_object</a>       3470 ext/date/php_date.c 	zval *object, *new_object;</span>
+<span class='curline'><a href='../S/79.html#L3477'>new_object</a>       3477 ext/date/php_date.c 	new_object = date_clone_immutable(object TSRMLS_CC);</span>
+<span class='curline'><a href='../S/79.html#L3478'>new_object</a>       3478 ext/date/php_date.c 	php_date_time_set(new_object, h, i, s, return_value TSRMLS_CC);</span>
+<span class='curline'><a href='../S/79.html#L3480'>new_object</a>       3480 ext/date/php_date.c 	RETURN_ZVAL(new_object, 0, 1);</span>
+<span class='curline'><a href='../S/79.html#L3518'>new_object</a>       3518 ext/date/php_date.c 	zval *object, *new_object;</span>
+<span class='curline'><a href='../S/79.html#L3525'>new_object</a>       3525 ext/date/php_date.c 	new_object = date_clone_immutable(object TSRMLS_CC);</span>
+<span class='curline'><a href='../S/79.html#L3526'>new_object</a>       3526 ext/date/php_date.c 	php_date_date_set(new_object, y, m, d, return_value TSRMLS_CC);</span>
+<span class='curline'><a href='../S/79.html#L3528'>new_object</a>       3528 ext/date/php_date.c 	RETURN_ZVAL(new_object, 0, 1);</span>
+<span class='curline'><a href='../S/79.html#L3570'>new_object</a>       3570 ext/date/php_date.c 	zval *object, *new_object;</span>
+<span class='curline'><a href='../S/79.html#L3577'>new_object</a>       3577 ext/date/php_date.c 	new_object = date_clone_immutable(object TSRMLS_CC);</span>
+<span class='curline'><a href='../S/79.html#L3578'>new_object</a>       3578 ext/date/php_date.c 	php_date_isodate_set(new_object, y, w, d, return_value TSRMLS_CC);</span>
+<span class='curline'><a href='../S/79.html#L3580'>new_object</a>       3580 ext/date/php_date.c 	RETURN_ZVAL(new_object, 0, 1);</span>
+<span class='curline'><a href='../S/79.html#L3616'>new_object</a>       3616 ext/date/php_date.c 	zval *object, *new_object;</span>
+<span class='curline'><a href='../S/79.html#L3623'>new_object</a>       3623 ext/date/php_date.c 	new_object = date_clone_immutable(object TSRMLS_CC);</span>
+<span class='curline'><a href='../S/79.html#L3624'>new_object</a>       3624 ext/date/php_date.c 	php_date_timestamp_set(new_object, timestamp, return_value TSRMLS_CC);</span>
+<span class='curline'><a href='../S/79.html#L3626'>new_object</a>       3626 ext/date/php_date.c 	RETURN_ZVAL(new_object, 0, 1);</span>
+<span class='curline'><a href='../S/145.html#L593'>new_object</a>        593 ext/dom/php_dom.c 	void *new_object;</span>
+<span class='curline'><a href='../S/145.html#L605'>new_object</a>        605 ext/dom/php_dom.c 	obj-&gt;clone(obj-&gt;object, &amp;new_object TSRMLS_CC);</span>
+<span class='curline'><a href='../S/145.html#L607'>new_object</a>        607 ext/dom/php_dom.c 	retval.handle = zend_objects_store_put(new_object, obj-&gt;dtor, obj-&gt;free_storage, obj-&gt;clone TSRMLS_CC);</span>
+<span class='curline'><a href='../S/145.html#L608'>new_object</a>        608 ext/dom/php_dom.c 	intern = (dom_object *) new_object;</span>
+<span class='curline'><a href='../S/285.html#L484'>new_object</a>        484 ext/gmp/gmp.c  	gmp_object *new_object = zend_object_store_get_object_by_handle(</span>
+<span class='curline'><a href='../S/285.html#L489'>new_object</a>        489 ext/gmp/gmp.c  		&amp;new_object-&gt;std, new_object_val,</span>
+<span class='curline'><a href='../S/285.html#L493'>new_object</a>        493 ext/gmp/gmp.c  	mpz_set(new_object-&gt;num, old_object-&gt;num);</span>
+<span class='curline'><a href='../S/792.html#L120'>new_object</a>        120 ext/mysqlnd/mysqlnd_driver.c 	MYSQLND * new_object;</span>
+<span class='curline'><a href='../S/792.html#L125'>new_object</a>        125 ext/mysqlnd/mysqlnd_driver.c 	new_object = mnd_pecalloc(1, alloc_size_ret, persistent);</span>
+<span class='curline'><a href='../S/792.html#L126'>new_object</a>        126 ext/mysqlnd/mysqlnd_driver.c 	if (!new_object) {</span>
+<span class='curline'><a href='../S/792.html#L129'>new_object</a>        129 ext/mysqlnd/mysqlnd_driver.c 	new_object-&gt;data = mnd_pecalloc(1, alloc_size_ret_data, persistent);</span>
+<span class='curline'><a href='../S/792.html#L130'>new_object</a>        130 ext/mysqlnd/mysqlnd_driver.c 	if (!new_object-&gt;data) {</span>
+<span class='curline'><a href='../S/792.html#L131'>new_object</a>        131 ext/mysqlnd/mysqlnd_driver.c 		mnd_pefree(new_object, persistent);</span>
+<span class='curline'><a href='../S/792.html#L134'>new_object</a>        134 ext/mysqlnd/mysqlnd_driver.c 	new_object-&gt;persistent = persistent;</span>
+<span class='curline'><a href='../S/792.html#L135'>new_object</a>        135 ext/mysqlnd/mysqlnd_driver.c 	new_object-&gt;m = mysqlnd_conn_get_methods();</span>
+<span class='curline'><a href='../S/792.html#L136'>new_object</a>        136 ext/mysqlnd/mysqlnd_driver.c 	data = new_object-&gt;data;</span>
+<span class='curline'><a href='../S/792.html#L148'>new_object</a>        148 ext/mysqlnd/mysqlnd_driver.c 		new_object-&gt;m-&gt;dtor(new_object TSRMLS_CC);</span>
+<span class='curline'><a href='../S/792.html#L154'>new_object</a>        154 ext/mysqlnd/mysqlnd_driver.c 		new_object-&gt;m-&gt;dtor(new_object TSRMLS_CC);</span>
+<span class='curline'><a href='../S/792.html#L160'>new_object</a>        160 ext/mysqlnd/mysqlnd_driver.c 	DBG_RETURN(new_object);</span>
+<span class='curline'><a href='../S/792.html#L170'>new_object</a>        170 ext/mysqlnd/mysqlnd_driver.c 	MYSQLND * new_object;</span>
+<span class='curline'><a href='../S/792.html#L177'>new_object</a>        177 ext/mysqlnd/mysqlnd_driver.c 	new_object = mnd_pecalloc(1, alloc_size_ret, to_be_cloned-&gt;persistent);</span>
+<span class='curline'><a href='../S/792.html#L178'>new_object</a>        178 ext/mysqlnd/mysqlnd_driver.c 	if (!new_object) {</span>
+<span class='curline'><a href='../S/792.html#L181'>new_object</a>        181 ext/mysqlnd/mysqlnd_driver.c 	new_object-&gt;persistent = to_be_cloned-&gt;persistent;</span>
+<span class='curline'><a href='../S/792.html#L182'>new_object</a>        182 ext/mysqlnd/mysqlnd_driver.c 	new_object-&gt;m = to_be_cloned-&gt;m;</span>
+<span class='curline'><a href='../S/792.html#L184'>new_object</a>        184 ext/mysqlnd/mysqlnd_driver.c 	new_object-&gt;data = to_be_cloned-&gt;data-&gt;m-&gt;get_reference(to_be_cloned-&gt;data TSRMLS_CC);</span>
+<span class='curline'><a href='../S/792.html#L185'>new_object</a>        185 ext/mysqlnd/mysqlnd_driver.c 	if (!new_object-&gt;data) {</span>
+<span class='curline'><a href='../S/792.html#L186'>new_object</a>        186 ext/mysqlnd/mysqlnd_driver.c 		new_object-&gt;m-&gt;dtor(new_object TSRMLS_CC);</span>
+<span class='curline'><a href='../S/792.html#L187'>new_object</a>        187 ext/mysqlnd/mysqlnd_driver.c 		new_object = NULL;</span>
+<span class='curline'><a href='../S/792.html#L189'>new_object</a>        189 ext/mysqlnd/mysqlnd_driver.c 	DBG_RETURN(new_object);</span>
+<span class='curline'><a href='../S/1047.html#L288'>new_object</a>        288 ext/spl/spl_array.c 	zend_object *new_object;</span>
+<span class='curline'><a href='../S/1047.html#L294'>new_object</a>        294 ext/spl/spl_array.c 	new_object = &amp;intern-&gt;std;</span>
+<span class='curline'><a href='../S/1047.html#L296'>new_object</a>        296 ext/spl/spl_array.c 	zend_objects_clone_members(new_object, new_obj_val, old_object, handle TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1049.html#L337'>new_object</a>        337 ext/spl/spl_directory.c 	zend_object *new_object;</span>
+<span class='curline'><a href='../S/1049.html#L347'>new_object</a>        347 ext/spl/spl_directory.c 	new_object = &amp;intern-&gt;std;</span>
+<span class='curline'><a href='../S/1049.html#L379'>new_object</a>        379 ext/spl/spl_directory.c 	zend_objects_clone_members(new_object, new_obj_val, old_object, handle TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1051.html#L468'>new_object</a>        468 ext/spl/spl_dllist.c 	zend_object        *new_object;</span>
+<span class='curline'><a href='../S/1051.html#L474'>new_object</a>        474 ext/spl/spl_dllist.c 	new_object  = &amp;intern-&gt;std;</span>
+<span class='curline'><a href='../S/1051.html#L476'>new_object</a>        476 ext/spl/spl_dllist.c 	zend_objects_clone_members(new_object, new_obj_val, old_object, handle TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1057.html#L330'>new_object</a>        330 ext/spl/spl_fixedarray.c 	zend_object           *new_object;</span>
+<span class='curline'><a href='../S/1057.html#L336'>new_object</a>        336 ext/spl/spl_fixedarray.c 	new_object  = &amp;intern-&gt;std;</span>
+<span class='curline'><a href='../S/1057.html#L338'>new_object</a>        338 ext/spl/spl_fixedarray.c 	zend_objects_clone_members(new_object, new_obj_val, old_object, handle TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1061.html#L484'>new_object</a>        484 ext/spl/spl_heap.c 	zend_object        *new_object;</span>
+<span class='curline'><a href='../S/1061.html#L490'>new_object</a>        490 ext/spl/spl_heap.c 	new_object  = &amp;intern-&gt;std;</span>
+<span class='curline'><a href='../S/1061.html#L492'>new_object</a>        492 ext/spl/spl_heap.c 	zend_objects_clone_members(new_object, new_obj_val, old_object, handle TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1065.html#L306'>new_object</a>        306 ext/spl/spl_observer.c 	zend_object *new_object;</span>
+<span class='curline'><a href='../S/1065.html#L312'>new_object</a>        312 ext/spl/spl_observer.c 	new_object = &amp;intern-&gt;std;</span>
+<span class='curline'><a href='../S/1065.html#L314'>new_object</a>        314 ext/spl/spl_observer.c 	zend_objects_clone_members(new_object, new_obj_val, old_object, handle TSRMLS_CC);</span>
+</pre>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>row_packet</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/803.html#L840'>row_packet</a>        840 ext/mysqlnd/mysqlnd_ps.c 	MYSQLND_PACKET_ROW * row_packet;</span>
+<span class='curline'><a href='../S/803.html#L858'>row_packet</a>        858 ext/mysqlnd/mysqlnd_ps.c 	if (!(row_packet = result-&gt;unbuf-&gt;row_packet)) {</span>
+<span class='curline'><a href='../S/803.html#L863'>row_packet</a>        863 ext/mysqlnd/mysqlnd_ps.c 	row_packet-&gt;skip_extraction = stmt &amp;&amp; stmt-&gt;result_bind? FALSE:TRUE;</span>
+<span class='curline'><a href='../S/803.html#L869'>row_packet</a>        869 ext/mysqlnd/mysqlnd_ps.c 	if (PASS == (ret = PACKET_READ(row_packet, result-&gt;conn)) &amp;&amp; !row_packet-&gt;eof) {</span>
+<span class='curline'><a href='../S/803.html#L872'>row_packet</a>        872 ext/mysqlnd/mysqlnd_ps.c 		if (!row_packet-&gt;skip_extraction) {</span>
+<span class='curline'><a href='../S/803.html#L875'>row_packet</a>        875 ext/mysqlnd/mysqlnd_ps.c 			result-&gt;unbuf-&gt;last_row_data = row_packet-&gt;fields;</span>
+<span class='curline'><a href='../S/803.html#L876'>row_packet</a>        876 ext/mysqlnd/mysqlnd_ps.c 			result-&gt;unbuf-&gt;last_row_buffer = row_packet-&gt;row_buffer;</span>
+<span class='curline'><a href='../S/803.html#L877'>row_packet</a>        877 ext/mysqlnd/mysqlnd_ps.c 			row_packet-&gt;fields = NULL;</span>
+<span class='curline'><a href='../S/803.html#L878'>row_packet</a>        878 ext/mysqlnd/mysqlnd_ps.c 			row_packet-&gt;row_buffer = NULL;</span>
+<span class='curline'><a href='../S/803.html#L882'>row_packet</a>        882 ext/mysqlnd/mysqlnd_ps.c 									row_packet-&gt;field_count,</span>
+<span class='curline'><a href='../S/803.html#L883'>row_packet</a>        883 ext/mysqlnd/mysqlnd_ps.c 									row_packet-&gt;fields_metadata,</span>
+<span class='curline'><a href='../S/803.html#L919'>row_packet</a>        919 ext/mysqlnd/mysqlnd_ps.c 			row_packet-&gt;row_buffer-&gt;free_chunk(row_packet-&gt;row_buffer TSRMLS_CC);</span>
+<span class='curline'><a href='../S/803.html#L920'>row_packet</a>        920 ext/mysqlnd/mysqlnd_ps.c 			row_packet-&gt;row_buffer = NULL;</span>
+<span class='curline'><a href='../S/803.html#L926'>row_packet</a>        926 ext/mysqlnd/mysqlnd_ps.c 		if (row_packet-&gt;error_info.error_no) {</span>
+<span class='curline'><a href='../S/803.html#L927'>row_packet</a>        927 ext/mysqlnd/mysqlnd_ps.c 			COPY_CLIENT_ERROR(*stmt-&gt;conn-&gt;error_info, row_packet-&gt;error_info);</span>
+<span class='curline'><a href='../S/803.html#L928'>row_packet</a>        928 ext/mysqlnd/mysqlnd_ps.c 			COPY_CLIENT_ERROR(*stmt-&gt;error_info, row_packet-&gt;error_info);</span>
+<span class='curline'><a href='../S/803.html#L932'>row_packet</a>        932 ext/mysqlnd/mysqlnd_ps.c 	} else if (row_packet-&gt;eof) {</span>
+<span class='curline'><a href='../S/803.html#L937'>row_packet</a>        937 ext/mysqlnd/mysqlnd_ps.c 		result-&gt;conn-&gt;upsert_status-&gt;warning_count = row_packet-&gt;warning_count;</span>
+<span class='curline'><a href='../S/803.html#L938'>row_packet</a>        938 ext/mysqlnd/mysqlnd_ps.c 		result-&gt;conn-&gt;upsert_status-&gt;server_status = row_packet-&gt;server_status;</span>
+<span class='curline'><a href='../S/803.html#L1009'>row_packet</a>       1009 ext/mysqlnd/mysqlnd_ps.c 	MYSQLND_PACKET_ROW * row_packet;</span>
+<span class='curline'><a href='../S/803.html#L1027'>row_packet</a>       1027 ext/mysqlnd/mysqlnd_ps.c 	if (!(row_packet = result-&gt;unbuf-&gt;row_packet)) {</span>
+<span class='curline'><a href='../S/803.html#L1044'>row_packet</a>       1044 ext/mysqlnd/mysqlnd_ps.c 	row_packet-&gt;skip_extraction = stmt-&gt;result_bind? FALSE:TRUE;</span>
+<span class='curline'><a href='../S/803.html#L1047'>row_packet</a>       1047 ext/mysqlnd/mysqlnd_ps.c 	if (PASS == (ret = PACKET_READ(row_packet, result-&gt;conn)) &amp;&amp; !row_packet-&gt;eof) {</span>
+<span class='curline'><a href='../S/803.html#L1051'>row_packet</a>       1051 ext/mysqlnd/mysqlnd_ps.c 		if (!row_packet-&gt;skip_extraction) {</span>
+<span class='curline'><a href='../S/803.html#L1054'>row_packet</a>       1054 ext/mysqlnd/mysqlnd_ps.c 			result-&gt;unbuf-&gt;last_row_data = row_packet-&gt;fields;</span>
+<span class='curline'><a href='../S/803.html#L1055'>row_packet</a>       1055 ext/mysqlnd/mysqlnd_ps.c 			result-&gt;unbuf-&gt;last_row_buffer = row_packet-&gt;row_buffer;</span>
+<span class='curline'><a href='../S/803.html#L1056'>row_packet</a>       1056 ext/mysqlnd/mysqlnd_ps.c 			row_packet-&gt;fields = NULL;</span>
+<span class='curline'><a href='../S/803.html#L1057'>row_packet</a>       1057 ext/mysqlnd/mysqlnd_ps.c 			row_packet-&gt;row_buffer = NULL;</span>
+<span class='curline'><a href='../S/803.html#L1061'>row_packet</a>       1061 ext/mysqlnd/mysqlnd_ps.c 									  row_packet-&gt;field_count,</span>
+<span class='curline'><a href='../S/803.html#L1062'>row_packet</a>       1062 ext/mysqlnd/mysqlnd_ps.c 									  row_packet-&gt;fields_metadata,</span>
+<span class='curline'><a href='../S/803.html#L1100'>row_packet</a>       1100 ext/mysqlnd/mysqlnd_ps.c 			row_packet-&gt;row_buffer-&gt;free_chunk(row_packet-&gt;row_buffer TSRMLS_CC);</span>
+<span class='curline'><a href='../S/803.html#L1101'>row_packet</a>       1101 ext/mysqlnd/mysqlnd_ps.c 			row_packet-&gt;row_buffer = NULL;</span>
+<span class='curline'><a href='../S/803.html#L1104'>row_packet</a>       1104 ext/mysqlnd/mysqlnd_ps.c 		ret = PACKET_READ(row_packet, result-&gt;conn);</span>
+<span class='curline'><a href='../S/803.html#L1105'>row_packet</a>       1105 ext/mysqlnd/mysqlnd_ps.c 		if (row_packet-&gt;row_buffer) {</span>
+<span class='curline'><a href='../S/803.html#L1106'>row_packet</a>       1106 ext/mysqlnd/mysqlnd_ps.c 			row_packet-&gt;row_buffer-&gt;free_chunk(row_packet-&gt;row_buffer TSRMLS_CC);</span>
+<span class='curline'><a href='../S/803.html#L1107'>row_packet</a>       1107 ext/mysqlnd/mysqlnd_ps.c 			row_packet-&gt;row_buffer = NULL;</span>
+<span class='curline'><a href='../S/803.html#L1118'>row_packet</a>       1118 ext/mysqlnd/mysqlnd_ps.c 				row_packet-&gt;warning_count;</span>
+<span class='curline'><a href='../S/803.html#L1122'>row_packet</a>       1122 ext/mysqlnd/mysqlnd_ps.c 				row_packet-&gt;server_status;</span>
+<span class='curline'><a href='../S/803.html#L1124'>row_packet</a>       1124 ext/mysqlnd/mysqlnd_ps.c 		result-&gt;unbuf-&gt;eof_reached = row_packet-&gt;eof;</span>
+<span class='curline'><a href='../S/803.html#L1128'>row_packet</a>       1128 ext/mysqlnd/mysqlnd_ps.c 			row_packet-&gt;warning_count;</span>
+<span class='curline'><a href='../S/803.html#L1131'>row_packet</a>       1131 ext/mysqlnd/mysqlnd_ps.c 			row_packet-&gt;server_status;</span>
+<span class='curline'><a href='../S/803.html#L1135'>row_packet</a>       1135 ext/mysqlnd/mysqlnd_ps.c 				row_packet-&gt;server_status, row_packet-&gt;warning_count,</span>
+<span class='curline'><a href='../S/805.html#L248'>row_packet</a>        248 ext/mysqlnd/mysqlnd_result.c 	if (result-&gt;row_packet) {</span>
+<span class='curline'><a href='../S/805.html#L249'>row_packet</a>        249 ext/mysqlnd/mysqlnd_result.c 		PACKET_FREE(result-&gt;row_packet);</span>
+<span class='curline'><a href='../S/805.html#L250'>row_packet</a>        250 ext/mysqlnd/mysqlnd_result.c 		result-&gt;row_packet = NULL;</span>
+<span class='curline'><a href='../S/805.html#L762'>row_packet</a>        762 ext/mysqlnd/mysqlnd_result.c 	MYSQLND_PACKET_ROW	*row_packet = result-&gt;unbuf-&gt;row_packet;</span>
+<span class='curline'><a href='../S/805.html#L776'>row_packet</a>        776 ext/mysqlnd/mysqlnd_result.c 	if (!row_packet) {</span>
+<span class='curline'><a href='../S/805.html#L781'>row_packet</a>        781 ext/mysqlnd/mysqlnd_result.c 	row_packet-&gt;skip_extraction = FALSE;</span>
+<span class='curline'><a href='../S/805.html#L787'>row_packet</a>        787 ext/mysqlnd/mysqlnd_result.c 	if (PASS == (ret = PACKET_READ(row_packet, result-&gt;conn)) &amp;&amp; !row_packet-&gt;eof) {</span>
+<span class='curline'><a href='../S/805.html#L790'>row_packet</a>        790 ext/mysqlnd/mysqlnd_result.c 		result-&gt;unbuf-&gt;last_row_data = row_packet-&gt;fields;</span>
+<span class='curline'><a href='../S/805.html#L791'>row_packet</a>        791 ext/mysqlnd/mysqlnd_result.c 		result-&gt;unbuf-&gt;last_row_buffer = row_packet-&gt;row_buffer;</span>
+<span class='curline'><a href='../S/805.html#L792'>row_packet</a>        792 ext/mysqlnd/mysqlnd_result.c 		row_packet-&gt;fields = NULL;</span>
+<span class='curline'><a href='../S/805.html#L793'>row_packet</a>        793 ext/mysqlnd/mysqlnd_result.c 		row_packet-&gt;row_buffer = NULL;</span>
+<span class='curline'><a href='../S/805.html#L797'>row_packet</a>        797 ext/mysqlnd/mysqlnd_result.c 		if (!row_packet-&gt;skip_extraction) {</span>
+<span class='curline'><a href='../S/805.html#L803'>row_packet</a>        803 ext/mysqlnd/mysqlnd_result.c 											row_packet-&gt;fields_metadata,</span>
+<span class='curline'><a href='../S/805.html#L844'>row_packet</a>        844 ext/mysqlnd/mysqlnd_result.c 		if (row_packet-&gt;error_info.error_no) {</span>
+<span class='curline'><a href='../S/805.html#L845'>row_packet</a>        845 ext/mysqlnd/mysqlnd_result.c 			COPY_CLIENT_ERROR(*result-&gt;conn-&gt;error_info, row_packet-&gt;error_info);</span>
+<span class='curline'><a href='../S/805.html#L846'>row_packet</a>        846 ext/mysqlnd/mysqlnd_result.c 			DBG_ERR_FMT("errorno=%u error=%s", row_packet-&gt;error_info.error_no, row_packet-&gt;error_info.error);</span>
+<span class='curline'><a href='../S/805.html#L850'>row_packet</a>        850 ext/mysqlnd/mysqlnd_result.c 	} else if (row_packet-&gt;eof) {</span>
+<span class='curline'><a href='../S/805.html#L852'>row_packet</a>        852 ext/mysqlnd/mysqlnd_result.c 		DBG_INF_FMT("warnings=%u server_status=%u", row_packet-&gt;warning_count, row_packet-&gt;server_status);</span>
+<span class='curline'><a href='../S/805.html#L855'>row_packet</a>        855 ext/mysqlnd/mysqlnd_result.c 		result-&gt;conn-&gt;upsert_status-&gt;warning_count = row_packet-&gt;warning_count;</span>
+<span class='curline'><a href='../S/805.html#L856'>row_packet</a>        856 ext/mysqlnd/mysqlnd_result.c 		result-&gt;conn-&gt;upsert_status-&gt;server_status = row_packet-&gt;server_status;</span>
+<span class='curline'><a href='../S/805.html#L881'>row_packet</a>        881 ext/mysqlnd/mysqlnd_result.c 	MYSQLND_PACKET_ROW	*row_packet = result-&gt;unbuf-&gt;row_packet;</span>
+<span class='curline'><a href='../S/805.html#L895'>row_packet</a>        895 ext/mysqlnd/mysqlnd_result.c 	if (!row_packet) {</span>
+<span class='curline'><a href='../S/805.html#L900'>row_packet</a>        900 ext/mysqlnd/mysqlnd_result.c 	row_packet-&gt;skip_extraction = row? FALSE:TRUE;</span>
+<span class='curline'><a href='../S/805.html#L906'>row_packet</a>        906 ext/mysqlnd/mysqlnd_result.c 	if (PASS == (ret = PACKET_READ(row_packet, result-&gt;conn)) &amp;&amp; !row_packet-&gt;eof) {</span>
+<span class='curline'><a href='../S/805.html#L909'>row_packet</a>        909 ext/mysqlnd/mysqlnd_result.c 		result-&gt;unbuf-&gt;last_row_data = row_packet-&gt;fields;</span>
+<span class='curline'><a href='../S/805.html#L910'>row_packet</a>        910 ext/mysqlnd/mysqlnd_result.c 		result-&gt;unbuf-&gt;last_row_buffer = row_packet-&gt;row_buffer;</span>
+<span class='curline'><a href='../S/805.html#L911'>row_packet</a>        911 ext/mysqlnd/mysqlnd_result.c 		row_packet-&gt;fields = NULL;</span>
+<span class='curline'><a href='../S/805.html#L912'>row_packet</a>        912 ext/mysqlnd/mysqlnd_result.c 		row_packet-&gt;row_buffer = NULL;</span>
+<span class='curline'><a href='../S/805.html#L916'>row_packet</a>        916 ext/mysqlnd/mysqlnd_result.c 		if (!row_packet-&gt;skip_extraction) {</span>
+<span class='curline'><a href='../S/805.html#L922'>row_packet</a>        922 ext/mysqlnd/mysqlnd_result.c 											row_packet-&gt;fields_metadata,</span>
+<span class='curline'><a href='../S/805.html#L974'>row_packet</a>        974 ext/mysqlnd/mysqlnd_result.c 		if (row_packet-&gt;error_info.error_no) {</span>
+<span class='curline'><a href='../S/805.html#L975'>row_packet</a>        975 ext/mysqlnd/mysqlnd_result.c 			COPY_CLIENT_ERROR(*result-&gt;conn-&gt;error_info, row_packet-&gt;error_info);</span>
+<span class='curline'><a href='../S/805.html#L976'>row_packet</a>        976 ext/mysqlnd/mysqlnd_result.c 			DBG_ERR_FMT("errorno=%u error=%s", row_packet-&gt;error_info.error_no, row_packet-&gt;error_info.error);</span>
+<span class='curline'><a href='../S/805.html#L980'>row_packet</a>        980 ext/mysqlnd/mysqlnd_result.c 	} else if (row_packet-&gt;eof) {</span>
+<span class='curline'><a href='../S/805.html#L982'>row_packet</a>        982 ext/mysqlnd/mysqlnd_result.c 		DBG_INF_FMT("warnings=%u server_status=%u", row_packet-&gt;warning_count, row_packet-&gt;server_status);</span>
+<span class='curline'><a href='../S/805.html#L985'>row_packet</a>        985 ext/mysqlnd/mysqlnd_result.c 		result-&gt;conn-&gt;upsert_status-&gt;warning_count = row_packet-&gt;warning_count;</span>
+<span class='curline'><a href='../S/805.html#L986'>row_packet</a>        986 ext/mysqlnd/mysqlnd_result.c 		result-&gt;conn-&gt;upsert_status-&gt;server_status = row_packet-&gt;server_status;</span>
+<span class='curline'><a href='../S/805.html#L1030'>row_packet</a>       1030 ext/mysqlnd/mysqlnd_result.c 	result-&gt;unbuf-&gt;row_packet = result-&gt;conn-&gt;protocol-&gt;m.get_row_packet(result-&gt;conn-&gt;protocol, FALSE TSRMLS_CC);</span>
+<span class='curline'><a href='../S/805.html#L1031'>row_packet</a>       1031 ext/mysqlnd/mysqlnd_result.c 	if (!result-&gt;unbuf-&gt;row_packet) {</span>
+<span class='curline'><a href='../S/805.html#L1034'>row_packet</a>       1034 ext/mysqlnd/mysqlnd_result.c 	result-&gt;unbuf-&gt;row_packet-&gt;result_set_memory_pool = result-&gt;unbuf-&gt;result_set_memory_pool;</span>
+<span class='curline'><a href='../S/805.html#L1035'>row_packet</a>       1035 ext/mysqlnd/mysqlnd_result.c 	result-&gt;unbuf-&gt;row_packet-&gt;field_count = result-&gt;field_count;</span>
+<span class='curline'><a href='../S/805.html#L1036'>row_packet</a>       1036 ext/mysqlnd/mysqlnd_result.c 	result-&gt;unbuf-&gt;row_packet-&gt;binary_protocol = ps;</span>
+<span class='curline'><a href='../S/805.html#L1037'>row_packet</a>       1037 ext/mysqlnd/mysqlnd_result.c 	result-&gt;unbuf-&gt;row_packet-&gt;fields_metadata = result-&gt;meta-&gt;fields;</span>
+<span class='curline'><a href='../S/805.html#L1038'>row_packet</a>       1038 ext/mysqlnd/mysqlnd_result.c 	result-&gt;unbuf-&gt;row_packet-&gt;bit_fields_count = result-&gt;meta-&gt;bit_fields_count;</span>
+<span class='curline'><a href='../S/805.html#L1039'>row_packet</a>       1039 ext/mysqlnd/mysqlnd_result.c 	result-&gt;unbuf-&gt;row_packet-&gt;bit_fields_total_len = result-&gt;meta-&gt;bit_fields_total_len;</span>
+<span class='curline'><a href='../S/805.html#L1370'>row_packet</a>       1370 ext/mysqlnd/mysqlnd_result.c 	MYSQLND_PACKET_ROW * row_packet = NULL;</span>
+<span class='curline'><a href='../S/805.html#L1393'>row_packet</a>       1393 ext/mysqlnd/mysqlnd_result.c 	row_packet = conn-&gt;protocol-&gt;m.get_row_packet(conn-&gt;protocol, FALSE TSRMLS_CC);</span>
+<span class='curline'><a href='../S/805.html#L1394'>row_packet</a>       1394 ext/mysqlnd/mysqlnd_result.c 	if (!row_packet) {</span>
+<span class='curline'><a href='../S/805.html#L1399'>row_packet</a>       1399 ext/mysqlnd/mysqlnd_result.c 	row_packet-&gt;result_set_memory_pool = result-&gt;stored_data-&gt;result_set_memory_pool;</span>
+<span class='curline'><a href='../S/805.html#L1400'>row_packet</a>       1400 ext/mysqlnd/mysqlnd_result.c 	row_packet-&gt;field_count = meta-&gt;field_count;</span>
+<span class='curline'><a href='../S/805.html#L1401'>row_packet</a>       1401 ext/mysqlnd/mysqlnd_result.c 	row_packet-&gt;binary_protocol = binary_protocol;</span>
+<span class='curline'><a href='../S/805.html#L1402'>row_packet</a>       1402 ext/mysqlnd/mysqlnd_result.c 	row_packet-&gt;fields_metadata = meta-&gt;fields;</span>
+<span class='curline'><a href='../S/805.html#L1403'>row_packet</a>       1403 ext/mysqlnd/mysqlnd_result.c 	row_packet-&gt;bit_fields_count	= meta-&gt;bit_fields_count;</span>
+<span class='curline'><a href='../S/805.html#L1404'>row_packet</a>       1404 ext/mysqlnd/mysqlnd_result.c 	row_packet-&gt;bit_fields_total_len = meta-&gt;bit_fields_total_len;</span>
+<span class='curline'><a href='../S/805.html#L1406'>row_packet</a>       1406 ext/mysqlnd/mysqlnd_result.c 	row_packet-&gt;skip_extraction = TRUE; /* let php_mysqlnd_rowp_read() not allocate row_packet-&gt;fields, we will do it */</span>
+<span class='curline'><a href='../S/805.html#L1408'>row_packet</a>       1408 ext/mysqlnd/mysqlnd_result.c 	while (FAIL != (ret = PACKET_READ(row_packet, conn)) &amp;&amp; !row_packet-&gt;eof) {</span>
+<span class='curline'><a href='../S/805.html#L1429'>row_packet</a>       1429 ext/mysqlnd/mysqlnd_result.c 		(*row_buffers)[set-&gt;row_count] = row_packet-&gt;row_buffer;</span>
+<span class='curline'><a href='../S/805.html#L1434'>row_packet</a>       1434 ext/mysqlnd/mysqlnd_result.c 		row_packet-&gt;fields = NULL;</span>
+<span class='curline'><a href='../S/805.html#L1435'>row_packet</a>       1435 ext/mysqlnd/mysqlnd_result.c 		row_packet-&gt;row_buffer = NULL;</span>
+<span class='curline'><a href='../S/805.html#L1451'>row_packet</a>       1451 ext/mysqlnd/mysqlnd_result.c 	if (row_packet-&gt;eof) { </span>
+<span class='curline'><a href='../S/805.html#L1453'>row_packet</a>       1453 ext/mysqlnd/mysqlnd_result.c 		conn-&gt;upsert_status-&gt;warning_count = row_packet-&gt;warning_count;</span>
+<span class='curline'><a href='../S/805.html#L1454'>row_packet</a>       1454 ext/mysqlnd/mysqlnd_result.c 		conn-&gt;upsert_status-&gt;server_status = row_packet-&gt;server_status;</span>
+<span class='curline'><a href='../S/805.html#L1474'>row_packet</a>       1474 ext/mysqlnd/mysqlnd_result.c 		COPY_CLIENT_ERROR(set-&gt;error_info, row_packet-&gt;error_info);</span>
+<span class='curline'><a href='../S/805.html#L1482'>row_packet</a>       1482 ext/mysqlnd/mysqlnd_result.c 	PACKET_FREE(row_packet);</span>
+</pre>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>zend_do_binary_op</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/1656.html#L466'>zend_do_binary_op</a>  466 Zend/zend_compile.h void zend_do_binary_op(zend_uchar op, znode *result, const znode *op1, const znode *op2 TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1701.html#L802'>zend_do_binary_op</a>  802 Zend/zend_language_parser.y 	|	expr T_LOGICAL_XOR expr { zend_do_binary_op(ZEND_BOOL_XOR, &amp;$$, &amp;$1, &amp;$3 TSRMLS_CC); }</span>
+<span class='curline'><a href='../S/1701.html#L803'>zend_do_binary_op</a>  803 Zend/zend_language_parser.y 	|	expr '|' expr	{ zend_do_binary_op(ZEND_BW_OR, &amp;$$, &amp;$1, &amp;$3 TSRMLS_CC); }</span>
+<span class='curline'><a href='../S/1701.html#L804'>zend_do_binary_op</a>  804 Zend/zend_language_parser.y 	|	expr '&amp;' expr	{ zend_do_binary_op(ZEND_BW_AND, &amp;$$, &amp;$1, &amp;$3 TSRMLS_CC); }</span>
+<span class='curline'><a href='../S/1701.html#L805'>zend_do_binary_op</a>  805 Zend/zend_language_parser.y 	|	expr '^' expr	{ zend_do_binary_op(ZEND_BW_XOR, &amp;$$, &amp;$1, &amp;$3 TSRMLS_CC); }</span>
+<span class='curline'><a href='../S/1701.html#L806'>zend_do_binary_op</a>  806 Zend/zend_language_parser.y 	|	expr '.' expr 	{ zend_do_binary_op(ZEND_CONCAT, &amp;$$, &amp;$1, &amp;$3 TSRMLS_CC); }</span>
+<span class='curline'><a href='../S/1701.html#L807'>zend_do_binary_op</a>  807 Zend/zend_language_parser.y 	|	expr '+' expr 	{ zend_do_binary_op(ZEND_ADD, &amp;$$, &amp;$1, &amp;$3 TSRMLS_CC); }</span>
+<span class='curline'><a href='../S/1701.html#L808'>zend_do_binary_op</a>  808 Zend/zend_language_parser.y 	|	expr '-' expr 	{ zend_do_binary_op(ZEND_SUB, &amp;$$, &amp;$1, &amp;$3 TSRMLS_CC); }</span>
+<span class='curline'><a href='../S/1701.html#L809'>zend_do_binary_op</a>  809 Zend/zend_language_parser.y 	|	expr '*' expr	{ zend_do_binary_op(ZEND_MUL, &amp;$$, &amp;$1, &amp;$3 TSRMLS_CC); }</span>
+<span class='curline'><a href='../S/1701.html#L810'>zend_do_binary_op</a>  810 Zend/zend_language_parser.y 	|	expr T_POW expr	{ zend_do_binary_op(ZEND_POW, &amp;$$, &amp;$1, &amp;$3 TSRMLS_CC); }</span>
+<span class='curline'><a href='../S/1701.html#L811'>zend_do_binary_op</a>  811 Zend/zend_language_parser.y 	|	expr '/' expr	{ zend_do_binary_op(ZEND_DIV, &amp;$$, &amp;$1, &amp;$3 TSRMLS_CC); }</span>
+<span class='curline'><a href='../S/1701.html#L812'>zend_do_binary_op</a>  812 Zend/zend_language_parser.y 	|	expr '%' expr 	{ zend_do_binary_op(ZEND_MOD, &amp;$$, &amp;$1, &amp;$3 TSRMLS_CC); }</span>
+<span class='curline'><a href='../S/1701.html#L813'>zend_do_binary_op</a>  813 Zend/zend_language_parser.y 	| 	expr T_SL expr	{ zend_do_binary_op(ZEND_SL, &amp;$$, &amp;$1, &amp;$3 TSRMLS_CC); }</span>
+<span class='curline'><a href='../S/1701.html#L814'>zend_do_binary_op</a>  814 Zend/zend_language_parser.y 	|	expr T_SR expr	{ zend_do_binary_op(ZEND_SR, &amp;$$, &amp;$1, &amp;$3 TSRMLS_CC); }</span>
+<span class='curline'><a href='../S/1701.html#L815'>zend_do_binary_op</a>  815 Zend/zend_language_parser.y 	|	'+' expr %prec T_INC { ZVAL_LONG(&amp;$1.u.constant, 0); if ($2.op_type == IS_CONST) { add_function(&amp;$2.u.constant, &amp;$1.u.constant, &amp;$2.u.constant TSRMLS_CC); $$ = $2; } else { $1.op_type = IS_CONST; INIT_PZVAL(&amp;$1.u.constant); zend_do_binary_op(ZEND_ADD, &amp;$$, &amp;$1, &amp;$2 TSRMLS_CC); } }</span>
+<span class='curline'><a href='../S/1701.html#L816'>zend_do_binary_op</a>  816 Zend/zend_language_parser.y 	|	'-' expr %prec T_INC { ZVAL_LONG(&amp;$1.u.constant, 0); if ($2.op_type == IS_CONST) { sub_function(&amp;$2.u.constant, &amp;$1.u.constant, &amp;$2.u.constant TSRMLS_CC); $$ = $2; } else { $1.op_type = IS_CONST; INIT_PZVAL(&amp;$1.u.constant); zend_do_binary_op(ZEND_SUB, &amp;$$, &amp;$1, &amp;$2 TSRMLS_CC); } }</span>
+<span class='curline'><a href='../S/1701.html#L819'>zend_do_binary_op</a>  819 Zend/zend_language_parser.y 	|	expr T_IS_IDENTICAL expr		{ zend_do_binary_op(ZEND_IS_IDENTICAL, &amp;$$, &amp;$1, &amp;$3 TSRMLS_CC); }</span>
+<span class='curline'><a href='../S/1701.html#L820'>zend_do_binary_op</a>  820 Zend/zend_language_parser.y 	|	expr T_IS_NOT_IDENTICAL expr	{ zend_do_binary_op(ZEND_IS_NOT_IDENTICAL, &amp;$$, &amp;$1, &amp;$3 TSRMLS_CC); }</span>
+<span class='curline'><a href='../S/1701.html#L821'>zend_do_binary_op</a>  821 Zend/zend_language_parser.y 	|	expr T_IS_EQUAL expr			{ zend_do_binary_op(ZEND_IS_EQUAL, &amp;$$, &amp;$1, &amp;$3 TSRMLS_CC); }</span>
+<span class='curline'><a href='../S/1701.html#L822'>zend_do_binary_op</a>  822 Zend/zend_language_parser.y 	|	expr T_IS_NOT_EQUAL expr 		{ zend_do_binary_op(ZEND_IS_NOT_EQUAL, &amp;$$, &amp;$1, &amp;$3 TSRMLS_CC); }</span>
+<span class='curline'><a href='../S/1701.html#L823'>zend_do_binary_op</a>  823 Zend/zend_language_parser.y 	|	expr '&lt;' expr 					{ zend_do_binary_op(ZEND_IS_SMALLER, &amp;$$, &amp;$1, &amp;$3 TSRMLS_CC); }</span>
+<span class='curline'><a href='../S/1701.html#L824'>zend_do_binary_op</a>  824 Zend/zend_language_parser.y 	|	expr T_IS_SMALLER_OR_EQUAL expr { zend_do_binary_op(ZEND_IS_SMALLER_OR_EQUAL, &amp;$$, &amp;$1, &amp;$3 TSRMLS_CC); }</span>
+<span class='curline'><a href='../S/1701.html#L825'>zend_do_binary_op</a>  825 Zend/zend_language_parser.y 	|	expr '&gt;' expr 					{ zend_do_binary_op(ZEND_IS_SMALLER, &amp;$$, &amp;$3, &amp;$1 TSRMLS_CC); }</span>
+<span class='curline'><a href='../S/1701.html#L826'>zend_do_binary_op</a>  826 Zend/zend_language_parser.y 	|	expr T_IS_GREATER_OR_EQUAL expr { zend_do_binary_op(ZEND_IS_SMALLER_OR_EQUAL, &amp;$$, &amp;$3, &amp;$1 TSRMLS_CC); }</span>
+</pre>
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>stm</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/50.html#L48'>stm</a>                48 ext/com_dotnet/com_persist.c static void istream_destructor(php_istream *stm TSRMLS_DC);</span>
+<span class='curline'><a href='../S/50.html#L52'>stm</a>                52 ext/com_dotnet/com_persist.c 	php_istream *stm = (php_istream *)rsrc-&gt;ptr;</span>
+<span class='curline'><a href='../S/50.html#L53'>stm</a>                53 ext/com_dotnet/com_persist.c 	istream_destructor(stm TSRMLS_CC);</span>
+<span class='curline'><a href='../S/50.html#L57'>stm</a>                57 ext/com_dotnet/com_persist.c 	php_istream *stm = (php_istream*)This; \</span>
+<span class='curline'><a href='../S/50.html#L59'>stm</a>                59 ext/com_dotnet/com_persist.c 	if (GetCurrentThreadId() != stm-&gt;engine_thread) \</span>
+<span class='curline'><a href='../S/50.html#L63'>stm</a>                63 ext/com_dotnet/com_persist.c 	php_istream *stm = (php_istream*)This;	\</span>
+<span class='curline'><a href='../S/50.html#L64'>stm</a>                64 ext/com_dotnet/com_persist.c 	if (GetCurrentThreadId() != stm-&gt;engine_thread)	\</span>
+<span class='curline'><a href='../S/50.html#L77'>stm</a>                77 ext/com_dotnet/com_persist.c 		InterlockedIncrement(&amp;stm-&gt;refcount);</span>
+<span class='curline'><a href='../S/50.html#L89'>stm</a>                89 ext/com_dotnet/com_persist.c 	return InterlockedIncrement(&amp;stm-&gt;refcount);</span>
+<span class='curline'><a href='../S/50.html#L97'>stm</a>                97 ext/com_dotnet/com_persist.c 	ret = InterlockedDecrement(&amp;stm-&gt;refcount);</span>
+<span class='curline'><a href='../S/50.html#L100'>stm</a>               100 ext/com_dotnet/com_persist.c 		if (stm-&gt;id)</span>
+<span class='curline'><a href='../S/50.html#L101'>stm</a>               101 ext/com_dotnet/com_persist.c 			zend_list_delete(stm-&gt;id);</span>
+<span class='curline'><a href='../S/50.html#L111'>stm</a>               111 ext/com_dotnet/com_persist.c 	nread = php_stream_read(stm-&gt;stream, pv, cb);</span>
+<span class='curline'><a href='../S/50.html#L127'>stm</a>               127 ext/com_dotnet/com_persist.c 	nwrote = php_stream_write(stm-&gt;stream, pv, cb);</span>
+<span class='curline'><a href='../S/50.html#L161'>stm</a>               161 ext/com_dotnet/com_persist.c 	ret = php_stream_seek(stm-&gt;stream, offset, whence);</span>
+<span class='curline'><a href='../S/50.html#L178'>stm</a>               178 ext/com_dotnet/com_persist.c 	if (php_stream_truncate_supported(stm-&gt;stream)) {</span>
+<span class='curline'><a href='../S/50.html#L179'>stm</a>               179 ext/com_dotnet/com_persist.c 		int ret = php_stream_truncate_set_size(stm-&gt;stream, (size_t)libNewSize.QuadPart);</span>
+<span class='curline'><a href='../S/50.html#L201'>stm</a>               201 ext/com_dotnet/com_persist.c 	php_stream_flush(stm-&gt;stream);</span>
+<span class='curline'><a href='../S/50.html#L252'>stm</a>               252 ext/com_dotnet/com_persist.c static void istream_destructor(php_istream *stm TSRMLS_DC)</span>
+<span class='curline'><a href='../S/50.html#L254'>stm</a>               254 ext/com_dotnet/com_persist.c 	if (stm-&gt;id) {</span>
+<span class='curline'><a href='../S/50.html#L255'>stm</a>               255 ext/com_dotnet/com_persist.c 		int id = stm-&gt;id;</span>
+<span class='curline'><a href='../S/50.html#L256'>stm</a>               256 ext/com_dotnet/com_persist.c 		stm-&gt;id = 0;</span>
+<span class='curline'><a href='../S/50.html#L261'>stm</a>               261 ext/com_dotnet/com_persist.c 	if (stm-&gt;refcount &gt; 0) {</span>
+<span class='curline'><a href='../S/50.html#L262'>stm</a>               262 ext/com_dotnet/com_persist.c 		CoDisconnectObject((IUnknown*)stm, 0);</span>
+<span class='curline'><a href='../S/50.html#L265'>stm</a>               265 ext/com_dotnet/com_persist.c 	zend_list_delete(stm-&gt;stream-&gt;rsrc_id);</span>
+<span class='curline'><a href='../S/50.html#L267'>stm</a>               267 ext/com_dotnet/com_persist.c 	CoTaskMemFree(stm);</span>
+<span class='curline'><a href='../S/50.html#L273'>stm</a>               273 ext/com_dotnet/com_persist.c 	php_istream *stm = (php_istream*)CoTaskMemAlloc(sizeof(*stm));</span>
+<span class='curline'><a href='../S/50.html#L275'>stm</a>               275 ext/com_dotnet/com_persist.c 	if (stm == NULL)</span>
+<span class='curline'><a href='../S/50.html#L278'>stm</a>               278 ext/com_dotnet/com_persist.c 	memset(stm, 0, sizeof(*stm));</span>
+<span class='curline'><a href='../S/50.html#L279'>stm</a>               279 ext/com_dotnet/com_persist.c 	stm-&gt;engine_thread = GetCurrentThreadId();</span>
+<span class='curline'><a href='../S/50.html#L280'>stm</a>               280 ext/com_dotnet/com_persist.c 	stm-&gt;lpVtbl = &amp;php_istream_vtbl;</span>
+<span class='curline'><a href='../S/50.html#L281'>stm</a>               281 ext/com_dotnet/com_persist.c 	stm-&gt;refcount = 1;</span>
+<span class='curline'><a href='../S/50.html#L282'>stm</a>               282 ext/com_dotnet/com_persist.c 	stm-&gt;stream = stream;</span>
+<span class='curline'><a href='../S/50.html#L285'>stm</a>               285 ext/com_dotnet/com_persist.c 	stm-&gt;id = zend_list_insert(stm, le_istream TSRMLS_CC);</span>
+<span class='curline'><a href='../S/50.html#L287'>stm</a>               287 ext/com_dotnet/com_persist.c 	return (IStream*)stm;</span>
+<span class='curline'><a href='../S/50.html#L539'>stm</a>               539 ext/com_dotnet/com_persist.c 	IStream *stm = NULL;</span>
+<span class='curline'><a href='../S/50.html#L555'>stm</a>               555 ext/com_dotnet/com_persist.c 	stm = php_com_wrapper_export_stream(stream TSRMLS_CC);</span>
+<span class='curline'><a href='../S/50.html#L556'>stm</a>               556 ext/com_dotnet/com_persist.c 	if (stm == NULL) {</span>
+<span class='curline'><a href='../S/50.html#L568'>stm</a>               568 ext/com_dotnet/com_persist.c 		res = OleLoadFromStream(stm, &amp;IID_IDispatch, &amp;disp);</span>
+<span class='curline'><a href='../S/50.html#L576'>stm</a>               576 ext/com_dotnet/com_persist.c 			res = IPersistStreamInit_Load(helper-&gt;ipsi, stm);</span>
+<span class='curline'><a href='../S/50.html#L580'>stm</a>               580 ext/com_dotnet/com_persist.c 				res = IPersistStreamInit_Load(helper-&gt;ipsi, stm);</span>
+<span class='curline'><a href='../S/50.html#L584'>stm</a>               584 ext/com_dotnet/com_persist.c 	IStream_Release(stm);</span>
+<span class='curline'><a href='../S/50.html#L599'>stm</a>               599 ext/com_dotnet/com_persist.c 	IStream *stm = NULL;</span>
+<span class='curline'><a href='../S/50.html#L617'>stm</a>               617 ext/com_dotnet/com_persist.c 	stm = php_com_wrapper_export_stream(stream TSRMLS_CC);</span>
+<span class='curline'><a href='../S/50.html#L618'>stm</a>               618 ext/com_dotnet/com_persist.c 	if (stm == NULL) {</span>
+<span class='curline'><a href='../S/50.html#L625'>stm</a>               625 ext/com_dotnet/com_persist.c 		res = IPersistStreamInit_Save(helper-&gt;ipsi, stm, TRUE);</span>
+<span class='curline'><a href='../S/50.html#L629'>stm</a>               629 ext/com_dotnet/com_persist.c 			res = IPersistStream_Save(helper-&gt;ips, stm, TRUE);</span>
+<span class='curline'><a href='../S/50.html#L633'>stm</a>               633 ext/com_dotnet/com_persist.c 	IStream_Release(stm);</span>
+<span class='curline'><a href='../S/924.html#L541'>stm</a>               541 ext/pdo/pdo_sql_parser.c 					php_stream *stm;</span>
+<span class='curline'><a href='../S/924.html#L543'>stm</a>               543 ext/pdo/pdo_sql_parser.c 					php_stream_from_zval_no_verify(stm, &amp;param-&gt;parameter);</span>
+<span class='curline'><a href='../S/924.html#L544'>stm</a>               544 ext/pdo/pdo_sql_parser.c 					if (stm) {</span>
+<span class='curline'><a href='../S/924.html#L548'>stm</a>               548 ext/pdo/pdo_sql_parser.c 						len = php_stream_copy_to_mem(stm, &amp;buf, PHP_STREAM_COPY_ALL, 0);</span>
+<span class='curline'><a href='../S/926.html#L614'>stm</a>               614 ext/pdo/pdo_stmt.c 				php_stream *stm;</span>
+<span class='curline'><a href='../S/926.html#L617'>stm</a>               617 ext/pdo/pdo_stmt.c 					stm = php_stream_memory_open(TEMP_STREAM_TAKE_BUFFER, value, value_len);</span>
+<span class='curline'><a href='../S/926.html#L618'>stm</a>               618 ext/pdo/pdo_stmt.c 					if (stm) {</span>
+<span class='curline'><a href='../S/926.html#L624'>stm</a>               624 ext/pdo/pdo_stmt.c 					stm = php_stream_memory_open(TEMP_STREAM_READONLY, value, value_len);</span>
+<span class='curline'><a href='../S/926.html#L626'>stm</a>               626 ext/pdo/pdo_stmt.c 				if (stm) {</span>
+<span class='curline'><a href='../S/926.html#L627'>stm</a>               627 ext/pdo/pdo_stmt.c 					php_stream_to_zval(stm, dest);</span>
+<span class='curline'><a href='../S/942.html#L512'>stm</a>               512 ext/pdo_mysql/mysql_statement.c 							php_stream *stm;</span>
+<span class='curline'><a href='../S/942.html#L513'>stm</a>               513 ext/pdo_mysql/mysql_statement.c 							php_stream_from_zval_no_verify(stm, &amp;param-&gt;parameter);</span>
+<span class='curline'><a href='../S/942.html#L514'>stm</a>               514 ext/pdo_mysql/mysql_statement.c 							if (stm) {</span>
+<span class='curline'><a href='../S/942.html#L517'>stm</a>               517 ext/pdo_mysql/mysql_statement.c 								Z_STRLEN_P(param-&gt;parameter) = php_stream_copy_to_mem(stm,</span>
+<span class='curline'><a href='../S/948.html#L368'>stm</a>               368 ext/pdo_oci/oci_statement.c 					php_stream *stm;</span>
+<span class='curline'><a href='../S/948.html#L375'>stm</a>               375 ext/pdo_oci/oci_statement.c 						stm = oci_create_lob_stream(stmt, (OCILobLocator*)P-&gt;thing TSRMLS_CC);</span>
+<span class='curline'><a href='../S/948.html#L376'>stm</a>               376 ext/pdo_oci/oci_statement.c 						if (stm) {</span>
+<span class='curline'><a href='../S/948.html#L378'>stm</a>               378 ext/pdo_oci/oci_statement.c 							php_stream_to_zval(stm, param-&gt;parameter);</span>
+<span class='curline'><a href='../S/948.html#L387'>stm</a>               387 ext/pdo_oci/oci_statement.c 						php_stream_from_zval_no_verify(stm, &amp;param-&gt;parameter);</span>
+<span class='curline'><a href='../S/948.html#L388'>stm</a>               388 ext/pdo_oci/oci_statement.c 						if (stm) {</span>
+<span class='curline'><a href='../S/948.html#L392'>stm</a>               392 ext/pdo_oci/oci_statement.c 								n = php_stream_read(stm, buf, sizeof(buf));</span>
+<span class='curline'><a href='../S/948.html#L703'>stm</a>               703 ext/pdo_oci/oci_statement.c 	php_stream *stm;</span>
+<span class='curline'><a href='../S/948.html#L710'>stm</a>               710 ext/pdo_oci/oci_statement.c 	stm = php_stream_alloc(&amp;oci_blob_stream_ops, self, 0, "r+b");</span>
+<span class='curline'><a href='../S/948.html#L712'>stm</a>               712 ext/pdo_oci/oci_statement.c 	if (stm) {</span>
+<span class='curline'><a href='../S/948.html#L714'>stm</a>               714 ext/pdo_oci/oci_statement.c 		return stm;</span>
+<span class='curline'><a href='../S/953.html#L180'>stm</a>               180 ext/pdo_odbc/odbc_stmt.c 			php_stream *stm;</span>
+<span class='curline'><a href='../S/953.html#L215'>stm</a>               215 ext/pdo_odbc/odbc_stmt.c 			php_stream_from_zval_no_verify(stm, &amp;param-&gt;parameter);</span>
+<span class='curline'><a href='../S/953.html#L216'>stm</a>               216 ext/pdo_odbc/odbc_stmt.c 			if (!stm) {</span>
+<span class='curline'><a href='../S/953.html#L232'>stm</a>               232 ext/pdo_odbc/odbc_stmt.c 				len = php_stream_read(stm, buf, 8192);</span>
+<span class='curline'><a href='../S/953.html#L393'>stm</a>               393 ext/pdo_odbc/odbc_stmt.c 						php_stream *stm;</span>
+<span class='curline'><a href='../S/953.html#L396'>stm</a>               396 ext/pdo_odbc/odbc_stmt.c 						php_stream_from_zval_no_verify(stm, &amp;param-&gt;parameter);</span>
+<span class='curline'><a href='../S/953.html#L398'>stm</a>               398 ext/pdo_odbc/odbc_stmt.c 						if (!stm) {</span>
+<span class='curline'><a href='../S/953.html#L402'>stm</a>               402 ext/pdo_odbc/odbc_stmt.c 						if (0 == php_stream_stat(stm, &amp;sb)) {</span>
+<span class='curline'><a href='../S/953.html#L416'>stm</a>               416 ext/pdo_odbc/odbc_stmt.c 									len = php_stream_read(stm, ptr, amount);</span>
+<span class='curline'><a href='../S/958.html#L190'>stm</a>               190 ext/pdo_pgsql/pgsql_driver.c 	php_stream *stm;</span>
+<span class='curline'><a href='../S/958.html#L199'>stm</a>               199 ext/pdo_pgsql/pgsql_driver.c 	stm = php_stream_alloc(&amp;pdo_pgsql_lob_stream_ops, self, 0, "r+b");</span>
+<span class='curline'><a href='../S/958.html#L201'>stm</a>               201 ext/pdo_pgsql/pgsql_driver.c 	if (stm) {</span>
+<span class='curline'><a href='../S/958.html#L203'>stm</a>               203 ext/pdo_pgsql/pgsql_driver.c 		return stm;</span>
+<span class='curline'><a href='../S/959.html#L307'>stm</a>               307 ext/pdo_pgsql/pgsql_statement.c 						php_stream *stm;</span>
+<span class='curline'><a href='../S/959.html#L308'>stm</a>               308 ext/pdo_pgsql/pgsql_statement.c 						php_stream_from_zval_no_verify(stm, &amp;param-&gt;parameter);</span>
+<span class='curline'><a href='../S/959.html#L309'>stm</a>               309 ext/pdo_pgsql/pgsql_statement.c 						if (stm) {</span>
+<span class='curline'><a href='../S/959.html#L310'>stm</a>               310 ext/pdo_pgsql/pgsql_statement.c 							if (php_stream_is(stm, &amp;pdo_pgsql_lob_stream_ops)) {</span>
+<span class='curline'><a href='../S/959.html#L311'>stm</a>               311 ext/pdo_pgsql/pgsql_statement.c 								struct pdo_pgsql_lob_self *self = (struct pdo_pgsql_lob_self*)stm-&gt;abstract;</span>
+<span class='curline'><a href='../S/959.html#L330'>stm</a>               330 ext/pdo_pgsql/pgsql_statement.c 								if ((len = php_stream_copy_to_mem(stm, &amp;Z_STRVAL_P(param-&gt;parameter), PHP_STREAM_COPY_ALL, 0)) &gt; 0) {</span>
+<span class='curline'><a href='../S/966.html#L130'>stm</a>               130 ext/pdo_sqlite/sqlite_statement.c 							php_stream *stm;</span>
+<span class='curline'><a href='../S/966.html#L131'>stm</a>               131 ext/pdo_sqlite/sqlite_statement.c 							php_stream_from_zval_no_verify(stm, &amp;param-&gt;parameter);</span>
+<span class='curline'><a href='../S/966.html#L132'>stm</a>               132 ext/pdo_sqlite/sqlite_statement.c 							if (stm) {</span>
+<span class='curline'><a href='../S/966.html#L135'>stm</a>               135 ext/pdo_sqlite/sqlite_statement.c 								Z_STRLEN_P(param-&gt;parameter) = php_stream_copy_to_mem(stm,</span>
+</pre>
+</body>
+</html>

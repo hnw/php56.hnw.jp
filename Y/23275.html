@@ -1,0 +1,211 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>ini_entry</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/1688.html#L37'>ini_entry</a>          37 Zend/zend_ini.c static int zend_remove_ini_entries(zend_ini_entry *ini_entry, int *module_number TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1688.html#L39'>ini_entry</a>          39 Zend/zend_ini.c 	if (ini_entry-&gt;module_number == *module_number) {</span>
+<span class='curline'><a href='../S/1688.html#L47'>ini_entry</a>          47 Zend/zend_ini.c static int zend_restore_ini_entry_cb(zend_ini_entry *ini_entry, int stage TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1688.html#L51'>ini_entry</a>          51 Zend/zend_ini.c 	if (ini_entry-&gt;modified) {</span>
+<span class='curline'><a href='../S/1688.html#L52'>ini_entry</a>          52 Zend/zend_ini.c 		if (ini_entry-&gt;on_modify) {</span>
+<span class='curline'><a href='../S/1688.html#L57'>ini_entry</a>          57 Zend/zend_ini.c 				result = ini_entry-&gt;on_modify(ini_entry, ini_entry-&gt;orig_value, ini_entry-&gt;orig_value_length, ini_entry-&gt;mh_arg1, ini_entry-&gt;mh_arg2, ini_entry-&gt;mh_arg3, stage TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1688.html#L64'>ini_entry</a>          64 Zend/zend_ini.c 		if (ini_entry-&gt;value != ini_entry-&gt;orig_value) {</span>
+<span class='curline'><a href='../S/1688.html#L65'>ini_entry</a>          65 Zend/zend_ini.c 			efree(ini_entry-&gt;value);</span>
+<span class='curline'><a href='../S/1688.html#L67'>ini_entry</a>          67 Zend/zend_ini.c 		ini_entry-&gt;value = ini_entry-&gt;orig_value;</span>
+<span class='curline'><a href='../S/1688.html#L68'>ini_entry</a>          68 Zend/zend_ini.c 		ini_entry-&gt;value_length = ini_entry-&gt;orig_value_length;</span>
+<span class='curline'><a href='../S/1688.html#L69'>ini_entry</a>          69 Zend/zend_ini.c 		ini_entry-&gt;modifiable = ini_entry-&gt;orig_modifiable;</span>
+<span class='curline'><a href='../S/1688.html#L70'>ini_entry</a>          70 Zend/zend_ini.c 		ini_entry-&gt;modified = 0;</span>
+<span class='curline'><a href='../S/1688.html#L71'>ini_entry</a>          71 Zend/zend_ini.c 		ini_entry-&gt;orig_value = NULL;</span>
+<span class='curline'><a href='../S/1688.html#L72'>ini_entry</a>          72 Zend/zend_ini.c 		ini_entry-&gt;orig_value_length = 0;</span>
+<span class='curline'><a href='../S/1688.html#L73'>ini_entry</a>          73 Zend/zend_ini.c 		ini_entry-&gt;orig_modifiable = 0;</span>
+<span class='curline'><a href='../S/1688.html#L79'>ini_entry</a>          79 Zend/zend_ini.c static int zend_restore_ini_entry_wrapper(zend_ini_entry **ini_entry TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1688.html#L81'>ini_entry</a>          81 Zend/zend_ini.c 	zend_restore_ini_entry_cb(*ini_entry, ZEND_INI_STAGE_DEACTIVATE TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1688.html#L134'>ini_entry</a>         134 Zend/zend_ini.c 	zend_ini_entry ini_entry;</span>
+<span class='curline'><a href='../S/1688.html#L142'>ini_entry</a>         142 Zend/zend_ini.c 	zend_hash_copy(EG(ini_directives), registered_zend_ini_directives, NULL, &amp;ini_entry, sizeof(zend_ini_entry));</span>
+<span class='curline'><a href='../S/1688.html#L177'>ini_entry</a>         177 Zend/zend_ini.c ZEND_API int zend_register_ini_entries(const zend_ini_entry *ini_entry, int module_number TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1688.html#L179'>ini_entry</a>         179 Zend/zend_ini.c 	const zend_ini_entry *p = ini_entry;</span>
+<span class='curline'><a href='../S/1688.html#L257'>ini_entry</a>         257 Zend/zend_ini.c 	zend_ini_entry *ini_entry;</span>
+<span class='curline'><a href='../S/1688.html#L262'>ini_entry</a>         262 Zend/zend_ini.c 	if (zend_hash_find(EG(ini_directives), name, name_length, (void **) &amp;ini_entry) == FAILURE) {</span>
+<span class='curline'><a href='../S/1688.html#L266'>ini_entry</a>         266 Zend/zend_ini.c 	modifiable = ini_entry-&gt;modifiable;</span>
+<span class='curline'><a href='../S/1688.html#L267'>ini_entry</a>         267 Zend/zend_ini.c 	modified = ini_entry-&gt;modified;</span>
+<span class='curline'><a href='../S/1688.html#L270'>ini_entry</a>         270 Zend/zend_ini.c 		ini_entry-&gt;modifiable = ZEND_INI_SYSTEM;</span>
+<span class='curline'><a href='../S/1688.html#L274'>ini_entry</a>         274 Zend/zend_ini.c 		if (!(ini_entry-&gt;modifiable &amp; modify_type)) {</span>
+<span class='curline'><a href='../S/1688.html#L284'>ini_entry</a>         284 Zend/zend_ini.c 		ini_entry-&gt;orig_value = ini_entry-&gt;value;</span>
+<span class='curline'><a href='../S/1688.html#L285'>ini_entry</a>         285 Zend/zend_ini.c 		ini_entry-&gt;orig_value_length = ini_entry-&gt;value_length;</span>
+<span class='curline'><a href='../S/1688.html#L286'>ini_entry</a>         286 Zend/zend_ini.c 		ini_entry-&gt;orig_modifiable = modifiable;</span>
+<span class='curline'><a href='../S/1688.html#L287'>ini_entry</a>         287 Zend/zend_ini.c 		ini_entry-&gt;modified = 1;</span>
+<span class='curline'><a href='../S/1688.html#L288'>ini_entry</a>         288 Zend/zend_ini.c 		zend_hash_add(EG(modified_ini_directives), name, name_length, &amp;ini_entry, sizeof(zend_ini_entry*), NULL);</span>
+<span class='curline'><a href='../S/1688.html#L293'>ini_entry</a>         293 Zend/zend_ini.c 	if (!ini_entry-&gt;on_modify</span>
+<span class='curline'><a href='../S/1688.html#L294'>ini_entry</a>         294 Zend/zend_ini.c 		|| ini_entry-&gt;on_modify(ini_entry, duplicate, new_value_length, ini_entry-&gt;mh_arg1, ini_entry-&gt;mh_arg2, ini_entry-&gt;mh_arg3, stage TSRMLS_CC) == SUCCESS) {</span>
+<span class='curline'><a href='../S/1688.html#L295'>ini_entry</a>         295 Zend/zend_ini.c 		if (modified &amp;&amp; ini_entry-&gt;orig_value != ini_entry-&gt;value) { /* we already changed the value, free the changed value */</span>
+<span class='curline'><a href='../S/1688.html#L296'>ini_entry</a>         296 Zend/zend_ini.c 			efree(ini_entry-&gt;value);</span>
+<span class='curline'><a href='../S/1688.html#L298'>ini_entry</a>         298 Zend/zend_ini.c 		ini_entry-&gt;value = duplicate;</span>
+<span class='curline'><a href='../S/1688.html#L299'>ini_entry</a>         299 Zend/zend_ini.c 		ini_entry-&gt;value_length = new_value_length;</span>
+<span class='curline'><a href='../S/1688.html#L311'>ini_entry</a>         311 Zend/zend_ini.c 	zend_ini_entry *ini_entry;</span>
+<span class='curline'><a href='../S/1688.html#L314'>ini_entry</a>         314 Zend/zend_ini.c 	if (zend_hash_find(EG(ini_directives), name, name_length, (void **) &amp;ini_entry) == FAILURE ||</span>
+<span class='curline'><a href='../S/1688.html#L315'>ini_entry</a>         315 Zend/zend_ini.c 		(stage == ZEND_INI_STAGE_RUNTIME &amp;&amp; (ini_entry-&gt;modifiable &amp; ZEND_INI_USER) == 0)) {</span>
+<span class='curline'><a href='../S/1688.html#L320'>ini_entry</a>         320 Zend/zend_ini.c 		if (zend_restore_ini_entry_cb(ini_entry, stage TSRMLS_CC) == 0) {</span>
+<span class='curline'><a href='../S/1688.html#L331'>ini_entry</a>         331 Zend/zend_ini.c ZEND_API int zend_ini_register_displayer(char *name, uint name_length, void (*displayer)(zend_ini_entry *ini_entry, int type)) /* {{{ */</span>
+<span class='curline'><a href='../S/1688.html#L333'>ini_entry</a>         333 Zend/zend_ini.c 	zend_ini_entry *ini_entry;</span>
+<span class='curline'><a href='../S/1688.html#L335'>ini_entry</a>         335 Zend/zend_ini.c 	if (zend_hash_find(registered_zend_ini_directives, name, name_length, (void **) &amp;ini_entry) == FAILURE) {</span>
+<span class='curline'><a href='../S/1688.html#L339'>ini_entry</a>         339 Zend/zend_ini.c 	ini_entry-&gt;displayer = displayer;</span>
+<span class='curline'><a href='../S/1688.html#L350'>ini_entry</a>         350 Zend/zend_ini.c 	zend_ini_entry *ini_entry;</span>
+<span class='curline'><a href='../S/1688.html#L353'>ini_entry</a>         353 Zend/zend_ini.c 	if (zend_hash_find(EG(ini_directives), name, name_length, (void **) &amp;ini_entry) == SUCCESS) {</span>
+<span class='curline'><a href='../S/1688.html#L354'>ini_entry</a>         354 Zend/zend_ini.c 		if (orig &amp;&amp; ini_entry-&gt;modified) {</span>
+<span class='curline'><a href='../S/1688.html#L355'>ini_entry</a>         355 Zend/zend_ini.c 			return (ini_entry-&gt;orig_value ? strtol(ini_entry-&gt;orig_value, NULL, 0) : 0);</span>
+<span class='curline'><a href='../S/1688.html#L357'>ini_entry</a>         357 Zend/zend_ini.c 			return (ini_entry-&gt;value      ? strtol(ini_entry-&gt;value, NULL, 0)      : 0);</span>
+<span class='curline'><a href='../S/1688.html#L367'>ini_entry</a>         367 Zend/zend_ini.c 	zend_ini_entry *ini_entry;</span>
+<span class='curline'><a href='../S/1688.html#L370'>ini_entry</a>         370 Zend/zend_ini.c 	if (zend_hash_find(EG(ini_directives), name, name_length, (void **) &amp;ini_entry) == SUCCESS) {</span>
+<span class='curline'><a href='../S/1688.html#L371'>ini_entry</a>         371 Zend/zend_ini.c 		if (orig &amp;&amp; ini_entry-&gt;modified) {</span>
+<span class='curline'><a href='../S/1688.html#L372'>ini_entry</a>         372 Zend/zend_ini.c 			return (double) (ini_entry-&gt;orig_value ? zend_strtod(ini_entry-&gt;orig_value, NULL) : 0.0);</span>
+<span class='curline'><a href='../S/1688.html#L374'>ini_entry</a>         374 Zend/zend_ini.c 			return (double) (ini_entry-&gt;value      ? zend_strtod(ini_entry-&gt;value, NULL)      : 0.0);</span>
+<span class='curline'><a href='../S/1688.html#L384'>ini_entry</a>         384 Zend/zend_ini.c 	zend_ini_entry *ini_entry;</span>
+<span class='curline'><a href='../S/1688.html#L387'>ini_entry</a>         387 Zend/zend_ini.c 	if (zend_hash_find(EG(ini_directives), name, name_length, (void **) &amp;ini_entry) == SUCCESS) {</span>
+<span class='curline'><a href='../S/1688.html#L392'>ini_entry</a>         392 Zend/zend_ini.c 		if (orig &amp;&amp; ini_entry-&gt;modified) {</span>
+<span class='curline'><a href='../S/1688.html#L393'>ini_entry</a>         393 Zend/zend_ini.c 			return ini_entry-&gt;orig_value;</span>
+<span class='curline'><a href='../S/1688.html#L395'>ini_entry</a>         395 Zend/zend_ini.c 			return ini_entry-&gt;value;</span>
+<span class='curline'><a href='../S/1688.html#L422'>ini_entry</a>         422 Zend/zend_ini.c static void zend_ini_displayer_cb(zend_ini_entry *ini_entry, int type) /* {{{ */</span>
+<span class='curline'><a href='../S/1688.html#L424'>ini_entry</a>         424 Zend/zend_ini.c 	if (ini_entry-&gt;displayer) {</span>
+<span class='curline'><a href='../S/1688.html#L425'>ini_entry</a>         425 Zend/zend_ini.c 		ini_entry-&gt;displayer(ini_entry, type);</span>
+<span class='curline'><a href='../S/1688.html#L430'>ini_entry</a>         430 Zend/zend_ini.c 		if (type == ZEND_INI_DISPLAY_ORIG &amp;&amp; ini_entry-&gt;modified) {</span>
+<span class='curline'><a href='../S/1688.html#L431'>ini_entry</a>         431 Zend/zend_ini.c 			if (ini_entry-&gt;orig_value) {</span>
+<span class='curline'><a href='../S/1688.html#L432'>ini_entry</a>         432 Zend/zend_ini.c 				display_string = ini_entry-&gt;orig_value;</span>
+<span class='curline'><a href='../S/1688.html#L433'>ini_entry</a>         433 Zend/zend_ini.c 				display_string_length = ini_entry-&gt;orig_value_length;</span>
+<span class='curline'><a href='../S/1688.html#L443'>ini_entry</a>         443 Zend/zend_ini.c 		} else if (ini_entry-&gt;value &amp;&amp; ini_entry-&gt;value[0]) {</span>
+<span class='curline'><a href='../S/1688.html#L444'>ini_entry</a>         444 Zend/zend_ini.c 			display_string = ini_entry-&gt;value;</span>
+<span class='curline'><a href='../S/1688.html#L445'>ini_entry</a>         445 Zend/zend_ini.c 			display_string_length = ini_entry-&gt;value_length;</span>
+<span class='curline'><a href='../S/1688.html#L466'>ini_entry</a>         466 Zend/zend_ini.c 	if (type == ZEND_INI_DISPLAY_ORIG &amp;&amp; ini_entry-&gt;modified) {</span>
+<span class='curline'><a href='../S/1688.html#L467'>ini_entry</a>         467 Zend/zend_ini.c 		tmp_value = (ini_entry-&gt;orig_value ? ini_entry-&gt;orig_value : NULL );</span>
+<span class='curline'><a href='../S/1688.html#L468'>ini_entry</a>         468 Zend/zend_ini.c 		tmp_value_len = ini_entry-&gt;orig_value_length;</span>
+<span class='curline'><a href='../S/1688.html#L469'>ini_entry</a>         469 Zend/zend_ini.c 	} else if (ini_entry-&gt;value) {</span>
+<span class='curline'><a href='../S/1688.html#L470'>ini_entry</a>         470 Zend/zend_ini.c 		tmp_value = ini_entry-&gt;value;</span>
+<span class='curline'><a href='../S/1688.html#L471'>ini_entry</a>         471 Zend/zend_ini.c 		tmp_value_len = ini_entry-&gt;value_length;</span>
+<span class='curline'><a href='../S/1688.html#L503'>ini_entry</a>         503 Zend/zend_ini.c 	if (type == ZEND_INI_DISPLAY_ORIG &amp;&amp; ini_entry-&gt;modified) {</span>
+<span class='curline'><a href='../S/1688.html#L504'>ini_entry</a>         504 Zend/zend_ini.c 		value = ini_entry-&gt;orig_value;</span>
+<span class='curline'><a href='../S/1688.html#L505'>ini_entry</a>         505 Zend/zend_ini.c 	} else if (ini_entry-&gt;value) {</span>
+<span class='curline'><a href='../S/1688.html#L506'>ini_entry</a>         506 Zend/zend_ini.c 		value = ini_entry-&gt;value;</span>
+<span class='curline'><a href='../S/1688.html#L530'>ini_entry</a>         530 Zend/zend_ini.c 	if (type == ZEND_INI_DISPLAY_ORIG &amp;&amp; ini_entry-&gt;modified) {</span>
+<span class='curline'><a href='../S/1688.html#L531'>ini_entry</a>         531 Zend/zend_ini.c 		value = ini_entry-&gt;orig_value;</span>
+<span class='curline'><a href='../S/1688.html#L532'>ini_entry</a>         532 Zend/zend_ini.c 	} else if (ini_entry-&gt;value) {</span>
+<span class='curline'><a href='../S/1688.html#L533'>ini_entry</a>         533 Zend/zend_ini.c 		value = ini_entry-&gt;value;</span>
+<span class='curline'><a href='../S/1689.html#L61'>ini_entry</a>          61 Zend/zend_ini.h #define ZEND_INI_DISP(name) void name(zend_ini_entry *ini_entry, int type)</span>
+<span class='curline'><a href='../S/1689.html#L81'>ini_entry</a>          81 Zend/zend_ini.h 	void (*displayer)(zend_ini_entry *ini_entry, int type);</span>
+<span class='curline'><a href='../S/1689.html#L94'>ini_entry</a>          94 Zend/zend_ini.h ZEND_API int zend_register_ini_entries(const zend_ini_entry *ini_entry, int module_number TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1689.html#L107'>ini_entry</a>         107 Zend/zend_ini.h ZEND_API int zend_ini_register_displayer(char *name, uint name_length, void (*displayer)(zend_ini_entry *ini_entry, int type));</span>
+<span class='curline'><a href='../S/1709.html#L78'>ini_entry</a>          78 Zend/zend_modules.h 	const struct _zend_ini_entry *ini_entry;</span>
+<span class='curline'><a href='../S/326.html#L703'>ini_entry</a>         703 ext/interbase/interbase.c 	if ((type == PHP_INI_DISPLAY_ORIG &amp;&amp; ini_entry-&gt;orig_value) </span>
+<span class='curline'><a href='../S/326.html#L704'>ini_entry</a>         704 ext/interbase/interbase.c 			|| (type == PHP_INI_DISPLAY_ACTIVE &amp;&amp; ini_entry-&gt;value)) {</span>
+<span class='curline'><a href='../S/755.html#L222'>ini_entry</a>         222 ext/mssql/php_mssql.c     if (type == PHP_INI_DISPLAY_ORIG &amp;&amp; ini_entry-&gt;modified) {</span>
+<span class='curline'><a href='../S/755.html#L223'>ini_entry</a>         223 ext/mssql/php_mssql.c 		value = ini_entry-&gt;orig_value;</span>
+<span class='curline'><a href='../S/755.html#L224'>ini_entry</a>         224 ext/mssql/php_mssql.c 	} else if (ini_entry-&gt;value) {</span>
+<span class='curline'><a href='../S/755.html#L225'>ini_entry</a>         225 ext/mssql/php_mssql.c 		value = ini_entry-&gt;value;</span>
+<span class='curline'><a href='../S/827.html#L535'>ini_entry</a>         535 ext/odbc/php_odbc.c 	if (type == PHP_INI_DISPLAY_ORIG &amp;&amp; ini_entry-&gt;modified) {</span>
+<span class='curline'><a href='../S/827.html#L536'>ini_entry</a>         536 ext/odbc/php_odbc.c 		value = ini_entry-&gt;orig_value;</span>
+<span class='curline'><a href='../S/827.html#L537'>ini_entry</a>         537 ext/odbc/php_odbc.c 	} else if (ini_entry-&gt;value) {</span>
+<span class='curline'><a href='../S/827.html#L538'>ini_entry</a>         538 ext/odbc/php_odbc.c 		value = ini_entry-&gt;value;</span>
+<span class='curline'><a href='../S/827.html#L560'>ini_entry</a>         560 ext/odbc/php_odbc.c 	if (type == PHP_INI_DISPLAY_ORIG &amp;&amp; ini_entry-&gt;modified) {</span>
+<span class='curline'><a href='../S/827.html#L561'>ini_entry</a>         561 ext/odbc/php_odbc.c 		value = ini_entry-&gt;orig_value;</span>
+<span class='curline'><a href='../S/827.html#L562'>ini_entry</a>         562 ext/odbc/php_odbc.c 	} else if (ini_entry-&gt;value) {</span>
+<span class='curline'><a href='../S/827.html#L563'>ini_entry</a>         563 ext/odbc/php_odbc.c 		value = ini_entry-&gt;value;</span>
+<span class='curline'><a href='../S/827.html#L591'>ini_entry</a>         591 ext/odbc/php_odbc.c 	if (type == PHP_INI_DISPLAY_ORIG &amp;&amp; ini_entry-&gt;modified) {</span>
+<span class='curline'><a href='../S/827.html#L592'>ini_entry</a>         592 ext/odbc/php_odbc.c 		value = ini_entry-&gt;orig_value;</span>
+<span class='curline'><a href='../S/827.html#L593'>ini_entry</a>         593 ext/odbc/php_odbc.c 	} else if (ini_entry-&gt;value) {</span>
+<span class='curline'><a href='../S/827.html#L594'>ini_entry</a>         594 ext/odbc/php_odbc.c 		value = ini_entry-&gt;value;</span>
+<span class='curline'><a href='../S/827.html#L622'>ini_entry</a>         622 ext/odbc/php_odbc.c 	if (type == PHP_INI_DISPLAY_ORIG &amp;&amp; ini_entry-&gt;modified) {</span>
+<span class='curline'><a href='../S/827.html#L623'>ini_entry</a>         623 ext/odbc/php_odbc.c 		value = ini_entry-&gt;orig_value;</span>
+<span class='curline'><a href='../S/827.html#L624'>ini_entry</a>         624 ext/odbc/php_odbc.c 	} else if (ini_entry-&gt;value) {</span>
+<span class='curline'><a href='../S/827.html#L625'>ini_entry</a>         625 ext/odbc/php_odbc.c 		value = ini_entry-&gt;value;</span>
+<span class='curline'><a href='../S/827.html#L648'>ini_entry</a>         648 ext/odbc/php_odbc.c 	if (type == PHP_INI_DISPLAY_ORIG &amp;&amp; ini_entry-&gt;modified) {</span>
+<span class='curline'><a href='../S/827.html#L649'>ini_entry</a>         649 ext/odbc/php_odbc.c 		value = ini_entry-&gt;orig_value;</span>
+<span class='curline'><a href='../S/827.html#L650'>ini_entry</a>         650 ext/odbc/php_odbc.c 	} else if (ini_entry-&gt;value) {</span>
+<span class='curline'><a href='../S/827.html#L651'>ini_entry</a>         651 ext/odbc/php_odbc.c 		value = ini_entry-&gt;value;</span>
+<span class='curline'><a href='../S/863.html#L2541'>ini_entry</a>        2541 ext/opcache/ZendAccelerator.c 	zend_ini_entry *ini_entry;</span>
+<span class='curline'><a href='../S/863.html#L2647'>ini_entry</a>        2647 ext/opcache/ZendAccelerator.c 	if (zend_hash_find(EG(ini_directives), "include_path", sizeof("include_path"), (void **) &amp;ini_entry) == SUCCESS) {</span>
+<span class='curline'><a href='../S/863.html#L2673'>ini_entry</a>        2673 ext/opcache/ZendAccelerator.c 		orig_include_path_on_modify = ini_entry-&gt;on_modify;</span>
+<span class='curline'><a href='../S/863.html#L2674'>ini_entry</a>        2674 ext/opcache/ZendAccelerator.c 		ini_entry-&gt;on_modify = accel_include_path_on_modify;</span>
+<span class='curline'><a href='../S/863.html#L2716'>ini_entry</a>        2716 ext/opcache/ZendAccelerator.c 	zend_ini_entry *ini_entry;</span>
+<span class='curline'><a href='../S/863.html#L2744'>ini_entry</a>        2744 ext/opcache/ZendAccelerator.c 	if (zend_hash_find(EG(ini_directives), "include_path", sizeof("include_path"), (void **) &amp;ini_entry) == SUCCESS) {</span>
+<span class='curline'><a href='../S/863.html#L2745'>ini_entry</a>        2745 ext/opcache/ZendAccelerator.c 		ini_entry-&gt;on_modify = orig_include_path_on_modify;</span>
+<span class='curline'><a href='../S/854.html#L123'>ini_entry</a>         123 ext/opcache/zend_accelerator_module.c 		zend_ini_entry *ini_entry;</span>
+<span class='curline'><a href='../S/854.html#L132'>ini_entry</a>         132 ext/opcache/zend_accelerator_module.c 					(void *) &amp;ini_entry) == FAILURE) {</span>
+<span class='curline'><a href='../S/854.html#L136'>ini_entry</a>         136 ext/opcache/zend_accelerator_module.c 		ini_entry-&gt;value = strdup(new_new_value);</span>
+<span class='curline'><a href='../S/854.html#L137'>ini_entry</a>         137 ext/opcache/zend_accelerator_module.c 		ini_entry-&gt;value_length = strlen(new_new_value);</span>
+<span class='curline'><a href='../S/854.html#L162'>ini_entry</a>         162 ext/opcache/zend_accelerator_module.c 		zend_ini_entry *ini_entry;</span>
+<span class='curline'><a href='../S/854.html#L179'>ini_entry</a>         179 ext/opcache/zend_accelerator_module.c 					(void *) &amp;ini_entry) == FAILURE) {</span>
+<span class='curline'><a href='../S/854.html#L182'>ini_entry</a>         182 ext/opcache/zend_accelerator_module.c 		ini_entry-&gt;value = strdup(new_new_value);</span>
+<span class='curline'><a href='../S/854.html#L183'>ini_entry</a>         183 ext/opcache/zend_accelerator_module.c 		ini_entry-&gt;value_length = strlen(new_new_value);</span>
+<span class='curline'><a href='../S/854.html#L207'>ini_entry</a>         207 ext/opcache/zend_accelerator_module.c 		zend_ini_entry *ini_entry;</span>
+<span class='curline'><a href='../S/854.html#L215'>ini_entry</a>         215 ext/opcache/zend_accelerator_module.c 					(void *) &amp;ini_entry) == FAILURE) {</span>
+<span class='curline'><a href='../S/854.html#L218'>ini_entry</a>         218 ext/opcache/zend_accelerator_module.c 		ini_entry-&gt;value = strdup(new_new_value);</span>
+<span class='curline'><a href='../S/854.html#L219'>ini_entry</a>         219 ext/opcache/zend_accelerator_module.c 		ini_entry-&gt;value_length = strlen(new_new_value);</span>
+<span class='curline'><a href='../S/996.html#L999'>ini_entry</a>         999 ext/reflection/php_reflection.c static int _extension_ini_string(zend_ini_entry *ini_entry TSRMLS_DC, int num_args, va_list args, zend_hash_key *hash_key) /* {{{ */</span>
+<span class='curline'><a href='../S/996.html#L1006'>ini_entry</a>        1006 ext/reflection/php_reflection.c 	if (number == ini_entry-&gt;module_number) {</span>
+<span class='curline'><a href='../S/996.html#L1007'>ini_entry</a>        1007 ext/reflection/php_reflection.c 		string_printf(str, "    %sEntry [ %s &lt;", indent, ini_entry-&gt;name);</span>
+<span class='curline'><a href='../S/996.html#L1008'>ini_entry</a>        1008 ext/reflection/php_reflection.c 		if (ini_entry-&gt;modifiable == ZEND_INI_ALL) {</span>
+<span class='curline'><a href='../S/996.html#L1011'>ini_entry</a>        1011 ext/reflection/php_reflection.c 			if (ini_entry-&gt;modifiable &amp; ZEND_INI_USER) {</span>
+<span class='curline'><a href='../S/996.html#L1015'>ini_entry</a>        1015 ext/reflection/php_reflection.c 			if (ini_entry-&gt;modifiable &amp; ZEND_INI_PERDIR) {</span>
+<span class='curline'><a href='../S/996.html#L1019'>ini_entry</a>        1019 ext/reflection/php_reflection.c 			if (ini_entry-&gt;modifiable &amp; ZEND_INI_SYSTEM) {</span>
+<span class='curline'><a href='../S/996.html#L1025'>ini_entry</a>        1025 ext/reflection/php_reflection.c 		string_printf(str, "    %s  Current = '%s'\n", indent, ini_entry-&gt;value ? ini_entry-&gt;value : "");</span>
+<span class='curline'><a href='../S/996.html#L1026'>ini_entry</a>        1026 ext/reflection/php_reflection.c 		if (ini_entry-&gt;modified) {</span>
+<span class='curline'><a href='../S/996.html#L1027'>ini_entry</a>        1027 ext/reflection/php_reflection.c 			string_printf(str, "    %s  Default = '%s'\n", indent, ini_entry-&gt;orig_value ? ini_entry-&gt;orig_value : "");</span>
+<span class='curline'><a href='../S/996.html#L5394'>ini_entry</a>        5394 ext/reflection/php_reflection.c static int _addinientry(zend_ini_entry *ini_entry TSRMLS_DC, int num_args, va_list args, zend_hash_key *hash_key)</span>
+<span class='curline'><a href='../S/996.html#L5399'>ini_entry</a>        5399 ext/reflection/php_reflection.c 	if (number == ini_entry-&gt;module_number) {</span>
+<span class='curline'><a href='../S/996.html#L5400'>ini_entry</a>        5400 ext/reflection/php_reflection.c 		if (ini_entry-&gt;value) {</span>
+<span class='curline'><a href='../S/996.html#L5401'>ini_entry</a>        5401 ext/reflection/php_reflection.c 			add_assoc_stringl(retval, ini_entry-&gt;name, ini_entry-&gt;value, ini_entry-&gt;value_length, 1);</span>
+<span class='curline'><a href='../S/996.html#L5403'>ini_entry</a>        5403 ext/reflection/php_reflection.c 			add_assoc_null(retval, ini_entry-&gt;name);</span>
+<span class='curline'><a href='../S/1077.html#L5320'>ini_entry</a>        5320 ext/standard/basic_functions.c static int php_ini_get_option(zend_ini_entry *ini_entry TSRMLS_DC, int num_args, va_list args, zend_hash_key *hash_key) /* {{{ */</span>
+<span class='curline'><a href='../S/1077.html#L5327'>ini_entry</a>        5327 ext/standard/basic_functions.c 	if (module_number != 0 &amp;&amp; ini_entry-&gt;module_number != module_number) {</span>
+<span class='curline'><a href='../S/1077.html#L5338'>ini_entry</a>        5338 ext/standard/basic_functions.c 			if (ini_entry-&gt;orig_value) {</span>
+<span class='curline'><a href='../S/1077.html#L5339'>ini_entry</a>        5339 ext/standard/basic_functions.c 				add_assoc_stringl(option, "global_value", ini_entry-&gt;orig_value, ini_entry-&gt;orig_value_length, 1);</span>
+<span class='curline'><a href='../S/1077.html#L5340'>ini_entry</a>        5340 ext/standard/basic_functions.c 			} else if (ini_entry-&gt;value) {</span>
+<span class='curline'><a href='../S/1077.html#L5341'>ini_entry</a>        5341 ext/standard/basic_functions.c 				add_assoc_stringl(option, "global_value", ini_entry-&gt;value, ini_entry-&gt;value_length, 1);</span>
+<span class='curline'><a href='../S/1077.html#L5346'>ini_entry</a>        5346 ext/standard/basic_functions.c 			if (ini_entry-&gt;value) {</span>
+<span class='curline'><a href='../S/1077.html#L5347'>ini_entry</a>        5347 ext/standard/basic_functions.c 				add_assoc_stringl(option, "local_value", ini_entry-&gt;value, ini_entry-&gt;value_length, 1);</span>
+<span class='curline'><a href='../S/1077.html#L5352'>ini_entry</a>        5352 ext/standard/basic_functions.c 			add_assoc_long(option, "access", ini_entry-&gt;modifiable);</span>
+<span class='curline'><a href='../S/1077.html#L5354'>ini_entry</a>        5354 ext/standard/basic_functions.c 			add_assoc_zval_ex(ini_array, ini_entry-&gt;name, ini_entry-&gt;name_length, option);</span>
+<span class='curline'><a href='../S/1077.html#L5356'>ini_entry</a>        5356 ext/standard/basic_functions.c 			if (ini_entry-&gt;value) {</span>
+<span class='curline'><a href='../S/1077.html#L5357'>ini_entry</a>        5357 ext/standard/basic_functions.c 				add_assoc_stringl(ini_array, ini_entry-&gt;name, ini_entry-&gt;value, ini_entry-&gt;value_length, 1);</span>
+<span class='curline'><a href='../S/1077.html#L5359'>ini_entry</a>        5359 ext/standard/basic_functions.c 				add_assoc_null(ini_array, ini_entry-&gt;name);</span>
+<span class='curline'><a href='../S/1364.html#L378'>ini_entry</a>         378 main/main.c    	if (type == ZEND_INI_DISPLAY_ORIG &amp;&amp; ini_entry-&gt;modified) {</span>
+<span class='curline'><a href='../S/1364.html#L379'>ini_entry</a>         379 main/main.c    		tmp_value = (ini_entry-&gt;orig_value ? ini_entry-&gt;orig_value : NULL );</span>
+<span class='curline'><a href='../S/1364.html#L380'>ini_entry</a>         380 main/main.c    		tmp_value_length = ini_entry-&gt;orig_value_length;</span>
+<span class='curline'><a href='../S/1364.html#L381'>ini_entry</a>         381 main/main.c    	} else if (ini_entry-&gt;value) {</span>
+<span class='curline'><a href='../S/1364.html#L382'>ini_entry</a>         382 main/main.c    		tmp_value = ini_entry-&gt;value;</span>
+<span class='curline'><a href='../S/1364.html#L383'>ini_entry</a>         383 main/main.c    		tmp_value_length = ini_entry-&gt;value_length;</span>
+<span class='curline'><a href='../S/1374.html#L77'>ini_entry</a>          77 main/php_ini.c static void php_ini_displayer_cb(zend_ini_entry *ini_entry, int type TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1374.html#L79'>ini_entry</a>          79 main/php_ini.c 	if (ini_entry-&gt;displayer) {</span>
+<span class='curline'><a href='../S/1374.html#L80'>ini_entry</a>          80 main/php_ini.c 		ini_entry-&gt;displayer(ini_entry, type);</span>
+<span class='curline'><a href='../S/1374.html#L85'>ini_entry</a>          85 main/php_ini.c 		if (type == ZEND_INI_DISPLAY_ORIG &amp;&amp; ini_entry-&gt;modified) {</span>
+<span class='curline'><a href='../S/1374.html#L86'>ini_entry</a>          86 main/php_ini.c 			if (ini_entry-&gt;orig_value &amp;&amp; ini_entry-&gt;orig_value[0]) {</span>
+<span class='curline'><a href='../S/1374.html#L87'>ini_entry</a>          87 main/php_ini.c 				display_string = ini_entry-&gt;orig_value;</span>
+<span class='curline'><a href='../S/1374.html#L88'>ini_entry</a>          88 main/php_ini.c 				display_string_length = ini_entry-&gt;orig_value_length;</span>
+<span class='curline'><a href='../S/1374.html#L99'>ini_entry</a>          99 main/php_ini.c 		} else if (ini_entry-&gt;value &amp;&amp; ini_entry-&gt;value[0]) {</span>
+<span class='curline'><a href='../S/1374.html#L100'>ini_entry</a>         100 main/php_ini.c 			display_string = ini_entry-&gt;value;</span>
+<span class='curline'><a href='../S/1374.html#L101'>ini_entry</a>         101 main/php_ini.c 			display_string_length = ini_entry-&gt;value_length;</span>
+<span class='curline'><a href='../S/1374.html#L124'>ini_entry</a>         124 main/php_ini.c static int php_ini_displayer(zend_ini_entry *ini_entry, int module_number TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1374.html#L126'>ini_entry</a>         126 main/php_ini.c 	if (ini_entry-&gt;module_number != module_number) {</span>
+<span class='curline'><a href='../S/1374.html#L132'>ini_entry</a>         132 main/php_ini.c 		PHPWRITE(ini_entry-&gt;name, ini_entry-&gt;name_length - 1);</span>
+<span class='curline'><a href='../S/1374.html#L134'>ini_entry</a>         134 main/php_ini.c 		php_ini_displayer_cb(ini_entry, ZEND_INI_DISPLAY_ACTIVE TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1374.html#L136'>ini_entry</a>         136 main/php_ini.c 		php_ini_displayer_cb(ini_entry, ZEND_INI_DISPLAY_ORIG TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1374.html#L139'>ini_entry</a>         139 main/php_ini.c 		PHPWRITE(ini_entry-&gt;name, ini_entry-&gt;name_length - 1);</span>
+<span class='curline'><a href='../S/1374.html#L141'>ini_entry</a>         141 main/php_ini.c 		php_ini_displayer_cb(ini_entry, ZEND_INI_DISPLAY_ACTIVE TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1374.html#L143'>ini_entry</a>         143 main/php_ini.c 		php_ini_displayer_cb(ini_entry, ZEND_INI_DISPLAY_ORIG TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1374.html#L152'>ini_entry</a>         152 main/php_ini.c static int php_ini_available(zend_ini_entry *ini_entry, int *module_number_available TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1374.html#L154'>ini_entry</a>         154 main/php_ini.c 	if (ini_entry-&gt;module_number == *module_number_available) {</span>
+<span class='curline'><a href='../S/1500.html#L28'>ini_entry</a>          28 sapi/fpm/fpm/fpm_php.c 	zend_ini_entry *ini_entry;</span>
+<span class='curline'><a href='../S/1500.html#L31'>ini_entry</a>          31 sapi/fpm/fpm/fpm_php.c 	if (zend_hash_find(EG(ini_directives), name, name_length, (void **) &amp;ini_entry) == FAILURE) {</span>
+<span class='curline'><a href='../S/1500.html#L37'>ini_entry</a>          37 sapi/fpm/fpm/fpm_php.c 	if (!ini_entry-&gt;on_modify</span>
+<span class='curline'><a href='../S/1500.html#L38'>ini_entry</a>          38 sapi/fpm/fpm/fpm_php.c 			|| ini_entry-&gt;on_modify(ini_entry, duplicate, new_value_length,</span>
+<span class='curline'><a href='../S/1500.html#L39'>ini_entry</a>          39 sapi/fpm/fpm/fpm_php.c 				ini_entry-&gt;mh_arg1, ini_entry-&gt;mh_arg2, ini_entry-&gt;mh_arg3, stage TSRMLS_CC) == SUCCESS) {</span>
+<span class='curline'><a href='../S/1500.html#L40'>ini_entry</a>          40 sapi/fpm/fpm/fpm_php.c 		ini_entry-&gt;value = duplicate;</span>
+<span class='curline'><a href='../S/1500.html#L41'>ini_entry</a>          41 sapi/fpm/fpm/fpm_php.c 		ini_entry-&gt;value_length = new_value_length;</span>
+<span class='curline'><a href='../S/1500.html#L42'>ini_entry</a>          42 sapi/fpm/fpm/fpm_php.c 		ini_entry-&gt;modifiable = mode;</span>
+</pre>
+</body>
+</html>

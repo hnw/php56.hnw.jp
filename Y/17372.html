@@ -1,0 +1,313 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>expr</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/1642.html#L226'>expr</a>              226 Zend/zend.c    ZEND_API void zend_make_printable_zval(zval *expr, zval *expr_copy, int *use_copy) /* {{{ */</span>
+<span class='curline'><a href='../S/1642.html#L228'>expr</a>              228 Zend/zend.c    	if (Z_TYPE_P(expr)==IS_STRING) {</span>
+<span class='curline'><a href='../S/1642.html#L232'>expr</a>              232 Zend/zend.c    	switch (Z_TYPE_P(expr)) {</span>
+<span class='curline'><a href='../S/1642.html#L238'>expr</a>              238 Zend/zend.c    			if (Z_LVAL_P(expr)) {</span>
+<span class='curline'><a href='../S/1642.html#L248'>expr</a>              248 Zend/zend.c    			Z_STRLEN_P(expr_copy) = snprintf(Z_STRVAL_P(expr_copy), sizeof("Resource id #") - 1 + MAX_LENGTH_OF_LONG, "Resource id #%ld", Z_LVAL_P(expr));</span>
+<span class='curline'><a href='../S/1642.html#L259'>expr</a>              259 Zend/zend.c    				if (zend_std_cast_object_tostring(expr, expr_copy, IS_STRING TSRMLS_CC) == SUCCESS) {</span>
+<span class='curline'><a href='../S/1642.html#L262'>expr</a>              262 Zend/zend.c    				if (Z_OBJ_HANDLER_P(expr, cast_object)) {</span>
+<span class='curline'><a href='../S/1642.html#L266'>expr</a>              266 Zend/zend.c    					INIT_PZVAL_COPY(val, expr);</span>
+<span class='curline'><a href='../S/1642.html#L268'>expr</a>              268 Zend/zend.c    					if (Z_OBJ_HANDLER_P(expr, cast_object)(val, expr_copy, IS_STRING TSRMLS_CC) == SUCCESS) {</span>
+<span class='curline'><a href='../S/1642.html#L274'>expr</a>              274 Zend/zend.c    				if (!Z_OBJ_HANDLER_P(expr, cast_object) &amp;&amp; Z_OBJ_HANDLER_P(expr, get)) {</span>
+<span class='curline'><a href='../S/1642.html#L275'>expr</a>              275 Zend/zend.c    					zval *z = Z_OBJ_HANDLER_P(expr, get)(expr TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1642.html#L290'>expr</a>              290 Zend/zend.c    				zend_error(EG(exception) ? E_ERROR : E_RECOVERABLE_ERROR, "Object of class %s could not be converted to string", Z_OBJCE_P(expr)-&gt;name);</span>
+<span class='curline'><a href='../S/1642.html#L296'>expr</a>              296 Zend/zend.c    			*expr_copy = *expr;</span>
+<span class='curline'><a href='../S/1642.html#L301'>expr</a>              301 Zend/zend.c    			*expr_copy = *expr;</span>
+<span class='curline'><a href='../S/1642.html#L311'>expr</a>              311 Zend/zend.c    ZEND_API int zend_print_zval(zval *expr, int indent) /* {{{ */</span>
+<span class='curline'><a href='../S/1642.html#L313'>expr</a>              313 Zend/zend.c    	return zend_print_zval_ex(zend_write, expr, indent);</span>
+<span class='curline'><a href='../S/1642.html#L317'>expr</a>              317 Zend/zend.c    ZEND_API int zend_print_zval_ex(zend_write_func_t write_func, zval *expr, int indent) /* {{{ */</span>
+<span class='curline'><a href='../S/1642.html#L322'>expr</a>              322 Zend/zend.c    	zend_make_printable_zval(expr, &amp;expr_copy, &amp;use_copy);</span>
+<span class='curline'><a href='../S/1642.html#L324'>expr</a>              324 Zend/zend.c    		expr = &amp;expr_copy;</span>
+<span class='curline'><a href='../S/1642.html#L326'>expr</a>              326 Zend/zend.c    	if (Z_STRLEN_P(expr) == 0) { /* optimize away empty strings */</span>
+<span class='curline'><a href='../S/1642.html#L328'>expr</a>              328 Zend/zend.c    			zval_dtor(expr);</span>
+<span class='curline'><a href='../S/1642.html#L332'>expr</a>              332 Zend/zend.c    	write_func(Z_STRVAL_P(expr), Z_STRLEN_P(expr));</span>
+<span class='curline'><a href='../S/1642.html#L334'>expr</a>              334 Zend/zend.c    		zval_dtor(expr);</span>
+<span class='curline'><a href='../S/1642.html#L336'>expr</a>              336 Zend/zend.c    	return Z_STRLEN_P(expr);</span>
+<span class='curline'><a href='../S/1642.html#L340'>expr</a>              340 Zend/zend.c    ZEND_API void zend_print_flat_zval_r(zval *expr TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1642.html#L342'>expr</a>              342 Zend/zend.c    	switch (Z_TYPE_P(expr)) {</span>
+<span class='curline'><a href='../S/1642.html#L345'>expr</a>              345 Zend/zend.c    			if (++Z_ARRVAL_P(expr)-&gt;nApplyCount&gt;1) {</span>
+<span class='curline'><a href='../S/1642.html#L347'>expr</a>              347 Zend/zend.c    				Z_ARRVAL_P(expr)-&gt;nApplyCount--;</span>
+<span class='curline'><a href='../S/1642.html#L350'>expr</a>              350 Zend/zend.c    			print_flat_hash(Z_ARRVAL_P(expr) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1642.html#L352'>expr</a>              352 Zend/zend.c    			Z_ARRVAL_P(expr)-&gt;nApplyCount--;</span>
+<span class='curline'><a href='../S/1642.html#L360'>expr</a>              360 Zend/zend.c    			if (Z_OBJ_HANDLER_P(expr, get_class_name)) {</span>
+<span class='curline'><a href='../S/1642.html#L361'>expr</a>              361 Zend/zend.c    				Z_OBJ_HANDLER_P(expr, get_class_name)(expr, &amp;class_name, &amp;clen, 0 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1642.html#L371'>expr</a>              371 Zend/zend.c    			if (Z_OBJ_HANDLER_P(expr, get_properties)) {</span>
+<span class='curline'><a href='../S/1642.html#L372'>expr</a>              372 Zend/zend.c    				properties = Z_OBJPROP_P(expr);</span>
+<span class='curline'><a href='../S/1642.html#L387'>expr</a>              387 Zend/zend.c    			zend_print_variable(expr);</span>
+<span class='curline'><a href='../S/1642.html#L393'>expr</a>              393 Zend/zend.c    ZEND_API void zend_print_zval_r(zval *expr, int indent TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1642.html#L395'>expr</a>              395 Zend/zend.c    	zend_print_zval_r_ex(zend_write, expr, indent TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1642.html#L399'>expr</a>              399 Zend/zend.c    ZEND_API void zend_print_zval_r_ex(zend_write_func_t write_func, zval *expr, int indent TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1642.html#L401'>expr</a>              401 Zend/zend.c    	switch (Z_TYPE_P(expr)) {</span>
+<span class='curline'><a href='../S/1642.html#L404'>expr</a>              404 Zend/zend.c    			if (++Z_ARRVAL_P(expr)-&gt;nApplyCount&gt;1) {</span>
+<span class='curline'><a href='../S/1642.html#L406'>expr</a>              406 Zend/zend.c    				Z_ARRVAL_P(expr)-&gt;nApplyCount--;</span>
+<span class='curline'><a href='../S/1642.html#L409'>expr</a>              409 Zend/zend.c    			print_hash(write_func, Z_ARRVAL_P(expr), indent, 0 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1642.html#L410'>expr</a>              410 Zend/zend.c    			Z_ARRVAL_P(expr)-&gt;nApplyCount--;</span>
+<span class='curline'><a href='../S/1642.html#L419'>expr</a>              419 Zend/zend.c    				if (Z_OBJ_HANDLER_P(expr, get_class_name)) {</span>
+<span class='curline'><a href='../S/1642.html#L420'>expr</a>              420 Zend/zend.c    					Z_OBJ_HANDLER_P(expr, get_class_name)(expr, &amp;class_name, &amp;clen, 0 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1642.html#L431'>expr</a>              431 Zend/zend.c    				if ((properties = Z_OBJDEBUG_P(expr, is_temp)) == NULL) {</span>
+<span class='curline'><a href='../S/1642.html#L448'>expr</a>              448 Zend/zend.c    			zend_print_zval_ex(write_func, expr, indent);</span>
+<span class='curline'><a href='../S/1643.html#L648'>expr</a>              648 Zend/zend.h    ZEND_API void zend_make_printable_zval(zval *expr, zval *expr_copy, int *use_copy);</span>
+<span class='curline'><a href='../S/1643.html#L649'>expr</a>              649 Zend/zend.h    ZEND_API int zend_print_zval(zval *expr, int indent);</span>
+<span class='curline'><a href='../S/1643.html#L650'>expr</a>              650 Zend/zend.h    ZEND_API int zend_print_zval_ex(zend_write_func_t write_func, zval *expr, int indent);</span>
+<span class='curline'><a href='../S/1643.html#L651'>expr</a>              651 Zend/zend.h    ZEND_API void zend_print_zval_r(zval *expr, int indent TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1643.html#L652'>expr</a>              652 Zend/zend.h    ZEND_API void zend_print_flat_zval_r(zval *expr TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1643.html#L653'>expr</a>              653 Zend/zend.h    ZEND_API void zend_print_zval_r_ex(zend_write_func_t write_func, zval *expr, int indent TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1643.html#L667'>expr</a>              667 Zend/zend.h    #define Z_DBG(expr)		(expr)</span>
+<span class='curline'><a href='../S/1643.html#L669'>expr</a>              669 Zend/zend.h    #define	Z_DBG(expr)</span>
+<span class='curline'><a href='../S/1648.html#L324'>expr</a>              324 Zend/zend_ast.c 					zval *expr;</span>
+<span class='curline'><a href='../S/1648.html#L325'>expr</a>              325 Zend/zend_ast.c 					MAKE_STD_ZVAL(expr);</span>
+<span class='curline'><a href='../S/1648.html#L329'>expr</a>              329 Zend/zend_ast.c 					zend_ast_evaluate(expr, (&amp;ast-&gt;u.child)[i+1], scope TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1648.html#L330'>expr</a>              330 Zend/zend_ast.c 					zend_do_add_static_array_element(result, has_key?&amp;op1:NULL, expr);</span>
+<span class='curline'><a href='../S/1655.html#L1100'>expr</a>             1100 Zend/zend_compile.c void zend_do_while_cond(const znode *expr, znode *close_bracket_token TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1655.html#L1106'>expr</a>             1106 Zend/zend_compile.c 	SET_NODE(opline-&gt;op1, expr);</span>
+<span class='curline'><a href='../S/1655.html#L1134'>expr</a>             1134 Zend/zend_compile.c void zend_do_for_cond(const znode *expr, znode *second_semicolon_token TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1655.html#L1140'>expr</a>             1140 Zend/zend_compile.c 	SET_NODE(opline-&gt;op1, expr);  /* the conditional expression */</span>
+<span class='curline'><a href='../S/1655.html#L2072'>expr</a>             2072 Zend/zend_compile.c void zend_do_clone(znode *result, const znode *expr TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1655.html#L2077'>expr</a>             2077 Zend/zend_compile.c 	SET_NODE(opline-&gt;op1, expr);</span>
+<span class='curline'><a href='../S/1655.html#L2812'>expr</a>             2812 Zend/zend_compile.c void zend_do_return(znode *expr, int do_end_vparse TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1655.html#L2821'>expr</a>             2821 Zend/zend_compile.c 		if (returns_reference &amp;&amp; !zend_is_function_or_method_call(expr)) {</span>
+<span class='curline'><a href='../S/1655.html#L2822'>expr</a>             2822 Zend/zend_compile.c 			zend_do_end_variable_parse(expr, BP_VAR_W, 0 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1655.html#L2824'>expr</a>             2824 Zend/zend_compile.c 			zend_do_end_variable_parse(expr, BP_VAR_R, 0 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1655.html#L2855'>expr</a>             2855 Zend/zend_compile.c 	if (expr) {</span>
+<span class='curline'><a href='../S/1655.html#L2856'>expr</a>             2856 Zend/zend_compile.c 		SET_NODE(opline-&gt;op1, expr);</span>
+<span class='curline'><a href='../S/1655.html#L2860'>expr</a>             2860 Zend/zend_compile.c 		} else if (zend_is_function_or_method_call(expr)) {</span>
+<span class='curline'><a href='../S/1655.html#L3087'>expr</a>             3087 Zend/zend_compile.c void zend_do_throw(const znode *expr TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1655.html#L3093'>expr</a>             3093 Zend/zend_compile.c 	SET_NODE(opline-&gt;op1, expr);</span>
+<span class='curline'><a href='../S/1655.html#L4948'>expr</a>             4948 Zend/zend_compile.c void zend_do_do_while_end(const znode *do_token, const znode *expr_open_bracket, const znode *expr TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1655.html#L4953'>expr</a>             4953 Zend/zend_compile.c 	SET_NODE(opline-&gt;op1, expr);</span>
+<span class='curline'><a href='../S/1655.html#L4963'>expr</a>             4963 Zend/zend_compile.c void zend_do_brk_cont(zend_uchar op, const znode *expr TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1655.html#L4970'>expr</a>             4970 Zend/zend_compile.c 	if (expr) {</span>
+<span class='curline'><a href='../S/1655.html#L4971'>expr</a>             4971 Zend/zend_compile.c 		if (expr-&gt;op_type != IS_CONST) {</span>
+<span class='curline'><a href='../S/1655.html#L4973'>expr</a>             4973 Zend/zend_compile.c 		} else if (Z_TYPE(expr-&gt;u.constant) != IS_LONG || Z_LVAL(expr-&gt;u.constant) &lt; 1) {</span>
+<span class='curline'><a href='../S/1655.html#L4976'>expr</a>             4976 Zend/zend_compile.c 		SET_NODE(opline-&gt;op2, expr);</span>
+<span class='curline'><a href='../S/1655.html#L5867'>expr</a>             5867 Zend/zend_compile.c void zend_do_init_array(znode *result, const znode *expr, const znode *offset, zend_bool is_ref TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1655.html#L5875'>expr</a>             5875 Zend/zend_compile.c 	if (expr) {</span>
+<span class='curline'><a href='../S/1655.html#L5876'>expr</a>             5876 Zend/zend_compile.c 		SET_NODE(opline-&gt;op1, expr);</span>
+<span class='curline'><a href='../S/1655.html#L5902'>expr</a>             5902 Zend/zend_compile.c void zend_do_add_array_element(znode *result, const znode *expr, const znode *offset, zend_bool is_ref TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1655.html#L5908'>expr</a>             5908 Zend/zend_compile.c 	SET_NODE(opline-&gt;op1, expr);</span>
+<span class='curline'><a href='../S/1655.html#L5930'>expr</a>             5930 Zend/zend_compile.c void zend_do_add_static_array_element(zval *result, zval *offset, const zval *expr) /* {{{ */</span>
+<span class='curline'><a href='../S/1655.html#L5935'>expr</a>             5935 Zend/zend_compile.c 				zend_symtable_update(Z_ARRVAL_P(result), Z_STRVAL_P(offset), Z_STRLEN_P(offset)+1, &amp;expr, sizeof(zval *), NULL);</span>
+<span class='curline'><a href='../S/1655.html#L5939'>expr</a>             5939 Zend/zend_compile.c 				zend_symtable_update(Z_ARRVAL_P(result), "", 1, &amp;expr, sizeof(zval *), NULL);</span>
+<span class='curline'><a href='../S/1655.html#L5943'>expr</a>             5943 Zend/zend_compile.c 				zend_hash_index_update(Z_ARRVAL_P(result), Z_LVAL_P(offset), &amp;expr, sizeof(zval *), NULL);</span>
+<span class='curline'><a href='../S/1655.html#L5946'>expr</a>             5946 Zend/zend_compile.c 				zend_hash_index_update(Z_ARRVAL_P(result), zend_dval_to_lval(Z_DVAL_P(offset)), &amp;expr, sizeof(zval *), NULL);</span>
+<span class='curline'><a href='../S/1655.html#L5953'>expr</a>             5953 Zend/zend_compile.c 		zend_hash_next_index_insert(Z_ARRVAL_P(result), &amp;expr, sizeof(zval *), NULL);</span>
+<span class='curline'><a href='../S/1655.html#L5997'>expr</a>             5997 Zend/zend_compile.c void zend_do_list_end(znode *result, znode *expr TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1655.html#L6011'>expr</a>             6011 Zend/zend_compile.c 				last_container = *expr;</span>
+<span class='curline'><a href='../S/1655.html#L6012'>expr</a>             6012 Zend/zend_compile.c 				switch (expr-&gt;op_type) {</span>
+<span class='curline'><a href='../S/1655.html#L6021'>expr</a>             6021 Zend/zend_compile.c 						zval_copy_ctor(&amp;expr-&gt;u.constant);</span>
+<span class='curline'><a href='../S/1655.html#L6045'>expr</a>             6045 Zend/zend_compile.c 	*result = *expr;</span>
+<span class='curline'><a href='../S/1655.html#L6204'>expr</a>             6204 Zend/zend_compile.c void zend_do_cast(znode *result, const znode *expr, int type TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1655.html#L6211'>expr</a>             6211 Zend/zend_compile.c 	SET_NODE(opline-&gt;op1, expr);</span>
+<span class='curline'><a href='../S/1655.html#L6335'>expr</a>             6335 Zend/zend_compile.c void zend_do_instanceof(znode *result, const znode *expr, const znode *class_znode, int type TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1655.html#L6347'>expr</a>             6347 Zend/zend_compile.c 	if (expr-&gt;op_type == IS_CONST) {</span>
+<span class='curline'><a href='../S/1655.html#L6355'>expr</a>             6355 Zend/zend_compile.c 	SET_NODE(opline-&gt;op1, expr);</span>
+<span class='curline'><a href='../S/1656.html#L488'>expr</a>              488 Zend/zend_compile.h void zend_do_while_cond(const znode *expr, znode *close_bracket_token TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1656.html#L491'>expr</a>              491 Zend/zend_compile.h void zend_do_do_while_end(const znode *do_token, const znode *expr_open_bracket, const znode *expr TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1656.html#L498'>expr</a>              498 Zend/zend_compile.h void zend_do_for_cond(const znode *expr, znode *second_semicolon_token TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1656.html#L521'>expr</a>              521 Zend/zend_compile.h void zend_do_clone(znode *result, const znode *expr TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1656.html#L527'>expr</a>              527 Zend/zend_compile.h void zend_do_return(znode *expr, int do_end_vparse TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1656.html#L540'>expr</a>              540 Zend/zend_compile.h void zend_do_throw(const znode *expr TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1656.html#L571'>expr</a>              571 Zend/zend_compile.h void zend_do_brk_cont(zend_uchar op, const znode *expr TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1656.html#L599'>expr</a>              599 Zend/zend_compile.h void zend_do_init_array(znode *result, const znode *expr, const znode *offset, zend_bool is_ref TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1656.html#L600'>expr</a>              600 Zend/zend_compile.h void zend_do_add_array_element(znode *result, const znode *expr, const znode *offset, zend_bool is_ref TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1656.html#L601'>expr</a>              601 Zend/zend_compile.h void zend_do_add_static_array_element(zval *result, zval *offset, const zval *expr);</span>
+<span class='curline'><a href='../S/1656.html#L603'>expr</a>              603 Zend/zend_compile.h void zend_do_list_end(znode *result, znode *expr TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1656.html#L613'>expr</a>              613 Zend/zend_compile.h void zend_do_cast(znode *result, const znode *expr, int type TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1656.html#L619'>expr</a>              619 Zend/zend_compile.h void zend_do_instanceof(znode *result, const znode *expr, const znode *class_znode, int type TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1691.html#L334'>expr</a>              334 Zend/zend_ini_parser.y 		expr							{ $$ = $1; }</span>
+<span class='curline'><a href='../S/1691.html#L370'>expr</a>              370 Zend/zend_ini_parser.y expr:</span>
+<span class='curline'><a href='../S/1691.html#L372'>expr</a>              372 Zend/zend_ini_parser.y 	|	expr '|' expr					{ zend_ini_do_op('|', &amp;$$, &amp;$1, &amp;$3); }</span>
+<span class='curline'><a href='../S/1691.html#L373'>expr</a>              373 Zend/zend_ini_parser.y 	|	expr '&amp;' expr					{ zend_ini_do_op('&amp;', &amp;$$, &amp;$1, &amp;$3); }</span>
+<span class='curline'><a href='../S/1691.html#L374'>expr</a>              374 Zend/zend_ini_parser.y 	|	expr '^' expr					{ zend_ini_do_op('^', &amp;$$, &amp;$1, &amp;$3); }</span>
+<span class='curline'><a href='../S/1691.html#L375'>expr</a>              375 Zend/zend_ini_parser.y 	|	'~' expr						{ zend_ini_do_op('~', &amp;$$, &amp;$2, NULL); }</span>
+<span class='curline'><a href='../S/1691.html#L376'>expr</a>              376 Zend/zend_ini_parser.y 	|	'!'	expr						{ zend_ini_do_op('!', &amp;$$, &amp;$2, NULL); }</span>
+<span class='curline'><a href='../S/1691.html#L377'>expr</a>              377 Zend/zend_ini_parser.y 	|	'(' expr ')'					{ $$ = $2; }</span>
+<span class='curline'><a href='../S/1701.html#L329'>expr</a>              329 Zend/zend_language_parser.y 	|	T_BREAK expr ';'		{ zend_do_brk_cont(ZEND_BRK, &amp;$2 TSRMLS_CC); }</span>
+<span class='curline'><a href='../S/1701.html#L331'>expr</a>              331 Zend/zend_language_parser.y 	|	T_CONTINUE expr ';'		{ zend_do_brk_cont(ZEND_CONT, &amp;$2 TSRMLS_CC); }</span>
+<span class='curline'><a href='../S/1701.html#L340'>expr</a>              340 Zend/zend_language_parser.y 	|	expr ';'				{ zend_do_free(&amp;$1 TSRMLS_CC); }</span>
+<span class='curline'><a href='../S/1701.html#L355'>expr</a>              355 Zend/zend_language_parser.y 	|	T_THROW expr ';' { zend_do_throw(&amp;$2 TSRMLS_CC); }</span>
+<span class='curline'><a href='../S/1701.html#L511'>expr</a>              511 Zend/zend_language_parser.y 	|	case_list T_CASE expr case_separator { zend_do_extended_info(TSRMLS_C);  zend_do_case_before_statement(&amp;$1, &amp;$2, &amp;$3 TSRMLS_CC); } inner_statement_list { zend_do_case_after_statement(&amp;$$, &amp;$2 TSRMLS_CC); $$.op_type = IS_CONST; }</span>
+<span class='curline'><a href='../S/1701.html#L596'>expr</a>              596 Zend/zend_language_parser.y 	|	T_ELLIPSIS expr			{ zend_do_unpack_params(&amp;$2 TSRMLS_CC); }</span>
+<span class='curline'><a href='../S/1701.html#L608'>expr</a>              608 Zend/zend_language_parser.y 	|	'$' '{' expr '}'	{ $$ = $3; }</span>
+<span class='curline'><a href='../S/1701.html#L735'>expr</a>              735 Zend/zend_language_parser.y 		echo_expr_list ',' expr { zend_do_echo(&amp;$3 TSRMLS_CC); }</span>
+<span class='curline'><a href='../S/1701.html#L736'>expr</a>              736 Zend/zend_language_parser.y 	|	expr					{ zend_do_echo(&amp;$1 TSRMLS_CC); }</span>
+<span class='curline'><a href='../S/1701.html#L746'>expr</a>              746 Zend/zend_language_parser.y 		non_empty_for_expr ','	{ zend_do_free(&amp;$1 TSRMLS_CC); } expr { $$ = $4; }</span>
+<span class='curline'><a href='../S/1701.html#L747'>expr</a>              747 Zend/zend_language_parser.y 	|	expr					{ $$ = $1; }</span>
+<span class='curline'><a href='../S/1701.html#L777'>expr</a>              777 Zend/zend_language_parser.y 		T_LIST '(' { zend_do_list_init(TSRMLS_C); } assignment_list ')' '=' expr { zend_do_list_end(&amp;$$, &amp;$7 TSRMLS_CC); }</span>
+<span class='curline'><a href='../S/1701.html#L778'>expr</a>              778 Zend/zend_language_parser.y 	|	variable '=' expr		{ zend_check_writable_variable(&amp;$1); zend_do_assign(&amp;$$, &amp;$1, &amp;$3 TSRMLS_CC); }</span>
+<span class='curline'><a href='../S/1701.html#L781'>expr</a>              781 Zend/zend_language_parser.y 	|	T_CLONE expr { zend_do_clone(&amp;$$, &amp;$2 TSRMLS_CC); }</span>
+<span class='curline'><a href='../S/1701.html#L782'>expr</a>              782 Zend/zend_language_parser.y 	|	variable T_PLUS_EQUAL expr 	{ zend_check_writable_variable(&amp;$1); zend_do_end_variable_parse(&amp;$1, BP_VAR_RW, 0 TSRMLS_CC); zend_do_binary_assign_op(ZEND_ASSIGN_ADD, &amp;$$, &amp;$1, &amp;$3 TSRMLS_CC); }</span>
+<span class='curline'><a href='../S/1701.html#L783'>expr</a>              783 Zend/zend_language_parser.y 	|	variable T_MINUS_EQUAL expr	{ zend_check_writable_variable(&amp;$1); zend_do_end_variable_parse(&amp;$1, BP_VAR_RW, 0 TSRMLS_CC); zend_do_binary_assign_op(ZEND_ASSIGN_SUB, &amp;$$, &amp;$1, &amp;$3 TSRMLS_CC); }</span>
+<span class='curline'><a href='../S/1701.html#L784'>expr</a>              784 Zend/zend_language_parser.y 	|	variable T_MUL_EQUAL expr		{ zend_check_writable_variable(&amp;$1); zend_do_end_variable_parse(&amp;$1, BP_VAR_RW, 0 TSRMLS_CC); zend_do_binary_assign_op(ZEND_ASSIGN_MUL, &amp;$$, &amp;$1, &amp;$3 TSRMLS_CC); }</span>
+<span class='curline'><a href='../S/1701.html#L785'>expr</a>              785 Zend/zend_language_parser.y 	|	variable T_POW_EQUAL expr		{ zend_check_writable_variable(&amp;$1); zend_do_end_variable_parse(&amp;$1, BP_VAR_RW, 0 TSRMLS_CC); zend_do_binary_assign_op(ZEND_ASSIGN_POW, &amp;$$, &amp;$1, &amp;$3 TSRMLS_CC); }</span>
+<span class='curline'><a href='../S/1701.html#L786'>expr</a>              786 Zend/zend_language_parser.y 	|	variable T_DIV_EQUAL expr		{ zend_check_writable_variable(&amp;$1); zend_do_end_variable_parse(&amp;$1, BP_VAR_RW, 0 TSRMLS_CC); zend_do_binary_assign_op(ZEND_ASSIGN_DIV, &amp;$$, &amp;$1, &amp;$3 TSRMLS_CC); }</span>
+<span class='curline'><a href='../S/1701.html#L787'>expr</a>              787 Zend/zend_language_parser.y 	|	variable T_CONCAT_EQUAL expr	{ zend_check_writable_variable(&amp;$1); zend_do_end_variable_parse(&amp;$1, BP_VAR_RW, 0 TSRMLS_CC); zend_do_binary_assign_op(ZEND_ASSIGN_CONCAT, &amp;$$, &amp;$1, &amp;$3 TSRMLS_CC); }</span>
+<span class='curline'><a href='../S/1701.html#L788'>expr</a>              788 Zend/zend_language_parser.y 	|	variable T_MOD_EQUAL expr		{ zend_check_writable_variable(&amp;$1); zend_do_end_variable_parse(&amp;$1, BP_VAR_RW, 0 TSRMLS_CC); zend_do_binary_assign_op(ZEND_ASSIGN_MOD, &amp;$$, &amp;$1, &amp;$3 TSRMLS_CC); }</span>
+<span class='curline'><a href='../S/1701.html#L789'>expr</a>              789 Zend/zend_language_parser.y 	|	variable T_AND_EQUAL expr		{ zend_check_writable_variable(&amp;$1); zend_do_end_variable_parse(&amp;$1, BP_VAR_RW, 0 TSRMLS_CC); zend_do_binary_assign_op(ZEND_ASSIGN_BW_AND, &amp;$$, &amp;$1, &amp;$3 TSRMLS_CC); }</span>
+<span class='curline'><a href='../S/1701.html#L790'>expr</a>              790 Zend/zend_language_parser.y 	|	variable T_OR_EQUAL expr 		{ zend_check_writable_variable(&amp;$1); zend_do_end_variable_parse(&amp;$1, BP_VAR_RW, 0 TSRMLS_CC); zend_do_binary_assign_op(ZEND_ASSIGN_BW_OR, &amp;$$, &amp;$1, &amp;$3 TSRMLS_CC); }</span>
+<span class='curline'><a href='../S/1701.html#L791'>expr</a>              791 Zend/zend_language_parser.y 	|	variable T_XOR_EQUAL expr 		{ zend_check_writable_variable(&amp;$1); zend_do_end_variable_parse(&amp;$1, BP_VAR_RW, 0 TSRMLS_CC); zend_do_binary_assign_op(ZEND_ASSIGN_BW_XOR, &amp;$$, &amp;$1, &amp;$3 TSRMLS_CC); }</span>
+<span class='curline'><a href='../S/1701.html#L792'>expr</a>              792 Zend/zend_language_parser.y 	|	variable T_SL_EQUAL expr	{ zend_check_writable_variable(&amp;$1); zend_do_end_variable_parse(&amp;$1, BP_VAR_RW, 0 TSRMLS_CC); zend_do_binary_assign_op(ZEND_ASSIGN_SL, &amp;$$, &amp;$1, &amp;$3 TSRMLS_CC); }</span>
+<span class='curline'><a href='../S/1701.html#L793'>expr</a>              793 Zend/zend_language_parser.y 	|	variable T_SR_EQUAL expr	{ zend_check_writable_variable(&amp;$1); zend_do_end_variable_parse(&amp;$1, BP_VAR_RW, 0 TSRMLS_CC); zend_do_binary_assign_op(ZEND_ASSIGN_SR, &amp;$$, &amp;$1, &amp;$3 TSRMLS_CC); }</span>
+<span class='curline'><a href='../S/1701.html#L798'>expr</a>              798 Zend/zend_language_parser.y 	|	expr T_BOOLEAN_OR { zend_do_boolean_or_begin(&amp;$1, &amp;$2 TSRMLS_CC); } expr { zend_do_boolean_or_end(&amp;$$, &amp;$1, &amp;$4, &amp;$2 TSRMLS_CC); }</span>
+<span class='curline'><a href='../S/1701.html#L799'>expr</a>              799 Zend/zend_language_parser.y 	|	expr T_BOOLEAN_AND { zend_do_boolean_and_begin(&amp;$1, &amp;$2 TSRMLS_CC); } expr { zend_do_boolean_and_end(&amp;$$, &amp;$1, &amp;$4, &amp;$2 TSRMLS_CC); }</span>
+<span class='curline'><a href='../S/1701.html#L800'>expr</a>              800 Zend/zend_language_parser.y 	|	expr T_LOGICAL_OR { zend_do_boolean_or_begin(&amp;$1, &amp;$2 TSRMLS_CC); } expr { zend_do_boolean_or_end(&amp;$$, &amp;$1, &amp;$4, &amp;$2 TSRMLS_CC); }</span>
+<span class='curline'><a href='../S/1701.html#L801'>expr</a>              801 Zend/zend_language_parser.y 	|	expr T_LOGICAL_AND { zend_do_boolean_and_begin(&amp;$1, &amp;$2 TSRMLS_CC); } expr { zend_do_boolean_and_end(&amp;$$, &amp;$1, &amp;$4, &amp;$2 TSRMLS_CC); }</span>
+<span class='curline'><a href='../S/1701.html#L802'>expr</a>              802 Zend/zend_language_parser.y 	|	expr T_LOGICAL_XOR expr { zend_do_binary_op(ZEND_BOOL_XOR, &amp;$$, &amp;$1, &amp;$3 TSRMLS_CC); }</span>
+<span class='curline'><a href='../S/1701.html#L803'>expr</a>              803 Zend/zend_language_parser.y 	|	expr '|' expr	{ zend_do_binary_op(ZEND_BW_OR, &amp;$$, &amp;$1, &amp;$3 TSRMLS_CC); }</span>
+<span class='curline'><a href='../S/1701.html#L804'>expr</a>              804 Zend/zend_language_parser.y 	|	expr '&amp;' expr	{ zend_do_binary_op(ZEND_BW_AND, &amp;$$, &amp;$1, &amp;$3 TSRMLS_CC); }</span>
+<span class='curline'><a href='../S/1701.html#L805'>expr</a>              805 Zend/zend_language_parser.y 	|	expr '^' expr	{ zend_do_binary_op(ZEND_BW_XOR, &amp;$$, &amp;$1, &amp;$3 TSRMLS_CC); }</span>
+<span class='curline'><a href='../S/1701.html#L806'>expr</a>              806 Zend/zend_language_parser.y 	|	expr '.' expr 	{ zend_do_binary_op(ZEND_CONCAT, &amp;$$, &amp;$1, &amp;$3 TSRMLS_CC); }</span>
+<span class='curline'><a href='../S/1701.html#L807'>expr</a>              807 Zend/zend_language_parser.y 	|	expr '+' expr 	{ zend_do_binary_op(ZEND_ADD, &amp;$$, &amp;$1, &amp;$3 TSRMLS_CC); }</span>
+<span class='curline'><a href='../S/1701.html#L808'>expr</a>              808 Zend/zend_language_parser.y 	|	expr '-' expr 	{ zend_do_binary_op(ZEND_SUB, &amp;$$, &amp;$1, &amp;$3 TSRMLS_CC); }</span>
+<span class='curline'><a href='../S/1701.html#L809'>expr</a>              809 Zend/zend_language_parser.y 	|	expr '*' expr	{ zend_do_binary_op(ZEND_MUL, &amp;$$, &amp;$1, &amp;$3 TSRMLS_CC); }</span>
+<span class='curline'><a href='../S/1701.html#L810'>expr</a>              810 Zend/zend_language_parser.y 	|	expr T_POW expr	{ zend_do_binary_op(ZEND_POW, &amp;$$, &amp;$1, &amp;$3 TSRMLS_CC); }</span>
+<span class='curline'><a href='../S/1701.html#L811'>expr</a>              811 Zend/zend_language_parser.y 	|	expr '/' expr	{ zend_do_binary_op(ZEND_DIV, &amp;$$, &amp;$1, &amp;$3 TSRMLS_CC); }</span>
+<span class='curline'><a href='../S/1701.html#L812'>expr</a>              812 Zend/zend_language_parser.y 	|	expr '%' expr 	{ zend_do_binary_op(ZEND_MOD, &amp;$$, &amp;$1, &amp;$3 TSRMLS_CC); }</span>
+<span class='curline'><a href='../S/1701.html#L813'>expr</a>              813 Zend/zend_language_parser.y 	| 	expr T_SL expr	{ zend_do_binary_op(ZEND_SL, &amp;$$, &amp;$1, &amp;$3 TSRMLS_CC); }</span>
+<span class='curline'><a href='../S/1701.html#L814'>expr</a>              814 Zend/zend_language_parser.y 	|	expr T_SR expr	{ zend_do_binary_op(ZEND_SR, &amp;$$, &amp;$1, &amp;$3 TSRMLS_CC); }</span>
+<span class='curline'><a href='../S/1701.html#L815'>expr</a>              815 Zend/zend_language_parser.y 	|	'+' expr %prec T_INC { ZVAL_LONG(&amp;$1.u.constant, 0); if ($2.op_type == IS_CONST) { add_function(&amp;$2.u.constant, &amp;$1.u.constant, &amp;$2.u.constant TSRMLS_CC); $$ = $2; } else { $1.op_type = IS_CONST; INIT_PZVAL(&amp;$1.u.constant); zend_do_binary_op(ZEND_ADD, &amp;$$, &amp;$1, &amp;$2 TSRMLS_CC); } }</span>
+<span class='curline'><a href='../S/1701.html#L816'>expr</a>              816 Zend/zend_language_parser.y 	|	'-' expr %prec T_INC { ZVAL_LONG(&amp;$1.u.constant, 0); if ($2.op_type == IS_CONST) { sub_function(&amp;$2.u.constant, &amp;$1.u.constant, &amp;$2.u.constant TSRMLS_CC); $$ = $2; } else { $1.op_type = IS_CONST; INIT_PZVAL(&amp;$1.u.constant); zend_do_binary_op(ZEND_SUB, &amp;$$, &amp;$1, &amp;$2 TSRMLS_CC); } }</span>
+<span class='curline'><a href='../S/1701.html#L817'>expr</a>              817 Zend/zend_language_parser.y 	|	'!' expr { zend_do_unary_op(ZEND_BOOL_NOT, &amp;$$, &amp;$2 TSRMLS_CC); }</span>
+<span class='curline'><a href='../S/1701.html#L818'>expr</a>              818 Zend/zend_language_parser.y 	|	'~' expr { zend_do_unary_op(ZEND_BW_NOT, &amp;$$, &amp;$2 TSRMLS_CC); }</span>
+<span class='curline'><a href='../S/1701.html#L819'>expr</a>              819 Zend/zend_language_parser.y 	|	expr T_IS_IDENTICAL expr		{ zend_do_binary_op(ZEND_IS_IDENTICAL, &amp;$$, &amp;$1, &amp;$3 TSRMLS_CC); }</span>
+<span class='curline'><a href='../S/1701.html#L820'>expr</a>              820 Zend/zend_language_parser.y 	|	expr T_IS_NOT_IDENTICAL expr	{ zend_do_binary_op(ZEND_IS_NOT_IDENTICAL, &amp;$$, &amp;$1, &amp;$3 TSRMLS_CC); }</span>
+<span class='curline'><a href='../S/1701.html#L821'>expr</a>              821 Zend/zend_language_parser.y 	|	expr T_IS_EQUAL expr			{ zend_do_binary_op(ZEND_IS_EQUAL, &amp;$$, &amp;$1, &amp;$3 TSRMLS_CC); }</span>
+<span class='curline'><a href='../S/1701.html#L822'>expr</a>              822 Zend/zend_language_parser.y 	|	expr T_IS_NOT_EQUAL expr 		{ zend_do_binary_op(ZEND_IS_NOT_EQUAL, &amp;$$, &amp;$1, &amp;$3 TSRMLS_CC); }</span>
+<span class='curline'><a href='../S/1701.html#L823'>expr</a>              823 Zend/zend_language_parser.y 	|	expr '&lt;' expr 					{ zend_do_binary_op(ZEND_IS_SMALLER, &amp;$$, &amp;$1, &amp;$3 TSRMLS_CC); }</span>
+<span class='curline'><a href='../S/1701.html#L824'>expr</a>              824 Zend/zend_language_parser.y 	|	expr T_IS_SMALLER_OR_EQUAL expr { zend_do_binary_op(ZEND_IS_SMALLER_OR_EQUAL, &amp;$$, &amp;$1, &amp;$3 TSRMLS_CC); }</span>
+<span class='curline'><a href='../S/1701.html#L825'>expr</a>              825 Zend/zend_language_parser.y 	|	expr '&gt;' expr 					{ zend_do_binary_op(ZEND_IS_SMALLER, &amp;$$, &amp;$3, &amp;$1 TSRMLS_CC); }</span>
+<span class='curline'><a href='../S/1701.html#L826'>expr</a>              826 Zend/zend_language_parser.y 	|	expr T_IS_GREATER_OR_EQUAL expr { zend_do_binary_op(ZEND_IS_SMALLER_OR_EQUAL, &amp;$$, &amp;$3, &amp;$1 TSRMLS_CC); }</span>
+<span class='curline'><a href='../S/1701.html#L827'>expr</a>              827 Zend/zend_language_parser.y 	|	expr T_INSTANCEOF class_name_reference { zend_do_instanceof(&amp;$$, &amp;$1, &amp;$3, 0 TSRMLS_CC); }</span>
+<span class='curline'><a href='../S/1701.html#L831'>expr</a>              831 Zend/zend_language_parser.y 	|	expr '?' { zend_do_begin_qm_op(&amp;$1, &amp;$2 TSRMLS_CC); }</span>
+<span class='curline'><a href='../S/1701.html#L832'>expr</a>              832 Zend/zend_language_parser.y 		expr ':' { zend_do_qm_true(&amp;$4, &amp;$2, &amp;$5 TSRMLS_CC); }</span>
+<span class='curline'><a href='../S/1701.html#L833'>expr</a>              833 Zend/zend_language_parser.y 		expr	 { zend_do_qm_false(&amp;$$, &amp;$7, &amp;$2, &amp;$5 TSRMLS_CC); }</span>
+<span class='curline'><a href='../S/1701.html#L834'>expr</a>              834 Zend/zend_language_parser.y 	|	expr '?' ':' { zend_do_jmp_set(&amp;$1, &amp;$2, &amp;$3 TSRMLS_CC); }</span>
+<span class='curline'><a href='../S/1701.html#L835'>expr</a>              835 Zend/zend_language_parser.y 		expr     { zend_do_jmp_set_else(&amp;$$, &amp;$5, &amp;$2, &amp;$3 TSRMLS_CC); }</span>
+<span class='curline'><a href='../S/1701.html#L837'>expr</a>              837 Zend/zend_language_parser.y 	|	T_INT_CAST expr 	{ zend_do_cast(&amp;$$, &amp;$2, IS_LONG TSRMLS_CC); }</span>
+<span class='curline'><a href='../S/1701.html#L838'>expr</a>              838 Zend/zend_language_parser.y 	|	T_DOUBLE_CAST expr 	{ zend_do_cast(&amp;$$, &amp;$2, IS_DOUBLE TSRMLS_CC); }</span>
+<span class='curline'><a href='../S/1701.html#L839'>expr</a>              839 Zend/zend_language_parser.y 	|	T_STRING_CAST expr	{ zend_do_cast(&amp;$$, &amp;$2, IS_STRING TSRMLS_CC); }</span>
+<span class='curline'><a href='../S/1701.html#L840'>expr</a>              840 Zend/zend_language_parser.y 	|	T_ARRAY_CAST expr 	{ zend_do_cast(&amp;$$, &amp;$2, IS_ARRAY TSRMLS_CC); }</span>
+<span class='curline'><a href='../S/1701.html#L841'>expr</a>              841 Zend/zend_language_parser.y 	|	T_OBJECT_CAST expr 	{ zend_do_cast(&amp;$$, &amp;$2, IS_OBJECT TSRMLS_CC); }</span>
+<span class='curline'><a href='../S/1701.html#L842'>expr</a>              842 Zend/zend_language_parser.y 	|	T_BOOL_CAST expr	{ zend_do_cast(&amp;$$, &amp;$2, IS_BOOL TSRMLS_CC); }</span>
+<span class='curline'><a href='../S/1701.html#L843'>expr</a>              843 Zend/zend_language_parser.y 	|	T_UNSET_CAST expr	{ zend_do_cast(&amp;$$, &amp;$2, IS_NULL TSRMLS_CC); }</span>
+<span class='curline'><a href='../S/1701.html#L845'>expr</a>              845 Zend/zend_language_parser.y 	|	'@' { zend_do_begin_silence(&amp;$1 TSRMLS_CC); } expr { zend_do_end_silence(&amp;$1 TSRMLS_CC); $$ = $3; }</span>
+<span class='curline'><a href='../S/1701.html#L850'>expr</a>              850 Zend/zend_language_parser.y 	|	T_PRINT expr  { zend_do_print(&amp;$$, &amp;$2 TSRMLS_CC); }</span>
+<span class='curline'><a href='../S/1701.html#L863'>expr</a>              863 Zend/zend_language_parser.y 	|	T_YIELD expr T_DOUBLE_ARROW expr_without_variable { zend_do_yield(&amp;$$, &amp;$4, &amp;$2, 0 TSRMLS_CC); }</span>
+<span class='curline'><a href='../S/1701.html#L864'>expr</a>              864 Zend/zend_language_parser.y 	|	T_YIELD expr T_DOUBLE_ARROW variable { zend_do_yield(&amp;$$, &amp;$4, &amp;$2, 1 TSRMLS_CC); }</span>
+<span class='curline'><a href='../S/1701.html#L1078'>expr</a>             1078 Zend/zend_language_parser.y expr:</span>
+<span class='curline'><a href='../S/1701.html#L1084'>expr</a>             1084 Zend/zend_language_parser.y 		'(' expr ')'		{ $$ = $2; }</span>
+<span class='curline'><a href='../S/1701.html#L1173'>expr</a>             1173 Zend/zend_language_parser.y 	|	reference_variable '{' expr '}'		{ fetch_string_offset(&amp;$$, &amp;$1, &amp;$3 TSRMLS_CC); }</span>
+<span class='curline'><a href='../S/1701.html#L1180'>expr</a>             1180 Zend/zend_language_parser.y 	|	'$' '{' expr '}'	{ $$ = $3; }</span>
+<span class='curline'><a href='../S/1701.html#L1185'>expr</a>             1185 Zend/zend_language_parser.y 	|	expr			{ $$ = $1; }</span>
+<span class='curline'><a href='../S/1701.html#L1196'>expr</a>             1196 Zend/zend_language_parser.y 	|	object_dim_list '{' expr '}'		{ fetch_string_offset(&amp;$$, &amp;$1, &amp;$3 TSRMLS_CC); }</span>
+<span class='curline'><a href='../S/1701.html#L1202'>expr</a>             1202 Zend/zend_language_parser.y 	|	'{' expr '}'	{ $$ = $2; }</span>
+<span class='curline'><a href='../S/1701.html#L1229'>expr</a>             1229 Zend/zend_language_parser.y 		non_empty_array_pair_list ',' expr T_DOUBLE_ARROW expr	{ zend_do_add_array_element(&amp;$$, &amp;$5, &amp;$3, 0 TSRMLS_CC); }</span>
+<span class='curline'><a href='../S/1701.html#L1230'>expr</a>             1230 Zend/zend_language_parser.y 	|	non_empty_array_pair_list ',' expr			{ zend_do_add_array_element(&amp;$$, &amp;$3, NULL, 0 TSRMLS_CC); }</span>
+<span class='curline'><a href='../S/1701.html#L1231'>expr</a>             1231 Zend/zend_language_parser.y 	|	expr T_DOUBLE_ARROW expr	{ zend_do_init_array(&amp;$$, &amp;$3, &amp;$1, 0 TSRMLS_CC); }</span>
+<span class='curline'><a href='../S/1701.html#L1232'>expr</a>             1232 Zend/zend_language_parser.y 	|	expr 				{ zend_do_init_array(&amp;$$, &amp;$1, NULL, 0 TSRMLS_CC); }</span>
+<span class='curline'><a href='../S/1701.html#L1233'>expr</a>             1233 Zend/zend_language_parser.y 	|	non_empty_array_pair_list ',' expr T_DOUBLE_ARROW '&amp;' w_variable { zend_do_add_array_element(&amp;$$, &amp;$6, &amp;$3, 1 TSRMLS_CC); }</span>
+<span class='curline'><a href='../S/1701.html#L1235'>expr</a>             1235 Zend/zend_language_parser.y 	|	expr T_DOUBLE_ARROW '&amp;' w_variable	{ zend_do_init_array(&amp;$$, &amp;$4, &amp;$1, 1 TSRMLS_CC); }</span>
+<span class='curline'><a href='../S/1701.html#L1252'>expr</a>             1252 Zend/zend_language_parser.y 	|	T_DOLLAR_OPEN_CURLY_BRACES expr '}' { zend_do_begin_variable_parse(TSRMLS_C);  fetch_simple_variable(&amp;$$, &amp;$2, 1 TSRMLS_CC); }</span>
+<span class='curline'><a href='../S/1701.html#L1253'>expr</a>             1253 Zend/zend_language_parser.y 	|	T_DOLLAR_OPEN_CURLY_BRACES T_STRING_VARNAME '[' expr ']' '}' { zend_do_begin_variable_parse(TSRMLS_C);  fetch_array_begin(&amp;$$, &amp;$2, &amp;$4 TSRMLS_CC); }</span>
+<span class='curline'><a href='../S/1701.html#L1269'>expr</a>             1269 Zend/zend_language_parser.y 	|	T_INCLUDE expr 			{ zend_do_include_or_eval(ZEND_INCLUDE, &amp;$$, &amp;$2 TSRMLS_CC); }</span>
+<span class='curline'><a href='../S/1701.html#L1270'>expr</a>             1270 Zend/zend_language_parser.y 	|	T_INCLUDE_ONCE expr 	{ zend_do_include_or_eval(ZEND_INCLUDE_ONCE, &amp;$$, &amp;$2 TSRMLS_CC); }</span>
+<span class='curline'><a href='../S/1701.html#L1271'>expr</a>             1271 Zend/zend_language_parser.y 	|	T_EVAL '(' expr ')' 	{ zend_do_include_or_eval(ZEND_EVAL, &amp;$$, &amp;$3 TSRMLS_CC); }</span>
+<span class='curline'><a href='../S/1701.html#L1272'>expr</a>             1272 Zend/zend_language_parser.y 	|	T_REQUIRE expr			{ zend_do_include_or_eval(ZEND_REQUIRE, &amp;$$, &amp;$2 TSRMLS_CC); }</span>
+<span class='curline'><a href='../S/1701.html#L1273'>expr</a>             1273 Zend/zend_language_parser.y 	|	T_REQUIRE_ONCE expr		{ zend_do_include_or_eval(ZEND_REQUIRE_ONCE, &amp;$$, &amp;$2 TSRMLS_CC); }</span>
+<span class='curline'><a href='../S/1747.html#L3889'>expr</a>             3889 Zend/zend_vm_def.h 	zval *expr;</span>
+<span class='curline'><a href='../S/1747.html#L3893'>expr</a>             3893 Zend/zend_vm_def.h 	expr = GET_OP1_ZVAL_PTR(BP_VAR_R);</span>
+<span class='curline'><a href='../S/1747.html#L3896'>expr</a>             3896 Zend/zend_vm_def.h 		ZVAL_COPY_VALUE(result, expr);</span>
+<span class='curline'><a href='../S/1747.html#L3918'>expr</a>             3918 Zend/zend_vm_def.h 			zend_make_printable_zval(expr, &amp;var_copy, &amp;use_copy);</span>
+<span class='curline'><a href='../S/1747.html#L3925'>expr</a>             3925 Zend/zend_vm_def.h 				ZVAL_COPY_VALUE(result, expr);</span>
+<span class='curline'><a href='../S/1747.html#L5117'>expr</a>             5117 Zend/zend_vm_def.h 	zval *expr;</span>
+<span class='curline'><a href='../S/1747.html#L5121'>expr</a>             5121 Zend/zend_vm_def.h 	expr = GET_OP1_ZVAL_PTR(BP_VAR_R);</span>
+<span class='curline'><a href='../S/1747.html#L5123'>expr</a>             5123 Zend/zend_vm_def.h 	if (Z_TYPE_P(expr) == IS_OBJECT &amp;&amp; Z_OBJ_HT_P(expr)-&gt;get_class_entry) {</span>
+<span class='curline'><a href='../S/1747.html#L5124'>expr</a>             5124 Zend/zend_vm_def.h 		result = instanceof_function(Z_OBJCE_P(expr), EX_T(opline-&gt;op2.var).class_entry TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L2864'>expr</a>             2864 Zend/zend_vm_execute.h 	zval *expr;</span>
+<span class='curline'><a href='../S/1748.html#L2868'>expr</a>             2868 Zend/zend_vm_execute.h 	expr = opline-&gt;op1.zv;</span>
+<span class='curline'><a href='../S/1748.html#L2871'>expr</a>             2871 Zend/zend_vm_execute.h 		ZVAL_COPY_VALUE(result, expr);</span>
+<span class='curline'><a href='../S/1748.html#L2893'>expr</a>             2893 Zend/zend_vm_execute.h 			zend_make_printable_zval(expr, &amp;var_copy, &amp;use_copy);</span>
+<span class='curline'><a href='../S/1748.html#L2900'>expr</a>             2900 Zend/zend_vm_execute.h 				ZVAL_COPY_VALUE(result, expr);</span>
+<span class='curline'><a href='../S/1748.html#L8230'>expr</a>             8230 Zend/zend_vm_execute.h 	zval *expr;</span>
+<span class='curline'><a href='../S/1748.html#L8234'>expr</a>             8234 Zend/zend_vm_execute.h 	expr = _get_zval_ptr_tmp(opline-&gt;op1.var, execute_data, &amp;free_op1 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L8237'>expr</a>             8237 Zend/zend_vm_execute.h 		ZVAL_COPY_VALUE(result, expr);</span>
+<span class='curline'><a href='../S/1748.html#L8259'>expr</a>             8259 Zend/zend_vm_execute.h 			zend_make_printable_zval(expr, &amp;var_copy, &amp;use_copy);</span>
+<span class='curline'><a href='../S/1748.html#L8266'>expr</a>             8266 Zend/zend_vm_execute.h 				ZVAL_COPY_VALUE(result, expr);</span>
+<span class='curline'><a href='../S/1748.html#L8741'>expr</a>             8741 Zend/zend_vm_execute.h 	zval *expr;</span>
+<span class='curline'><a href='../S/1748.html#L8745'>expr</a>             8745 Zend/zend_vm_execute.h 	expr = _get_zval_ptr_tmp(opline-&gt;op1.var, execute_data, &amp;free_op1 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L8747'>expr</a>             8747 Zend/zend_vm_execute.h 	if (Z_TYPE_P(expr) == IS_OBJECT &amp;&amp; Z_OBJ_HT_P(expr)-&gt;get_class_entry) {</span>
+<span class='curline'><a href='../S/1748.html#L8748'>expr</a>             8748 Zend/zend_vm_execute.h 		result = instanceof_function(Z_OBJCE_P(expr), EX_T(opline-&gt;op2.var).class_entry TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L13599'>expr</a>             13599 Zend/zend_vm_execute.h 	zval *expr;</span>
+<span class='curline'><a href='../S/1748.html#L13603'>expr</a>             13603 Zend/zend_vm_execute.h 	expr = _get_zval_ptr_var(opline-&gt;op1.var, execute_data, &amp;free_op1 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L13606'>expr</a>             13606 Zend/zend_vm_execute.h 		ZVAL_COPY_VALUE(result, expr);</span>
+<span class='curline'><a href='../S/1748.html#L13628'>expr</a>             13628 Zend/zend_vm_execute.h 			zend_make_printable_zval(expr, &amp;var_copy, &amp;use_copy);</span>
+<span class='curline'><a href='../S/1748.html#L13635'>expr</a>             13635 Zend/zend_vm_execute.h 				ZVAL_COPY_VALUE(result, expr);</span>
+<span class='curline'><a href='../S/1748.html#L14213'>expr</a>             14213 Zend/zend_vm_execute.h 	zval *expr;</span>
+<span class='curline'><a href='../S/1748.html#L14217'>expr</a>             14217 Zend/zend_vm_execute.h 	expr = _get_zval_ptr_var(opline-&gt;op1.var, execute_data, &amp;free_op1 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L14219'>expr</a>             14219 Zend/zend_vm_execute.h 	if (Z_TYPE_P(expr) == IS_OBJECT &amp;&amp; Z_OBJ_HT_P(expr)-&gt;get_class_entry) {</span>
+<span class='curline'><a href='../S/1748.html#L14220'>expr</a>             14220 Zend/zend_vm_execute.h 		result = instanceof_function(Z_OBJCE_P(expr), EX_T(opline-&gt;op2.var).class_entry TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L31268'>expr</a>             31268 Zend/zend_vm_execute.h 	zval *expr;</span>
+<span class='curline'><a href='../S/1748.html#L31272'>expr</a>             31272 Zend/zend_vm_execute.h 	expr = _get_zval_ptr_cv_BP_VAR_R(execute_data, opline-&gt;op1.var TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L31275'>expr</a>             31275 Zend/zend_vm_execute.h 		ZVAL_COPY_VALUE(result, expr);</span>
+<span class='curline'><a href='../S/1748.html#L31297'>expr</a>             31297 Zend/zend_vm_execute.h 			zend_make_printable_zval(expr, &amp;var_copy, &amp;use_copy);</span>
+<span class='curline'><a href='../S/1748.html#L31304'>expr</a>             31304 Zend/zend_vm_execute.h 				ZVAL_COPY_VALUE(result, expr);</span>
+<span class='curline'><a href='../S/1748.html#L31748'>expr</a>             31748 Zend/zend_vm_execute.h 	zval *expr;</span>
+<span class='curline'><a href='../S/1748.html#L31752'>expr</a>             31752 Zend/zend_vm_execute.h 	expr = _get_zval_ptr_cv_BP_VAR_R(execute_data, opline-&gt;op1.var TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L31754'>expr</a>             31754 Zend/zend_vm_execute.h 	if (Z_TYPE_P(expr) == IS_OBJECT &amp;&amp; Z_OBJ_HT_P(expr)-&gt;get_class_entry) {</span>
+<span class='curline'><a href='../S/1748.html#L31755'>expr</a>             31755 Zend/zend_vm_execute.h 		result = instanceof_function(Z_OBJCE_P(expr), EX_T(opline-&gt;op2.var).class_entry TSRMLS_CC);</span>
+<span class='curline'><a href='../S/153.html#L50'>expr</a>               50 ext/dom/xpath.c 	ZEND_ARG_INFO(0, expr)</span>
+<span class='curline'><a href='../S/153.html#L56'>expr</a>               56 ext/dom/xpath.c 	ZEND_ARG_INFO(0, expr)</span>
+<span class='curline'><a href='../S/153.html#L395'>expr</a>              395 ext/dom/xpath.c 	char *expr;</span>
+<span class='curline'><a href='../S/153.html#L400'>expr</a>              400 ext/dom/xpath.c 	if (zend_parse_method_parameters(ZEND_NUM_ARGS() TSRMLS_CC, getThis(), "Os|O!b", &amp;id, dom_xpath_class_entry, &amp;expr, &amp;expr_len, &amp;context, dom_node_class_entry, &amp;register_node_ns) == FAILURE) {</span>
+<span class='curline'><a href='../S/153.html#L447'>expr</a>              447 ext/dom/xpath.c 	xpathobjp = xmlXPathEvalExpression(expr, ctxp);</span>
+<span class='curline'><a href='../S/723.html#L3971'>expr</a>             3971 ext/mbstring/oniguruma/regcomp.c   OptExactInfo expr;   /* prec read (?=...) */</span>
+<span class='curline'><a href='../S/723.html#L4442'>expr</a>             4442 ext/mbstring/oniguruma/regcomp.c   copy_mml(&amp;(opt-&gt;expr.mmd), mmd);</span>
+<span class='curline'><a href='../S/723.html#L4453'>expr</a>             4453 ext/mbstring/oniguruma/regcomp.c   clear_opt_exact_info(&amp;opt-&gt;expr);</span>
+<span class='curline'><a href='../S/723.html#L4502'>expr</a>             4502 ext/mbstring/oniguruma/regcomp.c   if (to-&gt;expr.len &gt; 0) {</span>
+<span class='curline'><a href='../S/723.html#L4504'>expr</a>             4504 ext/mbstring/oniguruma/regcomp.c       if (to-&gt;expr.len &gt; (int )add-&gt;len.max)</span>
+<span class='curline'><a href='../S/723.html#L4505'>expr</a>             4505 ext/mbstring/oniguruma/regcomp.c 	to-&gt;expr.len = add-&gt;len.max;</span>
+<span class='curline'><a href='../S/723.html#L4507'>expr</a>             4507 ext/mbstring/oniguruma/regcomp.c       if (to-&gt;expr.mmd.max == 0)</span>
+<span class='curline'><a href='../S/723.html#L4508'>expr</a>             4508 ext/mbstring/oniguruma/regcomp.c 	select_opt_exact_info(enc, &amp;to-&gt;exb, &amp;to-&gt;expr);</span>
+<span class='curline'><a href='../S/723.html#L4510'>expr</a>             4510 ext/mbstring/oniguruma/regcomp.c 	select_opt_exact_info(enc, &amp;to-&gt;exm, &amp;to-&gt;expr);</span>
+<span class='curline'><a href='../S/723.html#L4513'>expr</a>             4513 ext/mbstring/oniguruma/regcomp.c   else if (add-&gt;expr.len &gt; 0) {</span>
+<span class='curline'><a href='../S/723.html#L4514'>expr</a>             4514 ext/mbstring/oniguruma/regcomp.c     copy_opt_exact_info(&amp;to-&gt;expr, &amp;add-&gt;expr);</span>
+<span class='curline'><a href='../S/723.html#L4528'>expr</a>             4528 ext/mbstring/oniguruma/regcomp.c   alt_merge_opt_exact_info(&amp;to-&gt;expr, &amp;add-&gt;expr, env);</span>
+<span class='curline'><a href='../S/723.html#L4709'>expr</a>             4709 ext/mbstring/oniguruma/regcomp.c 	    copy_opt_exact_info(&amp;opt-&gt;expr, &amp;nopt.exb);</span>
+<span class='curline'><a href='../S/723.html#L4711'>expr</a>             4711 ext/mbstring/oniguruma/regcomp.c 	    copy_opt_exact_info(&amp;opt-&gt;expr, &amp;nopt.exm);</span>
+<span class='curline'><a href='../S/723.html#L4713'>expr</a>             4713 ext/mbstring/oniguruma/regcomp.c 	  opt-&gt;expr.reach_end = 0;</span>
+<span class='curline'><a href='../S/900.html#L41'>expr</a>               41 ext/pcre/pcrelib/sljit/sljitLir.c #define FAIL_IF(expr) \</span>
+<span class='curline'><a href='../S/900.html#L43'>expr</a>               43 ext/pcre/pcrelib/sljit/sljitLir.c 		if (SLJIT_UNLIKELY(expr)) \</span>
+<span class='curline'><a href='../S/900.html#L47'>expr</a>               47 ext/pcre/pcrelib/sljit/sljitLir.c #define PTR_FAIL_IF(expr) \</span>
+<span class='curline'><a href='../S/900.html#L49'>expr</a>               49 ext/pcre/pcrelib/sljit/sljitLir.c 		if (SLJIT_UNLIKELY(expr)) \</span>
+<span class='curline'><a href='../S/1067.html#L53111'>expr</a>             53111 ext/sqlite3/libsqlite/sqlite3.c #define IfNotOmitAV(expr) (expr)</span>
+<span class='curline'><a href='../S/1067.html#L53113'>expr</a>             53113 ext/sqlite3/libsqlite/sqlite3.c #define IfNotOmitAV(expr) 0</span>
+<span class='curline'><a href='../S/1077.html#L5257'>expr</a>             5257 ext/standard/basic_functions.c 	zval **expr;</span>
+<span class='curline'><a href='../S/1077.html#L5263'>expr</a>             5263 ext/standard/basic_functions.c 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "Z|b", &amp;expr, &amp;i) == FAILURE) {</span>
+<span class='curline'><a href='../S/1077.html#L5266'>expr</a>             5266 ext/standard/basic_functions.c 	convert_to_string_ex(expr);</span>
+<span class='curline'><a href='../S/1077.html#L5278'>expr</a>             5278 ext/standard/basic_functions.c 	if (highlight_string(*expr, &amp;syntax_highlighter_ini, hicompiled_string_description TSRMLS_CC) == FAILURE) {</span>
+<span class='curline'><a href='../S/1189.html#L1184'>expr</a>             1184 ext/standard/string.c 				zval expr;</span>
+<span class='curline'><a href='../S/1189.html#L1185'>expr</a>             1185 ext/standard/string.c 				zend_make_printable_zval(*tmp, &amp;expr, &amp;copy);</span>
+<span class='curline'><a href='../S/1189.html#L1186'>expr</a>             1186 ext/standard/string.c 				smart_str_appendl(&amp;implstr, Z_STRVAL(expr), Z_STRLEN(expr));</span>
+<span class='curline'><a href='../S/1189.html#L1188'>expr</a>             1188 ext/standard/string.c 					zval_dtor(&amp;expr);</span>
+<span class='curline'><a href='../S/1368.html#L85'>expr</a>               85 main/php.h     #define assert(expr) ((void) (0))</span>
+<span class='curline'><a href='../S/1548.html#L701'>expr</a>              701 sapi/phpdbg/phpdbg_bp.c static inline void phpdbg_create_conditional_break(phpdbg_breakcond_t *brake, const phpdbg_param_t *param, const char *expr, size_t expr_len, zend_ulong hash TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1548.html#L722'>expr</a>              722 sapi/phpdbg/phpdbg_bp.c 	new_break.code = estrndup(expr, expr_len);</span>
+<span class='curline'><a href='../S/1548.html#L728'>expr</a>              728 sapi/phpdbg/phpdbg_bp.c 	memcpy(Z_STRVAL(pv) + sizeof("return ") - 1, expr, expr_len);</span>
+<span class='curline'><a href='../S/1548.html#L750'>expr</a>              750 sapi/phpdbg/phpdbg_bp.c 			"Failed to compile code for expression %s", expr);</span>
+<span class='curline'><a href='../S/1548.html#L757'>expr</a>              757 sapi/phpdbg/phpdbg_bp.c PHPDBG_API void phpdbg_set_breakpoint_expression(const char *expr, size_t expr_len TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1548.html#L759'>expr</a>              759 sapi/phpdbg/phpdbg_bp.c 	zend_ulong expr_hash = zend_inline_hash_func(expr, expr_len);</span>
+<span class='curline'><a href='../S/1548.html#L764'>expr</a>              764 sapi/phpdbg/phpdbg_bp.c 			&amp;new_break, NULL, expr, expr_len, expr_hash TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1548.html#L766'>expr</a>              766 sapi/phpdbg/phpdbg_bp.c 		phpdbg_notice("Conditional break %s exists", expr);</span>
+</pre>
+</body>
+</html>

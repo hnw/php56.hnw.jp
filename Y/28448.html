@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>new_cert</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/865.html#L2943'>new_cert</a>         2943 ext/openssl/openssl.c 	X509 * cert = NULL, *new_cert = NULL;</span>
+<span class='curline'><a href='../S/865.html#L3000'>new_cert</a>         3000 ext/openssl/openssl.c 	new_cert = X509_new();</span>
+<span class='curline'><a href='../S/865.html#L3001'>new_cert</a>         3001 ext/openssl/openssl.c 	if (new_cert == NULL) {</span>
+<span class='curline'><a href='../S/865.html#L3006'>new_cert</a>         3006 ext/openssl/openssl.c 	if (!X509_set_version(new_cert, 2))</span>
+<span class='curline'><a href='../S/865.html#L3009'>new_cert</a>         3009 ext/openssl/openssl.c 	ASN1_INTEGER_set(X509_get_serialNumber(new_cert), serial);</span>
+<span class='curline'><a href='../S/865.html#L3011'>new_cert</a>         3011 ext/openssl/openssl.c 	X509_set_subject_name(new_cert, X509_REQ_get_subject_name(csr));</span>
+<span class='curline'><a href='../S/865.html#L3014'>new_cert</a>         3014 ext/openssl/openssl.c 		cert = new_cert;</span>
+<span class='curline'><a href='../S/865.html#L3016'>new_cert</a>         3016 ext/openssl/openssl.c 	if (!X509_set_issuer_name(new_cert, X509_get_subject_name(cert))) {</span>
+<span class='curline'><a href='../S/865.html#L3019'>new_cert</a>         3019 ext/openssl/openssl.c 	X509_gmtime_adj(X509_get_notBefore(new_cert), 0);</span>
+<span class='curline'><a href='../S/865.html#L3020'>new_cert</a>         3020 ext/openssl/openssl.c 	X509_gmtime_adj(X509_get_notAfter(new_cert), (long)60*60*24*num_days);</span>
+<span class='curline'><a href='../S/865.html#L3021'>new_cert</a>         3021 ext/openssl/openssl.c 	i = X509_set_pubkey(new_cert, key);</span>
+<span class='curline'><a href='../S/865.html#L3028'>new_cert</a>         3028 ext/openssl/openssl.c 		X509V3_set_ctx(&amp;ctx, cert, new_cert, csr, NULL, 0);</span>
+<span class='curline'><a href='../S/865.html#L3030'>new_cert</a>         3030 ext/openssl/openssl.c 		if (!X509V3_EXT_add_conf(req.req_config, &amp;ctx, req.extensions_section, new_cert)) {</span>
+<span class='curline'><a href='../S/865.html#L3036'>new_cert</a>         3036 ext/openssl/openssl.c 	if (!X509_sign(new_cert, priv_key, req.digest)) {</span>
+<span class='curline'><a href='../S/865.html#L3042'>new_cert</a>         3042 ext/openssl/openssl.c 	RETVAL_RESOURCE(zend_list_insert(new_cert, le_x509 TSRMLS_CC));</span>
+<span class='curline'><a href='../S/865.html#L3043'>new_cert</a>         3043 ext/openssl/openssl.c 	new_cert = NULL;</span>
+<span class='curline'><a href='../S/865.html#L3047'>new_cert</a>         3047 ext/openssl/openssl.c 	if (cert == new_cert) {</span>
+<span class='curline'><a href='../S/865.html#L3064'>new_cert</a>         3064 ext/openssl/openssl.c 	if (new_cert) {</span>
+<span class='curline'><a href='../S/865.html#L3065'>new_cert</a>         3065 ext/openssl/openssl.c 		X509_free(new_cert);</span>
+</pre>
+</body>
+</html>

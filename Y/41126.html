@@ -1,0 +1,160 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>watch</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/1572.html#L66'>watch</a>              66 sapi/phpdbg/phpdbg_prompt.c 	PHPDBG_COMMAND_D(watch,   "set watchpoint",                           'w', phpdbg_watch_commands, "|ss"),</span>
+<span class='curline'><a href='../S/1572.html#L977'>watch</a>             977 sapi/phpdbg/phpdbg_prompt.c PHPDBG_COMMAND(watch) /* {{{ */</span>
+<span class='curline'><a href='../S/1573.html#L55'>watch</a>              55 sapi/phpdbg/phpdbg_prompt.h PHPDBG_COMMAND(watch); /* }}} */</span>
+<span class='curline'><a href='../S/1578.html#L46'>watch</a>              46 sapi/phpdbg/phpdbg_watch.c 	phpdbg_watchpoint_t *watch;</span>
+<span class='curline'><a href='../S/1578.html#L53'>watch</a>              53 sapi/phpdbg/phpdbg_watch.c 	watch = result-&gt;ptr;</span>
+<span class='curline'><a href='../S/1578.html#L56'>watch</a>              56 sapi/phpdbg/phpdbg_watch.c 	if ((char *)phpdbg_get_page_boundary(watch-&gt;addr.ptr) &gt; (char *)addr || (char *)phpdbg_get_page_boundary(watch-&gt;addr.ptr) + phpdbg_get_total_page_size(watch-&gt;addr.ptr, watch-&gt;size) &lt; (char *)addr) {</span>
+<span class='curline'><a href='../S/1578.html#L61'>watch</a>              61 sapi/phpdbg/phpdbg_watch.c 	return watch;</span>
+<span class='curline'><a href='../S/1578.html#L64'>watch</a>              64 sapi/phpdbg/phpdbg_watch.c static void phpdbg_change_watchpoint_access(phpdbg_watchpoint_t *watch, int access TSRMLS_DC) {</span>
+<span class='curline'><a href='../S/1578.html#L68'>watch</a>              68 sapi/phpdbg/phpdbg_watch.c 	m = mprotect(phpdbg_get_page_boundary(watch-&gt;addr.ptr), phpdbg_get_total_page_size(watch-&gt;addr.ptr, watch-&gt;size), access);</span>
+<span class='curline'><a href='../S/1578.html#L71'>watch</a>              71 sapi/phpdbg/phpdbg_watch.c static inline void phpdbg_activate_watchpoint(phpdbg_watchpoint_t *watch TSRMLS_DC) {</span>
+<span class='curline'><a href='../S/1578.html#L72'>watch</a>              72 sapi/phpdbg/phpdbg_watch.c 	phpdbg_change_watchpoint_access(watch, PROT_READ TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1578.html#L75'>watch</a>              75 sapi/phpdbg/phpdbg_watch.c static inline void phpdbg_deactivate_watchpoint(phpdbg_watchpoint_t *watch TSRMLS_DC) {</span>
+<span class='curline'><a href='../S/1578.html#L76'>watch</a>              76 sapi/phpdbg/phpdbg_watch.c 	phpdbg_change_watchpoint_access(watch, PROT_READ | PROT_WRITE TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1578.html#L79'>watch</a>              79 sapi/phpdbg/phpdbg_watch.c static inline void phpdbg_store_watchpoint(phpdbg_watchpoint_t *watch TSRMLS_DC) {</span>
+<span class='curline'><a href='../S/1578.html#L80'>watch</a>              80 sapi/phpdbg/phpdbg_watch.c 	phpdbg_btree_insert(&amp;PHPDBG_G(watchpoint_tree), (zend_ulong)watch-&gt;addr.ptr, watch);</span>
+<span class='curline'><a href='../S/1578.html#L83'>watch</a>              83 sapi/phpdbg/phpdbg_watch.c static inline void phpdbg_remove_watchpoint(phpdbg_watchpoint_t *watch TSRMLS_DC) {</span>
+<span class='curline'><a href='../S/1578.html#L84'>watch</a>              84 sapi/phpdbg/phpdbg_watch.c 	phpdbg_btree_delete(&amp;PHPDBG_G(watchpoint_tree), (zend_ulong)watch-&gt;addr.ptr);</span>
+<span class='curline'><a href='../S/1578.html#L87'>watch</a>              87 sapi/phpdbg/phpdbg_watch.c void phpdbg_create_addr_watchpoint(void *addr, size_t size, phpdbg_watchpoint_t *watch) {</span>
+<span class='curline'><a href='../S/1578.html#L88'>watch</a>              88 sapi/phpdbg/phpdbg_watch.c 	watch-&gt;addr.ptr = addr;</span>
+<span class='curline'><a href='../S/1578.html#L89'>watch</a>              89 sapi/phpdbg/phpdbg_watch.c 	watch-&gt;size = size;</span>
+<span class='curline'><a href='../S/1578.html#L92'>watch</a>              92 sapi/phpdbg/phpdbg_watch.c void phpdbg_create_zval_watchpoint(zval *zv, phpdbg_watchpoint_t *watch) {</span>
+<span class='curline'><a href='../S/1578.html#L93'>watch</a>              93 sapi/phpdbg/phpdbg_watch.c 	phpdbg_create_addr_watchpoint(zv, sizeof(zval), watch);</span>
+<span class='curline'><a href='../S/1578.html#L94'>watch</a>              94 sapi/phpdbg/phpdbg_watch.c 	watch-&gt;type = WATCH_ON_ZVAL;</span>
+<span class='curline'><a href='../S/1578.html#L97'>watch</a>              97 sapi/phpdbg/phpdbg_watch.c void phpdbg_create_ht_watchpoint(HashTable *ht, phpdbg_watchpoint_t *watch) {</span>
+<span class='curline'><a href='../S/1578.html#L98'>watch</a>              98 sapi/phpdbg/phpdbg_watch.c 	phpdbg_create_addr_watchpoint(ht, sizeof(HashTable), watch);</span>
+<span class='curline'><a href='../S/1578.html#L99'>watch</a>              99 sapi/phpdbg/phpdbg_watch.c 	watch-&gt;type = WATCH_ON_HASHTABLE;</span>
+<span class='curline'><a href='../S/1578.html#L104'>watch</a>             104 sapi/phpdbg/phpdbg_watch.c static int phpdbg_create_watchpoint(phpdbg_watchpoint_t *watch TSRMLS_DC) {</span>
+<span class='curline'><a href='../S/1578.html#L105'>watch</a>             105 sapi/phpdbg/phpdbg_watch.c 	watch-&gt;flags |= PHPDBG_WATCH_SIMPLE;</span>
+<span class='curline'><a href='../S/1578.html#L107'>watch</a>             107 sapi/phpdbg/phpdbg_watch.c 	phpdbg_store_watchpoint(watch TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1578.html#L108'>watch</a>             108 sapi/phpdbg/phpdbg_watch.c 	zend_hash_add(&amp;PHPDBG_G(watchpoints), watch-&gt;str, watch-&gt;str_len, &amp;watch, sizeof(phpdbg_watchpoint_t *), NULL);</span>
+<span class='curline'><a href='../S/1578.html#L110'>watch</a>             110 sapi/phpdbg/phpdbg_watch.c 	if (watch-&gt;type == WATCH_ON_ZVAL) {</span>
+<span class='curline'><a href='../S/1578.html#L111'>watch</a>             111 sapi/phpdbg/phpdbg_watch.c 		phpdbg_btree_insert(&amp;PHPDBG_G(watch_HashTables), (zend_ulong)watch-&gt;parent_container, watch-&gt;parent_container-&gt;pDestructor);</span>
+<span class='curline'><a href='../S/1578.html#L112'>watch</a>             112 sapi/phpdbg/phpdbg_watch.c 		watch-&gt;parent_container-&gt;pDestructor = (dtor_func_t)phpdbg_watch_HashTable_dtor;</span>
+<span class='curline'><a href='../S/1578.html#L115'>watch</a>             115 sapi/phpdbg/phpdbg_watch.c 	phpdbg_activate_watchpoint(watch TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1578.html#L120'>watch</a>             120 sapi/phpdbg/phpdbg_watch.c static int phpdbg_create_array_watchpoint(phpdbg_watchpoint_t *watch TSRMLS_DC) {</span>
+<span class='curline'><a href='../S/1578.html#L123'>watch</a>             123 sapi/phpdbg/phpdbg_watch.c 	switch (Z_TYPE_P(watch-&gt;addr.zv)) {</span>
+<span class='curline'><a href='../S/1578.html#L125'>watch</a>             125 sapi/phpdbg/phpdbg_watch.c 			ht = Z_ARRVAL_P(watch-&gt;addr.zv);</span>
+<span class='curline'><a href='../S/1578.html#L128'>watch</a>             128 sapi/phpdbg/phpdbg_watch.c 			ht = Z_OBJPROP_P(watch-&gt;addr.zv);</span>
+<span class='curline'><a href='../S/1578.html#L134'>watch</a>             134 sapi/phpdbg/phpdbg_watch.c 	phpdbg_create_ht_watchpoint(ht, watch);</span>
+<span class='curline'><a href='../S/1578.html#L136'>watch</a>             136 sapi/phpdbg/phpdbg_watch.c 	phpdbg_create_watchpoint(watch TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1578.html#L148'>watch</a>             148 sapi/phpdbg/phpdbg_watch.c static int phpdbg_create_recursive_watchpoint(phpdbg_watchpoint_t *watch TSRMLS_DC) {</span>
+<span class='curline'><a href='../S/1578.html#L151'>watch</a>             151 sapi/phpdbg/phpdbg_watch.c 	if (watch-&gt;type != WATCH_ON_ZVAL) {</span>
+<span class='curline'><a href='../S/1578.html#L155'>watch</a>             155 sapi/phpdbg/phpdbg_watch.c 	watch-&gt;flags |= PHPDBG_WATCH_RECURSIVE;</span>
+<span class='curline'><a href='../S/1578.html#L156'>watch</a>             156 sapi/phpdbg/phpdbg_watch.c 	phpdbg_create_watchpoint(watch TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1578.html#L158'>watch</a>             158 sapi/phpdbg/phpdbg_watch.c 	switch (Z_TYPE_P(watch-&gt;addr.zv)) {</span>
+<span class='curline'><a href='../S/1578.html#L160'>watch</a>             160 sapi/phpdbg/phpdbg_watch.c 			ht = Z_ARRVAL_P(watch-&gt;addr.zv);</span>
+<span class='curline'><a href='../S/1578.html#L163'>watch</a>             163 sapi/phpdbg/phpdbg_watch.c 			ht = Z_OBJPROP_P(watch-&gt;addr.zv);</span>
+<span class='curline'><a href='../S/1578.html#L180'>watch</a>             180 sapi/phpdbg/phpdbg_watch.c 			new_watch-&gt;parent = watch;</span>
+<span class='curline'><a href='../S/1578.html#L193'>watch</a>             193 sapi/phpdbg/phpdbg_watch.c 			new_watch-&gt;str_len = asprintf(&amp;new_watch-&gt;str, "%.*s%s%s%s", (int)watch-&gt;str_len, watch-&gt;str, Z_TYPE_P(watch-&gt;addr.zv) == IS_ARRAY?"[":"-&gt;", phpdbg_get_property_key(new_watch-&gt;name_in_parent), Z_TYPE_P(watch-&gt;addr.zv) == IS_ARRAY?"]":"");</span>
+<span class='curline'><a href='../S/1578.html#L203'>watch</a>             203 sapi/phpdbg/phpdbg_watch.c 		new_watch-&gt;parent = watch;</span>
+<span class='curline'><a href='../S/1578.html#L204'>watch</a>             204 sapi/phpdbg/phpdbg_watch.c 		new_watch-&gt;parent_container = watch-&gt;parent_container;</span>
+<span class='curline'><a href='../S/1578.html#L205'>watch</a>             205 sapi/phpdbg/phpdbg_watch.c 		new_watch-&gt;name_in_parent = zend_strndup(watch-&gt;name_in_parent, watch-&gt;name_in_parent_len);</span>
+<span class='curline'><a href='../S/1578.html#L206'>watch</a>             206 sapi/phpdbg/phpdbg_watch.c 		new_watch-&gt;name_in_parent_len = watch-&gt;name_in_parent_len;</span>
+<span class='curline'><a href='../S/1578.html#L208'>watch</a>             208 sapi/phpdbg/phpdbg_watch.c 		new_watch-&gt;str_len = asprintf(&amp;new_watch-&gt;str, "%.*s[]", (int)watch-&gt;str_len, watch-&gt;str);</span>
+<span class='curline'><a href='../S/1578.html#L218'>watch</a>             218 sapi/phpdbg/phpdbg_watch.c static int phpdbg_delete_watchpoint_recursive(phpdbg_watchpoint_t *watch, zend_bool user_request TSRMLS_DC) {</span>
+<span class='curline'><a href='../S/1578.html#L219'>watch</a>             219 sapi/phpdbg/phpdbg_watch.c 	if (watch-&gt;type == WATCH_ON_HASHTABLE || (watch-&gt;type == WATCH_ON_ZVAL &amp;&amp; (Z_TYPE_P(watch-&gt;addr.zv) == IS_ARRAY || Z_TYPE_P(watch-&gt;addr.zv) == IS_OBJECT))) {</span>
+<span class='curline'><a href='../S/1578.html#L223'>watch</a>             223 sapi/phpdbg/phpdbg_watch.c 		if (watch-&gt;type == WATCH_ON_HASHTABLE &amp;&amp; user_request) {</span>
+<span class='curline'><a href='../S/1578.html#L231'>watch</a>             231 sapi/phpdbg/phpdbg_watch.c 			ht = watch-&gt;addr.ht;</span>
+<span class='curline'><a href='../S/1578.html#L239'>watch</a>             239 sapi/phpdbg/phpdbg_watch.c 					str_len = asprintf(&amp;str, "%.*s%s%s%s", (int)watch-&gt;parent-&gt;str_len, watch-&gt;parent-&gt;str, Z_TYPE_P(watch-&gt;parent-&gt;addr.zv) == IS_ARRAY?"[":"-&gt;", phpdbg_get_property_key(Z_STRVAL(key)), Z_TYPE_P(watch-&gt;parent-&gt;addr.zv) == IS_ARRAY?"]":"");</span>
+<span class='curline'><a href='../S/1578.html#L241'>watch</a>             241 sapi/phpdbg/phpdbg_watch.c 					str_len = asprintf(&amp;str, "%.*s%s%li%s", (int)watch-&gt;parent-&gt;str_len, watch-&gt;parent-&gt;str, Z_TYPE_P(watch-&gt;parent-&gt;addr.zv) == IS_ARRAY?"[":"-&gt;", Z_LVAL(key), Z_TYPE_P(watch-&gt;parent-&gt;addr.zv) == IS_ARRAY?"]":"");</span>
+<span class='curline'><a href='../S/1578.html#L249'>watch</a>             249 sapi/phpdbg/phpdbg_watch.c 			switch (Z_TYPE_P(watch-&gt;addr.zv)) {</span>
+<span class='curline'><a href='../S/1578.html#L251'>watch</a>             251 sapi/phpdbg/phpdbg_watch.c 					ht = Z_ARRVAL_P(watch-&gt;addr.zv);</span>
+<span class='curline'><a href='../S/1578.html#L254'>watch</a>             254 sapi/phpdbg/phpdbg_watch.c 					ht = Z_OBJPROP_P(watch-&gt;addr.zv);</span>
+<span class='curline'><a href='../S/1578.html#L264'>watch</a>             264 sapi/phpdbg/phpdbg_watch.c 	return zend_hash_del(&amp;PHPDBG_G(watchpoints), watch-&gt;str, watch-&gt;str_len);</span>
+<span class='curline'><a href='../S/1578.html#L269'>watch</a>             269 sapi/phpdbg/phpdbg_watch.c 	phpdbg_watchpoint_t *watch;</span>
+<span class='curline'><a href='../S/1578.html#L276'>watch</a>             276 sapi/phpdbg/phpdbg_watch.c 	watch = result-&gt;ptr;</span>
+<span class='curline'><a href='../S/1578.html#L278'>watch</a>             278 sapi/phpdbg/phpdbg_watch.c 	if (watch-&gt;flags &amp; PHPDBG_WATCH_RECURSIVE) {</span>
+<span class='curline'><a href='../S/1578.html#L279'>watch</a>             279 sapi/phpdbg/phpdbg_watch.c 		ret = phpdbg_delete_watchpoint_recursive(watch, 1 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1578.html#L281'>watch</a>             281 sapi/phpdbg/phpdbg_watch.c 		ret = zend_hash_del(&amp;PHPDBG_G(watchpoints), watch-&gt;str, watch-&gt;str_len);</span>
+<span class='curline'><a href='../S/1578.html#L337'>watch</a>             337 sapi/phpdbg/phpdbg_watch.c 					phpdbg_watchpoint_t *watch = emalloc(sizeof(phpdbg_watchpoint_t));</span>
+<span class='curline'><a href='../S/1578.html#L338'>watch</a>             338 sapi/phpdbg/phpdbg_watch.c 					watch-&gt;flags = 0;</span>
+<span class='curline'><a href='../S/1578.html#L341'>watch</a>             341 sapi/phpdbg/phpdbg_watch.c 					watch-&gt;str = malloc(i + Z_STRLEN_P(key) + 2);</span>
+<span class='curline'><a href='../S/1578.html#L342'>watch</a>             342 sapi/phpdbg/phpdbg_watch.c 					watch-&gt;str_len = sprintf(watch-&gt;str, "%.*s%s%s", (int)i, input, phpdbg_get_property_key(Z_STRVAL_P(key)), input[len - 1] == ']'?"]":"");</span>
+<span class='curline'><a href='../S/1578.html#L344'>watch</a>             344 sapi/phpdbg/phpdbg_watch.c 					watch-&gt;name_in_parent = zend_strndup(last_index, index_len);</span>
+<span class='curline'><a href='../S/1578.html#L345'>watch</a>             345 sapi/phpdbg/phpdbg_watch.c 					watch-&gt;name_in_parent_len = index_len;</span>
+<span class='curline'><a href='../S/1578.html#L346'>watch</a>             346 sapi/phpdbg/phpdbg_watch.c 					watch-&gt;parent_container = parent;</span>
+<span class='curline'><a href='../S/1578.html#L347'>watch</a>             347 sapi/phpdbg/phpdbg_watch.c 					phpdbg_create_zval_watchpoint(*zv, watch);</span>
+<span class='curline'><a href='../S/1578.html#L349'>watch</a>             349 sapi/phpdbg/phpdbg_watch.c 					ret = callback(watch TSRMLS_CC) == SUCCESS || ret == SUCCESS?SUCCESS:FAILURE;</span>
+<span class='curline'><a href='../S/1578.html#L370'>watch</a>             370 sapi/phpdbg/phpdbg_watch.c 				phpdbg_watchpoint_t *watch = emalloc(sizeof(phpdbg_watchpoint_t));</span>
+<span class='curline'><a href='../S/1578.html#L371'>watch</a>             371 sapi/phpdbg/phpdbg_watch.c 				watch-&gt;flags = 0;</span>
+<span class='curline'><a href='../S/1578.html#L372'>watch</a>             372 sapi/phpdbg/phpdbg_watch.c 				watch-&gt;str = zend_strndup(input, len);</span>
+<span class='curline'><a href='../S/1578.html#L373'>watch</a>             373 sapi/phpdbg/phpdbg_watch.c 				watch-&gt;str_len = len;</span>
+<span class='curline'><a href='../S/1578.html#L374'>watch</a>             374 sapi/phpdbg/phpdbg_watch.c 				watch-&gt;name_in_parent = zend_strndup(last_index, index_len);</span>
+<span class='curline'><a href='../S/1578.html#L375'>watch</a>             375 sapi/phpdbg/phpdbg_watch.c 				watch-&gt;name_in_parent_len = index_len;</span>
+<span class='curline'><a href='../S/1578.html#L376'>watch</a>             376 sapi/phpdbg/phpdbg_watch.c 				watch-&gt;parent_container = parent;</span>
+<span class='curline'><a href='../S/1578.html#L377'>watch</a>             377 sapi/phpdbg/phpdbg_watch.c 				phpdbg_create_zval_watchpoint(*zv, watch);</span>
+<span class='curline'><a href='../S/1578.html#L379'>watch</a>             379 sapi/phpdbg/phpdbg_watch.c 				ret = callback(watch TSRMLS_CC) == SUCCESS || ret == SUCCESS?SUCCESS:FAILURE;</span>
+<span class='curline'><a href='../S/1578.html#L472'>watch</a>             472 sapi/phpdbg/phpdbg_watch.c 		phpdbg_watchpoint_t *watch = result-&gt;ptr;</span>
+<span class='curline'><a href='../S/1578.html#L476'>watch</a>             476 sapi/phpdbg/phpdbg_watch.c 		phpdbg_notice("%.*s was removed, removing watchpoint%s", (int)watch-&gt;str_len, watch-&gt;str, (watch-&gt;flags &amp; PHPDBG_WATCH_RECURSIVE)?" recursively":"");</span>
+<span class='curline'><a href='../S/1578.html#L478'>watch</a>             478 sapi/phpdbg/phpdbg_watch.c 		if (watch-&gt;flags &amp; PHPDBG_WATCH_RECURSIVE) {</span>
+<span class='curline'><a href='../S/1578.html#L479'>watch</a>             479 sapi/phpdbg/phpdbg_watch.c 			phpdbg_delete_watchpoint_recursive(watch, 0 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1578.html#L481'>watch</a>             481 sapi/phpdbg/phpdbg_watch.c 			zend_hash_del(&amp;PHPDBG_G(watchpoints), watch-&gt;str, watch-&gt;str_len);</span>
+<span class='curline'><a href='../S/1578.html#L510'>watch</a>             510 sapi/phpdbg/phpdbg_watch.c 	phpdbg_watchpoint_t *watch;</span>
+<span class='curline'><a href='../S/1578.html#L513'>watch</a>             513 sapi/phpdbg/phpdbg_watch.c 	watch = phpdbg_check_for_watchpoint(</span>
+<span class='curline'><a href='../S/1578.html#L521'>watch</a>             521 sapi/phpdbg/phpdbg_watch.c 	if (watch == NULL) {</span>
+<span class='curline'><a href='../S/1578.html#L525'>watch</a>             525 sapi/phpdbg/phpdbg_watch.c 	page = phpdbg_get_page_boundary(watch-&gt;addr.ptr);</span>
+<span class='curline'><a href='../S/1578.html#L526'>watch</a>             526 sapi/phpdbg/phpdbg_watch.c 	size = phpdbg_get_total_page_size(watch-&gt;addr.ptr, watch-&gt;size);</span>
+<span class='curline'><a href='../S/1578.html#L547'>watch</a>             547 sapi/phpdbg/phpdbg_watch.c 	phpdbg_watchpoint_t *watch = *(phpdbg_watchpoint_t **)pDest;</span>
+<span class='curline'><a href='../S/1578.html#L550'>watch</a>             550 sapi/phpdbg/phpdbg_watch.c 	phpdbg_deactivate_watchpoint(watch TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1578.html#L551'>watch</a>             551 sapi/phpdbg/phpdbg_watch.c 	phpdbg_remove_watchpoint(watch TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1578.html#L553'>watch</a>             553 sapi/phpdbg/phpdbg_watch.c 	free(watch-&gt;str);</span>
+<span class='curline'><a href='../S/1578.html#L554'>watch</a>             554 sapi/phpdbg/phpdbg_watch.c 	free(watch-&gt;name_in_parent);</span>
+<span class='curline'><a href='../S/1578.html#L555'>watch</a>             555 sapi/phpdbg/phpdbg_watch.c 	efree(watch);</span>
+<span class='curline'><a href='../S/1578.html#L596'>watch</a>             596 sapi/phpdbg/phpdbg_watch.c 		phpdbg_watchpoint_t *watch = result-&gt;ptr, *htwatch;</span>
+<span class='curline'><a href='../S/1578.html#L597'>watch</a>             597 sapi/phpdbg/phpdbg_watch.c 		void *oldPtr = (char *)&amp;dump-&gt;data + ((size_t)watch-&gt;addr.ptr - (size_t)dump-&gt;page);</span>
+<span class='curline'><a href='../S/1578.html#L600'>watch</a>             600 sapi/phpdbg/phpdbg_watch.c 		if ((size_t)watch-&gt;addr.ptr &lt; (size_t)dump-&gt;page || (size_t)watch-&gt;addr.ptr + watch-&gt;size &gt; (size_t)dump-&gt;page + dump-&gt;size) {</span>
+<span class='curline'><a href='../S/1578.html#L605'>watch</a>             605 sapi/phpdbg/phpdbg_watch.c 		if (zend_hash_find(watch-&gt;parent_container, watch-&gt;name_in_parent, watch-&gt;name_in_parent_len + 1, &amp;curTest) == SUCCESS) {</span>
+<span class='curline'><a href='../S/1578.html#L606'>watch</a>             606 sapi/phpdbg/phpdbg_watch.c 			if (watch-&gt;type == WATCH_ON_HASHTABLE) {</span>
+<span class='curline'><a href='../S/1578.html#L619'>watch</a>             619 sapi/phpdbg/phpdbg_watch.c 			if (curTest != watch-&gt;addr.ptr) {</span>
+<span class='curline'><a href='../S/1578.html#L620'>watch</a>             620 sapi/phpdbg/phpdbg_watch.c 				phpdbg_deactivate_watchpoint(watch TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1578.html#L621'>watch</a>             621 sapi/phpdbg/phpdbg_watch.c 				phpdbg_remove_watchpoint(watch TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1578.html#L622'>watch</a>             622 sapi/phpdbg/phpdbg_watch.c 				watch-&gt;addr.ptr = curTest;</span>
+<span class='curline'><a href='../S/1578.html#L623'>watch</a>             623 sapi/phpdbg/phpdbg_watch.c 				phpdbg_store_watchpoint(watch TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1578.html#L624'>watch</a>             624 sapi/phpdbg/phpdbg_watch.c 				phpdbg_activate_watchpoint(watch TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1578.html#L631'>watch</a>             631 sapi/phpdbg/phpdbg_watch.c 		if (memcmp(oldPtr, watch-&gt;addr.ptr, watch-&gt;size) != SUCCESS) {</span>
+<span class='curline'><a href='../S/1578.html#L632'>watch</a>             632 sapi/phpdbg/phpdbg_watch.c 			if (PHPDBG_G(flags) &amp; PHPDBG_SHOW_REFCOUNTS || (watch-&gt;type == WATCH_ON_ZVAL &amp;&amp; memcmp(oldPtr, watch-&gt;addr.zv, sizeof(zvalue_value))) || (watch-&gt;type == WATCH_ON_HASHTABLE</span>
+<span class='curline'><a href='../S/1578.html#L634'>watch</a>             634 sapi/phpdbg/phpdbg_watch.c 			    &amp;&amp; !watch-&gt;addr.ht-&gt;inconsistent</span>
+<span class='curline'><a href='../S/1578.html#L636'>watch</a>             636 sapi/phpdbg/phpdbg_watch.c 			    &amp;&amp; zend_hash_num_elements((HashTable *)oldPtr) != zend_hash_num_elements(watch-&gt;addr.ht))) {</span>
+<span class='curline'><a href='../S/1578.html#L639'>watch</a>             639 sapi/phpdbg/phpdbg_watch.c 				phpdbg_notice("Breaking on watchpoint %s", watch-&gt;str);</span>
+<span class='curline'><a href='../S/1578.html#L642'>watch</a>             642 sapi/phpdbg/phpdbg_watch.c 			switch (watch-&gt;type) {</span>
+<span class='curline'><a href='../S/1578.html#L644'>watch</a>             644 sapi/phpdbg/phpdbg_watch.c 					int removed = ((zval *)oldPtr)-&gt;refcount__gc != watch-&gt;addr.zv-&gt;refcount__gc &amp;&amp; !zend_symtable_exists(watch-&gt;parent_container, watch-&gt;name_in_parent, watch-&gt;name_in_parent_len + 1);</span>
+<span class='curline'><a href='../S/1578.html#L645'>watch</a>             645 sapi/phpdbg/phpdbg_watch.c 					int show_value = memcmp(oldPtr, watch-&gt;addr.zv, sizeof(zvalue_value));</span>
+<span class='curline'><a href='../S/1578.html#L646'>watch</a>             646 sapi/phpdbg/phpdbg_watch.c 					int show_ref = ((zval *)oldPtr)-&gt;refcount__gc != watch-&gt;addr.zv-&gt;refcount__gc || ((zval *)oldPtr)-&gt;is_ref__gc != watch-&gt;addr.zv-&gt;is_ref__gc;</span>
+<span class='curline'><a href='../S/1578.html#L663'>watch</a>             663 sapi/phpdbg/phpdbg_watch.c 						phpdbg_notice("Watchpoint %s was unset, removing watchpoint", watch-&gt;str);</span>
+<span class='curline'><a href='../S/1578.html#L664'>watch</a>             664 sapi/phpdbg/phpdbg_watch.c 						zend_hash_del(&amp;PHPDBG_G(watchpoints), watch-&gt;str, watch-&gt;str_len);</span>
+<span class='curline'><a href='../S/1578.html#L677'>watch</a>             677 sapi/phpdbg/phpdbg_watch.c 						zend_print_flat_zval_r(watch-&gt;addr.zv TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1578.html#L681'>watch</a>             681 sapi/phpdbg/phpdbg_watch.c 						phpdbg_writeln("New refcount: %d; New is_ref: %d", watch-&gt;addr.zv-&gt;refcount__gc, watch-&gt;addr.zv-&gt;is_ref__gc);</span>
+<span class='curline'><a href='../S/1578.html#L684'>watch</a>             684 sapi/phpdbg/phpdbg_watch.c 					if ((Z_TYPE_P(watch-&gt;addr.zv) == IS_ARRAY &amp;&amp; Z_ARRVAL_P(watch-&gt;addr.zv) != Z_ARRVAL_P((zval *)oldPtr)) || (Z_TYPE_P(watch-&gt;addr.zv) != IS_OBJECT &amp;&amp; Z_OBJ_HANDLE_P(watch-&gt;addr.zv) == Z_OBJ_HANDLE_P((zval *)oldPtr))) {</span>
+<span class='curline'><a href='../S/1578.html#L686'>watch</a>             686 sapi/phpdbg/phpdbg_watch.c 						if (watch-&gt;flags &amp; PHPDBG_WATCH_RECURSIVE) {</span>
+<span class='curline'><a href='../S/1578.html#L687'>watch</a>             687 sapi/phpdbg/phpdbg_watch.c 							phpdbg_create_recursive_watchpoint(watch TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1578.html#L691'>watch</a>             691 sapi/phpdbg/phpdbg_watch.c 					if ((Z_TYPE_P((zval *)oldPtr) != IS_ARRAY || Z_ARRVAL_P(watch-&gt;addr.zv) == Z_ARRVAL_P((zval *)oldPtr)) &amp;&amp; (Z_TYPE_P((zval *)oldPtr) != IS_OBJECT || Z_OBJ_HANDLE_P(watch-&gt;addr.zv) == Z_OBJ_HANDLE_P((zval *)oldPtr))) {</span>
+<span class='curline'><a href='../S/1578.html#L706'>watch</a>             706 sapi/phpdbg/phpdbg_watch.c 					if (watch-&gt;addr.ht-&gt;inconsistent) {</span>
+<span class='curline'><a href='../S/1578.html#L707'>watch</a>             707 sapi/phpdbg/phpdbg_watch.c 						phpdbg_notice("Watchpoint %s was unset, removing watchpoint", watch-&gt;str);</span>
+<span class='curline'><a href='../S/1578.html#L708'>watch</a>             708 sapi/phpdbg/phpdbg_watch.c 						zend_hash_del(&amp;PHPDBG_G(watchpoints), watch-&gt;str, watch-&gt;str_len);</span>
+<span class='curline'><a href='../S/1578.html#L716'>watch</a>             716 sapi/phpdbg/phpdbg_watch.c 					elementDiff = zend_hash_num_elements((HashTable *)oldPtr) - zend_hash_num_elements(watch-&gt;addr.ht);</span>
+<span class='curline'><a href='../S/1578.html#L724'>watch</a>             724 sapi/phpdbg/phpdbg_watch.c 							if (watch-&gt;flags &amp; PHPDBG_WATCH_RECURSIVE) {</span>
+<span class='curline'><a href='../S/1578.html#L725'>watch</a>             725 sapi/phpdbg/phpdbg_watch.c 								phpdbg_create_recursive_watchpoint(watch TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1578.html#L729'>watch</a>             729 sapi/phpdbg/phpdbg_watch.c 					if (((HashTable *)oldPtr)-&gt;pInternalPointer != watch-&gt;addr.ht-&gt;pInternalPointer) {</span>
+<span class='curline'><a href='../S/1578.html#L765'>watch</a>             765 sapi/phpdbg/phpdbg_watch.c 	phpdbg_watchpoint_t **watch;</span>
+<span class='curline'><a href='../S/1578.html#L768'>watch</a>             768 sapi/phpdbg/phpdbg_watch.c 	     zend_hash_get_current_data_ex(&amp;PHPDBG_G(watchpoints), (void**) &amp;watch, &amp;position) == SUCCESS;</span>
+<span class='curline'><a href='../S/1578.html#L770'>watch</a>             770 sapi/phpdbg/phpdbg_watch.c 		phpdbg_writeln("%.*s", (int)(*watch)-&gt;str_len, (*watch)-&gt;str);</span>
+<span class='curline'><a href='../S/1578.html#L781'>watch</a>             781 sapi/phpdbg/phpdbg_watch.c 		phpdbg_watchpoint_t *watch = result-&gt;ptr;</span>
+<span class='curline'><a href='../S/1578.html#L783'>watch</a>             783 sapi/phpdbg/phpdbg_watch.c 		if ((size_t)watch-&gt;addr.ptr + watch-&gt;size &gt; (size_t)ptr) {</span>
+<span class='curline'><a href='../S/1578.html#L784'>watch</a>             784 sapi/phpdbg/phpdbg_watch.c 			zend_hash_del(&amp;PHPDBG_G(watchpoints), watch-&gt;str, watch-&gt;str_len);</span>
+<span class='curline'><a href='../S/1579.html#L89'>watch</a>              89 sapi/phpdbg/phpdbg_watch.h void phpdbg_create_addr_watchpoint(void *addr, size_t size, phpdbg_watchpoint_t *watch);</span>
+<span class='curline'><a href='../S/1579.html#L90'>watch</a>              90 sapi/phpdbg/phpdbg_watch.h void phpdbg_create_zval_watchpoint(zval *zv, phpdbg_watchpoint_t *watch);</span>
+</pre>
+</body>
+</html>

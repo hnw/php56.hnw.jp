@@ -1,0 +1,221 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>num_args</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/1646.html#L729'>num_args</a>          729 Zend/zend_API.c static int zend_parse_va_args(int num_args, const char *type_spec, va_list *va, int flags TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1646.html#L811'>num_args</a>          811 Zend/zend_API.c 	if (num_args &lt; min_num_args || (num_args &gt; max_num_args &amp;&amp; max_num_args &gt; 0)) {</span>
+<span class='curline'><a href='../S/1646.html#L819'>num_args</a>          819 Zend/zend_API.c 					min_num_args == max_num_args ? "exactly" : num_args &lt; min_num_args ? "at least" : "at most",</span>
+<span class='curline'><a href='../S/1646.html#L820'>num_args</a>          820 Zend/zend_API.c 					num_args &lt; min_num_args ? min_num_args : max_num_args,</span>
+<span class='curline'><a href='../S/1646.html#L821'>num_args</a>          821 Zend/zend_API.c 					(num_args &lt; min_num_args ? min_num_args : max_num_args) == 1 ? "" : "s",</span>
+<span class='curline'><a href='../S/1646.html#L822'>num_args</a>          822 Zend/zend_API.c 					num_args);</span>
+<span class='curline'><a href='../S/1646.html#L829'>num_args</a>          829 Zend/zend_API.c 	if (num_args &gt; arg_count) {</span>
+<span class='curline'><a href='../S/1646.html#L836'>num_args</a>          836 Zend/zend_API.c 	while (num_args-- &gt; 0) {</span>
+<span class='curline'><a href='../S/1646.html#L842'>num_args</a>          842 Zend/zend_API.c 			int num_varargs = num_args + 1 - post_varargs;</span>
+<span class='curline'><a href='../S/1646.html#L862'>num_args</a>          862 Zend/zend_API.c 				num_args = num_args + 1 - iv;</span>
+<span class='curline'><a href='../S/1646.html#L888'>num_args</a>          888 Zend/zend_API.c #define RETURN_IF_ZERO_ARGS(num_args, type_spec, quiet) { \</span>
+<span class='curline'><a href='../S/1646.html#L889'>num_args</a>          889 Zend/zend_API.c 	int __num_args = (num_args); \</span>
+<span class='curline'><a href='../S/1646.html#L901'>num_args</a>          901 Zend/zend_API.c ZEND_API int zend_parse_parameters_ex(int flags, int num_args TSRMLS_DC, const char *type_spec, ...) /* {{{ */</span>
+<span class='curline'><a href='../S/1646.html#L906'>num_args</a>          906 Zend/zend_API.c 	RETURN_IF_ZERO_ARGS(num_args, type_spec, flags &amp; ZEND_PARSE_PARAMS_QUIET);</span>
+<span class='curline'><a href='../S/1646.html#L909'>num_args</a>          909 Zend/zend_API.c 	retval = zend_parse_va_args(num_args, type_spec, &amp;va, flags TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1646.html#L916'>num_args</a>          916 Zend/zend_API.c ZEND_API int zend_parse_parameters(int num_args TSRMLS_DC, const char *type_spec, ...) /* {{{ */</span>
+<span class='curline'><a href='../S/1646.html#L921'>num_args</a>          921 Zend/zend_API.c 	RETURN_IF_ZERO_ARGS(num_args, type_spec, 0);</span>
+<span class='curline'><a href='../S/1646.html#L924'>num_args</a>          924 Zend/zend_API.c 	retval = zend_parse_va_args(num_args, type_spec, &amp;va, 0 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1646.html#L931'>num_args</a>          931 Zend/zend_API.c ZEND_API int zend_parse_method_parameters(int num_args TSRMLS_DC, zval *this_ptr, const char *type_spec, ...) /* {{{ */</span>
+<span class='curline'><a href='../S/1646.html#L940'>num_args</a>          940 Zend/zend_API.c 		RETURN_IF_ZERO_ARGS(num_args, p, 0);</span>
+<span class='curline'><a href='../S/1646.html#L943'>num_args</a>          943 Zend/zend_API.c 		retval = zend_parse_va_args(num_args, type_spec, &amp;va, 0 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1646.html#L947'>num_args</a>          947 Zend/zend_API.c 		RETURN_IF_ZERO_ARGS(num_args, p, 0);</span>
+<span class='curline'><a href='../S/1646.html#L960'>num_args</a>          960 Zend/zend_API.c 		retval = zend_parse_va_args(num_args, p, &amp;va, 0 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1646.html#L967'>num_args</a>          967 Zend/zend_API.c ZEND_API int zend_parse_method_parameters_ex(int flags, int num_args TSRMLS_DC, zval *this_ptr, const char *type_spec, ...) /* {{{ */</span>
+<span class='curline'><a href='../S/1646.html#L977'>num_args</a>          977 Zend/zend_API.c 		RETURN_IF_ZERO_ARGS(num_args, p, quiet);</span>
+<span class='curline'><a href='../S/1646.html#L980'>num_args</a>          980 Zend/zend_API.c 		retval = zend_parse_va_args(num_args, type_spec, &amp;va, flags TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1646.html#L984'>num_args</a>          984 Zend/zend_API.c 		RETURN_IF_ZERO_ARGS(num_args, p, quiet);</span>
+<span class='curline'><a href='../S/1646.html#L1001'>num_args</a>         1001 Zend/zend_API.c 		retval = zend_parse_va_args(num_args, p, &amp;va, flags TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1646.html#L1019'>num_args</a>         1019 Zend/zend_API.c static int zend_merge_property(zval **value TSRMLS_DC, int num_args, va_list args, const zend_hash_key *hash_key) /* {{{ */</span>
+<span class='curline'><a href='../S/1646.html#L1975'>num_args</a>         1975 Zend/zend_API.c 	if (name_len == sizeof(ZEND_DESTRUCTOR_FUNC_NAME) - 1 &amp;&amp; !memcmp(lcname, ZEND_DESTRUCTOR_FUNC_NAME, sizeof(ZEND_DESTRUCTOR_FUNC_NAME) - 1) &amp;&amp; fptr-&gt;common.num_args != 0) {</span>
+<span class='curline'><a href='../S/1646.html#L1977'>num_args</a>         1977 Zend/zend_API.c 	} else if (name_len == sizeof(ZEND_CLONE_FUNC_NAME) - 1 &amp;&amp; !memcmp(lcname, ZEND_CLONE_FUNC_NAME, sizeof(ZEND_CLONE_FUNC_NAME) - 1) &amp;&amp; fptr-&gt;common.num_args != 0) {</span>
+<span class='curline'><a href='../S/1646.html#L1980'>num_args</a>         1980 Zend/zend_API.c 		if (fptr-&gt;common.num_args != 1) {</span>
+<span class='curline'><a href='../S/1646.html#L1986'>num_args</a>         1986 Zend/zend_API.c 		if (fptr-&gt;common.num_args != 2) {</span>
+<span class='curline'><a href='../S/1646.html#L1992'>num_args</a>         1992 Zend/zend_API.c 		if (fptr-&gt;common.num_args != 1) {</span>
+<span class='curline'><a href='../S/1646.html#L1998'>num_args</a>         1998 Zend/zend_API.c 		if (fptr-&gt;common.num_args != 1) {</span>
+<span class='curline'><a href='../S/1646.html#L2004'>num_args</a>         2004 Zend/zend_API.c 		if (fptr-&gt;common.num_args != 2) {</span>
+<span class='curline'><a href='../S/1646.html#L2012'>num_args</a>         2012 Zend/zend_API.c 		if (fptr-&gt;common.num_args != 2) {</span>
+<span class='curline'><a href='../S/1646.html#L2018'>num_args</a>         2018 Zend/zend_API.c  		!memcmp(lcname, ZEND_TOSTRING_FUNC_NAME, sizeof(ZEND_TOSTRING_FUNC_NAME)-1) &amp;&amp; fptr-&gt;common.num_args != 0</span>
+<span class='curline'><a href='../S/1646.html#L2022'>num_args</a>         2022 Zend/zend_API.c 		!memcmp(lcname, ZEND_DEBUGINFO_FUNC_NAME, sizeof(ZEND_DEBUGINFO_FUNC_NAME)-1) &amp;&amp; fptr-&gt;common.num_args != 0) {</span>
+<span class='curline'><a href='../S/1646.html#L2088'>num_args</a>         2088 Zend/zend_API.c 			internal_function-&gt;num_args = ptr-&gt;num_args;</span>
+<span class='curline'><a href='../S/1646.html#L2091'>num_args</a>         2091 Zend/zend_API.c 				internal_function-&gt;required_num_args = ptr-&gt;num_args;</span>
+<span class='curline'><a href='../S/1646.html#L2098'>num_args</a>         2098 Zend/zend_API.c 			if (ptr-&gt;arg_info[ptr-&gt;num_args].is_variadic) {</span>
+<span class='curline'><a href='../S/1646.html#L2103'>num_args</a>         2103 Zend/zend_API.c 			internal_function-&gt;num_args = 0;</span>
+<span class='curline'><a href='../S/1646.html#L2145'>num_args</a>         2145 Zend/zend_API.c 		if (reg_function-&gt;common.arg_info &amp;&amp; reg_function-&gt;common.num_args) {</span>
+<span class='curline'><a href='../S/1646.html#L2147'>num_args</a>         2147 Zend/zend_API.c 			for (i = 0; i &lt; reg_function-&gt;common.num_args; i++) {</span>
+<span class='curline'><a href='../S/1646.html#L2167'>num_args</a>         2167 Zend/zend_API.c 				if (internal_function-&gt;num_args) {</span>
+<span class='curline'><a href='../S/1646.html#L2886'>num_args</a>         2886 Zend/zend_API.c 				fcc-&gt;function_handler-&gt;internal_function.num_args = 0;</span>
+<span class='curline'><a href='../S/1647.html#L39'>num_args</a>           39 Zend/zend_API.h 	zend_uint num_args;</span>
+<span class='curline'><a href='../S/1647.html#L257'>num_args</a>          257 Zend/zend_API.h ZEND_API int zend_parse_parameters(int num_args TSRMLS_DC, const char *type_spec, ...);</span>
+<span class='curline'><a href='../S/1647.html#L258'>num_args</a>          258 Zend/zend_API.h ZEND_API int zend_parse_parameters_ex(int flags, int num_args TSRMLS_DC, const char *type_spec, ...);</span>
+<span class='curline'><a href='../S/1647.html#L261'>num_args</a>          261 Zend/zend_API.h ZEND_API int zend_parse_method_parameters(int num_args TSRMLS_DC, zval *this_ptr, const char *type_spec, ...);</span>
+<span class='curline'><a href='../S/1647.html#L262'>num_args</a>          262 Zend/zend_API.h ZEND_API int zend_parse_method_parameters_ex(int flags, int num_args TSRMLS_DC, zval *this_ptr, const char *type_spec, ...);</span>
+<span class='curline'><a href='../S/1651.html#L1650'>num_args</a>         1650 Zend/zend_builtin_functions.c static int copy_class_or_interface_name(zend_class_entry **pce TSRMLS_DC, int num_args, va_list args, zend_hash_key *hash_key)</span>
+<span class='curline'><a href='../S/1651.html#L1721'>num_args</a>         1721 Zend/zend_builtin_functions.c static int copy_function_name(zend_function *func TSRMLS_DC, int num_args, va_list args, zend_hash_key *hash_key)</span>
+<span class='curline'><a href='../S/1653.html#L367'>num_args</a>          367 Zend/zend_closures.c 			for (i = 0; i &lt; closure-&gt;func.common.num_args; i++) {</span>
+<span class='curline'><a href='../S/1655.html#L1850'>num_args</a>         1850 Zend/zend_compile.c 		if (name_len == sizeof(ZEND_AUTOLOAD_FUNC_NAME) - 1 &amp;&amp; !memcmp(lcname, ZEND_AUTOLOAD_FUNC_NAME, sizeof(ZEND_AUTOLOAD_FUNC_NAME)) &amp;&amp; CG(active_op_array)-&gt;num_args != 1) {</span>
+<span class='curline'><a href='../S/1655.html#L1903'>num_args</a>         1903 Zend/zend_compile.c 	CG(active_op_array)-&gt;num_args++;</span>
+<span class='curline'><a href='../S/1655.html#L1907'>num_args</a>         1907 Zend/zend_compile.c 	opline-&gt;op1.num = CG(active_op_array)-&gt;num_args;</span>
+<span class='curline'><a href='../S/1655.html#L1913'>num_args</a>         1913 Zend/zend_compile.c 			CG(active_op_array)-&gt;required_num_args = CG(active_op_array)-&gt;num_args;</span>
+<span class='curline'><a href='../S/1655.html#L1916'>num_args</a>         1916 Zend/zend_compile.c 	CG(active_op_array)-&gt;arg_info = erealloc(CG(active_op_array)-&gt;arg_info, sizeof(zend_arg_info)*(CG(active_op_array)-&gt;num_args));</span>
+<span class='curline'><a href='../S/1655.html#L1917'>num_args</a>         1917 Zend/zend_compile.c 	cur_arg_info = &amp;CG(active_op_array)-&gt;arg_info[CG(active_op_array)-&gt;num_args-1];</span>
+<span class='curline'><a href='../S/1655.html#L3236'>num_args</a>         3236 Zend/zend_compile.c 	zend_uint i, num_args;</span>
+<span class='curline'><a href='../S/1655.html#L3262'>num_args</a>         3262 Zend/zend_compile.c 		|| proto-&gt;common.num_args &gt; fe-&gt;common.num_args) {</span>
+<span class='curline'><a href='../S/1655.html#L3281'>num_args</a>         3281 Zend/zend_compile.c 	num_args = proto-&gt;common.num_args;</span>
+<span class='curline'><a href='../S/1655.html#L3283'>num_args</a>         3283 Zend/zend_compile.c 		&amp;&amp; fe-&gt;common.num_args &gt; proto-&gt;common.num_args) {</span>
+<span class='curline'><a href='../S/1655.html#L3284'>num_args</a>         3284 Zend/zend_compile.c 		num_args = fe-&gt;common.num_args;</span>
+<span class='curline'><a href='../S/1655.html#L3287'>num_args</a>         3287 Zend/zend_compile.c 	for (i = 0; i &lt; num_args; i++) {</span>
+<span class='curline'><a href='../S/1655.html#L3291'>num_args</a>         3291 Zend/zend_compile.c 		if (i &lt; proto-&gt;common.num_args) {</span>
+<span class='curline'><a href='../S/1655.html#L3294'>num_args</a>         3294 Zend/zend_compile.c 			proto_arg_info = &amp;proto-&gt;common.arg_info[proto-&gt;common.num_args-1];</span>
+<span class='curline'><a href='../S/1655.html#L3404'>num_args</a>         3404 Zend/zend_compile.c 		for (i = 0; i &lt; fptr-&gt;common.num_args;) {</span>
+<span class='curline'><a href='../S/1655.html#L3530'>num_args</a>         3530 Zend/zend_compile.c 			if (++i &lt; fptr-&gt;common.num_args) {</span>
+<span class='curline'><a href='../S/1655.html#L3888'>num_args</a>         3888 Zend/zend_compile.c static int do_interface_constant_check(zval **val TSRMLS_DC, int num_args, va_list args, const zend_hash_key *key) /* {{{ */</span>
+<span class='curline'><a href='../S/1655.html#L4114'>num_args</a>         4114 Zend/zend_compile.c static int zend_traits_copy_functions(zend_function *fn TSRMLS_DC, int num_args, va_list args, zend_hash_key *hash_key) /* {{{ */</span>
+<span class='curline'><a href='../S/1656.html#L274'>num_args</a>          274 Zend/zend_compile.h 	zend_uint num_args;</span>
+<span class='curline'><a href='../S/1656.html#L331'>num_args</a>          331 Zend/zend_compile.h 	zend_uint num_args;</span>
+<span class='curline'><a href='../S/1656.html#L351'>num_args</a>          351 Zend/zend_compile.h 		zend_uint num_args;</span>
+<span class='curline'><a href='../S/1656.html#L844'>num_args</a>          844 Zend/zend_compile.h 	(arg_num &lt;= (zf)-&gt;common.num_args \</span>
+<span class='curline'><a href='../S/1656.html#L847'>num_args</a>          847 Zend/zend_compile.h 			? ((zf)-&gt;common.arg_info[(zf)-&gt;common.num_args-1].pass_by_reference &amp; (m)) : 0))</span>
+<span class='curline'><a href='../S/1667.html#L404'>num_args</a>          404 Zend/zend_exceptions.c static int _build_trace_args(zval **arg TSRMLS_DC, int num_args, va_list args, zend_hash_key *hash_key) /* {{{ */</span>
+<span class='curline'><a href='../S/1667.html#L550'>num_args</a>          550 Zend/zend_exceptions.c static int _build_trace_string(zval **frame TSRMLS_DC, int num_args, va_list args, zend_hash_key *hash_key) /* {{{ */</span>
+<span class='curline'><a href='../S/1669.html#L636'>num_args</a>          636 Zend/zend_execute.c 	if (arg_num &lt;= zf-&gt;common.num_args) {</span>
+<span class='curline'><a href='../S/1669.html#L639'>num_args</a>          639 Zend/zend_execute.c 		cur_arg_info = &amp;zf-&gt;common.arg_info[zf-&gt;common.num_args-1];</span>
+<span class='curline'><a href='../S/1672.html#L205'>num_args</a>          205 Zend/zend_extensions.c static void zend_extension_message_dispatcher(const zend_extension *extension, int num_args, va_list args TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1672.html#L210'>num_args</a>          210 Zend/zend_extensions.c 	if (!extension-&gt;message_handler || num_args!=2) {</span>
+<span class='curline'><a href='../S/1678.html#L243'>num_args</a>          243 Zend/zend_generators.c static void copy_closure_static_var(zval **var TSRMLS_DC, int num_args, va_list args, zend_hash_key *key) /* {{{ */</span>
+<span class='curline'><a href='../S/1682.html#L682'>num_args</a>          682 Zend/zend_hash.c ZEND_API void zend_hash_apply_with_arguments(HashTable *ht TSRMLS_DC, apply_func_args_t apply_func, int num_args, ...)</span>
+<span class='curline'><a href='../S/1682.html#L697'>num_args</a>          697 Zend/zend_hash.c 		va_start(args, num_args);</span>
+<span class='curline'><a href='../S/1682.html#L701'>num_args</a>          701 Zend/zend_hash.c 		result = apply_func(p-&gt;pData TSRMLS_CC, num_args, args, &amp;hash_key);</span>
+<span class='curline'><a href='../S/1683.html#L135'>num_args</a>          135 Zend/zend_hash.h typedef int (*apply_func_args_t)(void *pDest TSRMLS_DC, int num_args, va_list args, zend_hash_key *hash_key);</span>
+<span class='curline'><a href='../S/1707.html#L239'>num_args</a>          239 Zend/zend_llist.c ZEND_API void zend_llist_apply_with_arguments(zend_llist *l, llist_apply_with_args_func_t func TSRMLS_DC, int num_args, ...)</span>
+<span class='curline'><a href='../S/1707.html#L244'>num_args</a>          244 Zend/zend_llist.c 	va_start(args, num_args);</span>
+<span class='curline'><a href='../S/1707.html#L246'>num_args</a>          246 Zend/zend_llist.c 		func(element-&gt;data, num_args, args TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1708.html#L33'>num_args</a>           33 Zend/zend_llist.h typedef void (*llist_apply_with_args_func_t)(void *data, int num_args, va_list args TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1708.html#L61'>num_args</a>           61 Zend/zend_llist.h ZEND_API void zend_llist_apply_with_arguments(zend_llist *l, llist_apply_with_args_func_t func TSRMLS_DC, int num_args, ...);</span>
+<span class='curline'><a href='../S/1713.html#L1028'>num_args</a>         1028 Zend/zend_object_handlers.c 	call_user_call-&gt;num_args = 0;</span>
+<span class='curline'><a href='../S/1713.html#L1168'>num_args</a>         1168 Zend/zend_object_handlers.c 	callstatic_user_call-&gt;num_args = 0;</span>
+<span class='curline'><a href='../S/1719.html#L82'>num_args</a>           82 Zend/zend_opcode.c 	op_array-&gt;num_args = 0;</span>
+<span class='curline'><a href='../S/1719.html#L410'>num_args</a>          410 Zend/zend_opcode.c 		for (i=0; i&lt;op_array-&gt;num_args; i++) {</span>
+<span class='curline'><a href='../S/1739.html#L172'>num_args</a>          172 Zend/zend_ts_hash.c ZEND_API void zend_ts_hash_apply_with_arguments(TsHashTable *ht TSRMLS_DC, apply_func_args_t apply_func, int num_args, ...)</span>
+<span class='curline'><a href='../S/1739.html#L176'>num_args</a>          176 Zend/zend_ts_hash.c 	va_start(args, num_args);</span>
+<span class='curline'><a href='../S/1739.html#L178'>num_args</a>          178 Zend/zend_ts_hash.c 	zend_hash_apply_with_arguments(TS_HASH(ht) TSRMLS_CC, apply_func, num_args, args);</span>
+<span class='curline'><a href='../S/1742.html#L198'>num_args</a>          198 Zend/zend_variables.c ZEND_API int zval_copy_static_var(zval **p TSRMLS_DC, int num_args, va_list args, zend_hash_key *key) /* {{{ */</span>
+<span class='curline'><a href='../S/1743.html#L48'>num_args</a>           48 Zend/zend_variables.h ZEND_API int zval_copy_static_var(zval **p TSRMLS_DC, int num_args, va_list args, zend_hash_key *key);</span>
+<span class='curline'><a href='../S/1747.html#L1915'>num_args</a>         1915 Zend/zend_vm_def.h 	zend_uint num_args;</span>
+<span class='curline'><a href='../S/1747.html#L1960'>num_args</a>         1960 Zend/zend_vm_def.h 	num_args = opline-&gt;extended_value + EX(call)-&gt;num_additional_args;</span>
+<span class='curline'><a href='../S/1747.html#L1962'>num_args</a>         1962 Zend/zend_vm_def.h 		EX(function_state).arguments = zend_vm_stack_push_args(num_args TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1747.html#L1965'>num_args</a>         1965 Zend/zend_vm_def.h 		zend_vm_stack_push((void*)(zend_uintptr_t) num_args TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1747.html#L1972'>num_args</a>         1972 Zend/zend_vm_def.h 			void **p = EX(function_state).arguments - num_args;</span>
+<span class='curline'><a href='../S/1747.html#L1974'>num_args</a>         1974 Zend/zend_vm_def.h 			for (i = 0; i &lt; num_args; ++i, ++p) {</span>
+<span class='curline'><a href='../S/1747.html#L1989'>num_args</a>         1989 Zend/zend_vm_def.h 				fbc-&gt;internal_function.handler(num_args, ret-&gt;var.ptr, &amp;ret-&gt;var.ptr, EX(object), RETURN_VALUE_USED(opline) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1747.html#L2039'>num_args</a>         2039 Zend/zend_vm_def.h 			Z_OBJ_HT_P(EX(object))-&gt;call_method(fbc-&gt;common.function_name, num_args, EX_T(opline-&gt;result.var).var.ptr, &amp;EX_T(opline-&gt;result.var).var.ptr, EX(object), RETURN_VALUE_USED(opline) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L484'>num_args</a>          484 Zend/zend_vm_execute.h 	zend_uint num_args;</span>
+<span class='curline'><a href='../S/1748.html#L529'>num_args</a>          529 Zend/zend_vm_execute.h 	num_args = opline-&gt;extended_value + EX(call)-&gt;num_additional_args;</span>
+<span class='curline'><a href='../S/1748.html#L531'>num_args</a>          531 Zend/zend_vm_execute.h 		EX(function_state).arguments = zend_vm_stack_push_args(num_args TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L534'>num_args</a>          534 Zend/zend_vm_execute.h 		zend_vm_stack_push((void*)(zend_uintptr_t) num_args TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L541'>num_args</a>          541 Zend/zend_vm_execute.h 			void **p = EX(function_state).arguments - num_args;</span>
+<span class='curline'><a href='../S/1748.html#L543'>num_args</a>          543 Zend/zend_vm_execute.h 			for (i = 0; i &lt; num_args; ++i, ++p) {</span>
+<span class='curline'><a href='../S/1748.html#L558'>num_args</a>          558 Zend/zend_vm_execute.h 				fbc-&gt;internal_function.handler(num_args, ret-&gt;var.ptr, &amp;ret-&gt;var.ptr, EX(object), RETURN_VALUE_USED(opline) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L608'>num_args</a>          608 Zend/zend_vm_execute.h 			Z_OBJ_HT_P(EX(object))-&gt;call_method(fbc-&gt;common.function_name, num_args, EX_T(opline-&gt;result.var).var.ptr, &amp;EX_T(opline-&gt;result.var).var.ptr, EX(object), RETURN_VALUE_USED(opline) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/46.html#L283'>num_args</a>          283 ext/com_dotnet/com_handlers.c 		f.num_args = 0;</span>
+<span class='curline'><a href='../S/46.html#L318'>num_args</a>          318 ext/com_dotnet/com_handlers.c 							f.num_args = bindptr.lpfuncdesc-&gt;cParams;</span>
+<span class='curline'><a href='../S/46.html#L415'>num_args</a>          415 ext/com_dotnet/com_handlers.c 	f.num_args = 0; \</span>
+<span class='curline'><a href='../S/323.html#L129'>num_args</a>          129 ext/interbase/ibase_events.c 	int num_args;</span>
+<span class='curline'><a href='../S/323.html#L141'>num_args</a>          141 ext/interbase/ibase_events.c 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "+", &amp;args, &amp;num_args) == FAILURE) {</span>
+<span class='curline'><a href='../S/323.html#L273'>num_args</a>          273 ext/interbase/ibase_events.c 	int link_res_id, num_args;</span>
+<span class='curline'><a href='../S/323.html#L282'>num_args</a>          282 ext/interbase/ibase_events.c 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "+", &amp;args, &amp;num_args) == FAILURE) {</span>
+<span class='curline'><a href='../S/787.html#L53'>num_args</a>           53 ext/mysqlnd/mysqlnd_bt.c mysqlnd_build_trace_args(zval **arg TSRMLS_DC, int num_args, va_list args, zend_hash_key *hash_key) /* {{{ */</span>
+<span class='curline'><a href='../S/787.html#L150'>num_args</a>          150 ext/mysqlnd/mysqlnd_bt.c mysqlnd_build_trace_string(zval **frame TSRMLS_DC, int num_args, va_list args, zend_hash_key *hash_key) /* {{{ */</span>
+<span class='curline'><a href='../S/856.html#L174'>num_args</a>          174 ext/opcache/zend_accelerator_util_funcs.c 	, int num_args, va_list args, zend_hash_key *hash_key) </span>
+<span class='curline'><a href='../S/856.html#L177'>num_args</a>          177 ext/opcache/zend_accelerator_util_funcs.c 	(void)num_args; /* keep the compiler happy */</span>
+<span class='curline'><a href='../S/858.html#L399'>num_args</a>          399 ext/opcache/zend_persist.c 			zend_accel_store(op_array-&gt;arg_info, sizeof(zend_arg_info) * op_array-&gt;num_args);</span>
+<span class='curline'><a href='../S/858.html#L400'>num_args</a>          400 ext/opcache/zend_persist.c 			for (i = 0; i &lt; op_array-&gt;num_args; i++) {</span>
+<span class='curline'><a href='../S/860.html#L211'>num_args</a>          211 ext/opcache/zend_persist_calc.c 		ADD_DUP_SIZE(op_array-&gt;arg_info, sizeof(zend_arg_info) * op_array-&gt;num_args);</span>
+<span class='curline'><a href='../S/860.html#L212'>num_args</a>          212 ext/opcache/zend_persist_calc.c 		for (i = 0; i &lt; op_array-&gt;num_args; i++) {</span>
+<span class='curline'><a href='../S/923.html#L1322'>num_args</a>         1322 ext/pdo/pdo_dbh.c 			ifunc-&gt;num_args = funcs-&gt;num_args;</span>
+<span class='curline'><a href='../S/923.html#L1324'>num_args</a>         1324 ext/pdo/pdo_dbh.c 				ifunc-&gt;required_num_args = funcs-&gt;num_args;</span>
+<span class='curline'><a href='../S/923.html#L1331'>num_args</a>         1331 ext/pdo/pdo_dbh.c 			if (funcs-&gt;arg_info[funcs-&gt;num_args].is_variadic) {</span>
+<span class='curline'><a href='../S/923.html#L1336'>num_args</a>         1336 ext/pdo/pdo_dbh.c 			ifunc-&gt;num_args = 0;</span>
+<span class='curline'><a href='../S/926.html#L779'>num_args</a>          779 ext/pdo/pdo_stmt.c static int make_callable_ex(pdo_stmt_t *stmt, zval *callable, zend_fcall_info * fci, zend_fcall_info_cache * fcc, int num_args TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/926.html#L797'>num_args</a>          797 ext/pdo/pdo_stmt.c 	fci-&gt;param_count = num_args; /* probably less */</span>
+<span class='curline'><a href='../S/926.html#L798'>num_args</a>          798 ext/pdo/pdo_stmt.c 	fci-&gt;params = safe_emalloc(sizeof(zval**), num_args, 0);</span>
+<span class='curline'><a href='../S/996.html#L809'>num_args</a>          809 ext/reflection/php_reflection.c 	string_printf(str, "%s- Parameters [%d] {\n", indent, fptr-&gt;common.num_args);</span>
+<span class='curline'><a href='../S/996.html#L810'>num_args</a>          810 ext/reflection/php_reflection.c 	for (i = 0; i &lt; fptr-&gt;common.num_args; i++) {</span>
+<span class='curline'><a href='../S/996.html#L999'>num_args</a>          999 ext/reflection/php_reflection.c static int _extension_ini_string(zend_ini_entry *ini_entry TSRMLS_DC, int num_args, va_list args, zend_hash_key *hash_key) /* {{{ */</span>
+<span class='curline'><a href='../S/996.html#L1035'>num_args</a>         1035 ext/reflection/php_reflection.c static int _extension_class_string(zend_class_entry **pce TSRMLS_DC, int num_args, va_list args, zend_hash_key *hash_key) /* {{{ */</span>
+<span class='curline'><a href='../S/996.html#L1054'>num_args</a>         1054 ext/reflection/php_reflection.c static int _extension_const_string(zend_constant *constant TSRMLS_DC, int num_args, va_list args, zend_hash_key *hash_key) /* {{{ */</span>
+<span class='curline'><a href='../S/996.html#L1933'>num_args</a>         1933 ext/reflection/php_reflection.c 	int result, num_args = 0;</span>
+<span class='curline'><a href='../S/996.html#L1942'>num_args</a>         1942 ext/reflection/php_reflection.c 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "*", &amp;params, &amp;num_args) == FAILURE) {</span>
+<span class='curline'><a href='../S/996.html#L1952'>num_args</a>         1952 ext/reflection/php_reflection.c 	fci.param_count = num_args;</span>
+<span class='curline'><a href='../S/996.html#L1964'>num_args</a>         1964 ext/reflection/php_reflection.c 	if (num_args) {</span>
+<span class='curline'><a href='../S/996.html#L2069'>num_args</a>         2069 ext/reflection/php_reflection.c 	RETURN_LONG(fptr-&gt;common.num_args);</span>
+<span class='curline'><a href='../S/996.html#L2102'>num_args</a>         2102 ext/reflection/php_reflection.c 	for (i = 0; i &lt; fptr-&gt;common.num_args; i++) {</span>
+<span class='curline'><a href='../S/996.html#L2284'>num_args</a>         2284 ext/reflection/php_reflection.c 		if (position &lt; 0 || (zend_uint)position &gt;= fptr-&gt;common.num_args) {</span>
+<span class='curline'><a href='../S/996.html#L2302'>num_args</a>         2302 ext/reflection/php_reflection.c 		for (i = 0; i &lt; fptr-&gt;common.num_args; i++) {</span>
+<span class='curline'><a href='../S/996.html#L2886'>num_args</a>         2886 ext/reflection/php_reflection.c 	int result, num_args = 0;</span>
+<span class='curline'><a href='../S/996.html#L2913'>num_args</a>         2913 ext/reflection/php_reflection.c 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "+", &amp;params, &amp;num_args) == FAILURE) {</span>
+<span class='curline'><a href='../S/996.html#L2952'>num_args</a>         2952 ext/reflection/php_reflection.c 	fci.param_count = num_args - 1;</span>
+<span class='curline'><a href='../S/996.html#L3824'>num_args</a>         3824 ext/reflection/php_reflection.c static int _addmethod_va(zend_function *mptr TSRMLS_DC, int num_args, va_list args, zend_hash_key *hash_key)</span>
+<span class='curline'><a href='../S/996.html#L3977'>num_args</a>         3977 ext/reflection/php_reflection.c static int _addproperty(zend_property_info *pptr TSRMLS_DC, int num_args, va_list args, zend_hash_key *hash_key)</span>
+<span class='curline'><a href='../S/996.html#L3998'>num_args</a>         3998 ext/reflection/php_reflection.c static int _adddynproperty(zval **pptr TSRMLS_DC, int num_args, va_list args, zend_hash_key *hash_key)</span>
+<span class='curline'><a href='../S/996.html#L4281'>num_args</a>         4281 ext/reflection/php_reflection.c 		int num_args = 0;</span>
+<span class='curline'><a href='../S/996.html#L4291'>num_args</a>         4291 ext/reflection/php_reflection.c 		if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "*", &amp;params, &amp;num_args) == FAILURE) {</span>
+<span class='curline'><a href='../S/996.html#L4305'>num_args</a>         4305 ext/reflection/php_reflection.c 		fci.param_count = num_args;</span>
+<span class='curline'><a href='../S/996.html#L5359'>num_args</a>         5359 ext/reflection/php_reflection.c static int _addconstant(zend_constant *constant TSRMLS_DC, int num_args, va_list args, zend_hash_key *hash_key) /* {{{ */</span>
+<span class='curline'><a href='../S/996.html#L5394'>num_args</a>         5394 ext/reflection/php_reflection.c static int _addinientry(zend_ini_entry *ini_entry TSRMLS_DC, int num_args, va_list args, zend_hash_key *hash_key)</span>
+<span class='curline'><a href='../S/996.html#L5428'>num_args</a>         5428 ext/reflection/php_reflection.c static int add_extension_class(zend_class_entry **pce TSRMLS_DC, int num_args, va_list args, zend_hash_key *hash_key)</span>
+<span class='curline'><a href='../S/1006.html#L1782'>num_args</a>         1782 ext/session/session.c 	int i, num_args, argc = ZEND_NUM_ARGS();</span>
+<span class='curline'><a href='../S/1006.html#L1883'>num_args</a>         1883 ext/session/session.c 	if (zend_parse_parameters(argc TSRMLS_CC, "+", &amp;args, &amp;num_args) == FAILURE) {</span>
+<span class='curline'><a href='../S/1031.html#L640'>num_args</a>          640 ext/soap/soap.c 		fe.num_args = 2;</span>
+<span class='curline'><a href='../S/1031.html#L1278'>num_args</a>         1278 ext/soap/soap.c 	int classname_len, found, num_args = 0;</span>
+<span class='curline'><a href='../S/1031.html#L1285'>num_args</a>         1285 ext/soap/soap.c 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s*", &amp;classname, &amp;classname_len, &amp;argv, &amp;num_args) == FAILURE) {</span>
+<span class='curline'><a href='../S/1031.html#L1296'>num_args</a>         1296 ext/soap/soap.c 		service-&gt;soap_class.argc = num_args;</span>
+<span class='curline'><a href='../S/1049.html#L2106'>num_args</a>         2106 ext/spl/spl_directory.c 	int num_args = pass_num_args + (arg2 ? 2 : 1);</span>
+<span class='curline'><a href='../S/1049.html#L2108'>num_args</a>         2108 ext/spl/spl_directory.c 	zval ***params = (zval***)safe_emalloc(num_args, sizeof(zval**), 0);</span>
+<span class='curline'><a href='../S/1049.html#L2125'>num_args</a>         2125 ext/spl/spl_directory.c 	fci.param_count = num_args;</span>
+<span class='curline'><a href='../S/1073.html#L1481'>num_args</a>         1481 ext/standard/array.c 	int num_args, i;</span>
+<span class='curline'><a href='../S/1073.html#L1483'>num_args</a>         1483 ext/standard/array.c 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "+", &amp;args, &amp;num_args) == FAILURE) {</span>
+<span class='curline'><a href='../S/1077.html#L4553'>num_args</a>         4553 ext/standard/basic_functions.c static int add_config_entry_cb(zval *entry TSRMLS_DC, int num_args, va_list args, zend_hash_key *hash_key)</span>
+<span class='curline'><a href='../S/1077.html#L5320'>num_args</a>         5320 ext/standard/basic_functions.c static int php_ini_get_option(zend_ini_entry *ini_entry TSRMLS_DC, int num_args, va_list args, zend_hash_key *hash_key) /* {{{ */</span>
+<span class='curline'><a href='../S/1079.html#L372'>num_args</a>          372 ext/standard/browscap.c static int browser_reg_compare(zval **browser TSRMLS_DC, int num_args, va_list args, zend_hash_key *key) /* {{{ */</span>
+<span class='curline'><a href='../S/1140.html#L116'>num_args</a>          116 ext/standard/pack.c 	int num_args, i;</span>
+<span class='curline'><a href='../S/1140.html#L126'>num_args</a>          126 ext/standard/pack.c 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "+", &amp;argv, &amp;num_args) == FAILURE) {</span>
+<span class='curline'><a href='../S/1140.html#L183'>num_args</a>          183 ext/standard/pack.c 				if (currentarg &gt;= num_args) {</span>
+<span class='curline'><a href='../S/1140.html#L235'>num_args</a>          235 ext/standard/pack.c 					arg = num_args - currentarg;</span>
+<span class='curline'><a href='../S/1140.html#L240'>num_args</a>          240 ext/standard/pack.c 				if (currentarg &gt; num_args) {</span>
+<span class='curline'><a href='../S/1140.html#L261'>num_args</a>          261 ext/standard/pack.c 	if (currentarg &lt; num_args) {</span>
+<span class='curline'><a href='../S/1140.html#L262'>num_args</a>          262 ext/standard/pack.c 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "%d arguments unused", (num_args - currentarg));</span>
+<span class='curline'><a href='../S/1189.html#L4358'>num_args</a>         4358 ext/standard/string.c 	int num_args, cat, i = 0;</span>
+<span class='curline'><a href='../S/1189.html#L4361'>num_args</a>         4361 ext/standard/string.c 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "Z+", &amp;pcategory, &amp;args, &amp;num_args) == FAILURE) {</span>
+<span class='curline'><a href='../S/1189.html#L4448'>num_args</a>         4448 ext/standard/string.c 			if (++i &gt;= num_args) break;</span>
+<span class='curline'><a href='../S/1189.html#L5325'>num_args</a>         5325 ext/standard/string.c 	int str_len, format_len, result, num_args = 0;</span>
+<span class='curline'><a href='../S/1189.html#L5328'>num_args</a>         5328 ext/standard/string.c 		&amp;args, &amp;num_args) == FAILURE) {</span>
+<span class='curline'><a href='../S/1189.html#L5332'>num_args</a>         5332 ext/standard/string.c 	result = php_sscanf_internal(str, format, num_args, args, 0, &amp;return_value TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1201.html#L38'>num_args</a>           38 ext/standard/var.c static int php_array_element_dump(zval **zv TSRMLS_DC, int num_args, va_list args, zend_hash_key *hash_key) /* {{{ */</span>
+<span class='curline'><a href='../S/1201.html#L56'>num_args</a>           56 ext/standard/var.c static int php_object_property_dump(zval **zv TSRMLS_DC, int num_args, va_list args, zend_hash_key *hash_key) /* {{{ */</span>
+<span class='curline'><a href='../S/1201.html#L189'>num_args</a>          189 ext/standard/var.c static int zval_array_element_dump(zval **zv TSRMLS_DC, int num_args, va_list args, zend_hash_key *hash_key) /* {{{ */</span>
+<span class='curline'><a href='../S/1201.html#L213'>num_args</a>          213 ext/standard/var.c static int zval_object_property_dump(zval **zv TSRMLS_DC, int num_args, va_list args, zend_hash_key *hash_key) /* {{{ */</span>
+<span class='curline'><a href='../S/1201.html#L344'>num_args</a>          344 ext/standard/var.c static int php_array_element_export(zval **zv TSRMLS_DC, int num_args, va_list args, zend_hash_key *hash_key) /* {{{ */</span>
+<span class='curline'><a href='../S/1201.html#L381'>num_args</a>          381 ext/standard/var.c static int php_object_element_export(zval **zv TSRMLS_DC, int num_args, va_list args, zend_hash_key *hash_key) /* {{{ */</span>
+<span class='curline'><a href='../S/1220.html#L1199'>num_args</a>         1199 ext/wddx/wddx.c 	int num_args, i;</span>
+<span class='curline'><a href='../S/1220.html#L1203'>num_args</a>         1203 ext/wddx/wddx.c 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "+", &amp;args, &amp;num_args) == FAILURE) {</span>
+<span class='curline'><a href='../S/1220.html#L1212'>num_args</a>         1212 ext/wddx/wddx.c 	for (i=0; i&lt;num_args; i++) {</span>
+<span class='curline'><a href='../S/1220.html#L1302'>num_args</a>         1302 ext/wddx/wddx.c 	int num_args, i;</span>
+<span class='curline'><a href='../S/1220.html#L1307'>num_args</a>         1307 ext/wddx/wddx.c 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "r+", &amp;packet_id, &amp;args, &amp;num_args) == FAILURE) {</span>
+<span class='curline'><a href='../S/1220.html#L1321'>num_args</a>         1321 ext/wddx/wddx.c 	for (i=0; i&lt;num_args; i++) {</span>
+<span class='curline'><a href='../S/1457.html#L722'>num_args</a>          722 sapi/cli/php_cli_server.c static int sapi_cli_server_register_entry_cb(char **entry TSRMLS_DC, int num_args, va_list args, zend_hash_key *hash_key) /* {{{ */ {</span>
+<span class='curline'><a href='../S/1556.html#L136'>num_args</a>          136 sapi/phpdbg/phpdbg_frame.c 		int j = 0, m = func ? func-&gt;common.num_args : 0;</span>
+</pre>
+</body>
+</html>

@@ -1,0 +1,320 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>class_type</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/1643.html#L512'>class_type</a>        512 Zend/zend.h    	zend_object_value (*create_object)(zend_class_entry *class_type TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1643.html#L514'>class_type</a>        514 Zend/zend.h    	int (*interface_gets_implemented)(zend_class_entry *iface, zend_class_entry *class_type TSRMLS_DC); /* a class implements this interface */</span>
+<span class='curline'><a href='../S/1646.html#L1088'>class_type</a>       1088 Zend/zend_API.c ZEND_API void zend_update_class_constants(zend_class_entry *class_type TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1646.html#L1090'>class_type</a>       1090 Zend/zend_API.c 	if ((class_type-&gt;ce_flags &amp; ZEND_ACC_CONSTANTS_UPDATED) == 0 || (!CE_STATIC_MEMBERS(class_type) &amp;&amp; class_type-&gt;default_static_members_count)) {</span>
+<span class='curline'><a href='../S/1646.html#L1095'>class_type</a>       1095 Zend/zend_API.c 		*scope = class_type;</span>
+<span class='curline'><a href='../S/1646.html#L1096'>class_type</a>       1096 Zend/zend_API.c 		zend_hash_apply_with_argument(&amp;class_type-&gt;constants_table, (apply_func_arg_t) zval_update_constant, (void *)1 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1646.html#L1098'>class_type</a>       1098 Zend/zend_API.c 		for (i = 0; i &lt; class_type-&gt;default_properties_count; i++) {</span>
+<span class='curline'><a href='../S/1646.html#L1099'>class_type</a>       1099 Zend/zend_API.c 			if (class_type-&gt;default_properties_table[i]) {</span>
+<span class='curline'><a href='../S/1646.html#L1100'>class_type</a>       1100 Zend/zend_API.c 				zval_update_class_constant(&amp;class_type-&gt;default_properties_table[i], 0, i TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1646.html#L1104'>class_type</a>       1104 Zend/zend_API.c 		if (!CE_STATIC_MEMBERS(class_type) &amp;&amp; class_type-&gt;default_static_members_count) {</span>
+<span class='curline'><a href='../S/1646.html#L1107'>class_type</a>       1107 Zend/zend_API.c 			if (class_type-&gt;parent) {</span>
+<span class='curline'><a href='../S/1646.html#L1108'>class_type</a>       1108 Zend/zend_API.c 				zend_update_class_constants(class_type-&gt;parent TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1646.html#L1111'>class_type</a>       1111 Zend/zend_API.c 			CG(static_members_table)[(zend_intptr_t)(class_type-&gt;static_members_table)] = emalloc(sizeof(zval*) * class_type-&gt;default_static_members_count);</span>
+<span class='curline'><a href='../S/1646.html#L1113'>class_type</a>       1113 Zend/zend_API.c 			class_type-&gt;static_members_table = emalloc(sizeof(zval*) * class_type-&gt;default_static_members_count);</span>
+<span class='curline'><a href='../S/1646.html#L1115'>class_type</a>       1115 Zend/zend_API.c 			for (i = 0; i &lt; class_type-&gt;default_static_members_count; i++) {</span>
+<span class='curline'><a href='../S/1646.html#L1116'>class_type</a>       1116 Zend/zend_API.c 				p = &amp;class_type-&gt;default_static_members_table[i];</span>
+<span class='curline'><a href='../S/1646.html#L1118'>class_type</a>       1118 Zend/zend_API.c 					class_type-&gt;parent &amp;&amp;</span>
+<span class='curline'><a href='../S/1646.html#L1119'>class_type</a>       1119 Zend/zend_API.c 					i &lt; class_type-&gt;parent-&gt;default_static_members_count &amp;&amp;</span>
+<span class='curline'><a href='../S/1646.html#L1120'>class_type</a>       1120 Zend/zend_API.c 					*p == class_type-&gt;parent-&gt;default_static_members_table[i] &amp;&amp;</span>
+<span class='curline'><a href='../S/1646.html#L1121'>class_type</a>       1121 Zend/zend_API.c 					CE_STATIC_MEMBERS(class_type-&gt;parent)[i]</span>
+<span class='curline'><a href='../S/1646.html#L1123'>class_type</a>       1123 Zend/zend_API.c 					zval *q = CE_STATIC_MEMBERS(class_type-&gt;parent)[i];</span>
+<span class='curline'><a href='../S/1646.html#L1127'>class_type</a>       1127 Zend/zend_API.c 					CE_STATIC_MEMBERS(class_type)[i] = q;</span>
+<span class='curline'><a href='../S/1646.html#L1135'>class_type</a>       1135 Zend/zend_API.c 					CE_STATIC_MEMBERS(class_type)[i] = r;</span>
+<span class='curline'><a href='../S/1646.html#L1140'>class_type</a>       1140 Zend/zend_API.c 		for (i = 0; i &lt; class_type-&gt;default_static_members_count; i++) {</span>
+<span class='curline'><a href='../S/1646.html#L1141'>class_type</a>       1141 Zend/zend_API.c 			zval_update_class_constant(&amp;CE_STATIC_MEMBERS(class_type)[i], 1, i TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1646.html#L1145'>class_type</a>       1145 Zend/zend_API.c 		class_type-&gt;ce_flags |= ZEND_ACC_CONSTANTS_UPDATED;</span>
+<span class='curline'><a href='../S/1646.html#L1150'>class_type</a>       1150 Zend/zend_API.c ZEND_API void object_properties_init(zend_object *object, zend_class_entry *class_type) /* {{{ */</span>
+<span class='curline'><a href='../S/1646.html#L1154'>class_type</a>       1154 Zend/zend_API.c 	if (class_type-&gt;default_properties_count) {</span>
+<span class='curline'><a href='../S/1646.html#L1155'>class_type</a>       1155 Zend/zend_API.c 		object-&gt;properties_table = emalloc(sizeof(zval*) * class_type-&gt;default_properties_count);</span>
+<span class='curline'><a href='../S/1646.html#L1156'>class_type</a>       1156 Zend/zend_API.c 		for (i = 0; i &lt; class_type-&gt;default_properties_count; i++) {</span>
+<span class='curline'><a href='../S/1646.html#L1157'>class_type</a>       1157 Zend/zend_API.c 			object-&gt;properties_table[i] = class_type-&gt;default_properties_table[i];</span>
+<span class='curline'><a href='../S/1646.html#L1158'>class_type</a>       1158 Zend/zend_API.c 			if (class_type-&gt;default_properties_table[i]) {</span>
+<span class='curline'><a href='../S/1646.html#L1161'>class_type</a>       1161 Zend/zend_API.c 				MAKE_COPY_ZVAL(&amp;class_type-&gt;default_properties_table[i], object-&gt;properties_table[i]);</span>
+<span class='curline'><a href='../S/1646.html#L1176'>class_type</a>       1176 Zend/zend_API.c ZEND_API int _object_and_properties_init(zval *arg, zend_class_entry *class_type, HashTable *properties ZEND_FILE_LINE_DC TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1646.html#L1180'>class_type</a>       1180 Zend/zend_API.c 	if (class_type-&gt;ce_flags &amp; (ZEND_ACC_INTERFACE|ZEND_ACC_IMPLICIT_ABSTRACT_CLASS|ZEND_ACC_EXPLICIT_ABSTRACT_CLASS)) {</span>
+<span class='curline'><a href='../S/1646.html#L1181'>class_type</a>       1181 Zend/zend_API.c 		char *what =   (class_type-&gt;ce_flags &amp; ZEND_ACC_INTERFACE)                ? "interface"</span>
+<span class='curline'><a href='../S/1646.html#L1182'>class_type</a>       1182 Zend/zend_API.c 					 :((class_type-&gt;ce_flags &amp; ZEND_ACC_TRAIT) == ZEND_ACC_TRAIT) ? "trait"</span>
+<span class='curline'><a href='../S/1646.html#L1184'>class_type</a>       1184 Zend/zend_API.c 		zend_error(E_ERROR, "Cannot instantiate %s %s", what, class_type-&gt;name);</span>
+<span class='curline'><a href='../S/1646.html#L1187'>class_type</a>       1187 Zend/zend_API.c 	zend_update_class_constants(class_type TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1646.html#L1190'>class_type</a>       1190 Zend/zend_API.c 	if (class_type-&gt;create_object == NULL) {</span>
+<span class='curline'><a href='../S/1646.html#L1191'>class_type</a>       1191 Zend/zend_API.c 		Z_OBJVAL_P(arg) = zend_objects_new(&amp;object, class_type TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1646.html#L1196'>class_type</a>       1196 Zend/zend_API.c 			object_properties_init(object, class_type);</span>
+<span class='curline'><a href='../S/1646.html#L1199'>class_type</a>       1199 Zend/zend_API.c 		Z_OBJVAL_P(arg) = class_type-&gt;create_object(class_type TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1646.html#L1205'>class_type</a>       1205 Zend/zend_API.c ZEND_API int _object_init_ex(zval *arg, zend_class_entry *class_type ZEND_FILE_LINE_DC TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1646.html#L1207'>class_type</a>       1207 Zend/zend_API.c 	return _object_and_properties_init(arg, class_type, 0 ZEND_FILE_LINE_RELAY_CC TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1646.html#L2653'>class_type</a>       2653 Zend/zend_API.c static zend_object_value display_disabled_class(zend_class_entry *class_type TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1646.html#L2657'>class_type</a>       2657 Zend/zend_API.c 	retval = zend_objects_new(&amp;intern, class_type TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1646.html#L2658'>class_type</a>       2658 Zend/zend_API.c 	zend_error(E_WARNING, "%s() has been disabled for security reasons", class_type-&gt;name);</span>
+<span class='curline'><a href='../S/1647.html#L325'>class_type</a>        325 Zend/zend_API.h ZEND_API void zend_update_class_constants(zend_class_entry *class_type TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1647.html#L372'>class_type</a>        372 Zend/zend_API.h ZEND_API void object_properties_init(zend_object *object, zend_class_entry *class_type);</span>
+<span class='curline'><a href='../S/1653.html#L282'>class_type</a>        282 Zend/zend_closures.c static zend_object_value zend_closure_new(zend_class_entry *class_type TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1653.html#L290'>class_type</a>        290 Zend/zend_closures.c 	zend_object_std_init(&amp;closure-&gt;std, class_type TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1655.html#L1865'>class_type</a>       1865 Zend/zend_compile.c void zend_do_receive_param(zend_uchar op, znode *varname, const znode *initialization, znode *class_type, zend_uchar pass_by_reference, zend_bool is_variadic TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1655.html#L1927'>class_type</a>       1927 Zend/zend_compile.c 	if (class_type-&gt;op_type != IS_UNUSED) {</span>
+<span class='curline'><a href='../S/1655.html#L1930'>class_type</a>       1930 Zend/zend_compile.c 		if (class_type-&gt;u.constant.type != IS_NULL) {</span>
+<span class='curline'><a href='../S/1655.html#L1931'>class_type</a>       1931 Zend/zend_compile.c 			if (class_type-&gt;u.constant.type == IS_ARRAY) {</span>
+<span class='curline'><a href='../S/1655.html#L1943'>class_type</a>       1943 Zend/zend_compile.c 			} else if (class_type-&gt;u.constant.type == IS_CALLABLE) {</span>
+<span class='curline'><a href='../S/1655.html#L1957'>class_type</a>       1957 Zend/zend_compile.c 				if (ZEND_FETCH_CLASS_DEFAULT == zend_get_class_fetch_type(Z_STRVAL(class_type-&gt;u.constant), Z_STRLEN(class_type-&gt;u.constant))) {</span>
+<span class='curline'><a href='../S/1655.html#L1958'>class_type</a>       1958 Zend/zend_compile.c 					zend_resolve_class_name(class_type TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1655.html#L1960'>class_type</a>       1960 Zend/zend_compile.c 				Z_STRVAL(class_type-&gt;u.constant) = (char*)zend_new_interned_string(Z_STRVAL(class_type-&gt;u.constant), Z_STRLEN(class_type-&gt;u.constant) + 1, 1 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1655.html#L1961'>class_type</a>       1961 Zend/zend_compile.c 				cur_arg_info-&gt;class_name = Z_STRVAL(class_type-&gt;u.constant);</span>
+<span class='curline'><a href='../S/1655.html#L1962'>class_type</a>       1962 Zend/zend_compile.c 				cur_arg_info-&gt;class_name_len = Z_STRLEN(class_type-&gt;u.constant);</span>
+<span class='curline'><a href='../S/1655.html#L5628'>class_type</a>       5628 Zend/zend_compile.c void zend_do_begin_new_object(znode *new_token, znode *class_type TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1655.html#L5638'>class_type</a>       5638 Zend/zend_compile.c 	SET_NODE(opline-&gt;op1, class_type);</span>
+<span class='curline'><a href='../S/1656.html#L518'>class_type</a>        518 Zend/zend_compile.h void zend_do_receive_param(zend_uchar op, znode *varname, const znode *initialization, znode *class_type, zend_bool pass_by_reference, zend_bool is_variadic TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1656.html#L592'>class_type</a>        592 Zend/zend_compile.h void zend_do_begin_new_object(znode *new_token, znode *class_type TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1667.html#L155'>class_type</a>        155 Zend/zend_exceptions.c static zend_object_value zend_default_exception_new_ex(zend_class_entry *class_type, int skip_top_traces TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1667.html#L161'>class_type</a>        161 Zend/zend_exceptions.c 	Z_OBJVAL(obj) = zend_objects_new(&amp;object, class_type TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1667.html#L164'>class_type</a>        164 Zend/zend_exceptions.c 	object_properties_init(object, class_type);</span>
+<span class='curline'><a href='../S/1667.html#L179'>class_type</a>        179 Zend/zend_exceptions.c static zend_object_value zend_default_exception_new(zend_class_entry *class_type TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1667.html#L181'>class_type</a>        181 Zend/zend_exceptions.c 	return zend_default_exception_new_ex(class_type, 0 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1667.html#L185'>class_type</a>        185 Zend/zend_exceptions.c static zend_object_value zend_error_exception_new(zend_class_entry *class_type TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1667.html#L187'>class_type</a>        187 Zend/zend_exceptions.c 	return zend_default_exception_new_ex(class_type, 2 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1678.html#L30'>class_type</a>         30 Zend/zend_generators.c static zend_object_value zend_generator_create(zend_class_entry *class_type TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1678.html#L219'>class_type</a>        219 Zend/zend_generators.c static zend_object_value zend_generator_create(zend_class_entry *class_type TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1678.html#L230'>class_type</a>        230 Zend/zend_generators.c 	zend_object_std_init(&amp;generator-&gt;std, class_type TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1695.html#L294'>class_type</a>        294 Zend/zend_interfaces.c static int zend_implement_traversable(zend_class_entry *interface, zend_class_entry *class_type TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1695.html#L299'>class_type</a>        299 Zend/zend_interfaces.c 	if (class_type-&gt;get_iterator || (class_type-&gt;parent &amp;&amp; class_type-&gt;parent-&gt;get_iterator)) {</span>
+<span class='curline'><a href='../S/1695.html#L302'>class_type</a>        302 Zend/zend_interfaces.c 	for (i = 0; i &lt; class_type-&gt;num_interfaces; i++) {</span>
+<span class='curline'><a href='../S/1695.html#L303'>class_type</a>        303 Zend/zend_interfaces.c 		if (class_type-&gt;interfaces[i] == zend_ce_aggregate || class_type-&gt;interfaces[i] == zend_ce_iterator) {</span>
+<span class='curline'><a href='../S/1695.html#L308'>class_type</a>        308 Zend/zend_interfaces.c 		class_type-&gt;name,</span>
+<span class='curline'><a href='../S/1695.html#L317'>class_type</a>        317 Zend/zend_interfaces.c static int zend_implement_aggregate(zend_class_entry *interface, zend_class_entry *class_type TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1695.html#L321'>class_type</a>        321 Zend/zend_interfaces.c 	if (class_type-&gt;get_iterator) {</span>
+<span class='curline'><a href='../S/1695.html#L322'>class_type</a>        322 Zend/zend_interfaces.c 		if (class_type-&gt;type == ZEND_INTERNAL_CLASS) {</span>
+<span class='curline'><a href='../S/1695.html#L325'>class_type</a>        325 Zend/zend_interfaces.c 		} else if (class_type-&gt;get_iterator != zend_user_it_get_new_iterator) {</span>
+<span class='curline'><a href='../S/1695.html#L327'>class_type</a>        327 Zend/zend_interfaces.c 			if (class_type-&gt;num_interfaces) {</span>
+<span class='curline'><a href='../S/1695.html#L328'>class_type</a>        328 Zend/zend_interfaces.c 				for (i = 0; i &lt; class_type-&gt;num_interfaces; i++) {</span>
+<span class='curline'><a href='../S/1695.html#L329'>class_type</a>        329 Zend/zend_interfaces.c 					if (class_type-&gt;interfaces[i] == zend_ce_iterator) {</span>
+<span class='curline'><a href='../S/1695.html#L331'>class_type</a>        331 Zend/zend_interfaces.c 									class_type-&gt;name,</span>
+<span class='curline'><a href='../S/1695.html#L336'>class_type</a>        336 Zend/zend_interfaces.c 					if (class_type-&gt;interfaces[i] == zend_ce_traversable) {</span>
+<span class='curline'><a href='../S/1695.html#L346'>class_type</a>        346 Zend/zend_interfaces.c 	class_type-&gt;iterator_funcs.zf_new_iterator = NULL;</span>
+<span class='curline'><a href='../S/1695.html#L347'>class_type</a>        347 Zend/zend_interfaces.c 	class_type-&gt;get_iterator = zend_user_it_get_new_iterator;</span>
+<span class='curline'><a href='../S/1695.html#L353'>class_type</a>        353 Zend/zend_interfaces.c static int zend_implement_iterator(zend_class_entry *interface, zend_class_entry *class_type TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1695.html#L355'>class_type</a>        355 Zend/zend_interfaces.c 	if (class_type-&gt;get_iterator &amp;&amp; class_type-&gt;get_iterator != zend_user_it_get_iterator) {</span>
+<span class='curline'><a href='../S/1695.html#L356'>class_type</a>        356 Zend/zend_interfaces.c 		if (class_type-&gt;type == ZEND_INTERNAL_CLASS) {</span>
+<span class='curline'><a href='../S/1695.html#L361'>class_type</a>        361 Zend/zend_interfaces.c 			if (class_type-&gt;get_iterator == zend_user_it_get_new_iterator) {</span>
+<span class='curline'><a href='../S/1695.html#L363'>class_type</a>        363 Zend/zend_interfaces.c 							class_type-&gt;name,</span>
+<span class='curline'><a href='../S/1695.html#L370'>class_type</a>        370 Zend/zend_interfaces.c 	class_type-&gt;get_iterator = zend_user_it_get_iterator;</span>
+<span class='curline'><a href='../S/1695.html#L371'>class_type</a>        371 Zend/zend_interfaces.c 	class_type-&gt;iterator_funcs.zf_valid = NULL;</span>
+<span class='curline'><a href='../S/1695.html#L372'>class_type</a>        372 Zend/zend_interfaces.c 	class_type-&gt;iterator_funcs.zf_current = NULL;</span>
+<span class='curline'><a href='../S/1695.html#L373'>class_type</a>        373 Zend/zend_interfaces.c 	class_type-&gt;iterator_funcs.zf_key = NULL;</span>
+<span class='curline'><a href='../S/1695.html#L374'>class_type</a>        374 Zend/zend_interfaces.c 	class_type-&gt;iterator_funcs.zf_next = NULL;</span>
+<span class='curline'><a href='../S/1695.html#L375'>class_type</a>        375 Zend/zend_interfaces.c 	class_type-&gt;iterator_funcs.zf_rewind = NULL;</span>
+<span class='curline'><a href='../S/1695.html#L376'>class_type</a>        376 Zend/zend_interfaces.c 	if (!class_type-&gt;iterator_funcs.funcs) {</span>
+<span class='curline'><a href='../S/1695.html#L377'>class_type</a>        377 Zend/zend_interfaces.c 		class_type-&gt;iterator_funcs.funcs = &amp;zend_interface_iterator_funcs_iterator;</span>
+<span class='curline'><a href='../S/1695.html#L384'>class_type</a>        384 Zend/zend_interfaces.c static int zend_implement_arrayaccess(zend_class_entry *interface, zend_class_entry *class_type TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1695.html#L474'>class_type</a>        474 Zend/zend_interfaces.c static int zend_implement_serializable(zend_class_entry *interface, zend_class_entry *class_type TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1695.html#L476'>class_type</a>        476 Zend/zend_interfaces.c 	if (class_type-&gt;parent</span>
+<span class='curline'><a href='../S/1695.html#L477'>class_type</a>        477 Zend/zend_interfaces.c 		&amp;&amp; (class_type-&gt;parent-&gt;serialize || class_type-&gt;parent-&gt;unserialize)</span>
+<span class='curline'><a href='../S/1695.html#L478'>class_type</a>        478 Zend/zend_interfaces.c 		&amp;&amp; !instanceof_function_ex(class_type-&gt;parent, zend_ce_serializable, 1 TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/1695.html#L481'>class_type</a>        481 Zend/zend_interfaces.c 	if (!class_type-&gt;serialize) {</span>
+<span class='curline'><a href='../S/1695.html#L482'>class_type</a>        482 Zend/zend_interfaces.c 		class_type-&gt;serialize = zend_user_serialize;</span>
+<span class='curline'><a href='../S/1695.html#L484'>class_type</a>        484 Zend/zend_interfaces.c 	if (!class_type-&gt;unserialize) {</span>
+<span class='curline'><a href='../S/1695.html#L485'>class_type</a>        485 Zend/zend_interfaces.c 		class_type-&gt;unserialize = zend_user_unserialize;</span>
+<span class='curline'><a href='../S/1715.html#L141'>class_type</a>        141 Zend/zend_objects.c ZEND_API zend_object_value zend_objects_new(zend_object **object, zend_class_entry *class_type TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1715.html#L146'>class_type</a>        146 Zend/zend_objects.c 	(*object)-&gt;ce = class_type;</span>
+<span class='curline'><a href='../S/1716.html#L30'>class_type</a>         30 Zend/zend_objects.h ZEND_API zend_object_value zend_objects_new(zend_object **object, zend_class_entry *class_type TSRMLS_DC);</span>
+<span class='curline'><a href='../S/79.html#L630'>class_type</a>        630 ext/date/php_date.c static zend_object_value date_object_new_date(zend_class_entry *class_type TSRMLS_DC);</span>
+<span class='curline'><a href='../S/79.html#L631'>class_type</a>        631 ext/date/php_date.c static zend_object_value date_object_new_timezone(zend_class_entry *class_type TSRMLS_DC);</span>
+<span class='curline'><a href='../S/79.html#L632'>class_type</a>        632 ext/date/php_date.c static zend_object_value date_object_new_interval(zend_class_entry *class_type TSRMLS_DC);</span>
+<span class='curline'><a href='../S/79.html#L633'>class_type</a>        633 ext/date/php_date.c static zend_object_value date_object_new_period(zend_class_entry *class_type TSRMLS_DC);</span>
+<span class='curline'><a href='../S/79.html#L2121'>class_type</a>       2121 ext/date/php_date.c static inline zend_object_value date_object_new_date_ex(zend_class_entry *class_type, php_date_obj **ptr TSRMLS_DC)</span>
+<span class='curline'><a href='../S/79.html#L2132'>class_type</a>       2132 ext/date/php_date.c 	zend_object_std_init(&amp;intern-&gt;std, class_type TSRMLS_CC);</span>
+<span class='curline'><a href='../S/79.html#L2133'>class_type</a>       2133 ext/date/php_date.c 	object_properties_init(&amp;intern-&gt;std, class_type);</span>
+<span class='curline'><a href='../S/79.html#L2141'>class_type</a>       2141 ext/date/php_date.c static zend_object_value date_object_new_date(zend_class_entry *class_type TSRMLS_DC)</span>
+<span class='curline'><a href='../S/79.html#L2143'>class_type</a>       2143 ext/date/php_date.c 	return date_object_new_date_ex(class_type, NULL TSRMLS_CC);</span>
+<span class='curline'><a href='../S/79.html#L2270'>class_type</a>       2270 ext/date/php_date.c static inline zend_object_value date_object_new_timezone_ex(zend_class_entry *class_type, php_timezone_obj **ptr TSRMLS_DC)</span>
+<span class='curline'><a href='../S/79.html#L2281'>class_type</a>       2281 ext/date/php_date.c 	zend_object_std_init(&amp;intern-&gt;std, class_type TSRMLS_CC);</span>
+<span class='curline'><a href='../S/79.html#L2282'>class_type</a>       2282 ext/date/php_date.c 	object_properties_init(&amp;intern-&gt;std, class_type);</span>
+<span class='curline'><a href='../S/79.html#L2290'>class_type</a>       2290 ext/date/php_date.c static zend_object_value date_object_new_timezone(zend_class_entry *class_type TSRMLS_DC)</span>
+<span class='curline'><a href='../S/79.html#L2292'>class_type</a>       2292 ext/date/php_date.c 	return date_object_new_timezone_ex(class_type, NULL TSRMLS_CC);</span>
+<span class='curline'><a href='../S/79.html#L2369'>class_type</a>       2369 ext/date/php_date.c static inline zend_object_value date_object_new_interval_ex(zend_class_entry *class_type, php_interval_obj **ptr TSRMLS_DC)</span>
+<span class='curline'><a href='../S/79.html#L2380'>class_type</a>       2380 ext/date/php_date.c 	zend_object_std_init(&amp;intern-&gt;std, class_type TSRMLS_CC);</span>
+<span class='curline'><a href='../S/79.html#L2381'>class_type</a>       2381 ext/date/php_date.c 	object_properties_init(&amp;intern-&gt;std, class_type);</span>
+<span class='curline'><a href='../S/79.html#L2389'>class_type</a>       2389 ext/date/php_date.c static zend_object_value date_object_new_interval(zend_class_entry *class_type TSRMLS_DC)</span>
+<span class='curline'><a href='../S/79.html#L2391'>class_type</a>       2391 ext/date/php_date.c 	return date_object_new_interval_ex(class_type, NULL TSRMLS_CC);</span>
+<span class='curline'><a href='../S/79.html#L2458'>class_type</a>       2458 ext/date/php_date.c static inline zend_object_value date_object_new_period_ex(zend_class_entry *class_type, php_period_obj **ptr TSRMLS_DC)</span>
+<span class='curline'><a href='../S/79.html#L2469'>class_type</a>       2469 ext/date/php_date.c 	zend_object_std_init(&amp;intern-&gt;std, class_type TSRMLS_CC);</span>
+<span class='curline'><a href='../S/79.html#L2470'>class_type</a>       2470 ext/date/php_date.c 	object_properties_init(&amp;intern-&gt;std, class_type);</span>
+<span class='curline'><a href='../S/79.html#L2478'>class_type</a>       2478 ext/date/php_date.c static zend_object_value date_object_new_period(zend_class_entry *class_type TSRMLS_DC)</span>
+<span class='curline'><a href='../S/79.html#L2480'>class_type</a>       2480 ext/date/php_date.c 	return date_object_new_period_ex(class_type, NULL TSRMLS_CC);</span>
+<span class='curline'><a href='../S/145.html#L1143'>class_type</a>       1143 ext/dom/php_dom.c static dom_object* dom_objects_set_class(zend_class_entry *class_type, zend_bool hash_copy TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/145.html#L1148'>class_type</a>       1148 ext/dom/php_dom.c 	if (instanceof_function(class_type, dom_xpath_class_entry TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/145.html#L1158'>class_type</a>       1158 ext/dom/php_dom.c 	base_class = class_type;</span>
+<span class='curline'><a href='../S/145.html#L1165'>class_type</a>       1165 ext/dom/php_dom.c 	zend_object_std_init(&amp;intern-&gt;std, class_type TSRMLS_CC);</span>
+<span class='curline'><a href='../S/145.html#L1167'>class_type</a>       1167 ext/dom/php_dom.c 		object_properties_init(&amp;intern-&gt;std, class_type);</span>
+<span class='curline'><a href='../S/145.html#L1208'>class_type</a>       1208 ext/dom/php_dom.c zend_object_value dom_objects_new(zend_class_entry *class_type TSRMLS_DC)</span>
+<span class='curline'><a href='../S/145.html#L1213'>class_type</a>       1213 ext/dom/php_dom.c 	intern = dom_objects_set_class(class_type, 1 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/145.html#L1225'>class_type</a>       1225 ext/dom/php_dom.c zend_object_value dom_xpath_objects_new(zend_class_entry *class_type TSRMLS_DC)</span>
+<span class='curline'><a href='../S/145.html#L1230'>class_type</a>       1230 ext/dom/php_dom.c 	intern = (dom_xpath_object *)dom_objects_set_class(class_type, 1 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/145.html#L1287'>class_type</a>       1287 ext/dom/php_dom.c zend_object_value dom_nnodemap_objects_new(zend_class_entry *class_type TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/145.html#L1293'>class_type</a>       1293 ext/dom/php_dom.c 	intern = dom_objects_set_class(class_type, 1 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/146.html#L99'>class_type</a>         99 ext/dom/php_dom.h zend_object_value dom_objects_new(zend_class_entry *class_type TSRMLS_DC);</span>
+<span class='curline'><a href='../S/146.html#L100'>class_type</a>        100 ext/dom/php_dom.h zend_object_value dom_nnodemap_objects_new(zend_class_entry *class_type TSRMLS_DC);</span>
+<span class='curline'><a href='../S/146.html#L102'>class_type</a>        102 ext/dom/php_dom.h zend_object_value dom_xpath_objects_new(zend_class_entry *class_type TSRMLS_DC);</span>
+<span class='curline'><a href='../S/175.html#L97'>class_type</a>         97 ext/fileinfo/fileinfo.c PHP_FILEINFO_API zend_object_value finfo_objects_new(zend_class_entry *class_type TSRMLS_DC)</span>
+<span class='curline'><a href='../S/175.html#L105'>class_type</a>        105 ext/fileinfo/fileinfo.c 	zend_object_std_init(&amp;intern-&gt;zo, class_type TSRMLS_CC);</span>
+<span class='curline'><a href='../S/175.html#L106'>class_type</a>        106 ext/fileinfo/fileinfo.c 	object_properties_init(&amp;intern-&gt;zo, class_type);</span>
+<span class='curline'><a href='../S/761.html#L488'>class_type</a>        488 ext/mysqli/mysqli.c PHP_MYSQLI_EXPORT(zend_object_value) mysqli_objects_new(zend_class_entry *class_type TSRMLS_DC)</span>
+<span class='curline'><a href='../S/761.html#L500'>class_type</a>        500 ext/mysqli/mysqli.c 	mysqli_base_class = class_type;</span>
+<span class='curline'><a href='../S/761.html#L508'>class_type</a>        508 ext/mysqli/mysqli.c 	zend_object_std_init(&amp;intern-&gt;zo, class_type TSRMLS_CC);</span>
+<span class='curline'><a href='../S/761.html#L509'>class_type</a>        509 ext/mysqli/mysqli.c 	object_properties_init(&amp;intern-&gt;zo, class_type);</span>
+<span class='curline'><a href='../S/761.html#L512'>class_type</a>        512 ext/mysqli/mysqli.c 	if (instanceof_function(class_type, mysqli_link_class_entry TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/761.html#L514'>class_type</a>        514 ext/mysqli/mysqli.c 	} else if (instanceof_function(class_type, mysqli_driver_class_entry TSRMLS_CC)) { /* driver object */</span>
+<span class='curline'><a href='../S/761.html#L516'>class_type</a>        516 ext/mysqli/mysqli.c 	} else if (instanceof_function(class_type, mysqli_stmt_class_entry TSRMLS_CC)) { /* stmt object */</span>
+<span class='curline'><a href='../S/761.html#L518'>class_type</a>        518 ext/mysqli/mysqli.c 	} else if (instanceof_function(class_type, mysqli_result_class_entry TSRMLS_CC)) { /* result object */</span>
+<span class='curline'><a href='../S/761.html#L520'>class_type</a>        520 ext/mysqli/mysqli.c 	} else if (instanceof_function(class_type, mysqli_warning_class_entry TSRMLS_CC)) { /* warning object */</span>
+<span class='curline'><a href='../S/996.html#L339'>class_type</a>        339 ext/reflection/php_reflection.c static zend_object_value reflection_objects_new(zend_class_entry *class_type TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/996.html#L345'>class_type</a>        345 ext/reflection/php_reflection.c 	intern-&gt;zo.ce = class_type;</span>
+<span class='curline'><a href='../S/996.html#L347'>class_type</a>        347 ext/reflection/php_reflection.c 	zend_object_std_init(&amp;intern-&gt;zo, class_type TSRMLS_CC);</span>
+<span class='curline'><a href='../S/996.html#L348'>class_type</a>        348 ext/reflection/php_reflection.c 	object_properties_init(&amp;intern-&gt;zo, class_type);</span>
+<span class='curline'><a href='../S/1017.html#L488'>class_type</a>        488 ext/snmp/snmp.c static zend_object_value php_snmp_object_new(zend_class_entry *class_type TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1017.html#L497'>class_type</a>        497 ext/snmp/snmp.c 	zend_object_std_init(&amp;intern-&gt;zo, class_type TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1017.html#L498'>class_type</a>        498 ext/snmp/snmp.c 	object_properties_init(&amp;intern-&gt;zo, class_type);</span>
+<span class='curline'><a href='../S/1047.html#L167'>class_type</a>        167 ext/spl/spl_array.c static zend_object_value spl_array_object_new_ex(zend_class_entry *class_type, spl_array_object **obj, zval *orig, int clone_orig TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1047.html#L172'>class_type</a>        172 ext/spl/spl_array.c 	zend_class_entry * parent = class_type;</span>
+<span class='curline'><a href='../S/1047.html#L180'>class_type</a>        180 ext/spl/spl_array.c 	zend_object_std_init(&amp;intern-&gt;std, class_type TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1047.html#L181'>class_type</a>        181 ext/spl/spl_array.c 	object_properties_init(&amp;intern-&gt;std, class_type);</span>
+<span class='curline'><a href='../S/1047.html#L217'>class_type</a>        217 ext/spl/spl_array.c 			class_type-&gt;get_iterator = spl_array_get_iterator;</span>
+<span class='curline'><a href='../S/1047.html#L230'>class_type</a>        230 ext/spl/spl_array.c 		zend_hash_find(&amp;class_type-&gt;function_table, "offsetget",    sizeof("offsetget"),    (void **) &amp;intern-&gt;fptr_offset_get);</span>
+<span class='curline'><a href='../S/1047.html#L234'>class_type</a>        234 ext/spl/spl_array.c 		zend_hash_find(&amp;class_type-&gt;function_table, "offsetset",    sizeof("offsetset"),    (void **) &amp;intern-&gt;fptr_offset_set);</span>
+<span class='curline'><a href='../S/1047.html#L238'>class_type</a>        238 ext/spl/spl_array.c 		zend_hash_find(&amp;class_type-&gt;function_table, "offsetexists", sizeof("offsetexists"), (void **) &amp;intern-&gt;fptr_offset_has);</span>
+<span class='curline'><a href='../S/1047.html#L242'>class_type</a>        242 ext/spl/spl_array.c 		zend_hash_find(&amp;class_type-&gt;function_table, "offsetunset",  sizeof("offsetunset"),  (void **) &amp;intern-&gt;fptr_offset_del);</span>
+<span class='curline'><a href='../S/1047.html#L246'>class_type</a>        246 ext/spl/spl_array.c 		zend_hash_find(&amp;class_type-&gt;function_table, "count",        sizeof("count"),        (void **) &amp;intern-&gt;fptr_count);</span>
+<span class='curline'><a href='../S/1047.html#L254'>class_type</a>        254 ext/spl/spl_array.c 		if (!class_type-&gt;iterator_funcs.zf_current) {</span>
+<span class='curline'><a href='../S/1047.html#L255'>class_type</a>        255 ext/spl/spl_array.c 			zend_hash_find(&amp;class_type-&gt;function_table, "rewind",  sizeof("rewind"),  (void **) &amp;class_type-&gt;iterator_funcs.zf_rewind);</span>
+<span class='curline'><a href='../S/1047.html#L256'>class_type</a>        256 ext/spl/spl_array.c 			zend_hash_find(&amp;class_type-&gt;function_table, "valid",   sizeof("valid"),   (void **) &amp;class_type-&gt;iterator_funcs.zf_valid);</span>
+<span class='curline'><a href='../S/1047.html#L257'>class_type</a>        257 ext/spl/spl_array.c 			zend_hash_find(&amp;class_type-&gt;function_table, "key",     sizeof("key"),     (void **) &amp;class_type-&gt;iterator_funcs.zf_key);</span>
+<span class='curline'><a href='../S/1047.html#L258'>class_type</a>        258 ext/spl/spl_array.c 			zend_hash_find(&amp;class_type-&gt;function_table, "current", sizeof("current"), (void **) &amp;class_type-&gt;iterator_funcs.zf_current);</span>
+<span class='curline'><a href='../S/1047.html#L259'>class_type</a>        259 ext/spl/spl_array.c 			zend_hash_find(&amp;class_type-&gt;function_table, "next",    sizeof("next"),    (void **) &amp;class_type-&gt;iterator_funcs.zf_next);</span>
+<span class='curline'><a href='../S/1047.html#L262'>class_type</a>        262 ext/spl/spl_array.c 			if (class_type-&gt;iterator_funcs.zf_rewind-&gt;common.scope  != parent) intern-&gt;ar_flags |= SPL_ARRAY_OVERLOADED_REWIND;</span>
+<span class='curline'><a href='../S/1047.html#L263'>class_type</a>        263 ext/spl/spl_array.c 			if (class_type-&gt;iterator_funcs.zf_valid-&gt;common.scope   != parent) intern-&gt;ar_flags |= SPL_ARRAY_OVERLOADED_VALID;</span>
+<span class='curline'><a href='../S/1047.html#L264'>class_type</a>        264 ext/spl/spl_array.c 			if (class_type-&gt;iterator_funcs.zf_key-&gt;common.scope     != parent) intern-&gt;ar_flags |= SPL_ARRAY_OVERLOADED_KEY;</span>
+<span class='curline'><a href='../S/1047.html#L265'>class_type</a>        265 ext/spl/spl_array.c 			if (class_type-&gt;iterator_funcs.zf_current-&gt;common.scope != parent) intern-&gt;ar_flags |= SPL_ARRAY_OVERLOADED_CURRENT;</span>
+<span class='curline'><a href='../S/1047.html#L266'>class_type</a>        266 ext/spl/spl_array.c 			if (class_type-&gt;iterator_funcs.zf_next-&gt;common.scope    != parent) intern-&gt;ar_flags |= SPL_ARRAY_OVERLOADED_NEXT;</span>
+<span class='curline'><a href='../S/1047.html#L276'>class_type</a>        276 ext/spl/spl_array.c static zend_object_value spl_array_object_new(zend_class_entry *class_type TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1047.html#L279'>class_type</a>        279 ext/spl/spl_array.c 	return spl_array_object_new_ex(class_type, &amp;tmp, NULL, 0 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1049.html#L147'>class_type</a>        147 ext/spl/spl_directory.c static zend_object_value spl_filesystem_object_new_ex(zend_class_entry *class_type, spl_filesystem_object **obj TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1049.html#L159'>class_type</a>        159 ext/spl/spl_directory.c 	zend_object_std_init(&amp;intern-&gt;std, class_type TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1049.html#L160'>class_type</a>        160 ext/spl/spl_directory.c 	object_properties_init(&amp;intern-&gt;std, class_type);</span>
+<span class='curline'><a href='../S/1049.html#L170'>class_type</a>        170 ext/spl/spl_directory.c static zend_object_value spl_filesystem_object_new(zend_class_entry *class_type TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1049.html#L172'>class_type</a>        172 ext/spl/spl_directory.c 	return spl_filesystem_object_new_ex(class_type, NULL TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1049.html#L177'>class_type</a>        177 ext/spl/spl_directory.c static zend_object_value spl_filesystem_object_new_check(zend_class_entry *class_type TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1049.html#L179'>class_type</a>        179 ext/spl/spl_directory.c 	zend_object_value ret = spl_filesystem_object_new_ex(class_type, NULL TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1051.html#L367'>class_type</a>        367 ext/spl/spl_dllist.c static zend_object_value spl_dllist_object_new_ex(zend_class_entry *class_type, spl_dllist_object **obj, zval *orig, int clone_orig TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1051.html#L371'>class_type</a>        371 ext/spl/spl_dllist.c 	zend_class_entry  *parent = class_type;</span>
+<span class='curline'><a href='../S/1051.html#L378'>class_type</a>        378 ext/spl/spl_dllist.c 	zend_object_std_init(&amp;intern-&gt;std, class_type TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1051.html#L379'>class_type</a>        379 ext/spl/spl_dllist.c 	object_properties_init(&amp;intern-&gt;std, class_type);</span>
+<span class='curline'><a href='../S/1051.html#L431'>class_type</a>        431 ext/spl/spl_dllist.c 		zend_hash_find(&amp;class_type-&gt;function_table, "offsetget",    sizeof("offsetget"),    (void **) &amp;intern-&gt;fptr_offset_get);</span>
+<span class='curline'><a href='../S/1051.html#L435'>class_type</a>        435 ext/spl/spl_dllist.c 		zend_hash_find(&amp;class_type-&gt;function_table, "offsetset",    sizeof("offsetset"),    (void **) &amp;intern-&gt;fptr_offset_set);</span>
+<span class='curline'><a href='../S/1051.html#L439'>class_type</a>        439 ext/spl/spl_dllist.c 		zend_hash_find(&amp;class_type-&gt;function_table, "offsetexists", sizeof("offsetexists"), (void **) &amp;intern-&gt;fptr_offset_has);</span>
+<span class='curline'><a href='../S/1051.html#L443'>class_type</a>        443 ext/spl/spl_dllist.c 		zend_hash_find(&amp;class_type-&gt;function_table, "offsetunset",  sizeof("offsetunset"),  (void **) &amp;intern-&gt;fptr_offset_del);</span>
+<span class='curline'><a href='../S/1051.html#L447'>class_type</a>        447 ext/spl/spl_dllist.c 		zend_hash_find(&amp;class_type-&gt;function_table, "count",        sizeof("count"),        (void **) &amp;intern-&gt;fptr_count);</span>
+<span class='curline'><a href='../S/1051.html#L457'>class_type</a>        457 ext/spl/spl_dllist.c static zend_object_value spl_dllist_object_new(zend_class_entry *class_type TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1051.html#L460'>class_type</a>        460 ext/spl/spl_dllist.c 	return spl_dllist_object_new_ex(class_type, &amp;tmp, NULL, 0 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1057.html#L223'>class_type</a>        223 ext/spl/spl_fixedarray.c static zend_object_value spl_fixedarray_object_new_ex(zend_class_entry *class_type, spl_fixedarray_object **obj, zval *orig, int clone_orig TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1057.html#L227'>class_type</a>        227 ext/spl/spl_fixedarray.c 	zend_class_entry     *parent = class_type;</span>
+<span class='curline'><a href='../S/1057.html#L234'>class_type</a>        234 ext/spl/spl_fixedarray.c 	zend_object_std_init(&amp;intern-&gt;std, class_type TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1057.html#L235'>class_type</a>        235 ext/spl/spl_fixedarray.c 	object_properties_init(&amp;intern-&gt;std, class_type);</span>
+<span class='curline'><a href='../S/1057.html#L256'>class_type</a>        256 ext/spl/spl_fixedarray.c 			class_type-&gt;get_iterator = spl_fixedarray_get_iterator;</span>
+<span class='curline'><a href='../S/1057.html#L269'>class_type</a>        269 ext/spl/spl_fixedarray.c 	if (!class_type-&gt;iterator_funcs.zf_current) {</span>
+<span class='curline'><a href='../S/1057.html#L270'>class_type</a>        270 ext/spl/spl_fixedarray.c 		zend_hash_find(&amp;class_type-&gt;function_table, "rewind",  sizeof("rewind"),  (void **) &amp;class_type-&gt;iterator_funcs.zf_rewind);</span>
+<span class='curline'><a href='../S/1057.html#L271'>class_type</a>        271 ext/spl/spl_fixedarray.c 		zend_hash_find(&amp;class_type-&gt;function_table, "valid",   sizeof("valid"),   (void **) &amp;class_type-&gt;iterator_funcs.zf_valid);</span>
+<span class='curline'><a href='../S/1057.html#L272'>class_type</a>        272 ext/spl/spl_fixedarray.c 		zend_hash_find(&amp;class_type-&gt;function_table, "key",     sizeof("key"),     (void **) &amp;class_type-&gt;iterator_funcs.zf_key);</span>
+<span class='curline'><a href='../S/1057.html#L273'>class_type</a>        273 ext/spl/spl_fixedarray.c 		zend_hash_find(&amp;class_type-&gt;function_table, "current", sizeof("current"), (void **) &amp;class_type-&gt;iterator_funcs.zf_current);</span>
+<span class='curline'><a href='../S/1057.html#L274'>class_type</a>        274 ext/spl/spl_fixedarray.c 		zend_hash_find(&amp;class_type-&gt;function_table, "next",    sizeof("next"),    (void **) &amp;class_type-&gt;iterator_funcs.zf_next);</span>
+<span class='curline'><a href='../S/1057.html#L277'>class_type</a>        277 ext/spl/spl_fixedarray.c 		if (class_type-&gt;iterator_funcs.zf_rewind-&gt;common.scope  != parent) { </span>
+<span class='curline'><a href='../S/1057.html#L280'>class_type</a>        280 ext/spl/spl_fixedarray.c 		if (class_type-&gt;iterator_funcs.zf_valid-&gt;common.scope   != parent) { </span>
+<span class='curline'><a href='../S/1057.html#L283'>class_type</a>        283 ext/spl/spl_fixedarray.c 		if (class_type-&gt;iterator_funcs.zf_key-&gt;common.scope     != parent) { </span>
+<span class='curline'><a href='../S/1057.html#L286'>class_type</a>        286 ext/spl/spl_fixedarray.c 		if (class_type-&gt;iterator_funcs.zf_current-&gt;common.scope != parent) { </span>
+<span class='curline'><a href='../S/1057.html#L289'>class_type</a>        289 ext/spl/spl_fixedarray.c 		if (class_type-&gt;iterator_funcs.zf_next-&gt;common.scope    != parent) { </span>
+<span class='curline'><a href='../S/1057.html#L293'>class_type</a>        293 ext/spl/spl_fixedarray.c 		zend_hash_find(&amp;class_type-&gt;function_table, "offsetget",    sizeof("offsetget"),    (void **) &amp;intern-&gt;fptr_offset_get);</span>
+<span class='curline'><a href='../S/1057.html#L297'>class_type</a>        297 ext/spl/spl_fixedarray.c 		zend_hash_find(&amp;class_type-&gt;function_table, "offsetset",    sizeof("offsetset"),    (void **) &amp;intern-&gt;fptr_offset_set);</span>
+<span class='curline'><a href='../S/1057.html#L301'>class_type</a>        301 ext/spl/spl_fixedarray.c 		zend_hash_find(&amp;class_type-&gt;function_table, "offsetexists", sizeof("offsetexists"), (void **) &amp;intern-&gt;fptr_offset_has);</span>
+<span class='curline'><a href='../S/1057.html#L305'>class_type</a>        305 ext/spl/spl_fixedarray.c 		zend_hash_find(&amp;class_type-&gt;function_table, "offsetunset",  sizeof("offsetunset"),  (void **) &amp;intern-&gt;fptr_offset_del);</span>
+<span class='curline'><a href='../S/1057.html#L309'>class_type</a>        309 ext/spl/spl_fixedarray.c 		zend_hash_find(&amp;class_type-&gt;function_table, "count",        sizeof("count"),        (void **) &amp;intern-&gt;fptr_count);</span>
+<span class='curline'><a href='../S/1057.html#L319'>class_type</a>        319 ext/spl/spl_fixedarray.c static zend_object_value spl_fixedarray_new(zend_class_entry *class_type TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1057.html#L322'>class_type</a>        322 ext/spl/spl_fixedarray.c 	return spl_fixedarray_object_new_ex(class_type, &amp;tmp, NULL, 0 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1060.html#L26'>class_type</a>         26 ext/spl/spl_functions.h typedef zend_object_value (*create_object_func_t)(zend_class_entry *class_type TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1061.html#L385'>class_type</a>        385 ext/spl/spl_heap.c static zend_object_value spl_heap_object_new_ex(zend_class_entry *class_type, spl_heap_object **obj, zval *orig, int clone_orig TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1061.html#L389'>class_type</a>        389 ext/spl/spl_heap.c 	zend_class_entry  *parent = class_type;</span>
+<span class='curline'><a href='../S/1061.html#L396'>class_type</a>        396 ext/spl/spl_heap.c 	zend_object_std_init(&amp;intern-&gt;std, class_type TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1061.html#L397'>class_type</a>        397 ext/spl/spl_heap.c 	object_properties_init(&amp;intern-&gt;std, class_type);</span>
+<span class='curline'><a href='../S/1061.html#L459'>class_type</a>        459 ext/spl/spl_heap.c 		zend_hash_find(&amp;class_type-&gt;function_table, "compare",    sizeof("compare"),    (void **) &amp;intern-&gt;fptr_cmp);</span>
+<span class='curline'><a href='../S/1061.html#L463'>class_type</a>        463 ext/spl/spl_heap.c 		zend_hash_find(&amp;class_type-&gt;function_table, "count",        sizeof("count"),        (void **) &amp;intern-&gt;fptr_count);</span>
+<span class='curline'><a href='../S/1061.html#L473'>class_type</a>        473 ext/spl/spl_heap.c static zend_object_value spl_heap_object_new(zend_class_entry *class_type TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1061.html#L476'>class_type</a>        476 ext/spl/spl_heap.c 	return spl_heap_object_new_ex(class_type, &amp;tmp, NULL, 0 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1063.html#L939'>class_type</a>        939 ext/spl/spl_iterators.c static zend_object_value spl_RecursiveIteratorIterator_new_ex(zend_class_entry *class_type, int init_prefix TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1063.html#L958'>class_type</a>        958 ext/spl/spl_iterators.c 	zend_object_std_init(&amp;intern-&gt;std, class_type TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1063.html#L959'>class_type</a>        959 ext/spl/spl_iterators.c 	object_properties_init(&amp;intern-&gt;std, class_type);</span>
+<span class='curline'><a href='../S/1063.html#L968'>class_type</a>        968 ext/spl/spl_iterators.c static zend_object_value spl_RecursiveIteratorIterator_new(zend_class_entry *class_type TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1063.html#L970'>class_type</a>        970 ext/spl/spl_iterators.c 	return spl_RecursiveIteratorIterator_new_ex(class_type, 0 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1063.html#L975'>class_type</a>        975 ext/spl/spl_iterators.c static zend_object_value spl_RecursiveTreeIterator_new(zend_class_entry *class_type TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1063.html#L977'>class_type</a>        977 ext/spl/spl_iterators.c 	return spl_RecursiveIteratorIterator_new_ex(class_type, 1 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1063.html#L1335'>class_type</a>       1335 ext/spl/spl_iterators.c static int spl_dual_it_gets_implemented(zend_class_entry *interface, zend_class_entry *class_type TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1063.html#L1337'>class_type</a>       1337 ext/spl/spl_iterators.c 	class_type-&gt;iterator_funcs.zf_valid = NULL;</span>
+<span class='curline'><a href='../S/1063.html#L1338'>class_type</a>       1338 ext/spl/spl_iterators.c 	class_type-&gt;iterator_funcs.zf_current = NULL;</span>
+<span class='curline'><a href='../S/1063.html#L1339'>class_type</a>       1339 ext/spl/spl_iterators.c 	class_type-&gt;iterator_funcs.zf_key = NULL;</span>
+<span class='curline'><a href='../S/1063.html#L1340'>class_type</a>       1340 ext/spl/spl_iterators.c 	class_type-&gt;iterator_funcs.zf_next = NULL;</span>
+<span class='curline'><a href='../S/1063.html#L1341'>class_type</a>       1341 ext/spl/spl_iterators.c 	class_type-&gt;iterator_funcs.zf_rewind = NULL;</span>
+<span class='curline'><a href='../S/1063.html#L1342'>class_type</a>       1342 ext/spl/spl_iterators.c 	if (!class_type-&gt;iterator_funcs.funcs) {</span>
+<span class='curline'><a href='../S/1063.html#L1343'>class_type</a>       1343 ext/spl/spl_iterators.c 		class_type-&gt;iterator_funcs.funcs = &amp;zend_interface_iterator_funcs_iterator;</span>
+<span class='curline'><a href='../S/1063.html#L2402'>class_type</a>       2402 ext/spl/spl_iterators.c static zend_object_value spl_dual_it_new(zend_class_entry *class_type TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1063.html#L2411'>class_type</a>       2411 ext/spl/spl_iterators.c 	zend_object_std_init(&amp;intern-&gt;std, class_type TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1063.html#L2412'>class_type</a>       2412 ext/spl/spl_iterators.c 	object_properties_init(&amp;intern-&gt;std, class_type);</span>
+<span class='curline'><a href='../S/1065.html#L260'>class_type</a>        260 ext/spl/spl_observer.c static zend_object_value spl_object_storage_new_ex(zend_class_entry *class_type, spl_SplObjectStorage **obj, zval *orig TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1065.html#L264'>class_type</a>        264 ext/spl/spl_observer.c 	zend_class_entry     *parent = class_type;</span>
+<span class='curline'><a href='../S/1065.html#L270'>class_type</a>        270 ext/spl/spl_observer.c 	zend_object_std_init(&amp;intern-&gt;std, class_type TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1065.html#L271'>class_type</a>        271 ext/spl/spl_observer.c 	object_properties_init(&amp;intern-&gt;std, class_type);</span>
+<span class='curline'><a href='../S/1065.html#L285'>class_type</a>        285 ext/spl/spl_observer.c 			if (class_type != spl_ce_SplObjectStorage) {</span>
+<span class='curline'><a href='../S/1065.html#L286'>class_type</a>        286 ext/spl/spl_observer.c 				zend_hash_find(&amp;class_type-&gt;function_table, "gethash",    sizeof("gethash"),    (void **) &amp;intern-&gt;fptr_get_hash);</span>
+<span class='curline'><a href='../S/1065.html#L422'>class_type</a>        422 ext/spl/spl_observer.c static zend_object_value spl_SplObjectStorage_new(zend_class_entry *class_type TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1065.html#L425'>class_type</a>        425 ext/spl/spl_observer.c 	return spl_object_storage_new_ex(class_type, &amp;tmp, NULL TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1072.html#L2186'>class_type</a>       2186 ext/sqlite3/sqlite3.c static zend_object_value php_sqlite3_object_new(zend_class_entry *class_type TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1072.html#L2199'>class_type</a>       2199 ext/sqlite3/sqlite3.c 	zend_object_std_init(&amp;intern-&gt;zo, class_type TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1072.html#L2200'>class_type</a>       2200 ext/sqlite3/sqlite3.c 	object_properties_init(&amp;intern-&gt;zo, class_type);</span>
+<span class='curline'><a href='../S/1072.html#L2209'>class_type</a>       2209 ext/sqlite3/sqlite3.c static zend_object_value php_sqlite3_stmt_object_new(zend_class_entry *class_type TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1072.html#L2220'>class_type</a>       2220 ext/sqlite3/sqlite3.c 	zend_object_std_init(&amp;intern-&gt;zo, class_type TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1072.html#L2221'>class_type</a>       2221 ext/sqlite3/sqlite3.c 	object_properties_init(&amp;intern-&gt;zo, class_type);</span>
+<span class='curline'><a href='../S/1072.html#L2230'>class_type</a>       2230 ext/sqlite3/sqlite3.c static zend_object_value php_sqlite3_result_object_new(zend_class_entry *class_type TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1072.html#L2243'>class_type</a>       2243 ext/sqlite3/sqlite3.c 	zend_object_std_init(&amp;intern-&gt;zo, class_type TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1072.html#L2244'>class_type</a>       2244 ext/sqlite3/sqlite3.c 	object_properties_init(&amp;intern-&gt;zo, class_type);</span>
+<span class='curline'><a href='../S/1125.html#L104'>class_type</a>        104 ext/standard/incomplete_class.c static zend_object_value php_create_incomplete_object(zend_class_entry *class_type TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1125.html#L109'>class_type</a>        109 ext/standard/incomplete_class.c 	value = zend_objects_new(&amp;object, class_type TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1125.html#L112'>class_type</a>        112 ext/standard/incomplete_class.c 	object_properties_init(object, class_type);</span>
+<span class='curline'><a href='../S/1214.html#L674'>class_type</a>        674 ext/tidy/tidy.c static void tidy_object_new(zend_class_entry *class_type, zend_object_handlers *handlers,</span>
+<span class='curline'><a href='../S/1214.html#L681'>class_type</a>        681 ext/tidy/tidy.c 	zend_object_std_init(&amp;intern-&gt;std, class_type TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1214.html#L682'>class_type</a>        682 ext/tidy/tidy.c 	object_properties_init(&amp;intern-&gt;std, class_type);</span>
+<span class='curline'><a href='../S/1214.html#L718'>class_type</a>        718 ext/tidy/tidy.c static zend_object_value tidy_object_new_node(zend_class_entry *class_type TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1214.html#L721'>class_type</a>        721 ext/tidy/tidy.c 	tidy_object_new(class_type, &amp;tidy_object_handlers_node, &amp;retval, is_node TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1214.html#L725'>class_type</a>        725 ext/tidy/tidy.c static zend_object_value tidy_object_new_doc(zend_class_entry *class_type TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1214.html#L728'>class_type</a>        728 ext/tidy/tidy.c 	tidy_object_new(class_type, &amp;tidy_object_handlers_doc, &amp;retval, is_doc TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1225.html#L391'>class_type</a>        391 ext/xmlreader/php_xmlreader.c zend_object_value xmlreader_objects_new(zend_class_entry *class_type TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1225.html#L403'>class_type</a>        403 ext/xmlreader/php_xmlreader.c 	zend_object_std_init(&amp;intern-&gt;std, class_type TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1225.html#L404'>class_type</a>        404 ext/xmlreader/php_xmlreader.c 	object_properties_init(&amp;intern-&gt;std, class_type);</span>
+<span class='curline'><a href='../S/1254.html#L143'>class_type</a>        143 ext/xmlwriter/php_xmlwriter.c static zend_object_value xmlwriter_object_new(zend_class_entry *class_type TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1254.html#L152'>class_type</a>        152 ext/xmlwriter/php_xmlwriter.c 	zend_object_std_init(&amp;intern-&gt;zo, class_type TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1254.html#L153'>class_type</a>        153 ext/xmlwriter/php_xmlwriter.c 	object_properties_init(&amp;intern-&gt;zo, class_type);</span>
+<span class='curline'><a href='../S/1256.html#L114'>class_type</a>        114 ext/xsl/php_xsl.c zend_object_value xsl_objects_new(zend_class_entry *class_type TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1256.html#L132'>class_type</a>        132 ext/xsl/php_xsl.c 	zend_object_std_init(&amp;intern-&gt;std, class_type TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1256.html#L133'>class_type</a>        133 ext/xsl/php_xsl.c 	object_properties_init(&amp;intern-&gt;std, class_type);</span>
+<span class='curline'><a href='../S/1351.html#L1125'>class_type</a>       1125 ext/zip/php_zip.c static zend_object_value php_zip_object_new(zend_class_entry *class_type TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1351.html#L1143'>class_type</a>       1143 ext/zip/php_zip.c 	zend_object_std_init(&amp;intern-&gt;zo, class_type TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1351.html#L1147'>class_type</a>       1147 ext/zip/php_zip.c 	intern-&gt;zo.ce = class_type;</span>
+<span class='curline'><a href='../S/1351.html#L1152'>class_type</a>       1152 ext/zip/php_zip.c 	zend_hash_copy(intern-&gt;zo.properties, &amp;class_type-&gt;default_properties, (copy_ctor_func_t) zval_add_ref,</span>
+<span class='curline'><a href='../S/1351.html#L1155'>class_type</a>       1155 ext/zip/php_zip.c 	object_properties_init(&amp;intern-&gt;zo, class_type);</span>
+</pre>
+</body>
+</html>

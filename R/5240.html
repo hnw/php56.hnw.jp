@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>NSG</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/1427.html#L95'>NSG</a>                95 sapi/aolserver/aolserver.c 		n = Ns_ConnWrite(NSG(conn), (void *) str, str_length);</span>
+<span class='curline'><a href='../S/1427.html#L129'>NSG</a>               129 sapi/aolserver/aolserver.c 			Ns_ConnSetTypeHeader(NSG(conn), header_content);</span>
+<span class='curline'><a href='../S/1427.html#L131'>NSG</a>               131 sapi/aolserver/aolserver.c 			Ns_ConnSetHeaders(NSG(conn), header_name, header_content);</span>
+<span class='curline'><a href='../S/1427.html#L151'>NSG</a>               151 sapi/aolserver/aolserver.c 		Ns_ConnSetRequiredHeaders(NSG(conn), "text/html", 0);</span>
+<span class='curline'><a href='../S/1427.html#L154'>NSG</a>               154 sapi/aolserver/aolserver.c 	Ns_ConnFlushHeaders(NSG(conn), SG(sapi_headers).http_response_code);</span>
+<span class='curline'><a href='../S/1427.html#L170'>NSG</a>               170 sapi/aolserver/aolserver.c 	max_read = MIN(NSG(data_avail), count_bytes);</span>
+<span class='curline'><a href='../S/1427.html#L172'>NSG</a>               172 sapi/aolserver/aolserver.c 	total_read = Ns_ConnRead(NSG(conn), buf, max_read);</span>
+<span class='curline'><a href='../S/1427.html#L177'>NSG</a>               177 sapi/aolserver/aolserver.c 		NSG(data_avail) -= total_read;</span>
+<span class='curline'><a href='../S/1427.html#L193'>NSG</a>               193 sapi/aolserver/aolserver.c 	i = Ns_SetIFind(NSG(conn-&gt;headers), "cookie");</span>
+<span class='curline'><a href='../S/1427.html#L195'>NSG</a>               195 sapi/aolserver/aolserver.c 		http_cookie = Ns_SetValue(NSG(conn-&gt;headers), i);</span>
+<span class='curline'><a href='../S/1427.html#L229'>NSG</a>               229 sapi/aolserver/aolserver.c 	php_info_print_table_row(2, "HTTP Request", NSG(conn)-&gt;request-&gt;line);</span>
+<span class='curline'><a href='../S/1427.html#L230'>NSG</a>               230 sapi/aolserver/aolserver.c 	for (i = 0; i &lt; Ns_SetSize(NSG(conn)-&gt;headers); i++) {</span>
+<span class='curline'><a href='../S/1427.html#L231'>NSG</a>               231 sapi/aolserver/aolserver.c 		php_info_print_table_row(2, Ns_SetKey(NSG(conn)-&gt;headers, i), Ns_SetValue(NSG(conn)-&gt;headers, i));</span>
+<span class='curline'><a href='../S/1427.html#L235'>NSG</a>               235 sapi/aolserver/aolserver.c 	for (i = 0; i &lt; Ns_SetSize(NSG(conn)-&gt;outputheaders); i++) {</span>
+<span class='curline'><a href='../S/1427.html#L236'>NSG</a>               236 sapi/aolserver/aolserver.c 		php_info_print_table_row(2, Ns_SetKey(NSG(conn)-&gt;outputheaders, i), Ns_SetValue(NSG(conn)-&gt;outputheaders, i));</span>
+<span class='curline'><a href='../S/1427.html#L272'>NSG</a>               272 sapi/aolserver/aolserver.c 	for (i = 0; i &lt; Ns_SetSize(NSG(conn-&gt;headers)); i++) {</span>
+<span class='curline'><a href='../S/1427.html#L273'>NSG</a>               273 sapi/aolserver/aolserver.c 		char *key = Ns_SetKey(NSG(conn-&gt;headers), i);</span>
+<span class='curline'><a href='../S/1427.html#L274'>NSG</a>               274 sapi/aolserver/aolserver.c 		char *value = Ns_SetValue(NSG(conn-&gt;headers), i);</span>
+<span class='curline'><a href='../S/1427.html#L310'>NSG</a>               310 sapi/aolserver/aolserver.c 	for(i = 0; i &lt; Ns_SetSize(NSG(conn-&gt;headers)); i++) {</span>
+<span class='curline'><a href='../S/1427.html#L311'>NSG</a>               311 sapi/aolserver/aolserver.c 		char *key = Ns_SetKey(NSG(conn-&gt;headers), i);</span>
+<span class='curline'><a href='../S/1427.html#L312'>NSG</a>               312 sapi/aolserver/aolserver.c 		char *value = Ns_SetValue(NSG(conn-&gt;headers), i);</span>
+<span class='curline'><a href='../S/1427.html#L331'>NSG</a>               331 sapi/aolserver/aolserver.c 	snprintf(buf, NS_BUF_SIZE, "HTTP/%1.1f", NSG(conn)-&gt;request-&gt;version);</span>
+<span class='curline'><a href='../S/1427.html#L334'>NSG</a>               334 sapi/aolserver/aolserver.c 	ADD_STRINGX("REQUEST_METHOD", NSG(conn)-&gt;request-&gt;method);</span>
+<span class='curline'><a href='../S/1427.html#L336'>NSG</a>               336 sapi/aolserver/aolserver.c 	if(NSG(conn)-&gt;request-&gt;query)</span>
+<span class='curline'><a href='../S/1427.html#L337'>NSG</a>               337 sapi/aolserver/aolserver.c 		ADD_STRINGX("QUERY_STRING", NSG(conn)-&gt;request-&gt;query);</span>
+<span class='curline'><a href='../S/1427.html#L341'>NSG</a>               341 sapi/aolserver/aolserver.c 	ADD_STRINGX("REMOTE_ADDR", Ns_ConnPeer(NSG(conn)));</span>
+<span class='curline'><a href='../S/1427.html#L343'>NSG</a>               343 sapi/aolserver/aolserver.c 	snprintf(buf, NS_BUF_SIZE, "%d", Ns_ConnPeerPort(NSG(conn)));</span>
+<span class='curline'><a href='../S/1427.html#L346'>NSG</a>               346 sapi/aolserver/aolserver.c 	snprintf(buf, NS_BUF_SIZE, "%d", Ns_ConnPort(NSG(conn)));</span>
+<span class='curline'><a href='../S/1427.html#L349'>NSG</a>               349 sapi/aolserver/aolserver.c 	tmp = Ns_ConnHost(NSG(conn));</span>
+<span class='curline'><a href='../S/1427.html#L439'>NSG</a>               439 sapi/aolserver/aolserver.c 	server = Ns_ConnServer(NSG(conn));</span>
+<span class='curline'><a href='../S/1427.html#L442'>NSG</a>               442 sapi/aolserver/aolserver.c 	SG(request_info).query_string = safe_strdup(NSG(conn-&gt;request-&gt;query));</span>
+<span class='curline'><a href='../S/1427.html#L445'>NSG</a>               445 sapi/aolserver/aolserver.c 	Ns_UrlToFile(&amp;ds, server, NSG(conn-&gt;request-&gt;url));</span>
+<span class='curline'><a href='../S/1427.html#L452'>NSG</a>               452 sapi/aolserver/aolserver.c 	SG(request_info).request_method = NSG(conn)-&gt;request-&gt;method;</span>
+<span class='curline'><a href='../S/1427.html#L453'>NSG</a>               453 sapi/aolserver/aolserver.c 	if(NSG(conn)-&gt;request-&gt;version &gt; 1.0) SG(request_info).proto_num = 1001;</span>
+<span class='curline'><a href='../S/1427.html#L455'>NSG</a>               455 sapi/aolserver/aolserver.c 	SG(request_info).content_length = Ns_ConnContentLength(NSG(conn));</span>
+<span class='curline'><a href='../S/1427.html#L456'>NSG</a>               456 sapi/aolserver/aolserver.c 	index = Ns_SetIFind(NSG(conn)-&gt;headers, "content-type");</span>
+<span class='curline'><a href='../S/1427.html#L458'>NSG</a>               458 sapi/aolserver/aolserver.c 		Ns_SetValue(NSG(conn)-&gt;headers, index);</span>
+<span class='curline'><a href='../S/1427.html#L461'>NSG</a>               461 sapi/aolserver/aolserver.c 	tmp = Ns_ConnAuthUser(NSG(conn));</span>
+<span class='curline'><a href='../S/1427.html#L466'>NSG</a>               466 sapi/aolserver/aolserver.c 	tmp = Ns_ConnAuthPasswd(NSG(conn));</span>
+<span class='curline'><a href='../S/1427.html#L471'>NSG</a>               471 sapi/aolserver/aolserver.c 	NSG(data_avail) = SG(request_info).content_length;</span>
+<span class='curline'><a href='../S/1427.html#L499'>NSG</a>               499 sapi/aolserver/aolserver.c 	NSG(conn) = conn;</span>
+<span class='curline'><a href='../S/1463.html#L413'>NSG</a>               413 sapi/continuity/capi.c    char *query_string = lstFset_get(NSG(t-&gt;vars), "query");</span>
+<span class='curline'><a href='../S/1463.html#L414'>NSG</a>               414 sapi/continuity/capi.c    char *uri = lstFset_get(NSG(t-&gt;vars), "uri");</span>
+<span class='curline'><a href='../S/1463.html#L415'>NSG</a>               415 sapi/continuity/capi.c    char *path_info = lstFset_get(NSG(t-&gt;vars), "path-info");</span>
+<span class='curline'><a href='../S/1463.html#L416'>NSG</a>               416 sapi/continuity/capi.c    char *path_translated = lstFset_get(NSG(t-&gt;vars), "path");</span>
+<span class='curline'><a href='../S/1463.html#L417'>NSG</a>               417 sapi/continuity/capi.c    char *request_method = lstFset_get(NSG(t-&gt;vars), "method");</span>
+<span class='curline'><a href='../S/1463.html#L418'>NSG</a>               418 sapi/continuity/capi.c    char *content_type = lstFset_get(NSG(t-&gt;req_hdrs), "content-type");</span>
+<span class='curline'><a href='../S/1463.html#L419'>NSG</a>               419 sapi/continuity/capi.c    char *content_length = lstFset_get(NSG(t-&gt;req_hdrs), "content-length");</span>
+<span class='curline'><a href='../S/1545.html#L850'>NSG</a>               850 sapi/nsapi/nsapi.c 	for (i=0; i &lt; NSG(pb)-&gt;hsize; i++) {</span>
+<span class='curline'><a href='../S/1545.html#L851'>NSG</a>               851 sapi/nsapi/nsapi.c 		entry=NSG(pb)-&gt;ht[i];</span>
+<span class='curline'><a href='../S/1545.html#L864'>NSG</a>               864 sapi/nsapi/nsapi.c 					log_error(LOG_WARN, pblock_findval("fn", NSG(pb)), NSG(sn), NSG(rq), "Cannot change php.ini key \"%s\" to \"%s\"", entry-&gt;param-&gt;name, entry-&gt;param-&gt;value);</span>
+<span class='curline'><a href='../S/1583.html#L203'>NSG</a>               203 sapi/phttpd/phttpd.c     server = Ns_ConnServer(NSG(conn));</span>
+<span class='curline'><a href='../S/1583.html#L206'>NSG</a>               206 sapi/phttpd/phttpd.c     Ns_UrlToFile(&amp;ds, server, NSG(conn-&gt;request-&gt;url));</span>
+<span class='curline'><a href='../S/1583.html#L213'>NSG</a>               213 sapi/phttpd/phttpd.c     SG(request_info).content_length = Ns_ConnContentLength(NSG(conn));</span>
+<span class='curline'><a href='../S/1583.html#L214'>NSG</a>               214 sapi/phttpd/phttpd.c     index = Ns_SetIFind(NSG(conn)-&gt;headers, "content-type");</span>
+<span class='curline'><a href='../S/1583.html#L216'>NSG</a>               216 sapi/phttpd/phttpd.c         Ns_SetValue(NSG(conn)-&gt;headers, index);</span>
+<span class='curline'><a href='../S/1583.html#L218'>NSG</a>               218 sapi/phttpd/phttpd.c     tmp = Ns_ConnAuthUser(NSG(conn));</span>
+<span class='curline'><a href='../S/1583.html#L224'>NSG</a>               224 sapi/phttpd/phttpd.c     tmp = Ns_ConnAuthPasswd(NSG(conn));</span>
+<span class='curline'><a href='../S/1583.html#L230'>NSG</a>               230 sapi/phttpd/phttpd.c     NSG(data_avail) = SG(request_info).content_length;</span>
+</pre>
+</body>
+</html>

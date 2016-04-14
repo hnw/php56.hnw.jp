@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>ext/ereg/regex/regfree.c</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<a id='TOP' name='TOP'></a><h2 class='header'><a href='../mains.html'>root</a>/<a href='../files/1753.html'>ext</a>/<a href='../files/1770.html'>ereg</a>/<a href='../files/1771.html'>regex</a>/regfree.c</h2>
+<em class='comment'>/* [&lt;][&gt;]<a href='#L13'>[^]</a>[v][top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+<hr />
+<h2 class='header'>DEFINITIONS</h2>
+This source file includes following definitions.
+<ol>
+<li><a href='#L13' title='Defined at 13.'>API_EXPORT</a></li>
+</ol>
+<hr />
+<pre>
+<a id='L1' name='L1'></a>   1 <em class='sharp'>#include</em> &lt;sys/types.h&gt;
+<a id='L2' name='L2'></a>   2 <em class='sharp'>#include</em> &lt;stdio.h&gt;
+<a id='L3' name='L3'></a>   3 <em class='sharp'>#include</em> &lt;stdlib.h&gt;
+<a id='L4' name='L4'></a>   4 
+<a id='L5' name='L5'></a>   5 <em class='sharp'>#include</em> "<a href='166.html'>regex.h</a>"
+<a id='L6' name='L6'></a>   6 <em class='sharp'>#include</em> "<a href='171.html'>utils.h</a>"
+<a id='L7' name='L7'></a>   7 <em class='sharp'>#include</em> "<a href='167.html'>regex2.h</a>"
+<a id='L8' name='L8'></a>   8 
+<a id='L9' name='L9'></a>   9 <em class='comment'>/*</em>
+<a id='L10' name='L10'></a>  10 <em class='comment'> - regfree - free everything</em>
+<a id='L11' name='L11'></a>  11 <em class='comment'> = API_EXPORT(void) regfree(regex_t *);</em>
+<a id='L12' name='L12'></a>  12 <em class='comment'> */</em>
+<a id='L13' name='L13'></a>  13 <a href='../R/188.html' title='Multiple referred from 4 places.'>API_EXPORT</a>(<strong class='reserved'>void</strong>)
+<a id='L14' name='L14'></a>  14 <a href='../D/28841.html' title='Multiple defined in 5 places.'>regfree</a>(<a href='../Y/33559.html' title='Multiple used in 48 places.'>preg</a>)
+<a id='L15' name='L15'></a>  15 <a href='../D/28839.html' title='Multiple defined in 8 places.'>regex_t</a> *<a href='../Y/33559.html' title='Multiple used in 48 places.'>preg</a>;
+<a id='L16' name='L16'></a>  16 <em class='brace'>{</em>
+<a id='L17' name='L17'></a>  17         <strong class='reserved'>register</strong> <strong class='reserved'>struct</strong> <a href='../S/167.html#L109' title='Defined at 109 in ext/ereg/regex/regex2.h.'>re_guts</a> *<a href='../Y/18874.html' title='Multiple used in 503 places.'>g</a>;
+<a id='L18' name='L18'></a>  18 
+<a id='L19' name='L19'></a>  19         <strong class='reserved'>if</strong> (<a href='../Y/33559.html' title='Multiple used in 48 places.'>preg</a>-&gt;<a href='../Y/34355.html' title='Multiple used in 7 places.'>re_magic</a> != <a href='../S/167.html#L24' title='Defined at 24 in ext/ereg/regex/regex2.h.'>MAGIC1</a>)   <em class='comment'>/* oops */</em>
+<a id='L20' name='L20'></a>  20                 <strong class='reserved'>return</strong>;                 <em class='comment'>/* nice to complain, but hard */</em>
+<a id='L21' name='L21'></a>  21 
+<a id='L22' name='L22'></a>  22         <a href='../Y/18874.html' title='Multiple used in 503 places.'>g</a> = <a href='../Y/33559.html' title='Multiple used in 48 places.'>preg</a>-&gt;<a href='../Y/34354.html' title='Multiple used in 5 places.'>re_g</a>;
+<a id='L23' name='L23'></a>  23         <strong class='reserved'>if</strong> (<a href='../Y/18874.html' title='Multiple used in 503 places.'>g</a> == <a href='../D/6086.html' title='Multiple defined in 8 places.'>NULL</a> || <a href='../Y/18874.html' title='Multiple used in 503 places.'>g</a>-&gt;<a href='../S/186.html#L160' title='Defined at 160 in ext/fileinfo/libmagic/file.h.'>magic</a> != <a href='../S/167.html#L111' title='Defined at 111 in ext/ereg/regex/regex2.h.'>MAGIC2</a>)    <em class='comment'>/* oops again */</em>
+<a id='L24' name='L24'></a>  24                 <strong class='reserved'>return</strong>;
+<a id='L25' name='L25'></a>  25         <a href='../Y/33559.html' title='Multiple used in 48 places.'>preg</a>-&gt;<a href='../Y/34355.html' title='Multiple used in 7 places.'>re_magic</a> = 0;             <em class='comment'>/* mark it invalid */</em>
+<a id='L26' name='L26'></a>  26         <a href='../Y/18874.html' title='Multiple used in 503 places.'>g</a>-&gt;<a href='../S/186.html#L160' title='Defined at 160 in ext/fileinfo/libmagic/file.h.'>magic</a> = 0;                   <em class='comment'>/* mark it invalid */</em>
+<a id='L27' name='L27'></a>  27 
+<a id='L28' name='L28'></a>  28         <strong class='reserved'>if</strong> (<a href='../Y/18874.html' title='Multiple used in 503 places.'>g</a>-&gt;<a href='../Y/38114.html' title='Multiple used in 56 places.'>strip</a> != <a href='../D/6086.html' title='Multiple defined in 8 places.'>NULL</a>)
+<a id='L29' name='L29'></a>  29                 <a href='../S/1228.html#L36' title='Defined at 36 in ext/xmlrpc/libxmlrpc/base64.h.'>free</a>((<strong class='reserved'>char</strong> *)<a href='../Y/18874.html' title='Multiple used in 503 places.'>g</a>-&gt;<a href='../Y/38114.html' title='Multiple used in 56 places.'>strip</a>);
+<a id='L30' name='L30'></a>  30         <strong class='reserved'>if</strong> (<a href='../Y/18874.html' title='Multiple used in 503 places.'>g</a>-&gt;<a href='../Y/36304.html' title='Multiple used in 32 places.'>sets</a> != <a href='../D/6086.html' title='Multiple defined in 8 places.'>NULL</a>)
+<a id='L31' name='L31'></a>  31                 <a href='../S/1228.html#L36' title='Defined at 36 in ext/xmlrpc/libxmlrpc/base64.h.'>free</a>((<strong class='reserved'>char</strong> *)<a href='../Y/18874.html' title='Multiple used in 503 places.'>g</a>-&gt;<a href='../Y/36304.html' title='Multiple used in 32 places.'>sets</a>);
+<a id='L32' name='L32'></a>  32         <strong class='reserved'>if</strong> (<a href='../Y/18874.html' title='Multiple used in 503 places.'>g</a>-&gt;<a href='../Y/36287.html' title='Multiple used in 14 places.'>setbits</a> != <a href='../D/6086.html' title='Multiple defined in 8 places.'>NULL</a>)
+<a id='L33' name='L33'></a>  33                 <a href='../S/1228.html#L36' title='Defined at 36 in ext/xmlrpc/libxmlrpc/base64.h.'>free</a>((<strong class='reserved'>char</strong> *)<a href='../Y/18874.html' title='Multiple used in 503 places.'>g</a>-&gt;<a href='../Y/36287.html' title='Multiple used in 14 places.'>setbits</a>);
+<a id='L34' name='L34'></a>  34         <strong class='reserved'>if</strong> (<a href='../Y/18874.html' title='Multiple used in 503 places.'>g</a>-&gt;<a href='../Y/27266.html' title='Multiple used in 15 places.'>must</a> != <a href='../D/6086.html' title='Multiple defined in 8 places.'>NULL</a>)
+<a id='L35' name='L35'></a>  35                 <a href='../S/1228.html#L36' title='Defined at 36 in ext/xmlrpc/libxmlrpc/base64.h.'>free</a>(<a href='../Y/18874.html' title='Multiple used in 503 places.'>g</a>-&gt;<a href='../Y/27266.html' title='Multiple used in 15 places.'>must</a>);
+<a id='L36' name='L36'></a>  36         <a href='../S/1228.html#L36' title='Defined at 36 in ext/xmlrpc/libxmlrpc/base64.h.'>free</a>((<strong class='reserved'>char</strong> *)<a href='../Y/18874.html' title='Multiple used in 503 places.'>g</a>);
+<a id='L37' name='L37'></a>  37 <em class='brace'>}</em>
+</pre>
+<hr />
+<a id='BOTTOM' name='BOTTOM'></a>
+<em class='comment'>/* [&lt;][&gt;][^]<a href='#L13'>[v]</a><a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+</body>
+</html>

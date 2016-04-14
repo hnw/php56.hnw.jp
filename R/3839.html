@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>LIBXML</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/464.html#L352'>LIBXML</a>            352 ext/libxml/libxml.c 	context = php_stream_context_from_zval(LIBXML(stream_context), 0);</span>
+<span class='curline'><a href='../S/464.html#L396'>LIBXML</a>            396 ext/libxml/libxml.c 	if (LIBXML(entity_loader_disabled)) {</span>
+<span class='curline'><a href='../S/464.html#L502'>LIBXML</a>            502 ext/libxml/libxml.c 		zend_llist_add_element(LIBXML(error_list), &amp;error_copy);</span>
+<span class='curline'><a href='../S/464.html#L523'>LIBXML</a>            523 ext/libxml/libxml.c 	if (LIBXML(error_list)) {</span>
+<span class='curline'><a href='../S/464.html#L546'>LIBXML</a>            546 ext/libxml/libxml.c 	smart_str_appendl(&amp;LIBXML(error_buffer), buf, len);</span>
+<span class='curline'><a href='../S/464.html#L551'>LIBXML</a>            551 ext/libxml/libxml.c 		if (LIBXML(error_list)) {</span>
+<span class='curline'><a href='../S/464.html#L552'>LIBXML</a>            552 ext/libxml/libxml.c 			_php_list_set_error_structure(NULL, LIBXML(error_buffer).c);</span>
+<span class='curline'><a href='../S/464.html#L556'>LIBXML</a>            556 ext/libxml/libxml.c 					php_libxml_ctx_error_level(E_WARNING, ctx, LIBXML(error_buffer).c TSRMLS_CC);</span>
+<span class='curline'><a href='../S/464.html#L559'>LIBXML</a>            559 ext/libxml/libxml.c 					php_libxml_ctx_error_level(E_NOTICE, ctx, LIBXML(error_buffer).c TSRMLS_CC);</span>
+<span class='curline'><a href='../S/464.html#L562'>LIBXML</a>            562 ext/libxml/libxml.c 					php_error_docref(NULL TSRMLS_CC, E_WARNING, "%s", LIBXML(error_buffer).c);</span>
+<span class='curline'><a href='../S/464.html#L565'>LIBXML</a>            565 ext/libxml/libxml.c 		smart_str_free(&amp;LIBXML(error_buffer));</span>
+<span class='curline'><a href='../S/464.html#L583'>LIBXML</a>            583 ext/libxml/libxml.c 	fci = &amp;LIBXML(entity_loader).fci;</span>
+<span class='curline'><a href='../S/464.html#L621'>LIBXML</a>            621 ext/libxml/libxml.c 	retval = zend_call_function(fci, &amp;LIBXML(entity_loader).fcc TSRMLS_CC);</span>
+<span class='curline'><a href='../S/464.html#L780'>LIBXML</a>            780 ext/libxml/libxml.c 	oldcontext = LIBXML(stream_context);</span>
+<span class='curline'><a href='../S/464.html#L781'>LIBXML</a>            781 ext/libxml/libxml.c 	LIBXML(stream_context) = context;</span>
+<span class='curline'><a href='../S/464.html#L881'>LIBXML</a>            881 ext/libxml/libxml.c 		LIBXML(entity_loader_disabled) = 0;</span>
+<span class='curline'><a href='../S/464.html#L912'>LIBXML</a>            912 ext/libxml/libxml.c 	if (LIBXML(stream_context)) {</span>
+<span class='curline'><a href='../S/464.html#L914'>LIBXML</a>            914 ext/libxml/libxml.c 		efree(LIBXML(stream_context));</span>
+<span class='curline'><a href='../S/464.html#L915'>LIBXML</a>            915 ext/libxml/libxml.c 		LIBXML(stream_context) = NULL;</span>
+<span class='curline'><a href='../S/464.html#L917'>LIBXML</a>            917 ext/libxml/libxml.c 	smart_str_free(&amp;LIBXML(error_buffer));</span>
+<span class='curline'><a href='../S/464.html#L918'>LIBXML</a>            918 ext/libxml/libxml.c 	if (LIBXML(error_list)) {</span>
+<span class='curline'><a href='../S/464.html#L919'>LIBXML</a>            919 ext/libxml/libxml.c 		zend_llist_destroy(LIBXML(error_list));</span>
+<span class='curline'><a href='../S/464.html#L920'>LIBXML</a>            920 ext/libxml/libxml.c 		efree(LIBXML(error_list));</span>
+<span class='curline'><a href='../S/464.html#L921'>LIBXML</a>            921 ext/libxml/libxml.c 		LIBXML(error_list) = NULL;</span>
+<span class='curline'><a href='../S/464.html#L925'>LIBXML</a>            925 ext/libxml/libxml.c 	_php_libxml_destroy_fci(&amp;LIBXML(entity_loader).fci);</span>
+<span class='curline'><a href='../S/464.html#L951'>LIBXML</a>            951 ext/libxml/libxml.c 	if (LIBXML(stream_context)) {</span>
+<span class='curline'><a href='../S/464.html#L952'>LIBXML</a>            952 ext/libxml/libxml.c 		zval_ptr_dtor(&amp;LIBXML(stream_context));</span>
+<span class='curline'><a href='../S/464.html#L953'>LIBXML</a>            953 ext/libxml/libxml.c 		LIBXML(stream_context) = NULL;</span>
+<span class='curline'><a href='../S/464.html#L956'>LIBXML</a>            956 ext/libxml/libxml.c 	LIBXML(stream_context) = arg;</span>
+<span class='curline'><a href='../S/464.html#L984'>LIBXML</a>            984 ext/libxml/libxml.c 		if (LIBXML(error_list)) {</span>
+<span class='curline'><a href='../S/464.html#L985'>LIBXML</a>            985 ext/libxml/libxml.c 			zend_llist_destroy(LIBXML(error_list));</span>
+<span class='curline'><a href='../S/464.html#L986'>LIBXML</a>            986 ext/libxml/libxml.c 			efree(LIBXML(error_list));</span>
+<span class='curline'><a href='../S/464.html#L987'>LIBXML</a>            987 ext/libxml/libxml.c 			LIBXML(error_list) = NULL;</span>
+<span class='curline'><a href='../S/464.html#L991'>LIBXML</a>            991 ext/libxml/libxml.c 		if (LIBXML(error_list) == NULL) {</span>
+<span class='curline'><a href='../S/464.html#L992'>LIBXML</a>            992 ext/libxml/libxml.c 			LIBXML(error_list) = (zend_llist *) emalloc(sizeof(zend_llist));</span>
+<span class='curline'><a href='../S/464.html#L993'>LIBXML</a>            993 ext/libxml/libxml.c 			zend_llist_init(LIBXML(error_list), sizeof(xmlError), (llist_dtor_func_t) _php_libxml_free_error, 0);</span>
+<span class='curline'><a href='../S/464.html#L1041'>LIBXML</a>           1041 ext/libxml/libxml.c 	if (LIBXML(error_list)) {</span>
+<span class='curline'><a href='../S/464.html#L1043'>LIBXML</a>           1043 ext/libxml/libxml.c 		error = zend_llist_get_first(LIBXML(error_list));</span>
+<span class='curline'><a href='../S/464.html#L1066'>LIBXML</a>           1066 ext/libxml/libxml.c 			error = zend_llist_get_next(LIBXML(error_list));</span>
+<span class='curline'><a href='../S/464.html#L1077'>LIBXML</a>           1077 ext/libxml/libxml.c 	if (LIBXML(error_list)) {</span>
+<span class='curline'><a href='../S/464.html#L1078'>LIBXML</a>           1078 ext/libxml/libxml.c 		zend_llist_clean(LIBXML(error_list));</span>
+<span class='curline'><a href='../S/464.html#L1085'>LIBXML</a>           1085 ext/libxml/libxml.c 	zend_bool old = LIBXML(entity_loader_disabled);</span>
+<span class='curline'><a href='../S/464.html#L1087'>LIBXML</a>           1087 ext/libxml/libxml.c 	LIBXML(entity_loader_disabled) = disable;</span>
+<span class='curline'><a href='../S/464.html#L1116'>LIBXML</a>           1116 ext/libxml/libxml.c 	_php_libxml_destroy_fci(&amp;LIBXML(entity_loader).fci);</span>
+<span class='curline'><a href='../S/464.html#L1119'>LIBXML</a>           1119 ext/libxml/libxml.c 		LIBXML(entity_loader).fci = fci;</span>
+<span class='curline'><a href='../S/464.html#L1124'>LIBXML</a>           1124 ext/libxml/libxml.c 		LIBXML(entity_loader).fcc = fcc;</span>
+</pre>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>resource_types_table</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/1595.html#L47'>resource_types_table</a>   47 TSRM/TSRM.c    static tsrm_resource_type	*resource_types_table=NULL;</span>
+<span class='curline'><a href='../S/1595.html#L147'>resource_types_table</a>  147 TSRM/TSRM.c    	resource_types_table = (tsrm_resource_type *) calloc(resource_types_table_size, sizeof(tsrm_resource_type));</span>
+<span class='curline'><a href='../S/1595.html#L148'>resource_types_table</a>  148 TSRM/TSRM.c    	if (!resource_types_table) {</span>
+<span class='curline'><a href='../S/1595.html#L179'>resource_types_table</a>  179 TSRM/TSRM.c    						if (resource_types_table &amp;&amp; !resource_types_table[j].done &amp;&amp; resource_types_table[j].dtor) {</span>
+<span class='curline'><a href='../S/1595.html#L180'>resource_types_table</a>  180 TSRM/TSRM.c    							resource_types_table[j].dtor(p-&gt;storage[j], &amp;p-&gt;storage);</span>
+<span class='curline'><a href='../S/1595.html#L193'>resource_types_table</a>  193 TSRM/TSRM.c    	if (resource_types_table) {</span>
+<span class='curline'><a href='../S/1595.html#L194'>resource_types_table</a>  194 TSRM/TSRM.c    		free(resource_types_table);</span>
+<span class='curline'><a href='../S/1595.html#L195'>resource_types_table</a>  195 TSRM/TSRM.c    		resource_types_table=NULL;</span>
+<span class='curline'><a href='../S/1595.html#L229'>resource_types_table</a>  229 TSRM/TSRM.c    		resource_types_table = (tsrm_resource_type *) realloc(resource_types_table, sizeof(tsrm_resource_type)*id_count);</span>
+<span class='curline'><a href='../S/1595.html#L230'>resource_types_table</a>  230 TSRM/TSRM.c    		if (!resource_types_table) {</span>
+<span class='curline'><a href='../S/1595.html#L238'>resource_types_table</a>  238 TSRM/TSRM.c    	resource_types_table[TSRM_UNSHUFFLE_RSRC_ID(*rsrc_id)].size = size;</span>
+<span class='curline'><a href='../S/1595.html#L239'>resource_types_table</a>  239 TSRM/TSRM.c    	resource_types_table[TSRM_UNSHUFFLE_RSRC_ID(*rsrc_id)].ctor = ctor;</span>
+<span class='curline'><a href='../S/1595.html#L240'>resource_types_table</a>  240 TSRM/TSRM.c    	resource_types_table[TSRM_UNSHUFFLE_RSRC_ID(*rsrc_id)].dtor = dtor;</span>
+<span class='curline'><a href='../S/1595.html#L241'>resource_types_table</a>  241 TSRM/TSRM.c    	resource_types_table[TSRM_UNSHUFFLE_RSRC_ID(*rsrc_id)].done = 0;</span>
+<span class='curline'><a href='../S/1595.html#L253'>resource_types_table</a>  253 TSRM/TSRM.c    					p-&gt;storage[j] = (void *) malloc(resource_types_table[j].size);</span>
+<span class='curline'><a href='../S/1595.html#L254'>resource_types_table</a>  254 TSRM/TSRM.c    					if (resource_types_table[j].ctor) {</span>
+<span class='curline'><a href='../S/1595.html#L255'>resource_types_table</a>  255 TSRM/TSRM.c    						resource_types_table[j].ctor(p-&gt;storage[j], &amp;p-&gt;storage);</span>
+<span class='curline'><a href='../S/1595.html#L288'>resource_types_table</a>  288 TSRM/TSRM.c    		if (resource_types_table[i].done) {</span>
+<span class='curline'><a href='../S/1595.html#L292'>resource_types_table</a>  292 TSRM/TSRM.c    			(*thread_resources_ptr)-&gt;storage[i] = (void *) malloc(resource_types_table[i].size);</span>
+<span class='curline'><a href='../S/1595.html#L293'>resource_types_table</a>  293 TSRM/TSRM.c    			if (resource_types_table[i].ctor) {</span>
+<span class='curline'><a href='../S/1595.html#L294'>resource_types_table</a>  294 TSRM/TSRM.c    				resource_types_table[i].ctor((*thread_resources_ptr)-&gt;storage[i], &amp;(*thread_resources_ptr)-&gt;storage);</span>
+<span class='curline'><a href='../S/1595.html#L392'>resource_types_table</a>  392 TSRM/TSRM.c    			if (resource_types_table[i].dtor) {</span>
+<span class='curline'><a href='../S/1595.html#L393'>resource_types_table</a>  393 TSRM/TSRM.c    				resource_types_table[i].dtor(thread_resources-&gt;storage[i], &amp;thread_resources-&gt;storage);</span>
+<span class='curline'><a href='../S/1595.html#L457'>resource_types_table</a>  457 TSRM/TSRM.c    				if (resource_types_table[i].dtor) {</span>
+<span class='curline'><a href='../S/1595.html#L458'>resource_types_table</a>  458 TSRM/TSRM.c    					resource_types_table[i].dtor(thread_resources-&gt;storage[i], &amp;thread_resources-&gt;storage);</span>
+<span class='curline'><a href='../S/1595.html#L499'>resource_types_table</a>  499 TSRM/TSRM.c    				if (resource_types_table[i].dtor) {</span>
+<span class='curline'><a href='../S/1595.html#L500'>resource_types_table</a>  500 TSRM/TSRM.c    					resource_types_table[i].dtor(thread_resources-&gt;storage[i], &amp;thread_resources-&gt;storage);</span>
+<span class='curline'><a href='../S/1595.html#L545'>resource_types_table</a>  545 TSRM/TSRM.c    					if (resource_types_table &amp;&amp; resource_types_table[j].dtor) {</span>
+<span class='curline'><a href='../S/1595.html#L546'>resource_types_table</a>  546 TSRM/TSRM.c    						resource_types_table[j].dtor(p-&gt;storage[j], &amp;p-&gt;storage);</span>
+<span class='curline'><a href='../S/1595.html#L555'>resource_types_table</a>  555 TSRM/TSRM.c    	resource_types_table[j].done = 1;</span>
+</pre>
+</body>
+</html>

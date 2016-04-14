@@ -1,0 +1,129 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>function_handler</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/1646.html#L2770'>function_handler</a> 2770 Zend/zend_API.c 	fcc-&gt;function_handler = NULL;</span>
+<span class='curline'><a href='../S/1646.html#L2783'>function_handler</a> 2783 Zend/zend_API.c 		if (zend_hash_find(EG(function_table), lmname, mlen+1, (void**)&amp;fcc-&gt;function_handler) == SUCCESS) {</span>
+<span class='curline'><a href='../S/1646.html#L2842'>function_handler</a> 2842 Zend/zend_API.c 		fcc-&gt;function_handler = fcc-&gt;calling_scope-&gt;constructor;</span>
+<span class='curline'><a href='../S/1646.html#L2843'>function_handler</a> 2843 Zend/zend_API.c 		if (fcc-&gt;function_handler) {</span>
+<span class='curline'><a href='../S/1646.html#L2846'>function_handler</a> 2846 Zend/zend_API.c 	} else if (zend_hash_find(ftable, lmname, mlen+1, (void**)&amp;fcc-&gt;function_handler) == SUCCESS) {</span>
+<span class='curline'><a href='../S/1646.html#L2848'>function_handler</a> 2848 Zend/zend_API.c 		if ((fcc-&gt;function_handler-&gt;op_array.fn_flags &amp; ZEND_ACC_CHANGED) &amp;&amp;</span>
+<span class='curline'><a href='../S/1646.html#L2850'>function_handler</a> 2850 Zend/zend_API.c 		    instanceof_function(fcc-&gt;function_handler-&gt;common.scope, EG(scope) TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/1646.html#L2856'>function_handler</a> 2856 Zend/zend_API.c 				fcc-&gt;function_handler = priv_fbc;</span>
+<span class='curline'><a href='../S/1646.html#L2863'>function_handler</a> 2863 Zend/zend_API.c 			if (fcc-&gt;function_handler-&gt;op_array.fn_flags &amp; ZEND_ACC_PRIVATE) {</span>
+<span class='curline'><a href='../S/1646.html#L2864'>function_handler</a> 2864 Zend/zend_API.c 				if (!zend_check_private(fcc-&gt;function_handler, fcc-&gt;object_ptr ? Z_OBJCE_P(fcc-&gt;object_ptr) : EG(scope), lmname, mlen TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/1646.html#L2866'>function_handler</a> 2866 Zend/zend_API.c 					fcc-&gt;function_handler = NULL;</span>
+<span class='curline'><a href='../S/1646.html#L2869'>function_handler</a> 2869 Zend/zend_API.c 			} else if (fcc-&gt;function_handler-&gt;common.fn_flags &amp; ZEND_ACC_PROTECTED) {</span>
+<span class='curline'><a href='../S/1646.html#L2870'>function_handler</a> 2870 Zend/zend_API.c 				if (!zend_check_protected(fcc-&gt;function_handler-&gt;common.scope, EG(scope))) {</span>
+<span class='curline'><a href='../S/1646.html#L2872'>function_handler</a> 2872 Zend/zend_API.c 					fcc-&gt;function_handler = NULL;</span>
+<span class='curline'><a href='../S/1646.html#L2881'>function_handler</a> 2881 Zend/zend_API.c 				fcc-&gt;function_handler = emalloc(sizeof(zend_internal_function));</span>
+<span class='curline'><a href='../S/1646.html#L2882'>function_handler</a> 2882 Zend/zend_API.c 				fcc-&gt;function_handler-&gt;internal_function.type = ZEND_INTERNAL_FUNCTION;</span>
+<span class='curline'><a href='../S/1646.html#L2883'>function_handler</a> 2883 Zend/zend_API.c 				fcc-&gt;function_handler-&gt;internal_function.module = (ce_org-&gt;type == ZEND_INTERNAL_CLASS) ? ce_org-&gt;info.internal.module : NULL;</span>
+<span class='curline'><a href='../S/1646.html#L2884'>function_handler</a> 2884 Zend/zend_API.c 				fcc-&gt;function_handler-&gt;internal_function.handler = zend_std_call_user_call;</span>
+<span class='curline'><a href='../S/1646.html#L2885'>function_handler</a> 2885 Zend/zend_API.c 				fcc-&gt;function_handler-&gt;internal_function.arg_info = NULL;</span>
+<span class='curline'><a href='../S/1646.html#L2886'>function_handler</a> 2886 Zend/zend_API.c 				fcc-&gt;function_handler-&gt;internal_function.num_args = 0;</span>
+<span class='curline'><a href='../S/1646.html#L2887'>function_handler</a> 2887 Zend/zend_API.c 				fcc-&gt;function_handler-&gt;internal_function.scope = ce_org;</span>
+<span class='curline'><a href='../S/1646.html#L2888'>function_handler</a> 2888 Zend/zend_API.c 				fcc-&gt;function_handler-&gt;internal_function.fn_flags = ZEND_ACC_CALL_VIA_HANDLER;</span>
+<span class='curline'><a href='../S/1646.html#L2889'>function_handler</a> 2889 Zend/zend_API.c 				fcc-&gt;function_handler-&gt;internal_function.function_name = estrndup(mname, mlen);</span>
+<span class='curline'><a href='../S/1646.html#L2893'>function_handler</a> 2893 Zend/zend_API.c 				fcc-&gt;function_handler = Z_OBJ_HT_P(fcc-&gt;object_ptr)-&gt;get_method(&amp;fcc-&gt;object_ptr, mname, mlen, NULL TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1646.html#L2894'>function_handler</a> 2894 Zend/zend_API.c 				if (fcc-&gt;function_handler) {</span>
+<span class='curline'><a href='../S/1646.html#L2896'>function_handler</a> 2896 Zend/zend_API.c 					    (!fcc-&gt;function_handler-&gt;common.scope ||</span>
+<span class='curline'><a href='../S/1646.html#L2897'>function_handler</a> 2897 Zend/zend_API.c 					     !instanceof_function(ce_org, fcc-&gt;function_handler-&gt;common.scope TSRMLS_CC))) {</span>
+<span class='curline'><a href='../S/1646.html#L2898'>function_handler</a> 2898 Zend/zend_API.c 						if ((fcc-&gt;function_handler-&gt;common.fn_flags &amp; ZEND_ACC_CALL_VIA_HANDLER) != 0) {</span>
+<span class='curline'><a href='../S/1646.html#L2899'>function_handler</a> 2899 Zend/zend_API.c 							if (fcc-&gt;function_handler-&gt;type != ZEND_OVERLOADED_FUNCTION) {</span>
+<span class='curline'><a href='../S/1646.html#L2900'>function_handler</a> 2900 Zend/zend_API.c 								efree((char*)fcc-&gt;function_handler-&gt;common.function_name);</span>
+<span class='curline'><a href='../S/1646.html#L2902'>function_handler</a> 2902 Zend/zend_API.c 							efree(fcc-&gt;function_handler);</span>
+<span class='curline'><a href='../S/1646.html#L2906'>function_handler</a> 2906 Zend/zend_API.c 						call_via_handler = (fcc-&gt;function_handler-&gt;common.fn_flags &amp; ZEND_ACC_CALL_VIA_HANDLER) != 0;</span>
+<span class='curline'><a href='../S/1646.html#L2912'>function_handler</a> 2912 Zend/zend_API.c 				fcc-&gt;function_handler = fcc-&gt;calling_scope-&gt;get_static_method(fcc-&gt;calling_scope, mname, mlen TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1646.html#L2914'>function_handler</a> 2914 Zend/zend_API.c 				fcc-&gt;function_handler = zend_std_get_static_method(fcc-&gt;calling_scope, mname, mlen, NULL TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1646.html#L2916'>function_handler</a> 2916 Zend/zend_API.c 			if (fcc-&gt;function_handler) {</span>
+<span class='curline'><a href='../S/1646.html#L2918'>function_handler</a> 2918 Zend/zend_API.c 				call_via_handler = (fcc-&gt;function_handler-&gt;common.fn_flags &amp; ZEND_ACC_CALL_VIA_HANDLER) != 0;</span>
+<span class='curline'><a href='../S/1646.html#L2930'>function_handler</a> 2930 Zend/zend_API.c 			if (!fcc-&gt;object_ptr &amp;&amp; (fcc-&gt;function_handler-&gt;common.fn_flags &amp; ZEND_ACC_ABSTRACT)) {</span>
+<span class='curline'><a href='../S/1646.html#L2932'>function_handler</a> 2932 Zend/zend_API.c 					zend_spprintf(error, 0, "cannot call abstract method %s::%s()", fcc-&gt;calling_scope-&gt;name, fcc-&gt;function_handler-&gt;common.function_name);</span>
+<span class='curline'><a href='../S/1646.html#L2935'>function_handler</a> 2935 Zend/zend_API.c 					zend_error(E_ERROR, "Cannot call abstract method %s::%s()", fcc-&gt;calling_scope-&gt;name, fcc-&gt;function_handler-&gt;common.function_name);</span>
+<span class='curline'><a href='../S/1646.html#L2937'>function_handler</a> 2937 Zend/zend_API.c 			} else if (!fcc-&gt;object_ptr &amp;&amp; !(fcc-&gt;function_handler-&gt;common.fn_flags &amp; ZEND_ACC_STATIC)) {</span>
+<span class='curline'><a href='../S/1646.html#L2940'>function_handler</a> 2940 Zend/zend_API.c 				if (fcc-&gt;function_handler-&gt;common.fn_flags &amp; ZEND_ACC_ALLOW_STATIC) {</span>
+<span class='curline'><a href='../S/1646.html#L2954'>function_handler</a> 2954 Zend/zend_API.c 						zend_spprintf(error, 0, "non-static method %s::%s() %s be called statically, assuming $this from compatible context %s", fcc-&gt;calling_scope-&gt;name, fcc-&gt;function_handler-&gt;common.function_name, verb, Z_OBJCE_P(EG(This))-&gt;name);</span>
+<span class='curline'><a href='../S/1646.html#L2959'>function_handler</a> 2959 Zend/zend_API.c 						zend_error(severity, "Non-static method %s::%s() %s be called statically, assuming $this from compatible context %s", fcc-&gt;calling_scope-&gt;name, fcc-&gt;function_handler-&gt;common.function_name, verb, Z_OBJCE_P(EG(This))-&gt;name);</span>
+<span class='curline'><a href='../S/1646.html#L2963'>function_handler</a> 2963 Zend/zend_API.c 						zend_spprintf(error, 0, "non-static method %s::%s() %s be called statically", fcc-&gt;calling_scope-&gt;name, fcc-&gt;function_handler-&gt;common.function_name, verb);</span>
+<span class='curline'><a href='../S/1646.html#L2968'>function_handler</a> 2968 Zend/zend_API.c 						zend_error(severity, "Non-static method %s::%s() %s be called statically", fcc-&gt;calling_scope-&gt;name, fcc-&gt;function_handler-&gt;common.function_name, verb);</span>
+<span class='curline'><a href='../S/1646.html#L2973'>function_handler</a> 2973 Zend/zend_API.c 				if (fcc-&gt;function_handler-&gt;op_array.fn_flags &amp; ZEND_ACC_PRIVATE) {</span>
+<span class='curline'><a href='../S/1646.html#L2974'>function_handler</a> 2974 Zend/zend_API.c 					if (!zend_check_private(fcc-&gt;function_handler, fcc-&gt;object_ptr ? Z_OBJCE_P(fcc-&gt;object_ptr) : EG(scope), lmname, mlen TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/1646.html#L2979'>function_handler</a> 2979 Zend/zend_API.c 							zend_spprintf(error, 0, "cannot access private method %s::%s()", fcc-&gt;calling_scope-&gt;name, fcc-&gt;function_handler-&gt;common.function_name);</span>
+<span class='curline'><a href='../S/1646.html#L2983'>function_handler</a> 2983 Zend/zend_API.c 				} else if ((fcc-&gt;function_handler-&gt;common.fn_flags &amp; ZEND_ACC_PROTECTED)) {</span>
+<span class='curline'><a href='../S/1646.html#L2984'>function_handler</a> 2984 Zend/zend_API.c 					if (!zend_check_protected(fcc-&gt;function_handler-&gt;common.scope, EG(scope))) {</span>
+<span class='curline'><a href='../S/1646.html#L2989'>function_handler</a> 2989 Zend/zend_API.c 							zend_spprintf(error, 0, "cannot access protected method %s::%s()", fcc-&gt;calling_scope-&gt;name, fcc-&gt;function_handler-&gt;common.function_name);</span>
+<span class='curline'><a href='../S/1646.html#L3037'>function_handler</a> 3037 Zend/zend_API.c 	fcc-&gt;function_handler = NULL;</span>
+<span class='curline'><a href='../S/1646.html#L3077'>function_handler</a> 3077 Zend/zend_API.c 			    fcc-&gt;function_handler &amp;&amp;</span>
+<span class='curline'><a href='../S/1646.html#L3078'>function_handler</a> 3078 Zend/zend_API.c 				((fcc-&gt;function_handler-&gt;type == ZEND_INTERNAL_FUNCTION &amp;&amp;</span>
+<span class='curline'><a href='../S/1646.html#L3079'>function_handler</a> 3079 Zend/zend_API.c 			      (fcc-&gt;function_handler-&gt;common.fn_flags &amp; ZEND_ACC_CALL_VIA_HANDLER)) ||</span>
+<span class='curline'><a href='../S/1646.html#L3080'>function_handler</a> 3080 Zend/zend_API.c 			     fcc-&gt;function_handler-&gt;type == ZEND_OVERLOADED_FUNCTION_TEMPORARY ||</span>
+<span class='curline'><a href='../S/1646.html#L3081'>function_handler</a> 3081 Zend/zend_API.c 			     fcc-&gt;function_handler-&gt;type == ZEND_OVERLOADED_FUNCTION)) {</span>
+<span class='curline'><a href='../S/1646.html#L3082'>function_handler</a> 3082 Zend/zend_API.c 				if (fcc-&gt;function_handler-&gt;type != ZEND_OVERLOADED_FUNCTION) {</span>
+<span class='curline'><a href='../S/1646.html#L3083'>function_handler</a> 3083 Zend/zend_API.c 					efree((char*)fcc-&gt;function_handler-&gt;common.function_name);</span>
+<span class='curline'><a href='../S/1646.html#L3085'>function_handler</a> 3085 Zend/zend_API.c 				efree(fcc-&gt;function_handler);</span>
+<span class='curline'><a href='../S/1646.html#L3155'>function_handler</a> 3155 Zend/zend_API.c 					    fcc-&gt;function_handler &amp;&amp;</span>
+<span class='curline'><a href='../S/1646.html#L3156'>function_handler</a> 3156 Zend/zend_API.c 						((fcc-&gt;function_handler-&gt;type == ZEND_INTERNAL_FUNCTION &amp;&amp;</span>
+<span class='curline'><a href='../S/1646.html#L3157'>function_handler</a> 3157 Zend/zend_API.c 					      (fcc-&gt;function_handler-&gt;common.fn_flags &amp; ZEND_ACC_CALL_VIA_HANDLER)) ||</span>
+<span class='curline'><a href='../S/1646.html#L3158'>function_handler</a> 3158 Zend/zend_API.c 					     fcc-&gt;function_handler-&gt;type == ZEND_OVERLOADED_FUNCTION_TEMPORARY ||</span>
+<span class='curline'><a href='../S/1646.html#L3159'>function_handler</a> 3159 Zend/zend_API.c 					     fcc-&gt;function_handler-&gt;type == ZEND_OVERLOADED_FUNCTION)) {</span>
+<span class='curline'><a href='../S/1646.html#L3160'>function_handler</a> 3160 Zend/zend_API.c 						if (fcc-&gt;function_handler-&gt;type != ZEND_OVERLOADED_FUNCTION) {</span>
+<span class='curline'><a href='../S/1646.html#L3161'>function_handler</a> 3161 Zend/zend_API.c 							efree((char*)fcc-&gt;function_handler-&gt;common.function_name);</span>
+<span class='curline'><a href='../S/1646.html#L3163'>function_handler</a> 3163 Zend/zend_API.c 						efree(fcc-&gt;function_handler);</span>
+<span class='curline'><a href='../S/1646.html#L3186'>function_handler</a> 3186 Zend/zend_API.c 			if (Z_OBJ_HANDLER_P(callable, get_closure) &amp;&amp; Z_OBJ_HANDLER_P(callable, get_closure)(callable, &amp;fcc-&gt;calling_scope, &amp;fcc-&gt;function_handler, &amp;fcc-&gt;object_ptr TSRMLS_CC) == SUCCESS) {</span>
+<span class='curline'><a href='../S/1646.html#L3231'>function_handler</a> 3231 Zend/zend_API.c 			add_next_index_string(callable, fcc.function_handler-&gt;common.function_name, 1);</span>
+<span class='curline'><a href='../S/1646.html#L3233'>function_handler</a> 3233 Zend/zend_API.c 		if (fcc.function_handler &amp;&amp;</span>
+<span class='curline'><a href='../S/1646.html#L3234'>function_handler</a> 3234 Zend/zend_API.c 			((fcc.function_handler-&gt;type == ZEND_INTERNAL_FUNCTION &amp;&amp;</span>
+<span class='curline'><a href='../S/1646.html#L3235'>function_handler</a> 3235 Zend/zend_API.c 		      (fcc.function_handler-&gt;common.fn_flags &amp; ZEND_ACC_CALL_VIA_HANDLER)) ||</span>
+<span class='curline'><a href='../S/1646.html#L3236'>function_handler</a> 3236 Zend/zend_API.c 		     fcc.function_handler-&gt;type == ZEND_OVERLOADED_FUNCTION_TEMPORARY ||</span>
+<span class='curline'><a href='../S/1646.html#L3237'>function_handler</a> 3237 Zend/zend_API.c 		     fcc.function_handler-&gt;type == ZEND_OVERLOADED_FUNCTION)) {</span>
+<span class='curline'><a href='../S/1646.html#L3238'>function_handler</a> 3238 Zend/zend_API.c 			if (fcc.function_handler-&gt;type != ZEND_OVERLOADED_FUNCTION) {</span>
+<span class='curline'><a href='../S/1646.html#L3239'>function_handler</a> 3239 Zend/zend_API.c 				efree((char*)fcc.function_handler-&gt;common.function_name);</span>
+<span class='curline'><a href='../S/1646.html#L3241'>function_handler</a> 3241 Zend/zend_API.c 			efree(fcc.function_handler);</span>
+<span class='curline'><a href='../S/1647.html#L57'>function_handler</a>   57 Zend/zend_API.h 	zend_function *function_handler;</span>
+<span class='curline'><a href='../S/1671.html#L696'>function_handler</a>  696 Zend/zend_execute_API.c 	EX(function_state).function = fci_cache-&gt;function_handler;</span>
+<span class='curline'><a href='../S/1671.html#L999'>function_handler</a>  999 Zend/zend_execute_API.c 	fcall_cache.function_handler = EG(autoload_func);</span>
+<span class='curline'><a href='../S/1671.html#L1008'>function_handler</a> 1008 Zend/zend_execute_API.c 	EG(autoload_func) = fcall_cache.function_handler;</span>
+<span class='curline'><a href='../S/1695.html#L76'>function_handler</a>   76 Zend/zend_interfaces.c 			if (zend_hash_find(function_table, function_name, function_name_len+1, (void **) &amp;fcic.function_handler) == FAILURE) {</span>
+<span class='curline'><a href='../S/1695.html#L81'>function_handler</a>   81 Zend/zend_interfaces.c 				*fn_proxy = fcic.function_handler;</span>
+<span class='curline'><a href='../S/1695.html#L84'>function_handler</a>   84 Zend/zend_interfaces.c 			fcic.function_handler = *fn_proxy;</span>
+<span class='curline'><a href='../S/758.html#L2196'>function_handler</a> 2196 ext/mysql/php_mysql.c 			fcc.function_handler = ce-&gt;constructor;</span>
+<span class='curline'><a href='../S/761.html#L1327'>function_handler</a> 1327 ext/mysqli/mysqli.c 			fcc.function_handler = ce-&gt;constructor;</span>
+<span class='curline'><a href='../S/923.html#L483'>function_handler</a>  483 ext/pdo/pdo_dbh.c 		fcc.function_handler = dbstmt_ce-&gt;constructor;</span>
+<span class='curline'><a href='../S/926.html#L766'>function_handler</a>  766 ext/pdo/pdo_stmt.c 		fcc-&gt;function_handler = ce-&gt;constructor;</span>
+<span class='curline'><a href='../S/967.html#L2816'>function_handler</a> 2816 ext/pgsql/pgsql.c 			fcc.function_handler = ce-&gt;constructor;</span>
+<span class='curline'><a href='../S/996.html#L1441'>function_handler</a> 1441 ext/reflection/php_reflection.c 	fcc.function_handler = ce_ptr-&gt;constructor;</span>
+<span class='curline'><a href='../S/996.html#L1957'>function_handler</a> 1957 ext/reflection/php_reflection.c 	fcc.function_handler = fptr;</span>
+<span class='curline'><a href='../S/996.html#L2024'>function_handler</a> 2024 ext/reflection/php_reflection.c 	fcc.function_handler = fptr;</span>
+<span class='curline'><a href='../S/996.html#L2957'>function_handler</a> 2957 ext/reflection/php_reflection.c 	fcc.function_handler = mptr;</span>
+<span class='curline'><a href='../S/996.html#L3066'>function_handler</a> 3066 ext/reflection/php_reflection.c 	fcc.function_handler = mptr;</span>
+<span class='curline'><a href='../S/996.html#L3076'>function_handler</a> 3076 ext/reflection/php_reflection.c 		fcc.function_handler = _copy_function(mptr TSRMLS_CC);</span>
+<span class='curline'><a href='../S/996.html#L4310'>function_handler</a> 4310 ext/reflection/php_reflection.c 		fcc.function_handler = constructor;</span>
+<span class='curline'><a href='../S/996.html#L4415'>function_handler</a> 4415 ext/reflection/php_reflection.c 		fcc.function_handler = constructor;</span>
+<span class='curline'><a href='../S/1045.html#L497'>function_handler</a>  497 ext/spl/php_spl.c 			alfi.func_ptr = fcc.function_handler;</span>
+<span class='curline'><a href='../S/1045.html#L540'>function_handler</a>  540 ext/spl/php_spl.c 		alfi.func_ptr = fcc.function_handler;</span>
+<span class='curline'><a href='../S/1049.html#L2131'>function_handler</a> 2131 ext/spl/spl_directory.c 	fcic.function_handler = func_ptr;</span>
+<span class='curline'><a href='../S/1054.html#L76'>function_handler</a>   76 ext/spl/spl_engine.h 	fcc.function_handler = func;</span>
+<span class='curline'><a href='../S/1063.html#L874'>function_handler</a>  874 ext/spl/spl_iterators.c 	union _zend_function    *function_handler;</span>
+<span class='curline'><a href='../S/1063.html#L884'>function_handler</a>  884 ext/spl/spl_iterators.c 	function_handler = std_object_handlers.get_method(object_ptr, method, method_len, key TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1063.html#L885'>function_handler</a>  885 ext/spl/spl_iterators.c 	if (!function_handler) {</span>
+<span class='curline'><a href='../S/1063.html#L886'>function_handler</a>  886 ext/spl/spl_iterators.c 		if (zend_hash_find(&amp;Z_OBJCE_P(zobj)-&gt;function_table, method, method_len+1, (void **) &amp;function_handler) == FAILURE) {</span>
+<span class='curline'><a href='../S/1063.html#L889'>function_handler</a>  889 ext/spl/spl_iterators.c 				function_handler = Z_OBJ_HT_P(*object_ptr)-&gt;get_method(object_ptr, method, method_len, key TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1063.html#L895'>function_handler</a>  895 ext/spl/spl_iterators.c 	return function_handler;</span>
+<span class='curline'><a href='../S/1063.html#L1352'>function_handler</a> 1352 ext/spl/spl_iterators.c 	union _zend_function *function_handler;</span>
+<span class='curline'><a href='../S/1063.html#L1357'>function_handler</a> 1357 ext/spl/spl_iterators.c 	function_handler = std_object_handlers.get_method(object_ptr, method, method_len, key TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1063.html#L1358'>function_handler</a> 1358 ext/spl/spl_iterators.c 	if (!function_handler &amp;&amp; intern-&gt;inner.ce) {</span>
+<span class='curline'><a href='../S/1063.html#L1359'>function_handler</a> 1359 ext/spl/spl_iterators.c 		if (zend_hash_find(&amp;intern-&gt;inner.ce-&gt;function_table, method, method_len+1, (void **) &amp;function_handler) == FAILURE) {</span>
+<span class='curline'><a href='../S/1063.html#L1362'>function_handler</a> 1362 ext/spl/spl_iterators.c 				function_handler = Z_OBJ_HT_P(*object_ptr)-&gt;get_method(object_ptr, method, method_len, key TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1063.html#L1368'>function_handler</a> 1368 ext/spl/spl_iterators.c 	return function_handler;</span>
+<span class='curline'><a href='../S/1419.html#L316'>function_handler</a>  316 main/streams/userspace.c 		fcc.function_handler = uwrap-&gt;ce-&gt;constructor;</span>
+</pre>
+</body>
+</html>

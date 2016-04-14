@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>PGG</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/967.html#L918'>PGG</a>               918 ext/pgsql/pgsql.c 	if (PGG(default_link) != -1) {</span>
+<span class='curline'><a href='../S/967.html#L919'>PGG</a>               919 ext/pgsql/pgsql.c 		zend_list_delete(PGG(default_link));</span>
+<span class='curline'><a href='../S/967.html#L922'>PGG</a>               922 ext/pgsql/pgsql.c 	PGG(default_link) = id;</span>
+<span class='curline'><a href='../S/967.html#L937'>PGG</a>               937 ext/pgsql/pgsql.c 	PGG(num_links)--;</span>
+<span class='curline'><a href='../S/967.html#L952'>PGG</a>               952 ext/pgsql/pgsql.c 	PGG(num_persistent)--;</span>
+<span class='curline'><a href='../S/967.html#L953'>PGG</a>               953 ext/pgsql/pgsql.c 	PGG(num_links)--;</span>
+<span class='curline'><a href='../S/967.html#L964'>PGG</a>               964 ext/pgsql/pgsql.c 	if (! PGG(ignore_notices)) {</span>
+<span class='curline'><a href='../S/967.html#L967'>PGG</a>               967 ext/pgsql/pgsql.c 		if (PGG(log_notices)) {</span>
+<span class='curline'><a href='../S/967.html#L970'>PGG</a>               970 ext/pgsql/pgsql.c 		zend_hash_index_update(&amp;PGG(notices), (ulong)resource_id, (void **)&amp;notice, sizeof(php_pgsql_notice *), NULL);</span>
+<span class='curline'><a href='../S/967.html#L1015'>PGG</a>              1015 ext/pgsql/pgsql.c 		orig = PGG(ignore_notices);</span>
+<span class='curline'><a href='../S/967.html#L1016'>PGG</a>              1016 ext/pgsql/pgsql.c 		PGG(ignore_notices) = 1;</span>
+<span class='curline'><a href='../S/967.html#L1025'>PGG</a>              1025 ext/pgsql/pgsql.c 		PGG(ignore_notices) = orig;</span>
+<span class='curline'><a href='../S/967.html#L1208'>PGG</a>              1208 ext/pgsql/pgsql.c 	zend_hash_destroy(&amp;PGG(notices));</span>
+<span class='curline'><a href='../S/967.html#L1218'>PGG</a>              1218 ext/pgsql/pgsql.c 	PGG(default_link)=-1;</span>
+<span class='curline'><a href='../S/967.html#L1219'>PGG</a>              1219 ext/pgsql/pgsql.c 	PGG(num_links) = PGG(num_persistent);</span>
+<span class='curline'><a href='../S/967.html#L1229'>PGG</a>              1229 ext/pgsql/pgsql.c 	zend_hash_clean(&amp;PGG(notices));</span>
+<span class='curline'><a href='../S/967.html#L1258'>PGG</a>              1258 ext/pgsql/pgsql.c 	snprintf(buf, sizeof(buf), "%ld", PGG(num_persistent));</span>
+<span class='curline'><a href='../S/967.html#L1260'>PGG</a>              1260 ext/pgsql/pgsql.c 	snprintf(buf, sizeof(buf), "%ld", PGG(num_links));</span>
+<span class='curline'><a href='../S/967.html#L1326'>PGG</a>              1326 ext/pgsql/pgsql.c 	if (persistent &amp;&amp; PGG(allow_persistent)) {</span>
+<span class='curline'><a href='../S/967.html#L1333'>PGG</a>              1333 ext/pgsql/pgsql.c 			if (PGG(max_links)!=-1 &amp;&amp; PGG(num_links)&gt;=PGG(max_links)) {</span>
+<span class='curline'><a href='../S/967.html#L1335'>PGG</a>              1335 ext/pgsql/pgsql.c 								 "Cannot create new link. Too many open links (%ld)", PGG(num_links));</span>
+<span class='curline'><a href='../S/967.html#L1338'>PGG</a>              1338 ext/pgsql/pgsql.c 			if (PGG(max_persistent)!=-1 &amp;&amp; PGG(num_persistent)&gt;=PGG(max_persistent)) {</span>
+<span class='curline'><a href='../S/967.html#L1340'>PGG</a>              1340 ext/pgsql/pgsql.c 								 "Cannot create new link. Too many open persistent links (%ld)", PGG(num_persistent));</span>
+<span class='curline'><a href='../S/967.html#L1364'>PGG</a>              1364 ext/pgsql/pgsql.c 			PGG(num_links)++;</span>
+<span class='curline'><a href='../S/967.html#L1365'>PGG</a>              1365 ext/pgsql/pgsql.c 			PGG(num_persistent)++;</span>
+<span class='curline'><a href='../S/967.html#L1371'>PGG</a>              1371 ext/pgsql/pgsql.c 			if (PGG(auto_reset_persistent) &amp; 1) {</span>
+<span class='curline'><a href='../S/967.html#L1435'>PGG</a>              1435 ext/pgsql/pgsql.c 		if (PGG(max_links)!=-1 &amp;&amp; PGG(num_links)&gt;=PGG(max_links)) {</span>
+<span class='curline'><a href='../S/967.html#L1436'>PGG</a>              1436 ext/pgsql/pgsql.c 			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Cannot create new link. Too many open links (%ld)", PGG(num_links));</span>
+<span class='curline'><a href='../S/967.html#L1479'>PGG</a>              1479 ext/pgsql/pgsql.c 		PGG(num_links)++;</span>
+<span class='curline'><a href='../S/967.html#L1482'>PGG</a>              1482 ext/pgsql/pgsql.c 	if (! PGG(ignore_notices) &amp;&amp; Z_TYPE_P(return_value) == IS_RESOURCE) {</span>
+<span class='curline'><a href='../S/967.html#L1502'>PGG</a>              1502 ext/pgsql/pgsql.c 	if (PGG(default_link)==-1) { /* no link opened yet, implicitly open one */</span>
+<span class='curline'><a href='../S/967.html#L1506'>PGG</a>              1506 ext/pgsql/pgsql.c 	return PGG(default_link);</span>
+<span class='curline'><a href='../S/967.html#L1565'>PGG</a>              1565 ext/pgsql/pgsql.c 		id = PGG(default_link);</span>
+<span class='curline'><a href='../S/967.html#L1580'>PGG</a>              1580 ext/pgsql/pgsql.c 		|| (pgsql_link &amp;&amp; Z_RESVAL_P(pgsql_link)==PGG(default_link))) {</span>
+<span class='curline'><a href='../S/967.html#L1581'>PGG</a>              1581 ext/pgsql/pgsql.c 		zend_list_delete(PGG(default_link));</span>
+<span class='curline'><a href='../S/967.html#L1582'>PGG</a>              1582 ext/pgsql/pgsql.c 		PGG(default_link) = -1;</span>
+<span class='curline'><a href='../S/967.html#L1613'>PGG</a>              1613 ext/pgsql/pgsql.c 		id = PGG(default_link);</span>
+<span class='curline'><a href='../S/967.html#L1761'>PGG</a>              1761 ext/pgsql/pgsql.c 		id = PGG(default_link);</span>
+<span class='curline'><a href='../S/967.html#L1794'>PGG</a>              1794 ext/pgsql/pgsql.c 		id = PGG(default_link);</span>
+<span class='curline'><a href='../S/967.html#L1836'>PGG</a>              1836 ext/pgsql/pgsql.c 		id = PGG(default_link);</span>
+<span class='curline'><a href='../S/967.html#L1862'>PGG</a>              1862 ext/pgsql/pgsql.c 	if ((PGG(auto_reset_persistent) &amp; 2) &amp;&amp; PQstatus(pgsql) != CONNECTION_OK) {</span>
+<span class='curline'><a href='../S/967.html#L1938'>PGG</a>              1938 ext/pgsql/pgsql.c 		id = PGG(default_link);</span>
+<span class='curline'><a href='../S/967.html#L1999'>PGG</a>              1999 ext/pgsql/pgsql.c 	if ((PGG(auto_reset_persistent) &amp; 2) &amp;&amp; PQstatus(pgsql) != CONNECTION_OK) {</span>
+<span class='curline'><a href='../S/967.html#L2059'>PGG</a>              2059 ext/pgsql/pgsql.c 		id = PGG(default_link);</span>
+<span class='curline'><a href='../S/967.html#L2085'>PGG</a>              2085 ext/pgsql/pgsql.c 	if ((PGG(auto_reset_persistent) &amp; 2) &amp;&amp; PQstatus(pgsql) != CONNECTION_OK) {</span>
+<span class='curline'><a href='../S/967.html#L2145'>PGG</a>              2145 ext/pgsql/pgsql.c 		id = PGG(default_link);</span>
+<span class='curline'><a href='../S/967.html#L2206'>PGG</a>              2206 ext/pgsql/pgsql.c 	if ((PGG(auto_reset_persistent) &amp; 2) &amp;&amp; PQstatus(pgsql) != CONNECTION_OK) {</span>
+<span class='curline'><a href='../S/967.html#L2331'>PGG</a>              2331 ext/pgsql/pgsql.c 	if (zend_hash_index_find(&amp;PGG(notices), Z_RESVAL_P(pgsql_link), (void **)&amp;notice) == FAILURE) {</span>
+<span class='curline'><a href='../S/967.html#L3115'>PGG</a>              3115 ext/pgsql/pgsql.c 	id = PGG(default_link);</span>
+<span class='curline'><a href='../S/967.html#L3160'>PGG</a>              3160 ext/pgsql/pgsql.c 		id = PGG(default_link);</span>
+<span class='curline'><a href='../S/967.html#L3193'>PGG</a>              3193 ext/pgsql/pgsql.c 		id = PGG(default_link);</span>
+<span class='curline'><a href='../S/967.html#L3286'>PGG</a>              3286 ext/pgsql/pgsql.c 		id = PGG(default_link);</span>
+<span class='curline'><a href='../S/967.html#L3296'>PGG</a>              3296 ext/pgsql/pgsql.c 		id = PGG(default_link);</span>
+<span class='curline'><a href='../S/967.html#L3358'>PGG</a>              3358 ext/pgsql/pgsql.c 		id = PGG(default_link);</span>
+<span class='curline'><a href='../S/967.html#L3368'>PGG</a>              3368 ext/pgsql/pgsql.c 		id = PGG(default_link);</span>
+<span class='curline'><a href='../S/967.html#L3579'>PGG</a>              3579 ext/pgsql/pgsql.c 		id = PGG(default_link);</span>
+<span class='curline'><a href='../S/967.html#L3687'>PGG</a>              3687 ext/pgsql/pgsql.c 		id = PGG(default_link);</span>
+<span class='curline'><a href='../S/967.html#L3698'>PGG</a>              3698 ext/pgsql/pgsql.c 		id = PGG(default_link);</span>
+<span class='curline'><a href='../S/967.html#L3854'>PGG</a>              3854 ext/pgsql/pgsql.c 		id = PGG(default_link);</span>
+<span class='curline'><a href='../S/967.html#L3893'>PGG</a>              3893 ext/pgsql/pgsql.c 		id = PGG(default_link);</span>
+<span class='curline'><a href='../S/967.html#L3925'>PGG</a>              3925 ext/pgsql/pgsql.c 		id = PGG(default_link);</span>
+<span class='curline'><a href='../S/967.html#L3963'>PGG</a>              3963 ext/pgsql/pgsql.c 		id = PGG(default_link);</span>
+<span class='curline'><a href='../S/967.html#L3998'>PGG</a>              3998 ext/pgsql/pgsql.c 		id = PGG(default_link);</span>
+<span class='curline'><a href='../S/967.html#L4318'>PGG</a>              4318 ext/pgsql/pgsql.c 			id = PGG(default_link);</span>
+<span class='curline'><a href='../S/967.html#L4359'>PGG</a>              4359 ext/pgsql/pgsql.c 			id = PGG(default_link);</span>
+<span class='curline'><a href='../S/967.html#L4531'>PGG</a>              4531 ext/pgsql/pgsql.c 			id = PGG(default_link);</span>
+<span class='curline'><a href='../S/967.html#L4857'>PGG</a>              4857 ext/pgsql/pgsql.c 			if ((PGG(auto_reset_persistent) &amp; 2) &amp;&amp; PQstatus(pgsql) != CONNECTION_OK) {</span>
+<span class='curline'><a href='../S/967.html#L4964'>PGG</a>              4964 ext/pgsql/pgsql.c 		if ((PGG(auto_reset_persistent) &amp; 2) &amp;&amp; PQstatus(pgsql) != CONNECTION_OK) {</span>
+<span class='curline'><a href='../S/967.html#L5039'>PGG</a>              5039 ext/pgsql/pgsql.c 			if ((PGG(auto_reset_persistent) &amp; 2) &amp;&amp; PQstatus(pgsql) != CONNECTION_OK) {</span>
+<span class='curline'><a href='../S/967.html#L5151'>PGG</a>              5151 ext/pgsql/pgsql.c 		if ((PGG(auto_reset_persistent) &amp; 2) &amp;&amp; PQstatus(pgsql) != CONNECTION_OK) {</span>
+<span class='curline'><a href='../S/967.html#L6700'>PGG</a>              6700 ext/pgsql/pgsql.c 		if ((PGG(auto_reset_persistent) &amp; 2) &amp;&amp; PQstatus(pg_link) != CONNECTION_OK) {</span>
+</pre>
+</body>
+</html>

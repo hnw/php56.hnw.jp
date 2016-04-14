@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>ptdoc</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/1214.html#L201'>ptdoc</a>             201 ext/tidy/tidy.c 	PHPTidyDoc		*ptdoc;</span>
+<span class='curline'><a href='../S/1214.html#L660'>ptdoc</a>             660 ext/tidy/tidy.c 	if (intern-&gt;ptdoc) {</span>
+<span class='curline'><a href='../S/1214.html#L661'>ptdoc</a>             661 ext/tidy/tidy.c 		intern-&gt;ptdoc-&gt;ref_count--;</span>
+<span class='curline'><a href='../S/1214.html#L663'>ptdoc</a>             663 ext/tidy/tidy.c 		if (intern-&gt;ptdoc-&gt;ref_count &lt;= 0) {</span>
+<span class='curline'><a href='../S/1214.html#L664'>ptdoc</a>             664 ext/tidy/tidy.c 			tidyBufFree(intern-&gt;ptdoc-&gt;errbuf);</span>
+<span class='curline'><a href='../S/1214.html#L665'>ptdoc</a>             665 ext/tidy/tidy.c 			efree(intern-&gt;ptdoc-&gt;errbuf);</span>
+<span class='curline'><a href='../S/1214.html#L666'>ptdoc</a>             666 ext/tidy/tidy.c 			tidyRelease(intern-&gt;ptdoc-&gt;doc);</span>
+<span class='curline'><a href='../S/1214.html#L667'>ptdoc</a>             667 ext/tidy/tidy.c 			efree(intern-&gt;ptdoc);</span>
+<span class='curline'><a href='../S/1214.html#L689'>ptdoc</a>             689 ext/tidy/tidy.c 			intern-&gt;ptdoc = emalloc(sizeof(PHPTidyDoc));</span>
+<span class='curline'><a href='../S/1214.html#L690'>ptdoc</a>             690 ext/tidy/tidy.c 			intern-&gt;ptdoc-&gt;doc = tidyCreate();</span>
+<span class='curline'><a href='../S/1214.html#L691'>ptdoc</a>             691 ext/tidy/tidy.c 			intern-&gt;ptdoc-&gt;ref_count = 1;</span>
+<span class='curline'><a href='../S/1214.html#L692'>ptdoc</a>             692 ext/tidy/tidy.c 			intern-&gt;ptdoc-&gt;initialized = 0;</span>
+<span class='curline'><a href='../S/1214.html#L693'>ptdoc</a>             693 ext/tidy/tidy.c 			intern-&gt;ptdoc-&gt;errbuf = emalloc(sizeof(TidyBuffer));</span>
+<span class='curline'><a href='../S/1214.html#L694'>ptdoc</a>             694 ext/tidy/tidy.c 			tidyBufInit(intern-&gt;ptdoc-&gt;errbuf);</span>
+<span class='curline'><a href='../S/1214.html#L696'>ptdoc</a>             696 ext/tidy/tidy.c 			if (tidySetErrorBuffer(intern-&gt;ptdoc-&gt;doc, intern-&gt;ptdoc-&gt;errbuf) != 0) {</span>
+<span class='curline'><a href='../S/1214.html#L697'>ptdoc</a>             697 ext/tidy/tidy.c 				tidyBufFree(intern-&gt;ptdoc-&gt;errbuf);</span>
+<span class='curline'><a href='../S/1214.html#L698'>ptdoc</a>             698 ext/tidy/tidy.c 				efree(intern-&gt;ptdoc-&gt;errbuf);</span>
+<span class='curline'><a href='../S/1214.html#L699'>ptdoc</a>             699 ext/tidy/tidy.c 				tidyRelease(intern-&gt;ptdoc-&gt;doc);</span>
+<span class='curline'><a href='../S/1214.html#L700'>ptdoc</a>             700 ext/tidy/tidy.c 				efree(intern-&gt;ptdoc);</span>
+<span class='curline'><a href='../S/1214.html#L705'>ptdoc</a>             705 ext/tidy/tidy.c 			tidyOptSetBool(intern-&gt;ptdoc-&gt;doc, TidyForceOutput, yes);</span>
+<span class='curline'><a href='../S/1214.html#L706'>ptdoc</a>             706 ext/tidy/tidy.c 			tidyOptSetBool(intern-&gt;ptdoc-&gt;doc, TidyMark, no);</span>
+<span class='curline'><a href='../S/1214.html#L708'>ptdoc</a>             708 ext/tidy/tidy.c 			TIDY_SET_DEFAULT_CONFIG(intern-&gt;ptdoc-&gt;doc);</span>
+<span class='curline'><a href='../S/1214.html#L766'>ptdoc</a>             766 ext/tidy/tidy.c 			tidySaveBuffer (obj-&gt;ptdoc-&gt;doc, &amp;output);</span>
+<span class='curline'><a href='../S/1214.html#L799'>ptdoc</a>             799 ext/tidy/tidy.c 			if (obj-&gt;ptdoc) {</span>
+<span class='curline'><a href='../S/1214.html#L800'>ptdoc</a>             800 ext/tidy/tidy.c 				tidyNodeGetText(obj-&gt;ptdoc-&gt;doc, obj-&gt;node, &amp;buf);</span>
+<span class='curline'><a href='../S/1214.html#L822'>ptdoc</a>             822 ext/tidy/tidy.c 	tidySaveBuffer (obj-&gt;ptdoc-&gt;doc, &amp;output);</span>
+<span class='curline'><a href='../S/1214.html#L835'>ptdoc</a>             835 ext/tidy/tidy.c 	if (obj-&gt;ptdoc-&gt;errbuf-&gt;size) {</span>
+<span class='curline'><a href='../S/1214.html#L840'>ptdoc</a>             840 ext/tidy/tidy.c 		ZVAL_STRINGL(temp, (char*)obj-&gt;ptdoc-&gt;errbuf-&gt;bp, obj-&gt;ptdoc-&gt;errbuf-&gt;size-1, TRUE);</span>
+<span class='curline'><a href='../S/1214.html#L861'>ptdoc</a>             861 ext/tidy/tidy.c 			tidyNodeGetText(obj-&gt;ptdoc-&gt;doc, obj-&gt;node, &amp;buf);</span>
+<span class='curline'><a href='../S/1214.html#L869'>ptdoc</a>             869 ext/tidy/tidy.c 			ADD_PROPERTY_BOOL(obj-&gt;std.properties, proprietary, tidyNodeIsProp(obj-&gt;ptdoc-&gt;doc, obj-&gt;node));</span>
+<span class='curline'><a href='../S/1214.html#L912'>ptdoc</a>             912 ext/tidy/tidy.c 					newobj-&gt;ptdoc = obj-&gt;ptdoc;</span>
+<span class='curline'><a href='../S/1214.html#L913'>ptdoc</a>             913 ext/tidy/tidy.c 					newobj-&gt;ptdoc-&gt;ref_count++;</span>
+<span class='curline'><a href='../S/1214.html#L938'>ptdoc</a>             938 ext/tidy/tidy.c static void *php_tidy_get_opt_val(PHPTidyDoc *ptdoc, TidyOption opt, TidyOptionType *type TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1214.html#L944'>ptdoc</a>             944 ext/tidy/tidy.c 			char *val = (char *) tidyOptGetValue(ptdoc-&gt;doc, tidyOptGetId(opt));</span>
+<span class='curline'><a href='../S/1214.html#L954'>ptdoc</a>             954 ext/tidy/tidy.c 			return (void *) tidyOptGetInt(ptdoc-&gt;doc, tidyOptGetId(opt));</span>
+<span class='curline'><a href='../S/1214.html#L958'>ptdoc</a>             958 ext/tidy/tidy.c 			return (void *) tidyOptGetBool(ptdoc-&gt;doc, tidyOptGetId(opt));</span>
+<span class='curline'><a href='../S/1214.html#L974'>ptdoc</a>             974 ext/tidy/tidy.c 			node = tidyGetRoot(obj-&gt;ptdoc-&gt;doc);</span>
+<span class='curline'><a href='../S/1214.html#L978'>ptdoc</a>             978 ext/tidy/tidy.c 			node = tidyGetHtml(obj-&gt;ptdoc-&gt;doc);</span>
+<span class='curline'><a href='../S/1214.html#L982'>ptdoc</a>             982 ext/tidy/tidy.c 			node = tidyGetHead(obj-&gt;ptdoc-&gt;doc);</span>
+<span class='curline'><a href='../S/1214.html#L986'>ptdoc</a>             986 ext/tidy/tidy.c 			node = tidyGetBody(obj-&gt;ptdoc-&gt;doc);</span>
+<span class='curline'><a href='../S/1214.html#L1001'>ptdoc</a>            1001 ext/tidy/tidy.c 	newobj-&gt;ptdoc = obj-&gt;ptdoc;</span>
+<span class='curline'><a href='../S/1214.html#L1003'>ptdoc</a>            1003 ext/tidy/tidy.c 	newobj-&gt;ptdoc-&gt;ref_count++;</span>
+<span class='curline'><a href='../S/1214.html#L1047'>ptdoc</a>            1047 ext/tidy/tidy.c 		if (tidySetCharEncoding(obj-&gt;ptdoc-&gt;doc, enc) &lt; 0) {</span>
+<span class='curline'><a href='../S/1214.html#L1053'>ptdoc</a>            1053 ext/tidy/tidy.c 	obj-&gt;ptdoc-&gt;initialized = 1;</span>
+<span class='curline'><a href='../S/1214.html#L1057'>ptdoc</a>            1057 ext/tidy/tidy.c 	if (tidyParseBuffer(obj-&gt;ptdoc-&gt;doc, &amp;buf) &lt; 0) {</span>
+<span class='curline'><a href='../S/1214.html#L1058'>ptdoc</a>            1058 ext/tidy/tidy.c 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "%s", obj-&gt;ptdoc-&gt;errbuf-&gt;bp);</span>
+<span class='curline'><a href='../S/1214.html#L1230'>ptdoc</a>            1230 ext/tidy/tidy.c 	TIDY_APPLY_CONFIG_ZVAL(obj-&gt;ptdoc-&gt;doc, options);</span>
+<span class='curline'><a href='../S/1214.html#L1246'>ptdoc</a>            1246 ext/tidy/tidy.c 	if (obj-&gt;ptdoc-&gt;errbuf &amp;&amp; obj-&gt;ptdoc-&gt;errbuf-&gt;bp) {</span>
+<span class='curline'><a href='../S/1214.html#L1247'>ptdoc</a>            1247 ext/tidy/tidy.c 		RETURN_STRINGL((char*)obj-&gt;ptdoc-&gt;errbuf-&gt;bp, obj-&gt;ptdoc-&gt;errbuf-&gt;size-1, 1);</span>
+<span class='curline'><a href='../S/1214.html#L1262'>ptdoc</a>            1262 ext/tidy/tidy.c 	tidySaveBuffer(obj-&gt;ptdoc-&gt;doc, &amp;output);</span>
+<span class='curline'><a href='../S/1214.html#L1294'>ptdoc</a>            1294 ext/tidy/tidy.c 	TIDY_APPLY_CONFIG_ZVAL(obj-&gt;ptdoc-&gt;doc, options);</span>
+<span class='curline'><a href='../S/1214.html#L1312'>ptdoc</a>            1312 ext/tidy/tidy.c 	if (tidyCleanAndRepair(obj-&gt;ptdoc-&gt;doc) &gt;= 0) {</span>
+<span class='curline'><a href='../S/1214.html#L1343'>ptdoc</a>            1343 ext/tidy/tidy.c 	if (obj-&gt;ptdoc-&gt;initialized &amp;&amp; tidyRunDiagnostics(obj-&gt;ptdoc-&gt;doc) &gt;= 0) {</span>
+<span class='curline'><a href='../S/1214.html#L1389'>ptdoc</a>            1389 ext/tidy/tidy.c 	opt = tidyGetOptionByName(obj-&gt;ptdoc-&gt;doc, optname);</span>
+<span class='curline'><a href='../S/1214.html#L1396'>ptdoc</a>            1396 ext/tidy/tidy.c 	if ( (optval = (char *) tidyOptGetDoc(obj-&gt;ptdoc-&gt;doc, opt)) ) {</span>
+<span class='curline'><a href='../S/1214.html#L1417'>ptdoc</a>            1417 ext/tidy/tidy.c 	itOpt = tidyGetOptionList(obj-&gt;ptdoc-&gt;doc);</span>
+<span class='curline'><a href='../S/1214.html#L1422'>ptdoc</a>            1422 ext/tidy/tidy.c 		TidyOption opt = tidyGetNextOption(obj-&gt;ptdoc-&gt;doc, &amp;itOpt);</span>
+<span class='curline'><a href='../S/1214.html#L1425'>ptdoc</a>            1425 ext/tidy/tidy.c 		opt_value = php_tidy_get_opt_val(obj-&gt;ptdoc, opt, &amp;optt TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1214.html#L1451'>ptdoc</a>            1451 ext/tidy/tidy.c 	RETURN_LONG(tidyStatus(obj-&gt;ptdoc-&gt;doc));</span>
+<span class='curline'><a href='../S/1214.html#L1461'>ptdoc</a>            1461 ext/tidy/tidy.c 	RETURN_LONG(tidyDetectedHtmlVersion(obj-&gt;ptdoc-&gt;doc));</span>
+<span class='curline'><a href='../S/1214.html#L1471'>ptdoc</a>            1471 ext/tidy/tidy.c 	RETURN_BOOL(tidyDetectedXhtml(obj-&gt;ptdoc-&gt;doc));</span>
+<span class='curline'><a href='../S/1214.html#L1481'>ptdoc</a>            1481 ext/tidy/tidy.c 	RETURN_BOOL(tidyDetectedGenericXml(obj-&gt;ptdoc-&gt;doc));</span>
+<span class='curline'><a href='../S/1214.html#L1491'>ptdoc</a>            1491 ext/tidy/tidy.c 	RETURN_LONG(tidyErrorCount(obj-&gt;ptdoc-&gt;doc));</span>
+<span class='curline'><a href='../S/1214.html#L1501'>ptdoc</a>            1501 ext/tidy/tidy.c 	RETURN_LONG(tidyWarningCount(obj-&gt;ptdoc-&gt;doc));</span>
+<span class='curline'><a href='../S/1214.html#L1511'>ptdoc</a>            1511 ext/tidy/tidy.c 	RETURN_LONG(tidyAccessWarningCount(obj-&gt;ptdoc-&gt;doc));</span>
+<span class='curline'><a href='../S/1214.html#L1521'>ptdoc</a>            1521 ext/tidy/tidy.c 	RETURN_LONG(tidyConfigErrorCount(obj-&gt;ptdoc-&gt;doc));</span>
+<span class='curline'><a href='../S/1214.html#L1550'>ptdoc</a>            1550 ext/tidy/tidy.c 	opt = tidyGetOptionByName(obj-&gt;ptdoc-&gt;doc, optname);</span>
+<span class='curline'><a href='../S/1214.html#L1557'>ptdoc</a>            1557 ext/tidy/tidy.c 	optval = php_tidy_get_opt_val(obj-&gt;ptdoc, opt, &amp;optt TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1214.html#L1608'>ptdoc</a>            1608 ext/tidy/tidy.c 		TIDY_APPLY_CONFIG_ZVAL(obj-&gt;ptdoc-&gt;doc, options);</span>
+<span class='curline'><a href='../S/1214.html#L1639'>ptdoc</a>            1639 ext/tidy/tidy.c 	TIDY_APPLY_CONFIG_ZVAL(obj-&gt;ptdoc-&gt;doc, options);</span>
+<span class='curline'><a href='../S/1214.html#L1665'>ptdoc</a>            1665 ext/tidy/tidy.c 	TIDY_APPLY_CONFIG_ZVAL(obj-&gt;ptdoc-&gt;doc, options);</span>
+<span class='curline'><a href='../S/1214.html#L1833'>ptdoc</a>            1833 ext/tidy/tidy.c 		newobj-&gt;ptdoc = obj-&gt;ptdoc;</span>
+<span class='curline'><a href='../S/1214.html#L1834'>ptdoc</a>            1834 ext/tidy/tidy.c 		newobj-&gt;ptdoc-&gt;ref_count++;</span>
+</pre>
+</body>
+</html>

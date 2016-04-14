@@ -1,0 +1,330 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>ops</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/287.html#L91'>ops</a>                91 ext/hash/hash.c 	php_hash_ops *ops;</span>
+<span class='curline'><a href='../S/287.html#L95'>ops</a>                95 ext/hash/hash.c 	if (SUCCESS != zend_hash_find(&amp;php_hash_hashtable, lower, algo_len + 1, (void*)&amp;ops)) {</span>
+<span class='curline'><a href='../S/287.html#L96'>ops</a>                96 ext/hash/hash.c 		ops = NULL;</span>
+<span class='curline'><a href='../S/287.html#L100'>ops</a>               100 ext/hash/hash.c 	return ops;</span>
+<span class='curline'><a href='../S/287.html#L104'>ops</a>               104 ext/hash/hash.c PHP_HASH_API void php_hash_register_algo(const char *algo, const php_hash_ops *ops) /* {{{ */</span>
+<span class='curline'><a href='../S/287.html#L110'>ops</a>               110 ext/hash/hash.c 	zend_hash_add(&amp;php_hash_hashtable, lower, algo_len + 1, (void*)ops, sizeof(php_hash_ops), NULL);</span>
+<span class='curline'><a href='../S/287.html#L115'>ops</a>               115 ext/hash/hash.c PHP_HASH_API int php_hash_copy(const void *ops, void *orig_context, void *dest_context) /* {{{ */</span>
+<span class='curline'><a href='../S/287.html#L117'>ops</a>               117 ext/hash/hash.c 	php_hash_ops *hash_ops = (php_hash_ops *)ops;</span>
+<span class='curline'><a href='../S/287.html#L131'>ops</a>               131 ext/hash/hash.c 	const php_hash_ops *ops;</span>
+<span class='curline'><a href='../S/287.html#L139'>ops</a>               139 ext/hash/hash.c 	ops = php_hash_fetch_ops(algo, algo_len);</span>
+<span class='curline'><a href='../S/287.html#L140'>ops</a>               140 ext/hash/hash.c 	if (!ops) {</span>
+<span class='curline'><a href='../S/287.html#L156'>ops</a>               156 ext/hash/hash.c 	context = emalloc(ops-&gt;context_size);</span>
+<span class='curline'><a href='../S/287.html#L157'>ops</a>               157 ext/hash/hash.c 	ops-&gt;hash_init(context);</span>
+<span class='curline'><a href='../S/287.html#L164'>ops</a>               164 ext/hash/hash.c 			ops-&gt;hash_update(context, (unsigned char *) buf, n);</span>
+<span class='curline'><a href='../S/287.html#L168'>ops</a>               168 ext/hash/hash.c 		ops-&gt;hash_update(context, (unsigned char *) data, data_len);</span>
+<span class='curline'><a href='../S/287.html#L171'>ops</a>               171 ext/hash/hash.c 	digest = emalloc(ops-&gt;digest_size + 1);</span>
+<span class='curline'><a href='../S/287.html#L172'>ops</a>               172 ext/hash/hash.c 	ops-&gt;hash_final((unsigned char *) digest, context);</span>
+<span class='curline'><a href='../S/287.html#L176'>ops</a>               176 ext/hash/hash.c 		digest[ops-&gt;digest_size] = 0;</span>
+<span class='curline'><a href='../S/287.html#L177'>ops</a>               177 ext/hash/hash.c 		RETURN_STRINGL(digest, ops-&gt;digest_size, 0);</span>
+<span class='curline'><a href='../S/287.html#L179'>ops</a>               179 ext/hash/hash.c 		char *hex_digest = safe_emalloc(ops-&gt;digest_size, 2, 1);</span>
+<span class='curline'><a href='../S/287.html#L181'>ops</a>               181 ext/hash/hash.c 		php_hash_bin2hex(hex_digest, (unsigned char *) digest, ops-&gt;digest_size);</span>
+<span class='curline'><a href='../S/287.html#L182'>ops</a>               182 ext/hash/hash.c 		hex_digest[2 * ops-&gt;digest_size] = 0;</span>
+<span class='curline'><a href='../S/287.html#L184'>ops</a>               184 ext/hash/hash.c 		RETURN_STRINGL(hex_digest, 2 * ops-&gt;digest_size, 0);</span>
+<span class='curline'><a href='../S/287.html#L221'>ops</a>               221 ext/hash/hash.c static inline void php_hash_hmac_prep_key(unsigned char *K, const php_hash_ops *ops, void *context, const unsigned char *key, const int key_len) {</span>
+<span class='curline'><a href='../S/287.html#L222'>ops</a>               222 ext/hash/hash.c 	memset(K, 0, ops-&gt;block_size);</span>
+<span class='curline'><a href='../S/287.html#L223'>ops</a>               223 ext/hash/hash.c 	if (key_len &gt; ops-&gt;block_size) {</span>
+<span class='curline'><a href='../S/287.html#L225'>ops</a>               225 ext/hash/hash.c 		ops-&gt;hash_init(context);</span>
+<span class='curline'><a href='../S/287.html#L226'>ops</a>               226 ext/hash/hash.c 		ops-&gt;hash_update(context, key, key_len);</span>
+<span class='curline'><a href='../S/287.html#L227'>ops</a>               227 ext/hash/hash.c 		ops-&gt;hash_final(K, context);</span>
+<span class='curline'><a href='../S/287.html#L232'>ops</a>               232 ext/hash/hash.c 	php_hash_string_xor_char(K, K, 0x36, ops-&gt;block_size);</span>
+<span class='curline'><a href='../S/287.html#L235'>ops</a>               235 ext/hash/hash.c static inline void php_hash_hmac_round(unsigned char *final, const php_hash_ops *ops, void *context, const unsigned char *key, const unsigned char *data, const long data_size) {</span>
+<span class='curline'><a href='../S/287.html#L236'>ops</a>               236 ext/hash/hash.c 	ops-&gt;hash_init(context);</span>
+<span class='curline'><a href='../S/287.html#L237'>ops</a>               237 ext/hash/hash.c 	ops-&gt;hash_update(context, key, ops-&gt;block_size);</span>
+<span class='curline'><a href='../S/287.html#L238'>ops</a>               238 ext/hash/hash.c 	ops-&gt;hash_update(context, data, data_size);</span>
+<span class='curline'><a href='../S/287.html#L239'>ops</a>               239 ext/hash/hash.c 	ops-&gt;hash_final(final, context);</span>
+<span class='curline'><a href='../S/287.html#L247'>ops</a>               247 ext/hash/hash.c 	const php_hash_ops *ops;</span>
+<span class='curline'><a href='../S/287.html#L256'>ops</a>               256 ext/hash/hash.c 	ops = php_hash_fetch_ops(algo, algo_len);</span>
+<span class='curline'><a href='../S/287.html#L257'>ops</a>               257 ext/hash/hash.c 	if (!ops) {</span>
+<span class='curline'><a href='../S/287.html#L273'>ops</a>               273 ext/hash/hash.c 	context = emalloc(ops-&gt;context_size);</span>
+<span class='curline'><a href='../S/287.html#L275'>ops</a>               275 ext/hash/hash.c 	K = emalloc(ops-&gt;block_size);</span>
+<span class='curline'><a href='../S/287.html#L276'>ops</a>               276 ext/hash/hash.c 	digest = emalloc(ops-&gt;digest_size + 1);</span>
+<span class='curline'><a href='../S/287.html#L278'>ops</a>               278 ext/hash/hash.c 	php_hash_hmac_prep_key((unsigned char *) K, ops, context, (unsigned char *) key, key_len);		</span>
+<span class='curline'><a href='../S/287.html#L283'>ops</a>               283 ext/hash/hash.c 		ops-&gt;hash_init(context);</span>
+<span class='curline'><a href='../S/287.html#L284'>ops</a>               284 ext/hash/hash.c 		ops-&gt;hash_update(context, (unsigned char *) K, ops-&gt;block_size);</span>
+<span class='curline'><a href='../S/287.html#L286'>ops</a>               286 ext/hash/hash.c 			ops-&gt;hash_update(context, (unsigned char *) buf, n);</span>
+<span class='curline'><a href='../S/287.html#L289'>ops</a>               289 ext/hash/hash.c 		ops-&gt;hash_final((unsigned char *) digest, context);</span>
+<span class='curline'><a href='../S/287.html#L291'>ops</a>               291 ext/hash/hash.c 		php_hash_hmac_round((unsigned char *) digest, ops, context, (unsigned char *) K, (unsigned char *) data, data_len);</span>
+<span class='curline'><a href='../S/287.html#L294'>ops</a>               294 ext/hash/hash.c 	php_hash_string_xor_char((unsigned char *) K, (unsigned char *) K, 0x6A, ops-&gt;block_size);</span>
+<span class='curline'><a href='../S/287.html#L296'>ops</a>               296 ext/hash/hash.c 	php_hash_hmac_round((unsigned char *) digest, ops, context, (unsigned char *) K, (unsigned char *) digest, ops-&gt;digest_size);</span>
+<span class='curline'><a href='../S/287.html#L299'>ops</a>               299 ext/hash/hash.c 	memset(K, 0, ops-&gt;block_size);</span>
+<span class='curline'><a href='../S/287.html#L304'>ops</a>               304 ext/hash/hash.c 		digest[ops-&gt;digest_size] = 0;</span>
+<span class='curline'><a href='../S/287.html#L305'>ops</a>               305 ext/hash/hash.c 		RETURN_STRINGL(digest, ops-&gt;digest_size, 0);</span>
+<span class='curline'><a href='../S/287.html#L307'>ops</a>               307 ext/hash/hash.c 		char *hex_digest = safe_emalloc(ops-&gt;digest_size, 2, 1);</span>
+<span class='curline'><a href='../S/287.html#L309'>ops</a>               309 ext/hash/hash.c 		php_hash_bin2hex(hex_digest, (unsigned char *) digest, ops-&gt;digest_size);</span>
+<span class='curline'><a href='../S/287.html#L310'>ops</a>               310 ext/hash/hash.c 		hex_digest[2 * ops-&gt;digest_size] = 0;</span>
+<span class='curline'><a href='../S/287.html#L312'>ops</a>               312 ext/hash/hash.c 		RETURN_STRINGL(hex_digest, 2 * ops-&gt;digest_size, 0);</span>
+<span class='curline'><a href='../S/287.html#L344'>ops</a>               344 ext/hash/hash.c 	const php_hash_ops *ops;</span>
+<span class='curline'><a href='../S/287.html#L351'>ops</a>               351 ext/hash/hash.c 	ops = php_hash_fetch_ops(algo, algo_len);</span>
+<span class='curline'><a href='../S/287.html#L352'>ops</a>               352 ext/hash/hash.c 	if (!ops) {</span>
+<span class='curline'><a href='../S/287.html#L364'>ops</a>               364 ext/hash/hash.c 	context = emalloc(ops-&gt;context_size);</span>
+<span class='curline'><a href='../S/287.html#L365'>ops</a>               365 ext/hash/hash.c 	ops-&gt;hash_init(context);</span>
+<span class='curline'><a href='../S/287.html#L368'>ops</a>               368 ext/hash/hash.c 	hash-&gt;ops = ops;</span>
+<span class='curline'><a href='../S/287.html#L374'>ops</a>               374 ext/hash/hash.c 		char *K = emalloc(ops-&gt;block_size);</span>
+<span class='curline'><a href='../S/287.html#L377'>ops</a>               377 ext/hash/hash.c 		memset(K, 0, ops-&gt;block_size);</span>
+<span class='curline'><a href='../S/287.html#L379'>ops</a>               379 ext/hash/hash.c 		if (key_len &gt; ops-&gt;block_size) {</span>
+<span class='curline'><a href='../S/287.html#L381'>ops</a>               381 ext/hash/hash.c 			ops-&gt;hash_update(context, (unsigned char *) key, key_len);</span>
+<span class='curline'><a href='../S/287.html#L382'>ops</a>               382 ext/hash/hash.c 			ops-&gt;hash_final((unsigned char *) K, context);</span>
+<span class='curline'><a href='../S/287.html#L384'>ops</a>               384 ext/hash/hash.c 			ops-&gt;hash_init(context);</span>
+<span class='curline'><a href='../S/287.html#L390'>ops</a>               390 ext/hash/hash.c 		for(i=0; i &lt; ops-&gt;block_size; i++) {</span>
+<span class='curline'><a href='../S/287.html#L393'>ops</a>               393 ext/hash/hash.c 		ops-&gt;hash_update(context, (unsigned char *) K, ops-&gt;block_size);</span>
+<span class='curline'><a href='../S/287.html#L416'>ops</a>               416 ext/hash/hash.c 	hash-&gt;ops-&gt;hash_update(hash-&gt;context, (unsigned char *) data, data_len);</span>
+<span class='curline'><a href='../S/287.html#L450'>ops</a>               450 ext/hash/hash.c 		hash-&gt;ops-&gt;hash_update(hash-&gt;context, (unsigned char *) buf, n);</span>
+<span class='curline'><a href='../S/287.html#L484'>ops</a>               484 ext/hash/hash.c 		hash-&gt;ops-&gt;hash_update(hash-&gt;context, (unsigned char *) buf, n);</span>
+<span class='curline'><a href='../S/287.html#L509'>ops</a>               509 ext/hash/hash.c 	digest_len = hash-&gt;ops-&gt;digest_size;</span>
+<span class='curline'><a href='../S/287.html#L511'>ops</a>               511 ext/hash/hash.c 	hash-&gt;ops-&gt;hash_final((unsigned char *) digest, hash-&gt;context);</span>
+<span class='curline'><a href='../S/287.html#L516'>ops</a>               516 ext/hash/hash.c 		for(i=0; i &lt; hash-&gt;ops-&gt;block_size; i++) {</span>
+<span class='curline'><a href='../S/287.html#L521'>ops</a>               521 ext/hash/hash.c 		hash-&gt;ops-&gt;hash_init(hash-&gt;context);</span>
+<span class='curline'><a href='../S/287.html#L522'>ops</a>               522 ext/hash/hash.c 		hash-&gt;ops-&gt;hash_update(hash-&gt;context, (unsigned char *) hash-&gt;key, hash-&gt;ops-&gt;block_size);</span>
+<span class='curline'><a href='../S/287.html#L523'>ops</a>               523 ext/hash/hash.c 		hash-&gt;ops-&gt;hash_update(hash-&gt;context, (unsigned char *) digest, hash-&gt;ops-&gt;digest_size);</span>
+<span class='curline'><a href='../S/287.html#L524'>ops</a>               524 ext/hash/hash.c 		hash-&gt;ops-&gt;hash_final((unsigned char *) digest, hash-&gt;context);</span>
+<span class='curline'><a href='../S/287.html#L527'>ops</a>               527 ext/hash/hash.c 		memset(hash-&gt;key, 0, hash-&gt;ops-&gt;block_size);</span>
+<span class='curline'><a href='../S/287.html#L572'>ops</a>               572 ext/hash/hash.c 	context = emalloc(hash-&gt;ops-&gt;context_size);</span>
+<span class='curline'><a href='../S/287.html#L573'>ops</a>               573 ext/hash/hash.c 	hash-&gt;ops-&gt;hash_init(context);</span>
+<span class='curline'><a href='../S/287.html#L575'>ops</a>               575 ext/hash/hash.c 	res = hash-&gt;ops-&gt;hash_copy(hash-&gt;ops, hash-&gt;context, context);</span>
+<span class='curline'><a href='../S/287.html#L582'>ops</a>               582 ext/hash/hash.c 	copy_hash-&gt;ops = hash-&gt;ops;</span>
+<span class='curline'><a href='../S/287.html#L585'>ops</a>               585 ext/hash/hash.c 	copy_hash-&gt;key = ecalloc(1, hash-&gt;ops-&gt;block_size);</span>
+<span class='curline'><a href='../S/287.html#L587'>ops</a>               587 ext/hash/hash.c 		memcpy(copy_hash-&gt;key, hash-&gt;key, hash-&gt;ops-&gt;block_size);</span>
+<span class='curline'><a href='../S/287.html#L622'>ops</a>               622 ext/hash/hash.c 	const php_hash_ops *ops;</span>
+<span class='curline'><a href='../S/287.html#L629'>ops</a>               629 ext/hash/hash.c 	ops = php_hash_fetch_ops(algo, algo_len);</span>
+<span class='curline'><a href='../S/287.html#L630'>ops</a>               630 ext/hash/hash.c 	if (!ops) {</span>
+<span class='curline'><a href='../S/287.html#L650'>ops</a>               650 ext/hash/hash.c 	context = emalloc(ops-&gt;context_size);</span>
+<span class='curline'><a href='../S/287.html#L651'>ops</a>               651 ext/hash/hash.c 	ops-&gt;hash_init(context);</span>
+<span class='curline'><a href='../S/287.html#L653'>ops</a>               653 ext/hash/hash.c 	K1 = emalloc(ops-&gt;block_size);</span>
+<span class='curline'><a href='../S/287.html#L654'>ops</a>               654 ext/hash/hash.c 	K2 = emalloc(ops-&gt;block_size);</span>
+<span class='curline'><a href='../S/287.html#L655'>ops</a>               655 ext/hash/hash.c 	digest = emalloc(ops-&gt;digest_size);</span>
+<span class='curline'><a href='../S/287.html#L656'>ops</a>               656 ext/hash/hash.c 	temp = emalloc(ops-&gt;digest_size);</span>
+<span class='curline'><a href='../S/287.html#L659'>ops</a>               659 ext/hash/hash.c 	php_hash_hmac_prep_key(K1, ops, context, (unsigned char *) pass, pass_len);</span>
+<span class='curline'><a href='../S/287.html#L661'>ops</a>               661 ext/hash/hash.c 	php_hash_string_xor_char(K2, K1, 0x6A, ops-&gt;block_size);</span>
+<span class='curline'><a href='../S/287.html#L665'>ops</a>               665 ext/hash/hash.c 		length = ops-&gt;digest_size;</span>
+<span class='curline'><a href='../S/287.html#L675'>ops</a>               675 ext/hash/hash.c 	loops = (long) ceil((float) digest_length / (float) ops-&gt;digest_size);</span>
+<span class='curline'><a href='../S/287.html#L677'>ops</a>               677 ext/hash/hash.c 	result = safe_emalloc(loops, ops-&gt;digest_size, 0);</span>
+<span class='curline'><a href='../S/287.html#L691'>ops</a>               691 ext/hash/hash.c 		php_hash_hmac_round(digest, ops, context, K1, computed_salt, (long) salt_len + 4);</span>
+<span class='curline'><a href='../S/287.html#L692'>ops</a>               692 ext/hash/hash.c 		php_hash_hmac_round(digest, ops, context, K2, digest, ops-&gt;digest_size);</span>
+<span class='curline'><a href='../S/287.html#L696'>ops</a>               696 ext/hash/hash.c 		memcpy(temp, digest, ops-&gt;digest_size);</span>
+<span class='curline'><a href='../S/287.html#L704'>ops</a>               704 ext/hash/hash.c 			php_hash_hmac_round(digest, ops, context, K1, digest, ops-&gt;digest_size);</span>
+<span class='curline'><a href='../S/287.html#L705'>ops</a>               705 ext/hash/hash.c 			php_hash_hmac_round(digest, ops, context, K2, digest, ops-&gt;digest_size);</span>
+<span class='curline'><a href='../S/287.html#L708'>ops</a>               708 ext/hash/hash.c 			php_hash_string_xor(temp, temp, digest, ops-&gt;digest_size);</span>
+<span class='curline'><a href='../S/287.html#L711'>ops</a>               711 ext/hash/hash.c 		memcpy(result + ((i - 1) * ops-&gt;digest_size), temp, ops-&gt;digest_size);</span>
+<span class='curline'><a href='../S/287.html#L714'>ops</a>               714 ext/hash/hash.c 	memset(K1, 0, ops-&gt;block_size);</span>
+<span class='curline'><a href='../S/287.html#L715'>ops</a>               715 ext/hash/hash.c 	memset(K2, 0, ops-&gt;block_size);</span>
+<span class='curline'><a href='../S/287.html#L784'>ops</a>               784 ext/hash/hash.c 		unsigned char *dummy = emalloc(hash-&gt;ops-&gt;digest_size);</span>
+<span class='curline'><a href='../S/287.html#L785'>ops</a>               785 ext/hash/hash.c 		hash-&gt;ops-&gt;hash_final(dummy, hash-&gt;context);</span>
+<span class='curline'><a href='../S/287.html#L791'>ops</a>               791 ext/hash/hash.c 		memset(hash-&gt;key, 0, hash-&gt;ops-&gt;block_size);</span>
+<span class='curline'><a href='../S/287.html#L919'>ops</a>               919 ext/hash/hash.c 			const php_hash_ops *ops = php_hash_fetch_ops(algorithm_lookup.hash_name, strlen(algorithm_lookup.hash_name));</span>
+<span class='curline'><a href='../S/287.html#L920'>ops</a>               920 ext/hash/hash.c 			if (ops) {</span>
+<span class='curline'><a href='../S/287.html#L921'>ops</a>               921 ext/hash/hash.c 				RETVAL_LONG(ops-&gt;digest_size);</span>
+<span class='curline'><a href='../S/287.html#L962'>ops</a>               962 ext/hash/hash.c 			const php_hash_ops *ops = php_hash_fetch_ops(algorithm_lookup.hash_name, strlen(algorithm_lookup.hash_name));</span>
+<span class='curline'><a href='../S/287.html#L963'>ops</a>               963 ext/hash/hash.c 			if (ops) {</span>
+<span class='curline'><a href='../S/287.html#L968'>ops</a>               968 ext/hash/hash.c 				int block_size = ops-&gt;digest_size;</span>
+<span class='curline'><a href='../S/287.html#L972'>ops</a>               972 ext/hash/hash.c 				context = emalloc(ops-&gt;context_size);</span>
+<span class='curline'><a href='../S/287.html#L973'>ops</a>               973 ext/hash/hash.c 				ops-&gt;hash_init(context);</span>
+<span class='curline'><a href='../S/287.html#L976'>ops</a>               976 ext/hash/hash.c 				digest = emalloc(ops-&gt;digest_size + 1);</span>
+<span class='curline'><a href='../S/287.html#L979'>ops</a>               979 ext/hash/hash.c 					ops-&gt;hash_init(context);</span>
+<span class='curline'><a href='../S/287.html#L982'>ops</a>               982 ext/hash/hash.c 						ops-&gt;hash_update(context, &amp;null, 1);</span>
+<span class='curline'><a href='../S/287.html#L984'>ops</a>               984 ext/hash/hash.c 					ops-&gt;hash_update(context, (unsigned char *)padded_salt, salt_len);</span>
+<span class='curline'><a href='../S/287.html#L985'>ops</a>               985 ext/hash/hash.c 					ops-&gt;hash_update(context, (unsigned char *)password, password_len);</span>
+<span class='curline'><a href='../S/287.html#L986'>ops</a>               986 ext/hash/hash.c 					ops-&gt;hash_final((unsigned char *)digest, context);</span>
+<span class='curline'><a href='../S/288.html#L59'>ops</a>                59 ext/hash/hash_adler32.c PHP_HASH_API int PHP_ADLER32Copy(const php_hash_ops *ops, PHP_ADLER32_CTX *orig_context, PHP_ADLER32_CTX *copy_context)</span>
+<span class='curline'><a href='../S/289.html#L69'>ops</a>                69 ext/hash/hash_crc32.c PHP_HASH_API int PHP_CRC32Copy(const php_hash_ops *ops, PHP_CRC32_CTX *orig_context, PHP_CRC32_CTX *copy_context)</span>
+<span class='curline'><a href='../S/300.html#L41'>ops</a>                41 ext/hash/php_hash.h typedef int  (*php_hash_copy_func_t)(const void *ops, void *orig_context, void *dest_context);</span>
+<span class='curline'><a href='../S/300.html#L55'>ops</a>                55 ext/hash/php_hash.h 	const php_hash_ops *ops;</span>
+<span class='curline'><a href='../S/300.html#L142'>ops</a>               142 ext/hash/php_hash.h PHP_HASH_API void php_hash_register_algo(const char *algo, const php_hash_ops *ops);</span>
+<span class='curline'><a href='../S/300.html#L143'>ops</a>               143 ext/hash/php_hash.h PHP_HASH_API int php_hash_copy(const void *ops, void *orig_context, void *dest_context);</span>
+<span class='curline'><a href='../S/301.html#L33'>ops</a>                33 ext/hash/php_hash_adler32.h PHP_HASH_API int PHP_ADLER32Copy(const php_hash_ops *ops, PHP_ADLER32_CTX *orig_context, PHP_ADLER32_CTX *copy_context);</span>
+<span class='curline'><a href='../S/302.html#L34'>ops</a>                34 ext/hash/php_hash_crc32.h PHP_HASH_API int PHP_CRC32Copy(const php_hash_ops *ops, PHP_CRC32_CTX *orig_context, PHP_CRC32_CTX *copy_context);</span>
+<span class='curline'><a href='../S/798.html#L865'>ops</a>               865 ext/mysqlnd/mysqlnd_net.c 	int was_blocked = net_stream-&gt;ops-&gt;set_option(net_stream, opt, 0, NULL TSRMLS_CC);</span>
+<span class='curline'><a href='../S/798.html#L878'>ops</a>               878 ext/mysqlnd/mysqlnd_net.c 			net_stream-&gt;ops-&gt;set_option(net_stream, opt, 1, NULL TSRMLS_CC);</span>
+<span class='curline'><a href='../S/863.html#L802'>ops</a>               802 ext/opcache/ZendAccelerator.c 				    !stream-&gt;ops ||</span>
+<span class='curline'><a href='../S/863.html#L803'>ops</a>               803 ext/opcache/ZendAccelerator.c 				    !stream-&gt;ops-&gt;stat) {</span>
+<span class='curline'><a href='../S/863.html#L810'>ops</a>               810 ext/opcache/ZendAccelerator.c 					ret = stream-&gt;ops-&gt;stat(stream, &amp;sb TSRMLS_CC);</span>
+<span class='curline'><a href='../S/867.html#L1577'>ops</a>              1577 ext/openssl/xp_ssl.c 		if (cparam-&gt;inputs.session-&gt;ops != &amp;php_openssl_socket_ops) {</span>
+<span class='curline'><a href='../S/867.html#L2122'>ops</a>              2122 ext/openssl/xp_ssl.c 			xparam-&gt;outputs.client = php_stream_alloc_rel(stream-&gt;ops, clisockdata, NULL, "r+");</span>
+<span class='curline'><a href='../S/987.html#L712'>ops</a>               712 ext/posix/posix.c 				stream-&gt;ops-&gt;label);</span>
+<span class='curline'><a href='../S/1006.html#L730'>ops</a>               730 ext/session/session.c 	php_hash_ops *ops = (php_hash_ops*)php_hash_fetch_ops(new_value, new_value_length);</span>
+<span class='curline'><a href='../S/1006.html#L732'>ops</a>               732 ext/session/session.c 	if (ops) {</span>
+<span class='curline'><a href='../S/1006.html#L734'>ops</a>               734 ext/session/session.c 		PS(hash_ops) = ops;</span>
+<span class='curline'><a href='../S/1067.html#L117489'>ops</a>              117489 ext/sqlite3/libsqlite/sqlite3.c     static const u8 ops[] = {TK_GE, TK_LE};</span>
+<span class='curline'><a href='../S/1067.html#L117495'>ops</a>              117495 ext/sqlite3/libsqlite/sqlite3.c       pNewExpr = sqlite3PExpr(pParse, ops[i], </span>
+<span class='curline'><a href='../S/1109.html#L2143'>ops</a>              2143 ext/standard/filters.c 	php_stream_filter_ops *ops;</span>
+<span class='curline'><a href='../S/1109.html#L2162'>ops</a>              2162 ext/standard/filters.c 	for (i = 0; standard_filters[i].ops; i++) {</span>
+<span class='curline'><a href='../S/1109.html#L2164'>ops</a>              2164 ext/standard/filters.c 					standard_filters[i].ops-&gt;label,</span>
+<span class='curline'><a href='../S/1109.html#L2177'>ops</a>              2177 ext/standard/filters.c 	for (i = 0; standard_filters[i].ops; i++) {</span>
+<span class='curline'><a href='../S/1109.html#L2178'>ops</a>              2178 ext/standard/filters.c 		php_stream_filter_unregister_factory(standard_filters[i].ops-&gt;label TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1155.html#L388'>ops</a>               388 ext/standard/php_fopen_wrapper.c 				stream-&gt;ops = &amp;php_stream_socket_ops;</span>
+<span class='curline'><a href='../S/1187.html#L516'>ops</a>               516 ext/standard/streamsfuncs.c 	add_assoc_string(return_value, "stream_type", (char *)stream-&gt;ops-&gt;label, 1);</span>
+<span class='curline'><a href='../S/1187.html#L537'>ops</a>               537 ext/standard/streamsfuncs.c 	add_assoc_bool(return_value, "seekable", (stream-&gt;ops-&gt;seek) &amp;&amp; (stream-&gt;flags &amp; PHP_STREAM_FLAG_NO_SEEK) == 0);</span>
+<span class='curline'><a href='../S/1387.html#L62'>ops</a>                62 main/php_streams.h #define php_stream_alloc_rel(ops, thisptr, persistent, mode) _php_stream_alloc((ops), (thisptr), (persistent), (mode) STREAMS_REL_CC TSRMLS_CC)</span>
+<span class='curline'><a href='../S/1387.html#L187'>ops</a>               187 main/php_streams.h 	php_stream_ops *ops;</span>
+<span class='curline'><a href='../S/1387.html#L240'>ops</a>               240 main/php_streams.h PHPAPI php_stream *_php_stream_alloc(php_stream_ops *ops, void *abstract,</span>
+<span class='curline'><a href='../S/1387.html#L243'>ops</a>               243 main/php_streams.h #define php_stream_alloc(ops, thisptr, persistent_id, mode)	_php_stream_alloc((ops), (thisptr), (persistent_id), (mode) STREAMS_CC TSRMLS_CC)</span>
+<span class='curline'><a href='../S/1387.html#L486'>ops</a>               486 main/php_streams.h #define php_stream_is(stream, anops)		((stream)-&gt;ops == anops)</span>
+<span class='curline'><a href='../S/1403.html#L208'>ops</a>               208 main/streams/cast.c 		if (stream-&gt;ops-&gt;seek &amp;&amp; (stream-&gt;flags &amp; PHP_STREAM_FLAG_NO_SEEK) == 0) {</span>
+<span class='curline'><a href='../S/1403.html#L211'>ops</a>               211 main/streams/cast.c 			stream-&gt;ops-&gt;seek(stream, stream-&gt;position, SEEK_SET, &amp;dummy TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1403.html#L229'>ops</a>               229 main/streams/cast.c 			stream-&gt;ops-&gt;cast &amp;&amp;</span>
+<span class='curline'><a href='../S/1403.html#L231'>ops</a>               231 main/streams/cast.c 			stream-&gt;ops-&gt;cast(stream, castas, ret TSRMLS_CC) == SUCCESS</span>
+<span class='curline'><a href='../S/1403.html#L272'>ops</a>               272 main/streams/cast.c 		if (!php_stream_is_filtered(stream) &amp;&amp; stream-&gt;ops-&gt;cast &amp;&amp; stream-&gt;ops-&gt;cast(stream, castas, NULL TSRMLS_CC) == SUCCESS) {</span>
+<span class='curline'><a href='../S/1403.html#L273'>ops</a>               273 main/streams/cast.c 			if (FAILURE == stream-&gt;ops-&gt;cast(stream, castas, ret TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/1403.html#L309'>ops</a>               309 main/streams/cast.c 	} else if (stream-&gt;ops-&gt;cast &amp;&amp; stream-&gt;ops-&gt;cast(stream, castas, ret TSRMLS_CC) == SUCCESS) {</span>
+<span class='curline'><a href='../S/1403.html#L322'>ops</a>               322 main/streams/cast.c 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "cannot represent a stream of type %s as a %s", stream-&gt;ops-&gt;label, cast_names[castas]);</span>
+<span class='curline'><a href='../S/1403.html#L384'>ops</a>               384 main/streams/cast.c 	if (((flags &amp; PHP_STREAM_FORCE_CONVERSION) == 0) &amp;&amp; origstream-&gt;ops-&gt;seek != NULL) {</span>
+<span class='curline'><a href='../S/1404.html#L504'>ops</a>               504 main/streams/filter.c 			stream-&gt;ops-&gt;write(stream, bucket-&gt;buf, bucket-&gt;buflen TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1406.html#L746'>ops</a>               746 main/streams/memory.c 		stream-&gt;ops = &amp;php_stream_rfc2397_ops;</span>
+<span class='curline'><a href='../S/1417.html#L87'>ops</a>                87 main/streams/streams.c fprintf(stderr, "forget_persistent: %s:%p\n", stream-&gt;ops-&gt;label, stream);</span>
+<span class='curline'><a href='../S/1417.html#L288'>ops</a>               288 main/streams/streams.c PHPAPI php_stream *_php_stream_alloc(php_stream_ops *ops, void *abstract, const char *persistent_id, const char *mode STREAMS_DC TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1417.html#L300'>ops</a>               300 main/streams/streams.c fprintf(stderr, "stream_alloc: %s:%p persistent=%s\n", ops-&gt;label, ret, persistent_id);</span>
+<span class='curline'><a href='../S/1417.html#L303'>ops</a>               303 main/streams/streams.c 	ret-&gt;ops = ops;</span>
+<span class='curline'><a href='../S/1417.html#L405'>ops</a>               405 main/streams/streams.c 			stream-&gt;ops-&gt;label, stream, stream-&gt;orig_path, stream-&gt;in_free, _php_stream_pretty_free_options(close_options, out));</span>
+<span class='curline'><a href='../S/1417.html#L456'>ops</a>               456 main/streams/streams.c 		stream-&gt;ops-&gt;label, stream, stream-&gt;orig_path, preserve_handle, release_cast,</span>
+<span class='curline'><a href='../S/1417.html#L486'>ops</a>               486 main/streams/streams.c 		ret = stream-&gt;ops-&gt;close(stream, preserve_handle ? 0 : 1 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1417.html#L530'>ops</a>               530 main/streams/streams.c 			spprintf(&amp;leakinfo, 0, __FILE__ "(%d) : Stream of type '%s' %p (path:%s) was not closed\n", __LINE__, stream-&gt;ops-&gt;label, stream, stream-&gt;orig_path);</span>
+<span class='curline'><a href='../S/1417.html#L596'>ops</a>               596 main/streams/streams.c 			justread = stream-&gt;ops-&gt;read(stream, chunk_buf, stream-&gt;chunk_size TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1417.html#L692'>ops</a>               692 main/streams/streams.c 			justread = stream-&gt;ops-&gt;read(stream, stream-&gt;readbuf + stream-&gt;writepos,</span>
+<span class='curline'><a href='../S/1417.html#L733'>ops</a>               733 main/streams/streams.c 			toread = stream-&gt;ops-&gt;read(stream, buf, size TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1417.html#L835'>ops</a>               835 main/streams/streams.c 	if (stream-&gt;ops-&gt;stat == NULL) {</span>
+<span class='curline'><a href='../S/1417.html#L839'>ops</a>               839 main/streams/streams.c 	return (stream-&gt;ops-&gt;stat)(stream, ssb TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1417.html#L1121'>ops</a>              1121 main/streams/streams.c 	if (stream-&gt;ops-&gt;seek &amp;&amp; (stream-&gt;flags &amp; PHP_STREAM_FLAG_NO_SEEK) == 0 &amp;&amp; stream-&gt;readpos != stream-&gt;writepos) {</span>
+<span class='curline'><a href='../S/1417.html#L1124'>ops</a>              1124 main/streams/streams.c 		stream-&gt;ops-&gt;seek(stream, stream-&gt;position, SEEK_SET, &amp;stream-&gt;position TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1417.html#L1133'>ops</a>              1133 main/streams/streams.c 		justwrote = stream-&gt;ops-&gt;write(stream, buf, towrite TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1417.html#L1143'>ops</a>              1143 main/streams/streams.c 			if (stream-&gt;ops-&gt;seek &amp;&amp; (stream-&gt;flags &amp; PHP_STREAM_FLAG_NO_SEEK) == 0) {</span>
+<span class='curline'><a href='../S/1417.html#L1228'>ops</a>              1228 main/streams/streams.c 	if (stream-&gt;ops-&gt;flush) {</span>
+<span class='curline'><a href='../S/1417.html#L1229'>ops</a>              1229 main/streams/streams.c 		ret = stream-&gt;ops-&gt;flush(stream TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1417.html#L1237'>ops</a>              1237 main/streams/streams.c 	if (buf == NULL || count == 0 || stream-&gt;ops-&gt;write == NULL) {</span>
+<span class='curline'><a href='../S/1417.html#L1304'>ops</a>              1304 main/streams/streams.c 	if (stream-&gt;ops-&gt;seek &amp;&amp; (stream-&gt;flags &amp; PHP_STREAM_FLAG_NO_SEEK) == 0) {</span>
+<span class='curline'><a href='../S/1417.html#L1317'>ops</a>              1317 main/streams/streams.c 		ret = stream-&gt;ops-&gt;seek(stream, offset, whence, &amp;stream-&gt;position TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1417.html#L1356'>ops</a>              1356 main/streams/streams.c 	if (stream-&gt;ops-&gt;set_option) {</span>
+<span class='curline'><a href='../S/1417.html#L1357'>ops</a>              1357 main/streams/streams.c 		ret = stream-&gt;ops-&gt;set_option(stream, option, value, ptrparam TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1417.html#L2134'>ops</a>              2134 main/streams/streams.c 	if (stream &amp;&amp; stream-&gt;ops-&gt;seek &amp;&amp; (stream-&gt;flags &amp; PHP_STREAM_FLAG_NO_SEEK) == 0 &amp;&amp; strchr(mode, 'a') &amp;&amp; stream-&gt;position == 0) {</span>
+<span class='curline'><a href='../S/1417.html#L2138'>ops</a>              2138 main/streams/streams.c 		if (0 == stream-&gt;ops-&gt;seek(stream, 0, SEEK_CUR, &amp;newpos TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/1420.html#L585'>ops</a>               585 main/streams/xp_socket.c 	if (stream-&gt;ops == &amp;php_stream_unix_socket_ops || stream-&gt;ops == &amp;php_stream_unixdg_socket_ops) {</span>
+<span class='curline'><a href='../S/1420.html#L588'>ops</a>               588 main/streams/xp_socket.c 		sock-&gt;socket = socket(PF_UNIX, stream-&gt;ops == &amp;php_stream_unix_socket_ops ? SOCK_STREAM : SOCK_DGRAM, 0);</span>
+<span class='curline'><a href='../S/1420.html#L593'>ops</a>               593 main/streams/xp_socket.c 						stream-&gt;ops == &amp;php_stream_unix_socket_ops ? "" : "datagram",</span>
+<span class='curline'><a href='../S/1420.html#L613'>ops</a>               613 main/streams/xp_socket.c 			stream-&gt;ops == &amp;php_stream_udp_socket_ops ? SOCK_DGRAM : SOCK_STREAM,</span>
+<span class='curline'><a href='../S/1420.html#L635'>ops</a>               635 main/streams/xp_socket.c 	if (stream-&gt;ops == &amp;php_stream_unix_socket_ops || stream-&gt;ops == &amp;php_stream_unixdg_socket_ops) {</span>
+<span class='curline'><a href='../S/1420.html#L638'>ops</a>               638 main/streams/xp_socket.c 		sock-&gt;socket = socket(PF_UNIX, stream-&gt;ops == &amp;php_stream_unix_socket_ops ? SOCK_STREAM : SOCK_DGRAM, 0);</span>
+<span class='curline'><a href='../S/1420.html#L683'>ops</a>               683 main/streams/xp_socket.c 			stream-&gt;ops == &amp;php_stream_udp_socket_ops ? SOCK_DGRAM : SOCK_STREAM,</span>
+<span class='curline'><a href='../S/1420.html#L743'>ops</a>               743 main/streams/xp_socket.c 			xparam-&gt;outputs.client = php_stream_alloc_rel(stream-&gt;ops, clisockdata, NULL, "r+");</span>
+<span class='curline'><a href='../S/1420.html#L796'>ops</a>               796 main/streams/xp_socket.c 	php_stream_ops *ops;</span>
+<span class='curline'><a href='../S/1420.html#L800'>ops</a>               800 main/streams/xp_socket.c 		ops = &amp;php_stream_socket_ops;</span>
+<span class='curline'><a href='../S/1420.html#L802'>ops</a>               802 main/streams/xp_socket.c 		ops = &amp;php_stream_udp_socket_ops;</span>
+<span class='curline'><a href='../S/1420.html#L806'>ops</a>               806 main/streams/xp_socket.c 		ops = &amp;php_stream_unix_socket_ops;</span>
+<span class='curline'><a href='../S/1420.html#L808'>ops</a>               808 main/streams/xp_socket.c 		ops = &amp;php_stream_unixdg_socket_ops;</span>
+<span class='curline'><a href='../S/1420.html#L827'>ops</a>               827 main/streams/xp_socket.c 	stream = php_stream_alloc_rel(ops, sock, persistent_id, "r+");</span>
+<span class='curline'><a href='../S/1546.html#L66'>ops</a>                66 sapi/phpdbg/phpdbg.c 	pg-&gt;ops = NULL;</span>
+<span class='curline'><a href='../S/1546.html#L128'>ops</a>               128 sapi/phpdbg/phpdbg.c 		if (brake-&gt;ops) {</span>
+<span class='curline'><a href='../S/1546.html#L132'>ops</a>               132 sapi/phpdbg/phpdbg.c 					brake-&gt;ops TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1546.html#L133'>ops</a>               133 sapi/phpdbg/phpdbg.c 			efree(brake-&gt;ops);</span>
+<span class='curline'><a href='../S/1546.html#L211'>ops</a>               211 sapi/phpdbg/phpdbg.c 	if (PHPDBG_G(ops)) {</span>
+<span class='curline'><a href='../S/1546.html#L212'>ops</a>               212 sapi/phpdbg/phpdbg.c 		destroy_op_array(PHPDBG_G(ops) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1546.html#L213'>ops</a>               213 sapi/phpdbg/phpdbg.c 		efree(PHPDBG_G(ops));</span>
+<span class='curline'><a href='../S/1546.html#L214'>ops</a>               214 sapi/phpdbg/phpdbg.c 		PHPDBG_G(ops) = NULL;</span>
+<span class='curline'><a href='../S/1547.html#L200'>ops</a>               200 sapi/phpdbg/phpdbg.h 	zend_op_array *ops;                 	     /* op_array */</span>
+<span class='curline'><a href='../S/1548.html#L444'>ops</a>               444 sapi/phpdbg/phpdbg_bp.c 			if (PHPDBG_G(ops) != NULL &amp;&amp; !memcmp(PHPDBG_G(ops)-&gt;filename, new_break-&gt;class_name, new_break-&gt;class_len)) {</span>
+<span class='curline'><a href='../S/1548.html#L445'>ops</a>               445 sapi/phpdbg/phpdbg_bp.c 				if (phpdbg_resolve_op_array_break(new_break, PHPDBG_G(ops) TSRMLS_CC) == SUCCESS) {</span>
+<span class='curline'><a href='../S/1548.html#L733'>ops</a>               733 sapi/phpdbg/phpdbg_bp.c 	new_break.ops = zend_compile_string(</span>
+<span class='curline'><a href='../S/1548.html#L738'>ops</a>               738 sapi/phpdbg/phpdbg_bp.c 	if (new_break.ops) {</span>
+<span class='curline'><a href='../S/1548.html#L744'>ops</a>               744 sapi/phpdbg/phpdbg_bp.c 			brake-&gt;id, brake-&gt;code, brake-&gt;ops);</span>
+<span class='curline'><a href='../S/1548.html#L813'>ops</a>               813 sapi/phpdbg/phpdbg_bp.c 	zend_op_array *ops;</span>
+<span class='curline'><a href='../S/1548.html#L820'>ops</a>               820 sapi/phpdbg/phpdbg_bp.c 	ops = (zend_op_array*)fbc;</span>
+<span class='curline'><a href='../S/1548.html#L822'>ops</a>               822 sapi/phpdbg/phpdbg_bp.c 	if (ops-&gt;scope) {</span>
+<span class='curline'><a href='../S/1548.html#L824'>ops</a>               824 sapi/phpdbg/phpdbg_bp.c 		return phpdbg_find_breakpoint_method(ops TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1548.html#L827'>ops</a>               827 sapi/phpdbg/phpdbg_bp.c 	fname = ops-&gt;function_name;</span>
+<span class='curline'><a href='../S/1548.html#L840'>ops</a>               840 sapi/phpdbg/phpdbg_bp.c static inline phpdbg_breakbase_t *phpdbg_find_breakpoint_method(zend_op_array *ops TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1548.html#L845'>ops</a>               845 sapi/phpdbg/phpdbg_bp.c 	if (zend_hash_find(&amp;PHPDBG_G(bp)[PHPDBG_BREAK_METHOD], ops-&gt;scope-&gt;name,</span>
+<span class='curline'><a href='../S/1548.html#L846'>ops</a>               846 sapi/phpdbg/phpdbg_bp.c 		ops-&gt;scope-&gt;name_length, (void**)&amp;class_table) == SUCCESS) {</span>
+<span class='curline'><a href='../S/1548.html#L847'>ops</a>               847 sapi/phpdbg/phpdbg_bp.c 		char *lcname = zend_str_tolower_dup(ops-&gt;function_name, strlen(ops-&gt;function_name));</span>
+<span class='curline'><a href='../S/1548.html#L908'>ops</a>               908 sapi/phpdbg/phpdbg_bp.c 				zend_op_array *ops = (zend_op_array*)function;</span>
+<span class='curline'><a href='../S/1548.html#L909'>ops</a>               909 sapi/phpdbg/phpdbg_bp.c 				str = ops-&gt;function_name ? ops-&gt;function_name : "main";</span>
+<span class='curline'><a href='../S/1548.html#L913'>ops</a>               913 sapi/phpdbg/phpdbg_bp.c 					return param-&gt;type == STR_PARAM || execute_data-&gt;opline - ops-&gt;opcodes == param-&gt;num;</span>
+<span class='curline'><a href='../S/1548.html#L937'>ops</a>               937 sapi/phpdbg/phpdbg_bp.c 				zend_op_array *ops = (zend_op_array*) function;</span>
+<span class='curline'><a href='../S/1548.html#L939'>ops</a>               939 sapi/phpdbg/phpdbg_bp.c 				if (ops-&gt;scope) {</span>
+<span class='curline'><a href='../S/1548.html#L940'>ops</a>               940 sapi/phpdbg/phpdbg_bp.c 					size_t lengths[2] = {strlen(param-&gt;method.class), ops-&gt;scope-&gt;name_length};</span>
+<span class='curline'><a href='../S/1548.html#L941'>ops</a>               941 sapi/phpdbg/phpdbg_bp.c 					if (lengths[0] == lengths[1] &amp;&amp; memcmp(param-&gt;method.class, ops-&gt;scope-&gt;name, lengths[0]) == SUCCESS) {</span>
+<span class='curline'><a href='../S/1548.html#L943'>ops</a>               943 sapi/phpdbg/phpdbg_bp.c 						lengths[1] = strlen(ops-&gt;function_name);</span>
+<span class='curline'><a href='../S/1548.html#L945'>ops</a>               945 sapi/phpdbg/phpdbg_bp.c 						if (lengths[0] == lengths[1] &amp;&amp; memcmp(param-&gt;method.name, ops-&gt;function_name, lengths[0]) == SUCCESS) {</span>
+<span class='curline'><a href='../S/1548.html#L946'>ops</a>               946 sapi/phpdbg/phpdbg_bp.c 							return param-&gt;type == METHOD_PARAM || (execute_data-&gt;opline - ops-&gt;opcodes) == param-&gt;num;</span>
+<span class='curline'><a href='../S/1548.html#L992'>ops</a>               992 sapi/phpdbg/phpdbg_bp.c 		EG(active_op_array) = bp-&gt;ops;</span>
+<span class='curline'><a href='../S/1549.html#L103'>ops</a>               103 sapi/phpdbg/phpdbg_bp.h 	zend_op_array  *ops;</span>
+<span class='curline'><a href='../S/1560.html#L124'>ops</a>               124 sapi/phpdbg/phpdbg_info.c 		zend_op_array *ops = EG(active_op_array);</span>
+<span class='curline'><a href='../S/1560.html#L126'>ops</a>               126 sapi/phpdbg/phpdbg_info.c 		if (ops-&gt;function_name) {</span>
+<span class='curline'><a href='../S/1560.html#L127'>ops</a>               127 sapi/phpdbg/phpdbg_info.c 			if (ops-&gt;scope) {</span>
+<span class='curline'><a href='../S/1560.html#L129'>ops</a>               129 sapi/phpdbg/phpdbg_info.c 				"Variables in %s::%s() (%d)", ops-&gt;scope-&gt;name, ops-&gt;function_name, zend_hash_num_elements(&amp;vars));</span>
+<span class='curline'><a href='../S/1560.html#L132'>ops</a>               132 sapi/phpdbg/phpdbg_info.c 					"Variables in %s() (%d)", ops-&gt;function_name, zend_hash_num_elements(&amp;vars));</span>
+<span class='curline'><a href='../S/1560.html#L135'>ops</a>               135 sapi/phpdbg/phpdbg_info.c 			if (ops-&gt;filename) {</span>
+<span class='curline'><a href='../S/1560.html#L137'>ops</a>               137 sapi/phpdbg/phpdbg_info.c 				"Variables in %s (%d)", ops-&gt;filename, zend_hash_num_elements(&amp;vars));</span>
+<span class='curline'><a href='../S/1560.html#L140'>ops</a>               140 sapi/phpdbg/phpdbg_info.c 					"Variables @ %p (%d)", ops, zend_hash_num_elements(&amp;vars));</span>
+<span class='curline'><a href='../S/1560.html#L209'>ops</a>               209 sapi/phpdbg/phpdbg_info.c 	if ((EG(in_execution) &amp;&amp; EG(active_op_array)) || PHPDBG_G(ops)) {</span>
+<span class='curline'><a href='../S/1560.html#L210'>ops</a>               210 sapi/phpdbg/phpdbg_info.c 		zend_op_array *ops = EG(active_op_array) ? EG(active_op_array) : PHPDBG_G(ops);</span>
+<span class='curline'><a href='../S/1560.html#L211'>ops</a>               211 sapi/phpdbg/phpdbg_info.c 		int literal = 0, count = ops-&gt;last_literal-1;</span>
+<span class='curline'><a href='../S/1560.html#L213'>ops</a>               213 sapi/phpdbg/phpdbg_info.c 		if (ops-&gt;function_name) {</span>
+<span class='curline'><a href='../S/1560.html#L214'>ops</a>               214 sapi/phpdbg/phpdbg_info.c 			if (ops-&gt;scope) {</span>
+<span class='curline'><a href='../S/1560.html#L216'>ops</a>               216 sapi/phpdbg/phpdbg_info.c 				"Literal Constants in %s::%s() (%d)", ops-&gt;scope-&gt;name, ops-&gt;function_name, count);</span>
+<span class='curline'><a href='../S/1560.html#L219'>ops</a>               219 sapi/phpdbg/phpdbg_info.c 					"Literal Constants in %s() (%d)", ops-&gt;function_name, count);</span>
+<span class='curline'><a href='../S/1560.html#L222'>ops</a>               222 sapi/phpdbg/phpdbg_info.c 			if (ops-&gt;filename) {</span>
+<span class='curline'><a href='../S/1560.html#L224'>ops</a>               224 sapi/phpdbg/phpdbg_info.c 				"Literal Constants in %s (%d)", ops-&gt;filename, count);</span>
+<span class='curline'><a href='../S/1560.html#L227'>ops</a>               227 sapi/phpdbg/phpdbg_info.c 					"Literal Constants @ %p (%d)", ops, count);</span>
+<span class='curline'><a href='../S/1560.html#L231'>ops</a>               231 sapi/phpdbg/phpdbg_info.c 		while (literal &lt; ops-&gt;last_literal) {</span>
+<span class='curline'><a href='../S/1560.html#L232'>ops</a>               232 sapi/phpdbg/phpdbg_info.c 			if (Z_TYPE(ops-&gt;literals[literal].constant) != IS_NULL) {</span>
+<span class='curline'><a href='../S/1560.html#L235'>ops</a>               235 sapi/phpdbg/phpdbg_info.c 					&amp;ops-&gt;literals[literal].constant, 0);</span>
+<span class='curline'><a href='../S/1564.html#L184'>ops</a>               184 sapi/phpdbg/phpdbg_list.c 	const zend_op_array *ops;</span>
+<span class='curline'><a href='../S/1564.html#L191'>ops</a>               191 sapi/phpdbg/phpdbg_list.c 	ops = (zend_op_array*)fbc;</span>
+<span class='curline'><a href='../S/1564.html#L193'>ops</a>               193 sapi/phpdbg/phpdbg_list.c 	phpdbg_list_file(ops-&gt;filename,</span>
+<span class='curline'><a href='../S/1564.html#L194'>ops</a>               194 sapi/phpdbg/phpdbg_list.c 		ops-&gt;line_end - ops-&gt;line_start + 1, ops-&gt;line_start, 0 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1566.html#L29'>ops</a>                29 sapi/phpdbg/phpdbg_opcode.c static inline zend_uint phpdbg_decode_literal(zend_op_array *ops, zend_literal *literal TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1566.html#L33'>ops</a>                33 sapi/phpdbg/phpdbg_opcode.c 	while (iter &lt; ops-&gt;last_literal) {</span>
+<span class='curline'><a href='../S/1566.html#L34'>ops</a>                34 sapi/phpdbg/phpdbg_opcode.c 		if (literal == &amp;ops-&gt;literals[iter]) {</span>
+<span class='curline'><a href='../S/1566.html#L43'>ops</a>                43 sapi/phpdbg/phpdbg_opcode.c static inline char *phpdbg_decode_op(zend_op_array *ops, znode_op *op, zend_uint type, HashTable *vars TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1566.html#L49'>ops</a>                49 sapi/phpdbg/phpdbg_opcode.c 			asprintf(&amp;decode, "$%s", ops-&gt;vars[op-&gt;var].name);</span>
+<span class='curline'><a href='../S/1566.html#L56'>ops</a>                56 sapi/phpdbg/phpdbg_opcode.c 				if (zend_hash_index_find(vars, (zend_ulong) ops-&gt;vars - op-&gt;var, (void**) &amp;pid) != SUCCESS) {</span>
+<span class='curline'><a href='../S/1566.html#L59'>ops</a>                59 sapi/phpdbg/phpdbg_opcode.c 						vars, (zend_ulong) ops-&gt;vars - op-&gt;var,</span>
+<span class='curline'><a href='../S/1566.html#L68'>ops</a>                68 sapi/phpdbg/phpdbg_opcode.c 			asprintf(&amp;decode, "C%u", phpdbg_decode_literal(ops, op-&gt;literal TSRMLS_CC));</span>
+<span class='curline'><a href='../S/1566.html#L78'>ops</a>                78 sapi/phpdbg/phpdbg_opcode.c char *phpdbg_decode_opline(zend_op_array *ops, zend_op *op, HashTable *vars TSRMLS_DC) /*{{{ */</span>
+<span class='curline'><a href='../S/1566.html#L90'>ops</a>                90 sapi/phpdbg/phpdbg_opcode.c 			asprintf(&amp;decode[1], "J%ld", op-&gt;op1.jmp_addr - ops-&gt;opcodes);</span>
+<span class='curline'><a href='../S/1566.html#L94'>ops</a>                94 sapi/phpdbg/phpdbg_opcode.c 			decode[1] = phpdbg_decode_op(ops, &amp;op-&gt;op1, op-&gt;op1_type, vars TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1566.html#L110'>ops</a>               110 sapi/phpdbg/phpdbg_opcode.c 		decode[1] = phpdbg_decode_op(ops, &amp;op-&gt;op1, op-&gt;op1_type, vars TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1566.html#L112'>ops</a>               112 sapi/phpdbg/phpdbg_opcode.c 			&amp;decode[2], "J%ld", op-&gt;op2.jmp_addr - ops-&gt;opcodes);</span>
+<span class='curline'><a href='../S/1566.html#L119'>ops</a>               119 sapi/phpdbg/phpdbg_opcode.c 			decode[1] = phpdbg_decode_op(ops, &amp;op-&gt;op1, op-&gt;op1_type, vars TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1566.html#L120'>ops</a>               120 sapi/phpdbg/phpdbg_opcode.c 			decode[2] = phpdbg_decode_op(ops, &amp;op-&gt;op2, op-&gt;op2_type, vars TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1566.html#L122'>ops</a>               122 sapi/phpdbg/phpdbg_opcode.c 			decode[3] = phpdbg_decode_op(ops, &amp;op-&gt;result, op-&gt;result_type, vars TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1567.html#L27'>ops</a>                27 sapi/phpdbg/phpdbg_opcode.h char *phpdbg_decode_opline(zend_op_array *ops, zend_op *op, HashTable *vars TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1570.html#L111'>ops</a>               111 sapi/phpdbg/phpdbg_print.c 		if (!PHPDBG_G(ops)) {</span>
+<span class='curline'><a href='../S/1570.html#L115'>ops</a>               115 sapi/phpdbg/phpdbg_print.c 		if (PHPDBG_G(ops)) {</span>
+<span class='curline'><a href='../S/1570.html#L118'>ops</a>               118 sapi/phpdbg/phpdbg_print.c 			phpdbg_print_function_helper((zend_function*) PHPDBG_G(ops) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1570.html#L129'>ops</a>               129 sapi/phpdbg/phpdbg_print.c 	zend_op_array *ops = EG(active_op_array);</span>
+<span class='curline'><a href='../S/1570.html#L131'>ops</a>               131 sapi/phpdbg/phpdbg_print.c 	if (EG(in_execution) &amp;&amp; ops) {</span>
+<span class='curline'><a href='../S/1570.html#L132'>ops</a>               132 sapi/phpdbg/phpdbg_print.c 		if (ops-&gt;function_name) {</span>
+<span class='curline'><a href='../S/1570.html#L133'>ops</a>               133 sapi/phpdbg/phpdbg_print.c 			if (ops-&gt;scope) {</span>
+<span class='curline'><a href='../S/1570.html#L134'>ops</a>               134 sapi/phpdbg/phpdbg_print.c 				phpdbg_notice("Stack in %s::%s()", ops-&gt;scope-&gt;name, ops-&gt;function_name);</span>
+<span class='curline'><a href='../S/1570.html#L136'>ops</a>               136 sapi/phpdbg/phpdbg_print.c 				phpdbg_notice("Stack in %s()", ops-&gt;function_name);</span>
+<span class='curline'><a href='../S/1570.html#L139'>ops</a>               139 sapi/phpdbg/phpdbg_print.c 			if (ops-&gt;filename) {</span>
+<span class='curline'><a href='../S/1570.html#L140'>ops</a>               140 sapi/phpdbg/phpdbg_print.c 				phpdbg_notice("Stack in %s", ops-&gt;filename);</span>
+<span class='curline'><a href='../S/1570.html#L142'>ops</a>               142 sapi/phpdbg/phpdbg_print.c 				phpdbg_notice("Stack @ %p", ops);</span>
+<span class='curline'><a href='../S/1570.html#L145'>ops</a>               145 sapi/phpdbg/phpdbg_print.c 		phpdbg_print_function_helper((zend_function*) ops TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1572.html#L351'>ops</a>               351 sapi/phpdbg/phpdbg_prompt.c 				if (PHPDBG_G(ops)) {</span>
+<span class='curline'><a href='../S/1572.html#L398'>ops</a>               398 sapi/phpdbg/phpdbg_prompt.c 		PHPDBG_G(ops) = zend_compile_file(&amp;fh, ZEND_INCLUDE TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1572.html#L584'>ops</a>               584 sapi/phpdbg/phpdbg_prompt.c 	if (PHPDBG_G(ops) || PHPDBG_G(exec)) {</span>
+<span class='curline'><a href='../S/1572.html#L591'>ops</a>               591 sapi/phpdbg/phpdbg_prompt.c 		if (!PHPDBG_G(ops)) {</span>
+<span class='curline'><a href='../S/1572.html#L598'>ops</a>               598 sapi/phpdbg/phpdbg_prompt.c 		EG(active_op_array) = PHPDBG_G(ops);</span>
+<span class='curline'><a href='../S/1572.html#L742'>ops</a>               742 sapi/phpdbg/phpdbg_prompt.c 	phpdbg_writeln("Compiled\t%s", PHPDBG_G(ops) ? "yes" : "no");</span>
+<span class='curline'><a href='../S/1572.html#L747'>ops</a>               747 sapi/phpdbg/phpdbg_prompt.c 	if (PHPDBG_G(ops)) {</span>
+<span class='curline'><a href='../S/1572.html#L748'>ops</a>               748 sapi/phpdbg/phpdbg_prompt.c 		phpdbg_writeln("Opcodes\t\t%d", PHPDBG_G(ops)-&gt;last);</span>
+<span class='curline'><a href='../S/1572.html#L750'>ops</a>               750 sapi/phpdbg/phpdbg_prompt.c 		if (PHPDBG_G(ops)-&gt;last_var) {</span>
+<span class='curline'><a href='../S/1572.html#L751'>ops</a>               751 sapi/phpdbg/phpdbg_prompt.c 			phpdbg_writeln("Variables\t%d", PHPDBG_G(ops)-&gt;last_var-1);</span>
+<span class='curline'><a href='../S/1572.html#L1073'>ops</a>              1073 sapi/phpdbg/phpdbg_prompt.c 	if (PHPDBG_G(ops)) {</span>
+<span class='curline'><a href='../S/1572.html#L1074'>ops</a>              1074 sapi/phpdbg/phpdbg_prompt.c 		destroy_op_array(PHPDBG_G(ops) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1572.html#L1075'>ops</a>              1075 sapi/phpdbg/phpdbg_prompt.c 		efree(PHPDBG_G(ops));</span>
+<span class='curline'><a href='../S/1572.html#L1076'>ops</a>              1076 sapi/phpdbg/phpdbg_prompt.c 		PHPDBG_G(ops) = NULL;</span>
+</pre>
+</body>
+</html>

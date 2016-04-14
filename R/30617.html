@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>zend_mm_segment</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/1644.html#L153'>zend_mm_segment</a>   153 Zend/zend_alloc.c static zend_mm_segment* zend_mm_mem_mmap_realloc(zend_mm_storage *storage, zend_mm_segment* segment, size_t size)</span>
+<span class='curline'><a href='../S/1644.html#L155'>zend_mm_segment</a>   155 Zend/zend_alloc.c 	zend_mm_segment *ret;</span>
+<span class='curline'><a href='../S/1644.html#L159'>zend_mm_segment</a>   159 Zend/zend_alloc.c 	ret = (zend_mm_segment*)mremap(segment, segment-&gt;size, segment, size, MREMAP_MAYMOVE);</span>
+<span class='curline'><a href='../S/1644.html#L161'>zend_mm_segment</a>   161 Zend/zend_alloc.c 	ret = (zend_mm_segment*)mremap(segment, segment-&gt;size, size, MREMAP_MAYMOVE);</span>
+<span class='curline'><a href='../S/1644.html#L176'>zend_mm_segment</a>   176 Zend/zend_alloc.c static void zend_mm_mem_mmap_free(zend_mm_storage *storage, zend_mm_segment* segment)</span>
+<span class='curline'><a href='../S/1644.html#L185'>zend_mm_segment</a>   185 Zend/zend_alloc.c static zend_mm_segment* zend_mm_mem_mmap_anon_alloc(zend_mm_storage *storage, size_t size)</span>
+<span class='curline'><a href='../S/1644.html#L187'>zend_mm_segment</a>   187 Zend/zend_alloc.c 	zend_mm_segment *ret = (zend_mm_segment*)mmap(NULL, size, PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANON, -1, 0);</span>
+<span class='curline'><a href='../S/1644.html#L220'>zend_mm_segment</a>   220 Zend/zend_alloc.c static zend_mm_segment* zend_mm_mem_mmap_zero_alloc(zend_mm_storage *storage, size_t size)</span>
+<span class='curline'><a href='../S/1644.html#L222'>zend_mm_segment</a>   222 Zend/zend_alloc.c 	zend_mm_segment *ret = (zend_mm_segment*)mmap(NULL, size, PROT_READ | PROT_WRITE, MAP_PRIVATE, zend_mm_dev_zero_fd, 0);</span>
+<span class='curline'><a href='../S/1644.html#L264'>zend_mm_segment</a>   264 Zend/zend_alloc.c static zend_mm_segment* zend_mm_mem_win32_alloc(zend_mm_storage *storage, size_t size)</span>
+<span class='curline'><a href='../S/1644.html#L266'>zend_mm_segment</a>   266 Zend/zend_alloc.c 	return (zend_mm_segment*) HeapAlloc((HANDLE)storage-&gt;data, HEAP_NO_SERIALIZE, size);</span>
+<span class='curline'><a href='../S/1644.html#L269'>zend_mm_segment</a>   269 Zend/zend_alloc.c static void zend_mm_mem_win32_free(zend_mm_storage *storage, zend_mm_segment* segment)</span>
+<span class='curline'><a href='../S/1644.html#L274'>zend_mm_segment</a>   274 Zend/zend_alloc.c static zend_mm_segment* zend_mm_mem_win32_realloc(zend_mm_storage *storage, zend_mm_segment* segment, size_t size)</span>
+<span class='curline'><a href='../S/1644.html#L276'>zend_mm_segment</a>   276 Zend/zend_alloc.c 	return (zend_mm_segment*) HeapReAlloc((HANDLE)storage-&gt;data, HEAP_NO_SERIALIZE, segment, size);</span>
+<span class='curline'><a href='../S/1644.html#L285'>zend_mm_segment</a>   285 Zend/zend_alloc.c static zend_mm_segment* zend_mm_mem_malloc_alloc(zend_mm_storage *storage, size_t size)</span>
+<span class='curline'><a href='../S/1644.html#L287'>zend_mm_segment</a>   287 Zend/zend_alloc.c 	return (zend_mm_segment*)malloc(size);</span>
+<span class='curline'><a href='../S/1644.html#L290'>zend_mm_segment</a>   290 Zend/zend_alloc.c static zend_mm_segment* zend_mm_mem_malloc_realloc(zend_mm_storage *storage, zend_mm_segment *ptr, size_t size)</span>
+<span class='curline'><a href='../S/1644.html#L292'>zend_mm_segment</a>   292 Zend/zend_alloc.c 	return (zend_mm_segment*)realloc(ptr, size);</span>
+<span class='curline'><a href='../S/1644.html#L295'>zend_mm_segment</a>   295 Zend/zend_alloc.c static void zend_mm_mem_malloc_free(zend_mm_storage *storage, zend_mm_segment *ptr)</span>
+<span class='curline'><a href='../S/1644.html#L424'>zend_mm_segment</a>   424 Zend/zend_alloc.c 	zend_mm_segment    *segments_list;</span>
+<span class='curline'><a href='../S/1644.html#L533'>zend_mm_segment</a>   533 Zend/zend_alloc.c #define ZEND_MM_ALIGNED_SEGMENT_SIZE		ZEND_MM_ALIGNED_SIZE(sizeof(zend_mm_segment))</span>
+<span class='curline'><a href='../S/1644.html#L919'>zend_mm_segment</a>   919 Zend/zend_alloc.c static void zend_mm_del_segment(zend_mm_heap *heap, zend_mm_segment *segment)</span>
+<span class='curline'><a href='../S/1644.html#L921'>zend_mm_segment</a>   921 Zend/zend_alloc.c 	zend_mm_segment **p = &amp;heap-&gt;segments_list;</span>
+<span class='curline'><a href='../S/1644.html#L960'>zend_mm_segment</a>   960 Zend/zend_alloc.c 					zend_mm_del_segment(heap, (zend_mm_segment *) ((char *)mm_block - ZEND_MM_ALIGNED_SEGMENT_SIZE));</span>
+<span class='curline'><a href='../S/1644.html#L1234'>zend_mm_segment</a>  1234 Zend/zend_alloc.c static long zend_mm_find_leaks(zend_mm_segment *segment, zend_mm_block *b)</span>
+<span class='curline'><a href='../S/1644.html#L1277'>zend_mm_segment</a>  1277 Zend/zend_alloc.c 	zend_mm_segment *segment = heap-&gt;segments_list;</span>
+<span class='curline'><a href='../S/1644.html#L1561'>zend_mm_segment</a>  1561 Zend/zend_alloc.c 	zend_mm_segment *segment = heap-&gt;segments_list;</span>
+<span class='curline'><a href='../S/1644.html#L1604'>zend_mm_segment</a>  1604 Zend/zend_alloc.c 	zend_mm_segment *segment;</span>
+<span class='curline'><a href='../S/1644.html#L1605'>zend_mm_segment</a>  1605 Zend/zend_alloc.c 	zend_mm_segment *prev;</span>
+<span class='curline'><a href='../S/1644.html#L1887'>zend_mm_segment</a>  1887 Zend/zend_alloc.c 	zend_mm_segment *segment;</span>
+<span class='curline'><a href='../S/1644.html#L1982'>zend_mm_segment</a>  1982 Zend/zend_alloc.c 		segment = (zend_mm_segment *) ZEND_MM_STORAGE_ALLOC(segment_size);</span>
+<span class='curline'><a href='../S/1644.html#L2115'>zend_mm_segment</a>  2115 Zend/zend_alloc.c 		zend_mm_del_segment(heap, (zend_mm_segment *) ((char *)mm_block - ZEND_MM_ALIGNED_SEGMENT_SIZE));</span>
+<span class='curline'><a href='../S/1644.html#L2263'>zend_mm_segment</a>  2263 Zend/zend_alloc.c 		zend_mm_segment *segment;</span>
+<span class='curline'><a href='../S/1644.html#L2264'>zend_mm_segment</a>  2264 Zend/zend_alloc.c 		zend_mm_segment *segment_copy;</span>
+<span class='curline'><a href='../S/1644.html#L2278'>zend_mm_segment</a>  2278 Zend/zend_alloc.c 		segment_copy = (zend_mm_segment *) ((char *)mm_block - ZEND_MM_ALIGNED_SEGMENT_SIZE);</span>
+<span class='curline'><a href='../S/1644.html#L2318'>zend_mm_segment</a>  2318 Zend/zend_alloc.c 			zend_mm_segment **seg = &amp;heap-&gt;segments_list;</span>
+<span class='curline'><a href='../S/1645.html#L223'>zend_mm_segment</a>   223 Zend/zend_alloc.h 	zend_mm_segment* (*_alloc)(zend_mm_storage *storage, size_t size);</span>
+<span class='curline'><a href='../S/1645.html#L224'>zend_mm_segment</a>   224 Zend/zend_alloc.h 	zend_mm_segment* (*_realloc)(zend_mm_storage *storage, zend_mm_segment *ptr, size_t size);</span>
+<span class='curline'><a href='../S/1645.html#L225'>zend_mm_segment</a>   225 Zend/zend_alloc.h 	void (*_free)(zend_mm_storage *storage, zend_mm_segment *ptr);</span>
+<span class='curline'><a href='../S/1547.html#L226'>zend_mm_segment</a>   226 sapi/phpdbg/phpdbg.h 	zend_mm_segment    *segments_list;</span>
+</pre>
+</body>
+</html>

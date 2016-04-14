@@ -1,0 +1,165 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>ftpbuf_t</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/206.html#L84'>ftpbuf_t</a>           84 ext/ftp/ftp.c  static int		ftp_putcmd(	ftpbuf_t *ftp,</span>
+<span class='curline'><a href='../S/206.html#L89'>ftpbuf_t</a>           89 ext/ftp/ftp.c  static int		my_send(ftpbuf_t *ftp, php_socket_t s, void *buf, size_t len);</span>
+<span class='curline'><a href='../S/206.html#L90'>ftpbuf_t</a>           90 ext/ftp/ftp.c  static int		my_recv(ftpbuf_t *ftp, php_socket_t s, void *buf, size_t len);</span>
+<span class='curline'><a href='../S/206.html#L91'>ftpbuf_t</a>           91 ext/ftp/ftp.c  static int		my_accept(ftpbuf_t *ftp, php_socket_t s, struct sockaddr *addr, socklen_t *addrlen);</span>
+<span class='curline'><a href='../S/206.html#L94'>ftpbuf_t</a>           94 ext/ftp/ftp.c  static int		ftp_readline(ftpbuf_t *ftp);</span>
+<span class='curline'><a href='../S/206.html#L97'>ftpbuf_t</a>           97 ext/ftp/ftp.c  static int		ftp_getresp(ftpbuf_t *ftp);</span>
+<span class='curline'><a href='../S/206.html#L100'>ftpbuf_t</a>          100 ext/ftp/ftp.c  static int		ftp_type(ftpbuf_t *ftp, ftptype_t type);</span>
+<span class='curline'><a href='../S/206.html#L103'>ftpbuf_t</a>          103 ext/ftp/ftp.c  static databuf_t*	ftp_getdata(ftpbuf_t *ftp TSRMLS_DC);</span>
+<span class='curline'><a href='../S/206.html#L106'>ftpbuf_t</a>          106 ext/ftp/ftp.c  static databuf_t*	data_accept(databuf_t *data, ftpbuf_t *ftp TSRMLS_DC);</span>
+<span class='curline'><a href='../S/206.html#L109'>ftpbuf_t</a>          109 ext/ftp/ftp.c  static databuf_t*	data_close(ftpbuf_t *ftp, databuf_t *data);</span>
+<span class='curline'><a href='../S/206.html#L112'>ftpbuf_t</a>          112 ext/ftp/ftp.c  static char**		ftp_genlist(ftpbuf_t *ftp, const char *cmd, const char *path TSRMLS_DC);</span>
+<span class='curline'><a href='../S/206.html#L123'>ftpbuf_t</a>          123 ext/ftp/ftp.c  ftpbuf_t*</span>
+<span class='curline'><a href='../S/206.html#L126'>ftpbuf_t</a>          126 ext/ftp/ftp.c  	ftpbuf_t		*ftp;</span>
+<span class='curline'><a href='../S/206.html#L172'>ftpbuf_t</a>          172 ext/ftp/ftp.c  ftpbuf_t*</span>
+<span class='curline'><a href='../S/206.html#L173'>ftpbuf_t</a>          173 ext/ftp/ftp.c  ftp_close(ftpbuf_t *ftp)</span>
+<span class='curline'><a href='../S/206.html#L203'>ftpbuf_t</a>          203 ext/ftp/ftp.c  ftp_gc(ftpbuf_t *ftp)</span>
+<span class='curline'><a href='../S/206.html#L222'>ftpbuf_t</a>          222 ext/ftp/ftp.c  ftp_quit(ftpbuf_t *ftp)</span>
+<span class='curline'><a href='../S/206.html#L247'>ftpbuf_t</a>          247 ext/ftp/ftp.c  ftp_login(ftpbuf_t *ftp, const char *user, const char *pass TSRMLS_DC)</span>
+<span class='curline'><a href='../S/206.html#L359'>ftpbuf_t</a>          359 ext/ftp/ftp.c  ftp_reinit(ftpbuf_t *ftp)</span>
+<span class='curline'><a href='../S/206.html#L383'>ftpbuf_t</a>          383 ext/ftp/ftp.c  ftp_syst(ftpbuf_t *ftp)</span>
+<span class='curline'><a href='../S/206.html#L419'>ftpbuf_t</a>          419 ext/ftp/ftp.c  ftp_pwd(ftpbuf_t *ftp)</span>
+<span class='curline'><a href='../S/206.html#L453'>ftpbuf_t</a>          453 ext/ftp/ftp.c  ftp_exec(ftpbuf_t *ftp, const char *cmd)</span>
+<span class='curline'><a href='../S/206.html#L472'>ftpbuf_t</a>          472 ext/ftp/ftp.c  ftp_raw(ftpbuf_t *ftp, const char *cmd, zval *return_value)</span>
+<span class='curline'><a href='../S/206.html#L493'>ftpbuf_t</a>          493 ext/ftp/ftp.c  ftp_chdir(ftpbuf_t *ftp, const char *dir)</span>
+<span class='curline'><a href='../S/206.html#L517'>ftpbuf_t</a>          517 ext/ftp/ftp.c  ftp_cdup(ftpbuf_t *ftp)</span>
+<span class='curline'><a href='../S/206.html#L541'>ftpbuf_t</a>          541 ext/ftp/ftp.c  ftp_mkdir(ftpbuf_t *ftp, const char *dir)</span>
+<span class='curline'><a href='../S/206.html#L573'>ftpbuf_t</a>          573 ext/ftp/ftp.c  ftp_rmdir(ftpbuf_t *ftp, const char *dir)</span>
+<span class='curline'><a href='../S/206.html#L591'>ftpbuf_t</a>          591 ext/ftp/ftp.c  ftp_chmod(ftpbuf_t *ftp, const int mode, const char *filename, const int filename_len)</span>
+<span class='curline'><a href='../S/206.html#L619'>ftpbuf_t</a>          619 ext/ftp/ftp.c  ftp_alloc(ftpbuf_t *ftp, const long size, char **response)</span>
+<span class='curline'><a href='../S/206.html#L652'>ftpbuf_t</a>          652 ext/ftp/ftp.c  ftp_nlist(ftpbuf_t *ftp, const char *path TSRMLS_DC)</span>
+<span class='curline'><a href='../S/206.html#L661'>ftpbuf_t</a>          661 ext/ftp/ftp.c  ftp_list(ftpbuf_t *ftp, const char *path, int recursive TSRMLS_DC)</span>
+<span class='curline'><a href='../S/206.html#L670'>ftpbuf_t</a>          670 ext/ftp/ftp.c  ftp_type(ftpbuf_t *ftp, ftptype_t type)</span>
+<span class='curline'><a href='../S/206.html#L702'>ftpbuf_t</a>          702 ext/ftp/ftp.c  ftp_pasv(ftpbuf_t *ftp, int pasv)</span>
+<span class='curline'><a href='../S/206.html#L796'>ftpbuf_t</a>          796 ext/ftp/ftp.c  ftp_get(ftpbuf_t *ftp, php_stream *outstream, const char *path, ftptype_t type, long resumepos TSRMLS_DC)</span>
+<span class='curline'><a href='../S/206.html#L888'>ftpbuf_t</a>          888 ext/ftp/ftp.c  ftp_put(ftpbuf_t *ftp, const char *path, php_stream *instream, ftptype_t type, long startpos TSRMLS_DC)</span>
+<span class='curline'><a href='../S/206.html#L966'>ftpbuf_t</a>          966 ext/ftp/ftp.c  ftp_size(ftpbuf_t *ftp, const char *path)</span>
+<span class='curline'><a href='../S/206.html#L987'>ftpbuf_t</a>          987 ext/ftp/ftp.c  ftp_mdtm(ftpbuf_t *ftp, const char *path)</span>
+<span class='curline'><a href='../S/206.html#L1035'>ftpbuf_t</a>         1035 ext/ftp/ftp.c  ftp_delete(ftpbuf_t *ftp, const char *path)</span>
+<span class='curline'><a href='../S/206.html#L1054'>ftpbuf_t</a>         1054 ext/ftp/ftp.c  ftp_rename(ftpbuf_t *ftp, const char *src, const char *dest)</span>
+<span class='curline'><a href='../S/206.html#L1078'>ftpbuf_t</a>         1078 ext/ftp/ftp.c  ftp_site(ftpbuf_t *ftp, const char *cmd)</span>
+<span class='curline'><a href='../S/206.html#L1099'>ftpbuf_t</a>         1099 ext/ftp/ftp.c  ftp_putcmd(ftpbuf_t *ftp, const char *cmd, const char *args)</span>
+<span class='curline'><a href='../S/206.html#L1140'>ftpbuf_t</a>         1140 ext/ftp/ftp.c  ftp_readline(ftpbuf_t *ftp)</span>
+<span class='curline'><a href='../S/206.html#L1192'>ftpbuf_t</a>         1192 ext/ftp/ftp.c  ftp_getresp(ftpbuf_t *ftp)</span>
+<span class='curline'><a href='../S/206.html#L1230'>ftpbuf_t</a>         1230 ext/ftp/ftp.c  my_send(ftpbuf_t *ftp, php_socket_t s, void *buf, size_t len)</span>
+<span class='curline'><a href='../S/206.html#L1275'>ftpbuf_t</a>         1275 ext/ftp/ftp.c  my_recv(ftpbuf_t *ftp, php_socket_t s, void *buf, size_t len)</span>
+<span class='curline'><a href='../S/206.html#L1307'>ftpbuf_t</a>         1307 ext/ftp/ftp.c  data_available(ftpbuf_t *ftp, php_socket_t s)</span>
+<span class='curline'><a href='../S/206.html#L1327'>ftpbuf_t</a>         1327 ext/ftp/ftp.c  data_writeable(ftpbuf_t *ftp, php_socket_t s)</span>
+<span class='curline'><a href='../S/206.html#L1348'>ftpbuf_t</a>         1348 ext/ftp/ftp.c  my_accept(ftpbuf_t *ftp, php_socket_t s, struct sockaddr *addr, socklen_t *addrlen)</span>
+<span class='curline'><a href='../S/206.html#L1369'>ftpbuf_t</a>         1369 ext/ftp/ftp.c  ftp_getdata(ftpbuf_t *ftp TSRMLS_DC)</span>
+<span class='curline'><a href='../S/206.html#L1491'>ftpbuf_t</a>         1491 ext/ftp/ftp.c  data_accept(databuf_t *data, ftpbuf_t *ftp TSRMLS_DC)</span>
+<span class='curline'><a href='../S/206.html#L1563'>ftpbuf_t</a>         1563 ext/ftp/ftp.c  data_close(ftpbuf_t *ftp, databuf_t *data)</span>
+<span class='curline'><a href='../S/206.html#L1609'>ftpbuf_t</a>         1609 ext/ftp/ftp.c  ftp_genlist(ftpbuf_t *ftp, const char *cmd, const char *path TSRMLS_DC)</span>
+<span class='curline'><a href='../S/206.html#L1714'>ftpbuf_t</a>         1714 ext/ftp/ftp.c  ftp_nb_get(ftpbuf_t *ftp, php_stream *outstream, const char *path, ftptype_t type, long resumepos TSRMLS_DC)</span>
+<span class='curline'><a href='../S/206.html#L1768'>ftpbuf_t</a>         1768 ext/ftp/ftp.c  ftp_nb_continue_read(ftpbuf_t *ftp TSRMLS_DC)</span>
+<span class='curline'><a href='../S/206.html#L1831'>ftpbuf_t</a>         1831 ext/ftp/ftp.c  ftp_nb_put(ftpbuf_t *ftp, const char *path, php_stream *instream, ftptype_t type, long startpos TSRMLS_DC)</span>
+<span class='curline'><a href='../S/206.html#L1881'>ftpbuf_t</a>         1881 ext/ftp/ftp.c  ftp_nb_continue_write(ftpbuf_t *ftp TSRMLS_DC)</span>
+<span class='curline'><a href='../S/207.html#L98'>ftpbuf_t</a>           98 ext/ftp/ftp.h  ftpbuf_t*	ftp_open(const char *host, short port, long timeout_sec TSRMLS_DC);</span>
+<span class='curline'><a href='../S/207.html#L103'>ftpbuf_t</a>          103 ext/ftp/ftp.h  int		ftp_quit(ftpbuf_t *ftp);</span>
+<span class='curline'><a href='../S/207.html#L106'>ftpbuf_t</a>          106 ext/ftp/ftp.h  void		ftp_gc(ftpbuf_t *ftp);</span>
+<span class='curline'><a href='../S/207.html#L109'>ftpbuf_t</a>          109 ext/ftp/ftp.h  ftpbuf_t*	ftp_close(ftpbuf_t *ftp);</span>
+<span class='curline'><a href='../S/207.html#L112'>ftpbuf_t</a>          112 ext/ftp/ftp.h  int		ftp_login(ftpbuf_t *ftp, const char *user, const char *pass TSRMLS_DC);</span>
+<span class='curline'><a href='../S/207.html#L115'>ftpbuf_t</a>          115 ext/ftp/ftp.h  int		ftp_reinit(ftpbuf_t *ftp);</span>
+<span class='curline'><a href='../S/207.html#L118'>ftpbuf_t</a>          118 ext/ftp/ftp.h  const char*	ftp_syst(ftpbuf_t *ftp);</span>
+<span class='curline'><a href='../S/207.html#L121'>ftpbuf_t</a>          121 ext/ftp/ftp.h  const char*	ftp_pwd(ftpbuf_t *ftp);</span>
+<span class='curline'><a href='../S/207.html#L124'>ftpbuf_t</a>          124 ext/ftp/ftp.h  int 	ftp_exec(ftpbuf_t *ftp, const char *cmd);</span>
+<span class='curline'><a href='../S/207.html#L127'>ftpbuf_t</a>          127 ext/ftp/ftp.h  void	ftp_raw(ftpbuf_t *ftp, const char *cmd, zval *return_value);</span>
+<span class='curline'><a href='../S/207.html#L130'>ftpbuf_t</a>          130 ext/ftp/ftp.h  int		ftp_chdir(ftpbuf_t *ftp, const char *dir);</span>
+<span class='curline'><a href='../S/207.html#L133'>ftpbuf_t</a>          133 ext/ftp/ftp.h  int		ftp_cdup(ftpbuf_t *ftp);</span>
+<span class='curline'><a href='../S/207.html#L138'>ftpbuf_t</a>          138 ext/ftp/ftp.h  char*		ftp_mkdir(ftpbuf_t *ftp, const char *dir);</span>
+<span class='curline'><a href='../S/207.html#L141'>ftpbuf_t</a>          141 ext/ftp/ftp.h  int		ftp_rmdir(ftpbuf_t *ftp, const char *dir);</span>
+<span class='curline'><a href='../S/207.html#L144'>ftpbuf_t</a>          144 ext/ftp/ftp.h  int		ftp_chmod(ftpbuf_t *ftp, const int mode, const char *filename, const int filename_len);</span>
+<span class='curline'><a href='../S/207.html#L151'>ftpbuf_t</a>          151 ext/ftp/ftp.h  int		ftp_alloc(ftpbuf_t *ftp, const long size, char **response);</span>
+<span class='curline'><a href='../S/207.html#L157'>ftpbuf_t</a>          157 ext/ftp/ftp.h  char**		ftp_nlist(ftpbuf_t *ftp, const char *path TSRMLS_DC);</span>
+<span class='curline'><a href='../S/207.html#L164'>ftpbuf_t</a>          164 ext/ftp/ftp.h  char**		ftp_list(ftpbuf_t *ftp, const char *path, int recursive TSRMLS_DC);</span>
+<span class='curline'><a href='../S/207.html#L169'>ftpbuf_t</a>          169 ext/ftp/ftp.h  int		ftp_pasv(ftpbuf_t *ftp, int pasv);</span>
+<span class='curline'><a href='../S/207.html#L174'>ftpbuf_t</a>          174 ext/ftp/ftp.h  int		ftp_get(ftpbuf_t *ftp, php_stream *outstream, const char *path, ftptype_t type, long resumepos TSRMLS_DC);</span>
+<span class='curline'><a href='../S/207.html#L179'>ftpbuf_t</a>          179 ext/ftp/ftp.h  int		ftp_put(ftpbuf_t *ftp, const char *path, php_stream *instream, ftptype_t type, long startpos TSRMLS_DC);</span>
+<span class='curline'><a href='../S/207.html#L182'>ftpbuf_t</a>          182 ext/ftp/ftp.h  long		ftp_size(ftpbuf_t *ftp, const char *path);</span>
+<span class='curline'><a href='../S/207.html#L185'>ftpbuf_t</a>          185 ext/ftp/ftp.h  time_t		ftp_mdtm(ftpbuf_t *ftp, const char *path);</span>
+<span class='curline'><a href='../S/207.html#L188'>ftpbuf_t</a>          188 ext/ftp/ftp.h  int		ftp_rename(ftpbuf_t *ftp, const char *src, const char *dest);</span>
+<span class='curline'><a href='../S/207.html#L191'>ftpbuf_t</a>          191 ext/ftp/ftp.h  int		ftp_delete(ftpbuf_t *ftp, const char *path);</span>
+<span class='curline'><a href='../S/207.html#L194'>ftpbuf_t</a>          194 ext/ftp/ftp.h  int		ftp_site(ftpbuf_t *ftp, const char *cmd);</span>
+<span class='curline'><a href='../S/207.html#L199'>ftpbuf_t</a>          199 ext/ftp/ftp.h  int		ftp_nb_get(ftpbuf_t *ftp, php_stream *outstream, const char *path, ftptype_t type, long resumepos TSRMLS_DC);</span>
+<span class='curline'><a href='../S/207.html#L204'>ftpbuf_t</a>          204 ext/ftp/ftp.h  int		ftp_nb_put(ftpbuf_t *ftp, const char *path, php_stream *instream, ftptype_t type, long startpos TSRMLS_DC);</span>
+<span class='curline'><a href='../S/207.html#L208'>ftpbuf_t</a>          208 ext/ftp/ftp.h  int		ftp_nb_continue_read(ftpbuf_t *ftp TSRMLS_DC);</span>
+<span class='curline'><a href='../S/207.html#L212'>ftpbuf_t</a>          212 ext/ftp/ftp.h  int		ftp_nb_continue_write(ftpbuf_t *ftp TSRMLS_DC);</span>
+<span class='curline'><a href='../S/208.html#L303'>ftpbuf_t</a>          303 ext/ftp/php_ftp.c 	ftpbuf_t *ftp = (ftpbuf_t *)rsrc-&gt;ptr;</span>
+<span class='curline'><a href='../S/208.html#L345'>ftpbuf_t</a>          345 ext/ftp/php_ftp.c 	ftpbuf_t	*ftp;</span>
+<span class='curline'><a href='../S/208.html#L382'>ftpbuf_t</a>          382 ext/ftp/php_ftp.c 	ftpbuf_t	*ftp;</span>
+<span class='curline'><a href='../S/208.html#L418'>ftpbuf_t</a>          418 ext/ftp/php_ftp.c 	ftpbuf_t	*ftp;</span>
+<span class='curline'><a href='../S/208.html#L426'>ftpbuf_t</a>          426 ext/ftp/php_ftp.c 	ZEND_FETCH_RESOURCE(ftp, ftpbuf_t*, &amp;z_ftp, -1, le_ftpbuf_name, le_ftpbuf);</span>
+<span class='curline'><a href='../S/208.html#L443'>ftpbuf_t</a>          443 ext/ftp/php_ftp.c 	ftpbuf_t	*ftp;</span>
+<span class='curline'><a href='../S/208.html#L450'>ftpbuf_t</a>          450 ext/ftp/php_ftp.c 	ZEND_FETCH_RESOURCE(ftp, ftpbuf_t*, &amp;z_ftp, -1, le_ftpbuf_name, le_ftpbuf);</span>
+<span class='curline'><a href='../S/208.html#L466'>ftpbuf_t</a>          466 ext/ftp/php_ftp.c 	ftpbuf_t	*ftp;</span>
+<span class='curline'><a href='../S/208.html#L472'>ftpbuf_t</a>          472 ext/ftp/php_ftp.c 	ZEND_FETCH_RESOURCE(ftp, ftpbuf_t*, &amp;z_ftp, -1, le_ftpbuf_name, le_ftpbuf);</span>
+<span class='curline'><a href='../S/208.html#L488'>ftpbuf_t</a>          488 ext/ftp/php_ftp.c 	ftpbuf_t	*ftp;</span>
+<span class='curline'><a href='../S/208.html#L496'>ftpbuf_t</a>          496 ext/ftp/php_ftp.c 	ZEND_FETCH_RESOURCE(ftp, ftpbuf_t*, &amp;z_ftp, -1, le_ftpbuf_name, le_ftpbuf);</span>
+<span class='curline'><a href='../S/208.html#L513'>ftpbuf_t</a>          513 ext/ftp/php_ftp.c 	ftpbuf_t	*ftp;</span>
+<span class='curline'><a href='../S/208.html#L521'>ftpbuf_t</a>          521 ext/ftp/php_ftp.c 	ZEND_FETCH_RESOURCE(ftp, ftpbuf_t*, &amp;z_ftp, -1, le_ftpbuf_name, le_ftpbuf);</span>
+<span class='curline'><a href='../S/208.html#L538'>ftpbuf_t</a>          538 ext/ftp/php_ftp.c 	ftpbuf_t	*ftp;</span>
+<span class='curline'><a href='../S/208.html#L546'>ftpbuf_t</a>          546 ext/ftp/php_ftp.c 	ZEND_FETCH_RESOURCE(ftp, ftpbuf_t*, &amp;z_ftp, -1, le_ftpbuf_name, le_ftpbuf);</span>
+<span class='curline'><a href='../S/208.html#L558'>ftpbuf_t</a>          558 ext/ftp/php_ftp.c 	ftpbuf_t	*ftp;</span>
+<span class='curline'><a href='../S/208.html#L566'>ftpbuf_t</a>          566 ext/ftp/php_ftp.c 	ZEND_FETCH_RESOURCE(ftp, ftpbuf_t*, &amp;z_ftp, -1, le_ftpbuf_name, le_ftpbuf);</span>
+<span class='curline'><a href='../S/208.html#L583'>ftpbuf_t</a>          583 ext/ftp/php_ftp.c 	ftpbuf_t	*ftp;</span>
+<span class='curline'><a href='../S/208.html#L591'>ftpbuf_t</a>          591 ext/ftp/php_ftp.c 	ZEND_FETCH_RESOURCE(ftp, ftpbuf_t*, &amp;z_ftp, -1, le_ftpbuf_name, le_ftpbuf);</span>
+<span class='curline'><a href='../S/208.html#L608'>ftpbuf_t</a>          608 ext/ftp/php_ftp.c 	ftpbuf_t	*ftp;</span>
+<span class='curline'><a href='../S/208.html#L617'>ftpbuf_t</a>          617 ext/ftp/php_ftp.c 	ZEND_FETCH_RESOURCE(ftp, ftpbuf_t*, &amp;z_ftp, -1, le_ftpbuf_name, le_ftpbuf);</span>
+<span class='curline'><a href='../S/208.html#L633'>ftpbuf_t</a>          633 ext/ftp/php_ftp.c 	ftpbuf_t	*ftp;</span>
+<span class='curline'><a href='../S/208.html#L641'>ftpbuf_t</a>          641 ext/ftp/php_ftp.c 	ZEND_FETCH_RESOURCE(ftp, ftpbuf_t*, &amp;z_ftp, -1, le_ftpbuf_name, le_ftpbuf);</span>
+<span class='curline'><a href='../S/208.html#L662'>ftpbuf_t</a>          662 ext/ftp/php_ftp.c 	ftpbuf_t	*ftp;</span>
+<span class='curline'><a href='../S/208.html#L670'>ftpbuf_t</a>          670 ext/ftp/php_ftp.c 	ZEND_FETCH_RESOURCE(ftp, ftpbuf_t*, &amp;z_ftp, -1, le_ftpbuf_name, le_ftpbuf);</span>
+<span class='curline'><a href='../S/208.html#L690'>ftpbuf_t</a>          690 ext/ftp/php_ftp.c 	ftpbuf_t	*ftp;</span>
+<span class='curline'><a href='../S/208.html#L699'>ftpbuf_t</a>          699 ext/ftp/php_ftp.c 	ZEND_FETCH_RESOURCE(ftp, ftpbuf_t*, &amp;z_ftp, -1, le_ftpbuf_name, le_ftpbuf);</span>
+<span class='curline'><a href='../S/208.html#L719'>ftpbuf_t</a>          719 ext/ftp/php_ftp.c 	ftpbuf_t	*ftp;</span>
+<span class='curline'><a href='../S/208.html#L726'>ftpbuf_t</a>          726 ext/ftp/php_ftp.c 	ZEND_FETCH_RESOURCE(ftp, ftpbuf_t*, &amp;z_ftp, -1, le_ftpbuf_name, le_ftpbuf);</span>
+<span class='curline'><a href='../S/208.html#L742'>ftpbuf_t</a>          742 ext/ftp/php_ftp.c 	ftpbuf_t	*ftp;</span>
+<span class='curline'><a href='../S/208.html#L753'>ftpbuf_t</a>          753 ext/ftp/php_ftp.c 	ZEND_FETCH_RESOURCE(ftp, ftpbuf_t*, &amp;z_ftp, -1, le_ftpbuf_name, le_ftpbuf);</span>
+<span class='curline'><a href='../S/208.html#L786'>ftpbuf_t</a>          786 ext/ftp/php_ftp.c 	ftpbuf_t	*ftp;</span>
+<span class='curline'><a href='../S/208.html#L797'>ftpbuf_t</a>          797 ext/ftp/php_ftp.c 	ZEND_FETCH_RESOURCE(ftp, ftpbuf_t*, &amp;z_ftp, -1, le_ftpbuf_name, le_ftpbuf);</span>
+<span class='curline'><a href='../S/208.html#L834'>ftpbuf_t</a>          834 ext/ftp/php_ftp.c 	ftpbuf_t	*ftp;</span>
+<span class='curline'><a href='../S/208.html#L841'>ftpbuf_t</a>          841 ext/ftp/php_ftp.c 	ZEND_FETCH_RESOURCE(ftp, ftpbuf_t*, &amp;z_ftp, -1, le_ftpbuf_name, le_ftpbuf);</span>
+<span class='curline'><a href='../S/208.html#L856'>ftpbuf_t</a>          856 ext/ftp/php_ftp.c 	ftpbuf_t	*ftp;</span>
+<span class='curline'><a href='../S/208.html#L867'>ftpbuf_t</a>          867 ext/ftp/php_ftp.c 	ZEND_FETCH_RESOURCE(ftp, ftpbuf_t*, &amp;z_ftp, -1, le_ftpbuf_name, le_ftpbuf);</span>
+<span class='curline'><a href='../S/208.html#L919'>ftpbuf_t</a>          919 ext/ftp/php_ftp.c 	ftpbuf_t	*ftp;</span>
+<span class='curline'><a href='../S/208.html#L930'>ftpbuf_t</a>          930 ext/ftp/php_ftp.c 	ZEND_FETCH_RESOURCE(ftp, ftpbuf_t*, &amp;z_ftp, -1, le_ftpbuf_name, le_ftpbuf);</span>
+<span class='curline'><a href='../S/208.html#L989'>ftpbuf_t</a>          989 ext/ftp/php_ftp.c 	ftpbuf_t	*ftp;</span>
+<span class='curline'><a href='../S/208.html#L996'>ftpbuf_t</a>          996 ext/ftp/php_ftp.c 	ZEND_FETCH_RESOURCE(ftp, ftpbuf_t*, &amp;z_ftp, -1, le_ftpbuf_name, le_ftpbuf);</span>
+<span class='curline'><a href='../S/208.html#L1027'>ftpbuf_t</a>         1027 ext/ftp/php_ftp.c 	ftpbuf_t	*ftp;</span>
+<span class='curline'><a href='../S/208.html#L1038'>ftpbuf_t</a>         1038 ext/ftp/php_ftp.c 	ZEND_FETCH_RESOURCE(ftp, ftpbuf_t*, &amp;z_ftp, -1, le_ftpbuf_name, le_ftpbuf);</span>
+<span class='curline'><a href='../S/208.html#L1074'>ftpbuf_t</a>         1074 ext/ftp/php_ftp.c 	ftpbuf_t	*ftp;</span>
+<span class='curline'><a href='../S/208.html#L1085'>ftpbuf_t</a>         1085 ext/ftp/php_ftp.c 	ZEND_FETCH_RESOURCE(ftp, ftpbuf_t*, &amp;z_ftp, -1, le_ftpbuf_name, le_ftpbuf);</span>
+<span class='curline'><a href='../S/208.html#L1126'>ftpbuf_t</a>         1126 ext/ftp/php_ftp.c 	ftpbuf_t	*ftp;</span>
+<span class='curline'><a href='../S/208.html#L1137'>ftpbuf_t</a>         1137 ext/ftp/php_ftp.c 	ZEND_FETCH_RESOURCE(ftp, ftpbuf_t*, &amp;z_ftp, -1, le_ftpbuf_name, le_ftpbuf);</span>
+<span class='curline'><a href='../S/208.html#L1179'>ftpbuf_t</a>         1179 ext/ftp/php_ftp.c 	ftpbuf_t	*ftp;</span>
+<span class='curline'><a href='../S/208.html#L1190'>ftpbuf_t</a>         1190 ext/ftp/php_ftp.c 	ZEND_FETCH_RESOURCE(ftp, ftpbuf_t*, &amp;z_ftp, -1, le_ftpbuf_name, le_ftpbuf);</span>
+<span class='curline'><a href='../S/208.html#L1239'>ftpbuf_t</a>         1239 ext/ftp/php_ftp.c 	ftpbuf_t	*ftp;</span>
+<span class='curline'><a href='../S/208.html#L1247'>ftpbuf_t</a>         1247 ext/ftp/php_ftp.c 	ZEND_FETCH_RESOURCE(ftp, ftpbuf_t*, &amp;z_ftp, -1, le_ftpbuf_name, le_ftpbuf);</span>
+<span class='curline'><a href='../S/208.html#L1259'>ftpbuf_t</a>         1259 ext/ftp/php_ftp.c 	ftpbuf_t	*ftp;</span>
+<span class='curline'><a href='../S/208.html#L1267'>ftpbuf_t</a>         1267 ext/ftp/php_ftp.c 	ZEND_FETCH_RESOURCE(ftp, ftpbuf_t*, &amp;z_ftp, -1, le_ftpbuf_name, le_ftpbuf);</span>
+<span class='curline'><a href='../S/208.html#L1279'>ftpbuf_t</a>         1279 ext/ftp/php_ftp.c 	ftpbuf_t	*ftp;</span>
+<span class='curline'><a href='../S/208.html#L1287'>ftpbuf_t</a>         1287 ext/ftp/php_ftp.c 	ZEND_FETCH_RESOURCE(ftp, ftpbuf_t*, &amp;z_ftp, -1, le_ftpbuf_name, le_ftpbuf);</span>
+<span class='curline'><a href='../S/208.html#L1304'>ftpbuf_t</a>         1304 ext/ftp/php_ftp.c 	ftpbuf_t	*ftp;</span>
+<span class='curline'><a href='../S/208.html#L1312'>ftpbuf_t</a>         1312 ext/ftp/php_ftp.c 	ZEND_FETCH_RESOURCE(ftp, ftpbuf_t*, &amp;z_ftp, -1, le_ftpbuf_name, le_ftpbuf);</span>
+<span class='curline'><a href='../S/208.html#L1329'>ftpbuf_t</a>         1329 ext/ftp/php_ftp.c 	ftpbuf_t	*ftp;</span>
+<span class='curline'><a href='../S/208.html#L1337'>ftpbuf_t</a>         1337 ext/ftp/php_ftp.c 	ZEND_FETCH_RESOURCE(ftp, ftpbuf_t*, &amp;z_ftp, -1, le_ftpbuf_name, le_ftpbuf);</span>
+<span class='curline'><a href='../S/208.html#L1354'>ftpbuf_t</a>         1354 ext/ftp/php_ftp.c 	ftpbuf_t	*ftp;</span>
+<span class='curline'><a href='../S/208.html#L1360'>ftpbuf_t</a>         1360 ext/ftp/php_ftp.c 	ZEND_FETCH_RESOURCE(ftp, ftpbuf_t*, &amp;z_ftp, -1, le_ftpbuf_name, le_ftpbuf);</span>
+<span class='curline'><a href='../S/208.html#L1374'>ftpbuf_t</a>         1374 ext/ftp/php_ftp.c 	ftpbuf_t	*ftp;</span>
+<span class='curline'><a href='../S/208.html#L1380'>ftpbuf_t</a>         1380 ext/ftp/php_ftp.c 	ZEND_FETCH_RESOURCE(ftp, ftpbuf_t*, &amp;z_ftp, -1, le_ftpbuf_name, le_ftpbuf);</span>
+<span class='curline'><a href='../S/208.html#L1428'>ftpbuf_t</a>         1428 ext/ftp/php_ftp.c 	ftpbuf_t	*ftp;</span>
+<span class='curline'><a href='../S/208.html#L1434'>ftpbuf_t</a>         1434 ext/ftp/php_ftp.c 	ZEND_FETCH_RESOURCE(ftp, ftpbuf_t*, &amp;z_ftp, -1, le_ftpbuf_name, le_ftpbuf);</span>
+</pre>
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>ext/intl/collator/collator_create.c</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<a id='TOP' name='TOP'></a><h2 class='header'><a href='../mains.html'>root</a>/<a href='../files/1753.html'>ext</a>/<a href='../files/1785.html'>intl</a>/<a href='../files/1788.html'>collator</a>/collator_create.c</h2>
+<em class='comment'>/* [&lt;][&gt;]<a href='#L28'>[^]</a><a href='#L73'>[v]</a>[top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+<hr />
+<h2 class='header'>DEFINITIONS</h2>
+This source file includes following definitions.
+<ol>
+<li><a href='#L28' title='Defined at 28.'>collator_ctor</a></li>
+<li><a href='#L63' title='Defined at 63.'>PHP_FUNCTION</a></li>
+<li><a href='#L73' title='Defined at 73.'>PHP_METHOD</a></li>
+</ol>
+<hr />
+<pre>
+<a id='L1' name='L1'></a>   1 <em class='comment'>/*</em>
+<a id='L2' name='L2'></a>   2 <em class='comment'>   +----------------------------------------------------------------------+</em>
+<a id='L3' name='L3'></a>   3 <em class='comment'>   | PHP Version 5                                                        |</em>
+<a id='L4' name='L4'></a>   4 <em class='comment'>   +----------------------------------------------------------------------+</em>
+<a id='L5' name='L5'></a>   5 <em class='comment'>   | This source file is subject to version 3.01 of the PHP license,      |</em>
+<a id='L6' name='L6'></a>   6 <em class='comment'>   | that is bundled with this package in the file LICENSE, and is        |</em>
+<a id='L7' name='L7'></a>   7 <em class='comment'>   | available through the world-wide-web at the following url:           |</em>
+<a id='L8' name='L8'></a>   8 <em class='comment'>   | http://www.php.net/license/3_01.txt                                  |</em>
+<a id='L9' name='L9'></a>   9 <em class='comment'>   | If you did not receive a copy of the PHP license and are unable to   |</em>
+<a id='L10' name='L10'></a>  10 <em class='comment'>   | obtain it through the world-wide-web, please send a note to          |</em>
+<a id='L11' name='L11'></a>  11 <em class='comment'>   | license@php.net so we can mail you a copy immediately.               |</em>
+<a id='L12' name='L12'></a>  12 <em class='comment'>   +----------------------------------------------------------------------+</em>
+<a id='L13' name='L13'></a>  13 <em class='comment'>   | Authors: Vadim Savchuk &lt;vsavchuk@productengine.com&gt;                  |</em>
+<a id='L14' name='L14'></a>  14 <em class='comment'>   |          Dmitry Lakhtyuk &lt;dlakhtyuk@productengine.com&gt;               |</em>
+<a id='L15' name='L15'></a>  15 <em class='comment'>   +----------------------------------------------------------------------+</em>
+<a id='L16' name='L16'></a>  16 <em class='comment'> */</em>
+<a id='L17' name='L17'></a>  17 
+<a id='L18' name='L18'></a>  18 <em class='sharp'>#ifdef</em> <a href='../Y/2620.html' title='Multiple used in 351 places.'>HAVE_CONFIG_H</a>
+<a id='L19' name='L19'></a>  19 <em class='sharp'>#include</em> "<a href='../I/126.html'>config.h</a>"
+<a id='L20' name='L20'></a>  20 <em class='sharp'>#endif</em>
+<a id='L21' name='L21'></a>  21 
+<a id='L22' name='L22'></a>  22 <em class='sharp'>#include</em> "<a href='435.html'>php_intl.h</a>"
+<a id='L23' name='L23'></a>  23 <em class='sharp'>#include</em> "<a href='344.html'>collator_class.h</a>"
+<a id='L24' name='L24'></a>  24 <em class='sharp'>#include</em> "<a href='350.html'>collator_create.h</a>"
+<a id='L25' name='L25'></a>  25 <em class='sharp'>#include</em> "<a href='406.html'>intl_data.h</a>"
+<a id='L26' name='L26'></a>  26 
+<a id='L27' name='L27'></a>  27 <em class='comment'>/* {{{ */</em>
+<a id='L28' name='L28'></a>  28 <strong class='reserved'>static</strong> <strong class='reserved'>void</strong> <a href='../R/17388.html' title='Multiple referred from 2 places.'>collator_ctor</a>(<a href='../S/1643.html#L290' title='Defined at 290 in Zend/zend.h.'>INTERNAL_FUNCTION_PARAMETERS</a>)
+<a id='L29' name='L29'></a>  29 <em class='brace'>{</em>
+<a id='L30' name='L30'></a>  30         <strong class='reserved'>const</strong> <strong class='reserved'>char</strong>*      <a href='../Y/25388.html' title='Multiple used in 48 places.'>locale</a>;
+<a id='L31' name='L31'></a>  31         <strong class='reserved'>int</strong>              <a href='../Y/25410.html' title='Multiple used in 19 places.'>locale_len</a> = 0;
+<a id='L32' name='L32'></a>  32         <a href='../S/1741.html#L55' title='Defined at 55 in Zend/zend_types.h.'>zval</a>*            <a href='../Y/29333.html' title='Multiple used in 3115 places.'>object</a>;
+<a id='L33' name='L33'></a>  33         <a href='../S/344.html#L37' title='Defined at 37 in ext/intl/collator/collator_class.h.'>Collator_object</a>* <a href='../Y/13842.html' title='Multiple used in 156 places.'>co</a>;
+<a id='L34' name='L34'></a>  34 
+<a id='L35' name='L35'></a>  35         <a href='../S/407.html#L90' title='Defined at 90 in ext/intl/intl_error.c.'>intl_error_reset</a>( <a href='../D/6086.html' title='Multiple defined in 8 places.'>NULL</a> <a href='../D/14074.html' title='Multiple defined in 2 places.'>TSRMLS_CC</a> );
+<a id='L36' name='L36'></a>  36         <a href='../Y/29333.html' title='Multiple used in 3115 places.'>object</a> = <a href='../S/813.html#L635' title='Defined at 635 in ext/mysqlnd/mysqlnd_structs.h.'>return_value</a>;
+<a id='L37' name='L37'></a>  37         <em class='comment'>/* Parse parameters. */</em>
+<a id='L38' name='L38'></a>  38         <strong class='reserved'>if</strong>( <a href='../S/1646.html#L916' title='Defined at 916 in Zend/zend_API.c.'>zend_parse_parameters</a>( <a href='../S/1647.html#L355' title='Defined at 355 in Zend/zend_API.h.'>ZEND_NUM_ARGS</a>() <a href='../D/14074.html' title='Multiple defined in 2 places.'>TSRMLS_CC</a>, "s",
+<a id='L39' name='L39'></a>  39                 &amp;<a href='../Y/25388.html' title='Multiple used in 48 places.'>locale</a>, &amp;<a href='../Y/25410.html' title='Multiple used in 19 places.'>locale_len</a> ) == <a href='../S/1643.html#L283' title='Defined at 283 in Zend/zend.h.'>FAILURE</a> )
+<a id='L40' name='L40'></a>  40         <em class='brace'>{</em>
+<a id='L41' name='L41'></a>  41                 <a href='../S/407.html#L183' title='Defined at 183 in ext/intl/intl_error.c.'>intl_error_set</a>( <a href='../D/6086.html' title='Multiple defined in 8 places.'>NULL</a>, <a href='../Y/6659.html' title='Multiple used in 163 places.'>U_ILLEGAL_ARGUMENT_ERROR</a>,
+<a id='L42' name='L42'></a>  42                         "collator_create: unable to parse input params", 0 <a href='../D/14074.html' title='Multiple defined in 2 places.'>TSRMLS_CC</a> );
+<a id='L43' name='L43'></a>  43                 <a href='../S/1743.html#L56' title='Defined at 56 in Zend/zend_variables.h.'>zval_dtor</a>(<a href='../S/813.html#L635' title='Defined at 635 in ext/mysqlnd/mysqlnd_structs.h.'>return_value</a>);
+<a id='L44' name='L44'></a>  44                 <a href='../S/1647.html#L632' title='Defined at 632 in Zend/zend_API.h.'>RETURN_NULL</a>();
+<a id='L45' name='L45'></a>  45         <em class='brace'>}</em>
+<a id='L46' name='L46'></a>  46 
+<a id='L47' name='L47'></a>  47         <a href='../S/406.html#L97' title='Defined at 97 in ext/intl/intl_data.h.'>INTL_CHECK_LOCALE_LEN_OBJ</a>(<a href='../Y/25410.html' title='Multiple used in 19 places.'>locale_len</a>, <a href='../S/813.html#L635' title='Defined at 635 in ext/mysqlnd/mysqlnd_structs.h.'>return_value</a>);
+<a id='L48' name='L48'></a>  48         <a href='../S/344.html#L58' title='Defined at 58 in ext/intl/collator/collator_class.h.'>COLLATOR_METHOD_FETCH_OBJECT</a>;
+<a id='L49' name='L49'></a>  49 
+<a id='L50' name='L50'></a>  50         <strong class='reserved'>if</strong>(<a href='../Y/25410.html' title='Multiple used in 19 places.'>locale_len</a> == 0) <em class='brace'>{</em>
+<a id='L51' name='L51'></a>  51                 <a href='../Y/25388.html' title='Multiple used in 48 places.'>locale</a> = <a href='../Y/23524.html' title='Multiple used in 17 places.'>intl_locale_get_default</a>(<a href='../D/14073.html' title='Multiple defined in 2 places.'>TSRMLS_C</a>);
+<a id='L52' name='L52'></a>  52         <em class='brace'>}</em>
+<a id='L53' name='L53'></a>  53 
+<a id='L54' name='L54'></a>  54         <em class='comment'>/* Open ICU collator. */</em>
+<a id='L55' name='L55'></a>  55         <a href='../Y/13842.html' title='Multiple used in 156 places.'>co</a>-&gt;<a href='../Y/39767.html' title='Multiple used in 22 places.'>ucoll</a> = <a href='../Y/39763.html' title='Multiple used in 2 places.'>ucol_open</a>( <a href='../Y/25388.html' title='Multiple used in 48 places.'>locale</a>, <a href='../S/344.html#L43' title='Defined at 43 in ext/intl/collator/collator_class.h.'>COLLATOR_ERROR_CODE_P</a>( <a href='../Y/13842.html' title='Multiple used in 156 places.'>co</a> ) );
+<a id='L56' name='L56'></a>  56         <a href='../S/406.html#L67' title='Defined at 67 in ext/intl/intl_data.h.'>INTL_CTOR_CHECK_STATUS</a>(<a href='../Y/13842.html' title='Multiple used in 156 places.'>co</a>, "collator_create: unable to open ICU collator");
+<a id='L57' name='L57'></a>  57 <em class='brace'>}</em>
+<a id='L58' name='L58'></a>  58 <em class='comment'>/* }}} */</em> 
+<a id='L59' name='L59'></a>  59 
+<a id='L60' name='L60'></a>  60 <em class='comment'>/* {{{ proto Collator collator_create( string $locale )</em>
+<a id='L61' name='L61'></a>  61 <em class='comment'> * Create collator.</em>
+<a id='L62' name='L62'></a>  62 <em class='comment'> */</em>
+<a id='L63' name='L63'></a>  63 <a href='../R/7174.html' title='Multiple referred from 2238 places.'>PHP_FUNCTION</a>( <a href='../Y/13909.html' title='Multiple used in 4 places.'>collator_create</a> )
+<a id='L64' name='L64'></a>  64 <em class='brace'>{</em>
+<a id='L65' name='L65'></a>  65         <a href='../S/1647.html#L366' title='Defined at 366 in Zend/zend_API.h.'>object_init_ex</a>( <a href='../S/813.html#L635' title='Defined at 635 in ext/mysqlnd/mysqlnd_structs.h.'>return_value</a>, <a href='../Y/1262.html' title='Multiple used in 19 places.'>Collator_ce_ptr</a> );
+<a id='L66' name='L66'></a>  66         <a href='../S/349.html#L28' title='Defined at 28 in ext/intl/collator/collator_create.c.'>collator_ctor</a>(<a href='../S/1643.html#L291' title='Defined at 291 in Zend/zend.h.'>INTERNAL_FUNCTION_PARAM_PASSTHRU</a>);
+<a id='L67' name='L67'></a>  67 <em class='brace'>}</em>
+<a id='L68' name='L68'></a>  68 <em class='comment'>/* }}} */</em>
+<a id='L69' name='L69'></a>  69 
+<a id='L70' name='L70'></a>  70 <em class='comment'>/* {{{ proto Collator Collator::__construct( string $locale )</em>
+<a id='L71' name='L71'></a>  71 <em class='comment'> * Collator object constructor.</em>
+<a id='L72' name='L72'></a>  72 <em class='comment'> */</em>
+<a id='L73' name='L73'></a>  73 <a href='../R/7435.html' title='Multiple referred from 127 places.'>PHP_METHOD</a>( <a href='../Y/1261.html' title='Multiple used in 8 places.'>Collator</a>, <a href='../Y/7607.html' title='Multiple used in 177 places.'>__construct</a> )
+<a id='L74' name='L74'></a>  74 <em class='brace'>{</em>
+<a id='L75' name='L75'></a>  75         <a href='../S/813.html#L635' title='Defined at 635 in ext/mysqlnd/mysqlnd_structs.h.'>return_value</a> = <a href='../S/1647.html#L350' title='Defined at 350 in Zend/zend_API.h.'>getThis</a>();
+<a id='L76' name='L76'></a>  76         <a href='../S/349.html#L28' title='Defined at 28 in ext/intl/collator/collator_create.c.'>collator_ctor</a>(<a href='../S/1643.html#L291' title='Defined at 291 in Zend/zend.h.'>INTERNAL_FUNCTION_PARAM_PASSTHRU</a>);
+<a id='L77' name='L77'></a>  77 <em class='brace'>}</em>
+<a id='L78' name='L78'></a>  78 <em class='comment'>/* }}} */</em>
+<a id='L79' name='L79'></a>  79 
+<a id='L80' name='L80'></a>  80 <em class='comment'>/*</em>
+<a id='L81' name='L81'></a>  81 <em class='comment'> * Local variables:</em>
+<a id='L82' name='L82'></a>  82 <em class='comment'> * tab-width: 4</em>
+<a id='L83' name='L83'></a>  83 <em class='comment'> * c-basic-offset: 4</em>
+<a id='L84' name='L84'></a>  84 <em class='comment'> * End:</em>
+<a id='L85' name='L85'></a>  85 <em class='comment'> * vim600: noet sw=4 ts=4 fdm=marker</em>
+<a id='L86' name='L86'></a>  86 <em class='comment'> * vim&lt;600: noet sw=4 ts=4</em>
+<a id='L87' name='L87'></a>  87 <em class='comment'> */</em>
+</pre>
+<hr />
+<a id='BOTTOM' name='BOTTOM'></a>
+<em class='comment'>/* [&lt;][&gt;]<a href='#L28'>[^]</a><a href='#L73'>[v]</a><a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+</body>
+</html>

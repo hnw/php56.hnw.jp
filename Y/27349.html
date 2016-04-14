@@ -1,0 +1,210 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>mydata</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/973.html#L492'>mydata</a>            492 ext/phar/phar.c 	if (mydata) {\</span>
+<span class='curline'><a href='../S/973.html#L493'>mydata</a>            493 ext/phar/phar.c 		phar_destroy_phar_data(mydata TSRMLS_CC);\</span>
+<span class='curline'><a href='../S/973.html#L653'>mydata</a>            653 ext/phar/phar.c 	phar_archive_data *mydata = NULL;</span>
+<span class='curline'><a href='../S/973.html#L1019'>mydata</a>           1019 ext/phar/phar.c 	mydata = pecalloc(1, sizeof(phar_archive_data), PHAR_G(persist));</span>
+<span class='curline'><a href='../S/973.html#L1020'>mydata</a>           1020 ext/phar/phar.c 	mydata-&gt;is_persistent = PHAR_G(persist);</span>
+<span class='curline'><a href='../S/973.html#L1024'>mydata</a>           1024 ext/phar/phar.c 	if (mydata-&gt;is_persistent) {</span>
+<span class='curline'><a href='../S/973.html#L1025'>mydata</a>           1025 ext/phar/phar.c 		mydata-&gt;metadata_len = len;</span>
+<span class='curline'><a href='../S/973.html#L1034'>mydata</a>           1034 ext/phar/phar.c 	if (phar_parse_metadata(&amp;buffer, &amp;mydata-&gt;metadata, len TSRMLS_CC) == FAILURE) {</span>
+<span class='curline'><a href='../S/973.html#L1040'>mydata</a>           1040 ext/phar/phar.c 	zend_hash_init(&amp;mydata-&gt;manifest, manifest_count,</span>
+<span class='curline'><a href='../S/973.html#L1041'>mydata</a>           1041 ext/phar/phar.c 		zend_get_hash_value, destroy_phar_manifest_entry, (zend_bool)mydata-&gt;is_persistent);</span>
+<span class='curline'><a href='../S/973.html#L1042'>mydata</a>           1042 ext/phar/phar.c 	zend_hash_init(&amp;mydata-&gt;mounted_dirs, 5,</span>
+<span class='curline'><a href='../S/973.html#L1043'>mydata</a>           1043 ext/phar/phar.c 		zend_get_hash_value, NULL, (zend_bool)mydata-&gt;is_persistent);</span>
+<span class='curline'><a href='../S/973.html#L1044'>mydata</a>           1044 ext/phar/phar.c 	zend_hash_init(&amp;mydata-&gt;virtual_dirs, manifest_count * 2,</span>
+<span class='curline'><a href='../S/973.html#L1045'>mydata</a>           1045 ext/phar/phar.c 		zend_get_hash_value, NULL, (zend_bool)mydata-&gt;is_persistent);</span>
+<span class='curline'><a href='../S/973.html#L1046'>mydata</a>           1046 ext/phar/phar.c 	mydata-&gt;fname = pestrndup(fname, fname_len, mydata-&gt;is_persistent);</span>
+<span class='curline'><a href='../S/973.html#L1048'>mydata</a>           1048 ext/phar/phar.c 	phar_unixify_path_separators(mydata-&gt;fname, fname_len);</span>
+<span class='curline'><a href='../S/973.html#L1050'>mydata</a>           1050 ext/phar/phar.c 	mydata-&gt;fname_len = fname_len;</span>
+<span class='curline'><a href='../S/973.html#L1053'>mydata</a>           1053 ext/phar/phar.c 	entry.phar = mydata;</span>
+<span class='curline'><a href='../S/973.html#L1055'>mydata</a>           1055 ext/phar/phar.c 	entry.is_persistent = mydata-&gt;is_persistent;</span>
+<span class='curline'><a href='../S/973.html#L1082'>mydata</a>           1082 ext/phar/phar.c 		phar_add_virtual_dirs(mydata, buffer, entry.filename_len TSRMLS_CC);</span>
+<span class='curline'><a href='../S/973.html#L1089'>mydata</a>           1089 ext/phar/phar.c 			mydata-&gt;min_timestamp = entry.timestamp;</span>
+<span class='curline'><a href='../S/973.html#L1090'>mydata</a>           1090 ext/phar/phar.c 			mydata-&gt;max_timestamp = entry.timestamp;</span>
+<span class='curline'><a href='../S/973.html#L1092'>mydata</a>           1092 ext/phar/phar.c 			if (mydata-&gt;min_timestamp &gt; entry.timestamp) {</span>
+<span class='curline'><a href='../S/973.html#L1093'>mydata</a>           1093 ext/phar/phar.c 				mydata-&gt;min_timestamp = entry.timestamp;</span>
+<span class='curline'><a href='../S/973.html#L1094'>mydata</a>           1094 ext/phar/phar.c 			} else if (mydata-&gt;max_timestamp &lt; entry.timestamp) {</span>
+<span class='curline'><a href='../S/973.html#L1095'>mydata</a>           1095 ext/phar/phar.c 				mydata-&gt;max_timestamp = entry.timestamp;</span>
+<span class='curline'><a href='../S/973.html#L1173'>mydata</a>           1173 ext/phar/phar.c 		zend_hash_add(&amp;mydata-&gt;manifest, entry.filename, entry.filename_len, (void*)&amp;entry, sizeof(phar_entry_info), NULL);</span>
+<span class='curline'><a href='../S/973.html#L1176'>mydata</a>           1176 ext/phar/phar.c 	snprintf(mydata-&gt;version, sizeof(mydata-&gt;version), "%u.%u.%u", manifest_ver &gt;&gt; 12, (manifest_ver &gt;&gt; 8) &amp; 0xF, (manifest_ver &gt;&gt; 4) &amp; 0xF);</span>
+<span class='curline'><a href='../S/973.html#L1177'>mydata</a>           1177 ext/phar/phar.c 	mydata-&gt;internal_file_start = halt_offset + manifest_len + 4;</span>
+<span class='curline'><a href='../S/973.html#L1178'>mydata</a>           1178 ext/phar/phar.c 	mydata-&gt;halt_offset = halt_offset;</span>
+<span class='curline'><a href='../S/973.html#L1179'>mydata</a>           1179 ext/phar/phar.c 	mydata-&gt;flags = manifest_flags;</span>
+<span class='curline'><a href='../S/973.html#L1180'>mydata</a>           1180 ext/phar/phar.c 	endbuffer = strrchr(mydata-&gt;fname, '/');</span>
+<span class='curline'><a href='../S/973.html#L1183'>mydata</a>           1183 ext/phar/phar.c 		mydata-&gt;ext = memchr(endbuffer, '.', (mydata-&gt;fname + fname_len) - endbuffer);</span>
+<span class='curline'><a href='../S/973.html#L1184'>mydata</a>           1184 ext/phar/phar.c 		if (mydata-&gt;ext == endbuffer) {</span>
+<span class='curline'><a href='../S/973.html#L1185'>mydata</a>           1185 ext/phar/phar.c 			mydata-&gt;ext = memchr(endbuffer + 1, '.', (mydata-&gt;fname + fname_len) - endbuffer - 1);</span>
+<span class='curline'><a href='../S/973.html#L1187'>mydata</a>           1187 ext/phar/phar.c 		if (mydata-&gt;ext) {</span>
+<span class='curline'><a href='../S/973.html#L1188'>mydata</a>           1188 ext/phar/phar.c 			mydata-&gt;ext_len = (mydata-&gt;fname + mydata-&gt;fname_len) - mydata-&gt;ext;</span>
+<span class='curline'><a href='../S/973.html#L1192'>mydata</a>           1192 ext/phar/phar.c 	mydata-&gt;alias = alias ?</span>
+<span class='curline'><a href='../S/973.html#L1193'>mydata</a>           1193 ext/phar/phar.c 		pestrndup(alias, alias_len, mydata-&gt;is_persistent) :</span>
+<span class='curline'><a href='../S/973.html#L1194'>mydata</a>           1194 ext/phar/phar.c 		pestrndup(mydata-&gt;fname, fname_len, mydata-&gt;is_persistent);</span>
+<span class='curline'><a href='../S/973.html#L1195'>mydata</a>           1195 ext/phar/phar.c 	mydata-&gt;alias_len = alias ? alias_len : fname_len;</span>
+<span class='curline'><a href='../S/973.html#L1196'>mydata</a>           1196 ext/phar/phar.c 	mydata-&gt;sig_flags = sig_flags;</span>
+<span class='curline'><a href='../S/973.html#L1197'>mydata</a>           1197 ext/phar/phar.c 	mydata-&gt;fp = fp;</span>
+<span class='curline'><a href='../S/973.html#L1198'>mydata</a>           1198 ext/phar/phar.c 	mydata-&gt;sig_len = sig_len;</span>
+<span class='curline'><a href='../S/973.html#L1199'>mydata</a>           1199 ext/phar/phar.c 	mydata-&gt;signature = signature;</span>
+<span class='curline'><a href='../S/973.html#L1205'>mydata</a>           1205 ext/phar/phar.c 		mydata-&gt;is_temporary_alias = temp_alias;</span>
+<span class='curline'><a href='../S/973.html#L1207'>mydata</a>           1207 ext/phar/phar.c 		if (!phar_validate_alias(mydata-&gt;alias, mydata-&gt;alias_len)) {</span>
+<span class='curline'><a href='../S/973.html#L1221'>mydata</a>           1221 ext/phar/phar.c 		zend_hash_add(&amp;(PHAR_GLOBALS-&gt;phar_alias_map), alias, alias_len, (void*)&amp;mydata, sizeof(phar_archive_data*), NULL);</span>
+<span class='curline'><a href='../S/973.html#L1223'>mydata</a>           1223 ext/phar/phar.c 		mydata-&gt;is_temporary_alias = 1;</span>
+<span class='curline'><a href='../S/973.html#L1226'>mydata</a>           1226 ext/phar/phar.c 	zend_hash_add(&amp;(PHAR_GLOBALS-&gt;phar_fname_map), mydata-&gt;fname, fname_len, (void*)&amp;mydata, sizeof(phar_archive_data*),  NULL);</span>
+<span class='curline'><a href='../S/973.html#L1230'>mydata</a>           1230 ext/phar/phar.c 		*pphar = mydata;</span>
+<span class='curline'><a href='../S/973.html#L1319'>mydata</a>           1319 ext/phar/phar.c 	phar_archive_data *mydata;</span>
+<span class='curline'><a href='../S/973.html#L1324'>mydata</a>           1324 ext/phar/phar.c 		pphar = &amp;mydata;</span>
+<span class='curline'><a href='../S/973.html#L1375'>mydata</a>           1375 ext/phar/phar.c 	mydata = ecalloc(1, sizeof(phar_archive_data));</span>
+<span class='curline'><a href='../S/973.html#L1376'>mydata</a>           1376 ext/phar/phar.c 	mydata-&gt;fname = expand_filepath(fname, NULL TSRMLS_CC);</span>
+<span class='curline'><a href='../S/973.html#L1377'>mydata</a>           1377 ext/phar/phar.c 	fname_len = strlen(mydata-&gt;fname);</span>
+<span class='curline'><a href='../S/973.html#L1379'>mydata</a>           1379 ext/phar/phar.c 	phar_unixify_path_separators(mydata-&gt;fname, fname_len);</span>
+<span class='curline'><a href='../S/973.html#L1381'>mydata</a>           1381 ext/phar/phar.c 	p = strrchr(mydata-&gt;fname, '/');</span>
+<span class='curline'><a href='../S/973.html#L1384'>mydata</a>           1384 ext/phar/phar.c 		mydata-&gt;ext = memchr(p, '.', (mydata-&gt;fname + fname_len) - p);</span>
+<span class='curline'><a href='../S/973.html#L1385'>mydata</a>           1385 ext/phar/phar.c 		if (mydata-&gt;ext == p) {</span>
+<span class='curline'><a href='../S/973.html#L1386'>mydata</a>           1386 ext/phar/phar.c 			mydata-&gt;ext = memchr(p + 1, '.', (mydata-&gt;fname + fname_len) - p - 1);</span>
+<span class='curline'><a href='../S/973.html#L1388'>mydata</a>           1388 ext/phar/phar.c 		if (mydata-&gt;ext) {</span>
+<span class='curline'><a href='../S/973.html#L1389'>mydata</a>           1389 ext/phar/phar.c 			mydata-&gt;ext_len = (mydata-&gt;fname + fname_len) - mydata-&gt;ext;</span>
+<span class='curline'><a href='../S/973.html#L1394'>mydata</a>           1394 ext/phar/phar.c 		*pphar = mydata;</span>
+<span class='curline'><a href='../S/973.html#L1397'>mydata</a>           1397 ext/phar/phar.c 	zend_hash_init(&amp;mydata-&gt;manifest, sizeof(phar_entry_info),</span>
+<span class='curline'><a href='../S/973.html#L1399'>mydata</a>           1399 ext/phar/phar.c 	zend_hash_init(&amp;mydata-&gt;mounted_dirs, sizeof(char *),</span>
+<span class='curline'><a href='../S/973.html#L1401'>mydata</a>           1401 ext/phar/phar.c 	zend_hash_init(&amp;mydata-&gt;virtual_dirs, sizeof(char *),</span>
+<span class='curline'><a href='../S/973.html#L1402'>mydata</a>           1402 ext/phar/phar.c 		zend_get_hash_value, NULL, (zend_bool)mydata-&gt;is_persistent);</span>
+<span class='curline'><a href='../S/973.html#L1403'>mydata</a>           1403 ext/phar/phar.c 	mydata-&gt;fname_len = fname_len;</span>
+<span class='curline'><a href='../S/973.html#L1404'>mydata</a>           1404 ext/phar/phar.c 	snprintf(mydata-&gt;version, sizeof(mydata-&gt;version), "%s", PHP_PHAR_API_VERSION);</span>
+<span class='curline'><a href='../S/973.html#L1405'>mydata</a>           1405 ext/phar/phar.c 	mydata-&gt;is_temporary_alias = alias ? 0 : 1;</span>
+<span class='curline'><a href='../S/973.html#L1406'>mydata</a>           1406 ext/phar/phar.c 	mydata-&gt;internal_file_start = -1;</span>
+<span class='curline'><a href='../S/973.html#L1407'>mydata</a>           1407 ext/phar/phar.c 	mydata-&gt;fp = NULL;</span>
+<span class='curline'><a href='../S/973.html#L1408'>mydata</a>           1408 ext/phar/phar.c 	mydata-&gt;is_writeable = 1;</span>
+<span class='curline'><a href='../S/973.html#L1409'>mydata</a>           1409 ext/phar/phar.c 	mydata-&gt;is_brandnew = 1;</span>
+<span class='curline'><a href='../S/973.html#L1411'>mydata</a>           1411 ext/phar/phar.c 	zend_hash_add(&amp;(PHAR_GLOBALS-&gt;phar_fname_map), mydata-&gt;fname, fname_len, (void*)&amp;mydata, sizeof(phar_archive_data*),  NULL);</span>
+<span class='curline'><a href='../S/973.html#L1416'>mydata</a>           1416 ext/phar/phar.c 		mydata-&gt;is_data = 1;</span>
+<span class='curline'><a href='../S/973.html#L1418'>mydata</a>           1418 ext/phar/phar.c 		mydata-&gt;is_tar = 1;</span>
+<span class='curline'><a href='../S/973.html#L1425'>mydata</a>           1425 ext/phar/phar.c 					spprintf(error, 4096, "phar error: phar \"%s\" cannot set alias \"%s\", already in use by another phar archive", mydata-&gt;fname, alias);</span>
+<span class='curline'><a href='../S/973.html#L1428'>mydata</a>           1428 ext/phar/phar.c 				zend_hash_del(&amp;(PHAR_GLOBALS-&gt;phar_fname_map), mydata-&gt;fname, fname_len);</span>
+<span class='curline'><a href='../S/973.html#L1438'>mydata</a>           1438 ext/phar/phar.c 		mydata-&gt;alias = alias ? estrndup(alias, alias_len) : estrndup(mydata-&gt;fname, fname_len);</span>
+<span class='curline'><a href='../S/973.html#L1439'>mydata</a>           1439 ext/phar/phar.c 		mydata-&gt;alias_len = alias ? alias_len : fname_len;</span>
+<span class='curline'><a href='../S/973.html#L1443'>mydata</a>           1443 ext/phar/phar.c 		if (FAILURE == zend_hash_add(&amp;(PHAR_GLOBALS-&gt;phar_alias_map), alias, alias_len, (void*)&amp;mydata, sizeof(phar_archive_data*), NULL)) {</span>
+<span class='curline'><a href='../S/973.html#L1450'>mydata</a>           1450 ext/phar/phar.c 			zend_hash_del(&amp;(PHAR_GLOBALS-&gt;phar_fname_map), mydata-&gt;fname, fname_len);</span>
+<span class='curline'><a href='../S/985.html#L172'>mydata</a>            172 ext/phar/zip.c 	phar_archive_data *mydata = NULL;</span>
+<span class='curline'><a href='../S/985.html#L221'>mydata</a>            221 ext/phar/zip.c 			mydata = pecalloc(1, sizeof(phar_archive_data), PHAR_G(persist));</span>
+<span class='curline'><a href='../S/985.html#L222'>mydata</a>            222 ext/phar/zip.c 			mydata-&gt;is_persistent = PHAR_G(persist);</span>
+<span class='curline'><a href='../S/985.html#L234'>mydata</a>            234 ext/phar/zip.c 					pefree(mydata, mydata-&gt;is_persistent);</span>
+<span class='curline'><a href='../S/985.html#L238'>mydata</a>            238 ext/phar/zip.c 				mydata-&gt;metadata_len = PHAR_GET_16(locator.comment_len);</span>
+<span class='curline'><a href='../S/985.html#L240'>mydata</a>            240 ext/phar/zip.c 				if (phar_parse_metadata(&amp;metadata, &amp;mydata-&gt;metadata, PHAR_GET_16(locator.comment_len) TSRMLS_CC) == FAILURE) {</span>
+<span class='curline'><a href='../S/985.html#L241'>mydata</a>            241 ext/phar/zip.c 					mydata-&gt;metadata_len = 0;</span>
+<span class='curline'><a href='../S/985.html#L245'>mydata</a>            245 ext/phar/zip.c 						ALLOC_PERMANENT_ZVAL(mydata-&gt;metadata);</span>
+<span class='curline'><a href='../S/985.html#L247'>mydata</a>            247 ext/phar/zip.c 						ALLOC_ZVAL(mydata-&gt;metadata);</span>
+<span class='curline'><a href='../S/985.html#L250'>mydata</a>            250 ext/phar/zip.c 					INIT_ZVAL(*mydata-&gt;metadata);</span>
+<span class='curline'><a href='../S/985.html#L251'>mydata</a>            251 ext/phar/zip.c 					metadata = pestrndup(metadata, PHAR_GET_16(locator.comment_len), mydata-&gt;is_persistent);</span>
+<span class='curline'><a href='../S/985.html#L252'>mydata</a>            252 ext/phar/zip.c 					ZVAL_STRINGL(mydata-&gt;metadata, metadata, PHAR_GET_16(locator.comment_len), 0);</span>
+<span class='curline'><a href='../S/985.html#L255'>mydata</a>            255 ext/phar/zip.c 				mydata-&gt;metadata = NULL;</span>
+<span class='curline'><a href='../S/985.html#L270'>mydata</a>            270 ext/phar/zip.c 	mydata-&gt;fname = pestrndup(fname, fname_len, mydata-&gt;is_persistent);</span>
+<span class='curline'><a href='../S/985.html#L272'>mydata</a>            272 ext/phar/zip.c 	phar_unixify_path_separators(mydata-&gt;fname, fname_len);</span>
+<span class='curline'><a href='../S/985.html#L274'>mydata</a>            274 ext/phar/zip.c 	mydata-&gt;is_zip = 1;</span>
+<span class='curline'><a href='../S/985.html#L275'>mydata</a>            275 ext/phar/zip.c 	mydata-&gt;fname_len = fname_len;</span>
+<span class='curline'><a href='../S/985.html#L276'>mydata</a>            276 ext/phar/zip.c 	ext = strrchr(mydata-&gt;fname, '/');</span>
+<span class='curline'><a href='../S/985.html#L279'>mydata</a>            279 ext/phar/zip.c 		mydata-&gt;ext = memchr(ext, '.', (mydata-&gt;fname + fname_len) - ext);</span>
+<span class='curline'><a href='../S/985.html#L280'>mydata</a>            280 ext/phar/zip.c 		if (mydata-&gt;ext == ext) {</span>
+<span class='curline'><a href='../S/985.html#L281'>mydata</a>            281 ext/phar/zip.c 			mydata-&gt;ext = memchr(ext + 1, '.', (mydata-&gt;fname + fname_len) - ext - 1);</span>
+<span class='curline'><a href='../S/985.html#L283'>mydata</a>            283 ext/phar/zip.c 		if (mydata-&gt;ext) {</span>
+<span class='curline'><a href='../S/985.html#L284'>mydata</a>            284 ext/phar/zip.c 			mydata-&gt;ext_len = (mydata-&gt;fname + fname_len) - mydata-&gt;ext;</span>
+<span class='curline'><a href='../S/985.html#L292'>mydata</a>            292 ext/phar/zip.c 	zend_hash_init(&amp;mydata-&gt;manifest, PHAR_GET_16(locator.count),</span>
+<span class='curline'><a href='../S/985.html#L293'>mydata</a>            293 ext/phar/zip.c 		zend_get_hash_value, destroy_phar_manifest_entry, (zend_bool)mydata-&gt;is_persistent);</span>
+<span class='curline'><a href='../S/985.html#L294'>mydata</a>            294 ext/phar/zip.c 	zend_hash_init(&amp;mydata-&gt;mounted_dirs, 5,</span>
+<span class='curline'><a href='../S/985.html#L295'>mydata</a>            295 ext/phar/zip.c 		zend_get_hash_value, NULL, (zend_bool)mydata-&gt;is_persistent);</span>
+<span class='curline'><a href='../S/985.html#L296'>mydata</a>            296 ext/phar/zip.c 	zend_hash_init(&amp;mydata-&gt;virtual_dirs, PHAR_GET_16(locator.count) * 2,</span>
+<span class='curline'><a href='../S/985.html#L297'>mydata</a>            297 ext/phar/zip.c 		zend_get_hash_value, NULL, (zend_bool)mydata-&gt;is_persistent);</span>
+<span class='curline'><a href='../S/985.html#L298'>mydata</a>            298 ext/phar/zip.c 	entry.phar = mydata;</span>
+<span class='curline'><a href='../S/985.html#L301'>mydata</a>            301 ext/phar/zip.c 	entry.is_persistent = mydata-&gt;is_persistent;</span>
+<span class='curline'><a href='../S/985.html#L303'>mydata</a>            303 ext/phar/zip.c 			zend_hash_destroy(&amp;mydata-&gt;manifest); \</span>
+<span class='curline'><a href='../S/985.html#L304'>mydata</a>            304 ext/phar/zip.c 			mydata-&gt;manifest.arBuckets = 0; \</span>
+<span class='curline'><a href='../S/985.html#L305'>mydata</a>            305 ext/phar/zip.c 			zend_hash_destroy(&amp;mydata-&gt;mounted_dirs); \</span>
+<span class='curline'><a href='../S/985.html#L306'>mydata</a>            306 ext/phar/zip.c 			mydata-&gt;mounted_dirs.arBuckets = 0; \</span>
+<span class='curline'><a href='../S/985.html#L307'>mydata</a>            307 ext/phar/zip.c 			zend_hash_destroy(&amp;mydata-&gt;virtual_dirs); \</span>
+<span class='curline'><a href='../S/985.html#L308'>mydata</a>            308 ext/phar/zip.c 			mydata-&gt;virtual_dirs.arBuckets = 0; \</span>
+<span class='curline'><a href='../S/985.html#L310'>mydata</a>            310 ext/phar/zip.c 			if (mydata-&gt;metadata) { \</span>
+<span class='curline'><a href='../S/985.html#L311'>mydata</a>            311 ext/phar/zip.c 				zval_dtor(mydata-&gt;metadata); \</span>
+<span class='curline'><a href='../S/985.html#L313'>mydata</a>            313 ext/phar/zip.c 			if (mydata-&gt;signature) { \</span>
+<span class='curline'><a href='../S/985.html#L314'>mydata</a>            314 ext/phar/zip.c 				efree(mydata-&gt;signature); \</span>
+<span class='curline'><a href='../S/985.html#L317'>mydata</a>            317 ext/phar/zip.c 				spprintf(error, 4096, "phar error: %s in zip-based phar \"%s\"", errmsg, mydata-&gt;fname); \</span>
+<span class='curline'><a href='../S/985.html#L319'>mydata</a>            319 ext/phar/zip.c 			pefree(mydata-&gt;fname, mydata-&gt;is_persistent); \</span>
+<span class='curline'><a href='../S/985.html#L320'>mydata</a>            320 ext/phar/zip.c 			if (mydata-&gt;alias) { \</span>
+<span class='curline'><a href='../S/985.html#L321'>mydata</a>            321 ext/phar/zip.c 				pefree(mydata-&gt;alias, mydata-&gt;is_persistent); \</span>
+<span class='curline'><a href='../S/985.html#L323'>mydata</a>            323 ext/phar/zip.c 			pefree(mydata, mydata-&gt;is_persistent); \</span>
+<span class='curline'><a href='../S/985.html#L327'>mydata</a>            327 ext/phar/zip.c 			zend_hash_destroy(&amp;mydata-&gt;manifest); \</span>
+<span class='curline'><a href='../S/985.html#L328'>mydata</a>            328 ext/phar/zip.c 			mydata-&gt;manifest.arBuckets = 0; \</span>
+<span class='curline'><a href='../S/985.html#L329'>mydata</a>            329 ext/phar/zip.c 			zend_hash_destroy(&amp;mydata-&gt;mounted_dirs); \</span>
+<span class='curline'><a href='../S/985.html#L330'>mydata</a>            330 ext/phar/zip.c 			mydata-&gt;mounted_dirs.arBuckets = 0; \</span>
+<span class='curline'><a href='../S/985.html#L331'>mydata</a>            331 ext/phar/zip.c 			zend_hash_destroy(&amp;mydata-&gt;virtual_dirs); \</span>
+<span class='curline'><a href='../S/985.html#L332'>mydata</a>            332 ext/phar/zip.c 			mydata-&gt;virtual_dirs.arBuckets = 0; \</span>
+<span class='curline'><a href='../S/985.html#L334'>mydata</a>            334 ext/phar/zip.c 			if (mydata-&gt;metadata) { \</span>
+<span class='curline'><a href='../S/985.html#L335'>mydata</a>            335 ext/phar/zip.c 				zval_dtor(mydata-&gt;metadata); \</span>
+<span class='curline'><a href='../S/985.html#L337'>mydata</a>            337 ext/phar/zip.c 			if (mydata-&gt;signature) { \</span>
+<span class='curline'><a href='../S/985.html#L338'>mydata</a>            338 ext/phar/zip.c 				efree(mydata-&gt;signature); \</span>
+<span class='curline'><a href='../S/985.html#L341'>mydata</a>            341 ext/phar/zip.c 				spprintf(error, 4096, "phar error: %s in zip-based phar \"%s\"", errmsg, mydata-&gt;fname); \</span>
+<span class='curline'><a href='../S/985.html#L343'>mydata</a>            343 ext/phar/zip.c 			pefree(mydata-&gt;fname, mydata-&gt;is_persistent); \</span>
+<span class='curline'><a href='../S/985.html#L344'>mydata</a>            344 ext/phar/zip.c 			if (mydata-&gt;alias) { \</span>
+<span class='curline'><a href='../S/985.html#L345'>mydata</a>            345 ext/phar/zip.c 				pefree(mydata-&gt;alias, mydata-&gt;is_persistent); \</span>
+<span class='curline'><a href='../S/985.html#L347'>mydata</a>            347 ext/phar/zip.c 			pefree(mydata, mydata-&gt;is_persistent); \</span>
+<span class='curline'><a href='../S/985.html#L438'>mydata</a>            438 ext/phar/zip.c 			mydata-&gt;sig_flags = PHAR_GET_32(sig);</span>
+<span class='curline'><a href='../S/985.html#L439'>mydata</a>            439 ext/phar/zip.c 			if (FAILURE == phar_verify_signature(sigfile, php_stream_tell(sigfile), mydata-&gt;sig_flags, sig + 8, entry.uncompressed_filesize - 8, fname, &amp;mydata-&gt;signature, &amp;mydata-&gt;sig_len, error TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/985.html#L462'>mydata</a>            462 ext/phar/zip.c 		phar_add_virtual_dirs(mydata, entry.filename, entry.filename_len TSRMLS_CC);</span>
+<span class='curline'><a href='../S/985.html#L592'>mydata</a>            592 ext/phar/zip.c 			mydata-&gt;alias_len = entry.uncompressed_filesize;</span>
+<span class='curline'><a href='../S/985.html#L641'>mydata</a>            641 ext/phar/zip.c 		zend_hash_add(&amp;mydata-&gt;manifest, entry.filename, entry.filename_len, (void *)&amp;entry,sizeof(phar_entry_info), NULL);</span>
+<span class='curline'><a href='../S/985.html#L644'>mydata</a>            644 ext/phar/zip.c 	mydata-&gt;fp = fp;</span>
+<span class='curline'><a href='../S/985.html#L646'>mydata</a>            646 ext/phar/zip.c 	if (zend_hash_exists(&amp;(mydata-&gt;manifest), ".phar/stub.php", sizeof(".phar/stub.php")-1)) {</span>
+<span class='curline'><a href='../S/985.html#L647'>mydata</a>            647 ext/phar/zip.c 		mydata-&gt;is_data = 0;</span>
+<span class='curline'><a href='../S/985.html#L649'>mydata</a>            649 ext/phar/zip.c 		mydata-&gt;is_data = 1;</span>
+<span class='curline'><a href='../S/985.html#L652'>mydata</a>            652 ext/phar/zip.c 	zend_hash_add(&amp;(PHAR_GLOBALS-&gt;phar_fname_map), mydata-&gt;fname, fname_len, (void*)&amp;mydata, sizeof(phar_archive_data*), NULL);</span>
+<span class='curline'><a href='../S/985.html#L657'>mydata</a>            657 ext/phar/zip.c 		if (!phar_validate_alias(actual_alias, mydata-&gt;alias_len)) {</span>
+<span class='curline'><a href='../S/985.html#L662'>mydata</a>            662 ext/phar/zip.c 			zend_hash_del(&amp;(PHAR_GLOBALS-&gt;phar_fname_map), mydata-&gt;fname, fname_len);</span>
+<span class='curline'><a href='../S/985.html#L666'>mydata</a>            666 ext/phar/zip.c 		mydata-&gt;is_temporary_alias = 0;</span>
+<span class='curline'><a href='../S/985.html#L668'>mydata</a>            668 ext/phar/zip.c 		if (SUCCESS == zend_hash_find(&amp;(PHAR_GLOBALS-&gt;phar_alias_map), actual_alias, mydata-&gt;alias_len, (void **)&amp;fd_ptr)) {</span>
+<span class='curline'><a href='../S/985.html#L669'>mydata</a>            669 ext/phar/zip.c 			if (SUCCESS != phar_free_alias(*fd_ptr, actual_alias, mydata-&gt;alias_len TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/985.html#L674'>mydata</a>            674 ext/phar/zip.c 				zend_hash_del(&amp;(PHAR_GLOBALS-&gt;phar_fname_map), mydata-&gt;fname, fname_len);</span>
+<span class='curline'><a href='../S/985.html#L679'>mydata</a>            679 ext/phar/zip.c 		mydata-&gt;alias = entry.is_persistent ? pestrndup(actual_alias, mydata-&gt;alias_len, 1) : actual_alias;</span>
+<span class='curline'><a href='../S/985.html#L685'>mydata</a>            685 ext/phar/zip.c 		zend_hash_add(&amp;(PHAR_GLOBALS-&gt;phar_alias_map), actual_alias, mydata-&gt;alias_len, (void*)&amp;mydata, sizeof(phar_archive_data*), NULL);</span>
+<span class='curline'><a href='../S/985.html#L695'>mydata</a>            695 ext/phar/zip.c 					zend_hash_del(&amp;(PHAR_GLOBALS-&gt;phar_fname_map), mydata-&gt;fname, fname_len);</span>
+<span class='curline'><a href='../S/985.html#L700'>mydata</a>            700 ext/phar/zip.c 			zend_hash_add(&amp;(PHAR_GLOBALS-&gt;phar_alias_map), actual_alias, mydata-&gt;alias_len, (void*)&amp;mydata, sizeof(phar_archive_data*), NULL);</span>
+<span class='curline'><a href='../S/985.html#L701'>mydata</a>            701 ext/phar/zip.c 			mydata-&gt;alias = pestrndup(alias, alias_len, mydata-&gt;is_persistent);</span>
+<span class='curline'><a href='../S/985.html#L702'>mydata</a>            702 ext/phar/zip.c 			mydata-&gt;alias_len = alias_len;</span>
+<span class='curline'><a href='../S/985.html#L704'>mydata</a>            704 ext/phar/zip.c 			mydata-&gt;alias = pestrndup(mydata-&gt;fname, fname_len, mydata-&gt;is_persistent);</span>
+<span class='curline'><a href='../S/985.html#L705'>mydata</a>            705 ext/phar/zip.c 			mydata-&gt;alias_len = fname_len;</span>
+<span class='curline'><a href='../S/985.html#L708'>mydata</a>            708 ext/phar/zip.c 		mydata-&gt;is_temporary_alias = 1;</span>
+<span class='curline'><a href='../S/985.html#L712'>mydata</a>            712 ext/phar/zip.c 		*pphar = mydata;</span>
+<span class='curline'><a href='../S/1237.html#L598'>mydata</a>            598 ext/xmlrpc/libxmlrpc/xml_element.c    xml_elem_data* mydata = (xml_elem_data*)userData;</span>
+<span class='curline'><a href='../S/1237.html#L601'>mydata</a>            601 ext/xmlrpc/libxmlrpc/xml_element.c    if(mydata) {</span>
+<span class='curline'><a href='../S/1237.html#L602'>mydata</a>            602 ext/xmlrpc/libxmlrpc/xml_element.c       c = mydata-&gt;current;</span>
+<span class='curline'><a href='../S/1237.html#L604'>mydata</a>            604 ext/xmlrpc/libxmlrpc/xml_element.c       mydata-&gt;current = xml_elem_new();</span>
+<span class='curline'><a href='../S/1237.html#L605'>mydata</a>            605 ext/xmlrpc/libxmlrpc/xml_element.c       mydata-&gt;current-&gt;name = (char*)strdup(name);</span>
+<span class='curline'><a href='../S/1237.html#L606'>mydata</a>            606 ext/xmlrpc/libxmlrpc/xml_element.c       mydata-&gt;current-&gt;parent = c;</span>
+<span class='curline'><a href='../S/1237.html#L614'>mydata</a>            614 ext/xmlrpc/libxmlrpc/xml_element.c             Q_PushTail(&amp;mydata-&gt;current-&gt;attrs, attr);</span>
+<span class='curline'><a href='../S/1237.html#L625'>mydata</a>            625 ext/xmlrpc/libxmlrpc/xml_element.c    xml_elem_data* mydata = (xml_elem_data*)userData;</span>
+<span class='curline'><a href='../S/1237.html#L627'>mydata</a>            627 ext/xmlrpc/libxmlrpc/xml_element.c    if(mydata &amp;&amp; mydata-&gt;current &amp;&amp; mydata-&gt;current-&gt;parent) {</span>
+<span class='curline'><a href='../S/1237.html#L628'>mydata</a>            628 ext/xmlrpc/libxmlrpc/xml_element.c       Q_PushTail(&amp;mydata-&gt;current-&gt;parent-&gt;children, mydata-&gt;current);</span>
+<span class='curline'><a href='../S/1237.html#L630'>mydata</a>            630 ext/xmlrpc/libxmlrpc/xml_element.c       mydata-&gt;current = mydata-&gt;current-&gt;parent;</span>
+<span class='curline'><a href='../S/1237.html#L639'>mydata</a>            639 ext/xmlrpc/libxmlrpc/xml_element.c    xml_elem_data* mydata = (xml_elem_data*)userData;</span>
+<span class='curline'><a href='../S/1237.html#L640'>mydata</a>            640 ext/xmlrpc/libxmlrpc/xml_element.c    if(mydata &amp;&amp; mydata-&gt;current) {</span>
+<span class='curline'><a href='../S/1237.html#L643'>mydata</a>            643 ext/xmlrpc/libxmlrpc/xml_element.c       if(mydata-&gt;needs_enc_conversion &amp;&amp; mydata-&gt;input_options-&gt;encoding) {</span>
+<span class='curline'><a href='../S/1237.html#L645'>mydata</a>            645 ext/xmlrpc/libxmlrpc/xml_element.c          char* add_text = utf8_decode(s, len, &amp;new_len, mydata-&gt;input_options-&gt;encoding);</span>
+<span class='curline'><a href='../S/1237.html#L648'>mydata</a>            648 ext/xmlrpc/libxmlrpc/xml_element.c             simplestring_addn(&amp;mydata-&gt;current-&gt;text, add_text, len);</span>
+<span class='curline'><a href='../S/1237.html#L653'>mydata</a>            653 ext/xmlrpc/libxmlrpc/xml_element.c       simplestring_addn(&amp;mydata-&gt;current-&gt;text, s, len);</span>
+<span class='curline'><a href='../S/1237.html#L699'>mydata</a>            699 ext/xmlrpc/libxmlrpc/xml_element.c       xml_elem_data mydata = {0};</span>
+<span class='curline'><a href='../S/1237.html#L703'>mydata</a>            703 ext/xmlrpc/libxmlrpc/xml_element.c       mydata.root = xml_elem_new();</span>
+<span class='curline'><a href='../S/1237.html#L704'>mydata</a>            704 ext/xmlrpc/libxmlrpc/xml_element.c       mydata.current = mydata.root;</span>
+<span class='curline'><a href='../S/1237.html#L705'>mydata</a>            705 ext/xmlrpc/libxmlrpc/xml_element.c       mydata.input_options = options;</span>
+<span class='curline'><a href='../S/1237.html#L706'>mydata</a>            706 ext/xmlrpc/libxmlrpc/xml_element.c       mydata.needs_enc_conversion = options-&gt;encoding &amp;&amp; strcmp(options-&gt;encoding, encoding_utf_8);</span>
+<span class='curline'><a href='../S/1237.html#L712'>mydata</a>            712 ext/xmlrpc/libxmlrpc/xml_element.c       XML_SetUserData(parser, (void*)&amp;mydata);</span>
+<span class='curline'><a href='../S/1237.html#L754'>mydata</a>            754 ext/xmlrpc/libxmlrpc/xml_element.c          xReturn = (xml_element*)Q_Head(&amp;mydata.root-&gt;children);</span>
+<span class='curline'><a href='../S/1237.html#L761'>mydata</a>            761 ext/xmlrpc/libxmlrpc/xml_element.c       xml_elem_free_non_recurse(mydata.root);</span>
+</pre>
+</body>
+</html>

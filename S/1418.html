@@ -1,0 +1,571 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>main/streams/transports.c</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<a id='TOP' name='TOP'></a><h2 class='header'><a href='../mains.html'>root</a>/<a href='../files/1872.html'>main</a>/<a href='../files/1873.html'>streams</a>/transports.c</h2>
+<em class='comment'>/* [&lt;][&gt;]<a href='#L27'>[^]</a><a href='#L507'>[v]</a>[top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+<hr />
+<h2 class='header'>DEFINITIONS</h2>
+This source file includes following definitions.
+<ol>
+<li><a href='#L27' title='Defined at 27.'>php_stream_xport_get_hash</a></li>
+<li><a href='#L32' title='Defined at 32.'>php_stream_xport_register</a></li>
+<li><a href='#L37' title='Defined at 37.'>php_stream_xport_unregister</a></li>
+<li><a href='#L52' title='Defined at 52.'>_php_stream_xport_create</a></li>
+<li><a href='#L196' title='Defined at 196.'>php_stream_xport_bind</a></li>
+<li><a href='#L224' title='Defined at 224.'>php_stream_xport_connect</a></li>
+<li><a href='#L260' title='Defined at 260.'>php_stream_xport_listen</a></li>
+<li><a href='#L284' title='Defined at 284.'>php_stream_xport_accept</a></li>
+<li><a href='#L323' title='Defined at 323.'>php_stream_xport_get_name</a></li>
+<li><a href='#L354' title='Defined at 354.'>php_stream_xport_crypto_setup</a></li>
+<li><a href='#L375' title='Defined at 375.'>php_stream_xport_crypto_enable</a></li>
+<li><a href='#L397' title='Defined at 397.'>php_stream_xport_recvfrom</a></li>
+<li><a href='#L467' title='Defined at 467.'>php_stream_xport_sendto</a></li>
+<li><a href='#L507' title='Defined at 507.'>php_stream_xport_shutdown</a></li>
+</ol>
+<hr />
+<pre>
+<a id='L1' name='L1'></a>   1 <em class='comment'>/*</em>
+<a id='L2' name='L2'></a>   2 <em class='comment'>  +----------------------------------------------------------------------+</em>
+<a id='L3' name='L3'></a>   3 <em class='comment'>  | PHP Version 5                                                        |</em>
+<a id='L4' name='L4'></a>   4 <em class='comment'>  +----------------------------------------------------------------------+</em>
+<a id='L5' name='L5'></a>   5 <em class='comment'>  | Copyright (c) 1997-2016 The PHP Group                                |</em>
+<a id='L6' name='L6'></a>   6 <em class='comment'>  +----------------------------------------------------------------------+</em>
+<a id='L7' name='L7'></a>   7 <em class='comment'>  | This source file is subject to version 3.01 of the PHP license,      |</em>
+<a id='L8' name='L8'></a>   8 <em class='comment'>  | that is bundled with this package in the file LICENSE, and is        |</em>
+<a id='L9' name='L9'></a>   9 <em class='comment'>  | available through the world-wide-web at the following url:           |</em>
+<a id='L10' name='L10'></a>  10 <em class='comment'>  | http://www.php.net/license/3_01.txt                                  |</em>
+<a id='L11' name='L11'></a>  11 <em class='comment'>  | If you did not receive a copy of the PHP license and are unable to   |</em>
+<a id='L12' name='L12'></a>  12 <em class='comment'>  | obtain it through the world-wide-web, please send a note to          |</em>
+<a id='L13' name='L13'></a>  13 <em class='comment'>  | license@php.net so we can mail you a copy immediately.               |</em>
+<a id='L14' name='L14'></a>  14 <em class='comment'>  +----------------------------------------------------------------------+</em>
+<a id='L15' name='L15'></a>  15 <em class='comment'>  | Author: Wez Furlong &lt;wez@thebrainroom.com&gt;                           |</em>
+<a id='L16' name='L16'></a>  16 <em class='comment'>  +----------------------------------------------------------------------+</em>
+<a id='L17' name='L17'></a>  17 <em class='comment'>*/</em>
+<a id='L18' name='L18'></a>  18 
+<a id='L19' name='L19'></a>  19 <em class='comment'>/* $Id$ */</em>
+<a id='L20' name='L20'></a>  20 
+<a id='L21' name='L21'></a>  21 <em class='sharp'>#include</em> "<a href='1368.html'>php.h</a>"
+<a id='L22' name='L22'></a>  22 <em class='sharp'>#include</em> "<a href='1415.html'>php_streams_int.h</a>"
+<a id='L23' name='L23'></a>  23 <em class='sharp'>#include</em> "<a href='../I/306.html'>ext/standard/file.h</a>"
+<a id='L24' name='L24'></a>  24 
+<a id='L25' name='L25'></a>  25 <strong class='reserved'>static</strong> <a href='../S/1683.html#L83' title='Defined at 83 in Zend/zend_hash.h.'>HashTable</a> <a href='../Y/42089.html' title='Multiple used in 5 places.'>xport_hash</a>;
+<a id='L26' name='L26'></a>  26 
+<a id='L27' name='L27'></a>  27 <a href='../D/7744.html' title='Multiple defined in 14 places.'>PHPAPI</a> <a href='../S/1683.html#L83' title='Defined at 83 in Zend/zend_hash.h.'>HashTable</a> *<a href='../R/24866.html' title='Multiple referred from 5 places.'>php_stream_xport_get_hash</a>(<strong class='reserved'>void</strong>)
+<a id='L28' name='L28'></a>  28 <em class='brace'>{</em>
+<a id='L29' name='L29'></a>  29         <strong class='reserved'>return</strong> &amp;<a href='../Y/42089.html' title='Multiple used in 5 places.'>xport_hash</a>;
+<a id='L30' name='L30'></a>  30 <em class='brace'>}</em>
+<a id='L31' name='L31'></a>  31 
+<a id='L32' name='L32'></a>  32 <a href='../D/7744.html' title='Multiple defined in 14 places.'>PHPAPI</a> <strong class='reserved'>int</strong> <a href='../R/24870.html' title='Multiple referred from 14 places.'>php_stream_xport_register</a>(<strong class='reserved'>const</strong> <strong class='reserved'>char</strong> *<a href='../S/813.html#L910' title='Defined at 910 in ext/mysqlnd/mysqlnd_structs.h.'>protocol</a>, <a href='../S/1413.html#L34' title='Defined at 34 in main/streams/php_stream_transport.h.'>php_stream_transport_factory</a> <a href='../Y/17582.html' title='Multiple used in 21 places.'>factory</a> <a href='../D/14076.html' title='Multiple defined in 136 places.'>TSRMLS_DC</a>)
+<a id='L33' name='L33'></a>  33 <em class='brace'>{</em>
+<a id='L34' name='L34'></a>  34         <strong class='reserved'>return</strong> <a href='../S/1683.html#L109' title='Defined at 109 in Zend/zend_hash.h.'>zend_hash_update</a>(&amp;<a href='../Y/42089.html' title='Multiple used in 5 places.'>xport_hash</a>, <a href='../S/813.html#L910' title='Defined at 910 in ext/mysqlnd/mysqlnd_structs.h.'>protocol</a>, <a href='../S/882.html#L373' title='Defined at 373 in ext/pcre/pcrelib/pcre_internal.h.'>strlen</a>(<a href='../S/813.html#L910' title='Defined at 910 in ext/mysqlnd/mysqlnd_structs.h.'>protocol</a>) + 1, &amp;<a href='../Y/17582.html' title='Multiple used in 21 places.'>factory</a>, <strong class='reserved'>sizeof</strong>(<a href='../Y/17582.html' title='Multiple used in 21 places.'>factory</a>), <a href='../D/6086.html' title='Multiple defined in 8 places.'>NULL</a>);
+<a id='L35' name='L35'></a>  35 <em class='brace'>}</em>
+<a id='L36' name='L36'></a>  36 
+<a id='L37' name='L37'></a>  37 <a href='../D/7744.html' title='Multiple defined in 14 places.'>PHPAPI</a> <strong class='reserved'>int</strong> <a href='../R/24873.html' title='Multiple referred from 8 places.'>php_stream_xport_unregister</a>(<strong class='reserved'>const</strong> <strong class='reserved'>char</strong> *<a href='../S/813.html#L910' title='Defined at 910 in ext/mysqlnd/mysqlnd_structs.h.'>protocol</a> <a href='../D/14076.html' title='Multiple defined in 136 places.'>TSRMLS_DC</a>)
+<a id='L38' name='L38'></a>  38 <em class='brace'>{</em>
+<a id='L39' name='L39'></a>  39         <strong class='reserved'>return</strong> <a href='../S/1683.html#L154' title='Defined at 154 in Zend/zend_hash.h.'>zend_hash_del</a>(&amp;<a href='../Y/42089.html' title='Multiple used in 5 places.'>xport_hash</a>, <a href='../S/813.html#L910' title='Defined at 910 in ext/mysqlnd/mysqlnd_structs.h.'>protocol</a>, <a href='../S/882.html#L373' title='Defined at 373 in ext/pcre/pcrelib/pcre_internal.h.'>strlen</a>(<a href='../S/813.html#L910' title='Defined at 910 in ext/mysqlnd/mysqlnd_structs.h.'>protocol</a>) + 1);
+<a id='L40' name='L40'></a>  40 <em class='brace'>}</em>
+<a id='L41' name='L41'></a>  41 
+<a id='L42' name='L42'></a>  42 <em class='sharp'>#define</em> <a href='../S/1418.html#L117' title='Referred from 117 in main/streams/transports.c.'>ERR_REPORT</a>(<a href='../Y/30364.html' title='Multiple used in 9 places.'>out_err</a>, <a href='../Y/18166.html' title='Multiple used in 238 places.'>fmt</a>, <a href='../D/19393.html' title='Multiple defined in 2 places.'>arg</a>) \
+<a id='L43' name='L43'></a>  43         <strong class='reserved'>if</strong> (<a href='../Y/30364.html' title='Multiple used in 9 places.'>out_err</a>) <em class='brace'>{</em> <a href='../S/1401.html#L834' title='Defined at 834 in main/spprintf.c.'>spprintf</a>(<a href='../Y/30364.html' title='Multiple used in 9 places.'>out_err</a>, 0, <a href='../Y/18166.html' title='Multiple used in 238 places.'>fmt</a>, <a href='../D/19393.html' title='Multiple defined in 2 places.'>arg</a>); <em class='brace'>}</em> \
+<a id='L44' name='L44'></a>  44         <strong class='reserved'>else</strong> <em class='brace'>{</em> <a href='../S/1368.html#L322' title='Defined at 322 in main/php.h.'>php_error_docref</a>(<a href='../D/6086.html' title='Multiple defined in 8 places.'>NULL</a> <a href='../D/14074.html' title='Multiple defined in 2 places.'>TSRMLS_CC</a>, <a href='../S/1666.html#L26' title='Defined at 26 in Zend/zend_errors.h.'>E_WARNING</a>, <a href='../Y/18166.html' title='Multiple used in 238 places.'>fmt</a>, <a href='../D/19393.html' title='Multiple defined in 2 places.'>arg</a>); <em class='brace'>}</em>
+<a id='L45' name='L45'></a>  45 
+<a id='L46' name='L46'></a>  46 <em class='sharp'>#define</em> <a href='../R/1938.html' title='Multiple referred from 3 places.'>ERR_RETURN</a>(<a href='../Y/30364.html' title='Multiple used in 9 places.'>out_err</a>, <a href='../Y/25365.html' title='Multiple used in 4 places.'>local_err</a>, <a href='../Y/18166.html' title='Multiple used in 238 places.'>fmt</a>) \
+<a id='L47' name='L47'></a>  47         <strong class='reserved'>if</strong> (<a href='../Y/30364.html' title='Multiple used in 9 places.'>out_err</a>) <em class='brace'>{</em> *<a href='../Y/30364.html' title='Multiple used in 9 places.'>out_err</a> = <a href='../Y/25365.html' title='Multiple used in 4 places.'>local_err</a>; <em class='brace'>}</em> \
+<a id='L48' name='L48'></a>  48         <strong class='reserved'>else</strong> <em class='brace'>{</em> <a href='../S/1368.html#L322' title='Defined at 322 in main/php.h.'>php_error_docref</a>(<a href='../D/6086.html' title='Multiple defined in 8 places.'>NULL</a> <a href='../D/14074.html' title='Multiple defined in 2 places.'>TSRMLS_CC</a>, <a href='../S/1666.html#L26' title='Defined at 26 in Zend/zend_errors.h.'>E_WARNING</a>, <a href='../Y/18166.html' title='Multiple used in 238 places.'>fmt</a>, <a href='../Y/25365.html' title='Multiple used in 4 places.'>local_err</a> ? <a href='../Y/25365.html' title='Multiple used in 4 places.'>local_err</a> : "Unspecified error"); \
+<a id='L49' name='L49'></a>  49                 <strong class='reserved'>if</strong> (<a href='../Y/25365.html' title='Multiple used in 4 places.'>local_err</a>) <em class='brace'>{</em> <a href='../D/21052.html' title='Multiple defined in 3 places.'>efree</a>(<a href='../Y/25365.html' title='Multiple used in 4 places.'>local_err</a>); <a href='../Y/25365.html' title='Multiple used in 4 places.'>local_err</a> = <a href='../D/6086.html' title='Multiple defined in 8 places.'>NULL</a>; <em class='brace'>}</em> \
+<a id='L50' name='L50'></a>  50         <em class='brace'>}</em>
+<a id='L51' name='L51'></a>  51         
+<a id='L52' name='L52'></a>  52 <a href='../D/7744.html' title='Multiple defined in 14 places.'>PHPAPI</a> <a href='../S/1387.html#L98' title='Defined at 98 in main/php_streams.h.'>php_stream</a> *<a href='../R/16103.html' title='Multiple referred from 2 places.'>_php_stream_xport_create</a>(<strong class='reserved'>const</strong> <strong class='reserved'>char</strong> *<a href='../Y/28160.html' title='Multiple used in 4617 places.'>name</a>, <a href='../Y/36596.html' title='Multiple used in 2694 places.'>size_t</a> <a href='../Y/28207.html' title='Multiple used in 192 places.'>namelen</a>, <strong class='reserved'>int</strong> <a href='../D/25249.html' title='Multiple defined in 4 places.'>options</a>,
+<a id='L53' name='L53'></a>  53                 <strong class='reserved'>int</strong> <a href='../D/21615.html' title='Multiple defined in 14 places.'>flags</a>, <strong class='reserved'>const</strong> <strong class='reserved'>char</strong> *<a href='../Y/31934.html' title='Multiple used in 65 places.'>persistent_id</a>,
+<a id='L54' name='L54'></a>  54                 <strong class='reserved'>struct</strong> <a href='../Y/38997.html' title='Multiple used in 173 places.'>timeval</a> *<a href='../Y/38977.html' title='Multiple used in 261 places.'>timeout</a>,
+<a id='L55' name='L55'></a>  55                 <a href='../S/1387.html#L100' title='Defined at 100 in main/php_streams.h.'>php_stream_context</a> *<a href='../Y/14267.html' title='Multiple used in 2143 places.'>context</a>,
+<a id='L56' name='L56'></a>  56                 <strong class='reserved'>char</strong> **<a href='../Y/17108.html' title='Multiple used in 42 places.'>error_string</a>,
+<a id='L57' name='L57'></a>  57                 <strong class='reserved'>int</strong> *<a href='../Y/17059.html' title='Multiple used in 179 places.'>error_code</a>
+<a id='L58' name='L58'></a>  58                 <a href='../D/12338.html' title='Multiple defined in 2 places.'>STREAMS_DC</a> <a href='../D/14076.html' title='Multiple defined in 136 places.'>TSRMLS_DC</a>)
+<a id='L59' name='L59'></a>  59 <em class='brace'>{</em>
+<a id='L60' name='L60'></a>  60         <a href='../S/1387.html#L98' title='Defined at 98 in main/php_streams.h.'>php_stream</a> *<a href='../S/813.html#L860' title='Defined at 860 in ext/mysqlnd/mysqlnd_structs.h.'>stream</a> = <a href='../D/6086.html' title='Multiple defined in 8 places.'>NULL</a>;
+<a id='L61' name='L61'></a>  61         <a href='../S/1413.html#L34' title='Defined at 34 in main/streams/php_stream_transport.h.'>php_stream_transport_factory</a> *<a href='../Y/17582.html' title='Multiple used in 21 places.'>factory</a> = <a href='../D/6086.html' title='Multiple defined in 8 places.'>NULL</a>;
+<a id='L62' name='L62'></a>  62         <strong class='reserved'>const</strong> <strong class='reserved'>char</strong> *<a href='../Y/30495.html' title='Multiple used in 13216 places.'>p</a>, *<a href='../S/813.html#L910' title='Defined at 910 in ext/mysqlnd/mysqlnd_structs.h.'>protocol</a> = <a href='../D/6086.html' title='Multiple defined in 8 places.'>NULL</a>;
+<a id='L63' name='L63'></a>  63         <strong class='reserved'>int</strong> <a href='../D/24846.html' title='Multiple defined in 3 places.'>n</a> = 0, <a href='../Y/17588.html' title='Multiple used in 36 places.'>failed</a> = 0;
+<a id='L64' name='L64'></a>  64         <strong class='reserved'>char</strong> *<a href='../Y/17109.html' title='Multiple used in 38 places.'>error_text</a> = <a href='../D/6086.html' title='Multiple defined in 8 places.'>NULL</a>;
+<a id='L65' name='L65'></a>  65         <strong class='reserved'>struct</strong> <a href='../Y/38997.html' title='Multiple used in 173 places.'>timeval</a> <a href='../Y/15463.html' title='Multiple used in 3 places.'>default_timeout</a> = <em class='brace'>{</em> 0, 0 <em class='brace'>}</em>;
+<a id='L66' name='L66'></a>  66         
+<a id='L67' name='L67'></a>  67         <a href='../Y/15463.html' title='Multiple used in 3 places.'>default_timeout</a>.<a href='../Y/39553.html' title='Multiple used in 205 places.'>tv_sec</a> = <a href='../D/2534.html' title='Multiple defined in 2 places.'>FG</a>(<a href='../Y/15457.html' title='Multiple used in 17 places.'>default_socket_timeout</a>);
+<a id='L68' name='L68'></a>  68 
+<a id='L69' name='L69'></a>  69         <strong class='reserved'>if</strong> (<a href='../Y/38977.html' title='Multiple used in 261 places.'>timeout</a> == <a href='../D/6086.html' title='Multiple defined in 8 places.'>NULL</a>) <em class='brace'>{</em>
+<a id='L70' name='L70'></a>  70                 <a href='../Y/38977.html' title='Multiple used in 261 places.'>timeout</a> = &amp;<a href='../Y/15463.html' title='Multiple used in 3 places.'>default_timeout</a>;
+<a id='L71' name='L71'></a>  71         <em class='brace'>}</em>
+<a id='L72' name='L72'></a>  72         
+<a id='L73' name='L73'></a>  73         <em class='comment'>/* check for a cached persistent socket */</em>
+<a id='L74' name='L74'></a>  74         <strong class='reserved'>if</strong> (<a href='../Y/31934.html' title='Multiple used in 65 places.'>persistent_id</a>) <em class='brace'>{</em>
+<a id='L75' name='L75'></a>  75                 <strong class='reserved'>switch</strong>(<a href='../S/1417.html#L117' title='Defined at 117 in main/streams/streams.c.'>php_stream_from_persistent_id</a>(<a href='../Y/31934.html' title='Multiple used in 65 places.'>persistent_id</a>, &amp;<a href='../S/813.html#L860' title='Defined at 860 in ext/mysqlnd/mysqlnd_structs.h.'>stream</a> <a href='../D/14074.html' title='Multiple defined in 2 places.'>TSRMLS_CC</a>)) <em class='brace'>{</em>
+<a id='L76' name='L76'></a>  76                         <strong class='reserved'>case</strong> <a href='../S/1387.html#L267' title='Defined at 267 in main/php_streams.h.'>PHP_STREAM_PERSISTENT_SUCCESS</a>:
+<a id='L77' name='L77'></a>  77                                 <em class='comment'>/* use a 0 second timeout when checking if the socket</em>
+<a id='L78' name='L78'></a>  78 <em class='comment'>                                 * has already died */</em>
+<a id='L79' name='L79'></a>  79                                 <strong class='reserved'>if</strong> (<a href='../S/1387.html#L429' title='Defined at 429 in main/php_streams.h.'>PHP_STREAM_OPTION_RETURN_OK</a> == <a href='../S/1387.html#L362' title='Defined at 362 in main/php_streams.h.'>php_stream_set_option</a>(<a href='../S/813.html#L860' title='Defined at 860 in ext/mysqlnd/mysqlnd_structs.h.'>stream</a>, <a href='../S/1387.html#L427' title='Defined at 427 in main/php_streams.h.'>PHP_STREAM_OPTION_CHECK_LIVENESS</a>, 0, <a href='../D/6086.html' title='Multiple defined in 8 places.'>NULL</a>)) <em class='brace'>{</em>
+<a id='L80' name='L80'></a>  80                                         <strong class='reserved'>return</strong> <a href='../S/813.html#L860' title='Defined at 860 in ext/mysqlnd/mysqlnd_structs.h.'>stream</a>;
+<a id='L81' name='L81'></a>  81                                 <em class='brace'>}</em>
+<a id='L82' name='L82'></a>  82                                 <em class='comment'>/* dead - kill it */</em>
+<a id='L83' name='L83'></a>  83                                 <a href='../S/1387.html#L284' title='Defined at 284 in main/php_streams.h.'>php_stream_pclose</a>(<a href='../S/813.html#L860' title='Defined at 860 in ext/mysqlnd/mysqlnd_structs.h.'>stream</a>);
+<a id='L84' name='L84'></a>  84                                 <a href='../S/813.html#L860' title='Defined at 860 in ext/mysqlnd/mysqlnd_structs.h.'>stream</a> = <a href='../D/6086.html' title='Multiple defined in 8 places.'>NULL</a>;
+<a id='L85' name='L85'></a>  85 
+<a id='L86' name='L86'></a>  86                                 <em class='comment'>/* fall through */</em>
+<a id='L87' name='L87'></a>  87 
+<a id='L88' name='L88'></a>  88                         <strong class='reserved'>case</strong> <a href='../S/1387.html#L268' title='Defined at 268 in main/php_streams.h.'>PHP_STREAM_PERSISTENT_FAILURE</a>:
+<a id='L89' name='L89'></a>  89                         <strong class='reserved'>default</strong>:
+<a id='L90' name='L90'></a>  90                                 <em class='comment'>/* failed; get a new one */</em>
+<a id='L91' name='L91'></a>  91                                 ;
+<a id='L92' name='L92'></a>  92                 <em class='brace'>}</em>
+<a id='L93' name='L93'></a>  93         <em class='brace'>}</em>
+<a id='L94' name='L94'></a>  94 
+<a id='L95' name='L95'></a>  95         <strong class='reserved'>for</strong> (<a href='../Y/30495.html' title='Multiple used in 13216 places.'>p</a> = <a href='../Y/28160.html' title='Multiple used in 4617 places.'>name</a>; <a href='../Y/24012.html' title='Multiple used in 31 places.'>isalnum</a>((<strong class='reserved'>int</strong>)*<a href='../Y/30495.html' title='Multiple used in 13216 places.'>p</a>) || *<a href='../Y/30495.html' title='Multiple used in 13216 places.'>p</a> == '+' || *<a href='../Y/30495.html' title='Multiple used in 13216 places.'>p</a> == '-' || *<a href='../Y/30495.html' title='Multiple used in 13216 places.'>p</a> == '.'; <a href='../Y/30495.html' title='Multiple used in 13216 places.'>p</a>++) <em class='brace'>{</em>
+<a id='L96' name='L96'></a>  96                 <a href='../D/24846.html' title='Multiple defined in 3 places.'>n</a>++;
+<a id='L97' name='L97'></a>  97         <em class='brace'>}</em>
+<a id='L98' name='L98'></a>  98 
+<a id='L99' name='L99'></a>  99         <strong class='reserved'>if</strong> ((*<a href='../Y/30495.html' title='Multiple used in 13216 places.'>p</a> == ':') &amp;&amp; (<a href='../D/24846.html' title='Multiple defined in 3 places.'>n</a> &gt; 1) &amp;&amp; !<a href='../S/882.html#L374' title='Defined at 374 in ext/pcre/pcrelib/pcre_internal.h.'>strncmp</a>("://", <a href='../Y/30495.html' title='Multiple used in 13216 places.'>p</a>, 3)) <em class='brace'>{</em>
+<a id='L100' name='L100'></a> 100                 <a href='../S/813.html#L910' title='Defined at 910 in ext/mysqlnd/mysqlnd_structs.h.'>protocol</a> = <a href='../Y/28160.html' title='Multiple used in 4617 places.'>name</a>;
+<a id='L101' name='L101'></a> 101                 <a href='../Y/28160.html' title='Multiple used in 4617 places.'>name</a> = <a href='../Y/30495.html' title='Multiple used in 13216 places.'>p</a> + 3;
+<a id='L102' name='L102'></a> 102                 <a href='../Y/28207.html' title='Multiple used in 192 places.'>namelen</a> -= <a href='../D/24846.html' title='Multiple defined in 3 places.'>n</a> + 3;
+<a id='L103' name='L103'></a> 103         <em class='brace'>}</em> <strong class='reserved'>else</strong> <em class='brace'>{</em>
+<a id='L104' name='L104'></a> 104                 <a href='../S/813.html#L910' title='Defined at 910 in ext/mysqlnd/mysqlnd_structs.h.'>protocol</a> = "tcp";
+<a id='L105' name='L105'></a> 105                 <a href='../D/24846.html' title='Multiple defined in 3 places.'>n</a> = 3;
+<a id='L106' name='L106'></a> 106         <em class='brace'>}</em>
+<a id='L107' name='L107'></a> 107 
+<a id='L108' name='L108'></a> 108         <strong class='reserved'>if</strong> (<a href='../S/813.html#L910' title='Defined at 910 in ext/mysqlnd/mysqlnd_structs.h.'>protocol</a>) <em class='brace'>{</em>
+<a id='L109' name='L109'></a> 109                 <strong class='reserved'>char</strong> *<a href='../Y/39059.html' title='Multiple used in 3942 places.'>tmp</a> = <a href='../S/1645.html#L78' title='Defined at 78 in Zend/zend_alloc.h.'>estrndup</a>(<a href='../S/813.html#L910' title='Defined at 910 in ext/mysqlnd/mysqlnd_structs.h.'>protocol</a>, <a href='../D/24846.html' title='Multiple defined in 3 places.'>n</a>);
+<a id='L110' name='L110'></a> 110                 <strong class='reserved'>if</strong> (<a href='../S/1643.html#L283' title='Defined at 283 in Zend/zend.h.'>FAILURE</a> == <a href='../S/1682.html#L838' title='Defined at 838 in Zend/zend_hash.c.'>zend_hash_find</a>(&amp;<a href='../Y/42089.html' title='Multiple used in 5 places.'>xport_hash</a>, (<strong class='reserved'>char</strong>*)<a href='../Y/39059.html' title='Multiple used in 3942 places.'>tmp</a>, <a href='../D/24846.html' title='Multiple defined in 3 places.'>n</a> + 1, (<strong class='reserved'>void</strong>**)&amp;<a href='../Y/17582.html' title='Multiple used in 21 places.'>factory</a>)) <em class='brace'>{</em>
+<a id='L111' name='L111'></a> 111                         <strong class='reserved'>char</strong> <a href='../Y/41307.html' title='Multiple used in 10 places.'>wrapper_name</a>[32];
+<a id='L112' name='L112'></a> 112 
+<a id='L113' name='L113'></a> 113                         <strong class='reserved'>if</strong> (<a href='../D/24846.html' title='Multiple defined in 3 places.'>n</a> &gt;= <strong class='reserved'>sizeof</strong>(<a href='../Y/41307.html' title='Multiple used in 10 places.'>wrapper_name</a>))
+<a id='L114' name='L114'></a> 114                                 <a href='../D/24846.html' title='Multiple defined in 3 places.'>n</a> = <strong class='reserved'>sizeof</strong>(<a href='../Y/41307.html' title='Multiple used in 10 places.'>wrapper_name</a>) - 1;
+<a id='L115' name='L115'></a> 115                         <a href='../S/1368.html#L111' title='Defined at 111 in main/php.h.'>PHP_STRLCPY</a>(<a href='../Y/41307.html' title='Multiple used in 10 places.'>wrapper_name</a>, <a href='../S/813.html#L910' title='Defined at 910 in ext/mysqlnd/mysqlnd_structs.h.'>protocol</a>, <strong class='reserved'>sizeof</strong>(<a href='../Y/41307.html' title='Multiple used in 10 places.'>wrapper_name</a>), <a href='../D/24846.html' title='Multiple defined in 3 places.'>n</a>);
+<a id='L116' name='L116'></a> 116                 
+<a id='L117' name='L117'></a> 117                         <a href='../S/1418.html#L42' title='Defined at 42 in main/streams/transports.c.'>ERR_REPORT</a>(<a href='../Y/17108.html' title='Multiple used in 42 places.'>error_string</a>, "Unable to find the socket transport \"%s\" - did you forget to enable it when you configured PHP?",
+<a id='L118' name='L118'></a> 118                                         <a href='../Y/41307.html' title='Multiple used in 10 places.'>wrapper_name</a>);
+<a id='L119' name='L119'></a> 119 
+<a id='L120' name='L120'></a> 120                         <a href='../D/21052.html' title='Multiple defined in 3 places.'>efree</a>(<a href='../Y/39059.html' title='Multiple used in 3942 places.'>tmp</a>);
+<a id='L121' name='L121'></a> 121                         <strong class='reserved'>return</strong> <a href='../D/6086.html' title='Multiple defined in 8 places.'>NULL</a>;
+<a id='L122' name='L122'></a> 122                 <em class='brace'>}</em>
+<a id='L123' name='L123'></a> 123                 <a href='../D/21052.html' title='Multiple defined in 3 places.'>efree</a>(<a href='../Y/39059.html' title='Multiple used in 3942 places.'>tmp</a>);
+<a id='L124' name='L124'></a> 124         <em class='brace'>}</em>
+<a id='L125' name='L125'></a> 125 
+<a id='L126' name='L126'></a> 126         <strong class='reserved'>if</strong> (<a href='../Y/17582.html' title='Multiple used in 21 places.'>factory</a> == <a href='../D/6086.html' title='Multiple defined in 8 places.'>NULL</a>) <em class='brace'>{</em>
+<a id='L127' name='L127'></a> 127                 <em class='comment'>/* should never happen */</em>
+<a id='L128' name='L128'></a> 128                 <a href='../S/1368.html#L322' title='Defined at 322 in main/php.h.'>php_error_docref</a>(<a href='../D/6086.html' title='Multiple defined in 8 places.'>NULL</a> <a href='../D/14074.html' title='Multiple defined in 2 places.'>TSRMLS_CC</a>, <a href='../S/1666.html#L26' title='Defined at 26 in Zend/zend_errors.h.'>E_WARNING</a>, "Could not find a factory !?");
+<a id='L129' name='L129'></a> 129                 <strong class='reserved'>return</strong> <a href='../D/6086.html' title='Multiple defined in 8 places.'>NULL</a>;
+<a id='L130' name='L130'></a> 130         <em class='brace'>}</em>
+<a id='L131' name='L131'></a> 131 
+<a id='L132' name='L132'></a> 132         <a href='../S/813.html#L860' title='Defined at 860 in ext/mysqlnd/mysqlnd_structs.h.'>stream</a> = (*<a href='../Y/17582.html' title='Multiple used in 21 places.'>factory</a>)(<a href='../S/813.html#L910' title='Defined at 910 in ext/mysqlnd/mysqlnd_structs.h.'>protocol</a>, <a href='../D/24846.html' title='Multiple defined in 3 places.'>n</a>,
+<a id='L133' name='L133'></a> 133                         (<strong class='reserved'>char</strong>*)<a href='../Y/28160.html' title='Multiple used in 4617 places.'>name</a>, <a href='../Y/28207.html' title='Multiple used in 192 places.'>namelen</a>, <a href='../Y/31934.html' title='Multiple used in 65 places.'>persistent_id</a>, <a href='../D/25249.html' title='Multiple defined in 4 places.'>options</a>, <a href='../D/21615.html' title='Multiple defined in 14 places.'>flags</a>, <a href='../Y/38977.html' title='Multiple used in 261 places.'>timeout</a>,
+<a id='L134' name='L134'></a> 134                         <a href='../Y/14267.html' title='Multiple used in 2143 places.'>context</a> <a href='../D/12340.html' title='Multiple defined in 2 places.'>STREAMS_REL_CC</a> <a href='../D/14074.html' title='Multiple defined in 2 places.'>TSRMLS_CC</a>);
+<a id='L135' name='L135'></a> 135 
+<a id='L136' name='L136'></a> 136         <strong class='reserved'>if</strong> (<a href='../S/813.html#L860' title='Defined at 860 in ext/mysqlnd/mysqlnd_structs.h.'>stream</a>) <em class='brace'>{</em>
+<a id='L137' name='L137'></a> 137                 <a href='../S/1417.html#L2164' title='Defined at 2164 in main/streams/streams.c.'>php_stream_context_set</a>(<a href='../S/813.html#L860' title='Defined at 860 in ext/mysqlnd/mysqlnd_structs.h.'>stream</a>, <a href='../Y/14267.html' title='Multiple used in 2143 places.'>context</a>);
+<a id='L138' name='L138'></a> 138 
+<a id='L139' name='L139'></a> 139                 <strong class='reserved'>if</strong> ((<a href='../D/21615.html' title='Multiple defined in 14 places.'>flags</a> &amp; <a href='../S/1413.html#L41' title='Defined at 41 in main/streams/php_stream_transport.h.'>STREAM_XPORT_SERVER</a>) == 0) <em class='brace'>{</em>
+<a id='L140' name='L140'></a> 140                         <em class='comment'>/* client */</em>
+<a id='L141' name='L141'></a> 141 
+<a id='L142' name='L142'></a> 142                         <strong class='reserved'>if</strong> (<a href='../D/21615.html' title='Multiple defined in 14 places.'>flags</a> &amp; (<a href='../S/1413.html#L43' title='Defined at 43 in main/streams/php_stream_transport.h.'>STREAM_XPORT_CONNECT</a>|<a href='../S/1413.html#L46' title='Defined at 46 in main/streams/php_stream_transport.h.'>STREAM_XPORT_CONNECT_ASYNC</a>)) <em class='brace'>{</em>
+<a id='L143' name='L143'></a> 143                                 <strong class='reserved'>if</strong> (-1 == <a href='../S/1418.html#L224' title='Defined at 224 in main/streams/transports.c.'>php_stream_xport_connect</a>(<a href='../S/813.html#L860' title='Defined at 860 in ext/mysqlnd/mysqlnd_structs.h.'>stream</a>, <a href='../Y/28160.html' title='Multiple used in 4617 places.'>name</a>, <a href='../Y/28207.html' title='Multiple used in 192 places.'>namelen</a>,
+<a id='L144' name='L144'></a> 144                                                         <a href='../D/21615.html' title='Multiple defined in 14 places.'>flags</a> &amp; <a href='../S/1413.html#L46' title='Defined at 46 in main/streams/php_stream_transport.h.'>STREAM_XPORT_CONNECT_ASYNC</a> ? 1 : 0,
+<a id='L145' name='L145'></a> 145                                                         <a href='../Y/38977.html' title='Multiple used in 261 places.'>timeout</a>, &amp;<a href='../Y/17109.html' title='Multiple used in 38 places.'>error_text</a>, <a href='../Y/17059.html' title='Multiple used in 179 places.'>error_code</a> <a href='../D/14074.html' title='Multiple defined in 2 places.'>TSRMLS_CC</a>)) <em class='brace'>{</em>
+<a id='L146' name='L146'></a> 146 
+<a id='L147' name='L147'></a> 147                                         <a href='../S/1418.html#L46' title='Defined at 46 in main/streams/transports.c.'>ERR_RETURN</a>(<a href='../Y/17108.html' title='Multiple used in 42 places.'>error_string</a>, <a href='../Y/17109.html' title='Multiple used in 38 places.'>error_text</a>, "connect() failed: %s");
+<a id='L148' name='L148'></a> 148 
+<a id='L149' name='L149'></a> 149                                         <a href='../Y/17588.html' title='Multiple used in 36 places.'>failed</a> = 1;
+<a id='L150' name='L150'></a> 150                                 <em class='brace'>}</em>
+<a id='L151' name='L151'></a> 151                         <em class='brace'>}</em>
+<a id='L152' name='L152'></a> 152 
+<a id='L153' name='L153'></a> 153                 <em class='brace'>}</em> <strong class='reserved'>else</strong> <em class='brace'>{</em>
+<a id='L154' name='L154'></a> 154                         <em class='comment'>/* server */</em>
+<a id='L155' name='L155'></a> 155                         <strong class='reserved'>if</strong> (<a href='../D/21615.html' title='Multiple defined in 14 places.'>flags</a> &amp; <a href='../S/1413.html#L44' title='Defined at 44 in main/streams/php_stream_transport.h.'>STREAM_XPORT_BIND</a>) <em class='brace'>{</em>
+<a id='L156' name='L156'></a> 156                                 <strong class='reserved'>if</strong> (0 != <a href='../S/1418.html#L196' title='Defined at 196 in main/streams/transports.c.'>php_stream_xport_bind</a>(<a href='../S/813.html#L860' title='Defined at 860 in ext/mysqlnd/mysqlnd_structs.h.'>stream</a>, <a href='../Y/28160.html' title='Multiple used in 4617 places.'>name</a>, <a href='../Y/28207.html' title='Multiple used in 192 places.'>namelen</a>, &amp;<a href='../Y/17109.html' title='Multiple used in 38 places.'>error_text</a> <a href='../D/14074.html' title='Multiple defined in 2 places.'>TSRMLS_CC</a>)) <em class='brace'>{</em>
+<a id='L157' name='L157'></a> 157                                         <a href='../S/1418.html#L46' title='Defined at 46 in main/streams/transports.c.'>ERR_RETURN</a>(<a href='../Y/17108.html' title='Multiple used in 42 places.'>error_string</a>, <a href='../Y/17109.html' title='Multiple used in 38 places.'>error_text</a>, "bind() failed: %s");
+<a id='L158' name='L158'></a> 158                                         <a href='../Y/17588.html' title='Multiple used in 36 places.'>failed</a> = 1;
+<a id='L159' name='L159'></a> 159                                 <em class='brace'>}</em> <strong class='reserved'>else</strong> <strong class='reserved'>if</strong> (<a href='../D/21615.html' title='Multiple defined in 14 places.'>flags</a> &amp; <a href='../S/1413.html#L45' title='Defined at 45 in main/streams/php_stream_transport.h.'>STREAM_XPORT_LISTEN</a>) <em class='brace'>{</em>
+<a id='L160' name='L160'></a> 160                                         <a href='../S/1741.html#L55' title='Defined at 55 in Zend/zend_types.h.'>zval</a> **<a href='../Y/44146.html' title='Multiple used in 4 places.'>zbacklog</a> = <a href='../D/6086.html' title='Multiple defined in 8 places.'>NULL</a>;
+<a id='L161' name='L161'></a> 161                                         <strong class='reserved'>int</strong> <a href='../Y/12252.html' title='Multiple used in 29 places.'>backlog</a> = 32;
+<a id='L162' name='L162'></a> 162                                         
+<a id='L163' name='L163'></a> 163                                         <strong class='reserved'>if</strong> (<a href='../S/813.html#L860' title='Defined at 860 in ext/mysqlnd/mysqlnd_structs.h.'>stream</a>-&gt;<a href='../Y/14267.html' title='Multiple used in 2143 places.'>context</a> &amp;&amp; <a href='../S/1417.html#L2227' title='Defined at 2227 in main/streams/streams.c.'>php_stream_context_get_option</a>(<a href='../S/813.html#L860' title='Defined at 860 in ext/mysqlnd/mysqlnd_structs.h.'>stream</a>-&gt;<a href='../Y/14267.html' title='Multiple used in 2143 places.'>context</a>, "socket", "backlog", &amp;<a href='../Y/44146.html' title='Multiple used in 4 places.'>zbacklog</a>) == <a href='../D/12833.html' title='Multiple defined in 2 places.'>SUCCESS</a>) <em class='brace'>{</em>
+<a id='L164' name='L164'></a> 164                                                 <a href='../S/1741.html#L55' title='Defined at 55 in Zend/zend_types.h.'>zval</a> *<a href='../Y/44646.html' title='Multiple used in 54 places.'>ztmp</a> = *<a href='../Y/44146.html' title='Multiple used in 4 places.'>zbacklog</a>;
+<a id='L165' name='L165'></a> 165                                                 
+<a id='L166' name='L166'></a> 166                                                 <a href='../S/1721.html#L425' title='Defined at 425 in Zend/zend_operators.h.'>convert_to_long_ex</a>(&amp;<a href='../Y/44646.html' title='Multiple used in 54 places.'>ztmp</a>);
+<a id='L167' name='L167'></a> 167                                                 <a href='../Y/12252.html' title='Multiple used in 29 places.'>backlog</a> = <a href='../S/1721.html#L457' title='Defined at 457 in Zend/zend_operators.h.'>Z_LVAL_P</a>(<a href='../Y/44646.html' title='Multiple used in 54 places.'>ztmp</a>);
+<a id='L168' name='L168'></a> 168                                                 <strong class='reserved'>if</strong> (<a href='../Y/44646.html' title='Multiple used in 54 places.'>ztmp</a> != *<a href='../Y/44146.html' title='Multiple used in 4 places.'>zbacklog</a>) <em class='brace'>{</em>
+<a id='L169' name='L169'></a> 169                                                         <a href='../D/34596.html' title='Multiple defined in 3 places.'>zval_ptr_dtor</a>(&amp;<a href='../Y/44646.html' title='Multiple used in 54 places.'>ztmp</a>);
+<a id='L170' name='L170'></a> 170                                                 <em class='brace'>}</em>
+<a id='L171' name='L171'></a> 171                                         <em class='brace'>}</em>
+<a id='L172' name='L172'></a> 172                                         
+<a id='L173' name='L173'></a> 173                                         <strong class='reserved'>if</strong> (0 != <a href='../S/1418.html#L260' title='Defined at 260 in main/streams/transports.c.'>php_stream_xport_listen</a>(<a href='../S/813.html#L860' title='Defined at 860 in ext/mysqlnd/mysqlnd_structs.h.'>stream</a>, <a href='../Y/12252.html' title='Multiple used in 29 places.'>backlog</a>, &amp;<a href='../Y/17109.html' title='Multiple used in 38 places.'>error_text</a> <a href='../D/14074.html' title='Multiple defined in 2 places.'>TSRMLS_CC</a>)) <em class='brace'>{</em>
+<a id='L174' name='L174'></a> 174                                                 <a href='../S/1418.html#L46' title='Defined at 46 in main/streams/transports.c.'>ERR_RETURN</a>(<a href='../Y/17108.html' title='Multiple used in 42 places.'>error_string</a>, <a href='../Y/17109.html' title='Multiple used in 38 places.'>error_text</a>, "listen() failed: %s");
+<a id='L175' name='L175'></a> 175                                                 <a href='../Y/17588.html' title='Multiple used in 36 places.'>failed</a> = 1;
+<a id='L176' name='L176'></a> 176                                         <em class='brace'>}</em>
+<a id='L177' name='L177'></a> 177                                 <em class='brace'>}</em>
+<a id='L178' name='L178'></a> 178                         <em class='brace'>}</em>
+<a id='L179' name='L179'></a> 179                 <em class='brace'>}</em>
+<a id='L180' name='L180'></a> 180         <em class='brace'>}</em>
+<a id='L181' name='L181'></a> 181 
+<a id='L182' name='L182'></a> 182         <strong class='reserved'>if</strong> (<a href='../Y/17588.html' title='Multiple used in 36 places.'>failed</a>) <em class='brace'>{</em>
+<a id='L183' name='L183'></a> 183                 <em class='comment'>/* failure means that they don't get a stream to play with */</em>
+<a id='L184' name='L184'></a> 184                 <strong class='reserved'>if</strong> (<a href='../Y/31934.html' title='Multiple used in 65 places.'>persistent_id</a>) <em class='brace'>{</em>
+<a id='L185' name='L185'></a> 185                         <a href='../S/1387.html#L284' title='Defined at 284 in main/php_streams.h.'>php_stream_pclose</a>(<a href='../S/813.html#L860' title='Defined at 860 in ext/mysqlnd/mysqlnd_structs.h.'>stream</a>);
+<a id='L186' name='L186'></a> 186                 <em class='brace'>}</em> <strong class='reserved'>else</strong> <em class='brace'>{</em>
+<a id='L187' name='L187'></a> 187                         <a href='../S/1387.html#L283' title='Defined at 283 in main/php_streams.h.'>php_stream_close</a>(<a href='../S/813.html#L860' title='Defined at 860 in ext/mysqlnd/mysqlnd_structs.h.'>stream</a>);
+<a id='L188' name='L188'></a> 188                 <em class='brace'>}</em>
+<a id='L189' name='L189'></a> 189                 <a href='../S/813.html#L860' title='Defined at 860 in ext/mysqlnd/mysqlnd_structs.h.'>stream</a> = <a href='../D/6086.html' title='Multiple defined in 8 places.'>NULL</a>;
+<a id='L190' name='L190'></a> 190         <em class='brace'>}</em>
+<a id='L191' name='L191'></a> 191 
+<a id='L192' name='L192'></a> 192         <strong class='reserved'>return</strong> <a href='../S/813.html#L860' title='Defined at 860 in ext/mysqlnd/mysqlnd_structs.h.'>stream</a>;
+<a id='L193' name='L193'></a> 193 <em class='brace'>}</em>
+<a id='L194' name='L194'></a> 194 
+<a id='L195' name='L195'></a> 195 <em class='comment'>/* Bind the stream to a local address */</em>
+<a id='L196' name='L196'></a> 196 <a href='../D/7744.html' title='Multiple defined in 14 places.'>PHPAPI</a> <strong class='reserved'>int</strong> <a href='../R/24860.html' title='Multiple referred from 2 places.'>php_stream_xport_bind</a>(<a href='../S/1387.html#L98' title='Defined at 98 in main/php_streams.h.'>php_stream</a> *<a href='../S/813.html#L860' title='Defined at 860 in ext/mysqlnd/mysqlnd_structs.h.'>stream</a>,
+<a id='L197' name='L197'></a> 197                 <strong class='reserved'>const</strong> <strong class='reserved'>char</strong> *<a href='../Y/28160.html' title='Multiple used in 4617 places.'>name</a>, <a href='../Y/36596.html' title='Multiple used in 2694 places.'>size_t</a> <a href='../Y/28207.html' title='Multiple used in 192 places.'>namelen</a>,
+<a id='L198' name='L198'></a> 198                 <strong class='reserved'>char</strong> **<a href='../Y/17109.html' title='Multiple used in 38 places.'>error_text</a>
+<a id='L199' name='L199'></a> 199                 <a href='../D/14076.html' title='Multiple defined in 136 places.'>TSRMLS_DC</a>)
+<a id='L200' name='L200'></a> 200 <em class='brace'>{</em>
+<a id='L201' name='L201'></a> 201         <a href='../Y/32920.html' title='Multiple used in 20 places.'>php_stream_xport_param</a> <a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>;
+<a id='L202' name='L202'></a> 202         <strong class='reserved'>int</strong> <a href='../Y/35120.html' title='Multiple used in 3931 places.'>ret</a>;
+<a id='L203' name='L203'></a> 203         
+<a id='L204' name='L204'></a> 204         <a href='../S/882.html#L378' title='Defined at 378 in ext/pcre/pcrelib/pcre_internal.h.'>memset</a>(&amp;<a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>, 0, <strong class='reserved'>sizeof</strong>(<a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>));
+<a id='L205' name='L205'></a> 205         <a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>.<a href='../D/25213.html' title='Multiple defined in 2 places.'>op</a> = <a href='../S/1413.html#L128' title='Defined at 128 in main/streams/php_stream_transport.h.'>STREAM_XPORT_OP_BIND</a>;
+<a id='L206' name='L206'></a> 206         <a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>.<a href='../Y/23391.html' title='Multiple used in 46 places.'>inputs</a>.<a href='../Y/28160.html' title='Multiple used in 4617 places.'>name</a> = (<strong class='reserved'>char</strong>*)<a href='../Y/28160.html' title='Multiple used in 4617 places.'>name</a>;
+<a id='L207' name='L207'></a> 207         <a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>.<a href='../Y/23391.html' title='Multiple used in 46 places.'>inputs</a>.<a href='../Y/28207.html' title='Multiple used in 192 places.'>namelen</a> = <a href='../Y/28207.html' title='Multiple used in 192 places.'>namelen</a>;
+<a id='L208' name='L208'></a> 208         <a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>.<a href='../Y/41103.html' title='Multiple used in 15 places.'>want_errortext</a> = <a href='../Y/17109.html' title='Multiple used in 38 places.'>error_text</a> ? 1 : 0;
+<a id='L209' name='L209'></a> 209 
+<a id='L210' name='L210'></a> 210         <a href='../Y/35120.html' title='Multiple used in 3931 places.'>ret</a> = <a href='../S/1387.html#L362' title='Defined at 362 in main/php_streams.h.'>php_stream_set_option</a>(<a href='../S/813.html#L860' title='Defined at 860 in ext/mysqlnd/mysqlnd_structs.h.'>stream</a>, <a href='../S/1387.html#L407' title='Defined at 407 in main/php_streams.h.'>PHP_STREAM_OPTION_XPORT_API</a>, 0, &amp;<a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>);
+<a id='L211' name='L211'></a> 211 
+<a id='L212' name='L212'></a> 212         <strong class='reserved'>if</strong> (<a href='../Y/35120.html' title='Multiple used in 3931 places.'>ret</a> == <a href='../S/1387.html#L429' title='Defined at 429 in main/php_streams.h.'>PHP_STREAM_OPTION_RETURN_OK</a>) <em class='brace'>{</em>
+<a id='L213' name='L213'></a> 213                 <strong class='reserved'>if</strong> (<a href='../Y/17109.html' title='Multiple used in 38 places.'>error_text</a>) <em class='brace'>{</em>
+<a id='L214' name='L214'></a> 214                         *<a href='../Y/17109.html' title='Multiple used in 38 places.'>error_text</a> = <a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>.<a href='../Y/30447.html' title='Multiple used in 96 places.'>outputs</a>.<a href='../Y/17109.html' title='Multiple used in 38 places.'>error_text</a>;
+<a id='L215' name='L215'></a> 215                 <em class='brace'>}</em>
+<a id='L216' name='L216'></a> 216 
+<a id='L217' name='L217'></a> 217                 <strong class='reserved'>return</strong> <a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>.<a href='../Y/30447.html' title='Multiple used in 96 places.'>outputs</a>.<a href='../Y/35194.html' title='Multiple used in 29 places.'>returncode</a>;
+<a id='L218' name='L218'></a> 218         <em class='brace'>}</em>
+<a id='L219' name='L219'></a> 219 
+<a id='L220' name='L220'></a> 220         <strong class='reserved'>return</strong> <a href='../Y/35120.html' title='Multiple used in 3931 places.'>ret</a>;
+<a id='L221' name='L221'></a> 221 <em class='brace'>}</em>
+<a id='L222' name='L222'></a> 222 
+<a id='L223' name='L223'></a> 223 <em class='comment'>/* Connect to a remote address */</em>
+<a id='L224' name='L224'></a> 224 <a href='../D/7744.html' title='Multiple defined in 14 places.'>PHPAPI</a> <strong class='reserved'>int</strong> <a href='../R/24861.html' title='Multiple referred from 2 places.'>php_stream_xport_connect</a>(<a href='../S/1387.html#L98' title='Defined at 98 in main/php_streams.h.'>php_stream</a> *<a href='../S/813.html#L860' title='Defined at 860 in ext/mysqlnd/mysqlnd_structs.h.'>stream</a>,
+<a id='L225' name='L225'></a> 225                 <strong class='reserved'>const</strong> <strong class='reserved'>char</strong> *<a href='../Y/28160.html' title='Multiple used in 4617 places.'>name</a>, <a href='../Y/36596.html' title='Multiple used in 2694 places.'>size_t</a> <a href='../Y/28207.html' title='Multiple used in 192 places.'>namelen</a>,
+<a id='L226' name='L226'></a> 226                 <strong class='reserved'>int</strong> <a href='../Y/11906.html' title='Multiple used in 11 places.'>asynchronous</a>,
+<a id='L227' name='L227'></a> 227                 <strong class='reserved'>struct</strong> <a href='../Y/38997.html' title='Multiple used in 173 places.'>timeval</a> *<a href='../Y/38977.html' title='Multiple used in 261 places.'>timeout</a>,
+<a id='L228' name='L228'></a> 228                 <strong class='reserved'>char</strong> **<a href='../Y/17109.html' title='Multiple used in 38 places.'>error_text</a>,
+<a id='L229' name='L229'></a> 229                 <strong class='reserved'>int</strong> *<a href='../Y/17059.html' title='Multiple used in 179 places.'>error_code</a>
+<a id='L230' name='L230'></a> 230                 <a href='../D/14076.html' title='Multiple defined in 136 places.'>TSRMLS_DC</a>)
+<a id='L231' name='L231'></a> 231 <em class='brace'>{</em>
+<a id='L232' name='L232'></a> 232         <a href='../Y/32920.html' title='Multiple used in 20 places.'>php_stream_xport_param</a> <a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>;
+<a id='L233' name='L233'></a> 233         <strong class='reserved'>int</strong> <a href='../Y/35120.html' title='Multiple used in 3931 places.'>ret</a>;
+<a id='L234' name='L234'></a> 234         
+<a id='L235' name='L235'></a> 235         <a href='../S/882.html#L378' title='Defined at 378 in ext/pcre/pcrelib/pcre_internal.h.'>memset</a>(&amp;<a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>, 0, <strong class='reserved'>sizeof</strong>(<a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>));
+<a id='L236' name='L236'></a> 236         <a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>.<a href='../D/25213.html' title='Multiple defined in 2 places.'>op</a> = <a href='../Y/11906.html' title='Multiple used in 11 places.'>asynchronous</a> ? <a href='../S/1413.html#L130' title='Defined at 130 in main/streams/php_stream_transport.h.'>STREAM_XPORT_OP_CONNECT_ASYNC</a>: <a href='../S/1413.html#L128' title='Defined at 128 in main/streams/php_stream_transport.h.'>STREAM_XPORT_OP_CONNECT</a>;
+<a id='L237' name='L237'></a> 237         <a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>.<a href='../Y/23391.html' title='Multiple used in 46 places.'>inputs</a>.<a href='../Y/28160.html' title='Multiple used in 4617 places.'>name</a> = (<strong class='reserved'>char</strong>*)<a href='../Y/28160.html' title='Multiple used in 4617 places.'>name</a>;
+<a id='L238' name='L238'></a> 238         <a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>.<a href='../Y/23391.html' title='Multiple used in 46 places.'>inputs</a>.<a href='../Y/28207.html' title='Multiple used in 192 places.'>namelen</a> = <a href='../Y/28207.html' title='Multiple used in 192 places.'>namelen</a>;
+<a id='L239' name='L239'></a> 239         <a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>.<a href='../Y/23391.html' title='Multiple used in 46 places.'>inputs</a>.<a href='../Y/38977.html' title='Multiple used in 261 places.'>timeout</a> = <a href='../Y/38977.html' title='Multiple used in 261 places.'>timeout</a>;
+<a id='L240' name='L240'></a> 240 
+<a id='L241' name='L241'></a> 241         <a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>.<a href='../Y/41103.html' title='Multiple used in 15 places.'>want_errortext</a> = <a href='../Y/17109.html' title='Multiple used in 38 places.'>error_text</a> ? 1 : 0;
+<a id='L242' name='L242'></a> 242         
+<a id='L243' name='L243'></a> 243         <a href='../Y/35120.html' title='Multiple used in 3931 places.'>ret</a> = <a href='../S/1387.html#L362' title='Defined at 362 in main/php_streams.h.'>php_stream_set_option</a>(<a href='../S/813.html#L860' title='Defined at 860 in ext/mysqlnd/mysqlnd_structs.h.'>stream</a>, <a href='../S/1387.html#L407' title='Defined at 407 in main/php_streams.h.'>PHP_STREAM_OPTION_XPORT_API</a>, 0, &amp;<a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>);
+<a id='L244' name='L244'></a> 244 
+<a id='L245' name='L245'></a> 245         <strong class='reserved'>if</strong> (<a href='../Y/35120.html' title='Multiple used in 3931 places.'>ret</a> == <a href='../S/1387.html#L429' title='Defined at 429 in main/php_streams.h.'>PHP_STREAM_OPTION_RETURN_OK</a>) <em class='brace'>{</em>
+<a id='L246' name='L246'></a> 246                 <strong class='reserved'>if</strong> (<a href='../Y/17109.html' title='Multiple used in 38 places.'>error_text</a>) <em class='brace'>{</em>
+<a id='L247' name='L247'></a> 247                         *<a href='../Y/17109.html' title='Multiple used in 38 places.'>error_text</a> = <a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>.<a href='../Y/30447.html' title='Multiple used in 96 places.'>outputs</a>.<a href='../Y/17109.html' title='Multiple used in 38 places.'>error_text</a>;
+<a id='L248' name='L248'></a> 248                 <em class='brace'>}</em>
+<a id='L249' name='L249'></a> 249                 <strong class='reserved'>if</strong> (<a href='../Y/17059.html' title='Multiple used in 179 places.'>error_code</a>) <em class='brace'>{</em>
+<a id='L250' name='L250'></a> 250                         *<a href='../Y/17059.html' title='Multiple used in 179 places.'>error_code</a> = <a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>.<a href='../Y/30447.html' title='Multiple used in 96 places.'>outputs</a>.<a href='../Y/17059.html' title='Multiple used in 179 places.'>error_code</a>;
+<a id='L251' name='L251'></a> 251                 <em class='brace'>}</em>
+<a id='L252' name='L252'></a> 252                 <strong class='reserved'>return</strong> <a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>.<a href='../Y/30447.html' title='Multiple used in 96 places.'>outputs</a>.<a href='../Y/35194.html' title='Multiple used in 29 places.'>returncode</a>;
+<a id='L253' name='L253'></a> 253         <em class='brace'>}</em>
+<a id='L254' name='L254'></a> 254 
+<a id='L255' name='L255'></a> 255         <strong class='reserved'>return</strong> <a href='../Y/35120.html' title='Multiple used in 3931 places.'>ret</a>;
+<a id='L256' name='L256'></a> 256 
+<a id='L257' name='L257'></a> 257 <em class='brace'>}</em>
+<a id='L258' name='L258'></a> 258 
+<a id='L259' name='L259'></a> 259 <em class='comment'>/* Prepare to listen */</em>
+<a id='L260' name='L260'></a> 260 <a href='../D/7744.html' title='Multiple defined in 14 places.'>PHPAPI</a> <strong class='reserved'>int</strong> <a href='../R/24868.html' title='Multiple referred from 2 places.'>php_stream_xport_listen</a>(<a href='../S/1387.html#L98' title='Defined at 98 in main/php_streams.h.'>php_stream</a> *<a href='../S/813.html#L860' title='Defined at 860 in ext/mysqlnd/mysqlnd_structs.h.'>stream</a>, <strong class='reserved'>int</strong> <a href='../Y/12252.html' title='Multiple used in 29 places.'>backlog</a>, <strong class='reserved'>char</strong> **<a href='../Y/17109.html' title='Multiple used in 38 places.'>error_text</a> <a href='../D/14076.html' title='Multiple defined in 136 places.'>TSRMLS_DC</a>)
+<a id='L261' name='L261'></a> 261 <em class='brace'>{</em>
+<a id='L262' name='L262'></a> 262         <a href='../Y/32920.html' title='Multiple used in 20 places.'>php_stream_xport_param</a> <a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>;
+<a id='L263' name='L263'></a> 263         <strong class='reserved'>int</strong> <a href='../Y/35120.html' title='Multiple used in 3931 places.'>ret</a>;
+<a id='L264' name='L264'></a> 264         
+<a id='L265' name='L265'></a> 265         <a href='../S/882.html#L378' title='Defined at 378 in ext/pcre/pcrelib/pcre_internal.h.'>memset</a>(&amp;<a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>, 0, <strong class='reserved'>sizeof</strong>(<a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>));
+<a id='L266' name='L266'></a> 266         <a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>.<a href='../D/25213.html' title='Multiple defined in 2 places.'>op</a> = <a href='../S/1413.html#L129' title='Defined at 129 in main/streams/php_stream_transport.h.'>STREAM_XPORT_OP_LISTEN</a>;
+<a id='L267' name='L267'></a> 267         <a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>.<a href='../Y/23391.html' title='Multiple used in 46 places.'>inputs</a>.<a href='../Y/12252.html' title='Multiple used in 29 places.'>backlog</a> = <a href='../Y/12252.html' title='Multiple used in 29 places.'>backlog</a>;
+<a id='L268' name='L268'></a> 268         <a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>.<a href='../Y/41103.html' title='Multiple used in 15 places.'>want_errortext</a> = <a href='../Y/17109.html' title='Multiple used in 38 places.'>error_text</a> ? 1 : 0;
+<a id='L269' name='L269'></a> 269         
+<a id='L270' name='L270'></a> 270         <a href='../Y/35120.html' title='Multiple used in 3931 places.'>ret</a> = <a href='../S/1387.html#L362' title='Defined at 362 in main/php_streams.h.'>php_stream_set_option</a>(<a href='../S/813.html#L860' title='Defined at 860 in ext/mysqlnd/mysqlnd_structs.h.'>stream</a>, <a href='../S/1387.html#L407' title='Defined at 407 in main/php_streams.h.'>PHP_STREAM_OPTION_XPORT_API</a>, 0, &amp;<a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>);
+<a id='L271' name='L271'></a> 271 
+<a id='L272' name='L272'></a> 272         <strong class='reserved'>if</strong> (<a href='../Y/35120.html' title='Multiple used in 3931 places.'>ret</a> == <a href='../S/1387.html#L429' title='Defined at 429 in main/php_streams.h.'>PHP_STREAM_OPTION_RETURN_OK</a>) <em class='brace'>{</em>
+<a id='L273' name='L273'></a> 273                 <strong class='reserved'>if</strong> (<a href='../Y/17109.html' title='Multiple used in 38 places.'>error_text</a>) <em class='brace'>{</em>
+<a id='L274' name='L274'></a> 274                         *<a href='../Y/17109.html' title='Multiple used in 38 places.'>error_text</a> = <a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>.<a href='../Y/30447.html' title='Multiple used in 96 places.'>outputs</a>.<a href='../Y/17109.html' title='Multiple used in 38 places.'>error_text</a>;
+<a id='L275' name='L275'></a> 275                 <em class='brace'>}</em>
+<a id='L276' name='L276'></a> 276 
+<a id='L277' name='L277'></a> 277                 <strong class='reserved'>return</strong> <a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>.<a href='../Y/30447.html' title='Multiple used in 96 places.'>outputs</a>.<a href='../Y/35194.html' title='Multiple used in 29 places.'>returncode</a>;
+<a id='L278' name='L278'></a> 278         <em class='brace'>}</em>
+<a id='L279' name='L279'></a> 279 
+<a id='L280' name='L280'></a> 280         <strong class='reserved'>return</strong> <a href='../Y/35120.html' title='Multiple used in 3931 places.'>ret</a>;
+<a id='L281' name='L281'></a> 281 <em class='brace'>}</em>
+<a id='L282' name='L282'></a> 282 
+<a id='L283' name='L283'></a> 283 <em class='comment'>/* Get the next client and their address (as a string) */</em>
+<a id='L284' name='L284'></a> 284 <a href='../D/7744.html' title='Multiple defined in 14 places.'>PHPAPI</a> <strong class='reserved'>int</strong> <a href='../R/24859.html' title='Multiple referred from 2 places.'>php_stream_xport_accept</a>(<a href='../S/1387.html#L98' title='Defined at 98 in main/php_streams.h.'>php_stream</a> *<a href='../S/813.html#L860' title='Defined at 860 in ext/mysqlnd/mysqlnd_structs.h.'>stream</a>, <a href='../S/1387.html#L98' title='Defined at 98 in main/php_streams.h.'>php_stream</a> **<a href='../Y/13709.html' title='Multiple used in 257 places.'>client</a>,
+<a id='L285' name='L285'></a> 285                 <strong class='reserved'>char</strong> **<a href='../Y/38738.html' title='Multiple used in 42 places.'>textaddr</a>, <strong class='reserved'>int</strong> *<a href='../Y/38739.html' title='Multiple used in 33 places.'>textaddrlen</a>,
+<a id='L286' name='L286'></a> 286                 <strong class='reserved'>void</strong> **<a href='../Y/8481.html' title='Multiple used in 834 places.'>addr</a>, <a href='../D/29787.html' title='Multiple defined in 2 places.'>socklen_t</a> *<a href='../Y/8556.html' title='Multiple used in 49 places.'>addrlen</a>,
+<a id='L287' name='L287'></a> 287                 <strong class='reserved'>struct</strong> <a href='../Y/38997.html' title='Multiple used in 173 places.'>timeval</a> *<a href='../Y/38977.html' title='Multiple used in 261 places.'>timeout</a>,
+<a id='L288' name='L288'></a> 288                 <strong class='reserved'>char</strong> **<a href='../Y/17109.html' title='Multiple used in 38 places.'>error_text</a>
+<a id='L289' name='L289'></a> 289                 <a href='../D/14076.html' title='Multiple defined in 136 places.'>TSRMLS_DC</a>)
+<a id='L290' name='L290'></a> 290 <em class='brace'>{</em>
+<a id='L291' name='L291'></a> 291         <a href='../Y/32920.html' title='Multiple used in 20 places.'>php_stream_xport_param</a> <a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>;
+<a id='L292' name='L292'></a> 292         <strong class='reserved'>int</strong> <a href='../Y/35120.html' title='Multiple used in 3931 places.'>ret</a>;
+<a id='L293' name='L293'></a> 293 
+<a id='L294' name='L294'></a> 294         <a href='../S/882.html#L378' title='Defined at 378 in ext/pcre/pcrelib/pcre_internal.h.'>memset</a>(&amp;<a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>, 0, <strong class='reserved'>sizeof</strong>(<a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>));
+<a id='L295' name='L295'></a> 295 
+<a id='L296' name='L296'></a> 296         <a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>.<a href='../D/25213.html' title='Multiple defined in 2 places.'>op</a> = <a href='../S/1413.html#L129' title='Defined at 129 in main/streams/php_stream_transport.h.'>STREAM_XPORT_OP_ACCEPT</a>;
+<a id='L297' name='L297'></a> 297         <a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>.<a href='../Y/23391.html' title='Multiple used in 46 places.'>inputs</a>.<a href='../Y/38977.html' title='Multiple used in 261 places.'>timeout</a> = <a href='../Y/38977.html' title='Multiple used in 261 places.'>timeout</a>;
+<a id='L298' name='L298'></a> 298         <a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>.<a href='../Y/41102.html' title='Multiple used in 17 places.'>want_addr</a> = <a href='../Y/8481.html' title='Multiple used in 834 places.'>addr</a> ? 1 : 0;
+<a id='L299' name='L299'></a> 299         <a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>.<a href='../Y/41105.html' title='Multiple used in 14 places.'>want_textaddr</a> = <a href='../Y/38738.html' title='Multiple used in 42 places.'>textaddr</a> ? 1 : 0;
+<a id='L300' name='L300'></a> 300         <a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>.<a href='../Y/41103.html' title='Multiple used in 15 places.'>want_errortext</a> = <a href='../Y/17109.html' title='Multiple used in 38 places.'>error_text</a> ? 1 : 0;
+<a id='L301' name='L301'></a> 301         
+<a id='L302' name='L302'></a> 302         <a href='../Y/35120.html' title='Multiple used in 3931 places.'>ret</a> = <a href='../S/1387.html#L362' title='Defined at 362 in main/php_streams.h.'>php_stream_set_option</a>(<a href='../S/813.html#L860' title='Defined at 860 in ext/mysqlnd/mysqlnd_structs.h.'>stream</a>, <a href='../S/1387.html#L407' title='Defined at 407 in main/php_streams.h.'>PHP_STREAM_OPTION_XPORT_API</a>, 0, &amp;<a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>);
+<a id='L303' name='L303'></a> 303 
+<a id='L304' name='L304'></a> 304         <strong class='reserved'>if</strong> (<a href='../Y/35120.html' title='Multiple used in 3931 places.'>ret</a> == <a href='../S/1387.html#L429' title='Defined at 429 in main/php_streams.h.'>PHP_STREAM_OPTION_RETURN_OK</a>) <em class='brace'>{</em>
+<a id='L305' name='L305'></a> 305                 *<a href='../Y/13709.html' title='Multiple used in 257 places.'>client</a> = <a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>.<a href='../Y/30447.html' title='Multiple used in 96 places.'>outputs</a>.<a href='../Y/13709.html' title='Multiple used in 257 places.'>client</a>;
+<a id='L306' name='L306'></a> 306                 <strong class='reserved'>if</strong> (<a href='../Y/8481.html' title='Multiple used in 834 places.'>addr</a>) <em class='brace'>{</em>
+<a id='L307' name='L307'></a> 307                         *<a href='../Y/8481.html' title='Multiple used in 834 places.'>addr</a> = <a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>.<a href='../Y/30447.html' title='Multiple used in 96 places.'>outputs</a>.<a href='../Y/8481.html' title='Multiple used in 834 places.'>addr</a>;
+<a id='L308' name='L308'></a> 308                         *<a href='../Y/8556.html' title='Multiple used in 49 places.'>addrlen</a> = <a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>.<a href='../Y/30447.html' title='Multiple used in 96 places.'>outputs</a>.<a href='../Y/8556.html' title='Multiple used in 49 places.'>addrlen</a>;
+<a id='L309' name='L309'></a> 309                 <em class='brace'>}</em>
+<a id='L310' name='L310'></a> 310                 <strong class='reserved'>if</strong> (<a href='../Y/38738.html' title='Multiple used in 42 places.'>textaddr</a>) <em class='brace'>{</em>
+<a id='L311' name='L311'></a> 311                         *<a href='../Y/38738.html' title='Multiple used in 42 places.'>textaddr</a> = <a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>.<a href='../Y/30447.html' title='Multiple used in 96 places.'>outputs</a>.<a href='../Y/38738.html' title='Multiple used in 42 places.'>textaddr</a>;
+<a id='L312' name='L312'></a> 312                         *<a href='../Y/38739.html' title='Multiple used in 33 places.'>textaddrlen</a> = <a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>.<a href='../Y/30447.html' title='Multiple used in 96 places.'>outputs</a>.<a href='../Y/38739.html' title='Multiple used in 33 places.'>textaddrlen</a>;
+<a id='L313' name='L313'></a> 313                 <em class='brace'>}</em>
+<a id='L314' name='L314'></a> 314                 <strong class='reserved'>if</strong> (<a href='../Y/17109.html' title='Multiple used in 38 places.'>error_text</a>) <em class='brace'>{</em>
+<a id='L315' name='L315'></a> 315                         *<a href='../Y/17109.html' title='Multiple used in 38 places.'>error_text</a> = <a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>.<a href='../Y/30447.html' title='Multiple used in 96 places.'>outputs</a>.<a href='../Y/17109.html' title='Multiple used in 38 places.'>error_text</a>;
+<a id='L316' name='L316'></a> 316                 <em class='brace'>}</em>
+<a id='L317' name='L317'></a> 317 
+<a id='L318' name='L318'></a> 318                 <strong class='reserved'>return</strong> <a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>.<a href='../Y/30447.html' title='Multiple used in 96 places.'>outputs</a>.<a href='../Y/35194.html' title='Multiple used in 29 places.'>returncode</a>;
+<a id='L319' name='L319'></a> 319         <em class='brace'>}</em>
+<a id='L320' name='L320'></a> 320         <strong class='reserved'>return</strong> <a href='../Y/35120.html' title='Multiple used in 3931 places.'>ret</a>;
+<a id='L321' name='L321'></a> 321 <em class='brace'>}</em>
+<a id='L322' name='L322'></a> 322 
+<a id='L323' name='L323'></a> 323 <a href='../D/7744.html' title='Multiple defined in 14 places.'>PHPAPI</a> <strong class='reserved'>int</strong> <a href='../R/24867.html' title='Multiple referred from 2 places.'>php_stream_xport_get_name</a>(<a href='../S/1387.html#L98' title='Defined at 98 in main/php_streams.h.'>php_stream</a> *<a href='../S/813.html#L860' title='Defined at 860 in ext/mysqlnd/mysqlnd_structs.h.'>stream</a>, <strong class='reserved'>int</strong> <a href='../Y/41104.html' title='Multiple used in 7 places.'>want_peer</a>,
+<a id='L324' name='L324'></a> 324                 <strong class='reserved'>char</strong> **<a href='../Y/38738.html' title='Multiple used in 42 places.'>textaddr</a>, <strong class='reserved'>int</strong> *<a href='../Y/38739.html' title='Multiple used in 33 places.'>textaddrlen</a>,
+<a id='L325' name='L325'></a> 325                 <strong class='reserved'>void</strong> **<a href='../Y/8481.html' title='Multiple used in 834 places.'>addr</a>, <a href='../D/29787.html' title='Multiple defined in 2 places.'>socklen_t</a> *<a href='../Y/8556.html' title='Multiple used in 49 places.'>addrlen</a>
+<a id='L326' name='L326'></a> 326                 <a href='../D/14076.html' title='Multiple defined in 136 places.'>TSRMLS_DC</a>)
+<a id='L327' name='L327'></a> 327 <em class='brace'>{</em>
+<a id='L328' name='L328'></a> 328         <a href='../Y/32920.html' title='Multiple used in 20 places.'>php_stream_xport_param</a> <a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>;
+<a id='L329' name='L329'></a> 329         <strong class='reserved'>int</strong> <a href='../Y/35120.html' title='Multiple used in 3931 places.'>ret</a>;
+<a id='L330' name='L330'></a> 330 
+<a id='L331' name='L331'></a> 331         <a href='../S/882.html#L378' title='Defined at 378 in ext/pcre/pcrelib/pcre_internal.h.'>memset</a>(&amp;<a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>, 0, <strong class='reserved'>sizeof</strong>(<a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>));
+<a id='L332' name='L332'></a> 332 
+<a id='L333' name='L333'></a> 333         <a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>.<a href='../D/25213.html' title='Multiple defined in 2 places.'>op</a> = <a href='../Y/41104.html' title='Multiple used in 7 places.'>want_peer</a> ? <a href='../S/1413.html#L132' title='Defined at 132 in main/streams/php_stream_transport.h.'>STREAM_XPORT_OP_GET_PEER_NAME</a> : <a href='../S/1413.html#L131' title='Defined at 131 in main/streams/php_stream_transport.h.'>STREAM_XPORT_OP_GET_NAME</a>;
+<a id='L334' name='L334'></a> 334         <a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>.<a href='../Y/41102.html' title='Multiple used in 17 places.'>want_addr</a> = <a href='../Y/8481.html' title='Multiple used in 834 places.'>addr</a> ? 1 : 0;
+<a id='L335' name='L335'></a> 335         <a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>.<a href='../Y/41105.html' title='Multiple used in 14 places.'>want_textaddr</a> = <a href='../Y/38738.html' title='Multiple used in 42 places.'>textaddr</a> ? 1 : 0;
+<a id='L336' name='L336'></a> 336         
+<a id='L337' name='L337'></a> 337         <a href='../Y/35120.html' title='Multiple used in 3931 places.'>ret</a> = <a href='../S/1387.html#L362' title='Defined at 362 in main/php_streams.h.'>php_stream_set_option</a>(<a href='../S/813.html#L860' title='Defined at 860 in ext/mysqlnd/mysqlnd_structs.h.'>stream</a>, <a href='../S/1387.html#L407' title='Defined at 407 in main/php_streams.h.'>PHP_STREAM_OPTION_XPORT_API</a>, 0, &amp;<a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>);
+<a id='L338' name='L338'></a> 338 
+<a id='L339' name='L339'></a> 339         <strong class='reserved'>if</strong> (<a href='../Y/35120.html' title='Multiple used in 3931 places.'>ret</a> == <a href='../S/1387.html#L429' title='Defined at 429 in main/php_streams.h.'>PHP_STREAM_OPTION_RETURN_OK</a>) <em class='brace'>{</em>
+<a id='L340' name='L340'></a> 340                 <strong class='reserved'>if</strong> (<a href='../Y/8481.html' title='Multiple used in 834 places.'>addr</a>) <em class='brace'>{</em>
+<a id='L341' name='L341'></a> 341                         *<a href='../Y/8481.html' title='Multiple used in 834 places.'>addr</a> = <a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>.<a href='../Y/30447.html' title='Multiple used in 96 places.'>outputs</a>.<a href='../Y/8481.html' title='Multiple used in 834 places.'>addr</a>;
+<a id='L342' name='L342'></a> 342                         *<a href='../Y/8556.html' title='Multiple used in 49 places.'>addrlen</a> = <a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>.<a href='../Y/30447.html' title='Multiple used in 96 places.'>outputs</a>.<a href='../Y/8556.html' title='Multiple used in 49 places.'>addrlen</a>;
+<a id='L343' name='L343'></a> 343                 <em class='brace'>}</em>
+<a id='L344' name='L344'></a> 344                 <strong class='reserved'>if</strong> (<a href='../Y/38738.html' title='Multiple used in 42 places.'>textaddr</a>) <em class='brace'>{</em>
+<a id='L345' name='L345'></a> 345                         *<a href='../Y/38738.html' title='Multiple used in 42 places.'>textaddr</a> = <a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>.<a href='../Y/30447.html' title='Multiple used in 96 places.'>outputs</a>.<a href='../Y/38738.html' title='Multiple used in 42 places.'>textaddr</a>;
+<a id='L346' name='L346'></a> 346                         *<a href='../Y/38739.html' title='Multiple used in 33 places.'>textaddrlen</a> = <a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>.<a href='../Y/30447.html' title='Multiple used in 96 places.'>outputs</a>.<a href='../Y/38739.html' title='Multiple used in 33 places.'>textaddrlen</a>;
+<a id='L347' name='L347'></a> 347                 <em class='brace'>}</em>
+<a id='L348' name='L348'></a> 348 
+<a id='L349' name='L349'></a> 349                 <strong class='reserved'>return</strong> <a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>.<a href='../Y/30447.html' title='Multiple used in 96 places.'>outputs</a>.<a href='../Y/35194.html' title='Multiple used in 29 places.'>returncode</a>;
+<a id='L350' name='L350'></a> 350         <em class='brace'>}</em>
+<a id='L351' name='L351'></a> 351         <strong class='reserved'>return</strong> <a href='../Y/35120.html' title='Multiple used in 3931 places.'>ret</a>;
+<a id='L352' name='L352'></a> 352 <em class='brace'>}</em>
+<a id='L353' name='L353'></a> 353 
+<a id='L354' name='L354'></a> 354 <a href='../D/7744.html' title='Multiple defined in 14 places.'>PHPAPI</a> <strong class='reserved'>int</strong> <a href='../R/24865.html' title='Multiple referred from 10 places.'>php_stream_xport_crypto_setup</a>(<a href='../S/1387.html#L98' title='Defined at 98 in main/php_streams.h.'>php_stream</a> *<a href='../S/813.html#L860' title='Defined at 860 in ext/mysqlnd/mysqlnd_structs.h.'>stream</a>, <a href='../S/1413.html#L192' title='Defined at 192 in main/streams/php_stream_transport.h.'>php_stream_xport_crypt_method_t</a> <a href='../Y/14556.html' title='Multiple used in 14 places.'>crypto_method</a>, <a href='../S/1387.html#L98' title='Defined at 98 in main/php_streams.h.'>php_stream</a> *<a href='../Y/36158.html' title='Multiple used in 3 places.'>session_stream</a> <a href='../D/14076.html' title='Multiple defined in 136 places.'>TSRMLS_DC</a>)
+<a id='L355' name='L355'></a> 355 <em class='brace'>{</em>
+<a id='L356' name='L356'></a> 356         <a href='../Y/32919.html' title='Multiple used in 6 places.'>php_stream_xport_crypto_param</a> <a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>;
+<a id='L357' name='L357'></a> 357         <strong class='reserved'>int</strong> <a href='../Y/35120.html' title='Multiple used in 3931 places.'>ret</a>;
+<a id='L358' name='L358'></a> 358 
+<a id='L359' name='L359'></a> 359         <a href='../S/882.html#L378' title='Defined at 378 in ext/pcre/pcrelib/pcre_internal.h.'>memset</a>(&amp;<a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>, 0, <strong class='reserved'>sizeof</strong>(<a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>));
+<a id='L360' name='L360'></a> 360         <a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>.<a href='../D/25213.html' title='Multiple defined in 2 places.'>op</a> = <a href='../S/1413.html#L203' title='Defined at 203 in main/streams/php_stream_transport.h.'>STREAM_XPORT_CRYPTO_OP_SETUP</a>;
+<a id='L361' name='L361'></a> 361         <a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>.<a href='../Y/23391.html' title='Multiple used in 46 places.'>inputs</a>.<a href='../Y/26655.html' title='Multiple used in 513 places.'>method</a> = <a href='../Y/14556.html' title='Multiple used in 14 places.'>crypto_method</a>;
+<a id='L362' name='L362'></a> 362         <a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>.<a href='../Y/23391.html' title='Multiple used in 46 places.'>inputs</a>.<a href='../Y/36125.html' title='Multiple used in 123 places.'>session</a> = <a href='../Y/36158.html' title='Multiple used in 3 places.'>session_stream</a>;
+<a id='L363' name='L363'></a> 363         
+<a id='L364' name='L364'></a> 364         <a href='../Y/35120.html' title='Multiple used in 3931 places.'>ret</a> = <a href='../S/1387.html#L362' title='Defined at 362 in main/php_streams.h.'>php_stream_set_option</a>(<a href='../S/813.html#L860' title='Defined at 860 in ext/mysqlnd/mysqlnd_structs.h.'>stream</a>, <a href='../S/1387.html#L408' title='Defined at 408 in main/php_streams.h.'>PHP_STREAM_OPTION_CRYPTO_API</a>, 0, &amp;<a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>);
+<a id='L365' name='L365'></a> 365 
+<a id='L366' name='L366'></a> 366         <strong class='reserved'>if</strong> (<a href='../Y/35120.html' title='Multiple used in 3931 places.'>ret</a> == <a href='../S/1387.html#L429' title='Defined at 429 in main/php_streams.h.'>PHP_STREAM_OPTION_RETURN_OK</a>) <em class='brace'>{</em>
+<a id='L367' name='L367'></a> 367                 <strong class='reserved'>return</strong> <a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>.<a href='../Y/30447.html' title='Multiple used in 96 places.'>outputs</a>.<a href='../Y/35194.html' title='Multiple used in 29 places.'>returncode</a>;
+<a id='L368' name='L368'></a> 368         <em class='brace'>}</em>
+<a id='L369' name='L369'></a> 369 
+<a id='L370' name='L370'></a> 370         <a href='../S/1368.html#L322' title='Defined at 322 in main/php.h.'>php_error_docref</a>("streams.crypto" <a href='../D/14074.html' title='Multiple defined in 2 places.'>TSRMLS_CC</a>, <a href='../S/1666.html#L26' title='Defined at 26 in Zend/zend_errors.h.'>E_WARNING</a>, "this stream does not support SSL/crypto");
+<a id='L371' name='L371'></a> 371         
+<a id='L372' name='L372'></a> 372         <strong class='reserved'>return</strong> <a href='../Y/35120.html' title='Multiple used in 3931 places.'>ret</a>;
+<a id='L373' name='L373'></a> 373 <em class='brace'>}</em>
+<a id='L374' name='L374'></a> 374 
+<a id='L375' name='L375'></a> 375 <a href='../D/7744.html' title='Multiple defined in 14 places.'>PHPAPI</a> <strong class='reserved'>int</strong> <a href='../R/24864.html' title='Multiple referred from 10 places.'>php_stream_xport_crypto_enable</a>(<a href='../S/1387.html#L98' title='Defined at 98 in main/php_streams.h.'>php_stream</a> *<a href='../S/813.html#L860' title='Defined at 860 in ext/mysqlnd/mysqlnd_structs.h.'>stream</a>, <strong class='reserved'>int</strong> <a href='../Y/8395.html' title='Multiple used in 15 places.'>activate</a> <a href='../D/14076.html' title='Multiple defined in 136 places.'>TSRMLS_DC</a>)
+<a id='L376' name='L376'></a> 376 <em class='brace'>{</em>
+<a id='L377' name='L377'></a> 377         <a href='../Y/32919.html' title='Multiple used in 6 places.'>php_stream_xport_crypto_param</a> <a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>;
+<a id='L378' name='L378'></a> 378         <strong class='reserved'>int</strong> <a href='../Y/35120.html' title='Multiple used in 3931 places.'>ret</a>;
+<a id='L379' name='L379'></a> 379 
+<a id='L380' name='L380'></a> 380         <a href='../S/882.html#L378' title='Defined at 378 in ext/pcre/pcrelib/pcre_internal.h.'>memset</a>(&amp;<a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>, 0, <strong class='reserved'>sizeof</strong>(<a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>));
+<a id='L381' name='L381'></a> 381         <a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>.<a href='../D/25213.html' title='Multiple defined in 2 places.'>op</a> = <a href='../S/1413.html#L204' title='Defined at 204 in main/streams/php_stream_transport.h.'>STREAM_XPORT_CRYPTO_OP_ENABLE</a>;
+<a id='L382' name='L382'></a> 382         <a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>.<a href='../Y/23391.html' title='Multiple used in 46 places.'>inputs</a>.<a href='../Y/8395.html' title='Multiple used in 15 places.'>activate</a> = <a href='../Y/8395.html' title='Multiple used in 15 places.'>activate</a>;
+<a id='L383' name='L383'></a> 383         
+<a id='L384' name='L384'></a> 384         <a href='../Y/35120.html' title='Multiple used in 3931 places.'>ret</a> = <a href='../S/1387.html#L362' title='Defined at 362 in main/php_streams.h.'>php_stream_set_option</a>(<a href='../S/813.html#L860' title='Defined at 860 in ext/mysqlnd/mysqlnd_structs.h.'>stream</a>, <a href='../S/1387.html#L408' title='Defined at 408 in main/php_streams.h.'>PHP_STREAM_OPTION_CRYPTO_API</a>, 0, &amp;<a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>);
+<a id='L385' name='L385'></a> 385 
+<a id='L386' name='L386'></a> 386         <strong class='reserved'>if</strong> (<a href='../Y/35120.html' title='Multiple used in 3931 places.'>ret</a> == <a href='../S/1387.html#L429' title='Defined at 429 in main/php_streams.h.'>PHP_STREAM_OPTION_RETURN_OK</a>) <em class='brace'>{</em>
+<a id='L387' name='L387'></a> 387                 <strong class='reserved'>return</strong> <a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>.<a href='../Y/30447.html' title='Multiple used in 96 places.'>outputs</a>.<a href='../Y/35194.html' title='Multiple used in 29 places.'>returncode</a>;
+<a id='L388' name='L388'></a> 388         <em class='brace'>}</em>
+<a id='L389' name='L389'></a> 389 
+<a id='L390' name='L390'></a> 390         <a href='../S/1368.html#L322' title='Defined at 322 in main/php.h.'>php_error_docref</a>("streams.crypto" <a href='../D/14074.html' title='Multiple defined in 2 places.'>TSRMLS_CC</a>, <a href='../S/1666.html#L26' title='Defined at 26 in Zend/zend_errors.h.'>E_WARNING</a>, "this stream does not support SSL/crypto");
+<a id='L391' name='L391'></a> 391         
+<a id='L392' name='L392'></a> 392         <strong class='reserved'>return</strong> <a href='../Y/35120.html' title='Multiple used in 3931 places.'>ret</a>;
+<a id='L393' name='L393'></a> 393 <em class='brace'>}</em>
+<a id='L394' name='L394'></a> 394 
+<a id='L395' name='L395'></a> 395 <em class='comment'>/* Similar to recv() system call; read data from the stream, optionally</em>
+<a id='L396' name='L396'></a> 396 <em class='comment'> * peeking, optionally retrieving OOB data */</em>
+<a id='L397' name='L397'></a> 397 <a href='../D/7744.html' title='Multiple defined in 14 places.'>PHPAPI</a> <strong class='reserved'>int</strong> <a href='../R/24869.html' title='Multiple referred from 2 places.'>php_stream_xport_recvfrom</a>(<a href='../S/1387.html#L98' title='Defined at 98 in main/php_streams.h.'>php_stream</a> *<a href='../S/813.html#L860' title='Defined at 860 in ext/mysqlnd/mysqlnd_structs.h.'>stream</a>, <strong class='reserved'>char</strong> *<a href='../Y/12847.html' title='Multiple used in 3901 places.'>buf</a>, <a href='../Y/36596.html' title='Multiple used in 2694 places.'>size_t</a> <a href='../Y/12898.html' title='Multiple used in 268 places.'>buflen</a>,
+<a id='L398' name='L398'></a> 398                 <strong class='reserved'>long</strong> <a href='../D/21615.html' title='Multiple defined in 14 places.'>flags</a>, <strong class='reserved'>void</strong> **<a href='../Y/8481.html' title='Multiple used in 834 places.'>addr</a>, <a href='../D/29787.html' title='Multiple defined in 2 places.'>socklen_t</a> *<a href='../Y/8556.html' title='Multiple used in 49 places.'>addrlen</a>, <strong class='reserved'>char</strong> **<a href='../Y/38738.html' title='Multiple used in 42 places.'>textaddr</a>, <strong class='reserved'>int</strong> *<a href='../Y/38739.html' title='Multiple used in 33 places.'>textaddrlen</a>
+<a id='L399' name='L399'></a> 399                 <a href='../D/14076.html' title='Multiple defined in 136 places.'>TSRMLS_DC</a>)
+<a id='L400' name='L400'></a> 400 <em class='brace'>{</em>
+<a id='L401' name='L401'></a> 401         <a href='../Y/32920.html' title='Multiple used in 20 places.'>php_stream_xport_param</a> <a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>;
+<a id='L402' name='L402'></a> 402         <strong class='reserved'>int</strong> <a href='../Y/35120.html' title='Multiple used in 3931 places.'>ret</a> = 0;
+<a id='L403' name='L403'></a> 403         <strong class='reserved'>int</strong> <a href='../Y/34540.html' title='Multiple used in 11 places.'>recvd_len</a> = 0;
+<a id='L404' name='L404'></a> 404 <em class='sharp'>#if</em> 0
+<a id='L405' name='L405'></a> 405         <strong class='reserved'>int</strong> <a href='../Y/29898.html' title='Multiple used in 6 places.'>oob</a>;
+<a id='L406' name='L406'></a> 406 
+<a id='L407' name='L407'></a> 407         <strong class='reserved'>if</strong> (<a href='../D/21615.html' title='Multiple defined in 14 places.'>flags</a> == 0 &amp;&amp; <a href='../Y/8481.html' title='Multiple used in 834 places.'>addr</a> == <a href='../D/6086.html' title='Multiple defined in 8 places.'>NULL</a>) <em class='brace'>{</em>
+<a id='L408' name='L408'></a> 408                 <strong class='reserved'>return</strong> <a href='../S/1387.html#L294' title='Defined at 294 in main/php_streams.h.'>php_stream_read</a>(<a href='../S/813.html#L860' title='Defined at 860 in ext/mysqlnd/mysqlnd_structs.h.'>stream</a>, <a href='../Y/12847.html' title='Multiple used in 3901 places.'>buf</a>, <a href='../Y/12898.html' title='Multiple used in 268 places.'>buflen</a>);
+<a id='L409' name='L409'></a> 409         <em class='brace'>}</em>
+<a id='L410' name='L410'></a> 410 
+<a id='L411' name='L411'></a> 411         <strong class='reserved'>if</strong> (<a href='../S/813.html#L860' title='Defined at 860 in ext/mysqlnd/mysqlnd_structs.h.'>stream</a>-&gt;<a href='../Y/34420.html' title='Multiple used in 19 places.'>readfilters</a>.<a href='../Y/19953.html' title='Multiple used in 331 places.'>head</a>) <em class='brace'>{</em>
+<a id='L412' name='L412'></a> 412                 <a href='../S/1368.html#L322' title='Defined at 322 in main/php.h.'>php_error_docref</a>(<a href='../D/6086.html' title='Multiple defined in 8 places.'>NULL</a> <a href='../D/14074.html' title='Multiple defined in 2 places.'>TSRMLS_CC</a>, <a href='../S/1666.html#L26' title='Defined at 26 in Zend/zend_errors.h.'>E_WARNING</a>, "cannot peek or fetch OOB data from a filtered stream");
+<a id='L413' name='L413'></a> 413                 <strong class='reserved'>return</strong> -1;
+<a id='L414' name='L414'></a> 414         <em class='brace'>}</em>
+<a id='L415' name='L415'></a> 415         
+<a id='L416' name='L416'></a> 416         <a href='../Y/29898.html' title='Multiple used in 6 places.'>oob</a> = (<a href='../D/21615.html' title='Multiple defined in 14 places.'>flags</a> &amp; <a href='../S/1413.html#L97' title='Defined at 97 in main/streams/php_stream_transport.h.'>STREAM_OOB</a>) == <a href='../S/1413.html#L97' title='Defined at 97 in main/streams/php_stream_transport.h.'>STREAM_OOB</a>;
+<a id='L417' name='L417'></a> 417 
+<a id='L418' name='L418'></a> 418         <strong class='reserved'>if</strong> (!<a href='../Y/29898.html' title='Multiple used in 6 places.'>oob</a> &amp;&amp; <a href='../Y/8481.html' title='Multiple used in 834 places.'>addr</a> == <a href='../D/6086.html' title='Multiple defined in 8 places.'>NULL</a>) <em class='brace'>{</em>
+<a id='L419' name='L419'></a> 419                 <em class='comment'>/* must be peeking at regular data; copy content from the buffer</em>
+<a id='L420' name='L420'></a> 420 <em class='comment'>                 * first, then adjust the pointer/len before handing off to the</em>
+<a id='L421' name='L421'></a> 421 <em class='comment'>                 * stream */</em>
+<a id='L422' name='L422'></a> 422                 <a href='../Y/34540.html' title='Multiple used in 11 places.'>recvd_len</a> = <a href='../S/813.html#L860' title='Defined at 860 in ext/mysqlnd/mysqlnd_structs.h.'>stream</a>-&gt;<a href='../Y/41350.html' title='Multiple used in 49 places.'>writepos</a> - <a href='../S/813.html#L860' title='Defined at 860 in ext/mysqlnd/mysqlnd_structs.h.'>stream</a>-&gt;<a href='../Y/34443.html' title='Multiple used in 52 places.'>readpos</a>;
+<a id='L423' name='L423'></a> 423                 <strong class='reserved'>if</strong> (<a href='../Y/34540.html' title='Multiple used in 11 places.'>recvd_len</a> &gt; <a href='../Y/12898.html' title='Multiple used in 268 places.'>buflen</a>) <em class='brace'>{</em>
+<a id='L424' name='L424'></a> 424                         <a href='../Y/34540.html' title='Multiple used in 11 places.'>recvd_len</a> = <a href='../Y/12898.html' title='Multiple used in 268 places.'>buflen</a>;
+<a id='L425' name='L425'></a> 425                 <em class='brace'>}</em>
+<a id='L426' name='L426'></a> 426                 <strong class='reserved'>if</strong> (<a href='../Y/34540.html' title='Multiple used in 11 places.'>recvd_len</a>) <em class='brace'>{</em>
+<a id='L427' name='L427'></a> 427                         <a href='../D/24204.html' title='Multiple defined in 2 places.'>memcpy</a>(<a href='../Y/12847.html' title='Multiple used in 3901 places.'>buf</a>, <a href='../S/813.html#L860' title='Defined at 860 in ext/mysqlnd/mysqlnd_structs.h.'>stream</a>-&gt;<a href='../Y/34408.html' title='Multiple used in 26 places.'>readbuf</a>, <a href='../Y/34540.html' title='Multiple used in 11 places.'>recvd_len</a>);
+<a id='L428' name='L428'></a> 428                         <a href='../Y/12847.html' title='Multiple used in 3901 places.'>buf</a> += <a href='../Y/34540.html' title='Multiple used in 11 places.'>recvd_len</a>;
+<a id='L429' name='L429'></a> 429                         <a href='../Y/12898.html' title='Multiple used in 268 places.'>buflen</a> -= <a href='../Y/34540.html' title='Multiple used in 11 places.'>recvd_len</a>;
+<a id='L430' name='L430'></a> 430                 <em class='brace'>}</em>
+<a id='L431' name='L431'></a> 431                 <em class='comment'>/* if we filled their buffer, return */</em>
+<a id='L432' name='L432'></a> 432                 <strong class='reserved'>if</strong> (<a href='../Y/12898.html' title='Multiple used in 268 places.'>buflen</a> == 0) <em class='brace'>{</em>
+<a id='L433' name='L433'></a> 433                         <strong class='reserved'>return</strong> <a href='../Y/34540.html' title='Multiple used in 11 places.'>recvd_len</a>;
+<a id='L434' name='L434'></a> 434                 <em class='brace'>}</em>
+<a id='L435' name='L435'></a> 435         <em class='brace'>}</em>
+<a id='L436' name='L436'></a> 436 <em class='sharp'>#endif</em>
+<a id='L437' name='L437'></a> 437 
+<a id='L438' name='L438'></a> 438         <em class='comment'>/* otherwise, we are going to bypass the buffer */</em>
+<a id='L439' name='L439'></a> 439         
+<a id='L440' name='L440'></a> 440         <a href='../S/882.html#L378' title='Defined at 378 in ext/pcre/pcrelib/pcre_internal.h.'>memset</a>(&amp;<a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>, 0, <strong class='reserved'>sizeof</strong>(<a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>));
+<a id='L441' name='L441'></a> 441 
+<a id='L442' name='L442'></a> 442         <a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>.<a href='../D/25213.html' title='Multiple defined in 2 places.'>op</a> = <a href='../S/1413.html#L133' title='Defined at 133 in main/streams/php_stream_transport.h.'>STREAM_XPORT_OP_RECV</a>;
+<a id='L443' name='L443'></a> 443         <a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>.<a href='../Y/41102.html' title='Multiple used in 17 places.'>want_addr</a> = <a href='../Y/8481.html' title='Multiple used in 834 places.'>addr</a> ? 1 : 0;
+<a id='L444' name='L444'></a> 444         <a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>.<a href='../Y/41105.html' title='Multiple used in 14 places.'>want_textaddr</a> = <a href='../Y/38738.html' title='Multiple used in 42 places.'>textaddr</a> ? 1 : 0;
+<a id='L445' name='L445'></a> 445         <a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>.<a href='../Y/23391.html' title='Multiple used in 46 places.'>inputs</a>.<a href='../Y/12847.html' title='Multiple used in 3901 places.'>buf</a> = <a href='../Y/12847.html' title='Multiple used in 3901 places.'>buf</a>;
+<a id='L446' name='L446'></a> 446         <a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>.<a href='../Y/23391.html' title='Multiple used in 46 places.'>inputs</a>.<a href='../Y/12898.html' title='Multiple used in 268 places.'>buflen</a> = <a href='../Y/12898.html' title='Multiple used in 268 places.'>buflen</a>;
+<a id='L447' name='L447'></a> 447         <a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>.<a href='../Y/23391.html' title='Multiple used in 46 places.'>inputs</a>.<a href='../D/21615.html' title='Multiple defined in 14 places.'>flags</a> = <a href='../D/21615.html' title='Multiple defined in 14 places.'>flags</a>;
+<a id='L448' name='L448'></a> 448         
+<a id='L449' name='L449'></a> 449         <a href='../Y/35120.html' title='Multiple used in 3931 places.'>ret</a> = <a href='../S/1387.html#L362' title='Defined at 362 in main/php_streams.h.'>php_stream_set_option</a>(<a href='../S/813.html#L860' title='Defined at 860 in ext/mysqlnd/mysqlnd_structs.h.'>stream</a>, <a href='../S/1387.html#L407' title='Defined at 407 in main/php_streams.h.'>PHP_STREAM_OPTION_XPORT_API</a>, 0, &amp;<a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>);
+<a id='L450' name='L450'></a> 450 
+<a id='L451' name='L451'></a> 451         <strong class='reserved'>if</strong> (<a href='../Y/35120.html' title='Multiple used in 3931 places.'>ret</a> == <a href='../S/1387.html#L429' title='Defined at 429 in main/php_streams.h.'>PHP_STREAM_OPTION_RETURN_OK</a>) <em class='brace'>{</em>
+<a id='L452' name='L452'></a> 452                 <strong class='reserved'>if</strong> (<a href='../Y/8481.html' title='Multiple used in 834 places.'>addr</a>) <em class='brace'>{</em>
+<a id='L453' name='L453'></a> 453                         *<a href='../Y/8481.html' title='Multiple used in 834 places.'>addr</a> = <a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>.<a href='../Y/30447.html' title='Multiple used in 96 places.'>outputs</a>.<a href='../Y/8481.html' title='Multiple used in 834 places.'>addr</a>;
+<a id='L454' name='L454'></a> 454                         *<a href='../Y/8556.html' title='Multiple used in 49 places.'>addrlen</a> = <a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>.<a href='../Y/30447.html' title='Multiple used in 96 places.'>outputs</a>.<a href='../Y/8556.html' title='Multiple used in 49 places.'>addrlen</a>;
+<a id='L455' name='L455'></a> 455                 <em class='brace'>}</em>
+<a id='L456' name='L456'></a> 456                 <strong class='reserved'>if</strong> (<a href='../Y/38738.html' title='Multiple used in 42 places.'>textaddr</a>) <em class='brace'>{</em>
+<a id='L457' name='L457'></a> 457                         *<a href='../Y/38738.html' title='Multiple used in 42 places.'>textaddr</a> = <a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>.<a href='../Y/30447.html' title='Multiple used in 96 places.'>outputs</a>.<a href='../Y/38738.html' title='Multiple used in 42 places.'>textaddr</a>;
+<a id='L458' name='L458'></a> 458                         *<a href='../Y/38739.html' title='Multiple used in 33 places.'>textaddrlen</a> = <a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>.<a href='../Y/30447.html' title='Multiple used in 96 places.'>outputs</a>.<a href='../Y/38739.html' title='Multiple used in 33 places.'>textaddrlen</a>;
+<a id='L459' name='L459'></a> 459                 <em class='brace'>}</em>
+<a id='L460' name='L460'></a> 460                 <strong class='reserved'>return</strong> <a href='../Y/34540.html' title='Multiple used in 11 places.'>recvd_len</a> + <a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>.<a href='../Y/30447.html' title='Multiple used in 96 places.'>outputs</a>.<a href='../Y/35194.html' title='Multiple used in 29 places.'>returncode</a>;
+<a id='L461' name='L461'></a> 461         <em class='brace'>}</em>
+<a id='L462' name='L462'></a> 462         <strong class='reserved'>return</strong> <a href='../Y/34540.html' title='Multiple used in 11 places.'>recvd_len</a> ? <a href='../Y/34540.html' title='Multiple used in 11 places.'>recvd_len</a> : -1;
+<a id='L463' name='L463'></a> 463 <em class='brace'>}</em>
+<a id='L464' name='L464'></a> 464 
+<a id='L465' name='L465'></a> 465 <em class='comment'>/* Similar to send() system call; send data to the stream, optionally</em>
+<a id='L466' name='L466'></a> 466 <em class='comment'> * sending it as OOB data */</em>
+<a id='L467' name='L467'></a> 467 <a href='../D/7744.html' title='Multiple defined in 14 places.'>PHPAPI</a> <strong class='reserved'>int</strong> <a href='../R/24871.html' title='Multiple referred from 2 places.'>php_stream_xport_sendto</a>(<a href='../S/1387.html#L98' title='Defined at 98 in main/php_streams.h.'>php_stream</a> *<a href='../S/813.html#L860' title='Defined at 860 in ext/mysqlnd/mysqlnd_structs.h.'>stream</a>, <strong class='reserved'>const</strong> <strong class='reserved'>char</strong> *<a href='../Y/12847.html' title='Multiple used in 3901 places.'>buf</a>, <a href='../Y/36596.html' title='Multiple used in 2694 places.'>size_t</a> <a href='../Y/12898.html' title='Multiple used in 268 places.'>buflen</a>,
+<a id='L468' name='L468'></a> 468                 <strong class='reserved'>long</strong> <a href='../D/21615.html' title='Multiple defined in 14 places.'>flags</a>, <strong class='reserved'>void</strong> *<a href='../Y/8481.html' title='Multiple used in 834 places.'>addr</a>, <a href='../D/29787.html' title='Multiple defined in 2 places.'>socklen_t</a> <a href='../Y/8556.html' title='Multiple used in 49 places.'>addrlen</a> <a href='../D/14076.html' title='Multiple defined in 136 places.'>TSRMLS_DC</a>)
+<a id='L469' name='L469'></a> 469 <em class='brace'>{</em>
+<a id='L470' name='L470'></a> 470         <a href='../Y/32920.html' title='Multiple used in 20 places.'>php_stream_xport_param</a> <a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>;
+<a id='L471' name='L471'></a> 471         <strong class='reserved'>int</strong> <a href='../Y/35120.html' title='Multiple used in 3931 places.'>ret</a> = 0;
+<a id='L472' name='L472'></a> 472         <strong class='reserved'>int</strong> <a href='../Y/29898.html' title='Multiple used in 6 places.'>oob</a>;
+<a id='L473' name='L473'></a> 473 
+<a id='L474' name='L474'></a> 474 <em class='sharp'>#if</em> 0
+<a id='L475' name='L475'></a> 475         <strong class='reserved'>if</strong> (<a href='../D/21615.html' title='Multiple defined in 14 places.'>flags</a> == 0 &amp;&amp; <a href='../Y/8481.html' title='Multiple used in 834 places.'>addr</a> == <a href='../D/6086.html' title='Multiple defined in 8 places.'>NULL</a>) <em class='brace'>{</em>
+<a id='L476' name='L476'></a> 476                 <strong class='reserved'>return</strong> <a href='../S/1387.html#L298' title='Defined at 298 in main/php_streams.h.'>php_stream_write</a>(<a href='../S/813.html#L860' title='Defined at 860 in ext/mysqlnd/mysqlnd_structs.h.'>stream</a>, <a href='../Y/12847.html' title='Multiple used in 3901 places.'>buf</a>, <a href='../Y/12898.html' title='Multiple used in 268 places.'>buflen</a>);
+<a id='L477' name='L477'></a> 477         <em class='brace'>}</em>
+<a id='L478' name='L478'></a> 478 <em class='sharp'>#endif</em>
+<a id='L479' name='L479'></a> 479         
+<a id='L480' name='L480'></a> 480         <a href='../Y/29898.html' title='Multiple used in 6 places.'>oob</a> = (<a href='../D/21615.html' title='Multiple defined in 14 places.'>flags</a> &amp; <a href='../S/1413.html#L97' title='Defined at 97 in main/streams/php_stream_transport.h.'>STREAM_OOB</a>) == <a href='../S/1413.html#L97' title='Defined at 97 in main/streams/php_stream_transport.h.'>STREAM_OOB</a>;
+<a id='L481' name='L481'></a> 481 
+<a id='L482' name='L482'></a> 482         <strong class='reserved'>if</strong> ((<a href='../Y/29898.html' title='Multiple used in 6 places.'>oob</a> || <a href='../Y/8481.html' title='Multiple used in 834 places.'>addr</a>) &amp;&amp; <a href='../S/813.html#L860' title='Defined at 860 in ext/mysqlnd/mysqlnd_structs.h.'>stream</a>-&gt;<a href='../Y/41348.html' title='Multiple used in 24 places.'>writefilters</a>.<a href='../Y/19953.html' title='Multiple used in 331 places.'>head</a>) <em class='brace'>{</em>
+<a id='L483' name='L483'></a> 483                 <a href='../S/1368.html#L322' title='Defined at 322 in main/php.h.'>php_error_docref</a>(<a href='../D/6086.html' title='Multiple defined in 8 places.'>NULL</a> <a href='../D/14074.html' title='Multiple defined in 2 places.'>TSRMLS_CC</a>, <a href='../S/1666.html#L26' title='Defined at 26 in Zend/zend_errors.h.'>E_WARNING</a>, "cannot write OOB data, or data to a targeted address on a filtered stream");
+<a id='L484' name='L484'></a> 484                 <strong class='reserved'>return</strong> -1;
+<a id='L485' name='L485'></a> 485         <em class='brace'>}</em>
+<a id='L486' name='L486'></a> 486         
+<a id='L487' name='L487'></a> 487         <a href='../S/882.html#L378' title='Defined at 378 in ext/pcre/pcrelib/pcre_internal.h.'>memset</a>(&amp;<a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>, 0, <strong class='reserved'>sizeof</strong>(<a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>));
+<a id='L488' name='L488'></a> 488 
+<a id='L489' name='L489'></a> 489         <a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>.<a href='../D/25213.html' title='Multiple defined in 2 places.'>op</a> = <a href='../S/1413.html#L134' title='Defined at 134 in main/streams/php_stream_transport.h.'>STREAM_XPORT_OP_SEND</a>;
+<a id='L490' name='L490'></a> 490         <a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>.<a href='../Y/41102.html' title='Multiple used in 17 places.'>want_addr</a> = <a href='../Y/8481.html' title='Multiple used in 834 places.'>addr</a> ? 1 : 0;
+<a id='L491' name='L491'></a> 491         <a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>.<a href='../Y/23391.html' title='Multiple used in 46 places.'>inputs</a>.<a href='../Y/12847.html' title='Multiple used in 3901 places.'>buf</a> = (<strong class='reserved'>char</strong>*)<a href='../Y/12847.html' title='Multiple used in 3901 places.'>buf</a>;
+<a id='L492' name='L492'></a> 492         <a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>.<a href='../Y/23391.html' title='Multiple used in 46 places.'>inputs</a>.<a href='../Y/12898.html' title='Multiple used in 268 places.'>buflen</a> = <a href='../Y/12898.html' title='Multiple used in 268 places.'>buflen</a>;
+<a id='L493' name='L493'></a> 493         <a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>.<a href='../Y/23391.html' title='Multiple used in 46 places.'>inputs</a>.<a href='../D/21615.html' title='Multiple defined in 14 places.'>flags</a> = <a href='../D/21615.html' title='Multiple defined in 14 places.'>flags</a>;
+<a id='L494' name='L494'></a> 494         <a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>.<a href='../Y/23391.html' title='Multiple used in 46 places.'>inputs</a>.<a href='../Y/8481.html' title='Multiple used in 834 places.'>addr</a> = <a href='../Y/8481.html' title='Multiple used in 834 places.'>addr</a>;
+<a id='L495' name='L495'></a> 495         <a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>.<a href='../Y/23391.html' title='Multiple used in 46 places.'>inputs</a>.<a href='../Y/8556.html' title='Multiple used in 49 places.'>addrlen</a> = <a href='../Y/8556.html' title='Multiple used in 49 places.'>addrlen</a>;
+<a id='L496' name='L496'></a> 496         
+<a id='L497' name='L497'></a> 497         <a href='../Y/35120.html' title='Multiple used in 3931 places.'>ret</a> = <a href='../S/1387.html#L362' title='Defined at 362 in main/php_streams.h.'>php_stream_set_option</a>(<a href='../S/813.html#L860' title='Defined at 860 in ext/mysqlnd/mysqlnd_structs.h.'>stream</a>, <a href='../S/1387.html#L407' title='Defined at 407 in main/php_streams.h.'>PHP_STREAM_OPTION_XPORT_API</a>, 0, &amp;<a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>);
+<a id='L498' name='L498'></a> 498 
+<a id='L499' name='L499'></a> 499         <strong class='reserved'>if</strong> (<a href='../Y/35120.html' title='Multiple used in 3931 places.'>ret</a> == <a href='../S/1387.html#L429' title='Defined at 429 in main/php_streams.h.'>PHP_STREAM_OPTION_RETURN_OK</a>) <em class='brace'>{</em>
+<a id='L500' name='L500'></a> 500                 <strong class='reserved'>return</strong> <a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>.<a href='../Y/30447.html' title='Multiple used in 96 places.'>outputs</a>.<a href='../Y/35194.html' title='Multiple used in 29 places.'>returncode</a>;
+<a id='L501' name='L501'></a> 501         <em class='brace'>}</em>
+<a id='L502' name='L502'></a> 502         <strong class='reserved'>return</strong> -1;
+<a id='L503' name='L503'></a> 503 <em class='brace'>}</em>
+<a id='L504' name='L504'></a> 504 
+<a id='L505' name='L505'></a> 505 <em class='comment'>/* Similar to shutdown() system call; shut down part of a full-duplex</em>
+<a id='L506' name='L506'></a> 506 <em class='comment'> * connection */</em>
+<a id='L507' name='L507'></a> 507 <a href='../D/7744.html' title='Multiple defined in 14 places.'>PHPAPI</a> <strong class='reserved'>int</strong> <a href='../R/24872.html' title='Multiple referred from 3 places.'>php_stream_xport_shutdown</a>(<a href='../S/1387.html#L98' title='Defined at 98 in main/php_streams.h.'>php_stream</a> *<a href='../S/813.html#L860' title='Defined at 860 in ext/mysqlnd/mysqlnd_structs.h.'>stream</a>, <a href='../S/1413.html#L116' title='Defined at 116 in main/streams/php_stream_transport.h.'>stream_shutdown_t</a> <a href='../Y/20116.html' title='Multiple used in 64 places.'>how</a> <a href='../D/14076.html' title='Multiple defined in 136 places.'>TSRMLS_DC</a>)
+<a id='L508' name='L508'></a> 508 <em class='brace'>{</em>
+<a id='L509' name='L509'></a> 509         <a href='../Y/32920.html' title='Multiple used in 20 places.'>php_stream_xport_param</a> <a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>;
+<a id='L510' name='L510'></a> 510         <strong class='reserved'>int</strong> <a href='../Y/35120.html' title='Multiple used in 3931 places.'>ret</a> = 0;
+<a id='L511' name='L511'></a> 511 
+<a id='L512' name='L512'></a> 512         <a href='../S/882.html#L378' title='Defined at 378 in ext/pcre/pcrelib/pcre_internal.h.'>memset</a>(&amp;<a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>, 0, <strong class='reserved'>sizeof</strong>(<a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>));
+<a id='L513' name='L513'></a> 513 
+<a id='L514' name='L514'></a> 514         <a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>.<a href='../D/25213.html' title='Multiple defined in 2 places.'>op</a> = <a href='../S/1413.html#L135' title='Defined at 135 in main/streams/php_stream_transport.h.'>STREAM_XPORT_OP_SHUTDOWN</a>;
+<a id='L515' name='L515'></a> 515         <a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>.<a href='../Y/20116.html' title='Multiple used in 64 places.'>how</a> = <a href='../Y/20116.html' title='Multiple used in 64 places.'>how</a>;
+<a id='L516' name='L516'></a> 516         
+<a id='L517' name='L517'></a> 517         <a href='../Y/35120.html' title='Multiple used in 3931 places.'>ret</a> = <a href='../S/1387.html#L362' title='Defined at 362 in main/php_streams.h.'>php_stream_set_option</a>(<a href='../S/813.html#L860' title='Defined at 860 in ext/mysqlnd/mysqlnd_structs.h.'>stream</a>, <a href='../S/1387.html#L407' title='Defined at 407 in main/php_streams.h.'>PHP_STREAM_OPTION_XPORT_API</a>, 0, &amp;<a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>);
+<a id='L518' name='L518'></a> 518 
+<a id='L519' name='L519'></a> 519         <strong class='reserved'>if</strong> (<a href='../Y/35120.html' title='Multiple used in 3931 places.'>ret</a> == <a href='../S/1387.html#L429' title='Defined at 429 in main/php_streams.h.'>PHP_STREAM_OPTION_RETURN_OK</a>) <em class='brace'>{</em>
+<a id='L520' name='L520'></a> 520                 <strong class='reserved'>return</strong> <a href='../Y/31392.html' title='Multiple used in 1275 places.'>param</a>.<a href='../Y/30447.html' title='Multiple used in 96 places.'>outputs</a>.<a href='../Y/35194.html' title='Multiple used in 29 places.'>returncode</a>;
+<a id='L521' name='L521'></a> 521         <em class='brace'>}</em>
+<a id='L522' name='L522'></a> 522         <strong class='reserved'>return</strong> -1;
+<a id='L523' name='L523'></a> 523 <em class='brace'>}</em>
+<a id='L524' name='L524'></a> 524 
+<a id='L525' name='L525'></a> 525 <em class='comment'>/*</em>
+<a id='L526' name='L526'></a> 526 <em class='comment'> * Local variables:</em>
+<a id='L527' name='L527'></a> 527 <em class='comment'> * tab-width: 4</em>
+<a id='L528' name='L528'></a> 528 <em class='comment'> * c-basic-offset: 4</em>
+<a id='L529' name='L529'></a> 529 <em class='comment'> * End:</em>
+<a id='L530' name='L530'></a> 530 <em class='comment'> * vim600: noet sw=4 ts=4 fdm=marker</em>
+<a id='L531' name='L531'></a> 531 <em class='comment'> * vim&lt;600: noet sw=4 ts=4</em>
+<a id='L532' name='L532'></a> 532 <em class='comment'> */</em>
+</pre>
+<hr />
+<a id='BOTTOM' name='BOTTOM'></a>
+<em class='comment'>/* [&lt;][&gt;]<a href='#L27'>[^]</a><a href='#L507'>[v]</a><a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+</body>
+</html>

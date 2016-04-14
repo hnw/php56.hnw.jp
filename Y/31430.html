@@ -1,0 +1,555 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>params</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/1642.html#L1035'>params</a>           1035 Zend/zend.c    	zval ***params;</span>
+<span class='curline'><a href='../S/1642.html#L1193'>params</a>           1193 Zend/zend.c    			params = (zval ***) emalloc(sizeof(zval **)*5);</span>
+<span class='curline'><a href='../S/1642.html#L1194'>params</a>           1194 Zend/zend.c    			params[0] = &amp;z_error_type;</span>
+<span class='curline'><a href='../S/1642.html#L1195'>params</a>           1195 Zend/zend.c    			params[1] = &amp;z_error_message;</span>
+<span class='curline'><a href='../S/1642.html#L1196'>params</a>           1196 Zend/zend.c    			params[2] = &amp;z_error_filename;</span>
+<span class='curline'><a href='../S/1642.html#L1197'>params</a>           1197 Zend/zend.c    			params[3] = &amp;z_error_lineno;</span>
+<span class='curline'><a href='../S/1642.html#L1198'>params</a>           1198 Zend/zend.c    			params[4] = &amp;z_context;</span>
+<span class='curline'><a href='../S/1642.html#L1223'>params</a>           1223 Zend/zend.c    			if (call_user_function_ex(CG(function_table), NULL, orig_user_error_handler, &amp;retval, 5, params, 1, NULL TSRMLS_CC) == SUCCESS) {</span>
+<span class='curline'><a href='../S/1642.html#L1255'>params</a>           1255 Zend/zend.c    			efree(params);</span>
+<span class='curline'><a href='../S/1642.html#L1346'>params</a>           1346 Zend/zend.c    					zval **params[1], *retval2, *old_exception;</span>
+<span class='curline'><a href='../S/1642.html#L1349'>params</a>           1349 Zend/zend.c    					params[0] = &amp;old_exception;</span>
+<span class='curline'><a href='../S/1642.html#L1351'>params</a>           1351 Zend/zend.c    					if (call_user_function_ex(CG(function_table), NULL, orig_user_exception_handler, &amp;retval2, 1, params, 1, NULL TSRMLS_CC) == SUCCESS) {</span>
+<span class='curline'><a href='../S/1646.html#L3261'>params</a>           3261 Zend/zend_API.c 	fci-&gt;params = NULL;</span>
+<span class='curline'><a href='../S/1646.html#L3271'>params</a>           3271 Zend/zend_API.c 	if (fci-&gt;params) {</span>
+<span class='curline'><a href='../S/1646.html#L3273'>params</a>           3273 Zend/zend_API.c 			efree(fci-&gt;params);</span>
+<span class='curline'><a href='../S/1646.html#L3274'>params</a>           3274 Zend/zend_API.c 			fci-&gt;params = NULL;</span>
+<span class='curline'><a href='../S/1646.html#L3281'>params</a>           3281 Zend/zend_API.c ZEND_API void zend_fcall_info_args_save(zend_fcall_info *fci, int *param_count, zval ****params) /* {{{ */</span>
+<span class='curline'><a href='../S/1646.html#L3284'>params</a>           3284 Zend/zend_API.c 	*params = fci-&gt;params;</span>
+<span class='curline'><a href='../S/1646.html#L3286'>params</a>           3286 Zend/zend_API.c 	fci-&gt;params = NULL;</span>
+<span class='curline'><a href='../S/1646.html#L3290'>params</a>           3290 Zend/zend_API.c ZEND_API void zend_fcall_info_args_restore(zend_fcall_info *fci, int param_count, zval ***params) /* {{{ */</span>
+<span class='curline'><a href='../S/1646.html#L3294'>params</a>           3294 Zend/zend_API.c 	fci-&gt;params = params;</span>
+<span class='curline'><a href='../S/1646.html#L3301'>params</a>           3301 Zend/zend_API.c 	zval **arg, ***params;</span>
+<span class='curline'><a href='../S/1646.html#L3314'>params</a>           3314 Zend/zend_API.c 	fci-&gt;params = params = (zval ***) erealloc(fci-&gt;params, fci-&gt;param_count * sizeof(zval **));</span>
+<span class='curline'><a href='../S/1646.html#L3318'>params</a>           3318 Zend/zend_API.c 		*params++ = arg;</span>
+<span class='curline'><a href='../S/1646.html#L3338'>params</a>           3338 Zend/zend_API.c 		fci-&gt;params = (zval ***) erealloc(fci-&gt;params, fci-&gt;param_count * sizeof(zval **));</span>
+<span class='curline'><a href='../S/1646.html#L3341'>params</a>           3341 Zend/zend_API.c 			fci-&gt;params[i] = argv[i];</span>
+<span class='curline'><a href='../S/1646.html#L3362'>params</a>           3362 Zend/zend_API.c 		fci-&gt;params = (zval ***) erealloc(fci-&gt;params, fci-&gt;param_count * sizeof(zval **));</span>
+<span class='curline'><a href='../S/1646.html#L3366'>params</a>           3366 Zend/zend_API.c 			fci-&gt;params[i] = arg;</span>
+<span class='curline'><a href='../S/1647.html#L50'>params</a>             50 Zend/zend_API.h 	zval ***params;</span>
+<span class='curline'><a href='../S/1647.html#L453'>params</a>            453 Zend/zend_API.h ZEND_API int call_user_function(HashTable *function_table, zval **object_pp, zval *function_name, zval *retval_ptr, zend_uint param_count, zval *params[] TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1647.html#L454'>params</a>            454 Zend/zend_API.h ZEND_API int call_user_function_ex(HashTable *function_table, zval **object_pp, zval *function_name, zval **retval_ptr_ptr, zend_uint param_count, zval **params[], int no_separation, HashTable *symbol_table TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1647.html#L479'>params</a>            479 Zend/zend_API.h ZEND_API void zend_fcall_info_args_save(zend_fcall_info *fci, int *param_count, zval ****params);</span>
+<span class='curline'><a href='../S/1647.html#L483'>params</a>            483 Zend/zend_API.h ZEND_API void zend_fcall_info_args_restore(zend_fcall_info *fci, int param_count, zval ***params);</span>
+<span class='curline'><a href='../S/1644.html#L137'>params</a>            137 Zend/zend_alloc.c static zend_mm_storage* zend_mm_mem_dummy_init(void *params)</span>
+<span class='curline'><a href='../S/1644.html#L202'>params</a>            202 Zend/zend_alloc.c static zend_mm_storage* zend_mm_mem_mmap_zero_init(void *params)</span>
+<span class='curline'><a href='../S/1644.html#L235'>params</a>            235 Zend/zend_alloc.c static zend_mm_storage* zend_mm_mem_win32_init(void *params)</span>
+<span class='curline'><a href='../S/1644.html#L1042'>params</a>           1042 Zend/zend_alloc.c ZEND_API zend_mm_heap *zend_mm_startup_ex(const zend_mm_mem_handlers *handlers, size_t block_size, size_t reserve_size, int internal, void *params)</span>
+<span class='curline'><a href='../S/1644.html#L1087'>params</a>           1087 Zend/zend_alloc.c 	storage = handlers-&gt;init(params);</span>
+<span class='curline'><a href='../S/1645.html#L220'>params</a>            220 Zend/zend_alloc.h 	zend_mm_storage* (*init)(void *params);</span>
+<span class='curline'><a href='../S/1645.html#L233'>params</a>            233 Zend/zend_alloc.h ZEND_API zend_mm_heap *zend_mm_startup_ex(const zend_mm_mem_handlers *handlers, size_t block_size, size_t reserve_size, int internal, void *params);</span>
+<span class='curline'><a href='../S/1655.html#L2740'>params</a>           2740 Zend/zend_compile.c void zend_do_unpack_params(znode *params TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1655.html#L2769'>params</a>           2769 Zend/zend_compile.c 	SET_NODE(opline-&gt;op1, params);</span>
+<span class='curline'><a href='../S/1656.html#L563'>params</a>            563 Zend/zend_compile.h void zend_do_unpack_params(znode *params TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1667.html#L704'>params</a>            704 Zend/zend_exceptions.c 		fci.params = NULL;</span>
+<span class='curline'><a href='../S/1671.html#L575'>params</a>            575 Zend/zend_execute_API.c int call_user_function(HashTable *function_table, zval **object_pp, zval *function_name, zval *retval_ptr, zend_uint param_count, zval *params[] TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1671.html#L585'>params</a>            585 Zend/zend_execute_API.c 			params_array[i] = &amp;params[i];</span>
+<span class='curline'><a href='../S/1671.html#L603'>params</a>            603 Zend/zend_execute_API.c int call_user_function_ex(HashTable *function_table, zval **object_pp, zval *function_name, zval **retval_ptr_ptr, zend_uint param_count, zval **params[], int no_separation, HashTable *symbol_table TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1671.html#L613'>params</a>            613 Zend/zend_execute_API.c 	fci.params = params;</span>
+<span class='curline'><a href='../S/1671.html#L724'>params</a>            724 Zend/zend_execute_API.c 			if (!PZVAL_IS_REF(*fci-&gt;params[i]) &amp;&amp; Z_REFCOUNT_PP(fci-&gt;params[i]) &gt; 1) {</span>
+<span class='curline'><a href='../S/1671.html#L744'>params</a>            744 Zend/zend_execute_API.c 				*new_zval = **fci-&gt;params[i];</span>
+<span class='curline'><a href='../S/1671.html#L747'>params</a>            747 Zend/zend_execute_API.c 				Z_DELREF_PP(fci-&gt;params[i]);</span>
+<span class='curline'><a href='../S/1671.html#L748'>params</a>            748 Zend/zend_execute_API.c 				*fci-&gt;params[i] = new_zval;</span>
+<span class='curline'><a href='../S/1671.html#L750'>params</a>            750 Zend/zend_execute_API.c 			Z_ADDREF_PP(fci-&gt;params[i]);</span>
+<span class='curline'><a href='../S/1671.html#L751'>params</a>            751 Zend/zend_execute_API.c 			Z_SET_ISREF_PP(fci-&gt;params[i]);</span>
+<span class='curline'><a href='../S/1671.html#L752'>params</a>            752 Zend/zend_execute_API.c 			param = *fci-&gt;params[i];</span>
+<span class='curline'><a href='../S/1671.html#L753'>params</a>            753 Zend/zend_execute_API.c 		} else if (PZVAL_IS_REF(*fci-&gt;params[i]) &amp;&amp;</span>
+<span class='curline'><a href='../S/1671.html#L757'>params</a>            757 Zend/zend_execute_API.c 			*param = **(fci-&gt;params[i]);</span>
+<span class='curline'><a href='../S/1671.html#L760'>params</a>            760 Zend/zend_execute_API.c 		} else if (*fci-&gt;params[i] != &amp;EG(uninitialized_zval)) {</span>
+<span class='curline'><a href='../S/1671.html#L761'>params</a>            761 Zend/zend_execute_API.c 			Z_ADDREF_PP(fci-&gt;params[i]);</span>
+<span class='curline'><a href='../S/1671.html#L762'>params</a>            762 Zend/zend_execute_API.c 			param = *fci-&gt;params[i];</span>
+<span class='curline'><a href='../S/1671.html#L765'>params</a>            765 Zend/zend_execute_API.c 			*param = **(fci-&gt;params[i]);</span>
+<span class='curline'><a href='../S/1671.html#L994'>params</a>            994 Zend/zend_execute_API.c 	fcall_info.params = args;</span>
+<span class='curline'><a href='../S/1695.html#L42'>params</a>             42 Zend/zend_interfaces.c 	zval **params[2];</span>
+<span class='curline'><a href='../S/1695.html#L44'>params</a>             44 Zend/zend_interfaces.c 	params[0] = &amp;arg1;</span>
+<span class='curline'><a href='../S/1695.html#L45'>params</a>             45 Zend/zend_interfaces.c 	params[1] = &amp;arg2;</span>
+<span class='curline'><a href='../S/1695.html#L53'>params</a>             53 Zend/zend_interfaces.c 	fci.params = params;</span>
+<span class='curline'><a href='../S/1747.html#L3466'>params</a>           3466 Zend/zend_vm_def.h 	zval **var_ptr, *params;</span>
+<span class='curline'><a href='../S/1747.html#L3472'>params</a>           3472 Zend/zend_vm_def.h 	MAKE_STD_ZVAL(params);</span>
+<span class='curline'><a href='../S/1747.html#L3473'>params</a>           3473 Zend/zend_vm_def.h 	*var_ptr = params;</span>
+<span class='curline'><a href='../S/1747.html#L3476'>params</a>           3476 Zend/zend_vm_def.h 		array_init_size(params, arg_count - arg_num + 1);</span>
+<span class='curline'><a href='../S/1747.html#L3478'>params</a>           3478 Zend/zend_vm_def.h 		array_init(params);</span>
+<span class='curline'><a href='../S/1747.html#L3484'>params</a>           3484 Zend/zend_vm_def.h 		zend_hash_next_index_insert(Z_ARRVAL_P(params), param, sizeof(zval *), NULL);</span>
+<span class='curline'><a href='../S/1748.html#L902'>params</a>            902 Zend/zend_vm_execute.h 	zval **var_ptr, *params;</span>
+<span class='curline'><a href='../S/1748.html#L908'>params</a>            908 Zend/zend_vm_execute.h 	MAKE_STD_ZVAL(params);</span>
+<span class='curline'><a href='../S/1748.html#L909'>params</a>            909 Zend/zend_vm_execute.h 	*var_ptr = params;</span>
+<span class='curline'><a href='../S/1748.html#L912'>params</a>            912 Zend/zend_vm_execute.h 		array_init_size(params, arg_count - arg_num + 1);</span>
+<span class='curline'><a href='../S/1748.html#L914'>params</a>            914 Zend/zend_vm_execute.h 		array_init(params);</span>
+<span class='curline'><a href='../S/1748.html#L920'>params</a>            920 Zend/zend_vm_execute.h 		zend_hash_next_index_insert(Z_ARRVAL_P(params), param, sizeof(zval *), NULL);</span>
+<span class='curline'><a href='../S/54.html#L256'>params</a>            256 ext/com_dotnet/com_wrapper.c 	zval ***params = NULL;</span>
+<span class='curline'><a href='../S/54.html#L268'>params</a>            268 ext/com_dotnet/com_wrapper.c 			params = (zval ***)safe_emalloc(sizeof(zval **), pdp-&gt;cArgs, 0);</span>
+<span class='curline'><a href='../S/54.html#L279'>params</a>            279 ext/com_dotnet/com_wrapper.c 				params[i] = (zval**)emalloc(sizeof(zval**));</span>
+<span class='curline'><a href='../S/54.html#L280'>params</a>            280 ext/com_dotnet/com_wrapper.c 				*params[i] = zarg;</span>
+<span class='curline'><a href='../S/54.html#L292'>params</a>            292 ext/com_dotnet/com_wrapper.c 			zend_update_property(Z_OBJCE_P(disp-&gt;object), disp-&gt;object, Z_STRVAL_PP(name), Z_STRLEN_PP(name)+1, *params[0] TSRMLS_CC);</span>
+<span class='curline'><a href='../S/54.html#L296'>params</a>            296 ext/com_dotnet/com_wrapper.c 							&amp;retval, pdp-&gt;cArgs, params, 1, NULL TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/54.html#L302'>params</a>            302 ext/com_dotnet/com_wrapper.c 						php_com_dotnet_object *obj = CDNO_FETCH(*params[i]);</span>
+<span class='curline'><a href='../S/54.html#L323'>params</a>            323 ext/com_dotnet/com_wrapper.c 		if (params) {</span>
+<span class='curline'><a href='../S/54.html#L325'>params</a>            325 ext/com_dotnet/com_wrapper.c 				zval_ptr_dtor(params[i]);</span>
+<span class='curline'><a href='../S/54.html#L326'>params</a>            326 ext/com_dotnet/com_wrapper.c 				efree(params[i]);</span>
+<span class='curline'><a href='../S/54.html#L328'>params</a>            328 ext/com_dotnet/com_wrapper.c 			efree(params);</span>
+<span class='curline'><a href='../S/60.html#L1341'>params</a>           1341 ext/curl/interface.c 			fci.params = argv;</span>
+<span class='curline'><a href='../S/60.html#L1408'>params</a>           1408 ext/curl/interface.c 			fci.params = argv;</span>
+<span class='curline'><a href='../S/60.html#L1487'>params</a>           1487 ext/curl/interface.c 			fci.params = argv;</span>
+<span class='curline'><a href='../S/60.html#L1562'>params</a>           1562 ext/curl/interface.c 			fci.params = argv;</span>
+<span class='curline'><a href='../S/60.html#L1640'>params</a>           1640 ext/curl/interface.c 			fci.params = argv;</span>
+<span class='curline'><a href='../S/153.html#L118'>params</a>            118 ext/dom/xpath.c 		fci.params = safe_emalloc(fci.param_count, sizeof(zval**), 0);</span>
+<span class='curline'><a href='../S/153.html#L177'>params</a>            177 ext/dom/xpath.c 		fci.params[i] = &amp;args[i];</span>
+<span class='curline'><a href='../S/153.html#L192'>params</a>            192 ext/dom/xpath.c 			efree(fci.params);</span>
+<span class='curline'><a href='../S/153.html#L253'>params</a>            253 ext/dom/xpath.c 		efree(fci.params);</span>
+<span class='curline'><a href='../S/318.html#L2888'>params</a>           2888 ext/iconv/iconv.c static php_stream_filter *php_iconv_stream_filter_factory_create(const char *name, zval *params, int persistent TSRMLS_DC)</span>
+<span class='curline'><a href='../S/320.html#L108'>params</a>            108 ext/imap/php_imap.c 	ZEND_ARG_INFO(0, params)</span>
+<span class='curline'><a href='../S/320.html#L1153'>params</a>           1153 ext/imap/php_imap.c 	zval *params = NULL;</span>
+<span class='curline'><a href='../S/320.html#L1157'>params</a>           1157 ext/imap/php_imap.c 		&amp;passwd, &amp;passwd_len, &amp;flags, &amp;retries, &amp;params) == FAILURE) {</span>
+<span class='curline'><a href='../S/320.html#L1171'>params</a>           1171 ext/imap/php_imap.c 	if (params) {</span>
+<span class='curline'><a href='../S/320.html#L1174'>params</a>           1174 ext/imap/php_imap.c 		if (zend_hash_find(HASH_OF(params), "DISABLE_AUTHENTICATOR", sizeof("DISABLE_AUTHENTICATOR"), (void **)&amp;disabled_auth_method) == SUCCESS) {</span>
+<span class='curline'><a href='../S/363.html#L249'>params</a>            249 ext/intl/converter/converter.c 	objval-&gt;to_cb.params         = zargs;</span>
+<span class='curline'><a href='../S/363.html#L346'>params</a>            346 ext/intl/converter/converter.c 	objval-&gt;from_cb.params         = zargs;</span>
+<span class='curline'><a href='../S/462.html#L2554'>params</a>           2554 ext/ldap/ldap.c int _ldap_rebind_proc(LDAP *ldap, const char *url, ber_tag_t req, ber_int_t msgid, void *params)</span>
+<span class='curline'><a href='../S/462.html#L2561'>params</a>           2561 ext/ldap/ldap.c 	zval *cb_link = (zval *) params;</span>
+<span class='curline'><a href='../S/464.html#L577'>params</a>            577 ext/libxml/libxml.c 						**params[]	= {&amp;public, &amp;system, &amp;ctxzv},</span>
+<span class='curline'><a href='../S/464.html#L617'>params</a>            617 ext/libxml/libxml.c 	fci-&gt;params			= params;</span>
+<span class='curline'><a href='../S/464.html#L618'>params</a>            618 ext/libxml/libxml.c 	fci-&gt;param_count	= sizeof(params)/sizeof(*params);</span>
+<span class='curline'><a href='../S/744.html#L973'>params</a>            973 ext/mbstring/php_mbregex.c 				arg_replace_fci.params = args;</span>
+<span class='curline'><a href='../S/758.html#L2178'>params</a>           2178 ext/mysql/php_mysql.c 			fci.params = NULL;</span>
+<span class='curline'><a href='../S/758.html#L2208'>params</a>           2208 ext/mysql/php_mysql.c 			if (fci.params) {</span>
+<span class='curline'><a href='../S/758.html#L2209'>params</a>           2209 ext/mysql/php_mysql.c 				efree(fci.params);</span>
+<span class='curline'><a href='../S/761.html#L1309'>params</a>           1309 ext/mysqli/mysqli.c 			fci.params = NULL;</span>
+<span class='curline'><a href='../S/761.html#L1339'>params</a>           1339 ext/mysqli/mysqli.c 			if (fci.params) {</span>
+<span class='curline'><a href='../S/761.html#L1340'>params</a>           1340 ext/mysqli/mysqli.c 				efree(fci.params);</span>
+<span class='curline'><a href='../S/762.html#L270'>params</a>            270 ext/mysqli/mysqli_api.c 	MYSQLND_PARAM_BIND	*params;</span>
+<span class='curline'><a href='../S/762.html#L277'>params</a>            277 ext/mysqli/mysqli_api.c 	params = mysqlnd_stmt_alloc_param_bind(stmt-&gt;stmt);</span>
+<span class='curline'><a href='../S/762.html#L278'>params</a>            278 ext/mysqli/mysqli_api.c 	if (!params) {</span>
+<span class='curline'><a href='../S/762.html#L304'>params</a>            304 ext/mysqli/mysqli_api.c 				mysqlnd_stmt_free_param_bind(stmt-&gt;stmt, params);</span>
+<span class='curline'><a href='../S/762.html#L307'>params</a>            307 ext/mysqli/mysqli_api.c 		params[i].zv = *(args[i + start]);</span>
+<span class='curline'><a href='../S/762.html#L308'>params</a>            308 ext/mysqli/mysqli_api.c 		params[i].type = type;</span>
+<span class='curline'><a href='../S/762.html#L310'>params</a>            310 ext/mysqli/mysqli_api.c 	ret = mysqlnd_stmt_bind_param(stmt-&gt;stmt, params);</span>
+<span class='curline'><a href='../S/762.html#L576'>params</a>            576 ext/mysqli/mysqli_api.c 	MYSQLND_RESULT_BIND * params = mysqlnd_stmt_alloc_result_bind(stmt-&gt;stmt);</span>
+<span class='curline'><a href='../S/762.html#L577'>params</a>            577 ext/mysqli/mysqli_api.c 	if (params) {</span>
+<span class='curline'><a href='../S/762.html#L579'>params</a>            579 ext/mysqli/mysqli_api.c 			params[i].zv = *(args[i + start]);</span>
+<span class='curline'><a href='../S/762.html#L581'>params</a>            581 ext/mysqli/mysqli_api.c 		return mysqlnd_stmt_bind_result(stmt-&gt;stmt, params);</span>
+<span class='curline'><a href='../S/762.html#L936'>params</a>            936 ext/mysqli/mysqli_api.c 				switch (stmt-&gt;stmt-&gt;params[i].buffer_type) {</span>
+<span class='curline'><a href='../S/762.html#L943'>params</a>            943 ext/mysqli/mysqli_api.c 						stmt-&gt;stmt-&gt;params[i].buffer = Z_STRVAL_P(the_var);</span>
+<span class='curline'><a href='../S/762.html#L944'>params</a>            944 ext/mysqli/mysqli_api.c 						stmt-&gt;stmt-&gt;params[i].buffer_length = Z_STRLEN_P(the_var);</span>
+<span class='curline'><a href='../S/762.html#L952'>params</a>            952 ext/mysqli/mysqli_api.c 						stmt-&gt;stmt-&gt;params[i].buffer = &amp;Z_DVAL_P(the_var);</span>
+<span class='curline'><a href='../S/762.html#L961'>params</a>            961 ext/mysqli/mysqli_api.c 						stmt-&gt;stmt-&gt;params[i].buffer = &amp;Z_LVAL_P(the_var);</span>
+<span class='curline'><a href='../S/766.html#L249'>params</a>            249 ext/mysqli/mysqli_fe.c 	ZEND_ARG_ARRAY_INFO(0, params, 0)</span>
+<span class='curline'><a href='../S/766.html#L256'>params</a>            256 ext/mysqli/mysqli_fe.c 	ZEND_ARG_ARRAY_INFO(0, params, 0)</span>
+<span class='curline'><a href='../S/824.html#L292'>params</a>            292 ext/oci8/php_oci8_int.h #define PHP_OCI_CALL(func, params)								\</span>
+<span class='curline'><a href='../S/824.html#L295'>params</a>            295 ext/oci8/php_oci8_int.h 		func params;													\</span>
+<span class='curline'><a href='../S/824.html#L299'>params</a>            299 ext/oci8/php_oci8_int.h #define PHP_OCI_CALL_RETURN(__retval, func, params)			\</span>
+<span class='curline'><a href='../S/824.html#L302'>params</a>            302 ext/oci8/php_oci8_int.h 		__retval = func params;											\</span>
+<span class='curline'><a href='../S/827.html#L1290'>params</a>           1290 ext/odbc/php_odbc.c 	params_t *params = NULL;</span>
+<span class='curline'><a href='../S/827.html#L1319'>params</a>           1319 ext/odbc/php_odbc.c 		params = (params_t *)safe_emalloc(sizeof(params_t), result-&gt;numparams, 0);</span>
+<span class='curline'><a href='../S/827.html#L1321'>params</a>           1321 ext/odbc/php_odbc.c 			params[i].fp = -1;</span>
+<span class='curline'><a href='../S/827.html#L1329'>params</a>           1329 ext/odbc/php_odbc.c 					if (params[i].fp != -1) {</span>
+<span class='curline'><a href='../S/827.html#L1330'>params</a>           1330 ext/odbc/php_odbc.c 						close(params[i].fp);</span>
+<span class='curline'><a href='../S/827.html#L1333'>params</a>           1333 ext/odbc/php_odbc.c 				efree(params);</span>
+<span class='curline'><a href='../S/827.html#L1343'>params</a>           1343 ext/odbc/php_odbc.c 					if (params[i].fp != -1) {</span>
+<span class='curline'><a href='../S/827.html#L1344'>params</a>           1344 ext/odbc/php_odbc.c 						close(params[i].fp);</span>
+<span class='curline'><a href='../S/827.html#L1347'>params</a>           1347 ext/odbc/php_odbc.c 				efree(params);</span>
+<span class='curline'><a href='../S/827.html#L1351'>params</a>           1351 ext/odbc/php_odbc.c 			params[i-1].vallen = Z_STRLEN_PP(tmp);</span>
+<span class='curline'><a href='../S/827.html#L1352'>params</a>           1352 ext/odbc/php_odbc.c 			params[i-1].fp = -1;</span>
+<span class='curline'><a href='../S/827.html#L1375'>params</a>           1375 ext/odbc/php_odbc.c 						if (params[i].fp != -1) {</span>
+<span class='curline'><a href='../S/827.html#L1376'>params</a>           1376 ext/odbc/php_odbc.c 							close(params[i].fp);</span>
+<span class='curline'><a href='../S/827.html#L1379'>params</a>           1379 ext/odbc/php_odbc.c 					efree(params);</span>
+<span class='curline'><a href='../S/827.html#L1383'>params</a>           1383 ext/odbc/php_odbc.c 				if ((params[i-1].fp = open(filename,O_RDONLY)) == -1) {</span>
+<span class='curline'><a href='../S/827.html#L1387'>params</a>           1387 ext/odbc/php_odbc.c 						if (params[i].fp != -1) {</span>
+<span class='curline'><a href='../S/827.html#L1388'>params</a>           1388 ext/odbc/php_odbc.c 							close(params[i].fp);</span>
+<span class='curline'><a href='../S/827.html#L1391'>params</a>           1391 ext/odbc/php_odbc.c 					efree(params);</span>
+<span class='curline'><a href='../S/827.html#L1398'>params</a>           1398 ext/odbc/php_odbc.c 				params[i-1].vallen = SQL_LEN_DATA_AT_EXEC(0);</span>
+<span class='curline'><a href='../S/827.html#L1402'>params</a>           1402 ext/odbc/php_odbc.c 									  (void *)params[i-1].fp, 0,</span>
+<span class='curline'><a href='../S/827.html#L1403'>params</a>           1403 ext/odbc/php_odbc.c 									  &amp;params[i-1].vallen);</span>
+<span class='curline'><a href='../S/827.html#L1406'>params</a>           1406 ext/odbc/php_odbc.c 				precision = params[i-1].vallen;</span>
+<span class='curline'><a href='../S/827.html#L1409'>params</a>           1409 ext/odbc/php_odbc.c 					params[i-1].vallen = SQL_NULL_DATA;</span>
+<span class='curline'><a href='../S/827.html#L1415'>params</a>           1415 ext/odbc/php_odbc.c 									  &amp;params[i-1].vallen);</span>
+<span class='curline'><a href='../S/827.html#L1421'>params</a>           1421 ext/odbc/php_odbc.c 					if (params[i].fp != -1) {</span>
+<span class='curline'><a href='../S/827.html#L1422'>params</a>           1422 ext/odbc/php_odbc.c 						close(params[i].fp);</span>
+<span class='curline'><a href='../S/827.html#L1425'>params</a>           1425 ext/odbc/php_odbc.c 				efree(params);</span>
+<span class='curline'><a href='../S/827.html#L1469'>params</a>           1469 ext/odbc/php_odbc.c 			if (params[i].fp != -1) {</span>
+<span class='curline'><a href='../S/827.html#L1470'>params</a>           1470 ext/odbc/php_odbc.c 				close(params[i].fp);</span>
+<span class='curline'><a href='../S/827.html#L1473'>params</a>           1473 ext/odbc/php_odbc.c 		efree(params);</span>
+<span class='curline'><a href='../S/867.html#L1049'>params</a>           1049 ext/openssl/xp_ssl.c 			zval *param, **params[1], *retval;</span>
+<span class='curline'><a href='../S/867.html#L1053'>params</a>           1053 ext/openssl/xp_ssl.c 			params[0] = &amp;param;</span>
+<span class='curline'><a href='../S/867.html#L1057'>params</a>           1057 ext/openssl/xp_ssl.c 			if (FAILURE == call_user_function_ex(EG(function_table), NULL, *val, &amp;retval, 1, params, 0, NULL TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/923.html#L477'>params</a>            477 ext/pdo/pdo_dbh.c 		fci.params = NULL;</span>
+<span class='curline'><a href='../S/923.html#L496'>params</a>            496 ext/pdo/pdo_dbh.c 		if (fci.params) {</span>
+<span class='curline'><a href='../S/923.html#L497'>params</a>            497 ext/pdo/pdo_dbh.c 			efree(fci.params);</span>
+<span class='curline'><a href='../S/924.html#L426'>params</a>            426 ext/pdo/pdo_sql_parser.c 	HashTable *params;</span>
+<span class='curline'><a href='../S/924.html#L492'>params</a>            492 ext/pdo/pdo_sql_parser.c 	params = stmt-&gt;bound_params;</span>
+<span class='curline'><a href='../S/924.html#L495'>params</a>            495 ext/pdo/pdo_sql_parser.c 	if (bindno &amp;&amp; !params &amp;&amp; stmt-&gt;supports_placeholders == PDO_PLACEHOLDER_NONE) {</span>
+<span class='curline'><a href='../S/924.html#L501'>params</a>            501 ext/pdo/pdo_sql_parser.c 	if (params &amp;&amp; bindno != zend_hash_num_elements(params) &amp;&amp; stmt-&gt;supports_placeholders == PDO_PLACEHOLDER_NONE) {</span>
+<span class='curline'><a href='../S/924.html#L503'>params</a>            503 ext/pdo/pdo_sql_parser.c 		if (query_type != PDO_PLACEHOLDER_POSITIONAL &amp;&amp; bindno &gt; zend_hash_num_elements(params)) {</span>
+<span class='curline'><a href='../S/924.html#L506'>params</a>            506 ext/pdo/pdo_sql_parser.c 				if (zend_hash_find(params, plc-&gt;pos, plc-&gt;len, (void**) &amp;param) == FAILURE) {</span>
+<span class='curline'><a href='../S/924.html#L529'>params</a>            529 ext/pdo/pdo_sql_parser.c 				ret = zend_hash_index_find(params, plc-&gt;bindno, (void**) &amp;param);</span>
+<span class='curline'><a href='../S/924.html#L531'>params</a>            531 ext/pdo/pdo_sql_parser.c 				ret = zend_hash_find(params, plc-&gt;pos, plc-&gt;len, (void**) &amp;param);</span>
+<span class='curline'><a href='../S/924.html#L736'>params</a>            736 ext/pdo/pdo_sql_parser.c 	HashTable *params = stmt-&gt;bound_params;</span>
+<span class='curline'><a href='../S/924.html#L747'>params</a>            747 ext/pdo/pdo_sql_parser.c 	if(params) {</span>
+<span class='curline'><a href='../S/924.html#L748'>params</a>            748 ext/pdo/pdo_sql_parser.c 		zend_hash_internal_pointer_reset(params);</span>
+<span class='curline'><a href='../S/924.html#L749'>params</a>            749 ext/pdo/pdo_sql_parser.c 		while (SUCCESS == zend_hash_get_current_data(params, (void**)&amp;param)) {</span>
+<span class='curline'><a href='../S/924.html#L758'>params</a>            758 ext/pdo/pdo_sql_parser.c 			zend_hash_move_forward(params);</span>
+<span class='curline'><a href='../S/924.html#L773'>params</a>            773 ext/pdo/pdo_sql_parser.c 			if(!params) { </span>
+<span class='curline'><a href='../S/924.html#L781'>params</a>            781 ext/pdo/pdo_sql_parser.c 			if((SUCCESS == zend_hash_find(params, s.tok, s.cur-s.tok,(void **)&amp;param))  </span>
+<span class='curline'><a href='../S/924.html#L783'>params</a>            783 ext/pdo/pdo_sql_parser.c 			   (SUCCESS == zend_hash_index_find(params, bindno, (void **)&amp;param))) </span>
+<span class='curline'><a href='../S/924.html#L813'>params</a>            813 ext/pdo/pdo_sql_parser.c 			if(!params) { </span>
+<span class='curline'><a href='../S/924.html#L820'>params</a>            820 ext/pdo/pdo_sql_parser.c 			if(SUCCESS == zend_hash_index_find(params, bindno, (void **)&amp;param)) </span>
+<span class='curline'><a href='../S/926.html#L106'>params</a>            106 ext/pdo/pdo_stmt.c 	ZEND_ARG_INFO(0, params)</span>
+<span class='curline'><a href='../S/926.html#L760'>params</a>            760 ext/pdo/pdo_stmt.c 		fci-&gt;params = NULL;</span>
+<span class='curline'><a href='../S/926.html#L798'>params</a>            798 ext/pdo/pdo_stmt.c 	fci-&gt;params = safe_emalloc(sizeof(zval**), num_args, 0);</span>
+<span class='curline'><a href='../S/926.html#L821'>params</a>            821 ext/pdo/pdo_stmt.c 	if (stmt-&gt;fetch.cls.fci.size &amp;&amp; stmt-&gt;fetch.cls.fci.params) {</span>
+<span class='curline'><a href='../S/926.html#L822'>params</a>            822 ext/pdo/pdo_stmt.c 		efree(stmt-&gt;fetch.cls.fci.params);</span>
+<span class='curline'><a href='../S/926.html#L823'>params</a>            823 ext/pdo/pdo_stmt.c 		stmt-&gt;fetch.cls.fci.params = NULL;</span>
+<span class='curline'><a href='../S/926.html#L1150'>params</a>           1150 ext/pdo/pdo_stmt.c 					stmt-&gt;fetch.cls.fci.params[idx] = &amp;stmt-&gt;fetch.func.values[idx];</span>
+<span class='curline'><a href='../S/941.html#L234'>params</a>            234 ext/pdo_mysql/mysql_driver.c 		S-&gt;params = NULL;</span>
+<span class='curline'><a href='../S/941.html#L236'>params</a>            236 ext/pdo_mysql/mysql_driver.c 		S-&gt;params = ecalloc(S-&gt;num_params, sizeof(MYSQL_BIND));</span>
+<span class='curline'><a href='../S/942.html#L68'>params</a>             68 ext/pdo_mysql/mysql_statement.c 	if (S-&gt;params) {</span>
+<span class='curline'><a href='../S/942.html#L69'>params</a>             69 ext/pdo_mysql/mysql_statement.c 		efree(S-&gt;params);</span>
+<span class='curline'><a href='../S/942.html#L170'>params</a>            170 ext/pdo_mysql/mysql_statement.c 	if (mysql_stmt_bind_param(S-&gt;stmt, S-&gt;params) || mysql_stmt_execute(S-&gt;stmt)) {</span>
+<span class='curline'><a href='../S/942.html#L171'>params</a>            171 ext/pdo_mysql/mysql_statement.c 		if (S-&gt;params) {</span>
+<span class='curline'><a href='../S/942.html#L172'>params</a>            172 ext/pdo_mysql/mysql_statement.c 			memset(S-&gt;params, 0, S-&gt;num_params * sizeof(MYSQL_BIND));</span>
+<span class='curline'><a href='../S/942.html#L470'>params</a>            470 ext/pdo_mysql/mysql_statement.c 				b = &amp;S-&gt;params[param-&gt;paramno];</span>
+<span class='curline'><a href='../S/945.html#L136'>params</a>            136 ext/pdo_mysql/php_pdo_mysql_int.h 	PDO_MYSQL_PARAM_BIND	*params;</span>
+<span class='curline'><a href='../S/948.html#L36'>params</a>             36 ext/pdo_oci/oci_statement.c #define STMT_CALL(name, params)											\</span>
+<span class='curline'><a href='../S/948.html#L38'>params</a>             38 ext/pdo_oci/oci_statement.c 		S-&gt;last_err = name params;										\</span>
+<span class='curline'><a href='../S/948.html#L45'>params</a>             45 ext/pdo_oci/oci_statement.c #define STMT_CALL_MSG(name, msg, params)								\</span>
+<span class='curline'><a href='../S/948.html#L47'>params</a>             47 ext/pdo_oci/oci_statement.c 		S-&gt;last_err = name params;										\</span>
+<span class='curline'><a href='../S/965.html#L384'>params</a>            384 ext/pdo_sqlite/sqlite_driver.c 	fc-&gt;fci.params = zargs;</span>
+<span class='curline'><a href='../S/965.html#L507'>params</a>            507 ext/pdo_sqlite/sqlite_driver.c 	collation-&gt;fc.fci.params = zargs;</span>
+<span class='curline'><a href='../S/967.html#L174'>params</a>            174 ext/pgsql/pgsql.c 	ZEND_ARG_INFO(0, params)</span>
+<span class='curline'><a href='../S/967.html#L190'>params</a>            190 ext/pgsql/pgsql.c 	ZEND_ARG_INFO(0, params)</span>
+<span class='curline'><a href='../S/967.html#L495'>params</a>            495 ext/pgsql/pgsql.c 	ZEND_ARG_INFO(0, params)</span>
+<span class='curline'><a href='../S/967.html#L511'>params</a>            511 ext/pgsql/pgsql.c 	ZEND_ARG_INFO(0, params)</span>
+<span class='curline'><a href='../S/967.html#L1902'>params</a>           1902 ext/pgsql/pgsql.c static void _php_pgsql_free_params(char **params, int num_params)</span>
+<span class='curline'><a href='../S/967.html#L1907'>params</a>           1907 ext/pgsql/pgsql.c 			if (params[i]) {</span>
+<span class='curline'><a href='../S/967.html#L1908'>params</a>           1908 ext/pgsql/pgsql.c 				efree(params[i]);</span>
+<span class='curline'><a href='../S/967.html#L1911'>params</a>           1911 ext/pgsql/pgsql.c 		efree(params);</span>
+<span class='curline'><a href='../S/967.html#L1928'>params</a>           1928 ext/pgsql/pgsql.c 	char **params = NULL;</span>
+<span class='curline'><a href='../S/967.html#L1968'>params</a>           1968 ext/pgsql/pgsql.c 		params = (char **)safe_emalloc(sizeof(char *), num_params, 0);</span>
+<span class='curline'><a href='../S/967.html#L1973'>params</a>           1973 ext/pgsql/pgsql.c 				_php_pgsql_free_params(params, num_params);</span>
+<span class='curline'><a href='../S/967.html#L1978'>params</a>           1978 ext/pgsql/pgsql.c 				params[i] = NULL;</span>
+<span class='curline'><a href='../S/967.html#L1986'>params</a>           1986 ext/pgsql/pgsql.c 					_php_pgsql_free_params(params, num_params);</span>
+<span class='curline'><a href='../S/967.html#L1989'>params</a>           1989 ext/pgsql/pgsql.c 				params[i] = estrndup(Z_STRVAL(tmp_val), Z_STRLEN(tmp_val));</span>
+<span class='curline'><a href='../S/967.html#L1998'>params</a>           1998 ext/pgsql/pgsql.c 					NULL, (const char * const *)params, NULL, NULL, 0);</span>
+<span class='curline'><a href='../S/967.html#L2003'>params</a>           2003 ext/pgsql/pgsql.c 						NULL, (const char * const *)params, NULL, NULL, 0);</span>
+<span class='curline'><a href='../S/967.html#L2012'>params</a>           2012 ext/pgsql/pgsql.c 	_php_pgsql_free_params(params, num_params);</span>
+<span class='curline'><a href='../S/967.html#L2135'>params</a>           2135 ext/pgsql/pgsql.c 	char **params = NULL;</span>
+<span class='curline'><a href='../S/967.html#L2175'>params</a>           2175 ext/pgsql/pgsql.c 		params = (char **)safe_emalloc(sizeof(char *), num_params, 0);</span>
+<span class='curline'><a href='../S/967.html#L2180'>params</a>           2180 ext/pgsql/pgsql.c 				_php_pgsql_free_params(params, num_params);</span>
+<span class='curline'><a href='../S/967.html#L2185'>params</a>           2185 ext/pgsql/pgsql.c 				params[i] = NULL;</span>
+<span class='curline'><a href='../S/967.html#L2193'>params</a>           2193 ext/pgsql/pgsql.c 					_php_pgsql_free_params(params, num_params);</span>
+<span class='curline'><a href='../S/967.html#L2196'>params</a>           2196 ext/pgsql/pgsql.c 				params[i] = estrndup(Z_STRVAL(tmp_val), Z_STRLEN(tmp_val));</span>
+<span class='curline'><a href='../S/967.html#L2205'>params</a>           2205 ext/pgsql/pgsql.c 					(const char * const *)params, NULL, NULL, 0);</span>
+<span class='curline'><a href='../S/967.html#L2210'>params</a>           2210 ext/pgsql/pgsql.c 						(const char * const *)params, NULL, NULL, 0);</span>
+<span class='curline'><a href='../S/967.html#L2219'>params</a>           2219 ext/pgsql/pgsql.c 	_php_pgsql_free_params(params, num_params);</span>
+<span class='curline'><a href='../S/967.html#L2798'>params</a>           2798 ext/pgsql/pgsql.c 			fci.params = NULL;</span>
+<span class='curline'><a href='../S/967.html#L2828'>params</a>           2828 ext/pgsql/pgsql.c 			if (fci.params) {</span>
+<span class='curline'><a href='../S/967.html#L2829'>params</a>           2829 ext/pgsql/pgsql.c 				efree(fci.params);</span>
+<span class='curline'><a href='../S/967.html#L4896'>params</a>           4896 ext/pgsql/pgsql.c 	char **params = NULL;</span>
+<span class='curline'><a href='../S/967.html#L4929'>params</a>           4929 ext/pgsql/pgsql.c 		params = (char **)safe_emalloc(sizeof(char *), num_params, 0);</span>
+<span class='curline'><a href='../S/967.html#L4934'>params</a>           4934 ext/pgsql/pgsql.c 				_php_pgsql_free_params(params, num_params);</span>
+<span class='curline'><a href='../S/967.html#L4939'>params</a>           4939 ext/pgsql/pgsql.c 				params[i] = NULL;</span>
+<span class='curline'><a href='../S/967.html#L4947'>params</a>           4947 ext/pgsql/pgsql.c 					_php_pgsql_free_params(params, num_params);</span>
+<span class='curline'><a href='../S/967.html#L4950'>params</a>           4950 ext/pgsql/pgsql.c 				params[i] = estrndup(Z_STRVAL(tmp_val), Z_STRLEN(tmp_val));</span>
+<span class='curline'><a href='../S/967.html#L4958'>params</a>           4958 ext/pgsql/pgsql.c 	if (PQsendQueryParams(pgsql, query, num_params, NULL, (const char * const *)params, NULL, NULL, 0)) {</span>
+<span class='curline'><a href='../S/967.html#L4959'>params</a>           4959 ext/pgsql/pgsql.c 		_php_pgsql_free_params(params, num_params);</span>
+<span class='curline'><a href='../S/967.html#L4961'>params</a>           4961 ext/pgsql/pgsql.c 		_php_pgsql_free_params(params, num_params);</span>
+<span class='curline'><a href='../S/967.html#L4967'>params</a>           4967 ext/pgsql/pgsql.c 		if (!PQsendQueryParams(pgsql, query, num_params, NULL, (const char * const *)params, NULL, NULL, 0)) {</span>
+<span class='curline'><a href='../S/967.html#L4968'>params</a>           4968 ext/pgsql/pgsql.c 			_php_pgsql_free_params(params, num_params);</span>
+<span class='curline'><a href='../S/967.html#L5083'>params</a>           5083 ext/pgsql/pgsql.c 	char **params = NULL;</span>
+<span class='curline'><a href='../S/967.html#L5116'>params</a>           5116 ext/pgsql/pgsql.c 		params = (char **)safe_emalloc(sizeof(char *), num_params, 0);</span>
+<span class='curline'><a href='../S/967.html#L5121'>params</a>           5121 ext/pgsql/pgsql.c 				_php_pgsql_free_params(params, num_params);</span>
+<span class='curline'><a href='../S/967.html#L5126'>params</a>           5126 ext/pgsql/pgsql.c 				params[i] = NULL;</span>
+<span class='curline'><a href='../S/967.html#L5134'>params</a>           5134 ext/pgsql/pgsql.c 					_php_pgsql_free_params(params, num_params);</span>
+<span class='curline'><a href='../S/967.html#L5137'>params</a>           5137 ext/pgsql/pgsql.c 				params[i] = estrndup(Z_STRVAL(tmp_val), Z_STRLEN(tmp_val));</span>
+<span class='curline'><a href='../S/967.html#L5145'>params</a>           5145 ext/pgsql/pgsql.c 	if (PQsendQueryPrepared(pgsql, stmtname, num_params, (const char * const *)params, NULL, NULL, 0)) {</span>
+<span class='curline'><a href='../S/967.html#L5146'>params</a>           5146 ext/pgsql/pgsql.c 		_php_pgsql_free_params(params, num_params);</span>
+<span class='curline'><a href='../S/967.html#L5148'>params</a>           5148 ext/pgsql/pgsql.c 		_php_pgsql_free_params(params, num_params);</span>
+<span class='curline'><a href='../S/967.html#L5154'>params</a>           5154 ext/pgsql/pgsql.c 		if (!PQsendQueryPrepared(pgsql, stmtname, num_params, (const char * const *)params, NULL, NULL, 0)) {</span>
+<span class='curline'><a href='../S/967.html#L5155'>params</a>           5155 ext/pgsql/pgsql.c 			_php_pgsql_free_params(params, num_params);</span>
+<span class='curline'><a href='../S/975.html#L683'>params</a>            683 ext/phar/phar_object.c 		zval *params, *retval_ptr, **zp[1];</span>
+<span class='curline'><a href='../S/975.html#L685'>params</a>            685 ext/phar/phar_object.c 		MAKE_STD_ZVAL(params);</span>
+<span class='curline'><a href='../S/975.html#L686'>params</a>            686 ext/phar/phar_object.c 		ZVAL_STRINGL(params, entry, entry_len, 1);</span>
+<span class='curline'><a href='../S/975.html#L687'>params</a>            687 ext/phar/phar_object.c 		zp[0] = &amp;params;</span>
+<span class='curline'><a href='../S/975.html#L700'>params</a>            700 ext/phar/phar_object.c 		fci.params = zp;</span>
+<span class='curline'><a href='../S/975.html#L701'>params</a>            701 ext/phar/phar_object.c 		Z_ADDREF_P(params);</span>
+<span class='curline'><a href='../S/984.html#L1453'>params</a>           1453 ext/phar/util.c 	fci.params = zp;</span>
+<span class='curline'><a href='../S/991.html#L493'>params</a>            493 ext/readline/readline.c 	zval *params[3];</span>
+<span class='curline'><a href='../S/991.html#L498'>params</a>            498 ext/readline/readline.c 	params[0]=_readline_string_zval(text);</span>
+<span class='curline'><a href='../S/991.html#L499'>params</a>            499 ext/readline/readline.c 	params[1]=_readline_long_zval(start);</span>
+<span class='curline'><a href='../S/991.html#L500'>params</a>            500 ext/readline/readline.c 	params[2]=_readline_long_zval(end);</span>
+<span class='curline'><a href='../S/991.html#L502'>params</a>            502 ext/readline/readline.c 	if (call_user_function(CG(function_table), NULL, _readline_completion, &amp;_readline_array, 3, params TSRMLS_CC) == SUCCESS) {</span>
+<span class='curline'><a href='../S/991.html#L518'>params</a>            518 ext/readline/readline.c 		zval_ptr_dtor(&amp;params[i]);</span>
+<span class='curline'><a href='../S/991.html#L564'>params</a>            564 ext/readline/readline.c 	zval *params[1];</span>
+<span class='curline'><a href='../S/991.html#L570'>params</a>            570 ext/readline/readline.c 	params[0] = _readline_string_zval(the_line);</span>
+<span class='curline'><a href='../S/991.html#L572'>params</a>            572 ext/readline/readline.c 	call_user_function(CG(function_table), NULL, _prepped_callback, &amp;dummy, 1, params TSRMLS_CC);</span>
+<span class='curline'><a href='../S/991.html#L574'>params</a>            574 ext/readline/readline.c 	zval_ptr_dtor(&amp;params[0]);</span>
+<span class='curline'><a href='../S/996.html#L1401'>params</a>           1401 ext/reflection/php_reflection.c 	zval *retval_ptr, **params[2];</span>
+<span class='curline'><a href='../S/996.html#L1427'>params</a>           1427 ext/reflection/php_reflection.c 	params[0] = &amp;argument_ptr;</span>
+<span class='curline'><a href='../S/996.html#L1428'>params</a>           1428 ext/reflection/php_reflection.c 	params[1] = &amp;argument2_ptr;</span>
+<span class='curline'><a href='../S/996.html#L1437'>params</a>           1437 ext/reflection/php_reflection.c 	fci.params = params;</span>
+<span class='curline'><a href='../S/996.html#L1463'>params</a>           1463 ext/reflection/php_reflection.c 	params[0] = &amp;reflector_ptr;</span>
+<span class='curline'><a href='../S/996.html#L1464'>params</a>           1464 ext/reflection/php_reflection.c 	params[1] = &amp;output_ptr;</span>
+<span class='curline'><a href='../S/996.html#L1472'>params</a>           1472 ext/reflection/php_reflection.c 	fci.params = params;</span>
+<span class='curline'><a href='../S/996.html#L1932'>params</a>           1932 ext/reflection/php_reflection.c 	zval ***params = NULL;</span>
+<span class='curline'><a href='../S/996.html#L1942'>params</a>           1942 ext/reflection/php_reflection.c 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "*", &amp;params, &amp;num_args) == FAILURE) {</span>
+<span class='curline'><a href='../S/996.html#L1953'>params</a>           1953 ext/reflection/php_reflection.c 	fci.params = params;</span>
+<span class='curline'><a href='../S/996.html#L1965'>params</a>           1965 ext/reflection/php_reflection.c 		efree(params);</span>
+<span class='curline'><a href='../S/996.html#L1980'>params</a>           1980 ext/reflection/php_reflection.c static int _zval_array_to_c_array(zval **arg, zval ****params TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/996.html#L1982'>params</a>           1982 ext/reflection/php_reflection.c 	*(*params)++ = arg;</span>
+<span class='curline'><a href='../S/996.html#L1991'>params</a>           1991 ext/reflection/php_reflection.c 	zval ***params;</span>
+<span class='curline'><a href='../S/996.html#L2009'>params</a>           2009 ext/reflection/php_reflection.c 	params = safe_emalloc(sizeof(zval **), argc, 0);</span>
+<span class='curline'><a href='../S/996.html#L2010'>params</a>           2010 ext/reflection/php_reflection.c 	zend_hash_apply_with_argument(Z_ARRVAL_P(param_array), (apply_func_arg_t)_zval_array_to_c_array, &amp;params TSRMLS_CC);</span>
+<span class='curline'><a href='../S/996.html#L2011'>params</a>           2011 ext/reflection/php_reflection.c 	params -= argc;</span>
+<span class='curline'><a href='../S/996.html#L2020'>params</a>           2020 ext/reflection/php_reflection.c 	fci.params = params;</span>
+<span class='curline'><a href='../S/996.html#L2031'>params</a>           2031 ext/reflection/php_reflection.c 	efree(params);</span>
+<span class='curline'><a href='../S/996.html#L2882'>params</a>           2882 ext/reflection/php_reflection.c 	zval ***params = NULL;</span>
+<span class='curline'><a href='../S/996.html#L2913'>params</a>           2913 ext/reflection/php_reflection.c 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "+", &amp;params, &amp;num_args) == FAILURE) {</span>
+<span class='curline'><a href='../S/996.html#L2927'>params</a>           2927 ext/reflection/php_reflection.c 		if (Z_TYPE_PP(params[0]) != IS_OBJECT) {</span>
+<span class='curline'><a href='../S/996.html#L2928'>params</a>           2928 ext/reflection/php_reflection.c 			efree(params);</span>
+<span class='curline'><a href='../S/996.html#L2933'>params</a>           2933 ext/reflection/php_reflection.c 		obj_ce = Z_OBJCE_PP(params[0]);</span>
+<span class='curline'><a href='../S/996.html#L2936'>params</a>           2936 ext/reflection/php_reflection.c 			if (params) {</span>
+<span class='curline'><a href='../S/996.html#L2937'>params</a>           2937 ext/reflection/php_reflection.c 				efree(params);</span>
+<span class='curline'><a href='../S/996.html#L2943'>params</a>           2943 ext/reflection/php_reflection.c 		object_ptr = *params[0];</span>
+<span class='curline'><a href='../S/996.html#L2953'>params</a>           2953 ext/reflection/php_reflection.c 	fci.params = params + 1;</span>
+<span class='curline'><a href='../S/996.html#L2964'>params</a>           2964 ext/reflection/php_reflection.c 	if (params) {</span>
+<span class='curline'><a href='../S/996.html#L2965'>params</a>           2965 ext/reflection/php_reflection.c 		efree(params);</span>
+<span class='curline'><a href='../S/996.html#L2985'>params</a>           2985 ext/reflection/php_reflection.c 	zval ***params;</span>
+<span class='curline'><a href='../S/996.html#L3024'>params</a>           3024 ext/reflection/php_reflection.c 	params = safe_emalloc(sizeof(zval **), argc, 0);</span>
+<span class='curline'><a href='../S/996.html#L3025'>params</a>           3025 ext/reflection/php_reflection.c 	zend_hash_apply_with_argument(Z_ARRVAL_P(param_array), (apply_func_arg_t)_zval_array_to_c_array, &amp;params TSRMLS_CC);</span>
+<span class='curline'><a href='../S/996.html#L3026'>params</a>           3026 ext/reflection/php_reflection.c 	params -= argc;</span>
+<span class='curline'><a href='../S/996.html#L3039'>params</a>           3039 ext/reflection/php_reflection.c 			efree(params);</span>
+<span class='curline'><a href='../S/996.html#L3049'>params</a>           3049 ext/reflection/php_reflection.c 			efree(params);</span>
+<span class='curline'><a href='../S/996.html#L3062'>params</a>           3062 ext/reflection/php_reflection.c 	fci.params = params;</span>
+<span class='curline'><a href='../S/996.html#L3081'>params</a>           3081 ext/reflection/php_reflection.c 	efree(params);</span>
+<span class='curline'><a href='../S/996.html#L4280'>params</a>           4280 ext/reflection/php_reflection.c 		zval ***params = NULL;</span>
+<span class='curline'><a href='../S/996.html#L4291'>params</a>           4291 ext/reflection/php_reflection.c 		if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "*", &amp;params, &amp;num_args) == FAILURE) {</span>
+<span class='curline'><a href='../S/996.html#L4292'>params</a>           4292 ext/reflection/php_reflection.c 			if (params) {</span>
+<span class='curline'><a href='../S/996.html#L4293'>params</a>           4293 ext/reflection/php_reflection.c 				efree(params);</span>
+<span class='curline'><a href='../S/996.html#L4306'>params</a>           4306 ext/reflection/php_reflection.c 		fci.params = params;</span>
+<span class='curline'><a href='../S/996.html#L4316'>params</a>           4316 ext/reflection/php_reflection.c 			if (params) {</span>
+<span class='curline'><a href='../S/996.html#L4317'>params</a>           4317 ext/reflection/php_reflection.c 				efree(params);</span>
+<span class='curline'><a href='../S/996.html#L4329'>params</a>           4329 ext/reflection/php_reflection.c 		if (params) {</span>
+<span class='curline'><a href='../S/996.html#L4330'>params</a>           4330 ext/reflection/php_reflection.c 			efree(params);</span>
+<span class='curline'><a href='../S/996.html#L4388'>params</a>           4388 ext/reflection/php_reflection.c 		zval ***params = NULL;</span>
+<span class='curline'><a href='../S/996.html#L4399'>params</a>           4399 ext/reflection/php_reflection.c 			params = safe_emalloc(sizeof(zval **), argc, 0);</span>
+<span class='curline'><a href='../S/996.html#L4400'>params</a>           4400 ext/reflection/php_reflection.c 			zend_hash_apply_with_argument(args, (apply_func_arg_t)_zval_array_to_c_array, &amp;params TSRMLS_CC);</span>
+<span class='curline'><a href='../S/996.html#L4401'>params</a>           4401 ext/reflection/php_reflection.c 			params -= argc;</span>
+<span class='curline'><a href='../S/996.html#L4411'>params</a>           4411 ext/reflection/php_reflection.c 		fci.params = params;</span>
+<span class='curline'><a href='../S/996.html#L4421'>params</a>           4421 ext/reflection/php_reflection.c 			if (params) {</span>
+<span class='curline'><a href='../S/996.html#L4422'>params</a>           4422 ext/reflection/php_reflection.c 				efree(params);</span>
+<span class='curline'><a href='../S/996.html#L4434'>params</a>           4434 ext/reflection/php_reflection.c 		if (params) {</span>
+<span class='curline'><a href='../S/996.html#L4435'>params</a>           4435 ext/reflection/php_reflection.c 			efree(params);</span>
+<span class='curline'><a href='../S/1020.html#L386'>params</a>            386 ext/soap/php_http.c 			zval *params[3];</span>
+<span class='curline'><a href='../S/1020.html#L389'>params</a>            389 ext/soap/php_http.c 			params[0] = &amp;param1;</span>
+<span class='curline'><a href='../S/1020.html#L390'>params</a>            390 ext/soap/php_http.c 			INIT_PZVAL(params[0]);</span>
+<span class='curline'><a href='../S/1020.html#L391'>params</a>            391 ext/soap/php_http.c 			params[1] = &amp;param2;</span>
+<span class='curline'><a href='../S/1020.html#L392'>params</a>            392 ext/soap/php_http.c 			INIT_PZVAL(params[1]);</span>
+<span class='curline'><a href='../S/1020.html#L393'>params</a>            393 ext/soap/php_http.c 			params[2] = &amp;param3;</span>
+<span class='curline'><a href='../S/1020.html#L394'>params</a>            394 ext/soap/php_http.c 			INIT_PZVAL(params[2]);</span>
+<span class='curline'><a href='../S/1020.html#L395'>params</a>            395 ext/soap/php_http.c 			ZVAL_STRINGL(params[0], buf, buf_size, 0);</span>
+<span class='curline'><a href='../S/1020.html#L396'>params</a>            396 ext/soap/php_http.c 			ZVAL_LONG(params[1], level);</span>
+<span class='curline'><a href='../S/1020.html#L405'>params</a>            405 ext/soap/php_http.c 				ZVAL_LONG(params[2], 0x1f);</span>
+<span class='curline'><a href='../S/1020.html#L407'>params</a>            407 ext/soap/php_http.c 			if (call_user_function(CG(function_table), (zval**)NULL, &amp;func, &amp;retval, n, params TSRMLS_CC) == SUCCESS &amp;&amp;</span>
+<span class='curline'><a href='../S/1020.html#L1253'>params</a>           1253 ext/soap/php_http.c 		zval *params[1];</span>
+<span class='curline'><a href='../S/1020.html#L1259'>params</a>           1259 ext/soap/php_http.c 			params[0] = &amp;param;</span>
+<span class='curline'><a href='../S/1020.html#L1260'>params</a>           1260 ext/soap/php_http.c 			ZVAL_STRINGL(params[0], http_body+10, http_body_size-10, 0);</span>
+<span class='curline'><a href='../S/1020.html#L1261'>params</a>           1261 ext/soap/php_http.c 			INIT_PZVAL(params[0]);</span>
+<span class='curline'><a href='../S/1020.html#L1265'>params</a>           1265 ext/soap/php_http.c 			params[0] = &amp;param;</span>
+<span class='curline'><a href='../S/1020.html#L1266'>params</a>           1266 ext/soap/php_http.c 			ZVAL_STRINGL(params[0], http_body, http_body_size, 0);</span>
+<span class='curline'><a href='../S/1020.html#L1267'>params</a>           1267 ext/soap/php_http.c 			INIT_PZVAL(params[0]);</span>
+<span class='curline'><a href='../S/1020.html#L1278'>params</a>           1278 ext/soap/php_http.c 		if (call_user_function(CG(function_table), (zval**)NULL, &amp;func, &amp;retval, 1, params TSRMLS_CC) == SUCCESS &amp;&amp;</span>
+<span class='curline'><a href='../S/1026.html#L561'>params</a>            561 ext/soap/php_sdl.c static void wsdl_soap_binding_body(sdlCtx* ctx, xmlNodePtr node, char* wsdl_soap_namespace, sdlSoapBindingFunctionBody *binding, HashTable* params)</span>
+<span class='curline'><a href='../S/1026.html#L600'>params</a>            600 ext/soap/php_sdl.c 					zend_hash_internal_pointer_reset_ex(params, &amp;pos);</span>
+<span class='curline'><a href='../S/1026.html#L601'>params</a>            601 ext/soap/php_sdl.c 					while (zend_hash_get_current_data_ex(params, (void **)&amp;param, &amp;pos) != FAILURE) {</span>
+<span class='curline'><a href='../S/1026.html#L612'>params</a>            612 ext/soap/php_sdl.c 						zend_hash_move_forward_ex(params, &amp;pos);</span>
+<span class='curline'><a href='../S/1026.html#L620'>params</a>            620 ext/soap/php_sdl.c 				zend_hash_destroy(params);</span>
+<span class='curline'><a href='../S/1026.html#L621'>params</a>            621 ext/soap/php_sdl.c 				*params = ht;</span>
+<span class='curline'><a href='../S/1026.html#L2509'>params</a>           2509 ext/soap/php_sdl.c static HashTable* make_persistent_sdl_parameters(HashTable *params, HashTable *ptr_map)</span>
+<span class='curline'><a href='../S/1026.html#L2520'>params</a>           2520 ext/soap/php_sdl.c 	zend_hash_init(pparams, zend_hash_num_elements(params), NULL, delete_parameter_persistent, 1);</span>
+<span class='curline'><a href='../S/1026.html#L2522'>params</a>           2522 ext/soap/php_sdl.c 	zend_hash_internal_pointer_reset(params);</span>
+<span class='curline'><a href='../S/1026.html#L2523'>params</a>           2523 ext/soap/php_sdl.c 	while (zend_hash_get_current_data(params, (void**)&amp;tmp) == SUCCESS) {</span>
+<span class='curline'><a href='../S/1026.html#L2545'>params</a>           2545 ext/soap/php_sdl.c 		if (zend_hash_get_current_key_ex(params, &amp;key, &amp;key_len, &amp;index, 0, NULL) == HASH_KEY_IS_STRING) {</span>
+<span class='curline'><a href='../S/1026.html#L2551'>params</a>           2551 ext/soap/php_sdl.c 		zend_hash_move_forward(params);</span>
+<span class='curline'><a href='../S/1031.html#L930'>params</a>            930 ext/soap/soap.c 	fci.params = NULL;</span>
+<span class='curline'><a href='../S/1031.html#L1499'>params</a>           1499 ext/soap/soap.c 	zval function_name, **params, *soap_obj, *retval;</span>
+<span class='curline'><a href='../S/1031.html#L1651'>params</a>           1651 ext/soap/soap.c 	function = deserialize_function_call(service-&gt;sdl, doc_request, service-&gt;actor, &amp;function_name, &amp;num_params, &amp;params, &amp;soap_version, &amp;soap_headers TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1031.html#L1849'>params</a>           1849 ext/soap/soap.c 			call_status = call_user_function(NULL, &amp;soap_obj, &amp;function_name, retval, num_params, params TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1031.html#L1862'>params</a>           1862 ext/soap/soap.c 			call_status = call_user_function(EG(function_table), NULL, &amp;function_name, retval, num_params, params TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1031.html#L1992'>params</a>           1992 ext/soap/soap.c 			zval_ptr_dtor(&amp;params[i]);</span>
+<span class='curline'><a href='../S/1031.html#L1994'>params</a>           1994 ext/soap/soap.c 		efree(params);</span>
+<span class='curline'><a href='../S/1031.html#L2559'>params</a>           2559 ext/soap/soap.c 	zval  *params[5];</span>
+<span class='curline'><a href='../S/1031.html#L2578'>params</a>           2578 ext/soap/soap.c 	ALLOC_INIT_ZVAL(params[0]);</span>
+<span class='curline'><a href='../S/1031.html#L2579'>params</a>           2579 ext/soap/soap.c 	ZVAL_STRINGL(params[0], buf, buf_size, 1);</span>
+<span class='curline'><a href='../S/1031.html#L2580'>params</a>           2580 ext/soap/soap.c 	ALLOC_INIT_ZVAL(params[1]);</span>
+<span class='curline'><a href='../S/1031.html#L2582'>params</a>           2582 ext/soap/soap.c 		ZVAL_NULL(params[1]);</span>
+<span class='curline'><a href='../S/1031.html#L2584'>params</a>           2584 ext/soap/soap.c 		ZVAL_STRING(params[1], location, 1);</span>
+<span class='curline'><a href='../S/1031.html#L2586'>params</a>           2586 ext/soap/soap.c 	ALLOC_INIT_ZVAL(params[2]);</span>
+<span class='curline'><a href='../S/1031.html#L2588'>params</a>           2588 ext/soap/soap.c 		ZVAL_NULL(params[2]);</span>
+<span class='curline'><a href='../S/1031.html#L2590'>params</a>           2590 ext/soap/soap.c 		ZVAL_STRING(params[2], action, 1);</span>
+<span class='curline'><a href='../S/1031.html#L2592'>params</a>           2592 ext/soap/soap.c 	ALLOC_INIT_ZVAL(params[3]);</span>
+<span class='curline'><a href='../S/1031.html#L2593'>params</a>           2593 ext/soap/soap.c 	ZVAL_LONG(params[3], version);</span>
+<span class='curline'><a href='../S/1031.html#L2595'>params</a>           2595 ext/soap/soap.c 	ALLOC_INIT_ZVAL(params[4]);</span>
+<span class='curline'><a href='../S/1031.html#L2596'>params</a>           2596 ext/soap/soap.c 	ZVAL_LONG(params[4], one_way);</span>
+<span class='curline'><a href='../S/1031.html#L2598'>params</a>           2598 ext/soap/soap.c 	if (call_user_function(NULL, &amp;this_ptr, &amp;func, response, 5, params TSRMLS_CC) != SUCCESS) {</span>
+<span class='curline'><a href='../S/1031.html#L2610'>params</a>           2610 ext/soap/soap.c 	zval_ptr_dtor(&amp;params[4]);</span>
+<span class='curline'><a href='../S/1031.html#L2611'>params</a>           2611 ext/soap/soap.c 	zval_ptr_dtor(&amp;params[3]);</span>
+<span class='curline'><a href='../S/1031.html#L2612'>params</a>           2612 ext/soap/soap.c 	zval_ptr_dtor(&amp;params[2]);</span>
+<span class='curline'><a href='../S/1031.html#L2613'>params</a>           2613 ext/soap/soap.c 	zval_ptr_dtor(&amp;params[1]);</span>
+<span class='curline'><a href='../S/1031.html#L2614'>params</a>           2614 ext/soap/soap.c 	zval_ptr_dtor(&amp;params[0]);</span>
+<span class='curline'><a href='../S/1031.html#L3332'>params</a>           3332 ext/soap/soap.c static void deserialize_parameters(xmlNodePtr params, sdlFunctionPtr function, int *num_params, zval ***parameters TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1031.html#L3348'>params</a>           3348 ext/soap/soap.c 			if (get_node(params, (*param)-&gt;paramName) != NULL) {</span>
+<span class='curline'><a href='../S/1031.html#L3357'>params</a>           3357 ext/soap/soap.c 				val = get_node(params, (*param)-&gt;paramName);</span>
+<span class='curline'><a href='../S/1031.html#L3374'>params</a>           3374 ext/soap/soap.c 	if (params) {</span>
+<span class='curline'><a href='../S/1031.html#L3378'>params</a>           3378 ext/soap/soap.c 		trav = params;</span>
+<span class='curline'><a href='../S/1031.html#L3393'>params</a>           3393 ext/soap/soap.c 		    strcmp((char *)params-&gt;name, function-&gt;functionName) == 0) {</span>
+<span class='curline'><a href='../S/1031.html#L3398'>params</a>           3398 ext/soap/soap.c 			trav = params;</span>
+<span class='curline'><a href='../S/1031.html#L4548'>params</a>           4548 ext/soap/soap.c static sdlFunctionPtr get_doc_function(sdlPtr sdl, xmlNodePtr params)</span>
+<span class='curline'><a href='../S/1031.html#L4559'>params</a>           4559 ext/soap/soap.c 					if (params == NULL) {</span>
+<span class='curline'><a href='../S/1031.html#L4567'>params</a>           4567 ext/soap/soap.c 						xmlNodePtr node = params;</span>
+<span class='curline'><a href='../S/1032.html#L71'>params</a>             71 ext/sockets/conversions.c 	HashTable		params; /* stores pointers; has to be first */</span>
+<span class='curline'><a href='../S/1032.html#L79'>params</a>             79 ext/sockets/conversions.c 	HashTable		params; /* stores pointers; has to be first */</span>
+<span class='curline'><a href='../S/1032.html#L997'>params</a>            997 ext/sockets/conversions.c 	if (zend_hash_add(&amp;ctx-&gt;params, KEY_CMSG_LEN, sizeof(KEY_CMSG_LEN),</span>
+<span class='curline'><a href='../S/1032.html#L1005'>params</a>           1005 ext/sockets/conversions.c 	zend_hash_del(&amp;ctx-&gt;params, KEY_CMSG_LEN, sizeof(KEY_CMSG_LEN));</span>
+<span class='curline'><a href='../S/1032.html#L1186'>params</a>           1186 ext/sockets/conversions.c 	if (zend_hash_add(&amp;ctx-&gt;params, KEY_FILL_SOCKADDR, sizeof(KEY_FILL_SOCKADDR),</span>
+<span class='curline'><a href='../S/1032.html#L1194'>params</a>           1194 ext/sockets/conversions.c 	zend_hash_del(&amp;ctx-&gt;params, KEY_FILL_SOCKADDR, sizeof(KEY_FILL_SOCKADDR));</span>
+<span class='curline'><a href='../S/1032.html#L1221'>params</a>           1221 ext/sockets/conversions.c 	if (zend_hash_find(&amp;ctx-&gt;params, KEY_RECVMSG_RET, sizeof(KEY_RECVMSG_RET),</span>
+<span class='curline'><a href='../S/1032.html#L1430'>params</a>           1430 ext/sockets/conversions.c 	if (zend_hash_find(&amp;ctx-&gt;params, KEY_CMSG_LEN, sizeof(KEY_CMSG_LEN),</span>
+<span class='curline'><a href='../S/1032.html#L1496'>params</a>           1496 ext/sockets/conversions.c 	zend_hash_init(&amp;ctx.params, 8, NULL, NULL, 0);</span>
+<span class='curline'><a href='../S/1032.html#L1519'>params</a>           1519 ext/sockets/conversions.c 	zend_hash_destroy(&amp;ctx.params);</span>
+<span class='curline'><a href='../S/1032.html#L1542'>params</a>           1542 ext/sockets/conversions.c 	zend_hash_init(&amp;ctx.params, 8, NULL, NULL, 0);</span>
+<span class='curline'><a href='../S/1032.html#L1544'>params</a>           1544 ext/sockets/conversions.c 		zend_hash_update(&amp;ctx.params, kv-&gt;key, kv-&gt;key_size,</span>
+<span class='curline'><a href='../S/1032.html#L1558'>params</a>           1558 ext/sockets/conversions.c 	zend_hash_destroy(&amp;ctx.params);</span>
+<span class='curline'><a href='../S/1049.html#L2108'>params</a>           2108 ext/spl/spl_directory.c 	zval ***params = (zval***)safe_emalloc(num_args, sizeof(zval**), 0);</span>
+<span class='curline'><a href='../S/1049.html#L2110'>params</a>           2110 ext/spl/spl_directory.c 	params[0] = &amp;zresource_ptr;</span>
+<span class='curline'><a href='../S/1049.html#L2113'>params</a>           2113 ext/spl/spl_directory.c 		params[1] = &amp;arg2;</span>
+<span class='curline'><a href='../S/1049.html#L2116'>params</a>           2116 ext/spl/spl_directory.c 	zend_get_parameters_array_ex(pass_num_args, params+(arg2 ? 2 : 1));</span>
+<span class='curline'><a href='../S/1049.html#L2126'>params</a>           2126 ext/spl/spl_directory.c 	fci.params = params;</span>
+<span class='curline'><a href='../S/1049.html#L2144'>params</a>           2144 ext/spl/spl_directory.c 	efree(params);</span>
+<span class='curline'><a href='../S/1054.html#L72'>params</a>             72 ext/spl/spl_engine.h 	fci.params = argv;</span>
+<span class='curline'><a href='../S/1063.html#L2002'>params</a>           2002 ext/spl/spl_iterators.c 	zval                  **params[3];</span>
+<span class='curline'><a href='../S/1063.html#L2013'>params</a>           2013 ext/spl/spl_iterators.c 	params[0] = &amp;intern-&gt;current.data;</span>
+<span class='curline'><a href='../S/1063.html#L2014'>params</a>           2014 ext/spl/spl_iterators.c 	params[1] = &amp;intern-&gt;current.key;</span>
+<span class='curline'><a href='../S/1063.html#L2015'>params</a>           2015 ext/spl/spl_iterators.c 	params[2] = &amp;intern-&gt;inner.zobject;</span>
+<span class='curline'><a href='../S/1063.html#L2019'>params</a>           2019 ext/spl/spl_iterators.c 	fci-&gt;params = params;</span>
+<span class='curline'><a href='../S/1072.html#L773'>params</a>            773 ext/sqlite3/sqlite3.c 	fc-&gt;fci.params = zargs;</span>
+<span class='curline'><a href='../S/1072.html#L906'>params</a>            906 ext/sqlite3/sqlite3.c 	collation-&gt;fci.fci.params = zargs;</span>
+<span class='curline'><a href='../S/1073.html#L588'>params</a>            588 ext/standard/array.c 	BG(user_compare_fci).params = args;</span>
+<span class='curline'><a href='../S/1073.html#L754'>params</a>            754 ext/standard/array.c 	BG(user_compare_fci).params = args;</span>
+<span class='curline'><a href='../S/1073.html#L1057'>params</a>           1057 ext/standard/array.c 	BG(array_walk_fci).params = args;</span>
+<span class='curline'><a href='../S/1073.html#L2800'>params</a>           2800 ext/standard/array.c 	BG(user_compare_fci).params = args;</span>
+<span class='curline'><a href='../S/1073.html#L4043'>params</a>           4043 ext/standard/array.c 			fci.params = args;</span>
+<span class='curline'><a href='../S/1073.html#L4130'>params</a>           4130 ext/standard/array.c 			fci.params = args;</span>
+<span class='curline'><a href='../S/1073.html#L4170'>params</a>           4170 ext/standard/array.c 	zval ***params;</span>
+<span class='curline'><a href='../S/1073.html#L4219'>params</a>           4219 ext/standard/array.c 	params = (zval ***)safe_emalloc(n_arrays, sizeof(zval **), 0);</span>
+<span class='curline'><a href='../S/1073.html#L4241'>params</a>           4241 ext/standard/array.c 				zend_hash_get_current_data_ex(Z_ARRVAL_P(args[i]), (void **)&amp;params[i], &amp;array_pos[i]);</span>
+<span class='curline'><a href='../S/1073.html#L4250'>params</a>           4250 ext/standard/array.c 				params[i] = &amp;null;</span>
+<span class='curline'><a href='../S/1073.html#L4254'>params</a>           4254 ext/standard/array.c 				zval_add_ref(params[i]);</span>
+<span class='curline'><a href='../S/1073.html#L4255'>params</a>           4255 ext/standard/array.c 				add_next_index_zval(result, *params[i]);</span>
+<span class='curline'><a href='../S/1073.html#L4262'>params</a>           4262 ext/standard/array.c 			fci.params = params;</span>
+<span class='curline'><a href='../S/1073.html#L4272'>params</a>           4272 ext/standard/array.c 				efree(params);</span>
+<span class='curline'><a href='../S/1073.html#L4289'>params</a>           4289 ext/standard/array.c 	efree(params);</span>
+<span class='curline'><a href='../S/1077.html#L712'>params</a>            712 ext/standard/basic_functions.c 	ZEND_ARG_INFO(0, params) /* ARRAY_INFO(0, params, 1) */</span>
+<span class='curline'><a href='../S/1077.html#L2056'>params</a>           2056 ext/standard/basic_functions.c 	ZEND_ARG_INFO(0, params) /* ARRAY_INFO(0, params, 1) */</span>
+<span class='curline'><a href='../S/1077.html#L4755'>params</a>           4755 ext/standard/basic_functions.c 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "f*", &amp;fci, &amp;fci_cache, &amp;fci.params, &amp;fci.param_count) == FAILURE) {</span>
+<span class='curline'><a href='../S/1077.html#L4765'>params</a>           4765 ext/standard/basic_functions.c 	if (fci.params) {</span>
+<span class='curline'><a href='../S/1077.html#L4766'>params</a>           4766 ext/standard/basic_functions.c 		efree(fci.params);</span>
+<span class='curline'><a href='../S/1077.html#L4775'>params</a>           4775 ext/standard/basic_functions.c 	zval *params, *retval_ptr = NULL;</span>
+<span class='curline'><a href='../S/1077.html#L4779'>params</a>           4779 ext/standard/basic_functions.c 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "fa/", &amp;fci, &amp;fci_cache, &amp;params) == FAILURE) {</span>
+<span class='curline'><a href='../S/1077.html#L4783'>params</a>           4783 ext/standard/basic_functions.c 	zend_fcall_info_args(&amp;fci, params TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1077.html#L4798'>params</a>           4798 ext/standard/basic_functions.c 	zval ***params = NULL;</span>
+<span class='curline'><a href='../S/1077.html#L4803'>params</a>           4803 ext/standard/basic_functions.c 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "z/z*", &amp;callback, &amp;object, &amp;params, &amp;n_params) == FAILURE) {</span>
+<span class='curline'><a href='../S/1077.html#L4811'>params</a>           4811 ext/standard/basic_functions.c 		if (params) {</span>
+<span class='curline'><a href='../S/1077.html#L4812'>params</a>           4812 ext/standard/basic_functions.c 			efree(params);</span>
+<span class='curline'><a href='../S/1077.html#L4819'>params</a>           4819 ext/standard/basic_functions.c 	if (call_user_function_ex(EG(function_table), &amp;object, callback, &amp;retval_ptr, n_params, params, 0, NULL TSRMLS_CC) == SUCCESS) {</span>
+<span class='curline'><a href='../S/1077.html#L4827'>params</a>           4827 ext/standard/basic_functions.c 		efree(params);</span>
+<span class='curline'><a href='../S/1077.html#L4836'>params</a>           4836 ext/standard/basic_functions.c 	zval *params, ***method_args = NULL, *retval_ptr;</span>
+<span class='curline'><a href='../S/1077.html#L4841'>params</a>           4841 ext/standard/basic_functions.c 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "z/zA/", &amp;callback, &amp;object, &amp;params) == FAILURE) {</span>
+<span class='curline'><a href='../S/1077.html#L4854'>params</a>           4854 ext/standard/basic_functions.c 	params_ar = HASH_OF(params);</span>
+<span class='curline'><a href='../S/1077.html#L4885'>params</a>           4885 ext/standard/basic_functions.c 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "f*", &amp;fci, &amp;fci_cache, &amp;fci.params, &amp;fci.param_count) == FAILURE) {</span>
+<span class='curline'><a href='../S/1077.html#L4904'>params</a>           4904 ext/standard/basic_functions.c 	if (fci.params) {</span>
+<span class='curline'><a href='../S/1077.html#L4905'>params</a>           4905 ext/standard/basic_functions.c 		efree(fci.params);</span>
+<span class='curline'><a href='../S/1077.html#L4914'>params</a>           4914 ext/standard/basic_functions.c 	zval *params, *retval_ptr = NULL;</span>
+<span class='curline'><a href='../S/1077.html#L4918'>params</a>           4918 ext/standard/basic_functions.c 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "fa/", &amp;fci, &amp;fci_cache, &amp;params) == FAILURE) {</span>
+<span class='curline'><a href='../S/1077.html#L4922'>params</a>           4922 ext/standard/basic_functions.c 	zend_fcall_info_args(&amp;fci, params TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1187.html#L948'>params</a>            948 ext/standard/streamsfuncs.c static int parse_context_params(php_stream_context *context, zval *params TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1187.html#L953'>params</a>            953 ext/standard/streamsfuncs.c 	if (SUCCESS == zend_hash_find(Z_ARRVAL_P(params), "notification", sizeof("notification"), (void**)&amp;tmp)) {</span>
+<span class='curline'><a href='../S/1187.html#L966'>params</a>            966 ext/standard/streamsfuncs.c 	if (SUCCESS == zend_hash_find(Z_ARRVAL_P(params), "options", sizeof("options"), (void**)&amp;tmp)) {</span>
+<span class='curline'><a href='../S/1187.html#L1066'>params</a>           1066 ext/standard/streamsfuncs.c 	zval *params, *zcontext;</span>
+<span class='curline'><a href='../S/1187.html#L1069'>params</a>           1069 ext/standard/streamsfuncs.c 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ra", &amp;zcontext, &amp;params) == FAILURE) {</span>
+<span class='curline'><a href='../S/1187.html#L1079'>params</a>           1079 ext/standard/streamsfuncs.c 	RETVAL_BOOL(parse_context_params(context, params TSRMLS_CC) == SUCCESS);</span>
+<span class='curline'><a href='../S/1187.html#L1115'>params</a>           1115 ext/standard/streamsfuncs.c 	zval *params = NULL;</span>
+<span class='curline'><a href='../S/1187.html#L1118'>params</a>           1118 ext/standard/streamsfuncs.c 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "|a", &amp;params) == FAILURE) {</span>
+<span class='curline'><a href='../S/1187.html#L1127'>params</a>           1127 ext/standard/streamsfuncs.c 	if (params) {</span>
+<span class='curline'><a href='../S/1187.html#L1128'>params</a>           1128 ext/standard/streamsfuncs.c 		parse_context_options(context, params TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1187.html#L1161'>params</a>           1161 ext/standard/streamsfuncs.c 	zval *options = NULL, *params = NULL;</span>
+<span class='curline'><a href='../S/1187.html#L1164'>params</a>           1164 ext/standard/streamsfuncs.c 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "|a!a!", &amp;options, &amp;params) == FAILURE) {</span>
+<span class='curline'><a href='../S/1187.html#L1174'>params</a>           1174 ext/standard/streamsfuncs.c 	if (params) {</span>
+<span class='curline'><a href='../S/1187.html#L1175'>params</a>           1175 ext/standard/streamsfuncs.c 		parse_context_params(context, params TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1224.html#L527'>params</a>            527 ext/xml/xml.c  		fci.params = args;</span>
+<span class='curline'><a href='../S/1235.html#L326'>params</a>            326 ext/xmlrpc/libxmlrpc/system_methods.c             XMLRPC_VALUE params = XMLRPC_VectorGetValueWithID(xMethodIter, "params");</span>
+<span class='curline'><a href='../S/1235.html#L328'>params</a>            328 ext/xmlrpc/libxmlrpc/system_methods.c             if(methodName &amp;&amp; params) {</span>
+<span class='curline'><a href='../S/1235.html#L331'>params</a>            331 ext/xmlrpc/libxmlrpc/system_methods.c                XMLRPC_RequestSetData(request, params);</span>
+<span class='curline'><a href='../S/1243.html#L407'>params</a>            407 ext/xmlrpc/libxmlrpc/xml_to_xmlrpc.c          xml_element* params = xml_elem_new();</span>
+<span class='curline'><a href='../S/1243.html#L408'>params</a>            408 ext/xmlrpc/libxmlrpc/xml_to_xmlrpc.c          params-&gt;name = strdup(ELEM_PARAMS);</span>
+<span class='curline'><a href='../S/1243.html#L409'>params</a>            409 ext/xmlrpc/libxmlrpc/xml_to_xmlrpc.c          Q_PushTail(&amp;wrapper-&gt;children, params);</span>
+<span class='curline'><a href='../S/1253.html#L98'>params</a>             98 ext/xmlrpc/xmlrpc-epi-php.c 	ZEND_ARG_INFO(0, params)</span>
+<span class='curline'><a href='../S/1259.html#L141'>params</a>            141 ext/xsl/xsltprocessor.c 	char **params = NULL;</span>
+<span class='curline'><a href='../S/1259.html#L145'>params</a>            145 ext/xsl/xsltprocessor.c 	params = (char **)safe_emalloc((2 * zend_hash_num_elements(parht) + 1), sizeof(char *), 0);</span>
+<span class='curline'><a href='../S/1259.html#L146'>params</a>            146 ext/xsl/xsltprocessor.c 	memset((char *)params, 0, parsize);</span>
+<span class='curline'><a href='../S/1259.html#L154'>params</a>            154 ext/xsl/xsltprocessor.c 			efree(params);</span>
+<span class='curline'><a href='../S/1259.html#L168'>params</a>            168 ext/xsl/xsltprocessor.c 				params[i++] = string_key;</span>
+<span class='curline'><a href='../S/1259.html#L169'>params</a>            169 ext/xsl/xsltprocessor.c 				params[i++] = xpath_expr;</span>
+<span class='curline'><a href='../S/1259.html#L176'>params</a>            176 ext/xsl/xsltprocessor.c 	params[i++] = NULL;</span>
+<span class='curline'><a href='../S/1259.html#L178'>params</a>            178 ext/xsl/xsltprocessor.c 	return params;</span>
+<span class='curline'><a href='../S/1259.html#L235'>params</a>            235 ext/xsl/xsltprocessor.c 		fci.params = safe_emalloc(fci.param_count, sizeof(zval**), 0);</span>
+<span class='curline'><a href='../S/1259.html#L304'>params</a>            304 ext/xsl/xsltprocessor.c 		fci.params[i] = &amp;args[i];</span>
+<span class='curline'><a href='../S/1259.html#L322'>params</a>            322 ext/xsl/xsltprocessor.c 			efree(fci.params);</span>
+<span class='curline'><a href='../S/1259.html#L384'>params</a>            384 ext/xsl/xsltprocessor.c 		efree(fci.params);</span>
+<span class='curline'><a href='../S/1259.html#L495'>params</a>            495 ext/xsl/xsltprocessor.c 	char **params = NULL;</span>
+<span class='curline'><a href='../S/1259.html#L530'>params</a>            530 ext/xsl/xsltprocessor.c 		params = php_xsl_xslt_make_params(intern-&gt;parameter, 0 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1259.html#L615'>params</a>            615 ext/xsl/xsltprocessor.c 		newdocp = xsltApplyStylesheetUser(style, doc, (const char**) params,  NULL, f, ctxt);</span>
+<span class='curline'><a href='../S/1259.html#L636'>params</a>            636 ext/xsl/xsltprocessor.c 	if (params) {</span>
+<span class='curline'><a href='../S/1259.html#L638'>params</a>            638 ext/xsl/xsltprocessor.c 		while(params[clone]) {</span>
+<span class='curline'><a href='../S/1259.html#L639'>params</a>            639 ext/xsl/xsltprocessor.c 			efree(params[clone++]);</span>
+<span class='curline'><a href='../S/1259.html#L641'>params</a>            641 ext/xsl/xsltprocessor.c 		efree(params);</span>
+<span class='curline'><a href='../S/1364.html#L771'>params</a>            771 main/main.c    PHPAPI void php_verror(const char *docref, const char *params, int type, const char *format, va_list args TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1364.html#L852'>params</a>            852 main/main.c    		origin_len = spprintf(&amp;origin, 0, "%s%s%s(%s)", class_name, space, function, params);</span>
+<span class='curline'><a href='../S/1364.html#L986'>params</a>            986 main/main.c    	char *params;</span>
+<span class='curline'><a href='../S/1364.html#L989'>params</a>            989 main/main.c    	spprintf(&amp;params, 0, "%s,%s", param1, param2);</span>
+<span class='curline'><a href='../S/1364.html#L991'>params</a>            991 main/main.c    	php_verror(docref, params ? params : "...", type, format, args TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1364.html#L993'>params</a>            993 main/main.c    	if (params) {</span>
+<span class='curline'><a href='../S/1364.html#L994'>params</a>            994 main/main.c    		efree(params);</span>
+<span class='curline'><a href='../S/1368.html#L302'>params</a>            302 main/php.h     PHPAPI void php_verror(const char *docref, const char *params, int type, const char *format, va_list args TSRMLS_DC) PHP_ATTRIBUTE_FORMAT(printf, 4, 0);</span>
+<span class='curline'><a href='../S/1419.html#L312'>params</a>            312 main/streams/userspace.c 		fci.params = NULL;</span>
+<span class='curline'><a href='../S/1457.html#L2450'>params</a>           2450 sapi/cli/php_cli_server.c 	php_cli_server_do_event_for_each_fd_callback_params *params = _params;</span>
+<span class='curline'><a href='../S/1457.html#L2452'>params</a>           2452 sapi/cli/php_cli_server.c 	void ***tsrm_ls = params-&gt;tsrm_ls;</span>
+<span class='curline'><a href='../S/1457.html#L2454'>params</a>           2454 sapi/cli/php_cli_server.c 	php_cli_server *server = params-&gt;server;</span>
+<span class='curline'><a href='../S/1457.html#L2492'>params</a>           2492 sapi/cli/php_cli_server.c 				params-&gt;rhandler(server, *client TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1457.html#L2495'>params</a>           2495 sapi/cli/php_cli_server.c 				params-&gt;whandler(server, *client TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1457.html#L2504'>params</a>           2504 sapi/cli/php_cli_server.c 	php_cli_server_do_event_for_each_fd_callback_params params = {</span>
+<span class='curline'><a href='../S/1457.html#L2513'>params</a>           2513 sapi/cli/php_cli_server.c 	php_cli_server_poller_iter_on_active(&amp;server-&gt;poller, &amp;params, php_cli_server_do_event_for_each_fd_callback);</span>
+<span class='curline'><a href='../S/1572.html#L102'>params</a>            102 sapi/phpdbg/phpdbg_prompt.c 				zval params;</span>
+<span class='curline'><a href='../S/1572.html#L105'>params</a>            105 sapi/phpdbg/phpdbg_prompt.c 				array_init(&amp;params);</span>
+<span class='curline'><a href='../S/1572.html#L115'>params</a>            115 sapi/phpdbg/phpdbg_prompt.c 								&amp;params,</span>
+<span class='curline'><a href='../S/1572.html#L121'>params</a>            121 sapi/phpdbg/phpdbg_prompt.c 							add_next_index_long(&amp;params, next-&gt;num);</span>
+<span class='curline'><a href='../S/1572.html#L127'>params</a>            127 sapi/phpdbg/phpdbg_prompt.c 							add_next_index_string(&amp;params, buffered, 0);</span>
+<span class='curline'><a href='../S/1572.html#L133'>params</a>            133 sapi/phpdbg/phpdbg_prompt.c 							add_next_index_string(&amp;params, buffered, 0);</span>
+<span class='curline'><a href='../S/1572.html#L139'>params</a>            139 sapi/phpdbg/phpdbg_prompt.c 							add_next_index_string(&amp;params, buffered, 0);</span>
+<span class='curline'><a href='../S/1572.html#L145'>params</a>            145 sapi/phpdbg/phpdbg_prompt.c 							add_next_index_string(&amp;params, buffered, 0);</span>
+<span class='curline'><a href='../S/1572.html#L151'>params</a>            151 sapi/phpdbg/phpdbg_prompt.c 							add_next_index_string(&amp;params, buffered, 0);</span>
+<span class='curline'><a href='../S/1572.html#L162'>params</a>            162 sapi/phpdbg/phpdbg_prompt.c 				zend_fcall_info_args(&amp;fci, &amp;params TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1572.html#L164'>params</a>            164 sapi/phpdbg/phpdbg_prompt.c 				fci.params = NULL;</span>
+<span class='curline'><a href='../S/1572.html#L557'>params</a>            557 sapi/phpdbg/phpdbg_prompt.c 	fci.params = NULL;</span>
+</pre>
+</body>
+</html>

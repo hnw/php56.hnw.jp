@@ -1,0 +1,222 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>property_info</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/1646.html#L3427'>property_info</a>    3427 Zend/zend_API.c 	zend_property_info property_info, *property_info_ptr;</span>
+<span class='curline'><a href='../S/1646.html#L3437'>property_info</a>    3437 Zend/zend_API.c 			property_info.offset = property_info_ptr-&gt;offset;</span>
+<span class='curline'><a href='../S/1646.html#L3438'>property_info</a>    3438 Zend/zend_API.c 			zval_ptr_dtor(&amp;ce-&gt;default_static_members_table[property_info.offset]);</span>
+<span class='curline'><a href='../S/1646.html#L3441'>property_info</a>    3441 Zend/zend_API.c 			property_info.offset = ce-&gt;default_static_members_count++;</span>
+<span class='curline'><a href='../S/1646.html#L3444'>property_info</a>    3444 Zend/zend_API.c 		ce-&gt;default_static_members_table[property_info.offset] = property;</span>
+<span class='curline'><a href='../S/1646.html#L3451'>property_info</a>    3451 Zend/zend_API.c 			property_info.offset = property_info_ptr-&gt;offset;</span>
+<span class='curline'><a href='../S/1646.html#L3452'>property_info</a>    3452 Zend/zend_API.c 			zval_ptr_dtor(&amp;ce-&gt;default_properties_table[property_info.offset]);</span>
+<span class='curline'><a href='../S/1646.html#L3455'>property_info</a>    3455 Zend/zend_API.c 			property_info.offset = ce-&gt;default_properties_count++;</span>
+<span class='curline'><a href='../S/1646.html#L3458'>property_info</a>    3458 Zend/zend_API.c 		ce-&gt;default_properties_table[property_info.offset] = property;</span>
+<span class='curline'><a href='../S/1646.html#L3477'>property_info</a>    3477 Zend/zend_API.c 				property_info.name = priv_name;</span>
+<span class='curline'><a href='../S/1646.html#L3478'>property_info</a>    3478 Zend/zend_API.c 				property_info.name_length = priv_name_length;</span>
+<span class='curline'><a href='../S/1646.html#L3486'>property_info</a>    3486 Zend/zend_API.c 				property_info.name = prot_name;</span>
+<span class='curline'><a href='../S/1646.html#L3487'>property_info</a>    3487 Zend/zend_API.c 				property_info.name_length = prot_name_length;</span>
+<span class='curline'><a href='../S/1646.html#L3492'>property_info</a>    3492 Zend/zend_API.c 				property_info.name = (char*)name;</span>
+<span class='curline'><a href='../S/1646.html#L3494'>property_info</a>    3494 Zend/zend_API.c 				property_info.name = ce-&gt;type &amp; ZEND_INTERNAL_CLASS ? zend_strndup(name, name_length) : estrndup(name, name_length);</span>
+<span class='curline'><a href='../S/1646.html#L3496'>property_info</a>    3496 Zend/zend_API.c 			property_info.name_length = name_length;</span>
+<span class='curline'><a href='../S/1646.html#L3500'>property_info</a>    3500 Zend/zend_API.c 	interned_name = zend_new_interned_string(property_info.name, property_info.name_length+1, 0 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1646.html#L3501'>property_info</a>    3501 Zend/zend_API.c 	if (interned_name != property_info.name) {</span>
+<span class='curline'><a href='../S/1646.html#L3503'>property_info</a>    3503 Zend/zend_API.c 			efree((char*)property_info.name);</span>
+<span class='curline'><a href='../S/1646.html#L3505'>property_info</a>    3505 Zend/zend_API.c 			free((char*)property_info.name);</span>
+<span class='curline'><a href='../S/1646.html#L3507'>property_info</a>    3507 Zend/zend_API.c 		property_info.name = interned_name;</span>
+<span class='curline'><a href='../S/1646.html#L3510'>property_info</a>    3510 Zend/zend_API.c 	property_info.flags = access_type;</span>
+<span class='curline'><a href='../S/1646.html#L3511'>property_info</a>    3511 Zend/zend_API.c 	property_info.h = (access_type &amp; ZEND_ACC_PUBLIC) ? h : zend_get_hash_value(property_info.name, property_info.name_length+1);</span>
+<span class='curline'><a href='../S/1646.html#L3513'>property_info</a>    3513 Zend/zend_API.c 	property_info.doc_comment = doc_comment;</span>
+<span class='curline'><a href='../S/1646.html#L3514'>property_info</a>    3514 Zend/zend_API.c 	property_info.doc_comment_len = doc_comment_len;</span>
+<span class='curline'><a href='../S/1646.html#L3516'>property_info</a>    3516 Zend/zend_API.c 	property_info.ce = ce;</span>
+<span class='curline'><a href='../S/1646.html#L3518'>property_info</a>    3518 Zend/zend_API.c 	zend_hash_quick_update(&amp;ce-&gt;properties_info, name, name_length+1, h, &amp;property_info, sizeof(zend_property_info), NULL);</span>
+<span class='curline'><a href='../S/1651.html#L1185'>property_info</a>    1185 Zend/zend_builtin_functions.c 	zend_property_info *property_info;</span>
+<span class='curline'><a href='../S/1651.html#L1210'>property_info</a>    1210 Zend/zend_builtin_functions.c 	if (zend_hash_quick_find(&amp;ce-&gt;properties_info, property, property_len+1, h, (void **) &amp;property_info) == SUCCESS</span>
+<span class='curline'><a href='../S/1651.html#L1211'>property_info</a>    1211 Zend/zend_builtin_functions.c 		&amp;&amp; (property_info-&gt;flags &amp; ZEND_ACC_SHADOW) == 0) {</span>
+<span class='curline'><a href='../S/1655.html#L112'>property_info</a>     112 Zend/zend_compile.c static void zend_duplicate_property_info(zend_property_info *property_info) /* {{{ */</span>
+<span class='curline'><a href='../S/1655.html#L114'>property_info</a>     114 Zend/zend_compile.c 	property_info-&gt;name = str_estrndup(property_info-&gt;name, property_info-&gt;name_length);</span>
+<span class='curline'><a href='../S/1655.html#L115'>property_info</a>     115 Zend/zend_compile.c 	if (property_info-&gt;doc_comment) {</span>
+<span class='curline'><a href='../S/1655.html#L116'>property_info</a>     116 Zend/zend_compile.c 		property_info-&gt;doc_comment = estrndup(property_info-&gt;doc_comment, property_info-&gt;doc_comment_len);</span>
+<span class='curline'><a href='../S/1655.html#L121'>property_info</a>     121 Zend/zend_compile.c static void zend_duplicate_property_info_internal(zend_property_info *property_info) /* {{{ */</span>
+<span class='curline'><a href='../S/1655.html#L123'>property_info</a>     123 Zend/zend_compile.c 	property_info-&gt;name = str_strndup(property_info-&gt;name, property_info-&gt;name_length);</span>
+<span class='curline'><a href='../S/1655.html#L127'>property_info</a>     127 Zend/zend_compile.c static void zend_destroy_property_info(zend_property_info *property_info) /* {{{ */</span>
+<span class='curline'><a href='../S/1655.html#L129'>property_info</a>     129 Zend/zend_compile.c 	str_efree(property_info-&gt;name);</span>
+<span class='curline'><a href='../S/1655.html#L130'>property_info</a>     130 Zend/zend_compile.c 	if (property_info-&gt;doc_comment) {</span>
+<span class='curline'><a href='../S/1655.html#L131'>property_info</a>     131 Zend/zend_compile.c 		efree((char*)property_info-&gt;doc_comment);</span>
+<span class='curline'><a href='../S/1655.html#L136'>property_info</a>     136 Zend/zend_compile.c static void zend_destroy_property_info_internal(zend_property_info *property_info) /* {{{ */</span>
+<span class='curline'><a href='../S/1655.html#L138'>property_info</a>     138 Zend/zend_compile.c 	str_free((char*)property_info-&gt;name);</span>
+<span class='curline'><a href='../S/1655.html#L3751'>property_info</a>    3751 Zend/zend_compile.c 	zend_property_info *property_info;</span>
+<span class='curline'><a href='../S/1655.html#L3847'>property_info</a>    3847 Zend/zend_compile.c 	zend_hash_get_current_data(&amp;ce-&gt;properties_info, (void *) &amp;property_info) == SUCCESS;</span>
+<span class='curline'><a href='../S/1655.html#L3849'>property_info</a>    3849 Zend/zend_compile.c 		if (property_info-&gt;ce == ce) {</span>
+<span class='curline'><a href='../S/1655.html#L3850'>property_info</a>    3850 Zend/zend_compile.c 			if (property_info-&gt;flags &amp; ZEND_ACC_STATIC) {</span>
+<span class='curline'><a href='../S/1655.html#L3851'>property_info</a>    3851 Zend/zend_compile.c 				property_info-&gt;offset += parent_ce-&gt;default_static_members_count;</span>
+<span class='curline'><a href='../S/1655.html#L3853'>property_info</a>    3853 Zend/zend_compile.c 				property_info-&gt;offset += parent_ce-&gt;default_properties_count;</span>
+<span class='curline'><a href='../S/1655.html#L4412'>property_info</a>    4412 Zend/zend_compile.c 	zend_property_info *property_info;</span>
+<span class='curline'><a href='../S/1655.html#L4431'>property_info</a>    4431 Zend/zend_compile.c 			 zend_hash_get_current_data(&amp;ce-&gt;traits[i]-&gt;properties_info, (void *) &amp;property_info) == SUCCESS;</span>
+<span class='curline'><a href='../S/1655.html#L4436'>property_info</a>    4436 Zend/zend_compile.c 			flags = property_info-&gt;flags;</span>
+<span class='curline'><a href='../S/1655.html#L4438'>property_info</a>    4438 Zend/zend_compile.c 				prop_hash = property_info-&gt;h;</span>
+<span class='curline'><a href='../S/1655.html#L4439'>property_info</a>    4439 Zend/zend_compile.c 				prop_name = property_info-&gt;name;</span>
+<span class='curline'><a href='../S/1655.html#L4440'>property_info</a>    4440 Zend/zend_compile.c 				prop_name_length = property_info-&gt;name_length;</span>
+<span class='curline'><a href='../S/1655.html#L4443'>property_info</a>    4443 Zend/zend_compile.c 				zend_unmangle_property_name_ex(property_info-&gt;name, property_info-&gt;name_length,</span>
+<span class='curline'><a href='../S/1655.html#L4460'>property_info</a>    4460 Zend/zend_compile.c 											  ce-&gt;traits[i]-&gt;default_static_members_table[property_info-&gt;offset] TSRMLS_CC))</span>
+<span class='curline'><a href='../S/1655.html#L4465'>property_info</a>    4465 Zend/zend_compile.c 											  ce-&gt;traits[i]-&gt;default_properties_table[property_info-&gt;offset] TSRMLS_CC))</span>
+<span class='curline'><a href='../S/1655.html#L4477'>property_info</a>    4477 Zend/zend_compile.c 								property_info-&gt;ce-&gt;name,</span>
+<span class='curline'><a href='../S/1655.html#L4484'>property_info</a>    4484 Zend/zend_compile.c 								property_info-&gt;ce-&gt;name,</span>
+<span class='curline'><a href='../S/1655.html#L4494'>property_info</a>    4494 Zend/zend_compile.c 				prop_value = ce-&gt;traits[i]-&gt;default_static_members_table[property_info-&gt;offset];</span>
+<span class='curline'><a href='../S/1655.html#L4496'>property_info</a>    4496 Zend/zend_compile.c 				prop_value = ce-&gt;traits[i]-&gt;default_properties_table[property_info-&gt;offset];</span>
+<span class='curline'><a href='../S/1655.html#L4500'>property_info</a>    4500 Zend/zend_compile.c 			doc_comment = property_info-&gt;doc_comment ? estrndup(property_info-&gt;doc_comment, property_info-&gt;doc_comment_len) : NULL;</span>
+<span class='curline'><a href='../S/1655.html#L4503'>property_info</a>    4503 Zend/zend_compile.c 								     doc_comment, property_info-&gt;doc_comment_len TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1713.html#L269'>property_info</a>     269 Zend/zend_object_handlers.c static zend_always_inline int zend_verify_property_access(zend_property_info *property_info, zend_class_entry *ce TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1713.html#L271'>property_info</a>     271 Zend/zend_object_handlers.c 	switch (property_info-&gt;flags &amp; ZEND_ACC_PPP_MASK) {</span>
+<span class='curline'><a href='../S/1713.html#L275'>property_info</a>     275 Zend/zend_object_handlers.c 			return zend_check_protected(property_info-&gt;ce, EG(scope));</span>
+<span class='curline'><a href='../S/1713.html#L277'>property_info</a>     277 Zend/zend_object_handlers.c 			if ((ce==EG(scope) || property_info-&gt;ce == EG(scope)) &amp;&amp; EG(scope)) {</span>
+<span class='curline'><a href='../S/1713.html#L304'>property_info</a>     304 Zend/zend_object_handlers.c 	zend_property_info *property_info;</span>
+<span class='curline'><a href='../S/1713.html#L309'>property_info</a>     309 Zend/zend_object_handlers.c 	if (key &amp;&amp; (property_info = CACHED_POLYMORPHIC_PTR(key-&gt;cache_slot, ce)) != NULL) {</span>
+<span class='curline'><a href='../S/1713.html#L310'>property_info</a>     310 Zend/zend_object_handlers.c 		return property_info;</span>
+<span class='curline'><a href='../S/1713.html#L323'>property_info</a>     323 Zend/zend_object_handlers.c 	property_info = NULL;</span>
+<span class='curline'><a href='../S/1713.html#L325'>property_info</a>     325 Zend/zend_object_handlers.c 	if (zend_hash_quick_find(&amp;ce-&gt;properties_info, Z_STRVAL_P(member), Z_STRLEN_P(member)+1, h, (void **) &amp;property_info)==SUCCESS) {</span>
+<span class='curline'><a href='../S/1713.html#L326'>property_info</a>     326 Zend/zend_object_handlers.c 		if (UNEXPECTED((property_info-&gt;flags &amp; ZEND_ACC_SHADOW) != 0)) {</span>
+<span class='curline'><a href='../S/1713.html#L328'>property_info</a>     328 Zend/zend_object_handlers.c 			property_info = NULL;</span>
+<span class='curline'><a href='../S/1713.html#L330'>property_info</a>     330 Zend/zend_object_handlers.c 			if (EXPECTED(zend_verify_property_access(property_info, ce TSRMLS_CC) != 0)) {</span>
+<span class='curline'><a href='../S/1713.html#L331'>property_info</a>     331 Zend/zend_object_handlers.c 				if (EXPECTED((property_info-&gt;flags &amp; ZEND_ACC_CHANGED) != 0)</span>
+<span class='curline'><a href='../S/1713.html#L332'>property_info</a>     332 Zend/zend_object_handlers.c 					&amp;&amp; EXPECTED(!(property_info-&gt;flags &amp; ZEND_ACC_PRIVATE))) {</span>
+<span class='curline'><a href='../S/1713.html#L338'>property_info</a>     338 Zend/zend_object_handlers.c 					if (UNEXPECTED((property_info-&gt;flags &amp; ZEND_ACC_STATIC) != 0) &amp;&amp; !silent) {</span>
+<span class='curline'><a href='../S/1713.html#L342'>property_info</a>     342 Zend/zend_object_handlers.c 						CACHE_POLYMORPHIC_PTR(key-&gt;cache_slot, ce, property_info);</span>
+<span class='curline'><a href='../S/1713.html#L344'>property_info</a>     344 Zend/zend_object_handlers.c 					return property_info;</span>
+<span class='curline'><a href='../S/1713.html#L361'>property_info</a>     361 Zend/zend_object_handlers.c 	} else if (property_info) {</span>
+<span class='curline'><a href='../S/1713.html#L365'>property_info</a>     365 Zend/zend_object_handlers.c 				zend_error_noreturn(E_ERROR, "Cannot access %s property %s::$%s", zend_visibility_string(property_info-&gt;flags), ce-&gt;name, Z_STRVAL_P(member));</span>
+<span class='curline'><a href='../S/1713.html#L371'>property_info</a>     371 Zend/zend_object_handlers.c 				CACHE_POLYMORPHIC_PTR(key-&gt;cache_slot, ce, property_info);</span>
+<span class='curline'><a href='../S/1713.html#L381'>property_info</a>     381 Zend/zend_object_handlers.c 		property_info = &amp;EG(std_property_info);</span>
+<span class='curline'><a href='../S/1713.html#L383'>property_info</a>     383 Zend/zend_object_handlers.c 	return property_info;</span>
+<span class='curline'><a href='../S/1713.html#L395'>property_info</a>     395 Zend/zend_object_handlers.c 	zend_property_info *property_info;</span>
+<span class='curline'><a href='../S/1713.html#L402'>property_info</a>     402 Zend/zend_object_handlers.c 	property_info = zend_get_property_info_quick(zobj-&gt;ce, &amp;member, 1, NULL TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1713.html#L403'>property_info</a>     403 Zend/zend_object_handlers.c 	if (!property_info) {</span>
+<span class='curline'><a href='../S/1713.html#L407'>property_info</a>     407 Zend/zend_object_handlers.c 		if (!(property_info-&gt;flags &amp; ZEND_ACC_PRIVATE)) {</span>
+<span class='curline'><a href='../S/1713.html#L410'>property_info</a>     410 Zend/zend_object_handlers.c 		} else if (strcmp(prop_info_name+1, property_info-&gt;name+1)) {</span>
+<span class='curline'><a href='../S/1713.html#L415'>property_info</a>     415 Zend/zend_object_handlers.c 	return zend_verify_property_access(property_info, zobj-&gt;ce TSRMLS_CC) ? SUCCESS : FAILURE;</span>
+<span class='curline'><a href='../S/1713.html#L419'>property_info</a>     419 Zend/zend_object_handlers.c static int zend_get_property_guard(zend_object *zobj, zend_property_info *property_info, zval *member, zend_guard **pguard) /* {{{ */</span>
+<span class='curline'><a href='../S/1713.html#L424'>property_info</a>     424 Zend/zend_object_handlers.c 	if (!property_info) {</span>
+<span class='curline'><a href='../S/1713.html#L425'>property_info</a>     425 Zend/zend_object_handlers.c 		property_info = &amp;info;</span>
+<span class='curline'><a href='../S/1713.html#L429'>property_info</a>     429 Zend/zend_object_handlers.c 	} else if(property_info-&gt;name[0] == '\0'){</span>
+<span class='curline'><a href='../S/1713.html#L431'>property_info</a>     431 Zend/zend_object_handlers.c 		zend_unmangle_property_name(property_info-&gt;name, property_info-&gt;name_length, &amp;class_name, &amp;prop_name);</span>
+<span class='curline'><a href='../S/1713.html#L437'>property_info</a>     437 Zend/zend_object_handlers.c 			property_info = &amp;info;</span>
+<span class='curline'><a href='../S/1713.html#L443'>property_info</a>     443 Zend/zend_object_handlers.c 	} else if (zend_hash_quick_find(zobj-&gt;guards, property_info-&gt;name, property_info-&gt;name_length+1, property_info-&gt;h, (void **) pguard) == SUCCESS) {</span>
+<span class='curline'><a href='../S/1713.html#L450'>property_info</a>     450 Zend/zend_object_handlers.c 	return zend_hash_quick_add(zobj-&gt;guards, property_info-&gt;name, property_info-&gt;name_length+1, property_info-&gt;h, (void**)&amp;stub, sizeof(stub), (void**) pguard);</span>
+<span class='curline'><a href='../S/1713.html#L460'>property_info</a>     460 Zend/zend_object_handlers.c 	zend_property_info *property_info;</span>
+<span class='curline'><a href='../S/1713.html#L481'>property_info</a>     481 Zend/zend_object_handlers.c 	property_info = zend_get_property_info_quick(zobj-&gt;ce, member, silent || (zobj-&gt;ce-&gt;__get != NULL), key TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1713.html#L483'>property_info</a>     483 Zend/zend_object_handlers.c 	if (UNEXPECTED(!property_info) ||</span>
+<span class='curline'><a href='../S/1713.html#L484'>property_info</a>     484 Zend/zend_object_handlers.c 	    ((EXPECTED((property_info-&gt;flags &amp; ZEND_ACC_STATIC) == 0) &amp;&amp;</span>
+<span class='curline'><a href='../S/1713.html#L485'>property_info</a>     485 Zend/zend_object_handlers.c 	     property_info-&gt;offset &gt;= 0) ?</span>
+<span class='curline'><a href='../S/1713.html#L487'>property_info</a>     487 Zend/zend_object_handlers.c 	            ((retval = (zval**)zobj-&gt;properties_table[property_info-&gt;offset]) == NULL) :</span>
+<span class='curline'><a href='../S/1713.html#L488'>property_info</a>     488 Zend/zend_object_handlers.c 	            (*(retval = &amp;zobj-&gt;properties_table[property_info-&gt;offset]) == NULL)) :</span>
+<span class='curline'><a href='../S/1713.html#L490'>property_info</a>     490 Zend/zend_object_handlers.c 	          UNEXPECTED(zend_hash_quick_find(zobj-&gt;properties, property_info-&gt;name, property_info-&gt;name_length+1, property_info-&gt;h, (void **) &amp;retval) == FAILURE)))) {</span>
+<span class='curline'><a href='../S/1713.html#L494'>property_info</a>     494 Zend/zend_object_handlers.c 		    zend_get_property_guard(zobj, property_info, member, &amp;guard) == SUCCESS &amp;&amp;</span>
+<span class='curline'><a href='../S/1713.html#L560'>property_info</a>     560 Zend/zend_object_handlers.c 	zend_property_info *property_info;</span>
+<span class='curline'><a href='../S/1713.html#L574'>property_info</a>     574 Zend/zend_object_handlers.c 	property_info = zend_get_property_info_quick(zobj-&gt;ce, member, (zobj-&gt;ce-&gt;__set != NULL), key TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1713.html#L576'>property_info</a>     576 Zend/zend_object_handlers.c 	if (EXPECTED(property_info != NULL) &amp;&amp;</span>
+<span class='curline'><a href='../S/1713.html#L577'>property_info</a>     577 Zend/zend_object_handlers.c 	    ((EXPECTED((property_info-&gt;flags &amp; ZEND_ACC_STATIC) == 0) &amp;&amp;</span>
+<span class='curline'><a href='../S/1713.html#L578'>property_info</a>     578 Zend/zend_object_handlers.c 	     property_info-&gt;offset &gt;= 0) ?</span>
+<span class='curline'><a href='../S/1713.html#L580'>property_info</a>     580 Zend/zend_object_handlers.c 	            ((variable_ptr = (zval**)zobj-&gt;properties_table[property_info-&gt;offset]) != NULL) :</span>
+<span class='curline'><a href='../S/1713.html#L581'>property_info</a>     581 Zend/zend_object_handlers.c 	            (*(variable_ptr = &amp;zobj-&gt;properties_table[property_info-&gt;offset]) != NULL)) :</span>
+<span class='curline'><a href='../S/1713.html#L583'>property_info</a>     583 Zend/zend_object_handlers.c 	          EXPECTED(zend_hash_quick_find(zobj-&gt;properties, property_info-&gt;name, property_info-&gt;name_length+1, property_info-&gt;h, (void **) &amp;variable_ptr) == SUCCESS)))) {</span>
+<span class='curline'><a href='../S/1713.html#L616'>property_info</a>     616 Zend/zend_object_handlers.c 		    zend_get_property_guard(zobj, property_info, member, &amp;guard) == SUCCESS &amp;&amp;</span>
+<span class='curline'><a href='../S/1713.html#L628'>property_info</a>     628 Zend/zend_object_handlers.c 		} else if (EXPECTED(property_info != NULL)) {</span>
+<span class='curline'><a href='../S/1713.html#L634'>property_info</a>     634 Zend/zend_object_handlers.c 			if (EXPECTED((property_info-&gt;flags &amp; ZEND_ACC_STATIC) == 0) &amp;&amp;</span>
+<span class='curline'><a href='../S/1713.html#L635'>property_info</a>     635 Zend/zend_object_handlers.c 			    property_info-&gt;offset &gt;= 0) {</span>
+<span class='curline'><a href='../S/1713.html#L637'>property_info</a>     637 Zend/zend_object_handlers.c 						zobj-&gt;properties_table[property_info-&gt;offset] = value;</span>
+<span class='curline'><a href='../S/1713.html#L638'>property_info</a>     638 Zend/zend_object_handlers.c 					} else if (zobj-&gt;properties_table[property_info-&gt;offset]) {</span>
+<span class='curline'><a href='../S/1713.html#L639'>property_info</a>     639 Zend/zend_object_handlers.c 						*(zval**)zobj-&gt;properties_table[property_info-&gt;offset] = value;</span>
+<span class='curline'><a href='../S/1713.html#L641'>property_info</a>     641 Zend/zend_object_handlers.c 						zend_hash_quick_update(zobj-&gt;properties, property_info-&gt;name, property_info-&gt;name_length+1, property_info-&gt;h, &amp;value, sizeof(zval *), (void**)&amp;zobj-&gt;properties_table[property_info-&gt;offset]);</span>
+<span class='curline'><a href='../S/1713.html#L647'>property_info</a>     647 Zend/zend_object_handlers.c 				zend_hash_quick_update(zobj-&gt;properties, property_info-&gt;name, property_info-&gt;name_length+1, property_info-&gt;h, &amp;value, sizeof(zval *), NULL);</span>
+<span class='curline'><a href='../S/1713.html#L754'>property_info</a>     754 Zend/zend_object_handlers.c 	zend_property_info *property_info;</span>
+<span class='curline'><a href='../S/1713.html#L770'>property_info</a>     770 Zend/zend_object_handlers.c 	property_info = zend_get_property_info_quick(zobj-&gt;ce, member, (zobj-&gt;ce-&gt;__get != NULL), key TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1713.html#L772'>property_info</a>     772 Zend/zend_object_handlers.c 	if (UNEXPECTED(!property_info) ||</span>
+<span class='curline'><a href='../S/1713.html#L773'>property_info</a>     773 Zend/zend_object_handlers.c 	    ((EXPECTED((property_info-&gt;flags &amp; ZEND_ACC_STATIC) == 0) &amp;&amp;</span>
+<span class='curline'><a href='../S/1713.html#L774'>property_info</a>     774 Zend/zend_object_handlers.c 	     property_info-&gt;offset &gt;= 0) ?</span>
+<span class='curline'><a href='../S/1713.html#L776'>property_info</a>     776 Zend/zend_object_handlers.c 	            ((retval = (zval**)zobj-&gt;properties_table[property_info-&gt;offset]) == NULL) :</span>
+<span class='curline'><a href='../S/1713.html#L777'>property_info</a>     777 Zend/zend_object_handlers.c 	            (*(retval = &amp;zobj-&gt;properties_table[property_info-&gt;offset]) == NULL)) :</span>
+<span class='curline'><a href='../S/1713.html#L779'>property_info</a>     779 Zend/zend_object_handlers.c 	          UNEXPECTED(zend_hash_quick_find(zobj-&gt;properties, property_info-&gt;name, property_info-&gt;name_length+1, property_info-&gt;h, (void **) &amp;retval) == FAILURE)))) {</span>
+<span class='curline'><a href='../S/1713.html#L784'>property_info</a>     784 Zend/zend_object_handlers.c 			zend_get_property_guard(zobj, property_info, member, &amp;guard) != SUCCESS ||</span>
+<span class='curline'><a href='../S/1713.html#L785'>property_info</a>     785 Zend/zend_object_handlers.c 			(property_info &amp;&amp; guard-&gt;in_get)) {</span>
+<span class='curline'><a href='../S/1713.html#L790'>property_info</a>     790 Zend/zend_object_handlers.c 			if (EXPECTED((property_info-&gt;flags &amp; ZEND_ACC_STATIC) == 0) &amp;&amp;</span>
+<span class='curline'><a href='../S/1713.html#L791'>property_info</a>     791 Zend/zend_object_handlers.c 			    property_info-&gt;offset &gt;= 0) {</span>
+<span class='curline'><a href='../S/1713.html#L793'>property_info</a>     793 Zend/zend_object_handlers.c 					zobj-&gt;properties_table[property_info-&gt;offset] = new_zval;</span>
+<span class='curline'><a href='../S/1713.html#L794'>property_info</a>     794 Zend/zend_object_handlers.c 					retval = &amp;zobj-&gt;properties_table[property_info-&gt;offset];</span>
+<span class='curline'><a href='../S/1713.html#L795'>property_info</a>     795 Zend/zend_object_handlers.c 				} else if (zobj-&gt;properties_table[property_info-&gt;offset]) {</span>
+<span class='curline'><a href='../S/1713.html#L796'>property_info</a>     796 Zend/zend_object_handlers.c 					*(zval**)zobj-&gt;properties_table[property_info-&gt;offset] = new_zval;</span>
+<span class='curline'><a href='../S/1713.html#L797'>property_info</a>     797 Zend/zend_object_handlers.c 					retval = (zval**)zobj-&gt;properties_table[property_info-&gt;offset];</span>
+<span class='curline'><a href='../S/1713.html#L799'>property_info</a>     799 Zend/zend_object_handlers.c 					zend_hash_quick_update(zobj-&gt;properties, property_info-&gt;name, property_info-&gt;name_length+1, property_info-&gt;h, &amp;new_zval, sizeof(zval *), (void**)&amp;zobj-&gt;properties_table[property_info-&gt;offset]);</span>
+<span class='curline'><a href='../S/1713.html#L800'>property_info</a>     800 Zend/zend_object_handlers.c 					retval = (zval**)zobj-&gt;properties_table[property_info-&gt;offset];</span>
+<span class='curline'><a href='../S/1713.html#L806'>property_info</a>     806 Zend/zend_object_handlers.c 				zend_hash_quick_update(zobj-&gt;properties, property_info-&gt;name, property_info-&gt;name_length+1, property_info-&gt;h, &amp;new_zval, sizeof(zval *), (void **) &amp;retval);</span>
+<span class='curline'><a href='../S/1713.html#L830'>property_info</a>     830 Zend/zend_object_handlers.c 	zend_property_info *property_info;</span>
+<span class='curline'><a href='../S/1713.html#L844'>property_info</a>     844 Zend/zend_object_handlers.c 	property_info = zend_get_property_info_quick(zobj-&gt;ce, member, (zobj-&gt;ce-&gt;__unset != NULL), key TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1713.html#L846'>property_info</a>     846 Zend/zend_object_handlers.c 	if (EXPECTED(property_info != NULL) &amp;&amp;</span>
+<span class='curline'><a href='../S/1713.html#L847'>property_info</a>     847 Zend/zend_object_handlers.c 	    EXPECTED((property_info-&gt;flags &amp; ZEND_ACC_STATIC) == 0) &amp;&amp;</span>
+<span class='curline'><a href='../S/1713.html#L849'>property_info</a>     849 Zend/zend_object_handlers.c 	    property_info-&gt;offset &gt;= 0 &amp;&amp;</span>
+<span class='curline'><a href='../S/1713.html#L850'>property_info</a>     850 Zend/zend_object_handlers.c 	    EXPECTED(zobj-&gt;properties_table[property_info-&gt;offset] != NULL)) {</span>
+<span class='curline'><a href='../S/1713.html#L851'>property_info</a>     851 Zend/zend_object_handlers.c 		zval_ptr_dtor(&amp;zobj-&gt;properties_table[property_info-&gt;offset]);</span>
+<span class='curline'><a href='../S/1713.html#L852'>property_info</a>     852 Zend/zend_object_handlers.c 		zobj-&gt;properties_table[property_info-&gt;offset] = NULL;</span>
+<span class='curline'><a href='../S/1713.html#L853'>property_info</a>     853 Zend/zend_object_handlers.c 	} else if (UNEXPECTED(!property_info) ||</span>
+<span class='curline'><a href='../S/1713.html#L855'>property_info</a>     855 Zend/zend_object_handlers.c 	           UNEXPECTED(zend_hash_quick_del(zobj-&gt;properties, property_info-&gt;name, property_info-&gt;name_length+1, property_info-&gt;h) == FAILURE)) {</span>
+<span class='curline'><a href='../S/1713.html#L859'>property_info</a>     859 Zend/zend_object_handlers.c 		    zend_get_property_guard(zobj, property_info, member, &amp;guard) == SUCCESS &amp;&amp;</span>
+<span class='curline'><a href='../S/1713.html#L879'>property_info</a>     879 Zend/zend_object_handlers.c 	} else if (EXPECTED(property_info != NULL) &amp;&amp;</span>
+<span class='curline'><a href='../S/1713.html#L880'>property_info</a>     880 Zend/zend_object_handlers.c 	           EXPECTED((property_info-&gt;flags &amp; ZEND_ACC_STATIC) == 0) &amp;&amp;</span>
+<span class='curline'><a href='../S/1713.html#L881'>property_info</a>     881 Zend/zend_object_handlers.c 	           property_info-&gt;offset &gt;= 0) {</span>
+<span class='curline'><a href='../S/1713.html#L882'>property_info</a>     882 Zend/zend_object_handlers.c 		zobj-&gt;properties_table[property_info-&gt;offset] = NULL;</span>
+<span class='curline'><a href='../S/1713.html#L1270'>property_info</a>    1270 Zend/zend_object_handlers.c 	zend_property_info *property_info;</span>
+<span class='curline'><a href='../S/1713.html#L1274'>property_info</a>    1274 Zend/zend_object_handlers.c 	    (property_info = CACHED_POLYMORPHIC_PTR(key-&gt;cache_slot, ce)) == NULL) {</span>
+<span class='curline'><a href='../S/1713.html#L1281'>property_info</a>    1281 Zend/zend_object_handlers.c 		if (UNEXPECTED(zend_hash_quick_find(&amp;ce-&gt;properties_info, property_name, property_name_len+1, hash_value, (void **) &amp;property_info)==FAILURE)) {</span>
+<span class='curline'><a href='../S/1713.html#L1289'>property_info</a>    1289 Zend/zend_object_handlers.c 		zend_printf("Access type for %s::%s is %s\n", ce-&gt;name, property_name, zend_visibility_string(property_info-&gt;flags));</span>
+<span class='curline'><a href='../S/1713.html#L1292'>property_info</a>    1292 Zend/zend_object_handlers.c 		if (UNEXPECTED(!zend_verify_property_access(property_info, ce TSRMLS_CC))) {</span>
+<span class='curline'><a href='../S/1713.html#L1294'>property_info</a>    1294 Zend/zend_object_handlers.c 				zend_error_noreturn(E_ERROR, "Cannot access %s property %s::$%s", zend_visibility_string(property_info-&gt;flags), ce-&gt;name, property_name);</span>
+<span class='curline'><a href='../S/1713.html#L1299'>property_info</a>    1299 Zend/zend_object_handlers.c 		if (UNEXPECTED((property_info-&gt;flags &amp; ZEND_ACC_STATIC) == 0)) {</span>
+<span class='curline'><a href='../S/1713.html#L1309'>property_info</a>    1309 Zend/zend_object_handlers.c 			CACHE_POLYMORPHIC_PTR(key-&gt;cache_slot, ce, property_info);</span>
+<span class='curline'><a href='../S/1713.html#L1314'>property_info</a>    1314 Zend/zend_object_handlers.c 	    UNEXPECTED(CE_STATIC_MEMBERS(ce)[property_info-&gt;offset] == NULL)) {</span>
+<span class='curline'><a href='../S/1713.html#L1321'>property_info</a>    1321 Zend/zend_object_handlers.c 	return &amp;CE_STATIC_MEMBERS(ce)[property_info-&gt;offset];</span>
+<span class='curline'><a href='../S/1713.html#L1435'>property_info</a>    1435 Zend/zend_object_handlers.c 	zend_property_info *property_info;</span>
+<span class='curline'><a href='../S/1713.html#L1453'>property_info</a>    1453 Zend/zend_object_handlers.c 	property_info = zend_get_property_info_quick(zobj-&gt;ce, member, 1, key TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1713.html#L1455'>property_info</a>    1455 Zend/zend_object_handlers.c 	if (UNEXPECTED(!property_info) ||</span>
+<span class='curline'><a href='../S/1713.html#L1456'>property_info</a>    1456 Zend/zend_object_handlers.c 	    ((EXPECTED((property_info-&gt;flags &amp; ZEND_ACC_STATIC) == 0) &amp;&amp;</span>
+<span class='curline'><a href='../S/1713.html#L1457'>property_info</a>    1457 Zend/zend_object_handlers.c 	     property_info-&gt;offset &gt;= 0) ?</span>
+<span class='curline'><a href='../S/1713.html#L1459'>property_info</a>    1459 Zend/zend_object_handlers.c 	            ((value = (zval**)zobj-&gt;properties_table[property_info-&gt;offset]) == NULL) :</span>
+<span class='curline'><a href='../S/1713.html#L1460'>property_info</a>    1460 Zend/zend_object_handlers.c 	            (*(value = &amp;zobj-&gt;properties_table[property_info-&gt;offset]) == NULL)) :</span>
+<span class='curline'><a href='../S/1713.html#L1462'>property_info</a>    1462 Zend/zend_object_handlers.c 	          UNEXPECTED(zend_hash_quick_find(zobj-&gt;properties, property_info-&gt;name, property_info-&gt;name_length+1, property_info-&gt;h, (void **) &amp;value) == FAILURE)))) {</span>
+<span class='curline'><a href='../S/1713.html#L1468'>property_info</a>    1468 Zend/zend_object_handlers.c 		    zend_get_property_guard(zobj, property_info, member, &amp;guard) == SUCCESS &amp;&amp;</span>
+<span class='curline'><a href='../S/856.html#L217'>property_info</a>     217 ext/opcache/zend_accelerator_util_funcs.c static void zend_destroy_property_info(zend_property_info *property_info)</span>
+<span class='curline'><a href='../S/856.html#L219'>property_info</a>     219 ext/opcache/zend_accelerator_util_funcs.c 	interned_efree((char*)property_info-&gt;name);</span>
+<span class='curline'><a href='../S/856.html#L220'>property_info</a>     220 ext/opcache/zend_accelerator_util_funcs.c 	if (property_info-&gt;doc_comment) {</span>
+<span class='curline'><a href='../S/856.html#L221'>property_info</a>     221 ext/opcache/zend_accelerator_util_funcs.c 		efree((char*)property_info-&gt;doc_comment);</span>
+<span class='curline'><a href='../S/996.html#L3874'>property_info</a>    3874 ext/reflection/php_reflection.c 	zend_property_info *property_info;</span>
+<span class='curline'><a href='../S/996.html#L3886'>property_info</a>    3886 ext/reflection/php_reflection.c 	if (zend_hash_find(&amp;ce-&gt;properties_info, name, name_len+1, (void **) &amp;property_info) == SUCCESS) {</span>
+<span class='curline'><a href='../S/996.html#L3887'>property_info</a>    3887 ext/reflection/php_reflection.c 		if (property_info-&gt;flags &amp; ZEND_ACC_SHADOW) {</span>
+<span class='curline'><a href='../S/996.html#L3912'>property_info</a>    3912 ext/reflection/php_reflection.c 	zend_property_info *property_info;</span>
+<span class='curline'><a href='../S/996.html#L3922'>property_info</a>    3922 ext/reflection/php_reflection.c 	if (zend_hash_find(&amp;ce-&gt;properties_info, name, name_len + 1, (void**) &amp;property_info) == SUCCESS) {</span>
+<span class='curline'><a href='../S/996.html#L3923'>property_info</a>    3923 ext/reflection/php_reflection.c 		if ((property_info-&gt;flags &amp; ZEND_ACC_SHADOW) == 0) {</span>
+<span class='curline'><a href='../S/996.html#L3924'>property_info</a>    3924 ext/reflection/php_reflection.c 			reflection_property_factory(ce, property_info, return_value TSRMLS_CC);</span>
+<span class='curline'><a href='../S/996.html#L3966'>property_info</a>    3966 ext/reflection/php_reflection.c 		if (zend_hash_find(&amp;ce-&gt;properties_info, name, name_len + 1, (void**) &amp;property_info) == SUCCESS &amp;&amp; (property_info-&gt;flags &amp; ZEND_ACC_SHADOW) == 0) {</span>
+<span class='curline'><a href='../S/996.html#L3967'>property_info</a>    3967 ext/reflection/php_reflection.c 			reflection_property_factory(ce, property_info, return_value TSRMLS_CC);</span>
+<span class='curline'><a href='../S/996.html#L4849'>property_info</a>    4849 ext/reflection/php_reflection.c 	zend_property_info *property_info = NULL;</span>
+<span class='curline'><a href='../S/996.html#L4882'>property_info</a>    4882 ext/reflection/php_reflection.c 	if (zend_hash_find(&amp;ce-&gt;properties_info, name_str, name_len + 1, (void **) &amp;property_info) == FAILURE || (property_info-&gt;flags &amp; ZEND_ACC_SHADOW)) {</span>
+<span class='curline'><a href='../S/996.html#L4884'>property_info</a>    4884 ext/reflection/php_reflection.c 		if (property_info == NULL &amp;&amp; Z_TYPE_P(classname) == IS_OBJECT &amp;&amp; Z_OBJ_HT_P(classname)-&gt;get_properties) {</span>
+<span class='curline'><a href='../S/996.html#L4895'>property_info</a>    4895 ext/reflection/php_reflection.c 	if (dynam_prop == 0 &amp;&amp; (property_info-&gt;flags &amp; ZEND_ACC_PRIVATE) == 0) {</span>
+<span class='curline'><a href='../S/996.html#L4902'>property_info</a>    4902 ext/reflection/php_reflection.c 			property_info = tmp_info;</span>
+<span class='curline'><a href='../S/996.html#L4911'>property_info</a>    4911 ext/reflection/php_reflection.c 		zend_unmangle_property_name(property_info-&gt;name, property_info-&gt;name_length, &amp;class_name, &amp;prop_name);</span>
+<span class='curline'><a href='../S/996.html#L4912'>property_info</a>    4912 ext/reflection/php_reflection.c 		ZVAL_STRINGL(classname, property_info-&gt;ce-&gt;name, property_info-&gt;ce-&gt;name_length, 1);</span>
+<span class='curline'><a href='../S/996.html#L4930'>property_info</a>    4930 ext/reflection/php_reflection.c 		reference-&gt;prop = *property_info;</span>
+<span class='curline'><a href='../S/1018.html#L1255'>property_info</a>    1255 ext/soap/php_encoding.c 			zend_property_info *property_info;</span>
+<span class='curline'><a href='../S/1018.html#L1257'>property_info</a>    1257 ext/soap/php_encoding.c 			property_info = zend_get_property_info(Z_OBJCE_P(object), &amp;member, 1 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1018.html#L1259'>property_info</a>    1259 ext/soap/php_encoding.c 			if (property_info &amp;&amp; zend_hash_quick_exists(Z_OBJPROP_P(object), property_info-&gt;name, property_info-&gt;name_length+1, property_info-&gt;h)) {</span>
+<span class='curline'><a href='../S/1047.html#L557'>property_info</a>     557 ext/spl/spl_array.c 					zend_property_info *property_info = zend_get_property_info(obj-&gt;std.ce, offset, 1 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1047.html#L559'>property_info</a>     559 ext/spl/spl_array.c 					if (property_info &amp;&amp;</span>
+<span class='curline'><a href='../S/1047.html#L560'>property_info</a>     560 ext/spl/spl_array.c 					    (property_info-&gt;flags &amp; ZEND_ACC_STATIC) == 0 &amp;&amp;</span>
+<span class='curline'><a href='../S/1047.html#L561'>property_info</a>     561 ext/spl/spl_array.c 					    property_info-&gt;offset &gt;= 0) {</span>
+<span class='curline'><a href='../S/1047.html#L562'>property_info</a>     562 ext/spl/spl_array.c 					    obj-&gt;std.properties_table[property_info-&gt;offset] = NULL;</span>
+</pre>
+</body>
+</html>

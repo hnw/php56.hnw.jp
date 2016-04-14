@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>f_profile</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/790.html#L362'>f_profile</a>         362 ext/mysqlnd/mysqlnd_debug.c 			struct st_mysqlnd_dbg_function_profile * f_profile = NULL;</span>
+<span class='curline'><a href='../S/790.html#L370'>f_profile</a>         370 ext/mysqlnd/mysqlnd_debug.c 			if (SUCCESS == zend_hash_find(&amp;self-&gt;function_profiles, func_name, func_name_len + 1, (void **) &amp;f_profile)) {</span>
+<span class='curline'><a href='../S/790.html#L372'>f_profile</a>         372 ext/mysqlnd/mysqlnd_debug.c 					if (f_profile) {</span>
+<span class='curline'><a href='../S/790.html#L373'>f_profile</a>         373 ext/mysqlnd/mysqlnd_debug.c 					if (mine_non_own_time &lt; f_profile-&gt;min_in_calls) {</span>
+<span class='curline'><a href='../S/790.html#L374'>f_profile</a>         374 ext/mysqlnd/mysqlnd_debug.c 						f_profile-&gt;min_in_calls = mine_non_own_time;</span>
+<span class='curline'><a href='../S/790.html#L375'>f_profile</a>         375 ext/mysqlnd/mysqlnd_debug.c 					} else if (mine_non_own_time &gt; f_profile-&gt;max_in_calls) {</span>
+<span class='curline'><a href='../S/790.html#L376'>f_profile</a>         376 ext/mysqlnd/mysqlnd_debug.c 						f_profile-&gt;max_in_calls = mine_non_own_time;</span>
+<span class='curline'><a href='../S/790.html#L378'>f_profile</a>         378 ext/mysqlnd/mysqlnd_debug.c 					f_profile-&gt;avg_in_calls = (f_profile-&gt;avg_in_calls * f_profile-&gt;calls + mine_non_own_time) / (f_profile-&gt;calls + 1);</span>
+<span class='curline'><a href='../S/790.html#L380'>f_profile</a>         380 ext/mysqlnd/mysqlnd_debug.c 					if (own_time &lt; f_profile-&gt;min_own) {</span>
+<span class='curline'><a href='../S/790.html#L381'>f_profile</a>         381 ext/mysqlnd/mysqlnd_debug.c 						f_profile-&gt;min_own = own_time;</span>
+<span class='curline'><a href='../S/790.html#L382'>f_profile</a>         382 ext/mysqlnd/mysqlnd_debug.c 					} else if (own_time &gt; f_profile-&gt;max_own) {</span>
+<span class='curline'><a href='../S/790.html#L383'>f_profile</a>         383 ext/mysqlnd/mysqlnd_debug.c 						f_profile-&gt;max_own = own_time;</span>
+<span class='curline'><a href='../S/790.html#L385'>f_profile</a>         385 ext/mysqlnd/mysqlnd_debug.c 					f_profile-&gt;avg_own = (f_profile-&gt;avg_own * f_profile-&gt;calls + own_time) / (f_profile-&gt;calls + 1);</span>
+<span class='curline'><a href='../S/790.html#L387'>f_profile</a>         387 ext/mysqlnd/mysqlnd_debug.c 					if (call_time &lt; f_profile-&gt;min_total) {</span>
+<span class='curline'><a href='../S/790.html#L388'>f_profile</a>         388 ext/mysqlnd/mysqlnd_debug.c 						f_profile-&gt;min_total = call_time;</span>
+<span class='curline'><a href='../S/790.html#L389'>f_profile</a>         389 ext/mysqlnd/mysqlnd_debug.c 					} else if (call_time &gt; f_profile-&gt;max_total) {</span>
+<span class='curline'><a href='../S/790.html#L390'>f_profile</a>         390 ext/mysqlnd/mysqlnd_debug.c 						f_profile-&gt;max_total = call_time;</span>
+<span class='curline'><a href='../S/790.html#L392'>f_profile</a>         392 ext/mysqlnd/mysqlnd_debug.c 					f_profile-&gt;avg_total = (f_profile-&gt;avg_total * f_profile-&gt;calls + call_time) / (f_profile-&gt;calls + 1);</span>
+<span class='curline'><a href='../S/790.html#L394'>f_profile</a>         394 ext/mysqlnd/mysqlnd_debug.c 					++f_profile-&gt;calls;</span>
+<span class='curline'><a href='../S/790.html#L395'>f_profile</a>         395 ext/mysqlnd/mysqlnd_debug.c 					if (f_profile-&gt;calls &gt; PROFILE_UNDERPERFORM_THRESHOLD) {</span>
+<span class='curline'><a href='../S/790.html#L396'>f_profile</a>         396 ext/mysqlnd/mysqlnd_debug.c 						if (f_profile-&gt;avg_in_calls &lt; mine_non_own_time) {</span>
+<span class='curline'><a href='../S/790.html#L397'>f_profile</a>         397 ext/mysqlnd/mysqlnd_debug.c 							f_profile-&gt;in_calls_underporm_calls++;</span>
+<span class='curline'><a href='../S/790.html#L399'>f_profile</a>         399 ext/mysqlnd/mysqlnd_debug.c 						if (f_profile-&gt;avg_own &lt; own_time) {</span>
+<span class='curline'><a href='../S/790.html#L400'>f_profile</a>         400 ext/mysqlnd/mysqlnd_debug.c 							f_profile-&gt;own_underporm_calls++;</span>
+<span class='curline'><a href='../S/790.html#L402'>f_profile</a>         402 ext/mysqlnd/mysqlnd_debug.c 						if (f_profile-&gt;avg_total &lt; call_time) {</span>
+<span class='curline'><a href='../S/790.html#L403'>f_profile</a>         403 ext/mysqlnd/mysqlnd_debug.c 							f_profile-&gt;total_underporm_calls++;</span>
+<span class='curline'><a href='../S/790.html#L409'>f_profile</a>         409 ext/mysqlnd/mysqlnd_debug.c 				f_profile = &amp;f_profile_stack;</span>
+<span class='curline'><a href='../S/790.html#L410'>f_profile</a>         410 ext/mysqlnd/mysqlnd_debug.c 				f_profile-&gt;min_in_calls = f_profile-&gt;max_in_calls = f_profile-&gt;avg_in_calls = mine_non_own_time;</span>
+<span class='curline'><a href='../S/790.html#L411'>f_profile</a>         411 ext/mysqlnd/mysqlnd_debug.c 				f_profile-&gt;min_total = f_profile-&gt;max_total = f_profile-&gt;avg_total = call_time;</span>
+<span class='curline'><a href='../S/790.html#L412'>f_profile</a>         412 ext/mysqlnd/mysqlnd_debug.c 				f_profile-&gt;min_own = f_profile-&gt;max_own = f_profile-&gt;avg_own = own_time;</span>
+<span class='curline'><a href='../S/790.html#L413'>f_profile</a>         413 ext/mysqlnd/mysqlnd_debug.c 				f_profile-&gt;calls = 1;</span>
+<span class='curline'><a href='../S/790.html#L414'>f_profile</a>         414 ext/mysqlnd/mysqlnd_debug.c 				zend_hash_add(&amp;self-&gt;function_profiles, func_name, func_name_len+1, f_profile, sizeof(struct st_mysqlnd_dbg_function_profile), NULL);</span>
+<span class='curline'><a href='../S/790.html#L442'>f_profile</a>         442 ext/mysqlnd/mysqlnd_debug.c 			struct st_mysqlnd_dbg_function_profile * f_profile;</span>
+<span class='curline'><a href='../S/790.html#L448'>f_profile</a>         448 ext/mysqlnd/mysqlnd_debug.c 			while (zend_hash_get_current_data_ex(&amp;self-&gt;function_profiles, (void **) &amp;f_profile, &amp;pos_values) == SUCCESS) {</span>
+<span class='curline'><a href='../S/790.html#L461'>f_profile</a>         461 ext/mysqlnd/mysqlnd_debug.c 						,(uint64_t) f_profile-&gt;calls</span>
+<span class='curline'><a href='../S/790.html#L462'>f_profile</a>         462 ext/mysqlnd/mysqlnd_debug.c 						,(uint64_t) f_profile-&gt;own_underporm_calls</span>
+<span class='curline'><a href='../S/790.html#L463'>f_profile</a>         463 ext/mysqlnd/mysqlnd_debug.c 						,(uint64_t) f_profile-&gt;in_calls_underporm_calls</span>
+<span class='curline'><a href='../S/790.html#L464'>f_profile</a>         464 ext/mysqlnd/mysqlnd_debug.c 						,(uint64_t) f_profile-&gt;total_underporm_calls</span>
+<span class='curline'><a href='../S/790.html#L466'>f_profile</a>         466 ext/mysqlnd/mysqlnd_debug.c 						,(uint64_t) f_profile-&gt;min_own</span>
+<span class='curline'><a href='../S/790.html#L467'>f_profile</a>         467 ext/mysqlnd/mysqlnd_debug.c 						,(uint64_t) f_profile-&gt;max_own</span>
+<span class='curline'><a href='../S/790.html#L468'>f_profile</a>         468 ext/mysqlnd/mysqlnd_debug.c 						,(uint64_t) f_profile-&gt;avg_own</span>
+<span class='curline'><a href='../S/790.html#L469'>f_profile</a>         469 ext/mysqlnd/mysqlnd_debug.c 						,(uint64_t) f_profile-&gt;min_in_calls</span>
+<span class='curline'><a href='../S/790.html#L470'>f_profile</a>         470 ext/mysqlnd/mysqlnd_debug.c 						,(uint64_t) f_profile-&gt;max_in_calls</span>
+<span class='curline'><a href='../S/790.html#L471'>f_profile</a>         471 ext/mysqlnd/mysqlnd_debug.c 						,(uint64_t) f_profile-&gt;avg_in_calls</span>
+<span class='curline'><a href='../S/790.html#L472'>f_profile</a>         472 ext/mysqlnd/mysqlnd_debug.c 						,(uint64_t) f_profile-&gt;min_total</span>
+<span class='curline'><a href='../S/790.html#L473'>f_profile</a>         473 ext/mysqlnd/mysqlnd_debug.c 						,(uint64_t) f_profile-&gt;max_total</span>
+<span class='curline'><a href='../S/790.html#L474'>f_profile</a>         474 ext/mysqlnd/mysqlnd_debug.c 						,(uint64_t) f_profile-&gt;avg_total</span>
+</pre>
+</body>
+</html>

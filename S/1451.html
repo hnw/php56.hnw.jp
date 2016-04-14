@@ -1,0 +1,173 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>sapi/cgi/fastcgi.h</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<a id='TOP' name='TOP'></a><h2 class='header'><a href='../mains.html'>root</a>/<a href='../files/1875.html'>sapi</a>/<a href='../files/1882.html'>cgi</a>/fastcgi.h</h2>
+<em class='comment'>/* [&lt;][&gt;][^][v][top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+<hr />
+<h2 class='header'><a href='../J/1571.html' title='Multiple included from 6 places.'>INCLUDED FROM</a></h2>
+<hr />
+<pre>
+<a id='L1' name='L1'></a>   1 <em class='comment'>/*</em>
+<a id='L2' name='L2'></a>   2 <em class='comment'>   +----------------------------------------------------------------------+</em>
+<a id='L3' name='L3'></a>   3 <em class='comment'>   | PHP Version 5                                                        |</em>
+<a id='L4' name='L4'></a>   4 <em class='comment'>   +----------------------------------------------------------------------+</em>
+<a id='L5' name='L5'></a>   5 <em class='comment'>   | Copyright (c) 1997-2016 The PHP Group                                |</em>
+<a id='L6' name='L6'></a>   6 <em class='comment'>   +----------------------------------------------------------------------+</em>
+<a id='L7' name='L7'></a>   7 <em class='comment'>   | This source file is subject to version 3.01 of the PHP license,      |</em>
+<a id='L8' name='L8'></a>   8 <em class='comment'>   | that is bundled with this package in the file LICENSE, and is        |</em>
+<a id='L9' name='L9'></a>   9 <em class='comment'>   | available through the world-wide-web at the following url:           |</em>
+<a id='L10' name='L10'></a>  10 <em class='comment'>   | http://www.php.net/license/3_01.txt                                  |</em>
+<a id='L11' name='L11'></a>  11 <em class='comment'>   | If you did not receive a copy of the PHP license and are unable to   |</em>
+<a id='L12' name='L12'></a>  12 <em class='comment'>   | obtain it through the world-wide-web, please send a note to          |</em>
+<a id='L13' name='L13'></a>  13 <em class='comment'>   | license@php.net so we can mail you a copy immediately.               |</em>
+<a id='L14' name='L14'></a>  14 <em class='comment'>   +----------------------------------------------------------------------+</em>
+<a id='L15' name='L15'></a>  15 <em class='comment'>   | Authors: Dmitry Stogov &lt;dmitry@zend.com&gt;                             |</em>
+<a id='L16' name='L16'></a>  16 <em class='comment'>   +----------------------------------------------------------------------+</em>
+<a id='L17' name='L17'></a>  17 <em class='comment'>*/</em>
+<a id='L18' name='L18'></a>  18 
+<a id='L19' name='L19'></a>  19 <em class='comment'>/* $Id$ */</em>
+<a id='L20' name='L20'></a>  20 
+<a id='L21' name='L21'></a>  21 <em class='comment'>/* FastCGI protocol */</em>
+<a id='L22' name='L22'></a>  22 
+<a id='L23' name='L23'></a>  23 <em class='sharp'>#define</em> <a href='../R/2164.html' title='Multiple referred from 12 places.'>FCGI_VERSION_1</a> 1
+<a id='L24' name='L24'></a>  24 
+<a id='L25' name='L25'></a>  25 <em class='sharp'>#define</em> <a href='../R/2155.html' title='Multiple referred from 6 places.'>FCGI_MAX_LENGTH</a> 0xffff
+<a id='L26' name='L26'></a>  26 
+<a id='L27' name='L27'></a>  27 <em class='sharp'>#define</em> <a href='../R/2153.html' title='Multiple referred from 2 places.'>FCGI_KEEP_CONN</a>  1
+<a id='L28' name='L28'></a>  28 
+<a id='L29' name='L29'></a>  29 <em class='comment'>/* this is near the perfect hash function for most useful FastCGI variables</em>
+<a id='L30' name='L30'></a>  30 <em class='comment'> * which combines efficiency and minimal hash collisions</em>
+<a id='L31' name='L31'></a>  31 <em class='comment'> */</em>
+<a id='L32' name='L32'></a>  32 
+<a id='L33' name='L33'></a>  33 <em class='sharp'>#define</em> <a href='../R/2149.html' title='Multiple referred from 9 places.'>FCGI_HASH_FUNC</a>(<a href='../Y/40598.html' title='Multiple used in 4992 places.'>var</a>, <a href='../Y/40614.html' title='Multiple used in 98 places.'>var_len</a>) \
+<a id='L34' name='L34'></a>  34         (<a href='../D/14422.html' title='Multiple defined in 2 places.'>UNEXPECTED</a>(<a href='../Y/40614.html' title='Multiple used in 98 places.'>var_len</a> &lt; 3) ? <a href='../Y/40614.html' title='Multiple used in 98 places.'>var_len</a> : \
+<a id='L35' name='L35'></a>  35                 (((<strong class='reserved'>unsigned</strong> <strong class='reserved'>int</strong>)<a href='../Y/40598.html' title='Multiple used in 4992 places.'>var</a>[3]) &lt;&lt; 2) + \
+<a id='L36' name='L36'></a>  36                 (((<strong class='reserved'>unsigned</strong> <strong class='reserved'>int</strong>)<a href='../Y/40598.html' title='Multiple used in 4992 places.'>var</a>[<a href='../Y/40614.html' title='Multiple used in 98 places.'>var_len</a>-2]) &lt;&lt; 4) + \
+<a id='L37' name='L37'></a>  37                 (((<strong class='reserved'>unsigned</strong> <strong class='reserved'>int</strong>)<a href='../Y/40598.html' title='Multiple used in 4992 places.'>var</a>[<a href='../Y/40614.html' title='Multiple used in 98 places.'>var_len</a>-1]) &lt;&lt; 2) + \
+<a id='L38' name='L38'></a>  38                 <a href='../Y/40614.html' title='Multiple used in 98 places.'>var_len</a>)
+<a id='L39' name='L39'></a>  39 
+<a id='L40' name='L40'></a>  40 <em class='sharp'>#define</em> <a href='../R/2146.html' title='Multiple referred from 5 places.'>FCGI_GETENV</a>(<a href='../S/813.html#L793' title='Defined at 793 in ext/mysqlnd/mysqlnd_structs.h.'>request</a>, <a href='../Y/28160.html' title='Multiple used in 4617 places.'>name</a>) \
+<a id='L41' name='L41'></a>  41         <a href='../S/1450.html#L1477' title='Defined at 1477 in sapi/cgi/fastcgi.c.'>fcgi_quick_getenv</a>(<a href='../S/813.html#L793' title='Defined at 793 in ext/mysqlnd/mysqlnd_structs.h.'>request</a>, <a href='../Y/28160.html' title='Multiple used in 4617 places.'>name</a>, <strong class='reserved'>sizeof</strong>(<a href='../Y/28160.html' title='Multiple used in 4617 places.'>name</a>)-1, <a href='../S/1451.html#L33' title='Defined at 33 in sapi/cgi/fastcgi.h.'>FCGI_HASH_FUNC</a>(<a href='../Y/28160.html' title='Multiple used in 4617 places.'>name</a>, <strong class='reserved'>sizeof</strong>(<a href='../Y/28160.html' title='Multiple used in 4617 places.'>name</a>)-1))
+<a id='L42' name='L42'></a>  42 
+<a id='L43' name='L43'></a>  43 <em class='sharp'>#define</em> <a href='../S/1449.html#L1073' title='Referred from 1073 in sapi/cgi/cgi_main.c.'>FCGI_PUTENV</a>(<a href='../S/813.html#L793' title='Defined at 793 in ext/mysqlnd/mysqlnd_structs.h.'>request</a>, <a href='../Y/28160.html' title='Multiple used in 4617 places.'>name</a>, <a href='../S/1737.html#L277' title='Defined at 277 in Zend/zend_strtod.c.'>value</a>) \
+<a id='L44' name='L44'></a>  44         <a href='../S/1450.html#L1495' title='Defined at 1495 in sapi/cgi/fastcgi.c.'>fcgi_quick_putenv</a>(<a href='../S/813.html#L793' title='Defined at 793 in ext/mysqlnd/mysqlnd_structs.h.'>request</a>, <a href='../Y/28160.html' title='Multiple used in 4617 places.'>name</a>, <strong class='reserved'>sizeof</strong>(<a href='../Y/28160.html' title='Multiple used in 4617 places.'>name</a>)-1, <a href='../S/1451.html#L33' title='Defined at 33 in sapi/cgi/fastcgi.h.'>FCGI_HASH_FUNC</a>(<a href='../Y/28160.html' title='Multiple used in 4617 places.'>name</a>, <strong class='reserved'>sizeof</strong>(<a href='../Y/28160.html' title='Multiple used in 4617 places.'>name</a>)-1), <a href='../S/1737.html#L277' title='Defined at 277 in Zend/zend_strtod.c.'>value</a>)
+<a id='L45' name='L45'></a>  45 
+<a id='L46' name='L46'></a>  46 <strong class='reserved'>typedef</strong> <strong class='reserved'>enum</strong> _fcgi_role <em class='brace'>{</em>
+<a id='L47' name='L47'></a>  47         <a href='../R/2159.html' title='Multiple referred from 2 places.'>FCGI_RESPONDER</a>  = 1,
+<a id='L48' name='L48'></a>  48         <a href='../R/2142.html' title='Multiple referred from 2 places.'>FCGI_AUTHORIZER</a> = 2,
+<a id='L49' name='L49'></a>  49         <a href='../R/2145.html' title='Multiple referred from 2 places.'>FCGI_FILTER</a>             = 3
+<a id='L50' name='L50'></a>  50 <em class='brace'>}</em> fcgi_role;
+<a id='L51' name='L51'></a>  51 
+<a id='L52' name='L52'></a>  52 <strong class='reserved'>typedef</strong> <strong class='reserved'>enum</strong> _fcgi_request_type <em class='brace'>{</em>
+<a id='L53' name='L53'></a>  53         <a href='../R/2143.html' title='Multiple referred from 2 places.'>FCGI_BEGIN_REQUEST</a>              =  1, <em class='comment'>/* [in]                              */</em>
+<a id='L54' name='L54'></a>  54         FCGI_ABORT_REQUEST              =  2, <em class='comment'>/* [in]  (not supported)             */</em>
+<a id='L55' name='L55'></a>  55         <a href='../R/2144.html' title='Multiple referred from 2 places.'>FCGI_END_REQUEST</a>                =  3, <em class='comment'>/* [out]                             */</em>
+<a id='L56' name='L56'></a>  56         <a href='../R/2156.html' title='Multiple referred from 2 places.'>FCGI_PARAMS</a>                             =  4, <em class='comment'>/* [in]  environment variables       */</em>
+<a id='L57' name='L57'></a>  57         <a href='../R/2161.html' title='Multiple referred from 4 places.'>FCGI_STDIN</a>                              =  5, <em class='comment'>/* [in]  post data                   */</em>
+<a id='L58' name='L58'></a>  58         <a href='../R/2162.html' title='Multiple referred from 2 places.'>FCGI_STDOUT</a>                             =  6, <em class='comment'>/* [out] response                    */</em>
+<a id='L59' name='L59'></a>  59         <a href='../R/2160.html' title='Multiple referred from 2 places.'>FCGI_STDERR</a>                             =  7, <em class='comment'>/* [out] errors                      */</em>
+<a id='L60' name='L60'></a>  60         FCGI_DATA                               =  8, <em class='comment'>/* [in]  filter data (not supported) */</em>
+<a id='L61' name='L61'></a>  61         <a href='../R/2147.html' title='Multiple referred from 2 places.'>FCGI_GET_VALUES</a>                 =  9, <em class='comment'>/* [in]                              */</em>
+<a id='L62' name='L62'></a>  62         <a href='../R/2148.html' title='Multiple referred from 2 places.'>FCGI_GET_VALUES_RESULT</a>  = 10  <em class='comment'>/* [out]                             */</em>
+<a id='L63' name='L63'></a>  63 <em class='brace'>}</em> <a href='../R/18635.html' title='Multiple referred from 10 places.'>fcgi_request_type</a>;
+<a id='L64' name='L64'></a>  64 
+<a id='L65' name='L65'></a>  65 <strong class='reserved'>typedef</strong> <strong class='reserved'>enum</strong> _fcgi_protocol_status <em class='brace'>{</em>
+<a id='L66' name='L66'></a>  66         <a href='../R/2158.html' title='Multiple referred from 2 places.'>FCGI_REQUEST_COMPLETE</a>   = 0,
+<a id='L67' name='L67'></a>  67         FCGI_CANT_MPX_CONN              = 1,
+<a id='L68' name='L68'></a>  68         FCGI_OVERLOADED                 = 2,
+<a id='L69' name='L69'></a>  69         FCGI_UNKNOWN_ROLE               = 3
+<a id='L70' name='L70'></a>  70 <em class='brace'>}</em> dcgi_protocol_status;
+<a id='L71' name='L71'></a>  71 
+<a id='L72' name='L72'></a>  72 <strong class='reserved'>typedef</strong> <strong class='reserved'>struct</strong> _fcgi_header <em class='brace'>{</em>
+<a id='L73' name='L73'></a>  73         <strong class='reserved'>unsigned</strong> <strong class='reserved'>char</strong> <a href='../Y/40723.html' title='Multiple used in 237 places.'>version</a>;
+<a id='L74' name='L74'></a>  74         <strong class='reserved'>unsigned</strong> <strong class='reserved'>char</strong> <a href='../D/32025.html' title='Multiple defined in 3 places.'>type</a>;
+<a id='L75' name='L75'></a>  75         <strong class='reserved'>unsigned</strong> <strong class='reserved'>char</strong> <a href='../Y/34892.html' title='Multiple used in 6 places.'>requestIdB1</a>;
+<a id='L76' name='L76'></a>  76         <strong class='reserved'>unsigned</strong> <strong class='reserved'>char</strong> <a href='../Y/34891.html' title='Multiple used in 6 places.'>requestIdB0</a>;
+<a id='L77' name='L77'></a>  77         <strong class='reserved'>unsigned</strong> <strong class='reserved'>char</strong> <a href='../Y/14247.html' title='Multiple used in 14 places.'>contentLengthB1</a>;
+<a id='L78' name='L78'></a>  78         <strong class='reserved'>unsigned</strong> <strong class='reserved'>char</strong> <a href='../Y/14246.html' title='Multiple used in 14 places.'>contentLengthB0</a>;
+<a id='L79' name='L79'></a>  79         <strong class='reserved'>unsigned</strong> <strong class='reserved'>char</strong> <a href='../Y/31360.html' title='Multiple used in 14 places.'>paddingLength</a>;
+<a id='L80' name='L80'></a>  80         <strong class='reserved'>unsigned</strong> <strong class='reserved'>char</strong> <a href='../Y/34967.html' title='Multiple used in 52 places.'>reserved</a>;
+<a id='L81' name='L81'></a>  81 <em class='brace'>}</em> <a href='../R/18618.html' title='Multiple referred from 47 places.'>fcgi_header</a>;
+<a id='L82' name='L82'></a>  82 
+<a id='L83' name='L83'></a>  83 <strong class='reserved'>typedef</strong> <strong class='reserved'>struct</strong> _fcgi_begin_request <em class='brace'>{</em>
+<a id='L84' name='L84'></a>  84         <strong class='reserved'>unsigned</strong> <strong class='reserved'>char</strong> <a href='../Y/35350.html' title='Multiple used in 4 places.'>roleB1</a>;
+<a id='L85' name='L85'></a>  85         <strong class='reserved'>unsigned</strong> <strong class='reserved'>char</strong> <a href='../Y/35349.html' title='Multiple used in 4 places.'>roleB0</a>;
+<a id='L86' name='L86'></a>  86         <strong class='reserved'>unsigned</strong> <strong class='reserved'>char</strong> <a href='../D/21615.html' title='Multiple defined in 14 places.'>flags</a>;
+<a id='L87' name='L87'></a>  87         <strong class='reserved'>unsigned</strong> <strong class='reserved'>char</strong> <a href='../Y/34967.html' title='Multiple used in 52 places.'>reserved</a>[5];
+<a id='L88' name='L88'></a>  88 <em class='brace'>}</em> <a href='../R/18593.html' title='Multiple referred from 8 places.'>fcgi_begin_request</a>;
+<a id='L89' name='L89'></a>  89 
+<a id='L90' name='L90'></a>  90 <strong class='reserved'>typedef</strong> <strong class='reserved'>struct</strong> _fcgi_begin_request_rec <em class='brace'>{</em>
+<a id='L91' name='L91'></a>  91         <a href='../D/21378.html' title='Multiple defined in 2 places.'>fcgi_header</a> <a href='../S/1358.html#L138' title='Defined at 138 in main/alloca.c.'>hdr</a>;
+<a id='L92' name='L92'></a>  92         <a href='../D/21352.html' title='Multiple defined in 2 places.'>fcgi_begin_request</a> <a href='../S/1135.html#L187' title='Defined at 187 in ext/standard/md5.c.'>body</a>;
+<a id='L93' name='L93'></a>  93 <em class='brace'>}</em> fcgi_begin_request_rec;
+<a id='L94' name='L94'></a>  94 
+<a id='L95' name='L95'></a>  95 <strong class='reserved'>typedef</strong> <strong class='reserved'>struct</strong> _fcgi_end_request <em class='brace'>{</em>
+<a id='L96' name='L96'></a>  96     <strong class='reserved'>unsigned</strong> <strong class='reserved'>char</strong> <a href='../Y/9067.html' title='Multiple used in 4 places.'>appStatusB3</a>;
+<a id='L97' name='L97'></a>  97     <strong class='reserved'>unsigned</strong> <strong class='reserved'>char</strong> <a href='../Y/9066.html' title='Multiple used in 4 places.'>appStatusB2</a>;
+<a id='L98' name='L98'></a>  98     <strong class='reserved'>unsigned</strong> <strong class='reserved'>char</strong> <a href='../Y/9065.html' title='Multiple used in 4 places.'>appStatusB1</a>;
+<a id='L99' name='L99'></a>  99     <strong class='reserved'>unsigned</strong> <strong class='reserved'>char</strong> <a href='../Y/9064.html' title='Multiple used in 4 places.'>appStatusB0</a>;
+<a id='L100' name='L100'></a> 100     <strong class='reserved'>unsigned</strong> <strong class='reserved'>char</strong> <a href='../Y/33821.html' title='Multiple used in 4 places.'>protocolStatus</a>;
+<a id='L101' name='L101'></a> 101     <strong class='reserved'>unsigned</strong> <strong class='reserved'>char</strong> <a href='../Y/34967.html' title='Multiple used in 52 places.'>reserved</a>[3];
+<a id='L102' name='L102'></a> 102 <em class='brace'>}</em> <a href='../R/18597.html' title='Multiple referred from 4 places.'>fcgi_end_request</a>;
+<a id='L103' name='L103'></a> 103 
+<a id='L104' name='L104'></a> 104 <strong class='reserved'>typedef</strong> <strong class='reserved'>struct</strong> _fcgi_end_request_rec <em class='brace'>{</em>
+<a id='L105' name='L105'></a> 105         <a href='../D/21378.html' title='Multiple defined in 2 places.'>fcgi_header</a> <a href='../S/1358.html#L138' title='Defined at 138 in main/alloca.c.'>hdr</a>;
+<a id='L106' name='L106'></a> 106         <a href='../D/21357.html' title='Multiple defined in 2 places.'>fcgi_end_request</a> <a href='../S/1135.html#L187' title='Defined at 187 in ext/standard/md5.c.'>body</a>;
+<a id='L107' name='L107'></a> 107 <em class='brace'>}</em> <a href='../R/18598.html' title='Multiple referred from 6 places.'>fcgi_end_request_rec</a>;
+<a id='L108' name='L108'></a> 108 
+<a id='L109' name='L109'></a> 109 <em class='comment'>/* FastCGI client API */</em>
+<a id='L110' name='L110'></a> 110 
+<a id='L111' name='L111'></a> 111 <strong class='reserved'>typedef</strong> <strong class='reserved'>void</strong> (*<a href='../Y/17699.html' title='Multiple used in 4 places.'>fcgi_apply_func</a>)(<strong class='reserved'>char</strong> *<a href='../Y/40598.html' title='Multiple used in 4992 places.'>var</a>, <strong class='reserved'>unsigned</strong> <strong class='reserved'>int</strong> <a href='../Y/40614.html' title='Multiple used in 98 places.'>var_len</a>, <strong class='reserved'>char</strong> *<a href='../Y/40518.html' title='Multiple used in 2351 places.'>val</a>, <strong class='reserved'>unsigned</strong> <strong class='reserved'>int</strong> <a href='../Y/40529.html' title='Multiple used in 104 places.'>val_len</a>, <strong class='reserved'>void</strong> *<a href='../D/19393.html' title='Multiple defined in 2 places.'>arg</a> <a href='../D/14076.html' title='Multiple defined in 136 places.'>TSRMLS_DC</a>);
+<a id='L112' name='L112'></a> 112 
+<a id='L113' name='L113'></a> 113 <strong class='reserved'>typedef</strong> <strong class='reserved'>struct</strong> <a href='../D/18097.html' title='Multiple defined in 2 places.'>_fcgi_request</a> <a href='../R/18634.html' title='Multiple referred from 85 places.'>fcgi_request</a>;
+<a id='L114' name='L114'></a> 114 
+<a id='L115' name='L115'></a> 115 <strong class='reserved'>int</strong> <a href='../D/21381.html' title='Multiple defined in 2 places.'>fcgi_init</a>(<strong class='reserved'>void</strong>);
+<a id='L116' name='L116'></a> 116 <strong class='reserved'>void</strong> <a href='../D/21401.html' title='Multiple defined in 2 places.'>fcgi_shutdown</a>(<strong class='reserved'>void</strong>);
+<a id='L117' name='L117'></a> 117 <strong class='reserved'>int</strong> <a href='../S/1450.html#L471' title='Defined at 471 in sapi/cgi/fastcgi.c.'>fcgi_is_fastcgi</a>(<strong class='reserved'>void</strong>);
+<a id='L118' name='L118'></a> 118 <strong class='reserved'>int</strong> <a href='../S/1450.html#L401' title='Defined at 401 in sapi/cgi/fastcgi.c.'>fcgi_in_shutdown</a>(<strong class='reserved'>void</strong>);
+<a id='L119' name='L119'></a> 119 <strong class='reserved'>void</strong> <a href='../S/1450.html#L406' title='Defined at 406 in sapi/cgi/fastcgi.c.'>fcgi_terminate</a>(<strong class='reserved'>void</strong>);
+<a id='L120' name='L120'></a> 120 <strong class='reserved'>int</strong> <a href='../S/1450.html#L572' title='Defined at 572 in sapi/cgi/fastcgi.c.'>fcgi_listen</a>(<strong class='reserved'>const</strong> <strong class='reserved'>char</strong> *<a href='../Y/31544.html' title='Multiple used in 1178 places.'>path</a>, <strong class='reserved'>int</strong> <a href='../Y/12252.html' title='Multiple used in 29 places.'>backlog</a>);
+<a id='L121' name='L121'></a> 121 <a href='../D/21394.html' title='Multiple defined in 2 places.'>fcgi_request</a>* <a href='../D/21382.html' title='Multiple defined in 2 places.'>fcgi_init_request</a>(<strong class='reserved'>int</strong> <a href='../Y/25263.html' title='Multiple used in 39 places.'>listen_socket</a>);
+<a id='L122' name='L122'></a> 122 <strong class='reserved'>void</strong> <a href='../S/1450.html#L768' title='Defined at 768 in sapi/cgi/fastcgi.c.'>fcgi_destroy_request</a>(<a href='../D/21394.html' title='Multiple defined in 2 places.'>fcgi_request</a> *<a href='../Y/34868.html' title='Multiple used in 621 places.'>req</a>);
+<a id='L123' name='L123'></a> 123 <strong class='reserved'>int</strong> <a href='../D/21351.html' title='Multiple defined in 2 places.'>fcgi_accept_request</a>(<a href='../D/21394.html' title='Multiple defined in 2 places.'>fcgi_request</a> *<a href='../Y/34868.html' title='Multiple used in 621 places.'>req</a>);
+<a id='L124' name='L124'></a> 124 <strong class='reserved'>int</strong> <a href='../D/21359.html' title='Multiple defined in 2 places.'>fcgi_finish_request</a>(<a href='../D/21394.html' title='Multiple defined in 2 places.'>fcgi_request</a> *<a href='../Y/34868.html' title='Multiple used in 621 places.'>req</a>, <strong class='reserved'>int</strong> <a href='../Y/18228.html' title='Multiple used in 6 places.'>force_close</a>);
+<a id='L125' name='L125'></a> 125 
+<a id='L126' name='L126'></a> 126 <strong class='reserved'>char</strong>* <a href='../D/21366.html' title='Multiple defined in 2 places.'>fcgi_getenv</a>(<a href='../D/21394.html' title='Multiple defined in 2 places.'>fcgi_request</a> *<a href='../Y/34868.html' title='Multiple used in 621 places.'>req</a>, <strong class='reserved'>const</strong> <strong class='reserved'>char</strong>* <a href='../Y/40598.html' title='Multiple used in 4992 places.'>var</a>, <strong class='reserved'>int</strong> <a href='../Y/40614.html' title='Multiple used in 98 places.'>var_len</a>);
+<a id='L127' name='L127'></a> 127 <strong class='reserved'>char</strong>* <a href='../D/21389.html' title='Multiple defined in 2 places.'>fcgi_putenv</a>(<a href='../D/21394.html' title='Multiple defined in 2 places.'>fcgi_request</a> *<a href='../Y/34868.html' title='Multiple used in 621 places.'>req</a>, <strong class='reserved'>char</strong>* <a href='../Y/40598.html' title='Multiple used in 4992 places.'>var</a>, <strong class='reserved'>int</strong> <a href='../Y/40614.html' title='Multiple used in 98 places.'>var_len</a>, <strong class='reserved'>char</strong>* <a href='../Y/40518.html' title='Multiple used in 2351 places.'>val</a>);
+<a id='L128' name='L128'></a> 128 <strong class='reserved'>char</strong>* <a href='../S/1450.html#L1477' title='Defined at 1477 in sapi/cgi/fastcgi.c.'>fcgi_quick_getenv</a>(<a href='../D/21394.html' title='Multiple defined in 2 places.'>fcgi_request</a> *<a href='../Y/34868.html' title='Multiple used in 621 places.'>req</a>, <strong class='reserved'>const</strong> <strong class='reserved'>char</strong>* <a href='../Y/40598.html' title='Multiple used in 4992 places.'>var</a>, <strong class='reserved'>int</strong> <a href='../Y/40614.html' title='Multiple used in 98 places.'>var_len</a>, <strong class='reserved'>unsigned</strong> <strong class='reserved'>int</strong> <a href='../Y/19872.html' title='Multiple used in 241 places.'>hash_value</a>);
+<a id='L129' name='L129'></a> 129 <strong class='reserved'>char</strong>* <a href='../S/1450.html#L1495' title='Defined at 1495 in sapi/cgi/fastcgi.c.'>fcgi_quick_putenv</a>(<a href='../D/21394.html' title='Multiple defined in 2 places.'>fcgi_request</a> *<a href='../Y/34868.html' title='Multiple used in 621 places.'>req</a>, <strong class='reserved'>char</strong>* <a href='../Y/40598.html' title='Multiple used in 4992 places.'>var</a>, <strong class='reserved'>int</strong> <a href='../Y/40614.html' title='Multiple used in 98 places.'>var_len</a>, <strong class='reserved'>unsigned</strong> <strong class='reserved'>int</strong> <a href='../Y/19872.html' title='Multiple used in 241 places.'>hash_value</a>, <strong class='reserved'>char</strong>* <a href='../Y/40518.html' title='Multiple used in 2351 places.'>val</a>);
+<a id='L130' name='L130'></a> 130 <strong class='reserved'>void</strong>  <a href='../S/1450.html#L1505' title='Defined at 1505 in sapi/cgi/fastcgi.c.'>fcgi_loadenv</a>(<a href='../D/21394.html' title='Multiple defined in 2 places.'>fcgi_request</a> *<a href='../Y/34868.html' title='Multiple used in 621 places.'>req</a>, <a href='../Y/17699.html' title='Multiple used in 4 places.'>fcgi_apply_func</a> load_func, <a href='../S/1741.html#L55' title='Defined at 55 in Zend/zend_types.h.'>zval</a> *<a href='../Y/11774.html' title='Multiple used in 576 places.'>array</a> <a href='../D/14076.html' title='Multiple defined in 136 places.'>TSRMLS_DC</a>);
+<a id='L131' name='L131'></a> 131 
+<a id='L132' name='L132'></a> 132 <strong class='reserved'>int</strong> <a href='../D/21392.html' title='Multiple defined in 2 places.'>fcgi_read</a>(<a href='../D/21394.html' title='Multiple defined in 2 places.'>fcgi_request</a> *<a href='../Y/34868.html' title='Multiple used in 621 places.'>req</a>, <strong class='reserved'>char</strong> *<a href='../Y/37895.html' title='Multiple used in 2900 places.'>str</a>, <strong class='reserved'>int</strong> <a href='../Y/25062.html' title='Multiple used in 4873 places.'>len</a>);
+<a id='L133' name='L133'></a> 133 
+<a id='L134' name='L134'></a> 134 <strong class='reserved'>int</strong> <a href='../D/21405.html' title='Multiple defined in 2 places.'>fcgi_write</a>(<a href='../D/21394.html' title='Multiple defined in 2 places.'>fcgi_request</a> *<a href='../Y/34868.html' title='Multiple used in 621 places.'>req</a>, <a href='../D/21395.html' title='Multiple defined in 2 places.'>fcgi_request_type</a> <a href='../D/32025.html' title='Multiple defined in 3 places.'>type</a>, <strong class='reserved'>const</strong> <strong class='reserved'>char</strong> *<a href='../Y/37895.html' title='Multiple used in 2900 places.'>str</a>, <strong class='reserved'>int</strong> <a href='../Y/25062.html' title='Multiple used in 4873 places.'>len</a>);
+<a id='L135' name='L135'></a> 135 <strong class='reserved'>int</strong> <a href='../D/21360.html' title='Multiple defined in 2 places.'>fcgi_flush</a>(<a href='../D/21394.html' title='Multiple defined in 2 places.'>fcgi_request</a> *<a href='../Y/34868.html' title='Multiple used in 621 places.'>req</a>, <strong class='reserved'>int</strong> <a href='../D/20053.html' title='Multiple defined in 3 places.'>close</a>);
+<a id='L136' name='L136'></a> 136 
+<a id='L137' name='L137'></a> 137 <em class='sharp'>#ifdef</em> <a href='../Y/4758.html' title='Multiple used in 689 places.'>PHP_WIN32</a>
+<a id='L138' name='L138'></a> 138 <strong class='reserved'>void</strong> <a href='../S/1450.html#L1511' title='Defined at 1511 in sapi/cgi/fastcgi.c.'>fcgi_impersonate</a>(<strong class='reserved'>void</strong>);
+<a id='L139' name='L139'></a> 139 <em class='sharp'>#endif</em>
+<a id='L140' name='L140'></a> 140 
+<a id='L141' name='L141'></a> 141 <strong class='reserved'>void</strong> <a href='../D/21399.html' title='Multiple defined in 2 places.'>fcgi_set_mgmt_var</a>(<strong class='reserved'>const</strong> <strong class='reserved'>char</strong> * <a href='../Y/28160.html' title='Multiple used in 4617 places.'>name</a>, <a href='../Y/36596.html' title='Multiple used in 2694 places.'>size_t</a> <a href='../Y/28182.html' title='Multiple used in 916 places.'>name_len</a>, <strong class='reserved'>const</strong> <strong class='reserved'>char</strong> * <a href='../S/1737.html#L277' title='Defined at 277 in Zend/zend_strtod.c.'>value</a>, <a href='../Y/36596.html' title='Multiple used in 2694 places.'>size_t</a> <a href='../Y/40574.html' title='Multiple used in 174 places.'>value_len</a>);
+<a id='L142' name='L142'></a> 142 <strong class='reserved'>void</strong> <a href='../D/21361.html' title='Multiple defined in 2 places.'>fcgi_free_mgmt_var_cb</a>(<strong class='reserved'>void</strong> * <a href='../Y/34004.html' title='Multiple used in 3316 places.'>ptr</a>);
+<a id='L143' name='L143'></a> 143 
+<a id='L144' name='L144'></a> 144 <em class='comment'>/*</em>
+<a id='L145' name='L145'></a> 145 <em class='comment'> * Local variables:</em>
+<a id='L146' name='L146'></a> 146 <em class='comment'> * tab-width: 4</em>
+<a id='L147' name='L147'></a> 147 <em class='comment'> * c-basic-offset: 4</em>
+<a id='L148' name='L148'></a> 148 <em class='comment'> * End:</em>
+<a id='L149' name='L149'></a> 149 <em class='comment'> * vim600: sw=4 ts=4 fdm=marker</em>
+<a id='L150' name='L150'></a> 150 <em class='comment'> * vim&lt;600: sw=4 ts=4</em>
+<a id='L151' name='L151'></a> 151 <em class='comment'> */</em>
+</pre>
+<hr />
+<a id='BOTTOM' name='BOTTOM'></a>
+<em class='comment'>/* [&lt;][&gt;][^][v]<a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>uwrap</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/1419.html#L75'>uwrap</a>              75 main/streams/userspace.c 	struct php_user_stream_wrapper * uwrap = (struct php_user_stream_wrapper*)rsrc-&gt;ptr;</span>
+<span class='curline'><a href='../S/1419.html#L77'>uwrap</a>              77 main/streams/userspace.c 	efree(uwrap-&gt;protoname);</span>
+<span class='curline'><a href='../S/1419.html#L78'>uwrap</a>              78 main/streams/userspace.c 	efree(uwrap-&gt;classname);</span>
+<span class='curline'><a href='../S/1419.html#L79'>uwrap</a>              79 main/streams/userspace.c 	efree(uwrap);</span>
+<span class='curline'><a href='../S/1419.html#L284'>uwrap</a>             284 main/streams/userspace.c static zval *user_stream_create_object(struct php_user_stream_wrapper *uwrap, php_stream_context *context TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1419.html#L289'>uwrap</a>             289 main/streams/userspace.c 	object_init_ex(object, uwrap-&gt;ce);</span>
+<span class='curline'><a href='../S/1419.html#L300'>uwrap</a>             300 main/streams/userspace.c 	if (uwrap-&gt;ce-&gt;constructor) {</span>
+<span class='curline'><a href='../S/1419.html#L306'>uwrap</a>             306 main/streams/userspace.c 		fci.function_table = &amp;uwrap-&gt;ce-&gt;function_table;</span>
+<span class='curline'><a href='../S/1419.html#L316'>uwrap</a>             316 main/streams/userspace.c 		fcc.function_handler = uwrap-&gt;ce-&gt;constructor;</span>
+<span class='curline'><a href='../S/1419.html#L322'>uwrap</a>             322 main/streams/userspace.c 			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Could not execute %s::%s()", uwrap-&gt;ce-&gt;name, uwrap-&gt;ce-&gt;constructor-&gt;common.function_name);</span>
+<span class='curline'><a href='../S/1419.html#L338'>uwrap</a>             338 main/streams/userspace.c 	struct php_user_stream_wrapper *uwrap = (struct php_user_stream_wrapper*)wrapper-&gt;abstract;</span>
+<span class='curline'><a href='../S/1419.html#L358'>uwrap</a>             358 main/streams/userspace.c 	if(uwrap-&gt;wrapper.is_url == 0 &amp;&amp;</span>
+<span class='curline'><a href='../S/1419.html#L365'>uwrap</a>             365 main/streams/userspace.c 	us-&gt;wrapper = uwrap;</span>
+<span class='curline'><a href='../S/1419.html#L367'>uwrap</a>             367 main/streams/userspace.c 	us-&gt;object = user_stream_create_object(uwrap, context TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1419.html#L444'>uwrap</a>             444 main/streams/userspace.c 	struct php_user_stream_wrapper *uwrap = (struct php_user_stream_wrapper*)wrapper-&gt;abstract;</span>
+<span class='curline'><a href='../S/1419.html#L459'>uwrap</a>             459 main/streams/userspace.c 	us-&gt;wrapper = uwrap;</span>
+<span class='curline'><a href='../S/1419.html#L461'>uwrap</a>             461 main/streams/userspace.c 	us-&gt;object = user_stream_create_object(uwrap, context TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1419.html#L523'>uwrap</a>             523 main/streams/userspace.c 	struct php_user_stream_wrapper * uwrap;</span>
+<span class='curline'><a href='../S/1419.html#L531'>uwrap</a>             531 main/streams/userspace.c 	uwrap = (struct php_user_stream_wrapper *)ecalloc(1, sizeof(*uwrap));</span>
+<span class='curline'><a href='../S/1419.html#L532'>uwrap</a>             532 main/streams/userspace.c 	uwrap-&gt;protoname = estrndup(protocol, protocol_len);</span>
+<span class='curline'><a href='../S/1419.html#L533'>uwrap</a>             533 main/streams/userspace.c 	uwrap-&gt;classname = estrndup(classname, classname_len);</span>
+<span class='curline'><a href='../S/1419.html#L534'>uwrap</a>             534 main/streams/userspace.c 	uwrap-&gt;wrapper.wops = &amp;user_stream_wops;</span>
+<span class='curline'><a href='../S/1419.html#L535'>uwrap</a>             535 main/streams/userspace.c 	uwrap-&gt;wrapper.abstract = uwrap;</span>
+<span class='curline'><a href='../S/1419.html#L536'>uwrap</a>             536 main/streams/userspace.c 	uwrap-&gt;wrapper.is_url = ((flags &amp; PHP_STREAM_IS_URL) != 0);</span>
+<span class='curline'><a href='../S/1419.html#L538'>uwrap</a>             538 main/streams/userspace.c 	rsrc_id = ZEND_REGISTER_RESOURCE(NULL, uwrap, le_protocols);</span>
+<span class='curline'><a href='../S/1419.html#L540'>uwrap</a>             540 main/streams/userspace.c 	if (zend_lookup_class(uwrap-&gt;classname, classname_len, (zend_class_entry***)&amp;uwrap-&gt;ce TSRMLS_CC) == SUCCESS) {</span>
+<span class='curline'><a href='../S/1419.html#L541'>uwrap</a>             541 main/streams/userspace.c 		uwrap-&gt;ce = *(zend_class_entry**)uwrap-&gt;ce;</span>
+<span class='curline'><a href='../S/1419.html#L542'>uwrap</a>             542 main/streams/userspace.c 		if (php_register_url_stream_wrapper_volatile(protocol, &amp;uwrap-&gt;wrapper TSRMLS_CC) == SUCCESS) {</span>
+<span class='curline'><a href='../S/1419.html#L1167'>uwrap</a>            1167 main/streams/userspace.c 	struct php_user_stream_wrapper *uwrap = (struct php_user_stream_wrapper*)wrapper-&gt;abstract;</span>
+<span class='curline'><a href='../S/1419.html#L1175'>uwrap</a>            1175 main/streams/userspace.c 	object = user_stream_create_object(uwrap, context TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1419.html#L1198'>uwrap</a>            1198 main/streams/userspace.c 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "%s::" USERSTREAM_UNLINK " is not implemented!", uwrap-&gt;classname);</span>
+<span class='curline'><a href='../S/1419.html#L1215'>uwrap</a>            1215 main/streams/userspace.c 	struct php_user_stream_wrapper *uwrap = (struct php_user_stream_wrapper*)wrapper-&gt;abstract;</span>
+<span class='curline'><a href='../S/1419.html#L1223'>uwrap</a>            1223 main/streams/userspace.c 	object = user_stream_create_object(uwrap, context TSRMLS_CC);	</span>
+<span class='curline'><a href='../S/1419.html#L1250'>uwrap</a>            1250 main/streams/userspace.c 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "%s::" USERSTREAM_RENAME " is not implemented!", uwrap-&gt;classname);</span>
+<span class='curline'><a href='../S/1419.html#L1268'>uwrap</a>            1268 main/streams/userspace.c 	struct php_user_stream_wrapper *uwrap = (struct php_user_stream_wrapper*)wrapper-&gt;abstract;</span>
+<span class='curline'><a href='../S/1419.html#L1276'>uwrap</a>            1276 main/streams/userspace.c 	object = user_stream_create_object(uwrap, context TSRMLS_CC);	</span>
+<span class='curline'><a href='../S/1419.html#L1307'>uwrap</a>            1307 main/streams/userspace.c 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "%s::" USERSTREAM_MKDIR " is not implemented!", uwrap-&gt;classname);</span>
+<span class='curline'><a href='../S/1419.html#L1327'>uwrap</a>            1327 main/streams/userspace.c 	struct php_user_stream_wrapper *uwrap = (struct php_user_stream_wrapper*)wrapper-&gt;abstract;</span>
+<span class='curline'><a href='../S/1419.html#L1335'>uwrap</a>            1335 main/streams/userspace.c 	object = user_stream_create_object(uwrap, context TSRMLS_CC);	</span>
+<span class='curline'><a href='../S/1419.html#L1362'>uwrap</a>            1362 main/streams/userspace.c 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "%s::" USERSTREAM_RMDIR " is not implemented!", uwrap-&gt;classname);</span>
+<span class='curline'><a href='../S/1419.html#L1381'>uwrap</a>            1381 main/streams/userspace.c 	struct php_user_stream_wrapper *uwrap = (struct php_user_stream_wrapper*)wrapper-&gt;abstract;</span>
+<span class='curline'><a href='../S/1419.html#L1414'>uwrap</a>            1414 main/streams/userspace.c 	object = user_stream_create_object(uwrap, context TSRMLS_CC);	</span>
+<span class='curline'><a href='../S/1419.html#L1444'>uwrap</a>            1444 main/streams/userspace.c 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "%s::" USERSTREAM_METADATA " is not implemented!", uwrap-&gt;classname);</span>
+<span class='curline'><a href='../S/1419.html#L1465'>uwrap</a>            1465 main/streams/userspace.c 	struct php_user_stream_wrapper *uwrap = (struct php_user_stream_wrapper*)wrapper-&gt;abstract;</span>
+<span class='curline'><a href='../S/1419.html#L1473'>uwrap</a>            1473 main/streams/userspace.c 	object = user_stream_create_object(uwrap, context TSRMLS_CC);	</span>
+<span class='curline'><a href='../S/1419.html#L1504'>uwrap</a>            1504 main/streams/userspace.c 					uwrap-&gt;classname);</span>
+</pre>
+</body>
+</html>

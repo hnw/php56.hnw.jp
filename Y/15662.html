@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>dh</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/865.html#L3487'>dh</a>               3487 ext/openssl/openssl.c 			assert(pkey-&gt;pkey.dh != NULL);</span>
+<span class='curline'><a href='../S/865.html#L3489'>dh</a>               3489 ext/openssl/openssl.c 			if (NULL == pkey-&gt;pkey.dh-&gt;p || NULL == pkey-&gt;pkey.dh-&gt;priv_key) {</span>
+<span class='curline'><a href='../S/865.html#L3600'>dh</a>               3600 ext/openssl/openssl.c 				DH *dh = DH_new();</span>
+<span class='curline'><a href='../S/865.html#L3601'>dh</a>               3601 ext/openssl/openssl.c 				if (dh) {</span>
+<span class='curline'><a href='../S/865.html#L3602'>dh</a>               3602 ext/openssl/openssl.c 					OPENSSL_PKEY_SET_BN(Z_ARRVAL_PP(data), dh, p);</span>
+<span class='curline'><a href='../S/865.html#L3603'>dh</a>               3603 ext/openssl/openssl.c 					OPENSSL_PKEY_SET_BN(Z_ARRVAL_PP(data), dh, g);</span>
+<span class='curline'><a href='../S/865.html#L3604'>dh</a>               3604 ext/openssl/openssl.c 					OPENSSL_PKEY_SET_BN(Z_ARRVAL_PP(data), dh, priv_key);</span>
+<span class='curline'><a href='../S/865.html#L3605'>dh</a>               3605 ext/openssl/openssl.c 					OPENSSL_PKEY_SET_BN(Z_ARRVAL_PP(data), dh, pub_key);</span>
+<span class='curline'><a href='../S/865.html#L3606'>dh</a>               3606 ext/openssl/openssl.c 					if (dh-&gt;p &amp;&amp; dh-&gt;g &amp;&amp;</span>
+<span class='curline'><a href='../S/865.html#L3607'>dh</a>               3607 ext/openssl/openssl.c 							(dh-&gt;pub_key || DH_generate_key(dh)) &amp;&amp;</span>
+<span class='curline'><a href='../S/865.html#L3608'>dh</a>               3608 ext/openssl/openssl.c 							EVP_PKEY_assign_DH(pkey, dh)) {</span>
+<span class='curline'><a href='../S/865.html#L3611'>dh</a>               3611 ext/openssl/openssl.c 					DH_free(dh);</span>
+<span class='curline'><a href='../S/865.html#L3916'>dh</a>               3916 ext/openssl/openssl.c 			if (pkey-&gt;pkey.dh != NULL) {</span>
+<span class='curline'><a href='../S/865.html#L3917'>dh</a>               3917 ext/openssl/openssl.c 				zval *dh;</span>
+<span class='curline'><a href='../S/865.html#L3919'>dh</a>               3919 ext/openssl/openssl.c 				ALLOC_INIT_ZVAL(dh);</span>
+<span class='curline'><a href='../S/865.html#L3920'>dh</a>               3920 ext/openssl/openssl.c 				array_init(dh);</span>
+<span class='curline'><a href='../S/865.html#L3921'>dh</a>               3921 ext/openssl/openssl.c 				OPENSSL_PKEY_GET_BN(dh, p);</span>
+<span class='curline'><a href='../S/865.html#L3922'>dh</a>               3922 ext/openssl/openssl.c 				OPENSSL_PKEY_GET_BN(dh, g);</span>
+<span class='curline'><a href='../S/865.html#L3923'>dh</a>               3923 ext/openssl/openssl.c 				OPENSSL_PKEY_GET_BN(dh, priv_key);</span>
+<span class='curline'><a href='../S/865.html#L3924'>dh</a>               3924 ext/openssl/openssl.c 				OPENSSL_PKEY_GET_BN(dh, pub_key);</span>
+<span class='curline'><a href='../S/865.html#L3925'>dh</a>               3925 ext/openssl/openssl.c 				add_assoc_zval(return_value, "dh", dh);</span>
+<span class='curline'><a href='../S/865.html#L5372'>dh</a>               5372 ext/openssl/openssl.c 	if (!pkey || EVP_PKEY_type(pkey-&gt;type) != EVP_PKEY_DH || !pkey-&gt;pkey.dh) {</span>
+<span class='curline'><a href='../S/865.html#L5378'>dh</a>               5378 ext/openssl/openssl.c 	data = emalloc(DH_size(pkey-&gt;pkey.dh) + 1);</span>
+<span class='curline'><a href='../S/865.html#L5379'>dh</a>               5379 ext/openssl/openssl.c 	len = DH_compute_key((unsigned char*)data, pub, pkey-&gt;pkey.dh);</span>
+<span class='curline'><a href='../S/867.html#L1161'>dh</a>               1161 ext/openssl/xp_ssl.c 	DH *dh;</span>
+<span class='curline'><a href='../S/867.html#L1171'>dh</a>               1171 ext/openssl/xp_ssl.c 	dh = PEM_read_bio_DHparams(bio, NULL, NULL, NULL);</span>
+<span class='curline'><a href='../S/867.html#L1174'>dh</a>               1174 ext/openssl/xp_ssl.c 	if (dh == NULL) {</span>
+<span class='curline'><a href='../S/867.html#L1179'>dh</a>               1179 ext/openssl/xp_ssl.c 	if (SSL_CTX_set_tmp_dh(ctx, dh) &lt; 0) {</span>
+<span class='curline'><a href='../S/867.html#L1181'>dh</a>               1181 ext/openssl/xp_ssl.c 		DH_free(dh);</span>
+<span class='curline'><a href='../S/867.html#L1185'>dh</a>               1185 ext/openssl/xp_ssl.c 	DH_free(dh);</span>
+</pre>
+</body>
+</html>

@@ -1,0 +1,830 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>php_stream</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/30.html#L133'>php_stream</a>        133 ext/bz2/bz2.c  	php_stream *stream;</span>
+<span class='curline'><a href='../S/30.html#L138'>php_stream</a>        138 ext/bz2/bz2.c  static size_t php_bz2iop_read(php_stream *stream, char *buf, size_t count TSRMLS_DC)</span>
+<span class='curline'><a href='../S/30.html#L152'>php_stream</a>        152 ext/bz2/bz2.c  static size_t php_bz2iop_write(php_stream *stream, const char *buf, size_t count TSRMLS_DC)</span>
+<span class='curline'><a href='../S/30.html#L159'>php_stream</a>        159 ext/bz2/bz2.c  static int php_bz2iop_close(php_stream *stream, int close_handle TSRMLS_DC)</span>
+<span class='curline'><a href='../S/30.html#L177'>php_stream</a>        177 ext/bz2/bz2.c  static int php_bz2iop_flush(php_stream *stream TSRMLS_DC)</span>
+<span class='curline'><a href='../S/30.html#L195'>php_stream</a>        195 ext/bz2/bz2.c  PHP_BZ2_API php_stream *_php_stream_bz2open_from_BZFILE(BZFILE *bz, </span>
+<span class='curline'><a href='../S/30.html#L196'>php_stream</a>        196 ext/bz2/bz2.c  														const char *mode, php_stream *innerstream STREAMS_DC TSRMLS_DC)</span>
+<span class='curline'><a href='../S/30.html#L208'>php_stream</a>        208 ext/bz2/bz2.c  PHP_BZ2_API php_stream *_php_stream_bz2open(php_stream_wrapper *wrapper,</span>
+<span class='curline'><a href='../S/30.html#L215'>php_stream</a>        215 ext/bz2/bz2.c  	php_stream *retstream = NULL, *stream = NULL;</span>
+<span class='curline'><a href='../S/30.html#L339'>php_stream</a>        339 ext/bz2/bz2.c  	php_stream *stream;</span>
+<span class='curline'><a href='../S/30.html#L375'>php_stream</a>        375 ext/bz2/bz2.c  	php_stream *stream = NULL;</span>
+<span class='curline'><a href='../S/30.html#L596'>php_stream</a>        596 ext/bz2/bz2.c  	php_stream   *stream;</span>
+<span class='curline'><a href='../S/31.html#L68'>php_stream</a>         68 ext/bz2/bz2_filter.c 	php_stream *stream,</span>
+<span class='curline'><a href='../S/31.html#L206'>php_stream</a>        206 ext/bz2/bz2_filter.c 	php_stream *stream,</span>
+<span class='curline'><a href='../S/32.html#L50'>php_stream</a>         50 ext/bz2/php_bz2.h PHP_BZ2_API php_stream *_php_stream_bz2open(php_stream_wrapper *wrapper, const char *path, const char *mode, int options, char **opened_path, php_stream_context *context STREAMS_DC TSRMLS_DC);</span>
+<span class='curline'><a href='../S/32.html#L51'>php_stream</a>         51 ext/bz2/php_bz2.h PHP_BZ2_API php_stream *_php_stream_bz2open_from_BZFILE(BZFILE *bz, const char *mode, php_stream *innerstream STREAMS_DC TSRMLS_DC);</span>
+<span class='curline'><a href='../S/50.html#L43'>php_stream</a>         43 ext/com_dotnet/com_persist.c 	php_stream *stream;</span>
+<span class='curline'><a href='../S/50.html#L271'>php_stream</a>        271 ext/com_dotnet/com_persist.c PHP_COM_DOTNET_API IStream *php_com_wrapper_export_stream(php_stream *stream TSRMLS_DC)</span>
+<span class='curline'><a href='../S/50.html#L538'>php_stream</a>        538 ext/com_dotnet/com_persist.c 	php_stream *stream;</span>
+<span class='curline'><a href='../S/50.html#L598'>php_stream</a>        598 ext/com_dotnet/com_persist.c 	php_stream *stream;</span>
+<span class='curline'><a href='../S/60.html#L226'>php_stream</a>        226 ext/curl/interface.c 	php_stream *stream;</span>
+<span class='curline'><a href='../S/60.html#L232'>php_stream</a>        232 ext/curl/interface.c 		stream = (php_stream *) zend_fetch_resource(&amp;ch-&gt;handlers-&gt;std_err TSRMLS_CC, -1, NULL, NULL, 2, php_file_le_stream(), php_file_le_pstream());</span>
+<span class='curline'><a href='../S/60.html#L244'>php_stream</a>        244 ext/curl/interface.c 		stream = (php_stream *) zend_fetch_resource(&amp;ch-&gt;handlers-&gt;read-&gt;stream TSRMLS_CC, -1, NULL, NULL, 2, php_file_le_stream(), php_file_le_pstream());</span>
+<span class='curline'><a href='../S/60.html#L258'>php_stream</a>        258 ext/curl/interface.c 		stream = (php_stream *) zend_fetch_resource(&amp;ch-&gt;handlers-&gt;write_header-&gt;stream TSRMLS_CC, -1, NULL, NULL, 2, php_file_le_stream(), php_file_le_pstream());</span>
+<span class='curline'><a href='../S/60.html#L272'>php_stream</a>        272 ext/curl/interface.c 		stream = (php_stream *) zend_fetch_resource(&amp;ch-&gt;handlers-&gt;write-&gt;stream TSRMLS_CC, -1, NULL, NULL, 2, php_file_le_stream(), php_file_le_pstream());</span>
+<span class='curline'><a href='../S/60.html#L2386'>php_stream</a>       2386 ext/curl/interface.c 				if (FAILURE == php_stream_cast((php_stream *) what, PHP_STREAM_AS_STDIO, (void *) &amp;fp, REPORT_ERRORS)) {</span>
+<span class='curline'><a href='../S/60.html#L2405'>php_stream</a>       2405 ext/curl/interface.c 					} else if (((php_stream *) what)-&gt;mode[0] != 'r' || ((php_stream *) what)-&gt;mode[1] == '+') {</span>
+<span class='curline'><a href='../S/60.html#L2426'>php_stream</a>       2426 ext/curl/interface.c 					} else if (((php_stream *) what)-&gt;mode[0] != 'r' || ((php_stream *) what)-&gt;mode[1] == '+') {</span>
+<span class='curline'><a href='../S/60.html#L2463'>php_stream</a>       2463 ext/curl/interface.c 					} else if (((php_stream *) what)-&gt;mode[0] != 'r' || ((php_stream *) what)-&gt;mode[1] == '+') {</span>
+<span class='curline'><a href='../S/60.html#L2997'>php_stream</a>       2997 ext/curl/interface.c 		php_stream  *stream;</span>
+<span class='curline'><a href='../S/60.html#L2998'>php_stream</a>       2998 ext/curl/interface.c 		stream = (php_stream*)zend_fetch_resource(&amp;ch-&gt;handlers-&gt;std_err TSRMLS_CC, -1, NULL, NULL, 2, php_file_le_stream(), php_file_le_pstream());</span>
+<span class='curline'><a href='../S/82.html#L54'>php_stream</a>         54 ext/dba/dba_cdb.c 	php_stream *file;</span>
+<span class='curline'><a href='../S/82.html#L66'>php_stream</a>         66 ext/dba/dba_cdb.c 	php_stream* file = 0;</span>
+<span class='curline'><a href='../S/82.html#L228'>php_stream</a>        228 ext/dba/dba_cdb.c int cdb_file_lseek(php_stream *fp, off_t offset, int whence TSRMLS_DC) {</span>
+<span class='curline'><a href='../S/94.html#L95'>php_stream</a>         95 ext/dba/libcdb/cdb.c void cdb_init(struct cdb *c, php_stream *fp TSRMLS_DC)</span>
+<span class='curline'><a href='../S/95.html#L31'>php_stream</a>         31 ext/dba/libcdb/cdb.h 	php_stream *fp;</span>
+<span class='curline'><a href='../S/95.html#L44'>php_stream</a>         44 ext/dba/libcdb/cdb.h void cdb_init(struct cdb *, php_stream *fp TSRMLS_DC);</span>
+<span class='curline'><a href='../S/96.html#L59'>php_stream</a>         59 ext/dba/libcdb/cdb_make.c int cdb_make_start(struct cdb_make *c, php_stream * f TSRMLS_DC)</span>
+<span class='curline'><a href='../S/97.html#L54'>php_stream</a>         54 ext/dba/libcdb/cdb_make.h 	php_stream * fp;</span>
+<span class='curline'><a href='../S/97.html#L57'>php_stream</a>         57 ext/dba/libcdb/cdb_make.h int cdb_make_start(struct cdb_make *, php_stream * TSRMLS_DC);</span>
+<span class='curline'><a href='../S/101.html#L32'>php_stream</a>         32 ext/dba/libflatfile/flatfile.h 	php_stream *fp;</span>
+<span class='curline'><a href='../S/102.html#L82'>php_stream</a>         82 ext/dba/libinifile/inifile.c inifile * inifile_alloc(php_stream *fp, int readonly, int persistent TSRMLS_DC)</span>
+<span class='curline'><a href='../S/102.html#L388'>php_stream</a>        388 ext/dba/libinifile/inifile.c 	php_stream *fp;</span>
+<span class='curline'><a href='../S/102.html#L465'>php_stream</a>        465 ext/dba/libinifile/inifile.c 	php_stream *fp_tmp = NULL;</span>
+<span class='curline'><a href='../S/103.html#L42'>php_stream</a>         42 ext/dba/libinifile/inifile.h 	php_stream *fp;</span>
+<span class='curline'><a href='../S/103.html#L63'>php_stream</a>         63 ext/dba/libinifile/inifile.h inifile * inifile_alloc(php_stream *fp, int readonly, int persistent TSRMLS_DC);</span>
+<span class='curline'><a href='../S/109.html#L35'>php_stream</a>         35 ext/dba/php_dba.h 	php_stream *fp;</span>
+<span class='curline'><a href='../S/109.html#L45'>php_stream</a>         45 ext/dba/php_dba.h 	php_stream *fp;  /* this is the database stream for builtin handlers */</span>
+<span class='curline'><a href='../S/172.html#L1513'>php_stream</a>       1513 ext/exif/exif.c 	php_stream      *infile;</span>
+<span class='curline'><a href='../S/172.html#L4158'>php_stream</a>       4158 ext/exif/exif.c 	php_stream * stream;</span>
+<span class='curline'><a href='../S/175.html#L482'>php_stream</a>        482 ext/fileinfo/fileinfo.c 				php_stream *stream;</span>
+<span class='curline'><a href='../S/175.html#L520'>php_stream</a>        520 ext/fileinfo/fileinfo.c 				php_stream *stream;</span>
+<span class='curline'><a href='../S/176.html#L961'>php_stream</a>        961 ext/fileinfo/libmagic/apprentice.c 	php_stream *stream;</span>
+<span class='curline'><a href='../S/176.html#L1151'>php_stream</a>       1151 ext/fileinfo/libmagic/apprentice.c 	php_stream *dir;</span>
+<span class='curline'><a href='../S/176.html#L2606'>php_stream</a>       2606 ext/fileinfo/libmagic/apprentice.c 	php_stream *stream = NULL;</span>
+<span class='curline'><a href='../S/176.html#L2760'>php_stream</a>       2760 ext/fileinfo/libmagic/apprentice.c 	php_stream *stream;</span>
+<span class='curline'><a href='../S/186.html#L416'>php_stream</a>        416 ext/fileinfo/libmagic/file.h protected int file_buffer(struct magic_set *, php_stream *, const char *, const void *,</span>
+<span class='curline'><a href='../S/186.html#L418'>php_stream</a>        418 ext/fileinfo/libmagic/file.h protected int file_fsmagic(struct magic_set *, const char *, struct stat *, php_stream *);</span>
+<span class='curline'><a href='../S/187.html#L93'>php_stream</a>         93 ext/fileinfo/libmagic/fsmagic.c file_fsmagic(struct magic_set *ms, const char *fn, struct stat *sb, php_stream *stream)</span>
+<span class='curline'><a href='../S/188.html#L164'>php_stream</a>        164 ext/fileinfo/libmagic/funcs.c file_buffer(struct magic_set *ms, php_stream *stream, const char *inname, const void *buf,</span>
+<span class='curline'><a href='../S/190.html#L89'>php_stream</a>         89 ext/fileinfo/libmagic/magic.c private const char *file_or_stream(struct magic_set *, const char *, php_stream *);</span>
+<span class='curline'><a href='../S/190.html#L341'>php_stream</a>        341 ext/fileinfo/libmagic/magic.c magic_stream(struct magic_set *ms, php_stream *stream)</span>
+<span class='curline'><a href='../S/190.html#L349'>php_stream</a>        349 ext/fileinfo/libmagic/magic.c file_or_stream(struct magic_set *ms, const char *inname, php_stream *stream)</span>
+<span class='curline'><a href='../S/191.html#L91'>php_stream</a>         91 ext/fileinfo/libmagic/magic.h const char *magic_stream(magic_t, php_stream *);</span>
+<span class='curline'><a href='../S/206.html#L796'>php_stream</a>        796 ext/ftp/ftp.c  ftp_get(ftpbuf_t *ftp, php_stream *outstream, const char *path, ftptype_t type, long resumepos TSRMLS_DC)</span>
+<span class='curline'><a href='../S/206.html#L888'>php_stream</a>        888 ext/ftp/ftp.c  ftp_put(ftpbuf_t *ftp, const char *path, php_stream *instream, ftptype_t type, long startpos TSRMLS_DC)</span>
+<span class='curline'><a href='../S/206.html#L1611'>php_stream</a>       1611 ext/ftp/ftp.c  	php_stream	*tmpstream = NULL;</span>
+<span class='curline'><a href='../S/206.html#L1714'>php_stream</a>       1714 ext/ftp/ftp.c  ftp_nb_get(ftpbuf_t *ftp, php_stream *outstream, const char *path, ftptype_t type, long resumepos TSRMLS_DC)</span>
+<span class='curline'><a href='../S/206.html#L1831'>php_stream</a>       1831 ext/ftp/ftp.c  ftp_nb_put(ftpbuf_t *ftp, const char *path, php_stream *instream, ftptype_t type, long startpos TSRMLS_DC)</span>
+<span class='curline'><a href='../S/207.html#L79'>php_stream</a>         79 ext/ftp/ftp.h  	php_stream		*stream; /* output stream for "nonblocking" transfers */</span>
+<span class='curline'><a href='../S/207.html#L174'>php_stream</a>        174 ext/ftp/ftp.h  int		ftp_get(ftpbuf_t *ftp, php_stream *outstream, const char *path, ftptype_t type, long resumepos TSRMLS_DC);</span>
+<span class='curline'><a href='../S/207.html#L179'>php_stream</a>        179 ext/ftp/ftp.h  int		ftp_put(ftpbuf_t *ftp, const char *path, php_stream *instream, ftptype_t type, long startpos TSRMLS_DC);</span>
+<span class='curline'><a href='../S/207.html#L199'>php_stream</a>        199 ext/ftp/ftp.h  int		ftp_nb_get(ftpbuf_t *ftp, php_stream *outstream, const char *path, ftptype_t type, long resumepos TSRMLS_DC);</span>
+<span class='curline'><a href='../S/207.html#L204'>php_stream</a>        204 ext/ftp/ftp.h  int		ftp_nb_put(ftpbuf_t *ftp, const char *path, php_stream *instream, ftptype_t type, long startpos TSRMLS_DC);</span>
+<span class='curline'><a href='../S/208.html#L744'>php_stream</a>        744 ext/ftp/php_ftp.c 	php_stream	*stream;</span>
+<span class='curline'><a href='../S/208.html#L788'>php_stream</a>        788 ext/ftp/php_ftp.c 	php_stream	*stream;</span>
+<span class='curline'><a href='../S/208.html#L858'>php_stream</a>        858 ext/ftp/php_ftp.c 	php_stream	*outstream;</span>
+<span class='curline'><a href='../S/208.html#L921'>php_stream</a>        921 ext/ftp/php_ftp.c 	php_stream	*outstream;</span>
+<span class='curline'><a href='../S/208.html#L1031'>php_stream</a>       1031 ext/ftp/php_ftp.c 	php_stream	*stream;</span>
+<span class='curline'><a href='../S/208.html#L1078'>php_stream</a>       1078 ext/ftp/php_ftp.c 	php_stream	*stream;</span>
+<span class='curline'><a href='../S/208.html#L1131'>php_stream</a>       1131 ext/ftp/php_ftp.c 	php_stream 	*instream;</span>
+<span class='curline'><a href='../S/208.html#L1184'>php_stream</a>       1184 ext/ftp/php_ftp.c 	php_stream 	*instream;</span>
+<span class='curline'><a href='../S/210.html#L1438'>php_stream</a>       1438 ext/gd/gd.c    	php_stream *stream;</span>
+<span class='curline'><a href='../S/210.html#L2372'>php_stream</a>       2372 ext/gd/gd.c    	php_stream *stream;</span>
+<span class='curline'><a href='../S/213.html#L51'>php_stream</a>         51 ext/gd/gd_ctx.c 	php_stream * stream = (php_stream *)ctx-&gt;data;</span>
+<span class='curline'><a href='../S/213.html#L58'>php_stream</a>         58 ext/gd/gd_ctx.c 	php_stream * stream = (php_stream *)ctx-&gt;data;</span>
+<span class='curline'><a href='../S/213.html#L68'>php_stream</a>         68 ext/gd/gd_ctx.c 		php_stream_close((php_stream *) ctx-&gt;data);</span>
+<span class='curline'><a href='../S/213.html#L89'>php_stream</a>         89 ext/gd/gd_ctx.c 	php_stream *stream;</span>
+<span class='curline'><a href='../S/287.html#L133'>php_stream</a>        133 ext/hash/hash.c 	php_stream *stream = NULL;</span>
+<span class='curline'><a href='../S/287.html#L249'>php_stream</a>        249 ext/hash/hash.c 	php_stream *stream = NULL;</span>
+<span class='curline'><a href='../S/287.html#L428'>php_stream</a>        428 ext/hash/hash.c 	php_stream *stream = NULL;</span>
+<span class='curline'><a href='../S/287.html#L466'>php_stream</a>        466 ext/hash/hash.c 	php_stream *stream;</span>
+<span class='curline'><a href='../S/294.html#L145'>php_stream</a>        145 ext/hash/hash_md.c 	php_stream    *stream;</span>
+<span class='curline'><a href='../S/296.html#L129'>php_stream</a>        129 ext/hash/hash_sha.c 	php_stream    *stream;</span>
+<span class='curline'><a href='../S/318.html#L2621'>php_stream</a>       2621 ext/iconv/iconv.c 		php_stream *stream, php_stream_filter *filter,</span>
+<span class='curline'><a href='../S/318.html#L2828'>php_stream</a>       2828 ext/iconv/iconv.c 		php_stream *stream, php_stream_filter *filter,</span>
+<span class='curline'><a href='../S/320.html#L2410'>php_stream</a>       2410 ext/imap/php_imap.c 	php_stream *writer = NULL;</span>
+<span class='curline'><a href='../S/321.html#L216'>php_stream</a>        216 ext/imap/php_imap.h 	php_stream *gets_stream;</span>
+<span class='curline'><a href='../S/322.html#L546'>php_stream</a>        546 ext/interbase/ibase_blobs.c 	php_stream *stream;</span>
+<span class='curline'><a href='../S/464.html#L374'>php_stream</a>        374 ext/libxml/libxml.c 	return php_stream_read((php_stream*)context, buffer, len);</span>
+<span class='curline'><a href='../S/464.html#L380'>php_stream</a>        380 ext/libxml/libxml.c 	return php_stream_write((php_stream*)context, buffer, len);</span>
+<span class='curline'><a href='../S/464.html#L386'>php_stream</a>        386 ext/libxml/libxml.c 	return php_stream_close((php_stream*)context);</span>
+<span class='curline'><a href='../S/464.html#L637'>php_stream</a>        637 ext/libxml/libxml.c 			php_stream *stream;</span>
+<span class='curline'><a href='../S/752.html#L37'>php_stream</a>         37 ext/mcrypt/mcrypt_filter.c 	php_stream *stream,</span>
+<span class='curline'><a href='../S/777.html#L129'>php_stream</a>        129 ext/mysqli/php_mysqli_structs.h 	php_stream		*li_stream;</span>
+<span class='curline'><a href='../S/780.html#L1311'>php_stream</a>       1311 ext/mysqlnd/mysqlnd.c 	php_stream *stream = NULL;</span>
+<span class='curline'><a href='../S/780.html#L1345'>php_stream</a>       1345 ext/mysqlnd/mysqlnd.c 	php_stream *stream = NULL;</span>
+<span class='curline'><a href='../S/780.html#L1906'>php_stream</a>       1906 ext/mysqlnd/mysqlnd.c 	php_stream * net_stream = net-&gt;data-&gt;m.get_stream(net TSRMLS_CC);</span>
+<span class='curline'><a href='../S/784.html#L492'>php_stream</a>        492 ext/mysqlnd/mysqlnd_auth.c 	php_stream * stream;</span>
+<span class='curline'><a href='../S/791.html#L47'>php_stream</a>         47 ext/mysqlnd/mysqlnd_debug.h 	php_stream	*stream;</span>
+<span class='curline'><a href='../S/798.html#L45'>php_stream</a>         45 ext/mysqlnd/mysqlnd_net.c mysqlnd_set_sock_no_delay(php_stream * stream TSRMLS_DC)</span>
+<span class='curline'><a href='../S/798.html#L66'>php_stream</a>         66 ext/mysqlnd/mysqlnd_net.c mysqlnd_set_sock_keepalive(php_stream * stream TSRMLS_DC)</span>
+<span class='curline'><a href='../S/798.html#L91'>php_stream</a>         91 ext/mysqlnd/mysqlnd_net.c 	php_stream * net_stream = net-&gt;data-&gt;m.get_stream(net TSRMLS_CC);</span>
+<span class='curline'><a href='../S/798.html#L130'>php_stream</a>        130 ext/mysqlnd/mysqlnd_net.c static php_stream *</span>
+<span class='curline'><a href='../S/798.html#L140'>php_stream</a>        140 ext/mysqlnd/mysqlnd_net.c 	php_stream * net_stream = NULL;</span>
+<span class='curline'><a href='../S/798.html#L168'>php_stream</a>        168 ext/mysqlnd/mysqlnd_net.c static php_stream *</span>
+<span class='curline'><a href='../S/798.html#L184'>php_stream</a>        184 ext/mysqlnd/mysqlnd_net.c 	php_stream * net_stream = NULL;</span>
+<span class='curline'><a href='../S/798.html#L264'>php_stream</a>        264 ext/mysqlnd/mysqlnd_net.c 	php_stream * net_stream = net-&gt;data-&gt;m.get_stream(net TSRMLS_CC);</span>
+<span class='curline'><a href='../S/798.html#L329'>php_stream</a>        329 ext/mysqlnd/mysqlnd_net.c 		php_stream * net_stream = open_stream(net, scheme, scheme_len, persistent, conn_stats, error_info TSRMLS_CC);</span>
+<span class='curline'><a href='../S/798.html#L864'>php_stream</a>        864 ext/mysqlnd/mysqlnd_net.c 	php_stream * net_stream = net-&gt;data-&gt;get_stream(net TSRMLS_CC);</span>
+<span class='curline'><a href='../S/798.html#L907'>php_stream</a>        907 ext/mysqlnd/mysqlnd_net.c 	php_stream * net_stream = net-&gt;data-&gt;m.get_stream(net TSRMLS_CC);</span>
+<span class='curline'><a href='../S/798.html#L1066'>php_stream</a>       1066 ext/mysqlnd/mysqlnd_net.c 	php_stream * net_stream;</span>
+<span class='curline'><a href='../S/798.html#L1137'>php_stream</a>       1137 ext/mysqlnd/mysqlnd_net.c static php_stream *</span>
+<span class='curline'><a href='../S/798.html#L1148'>php_stream</a>       1148 ext/mysqlnd/mysqlnd_net.c static php_stream *</span>
+<span class='curline'><a href='../S/798.html#L1149'>php_stream</a>       1149 ext/mysqlnd/mysqlnd_net.c MYSQLND_METHOD(mysqlnd_net, set_stream)(MYSQLND_NET * const net, php_stream * net_stream TSRMLS_DC)</span>
+<span class='curline'><a href='../S/798.html#L1151'>php_stream</a>       1151 ext/mysqlnd/mysqlnd_net.c 	php_stream * ret = NULL;</span>
+<span class='curline'><a href='../S/813.html#L128'>php_stream</a>        128 ext/mysqlnd/mysqlnd_structs.h 	php_stream	*fd;</span>
+<span class='curline'><a href='../S/813.html#L305'>php_stream</a>        305 ext/mysqlnd/mysqlnd_structs.h typedef php_stream *		(*func_mysqlnd_net__open_stream)(MYSQLND_NET * const net, const char * const scheme, const size_t scheme_len, const zend_bool persistent, MYSQLND_STATS * const conn_stats, MYSQLND_ERROR_INFO * const error_info TSRMLS_DC);</span>
+<span class='curline'><a href='../S/813.html#L306'>php_stream</a>        306 ext/mysqlnd/mysqlnd_structs.h typedef php_stream *		(*func_mysqlnd_net__get_stream)(const MYSQLND_NET * const net TSRMLS_DC);</span>
+<span class='curline'><a href='../S/813.html#L307'>php_stream</a>        307 ext/mysqlnd/mysqlnd_structs.h typedef php_stream *		(*func_mysqlnd_net__set_stream)(MYSQLND_NET * const net, php_stream * net_stream TSRMLS_DC);</span>
+<span class='curline'><a href='../S/813.html#L860'>php_stream</a>        860 ext/mysqlnd/mysqlnd_structs.h 	php_stream			*stream;</span>
+<span class='curline'><a href='../S/820.html#L882'>php_stream</a>        882 ext/oci8/oci8_interface.c 	php_stream *stream;</span>
+<span class='curline'><a href='../S/863.html#L797'>php_stream</a>        797 ext/opcache/ZendAccelerator.c 				php_stream *stream = (php_stream *)file_handle-&gt;handle.stream.handle;</span>
+<span class='curline'><a href='../S/865.html#L579'>php_stream</a>        579 ext/openssl/openssl.c php_stream* php_openssl_get_stream_from_ssl_handle(const SSL *ssl)</span>
+<span class='curline'><a href='../S/865.html#L581'>php_stream</a>        581 ext/openssl/openssl.c 	return (php_stream*)SSL_get_ex_data(ssl, ssl_stream_data_index);</span>
+<span class='curline'><a href='../S/867.html#L77'>php_stream</a>         77 ext/openssl/xp_ssl.c extern php_stream* php_openssl_get_stream_from_ssl_handle(const SSL *ssl);</span>
+<span class='curline'><a href='../S/867.html#L83'>php_stream</a>         83 ext/openssl/xp_ssl.c static size_t php_openssl_sockop_io(int read, php_stream *stream, char *buf, size_t count TSRMLS_DC);</span>
+<span class='curline'><a href='../S/867.html#L125'>php_stream</a>        125 ext/openssl/xp_ssl.c static int is_http_stream_talking_to_iis(php_stream *stream TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/867.html#L150'>php_stream</a>        150 ext/openssl/xp_ssl.c static int handle_ssl_error(php_stream *stream, int nr_bytes, zend_bool is_init TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/867.html#L236'>php_stream</a>        236 ext/openssl/xp_ssl.c 	php_stream *stream;</span>
+<span class='curline'><a href='../S/867.html#L250'>php_stream</a>        250 ext/openssl/xp_ssl.c 	stream = (php_stream*)SSL_get_ex_data(ssl, php_openssl_get_ssl_stream_data_index());</span>
+<span class='curline'><a href='../S/867.html#L451'>php_stream</a>        451 ext/openssl/xp_ssl.c static int apply_peer_verification_policy(SSL *ssl, X509 *peer, php_stream *stream TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/867.html#L553'>php_stream</a>        553 ext/openssl/xp_ssl.c 	php_stream *stream = (php_stream *)data;</span>
+<span class='curline'><a href='../S/867.html#L577'>php_stream</a>        577 ext/openssl/xp_ssl.c 	php_stream *stream;</span>
+<span class='curline'><a href='../S/867.html#L584'>php_stream</a>        584 ext/openssl/xp_ssl.c 	stream = (php_stream*)arg;</span>
+<span class='curline'><a href='../S/867.html#L737'>php_stream</a>        737 ext/openssl/xp_ssl.c 	php_stream *stream;</span>
+<span class='curline'><a href='../S/867.html#L815'>php_stream</a>        815 ext/openssl/xp_ssl.c static int enable_peer_verification(SSL_CTX *ctx, php_stream *stream TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/867.html#L869'>php_stream</a>        869 ext/openssl/xp_ssl.c static void disable_peer_verification(SSL_CTX *ctx, php_stream *stream TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/867.html#L875'>php_stream</a>        875 ext/openssl/xp_ssl.c static int set_local_cert(SSL_CTX *ctx, php_stream *stream TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/867.html#L1014'>php_stream</a>       1014 ext/openssl/xp_ssl.c 	php_stream *stream;</span>
+<span class='curline'><a href='../S/867.html#L1088'>php_stream</a>       1088 ext/openssl/xp_ssl.c static void init_server_reneg_limit(php_stream *stream, php_openssl_netstream_data_t *sslsock) /* {{{ */</span>
+<span class='curline'><a href='../S/867.html#L1129'>php_stream</a>       1129 ext/openssl/xp_ssl.c static int set_server_rsa_key(php_stream *stream, SSL_CTX *ctx TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/867.html#L1192'>php_stream</a>       1192 ext/openssl/xp_ssl.c static int set_server_ecdh_curve(php_stream *stream, SSL_CTX *ctx TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/867.html#L1227'>php_stream</a>       1227 ext/openssl/xp_ssl.c static int set_server_specific_opts(php_stream *stream, SSL_CTX *ctx TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/867.html#L1288'>php_stream</a>       1288 ext/openssl/xp_ssl.c 	php_stream *stream;</span>
+<span class='curline'><a href='../S/867.html#L1299'>php_stream</a>       1299 ext/openssl/xp_ssl.c 	stream = (php_stream*)SSL_get_ex_data(ssl_handle, php_openssl_get_ssl_stream_data_index());</span>
+<span class='curline'><a href='../S/867.html#L1317'>php_stream</a>       1317 ext/openssl/xp_ssl.c static int enable_server_sni(php_stream *stream, php_openssl_netstream_data_t *sslsock TSRMLS_DC)</span>
+<span class='curline'><a href='../S/867.html#L1411'>php_stream</a>       1411 ext/openssl/xp_ssl.c static void enable_client_sni(php_stream *stream, php_openssl_netstream_data_t *sslsock) /* {{{ */</span>
+<span class='curline'><a href='../S/867.html#L1437'>php_stream</a>       1437 ext/openssl/xp_ssl.c int php_openssl_setup_crypto(php_stream *stream,</span>
+<span class='curline'><a href='../S/867.html#L1619'>php_stream</a>       1619 ext/openssl/xp_ssl.c static int capture_peer_certs(php_stream *stream, php_openssl_netstream_data_t *sslsock, X509 *peer_cert TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/867.html#L1669'>php_stream</a>       1669 ext/openssl/xp_ssl.c static int php_openssl_enable_crypto(php_stream *stream,</span>
+<span class='curline'><a href='../S/867.html#L1806'>php_stream</a>       1806 ext/openssl/xp_ssl.c static size_t php_openssl_sockop_read(php_stream *stream, char *buf, size_t count TSRMLS_DC)/* {{{ */</span>
+<span class='curline'><a href='../S/867.html#L1812'>php_stream</a>       1812 ext/openssl/xp_ssl.c static size_t php_openssl_sockop_write(php_stream *stream, const char *buf, size_t count TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/867.html#L1825'>php_stream</a>       1825 ext/openssl/xp_ssl.c static size_t php_openssl_sockop_io(int read, php_stream *stream, char *buf, size_t count TSRMLS_DC)</span>
+<span class='curline'><a href='../S/867.html#L2010'>php_stream</a>       2010 ext/openssl/xp_ssl.c static int php_openssl_sockop_close(php_stream *stream, int close_handle TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/867.html#L2078'>php_stream</a>       2078 ext/openssl/xp_ssl.c static int php_openssl_sockop_flush(php_stream *stream TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/867.html#L2084'>php_stream</a>       2084 ext/openssl/xp_ssl.c static int php_openssl_sockop_stat(php_stream *stream, php_stream_statbuf *ssb TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/867.html#L2090'>php_stream</a>       2090 ext/openssl/xp_ssl.c static inline int php_openssl_tcp_sockop_accept(php_stream *stream, php_openssl_netstream_data_t *sock,</span>
+<span class='curline'><a href='../S/867.html#L2154'>php_stream</a>       2154 ext/openssl/xp_ssl.c static int php_openssl_sockop_set_option(php_stream *stream, int option, int value, void *ptrparam TSRMLS_DC)</span>
+<span class='curline'><a href='../S/867.html#L2272'>php_stream</a>       2272 ext/openssl/xp_ssl.c static int php_openssl_sockop_cast(php_stream *stream, int castas, void **ret TSRMLS_DC)</span>
+<span class='curline'><a href='../S/867.html#L2377'>php_stream</a>       2377 ext/openssl/xp_ssl.c php_stream *php_openssl_ssl_socket_factory(const char *proto, size_t protolen,</span>
+<span class='curline'><a href='../S/867.html#L2383'>php_stream</a>       2383 ext/openssl/xp_ssl.c 	php_stream *stream = NULL;</span>
+<span class='curline'><a href='../S/923.html#L187'>php_stream</a>        187 ext/pdo/pdo_dbh.c 	php_stream *stream;</span>
+<span class='curline'><a href='../S/924.html#L541'>php_stream</a>        541 ext/pdo/pdo_sql_parser.c 					php_stream *stm;</span>
+<span class='curline'><a href='../S/926.html#L602'>php_stream</a>        602 ext/pdo/pdo_stmt.c 					len = php_stream_copy_to_mem((php_stream*)value, &amp;buf, PHP_STREAM_COPY_ALL, 0);</span>
+<span class='curline'><a href='../S/926.html#L608'>php_stream</a>        608 ext/pdo/pdo_stmt.c 					php_stream_close((php_stream*)value);</span>
+<span class='curline'><a href='../S/926.html#L610'>php_stream</a>        610 ext/pdo/pdo_stmt.c 					php_stream_to_zval((php_stream*)value, dest);</span>
+<span class='curline'><a href='../S/926.html#L614'>php_stream</a>        614 ext/pdo/pdo_stmt.c 				php_stream *stm;</span>
+<span class='curline'><a href='../S/926.html#L2130'>php_stream</a>       2130 ext/pdo/pdo_stmt.c 	php_stream *out = php_stream_open_wrapper("php://output", "w", 0, NULL);</span>
+<span class='curline'><a href='../S/942.html#L512'>php_stream</a>        512 ext/pdo_mysql/mysql_statement.c 							php_stream *stm;</span>
+<span class='curline'><a href='../S/948.html#L54'>php_stream</a>         54 ext/pdo_oci/oci_statement.c static php_stream *oci_create_lob_stream(pdo_stmt_t *stmt, OCILobLocator *lob TSRMLS_DC);</span>
+<span class='curline'><a href='../S/948.html#L368'>php_stream</a>        368 ext/pdo_oci/oci_statement.c 					php_stream *stm;</span>
+<span class='curline'><a href='../S/948.html#L614'>php_stream</a>        614 ext/pdo_oci/oci_statement.c static size_t oci_blob_write(php_stream *stream, const char *buf, size_t count TSRMLS_DC)</span>
+<span class='curline'><a href='../S/948.html#L634'>php_stream</a>        634 ext/pdo_oci/oci_statement.c static size_t oci_blob_read(php_stream *stream, char *buf, size_t count TSRMLS_DC)</span>
+<span class='curline'><a href='../S/948.html#L656'>php_stream</a>        656 ext/pdo_oci/oci_statement.c static int oci_blob_close(php_stream *stream, int close_handle TSRMLS_DC)</span>
+<span class='curline'><a href='../S/948.html#L670'>php_stream</a>        670 ext/pdo_oci/oci_statement.c static int oci_blob_flush(php_stream *stream TSRMLS_DC)</span>
+<span class='curline'><a href='../S/948.html#L677'>php_stream</a>        677 ext/pdo_oci/oci_statement.c static int oci_blob_seek(php_stream *stream, off_t offset, int whence, off_t *newoffset TSRMLS_DC)</span>
+<span class='curline'><a href='../S/948.html#L701'>php_stream</a>        701 ext/pdo_oci/oci_statement.c static php_stream *oci_create_lob_stream(pdo_stmt_t *stmt, OCILobLocator *lob TSRMLS_DC)</span>
+<span class='curline'><a href='../S/948.html#L703'>php_stream</a>        703 ext/pdo_oci/oci_statement.c 	php_stream *stm;</span>
+<span class='curline'><a href='../S/953.html#L180'>php_stream</a>        180 ext/pdo_odbc/odbc_stmt.c 			php_stream *stm;</span>
+<span class='curline'><a href='../S/953.html#L393'>php_stream</a>        393 ext/pdo_odbc/odbc_stmt.c 						php_stream *stm;</span>
+<span class='curline'><a href='../S/958.html#L137'>php_stream</a>        137 ext/pdo_pgsql/pgsql_driver.c static size_t pgsql_lob_write(php_stream *stream, const char *buf, size_t count TSRMLS_DC)</span>
+<span class='curline'><a href='../S/958.html#L143'>php_stream</a>        143 ext/pdo_pgsql/pgsql_driver.c static size_t pgsql_lob_read(php_stream *stream, char *buf, size_t count TSRMLS_DC)</span>
+<span class='curline'><a href='../S/958.html#L149'>php_stream</a>        149 ext/pdo_pgsql/pgsql_driver.c static int pgsql_lob_close(php_stream *stream, int close_handle TSRMLS_DC)</span>
+<span class='curline'><a href='../S/958.html#L162'>php_stream</a>        162 ext/pdo_pgsql/pgsql_driver.c static int pgsql_lob_flush(php_stream *stream TSRMLS_DC)</span>
+<span class='curline'><a href='../S/958.html#L167'>php_stream</a>        167 ext/pdo_pgsql/pgsql_driver.c static int pgsql_lob_seek(php_stream *stream, off_t offset, int whence,</span>
+<span class='curline'><a href='../S/958.html#L188'>php_stream</a>        188 ext/pdo_pgsql/pgsql_driver.c php_stream *pdo_pgsql_create_lob_stream(pdo_dbh_t *dbh, int lfd, Oid oid TSRMLS_DC)</span>
+<span class='curline'><a href='../S/958.html#L190'>php_stream</a>        190 ext/pdo_pgsql/pgsql_driver.c 	php_stream *stm;</span>
+<span class='curline'><a href='../S/958.html#L668'>php_stream</a>        668 ext/pdo_pgsql/pgsql_driver.c 	php_stream *stream;</span>
+<span class='curline'><a href='../S/958.html#L769'>php_stream</a>        769 ext/pdo_pgsql/pgsql_driver.c 	php_stream *stream;</span>
+<span class='curline'><a href='../S/958.html#L992'>php_stream</a>        992 ext/pdo_pgsql/pgsql_driver.c 		php_stream *stream = pdo_pgsql_create_lob_stream(dbh, lfd, oid TSRMLS_CC);</span>
+<span class='curline'><a href='../S/959.html#L307'>php_stream</a>        307 ext/pdo_pgsql/pgsql_statement.c 						php_stream *stm;</span>
+<span class='curline'><a href='../S/961.html#L112'>php_stream</a>        112 ext/pdo_pgsql/php_pdo_pgsql_int.h php_stream *pdo_pgsql_create_lob_stream(pdo_dbh_t *stmt, int lfd, Oid oid TSRMLS_DC);</span>
+<span class='curline'><a href='../S/966.html#L130'>php_stream</a>        130 ext/pdo_sqlite/sqlite_statement.c 							php_stream *stm;</span>
+<span class='curline'><a href='../S/967.html#L3114'>php_stream</a>       3114 ext/pgsql/pgsql.c 	php_stream *stream;</span>
+<span class='curline'><a href='../S/967.html#L5327'>php_stream</a>       5327 ext/pgsql/pgsql.c static size_t php_pgsql_fd_write(php_stream *stream, const char *buf, size_t count TSRMLS_DC)</span>
+<span class='curline'><a href='../S/967.html#L5332'>php_stream</a>       5332 ext/pgsql/pgsql.c static size_t php_pgsql_fd_read(php_stream *stream, char *buf, size_t count TSRMLS_DC)</span>
+<span class='curline'><a href='../S/967.html#L5337'>php_stream</a>       5337 ext/pgsql/pgsql.c static int php_pgsql_fd_close(php_stream *stream, int close_handle TSRMLS_DC)</span>
+<span class='curline'><a href='../S/967.html#L5342'>php_stream</a>       5342 ext/pgsql/pgsql.c static int php_pgsql_fd_flush(php_stream *stream TSRMLS_DC)</span>
+<span class='curline'><a href='../S/967.html#L5347'>php_stream</a>       5347 ext/pgsql/pgsql.c static int php_pgsql_fd_set_option(php_stream *stream, int option, int value, void *ptrparam TSRMLS_DC)</span>
+<span class='curline'><a href='../S/967.html#L5358'>php_stream</a>       5358 ext/pgsql/pgsql.c static int php_pgsql_fd_cast(php_stream *stream, int cast_as, void **ret TSRMLS_DC)</span>
+<span class='curline'><a href='../S/967.html#L5386'>php_stream</a>       5386 ext/pgsql/pgsql.c 	php_stream *stream;</span>
+<span class='curline'><a href='../S/968.html#L230'>php_stream</a>        230 ext/pgsql/php_pgsql.h static size_t php_pgsql_fd_write(php_stream *stream, const char *buf, size_t count TSRMLS_DC);</span>
+<span class='curline'><a href='../S/968.html#L231'>php_stream</a>        231 ext/pgsql/php_pgsql.h static size_t php_pgsql_fd_read(php_stream *stream, char *buf, size_t count TSRMLS_DC);</span>
+<span class='curline'><a href='../S/968.html#L232'>php_stream</a>        232 ext/pgsql/php_pgsql.h static int php_pgsql_fd_close(php_stream *stream, int close_handle TSRMLS_DC);</span>
+<span class='curline'><a href='../S/968.html#L233'>php_stream</a>        233 ext/pgsql/php_pgsql.h static int php_pgsql_fd_flush(php_stream *stream TSRMLS_DC);</span>
+<span class='curline'><a href='../S/968.html#L234'>php_stream</a>        234 ext/pgsql/php_pgsql.h static int php_pgsql_fd_set_option(php_stream *stream, int option, int value, void *ptrparam TSRMLS_DC);</span>
+<span class='curline'><a href='../S/968.html#L235'>php_stream</a>        235 ext/pgsql/php_pgsql.h static int php_pgsql_fd_cast(php_stream *stream, int cast_as, void **ret TSRMLS_DC);</span>
+<span class='curline'><a href='../S/969.html#L43'>php_stream</a>         43 ext/phar/dirstream.c static int phar_dir_close(php_stream *stream, int close_handle TSRMLS_DC)  /* {{{ */</span>
+<span class='curline'><a href='../S/969.html#L61'>php_stream</a>         61 ext/phar/dirstream.c static int phar_dir_seek(php_stream *stream, off_t offset, int whence, off_t *newoffset TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/969.html#L93'>php_stream</a>         93 ext/phar/dirstream.c static size_t phar_dir_read(php_stream *stream, char *buf, size_t count TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/969.html#L123'>php_stream</a>        123 ext/phar/dirstream.c static size_t phar_dir_write(php_stream *stream, const char *buf, size_t count TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/969.html#L132'>php_stream</a>        132 ext/phar/dirstream.c static int phar_dir_flush(php_stream *stream TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/969.html#L180'>php_stream</a>        180 ext/phar/dirstream.c static php_stream *phar_make_dirstream(char *dir, HashTable *manifest TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/969.html#L302'>php_stream</a>        302 ext/phar/dirstream.c php_stream *phar_wrapper_open_dir(php_stream_wrapper *wrapper, const char *path, const char *mode, int options, char **opened_path, php_stream_context *context STREAMS_DC TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/969.html#L305'>php_stream</a>        305 ext/phar/dirstream.c 	php_stream *ret;</span>
+<span class='curline'><a href='../S/970.html#L30'>php_stream</a>         30 ext/phar/dirstream.h static size_t phar_dir_write(php_stream *stream, const char *buf, size_t count TSRMLS_DC);</span>
+<span class='curline'><a href='../S/970.html#L31'>php_stream</a>         31 ext/phar/dirstream.h static size_t phar_dir_read( php_stream *stream, char *buf, size_t count TSRMLS_DC);</span>
+<span class='curline'><a href='../S/970.html#L32'>php_stream</a>         32 ext/phar/dirstream.h static int    phar_dir_close(php_stream *stream, int close_handle TSRMLS_DC);</span>
+<span class='curline'><a href='../S/970.html#L33'>php_stream</a>         33 ext/phar/dirstream.h static int    phar_dir_flush(php_stream *stream TSRMLS_DC);</span>
+<span class='curline'><a href='../S/970.html#L34'>php_stream</a>         34 ext/phar/dirstream.h static int    phar_dir_seek( php_stream *stream, off_t offset, int whence, off_t *newoffset TSRMLS_DC);</span>
+<span class='curline'><a href='../S/970.html#L36'>php_stream</a>         36 ext/phar/dirstream.h php_stream* phar_wrapper_open_dir(php_stream_wrapper *wrapper, const char *path, const char *mode, int options, char **opened_path, php_stream_context *context STREAMS_DC TSRMLS_DC);</span>
+<span class='curline'><a href='../S/971.html#L59'>php_stream</a>         59 ext/phar/func_interceptors.c 			php_stream *stream;</span>
+<span class='curline'><a href='../S/971.html#L100'>php_stream</a>        100 ext/phar/func_interceptors.c 	php_stream *stream;</span>
+<span class='curline'><a href='../S/971.html#L237'>php_stream</a>        237 ext/phar/func_interceptors.c 	php_stream *stream;</span>
+<span class='curline'><a href='../S/971.html#L332'>php_stream</a>        332 ext/phar/func_interceptors.c 	php_stream *stream;</span>
+<span class='curline'><a href='../S/973.html#L650'>php_stream</a>        650 ext/phar/phar.c static int phar_parse_pharfile(php_stream *fp, char *fname, int fname_len, char *alias, int alias_len, long halt_offset, phar_archive_data** pphar, php_uint32 compression, char **error TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/973.html#L1320'>php_stream</a>       1320 ext/phar/phar.c 	php_stream *fp;</span>
+<span class='curline'><a href='../S/973.html#L1473'>php_stream</a>       1473 ext/phar/phar.c 	php_stream *fp;</span>
+<span class='curline'><a href='../S/973.html#L1562'>php_stream</a>       1562 ext/phar/phar.c static int phar_open_from_fp(php_stream* fp, char *fname, int fname_len, char *alias, int alias_len, int options, phar_archive_data** pphar, int is_data, char **error TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/973.html#L1602'>php_stream</a>       1602 ext/phar/phar.c 				php_stream *temp;</span>
+<span class='curline'><a href='../S/973.html#L1661'>php_stream</a>       1661 ext/phar/phar.c 				php_stream *temp;</span>
+<span class='curline'><a href='../S/973.html#L2312'>php_stream</a>       2312 ext/phar/phar.c 	php_stream *fp;</span>
+<span class='curline'><a href='../S/973.html#L2391'>php_stream</a>       2391 ext/phar/phar.c 	php_stream *fp = idata-&gt;fp;</span>
+<span class='curline'><a href='../S/973.html#L2562'>php_stream</a>       2562 ext/phar/phar.c 	php_stream *file, *oldfile, *newfile, *stubfile;</span>
+<span class='curline'><a href='../S/974.html#L259'>php_stream</a>        259 ext/phar/phar_internal.h 	php_stream               *fp;</span>
+<span class='curline'><a href='../S/974.html#L260'>php_stream</a>        260 ext/phar/phar_internal.h 	php_stream               *cfp;</span>
+<span class='curline'><a href='../S/974.html#L309'>php_stream</a>        309 ext/phar/phar_internal.h 	php_stream               *fp;</span>
+<span class='curline'><a href='../S/974.html#L311'>php_stream</a>        311 ext/phar/phar_internal.h 	php_stream               *ufp;</span>
+<span class='curline'><a href='../S/974.html#L343'>php_stream</a>        343 ext/phar/phar_internal.h 	php_stream *fp;</span>
+<span class='curline'><a href='../S/974.html#L344'>php_stream</a>        344 ext/phar/phar_internal.h 	php_stream *ufp;</span>
+<span class='curline'><a href='../S/974.html#L348'>php_stream</a>        348 ext/phar/phar_internal.h static inline php_stream *phar_get_entrypfp(phar_entry_info *entry TSRMLS_DC)</span>
+<span class='curline'><a href='../S/974.html#L356'>php_stream</a>        356 ext/phar/phar_internal.h static inline php_stream *phar_get_entrypufp(phar_entry_info *entry TSRMLS_DC)</span>
+<span class='curline'><a href='../S/974.html#L364'>php_stream</a>        364 ext/phar/phar_internal.h static inline void phar_set_entrypfp(phar_entry_info *entry, php_stream *fp TSRMLS_DC)</span>
+<span class='curline'><a href='../S/974.html#L374'>php_stream</a>        374 ext/phar/phar_internal.h static inline void phar_set_entrypufp(phar_entry_info *entry, php_stream *fp TSRMLS_DC)</span>
+<span class='curline'><a href='../S/974.html#L384'>php_stream</a>        384 ext/phar/phar_internal.h static inline php_stream *phar_get_pharfp(phar_archive_data *phar TSRMLS_DC)</span>
+<span class='curline'><a href='../S/974.html#L392'>php_stream</a>        392 ext/phar/phar_internal.h static inline php_stream *phar_get_pharufp(phar_archive_data *phar TSRMLS_DC)</span>
+<span class='curline'><a href='../S/974.html#L400'>php_stream</a>        400 ext/phar/phar_internal.h static inline void phar_set_pharfp(phar_archive_data *phar, php_stream *fp TSRMLS_DC)</span>
+<span class='curline'><a href='../S/974.html#L410'>php_stream</a>        410 ext/phar/phar_internal.h static inline void phar_set_pharufp(phar_archive_data *phar, php_stream *fp TSRMLS_DC)</span>
+<span class='curline'><a href='../S/974.html#L469'>php_stream</a>        469 ext/phar/phar_internal.h 	php_stream               *fp;</span>
+<span class='curline'><a href='../S/974.html#L567'>php_stream</a>        567 ext/phar/phar_internal.h int phar_verify_signature(php_stream *fp, size_t end_of_phar, php_uint32 sig_type, char *sig, int sig_len, char *fname, char **signature, int *signature_len, char **error TSRMLS_DC);</span>
+<span class='curline'><a href='../S/974.html#L568'>php_stream</a>        568 ext/phar/phar_internal.h int phar_create_signature(phar_archive_data *phar, php_stream *fp, char **signature, int *signature_length, char **error TSRMLS_DC);</span>
+<span class='curline'><a href='../S/974.html#L584'>php_stream</a>        584 ext/phar/phar_internal.h php_stream *phar_get_efp(phar_entry_info *entry, int follow_links TSRMLS_DC);</span>
+<span class='curline'><a href='../S/974.html#L595'>php_stream</a>        595 ext/phar/phar_internal.h int phar_parse_tarfile(php_stream* fp, char *fname, int fname_len, char *alias, int alias_len, phar_archive_data** pphar, int is_data, php_uint32 compression, char **error TSRMLS_DC);</span>
+<span class='curline'><a href='../S/974.html#L600'>php_stream</a>        600 ext/phar/phar_internal.h int phar_parse_zipfile(php_stream *fp, char *fname, int fname_len, char *alias, int alias_len, phar_archive_data** pphar, char **error TSRMLS_DC);</span>
+<span class='curline'><a href='../S/974.html#L605'>php_stream</a>        605 ext/phar/phar_internal.h static int phar_open_from_fp(php_stream* fp, char *fname, int fname_len, char *alias, int alias_len, int options, phar_archive_data** pphar, int is_data, char **error TSRMLS_DC);</span>
+<span class='curline'><a href='../S/975.html#L176'>php_stream</a>        176 ext/phar/phar_object.c 	php_stream *fp;</span>
+<span class='curline'><a href='../S/975.html#L1415'>php_stream</a>       1415 ext/phar/phar_object.c 	php_stream *fp;</span>
+<span class='curline'><a href='../S/975.html#L1425'>php_stream</a>       1425 ext/phar/phar_object.c 	php_stream *fp;</span>
+<span class='curline'><a href='../S/975.html#L1976'>php_stream</a>       1976 ext/phar/phar_object.c static int phar_copy_file_contents(phar_entry_info *entry, php_stream *fp TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/975.html#L2884'>php_stream</a>       2884 ext/phar/phar_object.c 	php_stream *stream;</span>
+<span class='curline'><a href='../S/975.html#L3632'>php_stream</a>       3632 ext/phar/phar_object.c 	php_stream *contents_file;</span>
+<span class='curline'><a href='../S/975.html#L3842'>php_stream</a>       3842 ext/phar/phar_object.c 	php_stream *resource;</span>
+<span class='curline'><a href='../S/975.html#L3906'>php_stream</a>       3906 ext/phar/phar_object.c 	php_stream *fp;</span>
+<span class='curline'><a href='../S/975.html#L4118'>php_stream</a>       4118 ext/phar/phar_object.c 	php_stream *fp;</span>
+<span class='curline'><a href='../S/975.html#L4306'>php_stream</a>       4306 ext/phar/phar_object.c 	php_stream *fp;</span>
+<span class='curline'><a href='../S/975.html#L4853'>php_stream</a>       4853 ext/phar/phar_object.c 	php_stream *fp;</span>
+<span class='curline'><a href='../S/979.html#L158'>php_stream</a>        158 ext/phar/stream.c static php_stream * phar_wrapper_open_url(php_stream_wrapper *wrapper, const char *path, const char *mode, int options, char **opened_path, php_stream_context *context STREAMS_DC TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/979.html#L166'>php_stream</a>        166 ext/phar/stream.c 	php_stream *fpf;</span>
+<span class='curline'><a href='../S/979.html#L348'>php_stream</a>        348 ext/phar/stream.c static int phar_stream_close(php_stream *stream, int close_handle TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/979.html#L359'>php_stream</a>        359 ext/phar/stream.c static size_t phar_stream_read(php_stream *stream, char *buf, size_t count TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/979.html#L390'>php_stream</a>        390 ext/phar/stream.c static int phar_stream_seek(php_stream *stream, off_t offset, int whence, off_t *newoffset TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/979.html#L434'>php_stream</a>        434 ext/phar/stream.c static size_t phar_stream_write(php_stream *stream, const char *buf, size_t count TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/979.html#L457'>php_stream</a>        457 ext/phar/stream.c static int phar_stream_flush(php_stream *stream TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/979.html#L549'>php_stream</a>        549 ext/phar/stream.c static int phar_stream_stat(php_stream *stream, php_stream_statbuf *ssb TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/980.html#L27'>php_stream</a>         27 ext/phar/stream.h static php_stream* phar_wrapper_open_url(php_stream_wrapper *wrapper, const char *path, const char *mode, int options, char **opened_path, php_stream_context *context STREAMS_DC TSRMLS_DC);</span>
+<span class='curline'><a href='../S/980.html#L33'>php_stream</a>         33 ext/phar/stream.h static size_t phar_stream_write(php_stream *stream, const char *buf, size_t count TSRMLS_DC);</span>
+<span class='curline'><a href='../S/980.html#L34'>php_stream</a>         34 ext/phar/stream.h static size_t phar_stream_read( php_stream *stream, char *buf, size_t count TSRMLS_DC);</span>
+<span class='curline'><a href='../S/980.html#L35'>php_stream</a>         35 ext/phar/stream.h static int    phar_stream_close(php_stream *stream, int close_handle TSRMLS_DC);</span>
+<span class='curline'><a href='../S/980.html#L36'>php_stream</a>         36 ext/phar/stream.h static int    phar_stream_flush(php_stream *stream TSRMLS_DC);</span>
+<span class='curline'><a href='../S/980.html#L37'>php_stream</a>         37 ext/phar/stream.h static int    phar_stream_seek( php_stream *stream, off_t offset, int whence, off_t *newoffset TSRMLS_DC);</span>
+<span class='curline'><a href='../S/980.html#L38'>php_stream</a>         38 ext/phar/stream.h static int    phar_stream_stat( php_stream *stream, php_stream_statbuf *ssb TSRMLS_DC);</span>
+<span class='curline'><a href='../S/982.html#L161'>php_stream</a>        161 ext/phar/tar.c static int phar_tar_process_metadata(phar_entry_info *entry, php_stream *fp TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/982.html#L205'>php_stream</a>        205 ext/phar/tar.c int phar_parse_tarfile(php_stream* fp, char *fname, int fname_len, char *alias, int alias_len, phar_archive_data** pphar, int is_data, php_uint32 compression, char **error TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/982.html#L693'>php_stream</a>        693 ext/phar/tar.c 	php_stream *old;</span>
+<span class='curline'><a href='../S/982.html#L694'>php_stream</a>        694 ext/phar/tar.c 	php_stream *new;</span>
+<span class='curline'><a href='../S/982.html#L949'>php_stream</a>        949 ext/phar/tar.c 	php_stream *oldfile, *newfile, *stubfile;</span>
+<span class='curline'><a href='../S/984.html#L41'>php_stream</a>         41 ext/phar/util.c static int phar_call_openssl_signverify(int is_sign, php_stream *fp, off_t end, char *key, int key_len, char **signature, int *signature_len TSRMLS_DC);</span>
+<span class='curline'><a href='../S/984.html#L90'>php_stream</a>         90 ext/phar/util.c php_stream *phar_get_efp(phar_entry_info *entry, int follow_links TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/984.html#L122'>php_stream</a>        122 ext/phar/util.c 	php_stream *fp = phar_get_efp(entry, follow_links TSRMLS_CC);</span>
+<span class='curline'><a href='../S/984.html#L702'>php_stream</a>        702 ext/phar/util.c 	php_stream *ufp;</span>
+<span class='curline'><a href='../S/984.html#L867'>php_stream</a>        867 ext/phar/util.c 	php_stream *fp;</span>
+<span class='curline'><a href='../S/984.html#L1407'>php_stream</a>       1407 ext/phar/util.c static int phar_call_openssl_signverify(int is_sign, php_stream *fp, off_t end, char *key, int key_len, char **signature, int *signature_len TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/984.html#L1520'>php_stream</a>       1520 ext/phar/util.c int phar_verify_signature(php_stream *fp, size_t end_of_phar, php_uint32 sig_type, char *sig, int sig_len, char *fname, char **signature, int *signature_len, char **error TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/984.html#L1540'>php_stream</a>       1540 ext/phar/util.c 			php_stream *pfp;</span>
+<span class='curline'><a href='../S/984.html#L1799'>php_stream</a>       1799 ext/phar/util.c int phar_create_signature(phar_archive_data *phar, php_stream *fp, char **signature, int *signature_length, char **error TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/985.html#L42'>php_stream</a>         42 ext/phar/zip.c static int phar_zip_process_extra(php_stream *fp, phar_entry_info *entry, php_uint16 len TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/985.html#L166'>php_stream</a>        166 ext/phar/zip.c int phar_parse_zipfile(php_stream *fp, char *fname, int fname_len, char *alias, int alias_len, phar_archive_data** pphar, char **error TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/985.html#L409'>php_stream</a>        409 ext/phar/zip.c 			php_stream *sigfile;</span>
+<span class='curline'><a href='../S/985.html#L758'>php_stream</a>        758 ext/phar/zip.c 	php_stream *filefp;</span>
+<span class='curline'><a href='../S/985.html#L759'>php_stream</a>        759 ext/phar/zip.c 	php_stream *centralfp;</span>
+<span class='curline'><a href='../S/985.html#L760'>php_stream</a>        760 ext/phar/zip.c 	php_stream *old;</span>
+<span class='curline'><a href='../S/985.html#L833'>php_stream</a>        833 ext/phar/zip.c 		php_stream *efp;</span>
+<span class='curline'><a href='../S/985.html#L1087'>php_stream</a>       1087 ext/phar/zip.c 		php_stream *newfile;</span>
+<span class='curline'><a href='../S/985.html#L1165'>php_stream</a>       1165 ext/phar/zip.c 	php_stream *stubfile, *oldfile;</span>
+<span class='curline'><a href='../S/987.html#L698'>php_stream</a>        698 ext/posix/posix.c 	php_stream *stream;</span>
+<span class='curline'><a href='../S/995.html#L192'>php_stream</a>        192 ext/recode/recode.c 	php_stream *instream, *outstream;</span>
+<span class='curline'><a href='../S/1020.html#L28'>php_stream</a>         28 ext/soap/php_http.c static int get_http_body(php_stream *socketd, int close, char *headers,  char **response, int *out_size TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1020.html#L29'>php_stream</a>         29 ext/soap/php_http.c static int get_http_headers(php_stream *socketd,char **response, int *out_size TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1020.html#L163'>php_stream</a>        163 ext/soap/php_http.c static php_stream* http_connect(zval* this_ptr, php_url *phpurl, int use_ssl, php_stream_context *context, int *use_proxy TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1020.html#L165'>php_stream</a>        165 ext/soap/php_http.c 	php_stream *stream;</span>
+<span class='curline'><a href='../S/1020.html#L347'>php_stream</a>        347 ext/soap/php_http.c 	php_stream *stream;</span>
+<span class='curline'><a href='../S/1020.html#L1372'>php_stream</a>       1372 ext/soap/php_http.c static int get_http_body(php_stream *stream, int close, char *headers,  char **response, int *out_size TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1020.html#L1506'>php_stream</a>       1506 ext/soap/php_http.c static int get_http_headers(php_stream *stream, char **response, int *out_size TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1032.html#L1383'>php_stream</a>       1383 ext/sockets/conversions.c 		php_stream *stream;</span>
+<span class='curline'><a href='../S/1032.html#L1393'>php_stream</a>       1393 ext/sockets/conversions.c 		ZEND_FETCH_RESOURCE2_NO_RETURN(stream, php_stream *, elem, -1,</span>
+<span class='curline'><a href='../S/1032.html#L1465'>php_stream</a>       1465 ext/sockets/conversions.c 			php_stream *stream = php_stream_fopen_from_fd(fd, "rw", NULL);</span>
+<span class='curline'><a href='../S/1041.html#L973'>php_stream</a>        973 ext/sockets/sockets.c 		php_stream *stream;</span>
+<span class='curline'><a href='../S/1041.html#L1013'>php_stream</a>       1013 ext/sockets/sockets.c 		php_stream *stream;</span>
+<span class='curline'><a href='../S/1041.html#L1070'>php_stream</a>       1070 ext/sockets/sockets.c 		php_stream *stream = NULL;</span>
+<span class='curline'><a href='../S/1041.html#L2265'>php_stream</a>       2265 ext/sockets/sockets.c 	php_stream			 *stream;</span>
+<span class='curline'><a href='../S/1050.html#L77'>php_stream</a>         77 ext/spl/spl_directory.h 			php_stream         *dirp;</span>
+<span class='curline'><a href='../S/1050.html#L88'>php_stream</a>         88 ext/spl/spl_directory.h 			php_stream         *stream;</span>
+<span class='curline'><a href='../S/1072.html#L1101'>php_stream</a>       1101 ext/sqlite3/sqlite3.c static size_t php_sqlite3_stream_write(php_stream *stream, const char *buf, size_t count TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1072.html#L1108'>php_stream</a>       1108 ext/sqlite3/sqlite3.c static size_t php_sqlite3_stream_read(php_stream *stream, char *buf, size_t count TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1072.html#L1125'>php_stream</a>       1125 ext/sqlite3/sqlite3.c static int php_sqlite3_stream_close(php_stream *stream, int close_handle TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1072.html#L1138'>php_stream</a>       1138 ext/sqlite3/sqlite3.c static int php_sqlite3_stream_flush(php_stream *stream TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1072.html#L1145'>php_stream</a>       1145 ext/sqlite3/sqlite3.c static int php_sqlite3_stream_seek(php_stream *stream, off_t offset, int whence, off_t *newoffs TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1072.html#L1208'>php_stream</a>       1208 ext/sqlite3/sqlite3.c static int php_sqlite3_stream_cast(php_stream *stream, int castas, void **ret TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1072.html#L1213'>php_stream</a>       1213 ext/sqlite3/sqlite3.c static int php_sqlite3_stream_stat(php_stream *stream, php_stream_statbuf *ssb TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1072.html#L1242'>php_stream</a>       1242 ext/sqlite3/sqlite3.c 	php_stream *stream;</span>
+<span class='curline'><a href='../S/1072.html#L1570'>php_stream</a>       1570 ext/sqlite3/sqlite3.c 					php_stream *stream = NULL;</span>
+<span class='curline'><a href='../S/1077.html#L4689'>php_stream</a>       4689 ext/standard/basic_functions.c 	php_stream *stream = NULL;</span>
+<span class='curline'><a href='../S/1099.html#L88'>php_stream</a>         88 ext/standard/dir.c 			ZEND_FETCH_RESOURCE(dirp, php_stream *, tmp, -1, "Directory", php_file_le_stream()); \</span>
+<span class='curline'><a href='../S/1099.html#L90'>php_stream</a>         90 ext/standard/dir.c 			ZEND_FETCH_RESOURCE(dirp, php_stream *, 0, DIRG(default_dir), "Directory", php_file_le_stream()); \</span>
+<span class='curline'><a href='../S/1099.html#L93'>php_stream</a>         93 ext/standard/dir.c 		dirp = (php_stream *) zend_fetch_resource(&amp;id TSRMLS_CC, -1, "Directory", NULL, 1, php_file_le_stream()); \</span>
+<span class='curline'><a href='../S/1099.html#L220'>php_stream</a>        220 ext/standard/dir.c 	php_stream *dirp;</span>
+<span class='curline'><a href='../S/1099.html#L270'>php_stream</a>        270 ext/standard/dir.c 	php_stream *dirp;</span>
+<span class='curline'><a href='../S/1099.html#L385'>php_stream</a>        385 ext/standard/dir.c 	php_stream *dirp;</span>
+<span class='curline'><a href='../S/1099.html#L403'>php_stream</a>        403 ext/standard/dir.c 	php_stream *dirp;</span>
+<span class='curline'><a href='../S/1104.html#L109'>php_stream</a>        109 ext/standard/exec.c 	php_stream *stream;</span>
+<span class='curline'><a href='../S/1104.html#L534'>php_stream</a>        534 ext/standard/exec.c 	php_stream *stream;</span>
+<span class='curline'><a href='../S/1106.html#L344'>php_stream</a>        344 ext/standard/file.c 	php_stream *stream;</span>
+<span class='curline'><a href='../S/1106.html#L529'>php_stream</a>        529 ext/standard/file.c 	php_stream *stream;</span>
+<span class='curline'><a href='../S/1106.html#L581'>php_stream</a>        581 ext/standard/file.c 	php_stream *stream;</span>
+<span class='curline'><a href='../S/1106.html#L589'>php_stream</a>        589 ext/standard/file.c 	php_stream *srcstream = NULL;</span>
+<span class='curline'><a href='../S/1106.html#L736'>php_stream</a>        736 ext/standard/file.c 	php_stream *stream;</span>
+<span class='curline'><a href='../S/1106.html#L852'>php_stream</a>        852 ext/standard/file.c 	php_stream *stream;</span>
+<span class='curline'><a href='../S/1106.html#L876'>php_stream</a>        876 ext/standard/file.c 	php_stream *stream;</span>
+<span class='curline'><a href='../S/1106.html#L900'>php_stream</a>        900 ext/standard/file.c 	php_stream *stream;</span>
+<span class='curline'><a href='../S/1106.html#L930'>php_stream</a>        930 ext/standard/file.c 	php_stream *stream;</span>
+<span class='curline'><a href='../S/1106.html#L972'>php_stream</a>        972 ext/standard/file.c 	php_stream *stream;</span>
+<span class='curline'><a href='../S/1106.html#L992'>php_stream</a>        992 ext/standard/file.c 	php_stream *stream;</span>
+<span class='curline'><a href='../S/1106.html#L1017'>php_stream</a>       1017 ext/standard/file.c 	php_stream *stream;</span>
+<span class='curline'><a href='../S/1106.html#L1066'>php_stream</a>       1066 ext/standard/file.c 	php_stream *stream;</span>
+<span class='curline'><a href='../S/1106.html#L1096'>php_stream</a>       1096 ext/standard/file.c 	php_stream *stream;</span>
+<span class='curline'><a href='../S/1106.html#L1158'>php_stream</a>       1158 ext/standard/file.c 	buf = php_stream_get_line((php_stream *) what, NULL, 0, &amp;len);</span>
+<span class='curline'><a href='../S/1106.html#L1189'>php_stream</a>       1189 ext/standard/file.c 	php_stream *stream;</span>
+<span class='curline'><a href='../S/1106.html#L1219'>php_stream</a>       1219 ext/standard/file.c 	php_stream *stream;</span>
+<span class='curline'><a href='../S/1106.html#L1240'>php_stream</a>       1240 ext/standard/file.c 	php_stream *stream;</span>
+<span class='curline'><a href='../S/1106.html#L1261'>php_stream</a>       1261 ext/standard/file.c 	php_stream *stream;</span>
+<span class='curline'><a href='../S/1106.html#L1283'>php_stream</a>       1283 ext/standard/file.c 	php_stream *stream;</span>
+<span class='curline'><a href='../S/1106.html#L1369'>php_stream</a>       1369 ext/standard/file.c 	php_stream *stream;</span>
+<span class='curline'><a href='../S/1106.html#L1422'>php_stream</a>       1422 ext/standard/file.c 	php_stream *stream;</span>
+<span class='curline'><a href='../S/1106.html#L1509'>php_stream</a>       1509 ext/standard/file.c 	php_stream *stream;</span>
+<span class='curline'><a href='../S/1106.html#L1533'>php_stream</a>       1533 ext/standard/file.c 	php_stream *stream;</span>
+<span class='curline'><a href='../S/1106.html#L1656'>php_stream</a>       1656 ext/standard/file.c 	php_stream *srcstream = NULL, *deststream = NULL;</span>
+<span class='curline'><a href='../S/1106.html#L1752'>php_stream</a>       1752 ext/standard/file.c 	php_stream *stream;</span>
+<span class='curline'><a href='../S/1106.html#L1821'>php_stream</a>       1821 ext/standard/file.c 	php_stream *stream;</span>
+<span class='curline'><a href='../S/1106.html#L1877'>php_stream</a>       1877 ext/standard/file.c PHPAPI int php_fputcsv(php_stream *stream, zval *fields, char delimiter, char enclosure, char escape_char TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1106.html#L1958'>php_stream</a>       1958 ext/standard/file.c 	php_stream *stream;</span>
+<span class='curline'><a href='../S/1106.html#L2045'>php_stream</a>       2045 ext/standard/file.c PHPAPI void php_fgetcsv(php_stream *stream, char delimiter, char enclosure, char escape_char, size_t buf_len, char *buf, zval *return_value TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1107.html#L82'>php_stream</a>         82 ext/standard/file.h PHPAPI void php_fgetcsv(php_stream *stream, char delimiter, char enclosure, char escape_char, size_t buf_len, char *buf, zval *return_value TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1107.html#L83'>php_stream</a>         83 ext/standard/file.h PHPAPI int php_fputcsv(php_stream *stream, zval *fields, char delimiter, char enclosure, char escape_char TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1107.html#L106'>php_stream</a>        106 ext/standard/file.h 	php_stream *stream;</span>
+<span class='curline'><a href='../S/1108.html#L761'>php_stream</a>        761 ext/standard/filestat.c 			php_stream *stream;</span>
+<span class='curline'><a href='../S/1109.html#L37'>php_stream</a>         37 ext/standard/filters.c 	php_stream *stream,</span>
+<span class='curline'><a href='../S/1109.html#L85'>php_stream</a>         85 ext/standard/filters.c 	php_stream *stream,</span>
+<span class='curline'><a href='../S/1109.html#L113'>php_stream</a>        113 ext/standard/filters.c 	php_stream *stream,</span>
+<span class='curline'><a href='../S/1109.html#L204'>php_stream</a>        204 ext/standard/filters.c 	php_stream *stream,</span>
+<span class='curline'><a href='../S/1109.html#L1541'>php_stream</a>       1541 ext/standard/filters.c 		php_stream *stream, php_stream_filter *filter,</span>
+<span class='curline'><a href='../S/1109.html#L1742'>php_stream</a>       1742 ext/standard/filters.c 	php_stream *stream,</span>
+<span class='curline'><a href='../S/1109.html#L1861'>php_stream</a>       1861 ext/standard/filters.c 	php_stream *stream,</span>
+<span class='curline'><a href='../S/1109.html#L2074'>php_stream</a>       2074 ext/standard/filters.c 	php_stream *stream,</span>
+<span class='curline'><a href='../S/1112.html#L747'>php_stream</a>        747 ext/standard/formatted_print.c 	php_stream *stream;</span>
+<span class='curline'><a href='../S/1112.html#L778'>php_stream</a>        778 ext/standard/formatted_print.c 	php_stream *stream;</span>
+<span class='curline'><a href='../S/1113.html#L42'>php_stream</a>         42 ext/standard/fsock.c 	php_stream *stream = NULL;</span>
+<span class='curline'><a href='../S/1116.html#L76'>php_stream</a>         76 ext/standard/ftp_fopen_wrapper.c 	php_stream *datastream;</span>
+<span class='curline'><a href='../S/1116.html#L77'>php_stream</a>         77 ext/standard/ftp_fopen_wrapper.c 	php_stream *controlstream;</span>
+<span class='curline'><a href='../S/1116.html#L78'>php_stream</a>         78 ext/standard/ftp_fopen_wrapper.c 	php_stream *dirstream;</span>
+<span class='curline'><a href='../S/1116.html#L83'>php_stream</a>         83 ext/standard/ftp_fopen_wrapper.c static inline int get_ftp_result(php_stream *stream, char *buffer, size_t buffer_size TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1116.html#L94'>php_stream</a>         94 ext/standard/ftp_fopen_wrapper.c static int php_stream_ftp_stream_stat(php_stream_wrapper *wrapper, php_stream *stream, php_stream_statbuf *ssb TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1116.html#L104'>php_stream</a>        104 ext/standard/ftp_fopen_wrapper.c static int php_stream_ftp_stream_close(php_stream_wrapper *wrapper, php_stream *stream TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1116.html#L106'>php_stream</a>        106 ext/standard/ftp_fopen_wrapper.c 	php_stream *controlstream = stream-&gt;wrapperthis;</span>
+<span class='curline'><a href='../S/1116.html#L133'>php_stream</a>        133 ext/standard/ftp_fopen_wrapper.c static php_stream *php_ftp_fopen_connect(php_stream_wrapper *wrapper, const char *path, const char *mode, int options,</span>
+<span class='curline'><a href='../S/1116.html#L134'>php_stream</a>        134 ext/standard/ftp_fopen_wrapper.c 										 char **opened_path, php_stream_context *context, php_stream **preuseid,</span>
+<span class='curline'><a href='../S/1116.html#L137'>php_stream</a>        137 ext/standard/ftp_fopen_wrapper.c 	php_stream *stream = NULL, *reuseid = NULL;</span>
+<span class='curline'><a href='../S/1116.html#L323'>php_stream</a>        323 ext/standard/ftp_fopen_wrapper.c static unsigned short php_fopen_do_pasv(php_stream *stream, char *ip, size_t ip_size, char **phoststart TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1116.html#L414'>php_stream</a>        414 ext/standard/ftp_fopen_wrapper.c php_stream * php_stream_url_wrap_ftp(php_stream_wrapper *wrapper, const char *path, const char *mode,</span>
+<span class='curline'><a href='../S/1116.html#L417'>php_stream</a>        417 ext/standard/ftp_fopen_wrapper.c 	php_stream *stream = NULL, *datastream = NULL;</span>
+<span class='curline'><a href='../S/1116.html#L424'>php_stream</a>        424 ext/standard/ftp_fopen_wrapper.c 	php_stream *reuseid=NULL;</span>
+<span class='curline'><a href='../S/1116.html#L609'>php_stream</a>        609 ext/standard/ftp_fopen_wrapper.c static size_t php_ftp_dirstream_read(php_stream *stream, char *buf, size_t count TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1116.html#L612'>php_stream</a>        612 ext/standard/ftp_fopen_wrapper.c 	php_stream *innerstream;</span>
+<span class='curline'><a href='../S/1116.html#L659'>php_stream</a>        659 ext/standard/ftp_fopen_wrapper.c static int php_ftp_dirstream_close(php_stream *stream, int close_handle TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1116.html#L695'>php_stream</a>        695 ext/standard/ftp_fopen_wrapper.c php_stream * php_stream_ftp_opendir(php_stream_wrapper *wrapper, const char *path, const char *mode, int options,</span>
+<span class='curline'><a href='../S/1116.html#L698'>php_stream</a>        698 ext/standard/ftp_fopen_wrapper.c 	php_stream *stream, *reuseid, *datastream = NULL;</span>
+<span class='curline'><a href='../S/1116.html#L787'>php_stream</a>        787 ext/standard/ftp_fopen_wrapper.c 	php_stream *stream = NULL;</span>
+<span class='curline'><a href='../S/1116.html#L910'>php_stream</a>        910 ext/standard/ftp_fopen_wrapper.c 	php_stream *stream = NULL;</span>
+<span class='curline'><a href='../S/1116.html#L960'>php_stream</a>        960 ext/standard/ftp_fopen_wrapper.c 	php_stream *stream = NULL;</span>
+<span class='curline'><a href='../S/1116.html#L1039'>php_stream</a>       1039 ext/standard/ftp_fopen_wrapper.c 	php_stream *stream = NULL;</span>
+<span class='curline'><a href='../S/1116.html#L1133'>php_stream</a>       1133 ext/standard/ftp_fopen_wrapper.c 	php_stream *stream = NULL;</span>
+<span class='curline'><a href='../S/1123.html#L112'>php_stream</a>        112 ext/standard/http_fopen_wrapper.c php_stream *php_stream_url_wrap_http_ex(php_stream_wrapper *wrapper, </span>
+<span class='curline'><a href='../S/1123.html#L116'>php_stream</a>        116 ext/standard/http_fopen_wrapper.c 	php_stream *stream = NULL;</span>
+<span class='curline'><a href='../S/1123.html#L961'>php_stream</a>        961 ext/standard/http_fopen_wrapper.c php_stream *php_stream_url_wrap_http(php_stream_wrapper *wrapper, const char *path, const char *mode, int options, char **opened_path, php_stream_context *context STREAMS_DC TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1123.html#L967'>php_stream</a>        967 ext/standard/http_fopen_wrapper.c static int php_stream_http_stream_stat(php_stream_wrapper *wrapper, php_stream *stream, php_stream_statbuf *ssb TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1124.html#L103'>php_stream</a>        103 ext/standard/image.c static struct gfxinfo *php_handle_gif (php_stream * stream TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1124.html#L126'>php_stream</a>        126 ext/standard/image.c static struct gfxinfo *php_handle_psd (php_stream * stream TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1124.html#L147'>php_stream</a>        147 ext/standard/image.c static struct gfxinfo *php_handle_bmp (php_stream * stream TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1124.html#L198'>php_stream</a>        198 ext/standard/image.c static struct gfxinfo *php_handle_swc(php_stream * stream TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1124.html#L270'>php_stream</a>        270 ext/standard/image.c static struct gfxinfo *php_handle_swf (php_stream * stream TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1124.html#L296'>php_stream</a>        296 ext/standard/image.c static struct gfxinfo *php_handle_png (php_stream * stream TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1124.html#L364'>php_stream</a>        364 ext/standard/image.c static unsigned short php_read2(php_stream * stream TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1124.html#L377'>php_stream</a>        377 ext/standard/image.c static unsigned int php_next_marker(php_stream * stream, int last_marker, int comment_correction, int ff_read TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1124.html#L425'>php_stream</a>        425 ext/standard/image.c static int php_skip_variable(php_stream * stream TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1124.html#L440'>php_stream</a>        440 ext/standard/image.c static int php_read_APP(php_stream * stream, unsigned int marker, zval *info TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1124.html#L474'>php_stream</a>        474 ext/standard/image.c static struct gfxinfo *php_handle_jpeg (php_stream * stream, zval *info TSRMLS_DC) </span>
+<span class='curline'><a href='../S/1124.html#L563'>php_stream</a>        563 ext/standard/image.c static unsigned int php_read4(php_stream * stream TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1124.html#L603'>php_stream</a>        603 ext/standard/image.c static struct gfxinfo *php_handle_jpc(php_stream * stream TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1124.html#L675'>php_stream</a>        675 ext/standard/image.c static struct gfxinfo *php_handle_jp2(php_stream *stream TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1124.html#L802'>php_stream</a>        802 ext/standard/image.c static struct gfxinfo *php_handle_tiff (php_stream * stream, zval *info, int motorola_intel TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1124.html#L883'>php_stream</a>        883 ext/standard/image.c static struct gfxinfo *php_handle_iff(php_stream * stream TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1124.html#L944'>php_stream</a>        944 ext/standard/image.c static int php_get_wbmp(php_stream *stream, struct gfxinfo **result, int check TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1124.html#L1006'>php_stream</a>       1006 ext/standard/image.c static struct gfxinfo *php_handle_wbmp(php_stream * stream TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1124.html#L1021'>php_stream</a>       1021 ext/standard/image.c static int php_get_xbm(php_stream *stream, struct gfxinfo **result TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1124.html#L1081'>php_stream</a>       1081 ext/standard/image.c static struct gfxinfo *php_handle_xbm(php_stream * stream TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1124.html#L1091'>php_stream</a>       1091 ext/standard/image.c static struct gfxinfo *php_handle_ico(php_stream * stream TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1124.html#L1230'>php_stream</a>       1230 ext/standard/image.c PHPAPI int php_getimagetype(php_stream * stream, char *filetype TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1124.html#L1307'>php_stream</a>       1307 ext/standard/image.c static void php_getimagesize_from_stream(php_stream *stream, zval **info, INTERNAL_FUNCTION_PARAMETERS) /* {{{ */</span>
+<span class='curline'><a href='../S/1124.html#L1404'>php_stream</a>       1404 ext/standard/image.c 	php_stream *stream = NULL;</span>
+<span class='curline'><a href='../S/1133.html#L218'>php_stream</a>        218 ext/standard/mail.c 	php_stream *stream = php_stream_open_wrapper(filename, "a", flags, NULL);</span>
+<span class='curline'><a href='../S/1135.html#L86'>php_stream</a>         86 ext/standard/md5.c 	php_stream    *stream;</span>
+<span class='curline'><a href='../S/1155.html#L34'>php_stream</a>         34 ext/standard/php_fopen_wrapper.c static size_t php_stream_output_write(php_stream *stream, const char *buf, size_t count TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1155.html#L41'>php_stream</a>         41 ext/standard/php_fopen_wrapper.c static size_t php_stream_output_read(php_stream *stream, char *buf, size_t count TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1155.html#L48'>php_stream</a>         48 ext/standard/php_fopen_wrapper.c static int php_stream_output_close(php_stream *stream, int close_handle TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1155.html#L67'>php_stream</a>         67 ext/standard/php_fopen_wrapper.c 	php_stream *body;</span>
+<span class='curline'><a href='../S/1155.html#L72'>php_stream</a>         72 ext/standard/php_fopen_wrapper.c static size_t php_stream_input_write(php_stream *stream, const char *buf, size_t count TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1155.html#L78'>php_stream</a>         78 ext/standard/php_fopen_wrapper.c static size_t php_stream_input_read(php_stream *stream, char *buf, size_t count TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1155.html#L106'>php_stream</a>        106 ext/standard/php_fopen_wrapper.c static int php_stream_input_close(php_stream *stream, int close_handle TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1155.html#L115'>php_stream</a>        115 ext/standard/php_fopen_wrapper.c static int php_stream_input_flush(php_stream *stream TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1155.html#L121'>php_stream</a>        121 ext/standard/php_fopen_wrapper.c static int php_stream_input_seek(php_stream *stream, off_t offset, int whence, off_t *newoffset TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1155.html#L147'>php_stream</a>        147 ext/standard/php_fopen_wrapper.c static void php_stream_apply_filter_list(php_stream *stream, char *filterlist, int read_chain, int write_chain TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1155.html#L174'>php_stream</a>        174 ext/standard/php_fopen_wrapper.c php_stream * php_stream_url_wrap_php(php_stream_wrapper *wrapper, const char *path, const char *mode, int options,</span>
+<span class='curline'><a href='../S/1155.html#L179'>php_stream</a>        179 ext/standard/php_fopen_wrapper.c 	php_stream * stream = NULL;</span>
+<span class='curline'><a href='../S/1156.html#L26'>php_stream</a>         26 ext/standard/php_fopen_wrappers.h php_stream *php_stream_url_wrap_http(php_stream_wrapper *wrapper, const char *path, const char *mode, int options, char **opened_path, php_stream_context *context STREAMS_DC TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1156.html#L27'>php_stream</a>         27 ext/standard/php_fopen_wrappers.h php_stream *php_stream_url_wrap_ftp(php_stream_wrapper *wrapper, const char *path, const char *mode, int options, char **opened_path, php_stream_context *context STREAMS_DC TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1159.html#L62'>php_stream</a>         62 ext/standard/php_image.h PHPAPI int php_getimagetype(php_stream *stream, char *filetype TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1177.html#L559'>php_stream</a>        559 ext/standard/proc_open.c 			php_stream *stream;</span>
+<span class='curline'><a href='../S/1177.html#L634'>php_stream</a>        634 ext/standard/proc_open.c 				php_stream *stream;</span>
+<span class='curline'><a href='../S/1177.html#L936'>php_stream</a>        936 ext/standard/proc_open.c 		php_stream *stream = NULL;</span>
+<span class='curline'><a href='../S/1184.html#L76'>php_stream</a>         76 ext/standard/sha1.c 	php_stream    *stream;</span>
+<span class='curline'><a href='../S/1187.html#L55'>php_stream</a>         55 ext/standard/streamsfuncs.c 	php_stream *s1, *s2;</span>
+<span class='curline'><a href='../S/1187.html#L97'>php_stream</a>         97 ext/standard/streamsfuncs.c 	php_stream *stream = NULL;</span>
+<span class='curline'><a href='../S/1187.html#L182'>php_stream</a>        182 ext/standard/streamsfuncs.c 	php_stream *stream = NULL;</span>
+<span class='curline'><a href='../S/1187.html#L250'>php_stream</a>        250 ext/standard/streamsfuncs.c 	php_stream *stream = NULL, *clistream = NULL;</span>
+<span class='curline'><a href='../S/1187.html#L301'>php_stream</a>        301 ext/standard/streamsfuncs.c 	php_stream *stream;</span>
+<span class='curline'><a href='../S/1187.html#L329'>php_stream</a>        329 ext/standard/streamsfuncs.c 	php_stream *stream;</span>
+<span class='curline'><a href='../S/1187.html#L358'>php_stream</a>        358 ext/standard/streamsfuncs.c 	php_stream *stream;</span>
+<span class='curline'><a href='../S/1187.html#L408'>php_stream</a>        408 ext/standard/streamsfuncs.c 	php_stream	*stream;</span>
+<span class='curline'><a href='../S/1187.html#L459'>php_stream</a>        459 ext/standard/streamsfuncs.c 	php_stream *src, *dest;</span>
+<span class='curline'><a href='../S/1187.html#L491'>php_stream</a>        491 ext/standard/streamsfuncs.c 	php_stream *stream;</span>
+<span class='curline'><a href='../S/1187.html#L609'>php_stream</a>        609 ext/standard/streamsfuncs.c 	php_stream *stream;</span>
+<span class='curline'><a href='../S/1187.html#L646'>php_stream</a>        646 ext/standard/streamsfuncs.c 	php_stream *stream;</span>
+<span class='curline'><a href='../S/1187.html#L713'>php_stream</a>        713 ext/standard/streamsfuncs.c 	php_stream *stream;</span>
+<span class='curline'><a href='../S/1187.html#L986'>php_stream</a>        986 ext/standard/streamsfuncs.c 		php_stream *stream;</span>
+<span class='curline'><a href='../S/1187.html#L1186'>php_stream</a>       1186 ext/standard/streamsfuncs.c 	php_stream *stream;</span>
+<span class='curline'><a href='../S/1187.html#L1315'>php_stream</a>       1315 ext/standard/streamsfuncs.c 	php_stream *stream;</span>
+<span class='curline'><a href='../S/1187.html#L1347'>php_stream</a>       1347 ext/standard/streamsfuncs.c 	php_stream *stream;</span>
+<span class='curline'><a href='../S/1187.html#L1374'>php_stream</a>       1374 ext/standard/streamsfuncs.c 	php_stream *stream;</span>
+<span class='curline'><a href='../S/1187.html#L1409'>php_stream</a>       1409 ext/standard/streamsfuncs.c 	php_stream *stream;</span>
+<span class='curline'><a href='../S/1187.html#L1437'>php_stream</a>       1437 ext/standard/streamsfuncs.c 	php_stream	*stream;</span>
+<span class='curline'><a href='../S/1187.html#L1472'>php_stream</a>       1472 ext/standard/streamsfuncs.c 	php_stream *stream;</span>
+<span class='curline'><a href='../S/1187.html#L1499'>php_stream</a>       1499 ext/standard/streamsfuncs.c 	php_stream *stream, *sessstream = NULL;</span>
+<span class='curline'><a href='../S/1187.html#L1569'>php_stream</a>       1569 ext/standard/streamsfuncs.c 	php_stream *stream = NULL;</span>
+<span class='curline'><a href='../S/1187.html#L1600'>php_stream</a>       1600 ext/standard/streamsfuncs.c 	php_stream *stream;</span>
+<span class='curline'><a href='../S/1187.html#L1627'>php_stream</a>       1627 ext/standard/streamsfuncs.c 	php_stream *stream;</span>
+<span class='curline'><a href='../S/1195.html#L703'>php_stream</a>        703 ext/standard/url.c 	php_stream *stream;</span>
+<span class='curline'><a href='../S/1199.html#L166'>php_stream</a>        166 ext/standard/user_filters.c 			php_stream *stream,</span>
+<span class='curline'><a href='../S/1199.html#L512'>php_stream</a>        512 ext/standard/user_filters.c 	php_stream *stream;</span>
+<span class='curline'><a href='../S/1214.html#L639'>php_stream</a>        639 ext/tidy/tidy.c 	php_stream *stream;</span>
+<span class='curline'><a href='../S/1220.html#L1340'>php_stream</a>       1340 ext/wddx/wddx.c 	php_stream *stream = NULL;</span>
+<span class='curline'><a href='../S/1254.html#L691'>php_stream</a>        691 ext/xmlwriter/php_xmlwriter.c 	return php_stream_write((php_stream*)context, buffer, len);</span>
+<span class='curline'><a href='../S/1254.html#L699'>php_stream</a>        699 ext/xmlwriter/php_xmlwriter.c 	return php_stream_close((php_stream*)context);</span>
+<span class='curline'><a href='../S/1351.html#L170'>php_stream</a>        170 ext/zip/php_zip.c 	php_stream *stream;</span>
+<span class='curline'><a href='../S/1351.html#L2815'>php_stream</a>       2815 ext/zip/php_zip.c 	php_stream *stream;</span>
+<span class='curline'><a href='../S/1352.html#L92'>php_stream</a>         92 ext/zip/php_zip.h php_stream *php_stream_zip_opener(php_stream_wrapper *wrapper, const char *path, const char *mode, int options, char **opened_path, php_stream_context *context STREAMS_DC TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1352.html#L93'>php_stream</a>         93 ext/zip/php_zip.h php_stream *php_stream_zip_open(const char *filename, const char *path, const char *mode STREAMS_DC TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1353.html#L38'>php_stream</a>         38 ext/zip/zip_stream.c 	php_stream *stream;</span>
+<span class='curline'><a href='../S/1353.html#L46'>php_stream</a>         46 ext/zip/zip_stream.c static size_t php_zip_ops_read(php_stream *stream, char *buf, size_t count TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1353.html#L73'>php_stream</a>         73 ext/zip/zip_stream.c static size_t php_zip_ops_write(php_stream *stream, const char *buf, size_t count TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1353.html#L84'>php_stream</a>         84 ext/zip/zip_stream.c static int php_zip_ops_close(php_stream *stream, int close_handle TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1353.html#L105'>php_stream</a>        105 ext/zip/zip_stream.c static int php_zip_ops_flush(php_stream *stream TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1353.html#L115'>php_stream</a>        115 ext/zip/zip_stream.c static int php_zip_ops_stat(php_stream *stream, php_stream_statbuf *ssb TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1353.html#L203'>php_stream</a>        203 ext/zip/zip_stream.c php_stream *php_stream_zip_open(const char *filename, const char *path, const char *mode STREAMS_DC TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1353.html#L208'>php_stream</a>        208 ext/zip/zip_stream.c 	php_stream *stream = NULL;</span>
+<span class='curline'><a href='../S/1353.html#L252'>php_stream</a>        252 ext/zip/zip_stream.c php_stream *php_stream_zip_opener(php_stream_wrapper *wrapper,</span>
+<span class='curline'><a href='../S/1353.html#L271'>php_stream</a>        271 ext/zip/zip_stream.c 	php_stream *stream = NULL;</span>
+<span class='curline'><a href='../S/1354.html#L61'>php_stream</a>         61 ext/zlib/php_zlib.h php_stream *php_stream_gzopen(php_stream_wrapper *wrapper, const char *path, const char *mode, int options, char **opened_path, php_stream_context *context STREAMS_DC TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1355.html#L554'>php_stream</a>        554 ext/zlib/zlib.c 	php_stream *stream;</span>
+<span class='curline'><a href='../S/1355.html#L593'>php_stream</a>        593 ext/zlib/zlib.c 	php_stream *stream;</span>
+<span class='curline'><a href='../S/1355.html#L620'>php_stream</a>        620 ext/zlib/zlib.c 	php_stream *stream;</span>
+<span class='curline'><a href='../S/1356.html#L55'>php_stream</a>         55 ext/zlib/zlib_filter.c 	php_stream *stream,</span>
+<span class='curline'><a href='../S/1356.html#L180'>php_stream</a>        180 ext/zlib/zlib_filter.c 	php_stream *stream,</span>
+<span class='curline'><a href='../S/1357.html#L32'>php_stream</a>         32 ext/zlib/zlib_fopen_wrapper.c 	php_stream *stream;</span>
+<span class='curline'><a href='../S/1357.html#L35'>php_stream</a>         35 ext/zlib/zlib_fopen_wrapper.c static size_t php_gziop_read(php_stream *stream, char *buf, size_t count TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1357.html#L49'>php_stream</a>         49 ext/zlib/zlib_fopen_wrapper.c static size_t php_gziop_write(php_stream *stream, const char *buf, size_t count TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1357.html#L59'>php_stream</a>         59 ext/zlib/zlib_fopen_wrapper.c static int php_gziop_seek(php_stream *stream, off_t offset, int whence, off_t *newoffs TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1357.html#L74'>php_stream</a>         74 ext/zlib/zlib_fopen_wrapper.c static int php_gziop_close(php_stream *stream, int close_handle TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1357.html#L94'>php_stream</a>         94 ext/zlib/zlib_fopen_wrapper.c static int php_gziop_flush(php_stream *stream TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1357.html#L111'>php_stream</a>        111 ext/zlib/zlib_fopen_wrapper.c php_stream *php_stream_gzopen(php_stream_wrapper *wrapper, const char *path, const char *mode, int options, </span>
+<span class='curline'><a href='../S/1357.html#L115'>php_stream</a>        115 ext/zlib/zlib_fopen_wrapper.c 	php_stream *stream = NULL, *innerstream = NULL;</span>
+<span class='curline'><a href='../S/1364.html#L1386'>php_stream</a>       1386 main/main.c    	php_stream_close((php_stream*)handle);</span>
+<span class='curline'><a href='../S/1364.html#L1392'>php_stream</a>       1392 main/main.c    	php_stream_mmap_unmap((php_stream*)handle);</span>
+<span class='curline'><a href='../S/1364.html#L1400'>php_stream</a>       1400 main/main.c    	if (php_stream_stat((php_stream*)handle, &amp;ssb) == 0) {</span>
+<span class='curline'><a href='../S/1364.html#L1417'>php_stream</a>       1417 main/main.c    	php_stream *stream = php_stream_open_wrapper((char *)filename, "rb", mode, &amp;handle-&gt;opened_path);</span>
+<span class='curline'><a href='../S/1366.html#L1038'>php_stream</a>       1038 main/network.c PHPAPI php_stream *_php_stream_sock_open_from_socket(php_socket_t socket, const char *persistent_id STREAMS_DC TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1366.html#L1040'>php_stream</a>       1040 main/network.c 	php_stream *stream;</span>
+<span class='curline'><a href='../S/1366.html#L1062'>php_stream</a>       1062 main/network.c PHPAPI php_stream *_php_stream_sock_open_host(const char *host, unsigned short port,</span>
+<span class='curline'><a href='../S/1366.html#L1067'>php_stream</a>       1067 main/network.c 	php_stream *stream;</span>
+<span class='curline'><a href='../S/1377.html#L44'>php_stream</a>         44 main/php_memory_streams.h PHPAPI php_stream *_php_stream_memory_create(int mode STREAMS_DC TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1377.html#L45'>php_stream</a>         45 main/php_memory_streams.h PHPAPI php_stream *_php_stream_memory_open(int mode, char *buf, size_t length STREAMS_DC TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1377.html#L46'>php_stream</a>         46 main/php_memory_streams.h PHPAPI char *_php_stream_memory_get_buffer(php_stream *stream, size_t *length STREAMS_DC TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1377.html#L48'>php_stream</a>         48 main/php_memory_streams.h PHPAPI php_stream *_php_stream_temp_create(int mode, size_t max_memory_usage STREAMS_DC TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1377.html#L49'>php_stream</a>         49 main/php_memory_streams.h PHPAPI php_stream *_php_stream_temp_create_ex(int mode, size_t max_memory_usage, const char *tmpdir STREAMS_DC TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1377.html#L50'>php_stream</a>         50 main/php_memory_streams.h PHPAPI php_stream *_php_stream_temp_open(int mode, size_t max_memory_usage, char *buf, size_t length STREAMS_DC TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1378.html#L288'>php_stream</a>        288 main/php_network.h PHPAPI php_stream *_php_stream_sock_open_from_socket(php_socket_t socket, const char *persistent_id STREAMS_DC TSRMLS_DC );</span>
+<span class='curline'><a href='../S/1378.html#L290'>php_stream</a>        290 main/php_network.h PHPAPI php_stream *_php_stream_sock_open_host(const char *host, unsigned short port,</span>
+<span class='curline'><a href='../S/1387.html#L98'>php_stream</a>         98 main/php_streams.h typedef struct _php_stream php_stream;</span>
+<span class='curline'><a href='../S/1387.html#L118'>php_stream</a>        118 main/php_streams.h 	size_t (*write)(php_stream *stream, const char *buf, size_t count TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1387.html#L119'>php_stream</a>        119 main/php_streams.h 	size_t (*read)(php_stream *stream, char *buf, size_t count TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1387.html#L120'>php_stream</a>        120 main/php_streams.h 	int    (*close)(php_stream *stream, int close_handle TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1387.html#L121'>php_stream</a>        121 main/php_streams.h 	int    (*flush)(php_stream *stream TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1387.html#L126'>php_stream</a>        126 main/php_streams.h 	int (*seek)(php_stream *stream, off_t offset, int whence, off_t *newoffset TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1387.html#L127'>php_stream</a>        127 main/php_streams.h 	int (*cast)(php_stream *stream, int castas, void **ret TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1387.html#L128'>php_stream</a>        128 main/php_streams.h 	int (*stat)(php_stream *stream, php_stream_statbuf *ssb TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1387.html#L129'>php_stream</a>        129 main/php_streams.h 	int (*set_option)(php_stream *stream, int option, int value, void *ptrparam TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1387.html#L134'>php_stream</a>        134 main/php_streams.h 	php_stream *(*stream_opener)(php_stream_wrapper *wrapper, const char *filename, const char *mode,</span>
+<span class='curline'><a href='../S/1387.html#L137'>php_stream</a>        137 main/php_streams.h 	int (*stream_closer)(php_stream_wrapper *wrapper, php_stream *stream TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1387.html#L139'>php_stream</a>        139 main/php_streams.h 	int (*stream_stat)(php_stream_wrapper *wrapper, php_stream *stream, php_stream_statbuf *ssb TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1387.html#L143'>php_stream</a>        143 main/php_streams.h 	php_stream *(*dir_opener)(php_stream_wrapper *wrapper, const char *filename, const char *mode,</span>
+<span class='curline'><a href='../S/1387.html#L240'>php_stream</a>        240 main/php_streams.h PHPAPI php_stream *_php_stream_alloc(php_stream_ops *ops, void *abstract,</span>
+<span class='curline'><a href='../S/1387.html#L245'>php_stream</a>        245 main/php_streams.h #define php_stream_get_resource_id(stream)		((php_stream *)(stream))-&gt;rsrc_id</span>
+<span class='curline'><a href='../S/1387.html#L258'>php_stream</a>        258 main/php_streams.h #define php_stream_from_zval(xstr, ppzval)	ZEND_FETCH_RESOURCE2((xstr), php_stream *, (ppzval), -1, "stream", php_file_le_stream(), php_file_le_pstream())</span>
+<span class='curline'><a href='../S/1387.html#L259'>php_stream</a>        259 main/php_streams.h #define php_stream_from_zval_no_verify(xstr, ppzval)	(xstr) = (php_stream*)zend_fetch_resource((ppzval) TSRMLS_CC, -1, "stream", NULL, 2, php_file_le_stream(), php_file_le_pstream())</span>
+<span class='curline'><a href='../S/1387.html#L262'>php_stream</a>        262 main/php_streams.h PHPAPI php_stream *php_stream_encloses(php_stream *enclosing, php_stream *enclosed);</span>
+<span class='curline'><a href='../S/1387.html#L264'>php_stream</a>        264 main/php_streams.h PHPAPI int _php_stream_free_enclosed(php_stream *stream_enclosed, int close_options TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1387.html#L266'>php_stream</a>        266 main/php_streams.h PHPAPI int php_stream_from_persistent_id(const char *persistent_id, php_stream **stream TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1387.html#L281'>php_stream</a>        281 main/php_streams.h PHPAPI int _php_stream_free(php_stream *stream, int close_options TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1387.html#L286'>php_stream</a>        286 main/php_streams.h PHPAPI int _php_stream_seek(php_stream *stream, off_t offset, int whence TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1387.html#L290'>php_stream</a>        290 main/php_streams.h PHPAPI off_t _php_stream_tell(php_stream *stream TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1387.html#L293'>php_stream</a>        293 main/php_streams.h PHPAPI size_t _php_stream_read(php_stream *stream, char *buf, size_t count TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1387.html#L296'>php_stream</a>        296 main/php_streams.h PHPAPI size_t _php_stream_write(php_stream *stream, const char *buf, size_t count TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1387.html#L300'>php_stream</a>        300 main/php_streams.h PHPAPI void _php_stream_fill_read_buffer(php_stream *stream, size_t size TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1387.html#L304'>php_stream</a>        304 main/php_streams.h PHPAPI size_t _php_stream_printf(php_stream *stream TSRMLS_DC, const char *fmt, ...) PHP_ATTRIBUTE_FORMAT(printf, 3, 4);</span>
+<span class='curline'><a href='../S/1387.html#L306'>php_stream</a>        306 main/php_streams.h PHPAPI size_t _php_stream_printf(php_stream *stream TSRMLS_DC, const char *fmt, ...) PHP_ATTRIBUTE_FORMAT(printf, 2, 3);</span>
+<span class='curline'><a href='../S/1387.html#L312'>php_stream</a>        312 main/php_streams.h PHPAPI int _php_stream_eof(php_stream *stream TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1387.html#L315'>php_stream</a>        315 main/php_streams.h PHPAPI int _php_stream_getc(php_stream *stream TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1387.html#L318'>php_stream</a>        318 main/php_streams.h PHPAPI int _php_stream_putc(php_stream *stream, int c TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1387.html#L321'>php_stream</a>        321 main/php_streams.h PHPAPI int _php_stream_flush(php_stream *stream, int closing TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1387.html#L324'>php_stream</a>        324 main/php_streams.h PHPAPI char *_php_stream_get_line(php_stream *stream, char *buf, size_t maxlen, size_t *returned_len TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1387.html#L328'>php_stream</a>        328 main/php_streams.h PHPAPI char *php_stream_get_record(php_stream *stream, size_t maxlen, size_t *returned_len, const char *delim, size_t delim_len TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1387.html#L331'>php_stream</a>        331 main/php_streams.h PHPAPI int _php_stream_puts(php_stream *stream, const char *buf TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1387.html#L334'>php_stream</a>        334 main/php_streams.h PHPAPI int _php_stream_stat(php_stream *stream, php_stream_statbuf *ssb TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1387.html#L347'>php_stream</a>        347 main/php_streams.h PHPAPI php_stream *_php_stream_opendir(const char *path, int options, php_stream_context *context STREAMS_DC TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1387.html#L349'>php_stream</a>        349 main/php_streams.h PHPAPI php_stream_dirent *_php_stream_readdir(php_stream *dirstream, php_stream_dirent *ent TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1387.html#L361'>php_stream</a>        361 main/php_streams.h PHPAPI int _php_stream_set_option(php_stream *stream, int option, int value, void *ptrparam TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1387.html#L418'>php_stream</a>        418 main/php_streams.h PHPAPI int _php_stream_truncate_set_size(php_stream *stream, size_t newsize TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1387.html#L439'>php_stream</a>        439 main/php_streams.h PHPAPI size_t _php_stream_copy_to_stream(php_stream *src, php_stream *dest, size_t maxlen STREAMS_DC TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1387.html#L441'>php_stream</a>        441 main/php_streams.h PHPAPI int _php_stream_copy_to_stream_ex(php_stream *src, php_stream *dest, size_t maxlen, size_t *len STREAMS_DC TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1387.html#L447'>php_stream</a>        447 main/php_streams.h PHPAPI size_t _php_stream_copy_to_mem(php_stream *src, char **buf, size_t maxlen,</span>
+<span class='curline'><a href='../S/1387.html#L452'>php_stream</a>        452 main/php_streams.h PHPAPI size_t _php_stream_passthru(php_stream * src STREAMS_DC TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1387.html#L478'>php_stream</a>        478 main/php_streams.h PHPAPI int _php_stream_cast(php_stream *stream, int castas, void **ret, int show_err TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1387.html#L551'>php_stream</a>        551 main/php_streams.h PHPAPI php_stream *_php_stream_open_wrapper_ex(const char *path, const char *mode, int options, char **opened_path, php_stream_context *context STREAMS_DC TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1387.html#L553'>php_stream</a>        553 main/php_streams.h PHPAPI const char *php_stream_locate_eol(php_stream *stream, const char *buf, size_t buf_len TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1387.html#L579'>php_stream</a>        579 main/php_streams.h PHPAPI int _php_stream_make_seekable(php_stream *origstream, php_stream **newstream, int flags STREAMS_DC TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1391.html#L321'>php_stream</a>        321 main/php_variables.c 	php_stream *s = SG(request_info).request_body;</span>
+<span class='curline'><a href='../S/1403.html#L68'>php_stream</a>         68 main/streams/cast.c 	ret = php_stream_read((php_stream*)cookie, buffer, size);</span>
+<span class='curline'><a href='../S/1403.html#L76'>php_stream</a>         76 main/streams/cast.c 	return php_stream_write((php_stream *)cookie, (char *)buffer, size);</span>
+<span class='curline'><a href='../S/1403.html#L83'>php_stream</a>         83 main/streams/cast.c 	return (PHP_FPOS_T)php_stream_seek((php_stream *)cookie, position, whence);</span>
+<span class='curline'><a href='../S/1403.html#L88'>php_stream</a>         88 main/streams/cast.c 	php_stream *stream = (php_stream*)cookie;</span>
+<span class='curline'><a href='../S/1403.html#L101'>php_stream</a>        101 main/streams/cast.c 	ret = php_stream_read(((php_stream *)cookie), buffer, size);</span>
+<span class='curline'><a href='../S/1403.html#L109'>php_stream</a>        109 main/streams/cast.c 	return php_stream_write(((php_stream *)cookie), (char *)buffer, size);</span>
+<span class='curline'><a href='../S/1403.html#L117'>php_stream</a>        117 main/streams/cast.c 	*position = php_stream_seek((php_stream *)cookie, (off_t)*position, whence);</span>
+<span class='curline'><a href='../S/1403.html#L129'>php_stream</a>        129 main/streams/cast.c 	return php_stream_seek((php_stream *)cookie, position, whence);</span>
+<span class='curline'><a href='../S/1403.html#L135'>php_stream</a>        135 main/streams/cast.c 	php_stream *stream = (php_stream*)cookie;</span>
+<span class='curline'><a href='../S/1403.html#L157'>php_stream</a>        157 main/streams/cast.c void php_stream_mode_sanitize_fdopen_fopencookie(php_stream *stream, char *result)</span>
+<span class='curline'><a href='../S/1403.html#L200'>php_stream</a>        200 main/streams/cast.c PHPAPI int _php_stream_cast(php_stream *stream, int castas, void **ret, int show_err TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1403.html#L278'>php_stream</a>        278 main/streams/cast.c 			php_stream *newstream;</span>
+<span class='curline'><a href='../S/1403.html#L357'>php_stream</a>        357 main/streams/cast.c 	php_stream *stream = NULL;</span>
+<span class='curline'><a href='../S/1403.html#L377'>php_stream</a>        377 main/streams/cast.c PHPAPI int _php_stream_make_seekable(php_stream *origstream, php_stream **newstream, int flags STREAMS_DC TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1404.html#L73'>php_stream</a>         73 main/streams/filter.c PHPAPI php_stream_bucket *php_stream_bucket_new(php_stream *stream, char *buf, size_t buflen, int own_buf, int buf_persistent TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1404.html#L339'>php_stream</a>        339 main/streams/filter.c 	php_stream *stream = chain-&gt;stream;</span>
+<span class='curline'><a href='../S/1404.html#L437'>php_stream</a>        437 main/streams/filter.c 	php_stream *stream;</span>
+<span class='curline'><a href='../S/1405.html#L50'>php_stream</a>         50 main/streams/glob_wrapper.c PHPAPI char* _php_glob_stream_get_path(php_stream *stream, int copy, int *plen STREAMS_DC TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1405.html#L72'>php_stream</a>         72 main/streams/glob_wrapper.c PHPAPI char* _php_glob_stream_get_pattern(php_stream *stream, int copy, int *plen STREAMS_DC TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1405.html#L94'>php_stream</a>         94 main/streams/glob_wrapper.c PHPAPI int _php_glob_stream_get_count(php_stream *stream, int *pflags STREAMS_DC TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1405.html#L140'>php_stream</a>        140 main/streams/glob_wrapper.c static size_t php_glob_stream_read(php_stream *stream, char *buf, size_t count TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1405.html#L164'>php_stream</a>        164 main/streams/glob_wrapper.c static int php_glob_stream_close(php_stream *stream, int close_handle TSRMLS_DC)  /* {{{ */</span>
+<span class='curline'><a href='../S/1405.html#L183'>php_stream</a>        183 main/streams/glob_wrapper.c static int php_glob_stream_rewind(php_stream *stream, off_t offset, int whence, off_t *newoffs TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1405.html#L209'>php_stream</a>        209 main/streams/glob_wrapper.c static php_stream *php_glob_stream_opener(php_stream_wrapper *wrapper, const char *path, const char *mode,</span>
+<span class='curline'><a href='../S/1406.html#L49'>php_stream</a>         49 main/streams/memory.c static size_t php_stream_memory_write(php_stream *stream, const char *buf, size_t count TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1406.html#L85'>php_stream</a>         85 main/streams/memory.c static size_t php_stream_memory_read(php_stream *stream, char *buf, size_t count TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1406.html#L110'>php_stream</a>        110 main/streams/memory.c static int php_stream_memory_close(php_stream *stream, int close_handle TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1406.html#L125'>php_stream</a>        125 main/streams/memory.c static int php_stream_memory_flush(php_stream *stream TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1406.html#L134'>php_stream</a>        134 main/streams/memory.c static int php_stream_memory_seek(php_stream *stream, off_t offset, int whence, off_t *newoffs TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1406.html#L198'>php_stream</a>        198 main/streams/memory.c static int php_stream_memory_cast(php_stream *stream, int castas, void **ret TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1406.html#L204'>php_stream</a>        204 main/streams/memory.c static int php_stream_memory_stat(php_stream *stream, php_stream_statbuf *ssb TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1406.html#L247'>php_stream</a>        247 main/streams/memory.c static int php_stream_memory_set_option(php_stream *stream, int option, int value, void *ptrparam TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1406.html#L293'>php_stream</a>        293 main/streams/memory.c PHPAPI php_stream *_php_stream_memory_create(int mode STREAMS_DC TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1406.html#L296'>php_stream</a>        296 main/streams/memory.c 	php_stream *stream;</span>
+<span class='curline'><a href='../S/1406.html#L313'>php_stream</a>        313 main/streams/memory.c PHPAPI php_stream *_php_stream_memory_open(int mode, char *buf, size_t length STREAMS_DC TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1406.html#L315'>php_stream</a>        315 main/streams/memory.c 	php_stream *stream;</span>
+<span class='curline'><a href='../S/1406.html#L338'>php_stream</a>        338 main/streams/memory.c PHPAPI char *_php_stream_memory_get_buffer(php_stream *stream, size_t *length STREAMS_DC TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1406.html#L355'>php_stream</a>        355 main/streams/memory.c 	php_stream  *innerstream;</span>
+<span class='curline'><a href='../S/1406.html#L364'>php_stream</a>        364 main/streams/memory.c static size_t php_stream_temp_write(php_stream *stream, const char *buf, size_t count TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1406.html#L377'>php_stream</a>        377 main/streams/memory.c 			php_stream *file = php_stream_fopen_temporary_file(ts-&gt;tmpdir, "php", NULL);</span>
+<span class='curline'><a href='../S/1406.html#L394'>php_stream</a>        394 main/streams/memory.c static size_t php_stream_temp_read(php_stream *stream, char *buf, size_t count TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1406.html#L415'>php_stream</a>        415 main/streams/memory.c static int php_stream_temp_close(php_stream *stream, int close_handle TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1406.html#L444'>php_stream</a>        444 main/streams/memory.c static int php_stream_temp_flush(php_stream *stream TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1406.html#L455'>php_stream</a>        455 main/streams/memory.c static int php_stream_temp_seek(php_stream *stream, off_t offset, int whence, off_t *newoffs TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1406.html#L475'>php_stream</a>        475 main/streams/memory.c static int php_stream_temp_cast(php_stream *stream, int castas, void **ret TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1406.html#L478'>php_stream</a>        478 main/streams/memory.c 	php_stream *file;</span>
+<span class='curline'><a href='../S/1406.html#L521'>php_stream</a>        521 main/streams/memory.c static int php_stream_temp_stat(php_stream *stream, php_stream_statbuf *ssb TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1406.html#L532'>php_stream</a>        532 main/streams/memory.c static int php_stream_temp_set_option(php_stream *stream, int option, int value, void *ptrparam TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1406.html#L564'>php_stream</a>        564 main/streams/memory.c PHPAPI php_stream *_php_stream_temp_create_ex(int mode, size_t max_memory_usage, const char *tmpdir STREAMS_DC TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1406.html#L567'>php_stream</a>        567 main/streams/memory.c 	php_stream *stream;</span>
+<span class='curline'><a href='../S/1406.html#L585'>php_stream</a>        585 main/streams/memory.c PHPAPI php_stream *_php_stream_temp_create(int mode, size_t max_memory_usage STREAMS_DC TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1406.html#L592'>php_stream</a>        592 main/streams/memory.c PHPAPI php_stream *_php_stream_temp_open(int mode, size_t max_memory_usage, char *buf, size_t length STREAMS_DC TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1406.html#L594'>php_stream</a>        594 main/streams/memory.c 	php_stream *stream;</span>
+<span class='curline'><a href='../S/1406.html#L622'>php_stream</a>        622 main/streams/memory.c static php_stream * php_stream_url_wrap_rfc2397(php_stream_wrapper *wrapper, const char *path,</span>
+<span class='curline'><a href='../S/1406.html#L626'>php_stream</a>        626 main/streams/memory.c 	php_stream *stream;</span>
+<span class='curline'><a href='../S/1407.html#L25'>php_stream</a>         25 main/streams/mmap.c PHPAPI char *_php_stream_mmap_range(php_stream *stream, size_t offset, size_t length, php_stream_mmap_operation_t mode, size_t *mapped_len TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1407.html#L49'>php_stream</a>         49 main/streams/mmap.c PHPAPI int _php_stream_mmap_unmap(php_stream *stream TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1407.html#L54'>php_stream</a>         54 main/streams/mmap.c PHPAPI int _php_stream_mmap_unmap_ex(php_stream *stream, off_t readden TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1408.html#L90'>php_stream</a>         90 main/streams/php_stream_context.h PHPAPI php_stream_context *php_stream_context_set(php_stream *stream, php_stream_context *context);</span>
+<span class='curline'><a href='../S/1409.html#L70'>php_stream</a>         70 main/streams/php_stream_filter_api.h PHPAPI php_stream_bucket *php_stream_bucket_new(php_stream *stream, char *buf, size_t buflen, int own_buf, int buf_persistent TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1409.html#L87'>php_stream</a>         87 main/streams/php_stream_filter_api.h 			php_stream *stream,</span>
+<span class='curline'><a href='../S/1409.html#L105'>php_stream</a>        105 main/streams/php_stream_filter_api.h 	php_stream *stream;</span>
+<span class='curline'><a href='../S/1410.html#L26'>php_stream</a>         26 main/streams/php_stream_glob_wrapper.h PHPAPI char* _php_glob_stream_get_path(php_stream *stream, int copy, int *plen STREAMS_DC TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1410.html#L29'>php_stream</a>         29 main/streams/php_stream_glob_wrapper.h PHPAPI char* _php_glob_stream_get_pattern(php_stream *stream, int copy, int *plen STREAMS_DC TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1410.html#L32'>php_stream</a>         32 main/streams/php_stream_glob_wrapper.h PHPAPI int   _php_glob_stream_get_count(php_stream *stream, int *pflags STREAMS_DC TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1411.html#L70'>php_stream</a>         70 main/streams/php_stream_mmap.h PHPAPI char *_php_stream_mmap_range(php_stream *stream, size_t offset, size_t length, php_stream_mmap_operation_t mode, size_t *mapped_len TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1411.html#L74'>php_stream</a>         74 main/streams/php_stream_mmap.h PHPAPI int _php_stream_mmap_unmap(php_stream *stream TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1411.html#L77'>php_stream</a>         77 main/streams/php_stream_mmap.h PHPAPI int _php_stream_mmap_unmap_ex(php_stream *stream, off_t readden TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1412.html#L30'>php_stream</a>         30 main/streams/php_stream_plain_wrapper.h PHPAPI php_stream *_php_stream_fopen(const char *filename, const char *mode, char **opened_path, int options STREAMS_DC TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1412.html#L33'>php_stream</a>         33 main/streams/php_stream_plain_wrapper.h PHPAPI php_stream *_php_stream_fopen_with_path(const char *filename, const char *mode, const char *path, char **opened_path, int options STREAMS_DC TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1412.html#L36'>php_stream</a>         36 main/streams/php_stream_plain_wrapper.h PHPAPI php_stream *_php_stream_fopen_from_file(FILE *file, const char *mode STREAMS_DC TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1412.html#L39'>php_stream</a>         39 main/streams/php_stream_plain_wrapper.h PHPAPI php_stream *_php_stream_fopen_from_fd(int fd, const char *mode, const char *persistent_id STREAMS_DC TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1412.html#L42'>php_stream</a>         42 main/streams/php_stream_plain_wrapper.h PHPAPI php_stream *_php_stream_fopen_from_pipe(FILE *file, const char *mode STREAMS_DC TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1412.html#L45'>php_stream</a>         45 main/streams/php_stream_plain_wrapper.h PHPAPI php_stream *_php_stream_fopen_tmpfile(int dummy STREAMS_DC TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1412.html#L48'>php_stream</a>         48 main/streams/php_stream_plain_wrapper.h PHPAPI php_stream *_php_stream_fopen_temporary_file(const char *dir, const char *pfx, char **opened_path STREAMS_DC TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1413.html#L29'>php_stream</a>         29 main/streams/php_stream_transport.h typedef php_stream *(php_stream_transport_factory_func)(const char *proto, size_t protolen,</span>
+<span class='curline'><a href='../S/1413.html#L49'>php_stream</a>         49 main/streams/php_stream_transport.h PHPAPI php_stream *_php_stream_xport_create(const char *name, size_t namelen, int options,</span>
+<span class='curline'><a href='../S/1413.html#L61'>php_stream</a>         61 main/streams/php_stream_transport.h PHPAPI int php_stream_xport_bind(php_stream *stream,</span>
+<span class='curline'><a href='../S/1413.html#L67'>php_stream</a>         67 main/streams/php_stream_transport.h PHPAPI int php_stream_xport_connect(php_stream *stream,</span>
+<span class='curline'><a href='../S/1413.html#L76'>php_stream</a>         76 main/streams/php_stream_transport.h PHPAPI int php_stream_xport_listen(php_stream *stream,</span>
+<span class='curline'><a href='../S/1413.html#L83'>php_stream</a>         83 main/streams/php_stream_transport.h PHPAPI int php_stream_xport_accept(php_stream *stream, php_stream **client,</span>
+<span class='curline'><a href='../S/1413.html#L91'>php_stream</a>         91 main/streams/php_stream_transport.h PHPAPI int php_stream_xport_get_name(php_stream *stream, int want_peer,</span>
+<span class='curline'><a href='../S/1413.html#L103'>php_stream</a>        103 main/streams/php_stream_transport.h PHPAPI int php_stream_xport_recvfrom(php_stream *stream, char *buf, size_t buflen,</span>
+<span class='curline'><a href='../S/1413.html#L109'>php_stream</a>        109 main/streams/php_stream_transport.h PHPAPI int php_stream_xport_sendto(php_stream *stream, const char *buf, size_t buflen,</span>
+<span class='curline'><a href='../S/1413.html#L120'>php_stream</a>        120 main/streams/php_stream_transport.h PHPAPI int php_stream_xport_shutdown(php_stream *stream, stream_shutdown_t how TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1413.html#L154'>php_stream</a>        154 main/streams/php_stream_transport.h 		php_stream *client;</span>
+<span class='curline'><a href='../S/1413.html#L197'>php_stream</a>        197 main/streams/php_stream_transport.h PHPAPI int php_stream_xport_crypto_setup(php_stream *stream, php_stream_xport_crypt_method_t crypto_method, php_stream *session_stream TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1413.html#L198'>php_stream</a>        198 main/streams/php_stream_transport.h PHPAPI int php_stream_xport_crypto_enable(php_stream *stream, int activate TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1413.html#L209'>php_stream</a>        209 main/streams/php_stream_transport.h 		php_stream *session;</span>
+<span class='curline'><a href='../S/1415.html#L67'>php_stream</a>         67 main/streams/php_streams_int.h void php_stream_mode_sanitize_fdopen_fopencookie(php_stream *stream, char *result);</span>
+<span class='curline'><a href='../S/1416.html#L155'>php_stream</a>        155 main/streams/plain_wrapper.c static php_stream *_php_stream_fopen_from_fd_int(int fd, const char *mode, const char *persistent_id STREAMS_DC TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1416.html#L171'>php_stream</a>        171 main/streams/plain_wrapper.c static php_stream *_php_stream_fopen_from_file_int(FILE *file, const char *mode STREAMS_DC TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1416.html#L187'>php_stream</a>        187 main/streams/plain_wrapper.c PHPAPI php_stream *_php_stream_fopen_temporary_file(const char *dir, const char *pfx, char **opened_path_ptr STREAMS_DC TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1416.html#L194'>php_stream</a>        194 main/streams/plain_wrapper.c 		php_stream *stream;</span>
+<span class='curline'><a href='../S/1416.html#L220'>php_stream</a>        220 main/streams/plain_wrapper.c PHPAPI php_stream *_php_stream_fopen_tmpfile(int dummy STREAMS_DC TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1416.html#L225'>php_stream</a>        225 main/streams/plain_wrapper.c PHPAPI php_stream *_php_stream_fopen_from_fd(int fd, const char *mode, const char *persistent_id STREAMS_DC TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1416.html#L227'>php_stream</a>        227 main/streams/plain_wrapper.c 	php_stream *stream = php_stream_fopen_from_fd_int_rel(fd, mode, persistent_id);</span>
+<span class='curline'><a href='../S/1416.html#L264'>php_stream</a>        264 main/streams/plain_wrapper.c PHPAPI php_stream *_php_stream_fopen_from_file(FILE *file, const char *mode STREAMS_DC TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1416.html#L266'>php_stream</a>        266 main/streams/plain_wrapper.c 	php_stream *stream = php_stream_fopen_from_file_int_rel(file, mode);</span>
+<span class='curline'><a href='../S/1416.html#L296'>php_stream</a>        296 main/streams/plain_wrapper.c PHPAPI php_stream *_php_stream_fopen_from_pipe(FILE *file, const char *mode STREAMS_DC TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1416.html#L299'>php_stream</a>        299 main/streams/plain_wrapper.c 	php_stream *stream;</span>
+<span class='curline'><a href='../S/1416.html#L315'>php_stream</a>        315 main/streams/plain_wrapper.c static size_t php_stdiop_write(php_stream *stream, const char *buf, size_t count TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1416.html#L338'>php_stream</a>        338 main/streams/plain_wrapper.c static size_t php_stdiop_read(php_stream *stream, char *buf, size_t count TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1416.html#L399'>php_stream</a>        399 main/streams/plain_wrapper.c static int php_stdiop_close(php_stream *stream, int close_handle TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1416.html#L460'>php_stream</a>        460 main/streams/plain_wrapper.c static int php_stdiop_flush(php_stream *stream TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1416.html#L477'>php_stream</a>        477 main/streams/plain_wrapper.c static int php_stdiop_seek(php_stream *stream, off_t offset, int whence, off_t *newoffset TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1416.html#L506'>php_stream</a>        506 main/streams/plain_wrapper.c static int php_stdiop_cast(php_stream *stream, int castas, void **ret TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1416.html#L564'>php_stream</a>        564 main/streams/plain_wrapper.c static int php_stdiop_stat(php_stream *stream, php_stream_statbuf *ssb TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1416.html#L576'>php_stream</a>        576 main/streams/plain_wrapper.c static int php_stdiop_set_option(php_stream *stream, int option, int value, void *ptrparam TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1416.html#L839'>php_stream</a>        839 main/streams/plain_wrapper.c static size_t php_plain_files_dirstream_read(php_stream *stream, char *buf, size_t count TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1416.html#L858'>php_stream</a>        858 main/streams/plain_wrapper.c static int php_plain_files_dirstream_close(php_stream *stream, int close_handle TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1416.html#L863'>php_stream</a>        863 main/streams/plain_wrapper.c static int php_plain_files_dirstream_rewind(php_stream *stream, off_t offset, int whence, off_t *newoffs TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1416.html#L879'>php_stream</a>        879 main/streams/plain_wrapper.c static php_stream *php_plain_files_dir_opener(php_stream_wrapper *wrapper, const char *path, const char *mode,</span>
+<span class='curline'><a href='../S/1416.html#L883'>php_stream</a>        883 main/streams/plain_wrapper.c 	php_stream *stream = NULL;</span>
+<span class='curline'><a href='../S/1416.html#L918'>php_stream</a>        918 main/streams/plain_wrapper.c PHPAPI php_stream *_php_stream_fopen(const char *filename, const char *mode, char **opened_path, int options STREAMS_DC TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1416.html#L923'>php_stream</a>        923 main/streams/plain_wrapper.c 	php_stream *ret;</span>
+<span class='curline'><a href='../S/1416.html#L1017'>php_stream</a>       1017 main/streams/plain_wrapper.c static php_stream *php_plain_files_stream_opener(php_stream_wrapper *wrapper, const char *path, const char *mode,</span>
+<span class='curline'><a href='../S/1416.html#L1383'>php_stream</a>       1383 main/streams/plain_wrapper.c PHPAPI php_stream *_php_stream_fopen_with_path(const char *filename, const char *mode, const char *path, char **opened_path, int options STREAMS_DC TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1416.html#L1390'>php_stream</a>       1390 main/streams/plain_wrapper.c 	php_stream *stream;</span>
+<span class='curline'><a href='../S/1417.html#L78'>php_stream</a>         78 main/streams/streams.c 	php_stream *stream;</span>
+<span class='curline'><a href='../S/1417.html#L84'>php_stream</a>         84 main/streams/streams.c 	stream = (php_stream*)rsrc-&gt;ptr;</span>
+<span class='curline'><a href='../S/1417.html#L108'>php_stream</a>        108 main/streams/streams.c PHPAPI php_stream *php_stream_encloses(php_stream *enclosing, php_stream *enclosed)</span>
+<span class='curline'><a href='../S/1417.html#L110'>php_stream</a>        110 main/streams/streams.c 	php_stream *orig = enclosed-&gt;enclosing_stream;</span>
+<span class='curline'><a href='../S/1417.html#L117'>php_stream</a>        117 main/streams/streams.c PHPAPI int php_stream_from_persistent_id(const char *persistent_id, php_stream **stream TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1417.html#L142'>php_stream</a>        142 main/streams/streams.c 				*stream = (php_stream*)le-&gt;ptr;</span>
+<span class='curline'><a href='../S/1417.html#L288'>php_stream</a>        288 main/streams/streams.c PHPAPI php_stream *_php_stream_alloc(php_stream_ops *ops, void *abstract, const char *persistent_id, const char *mode STREAMS_DC TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1417.html#L290'>php_stream</a>        290 main/streams/streams.c 	php_stream *ret;</span>
+<span class='curline'><a href='../S/1417.html#L292'>php_stream</a>        292 main/streams/streams.c 	ret = (php_stream*) pemalloc_rel_orig(sizeof(php_stream), persistent_id ? 1 : 0);</span>
+<span class='curline'><a href='../S/1417.html#L294'>php_stream</a>        294 main/streams/streams.c 	memset(ret, 0, sizeof(php_stream));</span>
+<span class='curline'><a href='../S/1417.html#L349'>php_stream</a>        349 main/streams/streams.c PHPAPI int _php_stream_free_enclosed(php_stream *stream_enclosed, int close_options TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1417.html#L383'>php_stream</a>        383 main/streams/streams.c PHPAPI int _php_stream_free(php_stream *stream, int close_options TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1417.html#L427'>php_stream</a>        427 main/streams/streams.c 		php_stream *enclosing_stream = stream-&gt;enclosing_stream;</span>
+<span class='curline'><a href='../S/1417.html#L571'>php_stream</a>        571 main/streams/streams.c PHPAPI void _php_stream_fill_read_buffer(php_stream *stream, size_t size TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1417.html#L703'>php_stream</a>        703 main/streams/streams.c PHPAPI size_t _php_stream_read(php_stream *stream, char *buf, size_t size TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1417.html#L773'>php_stream</a>        773 main/streams/streams.c PHPAPI int _php_stream_eof(php_stream *stream TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1417.html#L790'>php_stream</a>        790 main/streams/streams.c PHPAPI int _php_stream_putc(php_stream *stream, int c TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1417.html#L800'>php_stream</a>        800 main/streams/streams.c PHPAPI int _php_stream_getc(php_stream *stream TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1417.html#L810'>php_stream</a>        810 main/streams/streams.c PHPAPI int _php_stream_puts(php_stream *stream, const char *buf TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1417.html#L822'>php_stream</a>        822 main/streams/streams.c PHPAPI int _php_stream_stat(php_stream *stream, php_stream_statbuf *ssb TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1417.html#L842'>php_stream</a>        842 main/streams/streams.c PHPAPI const char *php_stream_locate_eol(php_stream *stream, const char *buf, size_t buf_len TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1417.html#L884'>php_stream</a>        884 main/streams/streams.c PHPAPI char *_php_stream_get_line(php_stream *stream, char *buf, size_t maxlen,</span>
+<span class='curline'><a href='../S/1417.html#L1001'>php_stream</a>       1001 main/streams/streams.c static const char *_php_stream_search_delim(php_stream *stream,</span>
+<span class='curline'><a href='../S/1417.html#L1025'>php_stream</a>       1025 main/streams/streams.c PHPAPI char *php_stream_get_record(php_stream *stream, size_t maxlen, size_t *returned_len, const char *delim, size_t delim_len TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1417.html#L1114'>php_stream</a>       1114 main/streams/streams.c static size_t _php_stream_write_buffer(php_stream *stream, const char *buf, size_t count TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1417.html#L1159'>php_stream</a>       1159 main/streams/streams.c static size_t _php_stream_write_filtered(php_stream *stream, const char *buf, size_t count, int flags TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1417.html#L1220'>php_stream</a>       1220 main/streams/streams.c PHPAPI int _php_stream_flush(php_stream *stream, int closing TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1417.html#L1235'>php_stream</a>       1235 main/streams/streams.c PHPAPI size_t _php_stream_write(php_stream *stream, const char *buf, size_t count TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1417.html#L1248'>php_stream</a>       1248 main/streams/streams.c PHPAPI size_t _php_stream_printf(php_stream *stream TSRMLS_DC, const char *fmt, ...)</span>
+<span class='curline'><a href='../S/1417.html#L1268'>php_stream</a>       1268 main/streams/streams.c PHPAPI off_t _php_stream_tell(php_stream *stream TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1417.html#L1273'>php_stream</a>       1273 main/streams/streams.c PHPAPI int _php_stream_seek(php_stream *stream, off_t offset, int whence TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1417.html#L1352'>php_stream</a>       1352 main/streams/streams.c PHPAPI int _php_stream_set_option(php_stream *stream, int option, int value, void *ptrparam TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1417.html#L1385'>php_stream</a>       1385 main/streams/streams.c PHPAPI int _php_stream_truncate_set_size(php_stream *stream, size_t newsize TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1417.html#L1390'>php_stream</a>       1390 main/streams/streams.c PHPAPI size_t _php_stream_passthru(php_stream * stream STREAMS_DC TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1417.html#L1425'>php_stream</a>       1425 main/streams/streams.c PHPAPI size_t _php_stream_copy_to_mem(php_stream *src, char **buf, size_t maxlen, int persistent STREAMS_DC TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1417.html#L1496'>php_stream</a>       1496 main/streams/streams.c PHPAPI int _php_stream_copy_to_stream_ex(php_stream *src, php_stream *dest, size_t maxlen, size_t *len STREAMS_DC TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1417.html#L1603'>php_stream</a>       1603 main/streams/streams.c PHPAPI size_t _php_stream_copy_to_stream(php_stream *src, php_stream *dest, size_t maxlen STREAMS_DC TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1417.html#L1618'>php_stream</a>       1618 main/streams/streams.c 	php_stream *stream = (php_stream*)rsrc-&gt;ptr;</span>
+<span class='curline'><a href='../S/1417.html#L1625'>php_stream</a>       1625 main/streams/streams.c 	php_stream *stream = (php_stream*)rsrc-&gt;ptr;</span>
+<span class='curline'><a href='../S/1417.html#L1970'>php_stream</a>       1970 main/streams/streams.c PHPAPI php_stream *_php_stream_opendir(const char *path, int options,</span>
+<span class='curline'><a href='../S/1417.html#L1973'>php_stream</a>       1973 main/streams/streams.c 	php_stream *stream = NULL;</span>
+<span class='curline'><a href='../S/1417.html#L2007'>php_stream</a>       2007 main/streams/streams.c PHPAPI php_stream_dirent *_php_stream_readdir(php_stream *dirstream, php_stream_dirent *ent TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1417.html#L2019'>php_stream</a>       2019 main/streams/streams.c PHPAPI php_stream *_php_stream_open_wrapper_ex(const char *path, const char *mode, int options,</span>
+<span class='curline'><a href='../S/1417.html#L2022'>php_stream</a>       2022 main/streams/streams.c 	php_stream *stream = NULL;</span>
+<span class='curline'><a href='../S/1417.html#L2100'>php_stream</a>       2100 main/streams/streams.c 		php_stream *newstream;</span>
+<span class='curline'><a href='../S/1417.html#L2164'>php_stream</a>       2164 main/streams/streams.c PHPAPI php_stream_context *php_stream_context_set(php_stream *stream, php_stream_context *context)</span>
+<span class='curline'><a href='../S/1417.html#L2283'>php_stream</a>       2283 main/streams/streams.c 	php_stream *stream;</span>
+<span class='curline'><a href='../S/1418.html#L52'>php_stream</a>         52 main/streams/transports.c PHPAPI php_stream *_php_stream_xport_create(const char *name, size_t namelen, int options,</span>
+<span class='curline'><a href='../S/1418.html#L60'>php_stream</a>         60 main/streams/transports.c 	php_stream *stream = NULL;</span>
+<span class='curline'><a href='../S/1418.html#L196'>php_stream</a>        196 main/streams/transports.c PHPAPI int php_stream_xport_bind(php_stream *stream,</span>
+<span class='curline'><a href='../S/1418.html#L224'>php_stream</a>        224 main/streams/transports.c PHPAPI int php_stream_xport_connect(php_stream *stream,</span>
+<span class='curline'><a href='../S/1418.html#L260'>php_stream</a>        260 main/streams/transports.c PHPAPI int php_stream_xport_listen(php_stream *stream, int backlog, char **error_text TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1418.html#L284'>php_stream</a>        284 main/streams/transports.c PHPAPI int php_stream_xport_accept(php_stream *stream, php_stream **client,</span>
+<span class='curline'><a href='../S/1418.html#L323'>php_stream</a>        323 main/streams/transports.c PHPAPI int php_stream_xport_get_name(php_stream *stream, int want_peer,</span>
+<span class='curline'><a href='../S/1418.html#L354'>php_stream</a>        354 main/streams/transports.c PHPAPI int php_stream_xport_crypto_setup(php_stream *stream, php_stream_xport_crypt_method_t crypto_method, php_stream *session_stream TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1418.html#L375'>php_stream</a>        375 main/streams/transports.c PHPAPI int php_stream_xport_crypto_enable(php_stream *stream, int activate TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1418.html#L397'>php_stream</a>        397 main/streams/transports.c PHPAPI int php_stream_xport_recvfrom(php_stream *stream, char *buf, size_t buflen,</span>
+<span class='curline'><a href='../S/1418.html#L467'>php_stream</a>        467 main/streams/transports.c PHPAPI int php_stream_xport_sendto(php_stream *stream, const char *buf, size_t buflen,</span>
+<span class='curline'><a href='../S/1418.html#L507'>php_stream</a>        507 main/streams/transports.c PHPAPI int php_stream_xport_shutdown(php_stream *stream, stream_shutdown_t how TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1419.html#L48'>php_stream</a>         48 main/streams/userspace.c static php_stream *user_wrapper_opener(php_stream_wrapper *wrapper, const char *filename, const char *mode, int options, char **opened_path, php_stream_context *context STREAMS_DC TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1419.html#L55'>php_stream</a>         55 main/streams/userspace.c static php_stream *user_wrapper_opendir(php_stream_wrapper *wrapper, const char *filename, const char *mode,</span>
+<span class='curline'><a href='../S/1419.html#L335'>php_stream</a>        335 main/streams/userspace.c static php_stream *user_wrapper_opener(php_stream_wrapper *wrapper, const char *filename, const char *mode,</span>
+<span class='curline'><a href='../S/1419.html#L343'>php_stream</a>        343 main/streams/userspace.c 	php_stream *stream = NULL;</span>
+<span class='curline'><a href='../S/1419.html#L441'>php_stream</a>        441 main/streams/userspace.c static php_stream *user_wrapper_opendir(php_stream_wrapper *wrapper, const char *filename, const char *mode,</span>
+<span class='curline'><a href='../S/1419.html#L449'>php_stream</a>        449 main/streams/userspace.c 	php_stream *stream = NULL;</span>
+<span class='curline'><a href='../S/1419.html#L622'>php_stream</a>        622 main/streams/userspace.c static size_t php_userstreamop_write(php_stream *stream, const char *buf, size_t count TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1419.html#L676'>php_stream</a>        676 main/streams/userspace.c static size_t php_userstreamop_read(php_stream *stream, char *buf, size_t count TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1419.html#L755'>php_stream</a>        755 main/streams/userspace.c static int php_userstreamop_close(php_stream *stream, int close_handle TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1419.html#L781'>php_stream</a>        781 main/streams/userspace.c static int php_userstreamop_flush(php_stream *stream TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1419.html#L809'>php_stream</a>        809 main/streams/userspace.c static int php_userstreamop_seek(php_stream *stream, off_t offset, int whence, off_t *newoffs TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1419.html#L936'>php_stream</a>        936 main/streams/userspace.c static int php_userstreamop_stat(php_stream *stream, php_stream_statbuf *ssb TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1419.html#L969'>php_stream</a>        969 main/streams/userspace.c static int php_userstreamop_set_option(php_stream *stream, int option, int value, void *ptrparam TSRMLS_DC) {</span>
+<span class='curline'><a href='../S/1419.html#L1521'>php_stream</a>       1521 main/streams/userspace.c static size_t php_userstreamop_readdir(php_stream *stream, char *buf, size_t count TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1419.html#L1559'>php_stream</a>       1559 main/streams/userspace.c static int php_userstreamop_closedir(php_stream *stream, int close_handle TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1419.html#L1585'>php_stream</a>       1585 main/streams/userspace.c static int php_userstreamop_rewinddir(php_stream *stream, off_t offset, int whence, off_t *newoffs TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1419.html#L1606'>php_stream</a>       1606 main/streams/userspace.c static int php_userstreamop_cast(php_stream *stream, int castas, void **retptr TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1419.html#L1613'>php_stream</a>       1613 main/streams/userspace.c 	php_stream * intstream = NULL;</span>
+<span class='curline'><a href='../S/1420.html#L51'>php_stream</a>         51 main/streams/xp_socket.c static int php_tcp_sockop_set_option(php_stream *stream, int option, int value, void *ptrparam TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1420.html#L54'>php_stream</a>         54 main/streams/xp_socket.c static size_t php_sockop_write(php_stream *stream, const char *buf, size_t count TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1420.html#L114'>php_stream</a>        114 main/streams/xp_socket.c static void php_sock_stream_wait_for_data(php_stream *stream, php_netstream_data_t *sock TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1420.html#L144'>php_stream</a>        144 main/streams/xp_socket.c static size_t php_sockop_read(php_stream *stream, char *buf, size_t count TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1420.html#L175'>php_stream</a>        175 main/streams/xp_socket.c static int php_sockop_close(php_stream *stream, int close_handle TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1420.html#L214'>php_stream</a>        214 main/streams/xp_socket.c static int php_sockop_flush(php_stream *stream TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1420.html#L223'>php_stream</a>        223 main/streams/xp_socket.c static int php_sockop_stat(php_stream *stream, php_stream_statbuf *ssb TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1420.html#L268'>php_stream</a>        268 main/streams/xp_socket.c static int php_sockop_set_option(php_stream *stream, int option, int value, void *ptrparam TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1420.html#L422'>php_stream</a>        422 main/streams/xp_socket.c static int php_sockop_cast(php_stream *stream, int castas, void **ret TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1420.html#L578'>php_stream</a>        578 main/streams/xp_socket.c static inline int php_tcp_sockop_bind(php_stream *stream, php_netstream_data_t *sock,</span>
+<span class='curline'><a href='../S/1420.html#L625'>php_stream</a>        625 main/streams/xp_socket.c static inline int php_tcp_sockop_connect(php_stream *stream, php_netstream_data_t *sock,</span>
+<span class='curline'><a href='../S/1420.html#L714'>php_stream</a>        714 main/streams/xp_socket.c static inline int php_tcp_sockop_accept(php_stream *stream, php_netstream_data_t *sock,</span>
+<span class='curline'><a href='../S/1420.html#L756'>php_stream</a>        756 main/streams/xp_socket.c static int php_tcp_sockop_set_option(php_stream *stream, int option, int value, void *ptrparam TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1420.html#L788'>php_stream</a>        788 main/streams/xp_socket.c PHPAPI php_stream *php_stream_generic_socket_factory(const char *proto, size_t protolen,</span>
+<span class='curline'><a href='../S/1420.html#L794'>php_stream</a>        794 main/streams/xp_socket.c 	php_stream *stream = NULL;</span>
+<span class='curline'><a href='../S/1449.html#L2423'>php_stream</a>       2423 sapi/cgi/cgi_main.c 						c = php_stream_getc((php_stream*)file_handle.handle.stream.handle);</span>
+<span class='curline'><a href='../S/1449.html#L2426'>php_stream</a>       2426 sapi/cgi/cgi_main.c 								c = php_stream_getc((php_stream*)file_handle.handle.stream.handle);	/* skip to end of line */</span>
+<span class='curline'><a href='../S/1449.html#L2430'>php_stream</a>       2430 sapi/cgi/cgi_main.c 								if (php_stream_getc((php_stream*)file_handle.handle.stream.handle) != '\n') {</span>
+<span class='curline'><a href='../S/1449.html#L2431'>php_stream</a>       2431 sapi/cgi/cgi_main.c 									long pos = php_stream_tell((php_stream*)file_handle.handle.stream.handle);</span>
+<span class='curline'><a href='../S/1449.html#L2432'>php_stream</a>       2432 sapi/cgi/cgi_main.c 									php_stream_seek((php_stream*)file_handle.handle.stream.handle, pos - 1, SEEK_SET);</span>
+<span class='curline'><a href='../S/1449.html#L2437'>php_stream</a>       2437 sapi/cgi/cgi_main.c 							php_stream_rewind((php_stream*)file_handle.handle.stream.handle);</span>
+<span class='curline'><a href='../S/1454.html#L552'>php_stream</a>        552 sapi/cli/php_cli.c static php_stream *s_in_process = NULL;</span>
+<span class='curline'><a href='../S/1454.html#L557'>php_stream</a>        557 sapi/cli/php_cli.c 	php_stream *s_in, *s_out, *s_err;</span>
+<span class='curline'><a href='../S/1546.html#L583'>php_stream</a>        583 sapi/phpdbg/phpdbg.c 	php_stream *s_in, *s_out, *s_err;</span>
+<span class='curline'><a href='../S/1564.html#L134'>php_stream</a>        134 sapi/phpdbg/phpdbg_list.c 	php_stream *stream = NULL;</span>
+</pre>
+</body>
+</html>

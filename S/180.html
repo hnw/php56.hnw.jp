@@ -1,0 +1,354 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>ext/fileinfo/libmagic/cdf.h</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<a id='TOP' name='TOP'></a><h2 class='header'><a href='../mains.html'>root</a>/<a href='../files/1753.html'>ext</a>/<a href='../files/1773.html'>fileinfo</a>/<a href='../files/1774.html'>libmagic</a>/cdf.h</h2>
+<em class='comment'>/* [&lt;][&gt;][^][v][top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+<hr />
+<h2 class='header'><a href='../J/300.html' title='Multiple included from 4 places.'>INCLUDED FROM</a></h2>
+<hr />
+<pre>
+<a id='L1' name='L1'></a>   1 <em class='comment'>/*-</em>
+<a id='L2' name='L2'></a>   2 <em class='comment'> * Copyright (c) 2008 Christos Zoulas</em>
+<a id='L3' name='L3'></a>   3 <em class='comment'> * All rights reserved.</em>
+<a id='L4' name='L4'></a>   4 <em class='comment'> *</em>
+<a id='L5' name='L5'></a>   5 <em class='comment'> * Redistribution and use in source and binary forms, with or without</em>
+<a id='L6' name='L6'></a>   6 <em class='comment'> * modification, are permitted provided that the following conditions</em>
+<a id='L7' name='L7'></a>   7 <em class='comment'> * are met:</em>
+<a id='L8' name='L8'></a>   8 <em class='comment'> * 1. Redistributions of source code must retain the above copyright</em>
+<a id='L9' name='L9'></a>   9 <em class='comment'> *    notice, this list of conditions and the following disclaimer.</em>
+<a id='L10' name='L10'></a>  10 <em class='comment'> * 2. Redistributions in binary form must reproduce the above copyright</em>
+<a id='L11' name='L11'></a>  11 <em class='comment'> *    notice, this list of conditions and the following disclaimer in the</em>
+<a id='L12' name='L12'></a>  12 <em class='comment'> *    documentation and/or other materials provided with the distribution.</em>
+<a id='L13' name='L13'></a>  13 <em class='comment'> *</em>
+<a id='L14' name='L14'></a>  14 <em class='comment'> * THIS SOFTWARE IS PROVIDED BY THE NETBSD FOUNDATION, INC. AND CONTRIBUTORS</em>
+<a id='L15' name='L15'></a>  15 <em class='comment'> * ``AS IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED</em>
+<a id='L16' name='L16'></a>  16 <em class='comment'> * TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR</em>
+<a id='L17' name='L17'></a>  17 <em class='comment'> * PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE FOUNDATION OR CONTRIBUTORS</em>
+<a id='L18' name='L18'></a>  18 <em class='comment'> * BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR</em>
+<a id='L19' name='L19'></a>  19 <em class='comment'> * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF</em>
+<a id='L20' name='L20'></a>  20 <em class='comment'> * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS</em>
+<a id='L21' name='L21'></a>  21 <em class='comment'> * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN</em>
+<a id='L22' name='L22'></a>  22 <em class='comment'> * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)</em>
+<a id='L23' name='L23'></a>  23 <em class='comment'> * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE</em>
+<a id='L24' name='L24'></a>  24 <em class='comment'> * POSSIBILITY OF SUCH DAMAGE.</em>
+<a id='L25' name='L25'></a>  25 <em class='comment'> */</em>
+<a id='L26' name='L26'></a>  26 <em class='comment'>/*</em>
+<a id='L27' name='L27'></a>  27 <em class='comment'> * Parse Composite Document Files, the format used in Microsoft Office</em>
+<a id='L28' name='L28'></a>  28 <em class='comment'> * document files before they switched to zipped XML.</em>
+<a id='L29' name='L29'></a>  29 <em class='comment'> * Info from: http://sc.openoffice.org/compdocfileformat.pdf</em>
+<a id='L30' name='L30'></a>  30 <em class='comment'> *</em>
+<a id='L31' name='L31'></a>  31 <em class='comment'> * N.B. This is the "Composite Document File" format, and not the</em>
+<a id='L32' name='L32'></a>  32 <em class='comment'> * "Compound Document Format", nor the "Channel Definition Format".</em>
+<a id='L33' name='L33'></a>  33 <em class='comment'> */</em>
+<a id='L34' name='L34'></a>  34 
+<a id='L35' name='L35'></a>  35 <em class='sharp'>#ifndef</em> <a href='../S/180.html#L36' title='Defined at 36 in ext/fileinfo/libmagic/cdf.h.'>_H_CDF_</a>
+<a id='L36' name='L36'></a>  36 <em class='sharp'>#define</em> <a href='../S/180.html#L35' title='Referred from 35 in ext/fileinfo/libmagic/cdf.h.'>_H_CDF_</a>
+<a id='L37' name='L37'></a>  37 
+<a id='L38' name='L38'></a>  38 <em class='sharp'>#ifdef</em> <a href='../Y/4758.html' title='Multiple used in 689 places.'>PHP_WIN32</a>
+<a id='L39' name='L39'></a>  39 <em class='sharp'>#include</em> &lt;winsock2.h&gt;
+<a id='L40' name='L40'></a>  40 <em class='sharp'>#define</em> <a href='../R/28621.html' title='Multiple referred from 14 places.'>timespec</a> <a href='../Y/38997.html' title='Multiple used in 173 places.'>timeval</a>
+<a id='L41' name='L41'></a>  41 <em class='sharp'>#define</em> <a href='../R/28778.html' title='Multiple referred from 20 places.'>tv_nsec</a> <a href='../Y/39554.html' title='Multiple used in 120 places.'>tv_usec</a>
+<a id='L42' name='L42'></a>  42 <em class='sharp'>#define</em> <a href='../R/16796.html' title='Multiple referred from 6 places.'>asctime_r</a> <a href='../D/26074.html' title='Multiple defined in 4 places.'>php_asctime_r</a>
+<a id='L43' name='L43'></a>  43 <em class='sharp'>#define</em> <a href='../R/17723.html' title='Multiple referred from 7 places.'>ctime_r</a> <a href='../D/26333.html' title='Multiple defined in 4 places.'>php_ctime_r</a>
+<a id='L44' name='L44'></a>  44 <em class='sharp'>#endif</em>
+<a id='L45' name='L45'></a>  45 <em class='sharp'>#ifdef</em> <a href='../Y/7521.html' title='Multiple used in 3 places.'>__DJGPP__</a>
+<a id='L46' name='L46'></a>  46 <em class='sharp'>#define</em> <a href='../R/28621.html' title='Multiple referred from 14 places.'>timespec</a> <a href='../Y/38997.html' title='Multiple used in 173 places.'>timeval</a>
+<a id='L47' name='L47'></a>  47 <em class='sharp'>#define</em> <a href='../R/28778.html' title='Multiple referred from 20 places.'>tv_nsec</a> <a href='../Y/39554.html' title='Multiple used in 120 places.'>tv_usec</a>
+<a id='L48' name='L48'></a>  48 <em class='sharp'>#endif</em>
+<a id='L49' name='L49'></a>  49 
+<a id='L50' name='L50'></a>  50 <strong class='reserved'>typedef</strong> <a href='../D/23265.html' title='Multiple defined in 10 places.'>int32_t</a> <a href='../R/17144.html' title='Multiple referred from 25 places.'>cdf_secid_t</a>;
+<a id='L51' name='L51'></a>  51 
+<a id='L52' name='L52'></a>  52 <em class='sharp'>#define</em> <a href='../R/698.html' title='Multiple referred from 6 places.'>CDF_LOOP_LIMIT</a>                                  10000
+<a id='L53' name='L53'></a>  53 
+<a id='L54' name='L54'></a>  54 <em class='sharp'>#define</em> CDF_SECID_NULL                                  0
+<a id='L55' name='L55'></a>  55 <em class='sharp'>#define</em> <a href='../R/723.html' title='Multiple referred from 2 places.'>CDF_SECID_FREE</a>                                  -1
+<a id='L56' name='L56'></a>  56 <em class='sharp'>#define</em> CDF_SECID_END_OF_CHAIN                          -2
+<a id='L57' name='L57'></a>  57 <em class='sharp'>#define</em> CDF_SECID_SECTOR_ALLOCATION_TABLE               -3
+<a id='L58' name='L58'></a>  58 <em class='sharp'>#define</em> CDF_SECID_MASTER_SECTOR_ALLOCATION_TABLE        -4
+<a id='L59' name='L59'></a>  59 
+<a id='L60' name='L60'></a>  60 <strong class='reserved'>typedef</strong> <strong class='reserved'>struct</strong> <em class='brace'>{</em>
+<a id='L61' name='L61'></a>  61         <a href='../D/32243.html' title='Multiple defined in 6 places.'>uint64_t</a>        <a href='../Y/19670.html' title='Multiple used in 5 places.'>h_magic</a>;
+<a id='L62' name='L62'></a>  62 <em class='sharp'>#if</em> <strong class='reserved'>defined</strong>(<a href='../Y/4758.html' title='Multiple used in 689 places.'>PHP_WIN32</a>) &amp;&amp; <a href='../Y/7446.html' title='Multiple used in 72 places.'>_MSC_VER</a> &lt;= 1500
+<a id='L63' name='L63'></a>  63 <em class='sharp'># define</em> <a href='../Y/340.html' title='Multiple used in 4 places.'>CDF_MAGIC</a>      0xE11AB1A1E011CFD0i64
+<a id='L64' name='L64'></a>  64 <em class='sharp'>#else</em>
+<a id='L65' name='L65'></a>  65 <em class='sharp'># define</em> <a href='../Y/340.html' title='Multiple used in 4 places.'>CDF_MAGIC</a>      0xE11AB1A1E011CFD0LL
+<a id='L66' name='L66'></a>  66 <em class='sharp'>#endif</em>
+<a id='L67' name='L67'></a>  67         <a href='../D/32243.html' title='Multiple defined in 6 places.'>uint64_t</a>        <a href='../Y/19695.html' title='Multiple used in 4 places.'>h_uuid</a>[2];
+<a id='L68' name='L68'></a>  68         <a href='../D/32233.html' title='Multiple defined in 3 places.'>uint16_t</a>        <a href='../Y/19681.html' title='Multiple used in 3 places.'>h_revision</a>;
+<a id='L69' name='L69'></a>  69         <a href='../D/32233.html' title='Multiple defined in 3 places.'>uint16_t</a>        <a href='../Y/19696.html' title='Multiple used in 3 places.'>h_version</a>;
+<a id='L70' name='L70'></a>  70         <a href='../D/32233.html' title='Multiple defined in 3 places.'>uint16_t</a>        <a href='../Y/19661.html' title='Multiple used in 3 places.'>h_byte_order</a>;
+<a id='L71' name='L71'></a>  71         <a href='../D/32233.html' title='Multiple defined in 3 places.'>uint16_t</a>        <a href='../Y/19684.html' title='Multiple used in 6 places.'>h_sec_size_p2</a>;
+<a id='L72' name='L72'></a>  72         <a href='../D/32233.html' title='Multiple defined in 3 places.'>uint16_t</a>        <a href='../Y/19689.html' title='Multiple used in 6 places.'>h_short_sec_size_p2</a>;
+<a id='L73' name='L73'></a>  73         <a href='../D/32245.html' title='Multiple defined in 3 places.'>uint8_t</a>         <a href='../Y/19693.html' title='Multiple used in 2 places.'>h_unused0</a>[10];
+<a id='L74' name='L74'></a>  74         <a href='../D/32238.html' title='Multiple defined in 10 places.'>uint32_t</a>        <a href='../Y/19677.html' title='Multiple used in 3 places.'>h_num_sectors_in_sat</a>;
+<a id='L75' name='L75'></a>  75         <a href='../D/32238.html' title='Multiple defined in 10 places.'>uint32_t</a>        <a href='../Y/19685.html' title='Multiple used in 4 places.'>h_secid_first_directory</a>;
+<a id='L76' name='L76'></a>  76         <a href='../D/32245.html' title='Multiple defined in 3 places.'>uint8_t</a>         <a href='../Y/19694.html' title='Multiple used in 2 places.'>h_unused1</a>[4];
+<a id='L77' name='L77'></a>  77         <a href='../D/32238.html' title='Multiple defined in 10 places.'>uint32_t</a>        <a href='../Y/19672.html' title='Multiple used in 7 places.'>h_min_size_standard_stream</a>;
+<a id='L78' name='L78'></a>  78         <a href='../S/180.html#L50' title='Defined at 50 in ext/fileinfo/libmagic/cdf.h.'>cdf_secid_t</a>     <a href='../Y/19687.html' title='Multiple used in 5 places.'>h_secid_first_sector_in_short_sat</a>;
+<a id='L79' name='L79'></a>  79         <a href='../D/32238.html' title='Multiple defined in 10 places.'>uint32_t</a>        <a href='../Y/19678.html' title='Multiple used in 4 places.'>h_num_sectors_in_short_sat</a>;
+<a id='L80' name='L80'></a>  80         <a href='../S/180.html#L50' title='Defined at 50 in ext/fileinfo/libmagic/cdf.h.'>cdf_secid_t</a>     <a href='../Y/19686.html' title='Multiple used in 5 places.'>h_secid_first_sector_in_master_sat</a>;
+<a id='L81' name='L81'></a>  81         <a href='../D/32238.html' title='Multiple defined in 10 places.'>uint32_t</a>        <a href='../Y/19676.html' title='Multiple used in 8 places.'>h_num_sectors_in_master_sat</a>;
+<a id='L82' name='L82'></a>  82         <a href='../S/180.html#L50' title='Defined at 50 in ext/fileinfo/libmagic/cdf.h.'>cdf_secid_t</a>     <a href='../Y/19671.html' title='Multiple used in 14 places.'>h_master_sat</a>[436/4];
+<a id='L83' name='L83'></a>  83 <em class='brace'>}</em> <a href='../R/17123.html' title='Multiple referred from 42 places.'>cdf_header_t</a>;
+<a id='L84' name='L84'></a>  84 
+<a id='L85' name='L85'></a>  85 <em class='sharp'>#define</em> <a href='../R/727.html' title='Multiple referred from 14 places.'>CDF_SEC_SIZE</a>(<a href='../Y/19629.html' title='Multiple used in 1510 places.'>h</a>) ((<a href='../Y/36596.html' title='Multiple used in 2694 places.'>size_t</a>)(1 &lt;&lt; (<a href='../Y/19629.html' title='Multiple used in 1510 places.'>h</a>)-&gt;<a href='../Y/19684.html' title='Multiple used in 6 places.'>h_sec_size_p2</a>))
+<a id='L86' name='L86'></a>  86 <em class='sharp'>#define</em> <a href='../S/179.html#L358' title='Referred from 358 in ext/fileinfo/libmagic/cdf.c.'>CDF_SEC_POS</a>(<a href='../Y/19629.html' title='Multiple used in 1510 places.'>h</a>, <a href='../Y/35916.html' title='Multiple used in 2 places.'>secid</a>) (<a href='../S/180.html#L85' title='Defined at 85 in ext/fileinfo/libmagic/cdf.h.'>CDF_SEC_SIZE</a>(<a href='../Y/19629.html' title='Multiple used in 1510 places.'>h</a>) + (<a href='../Y/35916.html' title='Multiple used in 2 places.'>secid</a>) * <a href='../S/180.html#L85' title='Defined at 85 in ext/fileinfo/libmagic/cdf.h.'>CDF_SEC_SIZE</a>(<a href='../Y/19629.html' title='Multiple used in 1510 places.'>h</a>))
+<a id='L87' name='L87'></a>  87 <em class='sharp'>#define</em> <a href='../R/730.html' title='Multiple referred from 7 places.'>CDF_SHORT_SEC_SIZE</a>(<a href='../Y/19629.html' title='Multiple used in 1510 places.'>h</a>)   ((<a href='../Y/36596.html' title='Multiple used in 2694 places.'>size_t</a>)(1 &lt;&lt; (<a href='../Y/19629.html' title='Multiple used in 1510 places.'>h</a>)-&gt;<a href='../Y/19689.html' title='Multiple used in 6 places.'>h_short_sec_size_p2</a>))
+<a id='L88' name='L88'></a>  88 <em class='sharp'>#define</em> <a href='../S/179.html#L368' title='Referred from 368 in ext/fileinfo/libmagic/cdf.c.'>CDF_SHORT_SEC_POS</a>(<a href='../Y/19629.html' title='Multiple used in 1510 places.'>h</a>, <a href='../Y/35916.html' title='Multiple used in 2 places.'>secid</a>) ((<a href='../Y/35916.html' title='Multiple used in 2 places.'>secid</a>) * <a href='../S/180.html#L87' title='Defined at 87 in ext/fileinfo/libmagic/cdf.h.'>CDF_SHORT_SEC_SIZE</a>(<a href='../Y/19629.html' title='Multiple used in 1510 places.'>h</a>))
+<a id='L89' name='L89'></a>  89 
+<a id='L90' name='L90'></a>  90 <strong class='reserved'>typedef</strong> <a href='../D/23265.html' title='Multiple defined in 10 places.'>int32_t</a> <a href='../R/17109.html' title='Multiple referred from 3 places.'>cdf_dirid_t</a>;
+<a id='L91' name='L91'></a>  91 <em class='sharp'>#define</em> CDF_DIRID_NULL  -1
+<a id='L92' name='L92'></a>  92 
+<a id='L93' name='L93'></a>  93 <strong class='reserved'>typedef</strong> <a href='../D/23269.html' title='Multiple defined in 6 places.'>int64_t</a> <a href='../R/17153.html' title='Multiple referred from 13 places.'>cdf_timestamp_t</a>;
+<a id='L94' name='L94'></a>  94 <em class='sharp'>#define</em> <a href='../R/686.html' title='Multiple referred from 2 places.'>CDF_BASE_YEAR</a>   1601
+<a id='L95' name='L95'></a>  95 <em class='sharp'>#define</em> <a href='../R/734.html' title='Multiple referred from 4 places.'>CDF_TIME_PREC</a>   10000000
+<a id='L96' name='L96'></a>  96 
+<a id='L97' name='L97'></a>  97 <strong class='reserved'>typedef</strong> <strong class='reserved'>struct</strong> <em class='brace'>{</em>
+<a id='L98' name='L98'></a>  98         <a href='../D/32233.html' title='Multiple defined in 3 places.'>uint16_t</a>        <a href='../Y/14941.html' title='Multiple used in 79 places.'>d_name</a>[32];
+<a id='L99' name='L99'></a>  99         <a href='../D/32233.html' title='Multiple defined in 3 places.'>uint16_t</a>        <a href='../Y/14942.html' title='Multiple used in 3 places.'>d_namelen</a>;
+<a id='L100' name='L100'></a> 100         <a href='../D/32245.html' title='Multiple defined in 3 places.'>uint8_t</a>         <a href='../Y/14956.html' title='Multiple used in 8 places.'>d_type</a>;
+<a id='L101' name='L101'></a> 101 <em class='sharp'>#define</em> CDF_DIR_TYPE_EMPTY              0
+<a id='L102' name='L102'></a> 102 <em class='sharp'>#define</em> <a href='../Y/338.html' title='Multiple used in 2 places.'>CDF_DIR_TYPE_USER_STORAGE</a>       1
+<a id='L103' name='L103'></a> 103 <em class='sharp'>#define</em> <a href='../Y/339.html' title='Multiple used in 3 places.'>CDF_DIR_TYPE_USER_STREAM</a>        2
+<a id='L104' name='L104'></a> 104 <em class='sharp'>#define</em> CDF_DIR_TYPE_LOCKBYTES          3
+<a id='L105' name='L105'></a> 105 <em class='sharp'>#define</em> CDF_DIR_TYPE_PROPERTY           4
+<a id='L106' name='L106'></a> 106 <em class='sharp'>#define</em> <a href='../Y/337.html' title='Multiple used in 2 places.'>CDF_DIR_TYPE_ROOT_STORAGE</a>       5
+<a id='L107' name='L107'></a> 107         <a href='../D/32245.html' title='Multiple defined in 3 places.'>uint8_t</a>         <a href='../Y/14930.html' title='Multiple used in 3 places.'>d_color</a>;
+<a id='L108' name='L108'></a> 108 <em class='sharp'>#define</em> CDF_DIR_COLOR_READ      0
+<a id='L109' name='L109'></a> 109 <em class='sharp'>#define</em> CDF_DIR_COLOR_BLACK     1
+<a id='L110' name='L110'></a> 110         <a href='../S/180.html#L90' title='Defined at 90 in ext/fileinfo/libmagic/cdf.h.'>cdf_dirid_t</a>     <a href='../Y/14938.html' title='Multiple used in 4 places.'>d_left_child</a>;
+<a id='L111' name='L111'></a> 111         <a href='../S/180.html#L90' title='Defined at 90 in ext/fileinfo/libmagic/cdf.h.'>cdf_dirid_t</a>     <a href='../Y/14946.html' title='Multiple used in 4 places.'>d_right_child</a>;
+<a id='L112' name='L112'></a> 112         <a href='../S/180.html#L90' title='Defined at 90 in ext/fileinfo/libmagic/cdf.h.'>cdf_dirid_t</a>     <a href='../Y/14949.html' title='Multiple used in 4 places.'>d_storage</a>;
+<a id='L113' name='L113'></a> 113         <a href='../D/32243.html' title='Multiple defined in 6 places.'>uint64_t</a>        <a href='../Y/14950.html' title='Multiple used in 6 places.'>d_storage_uuid</a>[2];
+<a id='L114' name='L114'></a> 114         <a href='../D/32238.html' title='Multiple defined in 10 places.'>uint32_t</a>        <a href='../Y/14934.html' title='Multiple used in 4 places.'>d_flags</a>;
+<a id='L115' name='L115'></a> 115         <a href='../S/180.html#L93' title='Defined at 93 in ext/fileinfo/libmagic/cdf.h.'>cdf_timestamp_t</a> <a href='../Y/14933.html' title='Multiple used in 4 places.'>d_created</a>;
+<a id='L116' name='L116'></a> 116         <a href='../S/180.html#L93' title='Defined at 93 in ext/fileinfo/libmagic/cdf.h.'>cdf_timestamp_t</a> <a href='../Y/14940.html' title='Multiple used in 4 places.'>d_modified</a>;
+<a id='L117' name='L117'></a> 117         <a href='../S/180.html#L50' title='Defined at 50 in ext/fileinfo/libmagic/cdf.h.'>cdf_secid_t</a>     <a href='../Y/14951.html' title='Multiple used in 9 places.'>d_stream_first_sector</a>;
+<a id='L118' name='L118'></a> 118         <a href='../D/32238.html' title='Multiple defined in 10 places.'>uint32_t</a>        <a href='../Y/14948.html' title='Multiple used in 8 places.'>d_size</a>;
+<a id='L119' name='L119'></a> 119         <a href='../D/32238.html' title='Multiple defined in 10 places.'>uint32_t</a>        <a href='../Y/14957.html' title='Multiple used in 2 places.'>d_unused0</a>;
+<a id='L120' name='L120'></a> 120 <em class='brace'>}</em> <a href='../R/17108.html' title='Multiple referred from 15 places.'>cdf_directory_t</a>;
+<a id='L121' name='L121'></a> 121 
+<a id='L122' name='L122'></a> 122 <em class='sharp'>#define</em> <a href='../R/690.html' title='Multiple referred from 2 places.'>CDF_DIRECTORY_SIZE</a>      128
+<a id='L123' name='L123'></a> 123 
+<a id='L124' name='L124'></a> 124 <strong class='reserved'>typedef</strong> <strong class='reserved'>struct</strong> <em class='brace'>{</em>
+<a id='L125' name='L125'></a> 125         <a href='../S/180.html#L50' title='Defined at 50 in ext/fileinfo/libmagic/cdf.h.'>cdf_secid_t</a> *<a href='../Y/35668.html' title='Multiple used in 17 places.'>sat_tab</a>;
+<a id='L126' name='L126'></a> 126         <a href='../Y/36596.html' title='Multiple used in 2694 places.'>size_t</a> <a href='../Y/35667.html' title='Multiple used in 14 places.'>sat_len</a>;
+<a id='L127' name='L127'></a> 127 <em class='brace'>}</em> <a href='../R/17143.html' title='Multiple referred from 26 places.'>cdf_sat_t</a>;
+<a id='L128' name='L128'></a> 128 
+<a id='L129' name='L129'></a> 129 <strong class='reserved'>typedef</strong> <strong class='reserved'>struct</strong> <em class='brace'>{</em>
+<a id='L130' name='L130'></a> 130         <a href='../S/180.html#L120' title='Defined at 120 in ext/fileinfo/libmagic/cdf.h.'>cdf_directory_t</a> *<a href='../Y/15729.html' title='Multiple used in 16 places.'>dir_tab</a>;
+<a id='L131' name='L131'></a> 131         <a href='../Y/36596.html' title='Multiple used in 2694 places.'>size_t</a> <a href='../Y/15720.html' title='Multiple used in 47 places.'>dir_len</a>;
+<a id='L132' name='L132'></a> 132 <em class='brace'>}</em> <a href='../R/17107.html' title='Multiple referred from 10 places.'>cdf_dir_t</a>;
+<a id='L133' name='L133'></a> 133 
+<a id='L134' name='L134'></a> 134 <strong class='reserved'>typedef</strong> <strong class='reserved'>struct</strong> <em class='brace'>{</em>
+<a id='L135' name='L135'></a> 135         <strong class='reserved'>void</strong> *<a href='../Y/37457.html' title='Multiple used in 22 places.'>sst_tab</a>;
+<a id='L136' name='L136'></a> 136         <a href='../Y/36596.html' title='Multiple used in 2694 places.'>size_t</a> <a href='../Y/37456.html' title='Multiple used in 18 places.'>sst_len</a>;
+<a id='L137' name='L137'></a> 137         <a href='../Y/36596.html' title='Multiple used in 2694 places.'>size_t</a> <a href='../Y/37455.html' title='Multiple used in 6 places.'>sst_dirlen</a>;
+<a id='L138' name='L138'></a> 138 <em class='brace'>}</em> <a href='../R/17147.html' title='Multiple referred from 32 places.'>cdf_stream_t</a>;
+<a id='L139' name='L139'></a> 139 
+<a id='L140' name='L140'></a> 140 <strong class='reserved'>typedef</strong> <strong class='reserved'>struct</strong> <em class='brace'>{</em>
+<a id='L141' name='L141'></a> 141         <a href='../D/32238.html' title='Multiple defined in 10 places.'>uint32_t</a>        <a href='../Y/13596.html' title='Multiple used in 3 places.'>cl_dword</a>;
+<a id='L142' name='L142'></a> 142         <a href='../D/32233.html' title='Multiple defined in 3 places.'>uint16_t</a>        <a href='../Y/13602.html' title='Multiple used in 5 places.'>cl_word</a>[2];
+<a id='L143' name='L143'></a> 143         <a href='../D/32245.html' title='Multiple defined in 3 places.'>uint8_t</a>         <a href='../Y/13601.html' title='Multiple used in 2 places.'>cl_two</a>[2];
+<a id='L144' name='L144'></a> 144         <a href='../D/32245.html' title='Multiple defined in 3 places.'>uint8_t</a>         <a href='../Y/13600.html' title='Multiple used in 4 places.'>cl_six</a>[6];
+<a id='L145' name='L145'></a> 145 <em class='brace'>}</em> <a href='../R/17103.html' title='Multiple referred from 6 places.'>cdf_classid_t</a>;
+<a id='L146' name='L146'></a> 146 
+<a id='L147' name='L147'></a> 147 <strong class='reserved'>typedef</strong> <strong class='reserved'>struct</strong> <em class='brace'>{</em>
+<a id='L148' name='L148'></a> 148         <a href='../D/32233.html' title='Multiple defined in 3 places.'>uint16_t</a>        <a href='../Y/36471.html' title='Multiple used in 4 places.'>si_byte_order</a>;
+<a id='L149' name='L149'></a> 149         <a href='../D/32233.html' title='Multiple defined in 3 places.'>uint16_t</a>        si_zero;
+<a id='L150' name='L150'></a> 150         <a href='../D/32233.html' title='Multiple defined in 3 places.'>uint16_t</a>        <a href='../Y/36478.html' title='Multiple used in 10 places.'>si_os_version</a>;
+<a id='L151' name='L151'></a> 151         <a href='../D/32233.html' title='Multiple defined in 3 places.'>uint16_t</a>        <a href='../Y/36477.html' title='Multiple used in 5 places.'>si_os</a>;
+<a id='L152' name='L152'></a> 152         <a href='../S/180.html#L145' title='Defined at 145 in ext/fileinfo/libmagic/cdf.h.'>cdf_classid_t</a>   <a href='../Y/36472.html' title='Multiple used in 4 places.'>si_class</a>;
+<a id='L153' name='L153'></a> 153         <a href='../D/32238.html' title='Multiple defined in 10 places.'>uint32_t</a>        <a href='../Y/36474.html' title='Multiple used in 3 places.'>si_count</a>;
+<a id='L154' name='L154'></a> 154 <em class='brace'>}</em> <a href='../R/17148.html' title='Multiple referred from 6 places.'>cdf_summary_info_header_t</a>;
+<a id='L155' name='L155'></a> 155 
+<a id='L156' name='L156'></a> 156 <em class='sharp'>#define</em> <a href='../S/179.html#L966' title='Referred from 966 in ext/fileinfo/libmagic/cdf.c.'>CDF_SECTION_DECLARATION_OFFSET</a> 0x1c
+<a id='L157' name='L157'></a> 157 
+<a id='L158' name='L158'></a> 158 <strong class='reserved'>typedef</strong> <strong class='reserved'>struct</strong> <em class='brace'>{</em>
+<a id='L159' name='L159'></a> 159         <a href='../S/180.html#L145' title='Defined at 145 in ext/fileinfo/libmagic/cdf.h.'>cdf_classid_t</a>   sd_class;
+<a id='L160' name='L160'></a> 160         <a href='../D/32238.html' title='Multiple defined in 10 places.'>uint32_t</a>        <a href='../Y/35864.html' title='Multiple used in 2 places.'>sd_offset</a>;
+<a id='L161' name='L161'></a> 161 <em class='brace'>}</em> <a href='../R/17145.html' title='Multiple referred from 2 places.'>cdf_section_declaration_t</a>;
+<a id='L162' name='L162'></a> 162 
+<a id='L163' name='L163'></a> 163 <strong class='reserved'>typedef</strong> <strong class='reserved'>struct</strong> <em class='brace'>{</em>
+<a id='L164' name='L164'></a> 164         <a href='../D/32238.html' title='Multiple defined in 10 places.'>uint32_t</a>        <a href='../Y/36329.html' title='Multiple used in 5 places.'>sh_len</a>;
+<a id='L165' name='L165'></a> 165         <a href='../D/32238.html' title='Multiple defined in 10 places.'>uint32_t</a>        <a href='../Y/36330.html' title='Multiple used in 9 places.'>sh_properties</a>;
+<a id='L166' name='L166'></a> 166 <em class='brace'>}</em> <a href='../R/17146.html' title='Multiple referred from 3 places.'>cdf_section_header_t</a>;
+<a id='L167' name='L167'></a> 167 
+<a id='L168' name='L168'></a> 168 <strong class='reserved'>typedef</strong> <strong class='reserved'>struct</strong> <em class='brace'>{</em>
+<a id='L169' name='L169'></a> 169         <a href='../D/32238.html' title='Multiple defined in 10 places.'>uint32_t</a>        <a href='../Y/33048.html' title='Multiple used in 6 places.'>pi_id</a>;
+<a id='L170' name='L170'></a> 170         <a href='../D/32238.html' title='Multiple defined in 10 places.'>uint32_t</a>        <a href='../Y/33054.html' title='Multiple used in 20 places.'>pi_type</a>;
+<a id='L171' name='L171'></a> 171         <strong class='reserved'>union</strong> <em class='brace'>{</em>
+<a id='L172' name='L172'></a> 172                 <a href='../D/32233.html' title='Multiple defined in 3 places.'>uint16_t</a>        <a href='../Y/7943.html' title='Multiple used in 2 places.'>_pi_u16</a>;
+<a id='L173' name='L173'></a> 173                 <a href='../D/23262.html' title='Multiple defined in 3 places.'>int16_t</a>         <a href='../Y/7938.html' title='Multiple used in 2 places.'>_pi_s16</a>;
+<a id='L174' name='L174'></a> 174                 <a href='../D/32238.html' title='Multiple defined in 10 places.'>uint32_t</a>        <a href='../Y/7944.html' title='Multiple used in 2 places.'>_pi_u32</a>;
+<a id='L175' name='L175'></a> 175                 <a href='../D/23265.html' title='Multiple defined in 10 places.'>int32_t</a>         <a href='../Y/7939.html' title='Multiple used in 2 places.'>_pi_s32</a>;
+<a id='L176' name='L176'></a> 176                 <a href='../D/32243.html' title='Multiple defined in 6 places.'>uint64_t</a>        <a href='../Y/7945.html' title='Multiple used in 2 places.'>_pi_u64</a>;
+<a id='L177' name='L177'></a> 177                 <a href='../D/23269.html' title='Multiple defined in 6 places.'>int64_t</a>         <a href='../Y/7940.html' title='Multiple used in 2 places.'>_pi_s64</a>;
+<a id='L178' name='L178'></a> 178                 <a href='../S/180.html#L93' title='Defined at 93 in ext/fileinfo/libmagic/cdf.h.'>cdf_timestamp_t</a> <a href='../Y/7942.html' title='Multiple used in 2 places.'>_pi_tp</a>;
+<a id='L179' name='L179'></a> 179                 <strong class='reserved'>float</strong>           <a href='../Y/7937.html' title='Multiple used in 2 places.'>_pi_f</a>;
+<a id='L180' name='L180'></a> 180                 <strong class='reserved'>double</strong>          <a href='../Y/7936.html' title='Multiple used in 2 places.'>_pi_d</a>;
+<a id='L181' name='L181'></a> 181                 <strong class='reserved'>struct</strong> <em class='brace'>{</em>
+<a id='L182' name='L182'></a> 182                         <a href='../D/32238.html' title='Multiple defined in 10 places.'>uint32_t</a> <a href='../Y/35573.html' title='Multiple used in 122 places.'>s_len</a>;
+<a id='L183' name='L183'></a> 183                         <strong class='reserved'>const</strong> <strong class='reserved'>char</strong> *<a href='../Y/35543.html' title='Multiple used in 6 places.'>s_buf</a>;
+<a id='L184' name='L184'></a> 184                 <em class='brace'>}</em> <a href='../Y/7941.html' title='Multiple used in 2 places.'>_pi_str</a>;
+<a id='L185' name='L185'></a> 185         <em class='brace'>}</em> <a href='../Y/33058.html' title='Multiple used in 11 places.'>pi_val</a>;
+<a id='L186' name='L186'></a> 186 <em class='sharp'>#define</em> <a href='../Y/33057.html' title='Multiple used in 2 places.'>pi_u64</a>  <a href='../Y/33058.html' title='Multiple used in 11 places.'>pi_val</a>.<a href='../Y/7945.html' title='Multiple used in 2 places.'>_pi_u64</a>
+<a id='L187' name='L187'></a> 187 <em class='sharp'>#define</em> <a href='../Y/33051.html' title='Multiple used in 2 places.'>pi_s64</a>  <a href='../Y/33058.html' title='Multiple used in 11 places.'>pi_val</a>.<a href='../Y/7940.html' title='Multiple used in 2 places.'>_pi_s64</a>
+<a id='L188' name='L188'></a> 188 <em class='sharp'>#define</em> <a href='../Y/33056.html' title='Multiple used in 5 places.'>pi_u32</a>  <a href='../Y/33058.html' title='Multiple used in 11 places.'>pi_val</a>.<a href='../Y/7944.html' title='Multiple used in 2 places.'>_pi_u32</a>
+<a id='L189' name='L189'></a> 189 <em class='sharp'>#define</em> <a href='../Y/33050.html' title='Multiple used in 4 places.'>pi_s32</a>  <a href='../Y/33058.html' title='Multiple used in 11 places.'>pi_val</a>.<a href='../Y/7939.html' title='Multiple used in 2 places.'>_pi_s32</a>
+<a id='L190' name='L190'></a> 190 <em class='sharp'>#define</em> pi_u16  <a href='../Y/33058.html' title='Multiple used in 11 places.'>pi_val</a>.<a href='../Y/7943.html' title='Multiple used in 2 places.'>_pi_u16</a>
+<a id='L191' name='L191'></a> 191 <em class='sharp'>#define</em> <a href='../Y/33049.html' title='Multiple used in 4 places.'>pi_s16</a>  <a href='../Y/33058.html' title='Multiple used in 11 places.'>pi_val</a>.<a href='../Y/7938.html' title='Multiple used in 2 places.'>_pi_s16</a>
+<a id='L192' name='L192'></a> 192 <em class='sharp'>#define</em> <a href='../Y/33047.html' title='Multiple used in 4 places.'>pi_f</a>    <a href='../Y/33058.html' title='Multiple used in 11 places.'>pi_val</a>.<a href='../Y/7937.html' title='Multiple used in 2 places.'>_pi_f</a>
+<a id='L193' name='L193'></a> 193 <em class='sharp'>#define</em> <a href='../Y/33046.html' title='Multiple used in 4 places.'>pi_d</a>    <a href='../Y/33058.html' title='Multiple used in 11 places.'>pi_val</a>.<a href='../Y/7936.html' title='Multiple used in 2 places.'>_pi_d</a>
+<a id='L194' name='L194'></a> 194 <em class='sharp'>#define</em> <a href='../Y/33053.html' title='Multiple used in 4 places.'>pi_tp</a>   <a href='../Y/33058.html' title='Multiple used in 11 places.'>pi_val</a>.<a href='../Y/7942.html' title='Multiple used in 2 places.'>_pi_tp</a>
+<a id='L195' name='L195'></a> 195 <em class='sharp'>#define</em> <a href='../Y/33052.html' title='Multiple used in 11 places.'>pi_str</a>  <a href='../Y/33058.html' title='Multiple used in 11 places.'>pi_val</a>.<a href='../Y/7941.html' title='Multiple used in 2 places.'>_pi_str</a>
+<a id='L196' name='L196'></a> 196 <em class='brace'>}</em> <a href='../R/17129.html' title='Multiple referred from 13 places.'>cdf_property_info_t</a>;
+<a id='L197' name='L197'></a> 197 
+<a id='L198' name='L198'></a> 198 <em class='sharp'>#define</em> <a href='../S/179.html#L923' title='Referred from 923 in ext/fileinfo/libmagic/cdf.c.'>CDF_ROUND</a>(<a href='../Y/40518.html' title='Multiple used in 2351 places.'>val</a>, by)     (((<a href='../Y/40518.html' title='Multiple used in 2351 places.'>val</a>) + (by) - 1) &amp; ~((by) - 1))
+<a id='L199' name='L199'></a> 199 
+<a id='L200' name='L200'></a> 200 <em class='comment'>/* Variant type definitions */</em>
+<a id='L201' name='L201'></a> 201 <em class='sharp'>#define</em> <a href='../S/179.html#L850' title='Referred from 850 in ext/fileinfo/libmagic/cdf.c.'>CDF_EMPTY</a>               0x00000000
+<a id='L202' name='L202'></a> 202 <em class='sharp'>#define</em> <a href='../R/699.html' title='Multiple referred from 3 places.'>CDF_NULL</a>                0x00000001
+<a id='L203' name='L203'></a> 203 <em class='sharp'>#define</em> <a href='../R/731.html' title='Multiple referred from 3 places.'>CDF_SIGNED16</a>            0x00000002
+<a id='L204' name='L204'></a> 204 <em class='sharp'>#define</em> <a href='../R/732.html' title='Multiple referred from 3 places.'>CDF_SIGNED32</a>            0x00000003
+<a id='L205' name='L205'></a> 205 <em class='sharp'>#define</em> <a href='../R/694.html' title='Multiple referred from 3 places.'>CDF_FLOAT</a>               0x00000004
+<a id='L206' name='L206'></a> 206 <em class='sharp'>#define</em> <a href='../R/691.html' title='Multiple referred from 3 places.'>CDF_DOUBLE</a>              0x00000005
+<a id='L207' name='L207'></a> 207 <em class='sharp'>#define</em> CDF_CY                  0x00000006
+<a id='L208' name='L208'></a> 208 <em class='sharp'>#define</em> CDF_DATE                0x00000007
+<a id='L209' name='L209'></a> 209 <em class='sharp'>#define</em> CDF_BSTR                0x00000008
+<a id='L210' name='L210'></a> 210 <em class='sharp'>#define</em> CDF_DISPATCH            0x00000009
+<a id='L211' name='L211'></a> 211 <em class='sharp'>#define</em> CDF_ERROR               0x0000000a
+<a id='L212' name='L212'></a> 212 <em class='sharp'>#define</em> <a href='../S/179.html#L864' title='Referred from 864 in ext/fileinfo/libmagic/cdf.c.'>CDF_BOOL</a>                0x0000000b
+<a id='L213' name='L213'></a> 213 <em class='sharp'>#define</em> CDF_VARIANT             0x0000000c
+<a id='L214' name='L214'></a> 214 <em class='sharp'>#define</em> CDF_UNKNOWN             0x0000000d
+<a id='L215' name='L215'></a> 215 <em class='sharp'>#define</em> CDF_DECIMAL             0x0000000e
+<a id='L216' name='L216'></a> 216 <em class='sharp'>#define</em> CDF_SIGNED8             0x00000010
+<a id='L217' name='L217'></a> 217 <em class='sharp'>#define</em> CDF_UNSIGNED8           0x00000011
+<a id='L218' name='L218'></a> 218 <em class='sharp'>#define</em> CDF_UNSIGNED16          0x00000012
+<a id='L219' name='L219'></a> 219 <em class='sharp'>#define</em> <a href='../R/741.html' title='Multiple referred from 3 places.'>CDF_UNSIGNED32</a>          0x00000013
+<a id='L220' name='L220'></a> 220 <em class='sharp'>#define</em> <a href='../S/179.html#L871' title='Referred from 871 in ext/fileinfo/libmagic/cdf.c.'>CDF_SIGNED64</a>            0x00000014
+<a id='L221' name='L221'></a> 221 <em class='sharp'>#define</em> <a href='../S/179.html#L877' title='Referred from 877 in ext/fileinfo/libmagic/cdf.c.'>CDF_UNSIGNED64</a>          0x00000015
+<a id='L222' name='L222'></a> 222 <em class='sharp'>#define</em> CDF_INT                 0x00000016
+<a id='L223' name='L223'></a> 223 <em class='sharp'>#define</em> CDF_UINT                0x00000017
+<a id='L224' name='L224'></a> 224 <em class='sharp'>#define</em> CDF_VOID                0x00000018
+<a id='L225' name='L225'></a> 225 <em class='sharp'>#define</em> CDF_HRESULT             0x00000019
+<a id='L226' name='L226'></a> 226 <em class='sharp'>#define</em> CDF_PTR                 0x0000001a
+<a id='L227' name='L227'></a> 227 <em class='sharp'>#define</em> CDF_SAFEARRAY           0x0000001b
+<a id='L228' name='L228'></a> 228 <em class='sharp'>#define</em> CDF_CARRAY              0x0000001c
+<a id='L229' name='L229'></a> 229 <em class='sharp'>#define</em> CDF_USERDEFINED         0x0000001d
+<a id='L230' name='L230'></a> 230 <em class='sharp'>#define</em> <a href='../R/696.html' title='Multiple referred from 3 places.'>CDF_LENGTH32_STRING</a>     0x0000001e
+<a id='L231' name='L231'></a> 231 <em class='sharp'>#define</em> <a href='../R/697.html' title='Multiple referred from 4 places.'>CDF_LENGTH32_WSTRING</a>    0x0000001f
+<a id='L232' name='L232'></a> 232 <em class='sharp'>#define</em> <a href='../R/693.html' title='Multiple referred from 3 places.'>CDF_FILETIME</a>            0x00000040
+<a id='L233' name='L233'></a> 233 <em class='sharp'>#define</em> CDF_BLOB                0x00000041
+<a id='L234' name='L234'></a> 234 <em class='sharp'>#define</em> CDF_STREAM              0x00000042
+<a id='L235' name='L235'></a> 235 <em class='sharp'>#define</em> CDF_STORAGE             0x00000043
+<a id='L236' name='L236'></a> 236 <em class='sharp'>#define</em> CDF_STREAMED_OBJECT     0x00000044
+<a id='L237' name='L237'></a> 237 <em class='sharp'>#define</em> CDF_STORED_OBJECT       0x00000045
+<a id='L238' name='L238'></a> 238 <em class='sharp'>#define</em> CDF_BLOB_OBJECT         0x00000046
+<a id='L239' name='L239'></a> 239 <em class='sharp'>#define</em> <a href='../R/689.html' title='Multiple referred from 3 places.'>CDF_CLIPBOARD</a>           0x00000047
+<a id='L240' name='L240'></a> 240 <em class='sharp'>#define</em> CDF_CLSID               0x00000048
+<a id='L241' name='L241'></a> 241 <em class='sharp'>#define</em> <a href='../R/743.html' title='Multiple referred from 10 places.'>CDF_VECTOR</a>              0x00001000
+<a id='L242' name='L242'></a> 242 <em class='sharp'>#define</em> <a href='../S/179.html#L846' title='Referred from 846 in ext/fileinfo/libmagic/cdf.c.'>CDF_ARRAY</a>               0x00002000
+<a id='L243' name='L243'></a> 243 <em class='sharp'>#define</em> <a href='../S/179.html#L846' title='Referred from 846 in ext/fileinfo/libmagic/cdf.c.'>CDF_BYREF</a>               0x00004000
+<a id='L244' name='L244'></a> 244 <em class='sharp'>#define</em> <a href='../S/179.html#L846' title='Referred from 846 in ext/fileinfo/libmagic/cdf.c.'>CDF_RESERVED</a>            0x00008000
+<a id='L245' name='L245'></a> 245 <em class='sharp'>#define</em> CDF_ILLEGAL             0x0000ffff
+<a id='L246' name='L246'></a> 246 <em class='sharp'>#define</em> CDF_ILLEGALMASKED       0x00000fff
+<a id='L247' name='L247'></a> 247 <em class='sharp'>#define</em> <a href='../S/179.html#L848' title='Referred from 848 in ext/fileinfo/libmagic/cdf.c.'>CDF_TYPEMASK</a>            0x00000fff
+<a id='L248' name='L248'></a> 248 
+<a id='L249' name='L249'></a> 249 <em class='sharp'>#define</em> <a href='../S/179.html#L1002' title='Referred from 1002 in ext/fileinfo/libmagic/cdf.c.'>CDF_PROPERTY_CODE_PAGE</a>                  0x00000001
+<a id='L250' name='L250'></a> 250 <em class='sharp'>#define</em> <a href='../S/179.html#L1003' title='Referred from 1003 in ext/fileinfo/libmagic/cdf.c.'>CDF_PROPERTY_TITLE</a>                      0x00000002
+<a id='L251' name='L251'></a> 251 <em class='sharp'>#define</em> <a href='../S/179.html#L1004' title='Referred from 1004 in ext/fileinfo/libmagic/cdf.c.'>CDF_PROPERTY_SUBJECT</a>                    0x00000003
+<a id='L252' name='L252'></a> 252 <em class='sharp'>#define</em> <a href='../S/179.html#L1005' title='Referred from 1005 in ext/fileinfo/libmagic/cdf.c.'>CDF_PROPERTY_AUTHOR</a>                     0x00000004
+<a id='L253' name='L253'></a> 253 <em class='sharp'>#define</em> <a href='../S/179.html#L1006' title='Referred from 1006 in ext/fileinfo/libmagic/cdf.c.'>CDF_PROPERTY_KEYWORDS</a>                   0x00000005
+<a id='L254' name='L254'></a> 254 <em class='sharp'>#define</em> <a href='../S/179.html#L1007' title='Referred from 1007 in ext/fileinfo/libmagic/cdf.c.'>CDF_PROPERTY_COMMENTS</a>                   0x00000006
+<a id='L255' name='L255'></a> 255 <em class='sharp'>#define</em> <a href='../S/179.html#L1008' title='Referred from 1008 in ext/fileinfo/libmagic/cdf.c.'>CDF_PROPERTY_TEMPLATE</a>                   0x00000007
+<a id='L256' name='L256'></a> 256 <em class='sharp'>#define</em> <a href='../S/179.html#L1009' title='Referred from 1009 in ext/fileinfo/libmagic/cdf.c.'>CDF_PROPERTY_LAST_SAVED_BY</a>              0x00000008
+<a id='L257' name='L257'></a> 257 <em class='sharp'>#define</em> <a href='../S/179.html#L1010' title='Referred from 1010 in ext/fileinfo/libmagic/cdf.c.'>CDF_PROPERTY_REVISION_NUMBER</a>            0x00000009
+<a id='L258' name='L258'></a> 258 <em class='sharp'>#define</em> <a href='../S/179.html#L1011' title='Referred from 1011 in ext/fileinfo/libmagic/cdf.c.'>CDF_PROPERTY_TOTAL_EDITING_TIME</a>         0x0000000a
+<a id='L259' name='L259'></a> 259 <em class='sharp'>#define</em> <a href='../S/179.html#L1012' title='Referred from 1012 in ext/fileinfo/libmagic/cdf.c.'>CDF_PROPERTY_LAST_PRINTED</a>               0X0000000b
+<a id='L260' name='L260'></a> 260 <em class='sharp'>#define</em> <a href='../S/179.html#L1013' title='Referred from 1013 in ext/fileinfo/libmagic/cdf.c.'>CDF_PROPERTY_CREATE_TIME</a>                0x0000000c
+<a id='L261' name='L261'></a> 261 <em class='sharp'>#define</em> <a href='../S/179.html#L1014' title='Referred from 1014 in ext/fileinfo/libmagic/cdf.c.'>CDF_PROPERTY_LAST_SAVED_TIME</a>            0x0000000d
+<a id='L262' name='L262'></a> 262 <em class='sharp'>#define</em> <a href='../S/179.html#L1015' title='Referred from 1015 in ext/fileinfo/libmagic/cdf.c.'>CDF_PROPERTY_NUMBER_OF_PAGES</a>            0x0000000e
+<a id='L263' name='L263'></a> 263 <em class='sharp'>#define</em> <a href='../S/179.html#L1016' title='Referred from 1016 in ext/fileinfo/libmagic/cdf.c.'>CDF_PROPERTY_NUMBER_OF_WORDS</a>            0x0000000f
+<a id='L264' name='L264'></a> 264 <em class='sharp'>#define</em> <a href='../S/179.html#L1017' title='Referred from 1017 in ext/fileinfo/libmagic/cdf.c.'>CDF_PROPERTY_NUMBER_OF_CHARACTERS</a>       0x00000010
+<a id='L265' name='L265'></a> 265 <em class='sharp'>#define</em> <a href='../S/179.html#L1018' title='Referred from 1018 in ext/fileinfo/libmagic/cdf.c.'>CDF_PROPERTY_THUMBNAIL</a>                  0x00000011
+<a id='L266' name='L266'></a> 266 <em class='sharp'>#define</em> <a href='../R/709.html' title='Multiple referred from 2 places.'>CDF_PROPERTY_NAME_OF_APPLICATION</a>        0x00000012
+<a id='L267' name='L267'></a> 267 <em class='sharp'>#define</em> <a href='../S/179.html#L1020' title='Referred from 1020 in ext/fileinfo/libmagic/cdf.c.'>CDF_PROPERTY_SECURITY</a>                   0x00000013
+<a id='L268' name='L268'></a> 268 <em class='sharp'>#define</em> <a href='../S/179.html#L1021' title='Referred from 1021 in ext/fileinfo/libmagic/cdf.c.'>CDF_PROPERTY_LOCALE_ID</a>                  0x80000000
+<a id='L269' name='L269'></a> 269 
+<a id='L270' name='L270'></a> 270 <strong class='reserved'>typedef</strong> <strong class='reserved'>struct</strong> <em class='brace'>{</em>
+<a id='L271' name='L271'></a> 271         <strong class='reserved'>int</strong> <a href='../Y/22536.html' title='Multiple used in 7 places.'>i_fd</a>;
+<a id='L272' name='L272'></a> 272         <strong class='reserved'>const</strong> <strong class='reserved'>unsigned</strong> <strong class='reserved'>char</strong> *<a href='../Y/22535.html' title='Multiple used in 5 places.'>i_buf</a>;
+<a id='L273' name='L273'></a> 273         <a href='../Y/36596.html' title='Multiple used in 2694 places.'>size_t</a> <a href='../Y/22539.html' title='Multiple used in 7 places.'>i_len</a>;
+<a id='L274' name='L274'></a> 274 <em class='brace'>}</em> <a href='../R/17124.html' title='Multiple referred from 23 places.'>cdf_info_t</a>;
+<a id='L275' name='L275'></a> 275 
+<a id='L276' name='L276'></a> 276 <strong class='reserved'>struct</strong> <a href='../Y/38997.html' title='Multiple used in 173 places.'>timeval</a>;
+<a id='L277' name='L277'></a> 277 <strong class='reserved'>int</strong> <a href='../S/181.html#L99' title='Defined at 99 in ext/fileinfo/libmagic/cdf_time.c.'>cdf_timestamp_to_timespec</a>(<strong class='reserved'>struct</strong> <a href='../Y/38997.html' title='Multiple used in 173 places.'>timeval</a> *, <a href='../S/180.html#L93' title='Defined at 93 in ext/fileinfo/libmagic/cdf.h.'>cdf_timestamp_t</a>);
+<a id='L278' name='L278'></a> 278 <strong class='reserved'>int</strong> <a href='../S/181.html#L148' title='Defined at 148 in ext/fileinfo/libmagic/cdf_time.c.'>cdf_timespec_to_timestamp</a>(<a href='../S/180.html#L93' title='Defined at 93 in ext/fileinfo/libmagic/cdf.h.'>cdf_timestamp_t</a> *, <strong class='reserved'>const</strong> <strong class='reserved'>struct</strong> <a href='../Y/38997.html' title='Multiple used in 173 places.'>timeval</a> *);
+<a id='L279' name='L279'></a> 279 <strong class='reserved'>int</strong> <a href='../S/179.html#L321' title='Defined at 321 in ext/fileinfo/libmagic/cdf.c.'>cdf_read_header</a>(<strong class='reserved'>const</strong> <a href='../S/180.html#L274' title='Defined at 274 in ext/fileinfo/libmagic/cdf.h.'>cdf_info_t</a> *, <a href='../S/180.html#L83' title='Defined at 83 in ext/fileinfo/libmagic/cdf.h.'>cdf_header_t</a> *);
+<a id='L280' name='L280'></a> 280 <strong class='reserved'>void</strong> <a href='../S/179.html#L175' title='Defined at 175 in ext/fileinfo/libmagic/cdf.c.'>cdf_swap_header</a>(<a href='../S/180.html#L83' title='Defined at 83 in ext/fileinfo/libmagic/cdf.h.'>cdf_header_t</a> *);
+<a id='L281' name='L281'></a> 281 <strong class='reserved'>void</strong> <a href='../S/179.html#L204' title='Defined at 204 in ext/fileinfo/libmagic/cdf.c.'>cdf_unpack_header</a>(<a href='../S/180.html#L83' title='Defined at 83 in ext/fileinfo/libmagic/cdf.h.'>cdf_header_t</a> *, <strong class='reserved'>char</strong> *);
+<a id='L282' name='L282'></a> 282 <strong class='reserved'>void</strong> <a href='../S/179.html#L230' title='Defined at 230 in ext/fileinfo/libmagic/cdf.c.'>cdf_swap_dir</a>(<a href='../S/180.html#L120' title='Defined at 120 in ext/fileinfo/libmagic/cdf.h.'>cdf_directory_t</a> *);
+<a id='L283' name='L283'></a> 283 <strong class='reserved'>void</strong> <a href='../S/179.html#L254' title='Defined at 254 in ext/fileinfo/libmagic/cdf.c.'>cdf_unpack_dir</a>(<a href='../S/180.html#L120' title='Defined at 120 in ext/fileinfo/libmagic/cdf.h.'>cdf_directory_t</a> *, <strong class='reserved'>char</strong> *);
+<a id='L284' name='L284'></a> 284 <strong class='reserved'>void</strong> <a href='../S/179.html#L246' title='Defined at 246 in ext/fileinfo/libmagic/cdf.c.'>cdf_swap_class</a>(<a href='../S/180.html#L145' title='Defined at 145 in ext/fileinfo/libmagic/cdf.h.'>cdf_classid_t</a> *);
+<a id='L285' name='L285'></a> 285 <a href='../D/31351.html' title='Multiple defined in 3 places.'>ssize_t</a> <a href='../S/179.html#L354' title='Defined at 354 in ext/fileinfo/libmagic/cdf.c.'>cdf_read_sector</a>(<strong class='reserved'>const</strong> <a href='../S/180.html#L274' title='Defined at 274 in ext/fileinfo/libmagic/cdf.h.'>cdf_info_t</a> *, <strong class='reserved'>void</strong> *, <a href='../Y/36596.html' title='Multiple used in 2694 places.'>size_t</a>, <a href='../Y/36596.html' title='Multiple used in 2694 places.'>size_t</a>,
+<a id='L286' name='L286'></a> 286     <strong class='reserved'>const</strong> <a href='../S/180.html#L83' title='Defined at 83 in ext/fileinfo/libmagic/cdf.h.'>cdf_header_t</a> *, <a href='../S/180.html#L50' title='Defined at 50 in ext/fileinfo/libmagic/cdf.h.'>cdf_secid_t</a>);
+<a id='L287' name='L287'></a> 287 <a href='../D/31351.html' title='Multiple defined in 3 places.'>ssize_t</a> <a href='../S/179.html#L364' title='Defined at 364 in ext/fileinfo/libmagic/cdf.c.'>cdf_read_short_sector</a>(<strong class='reserved'>const</strong> <a href='../S/180.html#L138' title='Defined at 138 in ext/fileinfo/libmagic/cdf.h.'>cdf_stream_t</a> *, <strong class='reserved'>void</strong> *, <a href='../Y/36596.html' title='Multiple used in 2694 places.'>size_t</a>, <a href='../Y/36596.html' title='Multiple used in 2694 places.'>size_t</a>,
+<a id='L288' name='L288'></a> 288     <strong class='reserved'>const</strong> <a href='../S/180.html#L83' title='Defined at 83 in ext/fileinfo/libmagic/cdf.h.'>cdf_header_t</a> *, <a href='../S/180.html#L50' title='Defined at 50 in ext/fileinfo/libmagic/cdf.h.'>cdf_secid_t</a>);
+<a id='L289' name='L289'></a> 289 <strong class='reserved'>int</strong> <a href='../S/179.html#L385' title='Defined at 385 in ext/fileinfo/libmagic/cdf.c.'>cdf_read_sat</a>(<strong class='reserved'>const</strong> <a href='../S/180.html#L274' title='Defined at 274 in ext/fileinfo/libmagic/cdf.h.'>cdf_info_t</a> *, <a href='../S/180.html#L83' title='Defined at 83 in ext/fileinfo/libmagic/cdf.h.'>cdf_header_t</a> *, <a href='../S/180.html#L127' title='Defined at 127 in ext/fileinfo/libmagic/cdf.h.'>cdf_sat_t</a> *);
+<a id='L290' name='L290'></a> 290 <a href='../Y/36596.html' title='Multiple used in 2694 places.'>size_t</a> <a href='../S/179.html#L470' title='Defined at 470 in ext/fileinfo/libmagic/cdf.c.'>cdf_count_chain</a>(<strong class='reserved'>const</strong> <a href='../S/180.html#L127' title='Defined at 127 in ext/fileinfo/libmagic/cdf.h.'>cdf_sat_t</a> *, <a href='../S/180.html#L50' title='Defined at 50 in ext/fileinfo/libmagic/cdf.h.'>cdf_secid_t</a>, <a href='../Y/36596.html' title='Multiple used in 2694 places.'>size_t</a>);
+<a id='L291' name='L291'></a> 291 <strong class='reserved'>int</strong> <a href='../S/179.html#L496' title='Defined at 496 in ext/fileinfo/libmagic/cdf.c.'>cdf_read_long_sector_chain</a>(<strong class='reserved'>const</strong> <a href='../S/180.html#L274' title='Defined at 274 in ext/fileinfo/libmagic/cdf.h.'>cdf_info_t</a> *, <strong class='reserved'>const</strong> <a href='../S/180.html#L83' title='Defined at 83 in ext/fileinfo/libmagic/cdf.h.'>cdf_header_t</a> *,
+<a id='L292' name='L292'></a> 292     <strong class='reserved'>const</strong> <a href='../S/180.html#L127' title='Defined at 127 in ext/fileinfo/libmagic/cdf.h.'>cdf_sat_t</a> *, <a href='../S/180.html#L50' title='Defined at 50 in ext/fileinfo/libmagic/cdf.h.'>cdf_secid_t</a>, <a href='../Y/36596.html' title='Multiple used in 2694 places.'>size_t</a>, <a href='../S/180.html#L138' title='Defined at 138 in ext/fileinfo/libmagic/cdf.h.'>cdf_stream_t</a> *);
+<a id='L293' name='L293'></a> 293 <strong class='reserved'>int</strong> <a href='../S/179.html#L542' title='Defined at 542 in ext/fileinfo/libmagic/cdf.c.'>cdf_read_short_sector_chain</a>(<strong class='reserved'>const</strong> <a href='../S/180.html#L83' title='Defined at 83 in ext/fileinfo/libmagic/cdf.h.'>cdf_header_t</a> *, <strong class='reserved'>const</strong> <a href='../S/180.html#L127' title='Defined at 127 in ext/fileinfo/libmagic/cdf.h.'>cdf_sat_t</a> *,
+<a id='L294' name='L294'></a> 294     <strong class='reserved'>const</strong> <a href='../S/180.html#L138' title='Defined at 138 in ext/fileinfo/libmagic/cdf.h.'>cdf_stream_t</a> *, <a href='../S/180.html#L50' title='Defined at 50 in ext/fileinfo/libmagic/cdf.h.'>cdf_secid_t</a>, <a href='../Y/36596.html' title='Multiple used in 2694 places.'>size_t</a>, <a href='../S/180.html#L138' title='Defined at 138 in ext/fileinfo/libmagic/cdf.h.'>cdf_stream_t</a> *);
+<a id='L295' name='L295'></a> 295 <strong class='reserved'>int</strong> <a href='../S/179.html#L584' title='Defined at 584 in ext/fileinfo/libmagic/cdf.c.'>cdf_read_sector_chain</a>(<strong class='reserved'>const</strong> <a href='../S/180.html#L274' title='Defined at 274 in ext/fileinfo/libmagic/cdf.h.'>cdf_info_t</a> *, <strong class='reserved'>const</strong> <a href='../S/180.html#L83' title='Defined at 83 in ext/fileinfo/libmagic/cdf.h.'>cdf_header_t</a> *,
+<a id='L296' name='L296'></a> 296     <strong class='reserved'>const</strong> <a href='../S/180.html#L127' title='Defined at 127 in ext/fileinfo/libmagic/cdf.h.'>cdf_sat_t</a> *, <strong class='reserved'>const</strong> <a href='../S/180.html#L127' title='Defined at 127 in ext/fileinfo/libmagic/cdf.h.'>cdf_sat_t</a> *, <strong class='reserved'>const</strong> <a href='../S/180.html#L138' title='Defined at 138 in ext/fileinfo/libmagic/cdf.h.'>cdf_stream_t</a> *, <a href='../S/180.html#L50' title='Defined at 50 in ext/fileinfo/libmagic/cdf.h.'>cdf_secid_t</a>,
+<a id='L297' name='L297'></a> 297     <a href='../Y/36596.html' title='Multiple used in 2694 places.'>size_t</a>, <a href='../S/180.html#L138' title='Defined at 138 in ext/fileinfo/libmagic/cdf.h.'>cdf_stream_t</a> *);
+<a id='L298' name='L298'></a> 298 <strong class='reserved'>int</strong> <a href='../S/179.html#L597' title='Defined at 597 in ext/fileinfo/libmagic/cdf.c.'>cdf_read_dir</a>(<strong class='reserved'>const</strong> <a href='../S/180.html#L274' title='Defined at 274 in ext/fileinfo/libmagic/cdf.h.'>cdf_info_t</a> *, <strong class='reserved'>const</strong> <a href='../S/180.html#L83' title='Defined at 83 in ext/fileinfo/libmagic/cdf.h.'>cdf_header_t</a> *, <strong class='reserved'>const</strong> <a href='../S/180.html#L127' title='Defined at 127 in ext/fileinfo/libmagic/cdf.h.'>cdf_sat_t</a> *,
+<a id='L299' name='L299'></a> 299     <a href='../S/180.html#L132' title='Defined at 132 in ext/fileinfo/libmagic/cdf.h.'>cdf_dir_t</a> *);
+<a id='L300' name='L300'></a> 300 <strong class='reserved'>int</strong> <a href='../S/179.html#L651' title='Defined at 651 in ext/fileinfo/libmagic/cdf.c.'>cdf_read_ssat</a>(<strong class='reserved'>const</strong> <a href='../S/180.html#L274' title='Defined at 274 in ext/fileinfo/libmagic/cdf.h.'>cdf_info_t</a> *, <strong class='reserved'>const</strong> <a href='../S/180.html#L83' title='Defined at 83 in ext/fileinfo/libmagic/cdf.h.'>cdf_header_t</a> *, <strong class='reserved'>const</strong> <a href='../S/180.html#L127' title='Defined at 127 in ext/fileinfo/libmagic/cdf.h.'>cdf_sat_t</a> *,
+<a id='L301' name='L301'></a> 301     <a href='../S/180.html#L127' title='Defined at 127 in ext/fileinfo/libmagic/cdf.h.'>cdf_sat_t</a> *);
+<a id='L302' name='L302'></a> 302 <strong class='reserved'>int</strong> <a href='../S/179.html#L693' title='Defined at 693 in ext/fileinfo/libmagic/cdf.c.'>cdf_read_short_stream</a>(<strong class='reserved'>const</strong> <a href='../S/180.html#L274' title='Defined at 274 in ext/fileinfo/libmagic/cdf.h.'>cdf_info_t</a> *, <strong class='reserved'>const</strong> <a href='../S/180.html#L83' title='Defined at 83 in ext/fileinfo/libmagic/cdf.h.'>cdf_header_t</a> *,
+<a id='L303' name='L303'></a> 303     <strong class='reserved'>const</strong> <a href='../S/180.html#L127' title='Defined at 127 in ext/fileinfo/libmagic/cdf.h.'>cdf_sat_t</a> *, <strong class='reserved'>const</strong> <a href='../S/180.html#L132' title='Defined at 132 in ext/fileinfo/libmagic/cdf.h.'>cdf_dir_t</a> *, <a href='../S/180.html#L138' title='Defined at 138 in ext/fileinfo/libmagic/cdf.h.'>cdf_stream_t</a> *,
+<a id='L304' name='L304'></a> 304     <strong class='reserved'>const</strong> <a href='../S/180.html#L120' title='Defined at 120 in ext/fileinfo/libmagic/cdf.h.'>cdf_directory_t</a> **);
+<a id='L305' name='L305'></a> 305 <strong class='reserved'>int</strong> <a href='../S/179.html#L759' title='Defined at 759 in ext/fileinfo/libmagic/cdf.c.'>cdf_read_property_info</a>(<strong class='reserved'>const</strong> <a href='../S/180.html#L138' title='Defined at 138 in ext/fileinfo/libmagic/cdf.h.'>cdf_stream_t</a> *, <strong class='reserved'>const</strong> <a href='../S/180.html#L83' title='Defined at 83 in ext/fileinfo/libmagic/cdf.h.'>cdf_header_t</a> *, <a href='../D/32238.html' title='Multiple defined in 10 places.'>uint32_t</a>,
+<a id='L306' name='L306'></a> 306     <a href='../S/180.html#L196' title='Defined at 196 in ext/fileinfo/libmagic/cdf.h.'>cdf_property_info_t</a> **, <a href='../Y/36596.html' title='Multiple used in 2694 places.'>size_t</a> *, <a href='../Y/36596.html' title='Multiple used in 2694 places.'>size_t</a> *);
+<a id='L307' name='L307'></a> 307 <strong class='reserved'>int</strong> <a href='../S/179.html#L734' title='Defined at 734 in ext/fileinfo/libmagic/cdf.c.'>cdf_read_summary_info</a>(<strong class='reserved'>const</strong> <a href='../S/180.html#L274' title='Defined at 274 in ext/fileinfo/libmagic/cdf.h.'>cdf_info_t</a> *, <strong class='reserved'>const</strong> <a href='../S/180.html#L83' title='Defined at 83 in ext/fileinfo/libmagic/cdf.h.'>cdf_header_t</a> *,
+<a id='L308' name='L308'></a> 308     <strong class='reserved'>const</strong> <a href='../S/180.html#L127' title='Defined at 127 in ext/fileinfo/libmagic/cdf.h.'>cdf_sat_t</a> *, <strong class='reserved'>const</strong> <a href='../S/180.html#L127' title='Defined at 127 in ext/fileinfo/libmagic/cdf.h.'>cdf_sat_t</a> *, <strong class='reserved'>const</strong> <a href='../S/180.html#L138' title='Defined at 138 in ext/fileinfo/libmagic/cdf.h.'>cdf_stream_t</a> *,
+<a id='L309' name='L309'></a> 309     <strong class='reserved'>const</strong> <a href='../S/180.html#L132' title='Defined at 132 in ext/fileinfo/libmagic/cdf.h.'>cdf_dir_t</a> *, <a href='../S/180.html#L138' title='Defined at 138 in ext/fileinfo/libmagic/cdf.h.'>cdf_stream_t</a> *);
+<a id='L310' name='L310'></a> 310 <strong class='reserved'>int</strong> <a href='../S/179.html#L958' title='Defined at 958 in ext/fileinfo/libmagic/cdf.c.'>cdf_unpack_summary_info</a>(<strong class='reserved'>const</strong> <a href='../S/180.html#L138' title='Defined at 138 in ext/fileinfo/libmagic/cdf.h.'>cdf_stream_t</a> *, <strong class='reserved'>const</strong> <a href='../S/180.html#L83' title='Defined at 83 in ext/fileinfo/libmagic/cdf.h.'>cdf_header_t</a> *,
+<a id='L311' name='L311'></a> 311     <a href='../S/180.html#L154' title='Defined at 154 in ext/fileinfo/libmagic/cdf.h.'>cdf_summary_info_header_t</a> *, <a href='../S/180.html#L196' title='Defined at 196 in ext/fileinfo/libmagic/cdf.h.'>cdf_property_info_t</a> **, <a href='../Y/36596.html' title='Multiple used in 2694 places.'>size_t</a> *);
+<a id='L312' name='L312'></a> 312 <strong class='reserved'>int</strong> <a href='../S/179.html#L989' title='Defined at 989 in ext/fileinfo/libmagic/cdf.c.'>cdf_print_classid</a>(<strong class='reserved'>char</strong> *, <a href='../Y/36596.html' title='Multiple used in 2694 places.'>size_t</a>, <strong class='reserved'>const</strong> <a href='../S/180.html#L145' title='Defined at 145 in ext/fileinfo/libmagic/cdf.h.'>cdf_classid_t</a> *);
+<a id='L313' name='L313'></a> 313 <strong class='reserved'>int</strong> <a href='../S/179.html#L1025' title='Defined at 1025 in ext/fileinfo/libmagic/cdf.c.'>cdf_print_property_name</a>(<strong class='reserved'>char</strong> *, <a href='../Y/36596.html' title='Multiple used in 2694 places.'>size_t</a>, <a href='../D/32238.html' title='Multiple defined in 10 places.'>uint32_t</a>);
+<a id='L314' name='L314'></a> 314 <strong class='reserved'>int</strong> <a href='../S/179.html#L1036' title='Defined at 1036 in ext/fileinfo/libmagic/cdf.c.'>cdf_print_elapsed_time</a>(<strong class='reserved'>char</strong> *, <a href='../Y/36596.html' title='Multiple used in 2694 places.'>size_t</a>, <a href='../S/180.html#L93' title='Defined at 93 in ext/fileinfo/libmagic/cdf.h.'>cdf_timestamp_t</a>);
+<a id='L315' name='L315'></a> 315 <a href='../D/32233.html' title='Multiple defined in 3 places.'>uint16_t</a> <a href='../S/179.html#L157' title='Defined at 157 in ext/fileinfo/libmagic/cdf.c.'>cdf_tole2</a>(<a href='../D/32233.html' title='Multiple defined in 3 places.'>uint16_t</a>);
+<a id='L316' name='L316'></a> 316 <a href='../D/32238.html' title='Multiple defined in 10 places.'>uint32_t</a> <a href='../S/179.html#L163' title='Defined at 163 in ext/fileinfo/libmagic/cdf.c.'>cdf_tole4</a>(<a href='../D/32238.html' title='Multiple defined in 10 places.'>uint32_t</a>);
+<a id='L317' name='L317'></a> 317 <a href='../D/32243.html' title='Multiple defined in 6 places.'>uint64_t</a> <a href='../S/179.html#L169' title='Defined at 169 in ext/fileinfo/libmagic/cdf.c.'>cdf_tole8</a>(<a href='../D/32243.html' title='Multiple defined in 6 places.'>uint64_t</a>);
+<a id='L318' name='L318'></a> 318 <strong class='reserved'>char</strong> *<a href='../S/181.html#L170' title='Defined at 170 in ext/fileinfo/libmagic/cdf_time.c.'>cdf_ctime</a>(<strong class='reserved'>const</strong> <a href='../Y/38957.html' title='Multiple used in 161 places.'>time_t</a> *, <strong class='reserved'>char</strong> *);
+<a id='L319' name='L319'></a> 319 
+<a id='L320' name='L320'></a> 320 <em class='sharp'>#ifdef</em> <a href='../Y/331.html' title='Multiple used in 15 places.'>CDF_DEBUG</a>
+<a id='L321' name='L321'></a> 321 <strong class='reserved'>void</strong> <a href='../S/179.html#L1073' title='Defined at 1073 in ext/fileinfo/libmagic/cdf.c.'>cdf_dump_header</a>(<strong class='reserved'>const</strong> <a href='../S/180.html#L83' title='Defined at 83 in ext/fileinfo/libmagic/cdf.h.'>cdf_header_t</a> *);
+<a id='L322' name='L322'></a> 322 <strong class='reserved'>void</strong> <a href='../S/179.html#L1101' title='Defined at 1101 in ext/fileinfo/libmagic/cdf.c.'>cdf_dump_sat</a>(<strong class='reserved'>const</strong> <strong class='reserved'>char</strong> *, <strong class='reserved'>const</strong> <a href='../S/180.html#L127' title='Defined at 127 in ext/fileinfo/libmagic/cdf.h.'>cdf_sat_t</a> *, <a href='../Y/36596.html' title='Multiple used in 2694 places.'>size_t</a>);
+<a id='L323' name='L323'></a> 323 <strong class='reserved'>void</strong> <a href='../S/179.html#L1120' title='Defined at 1120 in ext/fileinfo/libmagic/cdf.c.'>cdf_dump</a>(<strong class='reserved'>void</strong> *, <a href='../Y/36596.html' title='Multiple used in 2694 places.'>size_t</a>);
+<a id='L324' name='L324'></a> 324 <strong class='reserved'>void</strong> <a href='../S/179.html#L1140' title='Defined at 1140 in ext/fileinfo/libmagic/cdf.c.'>cdf_dump_stream</a>(<strong class='reserved'>const</strong> <a href='../S/180.html#L83' title='Defined at 83 in ext/fileinfo/libmagic/cdf.h.'>cdf_header_t</a> *, <strong class='reserved'>const</strong> <a href='../S/180.html#L138' title='Defined at 138 in ext/fileinfo/libmagic/cdf.h.'>cdf_stream_t</a> *);
+<a id='L325' name='L325'></a> 325 <strong class='reserved'>void</strong> <a href='../S/179.html#L1148' title='Defined at 1148 in ext/fileinfo/libmagic/cdf.c.'>cdf_dump_dir</a>(<strong class='reserved'>const</strong> <a href='../S/180.html#L274' title='Defined at 274 in ext/fileinfo/libmagic/cdf.h.'>cdf_info_t</a> *, <strong class='reserved'>const</strong> <a href='../S/180.html#L83' title='Defined at 83 in ext/fileinfo/libmagic/cdf.h.'>cdf_header_t</a> *, <strong class='reserved'>const</strong> <a href='../S/180.html#L127' title='Defined at 127 in ext/fileinfo/libmagic/cdf.h.'>cdf_sat_t</a> *,
+<a id='L326' name='L326'></a> 326     <strong class='reserved'>const</strong> <a href='../S/180.html#L127' title='Defined at 127 in ext/fileinfo/libmagic/cdf.h.'>cdf_sat_t</a> *, <strong class='reserved'>const</strong> <a href='../S/180.html#L138' title='Defined at 138 in ext/fileinfo/libmagic/cdf.h.'>cdf_stream_t</a> *, <strong class='reserved'>const</strong> <a href='../S/180.html#L132' title='Defined at 132 in ext/fileinfo/libmagic/cdf.h.'>cdf_dir_t</a> *);
+<a id='L327' name='L327'></a> 327 <strong class='reserved'>void</strong> <a href='../S/179.html#L1206' title='Defined at 1206 in ext/fileinfo/libmagic/cdf.c.'>cdf_dump_property_info</a>(<strong class='reserved'>const</strong> <a href='../S/180.html#L196' title='Defined at 196 in ext/fileinfo/libmagic/cdf.h.'>cdf_property_info_t</a> *, <a href='../Y/36596.html' title='Multiple used in 2694 places.'>size_t</a>);
+<a id='L328' name='L328'></a> 328 <strong class='reserved'>void</strong> <a href='../S/179.html#L1279' title='Defined at 1279 in ext/fileinfo/libmagic/cdf.c.'>cdf_dump_summary_info</a>(<strong class='reserved'>const</strong> <a href='../S/180.html#L83' title='Defined at 83 in ext/fileinfo/libmagic/cdf.h.'>cdf_header_t</a> *, <strong class='reserved'>const</strong> <a href='../S/180.html#L138' title='Defined at 138 in ext/fileinfo/libmagic/cdf.h.'>cdf_stream_t</a> *);
+<a id='L329' name='L329'></a> 329 <em class='sharp'>#endif</em>
+<a id='L330' name='L330'></a> 330 
+<a id='L331' name='L331'></a> 331 
+<a id='L332' name='L332'></a> 332 <em class='sharp'>#endif</em> <em class='comment'>/* _H_CDF_ */</em>
+</pre>
+<hr />
+<a id='BOTTOM' name='BOTTOM'></a>
+<em class='comment'>/* [&lt;][&gt;][^][v]<a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+</body>
+</html>

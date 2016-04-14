@@ -1,0 +1,230 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>ext/date/php_date.h</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<a id='TOP' name='TOP'></a><h2 class='header'><a href='../mains.html'>root</a>/<a href='../files/1753.html'>ext</a>/<a href='../files/1762.html'>date</a>/php_date.h</h2>
+<em class='comment'>/* [&lt;][&gt;][^][v][top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+<hr />
+<h2 class='header'><a href='../J/200.html' title='Multiple included from 10 places.'>INCLUDED FROM</a></h2>
+<hr />
+<pre>
+<a id='L1' name='L1'></a>   1 <em class='comment'>/* </em>
+<a id='L2' name='L2'></a>   2 <em class='comment'>   +----------------------------------------------------------------------+</em>
+<a id='L3' name='L3'></a>   3 <em class='comment'>   | PHP Version 5                                                        |</em>
+<a id='L4' name='L4'></a>   4 <em class='comment'>   +----------------------------------------------------------------------+</em>
+<a id='L5' name='L5'></a>   5 <em class='comment'>   | Copyright (c) 1997-2016 The PHP Group                                |</em>
+<a id='L6' name='L6'></a>   6 <em class='comment'>   +----------------------------------------------------------------------+</em>
+<a id='L7' name='L7'></a>   7 <em class='comment'>   | This source file is subject to version 3.01 of the PHP license,      |</em>
+<a id='L8' name='L8'></a>   8 <em class='comment'>   | that is bundled with this package in the file LICENSE, and is        |</em>
+<a id='L9' name='L9'></a>   9 <em class='comment'>   | available through the world-wide-web at the following url:           |</em>
+<a id='L10' name='L10'></a>  10 <em class='comment'>   | http://www.php.net/license/3_01.txt                                  |</em>
+<a id='L11' name='L11'></a>  11 <em class='comment'>   | If you did not receive a copy of the PHP license and are unable to   |</em>
+<a id='L12' name='L12'></a>  12 <em class='comment'>   | obtain it through the world-wide-web, please send a note to          |</em>
+<a id='L13' name='L13'></a>  13 <em class='comment'>   | license@php.net so we can mail you a copy immediately.               |</em>
+<a id='L14' name='L14'></a>  14 <em class='comment'>   +----------------------------------------------------------------------+</em>
+<a id='L15' name='L15'></a>  15 <em class='comment'>   | Authors: Derick Rethans &lt;derick@derickrethans.nl&gt;                    |</em>
+<a id='L16' name='L16'></a>  16 <em class='comment'>   +----------------------------------------------------------------------+</em>
+<a id='L17' name='L17'></a>  17 <em class='comment'>*/</em>
+<a id='L18' name='L18'></a>  18 
+<a id='L19' name='L19'></a>  19 <em class='comment'>/* $Id$ */</em>
+<a id='L20' name='L20'></a>  20 
+<a id='L21' name='L21'></a>  21 <em class='sharp'>#ifndef</em> <a href='../S/80.html#L22' title='Defined at 22 in ext/date/php_date.h.'>PHP_DATE_H</a>
+<a id='L22' name='L22'></a>  22 <em class='sharp'>#define</em> <a href='../S/80.html#L21' title='Referred from 21 in ext/date/php_date.h.'>PHP_DATE_H</a>
+<a id='L23' name='L23'></a>  23 
+<a id='L24' name='L24'></a>  24 <em class='sharp'>#include</em> "<a href='73.html'>lib/timelib.h</a>"
+<a id='L25' name='L25'></a>  25 <em class='sharp'>#include</em> "<a href='1683.html'>Zend/zend_hash.h</a>"
+<a id='L26' name='L26'></a>  26 
+<a id='L27' name='L27'></a>  27 <strong class='reserved'>extern</strong> <a href='../S/1709.html#L70' title='Defined at 70 in Zend/zend_modules.h.'>zend_module_entry</a> <a href='../Y/15050.html' title='Multiple used in 3 places.'>date_module_entry</a>;
+<a id='L28' name='L28'></a>  28 <em class='sharp'>#define</em> <a href='../S/1363.html#L131' title='Referred from 131 in main/internal_functions_win32.c.'>phpext_date_ptr</a> &amp;<a href='../Y/15050.html' title='Multiple used in 3 places.'>date_module_entry</a>
+<a id='L29' name='L29'></a>  29 
+<a id='L30' name='L30'></a>  30 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/15017.html' title='Multiple used in 72 places.'>date</a>);
+<a id='L31' name='L31'></a>  31 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/22659.html' title='Multiple used in 3 places.'>idate</a>);
+<a id='L32' name='L32'></a>  32 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/19403.html' title='Multiple used in 3 places.'>gmdate</a>);
+<a id='L33' name='L33'></a>  33 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/38156.html' title='Multiple used in 3 places.'>strtotime</a>);
+<a id='L34' name='L34'></a>  34 
+<a id='L35' name='L35'></a>  35 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/26810.html' title='Multiple used in 15 places.'>mktime</a>);
+<a id='L36' name='L36'></a>  36 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/19404.html' title='Multiple used in 3 places.'>gmmktime</a>);
+<a id='L37' name='L37'></a>  37 
+<a id='L38' name='L38'></a>  38 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/13501.html' title='Multiple used in 3 places.'>checkdate</a>);
+<a id='L39' name='L39'></a>  39 
+<a id='L40' name='L40'></a>  40 <em class='sharp'>#ifdef</em> <a href='../S/742.html#L50' title='Defined at 50 in ext/mbstring/oniguruma/win32/config.h.'>HAVE_STRFTIME</a>
+<a id='L41' name='L41'></a>  41 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/38058.html' title='Multiple used in 22 places.'>strftime</a>);
+<a id='L42' name='L42'></a>  42 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/19496.html' title='Multiple used in 3 places.'>gmstrftime</a>);
+<a id='L43' name='L43'></a>  43 <em class='sharp'>#endif</em>
+<a id='L44' name='L44'></a>  44 
+<a id='L45' name='L45'></a>  45 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/38939.html' title='Multiple used in 644 places.'>time</a>);
+<a id='L46' name='L46'></a>  46 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../S/1067.html#L35207' title='Defined at 35207 in ext/sqlite3/libsqlite/sqlite3.c.'>localtime</a>);
+<a id='L47' name='L47'></a>  47 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/19276.html' title='Multiple used in 3 places.'>getdate</a>);
+<a id='L48' name='L48'></a>  48 
+<a id='L49' name='L49'></a>  49 <em class='comment'>/* Advanced Interface */</em>
+<a id='L50' name='L50'></a>  50 <a href='../D/8394.html' title='Multiple defined in 298 places.'>PHP_METHOD</a>(<a href='../D/1871.html' title='Multiple defined in 2 places.'>DateTime</a>, <a href='../Y/7607.html' title='Multiple used in 177 places.'>__construct</a>);
+<a id='L51' name='L51'></a>  51 <a href='../D/8394.html' title='Multiple defined in 298 places.'>PHP_METHOD</a>(<a href='../D/1871.html' title='Multiple defined in 2 places.'>DateTime</a>, <a href='../Y/7753.html' title='Multiple used in 26 places.'>__wakeup</a>);
+<a id='L52' name='L52'></a>  52 <a href='../D/8394.html' title='Multiple defined in 298 places.'>PHP_METHOD</a>(<a href='../D/1871.html' title='Multiple defined in 2 places.'>DateTime</a>, <a href='../Y/7711.html' title='Multiple used in 15 places.'>__set_state</a>);
+<a id='L53' name='L53'></a>  53 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/15027.html' title='Multiple used in 3 places.'>date_create</a>);
+<a id='L54' name='L54'></a>  54 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/15029.html' title='Multiple used in 3 places.'>date_create_immutable</a>);
+<a id='L55' name='L55'></a>  55 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/15028.html' title='Multiple used in 4 places.'>date_create_from_format</a>);
+<a id='L56' name='L56'></a>  56 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/15030.html' title='Multiple used in 4 places.'>date_create_immutable_from_format</a>);
+<a id='L57' name='L57'></a>  57 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/15058.html' title='Multiple used in 3 places.'>date_parse</a>);
+<a id='L58' name='L58'></a>  58 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/15059.html' title='Multiple used in 3 places.'>date_parse_from_format</a>);
+<a id='L59' name='L59'></a>  59 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/15043.html' title='Multiple used in 5 places.'>date_get_last_errors</a>);
+<a id='L60' name='L60'></a>  60 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../S/79.html#L1067' title='Defined at 1067 in ext/date/php_date.c.'>date_format</a>);
+<a id='L61' name='L61'></a>  61 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/15049.html' title='Multiple used in 4 places.'>date_modify</a>);
+<a id='L62' name='L62'></a>  62 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/15020.html' title='Multiple used in 4 places.'>date_add</a>);
+<a id='L63' name='L63'></a>  63 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/15063.html' title='Multiple used in 4 places.'>date_sub</a>);
+<a id='L64' name='L64'></a>  64 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/15070.html' title='Multiple used in 5 places.'>date_timezone_get</a>);
+<a id='L65' name='L65'></a>  65 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/15071.html' title='Multiple used in 4 places.'>date_timezone_set</a>);
+<a id='L66' name='L66'></a>  66 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/15057.html' title='Multiple used in 5 places.'>date_offset_get</a>);
+<a id='L67' name='L67'></a>  67 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/15034.html' title='Multiple used in 5 places.'>date_diff</a>);
+<a id='L68' name='L68'></a>  68 
+<a id='L69' name='L69'></a>  69 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/15067.html' title='Multiple used in 4 places.'>date_time_set</a>);
+<a id='L70' name='L70'></a>  70 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/15031.html' title='Multiple used in 4 places.'>date_date_set</a>);
+<a id='L71' name='L71'></a>  71 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/15047.html' title='Multiple used in 4 places.'>date_isodate_set</a>);
+<a id='L72' name='L72'></a>  72 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/15069.html' title='Multiple used in 4 places.'>date_timestamp_set</a>);
+<a id='L73' name='L73'></a>  73 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/15068.html' title='Multiple used in 5 places.'>date_timestamp_get</a>);
+<a id='L74' name='L74'></a>  74 
+<a id='L75' name='L75'></a>  75 <a href='../D/8394.html' title='Multiple defined in 298 places.'>PHP_METHOD</a>(<a href='../Y/1604.html' title='Multiple used in 33 places.'>DateTimeImmutable</a>, <a href='../Y/7607.html' title='Multiple used in 177 places.'>__construct</a>);
+<a id='L76' name='L76'></a>  76 <a href='../D/8394.html' title='Multiple defined in 298 places.'>PHP_METHOD</a>(<a href='../Y/1604.html' title='Multiple used in 33 places.'>DateTimeImmutable</a>, <a href='../Y/7711.html' title='Multiple used in 15 places.'>__set_state</a>);
+<a id='L77' name='L77'></a>  77 <a href='../D/8394.html' title='Multiple defined in 298 places.'>PHP_METHOD</a>(<a href='../Y/1604.html' title='Multiple used in 33 places.'>DateTimeImmutable</a>, <a href='../Y/26891.html' title='Multiple used in 15 places.'>modify</a>);
+<a id='L78' name='L78'></a>  78 <a href='../D/8394.html' title='Multiple defined in 298 places.'>PHP_METHOD</a>(<a href='../Y/1604.html' title='Multiple used in 33 places.'>DateTimeImmutable</a>, <a href='../S/79.html#L3929' title='Defined at 3929 in ext/date/php_date.c.'>add</a>);
+<a id='L79' name='L79'></a>  79 <a href='../D/8394.html' title='Multiple defined in 298 places.'>PHP_METHOD</a>(<a href='../Y/1604.html' title='Multiple used in 33 places.'>DateTimeImmutable</a>, <a href='../Y/38187.html' title='Multiple used in 186 places.'>sub</a>);
+<a id='L80' name='L80'></a>  80 <a href='../D/8394.html' title='Multiple defined in 298 places.'>PHP_METHOD</a>(<a href='../Y/1604.html' title='Multiple used in 33 places.'>DateTimeImmutable</a>, <a href='../Y/36245.html' title='Multiple used in 4 places.'>setTimezone</a>);
+<a id='L81' name='L81'></a>  81 <a href='../D/8394.html' title='Multiple defined in 298 places.'>PHP_METHOD</a>(<a href='../Y/1604.html' title='Multiple used in 33 places.'>DateTimeImmutable</a>, <a href='../Y/36241.html' title='Multiple used in 4 places.'>setTime</a>);
+<a id='L82' name='L82'></a>  82 <a href='../D/8394.html' title='Multiple defined in 298 places.'>PHP_METHOD</a>(<a href='../Y/1604.html' title='Multiple used in 33 places.'>DateTimeImmutable</a>, <a href='../Y/36182.html' title='Multiple used in 4 places.'>setDate</a>);
+<a id='L83' name='L83'></a>  83 <a href='../D/8394.html' title='Multiple defined in 298 places.'>PHP_METHOD</a>(<a href='../Y/1604.html' title='Multiple used in 33 places.'>DateTimeImmutable</a>, <a href='../Y/36192.html' title='Multiple used in 4 places.'>setISODate</a>);
+<a id='L84' name='L84'></a>  84 <a href='../D/8394.html' title='Multiple defined in 298 places.'>PHP_METHOD</a>(<a href='../Y/1604.html' title='Multiple used in 33 places.'>DateTimeImmutable</a>, <a href='../Y/36244.html' title='Multiple used in 4 places.'>setTimestamp</a>);
+<a id='L85' name='L85'></a>  85 <a href='../D/8394.html' title='Multiple defined in 298 places.'>PHP_METHOD</a>(<a href='../Y/1604.html' title='Multiple used in 33 places.'>DateTimeImmutable</a>, <a href='../Y/14510.html' title='Multiple used in 3 places.'>createFromMutable</a>);
+<a id='L86' name='L86'></a>  86 
+<a id='L87' name='L87'></a>  87 <a href='../D/8394.html' title='Multiple defined in 298 places.'>PHP_METHOD</a>(<a href='../Y/1606.html' title='Multiple used in 14 places.'>DateTimeZone</a>, <a href='../Y/7607.html' title='Multiple used in 177 places.'>__construct</a>);
+<a id='L88' name='L88'></a>  88 <a href='../D/8394.html' title='Multiple defined in 298 places.'>PHP_METHOD</a>(<a href='../Y/1606.html' title='Multiple used in 14 places.'>DateTimeZone</a>, <a href='../Y/7753.html' title='Multiple used in 26 places.'>__wakeup</a>);
+<a id='L89' name='L89'></a>  89 <a href='../D/8394.html' title='Multiple defined in 298 places.'>PHP_METHOD</a>(<a href='../Y/1606.html' title='Multiple used in 14 places.'>DateTimeZone</a>, <a href='../Y/7711.html' title='Multiple used in 15 places.'>__set_state</a>);
+<a id='L90' name='L90'></a>  90 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/39011.html' title='Multiple used in 3 places.'>timezone_open</a>);
+<a id='L91' name='L91'></a>  91 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/39007.html' title='Multiple used in 4 places.'>timezone_name_get</a>);
+<a id='L92' name='L92'></a>  92 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/39006.html' title='Multiple used in 3 places.'>timezone_name_from_abbr</a>);
+<a id='L93' name='L93'></a>  93 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/39010.html' title='Multiple used in 4 places.'>timezone_offset_get</a>);
+<a id='L94' name='L94'></a>  94 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/39015.html' title='Multiple used in 4 places.'>timezone_transitions_get</a>);
+<a id='L95' name='L95'></a>  95 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/39005.html' title='Multiple used in 4 places.'>timezone_location_get</a>);
+<a id='L96' name='L96'></a>  96 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/39004.html' title='Multiple used in 4 places.'>timezone_identifiers_list</a>);
+<a id='L97' name='L97'></a>  97 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/39000.html' title='Multiple used in 4 places.'>timezone_abbreviations_list</a>);
+<a id='L98' name='L98'></a>  98 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/39017.html' title='Multiple used in 3 places.'>timezone_version_get</a>);
+<a id='L99' name='L99'></a>  99 
+<a id='L100' name='L100'></a> 100 <a href='../D/8394.html' title='Multiple defined in 298 places.'>PHP_METHOD</a>(<a href='../Y/1602.html' title='Multiple used in 12 places.'>DateInterval</a>, <a href='../Y/7607.html' title='Multiple used in 177 places.'>__construct</a>);
+<a id='L101' name='L101'></a> 101 <a href='../D/8394.html' title='Multiple defined in 298 places.'>PHP_METHOD</a>(<a href='../Y/1602.html' title='Multiple used in 12 places.'>DateInterval</a>, <a href='../Y/7753.html' title='Multiple used in 26 places.'>__wakeup</a>);
+<a id='L102' name='L102'></a> 102 <a href='../D/8394.html' title='Multiple defined in 298 places.'>PHP_METHOD</a>(<a href='../Y/1602.html' title='Multiple used in 12 places.'>DateInterval</a>, <a href='../Y/7711.html' title='Multiple used in 15 places.'>__set_state</a>);
+<a id='L103' name='L103'></a> 103 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../S/79.html#L4305' title='Defined at 4305 in ext/date/php_date.c.'>date_interval_format</a>);
+<a id='L104' name='L104'></a> 104 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/15046.html' title='Multiple used in 4 places.'>date_interval_create_from_date_string</a>);
+<a id='L105' name='L105'></a> 105 
+<a id='L106' name='L106'></a> 106 <a href='../D/8394.html' title='Multiple defined in 298 places.'>PHP_METHOD</a>(<a href='../Y/1603.html' title='Multiple used in 18 places.'>DatePeriod</a>, <a href='../Y/7607.html' title='Multiple used in 177 places.'>__construct</a>);
+<a id='L107' name='L107'></a> 107 <a href='../D/8394.html' title='Multiple defined in 298 places.'>PHP_METHOD</a>(<a href='../Y/1603.html' title='Multiple used in 18 places.'>DatePeriod</a>, <a href='../Y/7753.html' title='Multiple used in 26 places.'>__wakeup</a>);
+<a id='L108' name='L108'></a> 108 <a href='../D/8394.html' title='Multiple defined in 298 places.'>PHP_METHOD</a>(<a href='../Y/1603.html' title='Multiple used in 18 places.'>DatePeriod</a>, <a href='../Y/7711.html' title='Multiple used in 15 places.'>__set_state</a>);
+<a id='L109' name='L109'></a> 109 <a href='../D/8394.html' title='Multiple defined in 298 places.'>PHP_METHOD</a>(<a href='../Y/1603.html' title='Multiple used in 18 places.'>DatePeriod</a>, <a href='../Y/19140.html' title='Multiple used in 3 places.'>getStartDate</a>);
+<a id='L110' name='L110'></a> 110 <a href='../D/8394.html' title='Multiple defined in 298 places.'>PHP_METHOD</a>(<a href='../Y/1603.html' title='Multiple used in 18 places.'>DatePeriod</a>, <a href='../Y/19036.html' title='Multiple used in 3 places.'>getEndDate</a>);
+<a id='L111' name='L111'></a> 111 <a href='../D/8394.html' title='Multiple defined in 298 places.'>PHP_METHOD</a>(<a href='../Y/1603.html' title='Multiple used in 18 places.'>DatePeriod</a>, <a href='../Y/19011.html' title='Multiple used in 3 places.'>getDateInterval</a>);
+<a id='L112' name='L112'></a> 112 
+<a id='L113' name='L113'></a> 113 <em class='comment'>/* Options and Configuration */</em>
+<a id='L114' name='L114'></a> 114 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/15033.html' title='Multiple used in 3 places.'>date_default_timezone_set</a>);
+<a id='L115' name='L115'></a> 115 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/15032.html' title='Multiple used in 3 places.'>date_default_timezone_get</a>);
+<a id='L116' name='L116'></a> 116 
+<a id='L117' name='L117'></a> 117 <em class='comment'>/* Astro functions */</em>
+<a id='L118' name='L118'></a> 118 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/15065.html' title='Multiple used in 3 places.'>date_sunrise</a>);
+<a id='L119' name='L119'></a> 119 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/15066.html' title='Multiple used in 3 places.'>date_sunset</a>);
+<a id='L120' name='L120'></a> 120 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/15064.html' title='Multiple used in 3 places.'>date_sun_info</a>);
+<a id='L121' name='L121'></a> 121 
+<a id='L122' name='L122'></a> 122 <a href='../D/8657.html' title='Multiple defined in 32 places.'>PHP_RINIT_FUNCTION</a>(<a href='../Y/15017.html' title='Multiple used in 72 places.'>date</a>);
+<a id='L123' name='L123'></a> 123 <a href='../D/8679.html' title='Multiple defined in 39 places.'>PHP_RSHUTDOWN_FUNCTION</a>(<a href='../Y/15017.html' title='Multiple used in 72 places.'>date</a>);
+<a id='L124' name='L124'></a> 124 <a href='../D/8401.html' title='Multiple defined in 101 places.'>PHP_MINIT_FUNCTION</a>(<a href='../Y/15017.html' title='Multiple used in 72 places.'>date</a>);
+<a id='L125' name='L125'></a> 125 <a href='../D/8432.html' title='Multiple defined in 78 places.'>PHP_MSHUTDOWN_FUNCTION</a>(<a href='../Y/15017.html' title='Multiple used in 72 places.'>date</a>);
+<a id='L126' name='L126'></a> 126 <a href='../D/8399.html' title='Multiple defined in 88 places.'>PHP_MINFO_FUNCTION</a>(<a href='../Y/15017.html' title='Multiple used in 72 places.'>date</a>);
+<a id='L127' name='L127'></a> 127 
+<a id='L128' name='L128'></a> 128 <strong class='reserved'>typedef</strong> <strong class='reserved'>struct</strong> <a href='../S/80.html#L133' title='Defined at 133 in ext/date/php_date.h.'>_php_date_obj</a> <a href='../R/23397.html' title='Multiple referred from 71 places.'>php_date_obj</a>;
+<a id='L129' name='L129'></a> 129 <strong class='reserved'>typedef</strong> <strong class='reserved'>struct</strong> <a href='../S/80.html#L139' title='Defined at 139 in ext/date/php_date.h.'>_php_timezone_obj</a> <a href='../S/80.html#L129' title='Defined at 129 in ext/date/php_date.h.'>php_timezone_obj</a>;
+<a id='L130' name='L130'></a> 130 <strong class='reserved'>typedef</strong> <strong class='reserved'>struct</strong> <a href='../S/80.html#L151' title='Defined at 151 in ext/date/php_date.h.'>_php_interval_obj</a> <a href='../S/80.html#L130' title='Defined at 130 in ext/date/php_date.h.'>php_interval_obj</a>;
+<a id='L131' name='L131'></a> 131 <strong class='reserved'>typedef</strong> <strong class='reserved'>struct</strong> <a href='../S/80.html#L158' title='Defined at 158 in ext/date/php_date.h.'>_php_period_obj</a> <a href='../R/24314.html' title='Multiple referred from 23 places.'>php_period_obj</a>;
+<a id='L132' name='L132'></a> 132 
+<a id='L133' name='L133'></a> 133 <strong class='reserved'>struct</strong> <a href='../S/80.html#L128' title='Referred from 128 in ext/date/php_date.h.'>_php_date_obj</a> <em class='brace'>{</em>
+<a id='L134' name='L134'></a> 134         <a href='../S/1643.html#L317' title='Defined at 317 in Zend/zend.h.'>zend_object</a>   <a href='../Y/37827.html' title='Multiple used in 217 places.'>std</a>;
+<a id='L135' name='L135'></a> 135         <a href='../D/31810.html' title='Multiple defined in 2 places.'>timelib_time</a> *<a href='../Y/38939.html' title='Multiple used in 644 places.'>time</a>;
+<a id='L136' name='L136'></a> 136         <a href='../S/1683.html#L83' title='Defined at 83 in Zend/zend_hash.h.'>HashTable</a>    *<a href='../Y/33804.html' title='Multiple used in 88 places.'>props</a>;
+<a id='L137' name='L137'></a> 137 <em class='brace'>}</em>;
+<a id='L138' name='L138'></a> 138 
+<a id='L139' name='L139'></a> 139 <strong class='reserved'>struct</strong> <a href='../S/80.html#L129' title='Referred from 129 in ext/date/php_date.h.'>_php_timezone_obj</a> <em class='brace'>{</em>
+<a id='L140' name='L140'></a> 140         <a href='../S/1643.html#L317' title='Defined at 317 in Zend/zend.h.'>zend_object</a>     <a href='../Y/37827.html' title='Multiple used in 217 places.'>std</a>;
+<a id='L141' name='L141'></a> 141         <strong class='reserved'>int</strong>             <a href='../S/813.html#L1059' title='Defined at 1059 in ext/mysqlnd/mysqlnd_structs.h.'>initialized</a>;
+<a id='L142' name='L142'></a> 142         <strong class='reserved'>int</strong>             <a href='../D/32025.html' title='Multiple defined in 3 places.'>type</a>;
+<a id='L143' name='L143'></a> 143         <strong class='reserved'>union</strong> <em class='brace'>{</em>
+<a id='L144' name='L144'></a> 144                 <a href='../D/31830.html' title='Multiple defined in 2 places.'>timelib_tzinfo</a>   *<a href='../Y/39622.html' title='Multiple used in 251 places.'>tz</a>;         <em class='comment'>/* TIMELIB_ZONETYPE_ID */</em>
+<a id='L145' name='L145'></a> 145                 <a href='../D/31801.html' title='Multiple defined in 2 places.'>timelib_sll</a>       <a href='../Y/40434.html' title='Multiple used in 26 places.'>utc_offset</a>; <em class='comment'>/* TIMELIB_ZONETYPE_OFFSET */</em>
+<a id='L146' name='L146'></a> 146                 <a href='../D/31734.html' title='Multiple defined in 2 places.'>timelib_abbr_info</a> <a href='../Y/43768.html' title='Multiple used in 2535 places.'>z</a>;          <em class='comment'>/* TIMELIB_ZONETYPE_ABBR */</em>
+<a id='L147' name='L147'></a> 147         <em class='brace'>}</em> <a href='../Y/39638.html' title='Multiple used in 115 places.'>tzi</a>;
+<a id='L148' name='L148'></a> 148         <a href='../S/1683.html#L83' title='Defined at 83 in Zend/zend_hash.h.'>HashTable</a> *<a href='../Y/33804.html' title='Multiple used in 88 places.'>props</a>;
+<a id='L149' name='L149'></a> 149 <em class='brace'>}</em>;
+<a id='L150' name='L150'></a> 150 
+<a id='L151' name='L151'></a> 151 <strong class='reserved'>struct</strong> <a href='../S/80.html#L130' title='Referred from 130 in ext/date/php_date.h.'>_php_interval_obj</a> <em class='brace'>{</em>
+<a id='L152' name='L152'></a> 152         <a href='../S/1643.html#L317' title='Defined at 317 in Zend/zend.h.'>zend_object</a>       <a href='../Y/37827.html' title='Multiple used in 217 places.'>std</a>;
+<a id='L153' name='L153'></a> 153         <a href='../D/31791.html' title='Multiple defined in 2 places.'>timelib_rel_time</a> *<a href='../S/1737.html#L916' title='Defined at 916 in Zend/zend_strtod.c.'>diff</a>;
+<a id='L154' name='L154'></a> 154         <a href='../S/1683.html#L83' title='Defined at 83 in Zend/zend_hash.h.'>HashTable</a>        *<a href='../Y/33804.html' title='Multiple used in 88 places.'>props</a>;
+<a id='L155' name='L155'></a> 155         <strong class='reserved'>int</strong>               <a href='../S/813.html#L1059' title='Defined at 1059 in ext/mysqlnd/mysqlnd_structs.h.'>initialized</a>;
+<a id='L156' name='L156'></a> 156 <em class='brace'>}</em>;
+<a id='L157' name='L157'></a> 157 
+<a id='L158' name='L158'></a> 158 <strong class='reserved'>struct</strong> <a href='../S/80.html#L131' title='Referred from 131 in ext/date/php_date.h.'>_php_period_obj</a> <em class='brace'>{</em>
+<a id='L159' name='L159'></a> 159         <a href='../S/1643.html#L317' title='Defined at 317 in Zend/zend.h.'>zend_object</a>       <a href='../Y/37827.html' title='Multiple used in 217 places.'>std</a>;
+<a id='L160' name='L160'></a> 160         <a href='../D/31810.html' title='Multiple defined in 2 places.'>timelib_time</a>     *<a href='../S/883.html#L1682' title='Defined at 1682 in ext/pcre/pcrelib/pcre_jit_compile.c.'>start</a>;
+<a id='L161' name='L161'></a> 161         <a href='../S/1643.html#L302' title='Defined at 302 in Zend/zend.h.'>zend_class_entry</a> *<a href='../Y/37672.html' title='Multiple used in 7 places.'>start_ce</a>;
+<a id='L162' name='L162'></a> 162         <a href='../D/31810.html' title='Multiple defined in 2 places.'>timelib_time</a>     *<a href='../Y/14782.html' title='Multiple used in 608 places.'>current</a>;
+<a id='L163' name='L163'></a> 163         <a href='../D/31810.html' title='Multiple defined in 2 places.'>timelib_time</a>     *<a href='../S/883.html#L1684' title='Defined at 1684 in ext/pcre/pcrelib/pcre_jit_compile.c.'>end</a>;
+<a id='L164' name='L164'></a> 164         <a href='../D/31791.html' title='Multiple defined in 2 places.'>timelib_rel_time</a> *<a href='../Y/23506.html' title='Multiple used in 69 places.'>interval</a>;
+<a id='L165' name='L165'></a> 165         <strong class='reserved'>int</strong>               <a href='../Y/34528.html' title='Multiple used in 17 places.'>recurrences</a>;
+<a id='L166' name='L166'></a> 166         <strong class='reserved'>int</strong>               <a href='../S/813.html#L1059' title='Defined at 1059 in ext/mysqlnd/mysqlnd_structs.h.'>initialized</a>;
+<a id='L167' name='L167'></a> 167         <strong class='reserved'>int</strong>               <a href='../Y/23180.html' title='Multiple used in 6 places.'>include_start_date</a>;
+<a id='L168' name='L168'></a> 168 <em class='brace'>}</em>;
+<a id='L169' name='L169'></a> 169 
+<a id='L170' name='L170'></a> 170 <a href='../D/15993.html' title='Multiple defined in 7 places.'>ZEND_BEGIN_MODULE_GLOBALS</a>(<a href='../Y/15017.html' title='Multiple used in 72 places.'>date</a>)
+<a id='L171' name='L171'></a> 171         <strong class='reserved'>char</strong>                    *<a href='../Y/15464.html' title='Multiple used in 11 places.'>default_timezone</a>;
+<a id='L172' name='L172'></a> 172         <strong class='reserved'>char</strong>                    *<a href='../D/31849.html' title='Multiple defined in 2 places.'>timezone</a>;
+<a id='L173' name='L173'></a> 173         <a href='../S/1683.html#L83' title='Defined at 83 in Zend/zend_hash.h.'>HashTable</a>               *<a href='../Y/39635.html' title='Multiple used in 12 places.'>tzcache</a>;
+<a id='L174' name='L174'></a> 174         <a href='../D/31758.html' title='Multiple defined in 2 places.'>timelib_error_container</a> *<a href='../Y/24703.html' title='Multiple used in 15 places.'>last_errors</a>;
+<a id='L175' name='L175'></a> 175         <strong class='reserved'>int</strong>                     <a href='../Y/39016.html' title='Multiple used in 6 places.'>timezone_valid</a>;
+<a id='L176' name='L176'></a> 176 <a href='../S/465.html#L51' title='Defined at 51 in ext/libxml/php_libxml.h.'>ZEND_END_MODULE_GLOBALS</a>(<a href='../Y/15017.html' title='Multiple used in 72 places.'>date</a>)
+<a id='L177' name='L177'></a> 177 
+<a id='L178' name='L178'></a> 178 <em class='sharp'>#ifdef</em> <a href='../Y/7361.html' title='Multiple used in 473 places.'>ZTS</a>
+<a id='L179' name='L179'></a> 179 <em class='sharp'>#define</em> <a href='../R/1290.html' title='Multiple referred from 47 places.'>DATEG</a>(<a href='../Y/40497.html' title='Multiple used in 3064 places.'>v</a>) <a href='../S/1596.html#L164' title='Defined at 164 in TSRM/TSRM.h.'>TSRMG</a>(date_globals_id, <a href='../Y/44225.html' title='Multiple used in 2 places.'>zend_date_globals</a> *, <a href='../Y/40497.html' title='Multiple used in 3064 places.'>v</a>)
+<a id='L180' name='L180'></a> 180 <em class='sharp'>#else</em>
+<a id='L181' name='L181'></a> 181 <em class='sharp'>#define</em> <a href='../R/1290.html' title='Multiple referred from 47 places.'>DATEG</a>(<a href='../Y/40497.html' title='Multiple used in 3064 places.'>v</a>) (<a href='../Y/15044.html' title='Multiple used in 6 places.'>date_globals</a>.<a href='../Y/40497.html' title='Multiple used in 3064 places.'>v</a>)
+<a id='L182' name='L182'></a> 182 <em class='sharp'>#endif</em>
+<a id='L183' name='L183'></a> 183 
+<a id='L184' name='L184'></a> 184 <em class='comment'>/* Backwards compatibility wrapper */</em>
+<a id='L185' name='L185'></a> 185 <a href='../D/7744.html' title='Multiple defined in 14 places.'>PHPAPI</a> <strong class='reserved'>signed</strong> <strong class='reserved'>long</strong> <a href='../S/79.html#L1426' title='Defined at 1426 in ext/date/php_date.c.'>php_parse_date</a>(<strong class='reserved'>char</strong> *<a href='../S/996.html#L119' title='Defined at 119 in ext/reflection/php_reflection.c.'>string</a>, <strong class='reserved'>signed</strong> <strong class='reserved'>long</strong> *<a href='../Y/28981.html' title='Multiple used in 150 places.'>now</a>);
+<a id='L186' name='L186'></a> 186 <a href='../D/7744.html' title='Multiple defined in 14 places.'>PHPAPI</a> <strong class='reserved'>void</strong> <a href='../S/79.html#L1511' title='Defined at 1511 in ext/date/php_date.c.'>php_mktime</a>(<a href='../S/1643.html#L290' title='Defined at 290 in Zend/zend.h.'>INTERNAL_FUNCTION_PARAMETERS</a>, <strong class='reserved'>int</strong> <a href='../Y/19497.html' title='Multiple used in 21 places.'>gmt</a>);
+<a id='L187' name='L187'></a> 187 <a href='../D/7744.html' title='Multiple defined in 14 places.'>PHPAPI</a> <strong class='reserved'>int</strong> <a href='../S/79.html#L1272' title='Defined at 1272 in ext/date/php_date.c.'>php_idate</a>(<strong class='reserved'>char</strong> <a href='../Y/18256.html' title='Multiple used in 555 places.'>format</a>, <a href='../Y/38957.html' title='Multiple used in 161 places.'>time_t</a> <a href='../Y/39505.html' title='Multiple used in 245 places.'>ts</a>, <strong class='reserved'>int</strong> <a href='../S/1067.html#L35207' title='Defined at 35207 in ext/sqlite3/libsqlite/sqlite3.c.'>localtime</a> <a href='../D/14076.html' title='Multiple defined in 136 places.'>TSRMLS_DC</a>);
+<a id='L188' name='L188'></a> 188 <em class='sharp'>#if</em> <a href='../S/742.html#L50' title='Defined at 50 in ext/mbstring/oniguruma/win32/config.h.'>HAVE_STRFTIME</a>
+<a id='L189' name='L189'></a> 189 <em class='sharp'>#define</em> _php_strftime <a href='../S/79.html#L1637' title='Defined at 1637 in ext/date/php_date.c.'>php_strftime</a>
+<a id='L190' name='L190'></a> 190 <a href='../D/7744.html' title='Multiple defined in 14 places.'>PHPAPI</a> <strong class='reserved'>void</strong> <a href='../S/79.html#L1637' title='Defined at 1637 in ext/date/php_date.c.'>php_strftime</a>(<a href='../S/1643.html#L290' title='Defined at 290 in Zend/zend.h.'>INTERNAL_FUNCTION_PARAMETERS</a>, <strong class='reserved'>int</strong> <a href='../Y/19401.html' title='Multiple used in 4 places.'>gm</a>);
+<a id='L191' name='L191'></a> 191 <em class='sharp'>#endif</em>
+<a id='L192' name='L192'></a> 192 <a href='../D/7744.html' title='Multiple defined in 14 places.'>PHPAPI</a> <strong class='reserved'>char</strong> *<a href='../S/79.html#L1245' title='Defined at 1245 in ext/date/php_date.c.'>php_format_date</a>(<strong class='reserved'>char</strong> *<a href='../Y/18256.html' title='Multiple used in 555 places.'>format</a>, <strong class='reserved'>int</strong> <a href='../Y/18262.html' title='Multiple used in 43 places.'>format_len</a>, <a href='../Y/38957.html' title='Multiple used in 161 places.'>time_t</a> <a href='../Y/39505.html' title='Multiple used in 245 places.'>ts</a>, <strong class='reserved'>int</strong> <a href='../S/1067.html#L35207' title='Defined at 35207 in ext/sqlite3/libsqlite/sqlite3.c.'>localtime</a> <a href='../D/14076.html' title='Multiple defined in 136 places.'>TSRMLS_DC</a>);
+<a id='L193' name='L193'></a> 193 
+<a id='L194' name='L194'></a> 194 <em class='comment'>/* Mechanism to set new TZ database */</em>
+<a id='L195' name='L195'></a> 195 <a href='../D/7744.html' title='Multiple defined in 14 places.'>PHPAPI</a> <strong class='reserved'>void</strong> <a href='../S/79.html#L1414' title='Defined at 1414 in ext/date/php_date.c.'>php_date_set_tzdb</a>(<a href='../S/74.html#L297' title='Defined at 297 in ext/date/lib/timelib_structs.h.'>timelib_tzdb</a> *<a href='../Y/39636.html' title='Multiple used in 53 places.'>tzdb</a>);
+<a id='L196' name='L196'></a> 196 <a href='../D/7744.html' title='Multiple defined in 14 places.'>PHPAPI</a> <a href='../D/31830.html' title='Multiple defined in 2 places.'>timelib_tzinfo</a> *<a href='../S/79.html#L995' title='Defined at 995 in ext/date/php_date.c.'>get_timezone_info</a>(<a href='../D/14075.html' title='Multiple defined in 2 places.'>TSRMLS_D</a>);
+<a id='L197' name='L197'></a> 197 
+<a id='L198' name='L198'></a> 198 <em class='comment'>/* Grabbing CE's so that other exts can use the date objects too */</em>
+<a id='L199' name='L199'></a> 199 <a href='../D/7744.html' title='Multiple defined in 14 places.'>PHPAPI</a> <a href='../S/1643.html#L302' title='Defined at 302 in Zend/zend.h.'>zend_class_entry</a> *<a href='../Y/32375.html' title='Multiple used in 2 places.'>php_date_get_date_ce</a>(<strong class='reserved'>void</strong>);
+<a id='L200' name='L200'></a> 200 <a href='../D/7744.html' title='Multiple defined in 14 places.'>PHPAPI</a> <a href='../S/1643.html#L302' title='Defined at 302 in Zend/zend.h.'>zend_class_entry</a> *<a href='../S/79.html#L585' title='Defined at 585 in ext/date/php_date.c.'>php_date_get_immutable_ce</a>(<strong class='reserved'>void</strong>);
+<a id='L201' name='L201'></a> 201 <a href='../D/7744.html' title='Multiple defined in 14 places.'>PHPAPI</a> <a href='../S/1643.html#L302' title='Defined at 302 in Zend/zend.h.'>zend_class_entry</a> *<a href='../S/79.html#L590' title='Defined at 590 in ext/date/php_date.c.'>php_date_get_timezone_ce</a>(<strong class='reserved'>void</strong>);
+<a id='L202' name='L202'></a> 202 
+<a id='L203' name='L203'></a> 203 <em class='comment'>/* Functions for creating DateTime objects, and initializing them from a string */</em>
+<a id='L204' name='L204'></a> 204 <a href='../D/7744.html' title='Multiple defined in 14 places.'>PHPAPI</a> <a href='../S/1741.html#L55' title='Defined at 55 in Zend/zend_types.h.'>zval</a> *<a href='../S/79.html#L2549' title='Defined at 2549 in ext/date/php_date.c.'>php_date_instantiate</a>(<a href='../S/1643.html#L302' title='Defined at 302 in Zend/zend.h.'>zend_class_entry</a> *<a href='../Y/31645.html' title='Multiple used in 359 places.'>pce</a>, <a href='../S/1741.html#L55' title='Defined at 55 in Zend/zend_types.h.'>zval</a> *<a href='../Y/29333.html' title='Multiple used in 3115 places.'>object</a> <a href='../D/14076.html' title='Multiple defined in 136 places.'>TSRMLS_DC</a>);
+<a id='L205' name='L205'></a> 205 <a href='../D/7744.html' title='Multiple defined in 14 places.'>PHPAPI</a> <strong class='reserved'>int</strong> <a href='../S/79.html#L2566' title='Defined at 2566 in ext/date/php_date.c.'>php_date_initialize</a>(<a href='../S/80.html#L128' title='Defined at 128 in ext/date/php_date.h.'>php_date_obj</a> *<a href='../Y/15102.html' title='Multiple used in 150 places.'>dateobj</a>, <em class='comment'>/*const*/</em> <strong class='reserved'>char</strong> *<a href='../Y/38954.html' title='Multiple used in 26 places.'>time_str</a>, <strong class='reserved'>int</strong> <a href='../Y/38955.html' title='Multiple used in 25 places.'>time_str_len</a>, <strong class='reserved'>char</strong> *<a href='../Y/18256.html' title='Multiple used in 555 places.'>format</a>, <a href='../S/1741.html#L55' title='Defined at 55 in Zend/zend_types.h.'>zval</a> *<a href='../Y/39008.html' title='Multiple used in 30 places.'>timezone_object</a>, <strong class='reserved'>int</strong> <a href='../Y/14613.html' title='Multiple used in 54 places.'>ctor</a> <a href='../D/14076.html' title='Multiple defined in 136 places.'>TSRMLS_DC</a>);
+<a id='L206' name='L206'></a> 206 
+<a id='L207' name='L207'></a> 207 
+<a id='L208' name='L208'></a> 208 <em class='sharp'>#endif</em> <em class='comment'>/* PHP_DATE_H */</em>
+</pre>
+<hr />
+<a id='BOTTOM' name='BOTTOM'></a>
+<em class='comment'>/* [&lt;][&gt;][^][v]<a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+</body>
+</html>

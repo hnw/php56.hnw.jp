@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>utf16</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/459.html#L354'>utf16</a>             354 ext/json/JSON_parser.c static void utf16_to_utf8(smart_str *buf, unsigned short utf16)</span>
+<span class='curline'><a href='../S/459.html#L356'>utf16</a>             356 ext/json/JSON_parser.c     if (utf16 &lt; 0x80)</span>
+<span class='curline'><a href='../S/459.html#L358'>utf16</a>             358 ext/json/JSON_parser.c         smart_str_appendc(buf, (unsigned char) utf16);</span>
+<span class='curline'><a href='../S/459.html#L360'>utf16</a>             360 ext/json/JSON_parser.c     else if (utf16 &lt; 0x800)</span>
+<span class='curline'><a href='../S/459.html#L362'>utf16</a>             362 ext/json/JSON_parser.c         smart_str_appendc(buf, 0xc0 | (utf16 &gt;&gt; 6));</span>
+<span class='curline'><a href='../S/459.html#L363'>utf16</a>             363 ext/json/JSON_parser.c         smart_str_appendc(buf, 0x80 | (utf16 &amp; 0x3f));</span>
+<span class='curline'><a href='../S/459.html#L365'>utf16</a>             365 ext/json/JSON_parser.c     else if ((utf16 &amp; 0xfc00) == 0xdc00</span>
+<span class='curline'><a href='../S/459.html#L376'>utf16</a>             376 ext/json/JSON_parser.c                     | (utf16 &amp; 0x3ff)) + 0x10000;</span>
+<span class='curline'><a href='../S/459.html#L386'>utf16</a>             386 ext/json/JSON_parser.c         smart_str_appendc(buf, 0xe0 | (utf16 &gt;&gt; 12));</span>
+<span class='curline'><a href='../S/459.html#L387'>utf16</a>             387 ext/json/JSON_parser.c         smart_str_appendc(buf, 0x80 | ((utf16 &gt;&gt; 6) &amp; 0x3f));</span>
+<span class='curline'><a href='../S/459.html#L388'>utf16</a>             388 ext/json/JSON_parser.c         smart_str_appendc(buf, 0x80 | (utf16 &amp; 0x3f));</span>
+<span class='curline'><a href='../S/459.html#L450'>utf16</a>             450 ext/json/JSON_parser.c     unsigned short utf16 = 0;</span>
+<span class='curline'><a href='../S/459.html#L502'>utf16</a>             502 ext/json/JSON_parser.c 	                utf16 = dehexchar(next_char) &lt;&lt; 12;</span>
+<span class='curline'><a href='../S/459.html#L504'>utf16</a>             504 ext/json/JSON_parser.c 	                utf16 += dehexchar(next_char) &lt;&lt; 8;</span>
+<span class='curline'><a href='../S/459.html#L506'>utf16</a>             506 ext/json/JSON_parser.c 	                utf16 += dehexchar(next_char) &lt;&lt; 4;</span>
+<span class='curline'><a href='../S/459.html#L508'>utf16</a>             508 ext/json/JSON_parser.c 	                utf16 += dehexchar(next_char);</span>
+<span class='curline'><a href='../S/459.html#L509'>utf16</a>             509 ext/json/JSON_parser.c 	                utf16_to_utf8(&amp;buf, utf16);</span>
+<span class='curline'><a href='../S/458.html#L372'>utf16</a>             372 ext/json/json.c static int json_utf8_to_utf16(unsigned short *utf16, char utf8[], int len) /* {{{ */</span>
+<span class='curline'><a href='../S/458.html#L377'>utf16</a>             377 ext/json/json.c 	if (utf16) {</span>
+<span class='curline'><a href='../S/458.html#L387'>utf16</a>             387 ext/json/json.c 				utf16[j++] = (unsigned short)((us &gt;&gt; 10) | 0xd800);</span>
+<span class='curline'><a href='../S/458.html#L388'>utf16</a>             388 ext/json/json.c 				utf16[j] = (unsigned short)((us &amp; 0x3ff) | 0xdc00);</span>
+<span class='curline'><a href='../S/458.html#L390'>utf16</a>             390 ext/json/json.c 				utf16[j] = (unsigned short)us;</span>
+<span class='curline'><a href='../S/458.html#L414'>utf16</a>             414 ext/json/json.c 	unsigned short *utf16;</span>
+<span class='curline'><a href='../S/458.html#L449'>utf16</a>             449 ext/json/json.c 	utf16 = (options &amp; PHP_JSON_UNESCAPED_UNICODE) ? NULL : (unsigned short *) safe_emalloc(len, sizeof(unsigned short), 0);</span>
+<span class='curline'><a href='../S/458.html#L450'>utf16</a>             450 ext/json/json.c 	ulen = json_utf8_to_utf16(utf16, s, len);</span>
+<span class='curline'><a href='../S/458.html#L452'>utf16</a>             452 ext/json/json.c 		if (utf16) {</span>
+<span class='curline'><a href='../S/458.html#L453'>utf16</a>             453 ext/json/json.c 			efree(utf16);</span>
+<span class='curline'><a href='../S/458.html#L473'>utf16</a>             473 ext/json/json.c 		us = (options &amp; PHP_JSON_UNESCAPED_UNICODE) ? s[pos++] : utf16[pos++];</span>
+<span class='curline'><a href='../S/458.html#L564'>utf16</a>             564 ext/json/json.c 	if (utf16) {</span>
+<span class='curline'><a href='../S/458.html#L565'>utf16</a>             565 ext/json/json.c 		efree(utf16);</span>
+<span class='curline'><a href='../S/458.html#L687'>utf16</a>             687 ext/json/json.c 	unsigned short *utf16;</span>
+<span class='curline'><a href='../S/458.html#L690'>utf16</a>             690 ext/json/json.c 	utf16 = (unsigned short *) safe_emalloc((str_len+1), sizeof(unsigned short), 1);</span>
+<span class='curline'><a href='../S/458.html#L692'>utf16</a>             692 ext/json/json.c 	utf16_len = json_utf8_to_utf16(utf16, str, str_len);</span>
+<span class='curline'><a href='../S/458.html#L694'>utf16</a>             694 ext/json/json.c 		if (utf16) {</span>
+<span class='curline'><a href='../S/458.html#L695'>utf16</a>             695 ext/json/json.c 			efree(utf16);</span>
+<span class='curline'><a href='../S/458.html#L703'>utf16</a>             703 ext/json/json.c 		efree(utf16);</span>
+<span class='curline'><a href='../S/458.html#L709'>utf16</a>             709 ext/json/json.c 	if (parse_JSON_ex(jp, z, utf16, utf16_len, options TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/458.html#L785'>utf16</a>             785 ext/json/json.c 	efree(utf16);</span>
+<span class='curline'><a href='../S/788.html#L413'>utf16</a>             413 ext/mysqlnd/mysqlnd_charset.c static uint mysqlnd_mbcharlen_utf16(unsigned int utf16)</span>
+<span class='curline'><a href='../S/788.html#L415'>utf16</a>             415 ext/mysqlnd/mysqlnd_charset.c   return UTF16_HIGH_HEAD(utf16) ? 4 : 2;</span>
+</pre>
+</body>
+</html>

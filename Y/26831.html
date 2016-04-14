@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>mmap</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/1644.html#L187'>mmap</a>              187 Zend/zend_alloc.c 	zend_mm_segment *ret = (zend_mm_segment*)mmap(NULL, size, PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANON, -1, 0);</span>
+<span class='curline'><a href='../S/1644.html#L222'>mmap</a>              222 Zend/zend_alloc.c 	zend_mm_segment *ret = (zend_mm_segment*)mmap(NULL, size, PROT_READ | PROT_WRITE, MAP_PRIVATE, zend_mm_dev_zero_fd, 0);</span>
+<span class='curline'><a href='../S/1733.html#L81'>mmap</a>               81 Zend/zend_stream.c 	if (stream-&gt;mmap.map) {</span>
+<span class='curline'><a href='../S/1733.html#L82'>mmap</a>               82 Zend/zend_stream.c 		munmap(stream-&gt;mmap.map, stream-&gt;mmap.len + ZEND_MMAP_AHEAD);</span>
+<span class='curline'><a href='../S/1733.html#L85'>mmap</a>               85 Zend/zend_stream.c 	if (stream-&gt;mmap.buf) {</span>
+<span class='curline'><a href='../S/1733.html#L86'>mmap</a>               86 Zend/zend_stream.c 		efree(stream-&gt;mmap.buf);</span>
+<span class='curline'><a href='../S/1733.html#L88'>mmap</a>               88 Zend/zend_stream.c 	stream-&gt;mmap.len = 0;</span>
+<span class='curline'><a href='../S/1733.html#L89'>mmap</a>               89 Zend/zend_stream.c 	stream-&gt;mmap.pos = 0;</span>
+<span class='curline'><a href='../S/1733.html#L90'>mmap</a>               90 Zend/zend_stream.c 	stream-&gt;mmap.map = 0;</span>
+<span class='curline'><a href='../S/1733.html#L91'>mmap</a>               91 Zend/zend_stream.c 	stream-&gt;mmap.buf = 0;</span>
+<span class='curline'><a href='../S/1733.html#L92'>mmap</a>               92 Zend/zend_stream.c 	stream-&gt;handle   = stream-&gt;mmap.old_handle;</span>
+<span class='curline'><a href='../S/1733.html#L98'>mmap</a>               98 Zend/zend_stream.c 	if (stream-&gt;mmap.old_closer &amp;&amp; stream-&gt;handle) {</span>
+<span class='curline'><a href='../S/1733.html#L99'>mmap</a>               99 Zend/zend_stream.c 		stream-&gt;mmap.old_closer(stream-&gt;handle TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1733.html#L112'>mmap</a>              112 Zend/zend_stream.c 		return file_handle-&gt;handle.stream.mmap.len;</span>
+<span class='curline'><a href='../S/1733.html#L139'>mmap</a>              139 Zend/zend_stream.c 	memset(&amp;handle-&gt;handle.stream.mmap, 0, sizeof(zend_mmap));</span>
+<span class='curline'><a href='../S/1733.html#L201'>mmap</a>              201 Zend/zend_stream.c 			memset(&amp;file_handle-&gt;handle.stream.mmap, 0, sizeof(zend_mmap));</span>
+<span class='curline'><a href='../S/1733.html#L206'>mmap</a>              206 Zend/zend_stream.c 			memset(&amp;file_handle-&gt;handle.stream.mmap, 0, sizeof(file_handle-&gt;handle.stream.mmap));</span>
+<span class='curline'><a href='../S/1733.html#L213'>mmap</a>              213 Zend/zend_stream.c 			file_handle-&gt;handle.stream.mmap.pos = 0;</span>
+<span class='curline'><a href='../S/1733.html#L214'>mmap</a>              214 Zend/zend_stream.c 			*buf = file_handle-&gt;handle.stream.mmap.buf;</span>
+<span class='curline'><a href='../S/1733.html#L215'>mmap</a>              215 Zend/zend_stream.c 			*len = file_handle-&gt;handle.stream.mmap.len;</span>
+<span class='curline'><a href='../S/1733.html#L238'>mmap</a>              238 Zend/zend_stream.c 			*buf = mmap(0, size + ZEND_MMAP_AHEAD, PROT_READ, MAP_PRIVATE, fileno(file_handle-&gt;handle.fp), 0);</span>
+<span class='curline'><a href='../S/1733.html#L241'>mmap</a>              241 Zend/zend_stream.c 				file_handle-&gt;handle.stream.mmap.map = *buf;</span>
+<span class='curline'><a href='../S/1733.html#L247'>mmap</a>              247 Zend/zend_stream.c 				file_handle-&gt;handle.stream.mmap.buf = *buf;</span>
+<span class='curline'><a href='../S/1733.html#L248'>mmap</a>              248 Zend/zend_stream.c 				file_handle-&gt;handle.stream.mmap.len = size;</span>
+<span class='curline'><a href='../S/1733.html#L254'>mmap</a>              254 Zend/zend_stream.c 		file_handle-&gt;handle.stream.mmap.map = 0;</span>
+<span class='curline'><a href='../S/1733.html#L255'>mmap</a>              255 Zend/zend_stream.c 		file_handle-&gt;handle.stream.mmap.buf = *buf = safe_emalloc(1, size, ZEND_MMAP_AHEAD);</span>
+<span class='curline'><a href='../S/1733.html#L256'>mmap</a>              256 Zend/zend_stream.c 		file_handle-&gt;handle.stream.mmap.len = zend_stream_read(file_handle, *buf, size TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1733.html#L271'>mmap</a>              271 Zend/zend_stream.c 		file_handle-&gt;handle.stream.mmap.map = 0;</span>
+<span class='curline'><a href='../S/1733.html#L272'>mmap</a>              272 Zend/zend_stream.c 		file_handle-&gt;handle.stream.mmap.len = size;</span>
+<span class='curline'><a href='../S/1733.html#L276'>mmap</a>              276 Zend/zend_stream.c 		file_handle-&gt;handle.stream.mmap.buf = *buf;</span>
+<span class='curline'><a href='../S/1733.html#L279'>mmap</a>              279 Zend/zend_stream.c 	if (file_handle-&gt;handle.stream.mmap.len == 0) {</span>
+<span class='curline'><a href='../S/1733.html#L281'>mmap</a>              281 Zend/zend_stream.c 		file_handle-&gt;handle.stream.mmap.buf = *buf;</span>
+<span class='curline'><a href='../S/1733.html#L285'>mmap</a>              285 Zend/zend_stream.c 		memset(file_handle-&gt;handle.stream.mmap.buf + file_handle-&gt;handle.stream.mmap.len, 0, ZEND_MMAP_AHEAD);</span>
+<span class='curline'><a href='../S/1733.html#L291'>mmap</a>              291 Zend/zend_stream.c 	file_handle-&gt;handle.stream.mmap.pos        = 0;</span>
+<span class='curline'><a href='../S/1733.html#L292'>mmap</a>              292 Zend/zend_stream.c 	file_handle-&gt;handle.stream.mmap.old_handle = file_handle-&gt;handle.stream.handle;</span>
+<span class='curline'><a href='../S/1733.html#L293'>mmap</a>              293 Zend/zend_stream.c 	file_handle-&gt;handle.stream.mmap.old_closer = file_handle-&gt;handle.stream.closer;</span>
+<span class='curline'><a href='../S/1733.html#L297'>mmap</a>              297 Zend/zend_stream.c 	*buf = file_handle-&gt;handle.stream.mmap.buf;</span>
+<span class='curline'><a href='../S/1733.html#L298'>mmap</a>              298 Zend/zend_stream.c 	*len = file_handle-&gt;handle.stream.mmap.len;</span>
+<span class='curline'><a href='../S/1733.html#L351'>mmap</a>              351 Zend/zend_stream.c 			        fh1-&gt;handle.stream.mmap.old_handle == fh2-&gt;handle.stream.mmap.old_handle)</span>
+<span class='curline'><a href='../S/1734.html#L56'>mmap</a>               56 Zend/zend_stream.h 	zend_mmap   mmap;</span>
+<span class='curline'><a href='../S/844.html#L49'>mmap</a>               49 ext/opcache/shared_alloc_mmap.c 	shared_segment-&gt;p = mmap(0, requested_size, PROT_READ | PROT_WRITE, MAP_SHARED|MAP_ANONYMOUS, -1, 0);</span>
+<span class='curline'><a href='../S/845.html#L66'>mmap</a>               66 ext/opcache/shared_alloc_posix.c 	shared_segment-&gt;common.p = mmap(0, requested_size, PROT_READ | PROT_WRITE, MAP_SHARED, shared_segment-&gt;shm_fd, 0);</span>
+<span class='curline'><a href='../S/899.html#L102'>mmap</a>              102 ext/pcre/pcrelib/sljit/sljitExecAllocator.c 	retval = mmap(NULL, size, PROT_READ | PROT_WRITE | PROT_EXEC, MAP_PRIVATE | MAP_ANON, -1, 0);</span>
+<span class='curline'><a href='../S/899.html#L108'>mmap</a>              108 ext/pcre/pcrelib/sljit/sljitExecAllocator.c 	retval = mmap(NULL, size, PROT_READ | PROT_WRITE | PROT_EXEC, MAP_PRIVATE, dev_zero, 0);</span>
+<span class='curline'><a href='../S/918.html#L255'>mmap</a>              255 ext/pcre/pcrelib/sljit/sljitUtils.c 	base.ptr = mmap(NULL, max_limit, PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANON, -1, 0);</span>
+<span class='curline'><a href='../S/918.html#L263'>mmap</a>              263 ext/pcre/pcrelib/sljit/sljitUtils.c 	base.ptr = mmap(NULL, max_limit, PROT_READ | PROT_WRITE, MAP_PRIVATE, dev_zero, 0);</span>
+<span class='curline'><a href='../S/973.html#L3363'>mmap</a>             3363 ext/phar/phar.c 				memset(&amp;file_handle-&gt;handle.stream.mmap, 0, sizeof(file_handle-&gt;handle.stream.mmap));</span>
+<span class='curline'><a href='../S/1067.html#L25896'>mmap</a>             25896 ext/sqlite3/libsqlite/sqlite3.c   { "mmap",       (sqlite3_syscall_ptr)mmap,     0 },</span>
+<span class='curline'><a href='../S/1364.html#L1431'>mmap</a>             1431 main/main.c    		memset(&amp;handle-&gt;handle.stream.mmap, 0, sizeof(handle-&gt;handle.stream.mmap));</span>
+<span class='curline'><a href='../S/1364.html#L1440'>mmap</a>             1440 main/main.c    			handle-&gt;handle.stream.mmap.buf = p;</span>
+<span class='curline'><a href='../S/1364.html#L1441'>mmap</a>             1441 main/main.c    			handle-&gt;handle.stream.mmap.len = mapped_len;</span>
+<span class='curline'><a href='../S/1416.html#L693'>mmap</a>              693 main/streams/plain_wrapper.c 						range-&gt;mapped = (char*)mmap(NULL, range-&gt;length, prot, flags, fd, range-&gt;offset);</span>
+<span class='curline'><a href='../S/1449.html#L2441'>mmap</a>             2441 sapi/cgi/cgi_main.c 						if (file_handle.handle.stream.mmap.buf[0] == '#') {</span>
+<span class='curline'><a href='../S/1449.html#L2444'>mmap</a>             2444 sapi/cgi/cgi_main.c 						    c = file_handle.handle.stream.mmap.buf[i++];</span>
+<span class='curline'><a href='../S/1449.html#L2445'>mmap</a>             2445 sapi/cgi/cgi_main.c 							while (c != '\n' &amp;&amp; c != '\r' &amp;&amp; i &lt; file_handle.handle.stream.mmap.len) {</span>
+<span class='curline'><a href='../S/1449.html#L2446'>mmap</a>             2446 sapi/cgi/cgi_main.c 								c = file_handle.handle.stream.mmap.buf[i++];</span>
+<span class='curline'><a href='../S/1449.html#L2449'>mmap</a>             2449 sapi/cgi/cgi_main.c 								if (i &lt; file_handle.handle.stream.mmap.len &amp;&amp; file_handle.handle.stream.mmap.buf[i] == '\n') {</span>
+<span class='curline'><a href='../S/1449.html#L2453'>mmap</a>             2453 sapi/cgi/cgi_main.c 							if(i &gt; file_handle.handle.stream.mmap.len) {</span>
+<span class='curline'><a href='../S/1449.html#L2454'>mmap</a>             2454 sapi/cgi/cgi_main.c 								i = file_handle.handle.stream.mmap.len;</span>
+<span class='curline'><a href='../S/1449.html#L2456'>mmap</a>             2456 sapi/cgi/cgi_main.c 							file_handle.handle.stream.mmap.buf += i;</span>
+<span class='curline'><a href='../S/1449.html#L2457'>mmap</a>             2457 sapi/cgi/cgi_main.c 							file_handle.handle.stream.mmap.len -= i;</span>
+<span class='curline'><a href='../S/1510.html#L24'>mmap</a>               24 sapi/fpm/fpm/fpm_shm.c 	mem = mmap(0, size, PROT_READ | PROT_WRITE, MAP_ANONYMOUS | MAP_SHARED, -1, 0);</span>
+<span class='curline'><a href='../S/1539.html#L2635'>mmap</a>             2635 sapi/litespeed/lsapilib.c     pBuf =( char*) mmap( NULL, size, PROT_READ | PROT_WRITE,</span>
+</pre>
+</body>
+</html>

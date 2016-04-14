@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>stage</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/1642.html#L79'>stage</a>              79 Zend/zend.c    	OnUpdateBool(entry, new_value, new_value_length, mh_arg1, mh_arg2, mh_arg3, stage TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1688.html#L47'>stage</a>              47 Zend/zend_ini.c static int zend_restore_ini_entry_cb(zend_ini_entry *ini_entry, int stage TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1688.html#L57'>stage</a>              57 Zend/zend_ini.c 				result = ini_entry-&gt;on_modify(ini_entry, ini_entry-&gt;orig_value, ini_entry-&gt;orig_value_length, ini_entry-&gt;mh_arg1, ini_entry-&gt;mh_arg2, ini_entry-&gt;mh_arg3, stage TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1688.html#L60'>stage</a>              60 Zend/zend_ini.c 		if (stage == ZEND_INI_STAGE_RUNTIME &amp;&amp; result == FAILURE) {</span>
+<span class='curline'><a href='../S/1688.html#L231'>stage</a>             231 Zend/zend_ini.c static int zend_ini_refresh_cache(zend_ini_entry *p, int stage TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1688.html#L234'>stage</a>             234 Zend/zend_ini.c 		p-&gt;on_modify(p, p-&gt;value, p-&gt;value_length, p-&gt;mh_arg1, p-&gt;mh_arg2, p-&gt;mh_arg3, stage TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1688.html#L240'>stage</a>             240 Zend/zend_ini.c ZEND_API void zend_ini_refresh_caches(int stage TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1688.html#L242'>stage</a>             242 Zend/zend_ini.c 	zend_hash_apply_with_argument(EG(ini_directives), (apply_func_arg_t) zend_ini_refresh_cache, (void *)(zend_intptr_t) stage TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1688.html#L247'>stage</a>             247 Zend/zend_ini.c ZEND_API int zend_alter_ini_entry(char *name, uint name_length, char *new_value, uint new_value_length, int modify_type, int stage) /* {{{ */</span>
+<span class='curline'><a href='../S/1688.html#L251'>stage</a>             251 Zend/zend_ini.c 	return zend_alter_ini_entry_ex(name, name_length, new_value, new_value_length, modify_type, stage, 0 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1688.html#L255'>stage</a>             255 Zend/zend_ini.c ZEND_API int zend_alter_ini_entry_ex(char *name, uint name_length, char *new_value, uint new_value_length, int modify_type, int stage, int force_change TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1688.html#L269'>stage</a>             269 Zend/zend_ini.c 	if (stage == ZEND_INI_STAGE_ACTIVATE &amp;&amp; modify_type == ZEND_INI_SYSTEM) {</span>
+<span class='curline'><a href='../S/1688.html#L294'>stage</a>             294 Zend/zend_ini.c 		|| ini_entry-&gt;on_modify(ini_entry, duplicate, new_value_length, ini_entry-&gt;mh_arg1, ini_entry-&gt;mh_arg2, ini_entry-&gt;mh_arg3, stage TSRMLS_CC) == SUCCESS) {</span>
+<span class='curline'><a href='../S/1688.html#L309'>stage</a>             309 Zend/zend_ini.c ZEND_API int zend_restore_ini_entry(char *name, uint name_length, int stage) /* {{{ */</span>
+<span class='curline'><a href='../S/1688.html#L315'>stage</a>             315 Zend/zend_ini.c 		(stage == ZEND_INI_STAGE_RUNTIME &amp;&amp; (ini_entry-&gt;modifiable &amp; ZEND_INI_USER) == 0)) {</span>
+<span class='curline'><a href='../S/1688.html#L320'>stage</a>             320 Zend/zend_ini.c 		if (zend_restore_ini_entry_cb(ini_entry, stage TSRMLS_CC) == 0) {</span>
+<span class='curline'><a href='../S/1689.html#L60'>stage</a>              60 Zend/zend_ini.h #define ZEND_INI_MH(name) int name(zend_ini_entry *entry, char *new_value, uint new_value_length, void *mh_arg1, void *mh_arg2, void *mh_arg3, int stage TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1689.html#L96'>stage</a>              96 Zend/zend_ini.h ZEND_API void zend_ini_refresh_caches(int stage TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1689.html#L97'>stage</a>              97 Zend/zend_ini.h ZEND_API int zend_alter_ini_entry(char *name, uint name_length, char *new_value, uint new_value_length, int modify_type, int stage);</span>
+<span class='curline'><a href='../S/1689.html#L98'>stage</a>              98 Zend/zend_ini.h ZEND_API int zend_alter_ini_entry_ex(char *name, uint name_length, char *new_value, uint new_value_length, int modify_type, int stage, int force_change TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1689.html#L99'>stage</a>              99 Zend/zend_ini.h ZEND_API int zend_restore_ini_entry(char *name, uint name_length, int stage);</span>
+<span class='curline'><a href='../S/79.html#L944'>stage</a>             944 ext/date/php_date.c 	if (OnUpdateString(entry, new_value, new_value_length, mh_arg1, mh_arg2, mh_arg3, stage TSRMLS_CC) == FAILURE) {</span>
+<span class='curline'><a href='../S/79.html#L949'>stage</a>             949 ext/date/php_date.c 	if (stage == PHP_INI_STAGE_RUNTIME) {</span>
+<span class='curline'><a href='../S/81.html#L475'>stage</a>             475 ext/dba/dba.c  		return OnUpdateString(entry, new_value, new_value_length, mh_arg1, mh_arg2, mh_arg3, stage TSRMLS_CC);</span>
+<span class='curline'><a href='../S/81.html#L485'>stage</a>             485 ext/dba/dba.c  	return OnUpdateString(entry, new_value, new_value_length, mh_arg1, mh_arg2, mh_arg3, stage TSRMLS_CC);</span>
+<span class='curline'><a href='../S/172.html#L179'>stage</a>             179 ext/exif/exif.c 	return OnUpdateString(entry, new_value, new_value_length, mh_arg1, mh_arg2, mh_arg3, stage TSRMLS_CC);</span>
+<span class='curline'><a href='../S/172.html#L194'>stage</a>             194 ext/exif/exif.c 	return OnUpdateString(entry, new_value, new_value_length, mh_arg1, mh_arg2, mh_arg3, stage TSRMLS_CC);</span>
+<span class='curline'><a href='../S/318.html#L229'>stage</a>             229 ext/iconv/iconv.c 	if (stage &amp; (PHP_INI_STAGE_ACTIVATE | PHP_INI_STAGE_RUNTIME)) {</span>
+<span class='curline'><a href='../S/318.html#L232'>stage</a>             232 ext/iconv/iconv.c 	OnUpdateString(entry, new_value, new_value_length, mh_arg1, mh_arg2, mh_arg3, stage TSRMLS_CC);</span>
+<span class='curline'><a href='../S/318.html#L242'>stage</a>             242 ext/iconv/iconv.c 	if (stage &amp; (PHP_INI_STAGE_ACTIVATE | PHP_INI_STAGE_RUNTIME)) {</span>
+<span class='curline'><a href='../S/318.html#L245'>stage</a>             245 ext/iconv/iconv.c 	OnUpdateString(entry, new_value, new_value_length, mh_arg1, mh_arg2, mh_arg3, stage TSRMLS_CC);</span>
+<span class='curline'><a href='../S/318.html#L255'>stage</a>             255 ext/iconv/iconv.c 	if (stage &amp; (PHP_INI_STAGE_ACTIVATE | PHP_INI_STAGE_RUNTIME)) {</span>
+<span class='curline'><a href='../S/318.html#L258'>stage</a>             258 ext/iconv/iconv.c 	OnUpdateString(entry, new_value, new_value_length, mh_arg1, mh_arg2, mh_arg3, stage TSRMLS_CC);</span>
+<span class='curline'><a href='../S/686.html#L1287'>stage</a>            1287 ext/mbstring/mbstring.c 	if (stage &amp; (PHP_INI_STAGE_ACTIVATE | PHP_INI_STAGE_RUNTIME)) {</span>
+<span class='curline'><a href='../S/686.html#L1318'>stage</a>            1318 ext/mbstring/mbstring.c 	if (stage &amp; (PHP_INI_STAGE_ACTIVATE | PHP_INI_STAGE_RUNTIME)) {</span>
+<span class='curline'><a href='../S/686.html#L1355'>stage</a>            1355 ext/mbstring/mbstring.c 	if (stage &amp; (PHP_INI_STAGE_ACTIVATE | PHP_INI_STAGE_RUNTIME)) {</span>
+<span class='curline'><a href='../S/686.html#L1359'>stage</a>            1359 ext/mbstring/mbstring.c 	if (OnUpdateString(entry, new_value, new_value_length, mh_arg1, mh_arg2, mh_arg3, stage TSRMLS_CC) == FAILURE) {</span>
+<span class='curline'><a href='../S/686.html#L1363'>stage</a>            1363 ext/mbstring/mbstring.c 	if (stage &amp; (PHP_INI_STAGE_STARTUP | PHP_INI_STAGE_SHUTDOWN | PHP_INI_STAGE_RUNTIME)) {</span>
+<span class='curline'><a href='../S/686.html#L1426'>stage</a>            1426 ext/mbstring/mbstring.c 	OnUpdateBool(entry, new_value, new_value_length, mh_arg1, mh_arg2, mh_arg3, stage TSRMLS_CC);</span>
+<span class='curline'><a href='../S/863.html#L205'>stage</a>             205 ext/opcache/ZendAccelerator.c 	int ret = orig_include_path_on_modify(entry, new_value, new_value_length, mh_arg1, mh_arg2, mh_arg3, stage TSRMLS_CC);</span>
+<span class='curline'><a href='../S/854.html#L116'>stage</a>             116 ext/opcache/zend_accelerator_module.c 	(void)entry; (void)new_value_length; (void)mh_arg2; (void)mh_arg3; (void)stage;</span>
+<span class='curline'><a href='../S/854.html#L154'>stage</a>             154 ext/opcache/zend_accelerator_module.c 	(void)entry; (void)new_value_length; (void)mh_arg2; (void)mh_arg3; (void)stage;</span>
+<span class='curline'><a href='../S/854.html#L200'>stage</a>             200 ext/opcache/zend_accelerator_module.c 	(void)entry; (void)new_value_length; (void)mh_arg2; (void)mh_arg3; (void)stage;</span>
+<span class='curline'><a href='../S/854.html#L227'>stage</a>             227 ext/opcache/zend_accelerator_module.c 	if (stage == ZEND_INI_STAGE_STARTUP ||</span>
+<span class='curline'><a href='../S/854.html#L228'>stage</a>             228 ext/opcache/zend_accelerator_module.c 	    stage == ZEND_INI_STAGE_SHUTDOWN ||</span>
+<span class='curline'><a href='../S/854.html#L229'>stage</a>             229 ext/opcache/zend_accelerator_module.c 	    stage == ZEND_INI_STAGE_DEACTIVATE) {</span>
+<span class='curline'><a href='../S/854.html#L230'>stage</a>             230 ext/opcache/zend_accelerator_module.c 		return OnUpdateBool(entry, new_value, new_value_length, mh_arg1, mh_arg2, mh_arg3, stage TSRMLS_CC);</span>
+<span class='curline'><a href='../S/973.html#L73'>stage</a>              73 ext/phar/phar.c 	if (stage == ZEND_INI_STAGE_STARTUP) {</span>
+<span class='curline'><a href='../S/973.html#L189'>stage</a>             189 ext/phar/phar.c 	if (stage == ZEND_INI_STAGE_STARTUP) {</span>
+<span class='curline'><a href='../S/1006.html#L580'>stage</a>             580 ext/session/session.c 		if (stage == ZEND_INI_STAGE_RUNTIME) {</span>
+<span class='curline'><a href='../S/1006.html#L587'>stage</a>             587 ext/session/session.c 		if (stage != ZEND_INI_STAGE_DEACTIVATE) {</span>
+<span class='curline'><a href='../S/1006.html#L610'>stage</a>             610 ext/session/session.c 		if (stage == ZEND_INI_STAGE_RUNTIME) {</span>
+<span class='curline'><a href='../S/1006.html#L617'>stage</a>             617 ext/session/session.c 		if (stage != ZEND_INI_STAGE_DEACTIVATE) {</span>
+<span class='curline'><a href='../S/1006.html#L645'>stage</a>             645 ext/session/session.c 	if (stage == PHP_INI_STAGE_RUNTIME || stage == PHP_INI_STAGE_HTACCESS) {</span>
+<span class='curline'><a href='../S/1006.html#L668'>stage</a>             668 ext/session/session.c 	OnUpdateString(entry, new_value, new_value_length, mh_arg1, mh_arg2, mh_arg3, stage TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1006.html#L679'>stage</a>             679 ext/session/session.c 		if (stage == ZEND_INI_STAGE_RUNTIME || stage == ZEND_INI_STAGE_ACTIVATE || stage == ZEND_INI_STAGE_STARTUP) {</span>
+<span class='curline'><a href='../S/1006.html#L686'>stage</a>             686 ext/session/session.c 		if (stage != ZEND_INI_STAGE_DEACTIVATE) {</span>
+<span class='curline'><a href='../S/1006.html#L692'>stage</a>             692 ext/session/session.c 	OnUpdateStringUnempty(entry, new_value, new_value_length, mh_arg1, mh_arg2, mh_arg3, stage TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1031.html#L492'>stage</a>             492 ext/soap/soap.c 	if (stage == PHP_INI_STAGE_RUNTIME || stage == PHP_INI_STAGE_HTACCESS) {</span>
+<span class='curline'><a href='../S/1031.html#L515'>stage</a>             515 ext/soap/soap.c 	OnUpdateString(entry, new_value, new_value_length, mh_arg1, mh_arg2, mh_arg3, stage TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1079.html#L315'>stage</a>             315 ext/standard/browscap.c 	if (stage == PHP_INI_STAGE_STARTUP) {</span>
+<span class='curline'><a href='../S/1079.html#L318'>stage</a>             318 ext/standard/browscap.c 	} else if (stage == PHP_INI_STAGE_ACTIVATE) {</span>
+<span class='curline'><a href='../S/1214.html#L1127'>stage</a>            1127 ext/tidy/tidy.c 	if (stage == PHP_INI_STAGE_RUNTIME) {</span>
+<span class='curline'><a href='../S/1214.html#L1140'>stage</a>            1140 ext/tidy/tidy.c 	status = OnUpdateBool(entry, new_value, new_value_length, mh_arg1, mh_arg2, mh_arg3, stage TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1214.html#L1142'>stage</a>            1142 ext/tidy/tidy.c 	if (stage == PHP_INI_STAGE_RUNTIME &amp;&amp; value) {</span>
+<span class='curline'><a href='../S/1355.html#L902'>stage</a>             902 ext/zlib/zlib.c 	if (stage == PHP_INI_STAGE_RUNTIME) {</span>
+<span class='curline'><a href='../S/1355.html#L910'>stage</a>             910 ext/zlib/zlib.c 	status = OnUpdateLong(entry, new_value, new_value_length, mh_arg1, mh_arg2, mh_arg3, stage TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1355.html#L913'>stage</a>             913 ext/zlib/zlib.c 	if (stage == PHP_INI_STAGE_RUNTIME &amp;&amp; int_value) {</span>
+<span class='curline'><a href='../S/1355.html#L926'>stage</a>             926 ext/zlib/zlib.c 	if (stage == PHP_INI_STAGE_RUNTIME &amp;&amp; (php_output_get_status(TSRMLS_C) &amp; PHP_OUTPUT_SENT)) {</span>
+<span class='curline'><a href='../S/1355.html#L931'>stage</a>             931 ext/zlib/zlib.c 	return OnUpdateString(entry, new_value, new_value_length, mh_arg1, mh_arg2, mh_arg3, stage TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1359.html#L95'>stage</a>              95 main/fopen_wrappers.c 	if (stage == PHP_INI_STAGE_STARTUP || stage == PHP_INI_STAGE_SHUTDOWN || stage == PHP_INI_STAGE_ACTIVATE || stage == PHP_INI_STAGE_DEACTIVATE) {</span>
+<span class='curline'><a href='../S/1364.html#L317'>stage</a>             317 main/main.c    	if (stage==PHP_INI_STAGE_STARTUP) {</span>
+<span class='curline'><a href='../S/1364.html#L423'>stage</a>             423 main/main.c    		OnUpdateString(entry, new_value, new_value_length, mh_arg1, mh_arg2, mh_arg3, stage TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1364.html#L434'>stage</a>             434 main/main.c    		OnUpdateString(entry, new_value, new_value_length, mh_arg1, mh_arg2, mh_arg3, stage TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1364.html#L445'>stage</a>             445 main/main.c    		OnUpdateString(entry, new_value, new_value_length, mh_arg1, mh_arg2, mh_arg3, stage TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1364.html#L456'>stage</a>             456 main/main.c    	if ((stage == PHP_INI_STAGE_RUNTIME || stage == PHP_INI_STAGE_HTACCESS) &amp;&amp; new_value &amp;&amp; strcmp(new_value, "syslog")) {</span>
+<span class='curline'><a href='../S/1364.html#L461'>stage</a>             461 main/main.c    	OnUpdateString(entry, new_value, new_value_length, mh_arg1, mh_arg2, mh_arg3, stage TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1364.html#L471'>stage</a>             471 main/main.c    	if ((stage == PHP_INI_STAGE_RUNTIME || stage == PHP_INI_STAGE_HTACCESS) &amp;&amp; new_value) {</span>
+<span class='curline'><a href='../S/1364.html#L476'>stage</a>             476 main/main.c    	OnUpdateString(entry, new_value, new_value_length, mh_arg1, mh_arg2, mh_arg3, stage TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1364.html#L486'>stage</a>             486 main/main.c    	if (stage == PHP_INI_STAGE_HTACCESS) {</span>
+<span class='curline'><a href='../S/1374.html#L786'>stage</a>             786 main/php_ini.c PHPAPI void php_ini_activate_config(HashTable *source_hash, int modify_type, int stage TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1374.html#L799'>stage</a>             799 main/php_ini.c 		zend_alter_ini_entry_ex(str, str_len, Z_STRVAL_P(data), Z_STRLEN_P(data), modify_type, stage, 0 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1375.html#L36'>stage</a>              36 main/php_ini.h PHPAPI void php_ini_activate_config(HashTable *source_hash, int modify_type, int stage TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1443.html#L935'>stage</a>             935 sapi/apache_hooks/mod_php5.c 	handler-&gt;stage = handler_stage;</span>
+<span class='curline'><a href='../S/1443.html#L954'>stage</a>             954 sapi/apache_hooks/mod_php5.c 	handler-&gt;stage = handler_stage;</span>
+<span class='curline'><a href='../S/1444.html#L43'>stage</a>              43 sapi/apache_hooks/mod_php5.h     long stage;</span>
+<span class='curline'><a href='../S/1500.html#L26'>stage</a>              26 sapi/fpm/fpm/fpm_php.c static int fpm_php_zend_ini_alter_master(char *name, int name_length, char *new_value, int new_value_length, int mode, int stage TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1500.html#L39'>stage</a>              39 sapi/fpm/fpm/fpm_php.c 				ini_entry-&gt;mh_arg1, ini_entry-&gt;mh_arg2, ini_entry-&gt;mh_arg3, stage TSRMLS_CC) == SUCCESS) {</span>
+<span class='curline'><a href='../S/1506.html#L35'>stage</a>              35 sapi/fpm/fpm/fpm_request.c const char *fpm_request_get_stage_name(int stage) {</span>
+<span class='curline'><a href='../S/1506.html#L36'>stage</a>              36 sapi/fpm/fpm/fpm_request.c 	return requests_stages[stage];</span>
+<span class='curline'><a href='../S/1507.html#L20'>stage</a>              20 sapi/fpm/fpm/fpm_request.h const char *fpm_request_get_stage_name(int stage);</span>
+</pre>
+</body>
+</html>

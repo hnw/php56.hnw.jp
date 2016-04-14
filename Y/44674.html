@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>zval_ptr</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/1670.html#L74'>zval_ptr</a>           74 Zend/zend_execute.h static zend_always_inline void i_zval_ptr_dtor(zval *zval_ptr ZEND_FILE_LINE_DC TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1670.html#L76'>zval_ptr</a>           76 Zend/zend_execute.h 	if (!Z_DELREF_P(zval_ptr)) {</span>
+<span class='curline'><a href='../S/1670.html#L77'>zval_ptr</a>           77 Zend/zend_execute.h 		ZEND_ASSERT(zval_ptr != &amp;EG(uninitialized_zval));</span>
+<span class='curline'><a href='../S/1670.html#L78'>zval_ptr</a>           78 Zend/zend_execute.h 		GC_REMOVE_ZVAL_FROM_BUFFER(zval_ptr);</span>
+<span class='curline'><a href='../S/1670.html#L79'>zval_ptr</a>           79 Zend/zend_execute.h 		zval_dtor(zval_ptr);</span>
+<span class='curline'><a href='../S/1670.html#L80'>zval_ptr</a>           80 Zend/zend_execute.h 		efree_rel(zval_ptr);</span>
+<span class='curline'><a href='../S/1670.html#L82'>zval_ptr</a>           82 Zend/zend_execute.h 		if (Z_REFCOUNT_P(zval_ptr) == 1) {</span>
+<span class='curline'><a href='../S/1670.html#L83'>zval_ptr</a>           83 Zend/zend_execute.h 			Z_UNSET_ISREF_P(zval_ptr);</span>
+<span class='curline'><a href='../S/1670.html#L86'>zval_ptr</a>           86 Zend/zend_execute.h 		GC_ZVAL_CHECK_POSSIBLE_ROOT(zval_ptr);</span>
+<span class='curline'><a href='../S/1670.html#L90'>zval_ptr</a>           90 Zend/zend_execute.h static zend_always_inline void i_zval_ptr_dtor_nogc(zval *zval_ptr ZEND_FILE_LINE_DC TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1670.html#L92'>zval_ptr</a>           92 Zend/zend_execute.h 	if (!Z_DELREF_P(zval_ptr)) {</span>
+<span class='curline'><a href='../S/1670.html#L93'>zval_ptr</a>           93 Zend/zend_execute.h 		ZEND_ASSERT(zval_ptr != &amp;EG(uninitialized_zval));</span>
+<span class='curline'><a href='../S/1670.html#L94'>zval_ptr</a>           94 Zend/zend_execute.h 		GC_REMOVE_ZVAL_FROM_BUFFER(zval_ptr);</span>
+<span class='curline'><a href='../S/1670.html#L95'>zval_ptr</a>           95 Zend/zend_execute.h 		zval_dtor(zval_ptr);</span>
+<span class='curline'><a href='../S/1670.html#L96'>zval_ptr</a>           96 Zend/zend_execute.h 		efree_rel(zval_ptr);</span>
+<span class='curline'><a href='../S/1670.html#L98'>zval_ptr</a>           98 Zend/zend_execute.h 		if (Z_REFCOUNT_P(zval_ptr) == 1) {</span>
+<span class='curline'><a href='../S/1670.html#L99'>zval_ptr</a>           99 Zend/zend_execute.h 			Z_UNSET_ISREF_P(zval_ptr);</span>
+<span class='curline'><a href='../S/1671.html#L421'>zval_ptr</a>          421 Zend/zend_execute_API.c ZEND_API void _zval_ptr_dtor(zval **zval_ptr ZEND_FILE_LINE_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1671.html#L424'>zval_ptr</a>          424 Zend/zend_execute_API.c 	i_zval_ptr_dtor(*zval_ptr ZEND_FILE_LINE_RELAY_CC TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1671.html#L428'>zval_ptr</a>          428 Zend/zend_execute_API.c ZEND_API void _zval_internal_ptr_dtor(zval **zval_ptr ZEND_FILE_LINE_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1671.html#L431'>zval_ptr</a>          431 Zend/zend_execute_API.c 	printf("Reducing refcount for %x (%x): %d-&gt;%d\n", *zval_ptr, zval_ptr, Z_REFCOUNT_PP(zval_ptr), Z_REFCOUNT_PP(zval_ptr) - 1);</span>
+<span class='curline'><a href='../S/1671.html#L433'>zval_ptr</a>          433 Zend/zend_execute_API.c 	Z_DELREF_PP(zval_ptr);</span>
+<span class='curline'><a href='../S/1671.html#L434'>zval_ptr</a>          434 Zend/zend_execute_API.c 	if (Z_REFCOUNT_PP(zval_ptr) == 0) {</span>
+<span class='curline'><a href='../S/1671.html#L435'>zval_ptr</a>          435 Zend/zend_execute_API.c 		zval_internal_dtor(*zval_ptr);</span>
+<span class='curline'><a href='../S/1671.html#L436'>zval_ptr</a>          436 Zend/zend_execute_API.c 		free(*zval_ptr);</span>
+<span class='curline'><a href='../S/1671.html#L437'>zval_ptr</a>          437 Zend/zend_execute_API.c 	} else if (Z_REFCOUNT_PP(zval_ptr) == 1) {</span>
+<span class='curline'><a href='../S/1671.html#L438'>zval_ptr</a>          438 Zend/zend_execute_API.c 		Z_UNSET_ISREF_PP(zval_ptr);</span>
+<span class='curline'><a href='../S/1742.html#L186'>zval_ptr</a>          186 Zend/zend_variables.c ZEND_API void _zval_ptr_dtor_wrapper(zval **zval_ptr)</span>
+<span class='curline'><a href='../S/1742.html#L188'>zval_ptr</a>          188 Zend/zend_variables.c 	zval_ptr_dtor(zval_ptr);</span>
+<span class='curline'><a href='../S/1742.html#L192'>zval_ptr</a>          192 Zend/zend_variables.c ZEND_API void _zval_internal_ptr_dtor_wrapper(zval **zval_ptr)</span>
+<span class='curline'><a href='../S/1742.html#L194'>zval_ptr</a>          194 Zend/zend_variables.c 	zval_internal_ptr_dtor(zval_ptr);</span>
+<span class='curline'><a href='../S/1743.html#L51'>zval_ptr</a>           51 Zend/zend_variables.h ZEND_API void _zval_ptr_dtor(zval **zval_ptr ZEND_FILE_LINE_DC);</span>
+<span class='curline'><a href='../S/1743.html#L57'>zval_ptr</a>           57 Zend/zend_variables.h #define zval_ptr_dtor(zval_ptr) _zval_ptr_dtor((zval_ptr) ZEND_FILE_LINE_CC)</span>
+<span class='curline'><a href='../S/1743.html#L64'>zval_ptr</a>           64 Zend/zend_variables.h ZEND_API void _zval_ptr_dtor_wrapper(zval **zval_ptr);</span>
+<span class='curline'><a href='../S/863.html#L2200'>zval_ptr</a>         2200 ext/opcache/ZendAccelerator.c static void accel_fast_zval_ptr_dtor(zval **zval_ptr)</span>
+<span class='curline'><a href='../S/863.html#L2202'>zval_ptr</a>         2202 ext/opcache/ZendAccelerator.c 	zval *zvalue = *zval_ptr;</span>
+</pre>
+</body>
+</html>

@@ -1,0 +1,199 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>zobj</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/1651.html#L995'>zobj</a>              995 Zend/zend_builtin_functions.c 	zend_object *zobj;</span>
+<span class='curline'><a href='../S/1651.html#L1011'>zobj</a>             1011 Zend/zend_builtin_functions.c 	zobj = zend_objects_get_address(obj TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1651.html#L1019'>zobj</a>             1019 Zend/zend_builtin_functions.c 			if (zend_check_property_access(zobj, key, key_len-1 TSRMLS_CC) == SUCCESS) {</span>
+<span class='curline'><a href='../S/1713.html#L66'>zobj</a>               66 Zend/zend_object_handlers.c ZEND_API void rebuild_object_properties(zend_object *zobj) /* {{{ */</span>
+<span class='curline'><a href='../S/1713.html#L68'>zobj</a>               68 Zend/zend_object_handlers.c 	if (!zobj-&gt;properties) {</span>
+<span class='curline'><a href='../S/1713.html#L71'>zobj</a>               71 Zend/zend_object_handlers.c 		zend_class_entry *ce = zobj-&gt;ce;</span>
+<span class='curline'><a href='../S/1713.html#L73'>zobj</a>               73 Zend/zend_object_handlers.c 		ALLOC_HASHTABLE(zobj-&gt;properties);</span>
+<span class='curline'><a href='../S/1713.html#L74'>zobj</a>               74 Zend/zend_object_handlers.c 		zend_hash_init(zobj-&gt;properties, 0, NULL, ZVAL_PTR_DTOR, 0);</span>
+<span class='curline'><a href='../S/1713.html#L82'>zobj</a>               82 Zend/zend_object_handlers.c 				    zobj-&gt;properties_table[prop_info-&gt;offset]) {</span>
+<span class='curline'><a href='../S/1713.html#L83'>zobj</a>               83 Zend/zend_object_handlers.c 					zend_hash_quick_add(zobj-&gt;properties, prop_info-&gt;name, prop_info-&gt;name_length+1, prop_info-&gt;h, (void**)&amp;zobj-&gt;properties_table[prop_info-&gt;offset], sizeof(zval*), (void**)&amp;zobj-&gt;properties_table[prop_info-&gt;offset]);</span>
+<span class='curline'><a href='../S/1713.html#L95'>zobj</a>               95 Zend/zend_object_handlers.c 						zobj-&gt;properties_table[prop_info-&gt;offset]) {</span>
+<span class='curline'><a href='../S/1713.html#L96'>zobj</a>               96 Zend/zend_object_handlers.c 						zend_hash_quick_add(zobj-&gt;properties, prop_info-&gt;name, prop_info-&gt;name_length+1, prop_info-&gt;h, (void**)&amp;zobj-&gt;properties_table[prop_info-&gt;offset], sizeof(zval*), (void**)&amp;zobj-&gt;properties_table[prop_info-&gt;offset]);</span>
+<span class='curline'><a href='../S/1713.html#L107'>zobj</a>              107 Zend/zend_object_handlers.c 	zend_object *zobj;</span>
+<span class='curline'><a href='../S/1713.html#L108'>zobj</a>              108 Zend/zend_object_handlers.c 	zobj = Z_OBJ_P(object);</span>
+<span class='curline'><a href='../S/1713.html#L109'>zobj</a>              109 Zend/zend_object_handlers.c 	if (!zobj-&gt;properties) {</span>
+<span class='curline'><a href='../S/1713.html#L110'>zobj</a>              110 Zend/zend_object_handlers.c 		rebuild_object_properties(zobj);</span>
+<span class='curline'><a href='../S/1713.html#L112'>zobj</a>              112 Zend/zend_object_handlers.c 	return zobj-&gt;properties;</span>
+<span class='curline'><a href='../S/1713.html#L123'>zobj</a>              123 Zend/zend_object_handlers.c 		zend_object *zobj = Z_OBJ_P(object);</span>
+<span class='curline'><a href='../S/1713.html#L125'>zobj</a>              125 Zend/zend_object_handlers.c 		if (zobj-&gt;properties) {</span>
+<span class='curline'><a href='../S/1713.html#L128'>zobj</a>              128 Zend/zend_object_handlers.c 			return zobj-&gt;properties;</span>
+<span class='curline'><a href='../S/1713.html#L130'>zobj</a>              130 Zend/zend_object_handlers.c 			*table = zobj-&gt;properties_table;</span>
+<span class='curline'><a href='../S/1713.html#L131'>zobj</a>              131 Zend/zend_object_handlers.c 			*n = zobj-&gt;ce-&gt;default_properties_count;</span>
+<span class='curline'><a href='../S/1713.html#L393'>zobj</a>              393 Zend/zend_object_handlers.c ZEND_API int zend_check_property_access(zend_object *zobj, const char *prop_info_name, int prop_info_name_len TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1713.html#L402'>zobj</a>              402 Zend/zend_object_handlers.c 	property_info = zend_get_property_info_quick(zobj-&gt;ce, &amp;member, 1, NULL TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1713.html#L415'>zobj</a>              415 Zend/zend_object_handlers.c 	return zend_verify_property_access(property_info, zobj-&gt;ce TSRMLS_CC) ? SUCCESS : FAILURE;</span>
+<span class='curline'><a href='../S/1713.html#L419'>zobj</a>              419 Zend/zend_object_handlers.c static int zend_get_property_guard(zend_object *zobj, zend_property_info *property_info, zval *member, zend_guard **pguard) /* {{{ */</span>
+<span class='curline'><a href='../S/1713.html#L440'>zobj</a>              440 Zend/zend_object_handlers.c 	if (!zobj-&gt;guards) {</span>
+<span class='curline'><a href='../S/1713.html#L441'>zobj</a>              441 Zend/zend_object_handlers.c 		ALLOC_HASHTABLE(zobj-&gt;guards);</span>
+<span class='curline'><a href='../S/1713.html#L442'>zobj</a>              442 Zend/zend_object_handlers.c 		zend_hash_init(zobj-&gt;guards, 0, NULL, NULL, 0);</span>
+<span class='curline'><a href='../S/1713.html#L443'>zobj</a>              443 Zend/zend_object_handlers.c 	} else if (zend_hash_quick_find(zobj-&gt;guards, property_info-&gt;name, property_info-&gt;name_length+1, property_info-&gt;h, (void **) pguard) == SUCCESS) {</span>
+<span class='curline'><a href='../S/1713.html#L450'>zobj</a>              450 Zend/zend_object_handlers.c 	return zend_hash_quick_add(zobj-&gt;guards, property_info-&gt;name, property_info-&gt;name_length+1, property_info-&gt;h, (void**)&amp;stub, sizeof(stub), (void**) pguard);</span>
+<span class='curline'><a href='../S/1713.html#L456'>zobj</a>              456 Zend/zend_object_handlers.c 	zend_object *zobj;</span>
+<span class='curline'><a href='../S/1713.html#L464'>zobj</a>              464 Zend/zend_object_handlers.c 	zobj = Z_OBJ_P(object);</span>
+<span class='curline'><a href='../S/1713.html#L481'>zobj</a>              481 Zend/zend_object_handlers.c 	property_info = zend_get_property_info_quick(zobj-&gt;ce, member, silent || (zobj-&gt;ce-&gt;__get != NULL), key TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1713.html#L486'>zobj</a>              486 Zend/zend_object_handlers.c 	        (zobj-&gt;properties ?</span>
+<span class='curline'><a href='../S/1713.html#L487'>zobj</a>              487 Zend/zend_object_handlers.c 	            ((retval = (zval**)zobj-&gt;properties_table[property_info-&gt;offset]) == NULL) :</span>
+<span class='curline'><a href='../S/1713.html#L488'>zobj</a>              488 Zend/zend_object_handlers.c 	            (*(retval = &amp;zobj-&gt;properties_table[property_info-&gt;offset]) == NULL)) :</span>
+<span class='curline'><a href='../S/1713.html#L489'>zobj</a>              489 Zend/zend_object_handlers.c 	        (UNEXPECTED(!zobj-&gt;properties) ||</span>
+<span class='curline'><a href='../S/1713.html#L490'>zobj</a>              490 Zend/zend_object_handlers.c 	          UNEXPECTED(zend_hash_quick_find(zobj-&gt;properties, property_info-&gt;name, property_info-&gt;name_length+1, property_info-&gt;h, (void **) &amp;retval) == FAILURE)))) {</span>
+<span class='curline'><a href='../S/1713.html#L493'>zobj</a>              493 Zend/zend_object_handlers.c 		if (zobj-&gt;ce-&gt;__get &amp;&amp;</span>
+<span class='curline'><a href='../S/1713.html#L494'>zobj</a>              494 Zend/zend_object_handlers.c 		    zend_get_property_guard(zobj, property_info, member, &amp;guard) == SUCCESS &amp;&amp;</span>
+<span class='curline'><a href='../S/1713.html#L519'>zobj</a>              519 Zend/zend_object_handlers.c 						zend_error(E_NOTICE, "Indirect modification of overloaded property %s::$%s has no effect", zobj-&gt;ce-&gt;name, Z_STRVAL_P(member));</span>
+<span class='curline'><a href='../S/1713.html#L531'>zobj</a>              531 Zend/zend_object_handlers.c 			if (zobj-&gt;ce-&gt;__get &amp;&amp; guard &amp;&amp; guard-&gt;in_get == 1) {</span>
+<span class='curline'><a href='../S/1713.html#L541'>zobj</a>              541 Zend/zend_object_handlers.c 				zend_error(E_NOTICE,"Undefined property: %s::$%s", zobj-&gt;ce-&gt;name, Z_STRVAL_P(member));</span>
+<span class='curline'><a href='../S/1713.html#L557'>zobj</a>              557 Zend/zend_object_handlers.c 	zend_object *zobj;</span>
+<span class='curline'><a href='../S/1713.html#L562'>zobj</a>              562 Zend/zend_object_handlers.c 	zobj = Z_OBJ_P(object);</span>
+<span class='curline'><a href='../S/1713.html#L574'>zobj</a>              574 Zend/zend_object_handlers.c 	property_info = zend_get_property_info_quick(zobj-&gt;ce, member, (zobj-&gt;ce-&gt;__set != NULL), key TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1713.html#L579'>zobj</a>              579 Zend/zend_object_handlers.c 	        (zobj-&gt;properties ?</span>
+<span class='curline'><a href='../S/1713.html#L580'>zobj</a>              580 Zend/zend_object_handlers.c 	            ((variable_ptr = (zval**)zobj-&gt;properties_table[property_info-&gt;offset]) != NULL) :</span>
+<span class='curline'><a href='../S/1713.html#L581'>zobj</a>              581 Zend/zend_object_handlers.c 	            (*(variable_ptr = &amp;zobj-&gt;properties_table[property_info-&gt;offset]) != NULL)) :</span>
+<span class='curline'><a href='../S/1713.html#L582'>zobj</a>              582 Zend/zend_object_handlers.c 	        (EXPECTED(zobj-&gt;properties != NULL) &amp;&amp;</span>
+<span class='curline'><a href='../S/1713.html#L583'>zobj</a>              583 Zend/zend_object_handlers.c 	          EXPECTED(zend_hash_quick_find(zobj-&gt;properties, property_info-&gt;name, property_info-&gt;name_length+1, property_info-&gt;h, (void **) &amp;variable_ptr) == SUCCESS)))) {</span>
+<span class='curline'><a href='../S/1713.html#L615'>zobj</a>              615 Zend/zend_object_handlers.c 		if (zobj-&gt;ce-&gt;__set &amp;&amp;</span>
+<span class='curline'><a href='../S/1713.html#L616'>zobj</a>              616 Zend/zend_object_handlers.c 		    zend_get_property_guard(zobj, property_info, member, &amp;guard) == SUCCESS &amp;&amp;</span>
+<span class='curline'><a href='../S/1713.html#L636'>zobj</a>              636 Zend/zend_object_handlers.c 					if (!zobj-&gt;properties) {</span>
+<span class='curline'><a href='../S/1713.html#L637'>zobj</a>              637 Zend/zend_object_handlers.c 						zobj-&gt;properties_table[property_info-&gt;offset] = value;</span>
+<span class='curline'><a href='../S/1713.html#L638'>zobj</a>              638 Zend/zend_object_handlers.c 					} else if (zobj-&gt;properties_table[property_info-&gt;offset]) {</span>
+<span class='curline'><a href='../S/1713.html#L639'>zobj</a>              639 Zend/zend_object_handlers.c 						*(zval**)zobj-&gt;properties_table[property_info-&gt;offset] = value;</span>
+<span class='curline'><a href='../S/1713.html#L641'>zobj</a>              641 Zend/zend_object_handlers.c 						zend_hash_quick_update(zobj-&gt;properties, property_info-&gt;name, property_info-&gt;name_length+1, property_info-&gt;h, &amp;value, sizeof(zval *), (void**)&amp;zobj-&gt;properties_table[property_info-&gt;offset]);</span>
+<span class='curline'><a href='../S/1713.html#L644'>zobj</a>              644 Zend/zend_object_handlers.c 					if (!zobj-&gt;properties) {</span>
+<span class='curline'><a href='../S/1713.html#L645'>zobj</a>              645 Zend/zend_object_handlers.c 					rebuild_object_properties(zobj);</span>
+<span class='curline'><a href='../S/1713.html#L647'>zobj</a>              647 Zend/zend_object_handlers.c 				zend_hash_quick_update(zobj-&gt;properties, property_info-&gt;name, property_info-&gt;name_length+1, property_info-&gt;h, &amp;value, sizeof(zval *), NULL);</span>
+<span class='curline'><a href='../S/1713.html#L649'>zobj</a>              649 Zend/zend_object_handlers.c 		} else if (zobj-&gt;ce-&gt;__set &amp;&amp; guard &amp;&amp; guard-&gt;in_set == 1) {</span>
+<span class='curline'><a href='../S/1713.html#L751'>zobj</a>              751 Zend/zend_object_handlers.c 	zend_object *zobj;</span>
+<span class='curline'><a href='../S/1713.html#L756'>zobj</a>              756 Zend/zend_object_handlers.c 	zobj = Z_OBJ_P(object);</span>
+<span class='curline'><a href='../S/1713.html#L770'>zobj</a>              770 Zend/zend_object_handlers.c 	property_info = zend_get_property_info_quick(zobj-&gt;ce, member, (zobj-&gt;ce-&gt;__get != NULL), key TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1713.html#L775'>zobj</a>              775 Zend/zend_object_handlers.c 	        (zobj-&gt;properties ?</span>
+<span class='curline'><a href='../S/1713.html#L776'>zobj</a>              776 Zend/zend_object_handlers.c 	            ((retval = (zval**)zobj-&gt;properties_table[property_info-&gt;offset]) == NULL) :</span>
+<span class='curline'><a href='../S/1713.html#L777'>zobj</a>              777 Zend/zend_object_handlers.c 	            (*(retval = &amp;zobj-&gt;properties_table[property_info-&gt;offset]) == NULL)) :</span>
+<span class='curline'><a href='../S/1713.html#L778'>zobj</a>              778 Zend/zend_object_handlers.c 	        (UNEXPECTED(!zobj-&gt;properties) ||</span>
+<span class='curline'><a href='../S/1713.html#L779'>zobj</a>              779 Zend/zend_object_handlers.c 	          UNEXPECTED(zend_hash_quick_find(zobj-&gt;properties, property_info-&gt;name, property_info-&gt;name_length+1, property_info-&gt;h, (void **) &amp;retval) == FAILURE)))) {</span>
+<span class='curline'><a href='../S/1713.html#L783'>zobj</a>              783 Zend/zend_object_handlers.c 		if (!zobj-&gt;ce-&gt;__get ||</span>
+<span class='curline'><a href='../S/1713.html#L784'>zobj</a>              784 Zend/zend_object_handlers.c 			zend_get_property_guard(zobj, property_info, member, &amp;guard) != SUCCESS ||</span>
+<span class='curline'><a href='../S/1713.html#L792'>zobj</a>              792 Zend/zend_object_handlers.c 				if (!zobj-&gt;properties) {</span>
+<span class='curline'><a href='../S/1713.html#L793'>zobj</a>              793 Zend/zend_object_handlers.c 					zobj-&gt;properties_table[property_info-&gt;offset] = new_zval;</span>
+<span class='curline'><a href='../S/1713.html#L794'>zobj</a>              794 Zend/zend_object_handlers.c 					retval = &amp;zobj-&gt;properties_table[property_info-&gt;offset];</span>
+<span class='curline'><a href='../S/1713.html#L795'>zobj</a>              795 Zend/zend_object_handlers.c 				} else if (zobj-&gt;properties_table[property_info-&gt;offset]) {</span>
+<span class='curline'><a href='../S/1713.html#L796'>zobj</a>              796 Zend/zend_object_handlers.c 					*(zval**)zobj-&gt;properties_table[property_info-&gt;offset] = new_zval;</span>
+<span class='curline'><a href='../S/1713.html#L797'>zobj</a>              797 Zend/zend_object_handlers.c 					retval = (zval**)zobj-&gt;properties_table[property_info-&gt;offset];</span>
+<span class='curline'><a href='../S/1713.html#L799'>zobj</a>              799 Zend/zend_object_handlers.c 					zend_hash_quick_update(zobj-&gt;properties, property_info-&gt;name, property_info-&gt;name_length+1, property_info-&gt;h, &amp;new_zval, sizeof(zval *), (void**)&amp;zobj-&gt;properties_table[property_info-&gt;offset]);</span>
+<span class='curline'><a href='../S/1713.html#L800'>zobj</a>              800 Zend/zend_object_handlers.c 					retval = (zval**)zobj-&gt;properties_table[property_info-&gt;offset];</span>
+<span class='curline'><a href='../S/1713.html#L803'>zobj</a>              803 Zend/zend_object_handlers.c 				if (!zobj-&gt;properties) {</span>
+<span class='curline'><a href='../S/1713.html#L804'>zobj</a>              804 Zend/zend_object_handlers.c 					rebuild_object_properties(zobj);</span>
+<span class='curline'><a href='../S/1713.html#L806'>zobj</a>              806 Zend/zend_object_handlers.c 				zend_hash_quick_update(zobj-&gt;properties, property_info-&gt;name, property_info-&gt;name_length+1, property_info-&gt;h, &amp;new_zval, sizeof(zval *), (void **) &amp;retval);</span>
+<span class='curline'><a href='../S/1713.html#L812'>zobj</a>              812 Zend/zend_object_handlers.c 				zend_error(E_NOTICE, "Undefined property: %s::$%s", zobj-&gt;ce-&gt;name, Z_STRVAL_P(member));</span>
+<span class='curline'><a href='../S/1713.html#L828'>zobj</a>              828 Zend/zend_object_handlers.c 	zend_object *zobj;</span>
+<span class='curline'><a href='../S/1713.html#L832'>zobj</a>              832 Zend/zend_object_handlers.c 	zobj = Z_OBJ_P(object);</span>
+<span class='curline'><a href='../S/1713.html#L844'>zobj</a>              844 Zend/zend_object_handlers.c 	property_info = zend_get_property_info_quick(zobj-&gt;ce, member, (zobj-&gt;ce-&gt;__unset != NULL), key TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1713.html#L848'>zobj</a>              848 Zend/zend_object_handlers.c 	    !zobj-&gt;properties &amp;&amp;</span>
+<span class='curline'><a href='../S/1713.html#L850'>zobj</a>              850 Zend/zend_object_handlers.c 	    EXPECTED(zobj-&gt;properties_table[property_info-&gt;offset] != NULL)) {</span>
+<span class='curline'><a href='../S/1713.html#L851'>zobj</a>              851 Zend/zend_object_handlers.c 		zval_ptr_dtor(&amp;zobj-&gt;properties_table[property_info-&gt;offset]);</span>
+<span class='curline'><a href='../S/1713.html#L852'>zobj</a>              852 Zend/zend_object_handlers.c 		zobj-&gt;properties_table[property_info-&gt;offset] = NULL;</span>
+<span class='curline'><a href='../S/1713.html#L854'>zobj</a>              854 Zend/zend_object_handlers.c 	           !zobj-&gt;properties ||</span>
+<span class='curline'><a href='../S/1713.html#L855'>zobj</a>              855 Zend/zend_object_handlers.c 	           UNEXPECTED(zend_hash_quick_del(zobj-&gt;properties, property_info-&gt;name, property_info-&gt;name_length+1, property_info-&gt;h) == FAILURE)) {</span>
+<span class='curline'><a href='../S/1713.html#L858'>zobj</a>              858 Zend/zend_object_handlers.c 		if (zobj-&gt;ce-&gt;__unset &amp;&amp;</span>
+<span class='curline'><a href='../S/1713.html#L859'>zobj</a>              859 Zend/zend_object_handlers.c 		    zend_get_property_guard(zobj, property_info, member, &amp;guard) == SUCCESS &amp;&amp;</span>
+<span class='curline'><a href='../S/1713.html#L870'>zobj</a>              870 Zend/zend_object_handlers.c 		} else if (zobj-&gt;ce-&gt;__unset &amp;&amp; guard &amp;&amp; guard-&gt;in_unset == 1) {</span>
+<span class='curline'><a href='../S/1713.html#L882'>zobj</a>              882 Zend/zend_object_handlers.c 		zobj-&gt;properties_table[property_info-&gt;offset] = NULL;</span>
+<span class='curline'><a href='../S/1713.html#L1041'>zobj</a>             1041 Zend/zend_object_handlers.c 	zend_object *zobj = Z_OBJ_P(object);</span>
+<span class='curline'><a href='../S/1713.html#L1056'>zobj</a>             1056 Zend/zend_object_handlers.c 	if (UNEXPECTED(zend_hash_quick_find(&amp;zobj-&gt;ce-&gt;function_table, lc_method_name, method_len+1, hash_value, (void **)&amp;fbc) == FAILURE)) {</span>
+<span class='curline'><a href='../S/1713.html#L1060'>zobj</a>             1060 Zend/zend_object_handlers.c 		if (zobj-&gt;ce-&gt;__call) {</span>
+<span class='curline'><a href='../S/1713.html#L1061'>zobj</a>             1061 Zend/zend_object_handlers.c 			return zend_get_user_call_function(zobj-&gt;ce, method_name, method_len);</span>
+<span class='curline'><a href='../S/1713.html#L1078'>zobj</a>             1078 Zend/zend_object_handlers.c 			if (zobj-&gt;ce-&gt;__call) {</span>
+<span class='curline'><a href='../S/1713.html#L1079'>zobj</a>             1079 Zend/zend_object_handlers.c 				fbc = zend_get_user_call_function(zobj-&gt;ce, method_name, method_len);</span>
+<span class='curline'><a href='../S/1713.html#L1104'>zobj</a>             1104 Zend/zend_object_handlers.c 				if (zobj-&gt;ce-&gt;__call) {</span>
+<span class='curline'><a href='../S/1713.html#L1105'>zobj</a>             1105 Zend/zend_object_handlers.c 					fbc = zend_get_user_call_function(zobj-&gt;ce, method_name, method_len);</span>
+<span class='curline'><a href='../S/1713.html#L1334'>zobj</a>             1334 Zend/zend_object_handlers.c 	zend_object *zobj = Z_OBJ_P(object);</span>
+<span class='curline'><a href='../S/1713.html#L1335'>zobj</a>             1335 Zend/zend_object_handlers.c 	zend_function *constructor = zobj-&gt;ce-&gt;constructor;</span>
+<span class='curline'><a href='../S/1713.html#L1431'>zobj</a>             1431 Zend/zend_object_handlers.c 	zend_object *zobj;</span>
+<span class='curline'><a href='../S/1713.html#L1437'>zobj</a>             1437 Zend/zend_object_handlers.c 	zobj = Z_OBJ_P(object);</span>
+<span class='curline'><a href='../S/1713.html#L1453'>zobj</a>             1453 Zend/zend_object_handlers.c 	property_info = zend_get_property_info_quick(zobj-&gt;ce, member, 1, key TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1713.html#L1458'>zobj</a>             1458 Zend/zend_object_handlers.c 	        (zobj-&gt;properties ?</span>
+<span class='curline'><a href='../S/1713.html#L1459'>zobj</a>             1459 Zend/zend_object_handlers.c 	            ((value = (zval**)zobj-&gt;properties_table[property_info-&gt;offset]) == NULL) :</span>
+<span class='curline'><a href='../S/1713.html#L1460'>zobj</a>             1460 Zend/zend_object_handlers.c 	            (*(value = &amp;zobj-&gt;properties_table[property_info-&gt;offset]) == NULL)) :</span>
+<span class='curline'><a href='../S/1713.html#L1461'>zobj</a>             1461 Zend/zend_object_handlers.c 	        (UNEXPECTED(!zobj-&gt;properties) ||</span>
+<span class='curline'><a href='../S/1713.html#L1462'>zobj</a>             1462 Zend/zend_object_handlers.c 	          UNEXPECTED(zend_hash_quick_find(zobj-&gt;properties, property_info-&gt;name, property_info-&gt;name_length+1, property_info-&gt;h, (void **) &amp;value) == FAILURE)))) {</span>
+<span class='curline'><a href='../S/1713.html#L1467'>zobj</a>             1467 Zend/zend_object_handlers.c 		    zobj-&gt;ce-&gt;__isset &amp;&amp;</span>
+<span class='curline'><a href='../S/1713.html#L1468'>zobj</a>             1468 Zend/zend_object_handlers.c 		    zend_get_property_guard(zobj, property_info, member, &amp;guard) == SUCCESS &amp;&amp;</span>
+<span class='curline'><a href='../S/1713.html#L1483'>zobj</a>             1483 Zend/zend_object_handlers.c 					if (EXPECTED(!EG(exception)) &amp;&amp; zobj-&gt;ce-&gt;__get &amp;&amp; !guard-&gt;in_get) {</span>
+<span class='curline'><a href='../S/1713.html#L1525'>zobj</a>             1525 Zend/zend_object_handlers.c 	zend_object *zobj;</span>
+<span class='curline'><a href='../S/1713.html#L1526'>zobj</a>             1526 Zend/zend_object_handlers.c 	zobj = Z_OBJ_P(object);</span>
+<span class='curline'><a href='../S/1713.html#L1528'>zobj</a>             1528 Zend/zend_object_handlers.c 	return zobj-&gt;ce;</span>
+<span class='curline'><a href='../S/1713.html#L1534'>zobj</a>             1534 Zend/zend_object_handlers.c 	zend_object *zobj;</span>
+<span class='curline'><a href='../S/1713.html#L1536'>zobj</a>             1536 Zend/zend_object_handlers.c 	zobj = Z_OBJ_P(object);</span>
+<span class='curline'><a href='../S/1713.html#L1539'>zobj</a>             1539 Zend/zend_object_handlers.c 		if (!zobj-&gt;ce-&gt;parent) {</span>
+<span class='curline'><a href='../S/1713.html#L1542'>zobj</a>             1542 Zend/zend_object_handlers.c 		ce = zobj-&gt;ce-&gt;parent;</span>
+<span class='curline'><a href='../S/1713.html#L1544'>zobj</a>             1544 Zend/zend_object_handlers.c 		ce = zobj-&gt;ce;</span>
+<span class='curline'><a href='../S/1714.html#L167'>zobj</a>              167 Zend/zend_object_handlers.h ZEND_API void rebuild_object_properties(zend_object *zobj);</span>
+<span class='curline'><a href='../S/1714.html#L177'>zobj</a>              177 Zend/zend_object_handlers.h ZEND_API int zend_check_property_access(zend_object *zobj, const char *prop_info_name, int prop_info_name_len TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1747.html#L4420'>zobj</a>             4420 Zend/zend_vm_def.h 			zend_object *zobj = zend_objects_get_address(array_ptr TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1747.html#L4430'>zobj</a>             4430 Zend/zend_vm_def.h 				     zend_check_property_access(zobj, str_key, str_key_len-1 TSRMLS_CC) == SUCCESS)) {</span>
+<span class='curline'><a href='../S/1747.html#L4477'>zobj</a>             4477 Zend/zend_vm_def.h 			zend_object *zobj = zend_objects_get_address(array TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1747.html#L4494'>zobj</a>             4494 Zend/zend_vm_def.h 			         zend_check_property_access(zobj, str_key, str_key_len - 1 TSRMLS_CC) != SUCCESS);</span>
+<span class='curline'><a href='../S/1748.html#L3180'>zobj</a>             3180 Zend/zend_vm_execute.h 			zend_object *zobj = zend_objects_get_address(array_ptr TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L3190'>zobj</a>             3190 Zend/zend_vm_execute.h 				     zend_check_property_access(zobj, str_key, str_key_len-1 TSRMLS_CC) == SUCCESS)) {</span>
+<span class='curline'><a href='../S/1748.html#L8546'>zobj</a>             8546 Zend/zend_vm_execute.h 			zend_object *zobj = zend_objects_get_address(array_ptr TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L8556'>zobj</a>             8556 Zend/zend_vm_execute.h 				     zend_check_property_access(zobj, str_key, str_key_len-1 TSRMLS_CC) == SUCCESS)) {</span>
+<span class='curline'><a href='../S/1748.html#L13915'>zobj</a>             13915 Zend/zend_vm_execute.h 			zend_object *zobj = zend_objects_get_address(array_ptr TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L13925'>zobj</a>             13925 Zend/zend_vm_execute.h 				     zend_check_property_access(zobj, str_key, str_key_len-1 TSRMLS_CC) == SUCCESS)) {</span>
+<span class='curline'><a href='../S/1748.html#L13972'>zobj</a>             13972 Zend/zend_vm_execute.h 			zend_object *zobj = zend_objects_get_address(array TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L13989'>zobj</a>             13989 Zend/zend_vm_execute.h 			         zend_check_property_access(zobj, str_key, str_key_len - 1 TSRMLS_CC) != SUCCESS);</span>
+<span class='curline'><a href='../S/1748.html#L31584'>zobj</a>             31584 Zend/zend_vm_execute.h 			zend_object *zobj = zend_objects_get_address(array_ptr TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L31594'>zobj</a>             31594 Zend/zend_vm_execute.h 				     zend_check_property_access(zobj, str_key, str_key_len-1 TSRMLS_CC) == SUCCESS)) {</span>
+<span class='curline'><a href='../S/50.html#L649'>zobj</a>              649 ext/com_dotnet/com_persist.c 	zval *zobj = NULL;</span>
+<span class='curline'><a href='../S/50.html#L653'>zobj</a>              653 ext/com_dotnet/com_persist.c 				&amp;zobj, php_com_variant_class_entry)) {</span>
+<span class='curline'><a href='../S/50.html#L658'>zobj</a>              658 ext/com_dotnet/com_persist.c 	if (!zobj) {</span>
+<span class='curline'><a href='../S/50.html#L662'>zobj</a>              662 ext/com_dotnet/com_persist.c 	obj = CDNO_FETCH(zobj);</span>
+<span class='curline'><a href='../S/51.html#L41'>zobj</a>               41 ext/com_dotnet/com_saproxy.c 	zval *zobj;</span>
+<span class='curline'><a href='../S/51.html#L415'>zobj</a>              415 ext/com_dotnet/com_saproxy.c 	zval_ptr_dtor(&amp;proxy-&gt;zobj);</span>
+<span class='curline'><a href='../S/51.html#L428'>zobj</a>              428 ext/com_dotnet/com_saproxy.c 	Z_ADDREF_P(cloneproxy-&gt;zobj);</span>
+<span class='curline'><a href='../S/51.html#L445'>zobj</a>              445 ext/com_dotnet/com_saproxy.c 		proxy-&gt;zobj = rel-&gt;zobj;</span>
+<span class='curline'><a href='../S/51.html#L449'>zobj</a>              449 ext/com_dotnet/com_saproxy.c 		proxy-&gt;zobj = com_object;</span>
+<span class='curline'><a href='../S/51.html#L452'>zobj</a>              452 ext/com_dotnet/com_saproxy.c 	Z_ADDREF_P(proxy-&gt;zobj);</span>
+<span class='curline'><a href='../S/53.html#L475'>zobj</a>              475 ext/com_dotnet/com_variant.c 	zval *zobj, *zvalue = NULL;</span>
+<span class='curline'><a href='../S/53.html#L479'>zobj</a>              479 ext/com_dotnet/com_variant.c 			"Oz!", &amp;zobj, php_com_variant_class_entry, &amp;zvalue)) {</span>
+<span class='curline'><a href='../S/53.html#L483'>zobj</a>              483 ext/com_dotnet/com_variant.c 	obj = CDNO_FETCH(zobj);</span>
+<span class='curline'><a href='../S/53.html#L997'>zobj</a>              997 ext/com_dotnet/com_variant.c 	zval *zobj;</span>
+<span class='curline'><a href='../S/53.html#L1001'>zobj</a>             1001 ext/com_dotnet/com_variant.c 		"O", &amp;zobj, php_com_variant_class_entry)) {</span>
+<span class='curline'><a href='../S/53.html#L1004'>zobj</a>             1004 ext/com_dotnet/com_variant.c 	obj = CDNO_FETCH(zobj);</span>
+<span class='curline'><a href='../S/53.html#L1014'>zobj</a>             1014 ext/com_dotnet/com_variant.c 	zval *zobj;</span>
+<span class='curline'><a href='../S/53.html#L1020'>zobj</a>             1020 ext/com_dotnet/com_variant.c 		"Ol", &amp;zobj, php_com_variant_class_entry, &amp;vt)) {</span>
+<span class='curline'><a href='../S/53.html#L1023'>zobj</a>             1023 ext/com_dotnet/com_variant.c 	obj = CDNO_FETCH(zobj);</span>
+<span class='curline'><a href='../S/53.html#L1049'>zobj</a>             1049 ext/com_dotnet/com_variant.c 	zval *zobj;</span>
+<span class='curline'><a href='../S/53.html#L1056'>zobj</a>             1056 ext/com_dotnet/com_variant.c 		"Ol", &amp;zobj, php_com_variant_class_entry, &amp;vt)) {</span>
+<span class='curline'><a href='../S/53.html#L1059'>zobj</a>             1059 ext/com_dotnet/com_variant.c 	obj = CDNO_FETCH(zobj);</span>
+<span class='curline'><a href='../S/363.html#L59'>zobj</a>               59 ext/intl/converter/converter.c static void php_converter_default_callback(zval *return_value, zval *zobj, long reason, zval *error TSRMLS_DC) {</span>
+<span class='curline'><a href='../S/363.html#L68'>zobj</a>               68 ext/intl/converter/converter.c 			php_converter_object *objval = (php_converter_object*)CONV_GET(zobj);</span>
+<span class='curline'><a href='../S/363.html#L551'>zobj</a>              551 ext/intl/converter/converter.c static void php_converter_resolve_callback(zval *zobj,</span>
+<span class='curline'><a href='../S/363.html#L560'>zobj</a>              560 ext/intl/converter/converter.c 	Z_ADDREF_P(zobj);</span>
+<span class='curline'><a href='../S/363.html#L561'>zobj</a>              561 ext/intl/converter/converter.c 	add_index_zval(&amp;caller, 0, zobj);</span>
+<span class='curline'><a href='../S/975.html#L1150'>zobj</a>             1150 ext/phar/phar_object.c 	zval *zobj = getThis(), arg1, arg2;</span>
+<span class='curline'><a href='../S/975.html#L1154'>zobj</a>             1154 ext/phar/phar_object.c 	is_data = instanceof_function(Z_OBJCE_P(zobj), phar_ce_data TSRMLS_CC);</span>
+<span class='curline'><a href='../S/975.html#L1255'>zobj</a>             1255 ext/phar/phar_object.c 	zend_call_method_with_2_params(&amp;zobj, Z_OBJCE_P(zobj),</span>
+<span class='curline'><a href='../S/975.html#L4455'>zobj</a>             4455 ext/phar/phar_object.c 	zval *zobj = getThis(), arg1;</span>
+<span class='curline'><a href='../S/975.html#L4504'>zobj</a>             4504 ext/phar/phar_object.c 	zend_call_method_with_1_params(&amp;zobj, Z_OBJCE_P(zobj),</span>
+<span class='curline'><a href='../S/1018.html#L1561'>zobj</a>             1561 ext/soap/php_encoding.c 					zend_object *zobj = zend_objects_get_address(ret TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1018.html#L1562'>zobj</a>             1562 ext/soap/php_encoding.c 					zobj-&gt;ce = ce;</span>
+<span class='curline'><a href='../S/1063.html#L877'>zobj</a>              877 ext/spl/spl_iterators.c 	zval                    *zobj;</span>
+<span class='curline'><a href='../S/1063.html#L882'>zobj</a>              882 ext/spl/spl_iterators.c 	zobj = object-&gt;iterators[level].zobject;</span>
+<span class='curline'><a href='../S/1063.html#L886'>zobj</a>              886 ext/spl/spl_iterators.c 		if (zend_hash_find(&amp;Z_OBJCE_P(zobj)-&gt;function_table, method, method_len+1, (void **) &amp;function_handler) == FAILURE) {</span>
+<span class='curline'><a href='../S/1063.html#L887'>zobj</a>              887 ext/spl/spl_iterators.c 			if (Z_OBJ_HT_P(zobj)-&gt;get_method) {</span>
+<span class='curline'><a href='../S/1063.html#L888'>zobj</a>              888 ext/spl/spl_iterators.c 				*object_ptr = zobj;</span>
+<span class='curline'><a href='../S/1063.html#L892'>zobj</a>              892 ext/spl/spl_iterators.c 			*object_ptr = zobj;</span>
+<span class='curline'><a href='../S/1122.html#L71'>zobj</a>               71 ext/standard/http.c 			zend_object *zobj = zend_objects_get_address(type TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1122.html#L72'>zobj</a>               72 ext/standard/http.c 			if (zend_check_property_access(zobj, key, key_len TSRMLS_CC) != SUCCESS) {</span>
+</pre>
+</body>
+</html>

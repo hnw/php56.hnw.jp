@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>objects</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/1717.html#L30'>objects</a>            30 Zend/zend_objects_API.c ZEND_API void zend_objects_store_init(zend_objects_store *objects, zend_uint init_size)</span>
+<span class='curline'><a href='../S/1717.html#L32'>objects</a>            32 Zend/zend_objects_API.c 	objects-&gt;object_buckets = (zend_object_store_bucket *) emalloc(init_size * sizeof(zend_object_store_bucket));</span>
+<span class='curline'><a href='../S/1717.html#L33'>objects</a>            33 Zend/zend_objects_API.c 	objects-&gt;top = 1; /* Skip 0 so that handles are true */</span>
+<span class='curline'><a href='../S/1717.html#L34'>objects</a>            34 Zend/zend_objects_API.c 	objects-&gt;size = init_size;</span>
+<span class='curline'><a href='../S/1717.html#L35'>objects</a>            35 Zend/zend_objects_API.c 	objects-&gt;free_list_head = -1;</span>
+<span class='curline'><a href='../S/1717.html#L36'>objects</a>            36 Zend/zend_objects_API.c 	memset(&amp;objects-&gt;object_buckets[0], 0, sizeof(zend_object_store_bucket));</span>
+<span class='curline'><a href='../S/1717.html#L39'>objects</a>            39 Zend/zend_objects_API.c ZEND_API void zend_objects_store_destroy(zend_objects_store *objects)</span>
+<span class='curline'><a href='../S/1717.html#L41'>objects</a>            41 Zend/zend_objects_API.c 	efree(objects-&gt;object_buckets);</span>
+<span class='curline'><a href='../S/1717.html#L42'>objects</a>            42 Zend/zend_objects_API.c 	objects-&gt;object_buckets = NULL;</span>
+<span class='curline'><a href='../S/1717.html#L45'>objects</a>            45 Zend/zend_objects_API.c ZEND_API void zend_objects_store_call_destructors(zend_objects_store *objects TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1717.html#L49'>objects</a>            49 Zend/zend_objects_API.c 	for (i = 1; i &lt; objects-&gt;top ; i++) {</span>
+<span class='curline'><a href='../S/1717.html#L50'>objects</a>            50 Zend/zend_objects_API.c 		if (objects-&gt;object_buckets[i].valid) {</span>
+<span class='curline'><a href='../S/1717.html#L51'>objects</a>            51 Zend/zend_objects_API.c 			struct _store_object *obj = &amp;objects-&gt;object_buckets[i].bucket.obj;</span>
+<span class='curline'><a href='../S/1717.html#L53'>objects</a>            53 Zend/zend_objects_API.c 			if (!objects-&gt;object_buckets[i].destructor_called) {</span>
+<span class='curline'><a href='../S/1717.html#L54'>objects</a>            54 Zend/zend_objects_API.c 				objects-&gt;object_buckets[i].destructor_called = 1;</span>
+<span class='curline'><a href='../S/1717.html#L58'>objects</a>            58 Zend/zend_objects_API.c 					obj = &amp;objects-&gt;object_buckets[i].bucket.obj;</span>
+<span class='curline'><a href='../S/1717.html#L71'>objects</a>            71 Zend/zend_objects_API.c ZEND_API void zend_objects_store_mark_destructed(zend_objects_store *objects TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1717.html#L75'>objects</a>            75 Zend/zend_objects_API.c 	if (!objects-&gt;object_buckets) {</span>
+<span class='curline'><a href='../S/1717.html#L78'>objects</a>            78 Zend/zend_objects_API.c 	for (i = 1; i &lt; objects-&gt;top ; i++) {</span>
+<span class='curline'><a href='../S/1717.html#L79'>objects</a>            79 Zend/zend_objects_API.c 		if (objects-&gt;object_buckets[i].valid) {</span>
+<span class='curline'><a href='../S/1717.html#L80'>objects</a>            80 Zend/zend_objects_API.c 			objects-&gt;object_buckets[i].destructor_called = 1;</span>
+<span class='curline'><a href='../S/1717.html#L85'>objects</a>            85 Zend/zend_objects_API.c ZEND_API void zend_objects_store_free_object_storage(zend_objects_store *objects TSRMLS_DC)</span>
+<span class='curline'><a href='../S/1717.html#L89'>objects</a>            89 Zend/zend_objects_API.c 	for (i = 1; i &lt; objects-&gt;top ; i++) {</span>
+<span class='curline'><a href='../S/1717.html#L90'>objects</a>            90 Zend/zend_objects_API.c 		if (objects-&gt;object_buckets[i].valid) {</span>
+<span class='curline'><a href='../S/1717.html#L91'>objects</a>            91 Zend/zend_objects_API.c 			struct _store_object *obj = &amp;objects-&gt;object_buckets[i].bucket.obj;</span>
+<span class='curline'><a href='../S/1717.html#L95'>objects</a>            95 Zend/zend_objects_API.c 			objects-&gt;object_buckets[i].valid = 0;</span>
+<span class='curline'><a href='../S/1718.html#L60'>objects</a>            60 Zend/zend_objects_API.h ZEND_API void zend_objects_store_init(zend_objects_store *objects, zend_uint init_size);</span>
+<span class='curline'><a href='../S/1718.html#L61'>objects</a>            61 Zend/zend_objects_API.h ZEND_API void zend_objects_store_call_destructors(zend_objects_store *objects TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1718.html#L62'>objects</a>            62 Zend/zend_objects_API.h ZEND_API void zend_objects_store_mark_destructed(zend_objects_store *objects TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1718.html#L63'>objects</a>            63 Zend/zend_objects_API.h ZEND_API void zend_objects_store_destroy(zend_objects_store *objects);</span>
+<span class='curline'><a href='../S/1718.html#L83'>objects</a>            83 Zend/zend_objects_API.h ZEND_API void zend_objects_store_free_object_storage(zend_objects_store *objects TSRMLS_DC);</span>
+</pre>
+</body>
+</html>

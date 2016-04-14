@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>session_pool</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/818.html#L137'>session_pool</a>      137 ext/oci8/oci8.c static void php_oci_spool_close(php_oci_spool *session_pool TSRMLS_DC);</span>
+<span class='curline'><a href='../S/818.html#L140'>session_pool</a>      140 ext/oci8/oci8.c static int php_oci_create_session(php_oci_connection *connection, php_oci_spool *session_pool, char *dbname, int dbname_len, char *username, int username_len, char *password, int password_len, char *new_password, int new_password_len, int session_mode TSRMLS_DC);</span>
+<span class='curline'><a href='../S/818.html#L1808'>session_pool</a>     1808 ext/oci8/oci8.c 	php_oci_spool *session_pool = NULL;</span>
+<span class='curline'><a href='../S/818.html#L2124'>session_pool</a>     2124 ext/oci8/oci8.c 		if ((session_pool = php_oci_get_spool(username, username_len, password, password_len, dbname, dbname_len, charsetid ? charsetid:charsetid_nls_lang TSRMLS_CC))==NULL)</span>
+<span class='curline'><a href='../S/818.html#L2156'>session_pool</a>     2156 ext/oci8/oci8.c 		if (php_oci_create_session(connection, session_pool, dbname, dbname_len, username, username_len, password, password_len, new_password, new_password_len, session_mode TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/818.html#L2830'>session_pool</a>     2830 ext/oci8/oci8.c 	php_oci_spool *session_pool = NULL;</span>
+<span class='curline'><a href='../S/818.html#L2837'>session_pool</a>     2837 ext/oci8/oci8.c 	session_pool = (php_oci_spool *) calloc(1, sizeof(php_oci_spool));</span>
+<span class='curline'><a href='../S/818.html#L2838'>session_pool</a>     2838 ext/oci8/oci8.c 	if (session_pool == NULL) {</span>
+<span class='curline'><a href='../S/818.html#L2845'>session_pool</a>     2845 ext/oci8/oci8.c 		session_pool-&gt;spool_hash_key = zend_strndup(hash_key, hash_key_len);</span>
+<span class='curline'><a href='../S/818.html#L2846'>session_pool</a>     2846 ext/oci8/oci8.c 		if (session_pool-&gt;spool_hash_key == NULL) {</span>
+<span class='curline'><a href='../S/818.html#L2853'>session_pool</a>     2853 ext/oci8/oci8.c 	if (!(session_pool-&gt;env = php_oci_create_env(charsetid TSRMLS_CC))) {</span>
+<span class='curline'><a href='../S/818.html#L2859'>session_pool</a>     2859 ext/oci8/oci8.c 	PHP_OCI_CALL_RETURN(errstatus, OCIHandleAlloc, (session_pool-&gt;env, (dvoid **) &amp;session_pool-&gt;poolh, OCI_HTYPE_SPOOL, (size_t) 0, (dvoid **) 0));</span>
+<span class='curline'><a href='../S/818.html#L2871'>session_pool</a>     2871 ext/oci8/oci8.c 	PHP_OCI_CALL_RETURN(errstatus, OCIHandleAlloc, ((dvoid *) session_pool-&gt;env, (dvoid **)&amp;(session_pool-&gt;err), (ub4) OCI_HTYPE_ERROR,(size_t) 0, (dvoid **) 0));</span>
+<span class='curline'><a href='../S/818.html#L2888'>session_pool</a>     2888 ext/oci8/oci8.c 	PHP_OCI_CALL_RETURN(errstatus, OCIHandleAlloc, (session_pool-&gt;env, (dvoid **)&amp;(spoolAuth), OCI_HTYPE_AUTHINFO, 0, NULL));</span>
+<span class='curline'><a href='../S/818.html#L2920'>session_pool</a>     2920 ext/oci8/oci8.c 	PHP_OCI_CALL_RETURN(errstatus, OCIAttrSet, ((dvoid *) (session_pool-&gt;poolh),(ub4) OCI_HTYPE_SPOOL, (dvoid *) spoolAuth, (ub4)0, (ub4)OCI_ATTR_SPOOL_AUTH, OCI_G(err)));</span>
+<span class='curline'><a href='../S/818.html#L2933'>session_pool</a>     2933 ext/oci8/oci8.c 	PHP_OCI_CALL_RETURN(errstatus, OCISessionPoolCreate,(session_pool-&gt;env, OCI_G(err), session_pool-&gt;poolh, (OraText **)&amp;session_pool-&gt;poolname, &amp;session_pool-&gt;poolname_len, (OraText *)dbname, (ub4)dbname_len, 0, UB4MAXVAL, 1,(OraText *)username, (ub4)username_len, (OraText *)password,(ub4)password_len, poolmode));</span>
+<span class='curline'><a href='../S/818.html#L2941'>session_pool</a>     2941 ext/oci8/oci8.c 	if (iserror &amp;&amp; session_pool) {</span>
+<span class='curline'><a href='../S/818.html#L2942'>session_pool</a>     2942 ext/oci8/oci8.c 		php_oci_spool_close(session_pool TSRMLS_CC);</span>
+<span class='curline'><a href='../S/818.html#L2943'>session_pool</a>     2943 ext/oci8/oci8.c 		session_pool = NULL;</span>
+<span class='curline'><a href='../S/818.html#L2952'>session_pool</a>     2952 ext/oci8/oci8.c 		DTRACE_OCI8_SESSPOOL_CREATE(session_pool);</span>
+<span class='curline'><a href='../S/818.html#L2956'>session_pool</a>     2956 ext/oci8/oci8.c 	return session_pool;</span>
+<span class='curline'><a href='../S/818.html#L2968'>session_pool</a>     2968 ext/oci8/oci8.c 	php_oci_spool *session_pool = NULL;</span>
+<span class='curline'><a href='../S/818.html#L3004'>session_pool</a>     3004 ext/oci8/oci8.c 		session_pool = php_oci_create_spool(username, username_len, password, password_len, dbname, dbname_len, spool_hashed_details.c, spool_hashed_details.len, charsetid TSRMLS_CC);</span>
+<span class='curline'><a href='../S/818.html#L3006'>session_pool</a>     3006 ext/oci8/oci8.c 		if (session_pool == NULL) {</span>
+<span class='curline'><a href='../S/818.html#L3010'>session_pool</a>     3010 ext/oci8/oci8.c 		spool_le.ptr  = session_pool;</span>
+<span class='curline'><a href='../S/818.html#L3012'>session_pool</a>     3012 ext/oci8/oci8.c 		PHP_OCI_REGISTER_RESOURCE(session_pool, le_psessionpool);</span>
+<span class='curline'><a href='../S/818.html#L3013'>session_pool</a>     3013 ext/oci8/oci8.c 		zend_hash_update(&amp;EG(persistent_list), session_pool-&gt;spool_hash_key, strlen(session_pool-&gt;spool_hash_key)+1,(void *)&amp;spool_le, sizeof(zend_rsrc_list_entry),NULL);</span>
+<span class='curline'><a href='../S/818.html#L3018'>session_pool</a>     3018 ext/oci8/oci8.c 		session_pool = (php_oci_spool *)(spool_out_le-&gt;ptr);</span>
+<span class='curline'><a href='../S/818.html#L3023'>session_pool</a>     3023 ext/oci8/oci8.c 	if (iserror &amp;&amp; session_pool) {</span>
+<span class='curline'><a href='../S/818.html#L3024'>session_pool</a>     3024 ext/oci8/oci8.c 		php_oci_spool_close(session_pool TSRMLS_CC);</span>
+<span class='curline'><a href='../S/818.html#L3025'>session_pool</a>     3025 ext/oci8/oci8.c 		session_pool = NULL;</span>
+<span class='curline'><a href='../S/818.html#L3028'>session_pool</a>     3028 ext/oci8/oci8.c 	return session_pool;</span>
+<span class='curline'><a href='../S/818.html#L3253'>session_pool</a>     3253 ext/oci8/oci8.c static int php_oci_create_session(php_oci_connection *connection, php_oci_spool *session_pool, char *dbname, int dbname_len, char *username, int username_len, char *password, int password_len, char *new_password, int new_password_len, int session_mode TSRMLS_DC)</span>
+<span class='curline'><a href='../S/818.html#L3267'>session_pool</a>     3267 ext/oci8/oci8.c 	actual_spool = (connection-&gt;is_persistent) ? (connection-&gt;private_spool) : (session_pool);</span>
+<span class='curline'><a href='../S/818.html#L3280'>session_pool</a>     3280 ext/oci8/oci8.c 		DTRACE_OCI8_SESSPOOL_TYPE(session_pool ? 1 : 0, session_pool ? session_pool : connection-&gt;private_spool);</span>
+<span class='curline'><a href='../S/818.html#L3417'>session_pool</a>     3417 ext/oci8/oci8.c 	php_oci_spool *session_pool = (php_oci_spool *)entry-&gt;ptr;</span>
+<span class='curline'><a href='../S/818.html#L3419'>session_pool</a>     3419 ext/oci8/oci8.c 	if (session_pool) {</span>
+<span class='curline'><a href='../S/818.html#L3420'>session_pool</a>     3420 ext/oci8/oci8.c 		php_oci_spool_close(session_pool TSRMLS_CC);</span>
+<span class='curline'><a href='../S/818.html#L3431'>session_pool</a>     3431 ext/oci8/oci8.c static void php_oci_spool_close(php_oci_spool *session_pool TSRMLS_DC)</span>
+<span class='curline'><a href='../S/818.html#L3433'>session_pool</a>     3433 ext/oci8/oci8.c 	if (session_pool-&gt;poolname_len) {</span>
+<span class='curline'><a href='../S/818.html#L3434'>session_pool</a>     3434 ext/oci8/oci8.c 		PHP_OCI_CALL(OCISessionPoolDestroy, ((dvoid *) session_pool-&gt;poolh,</span>
+<span class='curline'><a href='../S/818.html#L3435'>session_pool</a>     3435 ext/oci8/oci8.c 			(dvoid *) session_pool-&gt;err, OCI_SPD_FORCE));</span>
+<span class='curline'><a href='../S/818.html#L3438'>session_pool</a>     3438 ext/oci8/oci8.c 	if (session_pool-&gt;poolh) {</span>
+<span class='curline'><a href='../S/818.html#L3439'>session_pool</a>     3439 ext/oci8/oci8.c 		PHP_OCI_CALL(OCIHandleFree, ((dvoid *) session_pool-&gt;poolh, OCI_HTYPE_SPOOL));</span>
+<span class='curline'><a href='../S/818.html#L3442'>session_pool</a>     3442 ext/oci8/oci8.c 	if (session_pool-&gt;err) {</span>
+<span class='curline'><a href='../S/818.html#L3443'>session_pool</a>     3443 ext/oci8/oci8.c 		PHP_OCI_CALL(OCIHandleFree, ((dvoid *) session_pool-&gt;err, OCI_HTYPE_ERROR));</span>
+<span class='curline'><a href='../S/818.html#L3446'>session_pool</a>     3446 ext/oci8/oci8.c 	if (session_pool-&gt;env) {</span>
+<span class='curline'><a href='../S/818.html#L3447'>session_pool</a>     3447 ext/oci8/oci8.c 		PHP_OCI_CALL(OCIHandleFree, ((dvoid *) session_pool-&gt;env, OCI_HTYPE_ENV));</span>
+<span class='curline'><a href='../S/818.html#L3450'>session_pool</a>     3450 ext/oci8/oci8.c 	if (session_pool-&gt;spool_hash_key) {</span>
+<span class='curline'><a href='../S/818.html#L3451'>session_pool</a>     3451 ext/oci8/oci8.c 		free(session_pool-&gt;spool_hash_key);</span>
+<span class='curline'><a href='../S/818.html#L3454'>session_pool</a>     3454 ext/oci8/oci8.c 	free(session_pool);</span>
+</pre>
+</body>
+</html>

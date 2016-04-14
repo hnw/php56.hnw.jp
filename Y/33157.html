@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>pmatch</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/162.html#L35'>pmatch</a>             35 ext/ereg/regex/engine.c 	regmatch_t *pmatch;	/* [nsub+1] (0 element unused) */</span>
+<span class='curline'><a href='../S/162.html#L66'>pmatch</a>             66 ext/ereg/regex/engine.c matcher(g, string, nmatch, pmatch, eflags)</span>
+<span class='curline'><a href='../S/162.html#L70'>pmatch</a>             70 ext/ereg/regex/engine.c regmatch_t pmatch[];</span>
+<span class='curline'><a href='../S/162.html#L87'>pmatch</a>             87 ext/ereg/regex/engine.c 		start = string + pmatch[0].rm_so;</span>
+<span class='curline'><a href='../S/162.html#L88'>pmatch</a>             88 ext/ereg/regex/engine.c 		stop = string + pmatch[0].rm_eo;</span>
+<span class='curline'><a href='../S/162.html#L109'>pmatch</a>            109 ext/ereg/regex/engine.c 	m-&gt;pmatch = NULL;</span>
+<span class='curline'><a href='../S/162.html#L145'>pmatch</a>            145 ext/ereg/regex/engine.c 		if (m-&gt;pmatch == NULL)</span>
+<span class='curline'><a href='../S/162.html#L146'>pmatch</a>            146 ext/ereg/regex/engine.c 			m-&gt;pmatch = (regmatch_t *)malloc((m-&gt;g-&gt;nsub + 1) *</span>
+<span class='curline'><a href='../S/162.html#L148'>pmatch</a>            148 ext/ereg/regex/engine.c 		if (m-&gt;pmatch == NULL) {</span>
+<span class='curline'><a href='../S/162.html#L153'>pmatch</a>            153 ext/ereg/regex/engine.c 			m-&gt;pmatch[i].rm_so = m-&gt;pmatch[i].rm_eo = -1;</span>
+<span class='curline'><a href='../S/162.html#L162'>pmatch</a>            162 ext/ereg/regex/engine.c 				free((char *)m-&gt;pmatch);</span>
+<span class='curline'><a href='../S/162.html#L185'>pmatch</a>            185 ext/ereg/regex/engine.c 				assert(m-&gt;pmatch[i].rm_so == -1);</span>
+<span class='curline'><a href='../S/162.html#L186'>pmatch</a>            186 ext/ereg/regex/engine.c 				assert(m-&gt;pmatch[i].rm_eo == -1);</span>
+<span class='curline'><a href='../S/162.html#L204'>pmatch</a>            204 ext/ereg/regex/engine.c 		pmatch[0].rm_so = m-&gt;coldp - m-&gt;offp;</span>
+<span class='curline'><a href='../S/162.html#L205'>pmatch</a>            205 ext/ereg/regex/engine.c 		pmatch[0].rm_eo = endp - m-&gt;offp;</span>
+<span class='curline'><a href='../S/162.html#L208'>pmatch</a>            208 ext/ereg/regex/engine.c 		assert(m-&gt;pmatch != NULL);</span>
+<span class='curline'><a href='../S/162.html#L211'>pmatch</a>            211 ext/ereg/regex/engine.c 				pmatch[i] = m-&gt;pmatch[i];</span>
+<span class='curline'><a href='../S/162.html#L213'>pmatch</a>            213 ext/ereg/regex/engine.c 				pmatch[i].rm_so = -1;</span>
+<span class='curline'><a href='../S/162.html#L214'>pmatch</a>            214 ext/ereg/regex/engine.c 				pmatch[i].rm_eo = -1;</span>
+<span class='curline'><a href='../S/162.html#L218'>pmatch</a>            218 ext/ereg/regex/engine.c 	if (m-&gt;pmatch != NULL)</span>
+<span class='curline'><a href='../S/162.html#L219'>pmatch</a>            219 ext/ereg/regex/engine.c 		free((char *)m-&gt;pmatch);</span>
+<span class='curline'><a href='../S/162.html#L397'>pmatch</a>            397 ext/ereg/regex/engine.c 			m-&gt;pmatch[i].rm_so = sp - m-&gt;offp;</span>
+<span class='curline'><a href='../S/162.html#L402'>pmatch</a>            402 ext/ereg/regex/engine.c 			m-&gt;pmatch[i].rm_eo = sp - m-&gt;offp;</span>
+<span class='curline'><a href='../S/162.html#L528'>pmatch</a>            528 ext/ereg/regex/engine.c 		if (m-&gt;pmatch[i].rm_eo == -1)</span>
+<span class='curline'><a href='../S/162.html#L530'>pmatch</a>            530 ext/ereg/regex/engine.c 		assert(m-&gt;pmatch[i].rm_so != -1);</span>
+<span class='curline'><a href='../S/162.html#L531'>pmatch</a>            531 ext/ereg/regex/engine.c 		len = m-&gt;pmatch[i].rm_eo - m-&gt;pmatch[i].rm_so;</span>
+<span class='curline'><a href='../S/162.html#L535'>pmatch</a>            535 ext/ereg/regex/engine.c 		ssp = m-&gt;offp + m-&gt;pmatch[i].rm_so;</span>
+<span class='curline'><a href='../S/162.html#L589'>pmatch</a>            589 ext/ereg/regex/engine.c 		offsave = m-&gt;pmatch[i].rm_so;</span>
+<span class='curline'><a href='../S/162.html#L590'>pmatch</a>            590 ext/ereg/regex/engine.c 		m-&gt;pmatch[i].rm_so = sp - m-&gt;offp;</span>
+<span class='curline'><a href='../S/162.html#L594'>pmatch</a>            594 ext/ereg/regex/engine.c 		m-&gt;pmatch[i].rm_so = offsave;</span>
+<span class='curline'><a href='../S/162.html#L600'>pmatch</a>            600 ext/ereg/regex/engine.c 		offsave = m-&gt;pmatch[i].rm_eo;</span>
+<span class='curline'><a href='../S/162.html#L601'>pmatch</a>            601 ext/ereg/regex/engine.c 		m-&gt;pmatch[i].rm_eo = sp - m-&gt;offp;</span>
+<span class='curline'><a href='../S/162.html#L605'>pmatch</a>            605 ext/ereg/regex/engine.c 		m-&gt;pmatch[i].rm_eo = offsave;</span>
+<span class='curline'><a href='../S/168.html#L113'>pmatch</a>            113 ext/ereg/regex/regexec.c regexec(preg, string, nmatch, pmatch, eflags)</span>
+<span class='curline'><a href='../S/168.html#L117'>pmatch</a>            117 ext/ereg/regex/regexec.c regmatch_t pmatch[];</span>
+<span class='curline'><a href='../S/168.html#L135'>pmatch</a>            135 ext/ereg/regex/regexec.c 		return(smatcher(g, (unsigned char *)string, nmatch, pmatch, eflags));</span>
+<span class='curline'><a href='../S/168.html#L137'>pmatch</a>            137 ext/ereg/regex/regexec.c 		return(lmatcher(g, (unsigned char *)string, nmatch, pmatch, eflags));</span>
+<span class='curline'><a href='../S/734.html#L167'>pmatch</a>            167 ext/mbstring/oniguruma/regposix.c 	regmatch_t pmatch[], int posix_options)</span>
+<span class='curline'><a href='../S/734.html#L189'>pmatch</a>            189 ext/mbstring/oniguruma/regposix.c     pm = pmatch;</span>
+<span class='curline'><a href='../S/734.html#L199'>pmatch</a>            199 ext/mbstring/oniguruma/regposix.c     if (pm != pmatch &amp;&amp; pm != NULL) {</span>
+<span class='curline'><a href='../S/734.html#L200'>pmatch</a>            200 ext/mbstring/oniguruma/regposix.c       xmemcpy(pmatch, pm, sizeof(regmatch_t) * nmatch);</span>
+<span class='curline'><a href='../S/734.html#L206'>pmatch</a>            206 ext/mbstring/oniguruma/regposix.c       pmatch[i].rm_so = pmatch[i].rm_eo = ONIG_REGION_NOTPOS;</span>
+<span class='curline'><a href='../S/734.html#L212'>pmatch</a>            212 ext/mbstring/oniguruma/regposix.c   if (pm != pmatch &amp;&amp; pm != NULL)</span>
+<span class='curline'><a href='../S/740.html#L41'>pmatch</a>             41 ext/mbstring/oniguruma/testc.c   regmatch_t pmatch[25];</span>
+<span class='curline'><a href='../S/740.html#L51'>pmatch</a>             51 ext/mbstring/oniguruma/testc.c   r = regexec(&amp;reg, str, reg.re_nsub + 1, pmatch, 0);</span>
+<span class='curline'><a href='../S/740.html#L75'>pmatch</a>             75 ext/mbstring/oniguruma/testc.c       if (pmatch[mem].rm_so == from &amp;&amp; pmatch[mem].rm_eo == to) {</span>
+<span class='curline'><a href='../S/740.html#L81'>pmatch</a>             81 ext/mbstring/oniguruma/testc.c 	        from, to, pmatch[mem].rm_so, pmatch[mem].rm_eo);</span>
+<span class='curline'><a href='../S/741.html#L66'>pmatch</a>             66 ext/mbstring/oniguruma/testu.c   regmatch_t pmatch[20];</span>
+<span class='curline'><a href='../S/741.html#L79'>pmatch</a>             79 ext/mbstring/oniguruma/testu.c   r = regexec(&amp;reg, str, reg.re_nsub + 1, pmatch, 0);</span>
+<span class='curline'><a href='../S/741.html#L103'>pmatch</a>            103 ext/mbstring/oniguruma/testu.c       if (pmatch[mem].rm_so == from &amp;&amp; pmatch[mem].rm_eo == to) {</span>
+<span class='curline'><a href='../S/741.html#L109'>pmatch</a>            109 ext/mbstring/oniguruma/testu.c 	        from, to, pmatch[mem].rm_so, pmatch[mem].rm_eo);</span>
+<span class='curline'><a href='../S/743.html#L41'>pmatch</a>             41 ext/mbstring/oniguruma/win32/testc.c   regmatch_t pmatch[25];</span>
+<span class='curline'><a href='../S/743.html#L51'>pmatch</a>             51 ext/mbstring/oniguruma/win32/testc.c   r = regexec(&amp;reg, str, reg.re_nsub + 1, pmatch, 0);</span>
+<span class='curline'><a href='../S/743.html#L75'>pmatch</a>             75 ext/mbstring/oniguruma/win32/testc.c       if (pmatch[mem].rm_so == from &amp;&amp; pmatch[mem].rm_eo == to) {</span>
+<span class='curline'><a href='../S/743.html#L81'>pmatch</a>             81 ext/mbstring/oniguruma/win32/testc.c 	        from, to, pmatch[mem].rm_so, pmatch[mem].rm_eo);</span>
+<span class='curline'><a href='../S/895.html#L323'>pmatch</a>            323 ext/pcre/pcrelib/pcreposix.c   regmatch_t pmatch[], int eflags)</span>
+<span class='curline'><a href='../S/895.html#L343'>pmatch</a>            343 ext/pcre/pcrelib/pcreposix.c if (nosub || pmatch == NULL) nmatch = 0;</span>
+<span class='curline'><a href='../S/895.html#L367'>pmatch</a>            367 ext/pcre/pcrelib/pcreposix.c   so = pmatch[0].rm_so;</span>
+<span class='curline'><a href='../S/895.html#L368'>pmatch</a>            368 ext/pcre/pcrelib/pcreposix.c   eo = pmatch[0].rm_eo;</span>
+<span class='curline'><a href='../S/895.html#L390'>pmatch</a>            390 ext/pcre/pcrelib/pcreposix.c       pmatch[i].rm_so = ovector[i*2];</span>
+<span class='curline'><a href='../S/895.html#L391'>pmatch</a>            391 ext/pcre/pcrelib/pcreposix.c       pmatch[i].rm_eo = ovector[i*2+1];</span>
+<span class='curline'><a href='../S/895.html#L394'>pmatch</a>            394 ext/pcre/pcrelib/pcreposix.c     for (; i &lt; nmatch; i++) pmatch[i].rm_so = pmatch[i].rm_eo = -1;</span>
+</pre>
+</body>
+</html>

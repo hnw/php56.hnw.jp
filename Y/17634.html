@@ -1,0 +1,543 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>fbc</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/1655.html#L105'>fbc</a>               105 Zend/zend_compile.c static void zend_push_function_call_entry(zend_function *fbc TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1655.html#L107'>fbc</a>               107 Zend/zend_compile.c 	zend_function_call_entry fcall = { fbc };</span>
+<span class='curline'><a href='../S/1655.html#L2590'>fbc</a>              2590 Zend/zend_compile.c 		if (fcall-&gt;fbc) {</span>
+<span class='curline'><a href='../S/1655.html#L2635'>fbc</a>              2635 Zend/zend_compile.c 	function_ptr = fcall-&gt;fbc;</span>
+<span class='curline'><a href='../S/1655.html#L2748'>fbc</a>              2748 Zend/zend_compile.c 	if (fcall-&gt;fbc) {</span>
+<span class='curline'><a href='../S/1655.html#L2753'>fbc</a>              2753 Zend/zend_compile.c 		ZVAL_STRING(&amp;func_name, fcall-&gt;fbc-&gt;common.function_name, 1);</span>
+<span class='curline'><a href='../S/1655.html#L2764'>fbc</a>              2764 Zend/zend_compile.c 		fcall-&gt;fbc = NULL;</span>
+<span class='curline'><a href='../S/1656.html#L367'>fbc</a>               367 Zend/zend_compile.h 	zend_function *fbc;</span>
+<span class='curline'><a href='../S/1656.html#L388'>fbc</a>               388 Zend/zend_compile.h 	zend_function     *fbc;</span>
+<span class='curline'><a href='../S/1669.html#L1732'>fbc</a>              1732 Zend/zend_execute.c 	return ARG_SHOULD_BE_SENT_BY_REF(call-&gt;fbc, arg_num);</span>
+<span class='curline'><a href='../S/1713.html#L951'>fbc</a>               951 Zend/zend_object_handlers.c static inline zend_function *zend_check_private_int(zend_function *fbc, zend_class_entry *ce, char *function_name_strval, int function_name_strlen, ulong hash_value TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1713.html#L963'>fbc</a>               963 Zend/zend_object_handlers.c 	if (fbc-&gt;common.scope == ce &amp;&amp; EG(scope) == ce) {</span>
+<span class='curline'><a href='../S/1713.html#L965'>fbc</a>               965 Zend/zend_object_handlers.c 		return fbc;</span>
+<span class='curline'><a href='../S/1713.html#L973'>fbc</a>               973 Zend/zend_object_handlers.c 			if (zend_hash_quick_find(&amp;ce-&gt;function_table, function_name_strval, function_name_strlen+1, hash_value, (void **) &amp;fbc)==SUCCESS</span>
+<span class='curline'><a href='../S/1713.html#L974'>fbc</a>               974 Zend/zend_object_handlers.c 				&amp;&amp; fbc-&gt;op_array.fn_flags &amp; ZEND_ACC_PRIVATE</span>
+<span class='curline'><a href='../S/1713.html#L975'>fbc</a>               975 Zend/zend_object_handlers.c 				&amp;&amp; fbc-&gt;common.scope == EG(scope)) {</span>
+<span class='curline'><a href='../S/1713.html#L976'>fbc</a>               976 Zend/zend_object_handlers.c 				return fbc;</span>
+<span class='curline'><a href='../S/1713.html#L986'>fbc</a>               986 Zend/zend_object_handlers.c ZEND_API int zend_check_private(zend_function *fbc, zend_class_entry *ce, char *function_name_strval, int function_name_strlen TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1713.html#L988'>fbc</a>               988 Zend/zend_object_handlers.c 	return zend_check_private_int(fbc, ce, function_name_strval, function_name_strlen, zend_hash_func(function_name_strval, function_name_strlen+1) TSRMLS_CC) != NULL;</span>
+<span class='curline'><a href='../S/1713.html#L1039'>fbc</a>              1039 Zend/zend_object_handlers.c 	zend_function *fbc;</span>
+<span class='curline'><a href='../S/1713.html#L1056'>fbc</a>              1056 Zend/zend_object_handlers.c 	if (UNEXPECTED(zend_hash_quick_find(&amp;zobj-&gt;ce-&gt;function_table, lc_method_name, method_len+1, hash_value, (void **)&amp;fbc) == FAILURE)) {</span>
+<span class='curline'><a href='../S/1713.html#L1068'>fbc</a>              1068 Zend/zend_object_handlers.c 	if (fbc-&gt;op_array.fn_flags &amp; ZEND_ACC_PRIVATE) {</span>
+<span class='curline'><a href='../S/1713.html#L1074'>fbc</a>              1074 Zend/zend_object_handlers.c 		updated_fbc = zend_check_private_int(fbc, Z_OBJ_HANDLER_P(object, get_class_entry)(object TSRMLS_CC), lc_method_name, method_len, hash_value TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1713.html#L1076'>fbc</a>              1076 Zend/zend_object_handlers.c 			fbc = updated_fbc;</span>
+<span class='curline'><a href='../S/1713.html#L1079'>fbc</a>              1079 Zend/zend_object_handlers.c 				fbc = zend_get_user_call_function(zobj-&gt;ce, method_name, method_len);</span>
+<span class='curline'><a href='../S/1713.html#L1081'>fbc</a>              1081 Zend/zend_object_handlers.c 				zend_error_noreturn(E_ERROR, "Call to %s method %s::%s() from context '%s'", zend_visibility_string(fbc-&gt;common.fn_flags), ZEND_FN_SCOPE_NAME(fbc), method_name, EG(scope) ? EG(scope)-&gt;name : "");</span>
+<span class='curline'><a href='../S/1713.html#L1089'>fbc</a>              1089 Zend/zend_object_handlers.c 		    is_derived_class(fbc-&gt;common.scope, EG(scope)) &amp;&amp;</span>
+<span class='curline'><a href='../S/1713.html#L1090'>fbc</a>              1090 Zend/zend_object_handlers.c 		    fbc-&gt;op_array.fn_flags &amp; ZEND_ACC_CHANGED) {</span>
+<span class='curline'><a href='../S/1713.html#L1096'>fbc</a>              1096 Zend/zend_object_handlers.c 				fbc = priv_fbc;</span>
+<span class='curline'><a href='../S/1713.html#L1099'>fbc</a>              1099 Zend/zend_object_handlers.c 		if ((fbc-&gt;common.fn_flags &amp; ZEND_ACC_PROTECTED)) {</span>
+<span class='curline'><a href='../S/1713.html#L1103'>fbc</a>              1103 Zend/zend_object_handlers.c 			if (UNEXPECTED(!zend_check_protected(zend_get_function_root_class(fbc), EG(scope)))) {</span>
+<span class='curline'><a href='../S/1713.html#L1105'>fbc</a>              1105 Zend/zend_object_handlers.c 					fbc = zend_get_user_call_function(zobj-&gt;ce, method_name, method_len);</span>
+<span class='curline'><a href='../S/1713.html#L1107'>fbc</a>              1107 Zend/zend_object_handlers.c 					zend_error_noreturn(E_ERROR, "Call to %s method %s::%s() from context '%s'", zend_visibility_string(fbc-&gt;common.fn_flags), ZEND_FN_SCOPE_NAME(fbc), method_name, EG(scope) ? EG(scope)-&gt;name : "");</span>
+<span class='curline'><a href='../S/1713.html#L1116'>fbc</a>              1116 Zend/zend_object_handlers.c 	return fbc;</span>
+<span class='curline'><a href='../S/1713.html#L1181'>fbc</a>              1181 Zend/zend_object_handlers.c 	zend_function *fbc = NULL;</span>
+<span class='curline'><a href='../S/1713.html#L1202'>fbc</a>              1202 Zend/zend_object_handlers.c 			fbc = ce-&gt;constructor;</span>
+<span class='curline'><a href='../S/1713.html#L1206'>fbc</a>              1206 Zend/zend_object_handlers.c 	if (EXPECTED(!fbc) &amp;&amp;</span>
+<span class='curline'><a href='../S/1713.html#L1207'>fbc</a>              1207 Zend/zend_object_handlers.c 	    UNEXPECTED(zend_hash_quick_find(&amp;ce-&gt;function_table, lc_function_name, function_name_strlen+1, hash_value, (void **) &amp;fbc)==FAILURE)) {</span>
+<span class='curline'><a href='../S/1713.html#L1227'>fbc</a>              1227 Zend/zend_object_handlers.c 	if (UNEXPECTED(!(fbc-&gt;common.fn_flags &amp; ZEND_ACC_STATIC))) {</span>
+<span class='curline'><a href='../S/1713.html#L1228'>fbc</a>              1228 Zend/zend_object_handlers.c 		zend_error_noreturn(E_ERROR, "Cannot call non static method %s::%s() without object", ZEND_FN_SCOPE_NAME(fbc), fbc-&gt;common.function_name);</span>
+<span class='curline'><a href='../S/1713.html#L1231'>fbc</a>              1231 Zend/zend_object_handlers.c 	if (fbc-&gt;op_array.fn_flags &amp; ZEND_ACC_PUBLIC) {</span>
+<span class='curline'><a href='../S/1713.html#L1233'>fbc</a>              1233 Zend/zend_object_handlers.c 	} else if (fbc-&gt;op_array.fn_flags &amp; ZEND_ACC_PRIVATE) {</span>
+<span class='curline'><a href='../S/1713.html#L1238'>fbc</a>              1238 Zend/zend_object_handlers.c 		updated_fbc = zend_check_private_int(fbc, EG(scope), lc_function_name, function_name_strlen, hash_value TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1713.html#L1240'>fbc</a>              1240 Zend/zend_object_handlers.c 			fbc = updated_fbc;</span>
+<span class='curline'><a href='../S/1713.html#L1243'>fbc</a>              1243 Zend/zend_object_handlers.c 				fbc = zend_get_user_callstatic_function(ce, function_name_strval, function_name_strlen);</span>
+<span class='curline'><a href='../S/1713.html#L1245'>fbc</a>              1245 Zend/zend_object_handlers.c 				zend_error_noreturn(E_ERROR, "Call to %s method %s::%s() from context '%s'", zend_visibility_string(fbc-&gt;common.fn_flags), ZEND_FN_SCOPE_NAME(fbc), function_name_strval, EG(scope) ? EG(scope)-&gt;name : "");</span>
+<span class='curline'><a href='../S/1713.html#L1248'>fbc</a>              1248 Zend/zend_object_handlers.c 	} else if ((fbc-&gt;common.fn_flags &amp; ZEND_ACC_PROTECTED)) {</span>
+<span class='curline'><a href='../S/1713.html#L1251'>fbc</a>              1251 Zend/zend_object_handlers.c 		if (UNEXPECTED(!zend_check_protected(zend_get_function_root_class(fbc), EG(scope)))) {</span>
+<span class='curline'><a href='../S/1713.html#L1253'>fbc</a>              1253 Zend/zend_object_handlers.c 				fbc = zend_get_user_callstatic_function(ce, function_name_strval, function_name_strlen);</span>
+<span class='curline'><a href='../S/1713.html#L1255'>fbc</a>              1255 Zend/zend_object_handlers.c 				zend_error_noreturn(E_ERROR, "Call to %s method %s::%s() from context '%s'", zend_visibility_string(fbc-&gt;common.fn_flags), ZEND_FN_SCOPE_NAME(fbc), function_name_strval, EG(scope) ? EG(scope)-&gt;name : "");</span>
+<span class='curline'><a href='../S/1713.html#L1264'>fbc</a>              1264 Zend/zend_object_handlers.c 	return fbc;</span>
+<span class='curline'><a href='../S/1714.html#L154'>fbc</a>               154 Zend/zend_object_handlers.h #define zend_get_function_root_class(fbc) \</span>
+<span class='curline'><a href='../S/1714.html#L155'>fbc</a>               155 Zend/zend_object_handlers.h 	((fbc)-&gt;common.prototype ? (fbc)-&gt;common.prototype-&gt;common.scope : (fbc)-&gt;common.scope)</span>
+<span class='curline'><a href='../S/1714.html#L173'>fbc</a>               173 Zend/zend_object_handlers.h ZEND_API int zend_check_private(union _zend_function *fbc, zend_class_entry *ce, char *function_name_strval, int function_name_strlen TSRMLS_DC);</span>
+<span class='curline'><a href='../S/1747.html#L1914'>fbc</a>              1914 Zend/zend_vm_def.h 	zend_function *fbc = EX(function_state).function;</span>
+<span class='curline'><a href='../S/1747.html#L1919'>fbc</a>              1919 Zend/zend_vm_def.h 	if (UNEXPECTED((fbc-&gt;common.fn_flags &amp; (ZEND_ACC_ABSTRACT|ZEND_ACC_DEPRECATED)) != 0)) {</span>
+<span class='curline'><a href='../S/1747.html#L1920'>fbc</a>              1920 Zend/zend_vm_def.h 		if (UNEXPECTED((fbc-&gt;common.fn_flags &amp; ZEND_ACC_ABSTRACT) != 0)) {</span>
+<span class='curline'><a href='../S/1747.html#L1921'>fbc</a>              1921 Zend/zend_vm_def.h 			zend_error_noreturn(E_ERROR, "Cannot call abstract method %s::%s()", fbc-&gt;common.scope-&gt;name, fbc-&gt;common.function_name);</span>
+<span class='curline'><a href='../S/1747.html#L1923'>fbc</a>              1923 Zend/zend_vm_def.h 		if (UNEXPECTED((fbc-&gt;common.fn_flags &amp; ZEND_ACC_DEPRECATED) != 0)) {</span>
+<span class='curline'><a href='../S/1747.html#L1925'>fbc</a>              1925 Zend/zend_vm_def.h 				fbc-&gt;common.scope ? fbc-&gt;common.scope-&gt;name : "",</span>
+<span class='curline'><a href='../S/1747.html#L1926'>fbc</a>              1926 Zend/zend_vm_def.h 				fbc-&gt;common.scope ? "::" : "",</span>
+<span class='curline'><a href='../S/1747.html#L1927'>fbc</a>              1927 Zend/zend_vm_def.h 				fbc-&gt;common.function_name);</span>
+<span class='curline'><a href='../S/1747.html#L1933'>fbc</a>              1933 Zend/zend_vm_def.h 	if (fbc-&gt;common.scope &amp;&amp;</span>
+<span class='curline'><a href='../S/1747.html#L1934'>fbc</a>              1934 Zend/zend_vm_def.h 		!(fbc-&gt;common.fn_flags &amp; ZEND_ACC_STATIC) &amp;&amp;</span>
+<span class='curline'><a href='../S/1747.html#L1937'>fbc</a>              1937 Zend/zend_vm_def.h 		if (fbc-&gt;common.fn_flags &amp; ZEND_ACC_ALLOW_STATIC) {</span>
+<span class='curline'><a href='../S/1747.html#L1939'>fbc</a>              1939 Zend/zend_vm_def.h 			zend_error(E_STRICT, "Non-static method %s::%s() should not be called statically", fbc-&gt;common.scope-&gt;name, fbc-&gt;common.function_name);</span>
+<span class='curline'><a href='../S/1747.html#L1946'>fbc</a>              1946 Zend/zend_vm_def.h 			zend_error_noreturn(E_ERROR, "Non-static method %s::%s() cannot be called statically", fbc-&gt;common.scope-&gt;name, fbc-&gt;common.function_name);</span>
+<span class='curline'><a href='../S/1747.html#L1950'>fbc</a>              1950 Zend/zend_vm_def.h 	if (fbc-&gt;type == ZEND_USER_FUNCTION || fbc-&gt;common.scope) {</span>
+<span class='curline'><a href='../S/1747.html#L1956'>fbc</a>              1956 Zend/zend_vm_def.h 		EG(scope) = (fbc-&gt;type == ZEND_USER_FUNCTION || !EX(object)) ? fbc-&gt;common.scope : NULL;</span>
+<span class='curline'><a href='../S/1747.html#L1969'>fbc</a>              1969 Zend/zend_vm_def.h 	if (fbc-&gt;type == ZEND_INTERNAL_FUNCTION) {</span>
+<span class='curline'><a href='../S/1747.html#L1970'>fbc</a>              1970 Zend/zend_vm_def.h 		if (fbc-&gt;common.fn_flags &amp; ZEND_ACC_HAS_TYPE_HINTS) {</span>
+<span class='curline'><a href='../S/1747.html#L1975'>fbc</a>              1975 Zend/zend_vm_def.h 				zend_verify_arg_type(fbc, i + 1, (zval *) *p, 0, NULL TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1747.html#L1985'>fbc</a>              1985 Zend/zend_vm_def.h 			ret-&gt;var.fcall_returned_reference = (fbc-&gt;common.fn_flags &amp; ZEND_ACC_RETURN_REFERENCE) != 0;</span>
+<span class='curline'><a href='../S/1747.html#L1989'>fbc</a>              1989 Zend/zend_vm_def.h 				fbc-&gt;internal_function.handler(num_args, ret-&gt;var.ptr, &amp;ret-&gt;var.ptr, EX(object), RETURN_VALUE_USED(opline) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1747.html#L2000'>fbc</a>              2000 Zend/zend_vm_def.h 	} else if (fbc-&gt;type == ZEND_USER_FUNCTION) {</span>
+<span class='curline'><a href='../S/1747.html#L2004'>fbc</a>              2004 Zend/zend_vm_def.h 		EG(active_op_array) = &amp;fbc-&gt;op_array;</span>
+<span class='curline'><a href='../S/1747.html#L2010'>fbc</a>              2010 Zend/zend_vm_def.h 			ret-&gt;var.fcall_returned_reference = (fbc-&gt;common.fn_flags &amp; ZEND_ACC_RETURN_REFERENCE) != 0;</span>
+<span class='curline'><a href='../S/1747.html#L2039'>fbc</a>              2039 Zend/zend_vm_def.h 			Z_OBJ_HT_P(EX(object))-&gt;call_method(fbc-&gt;common.function_name, num_args, EX_T(opline-&gt;result.var).var.ptr, &amp;EX_T(opline-&gt;result.var).var.ptr, EX(object), RETURN_VALUE_USED(opline) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1747.html#L2044'>fbc</a>              2044 Zend/zend_vm_def.h 		if (fbc-&gt;type == ZEND_OVERLOADED_FUNCTION_TEMPORARY) {</span>
+<span class='curline'><a href='../S/1747.html#L2045'>fbc</a>              2045 Zend/zend_vm_def.h 			efree((char*)fbc-&gt;common.function_name);</span>
+<span class='curline'><a href='../S/1747.html#L2047'>fbc</a>              2047 Zend/zend_vm_def.h 		efree(fbc);</span>
+<span class='curline'><a href='../S/1747.html#L2453'>fbc</a>              2453 Zend/zend_vm_def.h 		    (call-&gt;fbc = CACHED_POLYMORPHIC_PTR(opline-&gt;op2.literal-&gt;cache_slot, call-&gt;called_scope)) == NULL) {</span>
+<span class='curline'><a href='../S/1747.html#L2461'>fbc</a>              2461 Zend/zend_vm_def.h 			call-&gt;fbc = Z_OBJ_HT_P(call-&gt;object)-&gt;get_method(&amp;call-&gt;object, function_name_strval, function_name_strlen, ((OP2_TYPE == IS_CONST) ? (opline-&gt;op2.literal + 1) : NULL) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1747.html#L2462'>fbc</a>              2462 Zend/zend_vm_def.h 			if (UNEXPECTED(call-&gt;fbc == NULL)) {</span>
+<span class='curline'><a href='../S/1747.html#L2466'>fbc</a>              2466 Zend/zend_vm_def.h 			    EXPECTED(call-&gt;fbc-&gt;type &lt;= ZEND_USER_FUNCTION) &amp;&amp;</span>
+<span class='curline'><a href='../S/1747.html#L2467'>fbc</a>              2467 Zend/zend_vm_def.h 			    EXPECTED((call-&gt;fbc-&gt;common.fn_flags &amp; (ZEND_ACC_CALL_VIA_HANDLER|ZEND_ACC_NEVER_CACHE)) == 0) &amp;&amp;</span>
+<span class='curline'><a href='../S/1747.html#L2469'>fbc</a>              2469 Zend/zend_vm_def.h 				CACHE_POLYMORPHIC_PTR(opline-&gt;op2.literal-&gt;cache_slot, call-&gt;called_scope, call-&gt;fbc);</span>
+<span class='curline'><a href='../S/1747.html#L2480'>fbc</a>              2480 Zend/zend_vm_def.h 	if ((call-&gt;fbc-&gt;common.fn_flags &amp; ZEND_ACC_STATIC) != 0) {</span>
+<span class='curline'><a href='../S/1747.html#L2542'>fbc</a>              2542 Zend/zend_vm_def.h 		call-&gt;fbc = CACHED_PTR(opline-&gt;op2.literal-&gt;cache_slot);</span>
+<span class='curline'><a href='../S/1747.html#L2545'>fbc</a>              2545 Zend/zend_vm_def.h 	           (call-&gt;fbc = CACHED_POLYMORPHIC_PTR(opline-&gt;op2.literal-&gt;cache_slot, ce))) {</span>
+<span class='curline'><a href='../S/1747.html#L2571'>fbc</a>              2571 Zend/zend_vm_def.h 				call-&gt;fbc = ce-&gt;get_static_method(ce, function_name_strval, function_name_strlen TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1747.html#L2573'>fbc</a>              2573 Zend/zend_vm_def.h 				call-&gt;fbc = zend_std_get_static_method(ce, function_name_strval, function_name_strlen, ((OP2_TYPE == IS_CONST) ? (opline-&gt;op2.literal + 1) : NULL) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1747.html#L2575'>fbc</a>              2575 Zend/zend_vm_def.h 			if (UNEXPECTED(call-&gt;fbc == NULL)) {</span>
+<span class='curline'><a href='../S/1747.html#L2579'>fbc</a>              2579 Zend/zend_vm_def.h 			    EXPECTED(call-&gt;fbc-&gt;type &lt;= ZEND_USER_FUNCTION) &amp;&amp;</span>
+<span class='curline'><a href='../S/1747.html#L2580'>fbc</a>              2580 Zend/zend_vm_def.h 			    EXPECTED((call-&gt;fbc-&gt;common.fn_flags &amp; (ZEND_ACC_CALL_VIA_HANDLER|ZEND_ACC_NEVER_CACHE)) == 0)) {</span>
+<span class='curline'><a href='../S/1747.html#L2582'>fbc</a>              2582 Zend/zend_vm_def.h 					CACHE_PTR(opline-&gt;op2.literal-&gt;cache_slot, call-&gt;fbc);</span>
+<span class='curline'><a href='../S/1747.html#L2584'>fbc</a>              2584 Zend/zend_vm_def.h 					CACHE_POLYMORPHIC_PTR(opline-&gt;op2.literal-&gt;cache_slot, ce, call-&gt;fbc);</span>
+<span class='curline'><a href='../S/1747.html#L2598'>fbc</a>              2598 Zend/zend_vm_def.h 		call-&gt;fbc = ce-&gt;constructor;</span>
+<span class='curline'><a href='../S/1747.html#L2601'>fbc</a>              2601 Zend/zend_vm_def.h 	if (call-&gt;fbc-&gt;common.fn_flags &amp; ZEND_ACC_STATIC) {</span>
+<span class='curline'><a href='../S/1747.html#L2609'>fbc</a>              2609 Zend/zend_vm_def.h 			if (call-&gt;fbc-&gt;common.fn_flags &amp; ZEND_ACC_ALLOW_STATIC) {</span>
+<span class='curline'><a href='../S/1747.html#L2610'>fbc</a>              2610 Zend/zend_vm_def.h 				zend_error(E_DEPRECATED, "Non-static method %s::%s() should not be called statically, assuming $this from incompatible context", call-&gt;fbc-&gt;common.scope-&gt;name, call-&gt;fbc-&gt;common.function_name);</span>
+<span class='curline'><a href='../S/1747.html#L2613'>fbc</a>              2613 Zend/zend_vm_def.h 				zend_error_noreturn(E_ERROR, "Non-static method %s::%s() cannot be called statically, assuming $this from incompatible context", call-&gt;fbc-&gt;common.scope-&gt;name, call-&gt;fbc-&gt;common.function_name);</span>
+<span class='curline'><a href='../S/1747.html#L2639'>fbc</a>              2639 Zend/zend_vm_def.h 			call-&gt;fbc = CACHED_PTR(opline-&gt;op2.literal-&gt;cache_slot);</span>
+<span class='curline'><a href='../S/1747.html#L2640'>fbc</a>              2640 Zend/zend_vm_def.h 		} else if (UNEXPECTED(zend_hash_quick_find(EG(function_table), Z_STRVAL_P(function_name), Z_STRLEN_P(function_name)+1, Z_HASH_P(function_name), (void **) &amp;call-&gt;fbc) == FAILURE)) {</span>
+<span class='curline'><a href='../S/1747.html#L2644'>fbc</a>              2644 Zend/zend_vm_def.h 			CACHE_PTR(opline-&gt;op2.literal-&gt;cache_slot, call-&gt;fbc);</span>
+<span class='curline'><a href='../S/1747.html#L2672'>fbc</a>              2672 Zend/zend_vm_def.h 			if (UNEXPECTED(zend_hash_find(EG(function_table), lcname, function_name_strlen+1, (void **) &amp;call-&gt;fbc) == FAILURE)) {</span>
+<span class='curline'><a href='../S/1747.html#L2689'>fbc</a>              2689 Zend/zend_vm_def.h 			Z_OBJ_HANDLER_P(function_name, get_closure)(function_name, &amp;call-&gt;called_scope, &amp;call-&gt;fbc, &amp;call-&gt;object TSRMLS_CC) == SUCCESS) {</span>
+<span class='curline'><a href='../S/1747.html#L2694'>fbc</a>              2694 Zend/zend_vm_def.h 			    call-&gt;fbc-&gt;common.fn_flags &amp; ZEND_ACC_CLOSURE) {</span>
+<span class='curline'><a href='../S/1747.html#L2696'>fbc</a>              2696 Zend/zend_vm_def.h 				call-&gt;fbc-&gt;common.prototype = (zend_function*)function_name;</span>
+<span class='curline'><a href='../S/1747.html#L2739'>fbc</a>              2739 Zend/zend_vm_def.h 					call-&gt;fbc = ce-&gt;get_static_method(ce, Z_STRVAL_PP(method), Z_STRLEN_PP(method) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1747.html#L2741'>fbc</a>              2741 Zend/zend_vm_def.h 					call-&gt;fbc = zend_std_get_static_method(ce, Z_STRVAL_PP(method), Z_STRLEN_PP(method), NULL TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1747.html#L2747'>fbc</a>              2747 Zend/zend_vm_def.h 				call-&gt;fbc = Z_OBJ_HT_P(call-&gt;object)-&gt;get_method(&amp;call-&gt;object, Z_STRVAL_PP(method), Z_STRLEN_PP(method), NULL TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1747.html#L2748'>fbc</a>              2748 Zend/zend_vm_def.h 				if (UNEXPECTED(call-&gt;fbc == NULL)) {</span>
+<span class='curline'><a href='../S/1747.html#L2752'>fbc</a>              2752 Zend/zend_vm_def.h 				if ((call-&gt;fbc-&gt;common.fn_flags &amp; ZEND_ACC_STATIC) != 0) {</span>
+<span class='curline'><a href='../S/1747.html#L2767'>fbc</a>              2767 Zend/zend_vm_def.h 			if (UNEXPECTED(call-&gt;fbc == NULL)) {</span>
+<span class='curline'><a href='../S/1747.html#L2797'>fbc</a>              2797 Zend/zend_vm_def.h 		call-&gt;fbc = CACHED_PTR(opline-&gt;op2.literal-&gt;cache_slot);</span>
+<span class='curline'><a href='../S/1747.html#L2798'>fbc</a>              2798 Zend/zend_vm_def.h 	} else if (zend_hash_quick_find(EG(function_table), Z_STRVAL(func_name-&gt;constant), Z_STRLEN(func_name-&gt;constant)+1, func_name-&gt;hash_value, (void **) &amp;call-&gt;fbc)==FAILURE) {</span>
+<span class='curline'><a href='../S/1747.html#L2800'>fbc</a>              2800 Zend/zend_vm_def.h 		if (UNEXPECTED(zend_hash_quick_find(EG(function_table), Z_STRVAL(func_name-&gt;constant), Z_STRLEN(func_name-&gt;constant)+1, func_name-&gt;hash_value, (void **) &amp;call-&gt;fbc)==FAILURE)) {</span>
+<span class='curline'><a href='../S/1747.html#L2804'>fbc</a>              2804 Zend/zend_vm_def.h 			CACHE_PTR(opline-&gt;op2.literal-&gt;cache_slot, call-&gt;fbc);</span>
+<span class='curline'><a href='../S/1747.html#L2807'>fbc</a>              2807 Zend/zend_vm_def.h 		CACHE_PTR(opline-&gt;op2.literal-&gt;cache_slot, call-&gt;fbc);</span>
+<span class='curline'><a href='../S/1747.html#L2821'>fbc</a>              2821 Zend/zend_vm_def.h 	EX(function_state).function = EX(call)-&gt;fbc;</span>
+<span class='curline'><a href='../S/1747.html#L2841'>fbc</a>              2841 Zend/zend_vm_def.h 	call-&gt;fbc = EX(function_state).function;</span>
+<span class='curline'><a href='../S/1747.html#L3077'>fbc</a>              3077 Zend/zend_vm_def.h 		if (ARG_MUST_BE_SENT_BY_REF(EX(call)-&gt;fbc, opline-&gt;op2.num)) {</span>
+<span class='curline'><a href='../S/1747.html#L3146'>fbc</a>              3146 Zend/zend_vm_def.h 		if (!ARG_SHOULD_BE_SENT_BY_REF(EX(call)-&gt;fbc, opline-&gt;op2.num)) {</span>
+<span class='curline'><a href='../S/1747.html#L3166'>fbc</a>              3166 Zend/zend_vm_def.h 			!ARG_MAY_BE_SENT_BY_REF(EX(call)-&gt;fbc, opline-&gt;op2.num)) {</span>
+<span class='curline'><a href='../S/1747.html#L3204'>fbc</a>              3204 Zend/zend_vm_def.h 		if (!ARG_SHOULD_BE_SENT_BY_REF(EX(call)-&gt;fbc, opline-&gt;op2.num)) {</span>
+<span class='curline'><a href='../S/1747.html#L3224'>fbc</a>              3224 Zend/zend_vm_def.h 		if (ARG_SHOULD_BE_SENT_BY_REF(EX(call)-&gt;fbc, opline-&gt;op2.num)) {</span>
+<span class='curline'><a href='../S/1747.html#L3266'>fbc</a>              3266 Zend/zend_vm_def.h 				if (ARG_SHOULD_BE_SENT_BY_REF(EX(call)-&gt;fbc, arg_num)) {</span>
+<span class='curline'><a href='../S/1747.html#L3339'>fbc</a>              3339 Zend/zend_vm_def.h 				if (ARG_MUST_BE_SENT_BY_REF(EX(call)-&gt;fbc, arg_num)) {</span>
+<span class='curline'><a href='../S/1747.html#L3343'>fbc</a>              3343 Zend/zend_vm_def.h 						EX(call)-&gt;fbc-&gt;common.scope ? EX(call)-&gt;fbc-&gt;common.scope-&gt;name : "",</span>
+<span class='curline'><a href='../S/1747.html#L3344'>fbc</a>              3344 Zend/zend_vm_def.h 						EX(call)-&gt;fbc-&gt;common.scope ? "::" : "",</span>
+<span class='curline'><a href='../S/1747.html#L3345'>fbc</a>              3345 Zend/zend_vm_def.h 						EX(call)-&gt;fbc-&gt;common.function_name</span>
+<span class='curline'><a href='../S/1747.html#L3619'>fbc</a>              3619 Zend/zend_vm_def.h 		call-&gt;fbc = constructor;</span>
+<span class='curline'><a href='../S/1747.html#L5261'>fbc</a>              5261 Zend/zend_vm_def.h 			if (call-&gt;fbc-&gt;common.fn_flags &amp; ZEND_ACC_CALL_VIA_HANDLER) {</span>
+<span class='curline'><a href='../S/1747.html#L5262'>fbc</a>              5262 Zend/zend_vm_def.h 				efree((char *) call-&gt;fbc-&gt;common.function_name);</span>
+<span class='curline'><a href='../S/1747.html#L5263'>fbc</a>              5263 Zend/zend_vm_def.h 				efree(call-&gt;fbc);</span>
+<span class='curline'><a href='../S/1748.html#L483'>fbc</a>               483 Zend/zend_vm_execute.h 	zend_function *fbc = EX(function_state).function;</span>
+<span class='curline'><a href='../S/1748.html#L488'>fbc</a>               488 Zend/zend_vm_execute.h 	if (UNEXPECTED((fbc-&gt;common.fn_flags &amp; (ZEND_ACC_ABSTRACT|ZEND_ACC_DEPRECATED)) != 0)) {</span>
+<span class='curline'><a href='../S/1748.html#L489'>fbc</a>               489 Zend/zend_vm_execute.h 		if (UNEXPECTED((fbc-&gt;common.fn_flags &amp; ZEND_ACC_ABSTRACT) != 0)) {</span>
+<span class='curline'><a href='../S/1748.html#L490'>fbc</a>               490 Zend/zend_vm_execute.h 			zend_error_noreturn(E_ERROR, "Cannot call abstract method %s::%s()", fbc-&gt;common.scope-&gt;name, fbc-&gt;common.function_name);</span>
+<span class='curline'><a href='../S/1748.html#L492'>fbc</a>               492 Zend/zend_vm_execute.h 		if (UNEXPECTED((fbc-&gt;common.fn_flags &amp; ZEND_ACC_DEPRECATED) != 0)) {</span>
+<span class='curline'><a href='../S/1748.html#L494'>fbc</a>               494 Zend/zend_vm_execute.h 				fbc-&gt;common.scope ? fbc-&gt;common.scope-&gt;name : "",</span>
+<span class='curline'><a href='../S/1748.html#L495'>fbc</a>               495 Zend/zend_vm_execute.h 				fbc-&gt;common.scope ? "::" : "",</span>
+<span class='curline'><a href='../S/1748.html#L496'>fbc</a>               496 Zend/zend_vm_execute.h 				fbc-&gt;common.function_name);</span>
+<span class='curline'><a href='../S/1748.html#L502'>fbc</a>               502 Zend/zend_vm_execute.h 	if (fbc-&gt;common.scope &amp;&amp;</span>
+<span class='curline'><a href='../S/1748.html#L503'>fbc</a>               503 Zend/zend_vm_execute.h 		!(fbc-&gt;common.fn_flags &amp; ZEND_ACC_STATIC) &amp;&amp;</span>
+<span class='curline'><a href='../S/1748.html#L506'>fbc</a>               506 Zend/zend_vm_execute.h 		if (fbc-&gt;common.fn_flags &amp; ZEND_ACC_ALLOW_STATIC) {</span>
+<span class='curline'><a href='../S/1748.html#L508'>fbc</a>               508 Zend/zend_vm_execute.h 			zend_error(E_STRICT, "Non-static method %s::%s() should not be called statically", fbc-&gt;common.scope-&gt;name, fbc-&gt;common.function_name);</span>
+<span class='curline'><a href='../S/1748.html#L515'>fbc</a>               515 Zend/zend_vm_execute.h 			zend_error_noreturn(E_ERROR, "Non-static method %s::%s() cannot be called statically", fbc-&gt;common.scope-&gt;name, fbc-&gt;common.function_name);</span>
+<span class='curline'><a href='../S/1748.html#L519'>fbc</a>               519 Zend/zend_vm_execute.h 	if (fbc-&gt;type == ZEND_USER_FUNCTION || fbc-&gt;common.scope) {</span>
+<span class='curline'><a href='../S/1748.html#L525'>fbc</a>               525 Zend/zend_vm_execute.h 		EG(scope) = (fbc-&gt;type == ZEND_USER_FUNCTION || !EX(object)) ? fbc-&gt;common.scope : NULL;</span>
+<span class='curline'><a href='../S/1748.html#L538'>fbc</a>               538 Zend/zend_vm_execute.h 	if (fbc-&gt;type == ZEND_INTERNAL_FUNCTION) {</span>
+<span class='curline'><a href='../S/1748.html#L539'>fbc</a>               539 Zend/zend_vm_execute.h 		if (fbc-&gt;common.fn_flags &amp; ZEND_ACC_HAS_TYPE_HINTS) {</span>
+<span class='curline'><a href='../S/1748.html#L544'>fbc</a>               544 Zend/zend_vm_execute.h 				zend_verify_arg_type(fbc, i + 1, (zval *) *p, 0, NULL TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L554'>fbc</a>               554 Zend/zend_vm_execute.h 			ret-&gt;var.fcall_returned_reference = (fbc-&gt;common.fn_flags &amp; ZEND_ACC_RETURN_REFERENCE) != 0;</span>
+<span class='curline'><a href='../S/1748.html#L558'>fbc</a>               558 Zend/zend_vm_execute.h 				fbc-&gt;internal_function.handler(num_args, ret-&gt;var.ptr, &amp;ret-&gt;var.ptr, EX(object), RETURN_VALUE_USED(opline) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L569'>fbc</a>               569 Zend/zend_vm_execute.h 	} else if (fbc-&gt;type == ZEND_USER_FUNCTION) {</span>
+<span class='curline'><a href='../S/1748.html#L573'>fbc</a>               573 Zend/zend_vm_execute.h 		EG(active_op_array) = &amp;fbc-&gt;op_array;</span>
+<span class='curline'><a href='../S/1748.html#L579'>fbc</a>               579 Zend/zend_vm_execute.h 			ret-&gt;var.fcall_returned_reference = (fbc-&gt;common.fn_flags &amp; ZEND_ACC_RETURN_REFERENCE) != 0;</span>
+<span class='curline'><a href='../S/1748.html#L608'>fbc</a>               608 Zend/zend_vm_execute.h 			Z_OBJ_HT_P(EX(object))-&gt;call_method(fbc-&gt;common.function_name, num_args, EX_T(opline-&gt;result.var).var.ptr, &amp;EX_T(opline-&gt;result.var).var.ptr, EX(object), RETURN_VALUE_USED(opline) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L613'>fbc</a>               613 Zend/zend_vm_execute.h 		if (fbc-&gt;type == ZEND_OVERLOADED_FUNCTION_TEMPORARY) {</span>
+<span class='curline'><a href='../S/1748.html#L614'>fbc</a>               614 Zend/zend_vm_execute.h 			efree((char*)fbc-&gt;common.function_name);</span>
+<span class='curline'><a href='../S/1748.html#L616'>fbc</a>               616 Zend/zend_vm_execute.h 		efree(fbc);</span>
+<span class='curline'><a href='../S/1748.html#L692'>fbc</a>               692 Zend/zend_vm_execute.h 	EX(function_state).function = EX(call)-&gt;fbc;</span>
+<span class='curline'><a href='../S/1748.html#L742'>fbc</a>               742 Zend/zend_vm_execute.h 				if (ARG_SHOULD_BE_SENT_BY_REF(EX(call)-&gt;fbc, arg_num)) {</span>
+<span class='curline'><a href='../S/1748.html#L815'>fbc</a>               815 Zend/zend_vm_execute.h 				if (ARG_MUST_BE_SENT_BY_REF(EX(call)-&gt;fbc, arg_num)) {</span>
+<span class='curline'><a href='../S/1748.html#L819'>fbc</a>               819 Zend/zend_vm_execute.h 						EX(call)-&gt;fbc-&gt;common.scope ? EX(call)-&gt;fbc-&gt;common.scope-&gt;name : "",</span>
+<span class='curline'><a href='../S/1748.html#L820'>fbc</a>               820 Zend/zend_vm_execute.h 						EX(call)-&gt;fbc-&gt;common.scope ? "::" : "",</span>
+<span class='curline'><a href='../S/1748.html#L821'>fbc</a>               821 Zend/zend_vm_execute.h 						EX(call)-&gt;fbc-&gt;common.function_name</span>
+<span class='curline'><a href='../S/1748.html#L966'>fbc</a>               966 Zend/zend_vm_execute.h 		call-&gt;fbc = constructor;</span>
+<span class='curline'><a href='../S/1748.html#L1217'>fbc</a>              1217 Zend/zend_vm_execute.h 			if (call-&gt;fbc-&gt;common.fn_flags &amp; ZEND_ACC_CALL_VIA_HANDLER) {</span>
+<span class='curline'><a href='../S/1748.html#L1218'>fbc</a>              1218 Zend/zend_vm_execute.h 				efree((char *) call-&gt;fbc-&gt;common.function_name);</span>
+<span class='curline'><a href='../S/1748.html#L1219'>fbc</a>              1219 Zend/zend_vm_execute.h 				efree(call-&gt;fbc);</span>
+<span class='curline'><a href='../S/1748.html#L1444'>fbc</a>              1444 Zend/zend_vm_execute.h 			call-&gt;fbc = CACHED_PTR(opline-&gt;op2.literal-&gt;cache_slot);</span>
+<span class='curline'><a href='../S/1748.html#L1445'>fbc</a>              1445 Zend/zend_vm_execute.h 		} else if (UNEXPECTED(zend_hash_quick_find(EG(function_table), Z_STRVAL_P(function_name), Z_STRLEN_P(function_name)+1, Z_HASH_P(function_name), (void **) &amp;call-&gt;fbc) == FAILURE)) {</span>
+<span class='curline'><a href='../S/1748.html#L1449'>fbc</a>              1449 Zend/zend_vm_execute.h 			CACHE_PTR(opline-&gt;op2.literal-&gt;cache_slot, call-&gt;fbc);</span>
+<span class='curline'><a href='../S/1748.html#L1477'>fbc</a>              1477 Zend/zend_vm_execute.h 			if (UNEXPECTED(zend_hash_find(EG(function_table), lcname, function_name_strlen+1, (void **) &amp;call-&gt;fbc) == FAILURE)) {</span>
+<span class='curline'><a href='../S/1748.html#L1493'>fbc</a>              1493 Zend/zend_vm_execute.h 			Z_OBJ_HANDLER_P(function_name, get_closure)(function_name, &amp;call-&gt;called_scope, &amp;call-&gt;fbc, &amp;call-&gt;object TSRMLS_CC) == SUCCESS) {</span>
+<span class='curline'><a href='../S/1748.html#L1498'>fbc</a>              1498 Zend/zend_vm_execute.h 			    call-&gt;fbc-&gt;common.fn_flags &amp; ZEND_ACC_CLOSURE) {</span>
+<span class='curline'><a href='../S/1748.html#L1500'>fbc</a>              1500 Zend/zend_vm_execute.h 				call-&gt;fbc-&gt;common.prototype = (zend_function*)function_name;</span>
+<span class='curline'><a href='../S/1748.html#L1543'>fbc</a>              1543 Zend/zend_vm_execute.h 					call-&gt;fbc = ce-&gt;get_static_method(ce, Z_STRVAL_PP(method), Z_STRLEN_PP(method) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L1545'>fbc</a>              1545 Zend/zend_vm_execute.h 					call-&gt;fbc = zend_std_get_static_method(ce, Z_STRVAL_PP(method), Z_STRLEN_PP(method), NULL TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L1551'>fbc</a>              1551 Zend/zend_vm_execute.h 				call-&gt;fbc = Z_OBJ_HT_P(call-&gt;object)-&gt;get_method(&amp;call-&gt;object, Z_STRVAL_PP(method), Z_STRLEN_PP(method), NULL TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L1552'>fbc</a>              1552 Zend/zend_vm_execute.h 				if (UNEXPECTED(call-&gt;fbc == NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L1556'>fbc</a>              1556 Zend/zend_vm_execute.h 				if ((call-&gt;fbc-&gt;common.fn_flags &amp; ZEND_ACC_STATIC) != 0) {</span>
+<span class='curline'><a href='../S/1748.html#L1571'>fbc</a>              1571 Zend/zend_vm_execute.h 			if (UNEXPECTED(call-&gt;fbc == NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L1600'>fbc</a>              1600 Zend/zend_vm_execute.h 		call-&gt;fbc = CACHED_PTR(opline-&gt;op2.literal-&gt;cache_slot);</span>
+<span class='curline'><a href='../S/1748.html#L1601'>fbc</a>              1601 Zend/zend_vm_execute.h 	} else if (zend_hash_quick_find(EG(function_table), Z_STRVAL(func_name-&gt;constant), Z_STRLEN(func_name-&gt;constant)+1, func_name-&gt;hash_value, (void **) &amp;call-&gt;fbc)==FAILURE) {</span>
+<span class='curline'><a href='../S/1748.html#L1603'>fbc</a>              1603 Zend/zend_vm_execute.h 		if (UNEXPECTED(zend_hash_quick_find(EG(function_table), Z_STRVAL(func_name-&gt;constant), Z_STRLEN(func_name-&gt;constant)+1, func_name-&gt;hash_value, (void **) &amp;call-&gt;fbc)==FAILURE)) {</span>
+<span class='curline'><a href='../S/1748.html#L1607'>fbc</a>              1607 Zend/zend_vm_execute.h 			CACHE_PTR(opline-&gt;op2.literal-&gt;cache_slot, call-&gt;fbc);</span>
+<span class='curline'><a href='../S/1748.html#L1610'>fbc</a>              1610 Zend/zend_vm_execute.h 		CACHE_PTR(opline-&gt;op2.literal-&gt;cache_slot, call-&gt;fbc);</span>
+<span class='curline'><a href='../S/1748.html#L1787'>fbc</a>              1787 Zend/zend_vm_execute.h 			call-&gt;fbc = CACHED_PTR(opline-&gt;op2.literal-&gt;cache_slot);</span>
+<span class='curline'><a href='../S/1748.html#L1788'>fbc</a>              1788 Zend/zend_vm_execute.h 		} else if (UNEXPECTED(zend_hash_quick_find(EG(function_table), Z_STRVAL_P(function_name), Z_STRLEN_P(function_name)+1, Z_HASH_P(function_name), (void **) &amp;call-&gt;fbc) == FAILURE)) {</span>
+<span class='curline'><a href='../S/1748.html#L1792'>fbc</a>              1792 Zend/zend_vm_execute.h 			CACHE_PTR(opline-&gt;op2.literal-&gt;cache_slot, call-&gt;fbc);</span>
+<span class='curline'><a href='../S/1748.html#L1820'>fbc</a>              1820 Zend/zend_vm_execute.h 			if (UNEXPECTED(zend_hash_find(EG(function_table), lcname, function_name_strlen+1, (void **) &amp;call-&gt;fbc) == FAILURE)) {</span>
+<span class='curline'><a href='../S/1748.html#L1837'>fbc</a>              1837 Zend/zend_vm_execute.h 			Z_OBJ_HANDLER_P(function_name, get_closure)(function_name, &amp;call-&gt;called_scope, &amp;call-&gt;fbc, &amp;call-&gt;object TSRMLS_CC) == SUCCESS) {</span>
+<span class='curline'><a href='../S/1748.html#L1842'>fbc</a>              1842 Zend/zend_vm_execute.h 			    call-&gt;fbc-&gt;common.fn_flags &amp; ZEND_ACC_CLOSURE) {</span>
+<span class='curline'><a href='../S/1748.html#L1844'>fbc</a>              1844 Zend/zend_vm_execute.h 				call-&gt;fbc-&gt;common.prototype = (zend_function*)function_name;</span>
+<span class='curline'><a href='../S/1748.html#L1887'>fbc</a>              1887 Zend/zend_vm_execute.h 					call-&gt;fbc = ce-&gt;get_static_method(ce, Z_STRVAL_PP(method), Z_STRLEN_PP(method) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L1889'>fbc</a>              1889 Zend/zend_vm_execute.h 					call-&gt;fbc = zend_std_get_static_method(ce, Z_STRVAL_PP(method), Z_STRLEN_PP(method), NULL TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L1895'>fbc</a>              1895 Zend/zend_vm_execute.h 				call-&gt;fbc = Z_OBJ_HT_P(call-&gt;object)-&gt;get_method(&amp;call-&gt;object, Z_STRVAL_PP(method), Z_STRLEN_PP(method), NULL TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L1896'>fbc</a>              1896 Zend/zend_vm_execute.h 				if (UNEXPECTED(call-&gt;fbc == NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L1900'>fbc</a>              1900 Zend/zend_vm_execute.h 				if ((call-&gt;fbc-&gt;common.fn_flags &amp; ZEND_ACC_STATIC) != 0) {</span>
+<span class='curline'><a href='../S/1748.html#L1915'>fbc</a>              1915 Zend/zend_vm_execute.h 			if (UNEXPECTED(call-&gt;fbc == NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L1986'>fbc</a>              1986 Zend/zend_vm_execute.h 			call-&gt;fbc = CACHED_PTR(opline-&gt;op2.literal-&gt;cache_slot);</span>
+<span class='curline'><a href='../S/1748.html#L1987'>fbc</a>              1987 Zend/zend_vm_execute.h 		} else if (UNEXPECTED(zend_hash_quick_find(EG(function_table), Z_STRVAL_P(function_name), Z_STRLEN_P(function_name)+1, Z_HASH_P(function_name), (void **) &amp;call-&gt;fbc) == FAILURE)) {</span>
+<span class='curline'><a href='../S/1748.html#L1991'>fbc</a>              1991 Zend/zend_vm_execute.h 			CACHE_PTR(opline-&gt;op2.literal-&gt;cache_slot, call-&gt;fbc);</span>
+<span class='curline'><a href='../S/1748.html#L2019'>fbc</a>              2019 Zend/zend_vm_execute.h 			if (UNEXPECTED(zend_hash_find(EG(function_table), lcname, function_name_strlen+1, (void **) &amp;call-&gt;fbc) == FAILURE)) {</span>
+<span class='curline'><a href='../S/1748.html#L2036'>fbc</a>              2036 Zend/zend_vm_execute.h 			Z_OBJ_HANDLER_P(function_name, get_closure)(function_name, &amp;call-&gt;called_scope, &amp;call-&gt;fbc, &amp;call-&gt;object TSRMLS_CC) == SUCCESS) {</span>
+<span class='curline'><a href='../S/1748.html#L2041'>fbc</a>              2041 Zend/zend_vm_execute.h 			    call-&gt;fbc-&gt;common.fn_flags &amp; ZEND_ACC_CLOSURE) {</span>
+<span class='curline'><a href='../S/1748.html#L2043'>fbc</a>              2043 Zend/zend_vm_execute.h 				call-&gt;fbc-&gt;common.prototype = (zend_function*)function_name;</span>
+<span class='curline'><a href='../S/1748.html#L2086'>fbc</a>              2086 Zend/zend_vm_execute.h 					call-&gt;fbc = ce-&gt;get_static_method(ce, Z_STRVAL_PP(method), Z_STRLEN_PP(method) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L2088'>fbc</a>              2088 Zend/zend_vm_execute.h 					call-&gt;fbc = zend_std_get_static_method(ce, Z_STRVAL_PP(method), Z_STRLEN_PP(method), NULL TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L2094'>fbc</a>              2094 Zend/zend_vm_execute.h 				call-&gt;fbc = Z_OBJ_HT_P(call-&gt;object)-&gt;get_method(&amp;call-&gt;object, Z_STRVAL_PP(method), Z_STRLEN_PP(method), NULL TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L2095'>fbc</a>              2095 Zend/zend_vm_execute.h 				if (UNEXPECTED(call-&gt;fbc == NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L2099'>fbc</a>              2099 Zend/zend_vm_execute.h 				if ((call-&gt;fbc-&gt;common.fn_flags &amp; ZEND_ACC_STATIC) != 0) {</span>
+<span class='curline'><a href='../S/1748.html#L2114'>fbc</a>              2114 Zend/zend_vm_execute.h 			if (UNEXPECTED(call-&gt;fbc == NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L2223'>fbc</a>              2223 Zend/zend_vm_execute.h 			call-&gt;fbc = CACHED_PTR(opline-&gt;op2.literal-&gt;cache_slot);</span>
+<span class='curline'><a href='../S/1748.html#L2224'>fbc</a>              2224 Zend/zend_vm_execute.h 		} else if (UNEXPECTED(zend_hash_quick_find(EG(function_table), Z_STRVAL_P(function_name), Z_STRLEN_P(function_name)+1, Z_HASH_P(function_name), (void **) &amp;call-&gt;fbc) == FAILURE)) {</span>
+<span class='curline'><a href='../S/1748.html#L2228'>fbc</a>              2228 Zend/zend_vm_execute.h 			CACHE_PTR(opline-&gt;op2.literal-&gt;cache_slot, call-&gt;fbc);</span>
+<span class='curline'><a href='../S/1748.html#L2256'>fbc</a>              2256 Zend/zend_vm_execute.h 			if (UNEXPECTED(zend_hash_find(EG(function_table), lcname, function_name_strlen+1, (void **) &amp;call-&gt;fbc) == FAILURE)) {</span>
+<span class='curline'><a href='../S/1748.html#L2272'>fbc</a>              2272 Zend/zend_vm_execute.h 			Z_OBJ_HANDLER_P(function_name, get_closure)(function_name, &amp;call-&gt;called_scope, &amp;call-&gt;fbc, &amp;call-&gt;object TSRMLS_CC) == SUCCESS) {</span>
+<span class='curline'><a href='../S/1748.html#L2277'>fbc</a>              2277 Zend/zend_vm_execute.h 			    call-&gt;fbc-&gt;common.fn_flags &amp; ZEND_ACC_CLOSURE) {</span>
+<span class='curline'><a href='../S/1748.html#L2279'>fbc</a>              2279 Zend/zend_vm_execute.h 				call-&gt;fbc-&gt;common.prototype = (zend_function*)function_name;</span>
+<span class='curline'><a href='../S/1748.html#L2322'>fbc</a>              2322 Zend/zend_vm_execute.h 					call-&gt;fbc = ce-&gt;get_static_method(ce, Z_STRVAL_PP(method), Z_STRLEN_PP(method) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L2324'>fbc</a>              2324 Zend/zend_vm_execute.h 					call-&gt;fbc = zend_std_get_static_method(ce, Z_STRVAL_PP(method), Z_STRLEN_PP(method), NULL TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L2330'>fbc</a>              2330 Zend/zend_vm_execute.h 				call-&gt;fbc = Z_OBJ_HT_P(call-&gt;object)-&gt;get_method(&amp;call-&gt;object, Z_STRVAL_PP(method), Z_STRLEN_PP(method), NULL TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L2331'>fbc</a>              2331 Zend/zend_vm_execute.h 				if (UNEXPECTED(call-&gt;fbc == NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L2335'>fbc</a>              2335 Zend/zend_vm_execute.h 				if ((call-&gt;fbc-&gt;common.fn_flags &amp; ZEND_ACC_STATIC) != 0) {</span>
+<span class='curline'><a href='../S/1748.html#L2350'>fbc</a>              2350 Zend/zend_vm_execute.h 			if (UNEXPECTED(call-&gt;fbc == NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L2595'>fbc</a>              2595 Zend/zend_vm_execute.h 	call-&gt;fbc = EX(function_state).function;</span>
+<span class='curline'><a href='../S/1748.html#L2756'>fbc</a>              2756 Zend/zend_vm_execute.h 		if (ARG_MUST_BE_SENT_BY_REF(EX(call)-&gt;fbc, opline-&gt;op2.num)) {</span>
+<span class='curline'><a href='../S/1748.html#L3856'>fbc</a>              3856 Zend/zend_vm_execute.h 		call-&gt;fbc = CACHED_PTR(opline-&gt;op2.literal-&gt;cache_slot);</span>
+<span class='curline'><a href='../S/1748.html#L3859'>fbc</a>              3859 Zend/zend_vm_execute.h 	           (call-&gt;fbc = CACHED_POLYMORPHIC_PTR(opline-&gt;op2.literal-&gt;cache_slot, ce))) {</span>
+<span class='curline'><a href='../S/1748.html#L3885'>fbc</a>              3885 Zend/zend_vm_execute.h 				call-&gt;fbc = ce-&gt;get_static_method(ce, function_name_strval, function_name_strlen TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L3887'>fbc</a>              3887 Zend/zend_vm_execute.h 				call-&gt;fbc = zend_std_get_static_method(ce, function_name_strval, function_name_strlen, ((IS_CONST == IS_CONST) ? (opline-&gt;op2.literal + 1) : NULL) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L3889'>fbc</a>              3889 Zend/zend_vm_execute.h 			if (UNEXPECTED(call-&gt;fbc == NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L3893'>fbc</a>              3893 Zend/zend_vm_execute.h 			    EXPECTED(call-&gt;fbc-&gt;type &lt;= ZEND_USER_FUNCTION) &amp;&amp;</span>
+<span class='curline'><a href='../S/1748.html#L3894'>fbc</a>              3894 Zend/zend_vm_execute.h 			    EXPECTED((call-&gt;fbc-&gt;common.fn_flags &amp; (ZEND_ACC_CALL_VIA_HANDLER|ZEND_ACC_NEVER_CACHE)) == 0)) {</span>
+<span class='curline'><a href='../S/1748.html#L3896'>fbc</a>              3896 Zend/zend_vm_execute.h 					CACHE_PTR(opline-&gt;op2.literal-&gt;cache_slot, call-&gt;fbc);</span>
+<span class='curline'><a href='../S/1748.html#L3898'>fbc</a>              3898 Zend/zend_vm_execute.h 					CACHE_POLYMORPHIC_PTR(opline-&gt;op2.literal-&gt;cache_slot, ce, call-&gt;fbc);</span>
+<span class='curline'><a href='../S/1748.html#L3912'>fbc</a>              3912 Zend/zend_vm_execute.h 		call-&gt;fbc = ce-&gt;constructor;</span>
+<span class='curline'><a href='../S/1748.html#L3915'>fbc</a>              3915 Zend/zend_vm_execute.h 	if (call-&gt;fbc-&gt;common.fn_flags &amp; ZEND_ACC_STATIC) {</span>
+<span class='curline'><a href='../S/1748.html#L3923'>fbc</a>              3923 Zend/zend_vm_execute.h 			if (call-&gt;fbc-&gt;common.fn_flags &amp; ZEND_ACC_ALLOW_STATIC) {</span>
+<span class='curline'><a href='../S/1748.html#L3924'>fbc</a>              3924 Zend/zend_vm_execute.h 				zend_error(E_DEPRECATED, "Non-static method %s::%s() should not be called statically, assuming $this from incompatible context", call-&gt;fbc-&gt;common.scope-&gt;name, call-&gt;fbc-&gt;common.function_name);</span>
+<span class='curline'><a href='../S/1748.html#L3927'>fbc</a>              3927 Zend/zend_vm_execute.h 				zend_error_noreturn(E_ERROR, "Non-static method %s::%s() cannot be called statically, assuming $this from incompatible context", call-&gt;fbc-&gt;common.scope-&gt;name, call-&gt;fbc-&gt;common.function_name);</span>
+<span class='curline'><a href='../S/1748.html#L4858'>fbc</a>              4858 Zend/zend_vm_execute.h 		call-&gt;fbc = CACHED_PTR(opline-&gt;op2.literal-&gt;cache_slot);</span>
+<span class='curline'><a href='../S/1748.html#L4861'>fbc</a>              4861 Zend/zend_vm_execute.h 	           (call-&gt;fbc = CACHED_POLYMORPHIC_PTR(opline-&gt;op2.literal-&gt;cache_slot, ce))) {</span>
+<span class='curline'><a href='../S/1748.html#L4887'>fbc</a>              4887 Zend/zend_vm_execute.h 				call-&gt;fbc = ce-&gt;get_static_method(ce, function_name_strval, function_name_strlen TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L4889'>fbc</a>              4889 Zend/zend_vm_execute.h 				call-&gt;fbc = zend_std_get_static_method(ce, function_name_strval, function_name_strlen, ((IS_TMP_VAR == IS_CONST) ? (opline-&gt;op2.literal + 1) : NULL) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L4891'>fbc</a>              4891 Zend/zend_vm_execute.h 			if (UNEXPECTED(call-&gt;fbc == NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L4895'>fbc</a>              4895 Zend/zend_vm_execute.h 			    EXPECTED(call-&gt;fbc-&gt;type &lt;= ZEND_USER_FUNCTION) &amp;&amp;</span>
+<span class='curline'><a href='../S/1748.html#L4896'>fbc</a>              4896 Zend/zend_vm_execute.h 			    EXPECTED((call-&gt;fbc-&gt;common.fn_flags &amp; (ZEND_ACC_CALL_VIA_HANDLER|ZEND_ACC_NEVER_CACHE)) == 0)) {</span>
+<span class='curline'><a href='../S/1748.html#L4898'>fbc</a>              4898 Zend/zend_vm_execute.h 					CACHE_PTR(opline-&gt;op2.literal-&gt;cache_slot, call-&gt;fbc);</span>
+<span class='curline'><a href='../S/1748.html#L4900'>fbc</a>              4900 Zend/zend_vm_execute.h 					CACHE_POLYMORPHIC_PTR(opline-&gt;op2.literal-&gt;cache_slot, ce, call-&gt;fbc);</span>
+<span class='curline'><a href='../S/1748.html#L4914'>fbc</a>              4914 Zend/zend_vm_execute.h 		call-&gt;fbc = ce-&gt;constructor;</span>
+<span class='curline'><a href='../S/1748.html#L4917'>fbc</a>              4917 Zend/zend_vm_execute.h 	if (call-&gt;fbc-&gt;common.fn_flags &amp; ZEND_ACC_STATIC) {</span>
+<span class='curline'><a href='../S/1748.html#L4925'>fbc</a>              4925 Zend/zend_vm_execute.h 			if (call-&gt;fbc-&gt;common.fn_flags &amp; ZEND_ACC_ALLOW_STATIC) {</span>
+<span class='curline'><a href='../S/1748.html#L4926'>fbc</a>              4926 Zend/zend_vm_execute.h 				zend_error(E_DEPRECATED, "Non-static method %s::%s() should not be called statically, assuming $this from incompatible context", call-&gt;fbc-&gt;common.scope-&gt;name, call-&gt;fbc-&gt;common.function_name);</span>
+<span class='curline'><a href='../S/1748.html#L4929'>fbc</a>              4929 Zend/zend_vm_execute.h 				zend_error_noreturn(E_ERROR, "Non-static method %s::%s() cannot be called statically, assuming $this from incompatible context", call-&gt;fbc-&gt;common.scope-&gt;name, call-&gt;fbc-&gt;common.function_name);</span>
+<span class='curline'><a href='../S/1748.html#L5722'>fbc</a>              5722 Zend/zend_vm_execute.h 		call-&gt;fbc = CACHED_PTR(opline-&gt;op2.literal-&gt;cache_slot);</span>
+<span class='curline'><a href='../S/1748.html#L5725'>fbc</a>              5725 Zend/zend_vm_execute.h 	           (call-&gt;fbc = CACHED_POLYMORPHIC_PTR(opline-&gt;op2.literal-&gt;cache_slot, ce))) {</span>
+<span class='curline'><a href='../S/1748.html#L5751'>fbc</a>              5751 Zend/zend_vm_execute.h 				call-&gt;fbc = ce-&gt;get_static_method(ce, function_name_strval, function_name_strlen TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L5753'>fbc</a>              5753 Zend/zend_vm_execute.h 				call-&gt;fbc = zend_std_get_static_method(ce, function_name_strval, function_name_strlen, ((IS_VAR == IS_CONST) ? (opline-&gt;op2.literal + 1) : NULL) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L5755'>fbc</a>              5755 Zend/zend_vm_execute.h 			if (UNEXPECTED(call-&gt;fbc == NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L5759'>fbc</a>              5759 Zend/zend_vm_execute.h 			    EXPECTED(call-&gt;fbc-&gt;type &lt;= ZEND_USER_FUNCTION) &amp;&amp;</span>
+<span class='curline'><a href='../S/1748.html#L5760'>fbc</a>              5760 Zend/zend_vm_execute.h 			    EXPECTED((call-&gt;fbc-&gt;common.fn_flags &amp; (ZEND_ACC_CALL_VIA_HANDLER|ZEND_ACC_NEVER_CACHE)) == 0)) {</span>
+<span class='curline'><a href='../S/1748.html#L5762'>fbc</a>              5762 Zend/zend_vm_execute.h 					CACHE_PTR(opline-&gt;op2.literal-&gt;cache_slot, call-&gt;fbc);</span>
+<span class='curline'><a href='../S/1748.html#L5764'>fbc</a>              5764 Zend/zend_vm_execute.h 					CACHE_POLYMORPHIC_PTR(opline-&gt;op2.literal-&gt;cache_slot, ce, call-&gt;fbc);</span>
+<span class='curline'><a href='../S/1748.html#L5778'>fbc</a>              5778 Zend/zend_vm_execute.h 		call-&gt;fbc = ce-&gt;constructor;</span>
+<span class='curline'><a href='../S/1748.html#L5781'>fbc</a>              5781 Zend/zend_vm_execute.h 	if (call-&gt;fbc-&gt;common.fn_flags &amp; ZEND_ACC_STATIC) {</span>
+<span class='curline'><a href='../S/1748.html#L5789'>fbc</a>              5789 Zend/zend_vm_execute.h 			if (call-&gt;fbc-&gt;common.fn_flags &amp; ZEND_ACC_ALLOW_STATIC) {</span>
+<span class='curline'><a href='../S/1748.html#L5790'>fbc</a>              5790 Zend/zend_vm_execute.h 				zend_error(E_DEPRECATED, "Non-static method %s::%s() should not be called statically, assuming $this from incompatible context", call-&gt;fbc-&gt;common.scope-&gt;name, call-&gt;fbc-&gt;common.function_name);</span>
+<span class='curline'><a href='../S/1748.html#L5793'>fbc</a>              5793 Zend/zend_vm_execute.h 				zend_error_noreturn(E_ERROR, "Non-static method %s::%s() cannot be called statically, assuming $this from incompatible context", call-&gt;fbc-&gt;common.scope-&gt;name, call-&gt;fbc-&gt;common.function_name);</span>
+<span class='curline'><a href='../S/1748.html#L6457'>fbc</a>              6457 Zend/zend_vm_execute.h 		call-&gt;fbc = CACHED_PTR(opline-&gt;op2.literal-&gt;cache_slot);</span>
+<span class='curline'><a href='../S/1748.html#L6460'>fbc</a>              6460 Zend/zend_vm_execute.h 	           (call-&gt;fbc = CACHED_POLYMORPHIC_PTR(opline-&gt;op2.literal-&gt;cache_slot, ce))) {</span>
+<span class='curline'><a href='../S/1748.html#L6486'>fbc</a>              6486 Zend/zend_vm_execute.h 				call-&gt;fbc = ce-&gt;get_static_method(ce, function_name_strval, function_name_strlen TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L6488'>fbc</a>              6488 Zend/zend_vm_execute.h 				call-&gt;fbc = zend_std_get_static_method(ce, function_name_strval, function_name_strlen, ((IS_UNUSED == IS_CONST) ? (opline-&gt;op2.literal + 1) : NULL) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L6490'>fbc</a>              6490 Zend/zend_vm_execute.h 			if (UNEXPECTED(call-&gt;fbc == NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L6494'>fbc</a>              6494 Zend/zend_vm_execute.h 			    EXPECTED(call-&gt;fbc-&gt;type &lt;= ZEND_USER_FUNCTION) &amp;&amp;</span>
+<span class='curline'><a href='../S/1748.html#L6495'>fbc</a>              6495 Zend/zend_vm_execute.h 			    EXPECTED((call-&gt;fbc-&gt;common.fn_flags &amp; (ZEND_ACC_CALL_VIA_HANDLER|ZEND_ACC_NEVER_CACHE)) == 0)) {</span>
+<span class='curline'><a href='../S/1748.html#L6497'>fbc</a>              6497 Zend/zend_vm_execute.h 					CACHE_PTR(opline-&gt;op2.literal-&gt;cache_slot, call-&gt;fbc);</span>
+<span class='curline'><a href='../S/1748.html#L6499'>fbc</a>              6499 Zend/zend_vm_execute.h 					CACHE_POLYMORPHIC_PTR(opline-&gt;op2.literal-&gt;cache_slot, ce, call-&gt;fbc);</span>
+<span class='curline'><a href='../S/1748.html#L6513'>fbc</a>              6513 Zend/zend_vm_execute.h 		call-&gt;fbc = ce-&gt;constructor;</span>
+<span class='curline'><a href='../S/1748.html#L6516'>fbc</a>              6516 Zend/zend_vm_execute.h 	if (call-&gt;fbc-&gt;common.fn_flags &amp; ZEND_ACC_STATIC) {</span>
+<span class='curline'><a href='../S/1748.html#L6524'>fbc</a>              6524 Zend/zend_vm_execute.h 			if (call-&gt;fbc-&gt;common.fn_flags &amp; ZEND_ACC_ALLOW_STATIC) {</span>
+<span class='curline'><a href='../S/1748.html#L6525'>fbc</a>              6525 Zend/zend_vm_execute.h 				zend_error(E_DEPRECATED, "Non-static method %s::%s() should not be called statically, assuming $this from incompatible context", call-&gt;fbc-&gt;common.scope-&gt;name, call-&gt;fbc-&gt;common.function_name);</span>
+<span class='curline'><a href='../S/1748.html#L6528'>fbc</a>              6528 Zend/zend_vm_execute.h 				zend_error_noreturn(E_ERROR, "Non-static method %s::%s() cannot be called statically, assuming $this from incompatible context", call-&gt;fbc-&gt;common.scope-&gt;name, call-&gt;fbc-&gt;common.function_name);</span>
+<span class='curline'><a href='../S/1748.html#L7316'>fbc</a>              7316 Zend/zend_vm_execute.h 		call-&gt;fbc = CACHED_PTR(opline-&gt;op2.literal-&gt;cache_slot);</span>
+<span class='curline'><a href='../S/1748.html#L7319'>fbc</a>              7319 Zend/zend_vm_execute.h 	           (call-&gt;fbc = CACHED_POLYMORPHIC_PTR(opline-&gt;op2.literal-&gt;cache_slot, ce))) {</span>
+<span class='curline'><a href='../S/1748.html#L7345'>fbc</a>              7345 Zend/zend_vm_execute.h 				call-&gt;fbc = ce-&gt;get_static_method(ce, function_name_strval, function_name_strlen TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L7347'>fbc</a>              7347 Zend/zend_vm_execute.h 				call-&gt;fbc = zend_std_get_static_method(ce, function_name_strval, function_name_strlen, ((IS_CV == IS_CONST) ? (opline-&gt;op2.literal + 1) : NULL) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L7349'>fbc</a>              7349 Zend/zend_vm_execute.h 			if (UNEXPECTED(call-&gt;fbc == NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L7353'>fbc</a>              7353 Zend/zend_vm_execute.h 			    EXPECTED(call-&gt;fbc-&gt;type &lt;= ZEND_USER_FUNCTION) &amp;&amp;</span>
+<span class='curline'><a href='../S/1748.html#L7354'>fbc</a>              7354 Zend/zend_vm_execute.h 			    EXPECTED((call-&gt;fbc-&gt;common.fn_flags &amp; (ZEND_ACC_CALL_VIA_HANDLER|ZEND_ACC_NEVER_CACHE)) == 0)) {</span>
+<span class='curline'><a href='../S/1748.html#L7356'>fbc</a>              7356 Zend/zend_vm_execute.h 					CACHE_PTR(opline-&gt;op2.literal-&gt;cache_slot, call-&gt;fbc);</span>
+<span class='curline'><a href='../S/1748.html#L7358'>fbc</a>              7358 Zend/zend_vm_execute.h 					CACHE_POLYMORPHIC_PTR(opline-&gt;op2.literal-&gt;cache_slot, ce, call-&gt;fbc);</span>
+<span class='curline'><a href='../S/1748.html#L7372'>fbc</a>              7372 Zend/zend_vm_execute.h 		call-&gt;fbc = ce-&gt;constructor;</span>
+<span class='curline'><a href='../S/1748.html#L7375'>fbc</a>              7375 Zend/zend_vm_execute.h 	if (call-&gt;fbc-&gt;common.fn_flags &amp; ZEND_ACC_STATIC) {</span>
+<span class='curline'><a href='../S/1748.html#L7383'>fbc</a>              7383 Zend/zend_vm_execute.h 			if (call-&gt;fbc-&gt;common.fn_flags &amp; ZEND_ACC_ALLOW_STATIC) {</span>
+<span class='curline'><a href='../S/1748.html#L7384'>fbc</a>              7384 Zend/zend_vm_execute.h 				zend_error(E_DEPRECATED, "Non-static method %s::%s() should not be called statically, assuming $this from incompatible context", call-&gt;fbc-&gt;common.scope-&gt;name, call-&gt;fbc-&gt;common.function_name);</span>
+<span class='curline'><a href='../S/1748.html#L7387'>fbc</a>              7387 Zend/zend_vm_execute.h 				zend_error_noreturn(E_ERROR, "Non-static method %s::%s() cannot be called statically, assuming $this from incompatible context", call-&gt;fbc-&gt;common.scope-&gt;name, call-&gt;fbc-&gt;common.function_name);</span>
+<span class='curline'><a href='../S/1748.html#L8121'>fbc</a>              8121 Zend/zend_vm_execute.h 		if (ARG_MUST_BE_SENT_BY_REF(EX(call)-&gt;fbc, opline-&gt;op2.num)) {</span>
+<span class='curline'><a href='../S/1748.html#L9314'>fbc</a>              9314 Zend/zend_vm_execute.h 		    (call-&gt;fbc = CACHED_POLYMORPHIC_PTR(opline-&gt;op2.literal-&gt;cache_slot, call-&gt;called_scope)) == NULL) {</span>
+<span class='curline'><a href='../S/1748.html#L9322'>fbc</a>              9322 Zend/zend_vm_execute.h 			call-&gt;fbc = Z_OBJ_HT_P(call-&gt;object)-&gt;get_method(&amp;call-&gt;object, function_name_strval, function_name_strlen, ((IS_CONST == IS_CONST) ? (opline-&gt;op2.literal + 1) : NULL) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L9323'>fbc</a>              9323 Zend/zend_vm_execute.h 			if (UNEXPECTED(call-&gt;fbc == NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L9327'>fbc</a>              9327 Zend/zend_vm_execute.h 			    EXPECTED(call-&gt;fbc-&gt;type &lt;= ZEND_USER_FUNCTION) &amp;&amp;</span>
+<span class='curline'><a href='../S/1748.html#L9328'>fbc</a>              9328 Zend/zend_vm_execute.h 			    EXPECTED((call-&gt;fbc-&gt;common.fn_flags &amp; (ZEND_ACC_CALL_VIA_HANDLER|ZEND_ACC_NEVER_CACHE)) == 0) &amp;&amp;</span>
+<span class='curline'><a href='../S/1748.html#L9330'>fbc</a>              9330 Zend/zend_vm_execute.h 				CACHE_POLYMORPHIC_PTR(opline-&gt;op2.literal-&gt;cache_slot, call-&gt;called_scope, call-&gt;fbc);</span>
+<span class='curline'><a href='../S/1748.html#L9341'>fbc</a>              9341 Zend/zend_vm_execute.h 	if ((call-&gt;fbc-&gt;common.fn_flags &amp; ZEND_ACC_STATIC) != 0) {</span>
+<span class='curline'><a href='../S/1748.html#L10179'>fbc</a>              10179 Zend/zend_vm_execute.h 		    (call-&gt;fbc = CACHED_POLYMORPHIC_PTR(opline-&gt;op2.literal-&gt;cache_slot, call-&gt;called_scope)) == NULL) {</span>
+<span class='curline'><a href='../S/1748.html#L10187'>fbc</a>              10187 Zend/zend_vm_execute.h 			call-&gt;fbc = Z_OBJ_HT_P(call-&gt;object)-&gt;get_method(&amp;call-&gt;object, function_name_strval, function_name_strlen, ((IS_TMP_VAR == IS_CONST) ? (opline-&gt;op2.literal + 1) : NULL) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L10188'>fbc</a>              10188 Zend/zend_vm_execute.h 			if (UNEXPECTED(call-&gt;fbc == NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L10192'>fbc</a>              10192 Zend/zend_vm_execute.h 			    EXPECTED(call-&gt;fbc-&gt;type &lt;= ZEND_USER_FUNCTION) &amp;&amp;</span>
+<span class='curline'><a href='../S/1748.html#L10193'>fbc</a>              10193 Zend/zend_vm_execute.h 			    EXPECTED((call-&gt;fbc-&gt;common.fn_flags &amp; (ZEND_ACC_CALL_VIA_HANDLER|ZEND_ACC_NEVER_CACHE)) == 0) &amp;&amp;</span>
+<span class='curline'><a href='../S/1748.html#L10195'>fbc</a>              10195 Zend/zend_vm_execute.h 				CACHE_POLYMORPHIC_PTR(opline-&gt;op2.literal-&gt;cache_slot, call-&gt;called_scope, call-&gt;fbc);</span>
+<span class='curline'><a href='../S/1748.html#L10206'>fbc</a>              10206 Zend/zend_vm_execute.h 	if ((call-&gt;fbc-&gt;common.fn_flags &amp; ZEND_ACC_STATIC) != 0) {</span>
+<span class='curline'><a href='../S/1748.html#L11045'>fbc</a>              11045 Zend/zend_vm_execute.h 		    (call-&gt;fbc = CACHED_POLYMORPHIC_PTR(opline-&gt;op2.literal-&gt;cache_slot, call-&gt;called_scope)) == NULL) {</span>
+<span class='curline'><a href='../S/1748.html#L11053'>fbc</a>              11053 Zend/zend_vm_execute.h 			call-&gt;fbc = Z_OBJ_HT_P(call-&gt;object)-&gt;get_method(&amp;call-&gt;object, function_name_strval, function_name_strlen, ((IS_VAR == IS_CONST) ? (opline-&gt;op2.literal + 1) : NULL) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L11054'>fbc</a>              11054 Zend/zend_vm_execute.h 			if (UNEXPECTED(call-&gt;fbc == NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L11058'>fbc</a>              11058 Zend/zend_vm_execute.h 			    EXPECTED(call-&gt;fbc-&gt;type &lt;= ZEND_USER_FUNCTION) &amp;&amp;</span>
+<span class='curline'><a href='../S/1748.html#L11059'>fbc</a>              11059 Zend/zend_vm_execute.h 			    EXPECTED((call-&gt;fbc-&gt;common.fn_flags &amp; (ZEND_ACC_CALL_VIA_HANDLER|ZEND_ACC_NEVER_CACHE)) == 0) &amp;&amp;</span>
+<span class='curline'><a href='../S/1748.html#L11061'>fbc</a>              11061 Zend/zend_vm_execute.h 				CACHE_POLYMORPHIC_PTR(opline-&gt;op2.literal-&gt;cache_slot, call-&gt;called_scope, call-&gt;fbc);</span>
+<span class='curline'><a href='../S/1748.html#L11072'>fbc</a>              11072 Zend/zend_vm_execute.h 	if ((call-&gt;fbc-&gt;common.fn_flags &amp; ZEND_ACC_STATIC) != 0) {</span>
+<span class='curline'><a href='../S/1748.html#L12491'>fbc</a>              12491 Zend/zend_vm_execute.h 		    (call-&gt;fbc = CACHED_POLYMORPHIC_PTR(opline-&gt;op2.literal-&gt;cache_slot, call-&gt;called_scope)) == NULL) {</span>
+<span class='curline'><a href='../S/1748.html#L12499'>fbc</a>              12499 Zend/zend_vm_execute.h 			call-&gt;fbc = Z_OBJ_HT_P(call-&gt;object)-&gt;get_method(&amp;call-&gt;object, function_name_strval, function_name_strlen, ((IS_CV == IS_CONST) ? (opline-&gt;op2.literal + 1) : NULL) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L12500'>fbc</a>              12500 Zend/zend_vm_execute.h 			if (UNEXPECTED(call-&gt;fbc == NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L12504'>fbc</a>              12504 Zend/zend_vm_execute.h 			    EXPECTED(call-&gt;fbc-&gt;type &lt;= ZEND_USER_FUNCTION) &amp;&amp;</span>
+<span class='curline'><a href='../S/1748.html#L12505'>fbc</a>              12505 Zend/zend_vm_execute.h 			    EXPECTED((call-&gt;fbc-&gt;common.fn_flags &amp; (ZEND_ACC_CALL_VIA_HANDLER|ZEND_ACC_NEVER_CACHE)) == 0) &amp;&amp;</span>
+<span class='curline'><a href='../S/1748.html#L12507'>fbc</a>              12507 Zend/zend_vm_execute.h 				CACHE_POLYMORPHIC_PTR(opline-&gt;op2.literal-&gt;cache_slot, call-&gt;called_scope, call-&gt;fbc);</span>
+<span class='curline'><a href='../S/1748.html#L12518'>fbc</a>              12518 Zend/zend_vm_execute.h 	if ((call-&gt;fbc-&gt;common.fn_flags &amp; ZEND_ACC_STATIC) != 0) {</span>
+<span class='curline'><a href='../S/1748.html#L13418'>fbc</a>              13418 Zend/zend_vm_execute.h 		if (!ARG_SHOULD_BE_SENT_BY_REF(EX(call)-&gt;fbc, opline-&gt;op2.num)) {</span>
+<span class='curline'><a href='../S/1748.html#L13438'>fbc</a>              13438 Zend/zend_vm_execute.h 			!ARG_MAY_BE_SENT_BY_REF(EX(call)-&gt;fbc, opline-&gt;op2.num)) {</span>
+<span class='curline'><a href='../S/1748.html#L13476'>fbc</a>              13476 Zend/zend_vm_execute.h 		if (!ARG_SHOULD_BE_SENT_BY_REF(EX(call)-&gt;fbc, opline-&gt;op2.num)) {</span>
+<span class='curline'><a href='../S/1748.html#L13496'>fbc</a>              13496 Zend/zend_vm_execute.h 		if (ARG_SHOULD_BE_SENT_BY_REF(EX(call)-&gt;fbc, opline-&gt;op2.num)) {</span>
+<span class='curline'><a href='../S/1748.html#L15739'>fbc</a>              15739 Zend/zend_vm_execute.h 		    (call-&gt;fbc = CACHED_POLYMORPHIC_PTR(opline-&gt;op2.literal-&gt;cache_slot, call-&gt;called_scope)) == NULL) {</span>
+<span class='curline'><a href='../S/1748.html#L15747'>fbc</a>              15747 Zend/zend_vm_execute.h 			call-&gt;fbc = Z_OBJ_HT_P(call-&gt;object)-&gt;get_method(&amp;call-&gt;object, function_name_strval, function_name_strlen, ((IS_CONST == IS_CONST) ? (opline-&gt;op2.literal + 1) : NULL) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L15748'>fbc</a>              15748 Zend/zend_vm_execute.h 			if (UNEXPECTED(call-&gt;fbc == NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L15752'>fbc</a>              15752 Zend/zend_vm_execute.h 			    EXPECTED(call-&gt;fbc-&gt;type &lt;= ZEND_USER_FUNCTION) &amp;&amp;</span>
+<span class='curline'><a href='../S/1748.html#L15753'>fbc</a>              15753 Zend/zend_vm_execute.h 			    EXPECTED((call-&gt;fbc-&gt;common.fn_flags &amp; (ZEND_ACC_CALL_VIA_HANDLER|ZEND_ACC_NEVER_CACHE)) == 0) &amp;&amp;</span>
+<span class='curline'><a href='../S/1748.html#L15755'>fbc</a>              15755 Zend/zend_vm_execute.h 				CACHE_POLYMORPHIC_PTR(opline-&gt;op2.literal-&gt;cache_slot, call-&gt;called_scope, call-&gt;fbc);</span>
+<span class='curline'><a href='../S/1748.html#L15766'>fbc</a>              15766 Zend/zend_vm_execute.h 	if ((call-&gt;fbc-&gt;common.fn_flags &amp; ZEND_ACC_STATIC) != 0) {</span>
+<span class='curline'><a href='../S/1748.html#L15827'>fbc</a>              15827 Zend/zend_vm_execute.h 		call-&gt;fbc = CACHED_PTR(opline-&gt;op2.literal-&gt;cache_slot);</span>
+<span class='curline'><a href='../S/1748.html#L15830'>fbc</a>              15830 Zend/zend_vm_execute.h 	           (call-&gt;fbc = CACHED_POLYMORPHIC_PTR(opline-&gt;op2.literal-&gt;cache_slot, ce))) {</span>
+<span class='curline'><a href='../S/1748.html#L15856'>fbc</a>              15856 Zend/zend_vm_execute.h 				call-&gt;fbc = ce-&gt;get_static_method(ce, function_name_strval, function_name_strlen TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L15858'>fbc</a>              15858 Zend/zend_vm_execute.h 				call-&gt;fbc = zend_std_get_static_method(ce, function_name_strval, function_name_strlen, ((IS_CONST == IS_CONST) ? (opline-&gt;op2.literal + 1) : NULL) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L15860'>fbc</a>              15860 Zend/zend_vm_execute.h 			if (UNEXPECTED(call-&gt;fbc == NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L15864'>fbc</a>              15864 Zend/zend_vm_execute.h 			    EXPECTED(call-&gt;fbc-&gt;type &lt;= ZEND_USER_FUNCTION) &amp;&amp;</span>
+<span class='curline'><a href='../S/1748.html#L15865'>fbc</a>              15865 Zend/zend_vm_execute.h 			    EXPECTED((call-&gt;fbc-&gt;common.fn_flags &amp; (ZEND_ACC_CALL_VIA_HANDLER|ZEND_ACC_NEVER_CACHE)) == 0)) {</span>
+<span class='curline'><a href='../S/1748.html#L15867'>fbc</a>              15867 Zend/zend_vm_execute.h 					CACHE_PTR(opline-&gt;op2.literal-&gt;cache_slot, call-&gt;fbc);</span>
+<span class='curline'><a href='../S/1748.html#L15869'>fbc</a>              15869 Zend/zend_vm_execute.h 					CACHE_POLYMORPHIC_PTR(opline-&gt;op2.literal-&gt;cache_slot, ce, call-&gt;fbc);</span>
+<span class='curline'><a href='../S/1748.html#L15883'>fbc</a>              15883 Zend/zend_vm_execute.h 		call-&gt;fbc = ce-&gt;constructor;</span>
+<span class='curline'><a href='../S/1748.html#L15886'>fbc</a>              15886 Zend/zend_vm_execute.h 	if (call-&gt;fbc-&gt;common.fn_flags &amp; ZEND_ACC_STATIC) {</span>
+<span class='curline'><a href='../S/1748.html#L15894'>fbc</a>              15894 Zend/zend_vm_execute.h 			if (call-&gt;fbc-&gt;common.fn_flags &amp; ZEND_ACC_ALLOW_STATIC) {</span>
+<span class='curline'><a href='../S/1748.html#L15895'>fbc</a>              15895 Zend/zend_vm_execute.h 				zend_error(E_DEPRECATED, "Non-static method %s::%s() should not be called statically, assuming $this from incompatible context", call-&gt;fbc-&gt;common.scope-&gt;name, call-&gt;fbc-&gt;common.function_name);</span>
+<span class='curline'><a href='../S/1748.html#L15898'>fbc</a>              15898 Zend/zend_vm_execute.h 				zend_error_noreturn(E_ERROR, "Non-static method %s::%s() cannot be called statically, assuming $this from incompatible context", call-&gt;fbc-&gt;common.scope-&gt;name, call-&gt;fbc-&gt;common.function_name);</span>
+<span class='curline'><a href='../S/1748.html#L18092'>fbc</a>              18092 Zend/zend_vm_execute.h 		    (call-&gt;fbc = CACHED_POLYMORPHIC_PTR(opline-&gt;op2.literal-&gt;cache_slot, call-&gt;called_scope)) == NULL) {</span>
+<span class='curline'><a href='../S/1748.html#L18100'>fbc</a>              18100 Zend/zend_vm_execute.h 			call-&gt;fbc = Z_OBJ_HT_P(call-&gt;object)-&gt;get_method(&amp;call-&gt;object, function_name_strval, function_name_strlen, ((IS_TMP_VAR == IS_CONST) ? (opline-&gt;op2.literal + 1) : NULL) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L18101'>fbc</a>              18101 Zend/zend_vm_execute.h 			if (UNEXPECTED(call-&gt;fbc == NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L18105'>fbc</a>              18105 Zend/zend_vm_execute.h 			    EXPECTED(call-&gt;fbc-&gt;type &lt;= ZEND_USER_FUNCTION) &amp;&amp;</span>
+<span class='curline'><a href='../S/1748.html#L18106'>fbc</a>              18106 Zend/zend_vm_execute.h 			    EXPECTED((call-&gt;fbc-&gt;common.fn_flags &amp; (ZEND_ACC_CALL_VIA_HANDLER|ZEND_ACC_NEVER_CACHE)) == 0) &amp;&amp;</span>
+<span class='curline'><a href='../S/1748.html#L18108'>fbc</a>              18108 Zend/zend_vm_execute.h 				CACHE_POLYMORPHIC_PTR(opline-&gt;op2.literal-&gt;cache_slot, call-&gt;called_scope, call-&gt;fbc);</span>
+<span class='curline'><a href='../S/1748.html#L18119'>fbc</a>              18119 Zend/zend_vm_execute.h 	if ((call-&gt;fbc-&gt;common.fn_flags &amp; ZEND_ACC_STATIC) != 0) {</span>
+<span class='curline'><a href='../S/1748.html#L18181'>fbc</a>              18181 Zend/zend_vm_execute.h 		call-&gt;fbc = CACHED_PTR(opline-&gt;op2.literal-&gt;cache_slot);</span>
+<span class='curline'><a href='../S/1748.html#L18184'>fbc</a>              18184 Zend/zend_vm_execute.h 	           (call-&gt;fbc = CACHED_POLYMORPHIC_PTR(opline-&gt;op2.literal-&gt;cache_slot, ce))) {</span>
+<span class='curline'><a href='../S/1748.html#L18210'>fbc</a>              18210 Zend/zend_vm_execute.h 				call-&gt;fbc = ce-&gt;get_static_method(ce, function_name_strval, function_name_strlen TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L18212'>fbc</a>              18212 Zend/zend_vm_execute.h 				call-&gt;fbc = zend_std_get_static_method(ce, function_name_strval, function_name_strlen, ((IS_TMP_VAR == IS_CONST) ? (opline-&gt;op2.literal + 1) : NULL) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L18214'>fbc</a>              18214 Zend/zend_vm_execute.h 			if (UNEXPECTED(call-&gt;fbc == NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L18218'>fbc</a>              18218 Zend/zend_vm_execute.h 			    EXPECTED(call-&gt;fbc-&gt;type &lt;= ZEND_USER_FUNCTION) &amp;&amp;</span>
+<span class='curline'><a href='../S/1748.html#L18219'>fbc</a>              18219 Zend/zend_vm_execute.h 			    EXPECTED((call-&gt;fbc-&gt;common.fn_flags &amp; (ZEND_ACC_CALL_VIA_HANDLER|ZEND_ACC_NEVER_CACHE)) == 0)) {</span>
+<span class='curline'><a href='../S/1748.html#L18221'>fbc</a>              18221 Zend/zend_vm_execute.h 					CACHE_PTR(opline-&gt;op2.literal-&gt;cache_slot, call-&gt;fbc);</span>
+<span class='curline'><a href='../S/1748.html#L18223'>fbc</a>              18223 Zend/zend_vm_execute.h 					CACHE_POLYMORPHIC_PTR(opline-&gt;op2.literal-&gt;cache_slot, ce, call-&gt;fbc);</span>
+<span class='curline'><a href='../S/1748.html#L18237'>fbc</a>              18237 Zend/zend_vm_execute.h 		call-&gt;fbc = ce-&gt;constructor;</span>
+<span class='curline'><a href='../S/1748.html#L18240'>fbc</a>              18240 Zend/zend_vm_execute.h 	if (call-&gt;fbc-&gt;common.fn_flags &amp; ZEND_ACC_STATIC) {</span>
+<span class='curline'><a href='../S/1748.html#L18248'>fbc</a>              18248 Zend/zend_vm_execute.h 			if (call-&gt;fbc-&gt;common.fn_flags &amp; ZEND_ACC_ALLOW_STATIC) {</span>
+<span class='curline'><a href='../S/1748.html#L18249'>fbc</a>              18249 Zend/zend_vm_execute.h 				zend_error(E_DEPRECATED, "Non-static method %s::%s() should not be called statically, assuming $this from incompatible context", call-&gt;fbc-&gt;common.scope-&gt;name, call-&gt;fbc-&gt;common.function_name);</span>
+<span class='curline'><a href='../S/1748.html#L18252'>fbc</a>              18252 Zend/zend_vm_execute.h 				zend_error_noreturn(E_ERROR, "Non-static method %s::%s() cannot be called statically, assuming $this from incompatible context", call-&gt;fbc-&gt;common.scope-&gt;name, call-&gt;fbc-&gt;common.function_name);</span>
+<span class='curline'><a href='../S/1748.html#L20410'>fbc</a>              20410 Zend/zend_vm_execute.h 		    (call-&gt;fbc = CACHED_POLYMORPHIC_PTR(opline-&gt;op2.literal-&gt;cache_slot, call-&gt;called_scope)) == NULL) {</span>
+<span class='curline'><a href='../S/1748.html#L20418'>fbc</a>              20418 Zend/zend_vm_execute.h 			call-&gt;fbc = Z_OBJ_HT_P(call-&gt;object)-&gt;get_method(&amp;call-&gt;object, function_name_strval, function_name_strlen, ((IS_VAR == IS_CONST) ? (opline-&gt;op2.literal + 1) : NULL) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L20419'>fbc</a>              20419 Zend/zend_vm_execute.h 			if (UNEXPECTED(call-&gt;fbc == NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L20423'>fbc</a>              20423 Zend/zend_vm_execute.h 			    EXPECTED(call-&gt;fbc-&gt;type &lt;= ZEND_USER_FUNCTION) &amp;&amp;</span>
+<span class='curline'><a href='../S/1748.html#L20424'>fbc</a>              20424 Zend/zend_vm_execute.h 			    EXPECTED((call-&gt;fbc-&gt;common.fn_flags &amp; (ZEND_ACC_CALL_VIA_HANDLER|ZEND_ACC_NEVER_CACHE)) == 0) &amp;&amp;</span>
+<span class='curline'><a href='../S/1748.html#L20426'>fbc</a>              20426 Zend/zend_vm_execute.h 				CACHE_POLYMORPHIC_PTR(opline-&gt;op2.literal-&gt;cache_slot, call-&gt;called_scope, call-&gt;fbc);</span>
+<span class='curline'><a href='../S/1748.html#L20437'>fbc</a>              20437 Zend/zend_vm_execute.h 	if ((call-&gt;fbc-&gt;common.fn_flags &amp; ZEND_ACC_STATIC) != 0) {</span>
+<span class='curline'><a href='../S/1748.html#L20499'>fbc</a>              20499 Zend/zend_vm_execute.h 		call-&gt;fbc = CACHED_PTR(opline-&gt;op2.literal-&gt;cache_slot);</span>
+<span class='curline'><a href='../S/1748.html#L20502'>fbc</a>              20502 Zend/zend_vm_execute.h 	           (call-&gt;fbc = CACHED_POLYMORPHIC_PTR(opline-&gt;op2.literal-&gt;cache_slot, ce))) {</span>
+<span class='curline'><a href='../S/1748.html#L20528'>fbc</a>              20528 Zend/zend_vm_execute.h 				call-&gt;fbc = ce-&gt;get_static_method(ce, function_name_strval, function_name_strlen TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L20530'>fbc</a>              20530 Zend/zend_vm_execute.h 				call-&gt;fbc = zend_std_get_static_method(ce, function_name_strval, function_name_strlen, ((IS_VAR == IS_CONST) ? (opline-&gt;op2.literal + 1) : NULL) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L20532'>fbc</a>              20532 Zend/zend_vm_execute.h 			if (UNEXPECTED(call-&gt;fbc == NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L20536'>fbc</a>              20536 Zend/zend_vm_execute.h 			    EXPECTED(call-&gt;fbc-&gt;type &lt;= ZEND_USER_FUNCTION) &amp;&amp;</span>
+<span class='curline'><a href='../S/1748.html#L20537'>fbc</a>              20537 Zend/zend_vm_execute.h 			    EXPECTED((call-&gt;fbc-&gt;common.fn_flags &amp; (ZEND_ACC_CALL_VIA_HANDLER|ZEND_ACC_NEVER_CACHE)) == 0)) {</span>
+<span class='curline'><a href='../S/1748.html#L20539'>fbc</a>              20539 Zend/zend_vm_execute.h 					CACHE_PTR(opline-&gt;op2.literal-&gt;cache_slot, call-&gt;fbc);</span>
+<span class='curline'><a href='../S/1748.html#L20541'>fbc</a>              20541 Zend/zend_vm_execute.h 					CACHE_POLYMORPHIC_PTR(opline-&gt;op2.literal-&gt;cache_slot, ce, call-&gt;fbc);</span>
+<span class='curline'><a href='../S/1748.html#L20555'>fbc</a>              20555 Zend/zend_vm_execute.h 		call-&gt;fbc = ce-&gt;constructor;</span>
+<span class='curline'><a href='../S/1748.html#L20558'>fbc</a>              20558 Zend/zend_vm_execute.h 	if (call-&gt;fbc-&gt;common.fn_flags &amp; ZEND_ACC_STATIC) {</span>
+<span class='curline'><a href='../S/1748.html#L20566'>fbc</a>              20566 Zend/zend_vm_execute.h 			if (call-&gt;fbc-&gt;common.fn_flags &amp; ZEND_ACC_ALLOW_STATIC) {</span>
+<span class='curline'><a href='../S/1748.html#L20567'>fbc</a>              20567 Zend/zend_vm_execute.h 				zend_error(E_DEPRECATED, "Non-static method %s::%s() should not be called statically, assuming $this from incompatible context", call-&gt;fbc-&gt;common.scope-&gt;name, call-&gt;fbc-&gt;common.function_name);</span>
+<span class='curline'><a href='../S/1748.html#L20570'>fbc</a>              20570 Zend/zend_vm_execute.h 				zend_error_noreturn(E_ERROR, "Non-static method %s::%s() cannot be called statically, assuming $this from incompatible context", call-&gt;fbc-&gt;common.scope-&gt;name, call-&gt;fbc-&gt;common.function_name);</span>
+<span class='curline'><a href='../S/1748.html#L21947'>fbc</a>              21947 Zend/zend_vm_execute.h 		call-&gt;fbc = CACHED_PTR(opline-&gt;op2.literal-&gt;cache_slot);</span>
+<span class='curline'><a href='../S/1748.html#L21950'>fbc</a>              21950 Zend/zend_vm_execute.h 	           (call-&gt;fbc = CACHED_POLYMORPHIC_PTR(opline-&gt;op2.literal-&gt;cache_slot, ce))) {</span>
+<span class='curline'><a href='../S/1748.html#L21976'>fbc</a>              21976 Zend/zend_vm_execute.h 				call-&gt;fbc = ce-&gt;get_static_method(ce, function_name_strval, function_name_strlen TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L21978'>fbc</a>              21978 Zend/zend_vm_execute.h 				call-&gt;fbc = zend_std_get_static_method(ce, function_name_strval, function_name_strlen, ((IS_UNUSED == IS_CONST) ? (opline-&gt;op2.literal + 1) : NULL) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L21980'>fbc</a>              21980 Zend/zend_vm_execute.h 			if (UNEXPECTED(call-&gt;fbc == NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L21984'>fbc</a>              21984 Zend/zend_vm_execute.h 			    EXPECTED(call-&gt;fbc-&gt;type &lt;= ZEND_USER_FUNCTION) &amp;&amp;</span>
+<span class='curline'><a href='../S/1748.html#L21985'>fbc</a>              21985 Zend/zend_vm_execute.h 			    EXPECTED((call-&gt;fbc-&gt;common.fn_flags &amp; (ZEND_ACC_CALL_VIA_HANDLER|ZEND_ACC_NEVER_CACHE)) == 0)) {</span>
+<span class='curline'><a href='../S/1748.html#L21987'>fbc</a>              21987 Zend/zend_vm_execute.h 					CACHE_PTR(opline-&gt;op2.literal-&gt;cache_slot, call-&gt;fbc);</span>
+<span class='curline'><a href='../S/1748.html#L21989'>fbc</a>              21989 Zend/zend_vm_execute.h 					CACHE_POLYMORPHIC_PTR(opline-&gt;op2.literal-&gt;cache_slot, ce, call-&gt;fbc);</span>
+<span class='curline'><a href='../S/1748.html#L22003'>fbc</a>              22003 Zend/zend_vm_execute.h 		call-&gt;fbc = ce-&gt;constructor;</span>
+<span class='curline'><a href='../S/1748.html#L22006'>fbc</a>              22006 Zend/zend_vm_execute.h 	if (call-&gt;fbc-&gt;common.fn_flags &amp; ZEND_ACC_STATIC) {</span>
+<span class='curline'><a href='../S/1748.html#L22014'>fbc</a>              22014 Zend/zend_vm_execute.h 			if (call-&gt;fbc-&gt;common.fn_flags &amp; ZEND_ACC_ALLOW_STATIC) {</span>
+<span class='curline'><a href='../S/1748.html#L22015'>fbc</a>              22015 Zend/zend_vm_execute.h 				zend_error(E_DEPRECATED, "Non-static method %s::%s() should not be called statically, assuming $this from incompatible context", call-&gt;fbc-&gt;common.scope-&gt;name, call-&gt;fbc-&gt;common.function_name);</span>
+<span class='curline'><a href='../S/1748.html#L22018'>fbc</a>              22018 Zend/zend_vm_execute.h 				zend_error_noreturn(E_ERROR, "Non-static method %s::%s() cannot be called statically, assuming $this from incompatible context", call-&gt;fbc-&gt;common.scope-&gt;name, call-&gt;fbc-&gt;common.function_name);</span>
+<span class='curline'><a href='../S/1748.html#L23880'>fbc</a>              23880 Zend/zend_vm_execute.h 		    (call-&gt;fbc = CACHED_POLYMORPHIC_PTR(opline-&gt;op2.literal-&gt;cache_slot, call-&gt;called_scope)) == NULL) {</span>
+<span class='curline'><a href='../S/1748.html#L23888'>fbc</a>              23888 Zend/zend_vm_execute.h 			call-&gt;fbc = Z_OBJ_HT_P(call-&gt;object)-&gt;get_method(&amp;call-&gt;object, function_name_strval, function_name_strlen, ((IS_CV == IS_CONST) ? (opline-&gt;op2.literal + 1) : NULL) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L23889'>fbc</a>              23889 Zend/zend_vm_execute.h 			if (UNEXPECTED(call-&gt;fbc == NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L23893'>fbc</a>              23893 Zend/zend_vm_execute.h 			    EXPECTED(call-&gt;fbc-&gt;type &lt;= ZEND_USER_FUNCTION) &amp;&amp;</span>
+<span class='curline'><a href='../S/1748.html#L23894'>fbc</a>              23894 Zend/zend_vm_execute.h 			    EXPECTED((call-&gt;fbc-&gt;common.fn_flags &amp; (ZEND_ACC_CALL_VIA_HANDLER|ZEND_ACC_NEVER_CACHE)) == 0) &amp;&amp;</span>
+<span class='curline'><a href='../S/1748.html#L23896'>fbc</a>              23896 Zend/zend_vm_execute.h 				CACHE_POLYMORPHIC_PTR(opline-&gt;op2.literal-&gt;cache_slot, call-&gt;called_scope, call-&gt;fbc);</span>
+<span class='curline'><a href='../S/1748.html#L23907'>fbc</a>              23907 Zend/zend_vm_execute.h 	if ((call-&gt;fbc-&gt;common.fn_flags &amp; ZEND_ACC_STATIC) != 0) {</span>
+<span class='curline'><a href='../S/1748.html#L23968'>fbc</a>              23968 Zend/zend_vm_execute.h 		call-&gt;fbc = CACHED_PTR(opline-&gt;op2.literal-&gt;cache_slot);</span>
+<span class='curline'><a href='../S/1748.html#L23971'>fbc</a>              23971 Zend/zend_vm_execute.h 	           (call-&gt;fbc = CACHED_POLYMORPHIC_PTR(opline-&gt;op2.literal-&gt;cache_slot, ce))) {</span>
+<span class='curline'><a href='../S/1748.html#L23997'>fbc</a>              23997 Zend/zend_vm_execute.h 				call-&gt;fbc = ce-&gt;get_static_method(ce, function_name_strval, function_name_strlen TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L23999'>fbc</a>              23999 Zend/zend_vm_execute.h 				call-&gt;fbc = zend_std_get_static_method(ce, function_name_strval, function_name_strlen, ((IS_CV == IS_CONST) ? (opline-&gt;op2.literal + 1) : NULL) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L24001'>fbc</a>              24001 Zend/zend_vm_execute.h 			if (UNEXPECTED(call-&gt;fbc == NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L24005'>fbc</a>              24005 Zend/zend_vm_execute.h 			    EXPECTED(call-&gt;fbc-&gt;type &lt;= ZEND_USER_FUNCTION) &amp;&amp;</span>
+<span class='curline'><a href='../S/1748.html#L24006'>fbc</a>              24006 Zend/zend_vm_execute.h 			    EXPECTED((call-&gt;fbc-&gt;common.fn_flags &amp; (ZEND_ACC_CALL_VIA_HANDLER|ZEND_ACC_NEVER_CACHE)) == 0)) {</span>
+<span class='curline'><a href='../S/1748.html#L24008'>fbc</a>              24008 Zend/zend_vm_execute.h 					CACHE_PTR(opline-&gt;op2.literal-&gt;cache_slot, call-&gt;fbc);</span>
+<span class='curline'><a href='../S/1748.html#L24010'>fbc</a>              24010 Zend/zend_vm_execute.h 					CACHE_POLYMORPHIC_PTR(opline-&gt;op2.literal-&gt;cache_slot, ce, call-&gt;fbc);</span>
+<span class='curline'><a href='../S/1748.html#L24024'>fbc</a>              24024 Zend/zend_vm_execute.h 		call-&gt;fbc = ce-&gt;constructor;</span>
+<span class='curline'><a href='../S/1748.html#L24027'>fbc</a>              24027 Zend/zend_vm_execute.h 	if (call-&gt;fbc-&gt;common.fn_flags &amp; ZEND_ACC_STATIC) {</span>
+<span class='curline'><a href='../S/1748.html#L24035'>fbc</a>              24035 Zend/zend_vm_execute.h 			if (call-&gt;fbc-&gt;common.fn_flags &amp; ZEND_ACC_ALLOW_STATIC) {</span>
+<span class='curline'><a href='../S/1748.html#L24036'>fbc</a>              24036 Zend/zend_vm_execute.h 				zend_error(E_DEPRECATED, "Non-static method %s::%s() should not be called statically, assuming $this from incompatible context", call-&gt;fbc-&gt;common.scope-&gt;name, call-&gt;fbc-&gt;common.function_name);</span>
+<span class='curline'><a href='../S/1748.html#L24039'>fbc</a>              24039 Zend/zend_vm_execute.h 				zend_error_noreturn(E_ERROR, "Non-static method %s::%s() cannot be called statically, assuming $this from incompatible context", call-&gt;fbc-&gt;common.scope-&gt;name, call-&gt;fbc-&gt;common.function_name);</span>
+<span class='curline'><a href='../S/1748.html#L25530'>fbc</a>              25530 Zend/zend_vm_execute.h 		    (call-&gt;fbc = CACHED_POLYMORPHIC_PTR(opline-&gt;op2.literal-&gt;cache_slot, call-&gt;called_scope)) == NULL) {</span>
+<span class='curline'><a href='../S/1748.html#L25538'>fbc</a>              25538 Zend/zend_vm_execute.h 			call-&gt;fbc = Z_OBJ_HT_P(call-&gt;object)-&gt;get_method(&amp;call-&gt;object, function_name_strval, function_name_strlen, ((IS_CONST == IS_CONST) ? (opline-&gt;op2.literal + 1) : NULL) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L25539'>fbc</a>              25539 Zend/zend_vm_execute.h 			if (UNEXPECTED(call-&gt;fbc == NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L25543'>fbc</a>              25543 Zend/zend_vm_execute.h 			    EXPECTED(call-&gt;fbc-&gt;type &lt;= ZEND_USER_FUNCTION) &amp;&amp;</span>
+<span class='curline'><a href='../S/1748.html#L25544'>fbc</a>              25544 Zend/zend_vm_execute.h 			    EXPECTED((call-&gt;fbc-&gt;common.fn_flags &amp; (ZEND_ACC_CALL_VIA_HANDLER|ZEND_ACC_NEVER_CACHE)) == 0) &amp;&amp;</span>
+<span class='curline'><a href='../S/1748.html#L25546'>fbc</a>              25546 Zend/zend_vm_execute.h 				CACHE_POLYMORPHIC_PTR(opline-&gt;op2.literal-&gt;cache_slot, call-&gt;called_scope, call-&gt;fbc);</span>
+<span class='curline'><a href='../S/1748.html#L25557'>fbc</a>              25557 Zend/zend_vm_execute.h 	if ((call-&gt;fbc-&gt;common.fn_flags &amp; ZEND_ACC_STATIC) != 0) {</span>
+<span class='curline'><a href='../S/1748.html#L26943'>fbc</a>              26943 Zend/zend_vm_execute.h 		    (call-&gt;fbc = CACHED_POLYMORPHIC_PTR(opline-&gt;op2.literal-&gt;cache_slot, call-&gt;called_scope)) == NULL) {</span>
+<span class='curline'><a href='../S/1748.html#L26951'>fbc</a>              26951 Zend/zend_vm_execute.h 			call-&gt;fbc = Z_OBJ_HT_P(call-&gt;object)-&gt;get_method(&amp;call-&gt;object, function_name_strval, function_name_strlen, ((IS_TMP_VAR == IS_CONST) ? (opline-&gt;op2.literal + 1) : NULL) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L26952'>fbc</a>              26952 Zend/zend_vm_execute.h 			if (UNEXPECTED(call-&gt;fbc == NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L26956'>fbc</a>              26956 Zend/zend_vm_execute.h 			    EXPECTED(call-&gt;fbc-&gt;type &lt;= ZEND_USER_FUNCTION) &amp;&amp;</span>
+<span class='curline'><a href='../S/1748.html#L26957'>fbc</a>              26957 Zend/zend_vm_execute.h 			    EXPECTED((call-&gt;fbc-&gt;common.fn_flags &amp; (ZEND_ACC_CALL_VIA_HANDLER|ZEND_ACC_NEVER_CACHE)) == 0) &amp;&amp;</span>
+<span class='curline'><a href='../S/1748.html#L26959'>fbc</a>              26959 Zend/zend_vm_execute.h 				CACHE_POLYMORPHIC_PTR(opline-&gt;op2.literal-&gt;cache_slot, call-&gt;called_scope, call-&gt;fbc);</span>
+<span class='curline'><a href='../S/1748.html#L26970'>fbc</a>              26970 Zend/zend_vm_execute.h 	if ((call-&gt;fbc-&gt;common.fn_flags &amp; ZEND_ACC_STATIC) != 0) {</span>
+<span class='curline'><a href='../S/1748.html#L28265'>fbc</a>              28265 Zend/zend_vm_execute.h 		    (call-&gt;fbc = CACHED_POLYMORPHIC_PTR(opline-&gt;op2.literal-&gt;cache_slot, call-&gt;called_scope)) == NULL) {</span>
+<span class='curline'><a href='../S/1748.html#L28273'>fbc</a>              28273 Zend/zend_vm_execute.h 			call-&gt;fbc = Z_OBJ_HT_P(call-&gt;object)-&gt;get_method(&amp;call-&gt;object, function_name_strval, function_name_strlen, ((IS_VAR == IS_CONST) ? (opline-&gt;op2.literal + 1) : NULL) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L28274'>fbc</a>              28274 Zend/zend_vm_execute.h 			if (UNEXPECTED(call-&gt;fbc == NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L28278'>fbc</a>              28278 Zend/zend_vm_execute.h 			    EXPECTED(call-&gt;fbc-&gt;type &lt;= ZEND_USER_FUNCTION) &amp;&amp;</span>
+<span class='curline'><a href='../S/1748.html#L28279'>fbc</a>              28279 Zend/zend_vm_execute.h 			    EXPECTED((call-&gt;fbc-&gt;common.fn_flags &amp; (ZEND_ACC_CALL_VIA_HANDLER|ZEND_ACC_NEVER_CACHE)) == 0) &amp;&amp;</span>
+<span class='curline'><a href='../S/1748.html#L28281'>fbc</a>              28281 Zend/zend_vm_execute.h 				CACHE_POLYMORPHIC_PTR(opline-&gt;op2.literal-&gt;cache_slot, call-&gt;called_scope, call-&gt;fbc);</span>
+<span class='curline'><a href='../S/1748.html#L28292'>fbc</a>              28292 Zend/zend_vm_execute.h 	if ((call-&gt;fbc-&gt;common.fn_flags &amp; ZEND_ACC_STATIC) != 0) {</span>
+<span class='curline'><a href='../S/1748.html#L30017'>fbc</a>              30017 Zend/zend_vm_execute.h 		    (call-&gt;fbc = CACHED_POLYMORPHIC_PTR(opline-&gt;op2.literal-&gt;cache_slot, call-&gt;called_scope)) == NULL) {</span>
+<span class='curline'><a href='../S/1748.html#L30025'>fbc</a>              30025 Zend/zend_vm_execute.h 			call-&gt;fbc = Z_OBJ_HT_P(call-&gt;object)-&gt;get_method(&amp;call-&gt;object, function_name_strval, function_name_strlen, ((IS_CV == IS_CONST) ? (opline-&gt;op2.literal + 1) : NULL) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L30026'>fbc</a>              30026 Zend/zend_vm_execute.h 			if (UNEXPECTED(call-&gt;fbc == NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L30030'>fbc</a>              30030 Zend/zend_vm_execute.h 			    EXPECTED(call-&gt;fbc-&gt;type &lt;= ZEND_USER_FUNCTION) &amp;&amp;</span>
+<span class='curline'><a href='../S/1748.html#L30031'>fbc</a>              30031 Zend/zend_vm_execute.h 			    EXPECTED((call-&gt;fbc-&gt;common.fn_flags &amp; (ZEND_ACC_CALL_VIA_HANDLER|ZEND_ACC_NEVER_CACHE)) == 0) &amp;&amp;</span>
+<span class='curline'><a href='../S/1748.html#L30033'>fbc</a>              30033 Zend/zend_vm_execute.h 				CACHE_POLYMORPHIC_PTR(opline-&gt;op2.literal-&gt;cache_slot, call-&gt;called_scope, call-&gt;fbc);</span>
+<span class='curline'><a href='../S/1748.html#L30044'>fbc</a>              30044 Zend/zend_vm_execute.h 	if ((call-&gt;fbc-&gt;common.fn_flags &amp; ZEND_ACC_STATIC) != 0) {</span>
+<span class='curline'><a href='../S/1748.html#L31099'>fbc</a>              31099 Zend/zend_vm_execute.h 		if (!ARG_SHOULD_BE_SENT_BY_REF(EX(call)-&gt;fbc, opline-&gt;op2.num)) {</span>
+<span class='curline'><a href='../S/1748.html#L31119'>fbc</a>              31119 Zend/zend_vm_execute.h 			!ARG_MAY_BE_SENT_BY_REF(EX(call)-&gt;fbc, opline-&gt;op2.num)) {</span>
+<span class='curline'><a href='../S/1748.html#L31157'>fbc</a>              31157 Zend/zend_vm_execute.h 		if (!ARG_SHOULD_BE_SENT_BY_REF(EX(call)-&gt;fbc, opline-&gt;op2.num)) {</span>
+<span class='curline'><a href='../S/1748.html#L31176'>fbc</a>              31176 Zend/zend_vm_execute.h 		if (ARG_SHOULD_BE_SENT_BY_REF(EX(call)-&gt;fbc, opline-&gt;op2.num)) {</span>
+<span class='curline'><a href='../S/1748.html#L33268'>fbc</a>              33268 Zend/zend_vm_execute.h 		    (call-&gt;fbc = CACHED_POLYMORPHIC_PTR(opline-&gt;op2.literal-&gt;cache_slot, call-&gt;called_scope)) == NULL) {</span>
+<span class='curline'><a href='../S/1748.html#L33276'>fbc</a>              33276 Zend/zend_vm_execute.h 			call-&gt;fbc = Z_OBJ_HT_P(call-&gt;object)-&gt;get_method(&amp;call-&gt;object, function_name_strval, function_name_strlen, ((IS_CONST == IS_CONST) ? (opline-&gt;op2.literal + 1) : NULL) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L33277'>fbc</a>              33277 Zend/zend_vm_execute.h 			if (UNEXPECTED(call-&gt;fbc == NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L33281'>fbc</a>              33281 Zend/zend_vm_execute.h 			    EXPECTED(call-&gt;fbc-&gt;type &lt;= ZEND_USER_FUNCTION) &amp;&amp;</span>
+<span class='curline'><a href='../S/1748.html#L33282'>fbc</a>              33282 Zend/zend_vm_execute.h 			    EXPECTED((call-&gt;fbc-&gt;common.fn_flags &amp; (ZEND_ACC_CALL_VIA_HANDLER|ZEND_ACC_NEVER_CACHE)) == 0) &amp;&amp;</span>
+<span class='curline'><a href='../S/1748.html#L33284'>fbc</a>              33284 Zend/zend_vm_execute.h 				CACHE_POLYMORPHIC_PTR(opline-&gt;op2.literal-&gt;cache_slot, call-&gt;called_scope, call-&gt;fbc);</span>
+<span class='curline'><a href='../S/1748.html#L33295'>fbc</a>              33295 Zend/zend_vm_execute.h 	if ((call-&gt;fbc-&gt;common.fn_flags &amp; ZEND_ACC_STATIC) != 0) {</span>
+<span class='curline'><a href='../S/1748.html#L35392'>fbc</a>              35392 Zend/zend_vm_execute.h 		    (call-&gt;fbc = CACHED_POLYMORPHIC_PTR(opline-&gt;op2.literal-&gt;cache_slot, call-&gt;called_scope)) == NULL) {</span>
+<span class='curline'><a href='../S/1748.html#L35400'>fbc</a>              35400 Zend/zend_vm_execute.h 			call-&gt;fbc = Z_OBJ_HT_P(call-&gt;object)-&gt;get_method(&amp;call-&gt;object, function_name_strval, function_name_strlen, ((IS_TMP_VAR == IS_CONST) ? (opline-&gt;op2.literal + 1) : NULL) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L35401'>fbc</a>              35401 Zend/zend_vm_execute.h 			if (UNEXPECTED(call-&gt;fbc == NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L35405'>fbc</a>              35405 Zend/zend_vm_execute.h 			    EXPECTED(call-&gt;fbc-&gt;type &lt;= ZEND_USER_FUNCTION) &amp;&amp;</span>
+<span class='curline'><a href='../S/1748.html#L35406'>fbc</a>              35406 Zend/zend_vm_execute.h 			    EXPECTED((call-&gt;fbc-&gt;common.fn_flags &amp; (ZEND_ACC_CALL_VIA_HANDLER|ZEND_ACC_NEVER_CACHE)) == 0) &amp;&amp;</span>
+<span class='curline'><a href='../S/1748.html#L35408'>fbc</a>              35408 Zend/zend_vm_execute.h 				CACHE_POLYMORPHIC_PTR(opline-&gt;op2.literal-&gt;cache_slot, call-&gt;called_scope, call-&gt;fbc);</span>
+<span class='curline'><a href='../S/1748.html#L35419'>fbc</a>              35419 Zend/zend_vm_execute.h 	if ((call-&gt;fbc-&gt;common.fn_flags &amp; ZEND_ACC_STATIC) != 0) {</span>
+<span class='curline'><a href='../S/1748.html#L37572'>fbc</a>              37572 Zend/zend_vm_execute.h 		    (call-&gt;fbc = CACHED_POLYMORPHIC_PTR(opline-&gt;op2.literal-&gt;cache_slot, call-&gt;called_scope)) == NULL) {</span>
+<span class='curline'><a href='../S/1748.html#L37580'>fbc</a>              37580 Zend/zend_vm_execute.h 			call-&gt;fbc = Z_OBJ_HT_P(call-&gt;object)-&gt;get_method(&amp;call-&gt;object, function_name_strval, function_name_strlen, ((IS_VAR == IS_CONST) ? (opline-&gt;op2.literal + 1) : NULL) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L37581'>fbc</a>              37581 Zend/zend_vm_execute.h 			if (UNEXPECTED(call-&gt;fbc == NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L37585'>fbc</a>              37585 Zend/zend_vm_execute.h 			    EXPECTED(call-&gt;fbc-&gt;type &lt;= ZEND_USER_FUNCTION) &amp;&amp;</span>
+<span class='curline'><a href='../S/1748.html#L37586'>fbc</a>              37586 Zend/zend_vm_execute.h 			    EXPECTED((call-&gt;fbc-&gt;common.fn_flags &amp; (ZEND_ACC_CALL_VIA_HANDLER|ZEND_ACC_NEVER_CACHE)) == 0) &amp;&amp;</span>
+<span class='curline'><a href='../S/1748.html#L37588'>fbc</a>              37588 Zend/zend_vm_execute.h 				CACHE_POLYMORPHIC_PTR(opline-&gt;op2.literal-&gt;cache_slot, call-&gt;called_scope, call-&gt;fbc);</span>
+<span class='curline'><a href='../S/1748.html#L37599'>fbc</a>              37599 Zend/zend_vm_execute.h 	if ((call-&gt;fbc-&gt;common.fn_flags &amp; ZEND_ACC_STATIC) != 0) {</span>
+<span class='curline'><a href='../S/1748.html#L40755'>fbc</a>              40755 Zend/zend_vm_execute.h 		    (call-&gt;fbc = CACHED_POLYMORPHIC_PTR(opline-&gt;op2.literal-&gt;cache_slot, call-&gt;called_scope)) == NULL) {</span>
+<span class='curline'><a href='../S/1748.html#L40763'>fbc</a>              40763 Zend/zend_vm_execute.h 			call-&gt;fbc = Z_OBJ_HT_P(call-&gt;object)-&gt;get_method(&amp;call-&gt;object, function_name_strval, function_name_strlen, ((IS_CV == IS_CONST) ? (opline-&gt;op2.literal + 1) : NULL) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L40764'>fbc</a>              40764 Zend/zend_vm_execute.h 			if (UNEXPECTED(call-&gt;fbc == NULL)) {</span>
+<span class='curline'><a href='../S/1748.html#L40768'>fbc</a>              40768 Zend/zend_vm_execute.h 			    EXPECTED(call-&gt;fbc-&gt;type &lt;= ZEND_USER_FUNCTION) &amp;&amp;</span>
+<span class='curline'><a href='../S/1748.html#L40769'>fbc</a>              40769 Zend/zend_vm_execute.h 			    EXPECTED((call-&gt;fbc-&gt;common.fn_flags &amp; (ZEND_ACC_CALL_VIA_HANDLER|ZEND_ACC_NEVER_CACHE)) == 0) &amp;&amp;</span>
+<span class='curline'><a href='../S/1748.html#L40771'>fbc</a>              40771 Zend/zend_vm_execute.h 				CACHE_POLYMORPHIC_PTR(opline-&gt;op2.literal-&gt;cache_slot, call-&gt;called_scope, call-&gt;fbc);</span>
+<span class='curline'><a href='../S/1748.html#L40782'>fbc</a>              40782 Zend/zend_vm_execute.h 	if ((call-&gt;fbc-&gt;common.fn_flags &amp; ZEND_ACC_STATIC) != 0) {</span>
+<span class='curline'><a href='../S/923.html#L1358'>fbc</a>              1358 ext/pdo/pdo_dbh.c 	zend_function *fbc = NULL;</span>
+<span class='curline'><a href='../S/923.html#L1368'>fbc</a>              1368 ext/pdo/pdo_dbh.c 	if ((fbc = std_object_handlers.get_method(object_pp, method_name, method_len, key TSRMLS_CC)) == NULL) {</span>
+<span class='curline'><a href='../S/923.html#L1380'>fbc</a>              1380 ext/pdo/pdo_dbh.c 				lc_method_name, method_len+1, (void**)&amp;fbc) == FAILURE) {</span>
+<span class='curline'><a href='../S/923.html#L1381'>fbc</a>              1381 ext/pdo/pdo_dbh.c 			if (!fbc) {</span>
+<span class='curline'><a href='../S/923.html#L1382'>fbc</a>              1382 ext/pdo/pdo_dbh.c 				fbc = NULL;</span>
+<span class='curline'><a href='../S/923.html#L1389'>fbc</a>              1389 ext/pdo/pdo_dbh.c 	return fbc;</span>
+<span class='curline'><a href='../S/926.html#L2251'>fbc</a>              2251 ext/pdo/pdo_stmt.c 	zend_function *fbc = NULL;</span>
+<span class='curline'><a href='../S/926.html#L2261'>fbc</a>              2261 ext/pdo/pdo_stmt.c 			method_len+1, (void**)&amp;fbc) == FAILURE) {</span>
+<span class='curline'><a href='../S/926.html#L2278'>fbc</a>              2278 ext/pdo/pdo_stmt.c 				lc_method_name, method_len+1, (void**)&amp;fbc) == FAILURE) {</span>
+<span class='curline'><a href='../S/926.html#L2279'>fbc</a>              2279 ext/pdo/pdo_stmt.c 			fbc = NULL;</span>
+<span class='curline'><a href='../S/926.html#L2287'>fbc</a>              2287 ext/pdo/pdo_stmt.c 	return fbc;</span>
+<span class='curline'><a href='../S/926.html#L2686'>fbc</a>              2686 ext/pdo/pdo_stmt.c 	zend_function *fbc;</span>
+<span class='curline'><a href='../S/926.html#L2692'>fbc</a>              2692 ext/pdo/pdo_stmt.c 	if (zend_hash_find(&amp;pdo_row_ce-&gt;function_table, lc_method_name, method_len+1, (void**)&amp;fbc) == FAILURE) {</span>
+<span class='curline'><a href='../S/926.html#L2698'>fbc</a>              2698 ext/pdo/pdo_stmt.c 	return fbc;</span>
+<span class='curline'><a href='../S/1548.html#L810'>fbc</a>               810 sapi/phpdbg/phpdbg_bp.c static inline phpdbg_breakbase_t *phpdbg_find_breakpoint_symbol(zend_function *fbc TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1548.html#L816'>fbc</a>               816 sapi/phpdbg/phpdbg_bp.c 	if (fbc-&gt;type != ZEND_USER_FUNCTION) {</span>
+<span class='curline'><a href='../S/1548.html#L820'>fbc</a>               820 sapi/phpdbg/phpdbg_bp.c 	ops = (zend_op_array*)fbc;</span>
+<span class='curline'><a href='../S/1564.html#L182'>fbc</a>               182 sapi/phpdbg/phpdbg_list.c void phpdbg_list_function(const zend_function *fbc TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1564.html#L186'>fbc</a>               186 sapi/phpdbg/phpdbg_list.c 	if (fbc-&gt;type != ZEND_USER_FUNCTION) {</span>
+<span class='curline'><a href='../S/1564.html#L187'>fbc</a>               187 sapi/phpdbg/phpdbg_list.c 		phpdbg_error("The function requested (%s) is not user defined", fbc-&gt;common.function_name);</span>
+<span class='curline'><a href='../S/1564.html#L191'>fbc</a>               191 sapi/phpdbg/phpdbg_list.c 	ops = (zend_op_array*)fbc;</span>
+<span class='curline'><a href='../S/1564.html#L200'>fbc</a>               200 sapi/phpdbg/phpdbg_list.c 	zend_function* fbc;</span>
+<span class='curline'><a href='../S/1564.html#L225'>fbc</a>               225 sapi/phpdbg/phpdbg_list.c 	if (zend_hash_find(func_table, func_name, func_name_len+1, (void**)&amp;fbc) == SUCCESS) {</span>
+<span class='curline'><a href='../S/1564.html#L226'>fbc</a>               226 sapi/phpdbg/phpdbg_list.c 		phpdbg_list_function(fbc TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1570.html#L191'>fbc</a>               191 sapi/phpdbg/phpdbg_print.c 		zend_function *fbc;</span>
+<span class='curline'><a href='../S/1570.html#L194'>fbc</a>               194 sapi/phpdbg/phpdbg_print.c 		if (zend_hash_find(&amp;(*ce)-&gt;function_table, lcname, strlen(lcname)+1, (void**)&amp;fbc) == SUCCESS) {</span>
+<span class='curline'><a href='../S/1570.html#L196'>fbc</a>               196 sapi/phpdbg/phpdbg_print.c 				(fbc-&gt;type == ZEND_USER_FUNCTION) ? "User" : "Internal",</span>
+<span class='curline'><a href='../S/1570.html#L197'>fbc</a>               197 sapi/phpdbg/phpdbg_print.c 				fbc-&gt;common.function_name);</span>
+<span class='curline'><a href='../S/1570.html#L199'>fbc</a>               199 sapi/phpdbg/phpdbg_print.c 			phpdbg_print_function_helper(fbc TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1570.html#L215'>fbc</a>               215 sapi/phpdbg/phpdbg_print.c 	zend_function* fbc;</span>
+<span class='curline'><a href='../S/1570.html#L239'>fbc</a>               239 sapi/phpdbg/phpdbg_print.c 	if (zend_hash_find(func_table, lcname, strlen(lcname)+1, (void**)&amp;fbc) == SUCCESS) {</span>
+<span class='curline'><a href='../S/1570.html#L241'>fbc</a>               241 sapi/phpdbg/phpdbg_print.c 			(fbc-&gt;type == ZEND_USER_FUNCTION) ? "User" : "Internal",</span>
+<span class='curline'><a href='../S/1570.html#L242'>fbc</a>               242 sapi/phpdbg/phpdbg_print.c 			(fbc-&gt;common.scope) ? "Method" : "Function",</span>
+<span class='curline'><a href='../S/1570.html#L243'>fbc</a>               243 sapi/phpdbg/phpdbg_print.c 			fbc-&gt;common.function_name);</span>
+<span class='curline'><a href='../S/1570.html#L245'>fbc</a>               245 sapi/phpdbg/phpdbg_print.c 		phpdbg_print_function_helper(fbc TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1572.html#L1111'>fbc</a>              1111 sapi/phpdbg/phpdbg_prompt.c 	EX(fbc) = NULL;</span>
+</pre>
+</body>
+</html>

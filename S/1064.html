@@ -1,0 +1,205 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>ext/spl/spl_iterators.h</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<a id='TOP' name='TOP'></a><h2 class='header'><a href='../mains.html'>root</a>/<a href='../files/1753.html'>ext</a>/<a href='../files/1852.html'>spl</a>/spl_iterators.h</h2>
+<em class='comment'>/* [&lt;][&gt;][^][v][top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+<hr />
+<h2 class='header'><a href='../J/1184.html' title='Multiple included from 11 places.'>INCLUDED FROM</a></h2>
+<hr />
+<pre>
+<a id='L1' name='L1'></a>   1 <em class='comment'>/*</em>
+<a id='L2' name='L2'></a>   2 <em class='comment'>   +----------------------------------------------------------------------+</em>
+<a id='L3' name='L3'></a>   3 <em class='comment'>   | PHP Version 5                                                        |</em>
+<a id='L4' name='L4'></a>   4 <em class='comment'>   +----------------------------------------------------------------------+</em>
+<a id='L5' name='L5'></a>   5 <em class='comment'>   | Copyright (c) 1997-2016 The PHP Group                                |</em>
+<a id='L6' name='L6'></a>   6 <em class='comment'>   +----------------------------------------------------------------------+</em>
+<a id='L7' name='L7'></a>   7 <em class='comment'>   | This source file is subject to version 3.01 of the PHP license,      |</em>
+<a id='L8' name='L8'></a>   8 <em class='comment'>   | that is bundled with this package in the file LICENSE, and is        |</em>
+<a id='L9' name='L9'></a>   9 <em class='comment'>   | available through the world-wide-web at the following url:           |</em>
+<a id='L10' name='L10'></a>  10 <em class='comment'>   | http://www.php.net/license/3_01.txt                                  |</em>
+<a id='L11' name='L11'></a>  11 <em class='comment'>   | If you did not receive a copy of the PHP license and are unable to   |</em>
+<a id='L12' name='L12'></a>  12 <em class='comment'>   | obtain it through the world-wide-web, please send a note to          |</em>
+<a id='L13' name='L13'></a>  13 <em class='comment'>   | license@php.net so we can mail you a copy immediately.               |</em>
+<a id='L14' name='L14'></a>  14 <em class='comment'>   +----------------------------------------------------------------------+</em>
+<a id='L15' name='L15'></a>  15 <em class='comment'>   | Authors: Marcus Boerger &lt;helly@php.net&gt;                              |</em>
+<a id='L16' name='L16'></a>  16 <em class='comment'>   +----------------------------------------------------------------------+</em>
+<a id='L17' name='L17'></a>  17 <em class='comment'> */</em>
+<a id='L18' name='L18'></a>  18 
+<a id='L19' name='L19'></a>  19 <em class='comment'>/* $Id$ */</em>
+<a id='L20' name='L20'></a>  20 
+<a id='L21' name='L21'></a>  21 <em class='sharp'>#ifndef</em> <a href='../S/1064.html#L22' title='Defined at 22 in ext/spl/spl_iterators.h.'>SPL_ITERATORS_H</a>
+<a id='L22' name='L22'></a>  22 <em class='sharp'>#define</em> <a href='../R/9732.html' title='Multiple referred from 2 places.'>SPL_ITERATORS_H</a>
+<a id='L23' name='L23'></a>  23 
+<a id='L24' name='L24'></a>  24 <em class='sharp'>#include</em> "<a href='1368.html'>php.h</a>"
+<a id='L25' name='L25'></a>  25 <em class='sharp'>#include</em> "<a href='1046.html'>php_spl.h</a>"
+<a id='L26' name='L26'></a>  26 <em class='sharp'>#if</em> <a href='../Y/2828.html' title='Multiple used in 17 places.'>HAVE_PCRE</a> || <a href='../Y/2606.html' title='Multiple used in 19 places.'>HAVE_BUNDLED_PCRE</a>
+<a id='L27' name='L27'></a>  27 <em class='sharp'>#include</em> "<a href='921.html'>ext/pcre/php_pcre.h</a>"
+<a id='L28' name='L28'></a>  28 <em class='sharp'>#endif</em>
+<a id='L29' name='L29'></a>  29 
+<a id='L30' name='L30'></a>  30 <em class='sharp'>#define</em> spl_ce_Traversable   <a href='../Y/44217.html' title='Multiple used in 19 places.'>zend_ce_traversable</a>
+<a id='L31' name='L31'></a>  31 <em class='sharp'>#define</em> <a href='../R/26702.html' title='Multiple referred from 2 places.'>spl_ce_Iterator</a>      <a href='../Y/44215.html' title='Multiple used in 23 places.'>zend_ce_iterator</a>
+<a id='L32' name='L32'></a>  32 <em class='sharp'>#define</em> spl_ce_Aggregate     <a href='../Y/44211.html' title='Multiple used in 9 places.'>zend_ce_aggregate</a>
+<a id='L33' name='L33'></a>  33 <em class='sharp'>#define</em> spl_ce_ArrayAccess   <a href='../Y/44212.html' title='Multiple used in 9 places.'>zend_ce_arrayaccess</a>
+<a id='L34' name='L34'></a>  34 <em class='sharp'>#define</em> spl_ce_Serializable  <a href='../Y/44216.html' title='Multiple used in 4 places.'>zend_ce_serializable</a>
+<a id='L35' name='L35'></a>  35 
+<a id='L36' name='L36'></a>  36 <strong class='reserved'>extern</strong> <a href='../D/7744.html' title='Multiple defined in 14 places.'>PHPAPI</a> <a href='../S/1643.html#L302' title='Defined at 302 in Zend/zend.h.'>zend_class_entry</a> *<a href='../Y/37060.html' title='Multiple used in 10 places.'>spl_ce_RecursiveIterator</a>;
+<a id='L37' name='L37'></a>  37 <strong class='reserved'>extern</strong> <a href='../D/7744.html' title='Multiple defined in 14 places.'>PHPAPI</a> <a href='../S/1643.html#L302' title='Defined at 302 in Zend/zend.h.'>zend_class_entry</a> *<a href='../Y/37061.html' title='Multiple used in 9 places.'>spl_ce_RecursiveIteratorIterator</a>;
+<a id='L38' name='L38'></a>  38 <strong class='reserved'>extern</strong> <a href='../D/7744.html' title='Multiple defined in 14 places.'>PHPAPI</a> <a href='../S/1643.html#L302' title='Defined at 302 in Zend/zend.h.'>zend_class_entry</a> *<a href='../Y/37063.html' title='Multiple used in 3 places.'>spl_ce_RecursiveTreeIterator</a>;
+<a id='L39' name='L39'></a>  39 <strong class='reserved'>extern</strong> <a href='../D/7744.html' title='Multiple defined in 14 places.'>PHPAPI</a> <a href='../S/1643.html#L302' title='Defined at 302 in Zend/zend.h.'>zend_class_entry</a> *<a href='../Y/37039.html' title='Multiple used in 4 places.'>spl_ce_FilterIterator</a>;
+<a id='L40' name='L40'></a>  40 <strong class='reserved'>extern</strong> <a href='../D/7744.html' title='Multiple defined in 14 places.'>PHPAPI</a> <a href='../S/1643.html#L302' title='Defined at 302 in Zend/zend.h.'>zend_class_entry</a> *<a href='../Y/37059.html' title='Multiple used in 3 places.'>spl_ce_RecursiveFilterIterator</a>;
+<a id='L41' name='L41'></a>  41 <strong class='reserved'>extern</strong> <a href='../D/7744.html' title='Multiple defined in 14 places.'>PHPAPI</a> <a href='../S/1643.html#L302' title='Defined at 302 in Zend/zend.h.'>zend_class_entry</a> *<a href='../Y/37053.html' title='Multiple used in 3 places.'>spl_ce_ParentIterator</a>;
+<a id='L42' name='L42'></a>  42 <strong class='reserved'>extern</strong> <a href='../D/7744.html' title='Multiple defined in 14 places.'>PHPAPI</a> <a href='../S/1643.html#L302' title='Defined at 302 in Zend/zend.h.'>zend_class_entry</a> *<a href='../Y/37066.html' title='Multiple used in 3 places.'>spl_ce_SeekableIterator</a>;
+<a id='L43' name='L43'></a>  43 <strong class='reserved'>extern</strong> <a href='../D/7744.html' title='Multiple defined in 14 places.'>PHPAPI</a> <a href='../S/1643.html#L302' title='Defined at 302 in Zend/zend.h.'>zend_class_entry</a> *<a href='../Y/37045.html' title='Multiple used in 3 places.'>spl_ce_LimitIterator</a>;
+<a id='L44' name='L44'></a>  44 <strong class='reserved'>extern</strong> <a href='../D/7744.html' title='Multiple defined in 14 places.'>PHPAPI</a> <a href='../S/1643.html#L302' title='Defined at 302 in Zend/zend.h.'>zend_class_entry</a> *<a href='../Y/37032.html' title='Multiple used in 3 places.'>spl_ce_CachingIterator</a>;
+<a id='L45' name='L45'></a>  45 <strong class='reserved'>extern</strong> <a href='../D/7744.html' title='Multiple defined in 14 places.'>PHPAPI</a> <a href='../S/1643.html#L302' title='Defined at 302 in Zend/zend.h.'>zend_class_entry</a> *<a href='../Y/37056.html' title='Multiple used in 5 places.'>spl_ce_RecursiveCachingIterator</a>;
+<a id='L46' name='L46'></a>  46 <strong class='reserved'>extern</strong> <a href='../D/7744.html' title='Multiple defined in 14 places.'>PHPAPI</a> <a href='../S/1643.html#L302' title='Defined at 302 in Zend/zend.h.'>zend_class_entry</a> *<a href='../Y/37051.html' title='Multiple used in 2 places.'>spl_ce_OuterIterator</a>;
+<a id='L47' name='L47'></a>  47 <strong class='reserved'>extern</strong> <a href='../D/7744.html' title='Multiple defined in 14 places.'>PHPAPI</a> <a href='../S/1643.html#L302' title='Defined at 302 in Zend/zend.h.'>zend_class_entry</a> *<a href='../Y/37043.html' title='Multiple used in 3 places.'>spl_ce_IteratorIterator</a>;
+<a id='L48' name='L48'></a>  48 <strong class='reserved'>extern</strong> <a href='../D/7744.html' title='Multiple defined in 14 places.'>PHPAPI</a> <a href='../S/1643.html#L302' title='Defined at 302 in Zend/zend.h.'>zend_class_entry</a> *<a href='../Y/37048.html' title='Multiple used in 3 places.'>spl_ce_NoRewindIterator</a>;
+<a id='L49' name='L49'></a>  49 <strong class='reserved'>extern</strong> <a href='../D/7744.html' title='Multiple defined in 14 places.'>PHPAPI</a> <a href='../S/1643.html#L302' title='Defined at 302 in Zend/zend.h.'>zend_class_entry</a> *<a href='../Y/37041.html' title='Multiple used in 3 places.'>spl_ce_InfiniteIterator</a>;
+<a id='L50' name='L50'></a>  50 <strong class='reserved'>extern</strong> <a href='../D/7744.html' title='Multiple defined in 14 places.'>PHPAPI</a> <a href='../S/1643.html#L302' title='Defined at 302 in Zend/zend.h.'>zend_class_entry</a> *<a href='../Y/37037.html' title='Multiple used in 2 places.'>spl_ce_EmptyIterator</a>;
+<a id='L51' name='L51'></a>  51 <strong class='reserved'>extern</strong> <a href='../D/7744.html' title='Multiple defined in 14 places.'>PHPAPI</a> <a href='../S/1643.html#L302' title='Defined at 302 in Zend/zend.h.'>zend_class_entry</a> *<a href='../Y/37027.html' title='Multiple used in 3 places.'>spl_ce_AppendIterator</a>;
+<a id='L52' name='L52'></a>  52 <strong class='reserved'>extern</strong> <a href='../D/7744.html' title='Multiple defined in 14 places.'>PHPAPI</a> <a href='../S/1643.html#L302' title='Defined at 302 in Zend/zend.h.'>zend_class_entry</a> *<a href='../Y/37064.html' title='Multiple used in 8 places.'>spl_ce_RegexIterator</a>;
+<a id='L53' name='L53'></a>  53 <strong class='reserved'>extern</strong> <a href='../D/7744.html' title='Multiple defined in 14 places.'>PHPAPI</a> <a href='../S/1643.html#L302' title='Defined at 302 in Zend/zend.h.'>zend_class_entry</a> *<a href='../Y/37062.html' title='Multiple used in 4 places.'>spl_ce_RecursiveRegexIterator</a>;
+<a id='L54' name='L54'></a>  54 <strong class='reserved'>extern</strong> <a href='../D/7744.html' title='Multiple defined in 14 places.'>PHPAPI</a> <a href='../S/1643.html#L302' title='Defined at 302 in Zend/zend.h.'>zend_class_entry</a> *<a href='../Y/37034.html' title='Multiple used in 6 places.'>spl_ce_Countable</a>;
+<a id='L55' name='L55'></a>  55 <strong class='reserved'>extern</strong> <a href='../D/7744.html' title='Multiple defined in 14 places.'>PHPAPI</a> <a href='../S/1643.html#L302' title='Defined at 302 in Zend/zend.h.'>zend_class_entry</a> *<a href='../Y/37033.html' title='Multiple used in 3 places.'>spl_ce_CallbackFilterIterator</a>;
+<a id='L56' name='L56'></a>  56 <strong class='reserved'>extern</strong> <a href='../D/7744.html' title='Multiple defined in 14 places.'>PHPAPI</a> <a href='../S/1643.html#L302' title='Defined at 302 in Zend/zend.h.'>zend_class_entry</a> *<a href='../Y/37057.html' title='Multiple used in 3 places.'>spl_ce_RecursiveCallbackFilterIterator</a>;
+<a id='L57' name='L57'></a>  57 
+<a id='L58' name='L58'></a>  58 <a href='../D/8401.html' title='Multiple defined in 101 places.'>PHP_MINIT_FUNCTION</a>(<a href='../Y/37148.html' title='Multiple used in 3 places.'>spl_iterators</a>);
+<a id='L59' name='L59'></a>  59 
+<a id='L60' name='L60'></a>  60 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/24287.html' title='Multiple used in 3 places.'>iterator_to_array</a>);
+<a id='L61' name='L61'></a>  61 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/24283.html' title='Multiple used in 3 places.'>iterator_count</a>);
+<a id='L62' name='L62'></a>  62 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/24282.html' title='Multiple used in 3 places.'>iterator_apply</a>);
+<a id='L63' name='L63'></a>  63 
+<a id='L64' name='L64'></a>  64 <strong class='reserved'>typedef</strong> <strong class='reserved'>enum</strong> <em class='brace'>{</em>
+<a id='L65' name='L65'></a>  65         <a href='../R/1490.html' title='Multiple referred from 3 places.'>DIT_Default</a> = 0,
+<a id='L66' name='L66'></a>  66         <a href='../S/1063.html#L1617' title='Referred from 1617 in ext/spl/spl_iterators.c.'>DIT_FilterIterator</a> = <a href='../S/1064.html#L65' title='Defined at 65 in ext/spl/spl_iterators.h.'>DIT_Default</a>,
+<a id='L67' name='L67'></a>  67         <a href='../S/1063.html#L1913' title='Referred from 1913 in ext/spl/spl_iterators.c.'>DIT_RecursiveFilterIterator</a> = <a href='../S/1064.html#L65' title='Defined at 65 in ext/spl/spl_iterators.h.'>DIT_Default</a>,
+<a id='L68' name='L68'></a>  68         <a href='../S/1063.html#L1984' title='Referred from 1984 in ext/spl/spl_iterators.c.'>DIT_ParentIterator</a> = <a href='../S/1064.html#L65' title='Defined at 65 in ext/spl/spl_iterators.h.'>DIT_Default</a>,
+<a id='L69' name='L69'></a>  69         <a href='../R/1494.html' title='Multiple referred from 2 places.'>DIT_LimitIterator</a>,
+<a id='L70' name='L70'></a>  70         <a href='../R/1488.html' title='Multiple referred from 4 places.'>DIT_CachingIterator</a>,
+<a id='L71' name='L71'></a>  71         <a href='../R/1497.html' title='Multiple referred from 5 places.'>DIT_RecursiveCachingIterator</a>,
+<a id='L72' name='L72'></a>  72         <a href='../R/1493.html' title='Multiple referred from 3 places.'>DIT_IteratorIterator</a>,
+<a id='L73' name='L73'></a>  73         <a href='../S/1063.html#L3184' title='Referred from 3184 in ext/spl/spl_iterators.c.'>DIT_NoRewindIterator</a>,
+<a id='L74' name='L74'></a>  74         <a href='../S/1063.html#L3281' title='Referred from 3281 in ext/spl/spl_iterators.c.'>DIT_InfiniteIterator</a>,
+<a id='L75' name='L75'></a>  75         <a href='../R/1485.html' title='Multiple referred from 3 places.'>DIT_AppendIterator</a>,
+<a id='L76' name='L76'></a>  76 <em class='sharp'>#if</em> <a href='../Y/2828.html' title='Multiple used in 17 places.'>HAVE_PCRE</a> || <a href='../Y/2606.html' title='Multiple used in 19 places.'>HAVE_BUNDLED_PCRE</a>
+<a id='L77' name='L77'></a>  77         <a href='../R/1501.html' title='Multiple referred from 3 places.'>DIT_RegexIterator</a>,
+<a id='L78' name='L78'></a>  78         <a href='../R/1500.html' title='Multiple referred from 3 places.'>DIT_RecursiveRegexIterator</a>,
+<a id='L79' name='L79'></a>  79 <em class='sharp'>#endif</em>
+<a id='L80' name='L80'></a>  80         <a href='../R/1489.html' title='Multiple referred from 3 places.'>DIT_CallbackFilterIterator</a>,
+<a id='L81' name='L81'></a>  81         <a href='../R/1498.html' title='Multiple referred from 3 places.'>DIT_RecursiveCallbackFilterIterator</a>,
+<a id='L82' name='L82'></a>  82         <a href='../R/1502.html' title='Multiple referred from 4 places.'>DIT_Unknown</a> = ~0
+<a id='L83' name='L83'></a>  83 <em class='brace'>}</em> <a href='../R/18262.html' title='Multiple referred from 2 places.'>dual_it_type</a>;
+<a id='L84' name='L84'></a>  84 
+<a id='L85' name='L85'></a>  85 <strong class='reserved'>typedef</strong> <strong class='reserved'>enum</strong> <em class='brace'>{</em>
+<a id='L86' name='L86'></a>  86         <a href='../S/1064.html#L87' title='Referred from 87 in ext/spl/spl_iterators.h.'>RIT_Default</a> = 0,
+<a id='L87' name='L87'></a>  87         <a href='../R/8772.html' title='Multiple referred from 2 places.'>RIT_RecursiveIteratorIterator</a> = <a href='../S/1064.html#L86' title='Defined at 86 in ext/spl/spl_iterators.h.'>RIT_Default</a>,
+<a id='L88' name='L88'></a>  88         <a href='../R/8773.html' title='Multiple referred from 2 places.'>RIT_RecursiveTreeIterator</a>,
+<a id='L89' name='L89'></a>  89         RIT_Unknow = ~0
+<a id='L90' name='L90'></a>  90 <em class='brace'>}</em> <a href='../S/1063.html#L462' title='Referred from 462 in ext/spl/spl_iterators.c.'>recursive_it_it_type</a>;
+<a id='L91' name='L91'></a>  91 
+<a id='L92' name='L92'></a>  92 <strong class='reserved'>enum</strong> <em class='brace'>{</em>
+<a id='L93' name='L93'></a>  93         <em class='comment'>/* public */</em>
+<a id='L94' name='L94'></a>  94         <a href='../R/913.html' title='Multiple referred from 6 places.'>CIT_CALL_TOSTRING</a>        = 0x00000001,
+<a id='L95' name='L95'></a>  95         <a href='../R/919.html' title='Multiple referred from 4 places.'>CIT_TOSTRING_USE_KEY</a>     = 0x00000002,
+<a id='L96' name='L96'></a>  96         <a href='../R/917.html' title='Multiple referred from 4 places.'>CIT_TOSTRING_USE_CURRENT</a> = 0x00000004,
+<a id='L97' name='L97'></a>  97         <a href='../R/918.html' title='Multiple referred from 6 places.'>CIT_TOSTRING_USE_INNER</a>   = 0x00000008,
+<a id='L98' name='L98'></a>  98         <a href='../R/914.html' title='Multiple referred from 6 places.'>CIT_CATCH_GET_CHILD</a>      = 0x00000010,
+<a id='L99' name='L99'></a>  99         <a href='../R/915.html' title='Multiple referred from 9 places.'>CIT_FULL_CACHE</a>           = 0x00000100,
+<a id='L100' name='L100'></a> 100         <a href='../R/916.html' title='Multiple referred from 3 places.'>CIT_PUBLIC</a>               = 0x0000FFFF,
+<a id='L101' name='L101'></a> 101         <em class='comment'>/* private */</em>
+<a id='L102' name='L102'></a> 102         <a href='../R/920.html' title='Multiple referred from 3 places.'>CIT_VALID</a>                = 0x00010000,
+<a id='L103' name='L103'></a> 103         CIT_HAS_CHILDREN         = 0x00020000
+<a id='L104' name='L104'></a> 104 <em class='brace'>}</em>;
+<a id='L105' name='L105'></a> 105 
+<a id='L106' name='L106'></a> 106 <strong class='reserved'>enum</strong> <em class='brace'>{</em>
+<a id='L107' name='L107'></a> 107         <em class='comment'>/* public */</em>
+<a id='L108' name='L108'></a> 108         <a href='../R/8600.html' title='Multiple referred from 3 places.'>REGIT_USE_KEY</a>            = 0x00000001,
+<a id='L109' name='L109'></a> 109         <a href='../R/8593.html' title='Multiple referred from 2 places.'>REGIT_INVERTED</a>           = 0x00000002
+<a id='L110' name='L110'></a> 110 <em class='brace'>}</em>;
+<a id='L111' name='L111'></a> 111 
+<a id='L112' name='L112'></a> 112 <strong class='reserved'>typedef</strong> <strong class='reserved'>enum</strong> <em class='brace'>{</em>
+<a id='L113' name='L113'></a> 113         <a href='../R/8596.html' title='Multiple referred from 3 places.'>REGIT_MODE_MATCH</a>,
+<a id='L114' name='L114'></a> 114         <a href='../R/8595.html' title='Multiple referred from 2 places.'>REGIT_MODE_GET_MATCH</a>,
+<a id='L115' name='L115'></a> 115         <a href='../R/8594.html' title='Multiple referred from 3 places.'>REGIT_MODE_ALL_MATCHES</a>,
+<a id='L116' name='L116'></a> 116         <a href='../R/8599.html' title='Multiple referred from 2 places.'>REGIT_MODE_SPLIT</a>,
+<a id='L117' name='L117'></a> 117         <a href='../R/8598.html' title='Multiple referred from 2 places.'>REGIT_MODE_REPLACE</a>,
+<a id='L118' name='L118'></a> 118         <a href='../R/8597.html' title='Multiple referred from 3 places.'>REGIT_MODE_MAX</a>
+<a id='L119' name='L119'></a> 119 <em class='brace'>}</em> <a href='../S/1064.html#L159' title='Referred from 159 in ext/spl/spl_iterators.h.'>regex_mode</a>;
+<a id='L120' name='L120'></a> 120 
+<a id='L121' name='L121'></a> 121 <strong class='reserved'>typedef</strong> <strong class='reserved'>struct</strong> <a href='../R/16160.html' title='Multiple referred from 2 places.'>_spl_cbfilter_it_intern</a> <em class='brace'>{</em>
+<a id='L122' name='L122'></a> 122         <a href='../S/1647.html#L53' title='Defined at 53 in Zend/zend_API.h.'>zend_fcall_info</a>       <a href='../Y/17706.html' title='Multiple used in 672 places.'>fci</a>;
+<a id='L123' name='L123'></a> 123         <a href='../S/1647.html#L61' title='Defined at 61 in Zend/zend_API.h.'>zend_fcall_info_cache</a> <a href='../Y/17696.html' title='Multiple used in 349 places.'>fcc</a>;
+<a id='L124' name='L124'></a> 124 <em class='brace'>}</em> <a href='../R/16160.html' title='Multiple referred from 2 places.'>_spl_cbfilter_it_intern</a>;
+<a id='L125' name='L125'></a> 125 
+<a id='L126' name='L126'></a> 126 <strong class='reserved'>typedef</strong> <strong class='reserved'>struct</strong> _spl_dual_it_object <em class='brace'>{</em>
+<a id='L127' name='L127'></a> 127         <a href='../S/1643.html#L317' title='Defined at 317 in Zend/zend.h.'>zend_object</a>              <a href='../Y/37827.html' title='Multiple used in 217 places.'>std</a>;
+<a id='L128' name='L128'></a> 128         <strong class='reserved'>struct</strong> <em class='brace'>{</em>
+<a id='L129' name='L129'></a> 129                 <a href='../S/1741.html#L55' title='Defined at 55 in Zend/zend_types.h.'>zval</a>                 *<a href='../Y/44574.html' title='Multiple used in 146 places.'>zobject</a>;
+<a id='L130' name='L130'></a> 130                 <a href='../S/1643.html#L302' title='Defined at 302 in Zend/zend.h.'>zend_class_entry</a>     *<a href='../Y/13321.html' title='Multiple used in 3134 places.'>ce</a>;
+<a id='L131' name='L131'></a> 131                 <a href='../S/1643.html#L317' title='Defined at 317 in Zend/zend.h.'>zend_object</a>          *<a href='../Y/29333.html' title='Multiple used in 3115 places.'>object</a>;
+<a id='L132' name='L132'></a> 132                 <a href='../S/1699.html#L29' title='Defined at 29 in Zend/zend_iterators.h.'>zend_object_iterator</a> *<a href='../Y/24280.html' title='Multiple used in 512 places.'>iterator</a>;
+<a id='L133' name='L133'></a> 133         <em class='brace'>}</em> <a href='../Y/23348.html' title='Multiple used in 61 places.'>inner</a>;
+<a id='L134' name='L134'></a> 134         <strong class='reserved'>struct</strong> <em class='brace'>{</em>
+<a id='L135' name='L135'></a> 135                 <a href='../S/1741.html#L55' title='Defined at 55 in Zend/zend_types.h.'>zval</a>                 *<a href='../D/20513.html' title='Multiple defined in 7 places.'>data</a>;
+<a id='L136' name='L136'></a> 136                 <a href='../S/1741.html#L55' title='Defined at 55 in Zend/zend_types.h.'>zval</a>                 *<a href='../D/23451.html' title='Multiple defined in 3 places.'>key</a>;
+<a id='L137' name='L137'></a> 137                 <strong class='reserved'>int</strong>                  <a href='../Y/33322.html' title='Multiple used in 1733 places.'>pos</a>;
+<a id='L138' name='L138'></a> 138         <em class='brace'>}</em> <a href='../Y/14782.html' title='Multiple used in 608 places.'>current</a>;
+<a id='L139' name='L139'></a> 139         <a href='../S/1064.html#L83' title='Defined at 83 in ext/spl/spl_iterators.h.'>dual_it_type</a>             <a href='../Y/15817.html' title='Multiple used in 15 places.'>dit_type</a>;
+<a id='L140' name='L140'></a> 140         <strong class='reserved'>union</strong> <em class='brace'>{</em>
+<a id='L141' name='L141'></a> 141                 <strong class='reserved'>struct</strong> <em class='brace'>{</em>
+<a id='L142' name='L142'></a> 142                         <strong class='reserved'>long</strong>             <a href='../D/25061.html' title='Multiple defined in 3 places.'>offset</a>;
+<a id='L143' name='L143'></a> 143                         <strong class='reserved'>long</strong>             <a href='../Y/14391.html' title='Multiple used in 1346 places.'>count</a>;
+<a id='L144' name='L144'></a> 144                 <em class='brace'>}</em> <a href='../Y/25160.html' title='Multiple used in 197 places.'>limit</a>;
+<a id='L145' name='L145'></a> 145                 <strong class='reserved'>struct</strong> <em class='brace'>{</em>
+<a id='L146' name='L146'></a> 146                         <strong class='reserved'>long</strong>             <a href='../D/21615.html' title='Multiple defined in 14 places.'>flags</a>; <em class='comment'>/* CIT_* */</em>
+<a id='L147' name='L147'></a> 147                         <a href='../S/1741.html#L55' title='Defined at 55 in Zend/zend_types.h.'>zval</a>             *<a href='../Y/44634.html' title='Multiple used in 77 places.'>zstr</a>;
+<a id='L148' name='L148'></a> 148                         <a href='../S/1741.html#L55' title='Defined at 55 in Zend/zend_types.h.'>zval</a>             *<a href='../Y/44163.html' title='Multiple used in 13 places.'>zchildren</a>;
+<a id='L149' name='L149'></a> 149                         <a href='../S/1741.html#L55' title='Defined at 55 in Zend/zend_types.h.'>zval</a>             *<a href='../Y/44154.html' title='Multiple used in 15 places.'>zcache</a>;
+<a id='L150' name='L150'></a> 150                 <em class='brace'>}</em> <a href='../Y/13082.html' title='Multiple used in 61 places.'>caching</a>;
+<a id='L151' name='L151'></a> 151                 <strong class='reserved'>struct</strong> <em class='brace'>{</em>
+<a id='L152' name='L152'></a> 152                         <a href='../S/1741.html#L55' title='Defined at 55 in Zend/zend_types.h.'>zval</a>                 *<a href='../Y/44144.html' title='Multiple used in 9 places.'>zarrayit</a>;
+<a id='L153' name='L153'></a> 153                         <a href='../S/1699.html#L29' title='Defined at 29 in Zend/zend_iterators.h.'>zend_object_iterator</a> *<a href='../Y/24280.html' title='Multiple used in 512 places.'>iterator</a>;
+<a id='L154' name='L154'></a> 154                 <em class='brace'>}</em> <a href='../Y/9071.html' title='Multiple used in 36 places.'>append</a>;
+<a id='L155' name='L155'></a> 155 <em class='sharp'>#if</em> <a href='../Y/2828.html' title='Multiple used in 17 places.'>HAVE_PCRE</a> || <a href='../Y/2606.html' title='Multiple used in 19 places.'>HAVE_BUNDLED_PCRE</a>
+<a id='L156' name='L156'></a> 156                 <strong class='reserved'>struct</strong> <em class='brace'>{</em>
+<a id='L157' name='L157'></a> 157                         <strong class='reserved'>int</strong>              <a href='../Y/40272.html' title='Multiple used in 8 places.'>use_flags</a>;
+<a id='L158' name='L158'></a> 158                         <strong class='reserved'>long</strong>             <a href='../D/21615.html' title='Multiple defined in 14 places.'>flags</a>;
+<a id='L159' name='L159'></a> 159                         <a href='../S/1064.html#L119' title='Defined at 119 in ext/spl/spl_iterators.h.'>regex_mode</a>       <a href='../S/813.html#L496' title='Defined at 496 in ext/mysqlnd/mysqlnd_structs.h.'>mode</a>;
+<a id='L160' name='L160'></a> 160                         <strong class='reserved'>long</strong>             <a href='../Y/33562.html' title='Multiple used in 17 places.'>preg_flags</a>;
+<a id='L161' name='L161'></a> 161                         <a href='../S/921.html#L53' title='Defined at 53 in ext/pcre/php_pcre.h.'>pcre_cache_entry</a> *<a href='../Y/31645.html' title='Multiple used in 359 places.'>pce</a>;
+<a id='L162' name='L162'></a> 162                         <strong class='reserved'>char</strong>             *<a href='../Y/34696.html' title='Multiple used in 108 places.'>regex</a>;
+<a id='L163' name='L163'></a> 163                         <a href='../D/32232.html' title='Multiple defined in 3 places.'>uint</a>             <a href='../Y/34701.html' title='Multiple used in 33 places.'>regex_len</a>;
+<a id='L164' name='L164'></a> 164                 <em class='brace'>}</em> <a href='../Y/34696.html' title='Multiple used in 108 places.'>regex</a>;
+<a id='L165' name='L165'></a> 165 <em class='sharp'>#endif</em>
+<a id='L166' name='L166'></a> 166                 <a href='../D/18742.html' title='Multiple defined in 2 places.'>_spl_cbfilter_it_intern</a> *<a href='../Y/13267.html' title='Multiple used in 11 places.'>cbfilter</a>;
+<a id='L167' name='L167'></a> 167         <em class='brace'>}</em> <a href='../Y/39645.html' title='Multiple used in 2308 places.'>u</a>;
+<a id='L168' name='L168'></a> 168 <em class='brace'>}</em> <a href='../R/26729.html' title='Multiple referred from 85 places.'>spl_dual_it_object</a>;
+<a id='L169' name='L169'></a> 169 
+<a id='L170' name='L170'></a> 170 <strong class='reserved'>typedef</strong> <strong class='reserved'>int</strong> (*<a href='../Y/37147.html' title='Multiple used in 5 places.'>spl_iterator_apply_func_t</a>)(<a href='../S/1699.html#L29' title='Defined at 29 in Zend/zend_iterators.h.'>zend_object_iterator</a> *<a href='../Y/24272.html' title='Multiple used in 644 places.'>iter</a>, <strong class='reserved'>void</strong> *<a href='../Y/34052.html' title='Multiple used in 14 places.'>puser</a> <a href='../D/14076.html' title='Multiple defined in 136 places.'>TSRMLS_DC</a>);
+<a id='L171' name='L171'></a> 171 
+<a id='L172' name='L172'></a> 172 <a href='../D/7744.html' title='Multiple defined in 14 places.'>PHPAPI</a> <strong class='reserved'>int</strong> <a href='../S/1063.html#L3548' title='Defined at 3548 in ext/spl/spl_iterators.c.'>spl_iterator_apply</a>(<a href='../S/1741.html#L55' title='Defined at 55 in Zend/zend_types.h.'>zval</a> *<a href='../Y/29322.html' title='Multiple used in 1685 places.'>obj</a>, <a href='../Y/37147.html' title='Multiple used in 5 places.'>spl_iterator_apply_func_t</a> <a href='../Y/9086.html' title='Multiple used in 30 places.'>apply_func</a>, <strong class='reserved'>void</strong> *<a href='../Y/34052.html' title='Multiple used in 14 places.'>puser</a> <a href='../D/14076.html' title='Multiple defined in 136 places.'>TSRMLS_DC</a>);
+<a id='L173' name='L173'></a> 173 
+<a id='L174' name='L174'></a> 174 <em class='sharp'>#endif</em> <em class='comment'>/* SPL_ITERATORS_H */</em>
+<a id='L175' name='L175'></a> 175 
+<a id='L176' name='L176'></a> 176 <em class='comment'>/*</em>
+<a id='L177' name='L177'></a> 177 <em class='comment'> * Local Variables:</em>
+<a id='L178' name='L178'></a> 178 <em class='comment'> * c-basic-offset: 4</em>
+<a id='L179' name='L179'></a> 179 <em class='comment'> * tab-width: 4</em>
+<a id='L180' name='L180'></a> 180 <em class='comment'> * End:</em>
+<a id='L181' name='L181'></a> 181 <em class='comment'> * vim600: fdm=marker</em>
+<a id='L182' name='L182'></a> 182 <em class='comment'> * vim: noet sw=4 ts=4</em>
+<a id='L183' name='L183'></a> 183 <em class='comment'> */</em>
+</pre>
+<hr />
+<a id='BOTTOM' name='BOTTOM'></a>
+<em class='comment'>/* [&lt;][&gt;][^][v]<a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+</body>
+</html>

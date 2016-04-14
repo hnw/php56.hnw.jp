@@ -1,0 +1,362 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>ext/pgsql/php_pgsql.h</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<a id='TOP' name='TOP'></a><h2 class='header'><a href='../mains.html'>root</a>/<a href='../files/1753.html'>ext</a>/<a href='../files/1838.html'>pgsql</a>/php_pgsql.h</h2>
+<em class='comment'>/* [&lt;][&gt;][^][v][top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+<hr />
+<h2 class='header'><a href='967.html#L49' title='Included from 49 in ext/pgsql/pgsql.c.'>INCLUDED FROM</a></h2>
+<hr />
+<pre>
+<a id='L1' name='L1'></a>   1 <em class='comment'>/*</em>
+<a id='L2' name='L2'></a>   2 <em class='comment'>   +----------------------------------------------------------------------+</em>
+<a id='L3' name='L3'></a>   3 <em class='comment'>   | PHP Version 5                                                        |</em>
+<a id='L4' name='L4'></a>   4 <em class='comment'>   +----------------------------------------------------------------------+</em>
+<a id='L5' name='L5'></a>   5 <em class='comment'>   | Copyright (c) 1997-2016 The PHP Group                                |</em>
+<a id='L6' name='L6'></a>   6 <em class='comment'>   +----------------------------------------------------------------------+</em>
+<a id='L7' name='L7'></a>   7 <em class='comment'>   | This source file is subject to version 3.01 of the PHP license,      |</em>
+<a id='L8' name='L8'></a>   8 <em class='comment'>   | that is bundled with this package in the file LICENSE, and is        |</em>
+<a id='L9' name='L9'></a>   9 <em class='comment'>   | available through the world-wide-web at the following url:           |</em>
+<a id='L10' name='L10'></a>  10 <em class='comment'>   | http://www.php.net/license/3_01.txt                                  |</em>
+<a id='L11' name='L11'></a>  11 <em class='comment'>   | If you did not receive a copy of the PHP license and are unable to   |</em>
+<a id='L12' name='L12'></a>  12 <em class='comment'>   | obtain it through the world-wide-web, please send a note to          |</em>
+<a id='L13' name='L13'></a>  13 <em class='comment'>   | license@php.net so we can mail you a copy immediately.               |</em>
+<a id='L14' name='L14'></a>  14 <em class='comment'>   +----------------------------------------------------------------------+</em>
+<a id='L15' name='L15'></a>  15 <em class='comment'>   | Authors: Zeev Suraski &lt;zeev@zend.com&gt;                                |</em>
+<a id='L16' name='L16'></a>  16 <em class='comment'>   |          Jouni Ahto &lt;jouni.ahto@exdec.fi&gt;                            |</em>
+<a id='L17' name='L17'></a>  17 <em class='comment'>   +----------------------------------------------------------------------+</em>
+<a id='L18' name='L18'></a>  18 <em class='comment'> */</em>
+<a id='L19' name='L19'></a>  19 
+<a id='L20' name='L20'></a>  20 <em class='comment'>/* $Id$ */</em>
+<a id='L21' name='L21'></a>  21 
+<a id='L22' name='L22'></a>  22 <em class='sharp'>#ifndef</em> <a href='../S/968.html#L23' title='Defined at 23 in ext/pgsql/php_pgsql.h.'>PHP_PGSQL_H</a>
+<a id='L23' name='L23'></a>  23 <em class='sharp'>#define</em> <a href='../S/968.html#L22' title='Referred from 22 in ext/pgsql/php_pgsql.h.'>PHP_PGSQL_H</a>
+<a id='L24' name='L24'></a>  24 
+<a id='L25' name='L25'></a>  25 <em class='sharp'>#if</em> <a href='../Y/2829.html' title='Multiple used in 2 places.'>HAVE_PGSQL</a>
+<a id='L26' name='L26'></a>  26 
+<a id='L27' name='L27'></a>  27 <em class='sharp'>#define</em> PHP_PGSQL_API_VERSION 20140217
+<a id='L28' name='L28'></a>  28 
+<a id='L29' name='L29'></a>  29 <strong class='reserved'>extern</strong> <a href='../S/1709.html#L70' title='Defined at 70 in Zend/zend_modules.h.'>zend_module_entry</a> <a href='../Y/32123.html' title='Multiple used in 3 places.'>pgsql_module_entry</a>;
+<a id='L30' name='L30'></a>  30 <em class='sharp'>#define</em> <a href='../S/968.html#L338' title='Referred from 338 in ext/pgsql/php_pgsql.h.'>pgsql_module_ptr</a> &amp;<a href='../Y/32123.html' title='Multiple used in 3 places.'>pgsql_module_entry</a>
+<a id='L31' name='L31'></a>  31 
+<a id='L32' name='L32'></a>  32 <em class='sharp'>#ifdef</em> <a href='../S/967.html#L27' title='Defined at 27 in ext/pgsql/pgsql.c.'>PHP_PGSQL_PRIVATE</a>
+<a id='L33' name='L33'></a>  33 <em class='sharp'>#undef</em> SOCKET_SIZE_TYPE
+<a id='L34' name='L34'></a>  34 <em class='sharp'>#include</em> &lt;libpq-fe.h&gt;
+<a id='L35' name='L35'></a>  35 
+<a id='L36' name='L36'></a>  36 <em class='sharp'>#ifdef</em> <a href='../Y/4758.html' title='Multiple used in 689 places.'>PHP_WIN32</a>
+<a id='L37' name='L37'></a>  37 <em class='sharp'>#define</em> <a href='../R/3473.html' title='Multiple referred from 6 places.'>INV_WRITE</a>            0x00020000
+<a id='L38' name='L38'></a>  38 <em class='sharp'>#define</em> <a href='../R/3472.html' title='Multiple referred from 8 places.'>INV_READ</a>             0x00040000
+<a id='L39' name='L39'></a>  39 <em class='sharp'>#undef</em> <a href='../R/7621.html' title='Multiple referred from 14 places.'>PHP_PGSQL_API</a>
+<a id='L40' name='L40'></a>  40 <em class='sharp'>#ifdef</em> PGSQL_EXPORTS
+<a id='L41' name='L41'></a>  41 <em class='sharp'>#define</em> <a href='../R/7621.html' title='Multiple referred from 14 places.'>PHP_PGSQL_API</a> <a href='../D/17968.html' title='Multiple defined in 10 places.'>__declspec</a>(<a href='../Y/15830.html' title='Multiple used in 48 places.'>dllexport</a>)
+<a id='L42' name='L42'></a>  42 <em class='sharp'>#else</em>
+<a id='L43' name='L43'></a>  43 <em class='sharp'>#define</em> <a href='../R/7621.html' title='Multiple referred from 14 places.'>PHP_PGSQL_API</a> <a href='../D/17968.html' title='Multiple defined in 10 places.'>__declspec</a>(<a href='../Y/15831.html' title='Multiple used in 27 places.'>dllimport</a>)
+<a id='L44' name='L44'></a>  44 <em class='sharp'>#endif</em>
+<a id='L45' name='L45'></a>  45 <em class='sharp'>#else</em>
+<a id='L46' name='L46'></a>  46 <em class='sharp'>#include</em> &lt;libpq/libpq-fs.h&gt;
+<a id='L47' name='L47'></a>  47 <em class='sharp'># if</em> <strong class='reserved'>defined</strong>(<a href='../Y/7532.html' title='Multiple used in 136 places.'>__GNUC__</a>) &amp;&amp; <a href='../Y/7532.html' title='Multiple used in 136 places.'>__GNUC__</a> &gt;= 4
+<a id='L48' name='L48'></a>  48 <em class='sharp'>#  define</em> <a href='../R/7621.html' title='Multiple referred from 14 places.'>PHP_PGSQL_API</a> <strong class='reserved'>__attribute__</strong> ((<a href='../Y/40745.html' title='Multiple used in 31 places.'>visibility</a>("default")))
+<a id='L49' name='L49'></a>  49 <em class='sharp'># else</em>
+<a id='L50' name='L50'></a>  50 <em class='sharp'>#  define</em> <a href='../R/7621.html' title='Multiple referred from 14 places.'>PHP_PGSQL_API</a>
+<a id='L51' name='L51'></a>  51 <em class='sharp'># endif</em>
+<a id='L52' name='L52'></a>  52 <em class='sharp'>#endif</em>
+<a id='L53' name='L53'></a>  53 
+<a id='L54' name='L54'></a>  54 <em class='sharp'>#ifdef</em> <a href='../Y/2832.html' title='Multiple used in 5 places.'>HAVE_PG_CONFIG_H</a>
+<a id='L55' name='L55'></a>  55 <em class='sharp'>#include</em> &lt;pg_config.h&gt;
+<a id='L56' name='L56'></a>  56 <em class='sharp'>#endif</em>
+<a id='L57' name='L57'></a>  57 
+<a id='L58' name='L58'></a>  58 <em class='sharp'>#ifdef</em> <a href='../Y/2830.html' title='Multiple used in 3 places.'>HAVE_PGSQL_WITH_MULTIBYTE_SUPPORT</a>
+<a id='L59' name='L59'></a>  59 <strong class='reserved'>const</strong> <strong class='reserved'>char</strong> * <a href='../S/967.html#L782' title='Defined at 782 in ext/pgsql/pgsql.c.'>pg_encoding_to_char</a>(<strong class='reserved'>int</strong> <a href='../Y/16735.html' title='Multiple used in 505 places.'>encoding</a>);
+<a id='L60' name='L60'></a>  60 <em class='sharp'>#endif</em>
+<a id='L61' name='L61'></a>  61 
+<a id='L62' name='L62'></a>  62 <a href='../D/8401.html' title='Multiple defined in 101 places.'>PHP_MINIT_FUNCTION</a>(<a href='../Y/32103.html' title='Multiple used in 360 places.'>pgsql</a>);
+<a id='L63' name='L63'></a>  63 <a href='../D/8432.html' title='Multiple defined in 78 places.'>PHP_MSHUTDOWN_FUNCTION</a>(<a href='../Y/32103.html' title='Multiple used in 360 places.'>pgsql</a>);
+<a id='L64' name='L64'></a>  64 <a href='../D/8657.html' title='Multiple defined in 32 places.'>PHP_RINIT_FUNCTION</a>(<a href='../Y/32103.html' title='Multiple used in 360 places.'>pgsql</a>);
+<a id='L65' name='L65'></a>  65 <a href='../D/8679.html' title='Multiple defined in 39 places.'>PHP_RSHUTDOWN_FUNCTION</a>(<a href='../Y/32103.html' title='Multiple used in 360 places.'>pgsql</a>);
+<a id='L66' name='L66'></a>  66 <a href='../D/8399.html' title='Multiple defined in 88 places.'>PHP_MINFO_FUNCTION</a>(<a href='../Y/32103.html' title='Multiple used in 360 places.'>pgsql</a>);
+<a id='L67' name='L67'></a>  67 <em class='comment'>/* connection functions */</em>
+<a id='L68' name='L68'></a>  68 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/31969.html' title='Multiple used in 3 places.'>pg_connect</a>);
+<a id='L69' name='L69'></a>  69 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/32057.html' title='Multiple used in 3 places.'>pg_pconnect</a>);
+<a id='L70' name='L70'></a>  70 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/31970.html' title='Multiple used in 3 places.'>pg_connect_poll</a>);
+<a id='L71' name='L71'></a>  71 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/31967.html' title='Multiple used in 3 places.'>pg_close</a>);
+<a id='L72' name='L72'></a>  72 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/31972.html' title='Multiple used in 3 places.'>pg_connection_reset</a>);
+<a id='L73' name='L73'></a>  73 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/31973.html' title='Multiple used in 3 places.'>pg_connection_status</a>);
+<a id='L74' name='L74'></a>  74 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/31971.html' title='Multiple used in 3 places.'>pg_connection_busy</a>);
+<a id='L75' name='L75'></a>  75 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/32020.html' title='Multiple used in 3 places.'>pg_host</a>);
+<a id='L76' name='L76'></a>  76 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/31978.html' title='Multiple used in 3 places.'>pg_dbname</a>);
+<a id='L77' name='L77'></a>  77 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/32059.html' title='Multiple used in 3 places.'>pg_port</a>);
+<a id='L78' name='L78'></a>  78 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/32082.html' title='Multiple used in 3 places.'>pg_tty</a>);
+<a id='L79' name='L79'></a>  79 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/32055.html' title='Multiple used in 3 places.'>pg_options</a>);
+<a id='L80' name='L80'></a>  80 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/32086.html' title='Multiple used in 3 places.'>pg_version</a>);
+<a id='L81' name='L81'></a>  81 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/32058.html' title='Multiple used in 3 places.'>pg_ping</a>);
+<a id='L82' name='L82'></a>  82 <em class='sharp'>#if</em> <a href='../Y/2856.html' title='Multiple used in 10 places.'>HAVE_PQPARAMETERSTATUS</a>
+<a id='L83' name='L83'></a>  83 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/32056.html' title='Multiple used in 3 places.'>pg_parameter_status</a>);
+<a id='L84' name='L84'></a>  84 <em class='sharp'>#endif</em>
+<a id='L85' name='L85'></a>  85 <em class='sharp'>#if</em> <a href='../Y/2831.html' title='Multiple used in 7 places.'>HAVE_PGTRANSACTIONSTATUS</a>
+<a id='L86' name='L86'></a>  86 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/32081.html' title='Multiple used in 3 places.'>pg_transaction_status</a>);
+<a id='L87' name='L87'></a>  87 <em class='sharp'>#endif</em>
+<a id='L88' name='L88'></a>  88 <em class='comment'>/* query functions */</em>
+<a id='L89' name='L89'></a>  89 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/32062.html' title='Multiple used in 4 places.'>pg_query</a>);
+<a id='L90' name='L90'></a>  90 <em class='sharp'>#if</em> <a href='../Y/2850.html' title='Multiple used in 5 places.'>HAVE_PQEXECPARAMS</a>
+<a id='L91' name='L91'></a>  91 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/32063.html' title='Multiple used in 3 places.'>pg_query_params</a>);
+<a id='L92' name='L92'></a>  92 <em class='sharp'>#endif</em>
+<a id='L93' name='L93'></a>  93 <em class='sharp'>#if</em> <a href='../Y/2857.html' title='Multiple used in 4 places.'>HAVE_PQPREPARE</a>
+<a id='L94' name='L94'></a>  94 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/32060.html' title='Multiple used in 3 places.'>pg_prepare</a>);
+<a id='L95' name='L95'></a>  95 <em class='sharp'>#endif</em>
+<a id='L96' name='L96'></a>  96 <em class='sharp'>#if</em> <a href='../Y/2851.html' title='Multiple used in 5 places.'>HAVE_PQEXECPREPARED</a>
+<a id='L97' name='L97'></a>  97 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/31989.html' title='Multiple used in 3 places.'>pg_execute</a>);
+<a id='L98' name='L98'></a>  98 <em class='sharp'>#endif</em>
+<a id='L99' name='L99'></a>  99 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/32074.html' title='Multiple used in 3 places.'>pg_send_query</a>);
+<a id='L100' name='L100'></a> 100 <em class='sharp'>#if</em> <a href='../Y/2862.html' title='Multiple used in 5 places.'>HAVE_PQSENDQUERYPARAMS</a>
+<a id='L101' name='L101'></a> 101 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/32075.html' title='Multiple used in 3 places.'>pg_send_query_params</a>);
+<a id='L102' name='L102'></a> 102 <em class='sharp'>#endif</em>
+<a id='L103' name='L103'></a> 103 <em class='sharp'>#if</em> <a href='../Y/2861.html' title='Multiple used in 4 places.'>HAVE_PQSENDPREPARE</a>
+<a id='L104' name='L104'></a> 104 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/32073.html' title='Multiple used in 3 places.'>pg_send_prepare</a>);
+<a id='L105' name='L105'></a> 105 <em class='sharp'>#endif</em>
+<a id='L106' name='L106'></a> 106 <em class='sharp'>#if</em> <a href='../Y/2863.html' title='Multiple used in 5 places.'>HAVE_PQSENDQUERYPREPARED</a>
+<a id='L107' name='L107'></a> 107 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/32072.html' title='Multiple used in 3 places.'>pg_send_execute</a>);
+<a id='L108' name='L108'></a> 108 <em class='sharp'>#endif</em>
+<a id='L109' name='L109'></a> 109 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/31964.html' title='Multiple used in 3 places.'>pg_cancel_query</a>);
+<a id='L110' name='L110'></a> 110 <em class='comment'>/* result functions */</em>
+<a id='L111' name='L111'></a> 111 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/31993.html' title='Multiple used in 3 places.'>pg_fetch_assoc</a>);
+<a id='L112' name='L112'></a> 112 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/31992.html' title='Multiple used in 3 places.'>pg_fetch_array</a>);
+<a id='L113' name='L113'></a> 113 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/31994.html' title='Multiple used in 3 places.'>pg_fetch_object</a>);
+<a id='L114' name='L114'></a> 114 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/31995.html' title='Multiple used in 4 places.'>pg_fetch_result</a>);
+<a id='L115' name='L115'></a> 115 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/31996.html' title='Multiple used in 3 places.'>pg_fetch_row</a>);
+<a id='L116' name='L116'></a> 116 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/31990.html' title='Multiple used in 3 places.'>pg_fetch_all</a>);
+<a id='L117' name='L117'></a> 117 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/31991.html' title='Multiple used in 3 places.'>pg_fetch_all_columns</a>);
+<a id='L118' name='L118'></a> 118 <em class='sharp'>#if</em> <a href='../Y/2845.html' title='Multiple used in 6 places.'>HAVE_PQCMDTUPLES</a>
+<a id='L119' name='L119'></a> 119 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/31963.html' title='Multiple used in 4 places.'>pg_affected_rows</a>);
+<a id='L120' name='L120'></a> 120 <em class='sharp'>#endif</em>
+<a id='L121' name='L121'></a> 121 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/32018.html' title='Multiple used in 3 places.'>pg_get_result</a>);
+<a id='L122' name='L122'></a> 122 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/32067.html' title='Multiple used in 3 places.'>pg_result_seek</a>);
+<a id='L123' name='L123'></a> 123 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/32068.html' title='Multiple used in 3 places.'>pg_result_status</a>);
+<a id='L124' name='L124'></a> 124 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/32014.html' title='Multiple used in 4 places.'>pg_free_result</a>);
+<a id='L125' name='L125'></a> 125 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/32024.html' title='Multiple used in 4 places.'>pg_last_oid</a>);
+<a id='L126' name='L126'></a> 126 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/32052.html' title='Multiple used in 4 places.'>pg_num_rows</a>);
+<a id='L127' name='L127'></a> 127 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/32051.html' title='Multiple used in 4 places.'>pg_num_fields</a>);
+<a id='L128' name='L128'></a> 128 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/31998.html' title='Multiple used in 4 places.'>pg_field_name</a>);
+<a id='L129' name='L129'></a> 129 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/31999.html' title='Multiple used in 4 places.'>pg_field_num</a>);
+<a id='L130' name='L130'></a> 130 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/32001.html' title='Multiple used in 4 places.'>pg_field_size</a>);
+<a id='L131' name='L131'></a> 131 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/32003.html' title='Multiple used in 4 places.'>pg_field_type</a>);
+<a id='L132' name='L132'></a> 132 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/32004.html' title='Multiple used in 3 places.'>pg_field_type_oid</a>);
+<a id='L133' name='L133'></a> 133 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/32000.html' title='Multiple used in 4 places.'>pg_field_prtlen</a>);
+<a id='L134' name='L134'></a> 134 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/31997.html' title='Multiple used in 4 places.'>pg_field_is_null</a>);
+<a id='L135' name='L135'></a> 135 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/32002.html' title='Multiple used in 3 places.'>pg_field_table</a>);
+<a id='L136' name='L136'></a> 136 <em class='comment'>/* async message functions */</em>
+<a id='L137' name='L137'></a> 137 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/32016.html' title='Multiple used in 3 places.'>pg_get_notify</a>);
+<a id='L138' name='L138'></a> 138 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/32079.html' title='Multiple used in 3 places.'>pg_socket</a>);
+<a id='L139' name='L139'></a> 139 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/31974.html' title='Multiple used in 3 places.'>pg_consume_input</a>);
+<a id='L140' name='L140'></a> 140 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/32013.html' title='Multiple used in 3 places.'>pg_flush</a>);
+<a id='L141' name='L141'></a> 141 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/32017.html' title='Multiple used in 3 places.'>pg_get_pid</a>);
+<a id='L142' name='L142'></a> 142 <em class='comment'>/* error message functions */</em>
+<a id='L143' name='L143'></a> 143 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/32065.html' title='Multiple used in 3 places.'>pg_result_error</a>);
+<a id='L144' name='L144'></a> 144 <em class='sharp'>#if</em> <a href='../Y/2860.html' title='Multiple used in 5 places.'>HAVE_PQRESULTERRORFIELD</a>
+<a id='L145' name='L145'></a> 145 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/32066.html' title='Multiple used in 3 places.'>pg_result_error_field</a>);
+<a id='L146' name='L146'></a> 146 <em class='sharp'>#endif</em>
+<a id='L147' name='L147'></a> 147 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/32022.html' title='Multiple used in 4 places.'>pg_last_error</a>);
+<a id='L148' name='L148'></a> 148 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/32023.html' title='Multiple used in 3 places.'>pg_last_notice</a>);
+<a id='L149' name='L149'></a> 149 <em class='comment'>/* copy functions */</em>
+<a id='L150' name='L150'></a> 150 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/32061.html' title='Multiple used in 3 places.'>pg_put_line</a>);
+<a id='L151' name='L151'></a> 151 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/31982.html' title='Multiple used in 3 places.'>pg_end_copy</a>);
+<a id='L152' name='L152'></a> 152 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/31977.html' title='Multiple used in 3 places.'>pg_copy_to</a>);
+<a id='L153' name='L153'></a> 153 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/31976.html' title='Multiple used in 3 places.'>pg_copy_from</a>);
+<a id='L154' name='L154'></a> 154 <em class='comment'>/* large object functions */</em>
+<a id='L155' name='L155'></a> 155 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/32027.html' title='Multiple used in 4 places.'>pg_lo_create</a>);
+<a id='L156' name='L156'></a> 156 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/32036.html' title='Multiple used in 4 places.'>pg_lo_unlink</a>);
+<a id='L157' name='L157'></a> 157 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/32030.html' title='Multiple used in 4 places.'>pg_lo_open</a>);
+<a id='L158' name='L158'></a> 158 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/32026.html' title='Multiple used in 4 places.'>pg_lo_close</a>);
+<a id='L159' name='L159'></a> 159 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/32031.html' title='Multiple used in 4 places.'>pg_lo_read</a>);
+<a id='L160' name='L160'></a> 160 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/32037.html' title='Multiple used in 4 places.'>pg_lo_write</a>);
+<a id='L161' name='L161'></a> 161 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/32032.html' title='Multiple used in 4 places.'>pg_lo_read_all</a>);
+<a id='L162' name='L162'></a> 162 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/32029.html' title='Multiple used in 4 places.'>pg_lo_import</a>);
+<a id='L163' name='L163'></a> 163 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/32028.html' title='Multiple used in 4 places.'>pg_lo_export</a>);
+<a id='L164' name='L164'></a> 164 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/32033.html' title='Multiple used in 3 places.'>pg_lo_seek</a>);
+<a id='L165' name='L165'></a> 165 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/32034.html' title='Multiple used in 3 places.'>pg_lo_tell</a>);
+<a id='L166' name='L166'></a> 166 <em class='sharp'>#if</em> <a href='../Y/2836.html' title='Multiple used in 4 places.'>HAVE_PG_LO_TRUNCATE</a>
+<a id='L167' name='L167'></a> 167 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/32035.html' title='Multiple used in 3 places.'>pg_lo_truncate</a>);
+<a id='L168' name='L168'></a> 168 <em class='sharp'>#endif</em>
+<a id='L169' name='L169'></a> 169 
+<a id='L170' name='L170'></a> 170 <em class='comment'>/* debugging functions */</em>
+<a id='L171' name='L171'></a> 171 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/32080.html' title='Multiple used in 3 places.'>pg_trace</a>);
+<a id='L172' name='L172'></a> 172 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/32084.html' title='Multiple used in 3 places.'>pg_untrace</a>);
+<a id='L173' name='L173'></a> 173 
+<a id='L174' name='L174'></a> 174 <em class='comment'>/* utility functions */</em>
+<a id='L175' name='L175'></a> 175 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/31965.html' title='Multiple used in 4 places.'>pg_client_encoding</a>);
+<a id='L176' name='L176'></a> 176 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/32076.html' title='Multiple used in 4 places.'>pg_set_client_encoding</a>);
+<a id='L177' name='L177'></a> 177 <em class='sharp'>#if</em> <a href='../Y/2864.html' title='Multiple used in 5 places.'>HAVE_PQSETERRORVERBOSITY</a>
+<a id='L178' name='L178'></a> 178 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/32077.html' title='Multiple used in 3 places.'>pg_set_error_verbosity</a>);
+<a id='L179' name='L179'></a> 179 <em class='sharp'>#endif</em>
+<a id='L180' name='L180'></a> 180 <em class='sharp'>#if</em> <a href='../Y/2846.html' title='Multiple used in 7 places.'>HAVE_PQESCAPE</a>
+<a id='L181' name='L181'></a> 181 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/31987.html' title='Multiple used in 3 places.'>pg_escape_string</a>);
+<a id='L182' name='L182'></a> 182 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/31984.html' title='Multiple used in 3 places.'>pg_escape_bytea</a>);
+<a id='L183' name='L183'></a> 183 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/32083.html' title='Multiple used in 3 places.'>pg_unescape_bytea</a>);
+<a id='L184' name='L184'></a> 184 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/31986.html' title='Multiple used in 3 places.'>pg_escape_literal</a>);
+<a id='L185' name='L185'></a> 185 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/31985.html' title='Multiple used in 3 places.'>pg_escape_identifier</a>);
+<a id='L186' name='L186'></a> 186 <em class='sharp'>#endif</em>
+<a id='L187' name='L187'></a> 187 
+<a id='L188' name='L188'></a> 188 <em class='comment'>/* misc functions */</em>
+<a id='L189' name='L189'></a> 189 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/32047.html' title='Multiple used in 3 places.'>pg_meta_data</a>);
+<a id='L190' name='L190'></a> 190 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/31975.html' title='Multiple used in 3 places.'>pg_convert</a>);
+<a id='L191' name='L191'></a> 191 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/32021.html' title='Multiple used in 3 places.'>pg_insert</a>);
+<a id='L192' name='L192'></a> 192 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/32085.html' title='Multiple used in 3 places.'>pg_update</a>);
+<a id='L193' name='L193'></a> 193 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/31979.html' title='Multiple used in 3 places.'>pg_delete</a>);
+<a id='L194' name='L194'></a> 194 <a href='../D/8116.html' title='Multiple defined in 2280 places.'>PHP_FUNCTION</a>(<a href='../Y/32071.html' title='Multiple used in 3 places.'>pg_select</a>);
+<a id='L195' name='L195'></a> 195 
+<a id='L196' name='L196'></a> 196 <em class='comment'>/* connection options - ToDo: Add async connection option */</em>
+<a id='L197' name='L197'></a> 197 <em class='sharp'>#define</em> <a href='../R/6705.html' title='Multiple referred from 5 places.'>PGSQL_CONNECT_FORCE_NEW</a>     (1&lt;&lt;1)
+<a id='L198' name='L198'></a> 198 <em class='sharp'>#define</em> <a href='../R/6704.html' title='Multiple referred from 2 places.'>PGSQL_CONNECT_ASYNC</a>         (1&lt;&lt;2)
+<a id='L199' name='L199'></a> 199 <em class='comment'>/* php_pgsql_convert options */</em>
+<a id='L200' name='L200'></a> 200 <em class='sharp'>#define</em> <a href='../R/6708.html' title='Multiple referred from 3 places.'>PGSQL_CONV_IGNORE_DEFAULT</a>   (1&lt;&lt;1)     <em class='comment'>/* Do not use DEAFULT value by removing field from returned array */</em>
+<a id='L201' name='L201'></a> 201 <em class='sharp'>#define</em> <a href='../R/6707.html' title='Multiple referred from 6 places.'>PGSQL_CONV_FORCE_NULL</a>       (1&lt;&lt;2)     <em class='comment'>/* Convert to NULL if string is null string */</em>
+<a id='L202' name='L202'></a> 202 <em class='sharp'>#define</em> <a href='../R/6709.html' title='Multiple referred from 3 places.'>PGSQL_CONV_IGNORE_NOT_NULL</a>  (1&lt;&lt;3)     <em class='comment'>/* Ignore NOT NULL constraints */</em>
+<a id='L203' name='L203'></a> 203 <em class='sharp'>#define</em> <a href='../R/6710.html' title='Multiple referred from 12 places.'>PGSQL_CONV_OPTS</a>             (<a href='../S/968.html#L200' title='Defined at 200 in ext/pgsql/php_pgsql.h.'>PGSQL_CONV_IGNORE_DEFAULT</a>|<a href='../S/968.html#L201' title='Defined at 201 in ext/pgsql/php_pgsql.h.'>PGSQL_CONV_FORCE_NULL</a>|<a href='../S/968.html#L202' title='Defined at 202 in ext/pgsql/php_pgsql.h.'>PGSQL_CONV_IGNORE_NOT_NULL</a>)
+<a id='L204' name='L204'></a> 204 <em class='comment'>/* php_pgsql_insert/update/select/delete options */</em>
+<a id='L205' name='L205'></a> 205 <em class='sharp'>#define</em> <a href='../R/6714.html' title='Multiple referred from 12 places.'>PGSQL_DML_NO_CONV</a>           (1&lt;&lt;8)     <em class='comment'>/* Do not call php_pgsql_convert() */</em>
+<a id='L206' name='L206'></a> 206 <em class='sharp'>#define</em> <a href='../R/6713.html' title='Multiple referred from 17 places.'>PGSQL_DML_EXEC</a>              (1&lt;&lt;9)     <em class='comment'>/* Execute query */</em>
+<a id='L207' name='L207'></a> 207 <em class='sharp'>#define</em> <a href='../R/6711.html' title='Multiple referred from 6 places.'>PGSQL_DML_ASYNC</a>             (1&lt;&lt;10)    <em class='comment'>/* Do async query */</em>
+<a id='L208' name='L208'></a> 208 <em class='sharp'>#define</em> <a href='../R/6715.html' title='Multiple referred from 20 places.'>PGSQL_DML_STRING</a>            (1&lt;&lt;11)    <em class='comment'>/* Return query string */</em>
+<a id='L209' name='L209'></a> 209 <em class='sharp'>#define</em> <a href='../R/6712.html' title='Multiple referred from 16 places.'>PGSQL_DML_ESCAPE</a>            (1&lt;&lt;12)    <em class='comment'>/* No convert, but escape only */</em>
+<a id='L210' name='L210'></a> 210 
+<a id='L211' name='L211'></a> 211 
+<a id='L212' name='L212'></a> 212 <em class='comment'>/* exported functions */</em>
+<a id='L213' name='L213'></a> 213 <a href='../D/8598.html' title='Multiple defined in 5 places.'>PHP_PGSQL_API</a> <strong class='reserved'>int</strong> <a href='../S/967.html#L5465' title='Defined at 5465 in ext/pgsql/pgsql.c.'>php_pgsql_meta_data</a>(<a href='../Y/4681.html' title='Multiple used in 143 places.'>PGconn</a> *<a href='../Y/32025.html' title='Multiple used in 85 places.'>pg_link</a>, <strong class='reserved'>const</strong> <strong class='reserved'>char</strong> *<a href='../Y/38533.html' title='Multiple used in 54 places.'>table_name</a>, <a href='../S/1741.html#L55' title='Defined at 55 in Zend/zend_types.h.'>zval</a> *<a href='../D/24247.html' title='Multiple defined in 7 places.'>meta</a>, <a href='../S/1741.html#L25' title='Defined at 25 in Zend/zend_types.h.'>zend_bool</a> <a href='../Y/17403.html' title='Multiple used in 15 places.'>extended</a> <a href='../D/14076.html' title='Multiple defined in 136 places.'>TSRMLS_DC</a>);
+<a id='L214' name='L214'></a> 214 <a href='../D/8598.html' title='Multiple defined in 5 places.'>PHP_PGSQL_API</a> <strong class='reserved'>int</strong> <a href='../S/967.html#L5786' title='Defined at 5786 in ext/pgsql/pgsql.c.'>php_pgsql_convert</a>(<a href='../Y/4681.html' title='Multiple used in 143 places.'>PGconn</a> *<a href='../Y/32025.html' title='Multiple used in 85 places.'>pg_link</a>, <strong class='reserved'>const</strong> <strong class='reserved'>char</strong> *<a href='../Y/38533.html' title='Multiple used in 54 places.'>table_name</a>, <strong class='reserved'>const</strong> <a href='../S/1741.html#L55' title='Defined at 55 in Zend/zend_types.h.'>zval</a> *<a href='../S/813.html#L1183' title='Defined at 1183 in ext/mysqlnd/mysqlnd_structs.h.'>values</a>, <a href='../S/1741.html#L55' title='Defined at 55 in Zend/zend_types.h.'>zval</a> *<a href='../D/28927.html' title='Multiple defined in 16 places.'>result</a>, <a href='../D/32258.html' title='Multiple defined in 3 places.'>ulong</a> <a href='../S/163.html#L372' title='Defined at 372 in ext/ereg/regex/main.c.'>opt</a> <a href='../D/14076.html' title='Multiple defined in 136 places.'>TSRMLS_DC</a>);
+<a id='L215' name='L215'></a> 215 <a href='../D/8598.html' title='Multiple defined in 5 places.'>PHP_PGSQL_API</a> <strong class='reserved'>int</strong> <a href='../S/967.html#L6539' title='Defined at 6539 in ext/pgsql/pgsql.c.'>php_pgsql_insert</a>(<a href='../Y/4681.html' title='Multiple used in 143 places.'>PGconn</a> *<a href='../Y/32025.html' title='Multiple used in 85 places.'>pg_link</a>, <strong class='reserved'>const</strong> <strong class='reserved'>char</strong> *<a href='../Y/38521.html' title='Multiple used in 359 places.'>table</a>, <a href='../S/1741.html#L55' title='Defined at 55 in Zend/zend_types.h.'>zval</a> *<a href='../S/813.html#L1183' title='Defined at 1183 in ext/mysqlnd/mysqlnd_structs.h.'>values</a>, <a href='../D/32258.html' title='Multiple defined in 3 places.'>ulong</a> <a href='../S/163.html#L372' title='Defined at 372 in ext/ereg/regex/main.c.'>opt</a>, <strong class='reserved'>char</strong> **<a href='../Y/37182.html' title='Multiple used in 109 places.'>sql</a> <a href='../D/14076.html' title='Multiple defined in 136 places.'>TSRMLS_DC</a>);
+<a id='L216' name='L216'></a> 216 <a href='../D/8598.html' title='Multiple defined in 5 places.'>PHP_PGSQL_API</a> <strong class='reserved'>int</strong> <a href='../S/967.html#L6814' title='Defined at 6814 in ext/pgsql/pgsql.c.'>php_pgsql_update</a>(<a href='../Y/4681.html' title='Multiple used in 143 places.'>PGconn</a> *<a href='../Y/32025.html' title='Multiple used in 85 places.'>pg_link</a>, <strong class='reserved'>const</strong> <strong class='reserved'>char</strong> *<a href='../Y/38521.html' title='Multiple used in 359 places.'>table</a>, <a href='../S/1741.html#L55' title='Defined at 55 in Zend/zend_types.h.'>zval</a> *<a href='../S/813.html#L1183' title='Defined at 1183 in ext/mysqlnd/mysqlnd_structs.h.'>values</a>, <a href='../S/1741.html#L55' title='Defined at 55 in Zend/zend_types.h.'>zval</a> *<a href='../Y/22677.html' title='Multiple used in 15 places.'>ids</a>, <a href='../D/32258.html' title='Multiple defined in 3 places.'>ulong</a> <a href='../S/163.html#L372' title='Defined at 372 in ext/ereg/regex/main.c.'>opt</a> , <strong class='reserved'>char</strong> **<a href='../Y/37182.html' title='Multiple used in 109 places.'>sql</a> <a href='../D/14076.html' title='Multiple defined in 136 places.'>TSRMLS_DC</a>);
+<a id='L217' name='L217'></a> 217 <a href='../D/8598.html' title='Multiple defined in 5 places.'>PHP_PGSQL_API</a> <strong class='reserved'>int</strong> <a href='../S/967.html#L6923' title='Defined at 6923 in ext/pgsql/pgsql.c.'>php_pgsql_delete</a>(<a href='../Y/4681.html' title='Multiple used in 143 places.'>PGconn</a> *<a href='../Y/32025.html' title='Multiple used in 85 places.'>pg_link</a>, <strong class='reserved'>const</strong> <strong class='reserved'>char</strong> *<a href='../Y/38521.html' title='Multiple used in 359 places.'>table</a>, <a href='../S/1741.html#L55' title='Defined at 55 in Zend/zend_types.h.'>zval</a> *<a href='../Y/22677.html' title='Multiple used in 15 places.'>ids</a>, <a href='../D/32258.html' title='Multiple defined in 3 places.'>ulong</a> <a href='../S/163.html#L372' title='Defined at 372 in ext/ereg/regex/main.c.'>opt</a>, <strong class='reserved'>char</strong> **<a href='../Y/37182.html' title='Multiple used in 109 places.'>sql</a> <a href='../D/14076.html' title='Multiple defined in 136 places.'>TSRMLS_DC</a>);
+<a id='L218' name='L218'></a> 218 <a href='../D/8598.html' title='Multiple defined in 5 places.'>PHP_PGSQL_API</a> <strong class='reserved'>int</strong> <a href='../S/967.html#L7057' title='Defined at 7057 in ext/pgsql/pgsql.c.'>php_pgsql_select</a>(<a href='../Y/4681.html' title='Multiple used in 143 places.'>PGconn</a> *<a href='../Y/32025.html' title='Multiple used in 85 places.'>pg_link</a>, <strong class='reserved'>const</strong> <strong class='reserved'>char</strong> *<a href='../Y/38521.html' title='Multiple used in 359 places.'>table</a>, <a href='../S/1741.html#L55' title='Defined at 55 in Zend/zend_types.h.'>zval</a> *<a href='../Y/22677.html' title='Multiple used in 15 places.'>ids</a>, <a href='../S/1741.html#L55' title='Defined at 55 in Zend/zend_types.h.'>zval</a> *<a href='../Y/35126.html' title='Multiple used in 15 places.'>ret_array</a>, <a href='../D/32258.html' title='Multiple defined in 3 places.'>ulong</a> <a href='../S/163.html#L372' title='Defined at 372 in ext/ereg/regex/main.c.'>opt</a>, <strong class='reserved'>char</strong> **<a href='../Y/37182.html' title='Multiple used in 109 places.'>sql</a>  <a href='../D/14076.html' title='Multiple defined in 136 places.'>TSRMLS_DC</a>);
+<a id='L219' name='L219'></a> 219 <a href='../D/8598.html' title='Multiple defined in 5 places.'>PHP_PGSQL_API</a> <strong class='reserved'>int</strong> <a href='../S/967.html#L7015' title='Defined at 7015 in ext/pgsql/pgsql.c.'>php_pgsql_result2array</a>(<a href='../Y/4683.html' title='Multiple used in 50 places.'>PGresult</a> *<a href='../Y/32064.html' title='Multiple used in 143 places.'>pg_result</a>, <a href='../S/1741.html#L55' title='Defined at 55 in Zend/zend_types.h.'>zval</a> *<a href='../Y/35126.html' title='Multiple used in 15 places.'>ret_array</a> <a href='../D/14076.html' title='Multiple defined in 136 places.'>TSRMLS_DC</a>);
+<a id='L220' name='L220'></a> 220 
+<a id='L221' name='L221'></a> 221 <em class='comment'>/* internal functions */</em>
+<a id='L222' name='L222'></a> 222 <strong class='reserved'>static</strong> <strong class='reserved'>void</strong> <a href='../S/967.html#L1271' title='Defined at 1271 in ext/pgsql/pgsql.c.'>php_pgsql_do_connect</a>(<a href='../S/1643.html#L290' title='Defined at 290 in Zend/zend.h.'>INTERNAL_FUNCTION_PARAMETERS</a>,<strong class='reserved'>int</strong> <a href='../D/25782.html' title='Multiple defined in 11 places.'>persistent</a>);
+<a id='L223' name='L223'></a> 223 <strong class='reserved'>static</strong> <strong class='reserved'>void</strong> <a href='../S/967.html#L1601' title='Defined at 1601 in ext/pgsql/pgsql.c.'>php_pgsql_get_link_info</a>(<a href='../S/1643.html#L290' title='Defined at 290 in Zend/zend.h.'>INTERNAL_FUNCTION_PARAMETERS</a>, <strong class='reserved'>int</strong> <a href='../Y/16905.html' title='Multiple used in 28 places.'>entry_type</a>);
+<a id='L224' name='L224'></a> 224 <strong class='reserved'>static</strong> <strong class='reserved'>void</strong> <a href='../S/967.html#L2254' title='Defined at 2254 in ext/pgsql/pgsql.c.'>php_pgsql_get_result_info</a>(<a href='../S/1643.html#L290' title='Defined at 290 in Zend/zend.h.'>INTERNAL_FUNCTION_PARAMETERS</a>, <strong class='reserved'>int</strong> <a href='../Y/16905.html' title='Multiple used in 28 places.'>entry_type</a>);
+<a id='L225' name='L225'></a> 225 <strong class='reserved'>static</strong> <strong class='reserved'>char</strong> *<a href='../S/967.html#L2340' title='Defined at 2340 in ext/pgsql/pgsql.c.'>get_field_name</a>(<a href='../Y/4681.html' title='Multiple used in 143 places.'>PGconn</a> *<a href='../Y/32103.html' title='Multiple used in 360 places.'>pgsql</a>, <a href='../Y/4428.html' title='Multiple used in 44 places.'>Oid</a> <a href='../Y/29642.html' title='Multiple used in 131 places.'>oid</a>, <a href='../S/1683.html#L83' title='Defined at 83 in Zend/zend_hash.h.'>HashTable</a> *<a href='../Y/25228.html' title='Multiple used in 484 places.'>list</a> <a href='../D/14076.html' title='Multiple defined in 136 places.'>TSRMLS_DC</a>);
+<a id='L226' name='L226'></a> 226 <strong class='reserved'>static</strong> <strong class='reserved'>void</strong> <a href='../S/967.html#L2496' title='Defined at 2496 in ext/pgsql/pgsql.c.'>php_pgsql_get_field_info</a>(<a href='../S/1643.html#L290' title='Defined at 290 in Zend/zend.h.'>INTERNAL_FUNCTION_PARAMETERS</a>, <strong class='reserved'>int</strong> <a href='../Y/16905.html' title='Multiple used in 28 places.'>entry_type</a>);
+<a id='L227' name='L227'></a> 227 <strong class='reserved'>static</strong> <strong class='reserved'>void</strong> <a href='../S/967.html#L2970' title='Defined at 2970 in ext/pgsql/pgsql.c.'>php_pgsql_data_info</a>(<a href='../S/1643.html#L290' title='Defined at 290 in Zend/zend.h.'>INTERNAL_FUNCTION_PARAMETERS</a>, <strong class='reserved'>int</strong> <a href='../Y/16905.html' title='Multiple used in 28 places.'>entry_type</a>);
+<a id='L228' name='L228'></a> 228 <strong class='reserved'>static</strong> <strong class='reserved'>void</strong> <a href='../S/967.html#L4752' title='Defined at 4752 in ext/pgsql/pgsql.c.'>php_pgsql_do_async</a>(<a href='../S/1643.html#L290' title='Defined at 290 in Zend/zend.h.'>INTERNAL_FUNCTION_PARAMETERS</a>,<strong class='reserved'>int</strong> <a href='../Y/16905.html' title='Multiple used in 28 places.'>entry_type</a>);
+<a id='L229' name='L229'></a> 229 
+<a id='L230' name='L230'></a> 230 <strong class='reserved'>static</strong> <a href='../Y/36596.html' title='Multiple used in 2694 places.'>size_t</a> <a href='../S/967.html#L5327' title='Defined at 5327 in ext/pgsql/pgsql.c.'>php_pgsql_fd_write</a>(<a href='../S/1387.html#L98' title='Defined at 98 in main/php_streams.h.'>php_stream</a> *<a href='../S/813.html#L860' title='Defined at 860 in ext/mysqlnd/mysqlnd_structs.h.'>stream</a>, <strong class='reserved'>const</strong> <strong class='reserved'>char</strong> *<a href='../Y/12847.html' title='Multiple used in 3901 places.'>buf</a>, <a href='../Y/36596.html' title='Multiple used in 2694 places.'>size_t</a> <a href='../Y/14391.html' title='Multiple used in 1346 places.'>count</a> <a href='../D/14076.html' title='Multiple defined in 136 places.'>TSRMLS_DC</a>);
+<a id='L231' name='L231'></a> 231 <strong class='reserved'>static</strong> <a href='../Y/36596.html' title='Multiple used in 2694 places.'>size_t</a> <a href='../S/967.html#L5332' title='Defined at 5332 in ext/pgsql/pgsql.c.'>php_pgsql_fd_read</a>(<a href='../S/1387.html#L98' title='Defined at 98 in main/php_streams.h.'>php_stream</a> *<a href='../S/813.html#L860' title='Defined at 860 in ext/mysqlnd/mysqlnd_structs.h.'>stream</a>, <strong class='reserved'>char</strong> *<a href='../Y/12847.html' title='Multiple used in 3901 places.'>buf</a>, <a href='../Y/36596.html' title='Multiple used in 2694 places.'>size_t</a> <a href='../Y/14391.html' title='Multiple used in 1346 places.'>count</a> <a href='../D/14076.html' title='Multiple defined in 136 places.'>TSRMLS_DC</a>);
+<a id='L232' name='L232'></a> 232 <strong class='reserved'>static</strong> <strong class='reserved'>int</strong> <a href='../S/967.html#L5337' title='Defined at 5337 in ext/pgsql/pgsql.c.'>php_pgsql_fd_close</a>(<a href='../S/1387.html#L98' title='Defined at 98 in main/php_streams.h.'>php_stream</a> *<a href='../S/813.html#L860' title='Defined at 860 in ext/mysqlnd/mysqlnd_structs.h.'>stream</a>, <strong class='reserved'>int</strong> <a href='../Y/13757.html' title='Multiple used in 36 places.'>close_handle</a> <a href='../D/14076.html' title='Multiple defined in 136 places.'>TSRMLS_DC</a>);
+<a id='L233' name='L233'></a> 233 <strong class='reserved'>static</strong> <strong class='reserved'>int</strong> <a href='../S/967.html#L5342' title='Defined at 5342 in ext/pgsql/pgsql.c.'>php_pgsql_fd_flush</a>(<a href='../S/1387.html#L98' title='Defined at 98 in main/php_streams.h.'>php_stream</a> *<a href='../S/813.html#L860' title='Defined at 860 in ext/mysqlnd/mysqlnd_structs.h.'>stream</a> <a href='../D/14076.html' title='Multiple defined in 136 places.'>TSRMLS_DC</a>);
+<a id='L234' name='L234'></a> 234 <strong class='reserved'>static</strong> <strong class='reserved'>int</strong> <a href='../S/967.html#L5347' title='Defined at 5347 in ext/pgsql/pgsql.c.'>php_pgsql_fd_set_option</a>(<a href='../S/1387.html#L98' title='Defined at 98 in main/php_streams.h.'>php_stream</a> *<a href='../S/813.html#L860' title='Defined at 860 in ext/mysqlnd/mysqlnd_structs.h.'>stream</a>, <strong class='reserved'>int</strong> <a href='../S/813.html#L510' title='Defined at 510 in ext/mysqlnd/mysqlnd_structs.h.'>option</a>, <strong class='reserved'>int</strong> <a href='../S/1737.html#L277' title='Defined at 277 in Zend/zend_strtod.c.'>value</a>, <strong class='reserved'>void</strong> *<a href='../Y/34015.html' title='Multiple used in 38 places.'>ptrparam</a> <a href='../D/14076.html' title='Multiple defined in 136 places.'>TSRMLS_DC</a>);
+<a id='L235' name='L235'></a> 235 <strong class='reserved'>static</strong> <strong class='reserved'>int</strong> <a href='../S/967.html#L5358' title='Defined at 5358 in ext/pgsql/pgsql.c.'>php_pgsql_fd_cast</a>(<a href='../S/1387.html#L98' title='Defined at 98 in main/php_streams.h.'>php_stream</a> *<a href='../S/813.html#L860' title='Defined at 860 in ext/mysqlnd/mysqlnd_structs.h.'>stream</a>, <strong class='reserved'>int</strong> <a href='../Y/13226.html' title='Multiple used in 3 places.'>cast_as</a>, <strong class='reserved'>void</strong> **<a href='../Y/35120.html' title='Multiple used in 3931 places.'>ret</a> <a href='../D/14076.html' title='Multiple defined in 136 places.'>TSRMLS_DC</a>);
+<a id='L236' name='L236'></a> 236 
+<a id='L237' name='L237'></a> 237 <strong class='reserved'>typedef</strong> <strong class='reserved'>enum</strong> _php_pgsql_data_type <em class='brace'>{</em>
+<a id='L238' name='L238'></a> 238         <em class='comment'>/* boolean */</em>
+<a id='L239' name='L239'></a> 239         <a href='../R/6730.html' title='Multiple referred from 2 places.'>PG_BOOL</a>,
+<a id='L240' name='L240'></a> 240         <em class='comment'>/* number */</em>
+<a id='L241' name='L241'></a> 241         <a href='../R/6749.html' title='Multiple referred from 2 places.'>PG_OID</a>,
+<a id='L242' name='L242'></a> 242         <a href='../R/6740.html' title='Multiple referred from 2 places.'>PG_INT2</a>,
+<a id='L243' name='L243'></a> 243         <a href='../R/6741.html' title='Multiple referred from 2 places.'>PG_INT4</a>,
+<a id='L244' name='L244'></a> 244         <a href='../R/6742.html' title='Multiple referred from 2 places.'>PG_INT8</a>,
+<a id='L245' name='L245'></a> 245         <a href='../R/6737.html' title='Multiple referred from 2 places.'>PG_FLOAT4</a>,
+<a id='L246' name='L246'></a> 246         <a href='../R/6738.html' title='Multiple referred from 2 places.'>PG_FLOAT8</a>,
+<a id='L247' name='L247'></a> 247         <a href='../R/6748.html' title='Multiple referred from 2 places.'>PG_NUMERIC</a>,
+<a id='L248' name='L248'></a> 248         <a href='../R/6747.html' title='Multiple referred from 2 places.'>PG_MONEY</a>,
+<a id='L249' name='L249'></a> 249         <em class='comment'>/* character */</em>
+<a id='L250' name='L250'></a> 250         <a href='../R/6753.html' title='Multiple referred from 3 places.'>PG_TEXT</a>,
+<a id='L251' name='L251'></a> 251         <a href='../R/6733.html' title='Multiple referred from 2 places.'>PG_CHAR</a>,
+<a id='L252' name='L252'></a> 252         <a href='../R/6762.html' title='Multiple referred from 2 places.'>PG_VARCHAR</a>,
+<a id='L253' name='L253'></a> 253         <em class='comment'>/* time and interval */</em>
+<a id='L254' name='L254'></a> 254         <a href='../R/6758.html' title='Multiple referred from 2 places.'>PG_UNIX_TIME</a>,
+<a id='L255' name='L255'></a> 255         <a href='../R/6759.html' title='Multiple referred from 3 places.'>PG_UNIX_TIME_INTERVAL</a>,
+<a id='L256' name='L256'></a> 256         <a href='../R/6736.html' title='Multiple referred from 2 places.'>PG_DATE</a>,
+<a id='L257' name='L257'></a> 257         <a href='../R/6754.html' title='Multiple referred from 2 places.'>PG_TIME</a>,
+<a id='L258' name='L258'></a> 258         <a href='../R/6757.html' title='Multiple referred from 2 places.'>PG_TIME_WITH_TIMEZONE</a>,
+<a id='L259' name='L259'></a> 259         <a href='../R/6755.html' title='Multiple referred from 2 places.'>PG_TIMESTAMP</a>,
+<a id='L260' name='L260'></a> 260         <a href='../R/6756.html' title='Multiple referred from 2 places.'>PG_TIMESTAMP_WITH_TIMEZONE</a>,
+<a id='L261' name='L261'></a> 261         <a href='../R/6743.html' title='Multiple referred from 2 places.'>PG_INTERVAL</a>,
+<a id='L262' name='L262'></a> 262         <em class='comment'>/* binary */</em>
+<a id='L263' name='L263'></a> 263         <a href='../R/6732.html' title='Multiple referred from 2 places.'>PG_BYTEA</a>,
+<a id='L264' name='L264'></a> 264         <em class='comment'>/* network */</em>
+<a id='L265' name='L265'></a> 265         <a href='../R/6734.html' title='Multiple referred from 2 places.'>PG_CIDR</a>,
+<a id='L266' name='L266'></a> 266         <a href='../R/6739.html' title='Multiple referred from 2 places.'>PG_INET</a>,
+<a id='L267' name='L267'></a> 267         <a href='../R/6746.html' title='Multiple referred from 2 places.'>PG_MACADDR</a>,
+<a id='L268' name='L268'></a> 268         <em class='comment'>/* bit */</em>
+<a id='L269' name='L269'></a> 269         <a href='../R/6729.html' title='Multiple referred from 2 places.'>PG_BIT</a>,
+<a id='L270' name='L270'></a> 270         <a href='../R/6761.html' title='Multiple referred from 2 places.'>PG_VARBIT</a>,
+<a id='L271' name='L271'></a> 271         <em class='comment'>/* geometoric */</em>
+<a id='L272' name='L272'></a> 272         <a href='../R/6744.html' title='Multiple referred from 2 places.'>PG_LINE</a>,
+<a id='L273' name='L273'></a> 273         <a href='../R/6745.html' title='Multiple referred from 2 places.'>PG_LSEG</a>,
+<a id='L274' name='L274'></a> 274         <a href='../R/6751.html' title='Multiple referred from 2 places.'>PG_POINT</a>,
+<a id='L275' name='L275'></a> 275         <a href='../R/6731.html' title='Multiple referred from 2 places.'>PG_BOX</a>,
+<a id='L276' name='L276'></a> 276         <a href='../R/6750.html' title='Multiple referred from 2 places.'>PG_PATH</a>,
+<a id='L277' name='L277'></a> 277         <a href='../R/6752.html' title='Multiple referred from 2 places.'>PG_POLYGON</a>,
+<a id='L278' name='L278'></a> 278         <a href='../R/6735.html' title='Multiple referred from 2 places.'>PG_CIRCLE</a>,
+<a id='L279' name='L279'></a> 279         <em class='comment'>/* unknown and system */</em>
+<a id='L280' name='L280'></a> 280         <a href='../R/6760.html' title='Multiple referred from 2 places.'>PG_UNKNOWN</a>
+<a id='L281' name='L281'></a> 281 <em class='brace'>}</em> <a href='../R/24320.html' title='Multiple referred from 2 places.'>php_pgsql_data_type</a>;
+<a id='L282' name='L282'></a> 282 
+<a id='L283' name='L283'></a> 283 <strong class='reserved'>typedef</strong> <strong class='reserved'>struct</strong> <a href='../R/22836.html' title='Multiple referred from 17 places.'>pgLofp</a> <em class='brace'>{</em>
+<a id='L284' name='L284'></a> 284         <a href='../Y/4681.html' title='Multiple used in 143 places.'>PGconn</a> *<a href='../D/20273.html' title='Multiple defined in 24 places.'>conn</a>;
+<a id='L285' name='L285'></a> 285         <strong class='reserved'>int</strong> <a href='../Y/25454.html' title='Multiple used in 17 places.'>lofd</a>;
+<a id='L286' name='L286'></a> 286 <em class='brace'>}</em> <a href='../R/22836.html' title='Multiple referred from 17 places.'>pgLofp</a>;
+<a id='L287' name='L287'></a> 287 
+<a id='L288' name='L288'></a> 288 <strong class='reserved'>typedef</strong> <strong class='reserved'>struct</strong> _php_pgsql_result_handle <em class='brace'>{</em>
+<a id='L289' name='L289'></a> 289         <a href='../Y/4681.html' title='Multiple used in 143 places.'>PGconn</a> *<a href='../D/20273.html' title='Multiple defined in 24 places.'>conn</a>;
+<a id='L290' name='L290'></a> 290         <a href='../Y/4683.html' title='Multiple used in 50 places.'>PGresult</a> *<a href='../D/28927.html' title='Multiple defined in 16 places.'>result</a>;
+<a id='L291' name='L291'></a> 291         <strong class='reserved'>int</strong> <a href='../Y/35380.html' title='Multiple used in 285 places.'>row</a>;
+<a id='L292' name='L292'></a> 292 <em class='brace'>}</em> <a href='../R/22852.html' title='Multiple referred from 43 places.'>pgsql_result_handle</a>;
+<a id='L293' name='L293'></a> 293 
+<a id='L294' name='L294'></a> 294 <strong class='reserved'>typedef</strong> <strong class='reserved'>struct</strong> _php_pgsql_notice <em class='brace'>{</em>
+<a id='L295' name='L295'></a> 295         <strong class='reserved'>char</strong> *<a href='../Y/26632.html' title='Multiple used in 388 places.'>message</a>;
+<a id='L296' name='L296'></a> 296         <a href='../Y/36596.html' title='Multiple used in 2694 places.'>size_t</a> <a href='../Y/25062.html' title='Multiple used in 4873 places.'>len</a>;
+<a id='L297' name='L297'></a> 297 <em class='brace'>}</em> <a href='../R/24339.html' title='Multiple referred from 5 places.'>php_pgsql_notice</a>;
+<a id='L298' name='L298'></a> 298 
+<a id='L299' name='L299'></a> 299 <strong class='reserved'>static</strong> <a href='../S/1387.html#L130' title='Defined at 130 in main/php_streams.h.'>php_stream_ops</a> <a href='../Y/32902.html' title='Multiple used in 2 places.'>php_stream_pgsql_fd_ops</a> = <em class='brace'>{</em>
+<a id='L300' name='L300'></a> 300         <a href='../S/967.html#L5327' title='Defined at 5327 in ext/pgsql/pgsql.c.'>php_pgsql_fd_write</a>,
+<a id='L301' name='L301'></a> 301         <a href='../S/967.html#L5332' title='Defined at 5332 in ext/pgsql/pgsql.c.'>php_pgsql_fd_read</a>,
+<a id='L302' name='L302'></a> 302         <a href='../S/967.html#L5337' title='Defined at 5337 in ext/pgsql/pgsql.c.'>php_pgsql_fd_close</a>,
+<a id='L303' name='L303'></a> 303         <a href='../S/967.html#L5342' title='Defined at 5342 in ext/pgsql/pgsql.c.'>php_pgsql_fd_flush</a>,
+<a id='L304' name='L304'></a> 304         "PostgreSQL link",
+<a id='L305' name='L305'></a> 305         <a href='../D/6086.html' title='Multiple defined in 8 places.'>NULL</a>, <em class='comment'>/* seek */</em>
+<a id='L306' name='L306'></a> 306         <a href='../S/967.html#L5358' title='Defined at 5358 in ext/pgsql/pgsql.c.'>php_pgsql_fd_cast</a>, <em class='comment'>/* cast */</em>
+<a id='L307' name='L307'></a> 307         <a href='../D/6086.html' title='Multiple defined in 8 places.'>NULL</a>, <em class='comment'>/* stat */</em>
+<a id='L308' name='L308'></a> 308         <a href='../S/967.html#L5347' title='Defined at 5347 in ext/pgsql/pgsql.c.'>php_pgsql_fd_set_option</a>
+<a id='L309' name='L309'></a> 309 <em class='brace'>}</em>;
+<a id='L310' name='L310'></a> 310 
+<a id='L311' name='L311'></a> 311 <a href='../D/15993.html' title='Multiple defined in 7 places.'>ZEND_BEGIN_MODULE_GLOBALS</a>(<a href='../Y/32103.html' title='Multiple used in 360 places.'>pgsql</a>)
+<a id='L312' name='L312'></a> 312         <strong class='reserved'>long</strong> <a href='../Y/15435.html' title='Multiple used in 88 places.'>default_link</a>; <em class='comment'>/* default link when connection is omitted */</em>
+<a id='L313' name='L313'></a> 313         <strong class='reserved'>long</strong> <a href='../Y/29178.html' title='Multiple used in 96 places.'>num_links</a>,<a href='../Y/29196.html' title='Multiple used in 55 places.'>num_persistent</a>;
+<a id='L314' name='L314'></a> 314         <strong class='reserved'>long</strong> <a href='../Y/26033.html' title='Multiple used in 33 places.'>max_links</a>,<a href='../Y/26046.html' title='Multiple used in 24 places.'>max_persistent</a>;
+<a id='L315' name='L315'></a> 315         <strong class='reserved'>long</strong> <a href='../Y/8761.html' title='Multiple used in 19 places.'>allow_persistent</a>;
+<a id='L316' name='L316'></a> 316         <strong class='reserved'>long</strong> <a href='../Y/12007.html' title='Multiple used in 12 places.'>auto_reset_persistent</a>;
+<a id='L317' name='L317'></a> 317         <strong class='reserved'>int</strong> <a href='../Y/24974.html' title='Multiple used in 12 places.'>le_lofp</a>,<a href='../Y/25007.html' title='Multiple used in 5 places.'>le_string</a>;
+<a id='L318' name='L318'></a> 318         <strong class='reserved'>int</strong> <a href='../Y/22749.html' title='Multiple used in 7 places.'>ignore_notices</a>,<a href='../Y/25471.html' title='Multiple used in 3 places.'>log_notices</a>;
+<a id='L319' name='L319'></a> 319         <a href='../S/1683.html#L83' title='Defined at 83 in Zend/zend_hash.h.'>HashTable</a> <a href='../Y/28974.html' title='Multiple used in 6 places.'>notices</a>;  <em class='comment'>/* notice message for each connection */</em>
+<a id='L320' name='L320'></a> 320 <a href='../S/465.html#L51' title='Defined at 51 in ext/libxml/php_libxml.h.'>ZEND_END_MODULE_GLOBALS</a>(<a href='../Y/32103.html' title='Multiple used in 360 places.'>pgsql</a>)
+<a id='L321' name='L321'></a> 321 
+<a id='L322' name='L322'></a> 322 <a href='../D/16248.html' title='Multiple defined in 6 places.'>ZEND_EXTERN_MODULE_GLOBALS</a>(<a href='../Y/32103.html' title='Multiple used in 360 places.'>pgsql</a>)
+<a id='L323' name='L323'></a> 323 
+<a id='L324' name='L324'></a> 324 <em class='sharp'>#ifdef</em> <a href='../Y/7361.html' title='Multiple used in 473 places.'>ZTS</a>
+<a id='L325' name='L325'></a> 325 <em class='sharp'># define</em> <a href='../R/6696.html' title='Multiple referred from 71 places.'>PGG</a>(<a href='../Y/40497.html' title='Multiple used in 3064 places.'>v</a>) <a href='../S/1596.html#L164' title='Defined at 164 in TSRM/TSRM.h.'>TSRMG</a>(pgsql_globals_id, <a href='../Y/44362.html' title='Multiple used in 8 places.'>zend_pgsql_globals</a> *, <a href='../Y/40497.html' title='Multiple used in 3064 places.'>v</a>)
+<a id='L326' name='L326'></a> 326 <em class='sharp'>#else</em>
+<a id='L327' name='L327'></a> 327 <em class='sharp'># define</em> <a href='../R/6696.html' title='Multiple referred from 71 places.'>PGG</a>(<a href='../Y/40497.html' title='Multiple used in 3064 places.'>v</a>) (<a href='../Y/32114.html' title='Multiple used in 9 places.'>pgsql_globals</a>.<a href='../Y/40497.html' title='Multiple used in 3064 places.'>v</a>)
+<a id='L328' name='L328'></a> 328 <em class='sharp'>#endif</em>
+<a id='L329' name='L329'></a> 329 
+<a id='L330' name='L330'></a> 330 <em class='sharp'>#endif</em>
+<a id='L331' name='L331'></a> 331 
+<a id='L332' name='L332'></a> 332 <em class='sharp'>#else</em>
+<a id='L333' name='L333'></a> 333 
+<a id='L334' name='L334'></a> 334 <em class='sharp'>#define</em> <a href='../S/968.html#L338' title='Referred from 338 in ext/pgsql/php_pgsql.h.'>pgsql_module_ptr</a> <a href='../D/6086.html' title='Multiple defined in 8 places.'>NULL</a>
+<a id='L335' name='L335'></a> 335 
+<a id='L336' name='L336'></a> 336 <em class='sharp'>#endif</em>
+<a id='L337' name='L337'></a> 337 
+<a id='L338' name='L338'></a> 338 <em class='sharp'>#define</em> phpext_pgsql_ptr <a href='../D/25804.html' title='Multiple defined in 2 places.'>pgsql_module_ptr</a>
+<a id='L339' name='L339'></a> 339 
+<a id='L340' name='L340'></a> 340 <em class='sharp'>#endif</em> <em class='comment'>/* PHP_PGSQL_H */</em>
+</pre>
+<hr />
+<a id='BOTTOM' name='BOTTOM'></a>
+<em class='comment'>/* [&lt;][&gt;][^][v]<a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+</body>
+</html>

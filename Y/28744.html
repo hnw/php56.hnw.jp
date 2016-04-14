@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>next_pingp</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/818.html#L1996'>next_pingp</a>       1996 ext/oci8/oci8.c 						if (!ping_done &amp;&amp; (*(connection-&gt;next_pingp) &gt; 0) &amp;&amp; (timestamp &gt;= *(connection-&gt;next_pingp)) &amp;&amp; !php_oci_connection_ping(connection TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/818.html#L2418'>next_pingp</a>       2418 ext/oci8/oci8.c 	if (connection-&gt;next_pingp) {</span>
+<span class='curline'><a href='../S/818.html#L2420'>next_pingp</a>       2420 ext/oci8/oci8.c 			*(connection-&gt;next_pingp) = timestamp + OCI_G(ping_interval);</span>
+<span class='curline'><a href='../S/818.html#L2423'>next_pingp</a>       2423 ext/oci8/oci8.c 			*(connection-&gt;next_pingp) = 0;</span>
+<span class='curline'><a href='../S/818.html#L2462'>next_pingp</a>       2462 ext/oci8/oci8.c 		connection-&gt;next_pingp = NULL;</span>
+<span class='curline'><a href='../S/818.html#L3370'>next_pingp</a>       3370 ext/oci8/oci8.c 		PHP_OCI_CALL_RETURN(OCI_G(errcode), OCIContextGetValue, (connection-&gt;session, OCI_G(err), (ub1 *)"NEXT_PING", (ub1)sizeof("NEXT_PING"), (void **)&amp;(connection-&gt;next_pingp)));</span>
+<span class='curline'><a href='../S/818.html#L3376'>next_pingp</a>       3376 ext/oci8/oci8.c 		if (!(connection-&gt;next_pingp)){</span>
+<span class='curline'><a href='../S/818.html#L3382'>next_pingp</a>       3382 ext/oci8/oci8.c 		} else if ((*(connection-&gt;next_pingp) &gt; 0) &amp;&amp; (timestamp &gt;= *(connection-&gt;next_pingp))) {</span>
+<span class='curline'><a href='../S/818.html#L3385'>next_pingp</a>       3385 ext/oci8/oci8.c 				*(connection-&gt;next_pingp) = timestamp + OCI_G(ping_interval);</span>
+<span class='curline'><a href='../S/818.html#L3466'>next_pingp</a>       3466 ext/oci8/oci8.c 	time_t *next_pingp = NULL;</span>
+<span class='curline'><a href='../S/818.html#L3468'>next_pingp</a>       3468 ext/oci8/oci8.c 	PHP_OCI_CALL_RETURN(OCI_G(errcode), OCIContextGetValue, (connection-&gt;session, errh, (ub1 *)"NEXT_PING", (ub1)sizeof("NEXT_PING"), (void **)&amp;next_pingp));</span>
+<span class='curline'><a href='../S/818.html#L3474'>next_pingp</a>       3474 ext/oci8/oci8.c 	if (!next_pingp) {</span>
+<span class='curline'><a href='../S/818.html#L3475'>next_pingp</a>       3475 ext/oci8/oci8.c 		PHP_OCI_CALL_RETURN(OCI_G(errcode), OCIMemoryAlloc, (connection-&gt;session, errh, (void **)&amp;next_pingp, OCI_DURATION_SESSION, sizeof(time_t), OCI_MEMORY_CLEARED));</span>
+<span class='curline'><a href='../S/818.html#L3483'>next_pingp</a>       3483 ext/oci8/oci8.c 		*next_pingp = timestamp + OCI_G(ping_interval);</span>
+<span class='curline'><a href='../S/818.html#L3485'>next_pingp</a>       3485 ext/oci8/oci8.c 		*next_pingp = 0;</span>
+<span class='curline'><a href='../S/818.html#L3489'>next_pingp</a>       3489 ext/oci8/oci8.c 	PHP_OCI_CALL_RETURN(OCI_G(errcode), OCIContextSetValue, (connection-&gt;session, errh, OCI_DURATION_SESSION, (ub1 *)"NEXT_PING", (ub1)sizeof("NEXT_PING"), next_pingp));</span>
+<span class='curline'><a href='../S/818.html#L3491'>next_pingp</a>       3491 ext/oci8/oci8.c 		OCIMemoryFree(connection-&gt;session, errh, next_pingp);</span>
+<span class='curline'><a href='../S/818.html#L3496'>next_pingp</a>       3496 ext/oci8/oci8.c 	connection-&gt;next_pingp = next_pingp;</span>
+<span class='curline'><a href='../S/824.html#L157'>next_pingp</a>        157 ext/oci8/php_oci8_int.h 	time_t		   *next_pingp;					/* (pointer to) time of the next ping */</span>
+</pre>
+</body>
+</html>

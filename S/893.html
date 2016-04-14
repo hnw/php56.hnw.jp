@@ -1,0 +1,288 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>ext/pcre/pcrelib/pcre_xclass.c</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<a id='TOP' name='TOP'></a><h2 class='header'><a href='../mains.html'>root</a>/<a href='../files/1753.html'>ext</a>/<a href='../files/1827.html'>pcre</a>/<a href='../files/1828.html'>pcrelib</a>/pcre_xclass.c</h2>
+<em class='comment'>/* [&lt;][&gt;][^][v][top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+<hr />
+<pre>
+<a id='L1' name='L1'></a>   1 <em class='comment'>/*************************************************</em>
+<a id='L2' name='L2'></a>   2 <em class='comment'>*      Perl-Compatible Regular Expressions       *</em>
+<a id='L3' name='L3'></a>   3 <em class='comment'>*************************************************/</em>
+<a id='L4' name='L4'></a>   4 
+<a id='L5' name='L5'></a>   5 <em class='comment'>/* PCRE is a library of functions to support regular expressions whose syntax</em>
+<a id='L6' name='L6'></a>   6 <em class='comment'>and semantics are as close as possible to those of the Perl 5 language.</em>
+<a id='L7' name='L7'></a>   7 <em class='comment'></em>
+<a id='L8' name='L8'></a>   8 <em class='comment'>                       Written by Philip Hazel</em>
+<a id='L9' name='L9'></a>   9 <em class='comment'>           Copyright (c) 1997-2013 University of Cambridge</em>
+<a id='L10' name='L10'></a>  10 <em class='comment'></em>
+<a id='L11' name='L11'></a>  11 <em class='comment'>-----------------------------------------------------------------------------</em>
+<a id='L12' name='L12'></a>  12 <em class='comment'>Redistribution and use in source and binary forms, with or without</em>
+<a id='L13' name='L13'></a>  13 <em class='comment'>modification, are permitted provided that the following conditions are met:</em>
+<a id='L14' name='L14'></a>  14 <em class='comment'></em>
+<a id='L15' name='L15'></a>  15 <em class='comment'>    * Redistributions of source code must retain the above copyright notice,</em>
+<a id='L16' name='L16'></a>  16 <em class='comment'>      this list of conditions and the following disclaimer.</em>
+<a id='L17' name='L17'></a>  17 <em class='comment'></em>
+<a id='L18' name='L18'></a>  18 <em class='comment'>    * Redistributions in binary form must reproduce the above copyright</em>
+<a id='L19' name='L19'></a>  19 <em class='comment'>      notice, this list of conditions and the following disclaimer in the</em>
+<a id='L20' name='L20'></a>  20 <em class='comment'>      documentation and/or other materials provided with the distribution.</em>
+<a id='L21' name='L21'></a>  21 <em class='comment'></em>
+<a id='L22' name='L22'></a>  22 <em class='comment'>    * Neither the name of the University of Cambridge nor the names of its</em>
+<a id='L23' name='L23'></a>  23 <em class='comment'>      contributors may be used to endorse or promote products derived from</em>
+<a id='L24' name='L24'></a>  24 <em class='comment'>      this software without specific prior written permission.</em>
+<a id='L25' name='L25'></a>  25 <em class='comment'></em>
+<a id='L26' name='L26'></a>  26 <em class='comment'>THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"</em>
+<a id='L27' name='L27'></a>  27 <em class='comment'>AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE</em>
+<a id='L28' name='L28'></a>  28 <em class='comment'>IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE</em>
+<a id='L29' name='L29'></a>  29 <em class='comment'>ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE</em>
+<a id='L30' name='L30'></a>  30 <em class='comment'>LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR</em>
+<a id='L31' name='L31'></a>  31 <em class='comment'>CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF</em>
+<a id='L32' name='L32'></a>  32 <em class='comment'>SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS</em>
+<a id='L33' name='L33'></a>  33 <em class='comment'>INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN</em>
+<a id='L34' name='L34'></a>  34 <em class='comment'>CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)</em>
+<a id='L35' name='L35'></a>  35 <em class='comment'>ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE</em>
+<a id='L36' name='L36'></a>  36 <em class='comment'>POSSIBILITY OF SUCH DAMAGE.</em>
+<a id='L37' name='L37'></a>  37 <em class='comment'>-----------------------------------------------------------------------------</em>
+<a id='L38' name='L38'></a>  38 <em class='comment'>*/</em>
+<a id='L39' name='L39'></a>  39 
+<a id='L40' name='L40'></a>  40 
+<a id='L41' name='L41'></a>  41 <em class='comment'>/* This module contains an internal function that is used to match an extended</em>
+<a id='L42' name='L42'></a>  42 <em class='comment'>class. It is used by both pcre_exec() and pcre_def_exec(). */</em>
+<a id='L43' name='L43'></a>  43 
+<a id='L44' name='L44'></a>  44 
+<a id='L45' name='L45'></a>  45 <em class='sharp'>#ifdef</em> <a href='../Y/2620.html' title='Multiple used in 351 places.'>HAVE_CONFIG_H</a>
+<a id='L46' name='L46'></a>  46 <em class='sharp'>#include</em> "<a href='../I/126.html'>config.h</a>"
+<a id='L47' name='L47'></a>  47 <em class='sharp'>#endif</em>
+<a id='L48' name='L48'></a>  48 
+<a id='L49' name='L49'></a>  49 <em class='sharp'>#include</em> "<a href='882.html'>pcre_internal.h</a>"
+<a id='L50' name='L50'></a>  50 
+<a id='L51' name='L51'></a>  51 
+<a id='L52' name='L52'></a>  52 <em class='comment'>/*************************************************</em>
+<a id='L53' name='L53'></a>  53 <em class='comment'>*       Match character against an XCLASS        *</em>
+<a id='L54' name='L54'></a>  54 <em class='comment'>*************************************************/</em>
+<a id='L55' name='L55'></a>  55 
+<a id='L56' name='L56'></a>  56 <em class='comment'>/* This function is called to match a character against an extended class that</em>
+<a id='L57' name='L57'></a>  57 <em class='comment'>might contain values &gt; 255 and/or Unicode properties.</em>
+<a id='L58' name='L58'></a>  58 <em class='comment'></em>
+<a id='L59' name='L59'></a>  59 <em class='comment'>Arguments:</em>
+<a id='L60' name='L60'></a>  60 <em class='comment'>  c           the character</em>
+<a id='L61' name='L61'></a>  61 <em class='comment'>  data        points to the flag byte of the XCLASS data</em>
+<a id='L62' name='L62'></a>  62 <em class='comment'></em>
+<a id='L63' name='L63'></a>  63 <em class='comment'>Returns:      TRUE if character matches, else FALSE</em>
+<a id='L64' name='L64'></a>  64 <em class='comment'>*/</em>
+<a id='L65' name='L65'></a>  65 
+<a id='L66' name='L66'></a>  66 <a href='../D/534.html' title='Multiple defined in 2 places.'>BOOL</a>
+<a id='L67' name='L67'></a>  67 <a href='../D/9082.html' title='Multiple defined in 6 places.'>PRIV</a>(<a href='../Y/41578.html' title='Multiple used in 13 places.'>xclass</a>)(<a href='../D/25593.html' title='Multiple defined in 2 places.'>pcre_uint32</a> <a href='../Y/12995.html' title='Multiple used in 8103 places.'>c</a>, <strong class='reserved'>const</strong> <a href='../D/25591.html' title='Multiple defined in 3 places.'>pcre_uchar</a> *<a href='../D/20513.html' title='Multiple defined in 7 places.'>data</a>, <a href='../D/534.html' title='Multiple defined in 2 places.'>BOOL</a> <a href='../Y/40435.html' title='Multiple used in 262 places.'>utf</a>)
+<a id='L68' name='L68'></a>  68 <em class='brace'>{</em>
+<a id='L69' name='L69'></a>  69 <a href='../D/25591.html' title='Multiple defined in 3 places.'>pcre_uchar</a> <a href='../Y/38488.html' title='Multiple used in 1287 places.'>t</a>;
+<a id='L70' name='L70'></a>  70 <a href='../D/534.html' title='Multiple defined in 2 places.'>BOOL</a> <a href='../Y/28343.html' title='Multiple used in 45 places.'>negated</a> = (*<a href='../D/20513.html' title='Multiple defined in 7 places.'>data</a> &amp; <a href='../S/882.html#L1828' title='Defined at 1828 in ext/pcre/pcrelib/pcre_internal.h.'>XCL_NOT</a>) != 0;
+<a id='L71' name='L71'></a>  71 
+<a id='L72' name='L72'></a>  72 (<strong class='reserved'>void</strong>)<a href='../Y/40435.html' title='Multiple used in 262 places.'>utf</a>;
+<a id='L73' name='L73'></a>  73 <em class='sharp'>#ifdef</em> <a href='../D/1257.html' title='Multiple defined in 2 places.'>COMPILE_PCRE8</a>
+<a id='L74' name='L74'></a>  74 <em class='comment'>/* In 8 bit mode, this must always be TRUE. Help the compiler to know that. */</em>
+<a id='L75' name='L75'></a>  75 <a href='../Y/40435.html' title='Multiple used in 262 places.'>utf</a> = <a href='../D/14068.html' title='Multiple defined in 24 places.'>TRUE</a>;
+<a id='L76' name='L76'></a>  76 <em class='sharp'>#endif</em>
+<a id='L77' name='L77'></a>  77 
+<a id='L78' name='L78'></a>  78 <em class='comment'>/* Character values &lt; 256 are matched against a bitmap, if one is present. If</em>
+<a id='L79' name='L79'></a>  79 <em class='comment'>not, we still carry on, because there may be ranges that start below 256 in the</em>
+<a id='L80' name='L80'></a>  80 <em class='comment'>additional data. */</em>
+<a id='L81' name='L81'></a>  81 
+<a id='L82' name='L82'></a>  82 <strong class='reserved'>if</strong> (<a href='../Y/12995.html' title='Multiple used in 8103 places.'>c</a> &lt; 256)
+<a id='L83' name='L83'></a>  83   <em class='brace'>{</em>
+<a id='L84' name='L84'></a>  84   <strong class='reserved'>if</strong> ((*<a href='../D/20513.html' title='Multiple defined in 7 places.'>data</a> &amp; <a href='../S/882.html#L1830' title='Defined at 1830 in ext/pcre/pcrelib/pcre_internal.h.'>XCL_HASPROP</a>) == 0)
+<a id='L85' name='L85'></a>  85     <em class='brace'>{</em>
+<a id='L86' name='L86'></a>  86     <strong class='reserved'>if</strong> ((*<a href='../D/20513.html' title='Multiple defined in 7 places.'>data</a> &amp; <a href='../S/882.html#L1829' title='Defined at 1829 in ext/pcre/pcrelib/pcre_internal.h.'>XCL_MAP</a>) == 0) <strong class='reserved'>return</strong> <a href='../Y/28343.html' title='Multiple used in 45 places.'>negated</a>;
+<a id='L87' name='L87'></a>  87     <strong class='reserved'>return</strong> (((<a href='../S/882.html#L194' title='Defined at 194 in ext/pcre/pcrelib/pcre_internal.h.'>pcre_uint8</a> *)(<a href='../D/20513.html' title='Multiple defined in 7 places.'>data</a> + 1))[<a href='../Y/12995.html' title='Multiple used in 8103 places.'>c</a>/8] &amp; (1 &lt;&lt; (<a href='../Y/12995.html' title='Multiple used in 8103 places.'>c</a>&amp;7))) != 0;
+<a id='L88' name='L88'></a>  88     <em class='brace'>}</em>
+<a id='L89' name='L89'></a>  89   <strong class='reserved'>if</strong> ((*<a href='../D/20513.html' title='Multiple defined in 7 places.'>data</a> &amp; <a href='../S/882.html#L1829' title='Defined at 1829 in ext/pcre/pcrelib/pcre_internal.h.'>XCL_MAP</a>) != 0 &amp;&amp;
+<a id='L90' name='L90'></a>  90     (((<a href='../S/882.html#L194' title='Defined at 194 in ext/pcre/pcrelib/pcre_internal.h.'>pcre_uint8</a> *)(<a href='../D/20513.html' title='Multiple defined in 7 places.'>data</a> + 1))[<a href='../Y/12995.html' title='Multiple used in 8103 places.'>c</a>/8] &amp; (1 &lt;&lt; (<a href='../Y/12995.html' title='Multiple used in 8103 places.'>c</a>&amp;7))) != 0)
+<a id='L91' name='L91'></a>  91     <strong class='reserved'>return</strong> !<a href='../Y/28343.html' title='Multiple used in 45 places.'>negated</a>; <em class='comment'>/* char found */</em>
+<a id='L92' name='L92'></a>  92   <em class='brace'>}</em>
+<a id='L93' name='L93'></a>  93 
+<a id='L94' name='L94'></a>  94 <em class='comment'>/* First skip the bit map if present. Then match against the list of Unicode</em>
+<a id='L95' name='L95'></a>  95 <em class='comment'>properties or large chars or ranges that end with a large char. We won't ever</em>
+<a id='L96' name='L96'></a>  96 <em class='comment'>encounter XCL_PROP or XCL_NOTPROP when UCP support is not compiled. */</em>
+<a id='L97' name='L97'></a>  97 
+<a id='L98' name='L98'></a>  98 <strong class='reserved'>if</strong> ((*<a href='../D/20513.html' title='Multiple defined in 7 places.'>data</a>++ &amp; <a href='../S/882.html#L1829' title='Defined at 1829 in ext/pcre/pcrelib/pcre_internal.h.'>XCL_MAP</a>) != 0) <a href='../D/20513.html' title='Multiple defined in 7 places.'>data</a> += 32 / <strong class='reserved'>sizeof</strong>(<a href='../D/25591.html' title='Multiple defined in 3 places.'>pcre_uchar</a>);
+<a id='L99' name='L99'></a>  99 
+<a id='L100' name='L100'></a> 100 <strong class='reserved'>while</strong> ((<a href='../Y/38488.html' title='Multiple used in 1287 places.'>t</a> = *<a href='../D/20513.html' title='Multiple defined in 7 places.'>data</a>++) != <a href='../S/882.html#L1832' title='Defined at 1832 in ext/pcre/pcrelib/pcre_internal.h.'>XCL_END</a>)
+<a id='L101' name='L101'></a> 101   <em class='brace'>{</em>
+<a id='L102' name='L102'></a> 102   <a href='../D/25593.html' title='Multiple defined in 2 places.'>pcre_uint32</a> <a href='../Y/41379.html' title='Multiple used in 2301 places.'>x</a>, <a href='../Y/42154.html' title='Multiple used in 1327 places.'>y</a>;
+<a id='L103' name='L103'></a> 103   <strong class='reserved'>if</strong> (<a href='../Y/38488.html' title='Multiple used in 1287 places.'>t</a> == <a href='../S/882.html#L1833' title='Defined at 1833 in ext/pcre/pcrelib/pcre_internal.h.'>XCL_SINGLE</a>)
+<a id='L104' name='L104'></a> 104     <em class='brace'>{</em>
+<a id='L105' name='L105'></a> 105 <em class='sharp'>#ifdef</em> <a href='../D/12844.html' title='Multiple defined in 2 places.'>SUPPORT_UTF</a>
+<a id='L106' name='L106'></a> 106     <strong class='reserved'>if</strong> (<a href='../Y/40435.html' title='Multiple used in 262 places.'>utf</a>)
+<a id='L107' name='L107'></a> 107       <em class='brace'>{</em>
+<a id='L108' name='L108'></a> 108       <a href='../D/3240.html' title='Multiple defined in 4 places.'>GETCHARINC</a>(<a href='../Y/41379.html' title='Multiple used in 2301 places.'>x</a>, <a href='../D/20513.html' title='Multiple defined in 7 places.'>data</a>); <em class='comment'>/* macro generates multiple statements */</em>
+<a id='L109' name='L109'></a> 109       <em class='brace'>}</em>
+<a id='L110' name='L110'></a> 110     <strong class='reserved'>else</strong>
+<a id='L111' name='L111'></a> 111 <em class='sharp'>#endif</em>
+<a id='L112' name='L112'></a> 112       <a href='../Y/41379.html' title='Multiple used in 2301 places.'>x</a> = *<a href='../D/20513.html' title='Multiple defined in 7 places.'>data</a>++;
+<a id='L113' name='L113'></a> 113     <strong class='reserved'>if</strong> (<a href='../Y/12995.html' title='Multiple used in 8103 places.'>c</a> == <a href='../Y/41379.html' title='Multiple used in 2301 places.'>x</a>) <strong class='reserved'>return</strong> !<a href='../Y/28343.html' title='Multiple used in 45 places.'>negated</a>;
+<a id='L114' name='L114'></a> 114     <em class='brace'>}</em>
+<a id='L115' name='L115'></a> 115   <strong class='reserved'>else</strong> <strong class='reserved'>if</strong> (<a href='../Y/38488.html' title='Multiple used in 1287 places.'>t</a> == <a href='../S/882.html#L1834' title='Defined at 1834 in ext/pcre/pcrelib/pcre_internal.h.'>XCL_RANGE</a>)
+<a id='L116' name='L116'></a> 116     <em class='brace'>{</em>
+<a id='L117' name='L117'></a> 117 <em class='sharp'>#ifdef</em> <a href='../D/12844.html' title='Multiple defined in 2 places.'>SUPPORT_UTF</a>
+<a id='L118' name='L118'></a> 118     <strong class='reserved'>if</strong> (<a href='../Y/40435.html' title='Multiple used in 262 places.'>utf</a>)
+<a id='L119' name='L119'></a> 119       <em class='brace'>{</em>
+<a id='L120' name='L120'></a> 120       <a href='../D/3240.html' title='Multiple defined in 4 places.'>GETCHARINC</a>(<a href='../Y/41379.html' title='Multiple used in 2301 places.'>x</a>, <a href='../D/20513.html' title='Multiple defined in 7 places.'>data</a>); <em class='comment'>/* macro generates multiple statements */</em>
+<a id='L121' name='L121'></a> 121       <a href='../D/3240.html' title='Multiple defined in 4 places.'>GETCHARINC</a>(<a href='../Y/42154.html' title='Multiple used in 1327 places.'>y</a>, <a href='../D/20513.html' title='Multiple defined in 7 places.'>data</a>); <em class='comment'>/* macro generates multiple statements */</em>
+<a id='L122' name='L122'></a> 122       <em class='brace'>}</em>
+<a id='L123' name='L123'></a> 123     <strong class='reserved'>else</strong>
+<a id='L124' name='L124'></a> 124 <em class='sharp'>#endif</em>
+<a id='L125' name='L125'></a> 125       <em class='brace'>{</em>
+<a id='L126' name='L126'></a> 126       <a href='../Y/41379.html' title='Multiple used in 2301 places.'>x</a> = *<a href='../D/20513.html' title='Multiple defined in 7 places.'>data</a>++;
+<a id='L127' name='L127'></a> 127       <a href='../Y/42154.html' title='Multiple used in 1327 places.'>y</a> = *<a href='../D/20513.html' title='Multiple defined in 7 places.'>data</a>++;
+<a id='L128' name='L128'></a> 128       <em class='brace'>}</em>
+<a id='L129' name='L129'></a> 129     <strong class='reserved'>if</strong> (<a href='../Y/12995.html' title='Multiple used in 8103 places.'>c</a> &gt;= <a href='../Y/41379.html' title='Multiple used in 2301 places.'>x</a> &amp;&amp; <a href='../Y/12995.html' title='Multiple used in 8103 places.'>c</a> &lt;= <a href='../Y/42154.html' title='Multiple used in 1327 places.'>y</a>) <strong class='reserved'>return</strong> !<a href='../Y/28343.html' title='Multiple used in 45 places.'>negated</a>;
+<a id='L130' name='L130'></a> 130     <em class='brace'>}</em>
+<a id='L131' name='L131'></a> 131 
+<a id='L132' name='L132'></a> 132 <em class='sharp'>#ifdef</em> <a href='../S/872.html#L13' title='Defined at 13 in ext/pcre/pcrelib/config.h.'>SUPPORT_UCP</a>
+<a id='L133' name='L133'></a> 133   <strong class='reserved'>else</strong>  <em class='comment'>/* XCL_PROP &amp; XCL_NOTPROP */</em>
+<a id='L134' name='L134'></a> 134     <em class='brace'>{</em>
+<a id='L135' name='L135'></a> 135     <strong class='reserved'>const</strong> <a href='../S/882.html#L2771' title='Defined at 2771 in ext/pcre/pcrelib/pcre_internal.h.'>ucd_record</a> *<a href='../Y/33768.html' title='Multiple used in 236 places.'>prop</a> = <a href='../S/882.html#L2787' title='Defined at 2787 in ext/pcre/pcrelib/pcre_internal.h.'>GET_UCD</a>(<a href='../Y/12995.html' title='Multiple used in 8103 places.'>c</a>);
+<a id='L136' name='L136'></a> 136     <a href='../D/534.html' title='Multiple defined in 2 places.'>BOOL</a> <a href='../Y/24242.html' title='Multiple used in 19 places.'>isprop</a> = <a href='../Y/38488.html' title='Multiple used in 1287 places.'>t</a> == <a href='../S/882.html#L1835' title='Defined at 1835 in ext/pcre/pcrelib/pcre_internal.h.'>XCL_PROP</a>;
+<a id='L137' name='L137'></a> 137 
+<a id='L138' name='L138'></a> 138     <strong class='reserved'>switch</strong>(*<a href='../D/20513.html' title='Multiple defined in 7 places.'>data</a>)
+<a id='L139' name='L139'></a> 139       <em class='brace'>{</em>
+<a id='L140' name='L140'></a> 140       <strong class='reserved'>case</strong> <a href='../S/882.html#L1802' title='Defined at 1802 in ext/pcre/pcrelib/pcre_internal.h.'>PT_ANY</a>:
+<a id='L141' name='L141'></a> 141       <strong class='reserved'>if</strong> (<a href='../Y/24242.html' title='Multiple used in 19 places.'>isprop</a>) <strong class='reserved'>return</strong> !<a href='../Y/28343.html' title='Multiple used in 45 places.'>negated</a>;
+<a id='L142' name='L142'></a> 142       <strong class='reserved'>break</strong>;
+<a id='L143' name='L143'></a> 143 
+<a id='L144' name='L144'></a> 144       <strong class='reserved'>case</strong> <a href='../S/882.html#L1803' title='Defined at 1803 in ext/pcre/pcrelib/pcre_internal.h.'>PT_LAMP</a>:
+<a id='L145' name='L145'></a> 145       <strong class='reserved'>if</strong> ((<a href='../Y/33768.html' title='Multiple used in 236 places.'>prop</a>-&gt;<a href='../Y/13474.html' title='Multiple used in 56 places.'>chartype</a> == <a href='../S/919.html#L43' title='Defined at 43 in ext/pcre/pcrelib/ucp.h.'>ucp_Lu</a> || <a href='../Y/33768.html' title='Multiple used in 236 places.'>prop</a>-&gt;<a href='../Y/13474.html' title='Multiple used in 56 places.'>chartype</a> == <a href='../S/919.html#L39' title='Defined at 39 in ext/pcre/pcrelib/ucp.h.'>ucp_Ll</a> ||
+<a id='L146' name='L146'></a> 146            <a href='../Y/33768.html' title='Multiple used in 236 places.'>prop</a>-&gt;<a href='../Y/13474.html' title='Multiple used in 56 places.'>chartype</a> == <a href='../S/919.html#L42' title='Defined at 42 in ext/pcre/pcrelib/ucp.h.'>ucp_Lt</a>) == <a href='../Y/24242.html' title='Multiple used in 19 places.'>isprop</a>) <strong class='reserved'>return</strong> !<a href='../Y/28343.html' title='Multiple used in 45 places.'>negated</a>;
+<a id='L147' name='L147'></a> 147       <strong class='reserved'>break</strong>;
+<a id='L148' name='L148'></a> 148 
+<a id='L149' name='L149'></a> 149       <strong class='reserved'>case</strong> <a href='../S/882.html#L1804' title='Defined at 1804 in ext/pcre/pcrelib/pcre_internal.h.'>PT_GC</a>:
+<a id='L150' name='L150'></a> 150       <strong class='reserved'>if</strong> ((<a href='../D/20513.html' title='Multiple defined in 7 places.'>data</a>[1] == <a href='../D/9082.html' title='Multiple defined in 6 places.'>PRIV</a>(<a href='../Y/39769.html' title='Multiple used in 26 places.'>ucp_gentype</a>)[<a href='../Y/33768.html' title='Multiple used in 236 places.'>prop</a>-&gt;<a href='../Y/13474.html' title='Multiple used in 56 places.'>chartype</a>]) == <a href='../Y/24242.html' title='Multiple used in 19 places.'>isprop</a>)
+<a id='L151' name='L151'></a> 151         <strong class='reserved'>return</strong> !<a href='../Y/28343.html' title='Multiple used in 45 places.'>negated</a>;
+<a id='L152' name='L152'></a> 152       <strong class='reserved'>break</strong>;
+<a id='L153' name='L153'></a> 153 
+<a id='L154' name='L154'></a> 154       <strong class='reserved'>case</strong> <a href='../S/882.html#L1805' title='Defined at 1805 in ext/pcre/pcrelib/pcre_internal.h.'>PT_PC</a>:
+<a id='L155' name='L155'></a> 155       <strong class='reserved'>if</strong> ((<a href='../D/20513.html' title='Multiple defined in 7 places.'>data</a>[1] == <a href='../Y/33768.html' title='Multiple used in 236 places.'>prop</a>-&gt;<a href='../Y/13474.html' title='Multiple used in 56 places.'>chartype</a>) == <a href='../Y/24242.html' title='Multiple used in 19 places.'>isprop</a>) <strong class='reserved'>return</strong> !<a href='../Y/28343.html' title='Multiple used in 45 places.'>negated</a>;
+<a id='L156' name='L156'></a> 156       <strong class='reserved'>break</strong>;
+<a id='L157' name='L157'></a> 157 
+<a id='L158' name='L158'></a> 158       <strong class='reserved'>case</strong> <a href='../S/882.html#L1806' title='Defined at 1806 in ext/pcre/pcrelib/pcre_internal.h.'>PT_SC</a>:
+<a id='L159' name='L159'></a> 159       <strong class='reserved'>if</strong> ((<a href='../D/20513.html' title='Multiple defined in 7 places.'>data</a>[1] == <a href='../Y/33768.html' title='Multiple used in 236 places.'>prop</a>-&gt;<a href='../Y/35836.html' title='Multiple used in 55 places.'>script</a>) == <a href='../Y/24242.html' title='Multiple used in 19 places.'>isprop</a>) <strong class='reserved'>return</strong> !<a href='../Y/28343.html' title='Multiple used in 45 places.'>negated</a>;
+<a id='L160' name='L160'></a> 160       <strong class='reserved'>break</strong>;
+<a id='L161' name='L161'></a> 161 
+<a id='L162' name='L162'></a> 162       <strong class='reserved'>case</strong> <a href='../S/882.html#L1807' title='Defined at 1807 in ext/pcre/pcrelib/pcre_internal.h.'>PT_ALNUM</a>:
+<a id='L163' name='L163'></a> 163       <strong class='reserved'>if</strong> ((<a href='../D/9082.html' title='Multiple defined in 6 places.'>PRIV</a>(<a href='../Y/39769.html' title='Multiple used in 26 places.'>ucp_gentype</a>)[<a href='../Y/33768.html' title='Multiple used in 236 places.'>prop</a>-&gt;<a href='../Y/13474.html' title='Multiple used in 56 places.'>chartype</a>] == <a href='../S/919.html#L23' title='Defined at 23 in ext/pcre/pcrelib/ucp.h.'>ucp_L</a> ||
+<a id='L164' name='L164'></a> 164            <a href='../D/9082.html' title='Multiple defined in 6 places.'>PRIV</a>(<a href='../Y/39769.html' title='Multiple used in 26 places.'>ucp_gentype</a>)[<a href='../Y/33768.html' title='Multiple used in 236 places.'>prop</a>-&gt;<a href='../Y/13474.html' title='Multiple used in 56 places.'>chartype</a>] == <a href='../S/919.html#L25' title='Defined at 25 in ext/pcre/pcrelib/ucp.h.'>ucp_N</a>) == <a href='../Y/24242.html' title='Multiple used in 19 places.'>isprop</a>)
+<a id='L165' name='L165'></a> 165         <strong class='reserved'>return</strong> !<a href='../Y/28343.html' title='Multiple used in 45 places.'>negated</a>;
+<a id='L166' name='L166'></a> 166       <strong class='reserved'>break</strong>;
+<a id='L167' name='L167'></a> 167 
+<a id='L168' name='L168'></a> 168       <em class='comment'>/* Perl space used to exclude VT, but from Perl 5.18 it is included,</em>
+<a id='L169' name='L169'></a> 169 <em class='comment'>      which means that Perl space and POSIX space are now identical. PCRE</em>
+<a id='L170' name='L170'></a> 170 <em class='comment'>      was changed at release 8.34. */</em>
+<a id='L171' name='L171'></a> 171 
+<a id='L172' name='L172'></a> 172       <strong class='reserved'>case</strong> <a href='../S/882.html#L1808' title='Defined at 1808 in ext/pcre/pcrelib/pcre_internal.h.'>PT_SPACE</a>:    <em class='comment'>/* Perl space */</em>
+<a id='L173' name='L173'></a> 173       <strong class='reserved'>case</strong> <a href='../S/882.html#L1809' title='Defined at 1809 in ext/pcre/pcrelib/pcre_internal.h.'>PT_PXSPACE</a>:  <em class='comment'>/* POSIX space */</em>
+<a id='L174' name='L174'></a> 174       <strong class='reserved'>switch</strong>(<a href='../Y/12995.html' title='Multiple used in 8103 places.'>c</a>)
+<a id='L175' name='L175'></a> 175         <em class='brace'>{</em>
+<a id='L176' name='L176'></a> 176         <a href='../D/3636.html' title='Multiple defined in 2 places.'>HSPACE_CASES</a>:
+<a id='L177' name='L177'></a> 177         <a href='../D/14880.html' title='Multiple defined in 2 places.'>VSPACE_CASES</a>:
+<a id='L178' name='L178'></a> 178         <strong class='reserved'>if</strong> (<a href='../Y/24242.html' title='Multiple used in 19 places.'>isprop</a>) <strong class='reserved'>return</strong> !<a href='../Y/28343.html' title='Multiple used in 45 places.'>negated</a>;
+<a id='L179' name='L179'></a> 179         <strong class='reserved'>break</strong>;
+<a id='L180' name='L180'></a> 180 
+<a id='L181' name='L181'></a> 181         <strong class='reserved'>default</strong>:
+<a id='L182' name='L182'></a> 182         <strong class='reserved'>if</strong> ((<a href='../D/9082.html' title='Multiple defined in 6 places.'>PRIV</a>(<a href='../Y/39769.html' title='Multiple used in 26 places.'>ucp_gentype</a>)[<a href='../Y/33768.html' title='Multiple used in 236 places.'>prop</a>-&gt;<a href='../Y/13474.html' title='Multiple used in 56 places.'>chartype</a>] == <a href='../S/919.html#L28' title='Defined at 28 in ext/pcre/pcrelib/ucp.h.'>ucp_Z</a>) == <a href='../Y/24242.html' title='Multiple used in 19 places.'>isprop</a>)
+<a id='L183' name='L183'></a> 183           <strong class='reserved'>return</strong> !<a href='../Y/28343.html' title='Multiple used in 45 places.'>negated</a>;
+<a id='L184' name='L184'></a> 184         <strong class='reserved'>break</strong>;
+<a id='L185' name='L185'></a> 185         <em class='brace'>}</em>
+<a id='L186' name='L186'></a> 186       <strong class='reserved'>break</strong>;
+<a id='L187' name='L187'></a> 187 
+<a id='L188' name='L188'></a> 188       <strong class='reserved'>case</strong> <a href='../S/882.html#L1810' title='Defined at 1810 in ext/pcre/pcrelib/pcre_internal.h.'>PT_WORD</a>:
+<a id='L189' name='L189'></a> 189       <strong class='reserved'>if</strong> ((<a href='../D/9082.html' title='Multiple defined in 6 places.'>PRIV</a>(<a href='../Y/39769.html' title='Multiple used in 26 places.'>ucp_gentype</a>)[<a href='../Y/33768.html' title='Multiple used in 236 places.'>prop</a>-&gt;<a href='../Y/13474.html' title='Multiple used in 56 places.'>chartype</a>] == <a href='../S/919.html#L23' title='Defined at 23 in ext/pcre/pcrelib/ucp.h.'>ucp_L</a> ||
+<a id='L190' name='L190'></a> 190            <a href='../D/9082.html' title='Multiple defined in 6 places.'>PRIV</a>(<a href='../Y/39769.html' title='Multiple used in 26 places.'>ucp_gentype</a>)[<a href='../Y/33768.html' title='Multiple used in 236 places.'>prop</a>-&gt;<a href='../Y/13474.html' title='Multiple used in 56 places.'>chartype</a>] == <a href='../S/919.html#L25' title='Defined at 25 in ext/pcre/pcrelib/ucp.h.'>ucp_N</a> || <a href='../Y/12995.html' title='Multiple used in 8103 places.'>c</a> == <a href='../D/978.html' title='Multiple defined in 2 places.'>CHAR_UNDERSCORE</a>)
+<a id='L191' name='L191'></a> 191              == <a href='../Y/24242.html' title='Multiple used in 19 places.'>isprop</a>)
+<a id='L192' name='L192'></a> 192         <strong class='reserved'>return</strong> !<a href='../Y/28343.html' title='Multiple used in 45 places.'>negated</a>;
+<a id='L193' name='L193'></a> 193       <strong class='reserved'>break</strong>;
+<a id='L194' name='L194'></a> 194 
+<a id='L195' name='L195'></a> 195       <strong class='reserved'>case</strong> <a href='../S/882.html#L1812' title='Defined at 1812 in ext/pcre/pcrelib/pcre_internal.h.'>PT_UCNC</a>:
+<a id='L196' name='L196'></a> 196       <strong class='reserved'>if</strong> (<a href='../Y/12995.html' title='Multiple used in 8103 places.'>c</a> &lt; 0xa0)
+<a id='L197' name='L197'></a> 197         <em class='brace'>{</em>
+<a id='L198' name='L198'></a> 198         <strong class='reserved'>if</strong> ((<a href='../Y/12995.html' title='Multiple used in 8103 places.'>c</a> == <a href='../D/917.html' title='Multiple defined in 2 places.'>CHAR_DOLLAR_SIGN</a> || <a href='../Y/12995.html' title='Multiple used in 8103 places.'>c</a> == <a href='../D/911.html' title='Multiple defined in 2 places.'>CHAR_COMMERCIAL_AT</a> ||
+<a id='L199' name='L199'></a> 199              <a href='../Y/12995.html' title='Multiple used in 8103 places.'>c</a> == <a href='../D/926.html' title='Multiple defined in 2 places.'>CHAR_GRAVE_ACCENT</a>) == <a href='../Y/24242.html' title='Multiple used in 19 places.'>isprop</a>)
+<a id='L200' name='L200'></a> 200           <strong class='reserved'>return</strong> !<a href='../Y/28343.html' title='Multiple used in 45 places.'>negated</a>;
+<a id='L201' name='L201'></a> 201         <em class='brace'>}</em>
+<a id='L202' name='L202'></a> 202       <strong class='reserved'>else</strong>
+<a id='L203' name='L203'></a> 203         <em class='brace'>{</em>
+<a id='L204' name='L204'></a> 204         <strong class='reserved'>if</strong> ((<a href='../Y/12995.html' title='Multiple used in 8103 places.'>c</a> &lt; 0xd800 || <a href='../Y/12995.html' title='Multiple used in 8103 places.'>c</a> &gt; 0xdfff) == <a href='../Y/24242.html' title='Multiple used in 19 places.'>isprop</a>)
+<a id='L205' name='L205'></a> 205           <strong class='reserved'>return</strong> !<a href='../Y/28343.html' title='Multiple used in 45 places.'>negated</a>;
+<a id='L206' name='L206'></a> 206         <em class='brace'>}</em>
+<a id='L207' name='L207'></a> 207       <strong class='reserved'>break</strong>;
+<a id='L208' name='L208'></a> 208 
+<a id='L209' name='L209'></a> 209       <em class='comment'>/* The following three properties can occur only in an XCLASS, as there</em>
+<a id='L210' name='L210'></a> 210 <em class='comment'>      is no \p or \P coding for them. */</em>
+<a id='L211' name='L211'></a> 211 
+<a id='L212' name='L212'></a> 212       <em class='comment'>/* Graphic character. Implement this as not Z (space or separator) and</em>
+<a id='L213' name='L213'></a> 213 <em class='comment'>      not C (other), except for Cf (format) with a few exceptions. This seems</em>
+<a id='L214' name='L214'></a> 214 <em class='comment'>      to be what Perl does. The exceptional characters are:</em>
+<a id='L215' name='L215'></a> 215 <em class='comment'></em>
+<a id='L216' name='L216'></a> 216 <em class='comment'>      U+061C           Arabic Letter Mark</em>
+<a id='L217' name='L217'></a> 217 <em class='comment'>      U+180E           Mongolian Vowel Separator</em>
+<a id='L218' name='L218'></a> 218 <em class='comment'>      U+2066 - U+2069  Various "isolate"s</em>
+<a id='L219' name='L219'></a> 219 <em class='comment'>      */</em>
+<a id='L220' name='L220'></a> 220 
+<a id='L221' name='L221'></a> 221       <strong class='reserved'>case</strong> <a href='../S/882.html#L1821' title='Defined at 1821 in ext/pcre/pcrelib/pcre_internal.h.'>PT_PXGRAPH</a>:
+<a id='L222' name='L222'></a> 222       <strong class='reserved'>if</strong> ((<a href='../D/9082.html' title='Multiple defined in 6 places.'>PRIV</a>(<a href='../Y/39769.html' title='Multiple used in 26 places.'>ucp_gentype</a>)[<a href='../Y/33768.html' title='Multiple used in 236 places.'>prop</a>-&gt;<a href='../Y/13474.html' title='Multiple used in 56 places.'>chartype</a>] != <a href='../S/919.html#L28' title='Defined at 28 in ext/pcre/pcrelib/ucp.h.'>ucp_Z</a> &amp;&amp;
+<a id='L223' name='L223'></a> 223             (<a href='../D/9082.html' title='Multiple defined in 6 places.'>PRIV</a>(<a href='../Y/39769.html' title='Multiple used in 26 places.'>ucp_gentype</a>)[<a href='../Y/33768.html' title='Multiple used in 236 places.'>prop</a>-&gt;<a href='../Y/13474.html' title='Multiple used in 56 places.'>chartype</a>] != <a href='../S/919.html#L22' title='Defined at 22 in ext/pcre/pcrelib/ucp.h.'>ucp_C</a> ||
+<a id='L224' name='L224'></a> 224               (<a href='../Y/33768.html' title='Multiple used in 236 places.'>prop</a>-&gt;<a href='../Y/13474.html' title='Multiple used in 56 places.'>chartype</a> == <a href='../S/919.html#L35' title='Defined at 35 in ext/pcre/pcrelib/ucp.h.'>ucp_Cf</a> &amp;&amp;
+<a id='L225' name='L225'></a> 225                 <a href='../Y/12995.html' title='Multiple used in 8103 places.'>c</a> != 0x061c &amp;&amp; <a href='../Y/12995.html' title='Multiple used in 8103 places.'>c</a> != 0x180e &amp;&amp; (<a href='../Y/12995.html' title='Multiple used in 8103 places.'>c</a> &lt; 0x2066 || <a href='../Y/12995.html' title='Multiple used in 8103 places.'>c</a> &gt; 0x2069))
+<a id='L226' name='L226'></a> 226          )) == <a href='../Y/24242.html' title='Multiple used in 19 places.'>isprop</a>)
+<a id='L227' name='L227'></a> 227         <strong class='reserved'>return</strong> !<a href='../Y/28343.html' title='Multiple used in 45 places.'>negated</a>;
+<a id='L228' name='L228'></a> 228       <strong class='reserved'>break</strong>;
+<a id='L229' name='L229'></a> 229 
+<a id='L230' name='L230'></a> 230       <em class='comment'>/* Printable character: same as graphic, with the addition of Zs, i.e.</em>
+<a id='L231' name='L231'></a> 231 <em class='comment'>      not Zl and not Zp, and U+180E. */</em>
+<a id='L232' name='L232'></a> 232 
+<a id='L233' name='L233'></a> 233       <strong class='reserved'>case</strong> <a href='../S/882.html#L1822' title='Defined at 1822 in ext/pcre/pcrelib/pcre_internal.h.'>PT_PXPRINT</a>:
+<a id='L234' name='L234'></a> 234       <strong class='reserved'>if</strong> ((<a href='../Y/33768.html' title='Multiple used in 236 places.'>prop</a>-&gt;<a href='../Y/13474.html' title='Multiple used in 56 places.'>chartype</a> != <a href='../S/919.html#L61' title='Defined at 61 in ext/pcre/pcrelib/ucp.h.'>ucp_Zl</a> &amp;&amp;
+<a id='L235' name='L235'></a> 235            <a href='../Y/33768.html' title='Multiple used in 236 places.'>prop</a>-&gt;<a href='../Y/13474.html' title='Multiple used in 56 places.'>chartype</a> != <a href='../S/919.html#L62' title='Defined at 62 in ext/pcre/pcrelib/ucp.h.'>ucp_Zp</a> &amp;&amp;
+<a id='L236' name='L236'></a> 236             (<a href='../D/9082.html' title='Multiple defined in 6 places.'>PRIV</a>(<a href='../Y/39769.html' title='Multiple used in 26 places.'>ucp_gentype</a>)[<a href='../Y/33768.html' title='Multiple used in 236 places.'>prop</a>-&gt;<a href='../Y/13474.html' title='Multiple used in 56 places.'>chartype</a>] != <a href='../S/919.html#L22' title='Defined at 22 in ext/pcre/pcrelib/ucp.h.'>ucp_C</a> ||
+<a id='L237' name='L237'></a> 237               (<a href='../Y/33768.html' title='Multiple used in 236 places.'>prop</a>-&gt;<a href='../Y/13474.html' title='Multiple used in 56 places.'>chartype</a> == <a href='../S/919.html#L35' title='Defined at 35 in ext/pcre/pcrelib/ucp.h.'>ucp_Cf</a> &amp;&amp;
+<a id='L238' name='L238'></a> 238                 <a href='../Y/12995.html' title='Multiple used in 8103 places.'>c</a> != 0x061c &amp;&amp; (<a href='../Y/12995.html' title='Multiple used in 8103 places.'>c</a> &lt; 0x2066 || <a href='../Y/12995.html' title='Multiple used in 8103 places.'>c</a> &gt; 0x2069))
+<a id='L239' name='L239'></a> 239          )) == <a href='../Y/24242.html' title='Multiple used in 19 places.'>isprop</a>)
+<a id='L240' name='L240'></a> 240         <strong class='reserved'>return</strong> !<a href='../Y/28343.html' title='Multiple used in 45 places.'>negated</a>;
+<a id='L241' name='L241'></a> 241       <strong class='reserved'>break</strong>;
+<a id='L242' name='L242'></a> 242 
+<a id='L243' name='L243'></a> 243       <em class='comment'>/* Punctuation: all Unicode punctuation, plus ASCII characters that</em>
+<a id='L244' name='L244'></a> 244 <em class='comment'>      Unicode treats as symbols rather than punctuation, for Perl</em>
+<a id='L245' name='L245'></a> 245 <em class='comment'>      compatibility (these are $+&lt;=&gt;^`|~). */</em>
+<a id='L246' name='L246'></a> 246 
+<a id='L247' name='L247'></a> 247       <strong class='reserved'>case</strong> <a href='../S/882.html#L1823' title='Defined at 1823 in ext/pcre/pcrelib/pcre_internal.h.'>PT_PXPUNCT</a>:
+<a id='L248' name='L248'></a> 248       <strong class='reserved'>if</strong> ((<a href='../D/9082.html' title='Multiple defined in 6 places.'>PRIV</a>(<a href='../Y/39769.html' title='Multiple used in 26 places.'>ucp_gentype</a>)[<a href='../Y/33768.html' title='Multiple used in 236 places.'>prop</a>-&gt;<a href='../Y/13474.html' title='Multiple used in 56 places.'>chartype</a>] == <a href='../S/919.html#L26' title='Defined at 26 in ext/pcre/pcrelib/ucp.h.'>ucp_P</a> ||
+<a id='L249' name='L249'></a> 249             (<a href='../Y/12995.html' title='Multiple used in 8103 places.'>c</a> &lt; 128 &amp;&amp; <a href='../D/9082.html' title='Multiple defined in 6 places.'>PRIV</a>(<a href='../Y/39769.html' title='Multiple used in 26 places.'>ucp_gentype</a>)[<a href='../Y/33768.html' title='Multiple used in 236 places.'>prop</a>-&gt;<a href='../Y/13474.html' title='Multiple used in 56 places.'>chartype</a>] == <a href='../S/919.html#L27' title='Defined at 27 in ext/pcre/pcrelib/ucp.h.'>ucp_S</a>)) == <a href='../Y/24242.html' title='Multiple used in 19 places.'>isprop</a>)
+<a id='L250' name='L250'></a> 250         <strong class='reserved'>return</strong> !<a href='../Y/28343.html' title='Multiple used in 45 places.'>negated</a>;
+<a id='L251' name='L251'></a> 251       <strong class='reserved'>break</strong>;
+<a id='L252' name='L252'></a> 252 
+<a id='L253' name='L253'></a> 253       <em class='comment'>/* This should never occur, but compilers may mutter if there is no</em>
+<a id='L254' name='L254'></a> 254 <em class='comment'>      default. */</em>
+<a id='L255' name='L255'></a> 255 
+<a id='L256' name='L256'></a> 256       <strong class='reserved'>default</strong>:
+<a id='L257' name='L257'></a> 257       <strong class='reserved'>return</strong> <a href='../D/2439.html' title='Multiple defined in 24 places.'>FALSE</a>;
+<a id='L258' name='L258'></a> 258       <em class='brace'>}</em>
+<a id='L259' name='L259'></a> 259 
+<a id='L260' name='L260'></a> 260     <a href='../D/20513.html' title='Multiple defined in 7 places.'>data</a> += 2;
+<a id='L261' name='L261'></a> 261     <em class='brace'>}</em>
+<a id='L262' name='L262'></a> 262 <em class='sharp'>#endif</em>  <em class='comment'>/* SUPPORT_UCP */</em>
+<a id='L263' name='L263'></a> 263   <em class='brace'>}</em>
+<a id='L264' name='L264'></a> 264 
+<a id='L265' name='L265'></a> 265 <strong class='reserved'>return</strong> <a href='../Y/28343.html' title='Multiple used in 45 places.'>negated</a>;   <em class='comment'>/* char did not match */</em>
+<a id='L266' name='L266'></a> 266 <em class='brace'>}</em>
+<a id='L267' name='L267'></a> 267 
+<a id='L268' name='L268'></a> 268 <em class='comment'>/* End of pcre_xclass.c */</em>
+</pre>
+<hr />
+<a id='BOTTOM' name='BOTTOM'></a>
+<em class='comment'>/* [&lt;][&gt;][^][v]<a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+</body>
+</html>

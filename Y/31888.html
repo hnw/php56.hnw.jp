@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>pdu</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/1017.html#L708'>pdu</a>               708 ext/snmp/snmp.c 	struct snmp_pdu *pdu=NULL, *response;</span>
+<span class='curline'><a href='../S/1017.html#L748'>pdu</a>               748 ext/snmp/snmp.c 				pdu = snmp_pdu_create(SNMP_MSG_GETNEXT);</span>
+<span class='curline'><a href='../S/1017.html#L750'>pdu</a>               750 ext/snmp/snmp.c 				pdu = snmp_pdu_create(SNMP_MSG_GETBULK);</span>
+<span class='curline'><a href='../S/1017.html#L751'>pdu</a>               751 ext/snmp/snmp.c 				pdu-&gt;non_repeaters = objid_query-&gt;non_repeaters;</span>
+<span class='curline'><a href='../S/1017.html#L752'>pdu</a>               752 ext/snmp/snmp.c 				pdu-&gt;max_repetitions = objid_query-&gt;max_repetitions;</span>
+<span class='curline'><a href='../S/1017.html#L754'>pdu</a>               754 ext/snmp/snmp.c 			snmp_add_null_var(pdu, objid_query-&gt;vars[0].name, objid_query-&gt;vars[0].name_length);</span>
+<span class='curline'><a href='../S/1017.html#L757'>pdu</a>               757 ext/snmp/snmp.c 				pdu = snmp_pdu_create(SNMP_MSG_GET);</span>
+<span class='curline'><a href='../S/1017.html#L759'>pdu</a>               759 ext/snmp/snmp.c 				pdu = snmp_pdu_create(SNMP_MSG_GETNEXT);</span>
+<span class='curline'><a href='../S/1017.html#L761'>pdu</a>               761 ext/snmp/snmp.c 				pdu = snmp_pdu_create(SNMP_MSG_SET);</span>
+<span class='curline'><a href='../S/1017.html#L770'>pdu</a>               770 ext/snmp/snmp.c 					if ((snmp_errno = snmp_add_var(pdu, objid_query-&gt;vars[objid_query-&gt;offset].name, objid_query-&gt;vars[objid_query-&gt;offset].name_length, objid_query-&gt;vars[objid_query-&gt;offset].type, objid_query-&gt;vars[objid_query-&gt;offset].value))) {</span>
+<span class='curline'><a href='../S/1017.html#L773'>pdu</a>               773 ext/snmp/snmp.c 						snmp_free_pdu(pdu);</span>
+<span class='curline'><a href='../S/1017.html#L779'>pdu</a>               779 ext/snmp/snmp.c 					snmp_add_null_var(pdu, objid_query-&gt;vars[objid_query-&gt;offset].name, objid_query-&gt;vars[objid_query-&gt;offset].name_length);</span>
+<span class='curline'><a href='../S/1017.html#L782'>pdu</a>               782 ext/snmp/snmp.c 			if(pdu-&gt;variables == NULL){</span>
+<span class='curline'><a href='../S/1017.html#L783'>pdu</a>               783 ext/snmp/snmp.c 				snmp_free_pdu(pdu);</span>
+<span class='curline'><a href='../S/1017.html#L791'>pdu</a>               791 ext/snmp/snmp.c 		status = snmp_synch_response(ss, pdu, &amp;response);</span>
+<span class='curline'><a href='../S/1017.html#L922'>pdu</a>               922 ext/snmp/snmp.c 						if ((pdu = snmp_fix_pdu(response, ((st &amp; SNMP_CMD_GET) ? SNMP_MSG_GET : SNMP_MSG_GETNEXT) )) != NULL) {</span>
+</pre>
+</body>
+</html>

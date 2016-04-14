@@ -1,0 +1,212 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>resolved_path</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/1744.html#L1184'>resolved_path</a>    1184 Zend/zend_virtual_cwd.c 	char resolved_path[MAXPATHLEN];</span>
+<span class='curline'><a href='../S/1744.html#L1216'>resolved_path</a>    1216 Zend/zend_virtual_cwd.c 			memcpy(resolved_path , path, path_length + 1);</span>
+<span class='curline'><a href='../S/1744.html#L1248'>resolved_path</a>    1248 Zend/zend_virtual_cwd.c 			memcpy(resolved_path, state-&gt;cwd, state_cwd_length);</span>
+<span class='curline'><a href='../S/1744.html#L1249'>resolved_path</a>    1249 Zend/zend_virtual_cwd.c 			if (resolved_path[state_cwd_length-1] == DEFAULT_SLASH) {</span>
+<span class='curline'><a href='../S/1744.html#L1250'>resolved_path</a>    1250 Zend/zend_virtual_cwd.c 				memcpy(resolved_path + state_cwd_length, path, path_length + 1);</span>
+<span class='curline'><a href='../S/1744.html#L1253'>resolved_path</a>    1253 Zend/zend_virtual_cwd.c 				resolved_path[state_cwd_length] = DEFAULT_SLASH;</span>
+<span class='curline'><a href='../S/1744.html#L1254'>resolved_path</a>    1254 Zend/zend_virtual_cwd.c 				memcpy(resolved_path + state_cwd_length + 1, path, path_length + 1);</span>
+<span class='curline'><a href='../S/1744.html#L1261'>resolved_path</a>    1261 Zend/zend_virtual_cwd.c 			resolved_path[0] = path[0];</span>
+<span class='curline'><a href='../S/1744.html#L1262'>resolved_path</a>    1262 Zend/zend_virtual_cwd.c 			resolved_path[1] = ':';</span>
+<span class='curline'><a href='../S/1744.html#L1263'>resolved_path</a>    1263 Zend/zend_virtual_cwd.c 			resolved_path[2] = DEFAULT_SLASH;</span>
+<span class='curline'><a href='../S/1744.html#L1264'>resolved_path</a>    1264 Zend/zend_virtual_cwd.c 			memcpy(resolved_path + 3, path + 2, path_length - 1);</span>
+<span class='curline'><a href='../S/1744.html#L1268'>resolved_path</a>    1268 Zend/zend_virtual_cwd.c 		memcpy(resolved_path, path, path_length + 1);</span>
+<span class='curline'><a href='../S/1744.html#L1272'>resolved_path</a>    1272 Zend/zend_virtual_cwd.c 	if (memchr(resolved_path, '*', path_length) ||</span>
+<span class='curline'><a href='../S/1744.html#L1273'>resolved_path</a>    1273 Zend/zend_virtual_cwd.c 		memchr(resolved_path, '?', path_length)) {</span>
+<span class='curline'><a href='../S/1744.html#L1279'>resolved_path</a>    1279 Zend/zend_virtual_cwd.c 	if (IS_UNC_PATH(resolved_path, path_length)) {</span>
+<span class='curline'><a href='../S/1744.html#L1281'>resolved_path</a>    1281 Zend/zend_virtual_cwd.c 		resolved_path[0] = DEFAULT_SLASH;</span>
+<span class='curline'><a href='../S/1744.html#L1282'>resolved_path</a>    1282 Zend/zend_virtual_cwd.c 		resolved_path[1] = DEFAULT_SLASH;</span>
+<span class='curline'><a href='../S/1744.html#L1284'>resolved_path</a>    1284 Zend/zend_virtual_cwd.c 		while (!IS_SLASH(resolved_path[start])) {</span>
+<span class='curline'><a href='../S/1744.html#L1285'>resolved_path</a>    1285 Zend/zend_virtual_cwd.c 			if (resolved_path[start] == 0) {</span>
+<span class='curline'><a href='../S/1744.html#L1288'>resolved_path</a>    1288 Zend/zend_virtual_cwd.c 			resolved_path[start] = toupper(resolved_path[start]);</span>
+<span class='curline'><a href='../S/1744.html#L1291'>resolved_path</a>    1291 Zend/zend_virtual_cwd.c 		resolved_path[start++] = DEFAULT_SLASH;</span>
+<span class='curline'><a href='../S/1744.html#L1292'>resolved_path</a>    1292 Zend/zend_virtual_cwd.c 		while (!IS_SLASH(resolved_path[start])) {</span>
+<span class='curline'><a href='../S/1744.html#L1293'>resolved_path</a>    1293 Zend/zend_virtual_cwd.c 			if (resolved_path[start] == 0) {</span>
+<span class='curline'><a href='../S/1744.html#L1296'>resolved_path</a>    1296 Zend/zend_virtual_cwd.c 			resolved_path[start] = toupper(resolved_path[start]);</span>
+<span class='curline'><a href='../S/1744.html#L1299'>resolved_path</a>    1299 Zend/zend_virtual_cwd.c 		resolved_path[start++] = DEFAULT_SLASH;</span>
+<span class='curline'><a href='../S/1744.html#L1300'>resolved_path</a>    1300 Zend/zend_virtual_cwd.c 	} else if (IS_ABSOLUTE_PATH(resolved_path, path_length)) {</span>
+<span class='curline'><a href='../S/1744.html#L1302'>resolved_path</a>    1302 Zend/zend_virtual_cwd.c 		resolved_path[0] = toupper(resolved_path[0]);</span>
+<span class='curline'><a href='../S/1744.html#L1303'>resolved_path</a>    1303 Zend/zend_virtual_cwd.c 		resolved_path[2] = DEFAULT_SLASH;</span>
+<span class='curline'><a href='../S/1744.html#L1307'>resolved_path</a>    1307 Zend/zend_virtual_cwd.c 	if (IS_ABSOLUTE_PATH(resolved_path, path_length)) {</span>
+<span class='curline'><a href='../S/1744.html#L1311'>resolved_path</a>    1311 Zend/zend_virtual_cwd.c 			if (resolved_path[start] == 0) return -1;</span>
+<span class='curline'><a href='../S/1744.html#L1315'>resolved_path</a>    1315 Zend/zend_virtual_cwd.c 		if (!IS_SLASH(resolved_path[start])) return -1;</span>
+<span class='curline'><a href='../S/1744.html#L1316'>resolved_path</a>    1316 Zend/zend_virtual_cwd.c 		resolved_path[start++] = DEFAULT_SLASH;</span>
+<span class='curline'><a href='../S/1744.html#L1320'>resolved_path</a>    1320 Zend/zend_virtual_cwd.c 	add_slash = (use_realpath != CWD_REALPATH) &amp;&amp; path_length &gt; 0 &amp;&amp; IS_SLASH(resolved_path[path_length-1]);</span>
+<span class='curline'><a href='../S/1744.html#L1322'>resolved_path</a>    1322 Zend/zend_virtual_cwd.c 	path_length = tsrm_realpath_r(resolved_path, start, path_length, &amp;ll, &amp;t, use_realpath, 0, NULL TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1744.html#L1330'>resolved_path</a>    1330 Zend/zend_virtual_cwd.c 		resolved_path[path_length++] = '.';</span>
+<span class='curline'><a href='../S/1744.html#L1332'>resolved_path</a>    1332 Zend/zend_virtual_cwd.c 	if (add_slash &amp;&amp; path_length &amp;&amp; !IS_SLASH(resolved_path[path_length-1])) {</span>
+<span class='curline'><a href='../S/1744.html#L1336'>resolved_path</a>    1336 Zend/zend_virtual_cwd.c 		resolved_path[path_length++] = DEFAULT_SLASH;</span>
+<span class='curline'><a href='../S/1744.html#L1338'>resolved_path</a>    1338 Zend/zend_virtual_cwd.c 	resolved_path[path_length] = 0;</span>
+<span class='curline'><a href='../S/1744.html#L1358'>resolved_path</a>    1358 Zend/zend_virtual_cwd.c 		memcpy(state-&gt;cwd, resolved_path, state-&gt;cwd_length+1);</span>
+<span class='curline'><a href='../S/1744.html#L1378'>resolved_path</a>    1378 Zend/zend_virtual_cwd.c 		memcpy(state-&gt;cwd, resolved_path, state-&gt;cwd_length+1);</span>
+<span class='curline'><a href='../S/1747.html#L3975'>resolved_path</a>    3975 Zend/zend_vm_def.h 					char *resolved_path;</span>
+<span class='curline'><a href='../S/1747.html#L3977'>resolved_path</a>    3977 Zend/zend_vm_def.h 					resolved_path = zend_resolve_path(Z_STRVAL_P(inc_filename), Z_STRLEN_P(inc_filename) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1747.html#L3978'>resolved_path</a>    3978 Zend/zend_vm_def.h 					if (resolved_path) {</span>
+<span class='curline'><a href='../S/1747.html#L3979'>resolved_path</a>    3979 Zend/zend_vm_def.h 						failure_retval = zend_hash_exists(&amp;EG(included_files), resolved_path, strlen(resolved_path)+1);</span>
+<span class='curline'><a href='../S/1747.html#L3981'>resolved_path</a>    3981 Zend/zend_vm_def.h 						resolved_path = Z_STRVAL_P(inc_filename);</span>
+<span class='curline'><a href='../S/1747.html#L3986'>resolved_path</a>    3986 Zend/zend_vm_def.h 					} else if (SUCCESS == zend_stream_open(resolved_path, &amp;file_handle TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/1747.html#L3989'>resolved_path</a>    3989 Zend/zend_vm_def.h 							file_handle.opened_path = estrdup(resolved_path);</span>
+<span class='curline'><a href='../S/1747.html#L4006'>resolved_path</a>    4006 Zend/zend_vm_def.h 					if (resolved_path != Z_STRVAL_P(inc_filename)) {</span>
+<span class='curline'><a href='../S/1747.html#L4007'>resolved_path</a>    4007 Zend/zend_vm_def.h 						efree(resolved_path);</span>
+<span class='curline'><a href='../S/1748.html#L2950'>resolved_path</a>    2950 Zend/zend_vm_execute.h 					char *resolved_path;</span>
+<span class='curline'><a href='../S/1748.html#L2952'>resolved_path</a>    2952 Zend/zend_vm_execute.h 					resolved_path = zend_resolve_path(Z_STRVAL_P(inc_filename), Z_STRLEN_P(inc_filename) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L2953'>resolved_path</a>    2953 Zend/zend_vm_execute.h 					if (resolved_path) {</span>
+<span class='curline'><a href='../S/1748.html#L2954'>resolved_path</a>    2954 Zend/zend_vm_execute.h 						failure_retval = zend_hash_exists(&amp;EG(included_files), resolved_path, strlen(resolved_path)+1);</span>
+<span class='curline'><a href='../S/1748.html#L2956'>resolved_path</a>    2956 Zend/zend_vm_execute.h 						resolved_path = Z_STRVAL_P(inc_filename);</span>
+<span class='curline'><a href='../S/1748.html#L2961'>resolved_path</a>    2961 Zend/zend_vm_execute.h 					} else if (SUCCESS == zend_stream_open(resolved_path, &amp;file_handle TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/1748.html#L2964'>resolved_path</a>    2964 Zend/zend_vm_execute.h 							file_handle.opened_path = estrdup(resolved_path);</span>
+<span class='curline'><a href='../S/1748.html#L2981'>resolved_path</a>    2981 Zend/zend_vm_execute.h 					if (resolved_path != Z_STRVAL_P(inc_filename)) {</span>
+<span class='curline'><a href='../S/1748.html#L2982'>resolved_path</a>    2982 Zend/zend_vm_execute.h 						efree(resolved_path);</span>
+<span class='curline'><a href='../S/1748.html#L8316'>resolved_path</a>    8316 Zend/zend_vm_execute.h 					char *resolved_path;</span>
+<span class='curline'><a href='../S/1748.html#L8318'>resolved_path</a>    8318 Zend/zend_vm_execute.h 					resolved_path = zend_resolve_path(Z_STRVAL_P(inc_filename), Z_STRLEN_P(inc_filename) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L8319'>resolved_path</a>    8319 Zend/zend_vm_execute.h 					if (resolved_path) {</span>
+<span class='curline'><a href='../S/1748.html#L8320'>resolved_path</a>    8320 Zend/zend_vm_execute.h 						failure_retval = zend_hash_exists(&amp;EG(included_files), resolved_path, strlen(resolved_path)+1);</span>
+<span class='curline'><a href='../S/1748.html#L8322'>resolved_path</a>    8322 Zend/zend_vm_execute.h 						resolved_path = Z_STRVAL_P(inc_filename);</span>
+<span class='curline'><a href='../S/1748.html#L8327'>resolved_path</a>    8327 Zend/zend_vm_execute.h 					} else if (SUCCESS == zend_stream_open(resolved_path, &amp;file_handle TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/1748.html#L8330'>resolved_path</a>    8330 Zend/zend_vm_execute.h 							file_handle.opened_path = estrdup(resolved_path);</span>
+<span class='curline'><a href='../S/1748.html#L8347'>resolved_path</a>    8347 Zend/zend_vm_execute.h 					if (resolved_path != Z_STRVAL_P(inc_filename)) {</span>
+<span class='curline'><a href='../S/1748.html#L8348'>resolved_path</a>    8348 Zend/zend_vm_execute.h 						efree(resolved_path);</span>
+<span class='curline'><a href='../S/1748.html#L13685'>resolved_path</a>    13685 Zend/zend_vm_execute.h 					char *resolved_path;</span>
+<span class='curline'><a href='../S/1748.html#L13687'>resolved_path</a>    13687 Zend/zend_vm_execute.h 					resolved_path = zend_resolve_path(Z_STRVAL_P(inc_filename), Z_STRLEN_P(inc_filename) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L13688'>resolved_path</a>    13688 Zend/zend_vm_execute.h 					if (resolved_path) {</span>
+<span class='curline'><a href='../S/1748.html#L13689'>resolved_path</a>    13689 Zend/zend_vm_execute.h 						failure_retval = zend_hash_exists(&amp;EG(included_files), resolved_path, strlen(resolved_path)+1);</span>
+<span class='curline'><a href='../S/1748.html#L13691'>resolved_path</a>    13691 Zend/zend_vm_execute.h 						resolved_path = Z_STRVAL_P(inc_filename);</span>
+<span class='curline'><a href='../S/1748.html#L13696'>resolved_path</a>    13696 Zend/zend_vm_execute.h 					} else if (SUCCESS == zend_stream_open(resolved_path, &amp;file_handle TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/1748.html#L13699'>resolved_path</a>    13699 Zend/zend_vm_execute.h 							file_handle.opened_path = estrdup(resolved_path);</span>
+<span class='curline'><a href='../S/1748.html#L13716'>resolved_path</a>    13716 Zend/zend_vm_execute.h 					if (resolved_path != Z_STRVAL_P(inc_filename)) {</span>
+<span class='curline'><a href='../S/1748.html#L13717'>resolved_path</a>    13717 Zend/zend_vm_execute.h 						efree(resolved_path);</span>
+<span class='curline'><a href='../S/1748.html#L31354'>resolved_path</a>    31354 Zend/zend_vm_execute.h 					char *resolved_path;</span>
+<span class='curline'><a href='../S/1748.html#L31356'>resolved_path</a>    31356 Zend/zend_vm_execute.h 					resolved_path = zend_resolve_path(Z_STRVAL_P(inc_filename), Z_STRLEN_P(inc_filename) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1748.html#L31357'>resolved_path</a>    31357 Zend/zend_vm_execute.h 					if (resolved_path) {</span>
+<span class='curline'><a href='../S/1748.html#L31358'>resolved_path</a>    31358 Zend/zend_vm_execute.h 						failure_retval = zend_hash_exists(&amp;EG(included_files), resolved_path, strlen(resolved_path)+1);</span>
+<span class='curline'><a href='../S/1748.html#L31360'>resolved_path</a>    31360 Zend/zend_vm_execute.h 						resolved_path = Z_STRVAL_P(inc_filename);</span>
+<span class='curline'><a href='../S/1748.html#L31365'>resolved_path</a>    31365 Zend/zend_vm_execute.h 					} else if (SUCCESS == zend_stream_open(resolved_path, &amp;file_handle TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/1748.html#L31368'>resolved_path</a>    31368 Zend/zend_vm_execute.h 							file_handle.opened_path = estrdup(resolved_path);</span>
+<span class='curline'><a href='../S/1748.html#L31385'>resolved_path</a>    31385 Zend/zend_vm_execute.h 					if (resolved_path != Z_STRVAL_P(inc_filename)) {</span>
+<span class='curline'><a href='../S/1748.html#L31386'>resolved_path</a>    31386 Zend/zend_vm_execute.h 						efree(resolved_path);</span>
+<span class='curline'><a href='../S/121.html#L1437'>resolved_path</a>    1437 ext/dom/document.c char *_dom_get_valid_file_path(char *source, char *resolved_path, int resolved_path_len  TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/121.html#L1478'>resolved_path</a>    1478 ext/dom/document.c 		if (!VCWD_REALPATH(source, resolved_path) &amp;&amp; !expand_filepath(source, resolved_path TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/121.html#L1482'>resolved_path</a>    1482 ext/dom/document.c 		file_dest = resolved_path;</span>
+<span class='curline'><a href='../S/121.html#L1501'>resolved_path</a>    1501 ext/dom/document.c 	char *directory=NULL, resolved_path[MAXPATHLEN];</span>
+<span class='curline'><a href='../S/121.html#L1526'>resolved_path</a>    1526 ext/dom/document.c 		file_dest = _dom_get_valid_file_path(source, resolved_path, MAXPATHLEN  TSRMLS_CC);</span>
+<span class='curline'><a href='../S/121.html#L1542'>resolved_path</a>    1542 ext/dom/document.c 		directory = VCWD_GETCWD(resolved_path, MAXPATHLEN);</span>
+<span class='curline'><a href='../S/121.html#L1544'>resolved_path</a>    1544 ext/dom/document.c 		directory = VCWD_GETWD(resolved_path);</span>
+<span class='curline'><a href='../S/121.html#L1550'>resolved_path</a>    1550 ext/dom/document.c 			resolved_path_len = strlen(resolved_path);</span>
+<span class='curline'><a href='../S/121.html#L1551'>resolved_path</a>    1551 ext/dom/document.c 			if (resolved_path[resolved_path_len - 1] != DEFAULT_SLASH) {</span>
+<span class='curline'><a href='../S/121.html#L1552'>resolved_path</a>    1552 ext/dom/document.c 				resolved_path[resolved_path_len] = DEFAULT_SLASH;</span>
+<span class='curline'><a href='../S/121.html#L1553'>resolved_path</a>    1553 ext/dom/document.c 				resolved_path[++resolved_path_len] = '\0';</span>
+<span class='curline'><a href='../S/121.html#L1555'>resolved_path</a>    1555 ext/dom/document.c 			ctxt-&gt;directory = (char *) xmlCanonicPath((const xmlChar *) resolved_path);</span>
+<span class='curline'><a href='../S/121.html#L1931'>resolved_path</a>    1931 ext/dom/document.c 	char resolved_path[MAXPATHLEN + 1];</span>
+<span class='curline'><a href='../S/121.html#L1950'>resolved_path</a>    1950 ext/dom/document.c 		valid_file = _dom_get_valid_file_path(source, resolved_path, MAXPATHLEN  TSRMLS_CC);</span>
+<span class='curline'><a href='../S/121.html#L2031'>resolved_path</a>    2031 ext/dom/document.c 	char resolved_path[MAXPATHLEN + 1];</span>
+<span class='curline'><a href='../S/121.html#L2050'>resolved_path</a>    2050 ext/dom/document.c 		valid_file = _dom_get_valid_file_path(source, resolved_path, MAXPATHLEN  TSRMLS_CC);</span>
+<span class='curline'><a href='../S/175.html#L303'>resolved_path</a>     303 ext/fileinfo/fileinfo.c 	char resolved_path[MAXPATHLEN];</span>
+<span class='curline'><a href='../S/175.html#L328'>resolved_path</a>     328 ext/fileinfo/fileinfo.c 		if (!expand_filepath_with_mode(file, resolved_path, NULL, 0, CWD_EXPAND TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/175.html#L332'>resolved_path</a>     332 ext/fileinfo/fileinfo.c 		file = resolved_path;</span>
+<span class='curline'><a href='../S/464.html#L296'>resolved_path</a>     296 ext/libxml/libxml.c 	char *resolved_path;</span>
+<span class='curline'><a href='../S/464.html#L307'>resolved_path</a>     307 ext/libxml/libxml.c 		resolved_path = xmlURIUnescapeString(filename, 0, NULL);</span>
+<span class='curline'><a href='../S/464.html#L316'>resolved_path</a>     316 ext/libxml/libxml.c 			if (strncasecmp(resolved_path, "file:/", pre_len) == 0</span>
+<span class='curline'><a href='../S/464.html#L317'>resolved_path</a>     317 ext/libxml/libxml.c 				&amp;&amp; '/' != resolved_path[pre_len]) {</span>
+<span class='curline'><a href='../S/464.html#L318'>resolved_path</a>     318 ext/libxml/libxml.c 				xmlChar *tmp = xmlStrdup(resolved_path + pre_len);</span>
+<span class='curline'><a href='../S/464.html#L319'>resolved_path</a>     319 ext/libxml/libxml.c 				xmlFree(resolved_path);</span>
+<span class='curline'><a href='../S/464.html#L320'>resolved_path</a>     320 ext/libxml/libxml.c 				resolved_path = tmp;</span>
+<span class='curline'><a href='../S/464.html#L325'>resolved_path</a>     325 ext/libxml/libxml.c 		resolved_path = (char *)filename;</span>
+<span class='curline'><a href='../S/464.html#L332'>resolved_path</a>     332 ext/libxml/libxml.c 	if (resolved_path == NULL) {</span>
+<span class='curline'><a href='../S/464.html#L342'>resolved_path</a>     342 ext/libxml/libxml.c 	wrapper = php_stream_locate_url_wrapper(resolved_path, &amp;path_to_open, 0 TSRMLS_CC);</span>
+<span class='curline'><a href='../S/464.html#L346'>resolved_path</a>     346 ext/libxml/libxml.c 				xmlFree(resolved_path);</span>
+<span class='curline'><a href='../S/464.html#L356'>resolved_path</a>     356 ext/libxml/libxml.c 		xmlFree(resolved_path);</span>
+<span class='curline'><a href='../S/863.html#L1782'>resolved_path</a>    1782 ext/opcache/ZendAccelerator.c 	char *resolved_path;</span>
+<span class='curline'><a href='../S/863.html#L1811'>resolved_path</a>    1811 ext/opcache/ZendAccelerator.c 		if ((resolved_path = accel_tsrm_realpath(trypath, len + 1 + filename_length TSRMLS_CC)) != NULL) {</span>
+<span class='curline'><a href='../S/863.html#L1812'>resolved_path</a>    1812 ext/opcache/ZendAccelerator.c 			return resolved_path;</span>
+<span class='curline'><a href='../S/863.html#L1852'>resolved_path</a>    1852 ext/opcache/ZendAccelerator.c 				char *resolved_path;</span>
+<span class='curline'><a href='../S/863.html#L1895'>resolved_path</a>    1895 ext/opcache/ZendAccelerator.c 				resolved_path = accel_php_resolve_path(filename, filename_len, ZCG(include_path) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/863.html#L1898'>resolved_path</a>    1898 ext/opcache/ZendAccelerator.c 				if (resolved_path &amp;&amp;</span>
+<span class='curline'><a href='../S/863.html#L1899'>resolved_path</a>    1899 ext/opcache/ZendAccelerator.c 				    (bucket = zend_accel_hash_find_entry(&amp;ZCSG(hash), resolved_path, strlen(resolved_path) + 1)) != NULL) {</span>
+<span class='curline'><a href='../S/863.html#L1903'>resolved_path</a>    1903 ext/opcache/ZendAccelerator.c 						handle-&gt;opened_path = resolved_path;</span>
+<span class='curline'><a href='../S/863.html#L1918'>resolved_path</a>    1918 ext/opcache/ZendAccelerator.c 				if (resolved_path) {</span>
+<span class='curline'><a href='../S/863.html#L1919'>resolved_path</a>    1919 ext/opcache/ZendAccelerator.c 					efree(resolved_path);</span>
+<span class='curline'><a href='../S/863.html#L2022'>resolved_path</a>    2022 ext/opcache/ZendAccelerator.c 			char *resolved_path;</span>
+<span class='curline'><a href='../S/863.html#L2057'>resolved_path</a>    2057 ext/opcache/ZendAccelerator.c 			resolved_path = accelerator_orig_zend_resolve_path(filename, filename_len TSRMLS_CC);</span>
+<span class='curline'><a href='../S/863.html#L2060'>resolved_path</a>    2060 ext/opcache/ZendAccelerator.c 			if (resolved_path &amp;&amp;</span>
+<span class='curline'><a href='../S/863.html#L2061'>resolved_path</a>    2061 ext/opcache/ZendAccelerator.c 			    (bucket = zend_accel_hash_find_entry(&amp;ZCSG(hash), resolved_path, strlen(resolved_path) + 1)) != NULL) {</span>
+<span class='curline'><a href='../S/863.html#L2075'>resolved_path</a>    2075 ext/opcache/ZendAccelerator.c 					return resolved_path;</span>
+<span class='curline'><a href='../S/863.html#L2080'>resolved_path</a>    2080 ext/opcache/ZendAccelerator.c 			return resolved_path;</span>
+<span class='curline'><a href='../S/1187.html#L1548'>resolved_path</a>    1548 ext/standard/streamsfuncs.c 	char *filename, *resolved_path;</span>
+<span class='curline'><a href='../S/1187.html#L1555'>resolved_path</a>    1555 ext/standard/streamsfuncs.c 	resolved_path = zend_resolve_path(filename, filename_len TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1187.html#L1557'>resolved_path</a>    1557 ext/standard/streamsfuncs.c 	if (resolved_path) {</span>
+<span class='curline'><a href='../S/1187.html#L1558'>resolved_path</a>    1558 ext/standard/streamsfuncs.c 		RETURN_STRING(resolved_path, 0);</span>
+<span class='curline'><a href='../S/1225.html#L230'>resolved_path</a>     230 ext/xmlreader/php_xmlreader.c char *_xmlreader_get_valid_file_path(char *source, char *resolved_path, int resolved_path_len  TSRMLS_DC) {</span>
+<span class='curline'><a href='../S/1225.html#L263'>resolved_path</a>     263 ext/xmlreader/php_xmlreader.c 		if (!VCWD_REALPATH(source, resolved_path) &amp;&amp; !expand_filepath(source, resolved_path TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/1225.html#L267'>resolved_path</a>     267 ext/xmlreader/php_xmlreader.c 		file_dest = resolved_path;</span>
+<span class='curline'><a href='../S/1225.html#L285'>resolved_path</a>     285 ext/xmlreader/php_xmlreader.c 	char resolved_path[MAXPATHLEN + 1];</span>
+<span class='curline'><a href='../S/1225.html#L289'>resolved_path</a>     289 ext/xmlreader/php_xmlreader.c 		valid_file = _xmlreader_get_valid_file_path(source, resolved_path, MAXPATHLEN  TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1225.html#L864'>resolved_path</a>     864 ext/xmlreader/php_xmlreader.c 	char resolved_path[MAXPATHLEN + 1];</span>
+<span class='curline'><a href='../S/1225.html#L886'>resolved_path</a>     886 ext/xmlreader/php_xmlreader.c 	valid_file = _xmlreader_get_valid_file_path(source, resolved_path, MAXPATHLEN  TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1225.html#L1047'>resolved_path</a>    1047 ext/xmlreader/php_xmlreader.c 	char *directory=NULL, resolved_path[MAXPATHLEN];</span>
+<span class='curline'><a href='../S/1225.html#L1074'>resolved_path</a>    1074 ext/xmlreader/php_xmlreader.c 		directory = VCWD_GETCWD(resolved_path, MAXPATHLEN);</span>
+<span class='curline'><a href='../S/1225.html#L1076'>resolved_path</a>    1076 ext/xmlreader/php_xmlreader.c 		directory = VCWD_GETWD(resolved_path);</span>
+<span class='curline'><a href='../S/1225.html#L1079'>resolved_path</a>    1079 ext/xmlreader/php_xmlreader.c 			resolved_path_len = strlen(resolved_path);</span>
+<span class='curline'><a href='../S/1225.html#L1080'>resolved_path</a>    1080 ext/xmlreader/php_xmlreader.c 			if (resolved_path[resolved_path_len - 1] != DEFAULT_SLASH) {</span>
+<span class='curline'><a href='../S/1225.html#L1081'>resolved_path</a>    1081 ext/xmlreader/php_xmlreader.c 				resolved_path[resolved_path_len] = DEFAULT_SLASH;</span>
+<span class='curline'><a href='../S/1225.html#L1082'>resolved_path</a>    1082 ext/xmlreader/php_xmlreader.c 				resolved_path[++resolved_path_len] = '\0';</span>
+<span class='curline'><a href='../S/1225.html#L1084'>resolved_path</a>    1084 ext/xmlreader/php_xmlreader.c 			uri = (char *) xmlCanonicPath((const xmlChar *) resolved_path);</span>
+<span class='curline'><a href='../S/1254.html#L602'>resolved_path</a>     602 ext/xmlwriter/php_xmlwriter.c static char *_xmlwriter_get_valid_file_path(char *source, char *resolved_path, int resolved_path_len  TSRMLS_DC) {</span>
+<span class='curline'><a href='../S/1254.html#L645'>resolved_path</a>     645 ext/xmlwriter/php_xmlwriter.c 		if (!VCWD_REALPATH(source, resolved_path) &amp;&amp; !expand_filepath(source, resolved_path TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/1254.html#L661'>resolved_path</a>     661 ext/xmlwriter/php_xmlwriter.c 		file_dest = resolved_path;</span>
+<span class='curline'><a href='../S/1254.html#L1749'>resolved_path</a>    1749 ext/xmlwriter/php_xmlwriter.c 	char resolved_path[MAXPATHLEN + 1];</span>
+<span class='curline'><a href='../S/1254.html#L1778'>resolved_path</a>    1778 ext/xmlwriter/php_xmlwriter.c 	valid_file = _xmlwriter_get_valid_file_path(source, resolved_path, MAXPATHLEN TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1351.html#L327'>resolved_path</a>     327 ext/zip/php_zip.c 	char resolved_path[MAXPATHLEN];</span>
+<span class='curline'><a href='../S/1351.html#L335'>resolved_path</a>     335 ext/zip/php_zip.c 	if (!expand_filepath(filename, resolved_path TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/1351.html#L339'>resolved_path</a>     339 ext/zip/php_zip.c 	php_stat(resolved_path, strlen(resolved_path), FS_EXISTS, &amp;exists_flag TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1351.html#L344'>resolved_path</a>     344 ext/zip/php_zip.c 	zs = zip_source_file(za, resolved_path, offset_start, offset_len);</span>
+<span class='curline'><a href='../S/1351.html#L1244'>resolved_path</a>    1244 ext/zip/php_zip.c 	char resolved_path[MAXPATHLEN + 1];</span>
+<span class='curline'><a href='../S/1351.html#L1261'>resolved_path</a>    1261 ext/zip/php_zip.c 	if(!expand_filepath(filename, resolved_path TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/1351.html#L1267'>resolved_path</a>    1267 ext/zip/php_zip.c 	rsrc_int-&gt;za = zip_open(resolved_path, 0, &amp;err);</span>
+<span class='curline'><a href='../S/1351.html#L1526'>resolved_path</a>    1526 ext/zip/php_zip.c 	char *resolved_path;</span>
+<span class='curline'><a href='../S/1351.html#L1549'>resolved_path</a>    1549 ext/zip/php_zip.c 	if (!(resolved_path = expand_filepath(filename, NULL TSRMLS_CC))) {</span>
+<span class='curline'><a href='../S/1351.html#L1557'>resolved_path</a>    1557 ext/zip/php_zip.c 			efree(resolved_path);</span>
+<span class='curline'><a href='../S/1351.html#L1567'>resolved_path</a>    1567 ext/zip/php_zip.c 	intern = zip_open(resolved_path, flags, &amp;err);</span>
+<span class='curline'><a href='../S/1351.html#L1569'>resolved_path</a>    1569 ext/zip/php_zip.c 		efree(resolved_path);</span>
+<span class='curline'><a href='../S/1351.html#L1572'>resolved_path</a>    1572 ext/zip/php_zip.c 	ze_obj-&gt;filename = resolved_path;</span>
+<span class='curline'><a href='../S/1351.html#L1573'>resolved_path</a>    1573 ext/zip/php_zip.c 	ze_obj-&gt;filename_len = strlen(resolved_path);</span>
+<span class='curline'><a href='../S/1359.html#L363'>resolved_path</a>     363 main/fopen_wrappers.c 	char *resolved_path = NULL;</span>
+<span class='curline'><a href='../S/1359.html#L431'>resolved_path</a>     431 main/fopen_wrappers.c 		resolved_path = zend_resolve_path(filename, strlen(filename) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1359.html#L434'>resolved_path</a>     434 main/fopen_wrappers.c 	if (!resolved_path) {</span>
+<span class='curline'><a href='../S/1359.html#L446'>resolved_path</a>     446 main/fopen_wrappers.c 	efree(resolved_path);</span>
+<span class='curline'><a href='../S/1359.html#L475'>resolved_path</a>     475 main/fopen_wrappers.c 	char resolved_path[MAXPATHLEN];</span>
+<span class='curline'><a href='../S/1359.html#L490'>resolved_path</a>     490 main/fopen_wrappers.c 			if (tsrm_realpath(actual_path, resolved_path TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/1359.html#L491'>resolved_path</a>     491 main/fopen_wrappers.c 				return estrdup(resolved_path);</span>
+<span class='curline'><a href='../S/1359.html#L503'>resolved_path</a>     503 main/fopen_wrappers.c 		if (tsrm_realpath(filename, resolved_path TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/1359.html#L504'>resolved_path</a>     504 main/fopen_wrappers.c 			return estrdup(resolved_path);</span>
+<span class='curline'><a href='../S/1359.html#L560'>resolved_path</a>     560 main/fopen_wrappers.c 		if (tsrm_realpath(actual_path, resolved_path TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/1359.html#L561'>resolved_path</a>     561 main/fopen_wrappers.c 			return estrdup(resolved_path);</span>
+<span class='curline'><a href='../S/1359.html#L597'>resolved_path</a>     597 main/fopen_wrappers.c 			if (tsrm_realpath(actual_path, resolved_path TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/1359.html#L598'>resolved_path</a>     598 main/fopen_wrappers.c 				return estrdup(resolved_path);</span>
+<span class='curline'><a href='../S/1417.html#L2026'>resolved_path</a>    2026 main/streams/streams.c 	char *resolved_path = NULL;</span>
+<span class='curline'><a href='../S/1417.html#L2039'>resolved_path</a>    2039 main/streams/streams.c 		resolved_path = zend_resolve_path(path, strlen(path) TSRMLS_CC);</span>
+<span class='curline'><a href='../S/1417.html#L2040'>resolved_path</a>    2040 main/streams/streams.c 		if (resolved_path) {</span>
+<span class='curline'><a href='../S/1417.html#L2041'>resolved_path</a>    2041 main/streams/streams.c 			path = resolved_path;</span>
+<span class='curline'><a href='../S/1417.html#L2053'>resolved_path</a>    2053 main/streams/streams.c 		if (resolved_path) {</span>
+<span class='curline'><a href='../S/1417.html#L2054'>resolved_path</a>    2054 main/streams/streams.c 			efree(resolved_path);</span>
+<span class='curline'><a href='../S/1417.html#L2084'>resolved_path</a>    2084 main/streams/streams.c 		if (opened_path &amp;&amp; !*opened_path &amp;&amp; resolved_path) {</span>
+<span class='curline'><a href='../S/1417.html#L2085'>resolved_path</a>    2085 main/streams/streams.c 			*opened_path = resolved_path;</span>
+<span class='curline'><a href='../S/1417.html#L2086'>resolved_path</a>    2086 main/streams/streams.c 			resolved_path = NULL;</span>
+<span class='curline'><a href='../S/1417.html#L2106'>resolved_path</a>    2106 main/streams/streams.c 				if (resolved_path) {</span>
+<span class='curline'><a href='../S/1417.html#L2107'>resolved_path</a>    2107 main/streams/streams.c 					efree(resolved_path);</span>
+<span class='curline'><a href='../S/1417.html#L2115'>resolved_path</a>    2115 main/streams/streams.c 				if (resolved_path) {</span>
+<span class='curline'><a href='../S/1417.html#L2116'>resolved_path</a>    2116 main/streams/streams.c 					efree(resolved_path);</span>
+<span class='curline'><a href='../S/1417.html#L2156'>resolved_path</a>    2156 main/streams/streams.c 	if (resolved_path) {</span>
+<span class='curline'><a href='../S/1417.html#L2157'>resolved_path</a>    2157 main/streams/streams.c 		efree(resolved_path);</span>
+</pre>
+</body>
+</html>

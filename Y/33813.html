@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>proto</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/1655.html#L3234'>proto</a>            3234 Zend/zend_compile.c static zend_bool zend_do_perform_implementation_check(const zend_function *fe, const zend_function *proto TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1655.html#L3242'>proto</a>            3242 Zend/zend_compile.c 	if (!proto || (!proto-&gt;common.arg_info &amp;&amp; proto-&gt;common.type != ZEND_USER_FUNCTION)) {</span>
+<span class='curline'><a href='../S/1655.html#L3250'>proto</a>            3250 Zend/zend_compile.c 		&amp;&amp; ((proto-&gt;common.scope-&gt;ce_flags &amp; ZEND_ACC_INTERFACE) == 0</span>
+<span class='curline'><a href='../S/1655.html#L3251'>proto</a>            3251 Zend/zend_compile.c 			&amp;&amp; (proto-&gt;common.fn_flags &amp; ZEND_ACC_ABSTRACT) == 0)) {</span>
+<span class='curline'><a href='../S/1655.html#L3256'>proto</a>            3256 Zend/zend_compile.c     if ((fe-&gt;common.fn_flags &amp; ZEND_ACC_PRIVATE) &amp;&amp; (proto-&gt;common.fn_flags &amp; ZEND_ACC_PRIVATE)) {</span>
+<span class='curline'><a href='../S/1655.html#L3261'>proto</a>            3261 Zend/zend_compile.c 	if (proto-&gt;common.required_num_args &lt; fe-&gt;common.required_num_args</span>
+<span class='curline'><a href='../S/1655.html#L3262'>proto</a>            3262 Zend/zend_compile.c 		|| proto-&gt;common.num_args &gt; fe-&gt;common.num_args) {</span>
+<span class='curline'><a href='../S/1655.html#L3267'>proto</a>            3267 Zend/zend_compile.c 	if ((proto-&gt;common.fn_flags &amp; ZEND_ACC_RETURN_REFERENCE)</span>
+<span class='curline'><a href='../S/1655.html#L3272'>proto</a>            3272 Zend/zend_compile.c 	if ((proto-&gt;common.fn_flags &amp; ZEND_ACC_VARIADIC)</span>
+<span class='curline'><a href='../S/1655.html#L3281'>proto</a>            3281 Zend/zend_compile.c 	num_args = proto-&gt;common.num_args;</span>
+<span class='curline'><a href='../S/1655.html#L3282'>proto</a>            3282 Zend/zend_compile.c 	if ((proto-&gt;common.fn_flags &amp; ZEND_ACC_VARIADIC)</span>
+<span class='curline'><a href='../S/1655.html#L3283'>proto</a>            3283 Zend/zend_compile.c 		&amp;&amp; fe-&gt;common.num_args &gt; proto-&gt;common.num_args) {</span>
+<span class='curline'><a href='../S/1655.html#L3291'>proto</a>            3291 Zend/zend_compile.c 		if (i &lt; proto-&gt;common.num_args) {</span>
+<span class='curline'><a href='../S/1655.html#L3292'>proto</a>            3292 Zend/zend_compile.c 			proto_arg_info = &amp;proto-&gt;common.arg_info[i];</span>
+<span class='curline'><a href='../S/1655.html#L3294'>proto</a>            3294 Zend/zend_compile.c 			proto_arg_info = &amp;proto-&gt;common.arg_info[proto-&gt;common.num_args-1];</span>
+<span class='curline'><a href='../S/1655.html#L3306'>proto</a>            3306 Zend/zend_compile.c 			if (!strcasecmp(fe_arg_info-&gt;class_name, "parent") &amp;&amp; proto-&gt;common.scope) {</span>
+<span class='curline'><a href='../S/1655.html#L3307'>proto</a>            3307 Zend/zend_compile.c 				fe_class_name = proto-&gt;common.scope-&gt;name;</span>
+<span class='curline'><a href='../S/1655.html#L3308'>proto</a>            3308 Zend/zend_compile.c 				fe_class_name_len = proto-&gt;common.scope-&gt;name_length;</span>
+<span class='curline'><a href='../S/1655.html#L3317'>proto</a>            3317 Zend/zend_compile.c 			if (!strcasecmp(proto_arg_info-&gt;class_name, "parent") &amp;&amp; proto-&gt;common.scope &amp;&amp; proto-&gt;common.scope-&gt;parent) {</span>
+<span class='curline'><a href='../S/1655.html#L3318'>proto</a>            3318 Zend/zend_compile.c 				proto_class_name = proto-&gt;common.scope-&gt;parent-&gt;name;</span>
+<span class='curline'><a href='../S/1655.html#L3319'>proto</a>            3319 Zend/zend_compile.c 				proto_class_name_len = proto-&gt;common.scope-&gt;parent-&gt;name_length;</span>
+<span class='curline'><a href='../S/1655.html#L3320'>proto</a>            3320 Zend/zend_compile.c 			} else if (!strcasecmp(proto_arg_info-&gt;class_name, "self") &amp;&amp; proto-&gt;common.scope) {</span>
+<span class='curline'><a href='../S/1655.html#L3321'>proto</a>            3321 Zend/zend_compile.c 				proto_class_name = proto-&gt;common.scope-&gt;name;</span>
+<span class='curline'><a href='../S/1655.html#L3322'>proto</a>            3322 Zend/zend_compile.c 				proto_class_name_len = proto-&gt;common.scope-&gt;name_length;</span>
+<span class='curline'><a href='../S/867.html#L1594'>proto</a>            1594 ext/openssl/xp_ssl.c 	long proto = SSL_version(ssl_handle);</span>
+<span class='curline'><a href='../S/867.html#L1597'>proto</a>            1597 ext/openssl/xp_ssl.c 	switch (proto) {</span>
+<span class='curline'><a href='../S/867.html#L2377'>proto</a>            2377 ext/openssl/xp_ssl.c php_stream *php_openssl_ssl_socket_factory(const char *proto, size_t protolen,</span>
+<span class='curline'><a href='../S/867.html#L2412'>proto</a>            2412 ext/openssl/xp_ssl.c 	if (strncmp(proto, "ssl", protolen) == 0) {</span>
+<span class='curline'><a href='../S/867.html#L2415'>proto</a>            2415 ext/openssl/xp_ssl.c 	} else if (strncmp(proto, "sslv2", protolen) == 0) {</span>
+<span class='curline'><a href='../S/867.html#L2423'>proto</a>            2423 ext/openssl/xp_ssl.c 	} else if (strncmp(proto, "sslv3", protolen) == 0) {</span>
+<span class='curline'><a href='../S/867.html#L2431'>proto</a>            2431 ext/openssl/xp_ssl.c 	} else if (strncmp(proto, "tls", protolen) == 0) {</span>
+<span class='curline'><a href='../S/867.html#L2434'>proto</a>            2434 ext/openssl/xp_ssl.c 	} else if (strncmp(proto, "tlsv1.0", protolen) == 0) {</span>
+<span class='curline'><a href='../S/867.html#L2437'>proto</a>            2437 ext/openssl/xp_ssl.c 	} else if (strncmp(proto, "tlsv1.1", protolen) == 0) {</span>
+<span class='curline'><a href='../S/867.html#L2445'>proto</a>            2445 ext/openssl/xp_ssl.c 	} else if (strncmp(proto, "tlsv1.2", protolen) == 0) {</span>
+<span class='curline'><a href='../S/1077.html#L808'>proto</a>             808 ext/standard/basic_functions.c 	ZEND_ARG_INFO(0, proto)</span>
+<span class='curline'><a href='../S/1077.html#L5591'>proto</a>            5591 ext/standard/basic_functions.c 	char *name, *proto;</span>
+<span class='curline'><a href='../S/1077.html#L5595'>proto</a>            5595 ext/standard/basic_functions.c 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ss", &amp;name, &amp;name_len, &amp;proto, &amp;proto_len) == FAILURE) {</span>
+<span class='curline'><a href='../S/1077.html#L5608'>proto</a>            5608 ext/standard/basic_functions.c 	serv = getservbyname(name, proto);</span>
+<span class='curline'><a href='../S/1077.html#L5624'>proto</a>            5624 ext/standard/basic_functions.c 	char *proto;</span>
+<span class='curline'><a href='../S/1077.html#L5629'>proto</a>            5629 ext/standard/basic_functions.c 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ls", &amp;port, &amp;proto, &amp;proto_len) == FAILURE) {</span>
+<span class='curline'><a href='../S/1077.html#L5633'>proto</a>            5633 ext/standard/basic_functions.c 	serv = getservbyport(htons((unsigned short) port), proto);</span>
+<span class='curline'><a href='../S/1077.html#L5673'>proto</a>            5673 ext/standard/basic_functions.c 	long proto;</span>
+<span class='curline'><a href='../S/1077.html#L5676'>proto</a>            5676 ext/standard/basic_functions.c 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "l", &amp;proto) == FAILURE) {</span>
+<span class='curline'><a href='../S/1077.html#L5680'>proto</a>            5680 ext/standard/basic_functions.c 	ent = getprotobynumber(proto);</span>
+<span class='curline'><a href='../S/1413.html#L29'>proto</a>              29 main/streams/php_stream_transport.h typedef php_stream *(php_stream_transport_factory_func)(const char *proto, size_t protolen,</span>
+<span class='curline'><a href='../S/1420.html#L788'>proto</a>             788 main/streams/xp_socket.c PHPAPI php_stream *php_stream_generic_socket_factory(const char *proto, size_t protolen,</span>
+<span class='curline'><a href='../S/1420.html#L799'>proto</a>             799 main/streams/xp_socket.c 	if (strncmp(proto, "tcp", protolen) == 0) {</span>
+<span class='curline'><a href='../S/1420.html#L801'>proto</a>             801 main/streams/xp_socket.c 	} else if (strncmp(proto, "udp", protolen) == 0) {</span>
+<span class='curline'><a href='../S/1420.html#L805'>proto</a>             805 main/streams/xp_socket.c 	else if (strncmp(proto, "unix", protolen) == 0) {</span>
+<span class='curline'><a href='../S/1420.html#L807'>proto</a>             807 main/streams/xp_socket.c 	} else if (strncmp(proto, "udg", protolen) == 0) {</span>
+</pre>
+</body>
+</html>

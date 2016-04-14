@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>tick_fe</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/1077.html#L4989'>tick_fe</a>          4989 ext/standard/basic_functions.c static void user_tick_function_call(user_tick_function_entry *tick_fe TSRMLS_DC) /* {{{ */</span>
+<span class='curline'><a href='../S/1077.html#L4992'>tick_fe</a>          4992 ext/standard/basic_functions.c 	zval *function = tick_fe-&gt;arguments[0];</span>
+<span class='curline'><a href='../S/1077.html#L4995'>tick_fe</a>          4995 ext/standard/basic_functions.c 	if (! tick_fe-&gt;calling) {</span>
+<span class='curline'><a href='../S/1077.html#L4996'>tick_fe</a>          4996 ext/standard/basic_functions.c 		tick_fe-&gt;calling = 1;</span>
+<span class='curline'><a href='../S/1077.html#L5001'>tick_fe</a>          5001 ext/standard/basic_functions.c 								tick_fe-&gt;arg_count - 1,</span>
+<span class='curline'><a href='../S/1077.html#L5002'>tick_fe</a>          5002 ext/standard/basic_functions.c 								tick_fe-&gt;arguments + 1</span>
+<span class='curline'><a href='../S/1077.html#L5022'>tick_fe</a>          5022 ext/standard/basic_functions.c 		tick_fe-&gt;calling = 0;</span>
+<span class='curline'><a href='../S/1077.html#L5695'>tick_fe</a>          5695 ext/standard/basic_functions.c 	user_tick_function_entry tick_fe;</span>
+<span class='curline'><a href='../S/1077.html#L5699'>tick_fe</a>          5699 ext/standard/basic_functions.c 	tick_fe.calling = 0;</span>
+<span class='curline'><a href='../S/1077.html#L5700'>tick_fe</a>          5700 ext/standard/basic_functions.c 	tick_fe.arg_count = ZEND_NUM_ARGS();</span>
+<span class='curline'><a href='../S/1077.html#L5702'>tick_fe</a>          5702 ext/standard/basic_functions.c 	if (tick_fe.arg_count &lt; 1) {</span>
+<span class='curline'><a href='../S/1077.html#L5706'>tick_fe</a>          5706 ext/standard/basic_functions.c 	tick_fe.arguments = (zval **) safe_emalloc(sizeof(zval *), tick_fe.arg_count, 0);</span>
+<span class='curline'><a href='../S/1077.html#L5708'>tick_fe</a>          5708 ext/standard/basic_functions.c 	if (zend_get_parameters_array(ht, tick_fe.arg_count, tick_fe.arguments) == FAILURE) {</span>
+<span class='curline'><a href='../S/1077.html#L5709'>tick_fe</a>          5709 ext/standard/basic_functions.c 		efree(tick_fe.arguments);</span>
+<span class='curline'><a href='../S/1077.html#L5713'>tick_fe</a>          5713 ext/standard/basic_functions.c 	if (!zend_is_callable(tick_fe.arguments[0], 0, &amp;function_name TSRMLS_CC)) {</span>
+<span class='curline'><a href='../S/1077.html#L5714'>tick_fe</a>          5714 ext/standard/basic_functions.c 		efree(tick_fe.arguments);</span>
+<span class='curline'><a href='../S/1077.html#L5722'>tick_fe</a>          5722 ext/standard/basic_functions.c 	if (Z_TYPE_P(tick_fe.arguments[0]) != IS_ARRAY &amp;&amp; Z_TYPE_P(tick_fe.arguments[0]) != IS_OBJECT) {</span>
+<span class='curline'><a href='../S/1077.html#L5723'>tick_fe</a>          5723 ext/standard/basic_functions.c 		convert_to_string_ex(&amp;tick_fe.arguments[0]);</span>
+<span class='curline'><a href='../S/1077.html#L5734'>tick_fe</a>          5734 ext/standard/basic_functions.c 	for (i = 0; i &lt; tick_fe.arg_count; i++) {</span>
+<span class='curline'><a href='../S/1077.html#L5735'>tick_fe</a>          5735 ext/standard/basic_functions.c 		Z_ADDREF_P(tick_fe.arguments[i]);</span>
+<span class='curline'><a href='../S/1077.html#L5738'>tick_fe</a>          5738 ext/standard/basic_functions.c 	zend_llist_add_element(BG(user_tick_functions), &amp;tick_fe);</span>
+<span class='curline'><a href='../S/1077.html#L5749'>tick_fe</a>          5749 ext/standard/basic_functions.c 	user_tick_function_entry tick_fe;</span>
+<span class='curline'><a href='../S/1077.html#L5763'>tick_fe</a>          5763 ext/standard/basic_functions.c 	tick_fe.arguments = (zval **) emalloc(sizeof(zval *));</span>
+<span class='curline'><a href='../S/1077.html#L5764'>tick_fe</a>          5764 ext/standard/basic_functions.c 	tick_fe.arguments[0] = function;</span>
+<span class='curline'><a href='../S/1077.html#L5765'>tick_fe</a>          5765 ext/standard/basic_functions.c 	tick_fe.arg_count = 1;</span>
+<span class='curline'><a href='../S/1077.html#L5766'>tick_fe</a>          5766 ext/standard/basic_functions.c 	zend_llist_del_element(BG(user_tick_functions), &amp;tick_fe, (int (*)(void *, void *)) user_tick_function_compare);</span>
+<span class='curline'><a href='../S/1077.html#L5767'>tick_fe</a>          5767 ext/standard/basic_functions.c 	efree(tick_fe.arguments);</span>
+</pre>
+</body>
+</html>

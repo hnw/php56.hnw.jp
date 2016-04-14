@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>pool</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.5.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/785.html#L34'>pool</a>               34 ext/mysqlnd/mysqlnd_block_alloc.c 	MYSQLND_MEMORY_POOL * pool = chunk-&gt;pool;</span>
+<span class='curline'><a href='../S/785.html#L38'>pool</a>               38 ext/mysqlnd/mysqlnd_block_alloc.c 		if (chunk-&gt;ptr == (pool-&gt;arena + (pool-&gt;arena_size - pool-&gt;free_size - chunk-&gt;size))) {</span>
+<span class='curline'><a href='../S/785.html#L43'>pool</a>               43 ext/mysqlnd/mysqlnd_block_alloc.c 			pool-&gt;free_size += chunk-&gt;size;</span>
+<span class='curline'><a href='../S/785.html#L45'>pool</a>               45 ext/mysqlnd/mysqlnd_block_alloc.c 		pool-&gt;refcount--;</span>
+<span class='curline'><a href='../S/785.html#L61'>pool</a>               61 ext/mysqlnd/mysqlnd_block_alloc.c 		MYSQLND_MEMORY_POOL * pool = chunk-&gt;pool;</span>
+<span class='curline'><a href='../S/785.html#L63'>pool</a>               63 ext/mysqlnd/mysqlnd_block_alloc.c 		if (chunk-&gt;ptr == (pool-&gt;arena + (pool-&gt;arena_size - pool-&gt;free_size - chunk-&gt;size))) {</span>
+<span class='curline'><a href='../S/785.html#L68'>pool</a>               68 ext/mysqlnd/mysqlnd_block_alloc.c 			if ((chunk-&gt;size + pool-&gt;free_size) &lt; size) {</span>
+<span class='curline'><a href='../S/785.html#L76'>pool</a>               76 ext/mysqlnd/mysqlnd_block_alloc.c 				pool-&gt;free_size += chunk-&gt;size;</span>
+<span class='curline'><a href='../S/785.html#L78'>pool</a>               78 ext/mysqlnd/mysqlnd_block_alloc.c 				chunk-&gt;pool = NULL; /* now we have no pool memory */</span>
+<span class='curline'><a href='../S/785.html#L79'>pool</a>               79 ext/mysqlnd/mysqlnd_block_alloc.c 				pool-&gt;refcount--;</span>
+<span class='curline'><a href='../S/785.html#L82'>pool</a>               82 ext/mysqlnd/mysqlnd_block_alloc.c 				pool-&gt;free_size += (chunk-&gt;size - size);</span>
+<span class='curline'><a href='../S/785.html#L97'>pool</a>               97 ext/mysqlnd/mysqlnd_block_alloc.c 				chunk-&gt;pool = NULL; /* now we have non-pool memory */</span>
+<span class='curline'><a href='../S/785.html#L98'>pool</a>               98 ext/mysqlnd/mysqlnd_block_alloc.c 				pool-&gt;refcount--;</span>
+<span class='curline'><a href='../S/785.html#L115'>pool</a>              115 ext/mysqlnd/mysqlnd_block_alloc.c MYSQLND_MEMORY_POOL_CHUNK * mysqlnd_mempool_get_chunk(MYSQLND_MEMORY_POOL * pool, unsigned int size TSRMLS_DC)</span>
+<span class='curline'><a href='../S/785.html#L130'>pool</a>              130 ext/mysqlnd/mysqlnd_block_alloc.c 		chunk-&gt;pool = pool;</span>
+<span class='curline'><a href='../S/785.html#L131'>pool</a>              131 ext/mysqlnd/mysqlnd_block_alloc.c 		if (size &gt; pool-&gt;free_size) {</span>
+<span class='curline'><a href='../S/785.html#L140'>pool</a>              140 ext/mysqlnd/mysqlnd_block_alloc.c 			++pool-&gt;refcount;</span>
+<span class='curline'><a href='../S/785.html#L141'>pool</a>              141 ext/mysqlnd/mysqlnd_block_alloc.c 			chunk-&gt;ptr = pool-&gt;arena + (pool-&gt;arena_size - pool-&gt;free_size);</span>
+<span class='curline'><a href='../S/785.html#L143'>pool</a>              143 ext/mysqlnd/mysqlnd_block_alloc.c 			pool-&gt;free_size -= size;</span>
+<span class='curline'><a href='../S/785.html#L176'>pool</a>              176 ext/mysqlnd/mysqlnd_block_alloc.c mysqlnd_mempool_destroy(MYSQLND_MEMORY_POOL * pool TSRMLS_DC)</span>
+<span class='curline'><a href='../S/785.html#L180'>pool</a>              180 ext/mysqlnd/mysqlnd_block_alloc.c 	mnd_free(pool-&gt;arena);</span>
+<span class='curline'><a href='../S/785.html#L181'>pool</a>              181 ext/mysqlnd/mysqlnd_block_alloc.c 	mnd_free(pool);</span>
+<span class='curline'><a href='../S/786.html#L27'>pool</a>               27 ext/mysqlnd/mysqlnd_block_alloc.h PHPAPI void 					mysqlnd_mempool_destroy(MYSQLND_MEMORY_POOL * pool TSRMLS_DC);</span>
+<span class='curline'><a href='../S/813.html#L51'>pool</a>               51 ext/mysqlnd/mysqlnd_structs.h 	MYSQLND_MEMORY_POOL_CHUNK*	(*get_chunk)(MYSQLND_MEMORY_POOL * pool, unsigned int size TSRMLS_DC);</span>
+<span class='curline'><a href='../S/813.html#L57'>pool</a>               57 ext/mysqlnd/mysqlnd_structs.h 	MYSQLND_MEMORY_POOL	*pool;</span>
+<span class='curline'><a href='../S/1429.html#L44'>pool</a>               44 sapi/apache/mod_php5.c static void php_init_handler(server_rec *s, pool *p);</span>
+<span class='curline'><a href='../S/1429.html#L48'>pool</a>               48 sapi/apache/mod_php5.c static void php_child_exit_handler(server_rec *s, pool *p);</span>
+<span class='curline'><a href='../S/1429.html#L198'>pool</a>              198 sapi/apache/mod_php5.c 				r-&gt;content_type = pstrdup(r-&gt;pool, header_content);</span>
+<span class='curline'><a href='../S/1429.html#L237'>pool</a>              237 sapi/apache/mod_php5.c 			r-&gt;status_line = ap_pstrndup(r-&gt;pool, sline + 9, MAX_STATUS_LENGTH);</span>
+<span class='curline'><a href='../S/1429.html#L239'>pool</a>              239 sapi/apache/mod_php5.c 			r-&gt;status_line = ap_pstrndup(r-&gt;pool, sline + 9, sline_len - 9);</span>
+<span class='curline'><a href='../S/1429.html#L358'>pool</a>              358 sapi/apache/mod_php5.c 	register_cleanup(r-&gt;pool, NULL, php_apache_request_shutdown, php_request_shutdown_for_exec);</span>
+<span class='curline'><a href='../S/1429.html#L545'>pool</a>              545 sapi/apache/mod_php5.c 		char *p = getword(r-&gt;pool, &amp;authorization, ' ');</span>
+<span class='curline'><a href='../S/1429.html#L547'>pool</a>              547 sapi/apache/mod_php5.c 			tmp = uudecode(r-&gt;pool, authorization);</span>
+<span class='curline'><a href='../S/1429.html#L548'>pool</a>              548 sapi/apache/mod_php5.c 			tmp_user = getword_nulls_nc(r-&gt;pool, &amp;tmp, ':');</span>
+<span class='curline'><a href='../S/1429.html#L550'>pool</a>              550 sapi/apache/mod_php5.c 				r-&gt;connection-&gt;user = pstrdup(r-&gt;connection-&gt;pool, tmp_user);</span>
+<span class='curline'><a href='../S/1429.html#L585'>pool</a>              585 sapi/apache/mod_php5.c 		mimetype = pstrdup(r-&gt;pool, tmpmimetype);</span>
+<span class='curline'><a href='../S/1429.html#L697'>pool</a>              697 sapi/apache/mod_php5.c 		ap_psprintf(r-&gt;pool, "%lu", zend_memory_peak_usage(1 TSRMLS_CC)));</span>
+<span class='curline'><a href='../S/1429.html#L766'>pool</a>              766 sapi/apache/mod_php5.c static void *php_create_dir(pool *p, char *dummy)</span>
+<span class='curline'><a href='../S/1429.html#L780'>pool</a>              780 sapi/apache/mod_php5.c static void *php_merge_dir(pool *p, void *basev, void *addv)</span>
+<span class='curline'><a href='../S/1429.html#L887'>pool</a>              887 sapi/apache/mod_php5.c 	apache_sapi_module.php_ini_path_override = ap_server_root_relative(cmd-&gt;pool, arg);</span>
+<span class='curline'><a href='../S/1429.html#L939'>pool</a>              939 sapi/apache/mod_php5.c static void php_child_exit_handler(server_rec *s, pool *p)</span>
+<span class='curline'><a href='../S/1429.html#L953'>pool</a>              953 sapi/apache/mod_php5.c static void php_init_handler(server_rec *s, pool *p)</span>
+<span class='curline'><a href='../S/1431.html#L452'>pool</a>              452 sapi/apache/php_apache.c 	ap_table_setn(r-&gt;subprocess_env, ap_pstrndup(r-&gt;pool, var, var_len), ap_pstrndup(r-&gt;pool, val, val_len));</span>
+<span class='curline'><a href='../S/1434.html#L68'>pool</a>               68 sapi/apache2filter/apache_config.c 	e.value = apr_pstrdup(cmd-&gt;pool, value);</span>
+<span class='curline'><a href='../S/1434.html#L116'>pool</a>              116 sapi/apache2filter/apache_config.c 	apache2_php_ini_path_override = ap_server_root_relative(cmd-&gt;pool, arg);</span>
+<span class='curline'><a href='../S/1437.html#L81'>pool</a>               81 sapi/apache2filter/sapi_apache2.c 	bb = apr_brigade_create(ctx-&gt;r-&gt;pool, ba);</span>
+<span class='curline'><a href='../S/1437.html#L127'>pool</a>              127 sapi/apache2filter/sapi_apache2.c 				ctx-&gt;r-&gt;content_type = apr_pstrdup(ctx-&gt;r-&gt;pool, val);</span>
+<span class='curline'><a href='../S/1437.html#L280'>pool</a>              280 sapi/apache2filter/sapi_apache2.c 	bb = apr_brigade_create(ctx-&gt;r-&gt;pool, ba);</span>
+<span class='curline'><a href='../S/1437.html#L385'>pool</a>              385 sapi/apache2filter/sapi_apache2.c 		ctx-&gt;post_data = apr_brigade_create(f-&gt;r-&gt;pool, f-&gt;c-&gt;bucket_alloc);</span>
+<span class='curline'><a href='../S/1437.html#L387'>pool</a>              387 sapi/apache2filter/sapi_apache2.c 	if ((rv = ap_save_brigade(f, &amp;ctx-&gt;post_data, &amp;bb, f-&gt;r-&gt;pool)) != APR_SUCCESS) {</span>
+<span class='curline'><a href='../S/1437.html#L414'>pool</a>              414 sapi/apache2filter/sapi_apache2.c 	f-&gt;r-&gt;content_type = apr_pstrdup(f-&gt;r-&gt;pool, content_type);</span>
+<span class='curline'><a href='../S/1437.html#L433'>pool</a>              433 sapi/apache2filter/sapi_apache2.c 	ctx-&gt;r-&gt;user = apr_pstrdup(ctx-&gt;r-&gt;pool, SG(request_info).auth_user);</span>
+<span class='curline'><a href='../S/1437.html#L485'>pool</a>              485 sapi/apache2filter/sapi_apache2.c 		pbb = f-&gt;ctx = apr_palloc(f-&gt;r-&gt;pool, sizeof(*pbb));</span>
+<span class='curline'><a href='../S/1437.html#L486'>pool</a>              486 sapi/apache2filter/sapi_apache2.c 		pbb-&gt;bb = apr_brigade_create(f-&gt;r-&gt;pool, f-&gt;c-&gt;bucket_alloc);</span>
+<span class='curline'><a href='../S/1437.html#L489'>pool</a>              489 sapi/apache2filter/sapi_apache2.c 	if(ap_save_brigade(NULL, &amp;pbb-&gt;bb, &amp;bb, f-&gt;r-&gt;pool) != APR_SUCCESS) {</span>
+<span class='curline'><a href='../S/1437.html#L551'>pool</a>              551 sapi/apache2filter/sapi_apache2.c 		apr_psprintf(ctx-&gt;r-&gt;pool, "%lu", (unsigned long) zend_memory_peak_usage(1 TSRMLS_CC)));</span>
+<span class='curline'><a href='../S/1437.html#L611'>pool</a>              611 sapi/apache2filter/sapi_apache2.c 	apr_pool_userdata_get(&amp;data, userdata_key, s-&gt;process-&gt;pool);</span>
+<span class='curline'><a href='../S/1437.html#L619'>pool</a>              619 sapi/apache2filter/sapi_apache2.c 							  apr_pool_cleanup_null, s-&gt;process-&gt;pool);</span>
+<span class='curline'><a href='../S/1437.html#L686'>pool</a>              686 sapi/apache2filter/sapi_apache2.c 	SG(server_context) = ctx = apr_pcalloc(r-&gt;pool, sizeof(*ctx));</span>
+<span class='curline'><a href='../S/1437.html#L691'>pool</a>              691 sapi/apache2filter/sapi_apache2.c 	apr_pool_cleanup_register(r-&gt;pool, (void *)&amp;SG(server_context),</span>
+<span class='curline'><a href='../S/1438.html#L68'>pool</a>               68 sapi/apache2handler/apache_config.c 	e.value = apr_pstrdup(cmd-&gt;pool, value);</span>
+<span class='curline'><a href='../S/1438.html#L116'>pool</a>              116 sapi/apache2handler/apache_config.c 	apache2_php_ini_path_override = ap_server_root_relative(cmd-&gt;pool, arg);</span>
+<span class='curline'><a href='../S/1442.html#L164'>pool</a>              164 sapi/apache2handler/sapi_apache2.c 		ctx-&gt;r-&gt;status_line = apr_pstrdup(ctx-&gt;r-&gt;pool, sline + 9);</span>
+<span class='curline'><a href='../S/1442.html#L176'>pool</a>              176 sapi/apache2handler/sapi_apache2.c 	ap_set_content_type(ctx-&gt;r, apr_pstrdup(ctx-&gt;r-&gt;pool, ctx-&gt;content_type));</span>
+<span class='curline'><a href='../S/1442.html#L438'>pool</a>              438 sapi/apache2handler/sapi_apache2.c 	apr_pool_userdata_get(&amp;data, userdata_key, s-&gt;process-&gt;pool);</span>
+<span class='curline'><a href='../S/1442.html#L445'>pool</a>              445 sapi/apache2handler/sapi_apache2.c 		apr_pool_userdata_set((const void *)1, userdata_key, apr_pool_cleanup_null, s-&gt;process-&gt;pool);</span>
+<span class='curline'><a href='../S/1442.html#L478'>pool</a>              478 sapi/apache2handler/sapi_apache2.c 	SG(request_info).query_string = apr_pstrdup(r-&gt;pool, r-&gt;args);</span>
+<span class='curline'><a href='../S/1442.html#L481'>pool</a>              481 sapi/apache2handler/sapi_apache2.c 	SG(request_info).request_uri = apr_pstrdup(r-&gt;pool, r-&gt;uri);</span>
+<span class='curline'><a href='../S/1442.html#L482'>pool</a>              482 sapi/apache2handler/sapi_apache2.c 	SG(request_info).path_translated = apr_pstrdup(r-&gt;pool, r-&gt;filename);</span>
+<span class='curline'><a href='../S/1442.html#L500'>pool</a>              500 sapi/apache2handler/sapi_apache2.c 	ctx-&gt;r-&gt;user = apr_pstrdup(ctx-&gt;r-&gt;pool, SG(request_info).auth_user);</span>
+<span class='curline'><a href='../S/1442.html#L532'>pool</a>              532 sapi/apache2handler/sapi_apache2.c 		apr_pool_cleanup_run(r-&gt;pool, (void *)&amp;SG(server_context), php_server_context_cleanup);</span>
+<span class='curline'><a href='../S/1442.html#L554'>pool</a>              554 sapi/apache2handler/sapi_apache2.c 		ctx = SG(server_context) = apr_pcalloc(r-&gt;pool, sizeof(*ctx));</span>
+<span class='curline'><a href='../S/1442.html#L559'>pool</a>              559 sapi/apache2handler/sapi_apache2.c 		apr_pool_cleanup_register(r-&gt;pool, (void *)&amp;SG(server_context), php_server_context_cleanup, apr_pool_cleanup_null);</span>
+<span class='curline'><a href='../S/1442.html#L614'>pool</a>              614 sapi/apache2handler/sapi_apache2.c 		brigade = apr_brigade_create(r-&gt;pool, r-&gt;connection-&gt;bucket_alloc);</span>
+<span class='curline'><a href='../S/1442.html#L673'>pool</a>              673 sapi/apache2handler/sapi_apache2.c 			apr_psprintf(ctx-&gt;r-&gt;pool, "%" APR_SIZE_T_FMT, zend_memory_peak_usage(1 TSRMLS_CC)));</span>
+<span class='curline'><a href='../S/1442.html#L691'>pool</a>              691 sapi/apache2handler/sapi_apache2.c 		apr_pool_cleanup_run(r-&gt;pool, (void *)&amp;SG(server_context), php_server_context_cleanup);</span>
+<span class='curline'><a href='../S/1443.html#L43'>pool</a>               43 sapi/apache_hooks/mod_php5.c static void php_init_handler(server_rec *s, pool *p);</span>
+<span class='curline'><a href='../S/1443.html#L47'>pool</a>               47 sapi/apache_hooks/mod_php5.c static void php_child_exit_handler(server_rec *s, pool *p);</span>
+<span class='curline'><a href='../S/1443.html#L343'>pool</a>              343 sapi/apache_hooks/mod_php5.c 				r-&gt;content_type = pstrdup(r-&gt;pool, header_content);</span>
+<span class='curline'><a href='../S/1443.html#L484'>pool</a>              484 sapi/apache_hooks/mod_php5.c 	register_cleanup(r-&gt;pool, NULL, php_apache_request_shutdown, php_request_shutdown_for_exec);</span>
+<span class='curline'><a href='../S/1443.html#L596'>pool</a>              596 sapi/apache_hooks/mod_php5.c         if (!strcasecmp(getword(r-&gt;pool, &amp;authorization, ' '), "Basic")) {</span>
+<span class='curline'><a href='../S/1443.html#L597'>pool</a>              597 sapi/apache_hooks/mod_php5.c             tmp = uudecode(r-&gt;pool, authorization);</span>
+<span class='curline'><a href='../S/1443.html#L598'>pool</a>              598 sapi/apache_hooks/mod_php5.c             tmp_user = getword_nulls_nc(r-&gt;pool, &amp;tmp, ':');</span>
+<span class='curline'><a href='../S/1443.html#L600'>pool</a>              600 sapi/apache_hooks/mod_php5.c                 r-&gt;connection-&gt;user = pstrdup(r-&gt;connection-&gt;pool, tmp_user);</span>
+<span class='curline'><a href='../S/1443.html#L607'>pool</a>              607 sapi/apache_hooks/mod_php5.c 		} else if  (!strcasecmp(getword(r-&gt;pool, &amp;authorization, ' '), "Digest")) {</span>
+<span class='curline'><a href='../S/1443.html#L635'>pool</a>              635 sapi/apache_hooks/mod_php5.c 		mimetype = pstrdup(r-&gt;pool, tmpmimetype);</span>
+<span class='curline'><a href='../S/1443.html#L749'>pool</a>              749 sapi/apache_hooks/mod_php5.c 		ap_psprintf(r-&gt;pool, "%u", zend_memory_peak_usage(1 TSRMLS_CC)));</span>
+<span class='curline'><a href='../S/1443.html#L836'>pool</a>              836 sapi/apache_hooks/mod_php5.c static void *php_create_server(pool *p, char *dummy)</span>
+<span class='curline'><a href='../S/1443.html#L852'>pool</a>              852 sapi/apache_hooks/mod_php5.c static void *php_create_dir(pool *p, char *dummy)</span>
+<span class='curline'><a href='../S/1443.html#L875'>pool</a>              875 sapi/apache_hooks/mod_php5.c static void *php_merge_dir(pool *p, void *basev, void *addv)</span>
+<span class='curline'><a href='../S/1443.html#L1171'>pool</a>             1171 sapi/apache_hooks/mod_php5.c 	apache_sapi_module.php_ini_path_override = ap_server_root_relative(cmd-&gt;pool, arg);</span>
+<span class='curline'><a href='../S/1443.html#L1225'>pool</a>             1225 sapi/apache_hooks/mod_php5.c static void php_child_exit_handler(server_rec *s, pool *p)</span>
+<span class='curline'><a href='../S/1443.html#L1239'>pool</a>             1239 sapi/apache_hooks/mod_php5.c static void php_init_handler(server_rec *s, pool *p)</span>
+<span class='curline'><a href='../S/1445.html#L225'>pool</a>              225 sapi/apache_hooks/php_apache.c 		*target = ap_pstrdup(r-&gt;pool, new_value);</span>
+<span class='curline'><a href='../S/1445.html#L974'>pool</a>              974 sapi/apache_hooks/php_apache.c         r-&gt;content_type = pstrdup(r-&gt;pool, type);</span>
+<span class='curline'><a href='../S/1445.html#L1827'>pool</a>             1827 sapi/apache_hooks/php_apache.c 	ap_table_setn(r-&gt;subprocess_env, ap_pstrndup(r-&gt;pool, var, var_len), ap_pstrndup(r-&gt;pool, val, val_len));</span>
+<span class='curline'><a href='../S/1497.html#L136'>pool</a>              136 sapi/fpm/fpm/fpm_log.c 			zlog(ZLOG_WARNING, "[pool %s] Unable to acquire shm slot while preparing the access log", scoreboard-&gt;pool);</span>
+<span class='curline'><a href='../S/1497.html#L288'>pool</a>              288 sapi/fpm/fpm/fpm_log.c 						len2 = snprintf(b, FPM_LOG_BUFFER - len, "%s", scoreboard-&gt;pool[0] ? scoreboard-&gt;pool : "-");</span>
+<span class='curline'><a href='../S/1508.html#L70'>pool</a>               70 sapi/fpm/fpm/fpm_scoreboard.c 		strlcpy(wp-&gt;scoreboard-&gt;pool, wp-&gt;config-&gt;name, sizeof(wp-&gt;scoreboard-&gt;pool));</span>
+<span class='curline'><a href='../S/1508.html#L302'>pool</a>              302 sapi/fpm/fpm/fpm_scoreboard.c 		zlog(ZLOG_DEBUG, "[pool %s] the proc-&gt;free_slot was not free. Let's search", scoreboard-&gt;pool);</span>
+<span class='curline'><a href='../S/1508.html#L312'>pool</a>              312 sapi/fpm/fpm/fpm_scoreboard.c 		zlog(ZLOG_ERROR, "[pool %s] no free scoreboard slot", scoreboard-&gt;pool);</span>
+<span class='curline'><a href='../S/1509.html#L54'>pool</a>               54 sapi/fpm/fpm/fpm_scoreboard.h 	char pool[32];</span>
+<span class='curline'><a href='../S/1516.html#L96'>pool</a>               96 sapi/fpm/fpm/fpm_status.c 			zlog(ZLOG_NOTICE, "[pool %s] status: scoreboard already in used.", scoreboard_p-&gt;pool);</span>
+<span class='curline'><a href='../S/1516.html#L109'>pool</a>              109 sapi/fpm/fpm/fpm_status.c 			zlog(ZLOG_ERROR, "[pool %s] invalid status values", scoreboard.pool);</span>
+<span class='curline'><a href='../S/1516.html#L360'>pool</a>              360 sapi/fpm/fpm/fpm_status.c 				scoreboard.pool,</span>
+<span class='curline'><a href='../S/1545.html#L499'>pool</a>              499 sapi/nsapi/nsapi.c 	header_name = pool_strdup(rc-&gt;sn-&gt;pool, sapi_header-&gt;header);</span>
+<span class='curline'><a href='../S/1545.html#L513'>pool</a>              513 sapi/nsapi/nsapi.c 	pool_free(rc-&gt;sn-&gt;pool, header_name);</span>
+<span class='curline'><a href='../S/1545.html#L537'>pool</a>              537 sapi/nsapi/nsapi.c 			header_name = pool_strdup(rc-&gt;sn-&gt;pool, sapi_header-&gt;header);</span>
+<span class='curline'><a href='../S/1545.html#L560'>pool</a>              560 sapi/nsapi/nsapi.c 			pool_free(rc-&gt;sn-&gt;pool, header_name);</span>
+<span class='curline'><a href='../S/1545.html#L1009'>pool</a>             1009 sapi/nsapi/nsapi.c 	request_context = (nsapi_request_context *)pool_malloc(sn-&gt;pool, sizeof(nsapi_request_context));</span>
+<span class='curline'><a href='../S/1545.html#L1067'>pool</a>             1067 sapi/nsapi/nsapi.c 	pool_free(sn-&gt;pool, request_context);</span>
+</pre>
+</body>
+</html>
